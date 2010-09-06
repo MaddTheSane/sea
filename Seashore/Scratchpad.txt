@@ -36,6 +36,7 @@ outside the view ( I've changed the behavior for now, but it really should go ba
 - Changing the visibility status of a layer temporarily toggles that layer's selection
 - Hitting the info button in the layers view selects the layer
 - Looks like Color Edges is somehow inverting the colors
+- If the info panel is hidden by default the button at the bottom starts in the wrong state
 
 ** Near-term projects **
 - We need an anchor cursor, or just get rid of anchoring all together
