@@ -1,0 +1,334 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                "" = id; 
+                customRedo = id; 
+                customUndo = id; 
+                selectInverse = id; 
+                selectNone = id; 
+                selectOpaque = id; 
+            }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                editLastSaved = id; 
+                newDocumentFromPasteboard = id; 
+                revert = id; 
+                showLicense = id; 
+            }; 
+            CLASS = SeaController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                licenseWindow = id; 
+                seaHelp = id; 
+                seaPlugins = id; 
+                seaPrefs = id; 
+                seaProxy = id; 
+                seaWarning = id; 
+                showWelcomePref = id; 
+                utilitiesManager = id; 
+                welcomeWindow = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                customRedo = id; 
+                customUndo = id; 
+                exporterChanged = id; 
+                saveDocument = id; 
+                saveDocumentAs = id; 
+                showExporterOptions = id; 
+            }; 
+            CLASS = SeaDocument; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                accessoryView = id; 
+                contents = id; 
+                dataSource = id; 
+                docWindow = id; 
+                exporters = id; 
+                exportersPopUp = id; 
+                gifExporter = id; 
+                helpers = id; 
+                jp2Exporter = id; 
+                jpegExporter = id; 
+                operations = id; 
+                optionsButton = id; 
+                optionsSummary = id; 
+                pluginData = id; 
+                pngExporter = id; 
+                selection = id; 
+                textureExporter = id; 
+                tiffExporter = id; 
+                tools = id; 
+                view = id; 
+                whiteboard = id; 
+                xcfExporter = id; 
+            }; 
+            SUPERCLASS = NSDocument; 
+        }, 
+        {
+            ACTIONS = {
+                changeToTemplate = id; 
+                changeUnits = id; 
+                createDocument = id; 
+                newDocument = id; 
+                openDocument = id; 
+                openRecent = id; 
+            }; 
+            CLASS = SeaDocumentController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                backgroundCheckbox = id; 
+                heightInput = id; 
+                heightUnits = id; 
+                modeMenu = id; 
+                newPanel = id; 
+                recentMenu = id; 
+                resMenu = id; 
+                seaPrefs = id; 
+                templatesMenu = id; 
+                unitsMenu = id; 
+                widthInput = id; 
+                widthUnits = id; 
+            }; 
+            SUPERCLASS = NSDocumentController; 
+        }, 
+        {
+            ACTIONS = {
+                checkForUpdate = id; 
+                goEmail = id; 
+                goSourceForge = id; 
+                goSurvey = id; 
+                goWebsite = id; 
+                openBugs = id; 
+                openEffectsHelp = id; 
+                openHelp = id; 
+            }; 
+            CLASS = SeaHelp; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {bugsWindow = id; instantHelpLabel = id; instantHelpWindow = id; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {reapplyEffect = id; run = id; updateClickCount = id; }; 
+            CLASS = SeaPlugins; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                clickCountLabel = id; 
+                controller = id; 
+                effectMenu = id; 
+                effectTable = id; 
+                effectTableInstruction = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                apply = id; 
+                changeUnits = id; 
+                checkerboardChanged = id; 
+                defaultWindowBack = id; 
+                guideColorChanged = id; 
+                layerBoundsColorChanged = id; 
+                rotateSelectionColor = id; 
+                selectionColorChanged = id; 
+                setCheckForUpdates = id; 
+                setEffectsPanel = id; 
+                setFewerWarnings = id; 
+                setHeight = id; 
+                setIgnoreFirstTouch = id; 
+                setMode = id; 
+                setMouseCoalescing = id; 
+                setMultithreaded = id; 
+                setNewUnits = id; 
+                setOpenUntitled = id; 
+                setPreciseCursor = id; 
+                setResolution = id; 
+                setSmartInterpolation = id; 
+                setTransparentBackground = id; 
+                setUseCoreImage = id; 
+                setWidth = id; 
+                show = id; 
+                toggleBoundaries = id; 
+                toggleGuides = id; 
+                toggleRulers = id; 
+                windowBackChanged = id; 
+            }; 
+            CLASS = SeaPrefs; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                checkForUpdatesCheckbox = id; 
+                checkerboardMatrix = id; 
+                coalescingCheckbox = id; 
+                colorPrefsView = id; 
+                controller = id; 
+                docUnitsMenu = id; 
+                effectsPanelCheckbox = id; 
+                fewerWarningsCheckbox = id; 
+                generalPrefsView = id; 
+                guideColorMenu = id; 
+                heightUnits = id; 
+                heightValue = id; 
+                ignoreFirstTouchCheckbox = id; 
+                layerBoundsMatrix = id; 
+                modeMenu = id; 
+                multithreadedCheckbox = id; 
+                newPrefsView = id; 
+                newUnitsMenu = id; 
+                openUntitledCheckbox = id; 
+                panel = id; 
+                preciseCursorCheckbox = id; 
+                resolutionHandlingMenu = id; 
+                resolutionMenu = id; 
+                selectionColorMenu = id; 
+                smartInterpolationCheckbox = id; 
+                toolbar = id; 
+                transparentBackgroundCheckbox = id; 
+                useCoreImageCheckbox = id; 
+                widthValue = id; 
+                windowBackWell = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                activateBackgroundColor = id; 
+                activateForegroundColor = id; 
+                addLayer = id; 
+                alignBottom = id; 
+                alignHorizontalCenters = id; 
+                alignLeft = id; 
+                alignRight = id; 
+                alignTop = id; 
+                alignVerticalCenters = id; 
+                bringToFront = id; 
+                centerLayerHorizontally = id; 
+                centerLayerVertically = id; 
+                changeSelectedChannel = id; 
+                changeTrueView = id; 
+                clearAllLinks = id; 
+                condenseLayer = id; 
+                condenseToSelection = id; 
+                copyMerged = id; 
+                crash = id; 
+                cropImage = id; 
+                defaultColors = id; 
+                deleteLayer = id; 
+                duplicate = id; 
+                duplicateLayer = id; 
+                expandLayer = id; 
+                exportAsTexture = id; 
+                flatten = id; 
+                flipDocHorizontally = id; 
+                flipDocVertically = id; 
+                flipHorizontally = id; 
+                flipVertically = id; 
+                importLayer = id; 
+                layerAbove = id; 
+                layerBelow = id; 
+                lowerLayer = id; 
+                maskImage = id; 
+                mergeDown = id; 
+                mergeLinked = id; 
+                openColorSyncPanel = id; 
+                raiseLayer = id; 
+                reapplyEffect = id; 
+                resetPerformance = id; 
+                rotateDocLeft = id; 
+                rotateDocRight = id; 
+                selectTool = id; 
+                sendToBack = id; 
+                setColorSpace = id; 
+                setLayerMargins = id; 
+                setLayerRotation = id; 
+                setLayerScale = id; 
+                setMargins = id; 
+                setResolution = id; 
+                setScale = id; 
+                swapColors = id; 
+                toggleCMYKPreview = id; 
+                toggleCMYKSave = id; 
+                toggleFloatingSelection = id; 
+                toggleInformation = id; 
+                toggleLayerAlpha = id; 
+                toggleLayers = id; 
+                toggleLinked = id; 
+                toggleOptions = id; 
+                toggleStatusBar = id; 
+                zoomIn = id; 
+                zoomNormal = id; 
+                zoomOut = id; 
+            }; 
+            CLASS = SeaProxy; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {shade = id; }; 
+            CLASS = SeaUtilityPanel; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {nullView = id; priorContentView = id; }; 
+            SUPERCLASS = NSPanel; 
+        }, 
+        {
+            ACTIONS = {
+                changeSpecialFont = id; 
+                copy = id; 
+                cut = id; 
+                delete = id; 
+                paste = id; 
+                selectAll = id; 
+                selectInverse = id; 
+                selectNone = id; 
+                zoomIn = id; 
+                zoomNormal = id; 
+                zoomOut = id; 
+            }; 
+            CLASS = SeaView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {cursorsManager = id; document = id; }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {CLASS = SeaWarning; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {changeColor = id; toggle = id; }; 
+            CLASS = TransparentUtility; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                activate = id; 
+                allConfiguration = id; 
+                documentConfiguration = id; 
+                toolbarAndDocumentConfiguration = id; 
+            }; 
+            CLASS = UtilitiesManager; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                brushUtility = id; 
+                controller = id; 
+                infoUtility = id; 
+                optionsUtility = id; 
+                pegasusUtility = id; 
+                textureUtility = id; 
+                toolboxUtility = id; 
+                transparentUtility = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = WindowBackColorWell; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {seaPrefs = id; }; 
+            SUPERCLASS = NSColorWell; 
+        }
+    ); 
+    IBVersion = 1; 
+}
