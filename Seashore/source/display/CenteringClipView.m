@@ -195,7 +195,6 @@ static BOOL preventRecurse = NO;
 	}
 }
 
-
 - (void)setFrame:(NSRect)frameRect
 {
 	// Set the frame
@@ -214,6 +213,57 @@ static BOOL preventRecurse = NO;
 {
 	[super scrollToPoint:newOrigin];
 	[(NSScrollView *)[self superview] setNeedsDisplay:YES];
+}
+
+- (void)scrollWheel:(NSEvent *)theEvent
+{
+	if(mostRecentScrollEvent==theEvent)
+	{
+		[super scrollWheel:theEvent];
+		return;
+	}
+	mostRecentScrollEvent = theEvent;
+	[[self documentView] scrollWheel:theEvent];
+}
+
+- (void)rightMouseDown:(NSEvent *)theEvent
+{
+	[[self documentView] rightMouseDown:theEvent];
+}
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+	[[self documentView] mouseDown:theEvent];
+}
+
+- (void)rightMouseDragged:(NSEvent *)theEvent
+{
+	[[self documentView] rightMouseDragged:theEvent];
+}
+
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+	[[self documentView] mouseDragged:theEvent];
+}
+
+- (void)rightMouseUp:(NSEvent *)theEvent
+{
+	[[self documentView] rightMouseUp:theEvent];
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+	[[self documentView] mouseUp:theEvent];
+}
+
+- (void)magnifyWithEvent:(NSEvent *)theEvent
+{
+	[[self documentView] magnifyWithEvent:theEvent];
+}
+
+- (void)swipeWithEvent:(NSEvent *)theEvent
+{
+	[[self documentView] swipeWithEvent:theEvent];
 }
 
 @end

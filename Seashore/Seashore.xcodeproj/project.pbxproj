@@ -1765,7 +1765,7 @@
 		A8EC3F210BDB56DE00EF2B55 /* CIWhitePointAdjust.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CIWhitePointAdjust.xcodeproj; path = "../CoreImage Plug-ins/CIWhitePointAdjust/CIWhitePointAdjust.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		A8EC63FA0422D5D900FE1D39 /* brush-cursor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brush-cursor.png"; sourceTree = "<group>"; };
 		A8EDF154078959C80022BB31 /* Seashore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seashore.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8EDF16707895A9F0022BB31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		A8EDF16707895A9F0022BB31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		A8EDF39F07895DBE0022BB31 /* PluginClass.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginClass.h; path = source/application/PluginClass.h; sourceTree = SOURCE_ROOT; };
 		A8EF9CC00536DE2000A80207 /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rects.m; sourceTree = "<group>"; };
 		A8F081740C3B822D0083E3D3 /* CIGlassLozenge.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CIGlassLozenge.xcodeproj; path = "../CoreImage Plug-ins/CIGlassLozenge/CIGlassLozenge.xcodeproj"; sourceTree = SOURCE_ROOT; };
@@ -5318,8 +5318,9 @@
 					MACOS_10_4_COMPILE,
 					MAIN_COMPILE,
 				);
+				GCC_VERSION = 4.0;
 				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 3.3;
+				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "-lz";
@@ -5343,12 +5344,15 @@
 					i386,
 				);
 				FRAMEWORK_SEARCH_PATHS = "$(FRAMEWORK_SEARCH_PATHS)";
+				GCC_AUTO_VECTORIZATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_CENTERING_CLIPVIEW,
 					MACOS_10_4_COMPILE,
 					MAIN_COMPILE,
 				);
+				GCC_VERSION = 4.0;
 				GCC_VERSION_i386 = 4.0;
 				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
@@ -5369,14 +5373,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(FRAMEWORK_SEARCH_PATHS)";
+				GCC_AUTO_VECTORIZATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_CENTERING_CLIPVIEW,
 					MACOS_10_4_COMPILE,
 					MAIN_COMPILE,
 				);
+				GCC_VERSION = 4.0;
 				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 3.3;
+				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "-lz";

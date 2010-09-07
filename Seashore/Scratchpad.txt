@@ -15,19 +15,13 @@ Bugs marked with (?) are things I've seen but haven't been able to reliably repr
 
 ** Really Broken Behaviors **
 - On two monitors, one window may never get the focus back
-- The main view should be first responder when the image first is created
 - Sometimes wand selects the wrong area after the anchoring of a new layer (?)
-- There is a horrible bug with the undo of moving floating layers (?)
-- repro steps: 1. new document 2. rotate the layer 3. scale the layer result the transparency disappears (maybe 10.4 only)
-	-- This also happens when you scale the entire image
 - Performance SUCKS!! There have to be a lot of inefficiencies now, we need to find and ELIMINATE them!
 - Sometimes you can get a "run away" auto scroll when you don't get sufficient mouse events, meaning the user releases the mouse 
 outside the view ( I've changed the behavior for now, but it really should go back to the way it was, but without this bug)
 - Leaving the font panel open across two documents both with text being inserted can result in the fonts being wrong on one of the docs
 - When you create a bucket fill as a preview first (hold down shift, then release before mouse up), you'll get multiple undo records that don't do anything
-- Things still crash! Such as color edges
-- Because of the change in color handling, a certain color palette can't be serialized, and if it's in the prefs it crashes the app on open
-	-- I've worked around it but it's still unclear why this is happening
+- Because of the change in color handling, a certain color palette can't be serialized, and if it's in the prefs it crashes the app on open I've worked around it but it's still unclear why this is happening
 - Some layers become unwriteable after opening as PDF
 - Also, opening a PDF at different DPI's doesn't behave correctly
 - Opening images at high DPI (or maybe it's setting the image to a high dpi, or maybe it's just with PDF's) doesn't work 
