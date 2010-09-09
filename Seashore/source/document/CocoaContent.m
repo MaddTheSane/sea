@@ -49,7 +49,6 @@
 	id layer;
 	BOOL test, res_set = NO;
 	int value;
-	NSSize size;
 	
 	// Initialize superclass first
 	if (![super initWithDocument:doc])
@@ -69,6 +68,10 @@
 		imageRep = [[image representations] objectAtIndex:0];
 		if (![imageRep isKindOfClass:[NSBitmapImageRep class]]) {
 			if ([imageRep isKindOfClass:[NSPDFImageRep class]]) {
+				
+				[image setScalesWhenResized:YES];
+				[image setDataRetained:YES];
+				
 				[NSBundle loadNibNamed:@"CocoaContent" owner:self];
 				[resMenu setEnabled:YES];
 				[pdfPanel center];
@@ -76,6 +79,15 @@
 				[resMenu selectItemAtIndex:0];
 				[NSApp runModalForWindow:pdfPanel];
 				[pdfPanel orderOut:self];
+
+				value = [pageInput intValue];
+				if (value > 0 && value <= [imageRep pageCount]){
+					[imageRep setCurrentPage:value - 1];
+				}
+
+				NSSize sourceSize = [image size];
+				NSSize size = sourceSize;
+				
 				value = [resMenu indexOfSelectedItem];
 				switch (value) {
 					case 0:
@@ -84,55 +96,53 @@
 					break;
 					case 1:
 						res_set = YES;
-						[image setScalesWhenResized:YES];
-						size = [image size];
 						size.width *= 96.0 / 72.0;
 						size.height *= 96.0 / 72.0;
-						[image setSize:size];
 						xres = yres = 96.0;
 					break;
 					case 2:
 						res_set = YES;
-						[image setScalesWhenResized:YES];
-						size = [image size];
 						size.width *= 150.0 / 72.0;
 						size.height *= 150.0 / 72.0;
-						[image setSize:size];
 						xres = yres = 150.0;
 					break;
 					case 3:
 						res_set = YES;
-						[image setScalesWhenResized:YES];
-						size = [image size];
 						size.width *= 300.0 / 72.0;
 						size.height *= 300.0 / 72.0;
-						[image setSize:size];
 						xres = yres = 300.0;
 					break;
 					case 4:
 						res_set = YES;
-						[image setScalesWhenResized:YES];
-						size = [image size];
 						size.width *= 600.0 / 72.0;
 						size.height *= 600.0 / 72.0;
-						[image setSize:size];
 						xres = yres = 600.0;
 					break;
 					case 5:
 						res_set = YES;
-						[image setScalesWhenResized:YES];
-						size = [image size];
 						size.width *= 900.0 / 72.0;
 						size.height *= 900.0 / 72.0;
-						[image setSize:size];
 						xres = yres = 900.0;
 					break;
 				}
-				value = [pageInput intValue];
-				if (value > 0 && value <= [imageRep pageCount])
-					[imageRep setCurrentPage:value - 1];
+				[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
+				[image setSize:size];
+				NSRect destinationRect = NSMakeRect( 0, 0, size.width, size.height );
+				NSImage* dest = [[NSImage alloc] initWithSize:size];
+				[dest lockFocus];
+				NSRectFillUsingOperation( destinationRect, NSCompositeClear );
+				[image drawInRect: destinationRect
+						  fromRect: destinationRect
+						 operation: NSCompositeCopy fraction: 1.0];
+				
+				NSBitmapImageRep* newRep = [[NSBitmapImageRep alloc]
+											initWithFocusedViewRect: destinationRect];
+				[dest unlockFocus];
+				[dest autorelease];
+				imageRep = newRep;
+			}else {
+				imageRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
 			}
-			imageRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
 		}
 	}
 	if (imageRep == NULL) {

@@ -88,8 +88,10 @@
 		for(i = 0; i < [recentDocs count]; i++){
 			NSString *path = [[recentDocs objectAtIndex:i] path];
 			NSString *filename = [[path pathComponents] objectAtIndex:[[path pathComponents] count] -1];
+			NSImage *image = [[NSWorkspace sharedWorkspace] iconForFile: path];
 			[recentMenu addItemWithTitle: filename];
 			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setRepresentedObject:path];
+			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setImage: image];
 		}
 	}else {
 		[recentMenu setEnabled:NO];
