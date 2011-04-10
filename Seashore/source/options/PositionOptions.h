@@ -1,5 +1,5 @@
 #import "Globals.h"
-#import "AbstractOptions.h"
+#import "AbstractScaleOptions.h"
 
 /*!
 	@enum		k...Layer
@@ -30,7 +30,7 @@ enum {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface PositionOptions : AbstractOptions {
+@interface PositionOptions : AbstractScaleOptions {
 
 	// Checkbox specifying whether the position tool can anchor floating selections
 	IBOutlet id canAnchorCheckbox;

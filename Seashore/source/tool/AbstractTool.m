@@ -6,6 +6,8 @@
 #import "UtilitiesManager.h"
 #import "TextureUtility.h"
 #import "AbstractOptions.h"
+#import "SeaDocument.h"
+#import "SeaContent.h"
 
 @implementation AbstractTool
 
@@ -13,6 +15,16 @@
 {
 	return -1;
 }
+
+- (id)init
+{
+	self = [super init];
+	if(self){
+		intermediate = NO;
+	}
+	return self;
+}
+
 
 - (void)setOptions:(id)newOptions
 {
@@ -62,5 +74,11 @@
 {
 	return NO;
 }
+
+- (BOOL) intermediate
+{
+	return intermediate;
+}
+
 
 @end

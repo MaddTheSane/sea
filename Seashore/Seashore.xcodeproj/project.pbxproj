@@ -244,6 +244,8 @@
 		DC493D6E0FB8ABAA009D352D /* SeaCursors.m in Sources */ = {isa = PBXBuildFile; fileRef = DC493D6D0FB8ABAA009D352D /* SeaCursors.m */; };
 		DC493D740FB8BAAF009D352D /* noop-cursor.png in Resources */ = {isa = PBXBuildFile; fileRef = DC493D730FB8BAAF009D352D /* noop-cursor.png */; };
 		DC4D4FCA0A3A2C4A00FD0484 /* intro-paste.png in Resources */ = {isa = PBXBuildFile; fileRef = DC4D4FC90A3A2C4A00FD0484 /* intro-paste.png */; };
+		DC4E4FA4134AD4D400BA6ACB /* AbstractSelectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4E4FA3134AD4D400BA6ACB /* AbstractSelectTool.m */; };
+		DC4E51231350E10500BA6ACB /* AbstractScaleOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4E51221350E10500BA6ACB /* AbstractScaleOptions.m */; };
 		DC56186810CC73CF009CF792 /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA87C0A105A195800234465 /* BannerView.m */; };
 		DC5ED8E90FF2E06400DB0897 /* InfoPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5ED8E80FF2E06400DB0897 /* InfoPanel.m */; };
 		DC5ED8FB0FF2E3A900DB0897 /* InfoPanelBacking.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5ED8FA0FF2E3A900DB0897 /* InfoPanelBacking.m */; };
@@ -261,7 +263,6 @@
 		DC7476B00A43B0F600CB1C1D /* PolygonLassoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7476AE0A43B0F600CB1C1D /* PolygonLassoTool.m */; };
 		DC74776A0A43CD0800CB1C1D /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = DC7477690A43CD0800CB1C1D /* circle.png */; };
 		DC74776C0A43CE7C00CB1C1D /* poly-lasso.png in Resources */ = {isa = PBXBuildFile; fileRef = DC74776B0A43CE7C00CB1C1D /* poly-lasso.png */; };
-		DC788D011092AF270095D1A8 /* XCFSpotlight.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; };
 		DC9C46220FFC1F4400C44AA4 /* AbstractPaintOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C46210FFC1F4400C44AA4 /* AbstractPaintOptions.m */; };
 		DC9C467A0FFC2CCF00C44AA4 /* AbstractPanelUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C46790FFC2CCF00C44AA4 /* AbstractPanelUtility.m */; };
 		DC9C46E70FFC508900C44AA4 /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9C46E60FFC508900C44AA4 /* done.png */; };
@@ -348,7 +349,7 @@
 		DCF904C10FCCB4C4001629C0 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = DCF904C00FCCB4C4001629C0 /* delete.png */; };
 		DCF904D60FCCBEF0001629C0 /* layer-gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = DCF904D50FCCBEF0001629C0 /* layer-gradient.png */; };
 		DCF904E20FCCC3A5001629C0 /* info-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = DCF904E10FCCC3A5001629C0 /* info-bg.png */; };
-		DCFBB7300FBC9A9C00851216 /* AbstractSelectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFBB72F0FBC9A9C00851216 /* AbstractSelectTool.m */; };
+		DCFBB7300FBC9A9C00851216 /* AbstractScaleTool.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFBB72F0FBC9A9C00851216 /* AbstractScaleTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1454,7 +1455,6 @@
 			dstPath = Contents/Library/Spotlight;
 			dstSubfolderSpec = 1;
 			files = (
-				DC788D011092AF270095D1A8 /* XCFSpotlight.mdimporter in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1821,6 +1821,10 @@
 		DC493D6D0FB8ABAA009D352D /* SeaCursors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaCursors.m; sourceTree = "<group>"; };
 		DC493D730FB8BAAF009D352D /* noop-cursor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noop-cursor.png"; sourceTree = "<group>"; };
 		DC4D4FC90A3A2C4A00FD0484 /* intro-paste.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-paste.png"; sourceTree = "<group>"; };
+		DC4E4FA2134AD4D400BA6ACB /* AbstractSelectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractSelectTool.h; sourceTree = "<group>"; };
+		DC4E4FA3134AD4D400BA6ACB /* AbstractSelectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractSelectTool.m; sourceTree = "<group>"; };
+		DC4E51211350E10500BA6ACB /* AbstractScaleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractScaleOptions.h; sourceTree = "<group>"; };
+		DC4E51221350E10500BA6ACB /* AbstractScaleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractScaleOptions.m; sourceTree = "<group>"; };
 		DC5C1F1712349FF500C0A5FE /* NSEvent_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSEvent_Extensions.h; sourceTree = "<group>"; };
 		DC5ED8E70FF2E06400DB0897 /* InfoPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPanel.h; sourceTree = "<group>"; };
 		DC5ED8E80FF2E06400DB0897 /* InfoPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPanel.m; sourceTree = "<group>"; };
@@ -1943,8 +1947,8 @@
 		DCF904C00FCCB4C4001629C0 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		DCF904D50FCCBEF0001629C0 /* layer-gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "layer-gradient.png"; sourceTree = "<group>"; };
 		DCF904E10FCCC3A5001629C0 /* info-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-bg.png"; sourceTree = "<group>"; };
-		DCFBB72E0FBC9A9C00851216 /* AbstractSelectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractSelectTool.h; sourceTree = "<group>"; };
-		DCFBB72F0FBC9A9C00851216 /* AbstractSelectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractSelectTool.m; sourceTree = "<group>"; };
+		DCFBB72E0FBC9A9C00851216 /* AbstractScaleTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractScaleTool.h; sourceTree = "<group>"; };
+		DCFBB72F0FBC9A9C00851216 /* AbstractScaleTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractScaleTool.m; sourceTree = "<group>"; };
 		F5003C2403CA976F01FED195 /* PegasusUtility.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PegasusUtility.h; sourceTree = "<group>"; };
 		F5003C2503CA976F01FED195 /* PegasusUtility.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PegasusUtility.m; sourceTree = "<group>"; };
 		F5003C2803CAA0B301FED195 /* UtilitiesManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = UtilitiesManager.h; sourceTree = "<group>"; };
@@ -2071,16 +2075,16 @@
 		2A37F4AAFDCFA73011CA2CEA /* Seashore */ = {
 			isa = PBXGroup;
 			children = (
-				A8E5085C045771DF00A80207 /* Options Classes */,
+				2A37F4ABFDCFA73011CA2CEA /* Application Classes */,
+				F50687FD039B9946016F7F19 /* Document Classes */,
+				F5B6B31B03D14DD701FCB9EC /* Display Classes */,
 				F5003C2303CA959301FED195 /* Utility Classes */,
 				F58550EC04039BE60101672D /* Tool Classes */,
+				A8E5085C045771DF00A80207 /* Options Classes */,
+				F5B70DDF03ED5E38015BA417 /* Operation Classes */,
 				A8FBD1580410B41600DF7825 /* Component Classes */,
-				F50687FD039B9946016F7F19 /* Document Classes */,
 				A8D6BCDC07C2152100B91A1D /* Importer Classes */,
 				F57AD82B03FF7FDB0185BAF6 /* Exporter Classes */,
-				F5B70DDF03ED5E38015BA417 /* Operation Classes */,
-				F5B6B31B03D14DD701FCB9EC /* Display Classes */,
-				2A37F4ABFDCFA73011CA2CEA /* Application Classes */,
 				A8BDC80404BEF77D00A80207 /* Extra Sources */,
 				2A37F4AFFDCFA73011CA2CEA /* Main Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
@@ -2926,6 +2930,8 @@
 			children = (
 				A8ABCA95045A109800A80207 /* AbstractOptions.h */,
 				A8ABCA94045A109800A80207 /* AbstractOptions.m */,
+				DC4E51211350E10500BA6ACB /* AbstractScaleOptions.h */,
+				DC4E51221350E10500BA6ACB /* AbstractScaleOptions.m */,
 				A8D52D2C0A8C26A100927657 /* AbstractSelectOptions.h */,
 				A8D52D2D0A8C26A100927657 /* AbstractSelectOptions.m */,
 				DC9C46200FFC1F4400C44AA4 /* AbstractPaintOptions.h */,
@@ -3310,8 +3316,10 @@
 				F53C6C7D0403B41901D21287 /* SeaTools.m */,
 				A8C0DBED052AF2AA00A80207 /* AbstractTool.h */,
 				A8C0DBEE052AF2AA00A80207 /* AbstractTool.m */,
-				DCFBB72E0FBC9A9C00851216 /* AbstractSelectTool.h */,
-				DCFBB72F0FBC9A9C00851216 /* AbstractSelectTool.m */,
+				DCFBB72E0FBC9A9C00851216 /* AbstractScaleTool.h */,
+				DCFBB72F0FBC9A9C00851216 /* AbstractScaleTool.m */,
+				DC4E4FA2134AD4D400BA6ACB /* AbstractSelectTool.h */,
+				DC4E4FA3134AD4D400BA6ACB /* AbstractSelectTool.m */,
 				A8C268190554875500A80207 /* RectSelectTool.h */,
 				A8C2681A0554875500A80207 /* RectSelectTool.m */,
 				DC7474930A43AFEE00CB1C1D /* EllipseSelectTool.h */,
@@ -3628,7 +3636,14 @@
 			isa = PBXProject;
 			buildConfigurationList = A8D01E0D09BD8EA3007CFE76 /* Build configuration list for PBXProject "Seashore" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Seashore */;
 			projectDirPath = "";
 			projectReferences = (
@@ -4815,7 +4830,7 @@
 				A8FEC68D0D9F64DB00F47425 /* SeaApplication.m in Sources */,
 				DC11244A0FB08A490040BB8A /* SeaShadowView.m in Sources */,
 				DC493D6E0FB8ABAA009D352D /* SeaCursors.m in Sources */,
-				DCFBB7300FBC9A9C00851216 /* AbstractSelectTool.m in Sources */,
+				DCFBB7300FBC9A9C00851216 /* AbstractScaleTool.m in Sources */,
 				DCC900AB0FC50A3000C74521 /* SeaToolbarItem.m in Sources */,
 				DCC903C40FC5EB9500C74521 /* SeaOptionsView.m in Sources */,
 				DCC904930FC5F76600C74521 /* LayerControlView.m in Sources */,
@@ -4832,6 +4847,8 @@
 				DC30949E108A95AB0084361E /* SeaWindowContent.m in Sources */,
 				DC56186810CC73CF009CF792 /* BannerView.m in Sources */,
 				DCD6A5A5114DA294002A4CFD /* WarningsUtility.m in Sources */,
+				DC4E4FA4134AD4D400BA6ACB /* AbstractSelectTool.m in Sources */,
+				DC4E51231350E10500BA6ACB /* AbstractScaleOptions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

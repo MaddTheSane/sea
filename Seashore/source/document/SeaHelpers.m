@@ -85,6 +85,8 @@
 	}
 	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
 	[(StatusUtility *)[[SeaController utilitiesManager] statusUtilityFor:document] update];
+	[[document docView] setNeedsDisplay:YES]; 
+
 }
 
 - (void)activeLayerWillChange
@@ -218,6 +220,8 @@
 	[[document selection] readjustSelection];
 	[[document whiteboard] readjustLayer];
 	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
+	[[document docView] setNeedsDisplay:YES]; 
+
 }
 
 - (void)layerContentsChanged:(int)index

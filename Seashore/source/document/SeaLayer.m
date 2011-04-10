@@ -262,6 +262,11 @@
 	return yoff;
 }
 
+- (IntRect)localRect
+{
+	return IntMakeRect(xoff, yoff, width, height);
+}
+
 - (void)setOffsets:(IntPoint)newOffsets
 {
 	xoff = newOffsets.x;

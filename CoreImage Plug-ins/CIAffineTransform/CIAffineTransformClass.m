@@ -371,8 +371,8 @@
 - (unsigned char *)transform:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
-	CIImage *input, *crop_output, *imm_output, *imm_output_1, *imm_output_2, *output, *background;
-	CIFilter *filter;
+	CIImage *unclampedInput, *clampedInput, *crop_output, *imm_output, *imm_output_1, *imm_output_2, *output, *background;
+	CIFilter *clamp, *filter;
 	CGImageRef temp_image;
 	CGImageDestinationRef temp_writer;
 	NSMutableData *temp_handler;
@@ -419,15 +419,23 @@
 	// Create core image with data
 	size.width = width;
 	size.height = height;
-	input = [CIImage imageWithBitmapData:[NSData dataWithBytesNoCopy:data length:width * height * 4 freeWhenDone:NO] bytesPerRow:width * 4 size:size format:kCIFormatARGB8 colorSpace:[pluginData displayProf]];
+	unclampedInput = [CIImage imageWithBitmapData:[NSData dataWithBytesNoCopy:data length:width * height * 4 freeWhenDone:NO] bytesPerRow:width * 4 size:size format:kCIFormatARGB8 colorSpace:[pluginData displayProf]];
 		
+	// We need to apply a CIAffineClamp to prevent the black soft fringe we'd normally get from
+	// the content outside the borders of the image
+	clamp = [CIFilter filterWithName: @"CIAffineClamp"];
+	[clamp setDefaults];
+	[clamp setValue:[NSAffineTransform transform] forKey:@"inputTransform"];
+	[clamp setValue:unclampedInput forKey: @"inputImage"];
+	clampedInput = [clamp valueForKey: @"outputImage"];
+	
 	// Position correctly
 	if (boundsValid) {
 	
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
-		[filter setValue:input forKey:@"inputImage"];
+		[filter setValue:clampedInput forKey:@"inputImage"];
 		[filter setValue:[CIVector vectorWithX:bounds.origin.x Y:height - bounds.size.height - bounds.origin.y Z:bounds.size.width W:bounds.size.height] forKey:@"inputRectangle"];
 		imm_output_1 = [filter valueForKey:@"outputImage"];
 		
@@ -443,7 +451,7 @@
 	
 	}
 	else {
-		imm_output_2 = input;
+		imm_output_2 = clampedInput;
 	}
 	
 	// Run filter
@@ -596,8 +604,8 @@
 - (unsigned char *)executeAffineTransform:(NSAffineTransform *)at withImage:(unsigned char *)data width:(int)width height:(int)height newWidth:(int *)newWidth newHeight:(int *)newHeight newSpp:(int *)nspp
 {
 	CIContext *context;
-	CIImage *input,*output;
-	CIFilter *filter;
+	CIImage *unclampedInput, *clampedInput, *output;
+	CIFilter *clamp, *filter;
 	CGImageRef temp_image;
 	CGImageDestinationRef temp_writer;
 	NSMutableData *temp_handler;
@@ -616,15 +624,23 @@
 	// Create core image with data
 	size.width = width;
 	size.height = height;
-	input = [CIImage imageWithBitmapData:[NSData dataWithBytesNoCopy:data length:width * height * 4 freeWhenDone:NO] bytesPerRow:width * 4 size:size format:kCIFormatARGB8 colorSpace:[pluginData displayProf]];
+	unclampedInput = [CIImage imageWithBitmapData:[NSData dataWithBytesNoCopy:data length:width * height * 4 freeWhenDone:NO] bytesPerRow:width * 4 size:size format:kCIFormatARGB8 colorSpace:[pluginData displayProf]];
 
+	// We need to apply a CIAffineClamp to prevent the black soft fringe we'd normally get from
+	// the content outside the borders of the image
+	clamp = [CIFilter filterWithName: @"CIAffineClamp"];
+	[clamp setDefaults];
+	[clamp setValue:[NSAffineTransform transform] forKey:@"inputTransform"];
+	[clamp setValue:unclampedInput forKey: @"inputImage"];
+	clampedInput = [clamp valueForKey: @"outputImage"];
+	
 	// Run filter
 	filter = [CIFilter filterWithName:@"CIAffineTransform"];
 	if (filter == NULL) {
 		@throw [NSException exceptionWithName:@"CoreImageFilterNotFoundException" reason:[NSString stringWithFormat:@"The Core Image filter named \"%@\" was not found.", @"CIAffineTransform"] userInfo:NULL];
 	}
 	[filter setDefaults];
-	[filter setValue:input forKey:@"inputImage"];
+	[filter setValue:clampedInput forKey:@"inputImage"];
 	[filter setValue:at forKey:@"inputTransform"];
 	output = [filter valueForKey: @"outputImage"];
 

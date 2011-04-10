@@ -42,6 +42,7 @@
 #import "SeaCursors.h"
 #import "AspectRatio.h"
 #import "WarningsUtility.h"
+#import "SeaScale.h"
 #import "NSEvent_Extensions.h"
 #import <Carbon/Carbon.h>
 
@@ -72,18 +73,23 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Adjust frame for non 72 dpi resolutions
 	xres = [[document contents] xres];
 	yres = [[document contents] yres];
-	if (gScreenResolution.x != 0 && xres != gScreenResolution.x) frame.size.width /= ((float)xres / gScreenResolution.x);
-	if (gScreenResolution.y != 0 && yres != gScreenResolution.y) frame.size.height /= ((float)yres / gScreenResolution.y);
+	if (gScreenResolution.x != 0 && xres != gScreenResolution.x){
+		frame.size.width /= ((float)xres / gScreenResolution.x);
+	}
+	
+	if (gScreenResolution.y != 0 && yres != gScreenResolution.y) {
+		frame.size.height /= ((float)yres / gScreenResolution.y);
+	}
 
 	// Initialize superclass
-	if ([super initWithFrame:frame] == NULL)
+	if ([super initWithFrame:frame] == NULL){
 		return NULL;
+	}
 	
 	// Set data members appropriately
 	lineDraw = NO;
 	keyWasUp = YES;
 	scrollingMode = NO;
-	scalingMode = kNoScalingMode;
 	scrollTimer = NULL;
 	magnifyTimer = NULL;
 	magnifyFactor = 1.0;
@@ -350,10 +356,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
 	}
 	
-	// Fix for Jaguar
-	if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_2)
-		srcRect.origin.y = [image size].height - srcRect.origin.y - srcRect.size.height;
-	
 	// Draw the image to screen
 	[image drawInRect:destRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0];
 
@@ -374,6 +376,47 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	}
 	[self drawExtras];
 }
+
+- (void)drawBoundaries
+{
+	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	
+	if (curToolIndex == kCropTool) {
+		[self drawCropBoundaries];
+	}
+	else {
+		[self drawSelectBoundaries];
+	}
+}
+
+- (void)drawCropBoundaries
+{
+	NSRect tempRect;
+	IntRect cropRect;
+	NSBezierPath *tempPath;
+	float xScale, yScale;
+	int width, height;
+	
+	xScale = [[document contents] xscale];
+	yScale = [[document contents] yscale];
+	width = [(SeaContent *)[document contents] width];
+	height = [(SeaContent *)[document contents] height];
+	cropRect = [[[document tools] currentTool] cropRect];
+	if (cropRect.size.width == 0 || cropRect.size.height == 0)
+		return;
+	tempRect.origin.x = floor(cropRect.origin.x * xScale);
+	tempRect.origin.y =  floor(cropRect.origin.y * yScale);
+	tempRect.size.width = ceil(cropRect.size.width * xScale);
+	tempRect.size.height = ceil(cropRect.size.height * yScale);
+	[[[SeaController seaPrefs] selectionColor:0.4] set];
+	tempPath = [NSBezierPath bezierPathWithRect:NSMakeRect(0, 0, width * xScale + 1.0, height * yScale + 1.0)];
+	[tempPath appendBezierPathWithRect:tempRect];
+	[tempPath setWindingRule:NSEvenOddWindingRule];
+	[tempPath fill];
+	
+	[self drawDragHandles: tempRect type: kCropHandleType];
+}
+
 
 - (void)drawSelectBoundaries
 {
@@ -463,7 +506,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Check to see if the user is currently dragging a selection
 	intermediate = NO;
 	if(curToolIndex >= kFirstSelectionTool && curToolIndex <= kLastSelectionTool){
-		intermediate =  [(AbstractSelectTool *)[[document tools] getTool: curToolIndex] intermediate] && ! [(AbstractSelectTool *)[[document tools] getTool: curToolIndex] selectionIsMoving];
+		intermediate =  [(AbstractScaleTool *)[[document tools] getTool: curToolIndex] intermediate] && ! [(AbstractScaleTool *)[[document tools] getTool: curToolIndex] isMovingOrScaling];
 	}
 	
 	[cursorsManager setCloseRect:NSMakeRect(0, 0, 0, 0)];
@@ -527,7 +570,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[[NSColor whiteColor] set];
 		[tempPath setLineDash: white count: 4 phase: 0.0];
 		[tempPath stroke];
-	}else if((curToolIndex == kLassoTool || curToolIndex == kPolygonLassoTool) && intermediate ){
+	}else if((curToolIndex == kLassoTool || curToolIndex == kPolygonLassoTool) && intermediate){
 		// Finally, draw the marching ants for the lasso or polygon lasso tools
 		tempPath = [NSBezierPath bezierPath];
 		
@@ -616,6 +659,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			[[NSColor blackColor] set];
 			[cursorsManager setCloseRect:outside];
 			break;
+		case kPositionType:
+			[[(SeaPrefs *)[SeaController seaPrefs] guideColor: 1.0] set];
+			outside = NSMakeRect(origin.x - 3, origin.y - 3, 6, 6);
+			path = [NSBezierPath bezierPathWithRect:outside];
+			break;
 		default:
 			NSLog(@"Handle type not understood.");
 			break;
@@ -663,101 +711,31 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		case kPolygonalLassoType:
 			[[NSColor whiteColor] set];
 			break;
+		case kPositionType:
+			inside = NSMakeRect(origin.x - 2, origin.y - 2, 4, 4);
+			path = [NSBezierPath bezierPathWithRect: inside];
+			[[NSColor whiteColor] set];
+			break;
 		default:
 			NSLog(@"Handle type not understood.");
 			break;
 	}
 	[path fill];
-}
-
-- (int)point:(NSPoint) point isInHandleFor:(IntRect)rect
-{
-	
-	float xScale = [[document contents] xscale];
-	float yScale = [[document contents] yscale];
-	rect = IntMakeRect(rect.origin.x * xScale, rect.origin.y * yScale, rect.size.width * xScale, rect.size.height * yScale);
-	
-	BOOL inTop = point.y + 5 > rect.origin.y && point.y - 3 < rect.origin.y;
-	BOOL inMiddle = point.y+ 4 > (rect.origin.y + rect.size.height / 2) && point.y - 4 < (rect.origin.y + rect.size.height / 2);
-	BOOL inBottom = point.y+ 3> (rect.origin.y + rect.size.height) && point.y - 5< (rect.origin.y + rect.size.height);
-	
-	BOOL inLeft = point.x + 5 > rect.origin.x && point.x -3  < rect.origin.x;
-	BOOL inCenter = point.x + 4 > (rect.origin.x + rect.size.width / 2) && point.x - 4 < (rect.origin.x + rect.size.width / 2);
-	BOOL inRight =  point.x + 3 > (rect.origin.x + rect.size.width) && point.x - 5 < (rect.origin.x + rect.size.width);
-	
-	if(inTop && inLeft )
-		return kULDir;
-	if(inTop&& inCenter)
-		return kUDir;
-	if(inTop && inRight)
-		return kURDir;
-	if(inMiddle && inRight)
-		return kRDir;
-	if(inBottom && inRight)
-		return kDRDir;
-	if(inBottom && inCenter)
-		return kDDir;
-	if(inBottom && inLeft)
-		return kDLDir;
-	if(inMiddle && inLeft)
-		return kLDir;
-		
-	return kNoDir;
-}
-
-- (void)drawCropBoundaries
-{
-	NSRect tempRect;
-	IntRect cropRect;
-	NSBezierPath *tempPath;
-	float xScale, yScale;
-	int width, height;
-	
-	xScale = [[document contents] xscale];
-	yScale = [[document contents] yscale];
-	width = [(SeaContent *)[document contents] width];
-	height = [(SeaContent *)[document contents] height];
-	cropRect = [[[document tools] currentTool] cropRect];
-	if (cropRect.size.width == 0 || cropRect.size.height == 0)
-		return;
-	tempRect.origin.x = floor(cropRect.origin.x * xScale);
-	tempRect.origin.y =  floor(cropRect.origin.y * yScale);
-	tempRect.size.width = ceil(cropRect.size.width * xScale);
-	tempRect.size.height = ceil(cropRect.size.height * yScale);
-	[[[SeaController seaPrefs] selectionColor:0.4] set];
-	tempPath = [NSBezierPath bezierPathWithRect:NSMakeRect(0, 0, width * xScale + 1.0, height * yScale + 1.0)];
-	[tempPath appendBezierPathWithRect:tempRect];
-	[tempPath setWindingRule:NSEvenOddWindingRule];
-	[tempPath fill];
-	
-	[self drawDragHandles: tempRect type: kCropHandleType];
-}
-
-- (void)drawBoundaries
-{
-	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
-	
-	if (curToolIndex == kCropTool) {
-		[self drawCropBoundaries];
-	}
-	else {
-		[self drawSelectBoundaries];
-	}
+	[[(SeaPrefs *)[SeaController seaPrefs] guideColor: 1.0] set];
 }
 
 - (void)drawExtras
 {	
 	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
-	id positionTool = [[document tools] getTool:kPositionTool];
 	id cloneTool = [[document tools] getTool:kCloneTool];
 	id effectTool = [[document tools] getTool:kEffectTool];
-	float radians = 0.0;
 	NSPoint outPoint, hilightPoint;
 	float xScale, yScale;
 	int xoff, yoff, lwidth, lheight, i;
 	NSBezierPath *tempPath;
 	IntPoint sourcePoint;
 	NSImage *crossImage;
+	
 	
 	// Fill out various variables
 	xoff = [[[document contents] activeLayer] xoff];
@@ -767,8 +745,44 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	xScale = [[document contents] xscale];
 	yScale = [[document contents] yscale];
 
+	tempPath = [NSBezierPath bezierPath];
+	[tempPath setLineWidth:1.0];
+	
+	
+	if([(SeaPrefs *)[SeaController seaPrefs] guides] && xScale > 2 && yScale > 2){
+		[[NSColor colorWithCalibratedWhite:0.9 alpha:0.25] set];
+		int i, j;
+		
+		for(i = 0; i < [self frame].size.width / xScale; i++){
+			[tempPath moveToPoint:NSMakePoint(xScale * i - 0.5, 0)];
+			[tempPath lineToPoint:NSMakePoint(xScale * i - 0.5, [self frame].size.height)];
+		}
+		
+		for(j = 0; j < [self frame].size.height / yScale; j++){
+			[tempPath moveToPoint:NSMakePoint(0, yScale * j - 0.5)];
+			[tempPath lineToPoint:NSMakePoint([self frame].size.width, yScale *j - 0.5)];
+		}		
+		[tempPath stroke];
+		[[NSColor colorWithCalibratedWhite:0.5 alpha:0.25] set];
 
+		for(i = 0; i < [self frame].size.width / xScale; i++){
+			[tempPath moveToPoint:NSMakePoint(xScale * i + 0.5, 0)];
+			[tempPath lineToPoint:NSMakePoint(xScale * i + 0.5, [self frame].size.height)];
+		}
+		
+		for(j = 0; j < [self frame].size.height / yScale; j++){
+			[tempPath moveToPoint:NSMakePoint(0, yScale * j + 0.5)];
+			[tempPath lineToPoint:NSMakePoint([self frame].size.width, yScale *j + 0.5)];
+		}		
+		[tempPath stroke];
+		
+	
+	}
+	
 	if(curToolIndex == kPositionTool && [(SeaPrefs *)[SeaController seaPrefs] guides]){
+		float radians = 0.0;
+		id positionTool = [[document tools] getTool:kPositionTool];
+
 		// The position tool now has guides (which the user can turn on or off)
 		// This makes it easy to see the dimensions and the boundaries of the moved layer
 		// or selection, even when there is currently an active selection.
@@ -779,8 +793,15 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		
 		[[(SeaPrefs *)[SeaController seaPrefs] guideColor: 1.0] set];
 		
-		tempPath = [NSBezierPath bezierPath];
-		[tempPath setLineWidth:1.0];
+		if([positionTool intermediate]){
+			IntRect postScaledRect = [positionTool postScaledRect];
+			xoff = postScaledRect.origin.x;
+			yoff = postScaledRect.origin.y;
+			lwidth = postScaledRect.size.width;
+			lheight = postScaledRect.size.height;
+		}
+			
+		[self drawDragHandles:NSMakeRect(xoff, yoff, lwidth, lheight) type:kPositionType];
 		
 		NSPoint centerPoint = NSMakePoint(xoff + lwidth / 2, yoff + lheight / 2);
 		// Additionally, the new guides are directly proportional to the amount of rotation or 
@@ -862,7 +883,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		}
 	}else if (curToolIndex == kWandTool || curToolIndex == kBucketTool){
 		WandTool *tool = [[document tools] getTool: curToolIndex];
-		if([tool intermediate] && (curToolIndex == kBucketTool || ![tool selectionIsMoving])){
+		if([tool intermediate] && (curToolIndex == kBucketTool || ![tool isMovingOrScaling])){
 			// Draw the connecting line
 			[[(SeaPrefs *)[SeaController seaPrefs] guideColor: 1.0] set];
 
@@ -1017,44 +1038,34 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		return;
 	}
 	
-	if([[document selection] active]){
-		if(curToolIndex>= kFirstSelectionTool && curToolIndex <= kLastSelectionTool && [options selectionMode] == kDefaultMode){
-			SeaSelection *selection = [document selection];
-			scalingDir = [self point: [self convertPoint:[theEvent locationInWindow] fromView:NULL] isInHandleFor: [selection globalRect]];
-			if(scalingDir > kNoDir){
-				scalingMode = kSelectionScalingMode;
-				preScaledRect = [selection globalRect];
-				if([selection mask]){
-					preScaledMask = malloc([selection globalRect].size.width * [selection globalRect].size.height);
-					memcpy(preScaledMask, [selection mask], [selection globalRect].size.width * [selection globalRect].size.height);
-				} else {
-					preScaledMask = NULL;
-				}
-				return;
-			}
+
+	/* else if(curToolIndex == kCropTool || curToolIndex == kPositionTool) {
+		IntRect localRect;
+		if(curToolIndex == kCropTool){
+			CropTool *tool = [[document tools] getTool:kCropTool];
+			localRect = [tool cropRect];
+		}else {
+			localRect = [[[document contents] activeLayer] localRect];
 		}
-	}else if(curToolIndex == kCropTool) {
-		CropTool *tool = [[document tools] getTool:kCropTool];
-		IntRect cropRect = [tool cropRect];
-		scalingDir = [self point: [self convertPoint:[theEvent locationInWindow] fromView:NULL] isInHandleFor: cropRect];
+
+		scalingDir = [self point: [self convertPoint:[theEvent locationInWindow] fromView:NULL] isInHandleFor: localRect];
 		if(scalingDir >= 0){
-			scalingMode = kCropScalingMode;
-			preScaledRect = cropRect;
+			if(curToolIndex == kCropTool){
+				scalingMode = kCropScalingMode;
+			}else {
+				scalingMode = kPositionScalingMode;
+			}
+
+			preScaledRect = localRect;
 			preScaledMask = NULL;
 			return;
 		}
-	}
+	}	 */
 	
 	// Check if it is a line draw
 	if (lineDraw) {
 		[self mouseDragged:theEvent];
 		return;
-	}
-	
-	// Check for floating
-	if (curToolIndex >= kFirstSelectionTool && curToolIndex <= kLastSelectionTool && [options modifier] == kAltModifier) {
-		[[document contents] makeSelectionFloat:NO];
-		curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	}
 	
 	// Get the current tool
@@ -1069,10 +1080,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	localActiveLayerPoint.y = localPoint.y - [[[document contents] activeLayer] yoff];
 	
 	// Turn mouse coalescing on or off
-	if ([curTool useMouseCoalescing] || [(SeaPrefs *)[SeaController seaPrefs] mouseCoalescing] || scrollingMode)
+	if ([curTool useMouseCoalescing] || [(SeaPrefs *)[SeaController seaPrefs] mouseCoalescing] || scrollingMode){
 		SetMouseCoalescingEnabled(true, NULL);
-	else
+	}else{
 		SetMouseCoalescingEnabled(false, NULL);
+	}
 	
 	// Check for tablet events
 	#ifdef MACOS_10_4_COMPILE
@@ -1222,88 +1234,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	xScale = [[document contents] xscale];
 	yScale = [[document contents] yscale];
 	localPoint.x /= xScale;
-	localPoint.y /= yScale;
-	if(scalingMode > kNoScalingMode){
-		IntRect oldRect;
-		localPoint.x = round(localPoint.x);
-		localPoint.y = round(localPoint.y);
-		if(scalingMode == kSelectionScalingMode){
-			oldRect = [[document selection] globalRect];
-		}else if(scalingMode == kCropScalingMode){
-			oldRect = [[[document tools] getTool:kCropTool] cropRect];
-		}
-		BOOL usesAspect = NO;
-		NSSize ratio = NSZeroSize;
-		if((curToolIndex == kRectSelectTool || curToolIndex == kEllipseSelectTool || curToolIndex == kCropTool) && [options aspectType] == kRatioAspectType){
-			usesAspect = YES;
-			ratio = [options ratio];
-		}
-		
-		float newHeight = preScaledRect.size.height;
-		float newWidth  = preScaledRect.size.width;
-		float newX = preScaledRect.origin.x;
-		float newY = preScaledRect.origin.y;
-
-		switch(scalingDir){
-			case kULDir:
-				newWidth = preScaledRect.origin.x -  localPoint.x + preScaledRect.size.width;
-				newX = localPoint.x;
-				if(usesAspect){
-					newHeight = newWidth * ratio.height;
-					newY = preScaledRect.origin.y + preScaledRect.size.height - newHeight;
-				}else{
-					newHeight = preScaledRect.origin.y - localPoint.y + preScaledRect.size.height;
-					newY = localPoint.y;
-				}
-			break; case kUDir:
-				newHeight = preScaledRect.origin.y - localPoint.y + preScaledRect.size.height;
-				newY = localPoint.y;
-			break; case kURDir:
-				newWidth = localPoint.x - preScaledRect.origin.x;
-				if(usesAspect){
-					newHeight = newWidth * ratio.height;
-					newY = preScaledRect.origin.y + preScaledRect.size.height - newHeight;
-				}else{
-					newHeight = preScaledRect.origin.y - localPoint.y + preScaledRect.size.height;
-					newY = localPoint.y;
-				}
-			break; case kRDir:
-				newWidth = localPoint.x - preScaledRect.origin.x;
-			break; case kDRDir:
-				newWidth = localPoint.x - preScaledRect.origin.x;
-				if(usesAspect){
-					newHeight = newWidth * ratio.height;
-				}else{
-					newHeight = localPoint.y - preScaledRect.origin.y;
-				}
-			break; case kDDir:
-				newHeight = localPoint.y - preScaledRect.origin.y;
-			break; case kDLDir:
-				newX = localPoint.x;
-				newWidth = preScaledRect.origin.x -  localPoint.x + preScaledRect.size.width;
-				if(usesAspect){
-					newHeight = newWidth * ratio.height;
-				}else{
-					newHeight = localPoint.y - preScaledRect.origin.y;
-				}
-			break; case kLDir:
-				newX = localPoint.x;
-				newWidth = preScaledRect.origin.x -  localPoint.x + preScaledRect.size.width;
-			break; default:
-				NSLog(@"Scaling direction not supported.");
-		}
-
-		if(scalingMode == kSelectionScalingMode){
-			[[document selection] scaleSelectionTo:IntMakeRect((int)newX, (int)newY, (int)newWidth, (int)newHeight) from: preScaledRect interpolation: GIMP_INTERPOLATION_CUBIC usingMask: preScaledMask];
-		}else if(scalingMode == kCropScalingMode){
-			[[[document tools] getTool:kCropTool] setCropRect: IntMakeRect((int)newX, (int)newY, (int)newWidth, (int)newHeight)];
-		}
-		// Update the utilities
-		if ([[[SeaController utilitiesManager] infoUtilityFor:document] visible]) [[[SeaController utilitiesManager] infoUtilityFor:document] update];
-		if ([[document scrollView] rulersVisible]) [self updateRulerMarkings:[theEvent locationInWindow] andStationary:mouseDownLoc];
-		return;
-	}
-	
+	localPoint.y /= yScale;	
 	localActiveLayerPoint.x = localPoint.x - [[[document contents] activeLayer] xoff];
 	localActiveLayerPoint.y = localPoint.y - [[[document contents] activeLayer] yoff];
 	
@@ -1374,14 +1305,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		lineDraw = YES;
 		return;
 	}
-	
-	if(scalingMode > kNoScalingMode){
-		scalingMode = kNoScalingMode;
-		if(preScaledMask)
-			free(preScaledMask);
-		return;
-	}
-	
+
 	// Calculate the localPoint and localActiveLayerPoint
 	mouseDownLoc = NSMakePoint(-256e6, -256e6);
 	localPoint = [self convertPoint:[theEvent locationInWindow] fromView:NULL];

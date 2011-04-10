@@ -158,7 +158,6 @@
 			current = atan((where.y - activeCenter.y) / (where.x - activeCenter.x));
 			rotation = current - original;
 			
-			[[document docView] setNeedsDisplay:YES];
 		
 		break;
 		case kScalingLayer:
@@ -167,10 +166,10 @@
 			original = sqrt(sqr(initialPoint.x - activeCenter.x) + sqr(initialPoint.y - activeCenter.y));
 			current = sqrt(sqr(where.x - activeCenter.x) + sqr(where.y - activeCenter.y));
 			scale = current / original;
-			[[document docView] setNeedsDisplay:YES];
 		
 		break;
 	}
+	[[document docView] setNeedsDisplay:YES];
 }
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event

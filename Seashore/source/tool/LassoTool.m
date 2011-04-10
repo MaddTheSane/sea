@@ -27,7 +27,7 @@
 	id layer = [[document contents] activeLayer];
 	[super mouseDownAt:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
 		
-	if(!movingSelection){
+	if(![super isMovingOrScaling]){
 		where.x -= [layer xoff];
 		where.y -= [layer yoff];
 
@@ -37,6 +37,7 @@
 		points[0] =  NSPointMakeIntPoint(where);
 		lastPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 		[[document docView] setNeedsDisplay:YES];
+		intermediate = YES;
 	}
 }
 
@@ -45,7 +46,7 @@
 	id layer = [[document contents] activeLayer];
 	[super mouseDraggedTo:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
 	
-	if(!movingSelection && intermediate){
+	if(intermediate && ![super isMovingOrScaling]){
 		int width, height;
 		where.x -= [layer xoff];
 		where.y -= [layer yoff];
@@ -68,28 +69,38 @@
 				if (points[pos].y > height) points[pos].y = height;
 			}
 		}
+		[[document docView] setNeedsDisplay:YES];
 	}
-	[[document docView] setNeedsDisplay:YES];
 }
 
 - (void)fineMouseUpAt:(NSPoint)where withEvent:(NSEvent *)event
 {
 	id layer = [[document contents] activeLayer];
-
 	[super mouseUpAt:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
-	unsigned char *overlay = [[document whiteboard] overlay];
-	unsigned char *fakeOverlay;
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
-	float xScale, yScale;
-	int fakeHeight, fakeWidth;
-	int interpolation;
-	int spp = [[document contents] spp];
-	int tpos;
-	IntRect rect;
-	GimpVector2 *gimpPoints;
 	
 	// Check we have a valid start point
-	if (!movingSelection && intermediate) {
+	if (intermediate && ![super isMovingOrScaling]) {
+		unsigned char *overlay = [[document whiteboard] overlay];
+		unsigned char *fakeOverlay;
+		int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+		float xScale, yScale;
+		int fakeHeight, fakeWidth;
+		int interpolation;
+		int spp = [[document contents] spp];
+		int tpos;
+		IntRect rect;
+		GimpVector2 *gimpPoints;
+
+		// Redraw canvas
+		[[document docView] setNeedsDisplay:YES];
+
+		// Clear last selection
+		if([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode)
+			[[document selection] clearSelection];
+		
+		// No single-pixel loops
+		if (pos <= 1) return;
+
 		// Fill out the variables
 		if([[document docView] zoom] <= 1){
 			interpolation = GIMP_INTERPOLATION_NONE;
@@ -109,16 +120,6 @@
 		pos++;
 		points[pos] = points[0];
 		gimpPoints = malloc((pos) * sizeof(GimpVector2));
-
-		// Redraw canvas
-		[[document docView] setNeedsDisplay:YES];
-
-		// Clear last selection
-		if([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode)
-			[[document selection] clearSelection];
-		
-		// No single-pixel loops
-		if (pos <= 1) return;
 
 		// Find the rectangle of the selection
 		rect.origin = points[0];
@@ -166,10 +167,12 @@
 			
 		// Release the fake (scaled) overlay
 		free(fakeOverlay);
+		intermediate = NO;
+		[[document docView] setNeedsDisplay:YES];
 	}
-	intermediate = NO;
-	movingSelection = NO;
-	[[document docView] setNeedsDisplay:YES];
+
+	translating = NO;
+	scalingDir = kNoDir;
 }
 
 - (BOOL)isFineTool

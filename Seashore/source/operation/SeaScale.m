@@ -147,7 +147,7 @@
 	[sheet orderOut:self];
 }
 
-- (void)scaleToWidth:(int)width height:(int)height interpolation:(int)interpolation index:(int)index undoRecord:(ScaleUndoRecord *)undoRecord
+- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg moving:(BOOL)isMoving interpolation:(int)interpolation index:(int)index undoRecord:(ScaleUndoRecord *)undoRecord
 {
 	id contents = [document contents], curLayer;
 	int whichLayer, count, oldWidth, oldHeight;
@@ -175,6 +175,9 @@
 		undoRecord->unscaledHeight = oldHeight;
 		undoRecord->scaledWidth = width;
 		undoRecord->scaledHeight = height;
+		undoRecord->scaledXOrg = xorg;
+		undoRecord->scaledYOrg = yorg;
+		undoRecord->isMoving = isMoving;
 		undoRecord->index = index;
 		undoRecord->interpolation = interpolation;
 		undoRecord->isScaled = YES;
@@ -223,9 +226,11 @@
 						
 			// Change the layer's size
 			[curLayer setWidth:[(SeaLayer *)curLayer width] * xScale height:[(SeaLayer *)curLayer height] * yScale interpolation:interpolation];
-			if (index == kAllLayers)
+			if (index == kAllLayers){
 				[curLayer setOffsets:IntMakePoint([curLayer xoff] * xScale, [curLayer yoff] * yScale)];
-			else {
+			}else if(isMoving) {
+				[curLayer setOffsets:IntMakePoint(xorg, yorg)];
+			}else {
 				x = [curLayer xoff] + ((float)oldWidth - (float)oldWidth * xScale) / 2.0;
 				y = [curLayer yoff] + ((float)oldHeight - (float)oldHeight * yScale) / 2.0;
 				[curLayer setOffsets:IntMakePoint(x, y)];
@@ -248,7 +253,7 @@
 	ScaleUndoRecord undoRecord;
 	
 	// Do the scale
-	[self scaleToWidth:width height:height interpolation:interpolation index:index undoRecord:&undoRecord];
+	[self scaleToWidth:width height:height xorg: 0 yorg: 0 moving: NO interpolation:interpolation index:index undoRecord:&undoRecord];
 
 	// Allow the undo
 	if (undoCount + 1 > undoMax) {
@@ -267,6 +272,33 @@
 		[[document helpers] boundariesAndContentChanged:YES];
 	else
 		[[document helpers] layerBoundariesChanged:index];
+}
+
+- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg interpolation:(int)interpolation index:(int)index
+{
+	ScaleUndoRecord undoRecord;
+	
+	// Do the scale
+	[self scaleToWidth:width height:height xorg: xorg yorg: yorg moving: YES interpolation:interpolation index:index undoRecord:&undoRecord];
+	
+	// Allow the undo
+	if (undoCount + 1 > undoMax) {
+		undoMax += kNumberOfScaleRecordsPerMalloc;
+		undoRecords = realloc(undoRecords, undoMax * sizeof(ScaleUndoRecord));
+	}
+	undoRecords[undoCount] = undoRecord;
+	[[[document undoManager] prepareWithInvocationTarget:self] undoScale:undoCount];
+	undoCount++;
+	
+	// Clear selection
+	[[document selection] clearSelection];
+	
+	// Do appropriate updating
+	if (index == kAllLayers){
+		[[document helpers] boundariesAndContentChanged:YES];
+	}else{
+		[[document helpers] layerBoundariesChanged:index];
+	}
 }
 
 - (void)undoScale:(int)undoIndex
@@ -328,7 +360,7 @@
 	else {
 		
 		// Otherwise just reverse the process with the information we stored on the original scaling
-		[self scaleToWidth:undoRecord.scaledWidth height:undoRecord.scaledHeight interpolation:undoRecord.interpolation index:undoRecord.index undoRecord:NULL];
+		[self scaleToWidth:undoRecord.scaledWidth height:undoRecord.scaledHeight xorg: undoRecord.scaledXOrg yorg: undoRecord.scaledYOrg moving: undoRecord.isMoving interpolation:undoRecord.interpolation index:undoRecord.index undoRecord:NULL];
 		undoRecord.isScaled = YES;
 	
 	}

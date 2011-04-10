@@ -98,16 +98,6 @@ static BOOL forceAlt = NO;
 	return NO;
 }
 
-- (NSSize)ratio
-{
-	return NSZeroSize;
-}
-
-- (int)aspectType
-{
-	return kNoAspectType;
-}
-
 - (void)shutdown
 {
 }

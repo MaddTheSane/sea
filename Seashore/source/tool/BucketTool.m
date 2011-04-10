@@ -26,7 +26,6 @@
 {
 	self = [super init];
 	if(self){
-		intermediate = NO;
 		isPreviewing = NO;
 	}
 	return self;
@@ -173,11 +172,6 @@
 -(NSPoint)current
 {
 	return currentNSPoint;
-}
-
-- (BOOL)intermediate
-{
-	return intermediate;
 }
 
 @end

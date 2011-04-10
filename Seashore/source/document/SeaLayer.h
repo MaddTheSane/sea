@@ -223,6 +223,13 @@
 - (int)yoff;
 
 /*!
+	@method		localRect
+	@discussion	For finding out where it is, simply a combination of the above values.
+	@result		An Integer Rectangle
+*/
+- (IntRect)localRect;
+
+/*!
 	@method		setOffsets:
 	@discussion	Sets the horizontal and vertical offsets of the layer.
 	@param		newOffsets

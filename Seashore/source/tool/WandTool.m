@@ -18,25 +18,30 @@
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	[super mouseDownAt:where withEvent:event];
-	startPoint = where;
-	startNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
-	currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
+	
+	if(![super isMovingOrScaling]){
+		startPoint = where;
+		startNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
+		currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
+		intermediate = YES;
+	}
 }
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
 	[super mouseDraggedTo:where withEvent:event];
-	currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
-	[[document docView] setNeedsDisplay: YES];
+	
+	if(![super isMovingOrScaling]){
+		currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
+		[[document docView] setNeedsDisplay: YES];
+	}
 }
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	[super mouseUpAt:where withEvent:event];
-	if(movingSelection){
-		intermediate = NO;
-		movingSelection = NO;
-	}else{
+
+	if(![super isMovingOrScaling]){
 		id layer = [[document contents] activeLayer];
 		int tolerance, width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height], spp = [[document contents] spp], k;
 		unsigned char *overlay = [[document whiteboard] overlay], *data = [(SeaLayer *)layer data];
@@ -78,6 +83,9 @@
 		intermediate = NO;
 
 	}
+
+	translating = NO;
+	scalingDir = kNoDir;
 }
 
 - (NSPoint)start

@@ -21,6 +21,10 @@
 				The scaled width of the document or layer.
 	@field		scaledHeight
 				The scaled height of the document or layer.
+	@field		scaledXOrg
+				The new X origin that the layer is scaled to.
+	@field		scaledYOrg
+				The new Y origin that the layer is scaled to.
 	@field		interpolation
 				The interpolation style to be used when scaling.
 	@field		isScaled
@@ -41,7 +45,10 @@ typedef struct {
 	int unscaledHeight;
 	int scaledWidth;
 	int scaledHeight;
+	int scaledXOrg;
+	int scaledYOrg;
 	int interpolation;
+	BOOL isMoving;
 	BOOL isScaled;
 	int *indicies;
 	IntRect *rects;
@@ -155,6 +162,29 @@ typedef struct {
 				the entire document).
 */
 - (void)scaleToWidth:(int)width height:(int)height interpolation:(int)interpolation index:(int)index;
+
+/*!
+	@method		scaleToWidth:height:xorg:yorg:interpolation:index:
+	@discussion	Scales the given layer (or entire document) so that it matches
+				the specified height and width. Interpolation (allowing for
+				smoother scaling) is used as specified (handles updates and
+				undos).
+	@param		width
+				The revised width of the document or layer.
+	@param		height
+				The revised height of the document or layer.
+	@param		xorg
+				The x origin of the newly scaled layer.
+	@param		yorg
+				The y origin of the newly scaled layer.
+	@param		interpolation
+				The interpolation style to be used (see GIMPCore).
+	@param		index
+				The index of the layer to be scaled (or kAllLayers to indicate
+				the entire document).
+*/
+- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg interpolation:(int)interpolation index:(int)index;
+
 
 /*!
 	@method		undoScale:

@@ -23,27 +23,26 @@
 {
 	[super mouseDownAt:where withEvent:event];
 	
-	int aspectType = [options aspectType];
-	NSSize ratio;
-	double xres, yres;
-	int modifier;
-	
-	// Get mode
-	modifier = [options modifier];
-	if(modifier == kShiftModifier){
-		oneToOne = YES;
-	}else{
-		oneToOne = NO;
-	}
-	
-	
-	// Do the following...
-	if (!movingSelection) {
+	// Do the following rect select specific behvior
+	if (![super isMovingOrScaling]) {
+		int aspectType = [options aspectType];
+		NSSize ratio;
+		double xres, yres;
+		int modifier;
+		
+		// Get mode
+		modifier = [options modifier];
+		if(modifier == kShiftModifier){
+			oneToOne = YES;
+		}else{
+			oneToOne = NO;
+		}
 		
 		// Clear the active selection and start the selection
-		if ([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode)
+		if ([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode){
 			[[document selection] clearSelection];
-
+		}
+		
 		// Record the start point
 		startPoint = where;
 
@@ -71,6 +70,7 @@
 				break;
 			}
 		}
+		intermediate = YES;
 		[[document helpers] selectionChanged];
 	}
 }
@@ -79,12 +79,11 @@
 {
 	[super mouseDraggedTo:where withEvent:event];
 	
-	int aspectType = [options aspectType];
-	NSSize ratio;
-	
 	// Check we have a valid start point
-	if (!movingSelection && intermediate) {
-	
+	if (intermediate && ![super isMovingOrScaling]) {
+		int aspectType = [options aspectType];
+		NSSize ratio;
+
 		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {
 			
 			// Determine the width of the selection rectangle
@@ -136,22 +135,36 @@
 {
 	[super mouseUpAt:where withEvent:event];
 	
-	if(!movingSelection && intermediate){
-		if([options radius])
+	if(intermediate && ![super isMovingOrScaling]){
+		if([options radius]){
 			[[document selection] selectRoundedRect:selectionRect radius:[options radius] mode:[options selectionMode]];
-		else
+		}else{
 			[[document selection] selectRect:selectionRect mode:[options selectionMode]];
+		}
 		selectionRect = IntMakeRect(0,0,0,0);
+		intermediate = NO;
 	}
 	
-	intermediate = NO;
-	movingSelection = NO;
+	// It's the responsibility of the subclass to reset these when its done
+	scalingDir = kNoDir;
+	translating = NO;
 }
 
 - (void)cancelSelection
 {
 	selectionRect = IntMakeRect(0,0,0,0);
 	[super cancelSelection];
+}
+
+- (void)reset
+{
+	NSLog(@"RectSelectTool invalidly being asked to reset");
+}
+
+- (IntRect)cropRect
+{
+	NSLog(@"RectSelectTool invalidly being asked for the crop rect");
+	return IntMakeRect(0, 0, 0, 0);
 }
 
 @end

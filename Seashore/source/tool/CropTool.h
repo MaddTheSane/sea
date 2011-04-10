@@ -1,5 +1,5 @@
 #import "Globals.h"
-#import "AbstractTool.h"
+#import "AbstractScaleTool.h"
 
 /*!
 	@class		CropTool
@@ -10,23 +10,17 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface CropTool : AbstractTool {
+@interface CropTool : AbstractScaleTool {
 
 	// The point where the selection begun
 	IntPoint startPoint;
-	
-	// The original origin when moving
-	IntPoint startOrigin;
-	
+		
 	// The rectangle used for cropping
 	IntRect cropRect;
 	
 	// Are we using the one-to-one ratio?
 	BOOL oneToOne;
-	
-	// Are we moving the crop?
-	BOOL movingCrop;
-	
+
 }
 
 /*!

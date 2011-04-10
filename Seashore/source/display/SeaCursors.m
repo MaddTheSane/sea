@@ -198,6 +198,23 @@
 				[self addCursorRect:handleRects[i] cursor:handleCursors[i]];
 			}
 		}
+	}else if (tool == kPositionTool) {
+		NSRect cropRect;
+		IntRect origRect;
+
+		[self addCursorRect:[view frame] cursor:moveCursor];
+		
+		origRect =IntConstrainRect(NSRectMakeIntRect([view frame]), operableIntRect);
+		cropRect = NSMakeRect(origRect.origin.x * xScale, origRect.origin.y * yScale, origRect.size.width * xScale, origRect.size.height * yScale);
+		
+		if (cropRect.size.width != 0 && cropRect.size.height != 0){
+			
+			[self addCursorRect:NSConstrainRect(cropRect,[view frame]) cursor:handCursor];
+			int i;
+			for(i = 0; i < 8; i++){
+				[self addCursorRect:handleRects[i] cursor:handleCursors[i]];
+			}
+		}
 	}else{
 
 		// If there is currently a selection, then users can operate in there only
@@ -257,7 +274,7 @@
 		// Do we need this?
 		//[view removeCursorRect:operableRect cursor:pencilCursor];
 		[self addCursorRect:operableRect cursor:eraserCursor];
-	}else if (tool == kPositionTool){
+	}/*else if (tool == kPositionTool){
 		PositionOptions *options = (PositionOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool];
 		if([options toolFunction] == kScalingLayer){
 			[self addCursorRect:[view frame] cursor:resizeCursor];
@@ -266,7 +283,7 @@
 		}else if([options toolFunction] == kMovingLayer){
 			[self addCursorRect:[view frame] cursor:moveCursor];
 		}
-	}
+	}*/
 	
 	
 	// Some tools can operate outside of the selection rectangle

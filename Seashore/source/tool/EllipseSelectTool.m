@@ -27,22 +27,22 @@
 {
 	[super mouseDownAt:where withEvent:event];
 
-	int aspectType = [options aspectType];
-	NSSize ratio;
-	double xres, yres;
-	int modifier;
-	
-	// Get mode
-	modifier = [options modifier];
-	if(modifier == kShiftModifier){
-		oneToOne = YES;
-	}else{
-		oneToOne = NO;
-	}
-		
 	// Otherwise do the following...
-	if (!movingSelection) {
-
+	if (![super isMovingOrScaling]) {
+		int aspectType = [options aspectType];
+		NSSize ratio;
+		double xres, yres;
+		int modifier;
+		
+		// Get mode
+		modifier = [options modifier];
+		if(modifier == kShiftModifier){
+			oneToOne = YES;
+		}else{
+			oneToOne = NO;
+		}
+		
+		
 		// Clear the active selection and start the selection
 		if([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode)
 			[[document selection] clearSelection];
@@ -74,20 +74,19 @@
 				break;
 			}
 		}
-		[[document helpers] selectionChanged];
+		[[document helpers] selectionChanged];	
+		intermediate = YES;
 	}
-	
-	intermediate = YES;
 }
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
 	[super mouseDraggedTo:where withEvent:event];
-	int aspectType = [options aspectType];
-	NSSize ratio;
 	
 	// Check we have a valid start point
-	if (!movingSelection && intermediate) {
+	if (intermediate && ![super isMovingOrScaling]) {
+		int aspectType = [options aspectType];
+		NSSize ratio;
 	
 		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {
 		
@@ -133,7 +132,6 @@
 			selectionRect.origin.y = where.y;
 
 		}
-
 		[[document helpers] selectionChanged];
 	}
 }
@@ -141,13 +139,14 @@
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	[super mouseUpAt:where withEvent:event];
-	if (!movingSelection && intermediate) {
+	if (intermediate && ![super isMovingOrScaling]) {
 		[[document selection] selectEllipse:selectionRect mode:[options selectionMode]];
 		selectionRect = IntMakeRect(0,0,0,0);
+		intermediate = NO;
 	}
 	
-	intermediate = NO;
-	movingSelection = NO;
+	scalingDir = kNoDir;
+	translating = NO;
 }
 
 - (void)cancelSelection

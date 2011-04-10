@@ -227,7 +227,11 @@
 	}
 #endif
 	
-	unpremultiplyBitmap(4, resdata, resdata, width * height);
+	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
+		unpremultiplyBitmap(4, resdata, resdata, selection.size.width * selection.size.height);
+	}else {
+		unpremultiplyBitmap(4, resdata, resdata, width * height);
+	}
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {

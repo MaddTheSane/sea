@@ -14,21 +14,15 @@ This is a place to quickly jot down bugs that you notice during editing.
 Bugs marked with (?) are things I've seen but haven't been able to reliably reproduce.
 
 ** Really Broken Behaviors **
-- On two monitors, one window may never get the focus back
+- On two monitors, one window may never get the focus back (?)
 - Sometimes wand selects the wrong area after the anchoring of a new layer (?)
-- Performance SUCKS!! There have to be a lot of inefficiencies now, we need to find and ELIMINATE them!
-- Sometimes you can get a "run away" auto scroll when you don't get sufficient mouse events, meaning the user releases the mouse 
-outside the view ( I've changed the behavior for now, but it really should go back to the way it was, but without this bug)
+- Performance/memory usage SUCKS!! There have to be a lot of inefficiencies now, we need to find and ELIMINATE them!
 - Leaving the font panel open across two documents both with text being inserted can result in the fonts being wrong on one of the docs
 - When you create a bucket fill as a preview first (hold down shift, then release before mouse up), you'll get multiple undo records that don't do anything
-- Because of the change in color handling, a certain color palette can't be serialized, and if it's in the prefs it crashes the app on open I've worked around it but it's still unclear why this is happening
-- Some layers become unwriteable after opening as PDF
-- Also, opening a PDF at different DPI's doesn't behave correctly
-- Opening images at high DPI (or maybe it's setting the image to a high dpi, or maybe it's just with PDF's) doesn't work 
-- selectionRect being recognized by some tools. This is because they are being called erroneously
+- Some layers become unwriteable after opening as PDF (?)
+- Opening images at high DPI (or maybe it's setting the image to a high dpi, or maybe it's just with PDF's) doesn't work (?)
+- selectionRect being recognized by some tools. This is because they are being called erroneously (?)
 - Applying plugins on floating layers and reanchoring them results in visible edges
-- Changing the visibility status of a layer temporarily toggles that layer's selection
-- Hitting the info button in the layers view selects the layer
 - Looks like Color Edges is somehow inverting the colors
 - If the info panel is hidden by default the button at the bottom starts in the wrong state
 
@@ -38,6 +32,8 @@ outside the view ( I've changed the behavior for now, but it really should go ba
 - Maximizing (zooming) a window, default and minimum / maximum window sizes need to be coordinated
 - Floating a layer with an anti-aliased selection mask can result in lost pixels at the boundary when the layer is re-anchored.
 - In 10.4 there's a potential redraw issue with the options view
+- Changing the visibility status of a layer temporarily toggles that layer's selection
+- Hitting the info button in the layers view selects the layer
 - Use Gimp Core more extensively for selections (feathering etc...)
 - Create a much more graphical file new window with thumbnails of recent documents, for example.
 - Need to remove deprecated 10.6 API's as well as remove all instances of "id" in class declarations favor of a more descriptive class
@@ -47,6 +43,11 @@ outside the view ( I've changed the behavior for now, but it really should go ba
 - The goal for the info panel should be more intelligent
 - The warning banner's alternate buttons should be more intelligent. For example, with a read only file, make the button be a Save As...
 - Should be able to paste text directly into an image
+- Sometimes you can get a "run away" auto scroll when you don't get sufficient mouse events, meaning the user releases the mouse (?)
+outside the view ( I've changed the behavior for now, but it really should go back to the way it was, but without this bug)
+- Because of the change in color handling, a certain color palette can't be serialized, and if it's in the prefs it crashes the app on open I've worked around it but it's still unclear why this is happening
+
+
 
 ** General UI Improvements **
 -  We need gradients with stops

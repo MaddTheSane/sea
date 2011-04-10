@@ -1,5 +1,5 @@
 #import "Globals.h"
-#import "AbstractOptions.h"
+#import "AbstractScaleOptions.h"
 
 /*!
 	@class		CropOptions
@@ -10,7 +10,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface CropOptions : AbstractOptions {
+@interface CropOptions : AbstractScaleOptions {
 
 	// The AspectRatio instance linked to this options panel
 	IBOutlet id aspectRatio;

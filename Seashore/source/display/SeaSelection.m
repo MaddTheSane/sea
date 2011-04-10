@@ -533,13 +533,15 @@
 	IntRect newRect, oldRect;
 	int tempMask, tempMaskProduct;
 	
-	if(!mask)
-		mode = kDefaultMode;
-	
 	// Get the rectangles
-	oldRect = [self localRect];
 	newRect = IntConstrainRect(selectionRect, IntMakeRect(0, 0, width, height));
-	rect = IntSumRects(oldRect, newRect);;
+	if(!mask || !active){
+		mode = kDefaultMode;		
+		rect = newRect;
+	}else {
+		oldRect = [self localRect];
+		rect = IntSumRects(oldRect, newRect);		
+	}
 
 	if(!mode)
 		active = YES;

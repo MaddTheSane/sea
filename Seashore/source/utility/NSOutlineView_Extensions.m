@@ -53,12 +53,13 @@
 
 - (NSArray *)allSelectedItems {
     NSMutableArray *items = [NSMutableArray array];
-    NSEnumerator *selectedRows = [self selectedRowEnumerator];
-    NSNumber *selRow = nil;
-    while( (selRow = [selectedRows nextObject]) ) {
-        if ([self itemAtRow:[selRow intValue]]) 
-            [items addObject: [self itemAtRow:[selRow intValue]]];
-    }
+    NSIndexSet *selectedIndexes = [self selectedRowIndexes];
+	int i;
+	for(i = 0; i < [self numberOfRows]; i++){
+		if([selectedIndexes containsIndex:i]){
+			[items addObject: [self itemAtRow: i]];
+		}
+	}
     return items;
 }
 

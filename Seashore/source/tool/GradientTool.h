@@ -21,8 +21,6 @@
 	// The temporary point we've dragged to
 	NSPoint tempNSPoint;
 	
-	// If we are currently in a drag
-	BOOL intermediate;
 }
 
 /*!
@@ -80,12 +78,5 @@
 	@result		Returns the NSPoint of where the mouse is currently dragged to.
 */
 - (NSPoint)current;
-
-/*!
-	@method		intermediate
-	@discussion	Returns if the drag is active or not.
-	@result		Returns a BOOL of YES if the drag is active, NO if it is not.
-*/
-- (BOOL)intermediate;
 
 @end

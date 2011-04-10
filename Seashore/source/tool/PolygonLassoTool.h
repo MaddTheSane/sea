@@ -1,5 +1,5 @@
 #import "Globals.h"
-#import "AbstractSelectTool.h"
+#import "AbstractScaleTool.h"
 #import "LassoTool.h"
 
 /*!

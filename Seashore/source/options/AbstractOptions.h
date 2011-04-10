@@ -111,24 +111,6 @@ enum {
 - (BOOL)useTextures;
 
 /*!
-	@method		ratio
-	@discussion	Returns the ratio/size for the rect.
-				If tool does not have a rect, this method is not needed.
-	@result		Returns a NSSize for the crop in the aspect type's
-				units. If it is a ratio the width = X / Y and the 
-				height = Y / X.
-*/
-- (NSSize)ratio;
-
-/*!
-	@method		aspectType
-	@discussion	Returns the type of aspect ratio.
-	@result		Returns a constant representing the type of aspect ratio
-				(see AspectRatio).
-*/
-- (int)aspectType;
-
-/*!
 	@method		shutdown
 	@discussion	Saves current options upon shutdown.
 */

@@ -19,27 +19,12 @@
 	return kPolygonLassoTool;
 }
 
-- (id) init
-{
-	if(![super init])
-		return NULL;
-	intermediate = NO;
-	return self;
-}
-
 - (void)fineMouseDownAt:(NSPoint)where withEvent:(NSEvent *)event
 {
 	id layer = [[document contents] activeLayer];
-	movingSelection = NO;
-	IntPoint intWhere = IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]);
-	if ([[document selection] active] && [(AbstractSelectOptions *)options selectionMode] == kDefaultMode && IntPointInRect(intWhere, [[document selection] localRect])) {
-		movingSelection = YES;
-		moveOrigin = intWhere;
-		oldOrigin =  [[document selection] trueLocalRect].origin;
-		intermediate = YES;
-	}
+	[super mouseDownAt:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
 	
-	if(!movingSelection){
+	if(![super isMovingOrScaling]){
 		float xScale, yScale;
 		unsigned char *overlay = [[document whiteboard] overlay];
 		unsigned char *fakeOverlay;
@@ -176,8 +161,8 @@
 			free(fakeOverlay);
 			intermediate = NO;
 		}
+		[[document docView] setNeedsDisplay:YES];
 	}
-	[[document docView] setNeedsDisplay:YES];
 }
 
 - (void)fineMouseDraggedTo:(NSPoint)where withEvent:(NSEvent *)event
@@ -191,10 +176,8 @@
 	id layer = [[document contents] activeLayer];
 	[super mouseUpAt:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
 
-	if(movingSelection){
-		intermediate = NO;
-		movingSelection = NO;
-	}
+	translating = NO;
+	scalingDir = kNoDir;
 }
 
 @end

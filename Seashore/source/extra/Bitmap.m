@@ -95,7 +95,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 	if (ispace == kGrayColorSpace && dspace == kGrayColorSpace) {
 	
 		// Define the source
-		srcBitmap.image = ibitmap;
+		srcBitmap.image = (char *)ibitmap;
 		srcBitmap.width = width;
 		srcBitmap.height = height;
 		srcBitmap.rowBytes = width * ispp * (ibps / 8);
@@ -106,7 +106,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 			srcBitmap.space = (ispp == 1) ? cmGray16Space : cmGrayA32Space;
 		
 		// Define the destination
-		destBitmap.image = dbitmap;
+		destBitmap.image = (char *)dbitmap;
 		destBitmap.width = width;
 		destBitmap.height = height;
 		destBitmap.rowBytes = width * 2;
@@ -125,7 +125,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 	else if (ispace == kRGBColorSpace && dspace == kRGBColorSpace) {
 		
 		// Define the source
-		srcBitmap.image = ibitmap;
+		srcBitmap.image = (char *)ibitmap;
 		srcBitmap.width = width;
 		srcBitmap.height = height;
 		srcBitmap.rowBytes = width * ispp * (ibps / 8);
@@ -136,7 +136,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 			srcBitmap.space = (ispp == 3) ? cmRGB48Space : cmRGBA64Space;
 		
 		// Define the destination
-		destBitmap.image = dbitmap;
+		destBitmap.image = (char *)dbitmap;
 		destBitmap.width = width;
 		destBitmap.height = height;
 		destBitmap.rowBytes = width * 4;
@@ -156,7 +156,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 	else if (ispace == kCMYKColorSpace && dspace == kRGBColorSpace) {
 	
 		// Define the source
-		srcBitmap.image = ibitmap;
+		srcBitmap.image = (char *)ibitmap;
 		srcBitmap.width = width;
 		srcBitmap.height = height;
 		srcBitmap.rowBytes = width * ispp * (ibps / 8);
@@ -164,7 +164,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 		srcBitmap.space = (ibps == 8) ? cmCMYK32Space : cmCMYK64Space;
 		
 		// Define the destination
-		destBitmap.image = dbitmap;
+		destBitmap.image = (char *)dbitmap;
 		destBitmap.width = width;
 		destBitmap.height = height;
 		destBitmap.rowBytes = width * 4;
@@ -193,7 +193,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 	else if (ispace == kCMYKColorSpace && dspace == kGrayColorSpace) {
 	
 		// Define the source
-		srcBitmap.image = ibitmap;
+		srcBitmap.image = (char *)ibitmap;
 		srcBitmap.width = width;
 		srcBitmap.height = height;
 		srcBitmap.rowBytes = width * ispp * (ibps / 8);
@@ -201,7 +201,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 		srcBitmap.space = (ibps == 8) ? cmCMYK32Space : cmCMYK64Space;
 		
 		// Define the destination
-		destBitmap.image = dbitmap;
+		destBitmap.image = (char *)dbitmap;
 		destBitmap.width = width;
 		destBitmap.height = height;
 		destBitmap.rowBytes = width * 2;
@@ -230,7 +230,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 	else if (ispace == kGrayColorSpace && dspace == kRGBColorSpace) {
 		
 		// Define the source
-		srcBitmap.image = ibitmap;
+		srcBitmap.image = (char *)ibitmap;
 		srcBitmap.width = width;
 		srcBitmap.height = height;
 		srcBitmap.rowBytes = width * ispp * (ibps / 8);
@@ -241,7 +241,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 			srcBitmap.space = (ispp == 1) ? cmGray16Space : cmGrayA32Space;
 		
 		// Define the destination
-		destBitmap.image = dbitmap;
+		destBitmap.image = (char *)dbitmap;
 		destBitmap.width = width;
 		destBitmap.height = height;
 		destBitmap.rowBytes = width * 4;
@@ -261,7 +261,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 	else if (ispace == kRGBColorSpace && dspace == kGrayColorSpace) {
 		
 		// Define the source
-		srcBitmap.image = ibitmap;
+		srcBitmap.image = (char *)ibitmap;
 		srcBitmap.width = width;
 		srcBitmap.height = height;
 		srcBitmap.rowBytes = width * ispp * (ibps / 8);
@@ -272,7 +272,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 			srcBitmap.space = (ispp == 3) ? cmRGB48Space : cmRGBA64Space;
 		
 		// Define the destination
-		destBitmap.image = dbitmap;
+		destBitmap.image = (char *)dbitmap;
 		destBitmap.width = width;
 		destBitmap.height = height;
 		destBitmap.rowBytes = width * 2;

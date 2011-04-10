@@ -1,71 +1,65 @@
 #import "AbstractSelectTool.h"
-#import "AbstractTool.h"
-#import "SeaController.h"
-#import "UtilitiesManager.h"
-#import "OptionsUtility.h"
-#import "SeaController.h"
-#import "UtilitiesManager.h"
-#import "TextureUtility.h"
-#import "AbstractSelectOptions.h"
-#import "SeaSelection.h"
-#import "AbstractSelectTool.h"
+
 #import "SeaDocument.h"
 #import "SeaHelpers.h"
+#import "SeaSelection.h"
+#import "AbstractOptions.h"
+#import "SeaContent.h"
 
 @implementation AbstractSelectTool
-- (id)init
-{
-	if (![super init])
-		return NULL;
 
-	intermediate = NO;
-	movingSelection = NO;
-	
-	return self;
+- (void)mouseDownAt:(IntPoint)localPoint withEvent:(NSEvent *)event
+{	
+	if([[document selection] active]){
+		/* incidentally, we should only be translating when the mode is default
+		 However, we don't know how to pass that logic in yet
+		 here it is:
+		 [(AbstractSelectOptions *)options selectionMode] == kDefaultMode
+		 */
+		
+		[self mouseDownAt: localPoint
+				  forRect: [[document selection] globalRect]
+				  andMask: [[document selection] mask]];
+		
+		// Also, we universally float the selection if alt is down
+		if(![self isMovingOrScaling] && [options modifier] == kAltModifier) {
+			[[document contents] makeSelectionFloat:NO];
+		}
+	}	
 }
 
-- (BOOL) intermediate
+- (void)mouseDraggedTo:(IntPoint)localPoint withEvent:(NSEvent *)event
 {
-	return intermediate;
-}
-
-- (BOOL) selectionIsMoving
-{
-	return movingSelection;
-}
-
-- (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
-{
-	// Check if location is in existing rect
-	movingSelection = NO;
-	if ([[document selection] active] && [(AbstractSelectOptions *)options selectionMode] == kDefaultMode && IntPointInRect(where, [[document selection] localRect])) {
-		movingSelection = YES;
-		moveOrigin = where;
-		oldOrigin =  [[document selection] trueLocalRect].origin;
-	}
-	intermediate = YES;
-}
-
-- (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
-{
-	if (movingSelection && intermediate) {
-		IntPoint newOrigin;
-		// Move the selection
-		newOrigin.x = oldOrigin.x + (where.x - moveOrigin.x);
-		newOrigin.y = oldOrigin.y + (where.y - moveOrigin.y);
-		[[document selection] moveSelection:newOrigin];
+	if([[document selection] active]){
+		IntRect newRect = [self mouseDraggedTo: localPoint
+									   forRect: [[document selection] globalRect]
+									   andMask: [[document selection] mask]];
+		if(scalingDir > kNoDir && !translating){
+			[[document selection] scaleSelectionTo: newRect
+											  from: [self preScaledRect]
+									 interpolation: GIMP_INTERPOLATION_CUBIC
+										 usingMask: [self preScaledMask]];
+		}else if (translating && scalingDir == kNoDir){
+			[[document selection] moveSelection:IntMakePoint(newRect.origin.x, newRect.origin.y)];
+		}
 	}
 }
 
-- (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
+- (void)mouseUpAt:(IntPoint)localPoint withEvent:(NSEvent *)event
 {
-	
+	if([[document selection] active]){
+		[self mouseUpAt: localPoint
+				forRect: [[document selection] globalRect]
+				andMask: [[document selection] mask]];		
+	}
 }
 
 - (void)cancelSelection
 {
+	translating = NO;
+	scalingDir = kNoDir;
+
 	intermediate = NO;
-	movingSelection = NO;
 	[[document helpers] selectionChanged];
 }
 

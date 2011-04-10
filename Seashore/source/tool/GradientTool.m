@@ -17,14 +17,6 @@
 	return kGradientTool;
 }
 
--(id) init
-{
-	if(![super init])
-		return NULL;
-	intermediate = NO;
-	return self;
-}
-
 - (void)dealloc
 {
 	[super dealloc];
@@ -132,8 +124,4 @@
 	return tempNSPoint;
 }
 
-- (BOOL)intermediate
-{
-	return intermediate;
-}
 @end

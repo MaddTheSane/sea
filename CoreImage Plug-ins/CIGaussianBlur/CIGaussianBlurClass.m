@@ -381,8 +381,8 @@
 - (unsigned char *)blur:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
-	CIImage *input, *crop_output, *output, *background;
-	CIFilter *filter;
+	CIImage *unclampedInput, *clampedInput, *crop_output, *output, *background;
+	CIFilter *clamp, *filter;
 	CGImageRef temp_image;
 	CGImageDestinationRef temp_writer;
 	NSMutableData *temp_handler;
@@ -422,7 +422,15 @@
 	// Create core image with data
 	size.width = width;
 	size.height = height;
-	input = [CIImage imageWithBitmapData:[NSData dataWithBytesNoCopy:data length:width * height * 4 freeWhenDone:NO] bytesPerRow:width * 4 size:size format:kCIFormatARGB8 colorSpace:[pluginData displayProf]];
+	unclampedInput = [CIImage imageWithBitmapData:[NSData dataWithBytesNoCopy:data length:width * height * 4 freeWhenDone:NO] bytesPerRow:width * 4 size:size format:kCIFormatARGB8 colorSpace:[pluginData displayProf]];
+	
+	// We need to apply a CIAffineClamp to prevent the black soft fringe we'd normally get from
+	// the content outside the borders of the image
+	clamp = [CIFilter filterWithName: @"CIAffineClamp"];
+	[clamp setDefaults];
+	[clamp setValue:[NSAffineTransform transform] forKey:@"inputTransform"];
+	[clamp setValue:unclampedInput forKey: @"inputImage"];
+	clampedInput = [clamp valueForKey: @"outputImage"];
 	
 	// Run filter
 	filter = [CIFilter filterWithName:@"CIGaussianBlur"];
@@ -430,7 +438,7 @@
 		@throw [NSException exceptionWithName:@"CoreImageFilterNotFoundException" reason:[NSString stringWithFormat:@"The Core Image filter named \"%@\" was not found.", @"CIGaussianBlur"] userInfo:NULL];
 	}
 	[filter setDefaults];
-	[filter setValue:input forKey:@"inputImage"];
+	[filter setValue:clampedInput forKey:@"inputImage"];
 	[filter setValue:[NSNumber numberWithInt:radius] forKey:@"inputRadius"];
 	output = [filter valueForKey: @"outputImage"];
 	
@@ -472,7 +480,7 @@
 	
 	// Handle opaque images
 	if (opaque) {
-		vec_len = width * height * 4;
+		vec_len = [temp_rep pixelsWide] * [temp_rep pixelsHigh] * [temp_rep samplesPerPixel];
 		if (vec_len % 16 == 0) { vec_len /= 16; }
 		else { vec_len /= 16; vec_len++; }
 		for (i = 0; i < 16; i++) {

@@ -20,6 +20,12 @@
 - (void)setSelectionMode:(int)newMode
 {
 	mode = newMode;
+	if(mode == kDefaultMode){
+		[self setIgnoresMove:NO];
+	}else {
+		[self setIgnoresMove:YES];
+	}
+
 }
 
 - (void)setModeFromModifier:(unsigned int)modifier

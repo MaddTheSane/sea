@@ -1,5 +1,5 @@
 #import "Globals.h"
-#import "AbstractOptions.h"
+#import "AbstractScaleOptions.h"
 
 /*		
 	@class		AbstractSelectOptions
@@ -11,7 +11,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface AbstractSelectOptions : AbstractOptions {
+@interface AbstractSelectOptions : AbstractScaleOptions {
 	// The Selection mode
 	int mode;
 }

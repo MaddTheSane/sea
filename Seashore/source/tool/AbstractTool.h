@@ -17,6 +17,9 @@
 	// The options associated with this tool
 	id options;
 	
+	// Is the selection being made
+	BOOL intermediate;
+	
 }
 
 /*!
@@ -125,6 +128,13 @@
 				The mouse up event.
 */
 - (void)fineMouseUpAt:(NSPoint)where withEvent:(NSEvent *)event;
+
+/*!
+	 @method		intermediate
+	 @discussion	This is used to detect if there is currently a mouse drag
+	 @result		Returns a BOOL: YES if there is currently an action being made.
+*/
+- (BOOL) intermediate;
 
 /*!
 	@method		isFineTool

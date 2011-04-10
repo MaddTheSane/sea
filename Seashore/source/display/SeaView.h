@@ -14,6 +14,8 @@
 				Indicates the handle is for the end of a gradient tool.
 	@constant	kPolygonalLassoType
 				Indicates the handle at the beginning of a polygonal lasso tool.
+	@constant	kPositionType
+				Indicates the handle for the position tool (scale, rotate).
 */
 enum {
 	kSelectionHandleType,
@@ -21,47 +23,8 @@ enum {
 	kCropHandleType,
 	kGradientStartType,
 	kGradientEndType,
-	kPolygonalLassoType
-};
-
-/*!
-	@enum		k...ScalingMode
-	@constant	kNoScalingMode
-				Indicates there is no scaling
-	@constant	kSelectionScalingMode
-				Indicates the selection mask is being scaled.
-	@constant	kCropScalingMode
-				Indicates the crop mask is being scaled.
-*/
-enum {
-	kNoScalingMode,
-	kSelectionScalingMode,
-	kCropScalingMode
-};
-
-
-/*!
-	@enum		k...Dir
-	@constant	kNoDir
-	@constant	kULDir
-	@constant	kUDir
-	@constant	kURDir
-	@constant	kRDir
-	@constant	kDRDir
-	@constant	kDDir
-	@constant	kDLDir
-	@constant	kLDir 
-*/
-enum {
-	kNoDir = -1,
-	kULDir,
-	kUDir,
-	kURDir,
-	kRDir,
-	kDRDir,
-	kDDir,
-	kDLDir,
-	kLDir
+	kPolygonalLassoType,
+	kPositionType
 };
 
 /*!
@@ -101,16 +64,7 @@ enum {
 	
 	// The magnify timer
 	NSTimer* magnifyTimer;
-	
-	// The direction of currently scaling (if any)
-	int scalingDir;
-	
-	// The mask of the selection before it was scaled
-	unsigned char * preScaledMask;
-	
-	// The rectangle of the selection before it was scaled
-	IntRect preScaledRect;
-	
+		
 	// Is the tablet eraser active?
 	// 0 = No; 1 = Yes, activated through sub-events, 2 = Yes, activated through native events.
 	int tabletEraser;
@@ -308,16 +262,6 @@ enum {
 				If the handle is not part of a rect use -1
 */
 - (void)drawHandle:(NSPoint) origin  type: (int)type index:(int)index;
-
-/*!
- @method		point:isInHandleFor:
- @discussion	Tests to see if the point is in a handle for the given rectangle.
- @param			point
-				The point to be tested.
- @param			rect
-				The specified rectangle to check for handles.
- */
-- (int)point:(NSPoint) point isInHandleFor:(IntRect)rect;
 
 /*!
  @method		drawCropBoundaries

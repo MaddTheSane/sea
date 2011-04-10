@@ -31,12 +31,6 @@
 - (void)dealloc;
 
 /*!
-	@method		shutdown
-	@discussion	Saves current transparency colour upon shutdown.
-*/
-- (void)shutdown;
-
-/*!
 	@method		toggle:
 	@discussion	Toggles the visibility of the utility's window.
 	@param		sender

@@ -5,6 +5,7 @@
 #import "SeaTools.h"
 #import "SeaDocument.h"
 #import "SeaSelection.h"
+#import "AspectRatio.h"
 
 @implementation PositionOptions
 

@@ -27,9 +27,6 @@
 	// The end point of the selection (at the moment)
 	NSPoint currentNSPoint;
 	
-	// If we are currently drawing the bucket
-	BOOL intermediate;
-	
 	// You can preview by holding down shift, so we need to track that
 	BOOL isPreviewing;
 }
@@ -89,12 +86,5 @@
 	@result		Returns an NSPoint
 */
 - (NSPoint)current;
-
-/*!
-	@method		intermediate
-	@discussion	If the bucket is currently being drawn.
-	@result		Returns a BOOL: YES if it is being made.
-*/
-- (BOOL) intermediate;
 
 @end

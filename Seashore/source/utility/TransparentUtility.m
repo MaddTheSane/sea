@@ -32,11 +32,6 @@
 	[super dealloc];
 }
 
-- (void)shutdown
-{	
-	[gUserDefaults setObject:[NSArchiver archivedDataWithRootObject:color] forKey:@"transparency color data"];
-}
-
 - (IBAction)toggle:(id)sender
 {
 	BOOL panelOpen = [gColorPanel isVisible] && [[gColorPanel title] isEqualToString:LOCALSTR(@"transparent", @"Transparent")];
@@ -71,6 +66,9 @@
 	for (i = 0; i < [documents count]; i++) {
 		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
 	}
+
+	[gUserDefaults setObject:[NSArchiver archivedDataWithRootObject:color] forKey:@"transparency color data"];
+
 }
 
 - (id)color

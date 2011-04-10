@@ -65,4 +65,10 @@
 	return count;
 }
 
+- (IntRect) selectionRect
+{
+	NSLog(@"Effect tool invalidly getting asked its selection rect");
+	return IntMakeRect(0, 0, 0, 0);
+}
+
 @end
