@@ -81,7 +81,7 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length);
+extern inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length);
 
 /*!
 	@function	premultiplyBitmap
@@ -97,7 +97,7 @@ inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *inp
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-inline void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
+extern inline void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
 
 /*!
 	@function	unpremultiplyBitmap
@@ -114,7 +114,7 @@ inline void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *sr
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-inline void unpremultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
+extern inline void unpremultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
 
 /*!
 	@function	averagedComponentValue
@@ -137,7 +137,7 @@ inline void unpremultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *
 	@param		where
 				The point at which to centre the box.
 */
-inline unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where);
+extern inline unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where);
 
 
 /*!
@@ -146,7 +146,7 @@ inline unsigned char averagedComponentValue(int spp, unsigned char *data, int wi
 	@param		profile
 				The profile to make the default display's profile.
 */
-inline void OpenDisplayProfile(CMProfileRef *profile);
+extern inline void OpenDisplayProfile(CMProfileRef *profile);
 
 /*!
 	@function	CloseDisplayProfile
@@ -154,4 +154,4 @@ inline void OpenDisplayProfile(CMProfileRef *profile);
 	@param		profile
 				The profile to make the default display's profile.
 */
-inline void CloseDisplayProfile(CMProfileRef profile);
+extern inline void CloseDisplayProfile(CMProfileRef profile);

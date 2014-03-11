@@ -180,7 +180,14 @@
 			isa = PBXProject;
 			buildConfigurationList = A8D8861309BD8F040027B1E7 /* Build configuration list for PBXProject "CompositorAV" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Blur */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -230,7 +237,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A859AE6D09C12BAB00684E83 /* Development (Native) */ = {
+		A859AE6D09C12BAB00684E83 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
@@ -248,14 +255,13 @@
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = YES;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A859AE6E09C12BAB00684E83 /* Deployment (Universal) */ = {
+		A859AE6E09C12BAB00684E83 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
 				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_AUTO_VECTORIZATION = YES;
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
@@ -269,49 +275,29 @@
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = NO;
 			};
-			name = "Deployment (Universal)";
+			name = Release;
 		};
-		A859AE6F09C12BAB00684E83 /* Development (Native) */ = {
+		A859AE6F09C12BAB00684E83 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_ACTUAL)";
 				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A859AE7009C12BAB00684E83 /* Deployment (Universal) */ = {
+		A859AE7009C12BAB00684E83 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 			};
-			name = "Deployment (Universal)";
-		};
-		A8B9A3CD0A42515000F63ECD /* Deployment (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = ppc;
-				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_AUTO_VECTORIZATION = YES;
-				GCC_AUTO_VECTORIZATION = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_NAME = CompositorAV;
-				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = NO;
-			};
-			name = "Deployment (Native)";
-		};
-		A8B9A3CE0A42515000F63ECD /* Deployment (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PREBINDING = NO;
-			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -319,22 +305,20 @@
 		A8D8860F09BD8F040027B1E7 /* Build configuration list for PBXNativeTarget "CompositorAV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A859AE6D09C12BAB00684E83 /* Development (Native) */,
-				A859AE6E09C12BAB00684E83 /* Deployment (Universal) */,
-				A8B9A3CD0A42515000F63ECD /* Deployment (Native) */,
+				A859AE6D09C12BAB00684E83 /* Debug */,
+				A859AE6E09C12BAB00684E83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 		A8D8861309BD8F040027B1E7 /* Build configuration list for PBXProject "CompositorAV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A859AE6F09C12BAB00684E83 /* Development (Native) */,
-				A859AE7009C12BAB00684E83 /* Deployment (Universal) */,
-				A8B9A3CE0A42515000F63ECD /* Deployment (Native) */,
+				A859AE6F09C12BAB00684E83 /* Debug */,
+				A859AE7009C12BAB00684E83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -517,11 +517,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		tempRect.origin.x += xoff; tempRect.origin.y += yoff;
 		tempRect.origin.x *= xScale; tempRect.origin.y *= yScale; tempRect.size.width *= xScale; tempRect.size.height *= yScale; 
 		tempPath = [NSBezierPath bezierPathWithOvalInRect:tempRect];
-		float black[4] = {0,.5,2,3.5};
+		CGFloat black[4] = {0,.5,2,3.5};
 		[[NSColor blackColor] set];
 		[tempPath setLineDash: black count: 4 phase: 0.0];
 		[tempPath stroke];
-		float white[4] = {0,3.5,2,.5};
+		CGFloat white[4] = {0,3.5,2,.5};
 		[[NSColor whiteColor] set];
 		[tempPath setLineDash: white count: 4 phase: 0.0];
 		[tempPath stroke];
@@ -562,11 +562,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		}
 		
 		// The marching ants themselves
-		float black[4] = {0,.5,2,3.5};
+		CGFloat black[4] = {0,.5,2,3.5};
 		[[NSColor blackColor] set];
 		[tempPath setLineDash: black count: 4 phase: 0.0];
 		[tempPath stroke];
-		float white[4] = {0,3.5,2,.5};
+		CGFloat white[4] = {0,3.5,2,.5};
 		[[NSColor whiteColor] set];
 		[tempPath setLineDash: white count: 4 phase: 0.0];
 		[tempPath stroke];
@@ -595,11 +595,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			[tempPath lineToPoint:NSMakePoint((thisPoint.x + xoff) * xScale , (thisPoint.y + yoff) * yScale )];
 		}
 		
-		float black[4] = {0,.5,2,3.5};
+		CGFloat black[4] = {0,.5,2,3.5};
 		[[NSColor blackColor] set];
 		[tempPath setLineDash: black count: 4 phase: 0.0];
 		[tempPath stroke];
-		float white[4] = {0,3.5,2,.5};
+		CGFloat white[4] = {0,3.5,2,.5};
 		[[NSColor whiteColor] set];
 		[tempPath setLineDash: white count: 4 phase: 0.0];
 		[tempPath stroke];
@@ -1080,14 +1080,17 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	localActiveLayerPoint.y = localPoint.y - [[[document contents] activeLayer] yoff];
 	
 	// Turn mouse coalescing on or off
+	/*
+	 FIXME: use Cocoa Coalescing check
 	if ([curTool useMouseCoalescing] || [(SeaPrefs *)[SeaController seaPrefs] mouseCoalescing] || scrollingMode){
 		SetMouseCoalescingEnabled(true, NULL);
 	}else{
 		SetMouseCoalescingEnabled(false, NULL);
 	}
+	 */
 	
 	// Check for tablet events
-	#ifdef MACOS_10_4_COMPILE
+
 	if (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_3) {
 		if (tabletEraser < 2) {
 			tabletEraser = 0;
@@ -1098,7 +1101,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			}
 		}
 	}
-	#endif
 	
 	// Reset the deltas
 	delta = IntMakePoint(0,0);
@@ -1291,7 +1293,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	yScale = [[document contents] yscale];
 	
 	// Return to normal coalescing
-	SetMouseCoalescingEnabled(true, NULL);
+	//SetMouseCoalescingEnabled(true, NULL);
 	
 	// Check if we are in scrolling mode
 	if (scrollingMode) {

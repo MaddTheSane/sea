@@ -91,7 +91,7 @@ enum {
 	@discussion	Returns an indication of the modifier.
 	@result		Returns an integer indicating the active modifier's tag.
 */
-- (int)modifier;
+- (NSComparisonPredicateModifier)modifier;
 
 
 /*!

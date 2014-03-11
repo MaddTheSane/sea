@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -133,9 +133,19 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = A893C29909BD8F17000B6D38 /* Build configuration list for PBXProject "Invert" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Invert */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -180,84 +190,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A893C29609BD8F17000B6D38 /* Development (Native) */ = {
+		A893C29609BD8F17000B6D38 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
 				PRODUCT_NAME = Invert;
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = YES;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A893C29709BD8F17000B6D38 /* Deployment (Universal) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				GCC_AUTO_VECTORIZATION = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
-				PRODUCT_NAME = Invert;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = "Deployment (Universal)";
-		};
-		A893C29809BD8F17000B6D38 /* Deployment (Native) */ = {
+		A893C29709BD8F17000B6D38 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
 				PRODUCT_NAME = Invert;
 				WRAPPER_EXTENSION = bundle;
 			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
-		A893C29A09BD8F17000B6D38 /* Development (Native) */ = {
+		A893C29A09BD8F17000B6D38 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A893C29B09BD8F17000B6D38 /* Deployment (Universal) */ = {
+		A893C29B09BD8F17000B6D38 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx;
 			};
-			name = "Deployment (Universal)";
-		};
-		A893C29C09BD8F17000B6D38 /* Deployment (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -265,22 +243,20 @@
 		A893C29509BD8F17000B6D38 /* Build configuration list for PBXNativeTarget "Invert" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A893C29609BD8F17000B6D38 /* Development (Native) */,
-				A893C29709BD8F17000B6D38 /* Deployment (Universal) */,
-				A893C29809BD8F17000B6D38 /* Deployment (Native) */,
+				A893C29609BD8F17000B6D38 /* Debug */,
+				A893C29709BD8F17000B6D38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 		A893C29909BD8F17000B6D38 /* Build configuration list for PBXProject "Invert" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A893C29A09BD8F17000B6D38 /* Development (Native) */,
-				A893C29B09BD8F17000B6D38 /* Deployment (Universal) */,
-				A893C29C09BD8F17000B6D38 /* Deployment (Native) */,
+				A893C29A09BD8F17000B6D38 /* Debug */,
+				A893C29B09BD8F17000B6D38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,3 +1,4 @@
+#import "Bitmap.h"
 #import "CIAffineTransformClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
@@ -184,24 +185,24 @@
 #endif
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
-@try {
-	resdata = [self executeChannel:pluginData withBitmap:newdata];
-}
-@catch (NSException *exception) {
+	@try {
+		resdata = [self executeChannel:pluginData withBitmap:newdata];
+	}
+	@catch (NSException *exception) {
 #ifdef __ppc__
-	for (i = 0; i < vec_len; i++) {
-		vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBR);
-	}
+		for (i = 0; i < vec_len; i++) {
+			vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBR);
+		}
 #else
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
-		vdata[i] = _mm_srli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
+		for (i = 0; i < vec_len; i++) {
+			vstore = _mm_slli_epi32(vdata[i], 24);
+			vdata[i] = _mm_srli_epi32(vdata[i], 8);
+			vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		}
 #endif
-	NSLog([exception reason]);
-	return;
-}
+		NSLog(@"%@", [exception reason]);
+		return;
+	}
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
 		unpremultiplyBitmap(4, resdata, resdata, selection.size.width * selection.size.height);
 	}else {
@@ -237,13 +238,13 @@
 {
 	int i, vec_len, width, height, channel;
 	unsigned char ormask[16], *resdata, *datatouse;
-	#ifdef __ppc__
+#ifdef __ppc__
 	vector unsigned char TOALPHA = (vector unsigned char)(0x10, 0x00, 0x00, 0x00, 0x10, 0x04, 0x04, 0x04, 0x10, 0x08, 0x08, 0x08, 0x10, 0x0C, 0x0C, 0x0C);
 	vector unsigned char HIGHVEC = (vector unsigned char)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
 	vector unsigned char *vdata, *rvdata, orvmask;
-	#else
+#else
 	__m128i *vdata, *rvdata, orvmask;
-	#endif
+#endif
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -254,40 +255,40 @@
 		vec_len = width * height * 4;
 		if (vec_len % 16 == 0) { vec_len /= 16; }
 		else { vec_len /= 16; vec_len++; }
-		#ifdef __ppc__
+#ifdef __ppc__
 		vdata = (vector unsigned char *)data; // NB: data may equal newdata
 		rvdata = (vector unsigned char *)newdata;
-		#else
+#else
 		vdata = (__m128i *)data;
 		rvdata = (__m128i *)newdata;
-		#endif
+#endif
 		datatouse = newdata;
 		if (channel == kPrimaryChannels) {
 			for (i = 0; i < 16; i++) {
 				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 			}
 			memcpy(&orvmask, ormask, 16);
-			#ifdef __ppc__
+#ifdef __ppc__
 			for (i = 0; i < vec_len; i++) {
 				rvdata[i] = vec_or(vdata[i], orvmask);
 			}
-			#else
+#else
 			for (i = 0; i < vec_len; i++) {
 				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
 			}
-			#endif
+#endif
 		}
 		else if (channel == kAlphaChannel) {
-			#ifdef __ppc__
+#ifdef __ppc__
 			for (i = 0; i < vec_len; i++) {
 				rvdata[i] = vec_perm(vdata[i], HIGHVEC, TOALPHA);
 			}
-			#else
+#else
 			for (i = 0; i < width * height; i++) {
 				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 				newdata[i * 4] = 255;
 			}
-			#endif
+#endif
 		}
 	}
 	
@@ -510,7 +511,7 @@
 	
 	// Get data from output core image
 	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
+	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
 	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
 	CGImageDestinationFinalize(temp_writer);
 	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
@@ -539,17 +540,17 @@
 
 - (unsigned char *)prepareAffineTransform:(NSAffineTransform *)at withImage:(unsigned char *)data spp:(int)spp width:(int)width height:(int)height
 {
-	#ifdef __ppc__
+#ifdef __ppc__
 	vector unsigned char TOGGLERGBF = (vector unsigned char)(0x13, 0x00, 0x01, 0x02, 0x17, 0x04, 0x05, 0x06, 0x1B, 0x08, 0x09, 0x0A, 0x1F, 0x0C, 0x0D, 0x0E);
 	vector unsigned char HIGHVEC = (vector unsigned char)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
 	vector unsigned char *vdata, *rvdata;
-	#else
+#else
 	__m128i *vdata, *rvdata, vstore, orvmask;
 	unsigned char ormask[16];
-	#endif
+#endif
 	unsigned char *ndata;
 	int i, vec_len;
-
+	
 	ndata = malloc(make_128(width * height * 4));
 	
 	if (spp == 2) {
@@ -561,31 +562,31 @@
 			ndata[i * 4 + 2] = data[i * 2];
 			ndata[i * 4 + 3] = data[i * 2];
 		}
-	
+		
 	}
 	else {
-	
+		
 		// I'm writing this on an Intel machine but AltiVec still kicks ass
-	
+		
 		// Determine vector length and prepare vector arrays
 		vec_len = width * height * 4;
 		if (vec_len % 16 == 0) { vec_len /= 16; }
 		else { vec_len /= 16; vec_len++; }
-		#ifdef __ppc__
+#ifdef __ppc__
 		vdata = (vector unsigned char *)data;
 		rvdata = (vector unsigned char *)ndata;
-		#else
+#else
 		vdata = (__m128i *)data;
 		rvdata = (__m128i *)ndata;
-		#endif
+#endif
 		
 		// Convert from RGBA to ARGB with A = 0xFF
-		#ifdef __ppc__
+#ifdef __ppc__
 		vdata = (vector unsigned char *)data;
 		for (i = 0; i < vec_len; i++) {
 			rvdata[i] = vec_perm(vdata[i], HIGHVEC, TOGGLERGBF);
 		}
-		#else
+#else
 		for (i = 0; i < 16; i++) {
 			ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 		}
@@ -594,7 +595,7 @@
 			rvdata[i] = _mm_slli_epi32(vdata[i], 8);
 			rvdata[i] = _mm_or_si128(rvdata[i], orvmask);
 		}
-		#endif
+#endif
 		
 	}
 	
@@ -666,7 +667,7 @@
 
 	// Get data from output core image
 	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
+	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
 	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
 	CGImageDestinationFinalize(temp_writer);
 	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
@@ -706,37 +707,13 @@
 			//}
 		}
 		
-	}
-	else {
-		
-		// I'm writing this on an Intel machine but AltiVec still kicks ass
-		/* Maybe, if it worked...
-		#if __ppc__
-		vec_len = width * height * 4;
-		if (vec_len % 16 == 0) { vec_len /= 16; }
-		else { vec_len /= 16; vec_len++; }
-		vdata = (vector unsigned char *)data;
-		rvdata = (vector unsigned char *)ndata;
-		
-		if (alpha) {
-			ovdata = (vector unsigned char *)alpha;
-			for (i = 0; i < vec_len; i++) {
-				rvdata[i] = vec_perm(vdata[i], ovdata[i], TOGGLERGBR);
-			}
-		}
-		else {
-			for (i = 0; i < vec_len; i++) {
-				rvdata[i] = vec_perm(vdata[i], HIGHVEC, TOGGLERGBR);
-			}
-		}
-		#else*/
+	} else {
 		for (i = 0; i < width * height; i++) {
 			ndata[i * 4] = data[i * ispp];
 			ndata[i * 4 + 1] = data[i * ispp + 1];
 			ndata[i * 4 + 2] = data[i * ispp + 2];
 			ndata[i * 4 + 3] = (alpha ? alpha[i * ispp] : 0xFF);
 		}
-		//#endif
 		
 	}
 	

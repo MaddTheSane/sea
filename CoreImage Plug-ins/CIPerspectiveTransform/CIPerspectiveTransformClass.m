@@ -210,7 +210,7 @@
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
 #endif
-	NSLog([exception reason]);
+	NSLog(@"%@", [exception reason]);
 	return;
 }
 

@@ -1,4 +1,5 @@
 #import "Globals.h"
+#import "Constants.h"
 
 /*!
 	@class		PluginData

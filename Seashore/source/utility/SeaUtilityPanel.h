@@ -10,7 +10,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface SeaUtilityPanel : NSPanel {
+@interface SeaUtilityPanel : NSPanel <NSWindowDelegate> {
 
 	// Used for window shading
 	float priorShadeHeight;

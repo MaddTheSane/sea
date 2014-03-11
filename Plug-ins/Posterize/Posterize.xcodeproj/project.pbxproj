@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -136,9 +136,19 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = A8CFAF9209BD8F1D005FBBB5 /* Build configuration list for PBXProject "Posterize" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Posterize */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -192,81 +202,51 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A8CFAF8F09BD8F1D005FBBB5 /* Development (Native) */ = {
+		A8CFAF8F09BD8F1D005FBBB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_NAME = Posterize;
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = YES;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A8CFAF9009BD8F1D005FBBB5 /* Deployment (Universal) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				GCC_AUTO_VECTORIZATION = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
-				PRODUCT_NAME = Posterize;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = "Deployment (Universal)";
-		};
-		A8CFAF9109BD8F1D005FBBB5 /* Deployment (Native) */ = {
+		A8CFAF9009BD8F1D005FBBB5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_NAME = Posterize;
 				WRAPPER_EXTENSION = bundle;
 			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
-		A8CFAF9309BD8F1D005FBBB5 /* Development (Native) */ = {
+		A8CFAF9309BD8F1D005FBBB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A8CFAF9409BD8F1D005FBBB5 /* Deployment (Universal) */ = {
+		A8CFAF9409BD8F1D005FBBB5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx;
 			};
-			name = "Deployment (Universal)";
-		};
-		A8CFAF9509BD8F1D005FBBB5 /* Deployment (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -274,22 +254,20 @@
 		A8CFAF8E09BD8F1D005FBBB5 /* Build configuration list for PBXNativeTarget "Posterize" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A8CFAF8F09BD8F1D005FBBB5 /* Development (Native) */,
-				A8CFAF9009BD8F1D005FBBB5 /* Deployment (Universal) */,
-				A8CFAF9109BD8F1D005FBBB5 /* Deployment (Native) */,
+				A8CFAF8F09BD8F1D005FBBB5 /* Debug */,
+				A8CFAF9009BD8F1D005FBBB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 		A8CFAF9209BD8F1D005FBBB5 /* Build configuration list for PBXProject "Posterize" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A8CFAF9309BD8F1D005FBBB5 /* Development (Native) */,
-				A8CFAF9409BD8F1D005FBBB5 /* Deployment (Universal) */,
-				A8CFAF9509BD8F1D005FBBB5 /* Deployment (Native) */,
+				A8CFAF9309BD8F1D005FBBB5 /* Debug */,
+				A8CFAF9409BD8F1D005FBBB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -13,7 +13,7 @@ extern BOOL useAltiVec;
 
 @implementation SeaPlugins
 
-int plugin_sort(id obj1, id obj2, void *context)
+NSInteger plugin_sort(id obj1, id obj2, void *context)
 {
 	int result;
 	
@@ -246,14 +246,14 @@ BOOL checkRun(NSString *path, NSString *file)
 
 - (void)dealloc
 {
-	int i;
+	//int i;
 	
-	if (pointPlugins) [pointPlugins autorelease];
+	if (pointPlugins) [pointPlugins release];
 	if (plugins) {
-		for (i = 0; i < [plugins count]; i++) {
-			[[plugins objectAtIndex:i] autorelease];
-		}
-		[plugins autorelease];
+		//for (i = 0; i < [plugins count]; i++) {
+		//	[[plugins objectAtIndex:i] release];
+		//}
+		[plugins release];
 	}
 	[super dealloc];
 }

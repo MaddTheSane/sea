@@ -84,7 +84,7 @@ static BOOL forceAlt = NO;
 	
 }
 
-- (int)modifier
+- (NSComparisonPredicateModifier)modifier
 {
 	return [[modifierPopup selectedItem] tag];
 }

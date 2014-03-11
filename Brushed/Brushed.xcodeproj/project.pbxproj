@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -179,9 +179,19 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
 			buildConfigurationList = A8B12B8409BD8F460096101F /* Build configuration list for PBXProject "Brushed" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Brushed */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -247,17 +257,10 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A898E52009BEFC120075C7AB /* Deployment (Native) */ = {
+		A898E53909BEFCA00075C7AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = "Deployment (Native)";
-		};
-		A898E53909BEFCA00075C7AB /* Development (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -277,15 +280,12 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A898E53A09BEFCA00075C7AB /* Deployment (Universal) */ = {
+		A898E53A09BEFCA00075C7AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -304,45 +304,26 @@
 				);
 				WRAPPER_EXTENSION = app;
 			};
-			name = "Deployment (Universal)";
+			name = Release;
 		};
-		A898E53B09BEFCA00075C7AB /* Deployment (Native) */ = {
+		A8B12B8509BD8F460096101F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 3.3;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = Brushed;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Deployment (Native)";
-		};
-		A8B12B8509BD8F460096101F /* Development (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = macosx;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A8B12B8609BD8F460096101F /* Deployment (Universal) */ = {
+		A8B12B8609BD8F460096101F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = macosx;
 			};
-			name = "Deployment (Universal)";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -350,22 +331,20 @@
 		A898E53809BEFCA00075C7AB /* Build configuration list for PBXNativeTarget "Brushed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A898E53909BEFCA00075C7AB /* Development (Native) */,
-				A898E53A09BEFCA00075C7AB /* Deployment (Universal) */,
-				A898E53B09BEFCA00075C7AB /* Deployment (Native) */,
+				A898E53909BEFCA00075C7AB /* Debug */,
+				A898E53A09BEFCA00075C7AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 		A8B12B8409BD8F460096101F /* Build configuration list for PBXProject "Brushed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A8B12B8509BD8F460096101F /* Development (Native) */,
-				A8B12B8609BD8F460096101F /* Deployment (Universal) */,
-				A898E52009BEFC120075C7AB /* Deployment (Native) */,
+				A8B12B8509BD8F460096101F /* Debug */,
+				A8B12B8609BD8F460096101F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -280,7 +280,7 @@
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
 #endif
-	NSLog([exception reason]);
+	NSLog(@"%@", [exception reason]);
 	return;
 }
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {

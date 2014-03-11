@@ -41,7 +41,7 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	fread(&header, sizeof(BrushHeader), 1, file);
 	
 	// Convert brush header to proper endianess
-#ifdef __i386__
+#ifdef __LITTLE_ENDIAN__
 	header.header_size = ntohl(header.header_size);
 	header.version = ntohl(header.version);
 	header.width = ntohl(header.width);

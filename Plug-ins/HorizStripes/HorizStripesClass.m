@@ -43,7 +43,7 @@
 	return @"Seashore Approved (Bobo)";
 }
 
-inline specmod(int a, int b)
+static inline int specmod(int a, int b)
 {
 	if (a < 0)
 		return b + a % b;

@@ -16,7 +16,7 @@ typedef enum
   BLUR_RLE
 } BlurMethod;
 
-inline void
+static inline void
 find_constants (double n_p[],
                 double n_m[],
                 double d_p[],
@@ -103,7 +103,7 @@ find_constants (double n_p[],
   }
 }
 
-inline int *
+static inline int *
 make_curve (double  sigma,
             int    *length)
 {
@@ -136,7 +136,7 @@ make_curve (double  sigma,
   return curve;
 }
 
-inline void
+static inline void
 run_length_encode (unsigned char *src,
                    int   *dest,
                    int    bytes,
@@ -173,7 +173,7 @@ run_length_encode (unsigned char *src,
     }
 }
 
-inline void
+static inline void
 transfer_pixels (double *src1,
                  double *src2,
                  unsigned char  *dest,

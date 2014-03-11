@@ -288,7 +288,7 @@
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
 #endif
-	NSLog([exception reason]);
+	NSLog(@"%@", [exception reason]);
 	return;
 }
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
@@ -462,7 +462,7 @@
 	
 	// Get data from output core image
 	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
+	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
 	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
 	CGImageDestinationFinalize(temp_writer);
 	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];

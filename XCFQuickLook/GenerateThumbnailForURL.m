@@ -22,7 +22,7 @@ OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thum
 	
 	QLThumbnailRequestSetImageWithData(thumbnail,(CFDataRef)[[whiteboard printableImage] TIFFRepresentation], NULL);
 	
-	[pool release];
+	[pool drain];
     return noErr;
 }
 

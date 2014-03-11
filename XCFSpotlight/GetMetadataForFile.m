@@ -160,6 +160,6 @@ Boolean GetMetadataForFile(void* thisInterface,
 		// release the loaded document
 		[tempDict release];
     }*/
-    [pool release];
+    [pool drain];
     return success;
 }

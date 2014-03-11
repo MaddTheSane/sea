@@ -13,7 +13,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "SeaPlugins.h"
 
-@interface CIDisplacementDistortionClass : NSObject {
+@interface CIDisplacementDistortionClass : NSObject <NSOpenSavePanelDelegate> {
 
 	// The plug-in's manager
 	id seaPlugins;

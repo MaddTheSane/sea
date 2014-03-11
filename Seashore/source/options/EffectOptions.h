@@ -63,7 +63,7 @@
 	@discussion	The row currently selected by the options.
 	@result		An integer.
 */
-- (int)selectedRow;
+- (NSInteger)selectedRow;
 
 /*!
 	@method		updateClickCount:

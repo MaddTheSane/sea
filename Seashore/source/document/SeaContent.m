@@ -125,8 +125,9 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Extract color profile
 	profile = [imageRep valueForProperty:NSImageColorSyncProfileData];
 	if (profile) {
-		cmProfileLoc.locType = cmPtrBasedProfile;
-		cmProfileLoc.u.ptrLoc.p = (Ptr)[profile bytes];
+		cmProfileLoc.locType = cmBufferBasedProfile;
+		cmProfileLoc.u.bufferLoc.buffer = (Ptr)[profile bytes];
+		cmProfileLoc.u.bufferLoc.size = [profile length];
 	}
 	
 	// Put it in a nice form
@@ -768,8 +769,9 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Extract color profile
 	profile = [imageRep valueForProperty:NSImageColorSyncProfileData];
 	if (profile) {
-		cmProfileLoc.locType = cmPtrBasedProfile;
-		cmProfileLoc.u.ptrLoc.p = (Ptr)[profile bytes];
+		cmProfileLoc.locType = cmBufferBasedProfile;
+		cmProfileLoc.u.bufferLoc.buffer = (Ptr)[profile bytes];
+		cmProfileLoc.u.bufferLoc.size = [profile length];
 	}
 	
 	// Work out the correct center point
@@ -1506,7 +1508,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 	// Check selection
 	if ([[document selection] active]) {
-		mask = [[document selection] mask];
+		mask = (unsigned char*)[[document selection] mask];
 		globalRect = [[document selection] globalRect];
 		ndata = malloc(make_128(globalRect.size.width * globalRect.size.height * spp));
 		if (mask) {
