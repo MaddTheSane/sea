@@ -43,8 +43,7 @@
 #import "AspectRatio.h"
 #import "WarningsUtility.h"
 #import "SeaScale.h"
-#import "NSEvent_Extensions.h"
-#import <Carbon/Carbon.h>
+#include <Carbon/Carbon.h>
 
 extern IntPoint gScreenResolution;
 
