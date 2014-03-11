@@ -7,6 +7,28 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		55909DFD18CFD59A00F43F90 /* CoreImage-based Plug-ins */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 55909DFE18CFD59A00F43F90 /* Build configuration list for PBXAggregateTarget "CoreImage-based Plug-ins" */;
+			buildPhases = (
+			);
+			dependencies = (
+				55909E2B18CFD73200F43F90 /* PBXTargetDependency */,
+				55909E0218CFD5A700F43F90 /* PBXTargetDependency */,
+				55909E0418CFD5A700F43F90 /* PBXTargetDependency */,
+				55909E0618CFD5A700F43F90 /* PBXTargetDependency */,
+				55909E0818CFD5A700F43F90 /* PBXTargetDependency */,
+				55909E0A18CFD5A700F43F90 /* PBXTargetDependency */,
+				55909E0C18CFD5A700F43F90 /* PBXTargetDependency */,
+				55909E0E18CFD5A700F43F90 /* PBXTargetDependency */,
+				55909E1018CFD5A700F43F90 /* PBXTargetDependency */,
+				55909E1218CFD5A700F43F90 /* PBXTargetDependency */,
+				55909E1418CFD5A700F43F90 /* PBXTargetDependency */,
+				55909E1618CFD5A700F43F90 /* PBXTargetDependency */,
+			);
+			name = "CoreImage-based Plug-ins";
+			productName = "CoreImage-based Plug-ins";
+		};
 		A89B83C60A426D3B00AD6941 /* Seashore Disk Image */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = A89B83CD0A426D4500AD6941 /* Build configuration list for PBXAggregateTarget "Seashore Disk Image" */;
@@ -83,13 +105,26 @@
 		55909DCA18CFCEC400F43F90 /* CICircularWrapClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D509A18CF9FBB005809E3 /* CICircularWrapClass.m */; };
 		55909DCB18CFCEC700F43F90 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D509D18CF9FBB005809E3 /* Localizable.strings */; };
 		55909DCC18CFCED000F43F90 /* CICMYKHalftoneClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D50A518CF9FBB005809E3 /* CICMYKHalftoneClass.m */; };
-		55909DCD18CFCEDC00F43F90 /* CICMYKHalftone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 557D50A618CF9FBB005809E3 /* CICMYKHalftone.nib */; };
 		55909DCE18CFCEE000F43F90 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50A818CF9FBB005809E3 /* Localizable.strings */; };
 		55909DD318CFCF3600F43F90 /* CIBloom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909DD518CFCF3600F43F90 /* CIBloom.xib */; };
 		55909DE118CFCFDE00F43F90 /* CICircularScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909DE018CFCFDE00F43F90 /* CICircularScreen.xib */; };
 		55909DE218CFCFEF00F43F90 /* CIBump.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909DDF18CFCF7600F43F90 /* CIBump.xib */; };
 		55909DE318CFCFF400F43F90 /* CIBrightness.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909DDA18CFCF5600F43F90 /* CIBrightness.xib */; };
 		55909DE618CFD06500F43F90 /* CICircularWrap.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909DE818CFD06500F43F90 /* CICircularWrap.xib */; };
+		55909DEE18CFD43900F43F90 /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF9CC00536DE2000A80207 /* Rects.m */; };
+		55909DEF18CFD43900F43F90 /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BDC80A04BF04B000A80207 /* Bitmap.m */; };
+		55909DF118CFD43900F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
+		55909DFB18CFD49500F43F90 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50B318CF9FBB005809E3 /* Localizable.strings */; };
+		55909DFC18CFD49900F43F90 /* CICrystallizeClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D50B018CF9FBB005809E3 /* CICrystallizeClass.m */; };
+		55909E1918CFD6DD00F43F90 /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF9CC00536DE2000A80207 /* Rects.m */; };
+		55909E1A18CFD6DD00F43F90 /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BDC80A04BF04B000A80207 /* Bitmap.m */; };
+		55909E1D18CFD6DD00F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
+		55909E2618CFD70E00F43F90 /* CIDisplacementDistortionClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D50BB18CF9FBB005809E3 /* CIDisplacementDistortionClass.m */; };
+		55909E2718CFD71200F43F90 /* default-distort.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 557D50BC18CF9FBB005809E3 /* default-distort.tiff */; };
+		55909E2918CFD71A00F43F90 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50BF18CF9FBB005809E3 /* Localizable.strings */; };
+		55909E2C18CFD80400F43F90 /* CICMYKHalftone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909E2E18CFD80400F43F90 /* CICMYKHalftone.xib */; };
+		55909E3418CFD92C00F43F90 /* CICrystallize.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909E3318CFD92700F43F90 /* CICrystallize.xib */; };
+		55909E3718CFD9BD00F43F90 /* CIDisplacementDistortion.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909E3918CFD9BD00F43F90 /* CIDisplacementDistortion.xib */; };
 		5599388418CFC69700E92088 /* CIBrightnessClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D506718CF9FBA005809E3 /* CIBrightnessClass.m */; };
 		5599388618CFC6A600E92088 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D506A18CF9FBA005809E3 /* Localizable.strings */; };
 		5599388818CFC6F100E92088 /* CIBumpClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D507218CF9FBA005809E3 /* CIBumpClass.m */; };
@@ -572,6 +607,90 @@
 			remoteGlobalIDString = 557D536118CFAAF6005809E3;
 			remoteInfo = "AffineTransform+";
 		};
+		55909E0118CFD5A700F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 557D533218CF9FEC005809E3;
+			remoteInfo = "Affine Tile+";
+		};
+		55909E0318CFD5A700F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 557D536118CFAAF6005809E3;
+			remoteInfo = "Affine Transform+";
+		};
+		55909E0518CFD5A700F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5599388A18CFC72A00E92088;
+			remoteInfo = "Bloom+";
+		};
+		55909E0718CFD5A700F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 550AEAF018CFC5DE008918BA;
+			remoteInfo = "Brightness+";
+		};
+		55909E0918CFD5A700F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 550AEAFE18CFC5E1008918BA;
+			remoteInfo = "Bump+";
+		};
+		55909E0B18CFD5A700F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 559938A518CFCCCA00E92088;
+			remoteInfo = "Checkerboard+";
+		};
+		55909E0D18CFD5A700F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55909DB618CFCE5500F43F90;
+			remoteInfo = "Circle Splash+";
+		};
+		55909E0F18CFD5A700F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 559938B418CFCCCC00E92088;
+			remoteInfo = "Circular Screen+";
+		};
+		55909E1118CFD5A700F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55909D9818CFCCF400F43F90;
+			remoteInfo = "Circular Wrap+";
+		};
+		55909E1318CFD5A700F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55909DA718CFCCF700F43F90;
+			remoteInfo = "CMYK Halftone+";
+		};
+		55909E1518CFD5A700F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55909DEB18CFD43900F43F90;
+			remoteInfo = "Crystallize+";
+		};
+		55909E2A18CFD73200F43F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55909E1718CFD6DD00F43F90;
+			remoteInfo = "Displacement Distortion+";
+		};
 		5599389C18CFC8AF00E92088 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -929,18 +1048,15 @@
 		557D509F18CF9FBB005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D50A418CF9FBB005809E3 /* CICMYKHalftoneClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CICMYKHalftoneClass.h; sourceTree = "<group>"; };
 		557D50A518CF9FBB005809E3 /* CICMYKHalftoneClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CICMYKHalftoneClass.m; sourceTree = "<group>"; };
-		557D50A718CF9FBB005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CICMYKHalftone.nib; sourceTree = "<group>"; };
 		557D50A918CF9FBB005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D50AA18CF9FBB005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D50AF18CF9FBB005809E3 /* CICrystallizeClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CICrystallizeClass.h; sourceTree = "<group>"; };
 		557D50B018CF9FBB005809E3 /* CICrystallizeClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CICrystallizeClass.m; sourceTree = "<group>"; };
-		557D50B218CF9FBB005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CICrystallize.nib; sourceTree = "<group>"; };
 		557D50B418CF9FBB005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D50B518CF9FBB005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D50BA18CF9FBB005809E3 /* CIDisplacementDistortionClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIDisplacementDistortionClass.h; sourceTree = "<group>"; };
 		557D50BB18CF9FBB005809E3 /* CIDisplacementDistortionClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIDisplacementDistortionClass.m; sourceTree = "<group>"; };
 		557D50BC18CF9FBB005809E3 /* default-distort.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "default-distort.tiff"; sourceTree = "<group>"; };
-		557D50BE18CF9FBB005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIDisplacementDistortion.nib; sourceTree = "<group>"; };
 		557D50C018CF9FBB005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D50C118CF9FBB005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D50C618CF9FBB005809E3 /* CIDotScreenClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIDotScreenClass.h; sourceTree = "<group>"; };
@@ -1161,16 +1277,20 @@
 		557D536C18CFAAF6005809E3 /* Affine Transform+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Affine Transform+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55909DA518CFCCF400F43F90 /* Circular Wrap+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Wrap+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55909DB418CFCCF700F43F90 /* CMYK Halftone+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CMYK Halftone+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55909DC018CFCE5500F43F90 /* Circular Screen+ copy.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Screen+ copy.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55909DC118CFCE5500F43F90 /* Circular Screen+ copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Circular Screen+ copy-Info.plist"; path = "/Users/cwbetts/SeaShore/Seashore/Circular Screen+ copy-Info.plist"; sourceTree = "<absolute>"; };
+		55909DC018CFCE5500F43F90 /* Circle Splash+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circle Splash+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55909DD418CFCF3600F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIBloom.xib; sourceTree = "<group>"; };
 		55909DD918CFCF5600F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIBrightness.xib; sourceTree = "<group>"; };
 		55909DDE18CFCF7600F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIBump.xib; sourceTree = "<group>"; };
 		55909DE018CFCFDE00F43F90 /* CICircularScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CICircularScreen.xib; sourceTree = "<group>"; };
 		55909DE718CFD06500F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CICircularWrap.xib; sourceTree = "<group>"; };
+		55909DF818CFD43900F43F90 /* Crystallize+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Crystallize+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55909E2418CFD6DD00F43F90 /* Displacement Distortion+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Displacement Distortion+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55909E2D18CFD80400F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CICMYKHalftone.xib; sourceTree = "<group>"; };
+		55909E3218CFD92700F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CICrystallize.xib; sourceTree = "<group>"; };
+		55909E3818CFD9BD00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIDisplacementDistortion.xib; sourceTree = "<group>"; };
 		5599389718CFC72A00E92088 /* Bloom+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bloom+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938B218CFCCCA00E92088 /* Checkerboard+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checkerboard+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		559938C118CFCCCC00E92088 /* CircularScreen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CircularScreen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		559938C118CFCCCC00E92088 /* Circular Screen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Screen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56C8A64C1055A1DA0056E36F /* normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normal.png; sourceTree = "<group>"; };
 		A801053106945E1E00A80207 /* GradientTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientTool.h; sourceTree = "<group>"; };
 		A801053206945E1E00A80207 /* GradientTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientTool.m; sourceTree = "<group>"; };
@@ -1705,6 +1825,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		55909DF018CFD43900F43F90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55909DF118CFD43900F43F90 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55909E1C18CFD6DD00F43F90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55909E1D18CFD6DD00F43F90 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5599388F18CFC72A00E92088 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1780,10 +1916,12 @@
 				550AEB0A18CFC5E1008918BA /* Bump+.bundle */,
 				5599389718CFC72A00E92088 /* Bloom+.bundle */,
 				559938B218CFCCCA00E92088 /* Checkerboard+.bundle */,
-				559938C118CFCCCC00E92088 /* CircularScreen+.bundle */,
+				559938C118CFCCCC00E92088 /* Circular Screen+.bundle */,
 				55909DA518CFCCF400F43F90 /* Circular Wrap+.bundle */,
 				55909DB418CFCCF700F43F90 /* CMYK Halftone+.bundle */,
-				55909DC018CFCE5500F43F90 /* Circular Screen+ copy.bundle */,
+				55909DC018CFCE5500F43F90 /* Circle Splash+.bundle */,
+				55909DF818CFD43900F43F90 /* Crystallize+.bundle */,
+				55909E2418CFD6DD00F43F90 /* Displacement Distortion+.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1808,7 +1946,6 @@
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				A89B83D30A426D4C00AD6941 /* Disk Image Items */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
-				55909DC118CFCE5500F43F90 /* Circular Screen+ copy-Info.plist */,
 			);
 			name = Seashore;
 			sourceTree = "<group>";
@@ -2166,7 +2303,7 @@
 			children = (
 				557D50A418CF9FBB005809E3 /* CICMYKHalftoneClass.h */,
 				557D50A518CF9FBB005809E3 /* CICMYKHalftoneClass.m */,
-				557D50A618CF9FBB005809E3 /* CICMYKHalftone.nib */,
+				55909E2E18CFD80400F43F90 /* CICMYKHalftone.xib */,
 				557D50A818CF9FBB005809E3 /* Localizable.strings */,
 				557D50AA18CF9FBB005809E3 /* Info.plist */,
 			);
@@ -2178,7 +2315,7 @@
 			children = (
 				557D50AF18CF9FBB005809E3 /* CICrystallizeClass.h */,
 				557D50B018CF9FBB005809E3 /* CICrystallizeClass.m */,
-				557D50B118CF9FBB005809E3 /* CICrystallize.nib */,
+				55909E3318CFD92700F43F90 /* CICrystallize.xib */,
 				557D50B318CF9FBB005809E3 /* Localizable.strings */,
 				557D50B518CF9FBB005809E3 /* Info.plist */,
 			);
@@ -2191,7 +2328,7 @@
 				557D50BA18CF9FBB005809E3 /* CIDisplacementDistortionClass.h */,
 				557D50BB18CF9FBB005809E3 /* CIDisplacementDistortionClass.m */,
 				557D50BC18CF9FBB005809E3 /* default-distort.tiff */,
-				557D50BD18CF9FBB005809E3 /* CIDisplacementDistortion.nib */,
+				55909E3918CFD9BD00F43F90 /* CIDisplacementDistortion.xib */,
 				557D50BF18CF9FBB005809E3 /* Localizable.strings */,
 				557D50C118CF9FBB005809E3 /* Info.plist */,
 			);
@@ -3590,7 +3727,41 @@
 			);
 			name = "Circle Splash+";
 			productName = CIAffineTile;
-			productReference = 55909DC018CFCE5500F43F90 /* Circular Screen+ copy.bundle */;
+			productReference = 55909DC018CFCE5500F43F90 /* Circle Splash+.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		55909DEB18CFD43900F43F90 /* Crystallize+ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55909DF518CFD43900F43F90 /* Build configuration list for PBXNativeTarget "Crystallize+" */;
+			buildPhases = (
+				55909DEC18CFD43900F43F90 /* Sources */,
+				55909DF018CFD43900F43F90 /* Frameworks */,
+				55909DF218CFD43900F43F90 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Crystallize+";
+			productName = CIAffineTile;
+			productReference = 55909DF818CFD43900F43F90 /* Crystallize+.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		55909E1718CFD6DD00F43F90 /* Displacement Distortion+ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55909E2118CFD6DD00F43F90 /* Build configuration list for PBXNativeTarget "Displacement Distortion+" */;
+			buildPhases = (
+				55909E1818CFD6DD00F43F90 /* Sources */,
+				55909E1C18CFD6DD00F43F90 /* Frameworks */,
+				55909E1E18CFD6DD00F43F90 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Displacement Distortion+";
+			productName = CIAffineTile;
+			productReference = 55909E2418CFD6DD00F43F90 /* Displacement Distortion+.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		5599388A18CFC72A00E92088 /* Bloom+ */ = {
@@ -3641,7 +3812,7 @@
 			);
 			name = "Circular Screen+";
 			productName = CIAffineTile;
-			productReference = 559938C118CFCCCC00E92088 /* CircularScreen+.bundle */;
+			productReference = 559938C118CFCCCC00E92088 /* Circular Screen+.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		A8EDF05C078959C80022BB31 /* Seashore */ = {
@@ -3806,6 +3977,7 @@
 			targets = (
 				A8EDF05C078959C80022BB31 /* Seashore */,
 				A89B83C60A426D3B00AD6941 /* Seashore Disk Image */,
+				55909DFD18CFD59A00F43F90 /* CoreImage-based Plug-ins */,
 				557D533218CF9FEC005809E3 /* Affine Tile+ */,
 				557D536118CFAAF6005809E3 /* Affine Transform+ */,
 				5599388A18CFC72A00E92088 /* Bloom+ */,
@@ -3816,6 +3988,8 @@
 				559938B418CFCCCC00E92088 /* Circular Screen+ */,
 				55909D9818CFCCF400F43F90 /* Circular Wrap+ */,
 				55909DA718CFCCF700F43F90 /* CMYK Halftone+ */,
+				55909DEB18CFD43900F43F90 /* Crystallize+ */,
+				55909E1718CFD6DD00F43F90 /* Displacement Distortion+ */,
 			);
 		};
 /* End PBXProject section */
@@ -4025,7 +4199,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55909DCD18CFCEDC00F43F90 /* CICMYKHalftone.nib in Resources */,
+				55909E2C18CFD80400F43F90 /* CICMYKHalftone.xib in Resources */,
 				55909DCE18CFCEE000F43F90 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4035,6 +4209,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				55909DC518CFCE8B00F43F90 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55909DF218CFD43900F43F90 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55909E3418CFD92C00F43F90 /* CICrystallize.xib in Resources */,
+				55909DFB18CFD49500F43F90 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55909E1E18CFD6DD00F43F90 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55909E2718CFD71200F43F90 /* default-distort.tiff in Resources */,
+				55909E3718CFD9BD00F43F90 /* CIDisplacementDistortion.xib in Resources */,
+				55909E2918CFD71A00F43F90 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4330,6 +4523,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		55909DEC18CFD43900F43F90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55909DEE18CFD43900F43F90 /* Rects.m in Sources */,
+				55909DEF18CFD43900F43F90 /* Bitmap.m in Sources */,
+				55909DFC18CFD49900F43F90 /* CICrystallizeClass.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55909E1818CFD6DD00F43F90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55909E2618CFD70E00F43F90 /* CIDisplacementDistortionClass.m in Sources */,
+				55909E1918CFD6DD00F43F90 /* Rects.m in Sources */,
+				55909E1A18CFD6DD00F43F90 /* Bitmap.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5599388B18CFC72A00E92088 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4540,6 +4753,66 @@
 			target = 557D536118CFAAF6005809E3 /* Affine Transform+ */;
 			targetProxy = 557D537318CFAD0D005809E3 /* PBXContainerItemProxy */;
 		};
+		55909E0218CFD5A700F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 557D533218CF9FEC005809E3 /* Affine Tile+ */;
+			targetProxy = 55909E0118CFD5A700F43F90 /* PBXContainerItemProxy */;
+		};
+		55909E0418CFD5A700F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 557D536118CFAAF6005809E3 /* Affine Transform+ */;
+			targetProxy = 55909E0318CFD5A700F43F90 /* PBXContainerItemProxy */;
+		};
+		55909E0618CFD5A700F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5599388A18CFC72A00E92088 /* Bloom+ */;
+			targetProxy = 55909E0518CFD5A700F43F90 /* PBXContainerItemProxy */;
+		};
+		55909E0818CFD5A700F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 550AEAF018CFC5DE008918BA /* Brightness+ */;
+			targetProxy = 55909E0718CFD5A700F43F90 /* PBXContainerItemProxy */;
+		};
+		55909E0A18CFD5A700F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 550AEAFE18CFC5E1008918BA /* Bump+ */;
+			targetProxy = 55909E0918CFD5A700F43F90 /* PBXContainerItemProxy */;
+		};
+		55909E0C18CFD5A700F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 559938A518CFCCCA00E92088 /* Checkerboard+ */;
+			targetProxy = 55909E0B18CFD5A700F43F90 /* PBXContainerItemProxy */;
+		};
+		55909E0E18CFD5A700F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55909DB618CFCE5500F43F90 /* Circle Splash+ */;
+			targetProxy = 55909E0D18CFD5A700F43F90 /* PBXContainerItemProxy */;
+		};
+		55909E1018CFD5A700F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 559938B418CFCCCC00E92088 /* Circular Screen+ */;
+			targetProxy = 55909E0F18CFD5A700F43F90 /* PBXContainerItemProxy */;
+		};
+		55909E1218CFD5A700F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55909D9818CFCCF400F43F90 /* Circular Wrap+ */;
+			targetProxy = 55909E1118CFD5A700F43F90 /* PBXContainerItemProxy */;
+		};
+		55909E1418CFD5A700F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55909DA718CFCCF700F43F90 /* CMYK Halftone+ */;
+			targetProxy = 55909E1318CFD5A700F43F90 /* PBXContainerItemProxy */;
+		};
+		55909E1618CFD5A700F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55909DEB18CFD43900F43F90 /* Crystallize+ */;
+			targetProxy = 55909E1518CFD5A700F43F90 /* PBXContainerItemProxy */;
+		};
+		55909E2B18CFD73200F43F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55909E1718CFD6DD00F43F90 /* Displacement Distortion+ */;
+			targetProxy = 55909E2A18CFD73200F43F90 /* PBXContainerItemProxy */;
+		};
 		5599389D18CFC8AF00E92088 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5599388A18CFC72A00E92088 /* Bloom+ */;
@@ -4720,14 +4993,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D50A618CF9FBB005809E3 /* CICMYKHalftone.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D50A718CF9FBB005809E3 /* English */,
-			);
-			name = CICMYKHalftone.nib;
-			sourceTree = "<group>";
-		};
 		557D50A818CF9FBB005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -4736,28 +5001,12 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D50B118CF9FBB005809E3 /* CICrystallize.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D50B218CF9FBB005809E3 /* English */,
-			);
-			name = CICrystallize.nib;
-			sourceTree = "<group>";
-		};
 		557D50B318CF9FBB005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				557D50B418CF9FBB005809E3 /* English */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D50BD18CF9FBB005809E3 /* CIDisplacementDistortion.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D50BE18CF9FBB005809E3 /* English */,
-			);
-			name = CIDisplacementDistortion.nib;
 			sourceTree = "<group>";
 		};
 		557D50BF18CF9FBB005809E3 /* Localizable.strings */ = {
@@ -5376,6 +5625,30 @@
 			name = CICircularWrap.xib;
 			sourceTree = "<group>";
 		};
+		55909E2E18CFD80400F43F90 /* CICMYKHalftone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909E2D18CFD80400F43F90 /* en */,
+			);
+			name = CICMYKHalftone.xib;
+			sourceTree = "<group>";
+		};
+		55909E3318CFD92700F43F90 /* CICrystallize.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909E3218CFD92700F43F90 /* en */,
+			);
+			name = CICrystallize.xib;
+			sourceTree = "<group>";
+		};
+		55909E3918CFD9BD00F43F90 /* CIDisplacementDistortion.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909E3818CFD9BD00F43F90 /* en */,
+			);
+			name = CIDisplacementDistortion.xib;
+			sourceTree = "<group>";
+		};
 		A81240C507E81A7A00F275BF /* SVGContent.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5457,8 +5730,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5494,8 +5765,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -5525,8 +5794,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5562,8 +5829,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -5593,8 +5858,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5630,8 +5893,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -5661,8 +5922,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5698,8 +5957,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -5729,8 +5986,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5766,8 +6021,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -5797,8 +6050,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5834,8 +6085,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -5865,8 +6114,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5881,9 +6128,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Circular Screen+ copy-Info.plist";
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CICircleSplash/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "Circular Screen+ copy";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -5902,8 +6149,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -5912,9 +6157,151 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Circular Screen+ copy-Info.plist";
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CICircleSplash/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "Circular Screen+ copy";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		55909DF618CFD43900F43F90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CICrystallize/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		55909DF718CFD43900F43F90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CICrystallize/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		55909DFF18CFD59A00F43F90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		55909E0018CFD59A00F43F90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		55909E2218CFD6DD00F43F90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CIDisplacementDistortion/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		55909E2318CFD6DD00F43F90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CIDisplacementDistortion/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -5933,8 +6320,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5970,8 +6355,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -6001,8 +6384,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -6038,8 +6419,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -6069,8 +6448,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -6106,8 +6483,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -6276,6 +6651,32 @@
 			buildConfigurations = (
 				55909DBE18CFCE5500F43F90 /* Debug */,
 				55909DBF18CFCE5500F43F90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55909DF518CFD43900F43F90 /* Build configuration list for PBXNativeTarget "Crystallize+" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55909DF618CFD43900F43F90 /* Debug */,
+				55909DF718CFD43900F43F90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55909DFE18CFD59A00F43F90 /* Build configuration list for PBXAggregateTarget "CoreImage-based Plug-ins" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55909DFF18CFD59A00F43F90 /* Debug */,
+				55909E0018CFD59A00F43F90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		55909E2118CFD6DD00F43F90 /* Build configuration list for PBXNativeTarget "Displacement Distortion+" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55909E2218CFD6DD00F43F90 /* Debug */,
+				55909E2318CFD6DD00F43F90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

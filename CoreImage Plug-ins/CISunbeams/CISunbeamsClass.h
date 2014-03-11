@@ -11,6 +11,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <ApplicationServices/ApplicationServices.h>
 #import "SeaPlugins.h"
+#import "PluginData.h"
+#import "SeaWhiteboard.h"
 
 #define gColorPanel [NSColorPanel sharedColorPanel]
 

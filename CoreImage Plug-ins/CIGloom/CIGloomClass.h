@@ -12,6 +12,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "SeaPlugins.h"
+#import "PluginData.h"
+#import "SeaWhiteboard.h"
 
 @interface CIGloomClass : NSObject {
 

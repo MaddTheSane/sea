@@ -346,10 +346,10 @@
 	<string>0.5.2</string>
 	<key>CFBundleSignature</key>
 	<string>SeSh</string>
-	<key>CFBundleURLTypes</key>
-	<array/>
 	<key>CFBundleVersion</key>
 	<string>20100909</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright (c) 1995-2010 Mark Pazolli et al.
 GNU General Public License v2.0</string>
@@ -357,8 +357,6 @@ GNU General Public License v2.0</string>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>SeaApplication</string>
-	<key>NSServices</key>
-	<array/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -389,7 +387,5 @@ GNU General Public License v2.0</string>
 			</dict>
 		</dict>
 	</array>
-	<key>UTImportedTypeDeclarations</key>
-	<array/>
 </dict>
 </plist>
