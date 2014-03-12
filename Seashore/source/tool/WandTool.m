@@ -59,7 +59,7 @@
 			for (k = 0; k < spp - 1; k++)
 				basePixel[k] = 0;
 			basePixel[spp - 1] = 255;
-			tolerance = [options tolerance];
+			tolerance = [(WandOptions*)options tolerance];
 			int mode = [options selectionMode];
 			int intervals = [options numIntervals];
 			

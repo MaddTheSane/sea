@@ -53,9 +53,9 @@
 	
 	dict = [NSDictionary dictionaryWithContentsOfURL:sender];
 	if (dict) {
-		newest_version = [[dict objectForKey:@"current version"] intValue];
+		newest_version = [dict[@"current version"] intValue];
 		if (newest_version > installed_version) {
-			download_url = [NSURL URLWithString:[dict objectForKey:@"url"]];
+			download_url = [NSURL URLWithString:dict[@"url"]];
 			if (NSRunAlertPanel(LOCALSTR(@"download available title", @"Update available"), LOCALSTR(@"download available body", @"An updated version of Seashore is now availble for download."), LOCALSTR(@"download now", @"Download now"), LOCALSTR(@"download later", @"Download later"), NULL) == NSAlertDefaultReturn) {
 				[[NSWorkspace sharedWorkspace] openURL:download_url];
 			}
@@ -85,7 +85,7 @@
 	NSArray *instantHelpArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Instant" ofType:@"plist"]];
 	
 	if (stringID >= 0 && stringID < [instantHelpArray count]) {
-		[instantHelpLabel setStringValue:[instantHelpArray objectAtIndex:stringID]];
+		[instantHelpLabel setStringValue:instantHelpArray[stringID]];
 		[instantHelpWindow orderFront:self];
 	}
 }
@@ -95,7 +95,7 @@
 	NSArray *instantHelpArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Instant" ofType:@"plist"]];
 	
 	if (stringID >= 0 && stringID < [instantHelpArray count] && [instantHelpWindow isVisible]) {
-		[instantHelpLabel setStringValue:[instantHelpArray objectAtIndex:stringID]];
+		[instantHelpLabel setStringValue:instantHelpArray[stringID]];
 	}
 }
 

@@ -6,13 +6,14 @@
 
 @implementation CocoaLayer
 
-- (id)initWithImageRep:(id)imageRep document:(id)doc spp:(int)lspp
+- (id)initWithImageRep:(NSBitmapImageRep *)imageRep document:(id)doc spp:(int)lspp
 {
-	int i, space, bps, sspp, format;
+	int i, space, bps, sspp;
 	unsigned char *srcPtr;
 	CMProfileLocation cmProfileLoc;
 	int bipp, bypr;
 	id profile;
+	NSBitmapFormat format;
 	
 	// Initialize superclass first
 	if (![super initWithDocument:doc])
@@ -48,8 +49,7 @@
 		space = kCMYKColorSpace;
 	if (space == -1) {
 		NSLog(@"Color space %@ not yet handled.", [imageRep colorSpaceName]);
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// Extract color profile
@@ -57,7 +57,7 @@
 	if (profile) {
 		cmProfileLoc.locType = cmBufferBasedProfile;
 		cmProfileLoc.u.bufferLoc.buffer = (Ptr)[profile bytes];
-		cmProfileLoc.u.bufferLoc.size = [profile length];
+		cmProfileLoc.u.bufferLoc.size = (UInt32)[profile length];
 	}
 	
 	// Convert data to what we want
@@ -66,8 +66,7 @@
 	data = convertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, (profile) ? &cmProfileLoc : NULL, bps, format);
 	if (!data) {
 		NSLog(@"Required conversion not supported.");
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// Check the alpha

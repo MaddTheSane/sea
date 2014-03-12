@@ -29,13 +29,13 @@
 
 - (void)terminate
 {
-	[pegasusUtilities autorelease];
-	[toolboxUtilities autorelease];
-	[brushUtilities autorelease];
-	[optionsUtilities autorelease];
-	[textureUtilities autorelease];
-	[infoUtilities autorelease];
-	[statusUtilities autorelease];
+	pegasusUtilities = nil;
+	toolboxUtilities = nil;
+	brushUtilities = nil;
+	optionsUtilities = nil;
+	textureUtilities = nil;
+	infoUtilities = nil;
+	statusUtilities = nil;
 	
 	// Force such information to be written to the hard disk
 	[gUserDefaults synchronize];
@@ -43,7 +43,7 @@
 
 - (void)shutdownFor:(id)doc
 {
-	NSNumber *key = [NSNumber numberWithLong:(long)doc];
+	NSNumber *key = @((size_t)doc);
 
 	[pegasusUtilities removeObjectForKey:key];
 	[toolboxUtilities  removeObjectForKey:key];
@@ -71,7 +71,7 @@
 
 - (id)pegasusUtilityFor:(id)doc
 {
-	return [pegasusUtilities objectForKey:[NSNumber numberWithLong:(long)doc]];
+	return pegasusUtilities[@((size_t)doc)];
 }
 
 - (id)transparentUtility
@@ -81,67 +81,67 @@
 
 - (id)toolboxUtilityFor:(id)doc
 {
-	return [toolboxUtilities objectForKey: [NSNumber numberWithLong:(long)doc]];
+	return toolboxUtilities[@((size_t)doc)];
 }
 
 - (id)brushUtilityFor:(id)doc
 {
-	return [brushUtilities objectForKey:[NSNumber numberWithLong:(long)doc]];
+	return brushUtilities[@((size_t)doc)];
 }
 
 - (id)textureUtilityFor:(id)doc
 {
-	return [textureUtilities objectForKey:[NSNumber numberWithLong:(long)doc]];
+	return textureUtilities[@((size_t)doc)];
 }
 
 - (id)optionsUtilityFor:(id)doc
 {
-	return [optionsUtilities objectForKey: [NSNumber numberWithLong:(long)doc]];
+	return optionsUtilities[@((size_t)doc)];
 }
 
 - (id)infoUtilityFor:(id)doc
 {
-	return [infoUtilities objectForKey:[NSNumber numberWithLong:(long)doc]];
+	return infoUtilities[@((size_t)doc)];
 }
 
 - (id)statusUtilityFor:(id)doc
 {
-	return [statusUtilities objectForKey:[NSNumber numberWithLong:(long)doc]];
+	return statusUtilities[@((size_t)doc)];
 }
 
 - (void)setPegasusUtility:(id)util for:(id)doc
 {
-	[pegasusUtilities setObject:util forKey:[NSNumber numberWithLong:(long)doc]];
+	pegasusUtilities[@((size_t)doc)] = util;
 }
 
 - (void)setToolboxUtility:(id)util for:(id)doc
 {
-	[toolboxUtilities setObject:util forKey:[NSNumber numberWithLong:(long)doc]];
+	toolboxUtilities[@((size_t)doc)] = util;
 }
 
 - (void)setBrushUtility:(id)util for:(id)doc
 {
-	[brushUtilities setObject:util forKey:[NSNumber numberWithLong:(long)doc]];
+	brushUtilities[@((size_t)doc)] = util;
 }
 
 - (void)setTextureUtility:(id)util for:(id)doc
 {
-	[textureUtilities setObject:util forKey:[NSNumber numberWithLong:(long)doc]];
+	textureUtilities[@((size_t)doc)] = util;
 }
 
 - (void)setOptionsUtility:(id)util for:(id)doc
 {
-	[optionsUtilities setObject:util forKey:[NSNumber numberWithLong:(long)doc]];
+	optionsUtilities[@((size_t)doc)] = util;
 }
 
 - (void)setInfoUtility:(id)util for:(id)doc
 {
-	[infoUtilities setObject:util forKey:[NSNumber numberWithLong:(long)doc]];
+	infoUtilities[@((size_t)doc)] = util;
 }
 
 - (void)setStatusUtility:(id)util for:(id)doc
 {
-	[statusUtilities setObject:util forKey:[NSNumber numberWithLong:(long)doc]];
+	statusUtilities[@((size_t)doc)] = util;
 }
 
 @end

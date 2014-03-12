@@ -43,10 +43,10 @@ extern IntSize getDocumentSize(char *path);
 		if (size.width > 0 && size.height > 0 && size.width < kMaxImageSize && size.height < kMaxImageSize) {
 			width_arg = [NSString stringWithFormat:@"%d", size.width];
 			height_arg = [NSString stringWithFormat:@"%d", size.height];
-			args = [NSArray arrayWithObjects:path_in, path_out, width_arg, height_arg, NULL];
+			args = @[path_in, path_out, width_arg, height_arg];
 		}
 		else {
-			args = [NSArray arrayWithObjects:path_in, path_out, NULL];
+			args = @[path_in, path_out];
 		}
 		[waitPanel center];
 		[waitPanel makeKeyAndOrderFront:self];
@@ -66,27 +66,24 @@ extern IntSize getDocumentSize(char *path);
 	// Open the image
 	image = [[NSImage alloc] initByReferencingFile:path_out];
 	if (image == NULL) {
-		[image autorelease];
 		return NO;
 	}
 	
 	// Form a bitmap representation of the file at the specified path
 	imageRep = NULL;
 	if ([[image representations] count] > 0) {
-		imageRep = [[image representations] objectAtIndex:0];
+		imageRep = [image representations][0];
 		if (![imageRep isKindOfClass:[NSBitmapImageRep class]]) {
 			imageRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
 		}
 	}
 	if (imageRep == NULL) {
-		[image autorelease];
 		return NO;
 	}
 		
 	// Create the layer
 	layer = [[CocoaLayer alloc] initWithImageRep:imageRep document:doc spp:[[doc contents] spp]];
 	if (layer == NULL) {
-		[image autorelease];
 		return NO;
 	}
 	
@@ -97,7 +94,6 @@ extern IntSize getDocumentSize(char *path);
 	[[doc contents] addLayerObject:layer];
 	
 	// Now forget the NSImage
-	[image autorelease];
 	
 	// Position the new layer correctly
 	[[(SeaOperations *)[doc operations] seaAlignment] centerLayerHorizontally:NULL];

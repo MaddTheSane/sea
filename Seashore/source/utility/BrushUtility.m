@@ -29,7 +29,7 @@
 		activeBrushIndex = 12;
 	else
 		activeBrushIndex = [gUserDefaults integerForKey:@"active brush"];
-	if (activeBrushIndex < 0 || activeBrushIndex >= [[groups objectAtIndex:activeGroupIndex] count])
+	if (activeBrushIndex < 0 || activeBrushIndex >= [groups[activeGroupIndex] count])
 		activeBrushIndex = 0;
 	
 	return self;
@@ -55,18 +55,18 @@
 	
 	// Configure the pop-up menu
 	[brushGroupPopUp removeAllItems];
-	[brushGroupPopUp addItemWithTitle:[groupNames objectAtIndex:0]];
+	[brushGroupPopUp addItemWithTitle:groupNames[0]];
 	[[brushGroupPopUp itemAtIndex:0] setTag:0];
 	if (customGroups != 0) {
 		[[brushGroupPopUp menu] addItem:[NSMenuItem separatorItem]];
 		for (i = 1; i < customGroups + 1; i++) {
-			[brushGroupPopUp addItemWithTitle:[groupNames objectAtIndex:i]];
+			[brushGroupPopUp addItemWithTitle:groupNames[i]];
 			[[brushGroupPopUp itemAtIndex:[[brushGroupPopUp menu] numberOfItems] - 1] setTag:i];
 		}
 	}
 	[[brushGroupPopUp menu] addItem:[NSMenuItem separatorItem]];
 	for (i = customGroups + 1; i < [groupNames count]; i++) {
-		[brushGroupPopUp addItemWithTitle:[groupNames objectAtIndex:i]];
+		[brushGroupPopUp addItemWithTitle:groupNames[i]];
 		[[brushGroupPopUp itemAtIndex:[[brushGroupPopUp menu] numberOfItems] - 1] setTag:i];
 	}
 	[brushGroupPopUp selectItemAtIndex:[brushGroupPopUp indexOfItemWithTag:activeGroupIndex]];
@@ -78,22 +78,6 @@
 	[(InfoPanel *)window setPanelStyle:kVerticalPanelStyle];
 	
 	[[SeaController utilitiesManager] setBrushUtility: self for:document];
-}
-
-- (void)dealloc
-{
-	int i;
-	
-	// Release any existing brushes
-	if (brushes) {
-		for (i = 0; i < [brushes count]; i++)
-			[[[brushes allValues] objectAtIndex:i] autorelease];
-		[brushes autorelease];
-	}
-	if (groups) [groups autorelease];
-	if (groupNames) [groupNames autorelease];
-	if ([view documentView]) [[view documentView] autorelease];
-	[super dealloc];
 }
 
 - (void)shutdown
@@ -117,7 +101,7 @@
 	activeGroupIndex = [[brushGroupPopUp selectedItem] tag];
 	if (activeGroupIndex >= [groups count])
 		activeGroupIndex = 0;
-	if (activeBrushIndex >= [[groups objectAtIndex:activeGroupIndex] count])
+	if (activeBrushIndex >= [groups[activeGroupIndex] count])
 		activeBrushIndex = 0;
 	[self setActiveBrushIndex:activeBrushIndex];
 	[[view documentView] update];
@@ -135,20 +119,11 @@
 	id tempBrush;
 	int i, j;
 	
-	// Release any existing brushes
-	if (brushes) {
-		for (i = 0; i < [brushes count]; i++)
-			[[[brushes allValues] objectAtIndex:i] autorelease];
-		[brushes autorelease];
-	}
-	if (groups) [groups autorelease];
-	if (groupNames) [groupNames autorelease];
-	
 	// Create a dictionary of all brushes
-	brushes = [NSDictionary dictionary];
+	brushes = @{};
 	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/brushes"]];
 	for (i = 0; i < [files count]; i++) {
-		tempPathA = [[[gMainBundle resourcePath] stringByAppendingString:@"/brushes/"] stringByAppendingString:[files objectAtIndex:i]];
+		tempPathA = [[[gMainBundle resourcePath] stringByAppendingString:@"/brushes/"] stringByAppendingString:files[i]];
 		if ([[tempPathA pathExtension] isEqualToString:@"gbr"]) {
 			tempBrush = [[SeaBrush alloc] initWithContentsOfFile:tempPathA];
 			if (tempBrush) {
@@ -158,24 +133,23 @@
 			}
 		}
 	}
-	[brushes retain];
 	
 	// Create the all group
 	tempBrushArray = [[brushes allValues] sortedArrayUsingSelector:@selector(compare:)];
-	groups = [NSArray arrayWithObject:tempBrushArray];
-	groupNames = [NSArray arrayWithObject:LOCALSTR(@"all group", @"All")];
+	groups = @[tempBrushArray];
+	groupNames = @[LOCALSTR(@"all group", @"All")];
 	
 	// Create the custom groups
 	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/brushes"]];
 	for (i = 0; i < [files count]; i++) {
 		tempPathA = [[gMainBundle resourcePath] stringByAppendingString:@"/brushes/"];
-		tempPathB = [tempPathA stringByAppendingString:[files objectAtIndex:i]];
+		tempPathB = [tempPathA stringByAppendingString:files[i]];
 		if ([[tempPathB pathExtension] isEqualToString:@"txt"]) {
 			tempArray = [NSArray arrayWithContentsOfFile:tempPathB];
 			if (tempArray) {
-				tempBrushArray = [NSArray array];
+				tempBrushArray = @[];
 				for (j = 0; j < [tempArray count]; j++) {
-					tempBrush = [brushes objectForKey:[tempPathA stringByAppendingString:[tempArray objectAtIndex:j]]];
+					tempBrush = brushes[[tempPathA stringByAppendingString:tempArray[j]]];
 					if (tempBrush) {
 						tempBrushArray = [tempBrushArray arrayByAddingObject:tempBrush];
 					}
@@ -192,14 +166,14 @@
 	// Create the other groups
 	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/brushes"]];
 	for (i = 0; i < [files count]; i++) {
-		tempPathA = [[[gMainBundle resourcePath] stringByAppendingString:@"/brushes/"] stringByAppendingString:[files objectAtIndex:i]];
+		tempPathA = [[[gMainBundle resourcePath] stringByAppendingString:@"/brushes/"] stringByAppendingString:files[i]];
 		[gFileManager fileExistsAtPath:tempPathA isDirectory:&isDirectory];
 		if (isDirectory) {
 			tempPathA = [tempPathA stringByAppendingString:@"/"];
 			tempArray = [gFileManager subpathsAtPath:tempPathA];
-			tempBrushArray = [NSArray array];
+			tempBrushArray = @[];
 			for (j = 0; j < [tempArray count]; j++) {
-				tempBrush = [brushes objectForKey:[tempPathA stringByAppendingString:[tempArray objectAtIndex:j]]];
+				tempBrush = brushes[[tempPathA stringByAppendingString:tempArray[j]]];
 				if (tempBrush) {
 					tempBrushArray = [tempBrushArray arrayByAddingObject:tempBrush];
 				}
@@ -213,11 +187,10 @@
 	}
 	
 	// Retain the groups and groupNames
-	[groups retain];
-	[groupNames retain];
 	
 	// Update utility if requested
-	if (update) [self update];
+	if (update)
+		[self update];
 }
 
 - (IBAction)changeSpacing:(id)sender
@@ -237,7 +210,7 @@
 
 - (id)activeBrush
 {
-	return [[groups objectAtIndex:activeGroupIndex] objectAtIndex:activeBrushIndex];
+	return groups[activeGroupIndex][activeBrushIndex];
 }
 
 - (int)activeBrushIndex
@@ -247,20 +220,20 @@
 
 - (void)setActiveBrushIndex:(int)index
 {
-	id oldBrush = [[groups objectAtIndex:activeGroupIndex] objectAtIndex:activeBrushIndex];
-	id newBrush = [[groups objectAtIndex:activeGroupIndex] objectAtIndex:index];
+	id oldBrush = groups[activeGroupIndex][activeBrushIndex];
+	id newBrush = groups[activeGroupIndex][index];
 	
 	[oldBrush deactivate];
 	activeBrushIndex = index;
 	[brushNameLabel setStringValue:[newBrush name]];
-	[spacingSlider setIntValue:[newBrush spacing]];
+	[spacingSlider setIntValue:[(SeaBrush*)newBrush spacing]];
 	[spacingLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"spacing", @"Spacing: %d%%"), [self spacing]]];
 	[newBrush activate];
 }
 
 - (NSArray *)brushes
 {
-	return [groups objectAtIndex:activeGroupIndex];
+	return groups[activeGroupIndex];
 }
 
 

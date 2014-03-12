@@ -31,12 +31,6 @@ id seaController;
 	return self;
 }
 
-- (void)dealloc
-{
-	if (terminationObjects) [terminationObjects autorelease];
-	[super dealloc];
-}
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	NSString *crashReport = [NSString stringWithFormat:@"%@/Library/Logs/CrashReporter/Seashore.crash.log", NSHomeDirectory()];
@@ -131,7 +125,7 @@ id seaController;
 {
 	id newDocument;
 	NSString *filename = [gCurrentDocument fileName];
-	NSRect frame = [[[[gCurrentDocument windowControllers] objectAtIndex:0] window] frame];
+	NSRect frame = [[[gCurrentDocument windowControllers][0] window] frame];
 	id window;
 	
 	// Question whether to proceed with reverting
@@ -140,7 +134,7 @@ id seaController;
 		// Close the document and reopen it
 		[gCurrentDocument close];
 		newDocument = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfFile:filename display:NO];
-		window = [[[newDocument windowControllers] objectAtIndex:0] window];
+		window = [[newDocument windowControllers][0] window];
 		[window setFrame:frame display:YES];
 		[window makeKeyAndOrderFront:self];		
 
@@ -195,7 +189,7 @@ id seaController;
 	
 	// Tell all documents to update there colour worlds
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] whiteboard] updateColorWorld];
+		[[documents[i] whiteboard] updateColorWorld];
 	}
 }
 
@@ -210,7 +204,7 @@ id seaController;
 	NSDocument *document;
 	
 	// Ensure that the document is valid
-	if(![[NSPasteboard generalPasteboard] availableTypeFromArray:[NSArray arrayWithObjects:NSTIFFPboardType, NSPICTPboardType, NULL]]){
+	if(![[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSTIFFPboardType, NSPICTPboardType]]){
 		NSBeep();
 		return;
 	}
@@ -220,22 +214,19 @@ id seaController;
 	[[NSDocumentController sharedDocumentController] addDocument:document];
 	[document makeWindowControllers];
 	[document showWindows];
-	[document autorelease];
 }
 
 - (void)registerForTermination:(id)object
 {
-	[terminationObjects autorelease];
-	terminationObjects = [[terminationObjects arrayByAddingObject:object] retain];
+	terminationObjects = [terminationObjects arrayByAddingObject:object];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
-	int i;
-	
 	// Inform those that wish to know
-	for (i = 0; i < [terminationObjects count]; i++)
-		[[terminationObjects objectAtIndex:i] terminate];
+	for (SeaPrefs *thePrefs in terminationObjects) {
+		[thePrefs terminate];
+	}
 	
 	// Save the changes in preferences
 	[gUserDefaults synchronize];
@@ -270,7 +261,7 @@ id seaController;
 			return gCurrentDocument && [gCurrentDocument fileName] && [gCurrentDocument current];
 		break;
 		case 400:
-			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:[NSArray arrayWithObjects:NSTIFFPboardType, NSPICTPboardType, NULL]];
+			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSTIFFPboardType, NSPICTPboardType]];
 			if (availableType)
 				return YES;
 			else

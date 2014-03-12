@@ -26,10 +26,6 @@ enum {
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
 
 - (BOOL)hasOptions
 {

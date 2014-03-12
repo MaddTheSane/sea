@@ -25,7 +25,6 @@
 - (void)dealloc
 {
 	free(undoRecords);
-	[super dealloc];
 }
 
 - (void)determineContentBorders
@@ -569,11 +568,10 @@
 	switch ([[presetsMenu selectedItem] tag]) {
 		case 0:
 			pboard = [NSPasteboard generalPasteboard];
-			availableType = [pboard availableTypeFromArray:[NSArray arrayWithObjects:NSTIFFPboardType, NSPICTPboardType, NULL]];
+			availableType = [pboard availableTypeFromArray:@[NSTIFFPboardType, NSPICTPboardType]];
 			if (availableType) {
 				image = [[NSImage alloc] initWithData:[pboard dataForType:availableType]];
 				size = NSSizeMakeIntSize([image size]);
-				[image autorelease];
 			}
 			else {
 				NSBeep();

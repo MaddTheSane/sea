@@ -49,12 +49,12 @@ typedef struct {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@class SeaLayer;
+@class SeaLayer, SeaDocument;
 
 @interface SeaCompositor : NSObject {
 
 	// The document associated with this compositor
-	id document;
+	SeaDocument *document;
 	
 	// The random table
 	int randomTable[RANDOM_TABLE_SIZE];
@@ -69,12 +69,6 @@ typedef struct {
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)initWithDocument:(id)doc;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		compositeLayer:withOptions:

@@ -22,14 +22,13 @@
 	// Open the image
 	image = [[NSImage alloc] initByReferencingFile:path];
 	if (image == NULL) {
-		[image autorelease];
 		return NO;
 	}
 	
 	// Form a bitmap representation of the file at the specified path
 	imageRep = NULL;
 	if ([[image representations] count] > 0) {
-		imageRep = [[image representations] objectAtIndex:0];
+		imageRep = [image representations][0];
 		if (![imageRep isKindOfClass:[NSBitmapImageRep class]]) {
 			if ([imageRep isKindOfClass:[NSPDFImageRep class]]) {
 				if ([imageRep pageCount] > 1) {
@@ -48,7 +47,6 @@
 		}
 	}
 	if (imageRep == NULL) {
-		[image autorelease];
 		return NO;
 	}
 		
@@ -60,7 +58,6 @@
 	// Create the layer
 	layer = [[CocoaLayer alloc] initWithImageRep:imageRep document:doc spp:[[doc contents] spp]];
 	if (layer == NULL) {
-		[image autorelease];
 		return NO;
 	}
 	
@@ -71,7 +68,6 @@
 	[[doc contents] addLayerObject:layer];
 	
 	// Now forget the NSImage
-	[image autorelease];
 	
 	// Position the new layer correctly
 	[[(SeaOperations *)[doc operations] seaAlignment] centerLayerHorizontally:NULL];

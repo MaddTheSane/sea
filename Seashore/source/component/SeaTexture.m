@@ -11,7 +11,6 @@
 	
 	// Check if file is a directory
 	if ([gFileManager fileExistsAtPath:path isDirectory:&isDir] && isDir) {
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -26,7 +25,6 @@
 	// Check the bps
 	if ([tempBitmapRep bitsPerSample] != 8) {
 		NSLog(@"Texture \"%@\" failed to load\n", [path lastPathComponent]);
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -75,12 +73,11 @@
 	}
 	else {
 		NSLog(@"Texture \"%@\" failed to load\n", [path lastPathComponent]);
-		[self autorelease];
 		return NULL;
 	}
 	
 	// Remember the texture name
-	name = [[[path lastPathComponent] stringByDeletingPathExtension] retain];
+	name = [[path lastPathComponent] stringByDeletingPathExtension];
 	
 	return self;
 }
@@ -89,8 +86,6 @@
 {
 	if (colorTexture) free(colorTexture);
 	if (greyTexture) free(greyTexture);
-	if (name) [name autorelease];
-	[super dealloc];
 }
 
 - (void)activate
@@ -128,8 +123,6 @@
 	thumbnail = [[NSImage alloc] initWithSize:NSMakeSize(thumbWidth, thumbHeight)];
 	[thumbnail setScalesWhenResized:YES];
 	[thumbnail addRepresentation:tempRep];
-	[tempRep autorelease];
-	[thumbnail autorelease];
 	
 	return thumbnail;
 }
@@ -168,8 +161,6 @@
 		rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&greyTexture pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:1 hasAlpha:NO isPlanar:NO colorSpaceName:NSDeviceWhiteColorSpace bytesPerRow:width bitsPerPixel:8];
 	
 	[image addRepresentation:rep];
-	[image autorelease];
-	[rep autorelease];
 	
 	nsColor = [NSColor colorWithPatternImage:image];
 	

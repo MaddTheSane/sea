@@ -113,11 +113,12 @@ static inline void fix_endian_read(int *input, int size)
 - (BOOL)addToDocument:(id)doc contentsOfFile:(NSString *)path
 {
 	SharedXCFInfo info;
-	int layerOffsets, offset;
+	NSInteger layerOffsets, offset;
 	FILE *file;
 	id layer;
-	int i, newType = [(SeaContent *)[doc contents] type];
+	int newType = [(SeaContent *)[doc contents] type];
 	NSArray *layers;
+	NSInteger i;
 
 	// Clear all links
 	[[doc contents] clearAllLinks];
@@ -150,7 +151,7 @@ static inline void fix_endian_read(int *input, int size)
 	// Determine the offset for the next layer
 	i = 0;
 	layerOffsets = ftell(file);
-	layers = [NSArray array];
+	layers = @[];
 	do {
 		fseek(file, layerOffsets + i * sizeof(int), SEEK_SET);
 		fread(tempIntString, sizeof(int), 1, file);
@@ -163,7 +164,7 @@ static inline void fix_endian_read(int *input, int size)
 			layer = [[XCFLayer alloc] initWithFile:file offset:offset document:doc sharedInfo:&info];
 			if (layer == NULL) {
 				for (i = 0; i < [layers count]; i++)
-					[[layers objectAtIndex:i] autorelease];
+					layers[i];
 				fclose(file);
 				return NO;
 			}
@@ -177,7 +178,7 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Add the layers
 	for (i = [layers count] - 1; i >= 0; i--) {
-		[[doc contents] addLayerObject:[layers objectAtIndex:i]];
+		[[doc contents] addLayerObject:layers[i]];
 	}
 	
 	// Close the file

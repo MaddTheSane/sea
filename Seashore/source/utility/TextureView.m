@@ -19,10 +19,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
 {
@@ -83,7 +79,7 @@
 				}
 				
 				// Draw the thumbnail
-				thumbnail = [[textures objectAtIndex:elemNo] thumbnail];
+				thumbnail = [textures[elemNo] thumbnail];
 				[thumbnail compositeToPoint:NSMakePoint(i * kTexturePreviewSize + kTexturePreviewSize / 2 - [thumbnail size].width / 2, j * kTexturePreviewSize + kTexturePreviewSize / 2 + [thumbnail size].height / 2) operation:NSCompositeSourceOver];
 				
 			}

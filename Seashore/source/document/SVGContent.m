@@ -106,7 +106,8 @@ IntSize getDocumentSize(char *path)
 - (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path
 {
 	NSString *importerPath;
-	id imageRep, layer;
+	NSImageRep *imageRep;
+	id layer;
 	NSImage *image;
 	BOOL test;
 	NSString *path_in, *path_out, *width_arg, *height_arg;
@@ -138,10 +139,10 @@ IntSize getDocumentSize(char *path)
 		if (size.width > 0 && size.height > 0 && size.width < kMaxImageSize && size.height < kMaxImageSize) {
 			width_arg = [NSString stringWithFormat:@"%d", size.width];
 			height_arg = [NSString stringWithFormat:@"%d", size.height];
-			args = [NSArray arrayWithObjects:path_in, path_out, width_arg, height_arg, NULL];
+			args = @[path_in, path_out, width_arg, height_arg];
 		}
 		else {
-			args = [NSArray arrayWithObjects:path_in, path_out, NULL];
+			args = @[path_in, path_out];
 		}
 		[waitPanel center];
 		[waitPanel makeKeyAndOrderFront:self];
@@ -155,29 +156,24 @@ IntSize getDocumentSize(char *path)
 	}
 	else {
 		[[SeaController seaWarning] addMessage:LOCALSTR(@"SVG message", @"Seashore is unable to open the given SVG file because the SVG Importer is not installed. The installer for this importer can be found on Seashore's website.") level:kHighImportance];
-		[self autorelease];
 		return NULL;
 	}
 
 	// Open the image
 	image = [[NSImage alloc] initByReferencingFile:path_out];
 	if (image == NULL) {
-		[image autorelease];
-		[self autorelease];
 		return NULL;
 	}
 	
 	// Form a bitmap representation of the file at the specified path
 	imageRep = NULL;
 	if ([[image representations] count] > 0) {
-		imageRep = [[image representations] objectAtIndex:0];
+		imageRep = [image representations][0];
 		if (![imageRep isKindOfClass:[NSBitmapImageRep class]]) {
 			imageRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
 		}
 	}
 	if (imageRep == NULL) {
-		[image autorelease];
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -199,15 +195,11 @@ IntSize getDocumentSize(char *path)
 	// Create the layer
 	layer = [[SVGLayer alloc] initWithImageRep:imageRep document:doc spp:(type == XCF_RGB_IMAGE) ? 4 : 2];
 	if (layer == NULL) {
-		[image autorelease];
-		[self autorelease];
 		return NULL;
 	}
-	layers = [NSArray arrayWithObject:layer];
-	[layers retain];
+	layers = @[layer];
 	
 	// Now forget the NSImage
-	[image autorelease];
 	[gFileManager removeFileAtPath:path_out handler:NULL];
 	
 	return self;

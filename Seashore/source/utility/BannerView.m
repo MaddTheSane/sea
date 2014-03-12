@@ -8,17 +8,12 @@
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        bannerText = [[NSString string] retain];
+        bannerText = [NSString string];
 		bannerImportance = kVeryLowImportance;
     }
     return self;
 }
 
-- (void)dealloc
-{
-	[bannerText release];
-	[super dealloc];
-}
 
 - (void)drawRect:(NSRect)dirtyRect {
     // We use images for the backgrounds
@@ -37,14 +32,14 @@
 	
 	[background drawInRect:NSMakeRect(0, 0, [self frame].size.width, [self frame].size.height) fromRect: NSZeroRect operation: NSCompositeSourceOver fraction: 1.0]; 
 	[NSGraphicsContext saveGraphicsState];
-	NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
+	NSShadow *shadow = [[NSShadow alloc] init];
 	[shadow setShadowOffset: NSMakeSize(0, 1)];
 	[shadow setShadowBlurRadius:0];
 	[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.0 alpha:0.5]];
 	[shadow set];
 	
 	NSDictionary *attrs;
-	attrs = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont systemFontOfSize:12] , NSFontAttributeName, [NSColor whiteColor], NSForegroundColorAttributeName, shadow ,NSShadowAttributeName ,nil];
+	attrs = @{NSFontAttributeName: [NSFont systemFontOfSize:12], NSForegroundColorAttributeName: [NSColor whiteColor], NSShadowAttributeName: shadow};
 	
 	// We need to calculate the width of the text box
 	NSRect drawRect = NSMakeRect(10, 8, [self frame].size.width, 18);
@@ -63,8 +58,7 @@
 
 - (void)setBannerText:(NSString *)text defaultButtonText:(NSString *)dText alternateButtonText:(NSString *)aText andImportance:(int)importance
 {
-	[bannerText release];
-	bannerText = [text retain];
+	bannerText = text;
 	bannerImportance = importance;
 	
 	if(dText){

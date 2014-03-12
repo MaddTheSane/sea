@@ -140,11 +140,11 @@ static inline void fix_endian_read(int *input, int size)
 								i++;
 							}
 						} while (nameString[i - 1] != 0 && !ferror(file));
-						parasites[pos].name = [[NSString alloc] initWithUTF8String:nameString];
+						parasites[pos].name = CFBridgingRetain([[NSString alloc] initWithUTF8String:nameString]);
 						free (nameString);
 					}
 					else {
-						parasites[pos].name = [[NSString alloc] initWithString:@"unnamed"];
+						parasites[pos].name = CFBridgingRetain(@"unnamed");
 					}
 					
 					// Remember flags and data size
@@ -191,7 +191,7 @@ static inline void fix_endian_read(int *input, int size)
 - (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
 {
 	SharedXCFInfo info;
-	int layerOffsets, offset;
+	size_t layerOffsets, offset;
 	FILE *file;
 	id layer;
 	int i;
@@ -207,15 +207,13 @@ static inline void fix_endian_read(int *input, int size)
 	// Open the file
 	file = fopen([path fileSystemRepresentation], "rb");
 	if (file == NULL) {
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// Read the header
 	if ([self readHeader:file] == NO) {
 		fclose(file);
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// Express warning if necessary
@@ -227,8 +225,7 @@ static inline void fix_endian_read(int *input, int size)
 	// Read properties
 	if ([self readProperties:file sharedInfo:&info] == NO) {
 		fclose(file);
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// NSLog(@"Properties end: %d", ftell(file));
@@ -239,7 +236,7 @@ static inline void fix_endian_read(int *input, int size)
 	// Determine the offset for the next layer
 	i = 0;
 	layerOffsets = ftell(file);
-	layers = [NSArray array];
+	layers = @[];
 	do {
 		fseek(file, layerOffsets + i * sizeof(int), SEEK_SET);
 		fread(tempIntString, sizeof(int), 1, file);
@@ -252,8 +249,6 @@ static inline void fix_endian_read(int *input, int size)
 			layer = [[XCFLayer alloc] initWithFile:file offset:offset document:doc sharedInfo:&info];
 			if (layer == NULL) {
 				fclose(file);
-				[layers retain];
-				[self autorelease];
 				return NULL;
 			}
 			layers = [layers arrayByAddingObject:layer];
@@ -264,7 +259,6 @@ static inline void fix_endian_read(int *input, int size)
 		
 		i++;
 	} while (offset != 0);
-	[layers retain];
 	
 	// Check for channels
 	fseek(file, layerOffsets + i * sizeof(int), SEEK_SET);
@@ -281,8 +275,7 @@ static inline void fix_endian_read(int *input, int size)
 	if ( xres < kMinResolution || yres < kMinResolution || xres > kMaxResolution || yres > kMaxResolution)
 		xres = yres = 72;
 	if (width < kMinImageSize || height < kMinImageSize || width > kMaxImageSize || height > kMaxImageSize) {
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// We don't support indexed images any more
@@ -301,7 +294,6 @@ static inline void fix_endian_read(int *input, int size)
 	if (exifParasite) {
 		exifContainer = [NSData dataWithBytesNoCopy:exifParasite->data length:exifParasite->size freeWhenDone:NO];
 		exifData = [NSPropertyListSerialization propertyListFromData:exifContainer mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:&errorString];
-		[exifData retain];
 	}
 	[self deleteParasiteWithName:@"exif-plist"];
 	

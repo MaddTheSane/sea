@@ -44,11 +44,11 @@
 
 - (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path
 {
-	id imageRep;
+	NSImageRep *imageRep;
 	NSImage *image;
 	id layer;
 	BOOL test, res_set = NO;
-	int value;
+	NSInteger value;
 	
 	// Initialize superclass first
 	if (![super initWithDocument:doc])
@@ -57,15 +57,13 @@
 	// Open the image
 	image = [[NSImage alloc] initByReferencingFile:path];
 	if (image == NULL) {
-		[image autorelease];
-		[self autorelease];
 		return NULL;
 	}
 	
 	// Form a bitmap representation of the file at the specified path
 	imageRep = NULL;
 	if ([[image representations] count] > 0) {
-		imageRep = [[image representations] objectAtIndex:0];
+		imageRep = [image representations][0];
 		if (![imageRep isKindOfClass:[NSBitmapImageRep class]]) {
 			if ([imageRep isKindOfClass:[NSPDFImageRep class]]) {
 				
@@ -75,14 +73,14 @@
 				[NSBundle loadNibNamed:@"CocoaContent" owner:self];
 				[resMenu setEnabled:YES];
 				[pdfPanel center];
-				[pageLabel setStringValue:[NSString stringWithFormat:@"of %d", [imageRep pageCount]]];
+				[pageLabel setStringValue:[NSString stringWithFormat:@"of %ld", (long)[(NSPDFImageRep*)imageRep pageCount]]];
 				[resMenu selectItemAtIndex:0];
 				[NSApp runModalForWindow:pdfPanel];
 				[pdfPanel orderOut:self];
 
 				value = [pageInput intValue];
-				if (value > 0 && value <= [imageRep pageCount]){
-					[imageRep setCurrentPage:value - 1];
+				if (value > 0 && value <= [(NSPDFImageRep*)imageRep pageCount]){
+					[(NSPDFImageRep*)imageRep setCurrentPage:value - 1];
 				}
 
 				NSSize sourceSize = [image size];
@@ -138,7 +136,6 @@
 				NSBitmapImageRep* newRep = [[NSBitmapImageRep alloc]
 											initWithFocusedViewRect: destinationRect];
 				[dest unlockFocus];
-				[dest autorelease];
 				imageRep = newRep;
 			}else {
 				imageRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
@@ -146,9 +143,7 @@
 		}
 	}
 	if (imageRep == NULL) {
-		[image autorelease];
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// Warn if 16-bit image
@@ -175,21 +170,14 @@
 		type = XCF_RGB_IMAGE;
 		
 	// Store EXIF data
-	exifData = [imageRep valueForProperty:@"NSImageEXIFData"];
-	if (exifData) [exifData retain];
+	exifData = [(NSBitmapImageRep*)imageRep valueForProperty:@"NSImageEXIFData"];
 	
 	// Create the layer
 	layer = [[CocoaLayer alloc] initWithImageRep:imageRep document:doc spp:(type == XCF_RGB_IMAGE) ? 4 : 2];
 	if (layer == NULL) {
-		[image autorelease];
-		[self autorelease];
 		return NULL;
 	}
-	layers = [NSArray arrayWithObject:layer];
-	[layers retain];
-	
-	// Now forget the NSImage
-	[image autorelease];
+	layers = @[layer];
 	
 	return self;
 }

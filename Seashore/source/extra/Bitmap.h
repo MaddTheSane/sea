@@ -63,7 +63,7 @@ enum {
 				possible. You should always check for failed conversions. The
 				block of memory is safe for use with AltiVec.
 */
-__private_extern__ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, int iformat);
+__private_extern__ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat);
 
 /*!
 	@function	stripAlphaToWhite

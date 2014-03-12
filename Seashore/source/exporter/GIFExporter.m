@@ -52,14 +52,13 @@
 			bitsPerPixel: 8 * spp];
 	
 	// With these GIF properties, we will let the OS do the dithering
-	NSDictionary *gifProperties = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], NSImageDitherTransparency, NULL];
+	NSDictionary *gifProperties = @{NSImageDitherTransparency: @YES};
 	
 	// Save to a file
 	NSData* imageData = [imageRep representationUsingType: NSGIFFileType properties: gifProperties];
 	[imageData writeToFile: path atomically: YES];
 	
 	// Cleanup
-	[imageRep autorelease];
 	free(destData);
 	
 	return YES;

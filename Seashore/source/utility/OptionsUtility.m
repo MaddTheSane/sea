@@ -35,11 +35,6 @@
 	[[SeaController utilitiesManager] setOptionsUtility: self for:document];
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)activate
 {
 	[self update];

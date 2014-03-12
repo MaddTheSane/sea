@@ -60,11 +60,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (BOOL)hasOptions
 {
 #ifdef MACOS_10_4_COMPILE
@@ -174,10 +169,9 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	realImage = [[NSImage alloc] initWithSize:NSMakeSize(160, 160)];
 	[realImage addRepresentation:realImageRep];
 	[realImageView setImage:realImage];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
 	[compressImageView setImage:compressImage];
-	[compressImage autorelease];
 	
 	// Display the options dialog
 	[panel center];
@@ -191,8 +185,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	else
 		[gUserDefaults setInteger:printCompression forKey:@"jp2 print compression"];
 	free(sampleData);
-	[realImageRep autorelease];
-	[realImage autorelease];
 #endif
 }
 
@@ -207,9 +199,8 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	else
 		printCompression = [compressSlider intValue];
 	value = [self reviseCompression];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
-	[compressImage autorelease];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
 #endif
@@ -233,9 +224,8 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	else
 		[compressSlider setIntValue:printCompression];
 	value = [self reviseCompression];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
-	[compressImage autorelease];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
 #endif
@@ -328,11 +318,10 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	}
 	
 	// Finally build the JPEG 2000 data
-	imageData = [imageRep representationUsingType:NSJPEG2000FileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]];
+	imageData = [imageRep representationUsingType:NSJPEG2000FileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}];
 	
 	// Save our file and let's go
 	[imageData writeToFile:path atomically:YES];
-	[imageRep autorelease];
 	
 	// If the destination data is not equivalent to the source data free the former
 	if (destData != srcData)

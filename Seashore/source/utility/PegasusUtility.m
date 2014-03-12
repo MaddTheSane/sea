@@ -13,23 +13,12 @@
 
 @implementation PegasusUtility
 
-- (id)init
-{
-	return self;
-}
-
 - (void)awakeFromNib
 {
 	// Enable the utility
 	enabled = YES;
 	
 	[[SeaController utilitiesManager] setPegasusUtility: self for:document];
-}
-
-- (void)dealloc
-{
-	//if ([layersView documentView]) [[layersView documentView] autorelease];
-	[super dealloc];
 }
 
 - (void)activate

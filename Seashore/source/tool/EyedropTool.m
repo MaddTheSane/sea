@@ -20,11 +20,6 @@
 	return kEyedropTool;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	id toolboxUtility = (ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document];

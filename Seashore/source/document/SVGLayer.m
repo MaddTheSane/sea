@@ -6,7 +6,7 @@
 
 @implementation SVGLayer
 
-- (id)initWithImageRep:(id)imageRep document:(id)doc spp:(int)lspp
+- (id)initWithImageRep:(NSBitmapImageRep*)imageRep document:(id)doc spp:(int)lspp
 {
 	int i, space, bps = [imageRep bitsPerSample], sspp = [imageRep samplesPerPixel];
 	unsigned char *srcPtr = [imageRep bitmapData];
@@ -37,7 +37,6 @@
 		space = kCMYKColorSpace;
 	if (space == -1) {
 		NSLog(@"Color space %@ not yet handled.", [imageRep colorSpaceName]);
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -55,7 +54,6 @@
 	data = convertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, (profile) ? &cmProfileLoc : NULL, bps, 0);
 	if (!data) {
 		NSLog(@"Required conversion not supported.");
-		[self autorelease];
 		return NULL;
 	}
 	

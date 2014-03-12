@@ -72,6 +72,6 @@
 
 - (NSArray *)allTools
 {
-	return [NSArray arrayWithObjects: rectSelectTool, ellipseSelectTool, lassoTool, polygonLassoTool, wandTool, pencilTool, brushTool, bucketTool, textTool, eyedropTool, eraserTool, positionTool, gradientTool, smudgeTool, cloneTool, cropTool, effectTool, nil];
+	return @[rectSelectTool, ellipseSelectTool, lassoTool, polygonLassoTool, wandTool, pencilTool, brushTool, bucketTool, textTool, eyedropTool, eraserTool, positionTool, gradientTool, smudgeTool, cloneTool, cropTool, effectTool];
 }
 @end

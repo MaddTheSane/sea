@@ -33,11 +33,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	id contents = [document contents];

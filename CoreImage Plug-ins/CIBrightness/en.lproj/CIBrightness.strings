@@ -1,0 +1,27 @@
+
+/* Class = "NSPanel"; title = "Brightness and Contrast"; ObjectID = "6"; */
+"6.title" = "Brightness and Contrast";
+
+/* Class = "NSButtonCell"; title = "Ok"; ObjectID = "46"; */
+"46.title" = "Ok";
+
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "47"; */
+"47.title" = "Brightness:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "49"; */
+"49.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "1.00"; ObjectID = "50"; */
+"50.title" = "1.00";
+
+/* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "51"; */
+"51.title" = "Contrast:";
+
+/* Class = "NSTextFieldCell"; title = "1.00"; ObjectID = "53"; */
+"53.title" = "1.00";
+
+/* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "54"; */
+"54.title" = "Saturation:";
+
+/* Class = "NSTextFieldCell"; title = "1.00"; ObjectID = "56"; */
+"56.title" = "1.00";

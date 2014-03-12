@@ -35,10 +35,6 @@ extern id gNewFont;
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
 
 - (void)mouseUpAt:(IntPoint)iwhere withEvent:(NSEvent *)theEvent
 {
@@ -85,10 +81,9 @@ extern id gNewFont;
 	paraStyle = [[NSMutableParagraphStyle alloc] init];
 	[paraStyle setAlignment:[options alignment]];
 	if (outline)
-		attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, color, NSForegroundColorAttributeName, paraStyle, NSParagraphStyleAttributeName, [NSNumber numberWithInt:outline], NSStrokeWidthAttributeName, NULL];
+		attributes = @{NSFontAttributeName: font, NSForegroundColorAttributeName: color, NSParagraphStyleAttributeName: paraStyle, NSStrokeWidthAttributeName: @(outline)};
 	else
-		attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, color, NSForegroundColorAttributeName, paraStyle, NSParagraphStyleAttributeName, NULL];
-	[paraStyle autorelease];
+		attributes = @{NSFontAttributeName: font, NSForegroundColorAttributeName: color, NSParagraphStyleAttributeName: paraStyle};
 	text = [[textbox textStorage] string];
 	fontSize = NSSizeMakeIntSize([text sizeWithAttributes:attributes]);
 	fontSize.width += [[NSString stringWithString:@"x"] sizeWithAttributes:attributes].width;
@@ -192,13 +187,7 @@ extern id gNewFont;
 	}
 	
 	// Clean-up everything
-	[image autorelease];
-	[imageRep autorelease];
-	[initRep autorelease];
 	if ([options allowFringe]) {
-		[image2 autorelease];
-		[imageRep2 autorelease];
-		[initRep2 autorelease];
 	}
 	free(initData);
 	
@@ -301,7 +290,7 @@ extern id gNewFont;
 	id layer;
 	
 	layer = [[document contents] activeLayer];
-	attributes = [NSDictionary dictionaryWithObjectsAndKeys:[fontManager selectedFont], NSFontAttributeName, NULL];
+	attributes = @{NSFontAttributeName: [fontManager selectedFont]};
 	text = [[textbox textStorage] string];
 	fontSize = NSSizeMakeIntSize([text sizeWithAttributes:attributes]);
 	width = [(SeaLayer *)layer width];
@@ -319,7 +308,7 @@ extern id gNewFont;
 	
 	layer = [[document contents] activeLayer];
 	font = [fontManager selectedFont];
-	attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, NULL];
+	attributes = @{NSFontAttributeName: font};
 	text = [[textbox textStorage] string];
 	fontSize = NSSizeMakeIntSize([text sizeWithAttributes:attributes]);
 	height = [(SeaLayer *)layer height];

@@ -64,7 +64,6 @@ extern BOOL userWarnedOnDiskSpace;
 	if (records) free(records);
 	
 	// Call the super
-	[super dealloc];
 }
 
 - (BOOL)checkDiskSpace

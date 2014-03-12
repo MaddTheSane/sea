@@ -20,58 +20,58 @@ extern IntPoint gScreenResolution;
 
 - (id)initWithDocument:(id)doc
 {
-	CMProfileRef destProf;
-	int layerWidth, layerHeight;
-	NSString *pluginPath;
-	NSBundle *bundle;
-	
-	// Remember the document we are representing
-	document = doc;
-	
-	// Initialize the compostior
-	compositor = NULL;
-	if (useAltiVec) {
-		pluginPath = [NSString stringWithFormat:@"%@/CompositorAV.bundle", [gMainBundle builtInPlugInsPath]];
-		if ([gFileManager fileExistsAtPath:pluginPath]) {
-			bundle = [NSBundle bundleWithPath:pluginPath];
-			if (bundle && [bundle principalClass]) {
-				compositor = [[bundle principalClass] alloc];
+	if (self = [super init]) {
+		CMProfileRef destProf;
+		int layerWidth, layerHeight;
+		NSString *pluginPath;
+		NSBundle *bundle;
+		
+		// Remember the document we are representing
+		document = doc;
+		
+		// Initialize the compostior
+		compositor = NULL;
+		if (useAltiVec) {
+			pluginPath = [NSString stringWithFormat:@"%@/CompositorAV.bundle", [gMainBundle builtInPlugInsPath]];
+			if ([gFileManager fileExistsAtPath:pluginPath]) {
+				bundle = [NSBundle bundleWithPath:pluginPath];
+				if (bundle && [bundle principalClass]) {
+					compositor = [[bundle principalClass] alloc];
+				}
 			}
 		}
+		compositor = [[SeaCompositor alloc] initWithDocument:document];
+		
+		// Record the width, height and use of greys
+		width = [(SeaContent *)[document contents] width];
+		height = [(SeaContent *)[document contents] height];
+		layerWidth = [(SeaLayer *)[[document contents] activeLayer] width];
+		layerHeight = [(SeaLayer *)[[document contents] activeLayer] height];
+		
+		// Record the samples per pixel used by the whiteboard
+		spp = [[document contents] spp];
+		
+		// Set the view type to show all channels
+		viewType = kAllChannelsView;
+		CMYKPreview = NO;
+		
+		// Allocate the whiteboard data
+		data = malloc(make_128(width * height * spp));
+		overlay = malloc(make_128(layerWidth * layerHeight * spp));
+		memset(overlay, 0, layerWidth * layerHeight * spp);
+		replace = malloc(make_128(layerWidth * layerHeight));
+		memset(replace, 0, layerWidth * layerHeight);
+		altData = NULL;
+		
+		// Create the colour world
+		OpenDisplayProfile(&displayProf);
+		cgDisplayProf = CGColorSpaceCreateWithPlatformColorSpace(displayProf);
+		CMGetDefaultProfileBySpace(cmCMYKData, &destProf);
+		NCWNewColorWorld(&cw, displayProf, destProf);
+		
+		// Set the locking thread to NULL
+		lockingThread = NULL;
 	}
-	if (compositor == NULL)	compositor = [SeaCompositor alloc];
-	[compositor initWithDocument:document];
-	
-	// Record the width, height and use of greys
-	width = [(SeaContent *)[document contents] width];
-	height = [(SeaContent *)[document contents] height];
-	layerWidth = [(SeaLayer *)[[document contents] activeLayer] width];
-	layerHeight = [(SeaLayer *)[[document contents] activeLayer] height];
-	
-	// Record the samples per pixel used by the whiteboard
-	spp = [[document contents] spp];
-	
-	// Set the view type to show all channels
-	viewType = kAllChannelsView;
-	CMYKPreview = NO;
-	
-	// Allocate the whiteboard data
-	data = malloc(make_128(width * height * spp));
-	overlay = malloc(make_128(layerWidth * layerHeight * spp));
-	memset(overlay, 0, layerWidth * layerHeight * spp);
-	replace = malloc(make_128(layerWidth * layerHeight));
-	memset(replace, 0, layerWidth * layerHeight);
-	altData = NULL;
-	
-	// Create the colour world
-	OpenDisplayProfile(&displayProf);
-	cgDisplayProf = CGColorSpaceCreateWithPlatformColorSpace(displayProf);
-	CMGetDefaultProfileBySpace(cmCMYKData, &destProf);
-	NCWNewColorWorld(&cw, displayProf, destProf);
-	
-	// Set the locking thread to NULL
-	lockingThread = NULL;
-	
 	return self;
 }
 
@@ -84,14 +84,11 @@ extern IntPoint gScreenResolution;
 	// Free the room we took for everything else
 	if (displayProf) CloseDisplayProfile(displayProf);
 	if (cgDisplayProf) CGColorSpaceRelease(cgDisplayProf);
-	if (compositor) [compositor autorelease];
-	if (image) [image autorelease];
 	if (cw) CWDisposeColorWorld(cw);
 	if (data) free(data);
 	if (overlay) free(overlay);
 	if (replace) free(replace);
 	if (altData) free(altData);
-	[super dealloc];
 }
 
 - (void)setOverlayBehaviour:(int)value
@@ -128,7 +125,7 @@ extern IntPoint gScreenResolution;
 	lheight = [(SeaLayer *)layer height];
 	xoff = [layer xoff];
 	yoff = [layer yoff];
-	mask = [[document selection] mask];
+	mask = ([[document selection] mask]);
 	maskOffset = [[document selection] maskOffset];
 	trueMaskOffset = IntMakePoint(maskOffset.x - selectRect.origin.x, maskOffset.y -  selectRect.origin.y);
 	maskSize = [[document selection] maskSize];
@@ -465,7 +462,7 @@ extern IntPoint gScreenResolution;
 		else {
 			selectRect = [[document selection] globalRect];
 		}
-		mask = [[document selection] mask];
+		mask = ([[document selection] mask]);
 		maskOffset = [[document selection] maskOffset];
 		maskSize = [[document selection] maskSize];
 	}
@@ -841,7 +838,6 @@ extern IntPoint gScreenResolution;
 	int xwidth, xheight;
 	id layer;
 	
-	if (image) [image autorelease];
 	image = [[NSImage alloc] init];
 	
 	if (altData) {
@@ -880,7 +876,6 @@ extern IntPoint gScreenResolution;
 {
 	NSBitmapImageRep *imageRep;
 	
-	if (image) [image autorelease];
 	image = [[NSImage alloc] init];
 	imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&data pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:width * spp bitsPerPixel:8 * spp];
 	[image addRepresentation:imageRep];

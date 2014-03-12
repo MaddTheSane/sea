@@ -1,6 +1,8 @@
 #import "Globals.h"
 #import "IndiciesKeeper.h"
 
+@class SeaDocument;
+
 /*!
 	@struct		ParasiteData
 	@discussion	A record containing arbitrary data that will be saved with the
@@ -15,7 +17,7 @@
 				The parasite's data.
 */
 typedef struct {
-	NSString *name;
+	CFStringRef name;
 	unsigned int flags;
 	unsigned int size;
 	unsigned char *data;
@@ -34,7 +36,7 @@ typedef struct {
 @interface SeaContent : NSObject {
 	
 	// The document associated with this object
-	id document;
+	SeaDocument *document;
 	
 	// The document's x and y resolution
 	int xres, yres;

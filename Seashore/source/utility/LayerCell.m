@@ -12,25 +12,18 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [image release];
-    [super dealloc];
-}
-
 - (id)copyWithZone:(NSZone *)zone
 {
     LayerCell *cell = (LayerCell *)[super copyWithZone:zone];
     // The image ivar will be directly copied; we need to retain or copy it.
-    cell->image = [image retain];
+    cell->image = image;
     return cell;
 }
 
 - (void)setImage:(NSImage *)anImage
 {
     if (anImage != image) {
-        [image release];
-        image = [anImage retain];
+        image = anImage;
     }
 }
 
@@ -85,7 +78,7 @@
 {
 	if (image != nil) {
 		[NSGraphicsContext saveGraphicsState];
-		NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
+		NSShadow *shadow = [[NSShadow alloc] init];
 		[shadow setShadowOffset: NSMakeSize(1, 1)];
 		[shadow setShadowBlurRadius:2];
 		[shadow setShadowColor:[NSColor blackColor]];
@@ -112,12 +105,12 @@
 		cellFrame.origin.y += 10;
 		NSDictionary *attrs;
 		if(selected){
-			attrs = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12] , NSFontAttributeName, [NSColor whiteColor], NSForegroundColorAttributeName, nil];
+			attrs = @{NSFontAttributeName: [NSFont boldSystemFontOfSize:12], NSForegroundColorAttributeName: [NSColor whiteColor]};
 			[[self stringValue] drawInRect:cellFrame withAttributes:attrs];
 			[NSGraphicsContext restoreGraphicsState];
 		}else{
 			[NSGraphicsContext restoreGraphicsState];
-			attrs = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont systemFontOfSize:12] , NSFontAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];
+			attrs = @{NSFontAttributeName: [NSFont systemFontOfSize:12], NSForegroundColorAttributeName: [NSColor blackColor]};
 			[[self stringValue] drawInRect:cellFrame withAttributes:attrs];
 		}
 		

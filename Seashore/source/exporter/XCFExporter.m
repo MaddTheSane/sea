@@ -92,7 +92,7 @@ static inline void fix_endian_write(int *input, int size)
 - (BOOL)writeProperties:(FILE *)file
 {
 	id contents = [document contents];
-	int offsetPos, count, size, i;
+	size_t offsetPos, count, size, i;
 	ParasiteData *parasites;
 	ParasiteData parasite;
 	
@@ -123,10 +123,10 @@ static inline void fix_endian_write(int *input, int size)
 		parasites = [contents parasites];
 		for (i = 0; i < count; i++) {
 			parasite = parasites[i];
-			tempIntString[0] = strlen([parasite.name UTF8String]) + 1;
+			tempIntString[0] = ([(__bridge NSString*)parasite.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) + 1;
 			fix_endian_write(tempIntString, 1);
 			fwrite(tempIntString, sizeof(int), 1, file);
-			fwrite([parasite.name UTF8String], sizeof(char), strlen([parasite.name UTF8String]) + 1, file);
+			fwrite([(__bridge NSString*)parasite.name UTF8String], sizeof(char), ([(__bridge NSString*)parasite.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) + 1, file);
 			tempIntString[0] = parasite.flags;
 			tempIntString[1] = parasite.size;
 			fix_endian_write(tempIntString, 2);
@@ -193,7 +193,7 @@ static inline void fix_endian_write(int *input, int size)
 
 - (BOOL)writeLayerProperties:(int)index file:(FILE *)file
 {
-	id layer = [[document contents] layer:index];
+	SeaLayer *layer = [[document contents] layer:index];
 	
 	// Write if the layer is the acitve layer
 	if ([[document contents] activeLayerIndex] == index) {

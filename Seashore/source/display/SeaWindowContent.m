@@ -5,13 +5,11 @@
 
 -(void)awakeFromNib
 {
-	dict = [[NSDictionary dictionaryWithObjectsAndKeys:
-			 [NSMutableDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], @"visibility", optionsBar, @"view", nonOptionsBar, @"nonView", @"above", @"side", [NSNumber numberWithFloat: 0], @"oldValue", nil], [NSNumber numberWithInt:kOptionsBar],
-			 [NSMutableDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], @"visibility", sidebar, @"view", nonSidebar, @"nonView", @"left", @"side", [NSNumber numberWithFloat: 0], @"oldValue", nil], [NSNumber numberWithInt:kSidebar],
-			 [NSMutableDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], @"visibility", pointInformation, @"view", layers, @"nonView", @"below", @"side", [NSNumber numberWithFloat: 0], @"oldValue", nil], [NSNumber numberWithInt:kPointInformation],
-			 [NSMutableDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], @"visibility", warningsBar, @"view", mainDocumentView, @"nonView", @"above", @"side", [NSNumber numberWithFloat: 0], @"oldValue", nil], [NSNumber numberWithInt:kWarningsBar],
-			 [NSMutableDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], @"visibility", statusBar, @"view", mainDocumentView, @"nonView", @"below", @"side", [NSNumber numberWithFloat: 0], @"oldValue", nil], [NSNumber numberWithInt:kStatusBar],
-			 nil] retain];
+	dict = @{@(kOptionsBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", optionsBar, @"view", nonOptionsBar, @"nonView", @"above", @"side", @0.0f, @"oldValue", nil],
+			 @(kSidebar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", sidebar, @"view", nonSidebar, @"nonView", @"left", @"side", @0.0f, @"oldValue", nil],
+			 @(kPointInformation): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", pointInformation, @"view", layers, @"nonView", @"below", @"side", @0.0f, @"oldValue", nil],
+			 @(kWarningsBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", warningsBar, @"view", mainDocumentView, @"nonView", @"above", @"side", @0.0f, @"oldValue", nil],
+			 @(kStatusBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", statusBar, @"view", mainDocumentView, @"nonView", @"below", @"side", @0.0f, @"oldValue", nil]};
 	
 	int i;
 	for(i = kOptionsBar; i <= kStatusBar; i++){
@@ -28,23 +26,23 @@
 
 -(BOOL)visibilityForRegion:(int)region
 {
-	return [[[dict objectForKey:[NSNumber numberWithInt:region]] objectForKey:@"visibility"] boolValue];
+	return [dict[@(region)][@"visibility"] boolValue];
 }
 
 -(void)setVisibility:(BOOL)visibility forRegion:(int)region
 {
-	NSMutableDictionary *thisDict = [dict objectForKey:[NSNumber numberWithInt:region]];
-	BOOL currentVisibility = [[thisDict objectForKey:@"visibility"] boolValue];
+	NSMutableDictionary *thisDict = dict[@(region)];
+	BOOL currentVisibility = [thisDict[@"visibility"] boolValue];
 	
 	// Check to see if we are already in the proper state
 	if(currentVisibility == visibility){
 		return;
 	}
 	
-	float oldValue = [[thisDict objectForKey:@"oldValue"] floatValue];
-	NSView *view = [thisDict objectForKey:@"view"];
-	NSView *nonView = [thisDict objectForKey:@"nonView"];
-	NSString *side = [thisDict objectForKey:@"side"];
+	float oldValue = [thisDict[@"oldValue"] floatValue];
+	NSView *view = thisDict[@"view"];
+	NSView *nonView = thisDict[@"nonView"];
+	NSString *side = thisDict[@"side"];
 	if(!visibility){
 		
 		if([side isEqual:@"above"] || [side isEqual:@"below"]){
@@ -82,7 +80,7 @@
 				
 		[nonView setNeedsDisplay:YES];
 		
-		[thisDict setObject:[NSNumber numberWithFloat:oldValue] forKey:@"oldValue"];
+		thisDict[@"oldValue"] = @(oldValue);
 		[gUserDefaults setObject: @"NO" forKey:[NSString stringWithFormat:@"region%dvisibility", region]];		
 	}else{
 		NSRect newRect = [view frame];
@@ -114,15 +112,15 @@
 		
 		[gUserDefaults setObject: @"YES" forKey:[NSString stringWithFormat:@"region%dvisibility", region]];
 	}
-	[thisDict setObject:[NSNumber numberWithBool:visibility] forKey:@"visibility"];
+	thisDict[@"visibility"] = @(visibility);
 }
 
 -(float)sizeForRegion:(int)region
 {
 	if([self visibilityForRegion:region]){
-		NSMutableDictionary *thisDict = [dict objectForKey:[NSNumber numberWithInt:region]];
-		NSString *side = [thisDict objectForKey:@"side"];
-		NSView *view = [thisDict objectForKey: @"view"];
+		NSMutableDictionary *thisDict = dict[@(region)];
+		NSString *side = thisDict[@"side"];
+		NSView *view = thisDict[@"view"];
 		if([side isEqual: @"above"] || [side isEqual: @"below"]){
 			return [view frame].size.height;
 		}else{

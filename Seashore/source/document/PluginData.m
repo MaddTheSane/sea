@@ -130,7 +130,6 @@
 		[[NSDocumentController sharedDocumentController] addDocument:newDocument];
 		[newDocument makeWindowControllers];
 		[newDocument showWindows];
-		[newDocument autorelease];
 	}
 }
 

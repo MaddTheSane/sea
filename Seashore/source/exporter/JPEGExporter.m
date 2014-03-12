@@ -87,11 +87,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (BOOL)hasOptions
 {
 	return YES;
@@ -185,10 +180,9 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	realImage = [[NSImage alloc] initWithSize:NSMakeSize(160, 160)];
 	[realImage addRepresentation:realImageRep];
 	[realImageView setImage:realImage];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
 	[compressImageView setImage:compressImage];
-	[compressImage autorelease];
 	
 	// Display the options dialog
 	[panel center];
@@ -202,8 +196,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	else
 		[gUserDefaults setInteger:printCompression forKey:@"jpeg print compression"];
 	free(sampleData);
-	[realImageRep autorelease];
-	[realImage autorelease];
 }
 
 - (IBAction)compressionChanged:(id)sender
@@ -216,9 +208,8 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	else
 		printCompression = [compressSlider intValue];
 	value = [self reviseCompression];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
-	[compressImage autorelease];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
 }
@@ -240,9 +231,8 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	else
 		[compressSlider setIntValue:printCompression];
 	value = [self reviseCompression];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
-	[compressImage autorelease];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
 }
@@ -323,7 +313,7 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	}
 	
 	// Finally build the JPEG data
-	imageData = [imageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]];
+	imageData = [imageRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}];
 	
 	// Now add in the resolution settings
 	// Notice how we are working on [imageData bytes] despite being explicitly told not to in Cocoa's documentation - well if Cocoa gave us proper resolution handling that wouldn't be a problem
@@ -332,7 +322,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 
 	// Save our file and let's go
 	[imageData writeToFile:path atomically:YES];
-	[imageRep autorelease];
 	
 	// If the destination data is not equivalent to the source data free the former
 	if (destData != srcData)

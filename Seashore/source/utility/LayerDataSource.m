@@ -21,18 +21,13 @@
 - (void)awakeFromNib
 {
 	// Register to get our custom type, strings, and filenames. Try dragging each into the view!
-    [outlineView registerForDraggedTypes:[NSArray arrayWithObjects:SEA_LAYER_PBOARD_TYPE, NSStringPboardType, NSFilenamesPboardType, nil]];
+    [outlineView registerForDraggedTypes:@[SEA_LAYER_PBOARD_TYPE, NSStringPboardType, NSFilenamesPboardType]];
 	[outlineView setVerticalMotionCanBeginDrag: YES];
 
 	[outlineView setIndentationPerLevel: 0.0];
 	[outlineView setOutlineTableColumn:[outlineView tableColumnWithIdentifier:LAYER_THUMB_NAME_COL]];
 
 	draggedNodes = nil;
-}
-
-- (void)dealloc
-{
-	[super dealloc];
 }
 
 - (NSArray *)draggedNodes { return draggedNodes; }
@@ -49,7 +44,7 @@
 	if([selectedNodes count] != 1){
 		NSLog(@"%@ says the Selection has Changed for %@ the selectedNodes are %@",self, olv, selectedNodes);
 	}else{
-		SeaLayer *selectedLayer = [selectedNodes objectAtIndex:0];
+		SeaLayer *selectedLayer = selectedNodes[0];
 		[[document helpers] activeLayerWillChange];
 		[[document contents] setActiveLayerIndex:[selectedLayer index]];
 		[[document helpers] activeLayerChanged:kLayerSwitched rect:NULL];
@@ -105,9 +100,9 @@
 			return @"Floating Layer";
 		return [(SeaLayer *)item name];
 	}else if([[tableColumn identifier] isEqualToString:LAYER_VISIBLE_COL]){
-		return [NSNumber numberWithBool:[(SeaLayer *)item visible]];
+		return @([(SeaLayer *)item visible]);
 	}else if([[tableColumn identifier] isEqualToString:INFO_BUTTON_COL]){
-		return [NSNumber numberWithBool:YES];
+		return @YES;
 	}else{
 		NSLog(@"Object value for unkown column: %@", tableColumn);
 	}
@@ -157,7 +152,7 @@
 		LayerCell *layerCell = (LayerCell *)cell;
 		// Set the image here since the value returned from outlineView:objectValueForTableColumn:... didn't specify the image part...
 		[layerCell setImage:[(SeaLayer *)item thumbnail]];
-		if([[self selectedNodes] count] > 0 && [[self selectedNodes] objectAtIndex:0] == item){
+		if([[self selectedNodes] count] > 0 && [self selectedNodes][0] == item){
 			[layerCell setSelected: YES];
 		}else{
 			[layerCell setSelected: NO];
@@ -227,12 +222,11 @@ NSFileHandle *NewFileHandleForWritingFile(NSString *dirpath, NSString *basename,
     int i = 0, count = [items count];
     NSMutableArray *filenames = [NSMutableArray array];
     for (i=0; i<count; i++) {
-        SeaLayer *layer = (SeaLayer *)[items objectAtIndex:i];
+        SeaLayer *layer = (SeaLayer *)items[i];
         NSString *filename  = nil;
         NSFileHandle *fileHandle = NewFileHandleForWritingFile([dropDestination path], [layer name], @"tif", &filename);
         if (fileHandle) {
             [fileHandle writeData: [layer TIFFRepresentation]];
-            [fileHandle release];
             fileHandle = nil;
             [filenames addObject: filename];
         }
@@ -245,17 +239,17 @@ NSFileHandle *NewFileHandleForWritingFile(NSString *dirpath, NSString *basename,
     draggedNodes = items; // Don't retain since this is just holding temporaral drag information, and it is only used during a drag!  We could put this in the pboard actually.
     
     // Provide data for our custom type, and simple NSStrings.
-    [pboard declareTypes:[NSArray arrayWithObjects:SEA_LAYER_PBOARD_TYPE, NSTIFFPboardType, NSFilesPromisePboardType, NSStringPboardType, nil] owner:self];
+    [pboard declareTypes:@[SEA_LAYER_PBOARD_TYPE, NSTIFFPboardType, NSFilesPromisePboardType, NSStringPboardType] owner:self];
 	
     // the actual data doesn't matter since DragDropSimplePboardType drags aren't recognized by anyone but us!.
     [pboard setData:[NSData data] forType:SEA_LAYER_PBOARD_TYPE]; 
-	[pboard setData:[[draggedNodes objectAtIndex:0] TIFFRepresentation] forType:NSTIFFPboardType];
+	[pboard setData:[draggedNodes[0] TIFFRepresentation] forType:NSTIFFPboardType];
 
     // Put the promised type we handle on the pasteboard.
-    [pboard setPropertyList:[NSArray arrayWithObjects:@"tif", nil] forType:NSFilesPromisePboardType];
+    [pboard setPropertyList:@[@"tif"] forType:NSFilesPromisePboardType];
 	
     // Put string data on the pboard... notice you candrag into TextEdit!
-    [pboard setString: [[draggedNodes objectAtIndex: 0] name] forType: NSStringPboardType];
+    [pboard setString: [draggedNodes[0] name] forType: NSStringPboardType];
     
     return YES;
 }
@@ -285,7 +279,7 @@ NSFileHandle *NewFileHandleForWritingFile(NSString *dirpath, NSString *basename,
 - (BOOL)outlineView:(NSOutlineView *)ov acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(int)childIndex
 {
 	if(draggedNodes){
-		SeaLayer *layer = [draggedNodes objectAtIndex:0];
+		SeaLayer *layer = draggedNodes[0];
 		[[document contents] moveLayer: layer toIndex:childIndex];
 		[self update];
 		draggedNodes = nil;

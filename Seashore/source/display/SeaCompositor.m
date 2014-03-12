@@ -9,22 +9,19 @@
 
 - (id)initWithDocument:(id)doc
 {
-	int i;
-	
-	// Remember the document we are compositing for
-	document = doc;
-	
-	// Work out the random table for the dissolve effect
-	srandom(RANDOM_SEED);
-	for (i = 0; i < 4096; i++)
-		randomTable[i] = random();
+	if (self = [super init]) {
+		int i;
+		
+		// Remember the document we are compositing for
+		document = doc;
+		
+		// Work out the random table for the dissolve effect
+		srandom(RANDOM_SEED);
+		for (i = 0; i < 4096; i++)
+			randomTable[i] = random() & 0xffffffff;
+	}
 	
 	return self;
-}
-
-- (void)dealloc
-{
-	[super dealloc];
 }
 
 - (void)compositeLayer:(SeaLayer *)layer withOptions:(CompositorOptions)options

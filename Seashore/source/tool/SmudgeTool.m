@@ -22,10 +22,6 @@
 }
 
 
-- (void)dealloc
-{
-	[super dealloc];
-}
 
 - (BOOL)useMouseCoalescing
 {

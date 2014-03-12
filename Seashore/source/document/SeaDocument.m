@@ -140,8 +140,7 @@ enum {
 		[self setFileType:type];
 	}
 	else {
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	return self;
@@ -186,15 +185,12 @@ enum {
 	
 	// Believe it or not sometimes this function is called after it has already run
 	if (whiteboard == NULL) {
-		exporters = [NSArray arrayWithObjects:
-					 gifExporter,
+		exporters = @[gifExporter,
 					 jpegExporter,
 					 jp2Exporter,
 					 pngExporter,
 					 tiffExporter,
-					 xcfExporter,
-					 NULL];
-		[exporters retain];
+					 xcfExporter];
 		
 		// Create a fresh whiteboard and selection manager
 		whiteboard = [[SeaWhiteboard alloc] initWithDocument:self];
@@ -206,10 +202,8 @@ enum {
 		#ifdef USE_CENTERING_CLIPVIEW
 		newClipView = [[CenteringClipView alloc] initWithFrame:[[view contentView] frame]];
 		[(NSScrollView *)view setContentView:newClipView];
-		[newClipView autorelease];
 		#endif
 		[view setDocumentView:seaView];
-		[seaView autorelease];
 		[view setDrawsBackground:NO];
 		
 		// set the frame of the window
@@ -220,18 +214,6 @@ enum {
 	}
 	
 	[docWindow setAcceptsMouseMovedEvents:YES];
-}
-
-- (void)dealloc
-{
-	// Then get rid of stuff that's no longer needed
-	if (selection) [selection autorelease];
-	if (whiteboard) [whiteboard autorelease];
-	if (contents) [contents autorelease];
-	if (exporters) [exporters autorelease];
-		
-	// Finally call the super
-	[super dealloc];
 }
 
 - (IBAction)saveDocument:(id)sender
@@ -256,7 +238,7 @@ enum {
 	return whiteboard;
 }
 
-- (id)selection
+- (SeaSelection*)selection
 {
 	return selection;
 }
@@ -377,9 +359,9 @@ enum {
 	for (i = 0; i < [exporters count]; i++) {
 		if ([[SeaDocumentController sharedDocumentController]
 			 type: type
-			 isContainedInDocType:[[exporters objectAtIndex:i] title]
+			 isContainedInDocType:[exporters[i] title]
 			 ]) {
-			[[exporters objectAtIndex:i] writeDocument:self toFile:path];
+			[exporters[i] writeDocument:self toFile:path];
 			result = YES;
 		}
 	}
@@ -402,15 +384,12 @@ enum {
 	// Insist the view be scaled to fit
 	[op setShowPanels:showPanels];
     [self runModalPrintOperation:op delegate:NULL didRunSelector:NULL contextInfo:NULL];
-
-	// Release print view
-	[printView autorelease];
 }
 
 
 - (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
 {
-	int i, exporterIndex = -1;
+	NSInteger i, exporterIndex = -1;
 	
 	// Implement the view that allows us to select layers
 	[savePanel setAccessoryView:accessoryView];
@@ -419,7 +398,7 @@ enum {
 	for (i = 0; i < [exporters count]; i++) {
 		if ([[SeaDocumentController sharedDocumentController]
 			 type: [self fileType]
-			 isContainedInDocType:[[exporters objectAtIndex:i] title]
+			 isContainedInDocType:[exporters[i] title]
 			 ]) {
 			exporterIndex = i;
 			break;
@@ -429,35 +408,35 @@ enum {
 	// Deal with the rare case where we don't find one
 	if (exporterIndex == -1) {
 		exporterIndex = [exporters count] - 1;
-		[self setFileType:[[exporters objectAtIndex:[exporters count] - 1] title]];
+		[self setFileType:[exporters[[exporters count] - 1] title]];
 	}
 	
 	// Add in our exporters
 	[exportersPopUp removeAllItems];
 	for (i = 0; i < [exporters count]; i++)
-		[exportersPopUp addItemWithTitle:[[exporters objectAtIndex:i] title]];
+		[exportersPopUp addItemWithTitle:[exporters[i] title]];
 	[exportersPopUp selectItemAtIndex:exporterIndex];
-	[savePanel setRequiredFileType:[[exporters objectAtIndex:exporterIndex] extension]];
+	[savePanel setRequiredFileType:[exporters[exporterIndex] extension]];
 	
 	// Finally set the options button state appropriately
-	[optionsButton setEnabled:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] hasOptions]];
-	[optionsSummary setStringValue:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] optionsString]];
+	[optionsButton setEnabled:[exporters[[exportersPopUp indexOfSelectedItem]] hasOptions]];
+	[optionsSummary setStringValue:[exporters[[exportersPopUp indexOfSelectedItem]] optionsString]];
 	
 	return YES;
 }
 
 - (IBAction)showExporterOptions:(id)sender
 {
-	[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] showOptions:self];
-	[optionsSummary setStringValue:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] optionsString]];
+	[exporters[[exportersPopUp indexOfSelectedItem]] showOptions:self];
+	[optionsSummary setStringValue:[exporters[[exportersPopUp indexOfSelectedItem]] optionsString]];
 }
 
 - (IBAction)exporterChanged:(id)sender
 {
-	[(NSSavePanel *)[exportersPopUp window] setRequiredFileType:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] extension]];
-	[self setFileType:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] title]];
-	[optionsButton setEnabled:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] hasOptions]];
-	[optionsSummary setStringValue:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] optionsString]];
+	[(NSSavePanel *)[exportersPopUp window] setRequiredFileType:[exporters[[exportersPopUp indexOfSelectedItem]] extension]];
+	[self setFileType:[exporters[[exportersPopUp indexOfSelectedItem]] title]];
+	[optionsButton setEnabled:[exporters[[exportersPopUp indexOfSelectedItem]] hasOptions]];
+	[optionsSummary setStringValue:[exporters[[exportersPopUp indexOfSelectedItem]] optionsString]];
 }
 
 - (void)windowWillBeginSheet:(NSNotification *)notification
@@ -667,7 +646,6 @@ enum {
 {
 	// Remember the old type
 	oldType = [self fileType];
-	[oldType retain];
 	if (saveOperation == NSSaveToOperation) {
 		restoreOldType = YES;
 	}
@@ -686,12 +664,12 @@ enum {
 	// Restore the old type
 	if (restoreOldType && didSave) {
 		[self setFileType:oldType];
-		[oldType autorelease];
+		oldType = nil;
 		restoreOldType = NO;
 	}
 	else if (!didSave) {
 		[self setFileType:oldType];
-		[oldType autorelease];
+		oldType = nil;
 		restoreOldType = NO;
 	}
 }

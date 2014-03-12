@@ -38,10 +38,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
 
 - (void)drawRect:(NSRect)rect
 {
@@ -102,7 +98,7 @@
 	paper.size = [pi paperSize];
 	paper.size.height -= [pi topMargin] + [pi bottomMargin];
 	paper.size.width -= [pi leftMargin] + [pi rightMargin];
-	scale = [[[pi dictionary] objectForKey:NSPrintScalingFactor] floatValue];
+	scale = [[pi dictionary][NSPrintScalingFactor] floatValue];
 	paper.size.height /= scale;
 	paper.size.width /= scale;
 	
@@ -154,7 +150,7 @@ extern inline float mod(float a, float b)
 	paper.size = [pi paperSize];
 	paper.size.height -= [pi topMargin] + [pi bottomMargin];
 	paper.size.width -= [pi leftMargin] + [pi rightMargin];
-	scale = [[[pi dictionary] objectForKey:NSPrintScalingFactor] floatValue];
+	scale = [[pi dictionary][NSPrintScalingFactor] floatValue];
 	paper.size.height /= scale;
 	paper.size.width /= scale;
 	

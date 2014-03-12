@@ -15,11 +15,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)mouseDown:(NSEvent *)event
 {
 	NSPoint clickPoint = [self convertPoint:[event locationInWindow] fromView:NULL];
@@ -36,7 +31,7 @@
 - (void)drawRect:(NSRect)rect
 {
 	NSArray *brushes = [master brushes];
-	int brushCount =  [brushes count];
+	NSInteger brushCount =  [brushes count];
 	int activeBrushIndex = [master activeBrushIndex];
 	int i, j, elemNo;
 	NSImage *thumbnail;
@@ -78,14 +73,14 @@
 				}
 				
 				// Draw the thumbnail
-				thumbnail = [[brushes objectAtIndex:elemNo] thumbnail];
+				thumbnail = [brushes[elemNo] thumbnail];
 				[thumbnail compositeToPoint:NSMakePoint(i * kBrushPreviewSize + kBrushPreviewSize / 2 - [thumbnail size].width / 2, j * kBrushPreviewSize + kBrushPreviewSize / 2 + [thumbnail size].height / 2) operation:NSCompositeSourceOver];
 				
 				// Draw the pixel tag if needed
-				pixelTag = [[brushes objectAtIndex:elemNo] pixelTag];
+				pixelTag = [brushes[elemNo] pixelTag];
 				if (pixelTag) {
 					font = [NSFont systemFontOfSize:9.0];
-					attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:1.0], NSForegroundColorAttributeName, NULL];
+					attributes = @{NSFontAttributeName: font, NSForegroundColorAttributeName: [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:1.0]};
 					fontSize = NSSizeMakeIntSize([pixelTag sizeWithAttributes:attributes]);
 					[pixelTag drawAtPoint:NSMakePoint(elemRect.origin.x + elemRect.size.width / 2 - fontSize.width / 2, elemRect.origin.y + elemRect.size.height / 2 - fontSize.height / 2) withAttributes:attributes];
 				}

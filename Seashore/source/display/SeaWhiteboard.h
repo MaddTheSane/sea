@@ -1,6 +1,8 @@
 #import "Globals.h"
 #import "SeaCompositor.h"
 
+@class SeaDocument;
+
 /*!
 	@enum		k...ChannelsView
 	@constant	kAllChannelsView
@@ -54,7 +56,7 @@ enum {
 @interface SeaWhiteboard : NSObject {
 
 	// The document associated with this whiteboard
-	id document;
+	SeaDocument *document;
 	
 	// The compositor for this whiteboard
 	id compositor;
@@ -119,12 +121,6 @@ enum {
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)initWithDocument:(id)doc;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		compositor

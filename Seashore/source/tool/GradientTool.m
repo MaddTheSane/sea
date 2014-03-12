@@ -17,11 +17,6 @@
 	return kGradientTool;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	startPoint = where;

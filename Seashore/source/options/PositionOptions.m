@@ -66,7 +66,7 @@
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
 	int i;
 	for (i = 0; i < [documents count]; i++) {
-		[[(SeaDocument *)[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+		[[(SeaDocument *)documents[i] docView] setNeedsDisplay:YES];
 	}
 }
 

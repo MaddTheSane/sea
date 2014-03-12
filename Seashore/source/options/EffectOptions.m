@@ -9,7 +9,7 @@
 @implementation EffectOptions
 - (void)awakeFromNib
 {
-	int effectIndex;
+	NSInteger effectIndex;
 	parentWin = nil;
 	NSArray *pointPlugins = [[SeaController seaPlugins] pointPlugins];
 	if ([pointPlugins count]) {
@@ -20,15 +20,15 @@
 		[effectTable noteNumberOfRowsChanged];
 		[effectTable selectRowIndexes:[NSIndexSet indexSetWithIndex:effectIndex] byExtendingSelection:NO];
 		[effectTable scrollRowToVisible:effectIndex];
-		[effectTableInstruction setStringValue:[[pointPlugins objectAtIndex:effectIndex] instruction]];
-		[clickCountLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"click count", @"Clicks remaining: %d"), [[pointPlugins objectAtIndex:effectIndex] points]]];
+		[effectTableInstruction setStringValue:[pointPlugins[effectIndex] instruction]];
+		[clickCountLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"click count", @"Clicks remaining: %d"), [pointPlugins[effectIndex] points]]];
 		[(InfoPanel *)panel setPanelStyle:kVerticalPanelStyle];
     }	
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(int)rowIndex
 {
-	return [[[SeaController seaPlugins] pointPluginsNames] objectAtIndex:rowIndex];
+	return [[SeaController seaPlugins] pointPluginsNames][rowIndex];
 }
 
 - (int)numberOfRowsInTableView:(NSTableView *)tableView
@@ -39,7 +39,7 @@
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
 	NSArray *pointPlugins = [[SeaController seaPlugins] pointPlugins];
-	[effectTableInstruction setStringValue:[[pointPlugins objectAtIndex:[effectTable selectedRow]] instruction]];
+	[effectTableInstruction setStringValue:[pointPlugins[[effectTable selectedRow]] instruction]];
 	[[[gCurrentDocument tools] getTool:kEffectTool] reset];
 }
 
@@ -50,7 +50,7 @@
 
 - (IBAction)updateClickCount:(id)sender
 {
-	[clickCountLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"click count", @"Clicks remaining: %d"), [[[[SeaController seaPlugins] pointPlugins] objectAtIndex:[effectTable selectedRow]] points] - [[[gCurrentDocument tools] getTool:kEffectTool] clickCount]]];
+	[clickCountLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"click count", @"Clicks remaining: %d"), [[[SeaController seaPlugins] pointPlugins][[effectTable selectedRow]] points] - [[[gCurrentDocument tools] getTool:kEffectTool] clickCount]]];
 }
 
 - (IBAction)showEffects:(id)sender

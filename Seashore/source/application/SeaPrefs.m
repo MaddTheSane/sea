@@ -186,12 +186,12 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	
 	// Determine the initial color (from preferences if possible)
 	if ([gUserDefaults objectForKey:@"windowBackColor"] == NULL) {
-		windowBackColor = [[NSColor colorWithCalibratedRed:0.6667 green:0.6667 blue:0.6667 alpha:1.0] retain];
+		windowBackColor = [NSColor colorWithCalibratedRed:0.6667 green:0.6667 blue:0.6667 alpha:1.0];
 	}
 	else {
 		tempData = [gUserDefaults dataForKey:@"windowBackColor"];
 		if (tempData != nil)
-			windowBackColor = [(NSColor *)[NSUnarchiver unarchiveObjectWithData:tempData] retain];
+			windowBackColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:tempData];
 	}
 	
 	// Get the default document size
@@ -301,7 +301,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	}
 
 	// Create the toolbar instance, and attach it to our document window 
-    toolbar = [[[NSToolbar alloc] initWithIdentifier: PrefsToolbarIdentifier] autorelease];
+    toolbar = [[NSToolbar alloc] initWithIdentifier: PrefsToolbarIdentifier];
     
     // Set up toolbar properties: Allow customization, give a default display mode, and remember state in user defaults 
     [toolbar setAllowsUserCustomization: YES];
@@ -366,26 +366,26 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	NSToolbarItem *toolbarItem = nil;
 
     if ([itemIdent isEqual: GeneralPrefsIdentifier]) {
-        toolbarItem = [[[ImageToolbarItem alloc] initWithItemIdentifier: GeneralPrefsIdentifier label: LOCALSTR(@"general", @"General") image: @"GeneralPrefsIcon" toolTip: LOCALSTR(@"general prefs tooltip", @"General application settings") target: self selector: @selector(generalPrefs)] autorelease];
+        toolbarItem = [[ImageToolbarItem alloc] initWithItemIdentifier: GeneralPrefsIdentifier label: LOCALSTR(@"general", @"General") image: @"GeneralPrefsIcon" toolTip: LOCALSTR(@"general prefs tooltip", @"General application settings") target: self selector: @selector(generalPrefs)];
 	} else if ([itemIdent isEqual: NewPrefsIdentifier]) {
-		toolbarItem = [[[ImageToolbarItem alloc] initWithItemIdentifier: NewPrefsIdentifier label: LOCALSTR(@"new images", @"New Images") image: @"NewPrefsIcon" toolTip: LOCALSTR(@"new prefs tooltip", @"Settings for new images") target: self selector: @selector(newPrefs)] autorelease];
+		toolbarItem = [[ImageToolbarItem alloc] initWithItemIdentifier: NewPrefsIdentifier label: LOCALSTR(@"new images", @"New Images") image: @"NewPrefsIcon" toolTip: LOCALSTR(@"new prefs tooltip", @"Settings for new images") target: self selector: @selector(newPrefs)];
 	} else if ([itemIdent isEqual: ColorPrefsIdentifier]) {
-		toolbarItem = [[[ImageToolbarItem alloc] initWithItemIdentifier: ColorPrefsIdentifier label: LOCALSTR(@"color", @"Colors") image: @"ColorPrefsIcon" toolTip: LOCALSTR(@"color prefs tooltip", @"Display colors") target: self selector: @selector(colorPrefs)] autorelease];
+		toolbarItem = [[ImageToolbarItem alloc] initWithItemIdentifier: ColorPrefsIdentifier label: LOCALSTR(@"color", @"Colors") image: @"ColorPrefsIcon" toolTip: LOCALSTR(@"color prefs tooltip", @"Display colors") target: self selector: @selector(colorPrefs)];
 	}
 	return toolbarItem;
 }
 
 - (NSArray *) toolbarDefaultItemIdentifiers: (NSToolbar *) toolbar {
-    return [NSArray arrayWithObjects: GeneralPrefsIdentifier, NewPrefsIdentifier, ColorPrefsIdentifier, nil];
+    return @[GeneralPrefsIdentifier, NewPrefsIdentifier, ColorPrefsIdentifier];
 }
 
 - (NSArray *) toolbarAllowedItemIdentifiers: (NSToolbar *) toolbar {
-	return [NSArray arrayWithObjects: GeneralPrefsIdentifier, NewPrefsIdentifier, ColorPrefsIdentifier, NSToolbarCustomizeToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, NSToolbarSpaceItemIdentifier, NSToolbarSeparatorItemIdentifier, nil];
+	return @[GeneralPrefsIdentifier, NewPrefsIdentifier, ColorPrefsIdentifier, NSToolbarCustomizeToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, NSToolbarSpaceItemIdentifier, NSToolbarSeparatorItemIdentifier];
 }
 
 - (NSArray *)toolbarSelectableItemIdentifiers: (NSToolbar *) toolbar;
 {
-    return [NSArray arrayWithObjects: GeneralPrefsIdentifier, NewPrefsIdentifier, ColorPrefsIdentifier, nil];
+    return @[GeneralPrefsIdentifier, NewPrefsIdentifier, ColorPrefsIdentifier];
 }
 
 - (void) generalPrefs {
@@ -579,7 +579,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	resolutionHandling = [[resolutionHandlingMenu selectedItem] tag];
 	gScreenResolution = [self screenResolution];
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] helpers] resolutionChanged];
+		[[documents[i] helpers] resolutionChanged];
 	}
 }
 
@@ -590,7 +590,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	
 	// Call for all documents' views to respond to the change
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+		[[documents[i] docView] setNeedsDisplay:YES];
 	}
 }
 
@@ -659,7 +659,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	
 	layerBounds = !layerBounds;
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+		[[documents[i] docView] setNeedsDisplay:YES];
 	}
 }
 
@@ -670,7 +670,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	
 	guides = !guides;
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+		[[documents[i] docView] setNeedsDisplay:YES];
 	}
 }
 		
@@ -681,7 +681,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	
 	rulers = !rulers;
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] updateRulersVisiblity];
+		[[documents[i] docView] updateRulersVisiblity];
 	}
 	[[gCurrentDocument docView] checkMouseTracking];
 }
@@ -693,7 +693,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 
 	useCheckerboard = [sender selectedRow];
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+		[[documents[i] docView] setNeedsDisplay:YES];
 	}
 }
 
@@ -707,12 +707,11 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
 	int i;
 
-	[windowBackColor autorelease];
-	windowBackColor = [[NSColor colorWithCalibratedRed:0.6667 green:0.6667 blue:0.6667 alpha:1.0] retain];
+	windowBackColor = [NSColor colorWithCalibratedRed:0.6667 green:0.6667 blue:0.6667 alpha:1.0];
 	[windowBackWell setInitialColor:windowBackColor];
 	for (i = 0; i < [documents count]; i++) {
-		[[documents objectAtIndex:i] updateWindowColor];
-		[[[[documents objectAtIndex:i] docView] superview] setNeedsDisplay:YES];
+		[documents[i] updateWindowColor];
+		[[[documents[i] docView] superview] setNeedsDisplay:YES];
 	}
 }
 
@@ -721,11 +720,10 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
 	int i;
 
-	[windowBackColor autorelease];
-	windowBackColor = [[windowBackWell color] retain];
+	windowBackColor = [windowBackWell color];
 	for (i = 0; i < [documents count]; i++) {
-		[[documents objectAtIndex:i] updateWindowColor];
-		[[[[documents objectAtIndex:i] docView] superview] setNeedsDisplay:YES];
+		[documents[i] updateWindowColor];
+		[[[documents[i] docView] superview] setNeedsDisplay:YES];
 	}
 }
 
@@ -770,7 +768,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	
 	selectionColor = [sender tag] - 280;
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+		[[documents[i] docView] setNeedsDisplay:YES];
 	}
 }
 
@@ -786,7 +784,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 
 	whiteLayerBounds = [sender selectedRow];
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+		[[documents[i] docView] setNeedsDisplay:YES];
 	}
 }
 
@@ -826,7 +824,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	
 	guideColor = [sender tag] - 290;
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+		[[documents[i] docView] setNeedsDisplay:YES];
 	}
 }
 
@@ -837,7 +835,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	
 	selectionColor = (selectionColor + 1) % kMaxColor;
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+		[[documents[i] docView] setNeedsDisplay:YES];
 	}
 	
 	// Set the selection colour correctly

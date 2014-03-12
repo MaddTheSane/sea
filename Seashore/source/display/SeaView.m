@@ -61,7 +61,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Set the last ruler update to take place in the distant past
 	lastRulerUpdate = [NSDate distantPast];
-	[lastRulerUpdate retain];
 	
 	// Remember the document this view is displaying
 	document = doc;
@@ -106,7 +105,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	cursorsManager = [[SeaCursors alloc] initWithDocument: doc andView: self];
 	
 	// Register for drag operations
-	[self registerForDraggedTypes:[NSArray arrayWithObjects:NSTIFFPboardType, NSPICTPboardType, NSFilenamesPboardType, nil]];
+	[self registerForDraggedTypes:@[NSTIFFPboardType, NSPICTPboardType, NSFilenamesPboardType]];
 	
 	// Set up the rulers
 	[[document scrollView] setHasHorizontalRuler:YES];
@@ -118,21 +117,17 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Change the ruler client views
 	[verticalRuler setClientView:[document scrollView]];
 	[horizontalRuler setClientView:[document scrollView]];
-	[[document scrollView] retain];
+	[document scrollView];
 	
 	// Add the markers
 	vMarker = [[NSRulerMarker alloc]initWithRulerView:verticalRuler markerLocation:0 image:[NSImage imageNamed:@"vMarker"] imageOrigin:NSMakePoint(4.0,4.0)];
 	[verticalRuler addMarker:vMarker];
-	[vMarker autorelease];
 	hMarker = [[NSRulerMarker alloc]initWithRulerView:horizontalRuler markerLocation:0 image:[NSImage imageNamed:@"hMarker"] imageOrigin:NSMakePoint(4.0,0.0)];
 	[horizontalRuler addMarker:hMarker];
-	[hMarker autorelease];
 	vStatMarker = [[NSRulerMarker alloc]initWithRulerView:verticalRuler markerLocation:-256e6 image:[NSImage imageNamed:@"vStatMarker"] imageOrigin:NSMakePoint(4.0,4.0)];
 	[verticalRuler addMarker:vStatMarker];
-	[vStatMarker autorelease];
 	hStatMarker = [[NSRulerMarker alloc]initWithRulerView:horizontalRuler markerLocation:-256e6 image:[NSImage imageNamed:@"hStatMarker"] imageOrigin:NSMakePoint(4.0,0.0)];
 	[horizontalRuler addMarker:hStatMarker];
-	[hStatMarker autorelease];
 	
 	// Make the rulers visible/invsible
 	[self updateRulersVisiblity];
@@ -148,11 +143,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
     return self;
 }
 
-- (void)dealloc
-{
-	[cursorsManager release];
-	[super dealloc];
-}
 
 - (IBAction)changeSpecialFont:(id)sender
 {
@@ -671,7 +661,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// The handle should have a subtle shadow so that it can be visible on background
 	// where the color is the same as the inside and outside of the handle
 	[NSGraphicsContext saveGraphicsState];
-	NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
+	NSShadow *shadow = [[NSShadow alloc] init];
 	[shadow setShadowOffset: NSMakeSize(0, 0)];
 	[shadow setShadowBlurRadius: 1];
 	
@@ -917,9 +907,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	if ([[NSDate date] timeIntervalSinceDate:lastRulerUpdate] > 0.03) {
 	
 		// Record this as the new time of the last update
-		[lastRulerUpdate autorelease];
 		lastRulerUpdate = [NSDate date];
-		[lastRulerUpdate retain];
 	
 		// Get mouse location and convert it
 		markersLocation.x = [[horizontalRuler clientView] convertPoint:mouseLocation fromView:nil].x;
@@ -1835,7 +1823,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 				files = [pboard propertyListForType:NSFilenamesPboardType];
 				success = YES;
 				for (i = 0; i < [files count]; i++)
-					success = success && [[document contents] canImportLayerFromFile:[files objectAtIndex:i]];
+					success = success && [[document contents] canImportLayerFromFile:files[i]];
 				if (success) {
 					return NSDragOperationCopy;
 				}
@@ -1888,7 +1876,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			files = [pboard propertyListForType:NSFilenamesPboardType];
 			success = YES;
 			for (i = 0; i < [files count]; i++)
-				success = success && [[document contents] importLayerFromFile:[files objectAtIndex:i]];
+				success = success && [[document contents] importLayerFromFile:files[i]];
 			return success;
 		}
 
@@ -1903,7 +1891,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	int i;
 	// This assumes that all of the subviews will actually respond to setRulersVisible
 	for(i = 0; i < [[superview subviews] count]; i++){
-		[[[superview subviews] objectAtIndex: i] setRulersVisible:[[SeaController seaPrefs] rulers]];
+		[[superview subviews][i] setRulersVisible:[[SeaController seaPrefs] rulers]];
 	}
 	
 	[self checkMouseTracking];
@@ -1914,18 +1902,18 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Set up the rulers for the new settings
 	switch ([document measureStyle]) {
 		case kPixelUnits:
-			[NSRulerView registerUnitWithName:@"Custom Horizontal Pixels" abbreviation:@"px" unitToPointsConversionFactor:((float)[[document contents] xres] / 72.0) * zoom stepUpCycle:[NSArray arrayWithObject:[NSNumber numberWithFloat:10.0]] stepDownCycle:[NSArray arrayWithObject:[NSNumber numberWithFloat:0.5]]];
+			[NSRulerView registerUnitWithName:@"Custom Horizontal Pixels" abbreviation:@"px" unitToPointsConversionFactor:((float)[[document contents] xres] / 72.0) * zoom stepUpCycle:@[@10.0f] stepDownCycle:@[@0.5f]];
 			[horizontalRuler setMeasurementUnits:@"Custom Horizontal Pixels"];
-			[NSRulerView registerUnitWithName:@"Custom Vertical Pixels" abbreviation:@"px" unitToPointsConversionFactor:((float)[[document contents] yres] / 72.0) * zoom stepUpCycle:[NSArray arrayWithObject:[NSNumber numberWithFloat:10.0]] stepDownCycle:[NSArray arrayWithObject:[NSNumber numberWithFloat:0.5]]];
+			[NSRulerView registerUnitWithName:@"Custom Vertical Pixels" abbreviation:@"px" unitToPointsConversionFactor:((float)[[document contents] yres] / 72.0) * zoom stepUpCycle:@[@10.0f] stepDownCycle:@[@0.5f]];
 			[verticalRuler setMeasurementUnits:@"Custom Vertical Pixels"];
 		break;
 		case kInchUnits:
-			[NSRulerView registerUnitWithName:@"Custom Inches" abbreviation:@"in" unitToPointsConversionFactor:72.0 * zoom stepUpCycle:[NSArray arrayWithObject:[NSNumber numberWithFloat:2.0]] stepDownCycle:[NSArray arrayWithObject:[NSNumber numberWithFloat:0.5]]];
+			[NSRulerView registerUnitWithName:@"Custom Inches" abbreviation:@"in" unitToPointsConversionFactor:72.0 * zoom stepUpCycle:@[@2.0f] stepDownCycle:@[@0.5f]];
 			[horizontalRuler setMeasurementUnits:@"Custom Inches"];
 			[verticalRuler setMeasurementUnits:@"Custom Inches"];
 		break;
 		case kMillimeterUnits:
-			[NSRulerView registerUnitWithName:@"Custom Millimetres" abbreviation:@"mm" unitToPointsConversionFactor:2.83464 * zoom stepUpCycle:[NSArray arrayWithObject:[NSNumber numberWithFloat:5.0]] stepDownCycle:[NSArray arrayWithObject:[NSNumber numberWithFloat:0.5]]];
+			[NSRulerView registerUnitWithName:@"Custom Millimetres" abbreviation:@"mm" unitToPointsConversionFactor:2.83464 * zoom stepUpCycle:@[@5.0f] stepDownCycle:@[@0.5f]];
 			[horizontalRuler setMeasurementUnits:@"Custom Millimetres"];
 			[verticalRuler setMeasurementUnits:@"Custom Millimetres"];
 		break;
@@ -1992,7 +1980,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		case 262: /* Paste */
 			if ([[document selection] floating])
 				return NO;
-			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:[NSArray arrayWithObjects:NSTIFFPboardType, NSPICTPboardType, NULL]];
+			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSTIFFPboardType, NSPICTPboardType]];
 			if (availableType)
 				return YES;
 			else

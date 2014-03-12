@@ -19,40 +19,31 @@
 - (void)awakeFromNib
 {
 	int i;
-	editableTypes = [[NSMutableDictionary dictionary] retain];
-	viewableTypes = [[NSMutableDictionary dictionary] retain];
+	editableTypes = [NSMutableDictionary dictionary];
+	viewableTypes = [NSMutableDictionary dictionary];
 	
 	// The document controller is responsible for tracking document types
 	// In addition, as it's in control of open, it also must know the types for import and export
 	NSArray *allDocumentTypes = [[[NSBundle mainBundle] infoDictionary]
 							  valueForKey:@"CFBundleDocumentTypes"];
 	for(i = 0; i < [allDocumentTypes count]; i++){
-		NSDictionary *typeDict = [allDocumentTypes objectAtIndex:i];
+		NSDictionary *typeDict = allDocumentTypes[i];
 		NSMutableSet *assembly = [NSMutableSet set];
 
-		[assembly addObjectsFromArray:[typeDict objectForKey:@"CFBundleTypeExtensions"]];
-		[assembly addObjectsFromArray:[typeDict objectForKey:@"CFBundleTypeOSTypes"]];
-		[assembly addObjectsFromArray:[typeDict objectForKey:@"LSItemContentTypes"]];
+		[assembly addObjectsFromArray:typeDict[@"CFBundleTypeExtensions"]];
+		[assembly addObjectsFromArray:typeDict[@"CFBundleTypeOSTypes"]];
+		[assembly addObjectsFromArray:typeDict[@"LSItemContentTypes"]];
 		
-		NSString* key = [typeDict objectForKey:@"CFBundleTypeName"];
+		NSString* key = typeDict[@"CFBundleTypeName"];
 		[assembly addObject:key];
 				
-		NSString *role = [typeDict objectForKey:@"CFBundleTypeRole"];
+		NSString *role = typeDict[@"CFBundleTypeRole"];
 		if([role isEqual:@"Editor"]){
-			[editableTypes setObject:assembly forKey: key];
+			editableTypes[key] = assembly;
 		}else if ([role isEqual:@"Viewer"]) {
-			[viewableTypes setObject:assembly forKey: key];
+			viewableTypes[key] = assembly;
 		}
 	}
-}
-
-- (void)dealloc
-{
-	// Then get rid of stuff that's no longer needed
-	if (editableTypes) [editableTypes autorelease];
-	if (viewableTypes) [viewableTypes autorelease];
-	// Finally call the super
-	[super dealloc];
 }
 
 - (IBAction)newDocument:(id)sender
@@ -86,8 +77,8 @@
 	if([recentDocs count]){
 		[recentMenu setEnabled:YES];
 		for(i = 0; i < [recentDocs count]; i++){
-			NSString *path = [[recentDocs objectAtIndex:i] path];
-			NSString *filename = [[path pathComponents] objectAtIndex:[[path pathComponents] count] -1];
+			NSString *path = [recentDocs[i] path];
+			NSString *filename = [path pathComponents][[[path pathComponents] count] -1];
 			NSImage *image = [[NSWorkspace sharedWorkspace] iconForFile: path];
 			[recentMenu addItemWithTitle: filename];
 			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setRepresentedObject:path];
@@ -175,11 +166,10 @@
 		break;
 		case 2:
 			pboard = [NSPasteboard generalPasteboard];
-			availableType = [pboard availableTypeFromArray:[NSArray arrayWithObjects:NSTIFFPboardType, NSPICTPboardType, NULL]];
+			availableType = [pboard availableTypeFromArray:@[NSTIFFPboardType, NSPICTPboardType]];
 			if (availableType) {
 				image = [[NSImage alloc] initWithData:[pboard dataForType:availableType]];
 				size = NSSizeMakeIntSize([image size]);
-				[image autorelease];
 			}
 			else {
 				NSBeep();
@@ -288,12 +278,12 @@
 	NSEnumerator *e = [editableTypes keyEnumerator];
 	NSString *key;
 	while (key = [e nextObject]) {
-		[array addObjectsFromArray:[[editableTypes objectForKey:key] allObjects]];
+		[array addObjectsFromArray:[editableTypes[key] allObjects]];
 	}
 	
 	e = [viewableTypes keyEnumerator];
 	while(key = [e nextObject]){
-		[array addObjectsFromArray:[[viewableTypes objectForKey:key] allObjects]];
+		[array addObjectsFromArray:[viewableTypes[key] allObjects]];
 	}
 	return array;
 }
@@ -309,9 +299,9 @@
 		return YES;
 	}
 	
-	NSMutableSet *set = [editableTypes objectForKey:key];
+	NSMutableSet *set = editableTypes[key];
 	if(!set){
-		set = [viewableTypes objectForKey:key];
+		set = viewableTypes[key];
 		// That's wierd, someone has passed in an invalid type
 		if(!set){
 			NSLog(@"Invalid key passed to SeaDocumentController: <%@> \n Investigating type: <%@>", key, aType);

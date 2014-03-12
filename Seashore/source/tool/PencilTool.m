@@ -24,11 +24,6 @@
 	return kPencilTool;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (BOOL)acceptsLineDraws
 {
 	return YES;
@@ -93,7 +88,7 @@
 	}
 	else {
 		if ([options useTextures])
-			[[document whiteboard] setOverlayOpacity:[[[SeaController utilitiesManager] textureUtilityFor:document] opacity]];
+			[[document whiteboard] setOverlayOpacity:[(TextureUtility*)[[SeaController utilitiesManager] textureUtilityFor:document] opacity]];
 		else
 			[[document whiteboard] setOverlayOpacity:[color alphaComponent] * 255.0];
 	}

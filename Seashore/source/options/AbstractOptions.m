@@ -29,9 +29,7 @@ static BOOL forceAlt = NO;
 
 - (void)forceAlt
 {
-	int index;
-	
-	index = [modifierPopup indexOfItemWithTag:kAltModifier];
+	NSInteger index = [modifierPopup indexOfItemWithTag:kAltModifier];
 	if (index > 0) [modifierPopup selectItemAtIndex:index];
 	forceAlt = YES;
 }
@@ -46,7 +44,7 @@ static BOOL forceAlt = NO;
 
 - (void)updateModifiers:(unsigned int)modifiers
 {
-	int index;
+	NSInteger index;
 	
 	if (modifierPopup) {
 	
@@ -79,7 +77,7 @@ static BOOL forceAlt = NO;
 	int i;
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
 	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+		[[documents[i] docView] setNeedsDisplay:YES];
 	}
 	
 }

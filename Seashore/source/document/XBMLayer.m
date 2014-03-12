@@ -32,8 +32,7 @@
 		
 		// Fail if something went wrong
 		if (ferror(file) || feof(file)) {
-			[self autorelease];
-			return NULL;
+			return nil;
 		}
 		
 		// Extract the string containing the value
@@ -46,7 +45,6 @@
 		
 		// Fail if something went wrong
 		if (ferror(file) || feof(file)) {
-			[self autorelease];
 			return NULL;
 		}
 		

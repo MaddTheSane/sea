@@ -31,11 +31,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	startPoint = where;
@@ -107,7 +102,7 @@
 	if ([options useTextures]) {
 		for (k = 0; k < spp - 1; k++)
 			basePixel[k] = 0;
-		basePixel[spp - 1] = [[[SeaController utilitiesManager] textureUtilityFor:document] opacity];
+		basePixel[spp - 1] = [(TextureUtility*)[[SeaController utilitiesManager] textureUtilityFor:document] opacity];
 	}
 	else {
 		if (spp == 4) {
@@ -139,7 +134,7 @@
 	
 	// Fill everything
 	if (useTolerance)
-		tolerance = [options tolerance];
+		tolerance = [(BucketOptions*)options tolerance];
 	else
 		tolerance = 255;
 	if ([layer floating])

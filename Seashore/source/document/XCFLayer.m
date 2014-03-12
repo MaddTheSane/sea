@@ -37,11 +37,8 @@ static inline void fix_endian_read(int *input, int size)
 				i++;
 			}
 		} while (nameString[i - 1] != 0 && !ferror(file));
-		if (name) [name autorelease];
 		name = [[NSString alloc] initWithUTF8String:nameString];
-	}
-	else {
-		if (name) [name autorelease];
+	} else {
 		name = [[NSString alloc] initWithString:LOCALSTR(@"untitled", @"Untitled")];
 	}
 	
@@ -491,7 +488,7 @@ static inline void fix_endian_read(int *input, int size)
 	return YES;
 }
 
-- (id)initWithFile:(FILE *)file offset:(int)offset document:(id)doc sharedInfo:(SharedXCFInfo *)info
+- (id)initWithFile:(FILE *)file offset:(size_t)offset document:(id)doc sharedInfo:(SharedXCFInfo *)info
 {
 	// int i;
 	
@@ -506,7 +503,6 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Read the header
 	if ([self readHeader:file] == NO) {
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -514,7 +510,6 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Read the properties
 	if ([self readProperties:file sharedInfo:info] == NO) {
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -522,7 +517,6 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Read the body
 	if ([self readBody:file sharedInfo:info] == NO) {
-		[self autorelease];
 		return NULL;
 	}
 	

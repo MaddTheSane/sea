@@ -29,12 +29,6 @@
 	return kEraserTool;
 }
 
-
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (BOOL)acceptsLineDraws
 {
 	return YES;
@@ -152,7 +146,7 @@
 	// Set the appropriate overlay opacity
 	if (hasAlpha)
 		[[document whiteboard] setOverlayBehaviour:kErasingBehaviour];
-	[[document whiteboard] setOverlayOpacity:[options opacity]];
+	[[document whiteboard] setOverlayOpacity:[(EraserOptions*)options opacity]];
 	
 	// Plot the initial point
 	rect.size.width = [(SeaBrush *)curBrush fakeWidth] + 1;
@@ -182,211 +176,207 @@
 }
 
 - (void)drawThread:(id)object
-{	
-	NSAutoreleasePool *pool = NULL;
-	NSPoint curPoint;
-	id layer;
-	int layerWidth, layerHeight;
-	id curBrush, activeTexture;
-	int brushWidth, brushHeight;
-	double brushSpacing;
-	double deltaX, deltaY, mag, xd, yd, dist;
-	double stFactor, stOffset;
-	double t0, dt, tn, t, dtx;
-	double total, initial;
-	double fadeValue;
-	BOOL fade;
-	int n, num_points, spp;
-	IntRect rect, trect, bigRect;
-	NSPoint temp;
-	int pressure, origPressure;
-	int tim;
-	NSDate *lastDate;
-	id boptions;
-	
-   // Create autorelease pool if needed
-   if (multithreaded) {
-		pool = [[NSAutoreleasePool alloc] init];
-   }
-   
-   // Set-up variables
-   layer = [[document contents] activeLayer];
-   curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
-   layerWidth = [(SeaLayer *)layer width];
-   layerHeight = [(SeaLayer *)layer height];
-   brushWidth = [(SeaBrush *)curBrush fakeWidth];
-   brushHeight = [(SeaBrush *)curBrush fakeHeight];
-   activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
-   boptions = [[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:kBrushTool];
-   brushSpacing = (double)[[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
-   fade = [options mimicBrush] && [boptions fade];
-   fadeValue = [boptions fadeValue];
-   spp = [[document contents] spp];
-   bigRect = IntMakeRect(0, 0, 0, 0);
-   lastDate = [NSDate date];
-   
-	// While we are not done...
-	do {
-
-next:
-		if (drawingPos < pos) {
+{
+	@autoreleasepool {
+		NSPoint curPoint;
+		id layer;
+		int layerWidth, layerHeight;
+		id curBrush, activeTexture;
+		int brushWidth, brushHeight;
+		double brushSpacing;
+		double deltaX, deltaY, mag, xd, yd, dist;
+		double stFactor, stOffset;
+		double t0, dt, tn, t, dtx;
+		double total, initial;
+		double fadeValue;
+		BOOL fade;
+		int n, num_points, spp;
+		IntRect rect, trect, bigRect;
+		NSPoint temp;
+		int pressure, origPressure;
+		int tim;
+		NSDate *lastDate;
+		id boptions;
+		
+		
+		// Set-up variables
+		layer = [[document contents] activeLayer];
+		curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+		layerWidth = [(SeaLayer *)layer width];
+		layerHeight = [(SeaLayer *)layer height];
+		brushWidth = [(SeaBrush *)curBrush fakeWidth];
+		brushHeight = [(SeaBrush *)curBrush fakeHeight];
+		activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+		boptions = [[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:kBrushTool];
+		brushSpacing = (double)[(SeaBrush*)[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
+		fade = [options mimicBrush] && [boptions fade];
+		fadeValue = [boptions fadeValue];
+		spp = [[document contents] spp];
+		bigRect = IntMakeRect(0, 0, 0, 0);
+		lastDate = [NSDate date];
+		
+		// While we are not done...
+		do {
 			
-			// Get the next record and carry on
-			curPoint = IntPointMakeNSPoint(points[drawingPos].point);
-			origPressure = points[drawingPos].pressure;
-			if (points[drawingPos].special == 2) {
-				if (bigRect.size.width != 0) [[document helpers] overlayChanged:bigRect inThread:YES];
-				drawingDone = YES;
-				if (multithreaded) [pool release];
-				return;
-			}
-			drawingPos++;
-			
-			// Determine the change in the x and y directions
-			deltaX = curPoint.x - lastPoint.x;
-			deltaY = curPoint.y - lastPoint.y;
-			if (deltaX == 0.0 && deltaY == 0.0) {
-				if (multithreaded)
-					goto next;
-				else
+		next:
+			if (drawingPos < pos) {
+				
+				// Get the next record and carry on
+				curPoint = IntPointMakeNSPoint(points[drawingPos].point);
+				origPressure = points[drawingPos].pressure;
+				if (points[drawingPos].special == 2) {
+					if (bigRect.size.width != 0) [[document helpers] overlayChanged:bigRect inThread:YES];
+					drawingDone = YES;
 					return;
-			}
-			
-			// Determine the number of brush strokes in the x and y directions
-			mag = (float)(brushWidth / 2);
-			xd = (mag * deltaX) / sqr(mag);
-			mag = (float)(brushHeight / 2);
-			yd = (mag * deltaY) / sqr(mag);
-			
-			// Determine the brush stroke distance and hence determine the initial and total distance
-			dist = 0.5 * sqrt(sqr(xd) + sqr(yd));		// Why is this halved?
-			total = dist + distance;
-			initial = distance;
-			
-			// Determine the stripe factor and offset
-			if (sqr(deltaX) > sqr(deltaY)) {
-				stFactor = deltaX;
-				stOffset = lastPoint.x - 0.5;
-			}
-			else {
-				stFactor = deltaY;
-				stOffset = lastPoint.y - 0.5;
-			}
-			
-			if (fabs(stFactor) > dist / brushSpacing) {
-
-				// We want to draw the maximum number of points
-				dt = brushSpacing / dist;
-				n = (int)(initial / brushSpacing + 1.0 + EPSILON);
-				t0 = (n * brushSpacing - initial) / dist;
-				num_points = 1 + (int)floor((1 + EPSILON - t0) / dt);
-				
-			}
-			else if (fabs(stFactor) < EPSILON) {
-			
-				// We can't draw any points - this does actually get called albeit once in a blue moon
-				lastPoint = curPoint;
-				if (multithreaded)
-					goto next;
-				else
-					return;
-				
-			}
-			else {
-			
-				// We want to draw a number of points
-				int direction = stFactor > 0 ? 1 : -1;
-				int x, y;
-				int s0, sn;
-				
-				s0 = (int)floor(stOffset + 0.5);
-				sn = (int)floor(stOffset + stFactor + 0.5);
-				
-				t0 = (s0 - stOffset) / stFactor;
-				tn = (sn - stOffset) / stFactor;
-				
-				x = (int)floor(lastPoint.x + t0 * deltaX);
-				y = (int)floor(lastPoint.y + t0 * deltaY);
-				if (t0 < 0.0 && !(x == (int)floor(lastPoint.x) && y == (int)floor(lastPoint.y))) {
-					s0 += direction;
 				}
-				if (x == (int)floor(lastPlotPoint.x) && y == (int)floor(lastPlotPoint.y)) {
-					s0 += direction;
-				}
-				x = (int)floor(lastPoint.x + tn * deltaX);
-				y = (int)floor(lastPoint.y + tn * deltaY);
-				if (tn > 1.0 && !(x == (int)floor(lastPoint.x) && y == (int)floor(lastPoint.y))) {
-					sn -= direction;
-				}
-				t0 = (s0 - stOffset) / stFactor;
-				tn = (sn - stOffset) / stFactor;
-				dt = direction * 1.0 / stFactor;
-				num_points = 1 + direction * (sn - s0);
+				drawingPos++;
 				
-				if (num_points >= 1) {
-					if (tn < 1)
-						total = initial + tn * dist;
-					total = brushSpacing * (int) (total / brushSpacing + 0.5);
-					total += (1.0 - tn) * dist;
+				// Determine the change in the x and y directions
+				deltaX = curPoint.x - lastPoint.x;
+				deltaY = curPoint.y - lastPoint.y;
+				if (deltaX == 0.0 && deltaY == 0.0) {
+					if (multithreaded)
+						goto next;
+					else
+						return;
 				}
 				
-			}
-
-			// Draw all the points
-			for (n = 0; n < num_points; n++) {
-				t = t0 + n * dt;
-				rect.size.width = brushWidth + 1;
-				rect.size.height = brushHeight + 1;
-				temp = NSMakePoint(lastPoint.x + deltaX * t - (float)(brushWidth / 2), lastPoint.y + deltaY * t - (float)(brushHeight / 2));
-				rect.origin = NSPointMakeIntPoint(temp);
-				rect.origin.x--; rect.origin.y--;
-				rect = IntConstrainRect(rect, IntMakeRect(0, 0, layerWidth, layerHeight));
-				if (fade) {
-					dtx = (double)(initial + t * dist) / fadeValue;
-					pressure = (int)(exp (- dtx * dtx * 5.541) * 255.0);
-					pressure = int_mult(pressure, origPressure, tim);
+				// Determine the number of brush strokes in the x and y directions
+				mag = (float)(brushWidth / 2);
+				xd = (mag * deltaX) / sqr(mag);
+				mag = (float)(brushHeight / 2);
+				yd = (mag * deltaY) / sqr(mag);
+				
+				// Determine the brush stroke distance and hence determine the initial and total distance
+				dist = 0.5 * sqrt(sqr(xd) + sqr(yd));		// Why is this halved?
+				total = dist + distance;
+				initial = distance;
+				
+				// Determine the stripe factor and offset
+				if (sqr(deltaX) > sqr(deltaY)) {
+					stFactor = deltaX;
+					stOffset = lastPoint.x - 0.5;
 				}
 				else {
-					pressure = origPressure;
+					stFactor = deltaY;
+					stOffset = lastPoint.y - 0.5;
 				}
-				if (rect.size.width > 0 && rect.size.height > 0 && pressure > 0) {
-					[self plotBrush:curBrush at:temp pressure:pressure];
-					if (bigRect.size.width == 0) {
-						bigRect = rect;
+				
+				if (fabs(stFactor) > dist / brushSpacing) {
+					
+					// We want to draw the maximum number of points
+					dt = brushSpacing / dist;
+					n = (int)(initial / brushSpacing + 1.0 + EPSILON);
+					t0 = (n * brushSpacing - initial) / dist;
+					num_points = 1 + (int)floor((1 + EPSILON - t0) / dt);
+					
+				}
+				else if (fabs(stFactor) < EPSILON) {
+					
+					// We can't draw any points - this does actually get called albeit once in a blue moon
+					lastPoint = curPoint;
+					if (multithreaded)
+						goto next;
+					else
+						return;
+					
+				}
+				else {
+					
+					// We want to draw a number of points
+					int direction = stFactor > 0 ? 1 : -1;
+					int x, y;
+					int s0, sn;
+					
+					s0 = (int)floor(stOffset + 0.5);
+					sn = (int)floor(stOffset + stFactor + 0.5);
+					
+					t0 = (s0 - stOffset) / stFactor;
+					tn = (sn - stOffset) / stFactor;
+					
+					x = (int)floor(lastPoint.x + t0 * deltaX);
+					y = (int)floor(lastPoint.y + t0 * deltaY);
+					if (t0 < 0.0 && !(x == (int)floor(lastPoint.x) && y == (int)floor(lastPoint.y))) {
+						s0 += direction;
+					}
+					if (x == (int)floor(lastPlotPoint.x) && y == (int)floor(lastPlotPoint.y)) {
+						s0 += direction;
+					}
+					x = (int)floor(lastPoint.x + tn * deltaX);
+					y = (int)floor(lastPoint.y + tn * deltaY);
+					if (tn > 1.0 && !(x == (int)floor(lastPoint.x) && y == (int)floor(lastPoint.y))) {
+						sn -= direction;
+					}
+					t0 = (s0 - stOffset) / stFactor;
+					tn = (sn - stOffset) / stFactor;
+					dt = direction * 1.0 / stFactor;
+					num_points = 1 + direction * (sn - s0);
+					
+					if (num_points >= 1) {
+						if (tn < 1)
+							total = initial + tn * dist;
+						total = brushSpacing * (int) (total / brushSpacing + 0.5);
+						total += (1.0 - tn) * dist;
+					}
+					
+				}
+				
+				// Draw all the points
+				for (n = 0; n < num_points; n++) {
+					t = t0 + n * dt;
+					rect.size.width = brushWidth + 1;
+					rect.size.height = brushHeight + 1;
+					temp = NSMakePoint(lastPoint.x + deltaX * t - (float)(brushWidth / 2), lastPoint.y + deltaY * t - (float)(brushHeight / 2));
+					rect.origin = NSPointMakeIntPoint(temp);
+					rect.origin.x--; rect.origin.y--;
+					rect = IntConstrainRect(rect, IntMakeRect(0, 0, layerWidth, layerHeight));
+					if (fade) {
+						dtx = (double)(initial + t * dist) / fadeValue;
+						pressure = (int)(exp (- dtx * dtx * 5.541) * 255.0);
+						pressure = int_mult(pressure, origPressure, tim);
 					}
 					else {
-						trect.origin.x = MIN(rect.origin.x, bigRect.origin.x);
-						trect.origin.y = MIN(rect.origin.y, bigRect.origin.y);
-						trect.size.width = MAX(rect.origin.x + rect.size.width - trect.origin.x, bigRect.origin.x + bigRect.size.width - trect.origin.x);
-						trect.size.height = MAX(rect.origin.y + rect.size.height - trect.origin.y, bigRect.origin.y + bigRect.size.height - trect.origin.y);
-						bigRect = trect;
+						pressure = origPressure;
+					}
+					if (rect.size.width > 0 && rect.size.height > 0 && pressure > 0) {
+						[self plotBrush:curBrush at:temp pressure:pressure];
+						if (bigRect.size.width == 0) {
+							bigRect = rect;
+						}
+						else {
+							trect.origin.x = MIN(rect.origin.x, bigRect.origin.x);
+							trect.origin.y = MIN(rect.origin.y, bigRect.origin.y);
+							trect.size.width = MAX(rect.origin.x + rect.size.width - trect.origin.x, bigRect.origin.x + bigRect.size.width - trect.origin.x);
+							trect.size.height = MAX(rect.origin.y + rect.size.height - trect.origin.y, bigRect.origin.y + bigRect.size.height - trect.origin.y);
+							bigRect = trect;
+						}
 					}
 				}
+				
+				// Update the distance and plot points
+				distance = total;
+				lastPoint.x = lastPoint.x + deltaX;
+				lastPoint.y = lastPoint.y + deltaY;
+				
+			}
+			else {
+				if (multithreaded) [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
 			}
 			
-			// Update the distance and plot points
-			distance = total;
-			lastPoint.x = lastPoint.x + deltaX;
-			lastPoint.y = lastPoint.y + deltaY; 
-		
-		}
-		else {
-			if (multithreaded) [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
-		}
-		
-		// Update periodically
-		if (multithreaded) {
-			if (bigRect.size.width != 0 && [[NSDate date] timeIntervalSinceDate:lastDate] > 0.02) {
-				[[document helpers] overlayChanged:bigRect inThread:YES];
-				lastDate = [NSDate date];
-				bigRect = IntMakeRect(0, 0, 0, 0);
+			// Update periodically
+			if (multithreaded) {
+				if (bigRect.size.width != 0 && [[NSDate date] timeIntervalSinceDate:lastDate] > 0.02) {
+					[[document helpers] overlayChanged:bigRect inThread:YES];
+					lastDate = [NSDate date];
+					bigRect = IntMakeRect(0, 0, 0, 0);
+				}
 			}
-		}
-		else {
-			[[document helpers] overlayChanged:bigRect inThread:YES];
-		}
-		
-	} while (multithreaded);
+			else {
+				[[document helpers] overlayChanged:bigRect inThread:YES];
+			}
+			
+		} while (multithreaded);
+	}
 }
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event

@@ -36,7 +36,7 @@
 	NSArray *groupNames;
 	
 	// The index of the currently active group
-	int activeGroupIndex;
+	NSInteger activeGroupIndex;
 	
 	// The index of the currently active brush
 	int activeBrushIndex;

@@ -63,7 +63,6 @@
 		
 	// Save our file and let's go
 	[imageData writeToFile:path atomically:YES];
-	[imageRep autorelease];
 	
 	// If the destination data is not equivalent to the source data free the former
 	if (destData != srcData)

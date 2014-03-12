@@ -32,7 +32,7 @@ enum {
 	
 	// Determine the path
 	if ([existingCategoryRadio state] == NSOnState) {
-		path = [[[gMainBundle resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:[groupNames objectAtIndex:[categoryTable selectedRow]]];
+		path = [[[gMainBundle resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:groupNames[[categoryTable selectedRow]]];
 	}
 	else {
 		path = [[[gMainBundle resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:[categoryTextbox stringValue]];
@@ -86,7 +86,7 @@ enum {
 {
 	NSArray *groupNames = [[[SeaController utilitiesManager] textureUtilityFor:document] groupNames];
 
-	return [groupNames objectAtIndex:row];
+	return groupNames[row];
 }
 
 - (int)numberOfRowsInTableView:(NSTableView *)tableView

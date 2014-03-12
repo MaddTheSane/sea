@@ -1,5 +1,7 @@
 #import "Globals.h"
 
+@class SeaDocument;
+
 /*!
 	@class		AbstractTool
 	@abstract	Acts as a base class for all tools.
@@ -12,7 +14,7 @@
 @interface AbstractTool : NSObject {
 
 	// The document associated with this tool
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// The options associated with this tool
 	id options;

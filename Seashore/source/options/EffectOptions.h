@@ -10,9 +10,9 @@
 				<b>Copyright:</b> Copyright (c) 2007 Mark Pazolli
 */
 
-@interface EffectOptions : AbstractOptions {
+@interface EffectOptions : AbstractOptions <NSTableViewDataSource> {
 	// The table listing all effects
-	IBOutlet id effectTable;
+	IBOutlet NSTableView *effectTable;
 	
 	// The instruction for those effects
 	IBOutlet id effectTableInstruction;

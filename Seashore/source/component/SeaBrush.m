@@ -23,6 +23,7 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 
 - (id)initWithContentsOfFile:(NSString *)path
 {
+	if (self = [super init]) {
 	FILE *file;
 	BrushHeader header;
 	BOOL versionGood = NO;
@@ -33,7 +34,6 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	file = fopen([path fileSystemRepresentation] ,"rb");
 	if (file == NULL) {
 		NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -56,7 +56,6 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	versionGood = versionGood || (header.version == 1); 
 	if (!versionGood) {
 		NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -74,7 +73,7 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	
 	// Read in brush name
 	nameLen = header.header_size - sizeof(header);
-	if (nameLen > 512) { [self autorelease]; return NULL; }
+	if (nameLen > 512) {  return NULL; }
 	if (nameLen > 0) {
 		fread(nameString, sizeof(char), nameLen, file);
 		name = [[NSString alloc] initWithUTF8String:nameString];
@@ -91,7 +90,6 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 			mask = malloc(make_128(tempSize));
 			if (fread(mask, sizeof(char), tempSize, file) < tempSize) {
 				NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
-				[self autorelease];
 				return NULL;
 			}
 		break;
@@ -101,21 +99,20 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 			pixmap = malloc(make_128(tempSize));
 			if (fread(pixmap, sizeof(char), tempSize, file) < tempSize) {
 				NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
-				[self autorelease];
-				return NULL;
+				return nil;
 			}
 			prePixmap = malloc(tempSize);
 			premultiplyBitmap(4, prePixmap, pixmap, width * height);
 		break;
 		default:
 			NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
-			[self autorelease];
-			return NULL;
+			return nil;
 		break;
 	}
 
 	// Close the brush file
 	fclose(file);
+	}
 	
 	return self;
 }
@@ -126,17 +123,16 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	
 	if (maskCache) {
 		for (i = 0; i < kBrushCacheSize; i++) {
-			if (maskCache[i].cache) free(maskCache[i].cache);
+			if (maskCache[i].cache)
+				free(maskCache[i].cache);
 		}
 		free(maskCache);
 	}
 	if (scaled) free(scaled);
 	if (positioned) free(positioned);
-	if (name) [name autorelease];
 	if (mask) free(mask);
 	if (pixmap) free(pixmap);
 	if (prePixmap) free(prePixmap);
-	[super dealloc];
 }
 
 - (void)activate
@@ -235,8 +231,6 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	thumbnail = [[NSImage alloc] initWithSize:NSMakeSize(thumbWidth, thumbHeight)];
 	[thumbnail setScalesWhenResized:YES];
 	[thumbnail addRepresentation:tempRep];
-	[tempRep autorelease];
-	[thumbnail autorelease];
 	
 	return thumbnail;
 }

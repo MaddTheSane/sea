@@ -378,7 +378,7 @@ void covertBitmapNoColorSync(unsigned char *dbitmap, int dspp, int dspace, unsig
 	
 }
 
-unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int ibipp, int ibypr, int ispace, CMProfileLocation *iprofile, int ibps, int iformat)
+unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int ibipp, int ibypr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat)
 {
 	PtrRecord ptrs;
 	unsigned char *bitmap, *pbitmap;

@@ -1,5 +1,7 @@
 #import "Globals.h"
 
+@class SeaSelection;
+
 /*!
 	@class		SeaDocument
 	@abstract	Represents a single Seashore document.
@@ -18,7 +20,7 @@
 	id whiteboard;
 	
 	// The selection manager for this document
-	id selection;
+	SeaSelection *selection;
 	
 	// The operations manager for this document
 	IBOutlet id operations;
@@ -136,18 +138,6 @@
 - (id)initWithData:(unsigned char *)data type:(int)type width:(int)width height:(int)height;
 
 /*!
-	@method		awakeFromNib
-	@discussion	Prepares document for use.
-*/
-- (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		saveDocument:
 	@discussion Called to save a document (makes current).
 	@param		sender
@@ -184,7 +174,7 @@
 	@discussion	Returns the selection manager of the document.
 	@result		Returns an instance of SeaSelection.
 */
-- (id)selection;
+- (SeaSelection*)selection;
 
 /*!
 	@method		operations

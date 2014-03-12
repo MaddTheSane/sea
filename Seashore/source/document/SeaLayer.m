@@ -105,9 +105,7 @@
 	yoff = [layer yoff];
 	visible = [layer visible];
 	opacity = [layer opacity];
-	[name autorelease];
 	name = [NSString stringWithString:[layer name]];
-	[name retain];
 	
 	// Assume we always have alpha
 	hasAlpha = YES;
@@ -154,19 +152,13 @@
 {	
 	struct stat sb;
 	
-	if (name) [name autorelease];
-	if (oldNames) [oldNames autorelease];
 	if (data) free(data);
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
-	if (seaLayerUndo) [seaLayerUndo autorelease];
 	if (data == NULL) {
 		if (stat([undoFilePath fileSystemRepresentation], &sb) == 0) {
 			unlink([undoFilePath fileSystemRepresentation]);
 		}
 	}
-	if (undoFilePath) [undoFilePath autorelease];
-	[super dealloc];
 }
 
 - (void)compress
@@ -198,7 +190,6 @@
 			}
 
 			// Get rid of the thumbnail
-			if (thumbnail) [thumbnail autorelease];
 			if (thumbData) free(thumbData);
 			thumbnail = NULL; thumbData = NULL;
 
@@ -481,7 +472,6 @@
 	[image_out unlockFocus];
 	
 	// Start clean up
-	[in_rep autorelease];
 	free(data);
 	
 	// Make the swap
@@ -494,8 +484,6 @@
 	data = convertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcData, width, height, ispp, bipp, bypr, ispace, NULL, ibps, 0); 
 	
 	// Clean up
-	[final_rep autorelease];
-	[image_out autorelease];
 	unpremultiplyBitmap(spp, data, data, width * height);
 		
 	// Make margin changes
@@ -546,7 +534,6 @@
 	width = newWidth; height = newHeight;
 	
 	// Destroy the thumbnail data
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
 	thumbnail = NULL; thumbData = NULL;
 	
@@ -613,11 +600,8 @@
 - (void)setName:(NSString *)newName
 {
 	if (name) {
-		[oldNames autorelease];
 		oldNames = [oldNames arrayByAddingObject:name];
-		[oldNames retain]; [name autorelease];
 		name = newName;
-		[name retain];
 	}
 }
 
@@ -743,10 +727,8 @@
 	tempRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&thumbData pixelsWide:thumbWidth pixelsHigh:thumbHeight bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:thumbWidth * spp bitsPerPixel:8 * spp];
 	
 	// Wrap it up in an NSImage
-	if (thumbnail) [thumbnail autorelease];
 	thumbnail = [[NSImage alloc] initWithSize:NSMakeSize(thumbWidth, thumbHeight)];
 	[thumbnail addRepresentation:tempRep];
-	[tempRep autorelease];
 		
 	return thumbnail;
 }
@@ -825,7 +807,6 @@
 	imageTIFFData = [imageRep TIFFRepresentationUsingCompression:NSTIFFCompressionLZW factor:255];
 	
 	// Release the representation and the image data
-	[imageRep autorelease];
 	free(pmImageData);
 	
 	return imageTIFFData;
@@ -868,7 +849,6 @@
 	xoff -= left; yoff -= top; 
 	
 	// Destroy the thumbnail data
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
 	thumbnail = NULL; thumbData = NULL;
 }
@@ -890,7 +870,6 @@
 	width = newWidth; height = newHeight;
 	
 	// Destroy the thumbnail data
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
 	thumbnail = NULL; thumbData = NULL;
 }
@@ -914,7 +893,6 @@
 	width = newWidth; height = newHeight;
 	
 	// Destroy the thumbnail data
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
 	thumbnail = NULL; thumbData = NULL;
 }
@@ -941,7 +919,6 @@
 	int i;
 	
 	// Destroy the thumbnail data
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
 	thumbnail = NULL; thumbData = NULL;
 
