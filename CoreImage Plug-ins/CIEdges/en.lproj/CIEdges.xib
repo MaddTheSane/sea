@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="BlurClass">
+        <customObject id="-2" userLabel="File's Owner" customClass="CIEdgesClass">
             <connections>
                 <outlet property="intensityLabel" destination="21" id="29"/>
                 <outlet property="intensitySlider" destination="14" id="30"/>

@@ -5,11 +5,13 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIFalseColorClass
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	newdata = NULL;
+	if (self = [super init]) {
+		seaPlugins = manager;
+	}
 	
 	return self;
 }
@@ -387,7 +389,7 @@
 	
 	// Get data from output core image
 	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
+	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
 	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
 	CGImageDestinationFinalize(temp_writer);
 	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];

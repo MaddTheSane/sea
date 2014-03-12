@@ -7,12 +7,16 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIExposureClass
+@synthesize seaPlugins;
+@synthesize panel;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CIExposure" owner:self];
-	newdata = NULL;
+	if (self = [super init]) {
+		seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CIExposure" owner:self];
+		newdata = NULL;
+	}
 	
 	return self;
 }
@@ -393,11 +397,13 @@
 - (unsigned char *)exposure:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
-	CIImage *input, *imm_output, *crop_output, *output, *background;
+	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
+#if 1
 	CGImageRef temp_image;
 	CGImageDestinationRef temp_writer;
 	NSMutableData *temp_handler;
+#endif
 	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
@@ -442,8 +448,9 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
-		
+#if 1
+		temp_image = [context createCGImage:output fromRect:rect];
+#endif
 	}
 	else {
 	
@@ -452,16 +459,21 @@
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
+#if 1
 		temp_image = [context createCGImage:output fromRect:rect];
-		
+#endif
 	}
 	
 	// Get data from output core image
+#if 1
 	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
+	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
 	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
 	CGImageDestinationFinalize(temp_writer);
 	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
+#else
+	temp_rep = [[NSBitmapImageRep alloc] initWithCIImage:output];
+#endif
 	resdata = [temp_rep bitmapData];
 		
 	return resdata;

@@ -13,6 +13,8 @@
 			buildPhases = (
 			);
 			dependencies = (
+				551E573D18D026DC00E4CDAF /* PBXTargetDependency */,
+				551E573F18D026DC00E4CDAF /* PBXTargetDependency */,
 				551E56CB18D0161200E4CDAF /* PBXTargetDependency */,
 				551E56CD18D0161200E4CDAF /* PBXTargetDependency */,
 				55909E4E18CFDB3C00F43F90 /* PBXTargetDependency */,
@@ -111,6 +113,21 @@
 		551E571518D021F400E4CDAF /* layers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551E571418D021F400E4CDAF /* layers.xcassets */; };
 		551E571718D0225700E4CDAF /* tools.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551E571618D0225700E4CDAF /* tools.xcassets */; };
 		551E571918D0229300E4CDAF /* miscellanea.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551E571818D0229300E4CDAF /* miscellanea.xcassets */; };
+		551E571D18D0268500E4CDAF /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF9CC00536DE2000A80207 /* Rects.m */; };
+		551E571E18D0268500E4CDAF /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BDC80A04BF04B000A80207 /* Bitmap.m */; };
+		551E572018D0268500E4CDAF /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
+		551E572118D0268500E4CDAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A518D0138C00E4CDAF /* QuartzCore.framework */; };
+		551E572218D0268500E4CDAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
+		551E572E18D0268A00E4CDAF /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF9CC00536DE2000A80207 /* Rects.m */; };
+		551E572F18D0268A00E4CDAF /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BDC80A04BF04B000A80207 /* Bitmap.m */; };
+		551E573118D0268A00E4CDAF /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
+		551E573218D0268A00E4CDAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A518D0138C00E4CDAF /* QuartzCore.framework */; };
+		551E573318D0268A00E4CDAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
+		551E574018D0270200E4CDAF /* CIExposureClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D50E818CF9FBC005809E3 /* CIExposureClass.m */; };
+		551E574118D0270500E4CDAF /* CIExposure.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909EAC18CFFD8400F43F90 /* CIExposure.xib */; };
+		551E574218D0270900E4CDAF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50EB18CF9FBC005809E3 /* Localizable.strings */; };
+		551E574318D0271000E4CDAF /* CIFalseColorClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D50F318CF9FBC005809E3 /* CIFalseColorClass.m */; };
+		551E574418D0271400E4CDAF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50F418CF9FBC005809E3 /* Localizable.strings */; };
 		5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in Copy Spotlight plug-in */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; };
 		5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in Copy QuickLook plug-in */ = {isa = PBXBuildFile; fileRef = 5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */; };
 		5528599913D6302E001564E5 /* Sharpen.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 35B1570E0A2C0116005B688F /* Sharpen.bundle */; };
@@ -493,6 +510,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 551E569518D0132B00E4CDAF;
 			remoteInfo = "Edge Work+";
+		};
+		551E573C18D026DC00E4CDAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 551E571A18D0268500E4CDAF;
+			remoteInfo = "Exposure+";
+		};
+		551E573E18D026DC00E4CDAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 551E572B18D0268A00E4CDAF;
+			remoteInfo = "False Color+";
 		};
 		5528596B13D62F32001564E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -937,6 +968,8 @@
 		551E571418D021F400E4CDAF /* layers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = layers.xcassets; sourceTree = "<group>"; };
 		551E571618D0225700E4CDAF /* tools.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = tools.xcassets; sourceTree = "<group>"; };
 		551E571818D0229300E4CDAF /* miscellanea.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = miscellanea.xcassets; sourceTree = "<group>"; };
+		551E572918D0268500E4CDAF /* Exposure+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Exposure+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		551E573A18D0268A00E4CDAF /* False Color+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "False Color+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
 		557D504918CF9FBA005809E3 /* CIAffineTileClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIAffineTileClass.h; sourceTree = "<group>"; };
 		557D504A18CF9FBA005809E3 /* CIAffineTileClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIAffineTileClass.m; sourceTree = "<group>"; };
@@ -1619,6 +1652,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		551E571F18D0268500E4CDAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				551E572018D0268500E4CDAF /* Quartz.framework in Frameworks */,
+				551E572118D0268500E4CDAF /* QuartzCore.framework in Frameworks */,
+				551E572218D0268500E4CDAF /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		551E573018D0268A00E4CDAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				551E573118D0268A00E4CDAF /* Quartz.framework in Frameworks */,
+				551E573218D0268A00E4CDAF /* QuartzCore.framework in Frameworks */,
+				551E573318D0268A00E4CDAF /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		557D533018CF9FEC005809E3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1777,6 +1830,8 @@
 				55909E4818CFDA6900F43F90 /* Dot Screen+.bundle */,
 				551E569318D0132900E4CDAF /* Edges+.bundle */,
 				551E56A218D0132B00E4CDAF /* Edge Work+.bundle */,
+				551E572918D0268500E4CDAF /* Exposure+.bundle */,
+				551E573A18D0268A00E4CDAF /* False Color+.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3325,6 +3380,40 @@
 			productReference = 551E56A218D0132B00E4CDAF /* Edge Work+.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		551E571A18D0268500E4CDAF /* Exposure+ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 551E572618D0268500E4CDAF /* Build configuration list for PBXNativeTarget "Exposure+" */;
+			buildPhases = (
+				551E571B18D0268500E4CDAF /* Sources */,
+				551E571F18D0268500E4CDAF /* Frameworks */,
+				551E572318D0268500E4CDAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Exposure+";
+			productName = CIAffineTile;
+			productReference = 551E572918D0268500E4CDAF /* Exposure+.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		551E572B18D0268A00E4CDAF /* False Color+ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 551E573718D0268A00E4CDAF /* Build configuration list for PBXNativeTarget "False Color+" */;
+			buildPhases = (
+				551E572C18D0268A00E4CDAF /* Sources */,
+				551E573018D0268A00E4CDAF /* Frameworks */,
+				551E573418D0268A00E4CDAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "False Color+";
+			productName = CIAffineTile;
+			productReference = 551E573A18D0268A00E4CDAF /* False Color+.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		557D533218CF9FEC005809E3 /* Affine Tile+ */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 557D533E18CF9FEC005809E3 /* Build configuration list for PBXNativeTarget "Affine Tile+" */;
@@ -3687,6 +3776,8 @@
 				55909E3A18CFDA6900F43F90 /* Dot Screen+ */,
 				551E568618D0132900E4CDAF /* Edges+ */,
 				551E569518D0132B00E4CDAF /* Edge Work+ */,
+				551E571A18D0268500E4CDAF /* Exposure+ */,
+				551E572B18D0268A00E4CDAF /* False Color+ */,
 			);
 		};
 /* End PBXProject section */
@@ -3885,6 +3976,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		551E572318D0268500E4CDAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				551E574118D0270500E4CDAF /* CIExposure.xib in Resources */,
+				551E574218D0270900E4CDAF /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		551E573418D0268A00E4CDAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				551E574418D0271400E4CDAF /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		557D533118CF9FEC005809E3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4062,6 +4170,26 @@
 				551E56C618D014B800E4CDAF /* CIEdgeWorkClass.m in Sources */,
 				551E569818D0132B00E4CDAF /* Rects.m in Sources */,
 				551E569918D0132B00E4CDAF /* Bitmap.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		551E571B18D0268500E4CDAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				551E574018D0270200E4CDAF /* CIExposureClass.m in Sources */,
+				551E571D18D0268500E4CDAF /* Rects.m in Sources */,
+				551E571E18D0268500E4CDAF /* Bitmap.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		551E572C18D0268A00E4CDAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				551E572E18D0268A00E4CDAF /* Rects.m in Sources */,
+				551E574318D0271000E4CDAF /* CIFalseColorClass.m in Sources */,
+				551E572F18D0268A00E4CDAF /* Bitmap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4344,6 +4472,16 @@
 			isa = PBXTargetDependency;
 			target = 551E569518D0132B00E4CDAF /* Edge Work+ */;
 			targetProxy = 551E56CC18D0161200E4CDAF /* PBXContainerItemProxy */;
+		};
+		551E573D18D026DC00E4CDAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 551E571A18D0268500E4CDAF /* Exposure+ */;
+			targetProxy = 551E573C18D026DC00E4CDAF /* PBXContainerItemProxy */;
+		};
+		551E573F18D026DC00E4CDAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 551E572B18D0268A00E4CDAF /* False Color+ */;
+			targetProxy = 551E573E18D026DC00E4CDAF /* PBXContainerItemProxy */;
 		};
 		5528596C13D62F32001564E5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5476,6 +5614,64 @@
 			};
 			name = Release;
 		};
+		551E572718D0268500E4CDAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CIExposure/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		551E572818D0268500E4CDAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CIExposure/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		551E573818D0268A00E4CDAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CIFalseColor/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		551E573918D0268A00E4CDAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CIFalseColor/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		557D533F18CF9FEC005809E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5973,6 +6169,24 @@
 			buildConfigurations = (
 				551E56A018D0132B00E4CDAF /* Debug */,
 				551E56A118D0132B00E4CDAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		551E572618D0268500E4CDAF /* Build configuration list for PBXNativeTarget "Exposure+" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				551E572718D0268500E4CDAF /* Debug */,
+				551E572818D0268500E4CDAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		551E573718D0268A00E4CDAF /* Build configuration list for PBXNativeTarget "False Color+" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				551E573818D0268A00E4CDAF /* Debug */,
+				551E573918D0268A00E4CDAF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

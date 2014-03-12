@@ -672,9 +672,9 @@
 	resdata = [temp_rep bitmapData];
 	
 	// Record the new width and height
-	*newWidth = [temp_rep pixelsWide];
-	*newHeight = [temp_rep pixelsHigh];
-	*nspp = [temp_rep samplesPerPixel];
+	*newWidth = (int)[temp_rep pixelsWide];
+	*newHeight = (int)[temp_rep pixelsHigh];
+	*nspp = (int)[temp_rep samplesPerPixel];
 	
 	return resdata;
 }

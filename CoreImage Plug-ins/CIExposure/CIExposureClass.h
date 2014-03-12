@@ -14,19 +14,13 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIExposureClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIExposureClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the value
 	IBOutlet id valueLabel;
 	
 	// The slider for the value
 	IBOutlet id valueSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The value of the crystallize
 	float value;

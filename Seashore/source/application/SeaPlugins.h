@@ -160,7 +160,9 @@ enum {
 
 @protocol SSSeaPlugin <NSObject>
 
-@property (weak) id seaPlugins;
+@property (weak) SeaPlugins *seaPlugins;
+
+- (instancetype)initWithManager:(SeaPlugins *)manager;
 
 /*!
  @method		type

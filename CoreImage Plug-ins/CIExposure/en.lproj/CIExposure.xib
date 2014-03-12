@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="BlurClass">
+        <customObject id="-2" userLabel="File's Owner" customClass="CIExposureClass">
             <connections>
                 <outlet property="panel" destination="6" id="32"/>
                 <outlet property="valueLabel" destination="21" id="29"/>

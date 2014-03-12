@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="BlurClass">
+        <customObject id="-2" userLabel="File's Owner" customClass="CIDotScreenClass">
             <connections>
                 <outlet property="angleLabel" destination="35" id="58"/>
                 <outlet property="angleSlider" destination="34" id="57"/>
