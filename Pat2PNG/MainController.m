@@ -16,7 +16,7 @@ typedef struct {
 - (IBAction)run:(id)sender
 {
 	NSOpenPanel *panel = [NSOpenPanel openPanel];
-	NSArray *types = [NSArray arrayWithObject:@"pat"];
+	NSArray *types = @[@"pat"];
 	PatternHeader header;
 	char nameString[512];
 	int nameLen;
@@ -34,10 +34,10 @@ typedef struct {
 	for (i = 0; i < [[panel filenames] count]; i++) {
 		
 		// Get the file name
-		path = [[panel filenames] objectAtIndex:i];
+		path = [[panel URLs][i] path];
 		
 		// Open the pattern file
-		file = fopen([path cString], "rb");
+		file = fopen([path fileSystemRepresentation], "rb");
 		if (file == NULL)
 			continue;
 		
@@ -55,10 +55,10 @@ typedef struct {
 		if (nameLen > 512) { continue; }
 		if (nameLen > 0) {
 			fread(nameString, sizeof(char), nameLen, file);
-			name = [NSString stringWithUTF8String:nameString];
+			name = @(nameString);
 		}
 		else {
-			name = [NSString stringWithString:@"Untitled"];
+			name = @"Untitled";
 		}
 		
 		// Get the pattern data
@@ -80,14 +80,11 @@ typedef struct {
 		bitmapImage = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&data pixelsWide:header.width pixelsHigh:header.height bitsPerSample:8 samplesPerPixel:spp hasAlpha:NO isPlanar:NO colorSpaceName:colorSpace bytesPerRow:0 bitsPerPixel:0];
 		
 		// Save the pattern as a PNG file
-		[[bitmapImage representationUsingType:NSPNGFileType properties:[NSDictionary dictionary]] writeToFile:[[path stringByDeletingLastPathComponent] stringByAppendingFormat:@"/%@.png", name] atomically:YES];
+		[[bitmapImage representationUsingType:NSPNGFileType properties:@{}] writeToFile:[[path stringByDeletingLastPathComponent] stringByAppendingFormat:@"/%@.png", name] atomically:YES];
 		
 		// And finally free everything
-		[bitmapImage autorelease];
 		free(data);
-		
 	}
-	
 }
 
 @end

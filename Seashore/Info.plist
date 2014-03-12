@@ -334,8 +334,6 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleGetInfoString</key>
 	<string>Seashore 0.5.2 - GNU General Public License</string>
-	<key>CFBundleIconFile</key>
-	<string>Main Icon</string>
 	<key>CFBundleIdentifier</key>
 	<string>net.sourceforge.seashore</string>
 	<key>CFBundleInfoDictionaryVersion</key>
