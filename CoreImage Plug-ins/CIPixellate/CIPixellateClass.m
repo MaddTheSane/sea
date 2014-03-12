@@ -410,7 +410,7 @@
 	else if (opaque) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent]];
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -429,7 +429,7 @@
 	}
 	[filter setDefaults];
 	[filter setValue:input forKey:@"inputImage"];
-	[filter setValue:[NSNumber numberWithInt:scale] forKey:@"inputScale"];
+	[filter setValue:@(scale) forKey:@"inputScale"];
 	if (centerBased)
 		[filter setValue:[CIVector vectorWithX:width / 2 Y:height / 2] forKey:@"inputCenter"];
 	else

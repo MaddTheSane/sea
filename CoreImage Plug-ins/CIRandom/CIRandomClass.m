@@ -163,7 +163,7 @@
 	else if (opaque) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent]];
 		
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -214,8 +214,7 @@
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];		
 		
-	}
-	else {
+	} else {
 	
 		// Create output core image
 		rect.origin.x = 0;

@@ -13,7 +13,7 @@ typedef struct
 } PixelRegion;
 
 
-inline PixelRegion pixel_region_make(unsigned char *data, int width, int height, int spp)
+static inline PixelRegion pixel_region_make(unsigned char *data, int width, int height, int spp)
 {
 	PixelRegion pr;
 	
@@ -32,17 +32,17 @@ inline void pixel_region_info(PixelRegion pr, int *width, int *height, int *spp)
 	*spp = pr.bytes;
 }
 
-inline gboolean pixel_region_has_alpha()
+static inline gboolean pixel_region_has_alpha(void *unused)
 {
 	return TRUE;
 }
 
-inline void pixel_region_set_row(PixelRegion *pr, gint x, gint y, gint w, guchar *data)
+static inline void pixel_region_set_row(PixelRegion *pr, gint x, gint y, gint w, guchar *data)
 {
 	memcpy(pr->data + (y * pr->w  + x) * pr->bytes, data, w * pr->bytes); 
 }
 
-inline void pixel_region_get_row(PixelRegion *pr, gint x, gint y, gint w, guchar *data, gint subsample)
+static inline void pixel_region_get_row(PixelRegion *pr, gint x, gint y, gint w, guchar *data, gint subsample)
 {
 	int i, j;
 	

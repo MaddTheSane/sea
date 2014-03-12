@@ -358,7 +358,7 @@
 	else foreColor = [CIColor colorWithRed:[[pluginData foreColor:YES] whiteComponent] green:[[pluginData foreColor:YES] whiteComponent] blue:[[pluginData foreColor:YES] whiteComponent] alpha:[[pluginData foreColor:YES] alphaComponent]];
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -377,7 +377,7 @@
 	}
 	[filter setDefaults];
 	[filter setValue:input forKey:@"inputImage"];
-	[filter setValue:[NSNumber numberWithFloat:radius] forKey:@"inputRadius"];
+	[filter setValue:@(radius) forKey:@"inputRadius"];
 	imm_output = [filter valueForKey: @"outputImage"];
 
 	// Add foreground

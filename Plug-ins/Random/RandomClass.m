@@ -34,7 +34,7 @@
 #define int_mult(a,b,t)  ((t) = (a) * (b) + 0x80, ((((t) >> 8) + (t)) >> 8))
 #define alphaPos (spp - 1)
 	
-inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+static inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char multi, alpha;
 	int t1, t2;

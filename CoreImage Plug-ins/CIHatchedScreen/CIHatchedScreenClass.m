@@ -417,7 +417,7 @@
 	IntRect selection;
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -437,9 +437,9 @@
 	[filter setDefaults];
 	[filter setValue:input forKey:@"inputImage"];
 	[filter setValue:[CIVector vectorWithX:width / 2 Y:height / 2] forKey:@"inputCenter"];
-	[filter setValue:[NSNumber numberWithInt:dotWidth] forKey:@"inputWidth"];
-	[filter setValue:[NSNumber numberWithFloat:angle] forKey:@"inputAngle"];
-	[filter setValue:[NSNumber numberWithFloat:sharpness] forKey:@"inputSharpness"];
+	[filter setValue:@(dotWidth) forKey:@"inputWidth"];
+	[filter setValue:@(angle) forKey:@"inputAngle"];
+	[filter setValue:@(sharpness) forKey:@"inputSharpness"];
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {

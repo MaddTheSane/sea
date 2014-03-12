@@ -367,7 +367,7 @@
 	
 	// Find core image context
 	//context = [[NSGraphicsContext currentContext] CIContext]; /* NOTE: Usually we would use the color-corrected context but in this case it seems to give duller results. */
-	 context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	 context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -387,7 +387,7 @@
 	}
 	[filter setDefaults];
 	[filter setValue:input forKey:@"inputImage"];
-	[filter setValue:[NSNumber numberWithFloat:intensity] forKey:@"inputIntensity"];
+	[filter setValue:@(intensity) forKey:@"inputIntensity"];
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {

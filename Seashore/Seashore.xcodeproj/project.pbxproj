@@ -567,6 +567,48 @@
 		55BD2E5E18D0D6C300C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D524B18CF9FC0005809E3 /* Localizable.strings */; };
 		55BD2E5F18D0D6CA00C4EE1B /* CITriangleTileClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D524A18CF9FC0005809E3 /* CITriangleTileClass.m */; };
 		55BD2E6018D0ECE400C4EE1B /* CIOpTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD2E6218D0ECE400C4EE1B /* CIOpTile.xib */; };
+		55BD2E6318D103CE00C4EE1B /* Edges+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E569318D0132900E4CDAF /* Edges+.bundle */; };
+		55BD2E6418D103CE00C4EE1B /* Edge Work+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E56A218D0132B00E4CDAF /* Edge Work+.bundle */; };
+		55BD2E6518D103CE00C4EE1B /* Exposure+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E572918D0268500E4CDAF /* Exposure+.bundle */; };
+		55BD2E6618D103CE00C4EE1B /* False Color+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E573A18D0268A00E4CDAF /* False Color+.bundle */; };
+		55BD2E6718D103CE00C4EE1B /* Gamma Adjust+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2B9218D0CA7C00C4EE1B /* Gamma Adjust+.bundle */; };
+		55BD2E6818D103CE00C4EE1B /* Gaussian Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BA218D0CA7E00C4EE1B /* Gaussian Blur+.bundle */; };
+		55BD2E6918D103CE00C4EE1B /* Glass Distortion+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BB018D0CB0C00C4EE1B /* Glass Distortion+.bundle */; };
+		55BD2E6A18D103CE00C4EE1B /* Glass Lozenge+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BBE18D0CB0E00C4EE1B /* Glass Lozenge+.bundle */; };
+		55BD2E6B18D103CE00C4EE1B /* Gloom+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BCC18D0CB7F00C4EE1B /* Gloom+.bundle */; };
+		55BD2E6C18D103CE00C4EE1B /* Hatched Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BDA18D0CB8300C4EE1B /* Hatched Screen+.bundle */; };
+		55BD2E6D18D103CE00C4EE1B /* Hole+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BE918D0CE1900C4EE1B /* Hole+.bundle */; };
+		55BD2E6E18D103CE00C4EE1B /* Horizontal Stripes+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BF718D0CE1C00C4EE1B /* Horizontal Stripes+.bundle */; };
+		55BD2E6F18D103CE00C4EE1B /* Invert+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C0518D0CE7E00C4EE1B /* Invert+.bundle */; };
+		55BD2E7018D103CE00C4EE1B /* Kaleidoscope+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C1318D0CE9700C4EE1B /* Kaleidoscope+.bundle */; };
+		55BD2E7118D103CE00C4EE1B /* Lenticular Halo+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C2118D0CE9900C4EE1B /* Lenticular Halo+.bundle */; };
+		55BD2E7218D103CE00C4EE1B /* Line Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C2F18D0CF2D00C4EE1B /* Line Screen+.bundle */; };
+		55BD2E7318D103CE00C4EE1B /* Median+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C3D18D0CF3000C4EE1B /* Median+.bundle */; };
+		55BD2E7418D103CE00C4EE1B /* Monochrome+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C4B18D0CF3300C4EE1B /* Monochrome+.bundle */; };
+		55BD2E7518D103CE00C4EE1B /* Motion Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C5918D0CF9500C4EE1B /* Motion Blur+.bundle */; };
+		55BD2E7618D103CE00C4EE1B /* Noise Reduction+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C6718D0CF9700C4EE1B /* Noise Reduction+.bundle */; };
+		55BD2E7718D103CE00C4EE1B /* Op Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C7518D0CF9B00C4EE1B /* Op Tile+.bundle */; };
+		55BD2E7818D103CE00C4EE1B /* Parallelogram Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C8318D0CF9F00C4EE1B /* Parallelogram Tile+.bundle */; };
+		55BD2E7918D103CE00C4EE1B /* Perspective Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C9118D0D02D00C4EE1B /* Perspective Tile+.bundle */; };
+		55BD2E7A18D103CE00C4EE1B /* Perspective Transform+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C9F18D0D03300C4EE1B /* Perspective Transform+.bundle */; };
+		55BD2E7B18D103CE00C4EE1B /* Pinch+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CAD18D0D03900C4EE1B /* Pinch+.bundle */; };
+		55BD2E7C18D103CE00C4EE1B /* Pixellate+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CBB18D0D03D00C4EE1B /* Pixellate+.bundle */; };
+		55BD2E7D18D103CE00C4EE1B /* Pointillize+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CC918D0D05100C4EE1B /* Pointillize+.bundle */; };
+		55BD2E7E18D103CE00C4EE1B /* Posterize+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CD718D0D05400C4EE1B /* Posterize+.bundle */; };
+		55BD2E7F18D103CE00C4EE1B /* Random+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CE518D0D06600C4EE1B /* Random+.bundle */; };
+		55BD2E8018D103CE00C4EE1B /* Sepia+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CF318D0D07100C4EE1B /* Sepia+.bundle */; };
+		55BD2E8118D103CE00C4EE1B /* Sharpen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D0118D0D08300C4EE1B /* Sharpen+.bundle */; };
+		55BD2E8218D103CE00C4EE1B /* Spotlight+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D0F18D0D08600C4EE1B /* Spotlight+.bundle */; };
+		55BD2E8318D103CE00C4EE1B /* Starshine+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D1D18D0D08F00C4EE1B /* Starshine+.bundle */; };
+		55BD2E8418D103CE00C4EE1B /* Sunbeams+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D2B18D0D09200C4EE1B /* Sunbeams+.bundle */; };
+		55BD2E8518D103CE00C4EE1B /* Torus Lens+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D3918D0D09F00C4EE1B /* Torus Lens+.bundle */; };
+		55BD2E8618D103CE00C4EE1B /* Triangle Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D4718D0D0A200C4EE1B /* Triangle Tile+.bundle */; };
+		55BD2E8718D103CE00C4EE1B /* Twirl+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D5518D0D0A800C4EE1B /* Twirl+.bundle */; };
+		55BD2E8818D103CE00C4EE1B /* Unsharp Mask+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D6318D0D0AA00C4EE1B /* Unsharp Mask+.bundle */; };
+		55BD2E8918D103CE00C4EE1B /* Vertical Stripes+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D7418D0D0B300C4EE1B /* Vertical Stripes+.bundle */; };
+		55BD2E8A18D103CE00C4EE1B /* Vortex+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D8518D0D0B900C4EE1B /* Vortex+.bundle */; };
+		55BD2E8B18D103CE00C4EE1B /* White Point Adjust+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */; };
+		55BD2E8C18D103CE00C4EE1B /* Zoom Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */; };
 		A80983D70871420900F7412F /* JP2Exporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A80983D50871420900F7412F /* JP2Exporter.m */; };
 		A8138D660CEFD5FA00C2F880 /* Seashore Effects Guide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8138D640CEFD5FA00C2F880 /* Seashore Effects Guide.pdf */; };
 		A81F6EB307C2EE35005C2DBD /* XBMImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A81F6EB107C2EE35005C2DBD /* XBMImporter.m */; };
@@ -1436,6 +1478,48 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				55BD2E6318D103CE00C4EE1B /* Edges+.bundle in Copy PlugIns */,
+				55BD2E6418D103CE00C4EE1B /* Edge Work+.bundle in Copy PlugIns */,
+				55BD2E6518D103CE00C4EE1B /* Exposure+.bundle in Copy PlugIns */,
+				55BD2E6618D103CE00C4EE1B /* False Color+.bundle in Copy PlugIns */,
+				55BD2E6718D103CE00C4EE1B /* Gamma Adjust+.bundle in Copy PlugIns */,
+				55BD2E6818D103CE00C4EE1B /* Gaussian Blur+.bundle in Copy PlugIns */,
+				55BD2E6918D103CE00C4EE1B /* Glass Distortion+.bundle in Copy PlugIns */,
+				55BD2E6A18D103CE00C4EE1B /* Glass Lozenge+.bundle in Copy PlugIns */,
+				55BD2E6B18D103CE00C4EE1B /* Gloom+.bundle in Copy PlugIns */,
+				55BD2E6C18D103CE00C4EE1B /* Hatched Screen+.bundle in Copy PlugIns */,
+				55BD2E6D18D103CE00C4EE1B /* Hole+.bundle in Copy PlugIns */,
+				55BD2E6E18D103CE00C4EE1B /* Horizontal Stripes+.bundle in Copy PlugIns */,
+				55BD2E6F18D103CE00C4EE1B /* Invert+.bundle in Copy PlugIns */,
+				55BD2E7018D103CE00C4EE1B /* Kaleidoscope+.bundle in Copy PlugIns */,
+				55BD2E7118D103CE00C4EE1B /* Lenticular Halo+.bundle in Copy PlugIns */,
+				55BD2E7218D103CE00C4EE1B /* Line Screen+.bundle in Copy PlugIns */,
+				55BD2E7318D103CE00C4EE1B /* Median+.bundle in Copy PlugIns */,
+				55BD2E7418D103CE00C4EE1B /* Monochrome+.bundle in Copy PlugIns */,
+				55BD2E7518D103CE00C4EE1B /* Motion Blur+.bundle in Copy PlugIns */,
+				55BD2E7618D103CE00C4EE1B /* Noise Reduction+.bundle in Copy PlugIns */,
+				55BD2E7718D103CE00C4EE1B /* Op Tile+.bundle in Copy PlugIns */,
+				55BD2E7818D103CE00C4EE1B /* Parallelogram Tile+.bundle in Copy PlugIns */,
+				55BD2E7918D103CE00C4EE1B /* Perspective Tile+.bundle in Copy PlugIns */,
+				55BD2E7A18D103CE00C4EE1B /* Perspective Transform+.bundle in Copy PlugIns */,
+				55BD2E7B18D103CE00C4EE1B /* Pinch+.bundle in Copy PlugIns */,
+				55BD2E7C18D103CE00C4EE1B /* Pixellate+.bundle in Copy PlugIns */,
+				55BD2E7D18D103CE00C4EE1B /* Pointillize+.bundle in Copy PlugIns */,
+				55BD2E7E18D103CE00C4EE1B /* Posterize+.bundle in Copy PlugIns */,
+				55BD2E7F18D103CE00C4EE1B /* Random+.bundle in Copy PlugIns */,
+				55BD2E8018D103CE00C4EE1B /* Sepia+.bundle in Copy PlugIns */,
+				55BD2E8118D103CE00C4EE1B /* Sharpen+.bundle in Copy PlugIns */,
+				55BD2E8218D103CE00C4EE1B /* Spotlight+.bundle in Copy PlugIns */,
+				55BD2E8318D103CE00C4EE1B /* Starshine+.bundle in Copy PlugIns */,
+				55BD2E8418D103CE00C4EE1B /* Sunbeams+.bundle in Copy PlugIns */,
+				55BD2E8518D103CE00C4EE1B /* Torus Lens+.bundle in Copy PlugIns */,
+				55BD2E8618D103CE00C4EE1B /* Triangle Tile+.bundle in Copy PlugIns */,
+				55BD2E8718D103CE00C4EE1B /* Twirl+.bundle in Copy PlugIns */,
+				55BD2E8818D103CE00C4EE1B /* Unsharp Mask+.bundle in Copy PlugIns */,
+				55BD2E8918D103CE00C4EE1B /* Vertical Stripes+.bundle in Copy PlugIns */,
+				55BD2E8A18D103CE00C4EE1B /* Vortex+.bundle in Copy PlugIns */,
+				55BD2E8B18D103CE00C4EE1B /* White Point Adjust+.bundle in Copy PlugIns */,
+				55BD2E8C18D103CE00C4EE1B /* Zoom Blur+.bundle in Copy PlugIns */,
 				55909F1818D0082800F43F90 /* Checkerboard+.bundle in Copy PlugIns */,
 				55909F1918D0082800F43F90 /* Circular Screen+.bundle in Copy PlugIns */,
 				55909F1A18D0082800F43F90 /* Circular Wrap+.bundle in Copy PlugIns */,
@@ -1862,7 +1946,7 @@
 		55BD2C4B18D0CF3300C4EE1B /* Monochrome+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Monochrome+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2C5918D0CF9500C4EE1B /* Motion Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Motion Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2C6718D0CF9700C4EE1B /* Noise Reduction+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Noise Reduction+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55BD2C7518D0CF9B00C4EE1B /* Op Tile.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Op Tile.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55BD2C7518D0CF9B00C4EE1B /* Op Tile+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Op Tile+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2C8318D0CF9F00C4EE1B /* Parallelogram Tile+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Parallelogram Tile+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2C9118D0D02D00C4EE1B /* Perspective Tile+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Perspective Tile+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2C9F18D0D03300C4EE1B /* Perspective Transform+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Perspective Transform+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1875,7 +1959,7 @@
 		55BD2D0118D0D08300C4EE1B /* Sharpen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sharpen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2D0F18D0D08600C4EE1B /* Spotlight+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Spotlight+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2D1D18D0D08F00C4EE1B /* Starshine+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Starshine+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55BD2D2B18D0D09200C4EE1B /* Sunbeams.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sunbeams.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		55BD2D2B18D0D09200C4EE1B /* Sunbeams+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sunbeams+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2D3918D0D09F00C4EE1B /* Torus Lens+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Torus Lens+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2D4718D0D0A200C4EE1B /* Triangle Tile+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Triangle Tile+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2D5518D0D0A800C4EE1B /* Twirl+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Twirl+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2813,7 +2897,7 @@
 				55BD2C4B18D0CF3300C4EE1B /* Monochrome+.bundle */,
 				55BD2C5918D0CF9500C4EE1B /* Motion Blur+.bundle */,
 				55BD2C6718D0CF9700C4EE1B /* Noise Reduction+.bundle */,
-				55BD2C7518D0CF9B00C4EE1B /* Op Tile.bundle */,
+				55BD2C7518D0CF9B00C4EE1B /* Op Tile+.bundle */,
 				55BD2C8318D0CF9F00C4EE1B /* Parallelogram Tile+.bundle */,
 				55BD2C9118D0D02D00C4EE1B /* Perspective Tile+.bundle */,
 				55BD2C9F18D0D03300C4EE1B /* Perspective Transform+.bundle */,
@@ -2826,7 +2910,7 @@
 				55BD2D0118D0D08300C4EE1B /* Sharpen+.bundle */,
 				55BD2D0F18D0D08600C4EE1B /* Spotlight+.bundle */,
 				55BD2D1D18D0D08F00C4EE1B /* Starshine+.bundle */,
-				55BD2D2B18D0D09200C4EE1B /* Sunbeams.bundle */,
+				55BD2D2B18D0D09200C4EE1B /* Sunbeams+.bundle */,
 				55BD2D3918D0D09F00C4EE1B /* Torus Lens+.bundle */,
 				55BD2D4718D0D0A200C4EE1B /* Triangle Tile+.bundle */,
 				55BD2D5518D0D0A800C4EE1B /* Twirl+.bundle */,
@@ -4836,7 +4920,7 @@
 			);
 			name = "Op Tile+";
 			productName = CIAffineTile;
-			productReference = 55BD2C7518D0CF9B00C4EE1B /* Op Tile.bundle */;
+			productReference = 55BD2C7518D0CF9B00C4EE1B /* Op Tile+.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55BD2C7718D0CF9F00C4EE1B /* Parallelogram Tile+ */ = {
@@ -5057,7 +5141,7 @@
 			);
 			name = "Sunbeams+";
 			productName = CIAffineTile;
-			productReference = 55BD2D2B18D0D09200C4EE1B /* Sunbeams.bundle */;
+			productReference = 55BD2D2B18D0D09200C4EE1B /* Sunbeams+.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55BD2D2D18D0D09F00C4EE1B /* Torus Lens+ */ = {

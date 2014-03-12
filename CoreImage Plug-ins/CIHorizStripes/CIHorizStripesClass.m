@@ -171,7 +171,7 @@
 	else  backColorAlpha = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent] alpha:[[pluginData backColor:YES] alphaComponent]];
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -194,8 +194,8 @@
 	[filter setValue:[CIVector vectorWithX:height - point.y Y:point.x] forKey:@"inputCenter"];
 	[filter setValue:foreColorAlpha forKey:@"inputColor0"];
 	[filter setValue:backColorAlpha forKey:@"inputColor1"];
-	[filter setValue:[NSNumber numberWithInt:amount] forKey:@"inputWidth"];
-	[filter setValue:[NSNumber numberWithFloat:1.0] forKey:@"inputSharpness"];
+	[filter setValue:@(amount) forKey:@"inputWidth"];
+	[filter setValue:@1.0f forKey:@"inputSharpness"];
 	pre_output = [filter valueForKey: @"outputImage"];
 	
 	// Run rotation

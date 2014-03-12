@@ -34,12 +34,10 @@
 
 - (void)dealloc
 {	
-	if (name) [name autorelease];
-	if (oldNames) [oldNames autorelease];
-	if (data) free(data);
-	if (thumbnail) [thumbnail autorelease];
-	if (thumbData) free(thumbData);
-	[super dealloc];
+	if (data)
+		free(data);
+	if (thumbData)
+		free(thumbData);
 }
 
 - (int)width
@@ -76,7 +74,6 @@
 {
 	return opacity;
 }
-
 
 - (int)mode
 {

@@ -455,7 +455,7 @@
 	mainColor = [CIColor colorWithRed:[mainNSColor redComponent] green:[mainNSColor greenComponent] blue:[mainNSColor blueComponent] alpha:[mainNSColor alphaComponent]];
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -483,12 +483,12 @@
 	[filter setDefaults];
 	[filter setValue:[CIVector vectorWithX:point1.x Y:height - point1.y] forKey:@"inputCenter"];
 	[filter setValue:mainColor forKey:@"inputColor"];
-	[filter setValue:[NSNumber numberWithFloat:halo_radius] forKey:@"inputHaloRadius"];
-	[filter setValue:[NSNumber numberWithFloat:halo_width] forKey:@"inputHaloWidth"];
-	[filter setValue:[NSNumber numberWithFloat:overlap] forKey:@"inputHaloOverlap"];
-	[filter setValue:[NSNumber numberWithFloat:strength] forKey:@"inputStriationStrength"];
-	[filter setValue:[NSNumber numberWithFloat:contrast] forKey:@"inputStriationContrast"];
-	[filter setValue:[NSNumber numberWithInt:0] forKey:@"inputTime"];
+	[filter setValue:@(halo_radius) forKey:@"inputHaloRadius"];
+	[filter setValue:@(halo_width) forKey:@"inputHaloWidth"];
+	[filter setValue:@(overlap) forKey:@"inputHaloOverlap"];
+	[filter setValue:@(strength) forKey:@"inputStriationStrength"];
+	[filter setValue:@(contrast) forKey:@"inputStriationContrast"];
+	[filter setValue:@0 forKey:@"inputTime"];
 	halo = [filter valueForKey: @"outputImage"];
 	
 	// Run filter

@@ -407,7 +407,7 @@
 	IntRect selection;
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -426,8 +426,8 @@
 	}
 	[filter setDefaults];
 	[filter setValue:input forKey:@"inputImage"];
-	[filter setValue:[NSNumber numberWithFloat:noise] forKey:@"inputNoiseLevel"];
-	[filter setValue:[NSNumber numberWithFloat:sharp] forKey:@"inputSharpness"];
+	[filter setValue:@(noise) forKey:@"inputNoiseLevel"];
+	[filter setValue:@(sharp) forKey:@"inputSharpness"];
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {

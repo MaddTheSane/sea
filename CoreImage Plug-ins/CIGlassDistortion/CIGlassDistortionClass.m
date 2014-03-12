@@ -152,7 +152,7 @@
 - (void)panelSelectionDidChange:(id)openPanel
 {
 	if ([[openPanel filenames] count] > 0) {
-		texturePath = [[openPanel filenames] objectAtIndex:0];
+		texturePath = [openPanel filenames][0];
 		if (texturePath) {
 			refresh = YES;
 			[self preview:NULL];
@@ -182,7 +182,7 @@
 	}
 	[panel setAlphaValue:1.0];
 	if (retval == NSOKButton) {
-		texturePath = [[openPanel filenames] objectAtIndex:0];
+		texturePath = [openPanel filenames][0];
 		localStr = [gOurBundle localizedStringForKey:@"texture label" value:@"Texture: %@" table:NULL];
 		[textureLabel setStringValue:[NSString stringWithFormat:localStr, [[texturePath lastPathComponent] stringByDeletingPathExtension]]];
 	}
@@ -444,7 +444,7 @@
 	else if (opaque) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent]];
 		
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -468,7 +468,7 @@
 	else
 		[filter setValue:[CIImage imageWithContentsOfURL:[NSURL fileURLWithPath:defaultPath]] forKey:@"inputTexture"];
 	[filter setValue:[CIVector vectorWithX:width / 2 Y:height / 2] forKey:@"inputCenter"];
-	[filter setValue:[NSNumber numberWithInt:scale] forKey:@"inputScale"];
+	[filter setValue:@(scale) forKey:@"inputScale"];
 	imm_output = [filter valueForKey: @"outputImage"];
 	
 	// Add opaque background (if required)

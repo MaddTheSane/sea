@@ -14,17 +14,16 @@
 
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
 {
-    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	
-    // Create and read the document file
-	XCFContent *contents = [[XCFContent alloc] initWithContentsOfFile: [(NSURL *)url path]];
-	SeaWhiteboard *whiteboard = [[SeaWhiteboard alloc] initWithContent:contents];
-	[whiteboard update];
-	
-	QLPreviewRequestSetDataRepresentation(preview, (CFDataRef)[[whiteboard printableImage] TIFFRepresentation], kUTTypeTIFF, NULL);
-	
-    [pool drain];
-    return noErr;
+    @autoreleasepool {
+		// Create and read the document file
+		XCFContent *contents = [[XCFContent alloc] initWithContentsOfFile: [(__bridge NSURL *)url path]];
+		SeaWhiteboard *whiteboard = [[SeaWhiteboard alloc] initWithContent:contents];
+		[whiteboard update];
+		
+		QLPreviewRequestSetDataRepresentation(preview, (__bridge CFDataRef)[[whiteboard printableImage] TIFFRepresentation], kUTTypeTIFF, NULL);
+		
+		return noErr;
+    }
 }
 
 void CancelPreviewGeneration(void* thisInterface, QLPreviewRequestRef preview)

@@ -14,16 +14,15 @@
 
 OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options, CGSize maxSize)
 {
-    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-
-	XCFContent *contents = [[XCFContent alloc] initWithContentsOfFile: [(NSURL *)url path]];
-	 SeaWhiteboard *whiteboard = [[SeaWhiteboard alloc] initWithContent:contents];
-	[whiteboard update];
-	
-	QLThumbnailRequestSetImageWithData(thumbnail,(CFDataRef)[[whiteboard printableImage] TIFFRepresentation], NULL);
-	
-	[pool drain];
-    return noErr;
+	@autoreleasepool {
+		XCFContent *contents = [[XCFContent alloc] initWithContentsOfFile: [(__bridge NSURL *)url path]];
+		SeaWhiteboard *whiteboard = [[SeaWhiteboard alloc] initWithContent:contents];
+		[whiteboard update];
+		
+		QLThumbnailRequestSetImageWithData(thumbnail,(__bridge CFDataRef)[[whiteboard printableImage] TIFFRepresentation], NULL);
+		
+		return noErr;
+	}
 }
 
 void CancelThumbnailGeneration(void* thisInterface, QLThumbnailRequestRef thumbnail)

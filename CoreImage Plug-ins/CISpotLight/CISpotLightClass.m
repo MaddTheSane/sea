@@ -474,7 +474,7 @@
 	mainColor = [CIColor colorWithRed:[mainNSColor redComponent] green:[mainNSColor greenComponent] blue:[mainNSColor blueComponent] alpha:[mainNSColor alphaComponent]];
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -498,8 +498,8 @@
 	[filter setValue:mainColor forKey:@"inputColor"];
 	[filter setValue:[CIVector vectorWithX:point.x Y:height - point.y Z:srcHeight] forKey:@"inputLightPosition"];
 	[filter setValue:[CIVector vectorWithX:apoint.x Y:height - apoint.y Z:destHeight] forKey:@"inputLightPointsAt"];
-	[filter setValue:[NSNumber numberWithFloat:concentration] forKey:@"inputConcentration"];
-	[filter setValue:[NSNumber numberWithFloat:brightness] forKey:@"inputBrightness"];
+	[filter setValue:@(concentration) forKey:@"inputConcentration"];
+	[filter setValue:@(brightness) forKey:@"inputBrightness"];
 	imm_output = [filter valueForKey: @"outputImage"];
 	
 	// Add opaque background (if required)

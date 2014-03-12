@@ -21,17 +21,12 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)compositeLayer:(id)layer withOptions:(CompositorOptions)options
 {
 	[self compositeLayer: layer withOptions: options andData: NULL];
 }
 
-- (void)compositeLayer:(id)layer withOptions:(CompositorOptions)options andData:(unsigned char *)destPtr
+- (void)compositeLayer:(SeaLayer*)layer withOptions:(CompositorOptions)options andData:(unsigned char *)destPtr
 {
 	unsigned char *srcPtr, *overlay, *replace;
 	int lwidth = [(SeaLayer *)layer width], lheight = [(SeaLayer *)layer height], mode = [(SeaLayer *)layer mode];
@@ -184,7 +179,7 @@
 	}
 }
 
-- (void)compositeLayer:(id)layer withFloat:(id)floatingLayer andOptions:(CompositorOptions)options
+- (void)compositeLayer:(SeaLayer*)layer withFloat:(id)floatingLayer andOptions:(CompositorOptions)options
 {
 	unsigned char *srcPtr, *floatPtr, *destPtr, *overlay, *replace;
 	int lwidth = [(SeaLayer *)layer width], lheight = [(SeaLayer *)layer height], mode = [(SeaLayer *)layer mode];

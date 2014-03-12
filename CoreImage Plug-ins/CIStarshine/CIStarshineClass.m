@@ -458,7 +458,7 @@
 	mainColor = [CIColor colorWithRed:[mainNSColor redComponent] green:[mainNSColor greenComponent] blue:[mainNSColor blueComponent] alpha:[mainNSColor alphaComponent]];
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -492,12 +492,12 @@
 	[filter setDefaults];
 	[filter setValue:[CIVector vectorWithX:point1.x Y:height - point1.y] forKey:@"inputCenter"];
 	[filter setValue:mainColor forKey:@"inputColor"];
-	[filter setValue:[NSNumber numberWithFloat:radius] forKey:@"inputRadius"];
-	[filter setValue:[NSNumber numberWithInt:scale] forKey:@"inputCrossScale"];
-	[filter setValue:[NSNumber numberWithFloat:angle] forKey:@"inputCrossAngle"];
-	[filter setValue:[NSNumber numberWithFloat:opacity] forKey:@"inputCrossOpacity"];
-	[filter setValue:[NSNumber numberWithFloat:star_width] forKey:@"inputCrossWidth"];
-	[filter setValue:[NSNumber numberWithInt:-2] forKey:@"inputEpsilon"];
+	[filter setValue:@(radius) forKey:@"inputRadius"];
+	[filter setValue:@(scale) forKey:@"inputCrossScale"];
+	[filter setValue:@(angle) forKey:@"inputCrossAngle"];
+	[filter setValue:@(opacity) forKey:@"inputCrossOpacity"];
+	[filter setValue:@(star_width) forKey:@"inputCrossWidth"];
+	[filter setValue:@-2 forKey:@"inputEpsilon"];
 	halo = [filter valueForKey: @"outputImage"];
 	
 	// Run filter
