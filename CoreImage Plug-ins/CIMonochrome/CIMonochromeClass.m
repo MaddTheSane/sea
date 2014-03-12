@@ -1,3 +1,4 @@
+#import "Bitmap.h"
 #import "CIMonochromeClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
@@ -56,9 +57,7 @@
 	
 	[intensitySlider setFloatValue:intensity];
 	
-	if (mainNSColor) [mainNSColor autorelease];
 	mainNSColor = [[mainColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	[mainNSColor retain];
 	
 	success = NO;
 	running = YES;
@@ -141,9 +140,7 @@
 {
 	PluginData *pluginData;
 	
-	if (mainNSColor) [mainNSColor autorelease];
 	mainNSColor = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	[mainNSColor retain];
 	if (running) {
 		refresh = YES;
 		[self preview:self];
@@ -483,7 +480,7 @@
 	
 	// Get data from output core image
 	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
+	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
 	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
 	CGImageDestinationFinalize(temp_writer);
 	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];

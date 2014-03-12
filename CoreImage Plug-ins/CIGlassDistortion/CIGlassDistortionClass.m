@@ -1,3 +1,4 @@
+#import "Bitmap.h"
 #import "CIGlassDistortionClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
@@ -164,21 +165,24 @@
 	PluginData *pluginData;
 	NSOpenPanel *openPanel;
 	NSString *path, *localStr, *startPath;
-	int retval;
+	NSInteger retval;
 
 	pluginData = [(SeaPlugins *)seaPlugins data];
-	if (texturePath) { [texturePath autorelease]; texturePath = NULL; }
+	if (texturePath) {
+		texturePath = nil;
+	}
 	openPanel = [NSOpenPanel openPanel];
 	[openPanel setTreatsFilePackagesAsDirectories:YES];
 	[openPanel setDelegate:self];
 	path = [NSString stringWithFormat:@"%@/textures/", [[NSBundle mainBundle] resourcePath]];
 	if ([pluginData window]) [panel setAlphaValue:0.4];
 	retval = [openPanel runModalForDirectory:path file:NULL types:[NSImage imageFileTypes]];
-	if (texturePath) { [texturePath autorelease]; texturePath = NULL; }
+	if (texturePath) {
+		texturePath = NULL;
+	}
 	[panel setAlphaValue:1.0];
 	if (retval == NSOKButton) {
 		texturePath = [[openPanel filenames] objectAtIndex:0];
-		[texturePath retain];
 		localStr = [gOurBundle localizedStringForKey:@"texture label" value:@"Texture: %@" table:NULL];
 		[textureLabel setStringValue:[NSString stringWithFormat:localStr, [[texturePath lastPathComponent] stringByDeletingPathExtension]]];
 	}
@@ -513,7 +517,7 @@
 	
 	// Get data from output core image
 	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
+	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
 	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
 	CGImageDestinationFinalize(temp_writer);
 	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];

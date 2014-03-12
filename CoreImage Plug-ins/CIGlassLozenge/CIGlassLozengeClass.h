@@ -162,14 +162,6 @@
 - (IBAction)update:(id)sender;
 
 /*!
-	@method		update:
-	@discussion	Updates the panel's labels.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
-
-/*!
 	@method		execute
 	@discussion	Executes the effect.
 */
