@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIBrightnessClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIBrightnessClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the brightness
 	IBOutlet id brightnessLabel;
 	
@@ -37,17 +34,14 @@
 	// The slider for the value
 	IBOutlet id saturationSlider;
 	
-	// The panel for the plug-in
-	IBOutlet id panel;
-
 	// The value of the brightness
-	float brightness;
+	CGFloat brightness;
 	
 	// The value of the contrast
-	float contrast;
+	CGFloat contrast;
 	
 	// The value of the saturation
-	float saturation;
+	CGFloat saturation;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;
@@ -57,7 +51,6 @@
 	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-
 }
 
 /*!

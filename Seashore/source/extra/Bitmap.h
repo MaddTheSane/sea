@@ -63,7 +63,7 @@ enum {
 				possible. You should always check for failed conversions. The
 				block of memory is safe for use with AltiVec.
 */
-unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, int iformat);
+__private_extern__ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, int iformat);
 
 /*!
 	@function	stripAlphaToWhite
@@ -81,7 +81,7 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length);
+__private_extern__ void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length);
 
 /*!
 	@function	premultiplyBitmap
@@ -97,7 +97,7 @@ extern inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned ch
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern inline void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
+__private_extern__ void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
 
 /*!
 	@function	unpremultiplyBitmap
@@ -114,7 +114,7 @@ extern inline void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned c
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern inline void unpremultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
+__private_extern__ void unpremultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
 
 /*!
 	@function	averagedComponentValue
@@ -137,7 +137,7 @@ extern inline void unpremultiplyBitmap(int spp, unsigned char *destPtr, unsigned
 	@param		where
 				The point at which to centre the box.
 */
-extern inline unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where);
+__private_extern__ unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where);
 
 
 /*!
@@ -146,7 +146,7 @@ extern inline unsigned char averagedComponentValue(int spp, unsigned char *data,
 	@param		profile
 				The profile to make the default display's profile.
 */
-extern inline void OpenDisplayProfile(CMProfileRef *profile);
+__private_extern__ void OpenDisplayProfile(CMProfileRef *profile);
 
 /*!
 	@function	CloseDisplayProfile
@@ -154,4 +154,4 @@ extern inline void OpenDisplayProfile(CMProfileRef *profile);
 	@param		profile
 				The profile to make the default display's profile.
 */
-extern inline void CloseDisplayProfile(CMProfileRef profile);
+__private_extern__ void CloseDisplayProfile(CMProfileRef profile);

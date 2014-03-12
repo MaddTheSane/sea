@@ -14,10 +14,10 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CICMYKHalftoneClass : NSObject {
-
+@interface CICMYKHalftoneClass : NSObject <SSSeaVisualPlugin>
+{
 	// The plug-in's manager
-	id seaPlugins;
+	__weak id seaPlugins;
 
 	// The label displaying the dot width
 	IBOutlet id dotWidthLabel;
@@ -49,11 +49,8 @@
 	// The slider for the UCR
 	IBOutlet id ucrSlider;
 
-	// The panel for the plug-in
-	IBOutlet id panel;
-
 	// The new width
-	int dotWidth;
+	NSInteger dotWidth;
 
 	// The new angle
 	float angle;

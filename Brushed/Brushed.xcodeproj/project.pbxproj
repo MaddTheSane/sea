@@ -29,6 +29,7 @@
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		55909E9A18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "en-GB"; path = "en-GB.lproj/Credits.rtf"; sourceTree = "<group>"; };
 		A80D889E043EE40D00A80207 /* BrushView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BrushView.h; sourceTree = "<group>"; };
 		A80D889F043EE40D00A80207 /* BrushView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BrushView.m; sourceTree = "<group>"; };
 		A84A94EA043DB32500A80207 /* BrushDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrushDocument.h; sourceTree = "<group>"; };
@@ -191,6 +192,7 @@
 				Japanese,
 				French,
 				German,
+				"en-GB",
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Brushed */;
 			projectDirPath = "";
@@ -242,6 +244,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A8EC24B8043D9B5A00A80207 /* English */,
+				55909E9A18CFEEB000F43F90 /* en-GB */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";

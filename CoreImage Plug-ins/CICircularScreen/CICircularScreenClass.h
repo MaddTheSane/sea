@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CICircularScreenClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CICircularScreenClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the dot width
 	IBOutlet id dotWidthLabel;
 	
@@ -31,14 +28,11 @@
 	// The slider for the sharpness
 	IBOutlet id sharpnessSlider;
 
-	// The panel for the plug-in
-	IBOutlet id panel;
-
 	// The new width
-	int dotWidth;
+	NSInteger dotWidth;
 
 	// The new sharpness
-	float sharpness;
+	CGFloat sharpness;
 	
 	// YES if the effect must be refreshed
 	BOOL refresh;

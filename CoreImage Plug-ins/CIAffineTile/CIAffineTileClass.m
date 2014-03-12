@@ -6,6 +6,7 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIAffineTileClass
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -146,7 +147,6 @@
 	vector unsigned char TOGGLERGBR = (vector unsigned char)(0x01, 0x02, 0x03, 0x00, 0x05, 0x06, 0x07, 0x04, 0x09, 0x0A, 0x0B, 0x08, 0x0D, 0x0E, 0x0F, 0x0C);
 	vector unsigned char *vdata, *voverlay, *vresdata;
 #else
-	__m128i opaquea = _mm_set1_epi32(0x000000FF);
 	__m128i *vdata, *voverlay, *vresdata;
 	__m128i vstore;
 #endif
@@ -373,7 +373,7 @@
 - (unsigned char *)tile:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
-	CIImage *input, *crop_output, *imm_output_1, *imm_output_2, *output, *background;
+	CIImage *input, *crop_output, *imm_output_1, *imm_output_2, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
 	CGImageDestinationRef temp_writer;
@@ -390,7 +390,7 @@
 	NSAffineTransform *offsetTransform, *trueTransform;
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];

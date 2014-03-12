@@ -15,11 +15,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIDisplacementDistortionClass : NSObject <NSOpenSavePanelDelegate> {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIDisplacementDistortionClass : NSObject <NSOpenSavePanelDelegate, SSSeaVisualPlugin>
+{
 	// The label displaying the scale
 	IBOutlet id scaleLabel;
 	
@@ -29,11 +26,8 @@
 	// The label displaying the current texture
 	IBOutlet id textureLabel;
 
-	// The panel for the plug-in
-	IBOutlet id panel;
-
 	// The scale of the crystallize
-	int scale;
+	NSInteger scale;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;

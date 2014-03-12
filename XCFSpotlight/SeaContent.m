@@ -2,6 +2,8 @@
 #import "SeaLayer.h"
 
 @implementation SeaContent
+@synthesize cmykSave;
+@synthesize trueView;
 
 - (id)init
 {
@@ -12,9 +14,9 @@
 	parasites = NULL; parasites_count = 0;
 	exifData = NULL;
 	layers = NULL; activeLayerIndex = 0;
-	layersToUndo = [[NSMutableArray array] retain];
-	layersToRedo = [[NSMutableArray array] retain];
-	orderings = [[NSMutableArray array] retain];
+	layersToUndo = [NSMutableArray array];
+	layersToRedo = [NSMutableArray array];
+	orderings = [NSMutableArray array];
 	deletedLayers = [[NSArray alloc] init];
 	selectedChannel = kAllChannels; trueView = NO;
 	cmykSave = NO;
@@ -29,44 +31,13 @@
 	
 	if (parasites) {
 		for (i = 0; i < parasites_count; i++) {
-			[parasites[i].name autorelease];
+			CFRelease(parasites[i].name);
 			free(parasites[i].data);
 		}
 		free(parasites);
 	}
-	if (exifData) [exifData autorelease];
-	if (lostprops) free(lostprops);
-	if (layers) {
-		for (i = 0; i < [layers count]; i++) {
-			[[layers objectAtIndex:i] autorelease];
-		}
-		[layers autorelease];
-	}
-	if (layersToUndo) {
-		for (i = 0; i < [layersToUndo count]; i++) {
-			[[layersToUndo objectAtIndex:i] autorelease];
-		}
-		[layersToUndo autorelease];
-	}
-	if (layersToRedo) {
-		for (i = 0; i < [layersToRedo count]; i++) {
-			[[layersToRedo objectAtIndex:i] autorelease];
-		}
-		[layersToRedo autorelease];
-	}
-	if (deletedLayers) {
-		for (i = 0; i < [deletedLayers count]; i++) {
-			[[deletedLayers objectAtIndex:i] autorelease];
-		}
-		[deletedLayers autorelease];
-	}
-	if(orderings){
-		for (i = 0; i < [orderings count]; i++) {
-			[[orderings objectAtIndex:i] autorelease];
-		}
-		[orderings autorelease];
-	}
-	[super dealloc];
+	if (lostprops)
+		free(lostprops);
 }
 
 - (int)type
@@ -163,7 +134,7 @@
 	int i;
 	
 	for (i = 0; i < parasites_count; i++) {
-		if ([name isEqualToString:parasites[i].name])
+		if ([name isEqualToString:(__bridge NSString *)(parasites[i].name)])
 			return &(parasites[i]);
 	}
 	
@@ -177,14 +148,14 @@
 	// Find the parasite to delete
 	x = -1;
 	for (i = 0; i < parasites_count && x == -1; i++) {
-		if ([name isEqualToString:parasites[i].name])
+		if ([name isEqualToString:(__bridge NSString *)(parasites[i].name)])
 			x = i;
 	}
 	
 	if (x != -1) {
 		
 		// Destroy it
-		[parasites[x].name autorelease];
+		CFRelease(parasites[x].name);
 		free(parasites[x].data);
 	
 		// Update the parasites list
@@ -194,8 +165,7 @@
 				parasites[i] = parasites[i + 1];
 			}
 			parasites = realloc(parasites, sizeof(ParasiteData) * parasites_count);
-		}
-		else {
+		} else {
 			free(parasites);
 			parasites = NULL;
 		}
@@ -206,7 +176,7 @@
 - (void)addParasite:(ParasiteData)parasite
 {
 	// Delete existing parasite with the same name (if any)
-	[self deleteParasiteWithName:parasite.name];
+	[self deleteParasiteWithName:(__bridge NSString *)(parasite.name)];
 	
 	// Add parasite
 	parasites_count++;
@@ -215,47 +185,27 @@
 	parasites[parasites_count - 1] = parasite;
 }
 
-- (BOOL)trueView
-{
-	return trueView;
-}
-
-- (void)setTrueView:(BOOL)value
-{
-	trueView = value;
-}
-
-- (void)setCMYKSave:(BOOL)value
-{
-	cmykSave = value;
-}
-
-- (BOOL)cmykSave
-{
-	return cmykSave;
-}
-
 - (NSDictionary *)exifData
 {
 	return exifData;
 }
 
-- (id)layer:(int)index
+- (id)layer:(NSInteger)index
 {
-	return [layers objectAtIndex:index];
+	return layers[index];
 }
 
-- (int)layerCount
+- (NSInteger)layerCount
 {
 	return [layers count];
 }
 
 - (id)activeLayer
 {
-	return (activeLayerIndex < 0) ? NULL : [layers objectAtIndex:activeLayerIndex];
+	return (activeLayerIndex < 0) ? nil : layers[activeLayerIndex];
 }
 
-- (int)activeLayerIndex
+- (NSInteger)activeLayerIndex
 {
 	return activeLayerIndex;
 }

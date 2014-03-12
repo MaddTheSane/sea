@@ -3,14 +3,13 @@
 
 @implementation XCFLayer
 
-static inline void fix_endian_read(int *input, int size)
+static inline void fix_endian_read(int *input, size_t size)
 {
 #ifdef __LITTLE_ENDIAN__
-	int i;
 	
-	for (i = 0; i < size; i++) {
-		input[i] = ntohl(input[i]);
-	}
+	dispatch_apply(size, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		input[i] = CFSwapInt32BigToHost(input[i]);
+	});
 #endif
 }
 
@@ -37,11 +36,8 @@ static inline void fix_endian_read(int *input, int size)
 				i++;
 			}
 		} while (nameString[i - 1] != 0 && !ferror(file));
-		if (name) [name autorelease];
 		name = [[NSString alloc] initWithUTF8String:nameString];
-	}
-	else {
-		if (name) [name autorelease];
+	} else {
 		name = [[NSString alloc] initWithString:LOCALSTR(@"untitled", @"Untitled")];
 	}
 	
@@ -499,24 +495,21 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Read the header
 	if ([self readHeader:file] == NO) {
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// NSLog(@"Layer Properties Begin: %d", ftell(file));
 	
 	// Read the properties
 	if ([self readProperties:file sharedInfo:info] == NO) {
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// NSLog(@"Layer Properties End: %d", ftell(file));
 	
 	// Read the body
 	if ([self readBody:file sharedInfo:info] == NO) {
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// Check the alpha

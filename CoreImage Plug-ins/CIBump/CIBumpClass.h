@@ -14,20 +14,14 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIBumpClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIBumpClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the scale
 	IBOutlet id scaleLabel;
 	
 	// The slider for the scale
 	IBOutlet id scaleSlider;
 	
-	// The panel for the plug-in
-	IBOutlet id panel;
-
 	// YES if the application succeeded
 	BOOL success;
 

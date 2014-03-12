@@ -1,3 +1,4 @@
+#import "Bitmap.h"
 #import "CIBloomClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
@@ -7,6 +8,12 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIBloomClass
+@synthesize radiusSlider;
+@synthesize radiusLabel;
+@synthesize panel;
+@synthesize intensityLabel;
+@synthesize intensitySlider;
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -50,7 +57,7 @@
 	if (radius < 0 || radius > 0.1)
 		radius = 10;
 	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%d", radius]];
+	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
 	[radiusSlider setFloatValue:radius];
 	
 	if ([gUserDefaults objectForKey:@"CIBloom.intensity"])
@@ -152,7 +159,7 @@
 	[panel setAlphaValue:1.0];
 	
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) 
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%d", radius]];
+	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
 	[intensityLabel setStringValue:[NSString stringWithFormat:@"%.0f%%", intensity * 100.0]];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
@@ -238,8 +245,7 @@
 	vector unsigned char TOGGLERGBR = (vector unsigned char)(0x01, 0x02, 0x03, 0x00, 0x05, 0x06, 0x07, 0x04, 0x09, 0x0A, 0x0B, 0x08, 0x0D, 0x0E, 0x0F, 0x0C);
 	vector unsigned char *vdata, *voverlay, *vresdata;
 #else
-	__m128i opaquea = _mm_set1_epi32(0x000000FF);
-	__m128i *vdata, *voverlay, *vresdata;
+	__m128i *vdata;
 	__m128i vstore;
 #endif
 	IntRect selection;
@@ -394,7 +400,7 @@
 - (unsigned char *)noiseReduction:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
-	CIImage *input, *crop_output, *output, *background;
+	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
 	CGImageDestinationRef temp_writer;
@@ -407,7 +413,7 @@
 	IntRect selection;
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -426,8 +432,8 @@
 	}
 	[filter setDefaults];
 	[filter setValue:input forKey:@"inputImage"];
-	[filter setValue:[NSNumber numberWithInt:radius] forKey:@"inputRadius"];
-	[filter setValue:[NSNumber numberWithFloat:intensity] forKey:@"inputIntensity"];
+	[filter setValue:@(radius) forKey:@"inputRadius"];
+	[filter setValue:@(intensity) forKey:@"inputIntensity"];
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
@@ -446,8 +452,7 @@
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];		
 		
-	}
-	else {
+	} else {
 	
 		// Create output core image
 		rect.origin.x = 0;

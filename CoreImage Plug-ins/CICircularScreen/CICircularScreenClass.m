@@ -1,3 +1,4 @@
+#import "Bitmap.h"
 #import "CICircularScreenClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
@@ -7,6 +8,8 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CICircularScreenClass
+@synthesize panel;
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -65,8 +68,8 @@
 	if (sharpness < 0.0 || sharpness > 1.0)
 		sharpness = 0.7;
 			
-	[dotWidthLabel setStringValue:[NSString stringWithFormat:@"%d", dotWidth]];
-	[dotWidthSlider setIntValue:dotWidth];
+	[dotWidthLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)dotWidth]];
+	[dotWidthSlider setIntegerValue:dotWidth];
 	[sharpnessLabel setStringValue:[NSString stringWithFormat:@"%.2f", sharpness]];
 	[sharpnessSlider setFloatValue:sharpness];
 	
@@ -157,7 +160,7 @@
 	
 	[panel setAlphaValue:1.0];
 	
-	[dotWidthLabel setStringValue:[NSString stringWithFormat:@"%d", dotWidth]];
+	[dotWidthLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)dotWidth]];
 	[sharpnessLabel setStringValue:[NSString stringWithFormat:@"%.2f", sharpness]];
 	
 	refresh = YES;
@@ -337,13 +340,13 @@
 {
 	int i, vec_len, width, height, channel;
 	unsigned char ormask[16], *resdata, *datatouse;
-	#ifdef __ppc__
+#ifdef __ppc__
 	vector unsigned char TOALPHA = (vector unsigned char)(0x10, 0x00, 0x00, 0x00, 0x10, 0x04, 0x04, 0x04, 0x10, 0x08, 0x08, 0x08, 0x10, 0x0C, 0x0C, 0x0C);
 	vector unsigned char HIGHVEC = (vector unsigned char)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
 	vector unsigned char *vdata, *rvdata, orvmask;
-	#else
+#else
 	__m128i *vdata, *rvdata, orvmask;
-	#endif
+#endif
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -354,40 +357,40 @@
 		vec_len = width * height * 4;
 		if (vec_len % 16 == 0) { vec_len /= 16; }
 		else { vec_len /= 16; vec_len++; }
-		#ifdef __ppc__
+#ifdef __ppc__
 		vdata = (vector unsigned char *)data; // NB: data may equal newdata
 		rvdata = (vector unsigned char *)newdata;
-		#else
+#else
 		vdata = (__m128i *)data;
 		rvdata = (__m128i *)newdata;
-		#endif
+#endif
 		datatouse = newdata;
 		if (channel == kPrimaryChannels) {
 			for (i = 0; i < 16; i++) {
 				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 			}
 			memcpy(&orvmask, ormask, 16);
-			#ifdef __ppc__
+#ifdef __ppc__
 			for (i = 0; i < vec_len; i++) {
 				rvdata[i] = vec_or(vdata[i], orvmask);
 			}
-			#else
+#else
 			for (i = 0; i < vec_len; i++) {
 				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
 			}
-			#endif
+#endif
 		}
 		else if (channel == kAlphaChannel) {
-			#ifdef __ppc__
+#ifdef __ppc__
 			for (i = 0; i < vec_len; i++) {
 				rvdata[i] = vec_perm(vdata[i], HIGHVEC, TOALPHA);
 			}
-			#else
+#else
 			for (i = 0; i < width * height; i++) {
 				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 				newdata[i * 4] = 255;
 			}
-			#endif
+#endif
 		}
 	}
 	
@@ -400,7 +403,7 @@
 - (unsigned char *)halftone:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
-	CIImage *input, *crop_output, *output, *background;
+	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
 	CGImageDestinationRef temp_writer;
@@ -414,7 +417,7 @@
 	IntPoint point;
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -435,8 +438,8 @@
 	[filter setDefaults];
 	[filter setValue:input forKey:@"inputImage"];
 	[filter setValue:[CIVector vectorWithX:point.x Y:height - point.y] forKey:@"inputCenter"];
-	[filter setValue:[NSNumber numberWithInt:dotWidth] forKey:@"inputWidth"];
-	[filter setValue:[NSNumber numberWithFloat:sharpness] forKey:@"inputSharpness"];
+	[filter setValue:@(dotWidth) forKey:@"inputWidth"];
+	[filter setValue:@(sharpness) forKey:@"inputSharpness"];
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {

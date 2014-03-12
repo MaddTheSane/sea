@@ -14,19 +14,13 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CICircularWrapClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CICircularWrapClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the angle
 	IBOutlet id angleLabel;
 	
 	// The slider for the angle
 	IBOutlet id angleSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// YES if the application succeeded
 	BOOL success;

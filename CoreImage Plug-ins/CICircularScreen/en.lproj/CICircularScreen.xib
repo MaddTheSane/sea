@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="BlurClass">
+        <customObject id="-2" userLabel="File's Owner" customClass="CICircularScreenClass">
             <connections>
                 <outlet property="dotWidthLabel" destination="21" id="29"/>
                 <outlet property="dotWidthSlider" destination="14" id="30"/>

@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIAffineTransformClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIAffineTransformClass : NSObject <SSSeaPlugin>
+{
 	// YES if the application succeeded
 	BOOL success;
 

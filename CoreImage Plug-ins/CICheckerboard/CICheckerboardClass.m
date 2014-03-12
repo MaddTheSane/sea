@@ -5,6 +5,7 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CICheckerboardClass
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -81,7 +82,6 @@
 	IntRect selection;
 	int i, j, spp, width, height;
 	unsigned char *data, *overlay, *resdata;
-	int vec_len, max;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -170,7 +170,7 @@
 	else  backColorAlpha = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent] alpha:[[pluginData backColor:YES] alphaComponent]];
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -193,8 +193,8 @@
 	[filter setValue:[CIVector vectorWithX:point.x Y:height - point.y] forKey:@"inputCenter"];
 	[filter setValue:backColorAlpha forKey:@"inputColor0"];
 	[filter setValue:foreColorAlpha forKey:@"inputColor1"];
-	[filter setValue:[NSNumber numberWithInt:amount] forKey:@"inputWidth"];
-	[filter setValue:[NSNumber numberWithFloat:1.0] forKey:@"inputSharpness"];
+	[filter setValue:@(amount) forKey:@"inputWidth"];
+	[filter setValue:@1.0f forKey:@"inputSharpness"];
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {

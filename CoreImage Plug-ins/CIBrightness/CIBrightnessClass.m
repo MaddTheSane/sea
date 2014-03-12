@@ -7,6 +7,8 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIBrightnessClass
+@synthesize seaPlugins;
+@synthesize panel;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -225,7 +227,7 @@
 	vector unsigned char TOGGLERGBR = (vector unsigned char)(0x01, 0x02, 0x03, 0x00, 0x05, 0x06, 0x07, 0x04, 0x09, 0x0A, 0x0B, 0x08, 0x0D, 0x0E, 0x0F, 0x0C);
 	vector unsigned char *vdata, *voverlay, *vresdata;
 #else
-	__m128i *vdata, *voverlay, *vresdata;
+	__m128i *vdata;
 	__m128i vstore;
 #endif
 	IntRect selection;
@@ -397,7 +399,7 @@
 - (unsigned char *)adjust:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
-	CIImage *input, *imm_output, *crop_output, *output, *background;
+	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
 	CGImageDestinationRef temp_writer;
@@ -410,7 +412,7 @@
 	IntRect selection;
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -429,9 +431,9 @@
 	}
 	[filter setDefaults];
 	[filter setValue:input forKey:@"inputImage"];
-	[filter setValue:[NSNumber numberWithFloat:brightness] forKey:@"inputBrightness"];
-	[filter setValue:[NSNumber numberWithFloat:contrast] forKey:@"inputContrast"];
-	[filter setValue:[NSNumber numberWithFloat:saturation] forKey:@"inputSaturation"];
+	[filter setValue:@(brightness) forKey:@"inputBrightness"];
+	[filter setValue:@(contrast) forKey:@"inputContrast"];
+	[filter setValue:@(saturation) forKey:@"inputSaturation"];
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {

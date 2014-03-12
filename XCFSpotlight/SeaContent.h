@@ -13,7 +13,7 @@
 				The parasite's data.
 */
 typedef struct {
-	NSString *name;
+	CFStringRef name;
 	unsigned int flags;
 	unsigned int size;
 	unsigned char *data;
@@ -54,25 +54,32 @@ typedef struct {
 	NSMutableArray *orderings;
 	
 	// Stores index of layer that is active
-	int activeLayerIndex;
+	NSInteger activeLayerIndex;
 	
 	// The currently selected channel (see constants)
 	int selectedChannel;
-	
-	//  If YES the user wants the typical view otherwise the user wants the channel-specific view
-	BOOL trueView;
 		
 	// All the parasites
 	ParasiteData *parasites;
 	int parasites_count;
 	
-	// Save as a CMYK TIFF file
-	BOOL cmykSave;
-	
 	// The EXIF data associated with this image
 	NSDictionary *exifData;
-	
 }
+
+/*!
+	@property	cmykSave
+	@discussion	Shows whether TIFF files should be saved using the CMYK colour
+				space.
+*/
+@property (setter = setCMYKSave:) BOOL cmykSave;
+
+/*!
+	@property	trueView
+	@discussion	Shows whether the document view should be showing all channels
+				or just the channel being edited.
+*/
+@property BOOL trueView;
 
 // CREATION METHODS
 
@@ -85,13 +92,6 @@ typedef struct {
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)init;
-
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 // PROPERTY METHODS
 
@@ -235,44 +235,6 @@ typedef struct {
 - (void)addParasite:(ParasiteData)parasite;
 
 /*!
-	@method		trueView
-	@discussion	Returns whether the document view should be showing all channels
-				or just the channel being edited.
-	@result		YES if the document view should be showing all channels, NO
-				otherwise.
-*/
-- (BOOL)trueView;
-
-/*!
-	@method		setTrueView:
-	@discussion	Sets whether the document view should be showing all channels or
-				just the channel being edited.
-	@param		value
-				YES if the document should be showing all channels, NO
-				otherwise.
-*/
-- (void)setTrueView:(BOOL)value;
-
-/*!
-	@method		setCMYKSave
-	@discussion	Sets whether TIFF files should be saved using the CMYK colour
-				space.
-	@param		value
-				YES if TIFF files should be saved using the CMYK colour space,
-				NO otherwise.
-*/
-- (void)setCMYKSave:(BOOL)value;
-
-/*!
-	@method		cmykSave
-	@discussion	Returns whether TIFF files should be saved using the CMYK colour
-				space.
-	@result		YES if TIFF files should be saved using the CMYK colour space,
-				NO otherwise.
-*/
-- (BOOL)cmykSave;
-
-/*!
 	@method		exifData
 	@discussion	Returns the EXIF data for this document.
 	@result		Returns an NSDictionary containing the EXIF data or NULL if no
@@ -289,7 +251,7 @@ typedef struct {
 				The index of the desired layer.
 	@result		An instance of SeaLayer corresponding to the specified index.
 */
-- (id)layer:(int)index;
+- (id)layer:(NSInteger)index;
 
 /*!
 	@method		layerCount
@@ -297,7 +259,7 @@ typedef struct {
 	@result		Returns an integer indicating the total number of layers in the
 				document.
 */
-- (int)layerCount;
+- (NSInteger)layerCount;
 
 /*!
 	@method		activeLayer
@@ -311,6 +273,6 @@ typedef struct {
 	@discussion	Returns the index of the currently active layer.
 	@result		Returns an integer representing the index of the active layer.
 */
-- (int)activeLayerIndex;
+- (NSInteger)activeLayerIndex;
 
 @end

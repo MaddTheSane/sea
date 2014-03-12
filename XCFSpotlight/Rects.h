@@ -65,7 +65,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The NSPoint to convert.
 	@result		Returns an IntPoint with similar values to the NSPoint.
 */
- IntPoint NSPointMakeIntPoint(NSPoint point);
+__private_extern__ IntPoint NSPointMakeIntPoint(NSPoint point);
 
 /*!
 	@function	NSSizeMakeIntSize
@@ -75,7 +75,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The NSSize to convert.
 	@result		Returns an IntSize with similar values to the NSSize.
 */
- IntSize NSSizeMakeIntSize(NSSize size);
+__private_extern__ IntSize NSSizeMakeIntSize(NSSize size);
 
 /*!
 	@function	IntPointMakeNSPoint
@@ -84,7 +84,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The IntPoint to convert.
 	@result		Returns a NSPoint with similar values to the IntPoint.
 */
- NSPoint IntPointMakeNSPoint(IntPoint point);
+__private_extern__ NSPoint IntPointMakeNSPoint(IntPoint point);
 
 /*!
 	@function	IntSizeMakeNSSize
@@ -93,7 +93,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The IntSize to convert.
 	@result		Returns a NSSize with similar values to the IntSize.
 */
- NSSize IntSizeMakeNSSize(IntSize size);
+__private_extern__ NSSize IntSizeMakeNSSize(IntSize size);
 
 /*!
 	@function	IntMakePoint
@@ -104,7 +104,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The y co-ordinate of the new point.
 	@result		Returns an IntPoint with the given co-ordinates.
 */
- IntPoint IntMakePoint(int x, int y);
+__private_extern__ IntPoint IntMakePoint(int x, int y);
 
 /*!
 	@function	IntMakeSize
@@ -115,7 +115,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The height of the new size.
 	@result		Returns an IntSize with the given values.
 */
- IntSize IntMakeSize(int width, int height);
+__private_extern__ IntSize IntMakeSize(int width, int height);
 
 /*!
 	@function	IntMakeRect
@@ -130,7 +130,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The height of the new rectangle.
 	@result		Returns an IntRect with the given values.
 */
- IntRect IntMakeRect(int x, int y, int width, int height);
+__private_extern__ IntRect IntMakeRect(int x, int y, int width, int height);
 
 /*!
 	@function	IntOffsetRect
@@ -143,7 +143,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 	@param		y
 				The amount by which to offset the y co-ordinates.
 */
- void IntOffsetRect(IntRect *rect, int x, int y);
+__private_extern__ void IntOffsetRect(IntRect *rect, int x, int y);
 
 /*!
 	@function	IntPointInRect
@@ -156,7 +156,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The rectangle in which to test for the point.
 	@result		YES if the point lies within the rectangle, NO otherwise.
 */
- BOOL IntPointInRect(IntPoint point, IntRect rect);
+__private_extern__ BOOL IntPointInRect(IntPoint point, IntRect rect);
 
 /*!
 	@function	IntContainsRect
@@ -170,7 +170,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 	@result		Returns YES if the bigRect entirely contains the littleRect, NO
 				otherwise.
 */
- BOOL IntContainsRect(IntRect bigRect, IntRect littleRect);
+__private_extern__ BOOL IntContainsRect(IntRect bigRect, IntRect littleRect);
 
 /*!
 	@function	IntConstrainRect
@@ -182,7 +182,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 	@result		Returns an IntRect that is the littleRect constrained to the
 				bigRect.
 */
- IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect);
+__private_extern__ IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect);
 
 /*!
 	@function	NSConstrainRect
@@ -194,7 +194,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 	@result		Returns an NSRect that is the littleRect constrained to the
 				bigRect.
 */
- NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect);
+__private_extern__ NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect);
 
 /*!
 	@function	IntSumRects
@@ -205,7 +205,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The second IntRect that we are adding to the aguend.
 	@result		Returns an IntRect that contains the aguend and addend.
 */
- IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
+__private_extern__ IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
 
 /*!
 	@function	NSRectMakeIntRect
@@ -215,7 +215,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The NSRect to convert.
 	@result		Returns an IntRect at least the size of NSRect.
 */
- IntRect NSRectMakeIntRect(NSRect rect);
+__private_extern__ IntRect NSRectMakeIntRect(NSRect rect);
 
 /*!
 	@function	IntRectMakeNSRect
@@ -224,7 +224,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The IntRect to convert.
 	@result		Returns an NSRect with similar values to the NSRect.
 */
- NSRect IntRectMakeNSRect(IntRect rect);
+__private_extern__ NSRect IntRectMakeNSRect(IntRect rect);
 
 /*!
 	@function	NSPointRotateNSPoint
@@ -237,4 +237,4 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The number of radians that point is rotated.
 	@result		Returns an NSPoint with the defined rotation.
 */
- NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians);
+__private_extern__ NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians);

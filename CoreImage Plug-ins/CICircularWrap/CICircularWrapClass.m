@@ -1,4 +1,5 @@
 #import "CICircularWrapClass.h"
+#include <math.h>
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
@@ -7,6 +8,8 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CICircularWrapClass
+@synthesize seaPlugins;
+@synthesize panel;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -47,7 +50,8 @@
 	return @"Seashore Approved (Bobo)";
 }
 
-#define PI 3.14159265
+#undef PI
+#define PI M_PI
 
 - (void)run
 {
@@ -494,7 +498,7 @@
 	else if (opaque) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent]];
 		
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:[NSDictionary dictionaryWithObjectsAndKeys:(id)[pluginData displayProf], kCIContextWorkingColorSpace, (id)[pluginData displayProf], kCIContextOutputColorSpace, NULL]];
+	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];
@@ -543,8 +547,8 @@
 	[filter setDefaults];
 	[filter setValue:imm_output_2 forKey:@"inputImage"];
 	[filter setValue:[CIVector vectorWithX:point.x Y:height - point.y] forKey:@"inputCenter"];
-	[filter setValue:[NSNumber numberWithInt:radius] forKey:@"inputRadius"];
-	[filter setValue:[NSNumber numberWithFloat:angle] forKey:@"inputAngle"];
+	[filter setValue:@(radius) forKey:@"inputRadius"];
+	[filter setValue:@(angle) forKey:@"inputAngle"];
 	imm_output_3 = [filter valueForKey: @"outputImage"];
 	
 	// Add opaque background (if required)

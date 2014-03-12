@@ -15,31 +15,13 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIBloomClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// The label displaying the radius
-	IBOutlet id radiusLabel;
-	
-	// The slider for the radius
-	IBOutlet id radiusSlider;
-
-	// The label displaying the intensity
-	IBOutlet id intensityLabel;
-	
-	// The slider for the intensity
-	IBOutlet id intensitySlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
+@interface CIBloomClass : NSObject <SSSeaVisualPlugin>
+{
 	// The new radius
-	int radius;
+	NSInteger radius;
 
 	// The new intensity
-	float intensity;
+	CGFloat intensity;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;
@@ -51,6 +33,18 @@
 	unsigned char *newdata;
 
 }
+	// The label displaying the radius
+@property (weak) IBOutlet NSTextField *radiusLabel;
+	
+	// The slider for the radius
+@property (weak) IBOutlet NSSlider *radiusSlider;
+
+	// The label displaying the intensity
+@property (weak) IBOutlet NSTextField *intensityLabel;
+	
+	// The slider for the intensity
+@property (weak) IBOutlet NSSlider *intensitySlider;
+
 
 /*!
 	@method		initWithManager:
