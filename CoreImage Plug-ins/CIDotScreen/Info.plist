@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AltiVecOrSSERequired</key>
-	<string>YES</string>
+	<true/>
 	<key>CFBundleAllowMixedLocalizations</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

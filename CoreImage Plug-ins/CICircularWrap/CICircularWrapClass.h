@@ -150,14 +150,6 @@
 - (IBAction)update:(id)sender;
 
 /*!
-	@method		update:
-	@discussion	Updates the panel's labels.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
-
-/*!
 	@method		determineContentBorders
 	@discussion	Determines the content borders, must be called before executing.
 	@param		pluginData

@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		551E570718D01CE300E4CDAF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551E570918D01CE300E4CDAF /* MainMenu.xib */; };
 		A8F100CD09C126A6003F15A3 /* Globals.h in Headers */ = {isa = PBXBuildFile; fileRef = A8B6866B047A427300A80207 /* Globals.h */; };
 		A8F100CE09C126A6003F15A3 /* MainController.h in Headers */ = {isa = PBXBuildFile; fileRef = A8B68671047A450B00A80207 /* MainController.h */; };
-		A8F100D009C126A6003F15A3 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		A8F100D109C126A6003F15A3 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A8B6866D047A42C700A80207 /* Credits.rtf */; };
 		A8F100D309C126A6003F15A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		A8F100D409C126A6003F15A3 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B68670047A450B00A80207 /* MainController.m */; };
@@ -19,9 +19,9 @@
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		551E570818D01CE300E4CDAF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A8B6866B047A427300A80207 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		A8B6866E047A42C700A80207 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		A8B68670047A450B00A80207 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				A8B6866D047A42C700A80207 /* Credits.rtf */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+				551E570918D01CE300E4CDAF /* MainMenu.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -182,8 +182,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8F100D009C126A6003F15A3 /* MainMenu.nib in Resources */,
 				A8F100D109C126A6003F15A3 /* Credits.rtf in Resources */,
+				551E570718D01CE300E4CDAF /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,12 +202,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+		551E570918D01CE300E4CDAF /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				29B97319FDCFA39411CA2CEA /* English */,
+				551E570818D01CE300E4CDAF /* en */,
 			);
-			name = MainMenu.nib;
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		A8B6866D047A42C700A80207 /* Credits.rtf */ = {

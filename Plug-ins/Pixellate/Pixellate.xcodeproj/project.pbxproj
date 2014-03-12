@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		551E56F818D01C0D00E4CDAF /* Pixellate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551E56FA18D01C0D00E4CDAF /* Pixellate.xib */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		A831E1410789471D0009080F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A831E13F0789471D0009080F /* Localizable.strings */; };
 		A83550AA0C2E43D300C7F9D9 /* PixellateClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A83550A80C2E43D300C7F9D9 /* PixellateClass.m */; };
-		A83550DD0C2E45A900C7F9D9 /* Pixellate.nib in Resources */ = {isa = PBXBuildFile; fileRef = A83550DB0C2E45A900C7F9D9 /* Pixellate.nib */; };
 		A89DCE51078A300C005008F4 /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A89DCE50078A300C005008F4 /* Rects.m */; };
 /* End PBXBuildFile section */
 
@@ -18,13 +18,13 @@
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		551E56F918D01C0D00E4CDAF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Pixellate.xib; sourceTree = "<group>"; };
 		55909E9518CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Pixellate.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pixellate.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A831E1400789471D0009080F /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A83550A80C2E43D300C7F9D9 /* PixellateClass.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PixellateClass.m; sourceTree = "<group>"; };
 		A83550A90C2E43D300C7F9D9 /* PixellateClass.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PixellateClass.h; sourceTree = "<group>"; };
-		A83550DC0C2E45A900C7F9D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Pixellate.nib; sourceTree = "<group>"; };
 		A84C96B8078965B900451E47 /* SeaPlugins.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = SeaPlugins.h; path = ../Common/SeaPlugins.h; sourceTree = "<group>"; };
 		A89DCE2A078A2FCB005008F4 /* Rects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rects.h; path = ../Common/Rects.h; sourceTree = "<group>"; };
 		A89DCE50078A300C005008F4 /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Rects.m; path = ../Common/Rects.m; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A83550DB0C2E45A900C7F9D9 /* Pixellate.nib */,
+				551E56FA18D01C0D00E4CDAF /* Pixellate.xib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				A831E13F0789471D0009080F /* Localizable.strings */,
 			);
@@ -166,7 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A831E1410789471D0009080F /* Localizable.strings in Resources */,
-				A83550DD0C2E45A900C7F9D9 /* Pixellate.nib in Resources */,
+				551E56F818D01C0D00E4CDAF /* Pixellate.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +185,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		551E56FA18D01C0D00E4CDAF /* Pixellate.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				551E56F918D01C0D00E4CDAF /* en */,
+			);
+			name = Pixellate.xib;
+			sourceTree = "<group>";
+		};
 		A831E13F0789471D0009080F /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -192,14 +200,6 @@
 				55909E9518CFEEB000F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		A83550DB0C2E45A900C7F9D9 /* Pixellate.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A83550DC0C2E45A900C7F9D9 /* English */,
-			);
-			name = Pixellate.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

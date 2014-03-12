@@ -14,19 +14,13 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIEdgesClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIEdgesClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the intensity
 	IBOutlet id intensityLabel;
 	
 	// The slider for the intensity
 	IBOutlet id intensitySlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The new intensity
 	float intensity;
@@ -39,7 +33,6 @@
 	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-
 }
 
 /*!

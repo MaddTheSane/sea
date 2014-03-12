@@ -3,6 +3,7 @@
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SVGContent">
@@ -19,10 +20,10 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="SVG Load" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="409" y="434" width="240" height="103"/>
+            <rect key="contentRect" x="409" y="434" width="240" height="115"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="6">
-                <rect key="frame" x="0.0" y="0.0" width="240" height="103"/>
+                <rect key="frame" x="0.0" y="0.0" width="240" height="115"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="21">
@@ -34,7 +35,7 @@
                         </constraints>
                     </progressIndicator>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="23">
-                        <rect key="frame" x="18" y="44" width="204" height="14"/>
+                        <rect key="frame" x="18" y="56" width="204" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="center" title="This may take several minutes" id="53">
                             <font key="font" metaFont="smallSystem"/>
@@ -43,7 +44,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26">
-                        <rect key="frame" x="58" y="66" width="125" height="17"/>
+                        <rect key="frame" x="58" y="78" width="125" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Loading SVG File..." id="54">
                             <font key="font" metaFont="system"/>
@@ -53,7 +54,7 @@
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="21" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="8" symbolic="YES" id="0tX-3N-Ce0"/>
+                    <constraint firstItem="21" firstAttribute="top" secondItem="23" secondAttribute="bottom" multiplier="1.2" constant="8" symbolic="YES" id="0tX-3N-Ce0"/>
                     <constraint firstItem="23" firstAttribute="top" secondItem="26" secondAttribute="bottom" constant="8" symbolic="YES" id="3ol-Kx-MMq"/>
                     <constraint firstItem="26" firstAttribute="top" secondItem="6" secondAttribute="top" constant="20" symbolic="YES" id="VDA-RI-eGo"/>
                     <constraint firstAttribute="bottom" secondItem="21" secondAttribute="bottom" constant="20" symbolic="YES" id="m7E-zz-FxZ"/>

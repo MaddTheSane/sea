@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		551E56E418D01B7700E4CDAF /* Sharpen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551E56E618D01B7700E4CDAF /* Sharpen.xib */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		A831E1410789471D0009080F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A831E13F0789471D0009080F /* Localizable.strings */; };
 		A89F8D940C377CD10029C269 /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A89F8D920C377CD10029C269 /* Rects.m */; };
-		A8CA58350793689B004BE921 /* Sharpen.nib in Resources */ = {isa = PBXBuildFile; fileRef = A8CA58330793689B004BE921 /* Sharpen.nib */; };
 		A8D55D7A0792124D00B6C7C8 /* SharpenClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D55D780792124D00B6C7C8 /* SharpenClass.m */; };
 /* End PBXBuildFile section */
 
@@ -18,6 +18,7 @@
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		551E56E518D01B7700E4CDAF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Sharpen.xib; sourceTree = "<group>"; };
 		55909E8A18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Sharpen.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sharpen.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -27,7 +28,6 @@
 		A89F8D910C377CD10029C269 /* Rects.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Rects.h; path = ../Common/Rects.h; sourceTree = SOURCE_ROOT; };
 		A89F8D920C377CD10029C269 /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Rects.m; path = ../Common/Rects.m; sourceTree = SOURCE_ROOT; };
 		A89F8D930C377CD10029C269 /* SeaPlugins.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = SeaPlugins.h; path = ../Common/SeaPlugins.h; sourceTree = SOURCE_ROOT; };
-		A8CA58340793689B004BE921 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sharpen.nib; sourceTree = "<group>"; };
 		A8D55D770792124D00B6C7C8 /* SharpenClass.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SharpenClass.h; sourceTree = "<group>"; };
 		A8D55D780792124D00B6C7C8 /* SharpenClass.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SharpenClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,7 +67,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A8CA58330793689B004BE921 /* Sharpen.nib */,
+				551E56E618D01B7700E4CDAF /* Sharpen.xib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				A831E13F0789471D0009080F /* Localizable.strings */,
 			);
@@ -168,7 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A831E1410789471D0009080F /* Localizable.strings in Resources */,
-				A8CA58350793689B004BE921 /* Sharpen.nib in Resources */,
+				551E56E418D01B7700E4CDAF /* Sharpen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +187,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		551E56E618D01B7700E4CDAF /* Sharpen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				551E56E518D01B7700E4CDAF /* en */,
+			);
+			name = Sharpen.xib;
+			sourceTree = "<group>";
+		};
 		A831E13F0789471D0009080F /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -194,14 +202,6 @@
 				55909E8A18CFEEB000F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		A8CA58330793689B004BE921 /* Sharpen.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A8CA58340793689B004BE921 /* English */,
-			);
-			name = Sharpen.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

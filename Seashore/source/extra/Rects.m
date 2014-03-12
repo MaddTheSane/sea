@@ -1,7 +1,7 @@
 #import "Rects.h"
 #import "Globals.h"
 
-extern inline IntPoint NSPointMakeIntPoint(NSPoint point)
+IntPoint NSPointMakeIntPoint(NSPoint point)
 {
 	IntPoint newPoint;
 	
@@ -11,7 +11,7 @@ extern inline IntPoint NSPointMakeIntPoint(NSPoint point)
 	return newPoint; 
 }
 
-extern inline IntSize NSSizeMakeIntSize(NSSize size)
+IntSize NSSizeMakeIntSize(NSSize size)
 {
 	IntSize newSize;
 	
@@ -21,7 +21,7 @@ extern inline IntSize NSSizeMakeIntSize(NSSize size)
 	return newSize;
 }
 
-extern inline NSPoint IntPointMakeNSPoint(IntPoint point)
+NSPoint IntPointMakeNSPoint(IntPoint point)
 {
 	NSPoint newPoint;
 	
@@ -31,7 +31,7 @@ extern inline NSPoint IntPointMakeNSPoint(IntPoint point)
 	return newPoint;
 }
 
-extern inline IntPoint IntMakePoint(int x, int y)
+IntPoint IntMakePoint(int x, int y)
 {
 	IntPoint newPoint;
 	
@@ -41,7 +41,7 @@ extern inline IntPoint IntMakePoint(int x, int y)
 	return newPoint;
 }
 
-extern inline NSSize IntSizeMakeNSSize(IntSize size)
+NSSize IntSizeMakeNSSize(IntSize size)
 {
 	NSSize newSize;
 	
@@ -51,7 +51,7 @@ extern inline NSSize IntSizeMakeNSSize(IntSize size)
 	return newSize;
 }
 
-extern inline IntSize IntMakeSize(int width, int height)
+IntSize IntMakeSize(int width, int height)
 {
 	IntSize newSize;
 	
@@ -61,7 +61,7 @@ extern inline IntSize IntMakeSize(int width, int height)
 	return newSize;
 }
 
-extern inline IntRect IntMakeRect(int x, int y, int width, int height)
+IntRect IntMakeRect(int x, int y, int width, int height)
 {
 	IntRect newRect;
 	
@@ -73,13 +73,13 @@ extern inline IntRect IntMakeRect(int x, int y, int width, int height)
 	return newRect;
 }
 
-extern inline void IntOffsetRect(IntRect *rect, int x, int y)
+void IntOffsetRect(IntRect *rect, int x, int y)
 {
 	rect->origin.x += x;
 	rect->origin.y += y;
 }
 
-extern inline BOOL IntPointInRect(IntPoint point, IntRect rect)
+BOOL IntPointInRect(IntPoint point, IntRect rect)
 {
 	if (point.x < rect.origin.x) return NO;
 	if (point.x >= rect.origin.x + rect.size.width) return NO;
@@ -89,7 +89,7 @@ extern inline BOOL IntPointInRect(IntPoint point, IntRect rect)
 	return YES;
 }
 
-extern inline BOOL IntContainsRect(IntRect bigRect, IntRect littleRect)
+BOOL IntContainsRect(IntRect bigRect, IntRect littleRect)
 {
 	if (littleRect.origin.x < bigRect.origin.x) return NO;
 	if (littleRect.origin.x + littleRect.size.width > bigRect.origin.x + bigRect.size.width) return NO;
@@ -99,7 +99,7 @@ extern inline BOOL IntContainsRect(IntRect bigRect, IntRect littleRect)
 	return YES;
 }
 
-extern inline IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect)
+IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect)
 {
 	IntRect rect = littleRect;
 	
@@ -116,7 +116,7 @@ extern inline IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect)
 	return rect;
 }
 
-extern inline NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect)
+NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect)
 {
 	NSRect rect = littleRect;
 	
@@ -133,7 +133,7 @@ extern inline NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect)
 	return rect;
 }
 
-extern inline IntRect IntSumRects(IntRect augendRect, IntRect addendRect)
+IntRect IntSumRects(IntRect augendRect, IntRect addendRect)
 {
 	// If either of the rects are zero
 	if(augendRect.size.width <= 0 || augendRect.size.height <= 0)
@@ -164,7 +164,7 @@ extern inline IntRect IntSumRects(IntRect augendRect, IntRect addendRect)
 	return rect;
 }
 
-extern inline IntRect NSRectMakeIntRect(NSRect rect)
+IntRect NSRectMakeIntRect(NSRect rect)
 {
 	IntRect newRect;
 	
@@ -174,7 +174,7 @@ extern inline IntRect NSRectMakeIntRect(NSRect rect)
 	return newRect;
 }
 
-extern inline NSRect IntRectMakeNSRect(IntRect rect)
+NSRect IntRectMakeNSRect(IntRect rect)
 {
 	NSRect newRect;
 	
@@ -184,7 +184,7 @@ extern inline NSRect IntRectMakeNSRect(IntRect rect)
 	return newRect;
 }
 
-extern inline NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians)
+NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians)
 {
 	if(radians == 0.0)
 		return initialPoint;
@@ -204,4 +204,3 @@ extern inline NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint center
 	result.y += centerPoint.y;
 	return result;
 }
-

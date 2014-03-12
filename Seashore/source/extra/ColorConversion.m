@@ -1,6 +1,6 @@
 #import "ColorConversion.h"
 
-extern inline int HLSValue(double n1, double n2, double hue)
+int HLSValue(double n1, double n2, double hue)
 {
 	double value;
 
@@ -20,7 +20,7 @@ extern inline int HLSValue(double n1, double n2, double hue)
 	return (int)(value * 255);
 }
 
-extern inline void RGBtoHSV(int *red, int *green, int *blue)
+void RGBtoHSV(int *red, int *green, int *blue)
 {
 	int r, g, b;
 	double h, s, v;
@@ -72,7 +72,7 @@ extern inline void RGBtoHSV(int *red, int *green, int *blue)
 	*blue  = v;
 }
 
-extern inline void HSVtoRGB(int *hue, int *saturation, int *value)
+void HSVtoRGB(int *hue, int *saturation, int *value)
 {
 	double h, s, v;
 	double f, p, q, t;
@@ -127,7 +127,7 @@ extern inline void HSVtoRGB(int *hue, int *saturation, int *value)
 	}
 }
 
-extern inline void RGBtoHLS (int *red, int *green, int *blue)
+void RGBtoHLS (int *red, int *green, int *blue)
 {
 	int r, g, b;
 	double h, l, s;
@@ -181,7 +181,7 @@ extern inline void RGBtoHLS (int *red, int *green, int *blue)
 	*blue = s;
 }
 
-extern inline void HLStoRGB(int *hue, int *lightness, int *saturation)
+void HLStoRGB(int *hue, int *lightness, int *saturation)
 {
 	double h, l, s;
 	double m1, m2;

@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		551E56E918D01B9400E4CDAF /* Brightness.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551E56EB18D01B9400E4CDAF /* Brightness.xib */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		A831E1410789471D0009080F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A831E13F0789471D0009080F /* Localizable.strings */; };
 		A89DCE51078A300C005008F4 /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A89DCE50078A300C005008F4 /* Rects.m */; };
-		A8A501AB079E0B6C00B1D609 /* Brightness.nib in Resources */ = {isa = PBXBuildFile; fileRef = A8A501A9079E0B6C00B1D609 /* Brightness.nib */; };
 		A8D55D7A0792124D00B6C7C8 /* BrightnessClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D55D780792124D00B6C7C8 /* BrightnessClass.m */; };
 /* End PBXBuildFile section */
 
@@ -18,6 +18,7 @@
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		551E56EA18D01B9400E4CDAF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Brightness.xib; sourceTree = "<group>"; };
 		55909E8C18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Brightness.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Brightness.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -25,7 +26,6 @@
 		A84C96B8078965B900451E47 /* SeaPlugins.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = SeaPlugins.h; path = ../Common/SeaPlugins.h; sourceTree = "<group>"; };
 		A89DCE2A078A2FCB005008F4 /* Rects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rects.h; path = ../Common/Rects.h; sourceTree = "<group>"; };
 		A89DCE50078A300C005008F4 /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Rects.m; path = ../Common/Rects.m; sourceTree = "<group>"; };
-		A8A501AA079E0B6C00B1D609 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Brightness.nib; sourceTree = "<group>"; };
 		A8CA5C4307937C9E004BE921 /* PluginData.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginData.h; path = ../Common/PluginData.h; sourceTree = "<group>"; };
 		A8D55D770792124D00B6C7C8 /* BrightnessClass.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BrightnessClass.h; sourceTree = "<group>"; };
 		A8D55D780792124D00B6C7C8 /* BrightnessClass.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BrightnessClass.m; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A8A501A9079E0B6C00B1D609 /* Brightness.nib */,
+				551E56EB18D01B9400E4CDAF /* Brightness.xib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				A831E13F0789471D0009080F /* Localizable.strings */,
 			);
@@ -166,7 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A831E1410789471D0009080F /* Localizable.strings in Resources */,
-				A8A501AB079E0B6C00B1D609 /* Brightness.nib in Resources */,
+				551E56E918D01B9400E4CDAF /* Brightness.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +185,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		551E56EB18D01B9400E4CDAF /* Brightness.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				551E56EA18D01B9400E4CDAF /* en */,
+			);
+			name = Brightness.xib;
+			sourceTree = "<group>";
+		};
 		A831E13F0789471D0009080F /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -192,14 +200,6 @@
 				55909E8C18CFEEB000F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		A8A501A9079E0B6C00B1D609 /* Brightness.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A8A501AA079E0B6C00B1D609 /* English */,
-			);
-			name = Brightness.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

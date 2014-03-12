@@ -1,3 +1,4 @@
+#import "Bitmap.h"
 #import "CIEdgeWorkClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
@@ -7,13 +8,15 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIEdgeWorkClass
-
+@synthesize panel;
+@synthesize seaPlugins;
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CIEdgeWork" owner:self];
-	newdata = NULL;
-	
+	if (self = [super init]) {
+		seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CIEdgeWork" owner:self];
+		newdata = NULL;
+	}
 	return self;
 }
 
@@ -484,7 +487,7 @@
 	
 	// Get data from output core image
 	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
+	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
 	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
 	CGImageDestinationFinalize(temp_writer);
 	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
