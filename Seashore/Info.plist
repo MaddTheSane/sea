@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDocumentTypes</key>
@@ -333,7 +335,7 @@
 	<key>CFBundleGetInfoString</key>
 	<string>Seashore 0.5.2 - GNU General Public License</string>
 	<key>CFBundleIconFile</key>
-	<string>Main Icon.icns</string>
+	<string>Main Icon</string>
 	<key>CFBundleIdentifier</key>
 	<string>net.sourceforge.seashore</string>
 	<key>CFBundleInfoDictionaryVersion</key>

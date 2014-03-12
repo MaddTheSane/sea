@@ -1,11 +1,12 @@
 #import "NSBezierPath_Extensions.h"
+#include <math.h>
 
 @implementation NSBezierPath (MyExtensions)
 
-+ (NSBezierPath *)bezierPathWithRect:(NSRect) rect andRadius:(float) radius
++ (NSBezierPath *)bezierPathWithRect:(NSRect)rect andRadius:(CGFloat)radius
 {
 	NSBezierPath *tempPath = [NSBezierPath bezierPath];
-	float revCurveRadius, f;
+	CGFloat revCurveRadius, f;
 	f = (4.0 / 3.0) * (sqrt(2) - 1);
 	if (rect.size.width < 2 * radius) revCurveRadius = rect.size.width / 2.0;
 	else if (rect.size.height < 2 * radius) revCurveRadius = rect.size.height / 2.0;

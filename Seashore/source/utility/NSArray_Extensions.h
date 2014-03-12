@@ -5,6 +5,6 @@
 @end
 
 @interface NSMutableArray(MyExtensions)
-- (void)insertObjectsFromArray:(NSArray *)array atIndex:(int)index;
+- (void)insertObjectsFromArray:(NSArray *)array atIndex:(NSInteger)index;
 @end
 

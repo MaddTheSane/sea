@@ -1,6 +1,6 @@
-author = "Mark Pazolli";
-copyright = "Public Domain 2007";
-description = "Applies a crystillizing effect to the selection.";
-groupName = "Stylize";
-license = "Public Domain";
-name = "Crystallize";
+//author = "Mark Pazolli";
+//copyright = "Public Domain 2007";
+description = "Applies a crystillising effect to the selection.";
+//groupName = "Stylize";
+//license = "Public Domain";
+name = "Crystallise";

@@ -48,19 +48,17 @@
 @implementation NSArray (MyExtensions)
 
 - (BOOL) containsObjectIdenticalTo: (id)obj { 
-    return [self indexOfObjectIdenticalTo: obj]!=NSNotFound; 
+    return [self indexOfObjectIdenticalTo:obj] != NSNotFound; 
 }
 
 @end
 
 @implementation NSMutableArray (MyExtensions)
 
-- (void) insertObjectsFromArray:(NSArray *)array atIndex:(int)index {
-    NSObject *entry = nil;
-    NSEnumerator *enumerator = [array objectEnumerator];
-    while ((entry=[enumerator nextObject])) {
-        [self insertObject:entry atIndex:index++];
-    }
+- (void) insertObjectsFromArray:(NSArray *)array atIndex:(NSInteger)index {
+	for (NSObject *entry in array) {
+		[self insertObject:entry atIndex:index++];
+	}
 }
 
 @end

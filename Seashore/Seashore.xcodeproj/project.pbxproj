@@ -54,8 +54,8 @@
 		550AEB0018CFC5E1008918BA /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF9CC00536DE2000A80207 /* Rects.m */; };
 		550AEB0218CFC5E1008918BA /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BDC80A04BF04B000A80207 /* Bitmap.m */; };
 		550AEB0418CFC5E1008918BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
-		5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; };
-		5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */; };
+		5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in Copy Spotlight plug-in */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; };
+		5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in Copy QuickLook plug-in */ = {isa = PBXBuildFile; fileRef = 5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */; };
 		5528599913D6302E001564E5 /* Sharpen.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 35B1570E0A2C0116005B688F /* Sharpen.bundle */; };
 		5528599A13D6302E001564E5 /* Threshold.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 35B157120A2C0116005B688F /* Threshold.bundle */; };
 		5528599B13D6302E001564E5 /* Brightness.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 35B1571E0A2C0116005B688F /* Brightness.bundle */; };
@@ -129,9 +129,18 @@
 		55909E3E18CFDA6900F43F90 /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BDC80A04BF04B000A80207 /* Bitmap.m */; };
 		55909E4018CFDA6900F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		55909E4A18CFDB1600F43F90 /* CIDotScreenClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D50C718CF9FBB005809E3 /* CIDotScreenClass.m */; };
-		55909E4B18CFDB1B00F43F90 /* CIDotScreen.nib in Resources */ = {isa = PBXBuildFile; fileRef = 557D50C818CF9FBB005809E3 /* CIDotScreen.nib */; };
 		55909E4C18CFDB2000F43F90 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50CA18CF9FBB005809E3 /* Localizable.strings */; };
 		55909E4F18CFDF4C00F43F90 /* CICircularScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909E5118CFDF4C00F43F90 /* CICircularScreen.xib */; };
+		55909EA118CFFD1C00F43F90 /* CIDotScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909EA318CFFD1C00F43F90 /* CIDotScreen.xib */; };
+		55909F1718D007C100F43F90 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55909F1618D007C100F43F90 /* libz.1.dylib */; };
+		55909F1818D0082800F43F90 /* Checkerboard+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 559938B218CFCCCA00E92088 /* Checkerboard+.bundle */; };
+		55909F1918D0082800F43F90 /* Circular Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 559938C118CFCCCC00E92088 /* Circular Screen+.bundle */; };
+		55909F1A18D0082800F43F90 /* Circular Wrap+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DA518CFCCF400F43F90 /* Circular Wrap+.bundle */; };
+		55909F1B18D0082800F43F90 /* CMYK Halftone+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DB418CFCCF700F43F90 /* CMYK Halftone+.bundle */; };
+		55909F1C18D0082800F43F90 /* Circle Splash+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DC018CFCE5500F43F90 /* Circle Splash+.bundle */; };
+		55909F1D18D0082800F43F90 /* Crystallize+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DF818CFD43900F43F90 /* Crystallize+.bundle */; };
+		55909F1E18D0082800F43F90 /* Displacement Distortion+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909E2418CFD6DD00F43F90 /* Displacement Distortion+.bundle */; };
+		55909F1F18D0082800F43F90 /* Dot Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909E4818CFDA6900F43F90 /* Dot Screen+.bundle */; };
 		5599388418CFC69700E92088 /* CIBrightnessClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D506718CF9FBA005809E3 /* CIBrightnessClass.m */; };
 		5599388618CFC6A600E92088 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D506A18CF9FBA005809E3 /* Localizable.strings */; };
 		5599388818CFC6F100E92088 /* CIBumpClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D507218CF9FBA005809E3 /* CIBumpClass.m */; };
@@ -600,20 +609,6 @@
 			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
 			remoteInfo = XCFQuickLook;
 		};
-		557D537118CFAD0D005809E3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 557D533218CF9FEC005809E3;
-			remoteInfo = "AffineTile+";
-		};
-		557D537318CFAD0D005809E3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 557D536118CFAAF6005809E3;
-			remoteInfo = "AffineTransform+";
-		};
 		55909E0118CFD5A700F43F90 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -705,26 +700,12 @@
 			remoteGlobalIDString = 55909E3A18CFDA6900F43F90;
 			remoteInfo = "Dot Screen+";
 		};
-		5599389C18CFC8AF00E92088 /* PBXContainerItemProxy */ = {
+		55909F2018D0083800F43F90 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5599388A18CFC72A00E92088;
-			remoteInfo = "Bloom+";
-		};
-		5599389E18CFC8AF00E92088 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 550AEAF018CFC5DE008918BA;
-			remoteInfo = "Brightness+";
-		};
-		559938A018CFC8AF00E92088 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 550AEAFE18CFC5E1008918BA;
-			remoteInfo = "Bump+";
+			remoteGlobalIDString = 55909DFD18CFD59A00F43F90;
+			remoteInfo = "CoreImage-based Plug-ins";
 		};
 		A8080D5F0C07C5D50026D06E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -917,6 +898,14 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				55909F1818D0082800F43F90 /* Checkerboard+.bundle in Copy PlugIns */,
+				55909F1918D0082800F43F90 /* Circular Screen+.bundle in Copy PlugIns */,
+				55909F1A18D0082800F43F90 /* Circular Wrap+.bundle in Copy PlugIns */,
+				55909F1B18D0082800F43F90 /* CMYK Halftone+.bundle in Copy PlugIns */,
+				55909F1C18D0082800F43F90 /* Circle Splash+.bundle in Copy PlugIns */,
+				55909F1D18D0082800F43F90 /* Crystallize+.bundle in Copy PlugIns */,
+				55909F1E18D0082800F43F90 /* Displacement Distortion+.bundle in Copy PlugIns */,
+				55909F1F18D0082800F43F90 /* Dot Screen+.bundle in Copy PlugIns */,
 				559938A218CFC8C800E92088 /* Brightness+.bundle in Copy PlugIns */,
 				559938A318CFC8C800E92088 /* Bump+.bundle in Copy PlugIns */,
 				559938A418CFC8C800E92088 /* Bloom+.bundle in Copy PlugIns */,
@@ -979,24 +968,26 @@
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DC48A369104219BD00A803AE /* CopyFiles */ = {
+		DC48A369104219BD00A803AE /* Copy Spotlight plug-in */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Contents/Library/Spotlight;
 			dstSubfolderSpec = 1;
 			files = (
-				5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in CopyFiles */,
+				5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in Copy Spotlight plug-in */,
 			);
+			name = "Copy Spotlight plug-in";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DC48A37110421B1F00A803AE /* CopyFiles */ = {
+		DC48A37110421B1F00A803AE /* Copy QuickLook plug-in */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Contents/Library/QuickLook;
 			dstSubfolderSpec = 1;
 			files = (
-				5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in CopyFiles */,
+				5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in Copy QuickLook plug-in */,
 			);
+			name = "Copy QuickLook plug-in";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -1075,22 +1066,18 @@
 		557D50C118CF9FBB005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D50C618CF9FBB005809E3 /* CIDotScreenClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIDotScreenClass.h; sourceTree = "<group>"; };
 		557D50C718CF9FBB005809E3 /* CIDotScreenClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIDotScreenClass.m; sourceTree = "<group>"; };
-		557D50C918CF9FBB005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIDotScreen.nib; sourceTree = "<group>"; };
 		557D50CB18CF9FBB005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D50CC18CF9FBB005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D50D118CF9FBB005809E3 /* CIEdgesClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIEdgesClass.h; sourceTree = "<group>"; };
 		557D50D218CF9FBB005809E3 /* CIEdgesClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIEdgesClass.m; sourceTree = "<group>"; };
-		557D50D418CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIEdges.nib; sourceTree = "<group>"; };
 		557D50D618CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D50D718CF9FBC005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D50DC18CF9FBC005809E3 /* CIEdgeWorkClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIEdgeWorkClass.h; sourceTree = "<group>"; };
 		557D50DD18CF9FBC005809E3 /* CIEdgeWorkClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIEdgeWorkClass.m; sourceTree = "<group>"; };
-		557D50DF18CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIEdgeWork.nib; sourceTree = "<group>"; };
 		557D50E118CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D50E218CF9FBC005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D50E718CF9FBC005809E3 /* CIExposureClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIExposureClass.h; sourceTree = "<group>"; };
 		557D50E818CF9FBC005809E3 /* CIExposureClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIExposureClass.m; sourceTree = "<group>"; };
-		557D50EA18CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIExposure.nib; sourceTree = "<group>"; };
 		557D50EC18CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D50ED18CF9FBC005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D50F218CF9FBC005809E3 /* CIFalseColorClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIFalseColorClass.h; sourceTree = "<group>"; };
@@ -1099,33 +1086,27 @@
 		557D50F618CF9FBC005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D50FB18CF9FBC005809E3 /* CIGammaAdjustClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIGammaAdjustClass.h; sourceTree = "<group>"; };
 		557D50FC18CF9FBC005809E3 /* CIGammaAdjustClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGammaAdjustClass.m; sourceTree = "<group>"; };
-		557D50FE18CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIGammaAdjust.nib; sourceTree = "<group>"; };
 		557D510018CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D510118CF9FBC005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D510618CF9FBC005809E3 /* CIGaussianBlurClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIGaussianBlurClass.h; sourceTree = "<group>"; };
 		557D510718CF9FBC005809E3 /* CIGaussianBlurClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGaussianBlurClass.m; sourceTree = "<group>"; };
-		557D510918CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIGaussianBlur.nib; sourceTree = "<group>"; };
 		557D510B18CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D510C18CF9FBC005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D511118CF9FBC005809E3 /* CIGlassDistortionClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIGlassDistortionClass.h; sourceTree = "<group>"; };
 		557D511218CF9FBC005809E3 /* CIGlassDistortionClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGlassDistortionClass.m; sourceTree = "<group>"; };
 		557D511318CF9FBC005809E3 /* default-distort.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "default-distort.tiff"; sourceTree = "<group>"; };
-		557D511518CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIGlassDistortion.nib; sourceTree = "<group>"; };
 		557D511718CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D511818CF9FBC005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D511D18CF9FBC005809E3 /* CIGlassLozengeClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIGlassLozengeClass.h; sourceTree = "<group>"; };
 		557D511E18CF9FBC005809E3 /* CIGlassLozengeClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGlassLozengeClass.m; sourceTree = "<group>"; };
-		557D512018CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIGlassLozenge.nib; sourceTree = "<group>"; };
 		557D512218CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D512318CF9FBC005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D512818CF9FBC005809E3 /* CIGloomClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIGloomClass.h; sourceTree = "<group>"; };
 		557D512918CF9FBC005809E3 /* CIGloomClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGloomClass.m; sourceTree = "<group>"; };
-		557D512B18CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIGloom.nib; sourceTree = "<group>"; };
 		557D512D18CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D512E18CF9FBD005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D513318CF9FBD005809E3 /* CIHatchedScreenClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIHatchedScreenClass.h; sourceTree = "<group>"; };
 		557D513418CF9FBD005809E3 /* CIHatchedScreenClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIHatchedScreenClass.m; sourceTree = "<group>"; };
-		557D513618CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIHatchedScreen.nib; sourceTree = "<group>"; };
 		557D513818CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D513918CF9FBD005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D513E18CF9FBD005809E3 /* CIHoleClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIHoleClass.h; sourceTree = "<group>"; };
@@ -1146,14 +1127,12 @@
 		557D515D18CF9FBD005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D516218CF9FBD005809E3 /* CILenticularHaloClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CILenticularHaloClass.h; sourceTree = "<group>"; };
 		557D516318CF9FBD005809E3 /* CILenticularHaloClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CILenticularHaloClass.m; sourceTree = "<group>"; };
-		557D516518CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CILenticularHalo.nib; sourceTree = "<group>"; };
 		557D516718CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D516818CF9FBD005809E3 /* HaloColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HaloColorWell.h; sourceTree = "<group>"; };
 		557D516918CF9FBD005809E3 /* HaloColorWell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HaloColorWell.m; sourceTree = "<group>"; };
 		557D516A18CF9FBD005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D516F18CF9FBD005809E3 /* CILineScreenClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CILineScreenClass.h; sourceTree = "<group>"; };
 		557D517018CF9FBD005809E3 /* CILineScreenClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CILineScreenClass.m; sourceTree = "<group>"; };
-		557D517218CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CILineScreen.nib; sourceTree = "<group>"; };
 		557D517418CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D517518CF9FBD005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D517A18CF9FBD005809E3 /* CIMedianClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIMedianClass.h; sourceTree = "<group>"; };
@@ -1162,7 +1141,6 @@
 		557D517E18CF9FBE005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D518318CF9FBE005809E3 /* CIMonochromeClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIMonochromeClass.h; sourceTree = "<group>"; };
 		557D518418CF9FBE005809E3 /* CIMonochromeClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIMonochromeClass.m; sourceTree = "<group>"; };
-		557D518618CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIMonochrome.nib; sourceTree = "<group>"; };
 		557D518818CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D518918CF9FBE005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D518A18CF9FBE005809E3 /* MonochromeColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonochromeColorWell.h; sourceTree = "<group>"; };
@@ -1173,17 +1151,14 @@
 		557D519418CF9FBE005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D519918CF9FBE005809E3 /* CINoiseReductionClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CINoiseReductionClass.h; sourceTree = "<group>"; };
 		557D519A18CF9FBE005809E3 /* CINoiseReductionClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CINoiseReductionClass.m; sourceTree = "<group>"; };
-		557D519C18CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CINoiseReduction.nib; sourceTree = "<group>"; };
 		557D519E18CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D519F18CF9FBE005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D51A418CF9FBE005809E3 /* CIOpTileClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIOpTileClass.h; sourceTree = "<group>"; };
 		557D51A518CF9FBE005809E3 /* CIOpTileClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIOpTileClass.m; sourceTree = "<group>"; };
-		557D51A718CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIOpTile.nib; sourceTree = "<group>"; };
 		557D51A918CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D51AA18CF9FBE005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D51AF18CF9FBE005809E3 /* CIParallelogramTileClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIParallelogramTileClass.h; sourceTree = "<group>"; };
 		557D51B018CF9FBE005809E3 /* CIParallelogramTileClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIParallelogramTileClass.m; sourceTree = "<group>"; };
-		557D51B218CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIParallelogramTile.nib; sourceTree = "<group>"; };
 		557D51B418CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D51B518CF9FBE005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D51BA18CF9FBE005809E3 /* CIPerspectiveTileClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIPerspectiveTileClass.h; sourceTree = "<group>"; };
@@ -1196,22 +1171,18 @@
 		557D51C718CF9FBE005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D51CC18CF9FBE005809E3 /* CIPinchClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIPinchClass.h; sourceTree = "<group>"; };
 		557D51CD18CF9FBE005809E3 /* CIPinchClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIPinchClass.m; sourceTree = "<group>"; };
-		557D51CF18CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIPinch.nib; sourceTree = "<group>"; };
 		557D51D118CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D51D218CF9FBF005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D51D718CF9FBF005809E3 /* CIPixellateClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIPixellateClass.h; sourceTree = "<group>"; };
 		557D51D818CF9FBF005809E3 /* CIPixellateClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIPixellateClass.m; sourceTree = "<group>"; };
-		557D51DA18CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIPixellate.nib; sourceTree = "<group>"; };
 		557D51DC18CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D51DD18CF9FBF005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D51E218CF9FBF005809E3 /* CIPointillizeClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIPointillizeClass.h; sourceTree = "<group>"; };
 		557D51E318CF9FBF005809E3 /* CIPointillizeClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIPointillizeClass.m; sourceTree = "<group>"; };
-		557D51E518CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIPointillize.nib; sourceTree = "<group>"; };
 		557D51E718CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D51E818CF9FBF005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D51ED18CF9FBF005809E3 /* CIPosterizeClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIPosterizeClass.h; sourceTree = "<group>"; };
 		557D51EE18CF9FBF005809E3 /* CIPosterizeClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIPosterizeClass.m; sourceTree = "<group>"; };
-		557D51F018CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIPosterize.nib; sourceTree = "<group>"; };
 		557D51F218CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D51F318CF9FBF005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D51F818CF9FBF005809E3 /* CIRandomClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIRandomClass.h; sourceTree = "<group>"; };
@@ -1220,38 +1191,32 @@
 		557D51FC18CF9FBF005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D520118CF9FBF005809E3 /* CISepiaClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CISepiaClass.h; sourceTree = "<group>"; };
 		557D520218CF9FBF005809E3 /* CISepiaClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CISepiaClass.m; sourceTree = "<group>"; };
-		557D520418CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CISepia.nib; sourceTree = "<group>"; };
 		557D520618CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D520718CF9FBF005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D520C18CF9FBF005809E3 /* CISharpenClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CISharpenClass.h; sourceTree = "<group>"; };
 		557D520D18CF9FBF005809E3 /* CISharpenClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CISharpenClass.m; sourceTree = "<group>"; };
-		557D520F18CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CISharpen.nib; sourceTree = "<group>"; };
 		557D521118CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D521218CF9FBF005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D521718CF9FBF005809E3 /* CISpotLightClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CISpotLightClass.h; sourceTree = "<group>"; };
 		557D521818CF9FBF005809E3 /* CISpotLightClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CISpotLightClass.m; sourceTree = "<group>"; };
-		557D521A18CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CISpotLight.nib; sourceTree = "<group>"; };
 		557D521C18CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D521D18CF9FBF005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D521E18CF9FBF005809E3 /* SpotLightColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotLightColorWell.h; sourceTree = "<group>"; };
 		557D521F18CF9FBF005809E3 /* SpotLightColorWell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotLightColorWell.m; sourceTree = "<group>"; };
 		557D522418CF9FC0005809E3 /* CIStarshineClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIStarshineClass.h; sourceTree = "<group>"; };
 		557D522518CF9FC0005809E3 /* CIStarshineClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIStarshineClass.m; sourceTree = "<group>"; };
-		557D522718CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIStarshine.nib; sourceTree = "<group>"; };
 		557D522918CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D522A18CF9FC0005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D522B18CF9FC0005809E3 /* StarshineColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarshineColorWell.h; sourceTree = "<group>"; };
 		557D522C18CF9FC0005809E3 /* StarshineColorWell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StarshineColorWell.m; sourceTree = "<group>"; };
 		557D523118CF9FC0005809E3 /* CISunbeamsClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CISunbeamsClass.h; sourceTree = "<group>"; };
 		557D523218CF9FC0005809E3 /* CISunbeamsClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CISunbeamsClass.m; sourceTree = "<group>"; };
-		557D523418CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CISunbeams.nib; sourceTree = "<group>"; };
 		557D523618CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D523718CF9FC0005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D523818CF9FC0005809E3 /* SunbeamsColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SunbeamsColorWell.h; sourceTree = "<group>"; };
 		557D523918CF9FC0005809E3 /* SunbeamsColorWell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SunbeamsColorWell.m; sourceTree = "<group>"; };
 		557D523E18CF9FC0005809E3 /* CITorusLensClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CITorusLensClass.h; sourceTree = "<group>"; };
 		557D523F18CF9FC0005809E3 /* CITorusLensClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CITorusLensClass.m; sourceTree = "<group>"; };
-		557D524118CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CITorusLens.nib; sourceTree = "<group>"; };
 		557D524318CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D524418CF9FC0005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D524918CF9FC0005809E3 /* CITriangleTileClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CITriangleTileClass.h; sourceTree = "<group>"; };
@@ -1260,12 +1225,10 @@
 		557D524D18CF9FC0005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D525218CF9FC0005809E3 /* CITwirlClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CITwirlClass.h; sourceTree = "<group>"; };
 		557D525318CF9FC0005809E3 /* CITwirlClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CITwirlClass.m; sourceTree = "<group>"; };
-		557D525518CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CITwirl.nib; sourceTree = "<group>"; };
 		557D525718CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D525818CF9FC0005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D525D18CF9FC0005809E3 /* CIUnsharpMaskClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIUnsharpMaskClass.h; sourceTree = "<group>"; };
 		557D525E18CF9FC0005809E3 /* CIUnsharpMaskClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIUnsharpMaskClass.m; sourceTree = "<group>"; };
-		557D526018CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIUnsharpMask.nib; sourceTree = "<group>"; };
 		557D526218CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D526318CF9FC0005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D526818CF9FC0005809E3 /* CIVertStripesClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIVertStripesClass.h; sourceTree = "<group>"; };
@@ -1274,7 +1237,6 @@
 		557D526C18CF9FC0005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D527118CF9FC0005809E3 /* CIVortexClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIVortexClass.h; sourceTree = "<group>"; };
 		557D527218CF9FC0005809E3 /* CIVortexClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIVortexClass.m; sourceTree = "<group>"; };
-		557D527418CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CIVortex.nib; sourceTree = "<group>"; };
 		557D527618CF9FC1005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D527718CF9FC1005809E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557D527C18CF9FC1005809E3 /* CIWhitePointAdjustClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIWhitePointAdjustClass.h; sourceTree = "<group>"; };
@@ -1303,15 +1265,7 @@
 		55909E3818CFD9BD00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIDisplacementDistortion.xib; sourceTree = "<group>"; };
 		55909E4818CFDA6900F43F90 /* Dot Screen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dot Screen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55909E5018CFDF4C00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CICircularScreen.xib; sourceTree = "<group>"; };
-		55909E5218CFEEAC00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E5318CFEEAC00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E5418CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E5518CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E5618CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E5718CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E5818CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E5918CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E5A18CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E5B18CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E5C18CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E5D18CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1345,7 +1299,6 @@
 		55909E7918CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E7A18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E7B18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E7C18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = "en-GB"; path = "en-GB.lproj/CISepia.nib"; sourceTree = "<group>"; };
 		55909E7D18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E7E18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E7F18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1359,6 +1312,36 @@
 		55909E8718CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E8818CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E8918CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		55909EA218CFFD1C00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIDotScreen.xib; sourceTree = "<group>"; };
+		55909EA518CFFD4600F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIEdges.xib; sourceTree = "<group>"; };
+		55909EA818CFFD6700F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIEdgeWork.xib; sourceTree = "<group>"; };
+		55909EAB18CFFD8400F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIExposure.xib; sourceTree = "<group>"; };
+		55909EAE18CFFD9D00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIGammaAdjust.xib; sourceTree = "<group>"; };
+		55909EB118CFFDBC00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIGaussianBlur.xib; sourceTree = "<group>"; };
+		55909EB418CFFDE500F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIGlassDistortion.xib; sourceTree = "<group>"; };
+		55909EB718CFFE0900F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIGlassLozenge.xib; sourceTree = "<group>"; };
+		55909EBA18CFFE2600F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIGloom.xib; sourceTree = "<group>"; };
+		55909EBD18CFFE4200F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIHatchedScreen.xib; sourceTree = "<group>"; };
+		55909EC018CFFE6300F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CILenticularHalo.xib; sourceTree = "<group>"; };
+		55909EC318CFFE8100F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CILineScreen.xib; sourceTree = "<group>"; };
+		55909EC618CFFE9C00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIMonochrome.xib; sourceTree = "<group>"; };
+		55909EC918CFFEBA00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CINoiseReduction.xib; sourceTree = "<group>"; };
+		55909ECB18CFFED100F43F90 /* CIOpTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CIOpTile.xib; sourceTree = "<group>"; };
+		55909ECD18CFFF1A00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIParallelogramTile.xib; sourceTree = "<group>"; };
+		55909ED018CFFF4B00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIPinch.xib; sourceTree = "<group>"; };
+		55909ED318CFFF6100F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIPixellate.xib; sourceTree = "<group>"; };
+		55909ED618CFFF7A00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIPointillize.xib; sourceTree = "<group>"; };
+		55909ED918CFFF9300F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIPosterize.xib; sourceTree = "<group>"; };
+		55909EDC18CFFFB300F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CISepia.xib; sourceTree = "<group>"; };
+		55909EDF18CFFFC900F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CISharpen.xib; sourceTree = "<group>"; };
+		55909EF818D0002200F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CISpotLight.xib; sourceTree = "<group>"; };
+		55909EFB18D0003F00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIStarshine.xib; sourceTree = "<group>"; };
+		55909EFE18D0005700F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CISunbeams.xib; sourceTree = "<group>"; };
+		55909F0118D0006F00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CITorusLens.xib; sourceTree = "<group>"; };
+		55909F0418D0008C00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CITwirl.xib; sourceTree = "<group>"; };
+		55909F0718D000A300F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIUnsharpMask.xib; sourceTree = "<group>"; };
+		55909F0A18D000BB00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIVortex.xib; sourceTree = "<group>"; };
+		55909F1618D007C100F43F90 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		5599389718CFC72A00E92088 /* Bloom+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bloom+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938B218CFCCCA00E92088 /* Checkerboard+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checkerboard+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938C118CFCCCC00E92088 /* Circular Screen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Screen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1582,8 +1565,6 @@
 		A8E5085804576FB200A80207 /* OptionsUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsUtility.h; sourceTree = "<group>"; };
 		A8E5085904576FB200A80207 /* OptionsUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsUtility.m; sourceTree = "<group>"; };
 		A8E57D0D09EFE9200009FCE2 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
-		A8EB480409C5AE58007B9A41 /* GIMPCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GIMPCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8EB480A09C5AE65007B9A41 /* TIFF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TIFF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EC63FA0422D5D900FE1D39 /* brush-cursor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brush-cursor.png"; sourceTree = "<group>"; };
 		A8EDF154078959C80022BB31 /* Seashore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seashore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EDF16707895A9F0022BB31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
@@ -1948,6 +1929,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55909F1718D007C100F43F90 /* libz.1.dylib in Frameworks */,
 				55850B3E13D63BC500C3B2CB /* GIMPCore.framework in Frameworks */,
 				55850B3F13D63BC500C3B2CB /* TIFF.framework in Frameworks */,
 				A84E106408E7A4FB0084BCB7 /* IOKit.framework in Frameworks */,
@@ -1960,19 +1942,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A84E106308E7A4FB0084BCB7 /* IOKit.framework */,
-				A8BF652608E6FEAB006E9BFC /* Carbon.framework */,
-				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
-				F5CE25B003D7112D013D2EC9 /* ApplicationServices.framework */,
-				A8EB480409C5AE58007B9A41 /* GIMPCore.framework */,
-				A8EB480A09C5AE65007B9A41 /* TIFF.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
 		1058C7A8FEA54F5311CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2009,16 +1978,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Seashore */ = {
 			isa = PBXGroup;
 			children = (
-				2A37F4ABFDCFA73011CA2CEA /* Application Classes */,
-				F50687FD039B9946016F7F19 /* Document Classes */,
-				F5B6B31B03D14DD701FCB9EC /* Display Classes */,
-				F5003C2303CA959301FED195 /* Utility Classes */,
-				F58550EC04039BE60101672D /* Tool Classes */,
-				A8E5085C045771DF00A80207 /* Options Classes */,
-				F5B70DDF03ED5E38015BA417 /* Operation Classes */,
-				A8FBD1580410B41600DF7825 /* Component Classes */,
-				A8D6BCDC07C2152100B91A1D /* Importer Classes */,
-				F57AD82B03FF7FDB0185BAF6 /* Exporter Classes */,
+				55909F2218D0084800F43F90 /* Classes */,
 				A8BDC80404BEF77D00A80207 /* Extra Sources */,
 				2A37F4AFFDCFA73011CA2CEA /* Main Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
@@ -2093,7 +2053,11 @@
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */,
+				55909F1618D007C100F43F90 /* libz.1.dylib */,
+				A84E106308E7A4FB0084BCB7 /* IOKit.framework */,
+				A8BF652608E6FEAB006E9BFC /* Carbon.framework */,
+				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
+				F5CE25B003D7112D013D2EC9 /* ApplicationServices.framework */,
 				557D533418CF9FEC005809E3 /* Cocoa.framework */,
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
@@ -2420,7 +2384,7 @@
 			children = (
 				557D50C618CF9FBB005809E3 /* CIDotScreenClass.h */,
 				557D50C718CF9FBB005809E3 /* CIDotScreenClass.m */,
-				557D50C818CF9FBB005809E3 /* CIDotScreen.nib */,
+				55909EA318CFFD1C00F43F90 /* CIDotScreen.xib */,
 				557D50CA18CF9FBB005809E3 /* Localizable.strings */,
 				557D50CC18CF9FBB005809E3 /* Info.plist */,
 			);
@@ -2432,7 +2396,7 @@
 			children = (
 				557D50D118CF9FBB005809E3 /* CIEdgesClass.h */,
 				557D50D218CF9FBB005809E3 /* CIEdgesClass.m */,
-				557D50D318CF9FBB005809E3 /* CIEdges.nib */,
+				55909EA618CFFD4600F43F90 /* CIEdges.xib */,
 				557D50D518CF9FBC005809E3 /* Localizable.strings */,
 				557D50D718CF9FBC005809E3 /* Info.plist */,
 			);
@@ -2444,7 +2408,7 @@
 			children = (
 				557D50DC18CF9FBC005809E3 /* CIEdgeWorkClass.h */,
 				557D50DD18CF9FBC005809E3 /* CIEdgeWorkClass.m */,
-				557D50DE18CF9FBC005809E3 /* CIEdgeWork.nib */,
+				55909EA918CFFD6700F43F90 /* CIEdgeWork.xib */,
 				557D50E018CF9FBC005809E3 /* Localizable.strings */,
 				557D50E218CF9FBC005809E3 /* Info.plist */,
 			);
@@ -2456,7 +2420,7 @@
 			children = (
 				557D50E718CF9FBC005809E3 /* CIExposureClass.h */,
 				557D50E818CF9FBC005809E3 /* CIExposureClass.m */,
-				557D50E918CF9FBC005809E3 /* CIExposure.nib */,
+				55909EAC18CFFD8400F43F90 /* CIExposure.xib */,
 				557D50EB18CF9FBC005809E3 /* Localizable.strings */,
 				557D50ED18CF9FBC005809E3 /* Info.plist */,
 			);
@@ -2479,7 +2443,7 @@
 			children = (
 				557D50FB18CF9FBC005809E3 /* CIGammaAdjustClass.h */,
 				557D50FC18CF9FBC005809E3 /* CIGammaAdjustClass.m */,
-				557D50FD18CF9FBC005809E3 /* CIGammaAdjust.nib */,
+				55909EAF18CFFD9D00F43F90 /* CIGammaAdjust.xib */,
 				557D50FF18CF9FBC005809E3 /* Localizable.strings */,
 				557D510118CF9FBC005809E3 /* Info.plist */,
 			);
@@ -2491,7 +2455,7 @@
 			children = (
 				557D510618CF9FBC005809E3 /* CIGaussianBlurClass.h */,
 				557D510718CF9FBC005809E3 /* CIGaussianBlurClass.m */,
-				557D510818CF9FBC005809E3 /* CIGaussianBlur.nib */,
+				55909EB218CFFDBC00F43F90 /* CIGaussianBlur.xib */,
 				557D510A18CF9FBC005809E3 /* Localizable.strings */,
 				557D510C18CF9FBC005809E3 /* Info.plist */,
 			);
@@ -2504,7 +2468,7 @@
 				557D511118CF9FBC005809E3 /* CIGlassDistortionClass.h */,
 				557D511218CF9FBC005809E3 /* CIGlassDistortionClass.m */,
 				557D511318CF9FBC005809E3 /* default-distort.tiff */,
-				557D511418CF9FBC005809E3 /* CIGlassDistortion.nib */,
+				55909EB518CFFDE500F43F90 /* CIGlassDistortion.xib */,
 				557D511618CF9FBC005809E3 /* Localizable.strings */,
 				557D511818CF9FBC005809E3 /* Info.plist */,
 			);
@@ -2516,7 +2480,7 @@
 			children = (
 				557D511D18CF9FBC005809E3 /* CIGlassLozengeClass.h */,
 				557D511E18CF9FBC005809E3 /* CIGlassLozengeClass.m */,
-				557D511F18CF9FBC005809E3 /* CIGlassLozenge.nib */,
+				55909EB818CFFE0900F43F90 /* CIGlassLozenge.xib */,
 				557D512118CF9FBC005809E3 /* Localizable.strings */,
 				557D512318CF9FBC005809E3 /* Info.plist */,
 			);
@@ -2528,7 +2492,7 @@
 			children = (
 				557D512818CF9FBC005809E3 /* CIGloomClass.h */,
 				557D512918CF9FBC005809E3 /* CIGloomClass.m */,
-				557D512A18CF9FBC005809E3 /* CIGloom.nib */,
+				55909EBB18CFFE2600F43F90 /* CIGloom.xib */,
 				557D512C18CF9FBD005809E3 /* Localizable.strings */,
 				557D512E18CF9FBD005809E3 /* Info.plist */,
 			);
@@ -2540,7 +2504,7 @@
 			children = (
 				557D513318CF9FBD005809E3 /* CIHatchedScreenClass.h */,
 				557D513418CF9FBD005809E3 /* CIHatchedScreenClass.m */,
-				557D513518CF9FBD005809E3 /* CIHatchedScreen.nib */,
+				55909EBE18CFFE4200F43F90 /* CIHatchedScreen.xib */,
 				557D513718CF9FBD005809E3 /* Localizable.strings */,
 				557D513918CF9FBD005809E3 /* Info.plist */,
 			);
@@ -2596,7 +2560,7 @@
 			children = (
 				557D516218CF9FBD005809E3 /* CILenticularHaloClass.h */,
 				557D516318CF9FBD005809E3 /* CILenticularHaloClass.m */,
-				557D516418CF9FBD005809E3 /* CILenticularHalo.nib */,
+				55909EC118CFFE6300F43F90 /* CILenticularHalo.xib */,
 				557D516618CF9FBD005809E3 /* Localizable.strings */,
 				557D516818CF9FBD005809E3 /* HaloColorWell.h */,
 				557D516918CF9FBD005809E3 /* HaloColorWell.m */,
@@ -2610,7 +2574,7 @@
 			children = (
 				557D516F18CF9FBD005809E3 /* CILineScreenClass.h */,
 				557D517018CF9FBD005809E3 /* CILineScreenClass.m */,
-				557D517118CF9FBD005809E3 /* CILineScreen.nib */,
+				55909EC418CFFE8100F43F90 /* CILineScreen.xib */,
 				557D517318CF9FBD005809E3 /* Localizable.strings */,
 				557D517518CF9FBD005809E3 /* Info.plist */,
 			);
@@ -2633,7 +2597,7 @@
 			children = (
 				557D518318CF9FBE005809E3 /* CIMonochromeClass.h */,
 				557D518418CF9FBE005809E3 /* CIMonochromeClass.m */,
-				557D518518CF9FBE005809E3 /* CIMonochrome.nib */,
+				55909EC718CFFE9C00F43F90 /* CIMonochrome.xib */,
 				557D518718CF9FBE005809E3 /* Localizable.strings */,
 				557D518918CF9FBE005809E3 /* Info.plist */,
 				557D518A18CF9FBE005809E3 /* MonochromeColorWell.h */,
@@ -2658,7 +2622,7 @@
 			children = (
 				557D519918CF9FBE005809E3 /* CINoiseReductionClass.h */,
 				557D519A18CF9FBE005809E3 /* CINoiseReductionClass.m */,
-				557D519B18CF9FBE005809E3 /* CINoiseReduction.nib */,
+				55909ECA18CFFEBA00F43F90 /* CINoiseReduction.xib */,
 				557D519D18CF9FBE005809E3 /* Localizable.strings */,
 				557D519F18CF9FBE005809E3 /* Info.plist */,
 			);
@@ -2670,7 +2634,7 @@
 			children = (
 				557D51A418CF9FBE005809E3 /* CIOpTileClass.h */,
 				557D51A518CF9FBE005809E3 /* CIOpTileClass.m */,
-				557D51A618CF9FBE005809E3 /* CIOpTile.nib */,
+				55909ECB18CFFED100F43F90 /* CIOpTile.xib */,
 				557D51A818CF9FBE005809E3 /* Localizable.strings */,
 				557D51AA18CF9FBE005809E3 /* Info.plist */,
 			);
@@ -2682,7 +2646,7 @@
 			children = (
 				557D51AF18CF9FBE005809E3 /* CIParallelogramTileClass.h */,
 				557D51B018CF9FBE005809E3 /* CIParallelogramTileClass.m */,
-				557D51B118CF9FBE005809E3 /* CIParallelogramTile.nib */,
+				55909ECE18CFFF1A00F43F90 /* CIParallelogramTile.xib */,
 				557D51B318CF9FBE005809E3 /* Localizable.strings */,
 				557D51B518CF9FBE005809E3 /* Info.plist */,
 			);
@@ -2716,7 +2680,7 @@
 			children = (
 				557D51CC18CF9FBE005809E3 /* CIPinchClass.h */,
 				557D51CD18CF9FBE005809E3 /* CIPinchClass.m */,
-				557D51CE18CF9FBE005809E3 /* CIPinch.nib */,
+				55909ED118CFFF4B00F43F90 /* CIPinch.xib */,
 				557D51D018CF9FBF005809E3 /* Localizable.strings */,
 				557D51D218CF9FBF005809E3 /* Info.plist */,
 			);
@@ -2728,7 +2692,7 @@
 			children = (
 				557D51D718CF9FBF005809E3 /* CIPixellateClass.h */,
 				557D51D818CF9FBF005809E3 /* CIPixellateClass.m */,
-				557D51D918CF9FBF005809E3 /* CIPixellate.nib */,
+				55909ED418CFFF6100F43F90 /* CIPixellate.xib */,
 				557D51DB18CF9FBF005809E3 /* Localizable.strings */,
 				557D51DD18CF9FBF005809E3 /* Info.plist */,
 			);
@@ -2740,7 +2704,7 @@
 			children = (
 				557D51E218CF9FBF005809E3 /* CIPointillizeClass.h */,
 				557D51E318CF9FBF005809E3 /* CIPointillizeClass.m */,
-				557D51E418CF9FBF005809E3 /* CIPointillize.nib */,
+				55909ED718CFFF7A00F43F90 /* CIPointillize.xib */,
 				557D51E618CF9FBF005809E3 /* Localizable.strings */,
 				557D51E818CF9FBF005809E3 /* Info.plist */,
 			);
@@ -2752,7 +2716,7 @@
 			children = (
 				557D51ED18CF9FBF005809E3 /* CIPosterizeClass.h */,
 				557D51EE18CF9FBF005809E3 /* CIPosterizeClass.m */,
-				557D51EF18CF9FBF005809E3 /* CIPosterize.nib */,
+				55909EDA18CFFF9300F43F90 /* CIPosterize.xib */,
 				557D51F118CF9FBF005809E3 /* Localizable.strings */,
 				557D51F318CF9FBF005809E3 /* Info.plist */,
 			);
@@ -2775,7 +2739,7 @@
 			children = (
 				557D520118CF9FBF005809E3 /* CISepiaClass.h */,
 				557D520218CF9FBF005809E3 /* CISepiaClass.m */,
-				557D520318CF9FBF005809E3 /* CISepia.nib */,
+				55909EDD18CFFFB300F43F90 /* CISepia.xib */,
 				557D520518CF9FBF005809E3 /* Localizable.strings */,
 				557D520718CF9FBF005809E3 /* Info.plist */,
 			);
@@ -2787,7 +2751,7 @@
 			children = (
 				557D520C18CF9FBF005809E3 /* CISharpenClass.h */,
 				557D520D18CF9FBF005809E3 /* CISharpenClass.m */,
-				557D520E18CF9FBF005809E3 /* CISharpen.nib */,
+				55909EE018CFFFC900F43F90 /* CISharpen.xib */,
 				557D521018CF9FBF005809E3 /* Localizable.strings */,
 				557D521218CF9FBF005809E3 /* Info.plist */,
 			);
@@ -2799,7 +2763,7 @@
 			children = (
 				557D521718CF9FBF005809E3 /* CISpotLightClass.h */,
 				557D521818CF9FBF005809E3 /* CISpotLightClass.m */,
-				557D521918CF9FBF005809E3 /* CISpotLight.nib */,
+				55909EF918D0002200F43F90 /* CISpotLight.xib */,
 				557D521B18CF9FBF005809E3 /* Localizable.strings */,
 				557D521D18CF9FBF005809E3 /* Info.plist */,
 				557D521E18CF9FBF005809E3 /* SpotLightColorWell.h */,
@@ -2813,7 +2777,7 @@
 			children = (
 				557D522418CF9FC0005809E3 /* CIStarshineClass.h */,
 				557D522518CF9FC0005809E3 /* CIStarshineClass.m */,
-				557D522618CF9FC0005809E3 /* CIStarshine.nib */,
+				55909EFC18D0003F00F43F90 /* CIStarshine.xib */,
 				557D522818CF9FC0005809E3 /* Localizable.strings */,
 				557D522A18CF9FC0005809E3 /* Info.plist */,
 				557D522B18CF9FC0005809E3 /* StarshineColorWell.h */,
@@ -2827,7 +2791,7 @@
 			children = (
 				557D523118CF9FC0005809E3 /* CISunbeamsClass.h */,
 				557D523218CF9FC0005809E3 /* CISunbeamsClass.m */,
-				557D523318CF9FC0005809E3 /* CISunbeams.nib */,
+				55909EFF18D0005700F43F90 /* CISunbeams.xib */,
 				557D523518CF9FC0005809E3 /* Localizable.strings */,
 				557D523718CF9FC0005809E3 /* Info.plist */,
 				557D523818CF9FC0005809E3 /* SunbeamsColorWell.h */,
@@ -2841,7 +2805,7 @@
 			children = (
 				557D523E18CF9FC0005809E3 /* CITorusLensClass.h */,
 				557D523F18CF9FC0005809E3 /* CITorusLensClass.m */,
-				557D524018CF9FC0005809E3 /* CITorusLens.nib */,
+				55909F0218D0006F00F43F90 /* CITorusLens.xib */,
 				557D524218CF9FC0005809E3 /* Localizable.strings */,
 				557D524418CF9FC0005809E3 /* Info.plist */,
 			);
@@ -2864,7 +2828,7 @@
 			children = (
 				557D525218CF9FC0005809E3 /* CITwirlClass.h */,
 				557D525318CF9FC0005809E3 /* CITwirlClass.m */,
-				557D525418CF9FC0005809E3 /* CITwirl.nib */,
+				55909F0518D0008C00F43F90 /* CITwirl.xib */,
 				557D525618CF9FC0005809E3 /* Localizable.strings */,
 				557D525818CF9FC0005809E3 /* Info.plist */,
 			);
@@ -2876,7 +2840,7 @@
 			children = (
 				557D525D18CF9FC0005809E3 /* CIUnsharpMaskClass.h */,
 				557D525E18CF9FC0005809E3 /* CIUnsharpMaskClass.m */,
-				557D525F18CF9FC0005809E3 /* CIUnsharpMask.nib */,
+				55909F0818D000A300F43F90 /* CIUnsharpMask.xib */,
 				557D526118CF9FC0005809E3 /* Localizable.strings */,
 				557D526318CF9FC0005809E3 /* Info.plist */,
 			);
@@ -2899,7 +2863,7 @@
 			children = (
 				557D527118CF9FC0005809E3 /* CIVortexClass.h */,
 				557D527218CF9FC0005809E3 /* CIVortexClass.m */,
-				557D527318CF9FC0005809E3 /* CIVortex.nib */,
+				55909F0B18D000BB00F43F90 /* CIVortex.xib */,
 				557D527518CF9FC0005809E3 /* Localizable.strings */,
 				557D527718CF9FC1005809E3 /* Info.plist */,
 			);
@@ -2926,6 +2890,23 @@
 				557D528918CF9FC1005809E3 /* Info.plist */,
 			);
 			path = CIZoomBlur;
+			sourceTree = "<group>";
+		};
+		55909F2218D0084800F43F90 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2A37F4ABFDCFA73011CA2CEA /* Application Classes */,
+				F50687FD039B9946016F7F19 /* Document Classes */,
+				F5B6B31B03D14DD701FCB9EC /* Display Classes */,
+				F5003C2303CA959301FED195 /* Utility Classes */,
+				F58550EC04039BE60101672D /* Tool Classes */,
+				A8E5085C045771DF00A80207 /* Options Classes */,
+				F5B70DDF03ED5E38015BA417 /* Operation Classes */,
+				A8FBD1580410B41600DF7825 /* Component Classes */,
+				A8D6BCDC07C2152100B91A1D /* Importer Classes */,
+				F57AD82B03FF7FDB0185BAF6 /* Exporter Classes */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		A83316C90C094D4400E1EBBE /* Products */ = {
@@ -3920,20 +3901,16 @@
 				A8EDF0F2078959C80022BB31 /* Sources */,
 				A8EDF14B078959C80022BB31 /* Frameworks */,
 				A8EDF14F078959C80022BB31 /* Copy Frameworks */,
-				DC48A369104219BD00A803AE /* CopyFiles */,
-				DC48A37110421B1F00A803AE /* CopyFiles */,
+				DC48A369104219BD00A803AE /* Copy Spotlight plug-in */,
+				DC48A37110421B1F00A803AE /* Copy QuickLook plug-in */,
 				55647C9D13D62DD60001A68C /* Copy PlugIns */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5599389D18CFC8AF00E92088 /* PBXTargetDependency */,
-				5599389F18CFC8AF00E92088 /* PBXTargetDependency */,
-				559938A118CFC8AF00E92088 /* PBXTargetDependency */,
+				55909F2118D0083800F43F90 /* PBXTargetDependency */,
 				35B157380A2C015A005B688F /* PBXTargetDependency */,
 				35B1573A0A2C015E005B688F /* PBXTargetDependency */,
-				557D537218CFAD0D005809E3 /* PBXTargetDependency */,
-				557D537418CFAD0D005809E3 /* PBXTargetDependency */,
 				A8080D600C07C5D50026D06E /* PBXTargetDependency */,
 				A8080D680C07C5D50026D06E /* PBXTargetDependency */,
 				A8080D6A0C07C5D50026D06E /* PBXTargetDependency */,
@@ -4334,7 +4311,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55909E4B18CFDB1B00F43F90 /* CIDotScreen.nib in Resources */,
+				55909EA118CFFD1C00F43F90 /* CIDotScreen.xib in Resources */,
 				55909E4C18CFDB2000F43F90 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4861,16 +4838,6 @@
 			name = XCFQuickLook;
 			targetProxy = 5528598713D62FBF001564E5 /* PBXContainerItemProxy */;
 		};
-		557D537218CFAD0D005809E3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 557D533218CF9FEC005809E3 /* Affine Tile+ */;
-			targetProxy = 557D537118CFAD0D005809E3 /* PBXContainerItemProxy */;
-		};
-		557D537418CFAD0D005809E3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 557D536118CFAAF6005809E3 /* Affine Transform+ */;
-			targetProxy = 557D537318CFAD0D005809E3 /* PBXContainerItemProxy */;
-		};
 		55909E0218CFD5A700F43F90 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 557D533218CF9FEC005809E3 /* Affine Tile+ */;
@@ -4936,20 +4903,10 @@
 			target = 55909E3A18CFDA6900F43F90 /* Dot Screen+ */;
 			targetProxy = 55909E4D18CFDB3C00F43F90 /* PBXContainerItemProxy */;
 		};
-		5599389D18CFC8AF00E92088 /* PBXTargetDependency */ = {
+		55909F2118D0083800F43F90 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5599388A18CFC72A00E92088 /* Bloom+ */;
-			targetProxy = 5599389C18CFC8AF00E92088 /* PBXContainerItemProxy */;
-		};
-		5599389F18CFC8AF00E92088 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 550AEAF018CFC5DE008918BA /* Brightness+ */;
-			targetProxy = 5599389E18CFC8AF00E92088 /* PBXContainerItemProxy */;
-		};
-		559938A118CFC8AF00E92088 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 550AEAFE18CFC5E1008918BA /* Bump+ */;
-			targetProxy = 559938A018CFC8AF00E92088 /* PBXContainerItemProxy */;
+			target = 55909DFD18CFD59A00F43F90 /* CoreImage-based Plug-ins */;
+			targetProxy = 55909F2018D0083800F43F90 /* PBXContainerItemProxy */;
 		};
 		A8080D600C07C5D50026D06E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5048,7 +5005,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D504C18CF9FBA005809E3 /* English */,
-				55909E5218CFEEAC00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5057,7 +5013,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D505518CF9FBA005809E3 /* English */,
-				55909E5318CFEEAC00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5075,7 +5030,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D506B18CF9FBA005809E3 /* English */,
-				55909E5518CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5084,7 +5038,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D507618CF9FBA005809E3 /* English */,
-				55909E5618CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5093,7 +5046,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D507F18CF9FBB005809E3 /* English */,
-				55909E5718CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5102,7 +5054,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D508818CF9FBB005809E3 /* English */,
-				55909E5818CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5111,7 +5062,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D509318CF9FBB005809E3 /* English */,
-				55909E5918CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5120,7 +5070,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D509E18CF9FBB005809E3 /* English */,
-				55909E5A18CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5152,14 +5101,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D50C818CF9FBB005809E3 /* CIDotScreen.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D50C918CF9FBB005809E3 /* English */,
-			);
-			name = CIDotScreen.nib;
-			sourceTree = "<group>";
-		};
 		557D50CA18CF9FBB005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5167,14 +5108,6 @@
 				55909E5E18CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D50D318CF9FBB005809E3 /* CIEdges.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D50D418CF9FBC005809E3 /* English */,
-			);
-			name = CIEdges.nib;
 			sourceTree = "<group>";
 		};
 		557D50D518CF9FBC005809E3 /* Localizable.strings */ = {
@@ -5186,14 +5119,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D50DE18CF9FBC005809E3 /* CIEdgeWork.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D50DF18CF9FBC005809E3 /* English */,
-			);
-			name = CIEdgeWork.nib;
-			sourceTree = "<group>";
-		};
 		557D50E018CF9FBC005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5201,14 +5126,6 @@
 				55909E6018CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D50E918CF9FBC005809E3 /* CIExposure.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D50EA18CF9FBC005809E3 /* English */,
-			);
-			name = CIExposure.nib;
 			sourceTree = "<group>";
 		};
 		557D50EB18CF9FBC005809E3 /* Localizable.strings */ = {
@@ -5229,14 +5146,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D50FD18CF9FBC005809E3 /* CIGammaAdjust.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D50FE18CF9FBC005809E3 /* English */,
-			);
-			name = CIGammaAdjust.nib;
-			sourceTree = "<group>";
-		};
 		557D50FF18CF9FBC005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5244,14 +5153,6 @@
 				55909E6318CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D510818CF9FBC005809E3 /* CIGaussianBlur.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D510918CF9FBC005809E3 /* English */,
-			);
-			name = CIGaussianBlur.nib;
 			sourceTree = "<group>";
 		};
 		557D510A18CF9FBC005809E3 /* Localizable.strings */ = {
@@ -5263,14 +5164,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D511418CF9FBC005809E3 /* CIGlassDistortion.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D511518CF9FBC005809E3 /* English */,
-			);
-			name = CIGlassDistortion.nib;
-			sourceTree = "<group>";
-		};
 		557D511618CF9FBC005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5278,14 +5171,6 @@
 				55909E6518CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D511F18CF9FBC005809E3 /* CIGlassLozenge.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D512018CF9FBC005809E3 /* English */,
-			);
-			name = CIGlassLozenge.nib;
 			sourceTree = "<group>";
 		};
 		557D512118CF9FBC005809E3 /* Localizable.strings */ = {
@@ -5297,14 +5182,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D512A18CF9FBC005809E3 /* CIGloom.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D512B18CF9FBC005809E3 /* English */,
-			);
-			name = CIGloom.nib;
-			sourceTree = "<group>";
-		};
 		557D512C18CF9FBD005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5312,14 +5189,6 @@
 				55909E6718CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D513518CF9FBD005809E3 /* CIHatchedScreen.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D513618CF9FBD005809E3 /* English */,
-			);
-			name = CIHatchedScreen.nib;
 			sourceTree = "<group>";
 		};
 		557D513718CF9FBD005809E3 /* Localizable.strings */ = {
@@ -5367,14 +5236,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D516418CF9FBD005809E3 /* CILenticularHalo.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D516518CF9FBD005809E3 /* English */,
-			);
-			name = CILenticularHalo.nib;
-			sourceTree = "<group>";
-		};
 		557D516618CF9FBD005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5382,14 +5243,6 @@
 				55909E6D18CFEEAE00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D517118CF9FBD005809E3 /* CILineScreen.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D517218CF9FBD005809E3 /* English */,
-			);
-			name = CILineScreen.nib;
 			sourceTree = "<group>";
 		};
 		557D517318CF9FBD005809E3 /* Localizable.strings */ = {
@@ -5410,14 +5263,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D518518CF9FBE005809E3 /* CIMonochrome.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D518618CF9FBE005809E3 /* English */,
-			);
-			name = CIMonochrome.nib;
-			sourceTree = "<group>";
-		};
 		557D518718CF9FBE005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5436,14 +5281,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D519B18CF9FBE005809E3 /* CINoiseReduction.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D519C18CF9FBE005809E3 /* English */,
-			);
-			name = CINoiseReduction.nib;
-			sourceTree = "<group>";
-		};
 		557D519D18CF9FBE005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5453,14 +5290,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D51A618CF9FBE005809E3 /* CIOpTile.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D51A718CF9FBE005809E3 /* English */,
-			);
-			name = CIOpTile.nib;
-			sourceTree = "<group>";
-		};
 		557D51A818CF9FBE005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5468,14 +5297,6 @@
 				55909E7318CFEEAE00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D51B118CF9FBE005809E3 /* CIParallelogramTile.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D51B218CF9FBE005809E3 /* English */,
-			);
-			name = CIParallelogramTile.nib;
 			sourceTree = "<group>";
 		};
 		557D51B318CF9FBE005809E3 /* Localizable.strings */ = {
@@ -5505,14 +5326,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D51CE18CF9FBE005809E3 /* CIPinch.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D51CF18CF9FBE005809E3 /* English */,
-			);
-			name = CIPinch.nib;
-			sourceTree = "<group>";
-		};
 		557D51D018CF9FBF005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5520,14 +5333,6 @@
 				55909E7718CFEEAF00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D51D918CF9FBF005809E3 /* CIPixellate.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D51DA18CF9FBF005809E3 /* English */,
-			);
-			name = CIPixellate.nib;
 			sourceTree = "<group>";
 		};
 		557D51DB18CF9FBF005809E3 /* Localizable.strings */ = {
@@ -5539,14 +5344,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D51E418CF9FBF005809E3 /* CIPointillize.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D51E518CF9FBF005809E3 /* English */,
-			);
-			name = CIPointillize.nib;
-			sourceTree = "<group>";
-		};
 		557D51E618CF9FBF005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5554,14 +5351,6 @@
 				55909E7918CFEEAF00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D51EF18CF9FBF005809E3 /* CIPosterize.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D51F018CF9FBF005809E3 /* English */,
-			);
-			name = CIPosterize.nib;
 			sourceTree = "<group>";
 		};
 		557D51F118CF9FBF005809E3 /* Localizable.strings */ = {
@@ -5582,15 +5371,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D520318CF9FBF005809E3 /* CISepia.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D520418CF9FBF005809E3 /* English */,
-				55909E7C18CFEEAF00F43F90 /* en-GB */,
-			);
-			name = CISepia.nib;
-			sourceTree = "<group>";
-		};
 		557D520518CF9FBF005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5598,14 +5378,6 @@
 				55909E7D18CFEEAF00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D520E18CF9FBF005809E3 /* CISharpen.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D520F18CF9FBF005809E3 /* English */,
-			);
-			name = CISharpen.nib;
 			sourceTree = "<group>";
 		};
 		557D521018CF9FBF005809E3 /* Localizable.strings */ = {
@@ -5617,14 +5389,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D521918CF9FBF005809E3 /* CISpotLight.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D521A18CF9FBF005809E3 /* English */,
-			);
-			name = CISpotLight.nib;
-			sourceTree = "<group>";
-		};
 		557D521B18CF9FBF005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5632,14 +5396,6 @@
 				55909E7F18CFEEAF00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D522618CF9FC0005809E3 /* CIStarshine.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D522718CF9FC0005809E3 /* English */,
-			);
-			name = CIStarshine.nib;
 			sourceTree = "<group>";
 		};
 		557D522818CF9FC0005809E3 /* Localizable.strings */ = {
@@ -5651,14 +5407,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D523318CF9FC0005809E3 /* CISunbeams.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D523418CF9FC0005809E3 /* English */,
-			);
-			name = CISunbeams.nib;
-			sourceTree = "<group>";
-		};
 		557D523518CF9FC0005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5666,14 +5414,6 @@
 				55909E8118CFEEAF00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D524018CF9FC0005809E3 /* CITorusLens.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D524118CF9FC0005809E3 /* English */,
-			);
-			name = CITorusLens.nib;
 			sourceTree = "<group>";
 		};
 		557D524218CF9FC0005809E3 /* Localizable.strings */ = {
@@ -5694,14 +5434,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		557D525418CF9FC0005809E3 /* CITwirl.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D525518CF9FC0005809E3 /* English */,
-			);
-			name = CITwirl.nib;
-			sourceTree = "<group>";
-		};
 		557D525618CF9FC0005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5709,14 +5441,6 @@
 				55909E8418CFEEAF00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D525F18CF9FC0005809E3 /* CIUnsharpMask.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D526018CF9FC0005809E3 /* English */,
-			);
-			name = CIUnsharpMask.nib;
 			sourceTree = "<group>";
 		};
 		557D526118CF9FC0005809E3 /* Localizable.strings */ = {
@@ -5735,14 +5459,6 @@
 				55909E8618CFEEAF00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		557D527318CF9FC0005809E3 /* CIVortex.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557D527418CF9FC0005809E3 /* English */,
-			);
-			name = CIVortex.nib;
 			sourceTree = "<group>";
 		};
 		557D527518CF9FC0005809E3 /* Localizable.strings */ = {
@@ -5834,6 +5550,230 @@
 				55909E5018CFDF4C00F43F90 /* en */,
 			);
 			name = CICircularScreen.xib;
+			sourceTree = "<group>";
+		};
+		55909EA318CFFD1C00F43F90 /* CIDotScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EA218CFFD1C00F43F90 /* en */,
+			);
+			name = CIDotScreen.xib;
+			sourceTree = "<group>";
+		};
+		55909EA618CFFD4600F43F90 /* CIEdges.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EA518CFFD4600F43F90 /* en */,
+			);
+			name = CIEdges.xib;
+			sourceTree = "<group>";
+		};
+		55909EA918CFFD6700F43F90 /* CIEdgeWork.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EA818CFFD6700F43F90 /* en */,
+			);
+			name = CIEdgeWork.xib;
+			sourceTree = "<group>";
+		};
+		55909EAC18CFFD8400F43F90 /* CIExposure.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EAB18CFFD8400F43F90 /* en */,
+			);
+			name = CIExposure.xib;
+			sourceTree = "<group>";
+		};
+		55909EAF18CFFD9D00F43F90 /* CIGammaAdjust.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EAE18CFFD9D00F43F90 /* en */,
+			);
+			name = CIGammaAdjust.xib;
+			sourceTree = "<group>";
+		};
+		55909EB218CFFDBC00F43F90 /* CIGaussianBlur.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EB118CFFDBC00F43F90 /* en */,
+			);
+			name = CIGaussianBlur.xib;
+			sourceTree = "<group>";
+		};
+		55909EB518CFFDE500F43F90 /* CIGlassDistortion.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EB418CFFDE500F43F90 /* en */,
+			);
+			name = CIGlassDistortion.xib;
+			sourceTree = "<group>";
+		};
+		55909EB818CFFE0900F43F90 /* CIGlassLozenge.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EB718CFFE0900F43F90 /* en */,
+			);
+			name = CIGlassLozenge.xib;
+			sourceTree = "<group>";
+		};
+		55909EBB18CFFE2600F43F90 /* CIGloom.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EBA18CFFE2600F43F90 /* en */,
+			);
+			name = CIGloom.xib;
+			sourceTree = "<group>";
+		};
+		55909EBE18CFFE4200F43F90 /* CIHatchedScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EBD18CFFE4200F43F90 /* en */,
+			);
+			name = CIHatchedScreen.xib;
+			sourceTree = "<group>";
+		};
+		55909EC118CFFE6300F43F90 /* CILenticularHalo.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EC018CFFE6300F43F90 /* en */,
+			);
+			name = CILenticularHalo.xib;
+			sourceTree = "<group>";
+		};
+		55909EC418CFFE8100F43F90 /* CILineScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EC318CFFE8100F43F90 /* en */,
+			);
+			name = CILineScreen.xib;
+			sourceTree = "<group>";
+		};
+		55909EC718CFFE9C00F43F90 /* CIMonochrome.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EC618CFFE9C00F43F90 /* en */,
+			);
+			name = CIMonochrome.xib;
+			sourceTree = "<group>";
+		};
+		55909ECA18CFFEBA00F43F90 /* CINoiseReduction.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EC918CFFEBA00F43F90 /* en */,
+			);
+			name = CINoiseReduction.xib;
+			sourceTree = "<group>";
+		};
+		55909ECE18CFFF1A00F43F90 /* CIParallelogramTile.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909ECD18CFFF1A00F43F90 /* en */,
+			);
+			name = CIParallelogramTile.xib;
+			sourceTree = "<group>";
+		};
+		55909ED118CFFF4B00F43F90 /* CIPinch.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909ED018CFFF4B00F43F90 /* en */,
+			);
+			name = CIPinch.xib;
+			sourceTree = "<group>";
+		};
+		55909ED418CFFF6100F43F90 /* CIPixellate.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909ED318CFFF6100F43F90 /* en */,
+			);
+			name = CIPixellate.xib;
+			sourceTree = "<group>";
+		};
+		55909ED718CFFF7A00F43F90 /* CIPointillize.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909ED618CFFF7A00F43F90 /* en */,
+			);
+			name = CIPointillize.xib;
+			sourceTree = "<group>";
+		};
+		55909EDA18CFFF9300F43F90 /* CIPosterize.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909ED918CFFF9300F43F90 /* en */,
+			);
+			name = CIPosterize.xib;
+			sourceTree = "<group>";
+		};
+		55909EDD18CFFFB300F43F90 /* CISepia.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EDC18CFFFB300F43F90 /* en */,
+			);
+			name = CISepia.xib;
+			sourceTree = "<group>";
+		};
+		55909EE018CFFFC900F43F90 /* CISharpen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EDF18CFFFC900F43F90 /* en */,
+			);
+			name = CISharpen.xib;
+			sourceTree = "<group>";
+		};
+		55909EF918D0002200F43F90 /* CISpotLight.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EF818D0002200F43F90 /* en */,
+			);
+			name = CISpotLight.xib;
+			sourceTree = "<group>";
+		};
+		55909EFC18D0003F00F43F90 /* CIStarshine.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EFB18D0003F00F43F90 /* en */,
+			);
+			name = CIStarshine.xib;
+			sourceTree = "<group>";
+		};
+		55909EFF18D0005700F43F90 /* CISunbeams.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909EFE18D0005700F43F90 /* en */,
+			);
+			name = CISunbeams.xib;
+			sourceTree = "<group>";
+		};
+		55909F0218D0006F00F43F90 /* CITorusLens.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909F0118D0006F00F43F90 /* en */,
+			);
+			name = CITorusLens.xib;
+			sourceTree = "<group>";
+		};
+		55909F0518D0008C00F43F90 /* CITwirl.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909F0418D0008C00F43F90 /* en */,
+			);
+			name = CITwirl.xib;
+			sourceTree = "<group>";
+		};
+		55909F0818D000A300F43F90 /* CIUnsharpMask.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909F0718D000A300F43F90 /* en */,
+			);
+			name = CIUnsharpMask.xib;
+			sourceTree = "<group>";
+		};
+		55909F0B18D000BB00F43F90 /* CIVortex.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909F0A18D000BB00F43F90 /* en */,
+			);
+			name = CIVortex.xib;
 			sourceTree = "<group>";
 		};
 		A81240C507E81A7A00F275BF /* SVGContent.nib */ = {
@@ -6775,7 +6715,6 @@
 					MACOS_10_4_COMPILE,
 					MAIN_COMPILE,
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "-lz";
@@ -6798,7 +6737,6 @@
 					MACOS_10_4_COMPILE,
 					MAIN_COMPILE,
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "-lz";
@@ -6927,6 +6865,7 @@
 				55909E0018CFD59A00F43F90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55909E2118CFD6DD00F43F90 /* Build configuration list for PBXNativeTarget "Displacement Distortion+" */ = {
 			isa = XCConfigurationList;

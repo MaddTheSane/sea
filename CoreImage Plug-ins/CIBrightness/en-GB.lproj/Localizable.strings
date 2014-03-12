@@ -1,6 +1,0 @@
-author = "Mark Pazolli";
-copyright = "Public Domain 2007";
-description = "Applies a crystillising effect to the selection.";
-groupName< = "Color Adjust";
-license = "Public Domain";
-name = "Brightness and Contrast";

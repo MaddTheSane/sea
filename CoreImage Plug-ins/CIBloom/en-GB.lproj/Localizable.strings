@@ -1,6 +1,6 @@
-author = "Mark Pazolli";
-copyright = "Public Domain 2007";
-description = "Softens edges and applies a pleasant glow to the selection.";
-groupName = "Stylize";
-license = "Public Domain";
-name = "Bloom";
+//author = "Mark Pazolli";
+//copyright = "Public Domain 2007";
+//description = "Softens edges and applies a pleasant glow to the selection.";
+groupName = "Stylise";
+//license = "Public Domain";
+//name = "Bloom";
