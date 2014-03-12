@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
@@ -18,14 +18,14 @@
         <window title="Glass Distortion" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="398" y="381" width="365" height="147"/>
+            <rect key="contentRect" x="398" y="381" width="365" height="146"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="5">
-                <rect key="frame" x="0.0" y="0.0" width="365" height="147"/>
+                <rect key="frame" x="0.0" y="0.0" width="365" height="146"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" id="7">
-                        <rect key="frame" x="259" y="12" width="92" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                        <rect key="frame" x="269" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Ok" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="42">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -38,8 +38,8 @@ DQ
                             <action selector="apply:" target="-2" id="26"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" id="13">
-                        <rect key="frame" x="17" y="113" width="331" height="14"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="13">
+                        <rect key="frame" x="18" y="112" width="57" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="Emphasis:" id="43">
                             <font key="font" metaFont="smallSystem"/>
@@ -47,8 +47,8 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <slider verticalHuggingPriority="750" id="14">
-                        <rect key="frame" x="30" y="86" width="273" height="21"/>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="14">
+                        <rect key="frame" x="18" y="85" width="283" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="500" doubleValue="200" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="44">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
@@ -57,30 +57,34 @@ DQ
                             <action selector="update:" target="-2" id="23"/>
                         </connections>
                     </slider>
-                    <button verticalHuggingPriority="750" id="16">
-                        <rect key="frame" x="167" y="12" width="92" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
+                        <rect key="frame" x="187" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="45">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent">.</string>
-                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
                         </buttonCell>
                         <connections>
                             <action selector="cancel:" target="-2" id="25"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" id="21">
-                        <rect key="frame" x="306" y="91" width="42" height="14"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                        <rect key="frame" x="305" y="87" width="42" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="38" id="6ge-Rx-eG8"/>
+                        </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="200" id="46">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="33">
-                        <rect key="frame" x="17" y="61" width="237" height="14"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="33">
+                        <rect key="frame" x="18" y="63" width="263" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="Texture: Default" id="47">
                             <font key="font" metaFont="smallSystem"/>
@@ -88,8 +92,8 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" id="37">
-                        <rect key="frame" x="262" y="53" width="88" height="28"/>
+                    <button horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="37">
+                        <rect key="frame" x="282" y="55" width="68" height="28"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Select..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="48">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -100,6 +104,26 @@ DQ
                         </connections>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="37" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="8" symbolic="YES" id="3GE-cc-qRa"/>
+                    <constraint firstItem="21" firstAttribute="leading" secondItem="14" secondAttribute="trailing" constant="8" symbolic="YES" id="7fh-Ew-Og2"/>
+                    <constraint firstItem="7" firstAttribute="top" secondItem="37" secondAttribute="bottom" constant="20" symbolic="YES" id="7hL-OY-kWZ"/>
+                    <constraint firstAttribute="trailing" secondItem="21" secondAttribute="trailing" constant="20" symbolic="YES" id="Htg-iq-ieK"/>
+                    <constraint firstItem="7" firstAttribute="leading" secondItem="16" secondAttribute="trailing" constant="12" symbolic="YES" id="IZh-EE-UBC"/>
+                    <constraint firstItem="13" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" id="KNi-hQ-TO2"/>
+                    <constraint firstItem="7" firstAttribute="width" secondItem="16" secondAttribute="width" id="Pax-ZQ-HTc"/>
+                    <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="20" symbolic="YES" id="SZg-G2-FST"/>
+                    <constraint firstItem="14" firstAttribute="baseline" secondItem="21" secondAttribute="baseline" id="Y3L-NF-EvE"/>
+                    <constraint firstItem="7" firstAttribute="baseline" secondItem="16" secondAttribute="baseline" id="Z7w-3r-nSb"/>
+                    <constraint firstItem="37" firstAttribute="leading" secondItem="33" secondAttribute="trailing" constant="8" symbolic="YES" id="aJe-QO-R85"/>
+                    <constraint firstItem="37" firstAttribute="baseline" secondItem="33" secondAttribute="baseline" id="hcI-wz-q1n"/>
+                    <constraint firstAttribute="trailing" secondItem="37" secondAttribute="trailing" constant="20" symbolic="YES" id="i6W-Tp-Bco"/>
+                    <constraint firstItem="13" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="oeH-r0-ArJ"/>
+                    <constraint firstItem="33" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="pXJ-yw-uzN"/>
+                    <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" constant="20" symbolic="YES" id="uQn-ab-ABr"/>
+                    <constraint firstItem="14" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="vjT-YM-T4o"/>
+                    <constraint firstItem="14" firstAttribute="top" secondItem="13" secondAttribute="bottom" constant="8" symbolic="YES" id="yhO-m1-UN3"/>
+                </constraints>
             </view>
         </window>
     </objects>

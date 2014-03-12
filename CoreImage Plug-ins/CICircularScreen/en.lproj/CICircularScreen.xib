@@ -26,7 +26,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7">
-                        <rect key="frame" x="293" y="13" width="58" height="32"/>
+                        <rect key="frame" x="269" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Ok" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="60">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -59,13 +59,14 @@ DQ
                         </connections>
                     </slider>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
-                        <rect key="frame" x="211" y="13" width="82" height="32"/>
+                        <rect key="frame" x="187" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="63">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent">.</string>
-                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
                         </buttonCell>
                         <connections>
                             <action selector="cancel:" target="-2" id="25"/>
@@ -128,6 +129,7 @@ DQ
                     <constraint firstItem="13" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" id="XBn-RX-utw"/>
                     <constraint firstItem="40" firstAttribute="top" secondItem="38" secondAttribute="bottom" constant="8" symbolic="YES" id="Z8I-CI-LT5"/>
                     <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" constant="20" symbolic="YES" id="e3w-T0-tyc"/>
+                    <constraint firstItem="7" firstAttribute="width" secondItem="16" secondAttribute="width" id="fC2-5b-JNd"/>
                     <constraint firstItem="38" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="8" symbolic="YES" id="fcB-dN-BF2"/>
                     <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="20" symbolic="YES" id="kym-1J-HCC"/>
                     <constraint firstItem="40" firstAttribute="baseline" secondItem="39" secondAttribute="baseline" id="rLB-iF-Z0C"/>

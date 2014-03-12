@@ -28,7 +28,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7">
-                        <rect key="frame" x="293" y="13" width="58" height="32"/>
+                        <rect key="frame" x="269" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Ok" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="46">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -51,7 +51,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="14">
-                        <rect key="frame" x="18" y="146" width="286" height="21"/>
+                        <rect key="frame" x="18" y="146" width="283" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" minValue="-1" maxValue="1" tickMarkPosition="above" sliderType="linear" id="48">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
@@ -61,20 +61,21 @@ DQ
                         </connections>
                     </slider>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
-                        <rect key="frame" x="211" y="13" width="82" height="32"/>
+                        <rect key="frame" x="187" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="49">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent">.</string>
-                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
                         </buttonCell>
                         <connections>
                             <action selector="cancel:" target="-2" id="25"/>
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
-                        <rect key="frame" x="308" y="148" width="39" height="14"/>
+                        <rect key="frame" x="305" y="148" width="42" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="1.00" id="50">
                             <numberFormatter key="formatter" formatterBehavior="custom10_4" generatesDecimalNumbers="YES" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="Scs-wv-3SQ"/>
@@ -96,7 +97,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="34">
-                        <rect key="frame" x="18" y="99" width="286" height="21"/>
+                        <rect key="frame" x="18" y="99" width="283" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" minValue="2.5" maxValue="40" doubleValue="4" tickMarkPosition="above" sliderType="linear" id="52">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
@@ -106,7 +107,7 @@ DQ
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35">
-                        <rect key="frame" x="308" y="101" width="39" height="14"/>
+                        <rect key="frame" x="305" y="101" width="42" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="1.00" id="53">
                             <numberFormatter key="formatter" formatterBehavior="custom10_4" generatesDecimalNumbers="YES" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="AER-3Z-HC8"/>
@@ -128,7 +129,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="37">
-                        <rect key="frame" x="18" y="59" width="286" height="21"/>
+                        <rect key="frame" x="18" y="59" width="283" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="2" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="55">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
@@ -138,10 +139,10 @@ DQ
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38">
-                        <rect key="frame" x="308" y="61" width="39" height="14"/>
+                        <rect key="frame" x="305" y="61" width="42" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="35" id="Rbh-fx-OPU"/>
+                            <constraint firstAttribute="width" constant="38" id="Rbh-fx-OPU"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="1.00" id="56">
                             <numberFormatter key="formatter" formatterBehavior="custom10_4" generatesDecimalNumbers="YES" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="UXK-mx-EAQ"/>
@@ -181,6 +182,7 @@ DQ
                     <constraint firstItem="7" firstAttribute="leading" secondItem="16" secondAttribute="trailing" constant="12" symbolic="YES" id="iiX-Rb-gF0"/>
                     <constraint firstAttribute="trailing" secondItem="38" secondAttribute="trailing" constant="20" symbolic="YES" id="leR-LO-Chy"/>
                     <constraint firstItem="33" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="8" symbolic="YES" id="oP3-tg-Vp1"/>
+                    <constraint firstItem="7" firstAttribute="width" secondItem="16" secondAttribute="width" id="pLP-Hz-KeG"/>
                     <constraint firstItem="21" firstAttribute="leading" secondItem="14" secondAttribute="trailing" constant="8" symbolic="YES" id="pzX-xo-hqu"/>
                     <constraint firstItem="35" firstAttribute="baseline" secondItem="34" secondAttribute="baseline" id="s17-t5-0B1"/>
                     <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="20" symbolic="YES" id="uPB-1Y-skc"/>
