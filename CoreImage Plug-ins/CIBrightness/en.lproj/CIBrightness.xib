@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
@@ -27,8 +27,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="365" height="207"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" id="7">
-                        <rect key="frame" x="259" y="12" width="92" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                        <rect key="frame" x="293" y="13" width="58" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Ok" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="46">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -41,8 +41,8 @@ DQ
                             <action selector="apply:" target="-2" id="26"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" id="13">
-                        <rect key="frame" x="17" y="173" width="331" height="14"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="13">
+                        <rect key="frame" x="18" y="173" width="63" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="Brightness:" id="47">
                             <font key="font" metaFont="smallSystem"/>
@@ -50,18 +50,18 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <slider verticalHuggingPriority="750" id="14">
-                        <rect key="frame" x="30" y="146" width="273" height="21"/>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="14">
+                        <rect key="frame" x="18" y="146" width="286" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="-1" maxValue="1" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="48">
+                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="-1" maxValue="1" tickMarkPosition="above" sliderType="linear" id="48">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
                         <connections>
-                            <action selector="update:" target="-2" id="23"/>
+                            <binding destination="-2" name="value" keyPath="self.brightness" id="Obz-jj-xTk"/>
                         </connections>
                     </slider>
-                    <button verticalHuggingPriority="750" id="16">
-                        <rect key="frame" x="167" y="12" width="92" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
+                        <rect key="frame" x="211" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="49">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -73,17 +73,21 @@ DQ
                             <action selector="cancel:" target="-2" id="25"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" id="21">
-                        <rect key="frame" x="306" y="151" width="42" height="14"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                        <rect key="frame" x="308" y="148" width="39" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="1.00" id="50">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" generatesDecimalNumbers="YES" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="Scs-wv-3SQ"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.brightness" id="C2G-fZ-D3r"/>
+                        </connections>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="33">
-                        <rect key="frame" x="17" y="128" width="331" height="14"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="33">
+                        <rect key="frame" x="18" y="126" width="53" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="Contrast:" id="51">
                             <font key="font" metaFont="smallSystem"/>
@@ -91,27 +95,31 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <slider verticalHuggingPriority="750" id="34">
-                        <rect key="frame" x="30" y="101" width="273" height="21"/>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="34">
+                        <rect key="frame" x="18" y="99" width="286" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="2.5" maxValue="40" doubleValue="10" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="52">
+                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="2.5" maxValue="40" doubleValue="4" tickMarkPosition="above" sliderType="linear" id="52">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
                         <connections>
-                            <action selector="update:" target="-2" id="43"/>
+                            <binding destination="-2" name="value" keyPath="self.contrast" id="hhT-86-FXn"/>
                         </connections>
                     </slider>
-                    <textField verticalHuggingPriority="750" id="35">
-                        <rect key="frame" x="306" y="106" width="42" height="14"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35">
+                        <rect key="frame" x="308" y="101" width="39" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="1.00" id="53">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" generatesDecimalNumbers="YES" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="AER-3Z-HC8"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.contrast" id="n6S-d0-dI7"/>
+                        </connections>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="36">
-                        <rect key="frame" x="17" y="83" width="331" height="14"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="36">
+                        <rect key="frame" x="18" y="86" width="62" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="Saturation:" id="54">
                             <font key="font" metaFont="smallSystem"/>
@@ -119,26 +127,66 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <slider verticalHuggingPriority="750" id="37">
-                        <rect key="frame" x="30" y="56" width="273" height="21"/>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="37">
+                        <rect key="frame" x="18" y="59" width="286" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="2" doubleValue="1" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="55">
+                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="2" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="55">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
                         <connections>
-                            <action selector="update:" target="-2" id="44"/>
+                            <binding destination="-2" name="value" keyPath="self.saturation" id="gAg-ow-Da6"/>
                         </connections>
                     </slider>
-                    <textField verticalHuggingPriority="750" id="38">
-                        <rect key="frame" x="306" y="61" width="42" height="14"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38">
+                        <rect key="frame" x="308" y="61" width="39" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="Rbh-fx-OPU"/>
+                        </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="1.00" id="56">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" generatesDecimalNumbers="YES" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="UXK-mx-EAQ"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.saturation" id="HnR-7Q-NRr"/>
+                        </connections>
                     </textField>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="14" firstAttribute="top" secondItem="13" secondAttribute="bottom" constant="8" symbolic="YES" id="34u-fT-cTL"/>
+                    <constraint firstItem="34" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="62p-oX-iHw"/>
+                    <constraint firstAttribute="trailing" secondItem="35" secondAttribute="trailing" constant="20" symbolic="YES" id="7Us-P2-Mrk"/>
+                    <constraint firstItem="13" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="997-di-kQp"/>
+                    <constraint firstItem="36" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="DNi-FB-FLI"/>
+                    <constraint firstItem="14" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="Dni-sB-LUq"/>
+                    <constraint firstItem="38" firstAttribute="baseline" secondItem="37" secondAttribute="baseline" id="Krf-uf-h9f"/>
+                    <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" constant="20" symbolic="YES" id="Ndr-Ge-HBc"/>
+                    <constraint firstItem="7" firstAttribute="top" secondItem="37" secondAttribute="bottom" constant="20" symbolic="YES" id="RRc-Eb-Piu"/>
+                    <constraint firstAttribute="trailing" secondItem="21" secondAttribute="trailing" constant="20" symbolic="YES" id="Rby-hx-NXI"/>
+                    <constraint firstItem="21" firstAttribute="trailing" secondItem="38" secondAttribute="trailing" id="Rme-JL-DOz"/>
+                    <constraint firstItem="33" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="Tc6-Ee-k45"/>
+                    <constraint firstItem="37" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="UIN-q8-WV0"/>
+                    <constraint firstItem="21" firstAttribute="leading" secondItem="35" secondAttribute="leading" id="YDG-10-62X"/>
+                    <constraint firstItem="21" firstAttribute="trailing" secondItem="35" secondAttribute="trailing" id="ZGw-HI-s5j"/>
+                    <constraint firstItem="13" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" id="a85-Td-zwT"/>
+                    <constraint firstItem="16" firstAttribute="baseline" secondItem="7" secondAttribute="baseline" id="aNF-Xb-xzX"/>
+                    <constraint firstItem="36" firstAttribute="leading" secondItem="13" secondAttribute="leading" id="bH6-Dp-W5b"/>
+                    <constraint firstItem="36" firstAttribute="leading" secondItem="33" secondAttribute="leading" id="bYq-nF-ICQ"/>
+                    <constraint firstItem="38" firstAttribute="leading" secondItem="37" secondAttribute="trailing" constant="8" symbolic="YES" id="c02-nN-1Xn"/>
+                    <constraint firstItem="34" firstAttribute="top" secondItem="33" secondAttribute="bottom" constant="8" symbolic="YES" id="dSG-M9-Q60"/>
+                    <constraint firstItem="21" firstAttribute="baseline" secondItem="14" secondAttribute="baseline" id="e4m-ks-h4g"/>
+                    <constraint firstItem="35" firstAttribute="leading" secondItem="34" secondAttribute="trailing" constant="8" symbolic="YES" id="ffV-k1-t2A"/>
+                    <constraint firstItem="7" firstAttribute="leading" secondItem="16" secondAttribute="trailing" constant="12" symbolic="YES" id="iiX-Rb-gF0"/>
+                    <constraint firstAttribute="trailing" secondItem="38" secondAttribute="trailing" constant="20" symbolic="YES" id="leR-LO-Chy"/>
+                    <constraint firstItem="33" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="8" symbolic="YES" id="oP3-tg-Vp1"/>
+                    <constraint firstItem="21" firstAttribute="leading" secondItem="14" secondAttribute="trailing" constant="8" symbolic="YES" id="pzX-xo-hqu"/>
+                    <constraint firstItem="35" firstAttribute="baseline" secondItem="34" secondAttribute="baseline" id="s17-t5-0B1"/>
+                    <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="20" symbolic="YES" id="uPB-1Y-skc"/>
+                    <constraint firstItem="21" firstAttribute="leading" secondItem="38" secondAttribute="leading" id="w3r-d8-QXX"/>
+                    <constraint firstItem="37" firstAttribute="top" secondItem="36" secondAttribute="bottom" constant="8" symbolic="YES" id="yGJ-hO-cMd"/>
+                </constraints>
             </view>
         </window>
     </objects>

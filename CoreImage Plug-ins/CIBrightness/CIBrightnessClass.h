@@ -16,33 +16,6 @@
 
 @interface CIBrightnessClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the brightness
-	IBOutlet id brightnessLabel;
-	
-	// The slider for the brightness
-	IBOutlet id brightnessSlider;
-	
-	// The label displaying the contrast
-	IBOutlet id contrastLabel;
-	
-	// The slider for the contrast
-	IBOutlet id contrastSlider;
-	
-	// The label displaying the value
-	IBOutlet id saturationLabel;
-	
-	// The slider for the value
-	IBOutlet id saturationSlider;
-	
-	// The value of the brightness
-	CGFloat brightness;
-	
-	// The value of the contrast
-	CGFloat contrast;
-	
-	// The value of the saturation
-	CGFloat saturation;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -52,6 +25,14 @@
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 }
+// The value of the brightness
+@property CGFloat brightness;
+
+// The value of the contrast
+@property CGFloat contrast;
+
+// The value of the saturation
+@property CGFloat saturation;
 
 /*!
 	@method		initWithManager:
