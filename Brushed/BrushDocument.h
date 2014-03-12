@@ -113,11 +113,9 @@ typedef struct
 
 // Import a graphic for the brush
 - (IBAction)import:(id)sender;
-- (void)importPanelDidEnd:(NSOpenPanel *)openPanel returnCode:(int)returnCode contextInfo:(void  *)contextInfo;
 
 // Export the brush's graphic
 - (IBAction)export:(id)sender;
-- (void)exportPanelDidEnd:(NSOpenPanel *)savePanel returnCode:(int)returnCode contextInfo:(void  *)contextInfo;
 
 // The following calls changeName: before scheduling saving (two events cannot occur in the same loop)
 - (IBAction)preSaveDocument:(id)sender;

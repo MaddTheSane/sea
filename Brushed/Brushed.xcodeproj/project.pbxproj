@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55909F0E18D000EB00F43F90 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909F1018D000EB00F43F90 /* MainMenu.xib */; };
+		55909F1318D0010700F43F90 /* BrushDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909F1518D0010700F43F90 /* BrushDocument.xib */; };
 		A898E52709BEFCA00075C7AB /* BrushDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = A84A94EA043DB32500A80207 /* BrushDocument.h */; };
 		A898E52809BEFCA00075C7AB /* Globals.h in Headers */ = {isa = PBXBuildFile; fileRef = A84A94EE043DB36200A80207 /* Globals.h */; };
 		A898E52909BEFCA00075C7AB /* BrushView.h in Headers */ = {isa = PBXBuildFile; fileRef = A80D889E043EE40D00A80207 /* BrushView.h */; };
 		A898E52A09BEFCA00075C7AB /* BrushedController.h in Headers */ = {isa = PBXBuildFile; fileRef = A865217604400768005BE329 /* BrushedController.h */; };
 		A898E52B09BEFCA00075C7AB /* BrushedDocumentController.h in Headers */ = {isa = PBXBuildFile; fileRef = A89B63D504403A9E00D5D43C /* BrushedDocumentController.h */; };
-		A898E52D09BEFCA00075C7AB /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		A898E52E09BEFCA00075C7AB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A8EC24B7043D9B5A00A80207 /* Credits.rtf */; };
-		A898E52F09BEFCA00075C7AB /* BrushDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = A8EC24BA043D9B6800A80207 /* BrushDocument.nib */; };
 		A898E53109BEFCA00075C7AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		A898E53209BEFCA00075C7AB /* BrushDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = A84A94EB043DB32500A80207 /* BrushDocument.m */; };
 		A898E53309BEFCA00075C7AB /* BrushView.m in Sources */ = {isa = PBXBuildFile; fileRef = A80D889F043EE40D00A80207 /* BrushView.m */; };
@@ -26,10 +26,10 @@
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		55909E9A18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "en-GB"; path = "en-GB.lproj/Credits.rtf"; sourceTree = "<group>"; };
+		55909F0F18D000EB00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		55909F1418D0010700F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BrushDocument.xib; sourceTree = "<group>"; };
 		A80D889E043EE40D00A80207 /* BrushView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BrushView.h; sourceTree = "<group>"; };
 		A80D889F043EE40D00A80207 /* BrushView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BrushView.m; sourceTree = "<group>"; };
 		A84A94EA043DB32500A80207 /* BrushDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrushDocument.h; sourceTree = "<group>"; };
@@ -42,7 +42,6 @@
 		A89B63D504403A9E00D5D43C /* BrushedDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BrushedDocumentController.h; sourceTree = "<group>"; };
 		A89B63D604403A9E00D5D43C /* BrushedDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BrushedDocumentController.m; sourceTree = "<group>"; };
 		A8EC24B8043D9B5A00A80207 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
-		A8EC24BB043D9B6800A80207 /* BrushDocument.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = BrushDocument.nib; path = English.lproj/BrushDocument.nib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,8 +122,8 @@
 			isa = PBXGroup;
 			children = (
 				A8EC24B7043D9B5A00A80207 /* Credits.rtf */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
-				A8EC24BA043D9B6800A80207 /* BrushDocument.nib */,
+				55909F1018D000EB00F43F90 /* MainMenu.xib */,
+				55909F1518D0010700F43F90 /* BrushDocument.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -208,9 +207,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A898E52D09BEFCA00075C7AB /* MainMenu.nib in Resources */,
 				A898E52E09BEFCA00075C7AB /* Credits.rtf in Resources */,
-				A898E52F09BEFCA00075C7AB /* BrushDocument.nib in Resources */,
+				55909F1318D0010700F43F90 /* BrushDocument.xib in Resources */,
+				55909F0E18D000EB00F43F90 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,29 +231,28 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+		55909F1018D000EB00F43F90 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				29B97319FDCFA39411CA2CEA /* English */,
+				55909F0F18D000EB00F43F90 /* en */,
 			);
-			name = MainMenu.nib;
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		55909F1518D0010700F43F90 /* BrushDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55909F1418D0010700F43F90 /* en */,
+			);
+			name = BrushDocument.xib;
 			sourceTree = "<group>";
 		};
 		A8EC24B7043D9B5A00A80207 /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A8EC24B8043D9B5A00A80207 /* English */,
-				55909E9A18CFEEB000F43F90 /* en-GB */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		A8EC24BA043D9B6800A80207 /* BrushDocument.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A8EC24BB043D9B6800A80207 /* BrushDocument.nib */,
-			);
-			name = BrushDocument.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -263,6 +261,7 @@
 		A898E53909BEFCA00075C7AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -288,6 +287,7 @@
 		A898E53A09BEFCA00075C7AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;

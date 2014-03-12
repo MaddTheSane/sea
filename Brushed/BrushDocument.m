@@ -11,7 +11,7 @@ typedef struct {
 } BrushHeader;
 
 #define GBRUSH_MAGIC    (('G' << 24) + ('I' << 16) + ('M' << 8) + ('P' << 0))
-#define window [[[self windowControllers] objectAtIndex:0] window]
+#define window [self windowForSheet]
 #define int_mult(a,b,t)  ((t) = (a) * (b) + 0x80, ((((t) >> 8) + (t)) >> 8))
 
 @implementation BrushDocument
@@ -27,8 +27,8 @@ typedef struct {
 	mask = pixmap = NULL;
 	usePixmap = NO;
 	spacing = 25;
-	name = [NSString stringWithString:@"Untitled"];
-	pastNames = [[NSArray alloc] initWithObjects:name, nil];
+	name = @"Untitled";
+	pastNames = @[name];
 	[self addToUndoRecords];
 	curUndoPos = 0;
 	
@@ -50,7 +50,6 @@ typedef struct {
 {
 	int i;
 	
-	if (pastNames) [pastNames autorelease];
 	if (undoRecords) {
 		for (i = 0; i < undoRecordsSize; i++) {
 			if (undoRecords[i].mask) free(undoRecords[i].mask);
@@ -58,8 +57,6 @@ typedef struct {
 		}
 		free(undoRecords);
 	}
-	
-	[super dealloc];
 }
 
 - (NSImage *)brushImage
@@ -79,7 +76,6 @@ typedef struct {
 	// Wrap it up in an NSImage
 	brushImage = [[NSImage alloc] initWithSize:NSMakeSize(width, height)];
 	[brushImage addRepresentation:tempRep];
-	[tempRep autorelease];
 	
 	return brushImage;
 }
@@ -198,8 +194,7 @@ typedef struct {
 		
 		// Store new name and remember last names for undo
 		name = [NSString stringWithString:[nameTextField stringValue]];
-		[pastNames autorelease];
-		pastNames = [[pastNames arrayByAddingObject:name] retain];
+		pastNames = [pastNames arrayByAddingObject:name];
 	
 	}
 }
@@ -236,13 +231,12 @@ typedef struct {
 	int nameLen, tempSize;
 	
 	// Set variables appropriately
-	if (pastNames) [pastNames autorelease];
 	if (undoRecords) free(undoRecords);
 	undoRecords = NULL;
 	undoRecordsSize = curUndoPos = 0;
 	
 	// Open the brush file
-	file = fopen([path cString], "rb");
+	file = fopen([path fileSystemRepresentation], "rb");
 	if (file == NULL)
 		return NO;
 		
@@ -278,15 +272,16 @@ typedef struct {
 	
 	// Read in brush name
 	nameLen = header.header_size - sizeof(header);
-	if (nameLen > 512) { return NO; }
+	if (nameLen > 512) {
+		return NO;
+	}
 	if (nameLen > 0) {
 		fread(nameString, sizeof(char), nameLen, file);
-		name = [NSString stringWithUTF8String:nameString];
+		name = @(nameString);
+	} else {
+		name = @"Untitled";
 	}
-	else {
-		name = [NSString stringWithString:@"Untitled"];
-	}
-	pastNames = [[NSArray alloc] initWithObjects:name, nil];
+	pastNames = @[name];
 	
 	// And then read in the important stuff
 	switch (header.bytes) {
@@ -373,7 +368,7 @@ typedef struct {
 	NSString *tempName;
 	
 	// Open the brush file
-	file = fopen([path cString], "wb");
+	file = fopen([path fileSystemRepresentation], "wb");
 	if (file == NULL)
 		return NO;
 	
@@ -421,39 +416,35 @@ typedef struct {
 
 - (IBAction)import:(id)sender
 {
-	NSOpenPanel *openPanel = [[NSOpenPanel alloc] init];
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	
 	[openPanel setAllowsMultipleSelection:NO];
 	[openPanel setPrompt:@"Import"];
-	[openPanel beginSheetForDirectory:nil file:nil types:[NSArray arrayWithObjects:@"tiff", @"tif", @"jpeg", @"jpg", @"png", nil] modalForWindow:window modalDelegate:self didEndSelector:@selector(importPanelDidEnd:returnCode:contextInfo:) contextInfo:NULL];
-	[openPanel autorelease];
-}
-
-- (void)importPanelDidEnd:(NSOpenPanel *)openPanel returnCode:(int)returnCode contextInfo:(void  *)contextInfo
-{
-	BOOL success;
+	openPanel.allowedFileTypes = @[(NSString*)kUTTypeTIFF, (NSString*)kUTTypeJPEG, (NSString*)kUTTypePNG];
 	
-	if (returnCode == NSCancelButton) return;
-	success = [self changeImage:[NSBitmapImageRep imageRepWithData:[NSData dataWithContentsOfFile:[[openPanel filenames] objectAtIndex:0]]]];
-	if (!success) {
-		NSRunAlertPanel(@"Cannot Import", @"Brushed can only import JPEG, PNG and TIFF files with 8-bit RGB channels or an 8-bit Grays channel and optionally an additional alpha channel.", @"Ok", NULL, NULL);
-	}
+	[openPanel beginSheetModalForWindow:window completionHandler:^(NSInteger result) {
+		BOOL success;
+		
+		if (result == NSCancelButton)
+			return;
+		success = [self changeImage:[NSBitmapImageRep imageRepWithData:[NSData dataWithContentsOfURL:[openPanel URLs][0]]]];
+		if (!success) {
+			NSRunAlertPanel(@"Cannot Import", @"Brushed can only import JPEG, PNG and TIFF files with 8-bit RGB channels or an 8-bit Grays channel and optionally an additional alpha channel.", @"Ok", NULL, NULL);
+		}
+
+	}];
 }
 
 - (IBAction)export:(id)sender
 {
-	NSSavePanel *savePanel = [[NSSavePanel alloc] init];
+	NSSavePanel *savePanel = [NSSavePanel savePanel];
 	
 	[savePanel setPrompt:@"Export"];
-	[savePanel setRequiredFileType:@"tiff"];
-	[savePanel beginSheetForDirectory:nil file:@"Untitled" modalForWindow:window modalDelegate:self didEndSelector:@selector(exportPanelDidEnd:returnCode:contextInfo:) contextInfo:NULL];
-	[savePanel autorelease];
-}
-
-- (void)exportPanelDidEnd:(NSOpenPanel *)savePanel returnCode:(int)returnCode contextInfo:(void  *)contextInfo
-{
-	if (returnCode == NSCancelButton) return;
-	[[[self brushImage] TIFFRepresentation] writeToFile:[savePanel filename] atomically:YES];
+	[savePanel setAllowedFileTypes:@[(NSString*)kUTTypeTIFF]];
+	[savePanel beginSheetModalForWindow:window completionHandler:^(NSInteger result) {
+		if (result == NSCancelButton) return;
+		[[[self brushImage] TIFFRepresentation] writeToURL:[savePanel URL] atomically:YES];
+	}];
 }
 
 - (IBAction)preSaveDocument:(id)sender
@@ -471,7 +462,7 @@ typedef struct {
 - (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
 {
 	[savePanel setTreatsFilePackagesAsDirectories:YES];
-	[savePanel setDirectory:@"/Applications/Seashore.app/Contents/Resources/brushes/"];
+	[savePanel setDirectoryURL:[NSURL fileURLWithPath:@"/Applications/Seashore.app/Contents/Resources/brushes/"]];
 	
 	return YES;
 }
