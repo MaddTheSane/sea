@@ -506,7 +506,6 @@
 		55BD2E2018D0D50D00C4EE1B /* CINoiseReduction.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909ECA18CFFEBA00F43F90 /* CINoiseReduction.xib */; };
 		55BD2E2118D0D50D00C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D519D18CF9FBE005809E3 /* Localizable.strings */; };
 		55BD2E2218D0D51300C4EE1B /* CIOpTileClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D51A518CF9FBE005809E3 /* CIOpTileClass.m */; };
-		55BD2E2318D0D51C00C4EE1B /* CIOpTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909ECB18CFFED100F43F90 /* CIOpTile.xib */; };
 		55BD2E2418D0D52100C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D51A818CF9FBE005809E3 /* Localizable.strings */; };
 		55BD2E2518D0D58000C4EE1B /* CIParallelogramTileClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D51B018CF9FBE005809E3 /* CIParallelogramTileClass.m */; };
 		55BD2E2618D0D58600C4EE1B /* CIParallelogramTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909ECE18CFFF1A00F43F90 /* CIParallelogramTile.xib */; };
@@ -567,6 +566,7 @@
 		55BD2E5D18D0D6BA00C4EE1B /* CITwirlClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D525318CF9FC0005809E3 /* CITwirlClass.m */; };
 		55BD2E5E18D0D6C300C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D524B18CF9FC0005809E3 /* Localizable.strings */; };
 		55BD2E5F18D0D6CA00C4EE1B /* CITriangleTileClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D524A18CF9FC0005809E3 /* CITriangleTileClass.m */; };
+		55BD2E6018D0ECE400C4EE1B /* CIOpTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD2E6218D0ECE400C4EE1B /* CIOpTile.xib */; };
 		A80983D70871420900F7412F /* JP2Exporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A80983D50871420900F7412F /* JP2Exporter.m */; };
 		A8138D660CEFD5FA00C2F880 /* Seashore Effects Guide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8138D640CEFD5FA00C2F880 /* Seashore Effects Guide.pdf */; };
 		A81F6EB307C2EE35005C2DBD /* XBMImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A81F6EB107C2EE35005C2DBD /* XBMImporter.m */; };
@@ -1828,7 +1828,6 @@
 		55909EC318CFFE8100F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CILineScreen.xib; sourceTree = "<group>"; };
 		55909EC618CFFE9C00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIMonochrome.xib; sourceTree = "<group>"; };
 		55909EC918CFFEBA00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CINoiseReduction.xib; sourceTree = "<group>"; };
-		55909ECB18CFFED100F43F90 /* CIOpTile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CIOpTile.xib; sourceTree = "<group>"; };
 		55909ECD18CFFF1A00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIParallelogramTile.xib; sourceTree = "<group>"; };
 		55909ED018CFFF4B00F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIPinch.xib; sourceTree = "<group>"; };
 		55909ED318CFFF6100F43F90 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIPixellate.xib; sourceTree = "<group>"; };
@@ -1885,6 +1884,7 @@
 		55BD2D8518D0D0B900C4EE1B /* Vortex+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vortex+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "White Point Adjust+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zoom Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55BD2E6118D0ECE400C4EE1B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIOpTile.xib; sourceTree = "<group>"; };
 		A801053106945E1E00A80207 /* GradientTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientTool.h; sourceTree = "<group>"; };
 		A801053206945E1E00A80207 /* GradientTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientTool.m; sourceTree = "<group>"; };
 		A80983D50871420900F7412F /* JP2Exporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JP2Exporter.m; sourceTree = "<group>"; };
@@ -3467,7 +3467,7 @@
 			children = (
 				557D51A418CF9FBE005809E3 /* CIOpTileClass.h */,
 				557D51A518CF9FBE005809E3 /* CIOpTileClass.m */,
-				55909ECB18CFFED100F43F90 /* CIOpTile.xib */,
+				55BD2E6218D0ECE400C4EE1B /* CIOpTile.xib */,
 				557D51A818CF9FBE005809E3 /* Localizable.strings */,
 			);
 			path = CIOpTile;
@@ -5865,7 +5865,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55BD2E2318D0D51C00C4EE1B /* CIOpTile.xib in Resources */,
+				55BD2E6018D0ECE400C4EE1B /* CIOpTile.xib in Resources */,
 				55BD2E2418D0D52100C4EE1B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7999,6 +7999,14 @@
 				55909F0A18D000BB00F43F90 /* en */,
 			);
 			name = CIVortex.xib;
+			sourceTree = "<group>";
+		};
+		55BD2E6218D0ECE400C4EE1B /* CIOpTile.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55BD2E6118D0ECE400C4EE1B /* en */,
+			);
+			name = CIOpTile.xib;
 			sourceTree = "<group>";
 		};
 		A8138D640CEFD5FA00C2F880 /* Seashore Effects Guide.pdf */ = {
