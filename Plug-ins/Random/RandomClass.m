@@ -37,7 +37,7 @@
 static inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char multi, alpha;
-	int t1, t2;
+	int t1, t2 = 0;
 	int k;
 	
 	if (srcPtr[srcLoc + alphaPos] == 0)

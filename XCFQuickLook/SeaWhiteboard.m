@@ -397,7 +397,7 @@
 	int i, j, k, temp, t, selectOpacity, nextOpacity;
 	IntRect selectRect, minorUpdateRect;
 	IntPoint point;
-	BOOL useSelection;
+	BOOL useSelection = NO;
 	
 	// Prepare variables for later use
 	mask = NULL;

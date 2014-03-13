@@ -481,41 +481,39 @@ static inline void fix_endian_read(int *input, size_t size)
 
 - (id)initWithFile:(FILE *)file offset:(int)offset sharedInfo:(SharedXCFInfo *)info
 {
-	int i;
-	
-	// Initialize superclass first
-	if (![super  init])
-		return NULL;
-	
-	// Go to the given offset
-	fseek(file, offset, SEEK_SET);
-	
-	// NSLog(@"Layer Header Begin: %d", ftell(file));
-	
-	// Read the header
-	if ([self readHeader:file] == NO) {
-		return nil;
-	}
-	
-	// NSLog(@"Layer Properties Begin: %d", ftell(file));
-	
-	// Read the properties
-	if ([self readProperties:file sharedInfo:info] == NO) {
-		return nil;
-	}
-	
-	// NSLog(@"Layer Properties End: %d", ftell(file));
-	
-	// Read the body
-	if ([self readBody:file sharedInfo:info] == NO) {
-		return nil;
-	}
-	
-	// Check the alpha
-	hasAlpha = NO;
-	for (i = 0; i < width * height; i++) {
-		if (data[(i + 1) * spp - 1] != 255)
-			hasAlpha = YES;
+	if (self = [super init]) {
+		int i;
+		
+		// Go to the given offset
+		fseek(file, offset, SEEK_SET);
+		
+		// NSLog(@"Layer Header Begin: %d", ftell(file));
+		
+		// Read the header
+		if ([self readHeader:file] == NO) {
+			return nil;
+		}
+		
+		// NSLog(@"Layer Properties Begin: %d", ftell(file));
+		
+		// Read the properties
+		if ([self readProperties:file sharedInfo:info] == NO) {
+			return nil;
+		}
+		
+		// NSLog(@"Layer Properties End: %d", ftell(file));
+		
+		// Read the body
+		if ([self readBody:file sharedInfo:info] == NO) {
+			return nil;
+		}
+		
+		// Check the alpha
+		hasAlpha = NO;
+		for (i = 0; i < width * height; i++) {
+			if (data[(i + 1) * spp - 1] != 255)
+				hasAlpha = YES;
+		}
 	}
 	
 	return self;

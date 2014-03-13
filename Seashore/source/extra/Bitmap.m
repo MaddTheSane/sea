@@ -9,7 +9,7 @@ typedef struct {
 	int init_size;
 } PtrRecord;
 
-extern inline PtrRecord initPtrs(unsigned char *initial, int init_size)
+static inline PtrRecord initPtrs(unsigned char *initial, int init_size)
 {
 	PtrRecord ptrs;
 	
@@ -20,12 +20,12 @@ extern inline PtrRecord initPtrs(unsigned char *initial, int init_size)
 	return ptrs;
 }
 
-extern inline unsigned char *getPtr(PtrRecord ptrs)
+static inline unsigned char *getPtr(PtrRecord ptrs)
 {
 	return ptrs.ptrs[ptrs.n - 1];
 }
 
-extern inline unsigned char *getFinalPtr(PtrRecord ptrs)
+static inline unsigned char *getFinalPtr(PtrRecord ptrs)
 {
 	unsigned char *result;
 	
@@ -40,7 +40,7 @@ extern inline unsigned char *getFinalPtr(PtrRecord ptrs)
 	return result;
 }
 
-extern inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
+static inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
 {
 	unsigned char *result;
 	
@@ -57,7 +57,7 @@ extern inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
 	return result;
 }
 
-extern inline void freePtrs(PtrRecord ptrs)
+static inline void freePtrs(PtrRecord ptrs)
 {
 	int i;
 	
@@ -524,7 +524,7 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 	return getFinalPtr(ptrs);
 }
 
-extern inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length)
+void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length)
 {
 	const int alphaPos = spp - 1;
 	const int outputSPP = spp - 1;
@@ -559,7 +559,7 @@ extern inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned ch
 	} 
 }
 
-extern inline void premultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
+void premultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
 {
 	int i, j, alphaPos, temp;
 	
@@ -583,7 +583,7 @@ extern inline void premultiplyBitmap(int spp, unsigned char *output, unsigned ch
 	}
 }
 
-extern inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
+void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
 {
 	int i, j, alphaPos, newValue;
 	double alphaRatio;
@@ -612,7 +612,7 @@ extern inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned 
 	}
 }
 
-extern inline unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where)
+unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where)
 {
 	int total, count;
 	int i, j;
@@ -631,11 +631,14 @@ extern inline unsigned char averagedComponentValue(int spp, unsigned char *data,
 			}
 		}
 	}
-		
+	if (count == 0) {
+		return total;
+	}
+	
 	return (total / count);
 }
 
-extern inline void OpenDisplayProfile(CMProfileRef *profile)
+void OpenDisplayProfile(CMProfileRef *profile)
 {
 	CMDeviceID device;
 	CMDeviceProfileID deviceID;
@@ -659,7 +662,7 @@ extern inline void OpenDisplayProfile(CMProfileRef *profile)
 	//}
 }
 
-extern inline void CloseDisplayProfile(CMProfileRef profile)
+void CloseDisplayProfile(CMProfileRef profile)
 {
 	CMCloseProfile(profile);
 }

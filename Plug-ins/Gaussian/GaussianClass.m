@@ -139,7 +139,7 @@
 	double d_p[5], d_m[5];
 	double bd_p[5], bd_m[5];
 	double std_dev;
-	int length;
+	int length = 0;
 	int *curve;
 	int *sum = NULL;
 	int total = 1;

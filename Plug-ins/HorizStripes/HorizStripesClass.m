@@ -68,14 +68,12 @@ static inline int specmod(int a, int b)
 	// Get plug-in data
 	pluginData = [(SeaPlugins *)seaPlugins data];
 	width = [pluginData width];
-	height = [pluginData height];
 	spp = [pluginData spp];
 	selection = [pluginData selection];
 	point = [pluginData point:0];
 	apoint = [pluginData point:1];
 	amount = abs(apoint.y - point.y);
 	overlay = [pluginData overlay];
-	channel = [pluginData channel];
 	
 	// Prepare for drawing
 	[pluginData setOverlayOpacity:255];

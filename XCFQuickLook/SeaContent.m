@@ -8,21 +8,23 @@
 
 - (id)init
 {
-	// Set the data members to reasonable values
-	xres = yres = 72;
-	height = width = type = 0;
-	lostprops = NULL; lostprops_len = 0;
-	parasites = NULL; parasites_count = 0;
-	exifData = NULL;
-	layers = NULL; activeLayerIndex = 0;
-	layersToUndo = [NSMutableArray array];
-	layersToRedo = [NSMutableArray array];
-	orderings = [NSMutableArray array];
-	deletedLayers = [[NSArray alloc] init];
-	selectedChannel = kAllChannels; trueView = NO;
-	cmykSave = NO;
-	gScreenResolution = IntMakePoint(1024, 768);
-
+	if (self = [super init]) {
+		// Set the data members to reasonable values
+		xres = yres = 72;
+		height = width = type = 0;
+		lostprops = NULL; lostprops_len = 0;
+		parasites = NULL; parasites_count = 0;
+		exifData = NULL;
+		layers = NULL; activeLayerIndex = 0;
+		layersToUndo = [NSMutableArray array];
+		layersToRedo = [NSMutableArray array];
+		orderings = [NSMutableArray array];
+		deletedLayers = [[NSArray alloc] init];
+		selectedChannel = kAllChannels; trueView = NO;
+		cmykSave = NO;
+		gScreenResolution = IntMakePoint(1024, 768);
+	}
+	
 	return self;
 }
 

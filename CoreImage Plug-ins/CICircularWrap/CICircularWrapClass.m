@@ -196,6 +196,7 @@
 	// Get plug-in data
 	width = [pluginData width];
 	height = [pluginData height];
+	spp = [pluginData spp];
 	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) { vec_len /= 16; }
 	else { vec_len /= 16; vec_len++; }

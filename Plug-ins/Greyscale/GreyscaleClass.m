@@ -54,7 +54,8 @@
 	data = [pluginData data];
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
-	
+	channel = [pluginData channel];
+
 	CMGetDefaultDevice(cmDisplayDeviceClass, &device);
 	CMGetDeviceDefaultProfileID(cmDisplayDeviceClass, device, &deviceID);
 	CMGetDeviceProfile(cmDisplayDeviceClass, device, deviceID, &profileLoc);
@@ -73,8 +74,7 @@
 			srcBitmap.rowBytes = selection.size.width * 3;
 			srcBitmap.pixelSize = 8 * 3;
 			srcBitmap.space = cmRGB24Space;
-		}
-		else {
+		} else {
 			srcBitmap.image = (char *)&(data[pos * 4]);
 			srcBitmap.width = selection.size.width;
 			srcBitmap.height = 1;

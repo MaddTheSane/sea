@@ -8,25 +8,27 @@
 @implementation SeaLayer
 
 - (id)init
-{	
-	// Set the data members to reasonable values
-	height = width = mode = 0;
-	opacity = 255; xoff = yoff = 0;
-	spp = 4; visible = YES; data = NULL; hasAlpha = YES;
-	lostprops = NULL;
-	lostprops_len = 0;
-	compressed = NO; 
-	thumbnail = NULL;
-	thumbData = NULL;
-	floating = NO;
-	srand(time(NULL));
-
-	uniqueLayerID = rand();
-	if (uniqueLayerID == 0)
-		name = [[NSString alloc] initWithString:LOCALSTR(@"background layer", @"Background")];
-	else
-		name = [[NSString alloc] initWithFormat:LOCALSTR(@"layer title", @"Layer %d"), uniqueLayerID];
-	oldNames = [[NSArray alloc] init];
+{
+	if (self = [super init]) {
+		// Set the data members to reasonable values
+		height = width = mode = 0;
+		opacity = 255; xoff = yoff = 0;
+		spp = 4; visible = YES; data = NULL; hasAlpha = YES;
+		lostprops = NULL;
+		lostprops_len = 0;
+		compressed = NO;
+		thumbnail = NULL;
+		thumbData = NULL;
+		floating = NO;
+		srand(time(NULL));
+		
+		uniqueLayerID = rand();
+		if (uniqueLayerID == 0)
+			name = [[NSString alloc] initWithString:LOCALSTR(@"background layer", @"Background")];
+		else
+			name = [[NSString alloc] initWithFormat:LOCALSTR(@"layer title", @"Layer %d"), uniqueLayerID];
+		oldNames = [[NSArray alloc] init];
+	}
 	
 	return self;
 }

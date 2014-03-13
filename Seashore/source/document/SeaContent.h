@@ -58,7 +58,7 @@ typedef struct {
 	NSMutableArray *orderings;
 	
 	// Stores index of layer that is active
-	int activeLayerIndex;
+	NSInteger activeLayerIndex;
 	
 	// The currently selected channel (see constants)
 	int selectedChannel;
@@ -150,12 +150,6 @@ typedef struct {
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)initWithDocument:(id)doc data:(unsigned char *)ddata type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 // PROPERTY METHODS
 
@@ -415,7 +409,7 @@ typedef struct {
 				The index of the desired layer.
 	@result		An instance of SeaLayer corresponding to the specified index.
 */
-- (id)layer:(int)index;
+- (id)layer:(NSInteger)index;
 
 /*!
 	@method		layerCount
@@ -423,7 +417,7 @@ typedef struct {
 	@result		Returns an integer indicating the total number of layers in the
 				document.
 */
-- (int)layerCount;
+- (NSInteger)layerCount;
 
 /*!
 	@method		activeLayer
@@ -437,14 +431,14 @@ typedef struct {
 	@discussion	Returns the index of the currently active layer.
 	@result		Returns an integer representing the index of the active layer.
 */
-- (int)activeLayerIndex;
+- (NSInteger)activeLayerIndex;
 
 /*!
 	@method		setActiveLayerIndex:
 	@param		value
 				The index of the new active layer.
 */
-- (void)setActiveLayerIndex:(int)value;
+- (void)setActiveLayerIndex:(NSInteger)value;
 
 /*!
 	@method		layerAbove
@@ -492,7 +486,7 @@ typedef struct {
 				The index above which to add the layer or kActiveLayer to
 				indicate the active layer.
 */
-- (void)addLayer:(int)index;
+- (void)addLayer:(NSInteger)index;
 
 /*!
 	@method		addLayerObject:
@@ -528,7 +522,7 @@ typedef struct {
 				The index of the layer to duplicate, the duplicate will be added
 				above this layer or kActiveLayer to indicate the active layer.
 */
-- (void)duplicateLayer:(int)index;
+- (void)duplicateLayer:(NSInteger)index;
 
 /*!
 	@method		deleteLayer:
@@ -537,7 +531,7 @@ typedef struct {
 				The index of the layer to delete or kActiveLayer to indicate the
 				active layer.
 */
-- (void)deleteLayer:(int)index;
+- (void)deleteLayer:(NSInteger)index;
 
 /*!
 	@method		restoreLayer:fromLostIndex:
@@ -549,7 +543,7 @@ typedef struct {
 	@param		lostIndex
 				The index in the lost layers of the layer.
 */
-- (void)restoreLayer:(int)index fromLostIndex:(int)lostIndex;
+- (void)restoreLayer:(NSInteger)index fromLostIndex:(NSInteger)lostIndex;
 
 /*!
 	@method		makeSelectionFloat
@@ -594,7 +588,7 @@ typedef struct {
 				active layer.
 	@result		YES if the layer can be risen, NO otherwise.
 */
-- (BOOL)canRaise:(int)index;
+- (BOOL)canRaise:(NSInteger)index;
 
 /*!
 	@method		canLower:
@@ -604,7 +598,7 @@ typedef struct {
 				active layer.
 	@result		YES if the layer can be lowered, NO otherwise.
 */
-- (BOOL)canLower:(int)index;
+- (BOOL)canLower:(NSInteger)index;
 
 /*!
 	@method		moveLayer:toIndex:
@@ -615,7 +609,7 @@ typedef struct {
 				index
 				The new index of the moved layer.
 */
-- (void)moveLayer:(id)layer toIndex:(int)index;
+- (void)moveLayer:(id)layer toIndex:(NSInteger)index;
 
 /*!
 	@method		moveLayerOfIndex:toIndex:
@@ -626,7 +620,7 @@ typedef struct {
 				dest
 				The new index of the moved layer.
 */
-- (void)moveLayerOfIndex:(int)source toIndex:(int)dest;
+- (void)moveLayerOfIndex:(NSInteger)source toIndex:(NSInteger)dest;
 
 /*!
 	@method		raiseLayer:
@@ -636,7 +630,7 @@ typedef struct {
 				The index of the layer to raise or kActiveLayer to indicate the
 				active layer.
 */
-- (void)raiseLayer:(int)index;
+- (void)raiseLayer:(NSInteger)index;
 
 /*!
 	@method		lowerLayer:
@@ -646,7 +640,7 @@ typedef struct {
 				The index of the layer to lower or kActiveLayer to indicate the
 				active layer.
 */
-- (void)lowerLayer:(int)index;
+- (void)lowerLayer:(NSInteger)index;
 
 /*!
 	@method		clearAllLinks
@@ -664,7 +658,7 @@ typedef struct {
 				The index of the layer whose linked status to toggle or
 				kActiveLayer to indicate the active layer.
 */
-- (void)setLinked:(BOOL)isLinked forLayer:(int)index;
+- (void)setLinked:(BOOL)isLinked forLayer:(NSInteger)index;
 
 /*!
 	@method		setVisible:forLayer:
@@ -676,7 +670,7 @@ typedef struct {
 				The index of the layer whose visible status to toggle or
 				kActiveLayer to indicate the active layer.
 */
-- (void)setVisible:(BOOL)isVisible forLayer:(int)index;
+- (void)setVisible:(BOOL)isVisible forLayer:(NSInteger)index;
 
 /*!
 	@method		copyMerged
@@ -731,7 +725,7 @@ typedef struct {
 	@param		ordering
 				The indexes of the the lost layers of the image.
 */
-- (void)undoMergeWith:(int)origNoLayers andOrdering:(NSMutableDictionary *)ordering;
+- (void)undoMergeWith:(NSInteger)origNoLayers andOrdering:(NSMutableDictionary *)ordering;
 
 /*!
 	@method		bitmapUnderneath:
@@ -751,7 +745,7 @@ typedef struct {
 	@param		ordering
 				The indexes of the the lost layers of the image.
 */
-- (void)redoMergeWith:(int)origNoLayers andOrdering:(NSMutableDictionary *)ordering;
+- (void)redoMergeWith:(NSInteger)origNoLayers andOrdering:(NSMutableDictionary *)ordering;
 
 /*!
 	@method		convertToType:

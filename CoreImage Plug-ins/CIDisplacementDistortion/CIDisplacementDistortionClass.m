@@ -392,8 +392,6 @@
 	CIImage *input, *imm_output, *crop_output, *output, *background, *texture_output;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	CGImageDestinationRef temp_writer;
-	NSMutableData *temp_handler;
 	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;

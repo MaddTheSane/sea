@@ -374,8 +374,6 @@
 	CIImage *unclampedInput, *clampedInput, *crop_output, *imm_output, *imm_output_1, *imm_output_2, *output, *background;
 	CIFilter *clamp, *filter;
 	CGImageRef temp_image;
-	CGImageDestinationRef temp_writer;
-	NSMutableData *temp_handler;
 	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
@@ -509,11 +507,8 @@
 	}
 	
 	// Get data from output core image
-	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
-	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
-	CGImageDestinationFinalize(temp_writer);
-	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	
 	return resdata;

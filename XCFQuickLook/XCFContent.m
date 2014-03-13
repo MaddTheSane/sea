@@ -132,7 +132,7 @@ static inline void fix_endian_read(int *input, size_t size)
 						free(nameString);
 					}
 					else {
-						parasites[pos].name = CFBridgingRetain([[NSString alloc] initWithString:@"unnamed"]);
+						parasites[pos].name = CFBridgingRetain(@"unnamed");
 					}
 					
 					// Remember flags and data size
@@ -178,98 +178,99 @@ static inline void fix_endian_read(int *input, size_t size)
 
 - (id)initWithContentsOfFile:(NSString *)path;
 {
-	SharedXCFInfo info;
-	int layerOffsets, offset;
-	FILE *file;
-	id layer;
-	int i;
-	BOOL maskToAlpha = NO;
-	ParasiteData *exifParasite;
-	NSString *errorString;
-	NSData *exifContainer;
-	
-	// Initialize superclass first
-	if (![super init])
-		return NULL;
-	
-	const char *fsRep = [path fileSystemRepresentation];
-
-	// Open the file
-	file = fopen(fsRep, "r");
-	if (file == NULL) {
-		return NULL;
-	}
-
-	// Read the header
-	if ([self readHeader:file] == NO) {
-		fclose(file);
-		return NULL;
-	}
-	
-	// Read properties
-	if ([self readProperties:file sharedInfo:&info] == NO) {
-		fclose(file);
-		return NULL;
-	}
-
-	// Provide the type for the layer
-	info.type = type;
-	
-	// Determine the offset for the next layer
-	i = 0;
-	layerOffsets = ftell(file);
-	layers = @[];
-	do {
+	if (self = [super init]) {
+		SharedXCFInfo info;
+		int layerOffsets, offset;
+		FILE *file;
+		id layer;
+		int i;
+		BOOL maskToAlpha = NO;
+		ParasiteData *exifParasite;
+		NSString *errorString;
+		NSData *exifContainer;
+		
+		// Initialize superclass first
+		if (![super init])
+			return NULL;
+		
+		const char *fsRep = [path fileSystemRepresentation];
+		
+		// Open the file
+		file = fopen(fsRep, "r");
+		if (file == NULL) {
+			return NULL;
+		}
+		
+		// Read the header
+		if ([self readHeader:file] == NO) {
+			fclose(file);
+			return NULL;
+		}
+		
+		// Read properties
+		if ([self readProperties:file sharedInfo:&info] == NO) {
+			fclose(file);
+			return NULL;
+		}
+		
+		// Provide the type for the layer
+		info.type = type;
+		
+		// Determine the offset for the next layer
+		i = 0;
+		layerOffsets = ftell(file);
+		layers = @[];
+		do {
+			fseek(file, layerOffsets + i * sizeof(int), SEEK_SET);
+			fread(tempIntString, sizeof(int), 1, file);
+			fix_endian_read(tempIntString, 1);
+			offset = tempIntString[0];
+			
+			// If it exists, move to it
+			if (offset != 0) {
+				layer = [[XCFLayer alloc] initWithFile:file offset:offset sharedInfo:&info];
+				if (layer == NULL) {
+					fclose(file);
+					return nil;
+				}
+				layers = [layers arrayByAddingObject:layer];
+				if (info.active)
+					activeLayerIndex = i;
+				maskToAlpha = maskToAlpha || info.maskToAlpha;
+			}
+			
+			i++;
+		} while (offset != 0);
+		
+		// Check for channels
 		fseek(file, layerOffsets + i * sizeof(int), SEEK_SET);
 		fread(tempIntString, sizeof(int), 1, file);
 		fix_endian_read(tempIntString, 1);
-		offset = tempIntString[0];
 		
-		// If it exists, move to it
-		if (offset != 0) {
-			layer = [[XCFLayer alloc] initWithFile:file offset:offset sharedInfo:&info];
-			if (layer == NULL) {
-				fclose(file);
-				return nil;
-			}
-			layers = [layers arrayByAddingObject:layer];
-			if (info.active)
-				activeLayerIndex = i;
-			maskToAlpha = maskToAlpha || info.maskToAlpha;
+		// Close the file
+		fclose(file);
+		
+		// Do some final checks to make sure we're are working with reasonable figures before returning ourselves
+		if ( xres < kMinResolution || yres < kMinResolution || xres > kMaxResolution || yres > kMaxResolution)
+			xres = yres = 72;
+		if (width < kMinImageSize || height < kMinImageSize || width > kMaxImageSize || height > kMaxImageSize) {
+			return NULL;
 		}
 		
-		i++;
-	} while (offset != 0);
-	
-	// Check for channels
-	fseek(file, layerOffsets + i * sizeof(int), SEEK_SET);
-	fread(tempIntString, sizeof(int), 1, file);
-	fix_endian_read(tempIntString, 1);
-	
-	// Close the file
-	fclose(file);
-	
-	// Do some final checks to make sure we're are working with reasonable figures before returning ourselves
-	if ( xres < kMinResolution || yres < kMinResolution || xres > kMaxResolution || yres > kMaxResolution)
-		xres = yres = 72;
-	if (width < kMinImageSize || height < kMinImageSize || width > kMaxImageSize || height > kMaxImageSize) {
-		return NULL;
+		// We don't support indexed images any more
+		if (type == XCF_INDEXED_IMAGE) {
+			type = XCF_RGB_IMAGE;
+			free(info.cmap);
+		}
+		
+		// Store EXIF data
+		exifParasite = [self parasiteWithName:@"exif-plist"];
+		if (exifParasite) {
+			exifContainer = [NSData dataWithBytesNoCopy:exifParasite->data length:exifParasite->size freeWhenDone:NO];
+			exifData = [NSPropertyListSerialization propertyListFromData:exifContainer mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:&errorString];
+		}
+		[self deleteParasiteWithName:@"exif-plist"];
 	}
-	
-	// We don't support indexed images any more
-	if (type == XCF_INDEXED_IMAGE) {
-		type = XCF_RGB_IMAGE;
-		free(info.cmap);
-	}
-
-	// Store EXIF data
-	exifParasite = [self parasiteWithName:@"exif-plist"];
-	if (exifParasite) {
-		exifContainer = [NSData dataWithBytesNoCopy:exifParasite->data length:exifParasite->size freeWhenDone:NO];
-		exifData = [NSPropertyListSerialization propertyListFromData:exifContainer mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:&errorString];
-	}
-	[self deleteParasiteWithName:@"exif-plist"];
-	
 	return self;
 }
 

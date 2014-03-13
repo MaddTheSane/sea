@@ -74,7 +74,7 @@
 - (void)executeGrey:(PluginData *)pluginData
 {
 	IntRect selection;
-	int i, spp, width, height;
+	int i, spp = 1, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
 	int vec_len, max;
 	
@@ -310,8 +310,6 @@
 	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	CGImageDestinationRef temp_writer;
-	NSMutableData *temp_handler;
 	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
@@ -383,11 +381,8 @@
 	}
 	
 	// Get data from output core image
-	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
-	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
-	CGImageDestinationFinalize(temp_writer);
-	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	
 	return resdata;

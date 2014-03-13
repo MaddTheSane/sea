@@ -116,8 +116,6 @@
 - (IBAction)update:(id)sender
 {
 	PluginData *pluginData;
-	
-	pluginData = [(SeaPlugins *)seaPlugins data];
 	brightness = [brightnessSlider floatValue];
 	contrast = [contrastSlider floatValue];
 	

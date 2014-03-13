@@ -54,6 +54,7 @@
 	data = [pluginData data];
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
+	channel = [pluginData channel];
 	
 	CMGetDefaultDevice(cmDisplayDeviceClass, &device);
 	CMGetDeviceDefaultProfileID(cmDisplayDeviceClass, device, &deviceID);

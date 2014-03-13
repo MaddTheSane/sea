@@ -435,12 +435,12 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return exifData;
 }
 
-- (id)layer:(int)index
+- (id)layer:(NSInteger)index
 {
 	return layers[index];
 }
 
-- (int)layerCount
+- (NSInteger)layerCount
 {
 	return [layers count];
 }
@@ -450,19 +450,19 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return (activeLayerIndex < 0) ? NULL : layers[activeLayerIndex];
 }
 
-- (int)activeLayerIndex
+- (NSInteger)activeLayerIndex
 {
 	return activeLayerIndex;
 }
 
-- (void)setActiveLayerIndex:(int)value
+- (void)setActiveLayerIndex:(NSInteger)value
 {
 	activeLayerIndex = value;
 }
 
 - (void)layerBelow
 {
-	int newIndex;
+	NSInteger newIndex;
 	[[document helpers] activeLayerWillChange];
 	if(activeLayerIndex + 1 >= [self layerCount])
 	{
@@ -476,7 +476,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (void)layerAbove
 {
-	int newIndex;
+	NSInteger newIndex;
 	[[document helpers] activeLayerWillChange];
 	if(activeLayerIndex - 1 < 0)
 	{
@@ -573,7 +573,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[openPanel beginSheetForDirectory:NULL file:NULL types:types modalForWindow:[document window] modalDelegate:self didEndSelector:@selector(importPanelDidEnd:returnCode:contextInfo:) contextInfo:NULL];
 }
 
-- (void)addLayer:(int)index
+- (void)addLayer:(NSInteger)index
 {
 	NSArray *tempArray = @[];
 	int i;
@@ -812,11 +812,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:index];
 }
 
-- (void)duplicateLayer:(int)index
+- (void)duplicateLayer:(NSInteger)index
 {
 	NSArray *tempArray = @[];
 	IntRect rect;
-	int i;
+	NSInteger i;
 	
 	// Inform the helpers we will change the layer
 	[[document helpers] activeLayerWillChange];
@@ -843,7 +843,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:index];
 }
 
-- (void)deleteLayer:(int)index
+- (void)deleteLayer:(NSInteger)index
 {
 	id layer;
 	NSArray *tempArray = @[];
@@ -896,7 +896,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] update:YES];
 }
 
-- (void)restoreLayer:(int)index fromLostIndex:(int)lostIndex
+- (void)restoreLayer:(NSInteger)index fromLostIndex:(NSInteger)lostIndex
 {
 	id layer = deletedLayers[lostIndex];
 	NSArray *tempArray;
@@ -1237,25 +1237,25 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[(SeaHelpers *)[document helpers] applyOverlay];
 }
 
-- (BOOL)canRaise:(int)index
+- (BOOL)canRaise:(NSInteger)index
 {
 	if (index == kActiveLayer) index = activeLayerIndex;
 	return !(index == 0);
 }
 
-- (BOOL)canLower:(int)index
+- (BOOL)canLower:(NSInteger)index
 {
 	if (index == kActiveLayer) index = activeLayerIndex;
 	if ([layers[index] floating] && index == [layers count] - 2) return NO;
 	return !(index == [layers count] - 1);
 }
 
-- (void)moveLayer:(id)layer toIndex:(int)index
+- (void)moveLayer:(id)layer toIndex:(NSInteger)index
 {
 	[self moveLayerOfIndex:[layers indexOfObject:layer] toIndex: index];	
 }
 
-- (void)moveLayerOfIndex:(int)source toIndex:(int)dest
+- (void)moveLayerOfIndex:(NSInteger)source toIndex:(NSInteger)dest
 {
 	NSMutableArray *tempArray;
 
@@ -1271,7 +1271,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	tempArray = [layers mutableCopy];
 	[tempArray removeObjectAtIndex:source];
 	
-	int actualFinal;
+	NSInteger actualFinal;
 	
 	if(dest >= [layers count]){
 		actualFinal = [layers count] - 1;
@@ -1300,7 +1300,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 }
 
 
-- (void)raiseLayer:(int)index
+- (void)raiseLayer:(NSInteger)index
 {
 	NSArray *tempArray;
 	int i;
@@ -1337,7 +1337,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[[document undoManager] prepareWithInvocationTarget:self] lowerLayer:index - 1];
 }
 
-- (void)lowerLayer:(int)index
+- (void)lowerLayer:(NSInteger)index
 {
 	NSArray *tempArray;
 	int i;
@@ -1385,7 +1385,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	}
 }
 
-- (void)setLinked:(BOOL)isLinked forLayer:(int)index
+- (void)setLinked:(BOOL)isLinked forLayer:(NSInteger)index
 {
 	id layer;
 	
@@ -1401,7 +1401,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[[document undoManager] prepareWithInvocationTarget:self] setLinked:!isLinked forLayer:index];
 }
 
-- (void)setVisible:(BOOL)isVisible forLayer:(int)index
+- (void)setVisible:(BOOL)isVisible forLayer:(NSInteger)index
 {
 	id layer;
 	
@@ -1520,7 +1520,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	}
 }
 
-- (void)merge:(NSArray *)mergingLayers useRepresentation: (BOOL)useRepresenation withName:(NSString *)newName
+- (void)merge:(NSArray *)mergingLayers useRepresentation:(BOOL)useRepresenation withName:(NSString *)newName
 {
 	CompositorOptions options;
 	unsigned char *data;
@@ -1614,7 +1614,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[document helpers] documentFlattened];
 }
 
-- (void)undoMergeWith:(int)oldNoLayers andOrdering: (NSMutableDictionary *)ordering
+- (void)undoMergeWith:(NSInteger)oldNoLayers andOrdering: (NSMutableDictionary *)ordering
 {
 	NSMutableArray *oldLayers = [NSMutableArray arrayWithCapacity:oldNoLayers];
 	NSMutableDictionary *newOrdering = [NSMutableDictionary dictionaryWithCapacity:[layers count]];
@@ -1699,7 +1699,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return data;
 }
 
-- (void)redoMergeWith:(int)oldNoLayers andOrdering:(NSMutableDictionary *)ordering
+- (void)redoMergeWith:(NSInteger)oldNoLayers andOrdering:(NSMutableDictionary *)ordering
 {
 	NSMutableArray *newLayers = [NSMutableArray arrayWithCapacity:oldNoLayers];
 	NSMutableDictionary *oldOrdering = [NSMutableDictionary dictionaryWithCapacity:[layers count]];
@@ -1712,7 +1712,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Store the orderings
 	NSEnumerator *e = [layers objectEnumerator];
 	while(layer = [e nextObject])
-		[oldOrdering setValue: [NSNumber numberWithInt:[layers indexOfObject: layer]] forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
+		[oldOrdering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
 
 	// Make action undoable
 	[[[document undoManager] prepareWithInvocationTarget:self] undoMergeWith:[layers count] andOrdering:oldOrdering];
