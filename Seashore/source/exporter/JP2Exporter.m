@@ -312,7 +312,14 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 		else
 			OpenDisplayProfile(&cmProfile);
 		cmData = NULL;
-		CMFlattenProfile(cmProfile, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
+		CMProfileLocation profileLoc;
+		profileLoc.locType = cmBufferBasedProfile;
+		profileLoc.u.bufferLoc.buffer = cmData;
+		profileLoc.u.bufferLoc.size = cmLen;
+		CMProfileRef tempProfile;
+		CMCopyProfile(&tempProfile, &profileLoc, cmProfile);
+
+		//CMFlattenProfile(cmProfile, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
 		if (cmData) {
 			[imageRep setProperty:NSImageColorSyncProfileData withValue:[NSData dataWithBytes:cmData length:cmLen]];
 			free(cmData);

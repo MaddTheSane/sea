@@ -135,7 +135,7 @@
 	}
 }
 
-inline get_row(unsigned char *out_row, unsigned char *in_row, int spp, int channel, int width)
+static inline void get_row(unsigned char *out_row, unsigned char *in_row, int spp, int channel, int width)
 {
 	int i;
 	
@@ -148,7 +148,7 @@ inline get_row(unsigned char *out_row, unsigned char *in_row, int spp, int chann
 	}
 }
 
-inline set_row(unsigned char *out_row, unsigned char *in_row, int spp, int channel, int width)
+static inline void set_row(unsigned char *out_row, unsigned char *in_row, int spp, int channel, int width)
 {
 	int i, j;
 	

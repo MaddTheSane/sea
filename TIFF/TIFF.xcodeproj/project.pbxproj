@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -274,9 +274,18 @@
 /* Begin PBXProject section */
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = A85D0B2509BD8F60009BD89D /* Build configuration list for PBXProject "TIFF" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* TIFF */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
@@ -344,20 +353,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		A85D0B2209BD8F60009BD89D /* Development (Native) */ = {
+		A85D0B2209BD8F60009BD89D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
@@ -365,54 +370,13 @@
 					0x01530000,
 					"-lz",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = TIFF;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = framework;
 				ZERO_LINK = YES;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A85D0B2309BD8F60009BD89D /* Deployment (Universal) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_AUTO_VECTORIZATION = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = (
-					"-seg1addr",
-					0x01530000,
-					"-lz",
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = TIFF;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = framework;
-			};
-			name = "Deployment (Universal)";
-		};
-		A85D0B2409BD8F60009BD89D /* Deployment (Native) */ = {
+		A85D0B2309BD8F60009BD89D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -421,9 +385,6 @@
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
@@ -431,37 +392,38 @@
 					0x01530000,
 					"-lz",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = TIFF;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = framework;
 			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
-		A85D0B2609BD8F60009BD89D /* Development (Native) */ = {
+		A85D0B2609BD8F60009BD89D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.5;
+				"SDKROOT[arch=i386]" = macosx10.4;
+				"SDKROOT[arch=ppc]" = macosx10.4;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A85D0B2709BD8F60009BD89D /* Deployment (Universal) */ = {
+		A85D0B2709BD8F60009BD89D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
+				SDKROOT = macosx10.5;
+				"SDKROOT[arch=i386]" = macosx10.4;
+				"SDKROOT[arch=ppc]" = macosx10.4;
 			};
-			name = "Deployment (Universal)";
-		};
-		A85D0B2809BD8F60009BD89D /* Deployment (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -469,22 +431,20 @@
 		A85D0B2109BD8F60009BD89D /* Build configuration list for PBXNativeTarget "TIFF" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A85D0B2209BD8F60009BD89D /* Development (Native) */,
-				A85D0B2309BD8F60009BD89D /* Deployment (Universal) */,
-				A85D0B2409BD8F60009BD89D /* Deployment (Native) */,
+				A85D0B2209BD8F60009BD89D /* Debug */,
+				A85D0B2309BD8F60009BD89D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 		A85D0B2509BD8F60009BD89D /* Build configuration list for PBXProject "TIFF" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A85D0B2609BD8F60009BD89D /* Development (Native) */,
-				A85D0B2709BD8F60009BD89D /* Deployment (Universal) */,
-				A85D0B2809BD8F60009BD89D /* Deployment (Native) */,
+				A85D0B2609BD8F60009BD89D /* Debug */,
+				A85D0B2709BD8F60009BD89D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

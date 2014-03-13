@@ -4,9 +4,13 @@
  IntPoint NSPointMakeIntPoint(NSPoint point)
 {
 	IntPoint newPoint;
-	
+#if defined(CGFLOAT_IS_DOUBLE) && CGFLOAT_IS_DOUBLE == 1
+	newPoint.x = floor(point.x);
+	newPoint.y = floor(point.y);
+#else
 	newPoint.x = floorf(point.x);
 	newPoint.y = floorf(point.y);
+#endif
 	
 	return newPoint; 
 }
@@ -14,9 +18,13 @@
  IntSize NSSizeMakeIntSize(NSSize size)
 {
 	IntSize newSize;
-	
+#if defined(CGFLOAT_IS_DOUBLE) && CGFLOAT_IS_DOUBLE == 1
 	newSize.width = ceilf(size.width);
 	newSize.height = ceilf(size.height);
+#else
+	newSize.width = ceil(size.width);
+	newSize.height = ceil(size.height);
+#endif
 	
 	return newSize;
 }

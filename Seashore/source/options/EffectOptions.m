@@ -43,7 +43,7 @@
 	[[[gCurrentDocument tools] getTool:kEffectTool] reset];
 }
 
-- (int)selectedRow
+- (NSInteger)selectedRow
 {
 	return [effectTable selectedRow];
 }

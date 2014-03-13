@@ -3,7 +3,7 @@
 
 #define alphaPos (spp - 1)
 
-inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
+void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
 {
 	unsigned char multi, alpha;
 	int t1, t2;
@@ -27,7 +27,7 @@ inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned 
 	destPtr[destLoc + alphaPos] += int_mult(255 - destPtr[destLoc + alphaPos], alpha, t1);
 }
 
-inline void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
+void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
 {
 	int t1, t2, k;
 	
@@ -42,7 +42,7 @@ inline void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned 
 	}
 }
 
-inline void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
+void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
 {
 	int t1, t2, k;
 	
@@ -57,7 +57,7 @@ inline void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, un
 	}
 }
 
-inline void replaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
+void replaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
 {
 	int t1, t2;
 	
@@ -71,7 +71,7 @@ inline void replaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsi
 	}
 }
 
-inline void normalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
+void normalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
 {
 	unsigned char alpha;
 	int t1, t2;
@@ -94,7 +94,7 @@ inline void normalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned c
 }
 
 
-inline void eraseMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
+void eraseMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
 {
 	unsigned char alpha;
 	int t1;
@@ -111,7 +111,7 @@ inline void eraseMerge(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 	
 }
 
-inline void primaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity, BOOL lazy)
+void primaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity, BOOL lazy)
 {
 	unsigned char oldAlpha;
 
@@ -124,7 +124,7 @@ inline void primaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned 
 	destPtr[destLoc + alphaPos] = oldAlpha;
 }
 
-inline void alphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
+void alphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
 {
 	unsigned char tempDest[2], tempSrc[2];
 
@@ -141,7 +141,7 @@ inline void alphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 	destPtr[destLoc + alphaPos] = tempDest[0];
 }
 
-inline void blendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int blend)
+void blendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int blend)
 {
 	const int blend1 = 256 - blend;
 	const int blend2 = blend + 1;
@@ -162,7 +162,7 @@ inline void blendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 	}
 }
 
-inline void dissolveMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void dissolveMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char alpha;
 	int randVal;
@@ -177,7 +177,7 @@ inline void dissolveMerge(int spp, unsigned char *destPtr, int destLoc, unsigned
 	destPtr[destLoc + alphaPos] = (randVal > alpha) ? 0 : alpha;
 }
 
-inline void additiveMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void additiveMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char alpha;
 	int k;
@@ -194,7 +194,7 @@ inline void additiveMerge(int spp, unsigned char *destPtr, int destLoc, unsigned
 	destPtr[destLoc + alphaPos] = MIN(alpha, destPtr[destLoc + alphaPos]);
 }
 
-inline void differenceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void differenceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char alpha;
 	int k;
@@ -211,7 +211,7 @@ inline void differenceMerge(int spp, unsigned char *destPtr, int destLoc, unsign
 	destPtr[destLoc + alphaPos] = MIN(alpha, destPtr[destLoc + alphaPos]);
 }
 
-inline void multiplyMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void multiplyMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char alpha;
 	int t1;
@@ -225,7 +225,7 @@ inline void multiplyMerge(int spp, unsigned char *destPtr, int destLoc, unsigned
 	destPtr[destLoc + alphaPos] = MIN(alpha, destPtr[destLoc + alphaPos]);
 }
 
-inline void overlayMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void overlayMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char alpha;
 	int t1, t2;
@@ -239,7 +239,7 @@ inline void overlayMerge(int spp, unsigned char *destPtr, int destLoc, unsigned 
 	destPtr[destLoc + alphaPos] = MIN(alpha, destPtr[destLoc + alphaPos]);
 }
 
-inline void screenMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void screenMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char alpha;
 	int t1;
@@ -254,7 +254,7 @@ inline void screenMerge(int spp, unsigned char *destPtr, int destLoc, unsigned c
 	destPtr[destLoc + alphaPos] = MIN(alpha, destPtr[destLoc + alphaPos]);
 }
 
-inline void subtractiveMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void subtractiveMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char alpha;
 	int k;
@@ -271,7 +271,7 @@ inline void subtractiveMerge(int spp, unsigned char *destPtr, int destLoc, unsig
 	destPtr[destLoc + alphaPos] = MIN(alpha, destPtr[destLoc + alphaPos]);
 }
 
-inline void darkenMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void darkenMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char alpha;
 	int k;
@@ -288,7 +288,7 @@ inline void darkenMerge(int spp, unsigned char *destPtr, int destLoc, unsigned c
 	destPtr[destLoc + alphaPos] = MIN(alpha, destPtr[destLoc + alphaPos]);
 }
 
-inline void lightenMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void lightenMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char alpha;
 	int k;
@@ -305,7 +305,7 @@ inline void lightenMerge(int spp, unsigned char *destPtr, int destLoc, unsigned 
 	destPtr[destLoc + alphaPos] = MIN(alpha, destPtr[destLoc + alphaPos]);
 }
 
-inline void divideMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void divideMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	unsigned char alpha;
 	int temp;
@@ -321,7 +321,7 @@ inline void divideMerge(int spp, unsigned char *destPtr, int destLoc, unsigned c
 	destPtr[destLoc + alphaPos] = MIN(alpha, destPtr[destLoc + alphaPos]);
 }
 
-inline void hueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void hueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int r1, g1, b1, r2, g2, b2;
 	int alpha;
@@ -349,7 +349,7 @@ inline void hueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char
 		normalMerge(spp, destPtr, destLoc, srcPtr, srcLoc, 255);
 }
 
-inline void saturationMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void saturationMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int r1, g1, b1, r2, g2, b2;
 	int alpha;
@@ -377,7 +377,7 @@ inline void saturationMerge(int spp, unsigned char *destPtr, int destLoc, unsign
 		normalMerge(spp, destPtr, destLoc, srcPtr, srcLoc, 255);
 }
 
-inline void valueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void valueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int r1, g1, b1, r2, g2, b2;
 	int alpha;
@@ -405,7 +405,7 @@ inline void valueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 		normalMerge(spp, destPtr, destLoc, srcPtr, srcLoc, 255);
 }
 
-inline void colorMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void colorMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int r1, g1, b1, r2, g2, b2;
 	int alpha;
@@ -434,7 +434,7 @@ inline void colorMerge(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 		normalMerge(spp, destPtr, destLoc, srcPtr, srcLoc, 255);
 }
 
-inline void dodgeMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void dodgeMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int t1, k;
 	
@@ -447,7 +447,7 @@ inline void dodgeMerge(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 	destPtr[destLoc + alphaPos] = MIN(srcPtr[srcLoc + alphaPos], destPtr[destLoc + alphaPos]);
 }
 
-inline void burnMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void burnMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int t1, k;
 	
@@ -460,7 +460,7 @@ inline void burnMerge(int spp, unsigned char *destPtr, int destLoc, unsigned cha
 	destPtr[destLoc + alphaPos] = MIN(srcPtr[srcLoc + alphaPos], destPtr[destLoc + alphaPos]);
 }
 
-inline void hardlightMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void hardlightMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int t1, k;
 	
@@ -478,7 +478,7 @@ inline void hardlightMerge(int spp, unsigned char *destPtr, int destLoc, unsigne
 	destPtr[destLoc + alphaPos] = MIN(srcPtr[srcLoc + alphaPos], destPtr[destLoc + alphaPos]);
 }
 
-inline void softlightMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void softlightMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int t1, t2, tM, tS, k;
 	
@@ -491,7 +491,7 @@ inline void softlightMerge(int spp, unsigned char *destPtr, int destLoc, unsigne
 	destPtr[destLoc + alphaPos] = MIN(srcPtr[srcLoc + alphaPos], destPtr[destLoc + alphaPos]);
 }
 
-inline void grainExtractMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void grainExtractMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int t1, k;
 	
@@ -503,7 +503,7 @@ inline void grainExtractMerge(int spp, unsigned char *destPtr, int destLoc, unsi
 	destPtr[destLoc + alphaPos] = MIN(srcPtr[srcLoc + alphaPos], destPtr[destLoc + alphaPos]);
 }
 
-inline void grainMergeMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void grainMergeMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int t1, k;
 	
@@ -515,7 +515,7 @@ inline void grainMergeMerge(int spp, unsigned char *destPtr, int destLoc, unsign
 	destPtr[destLoc + alphaPos] = MIN(srcPtr[srcLoc + alphaPos], destPtr[destLoc + alphaPos]);
 }
 
-inline void selectMerge(int choice, int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
+void selectMerge(int choice, int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	switch (choice) {
 		case XCF_DISSOLVE_MODE:

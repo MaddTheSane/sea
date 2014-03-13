@@ -19,25 +19,6 @@ enum {
    closeSpool  = 5		/* complete data transfer process */
 }; 
 
-static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
-{
-	if (command == openWriteSpool) {
-		cmData = malloc(*size);
-		memcpy(cmData, data, *size);
-		cmLen = *size;
-	}
-	else if (command == writeSpool) {
-		cmData = realloc(cmData, cmLen + *size);
-		memcpy(&(cmData[cmLen]), data, *size);
-		cmLen += *size;
-	}
-	else if (command == closeSpool) {
-		cmOkay = YES;
-	}
-	
-	return 0;
-}
-
 @implementation TIFFExporter
 
 - (id)init
@@ -171,7 +152,14 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 		// Embed ColorSync profile
 		cmData = NULL;
 		cmOkay = NO;
-		CMFlattenProfile(destProf, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
+		CMProfileLocation profileLoc;
+		profileLoc.locType = cmBufferBasedProfile;
+		profileLoc.u.bufferLoc.buffer = cmData;
+		profileLoc.u.bufferLoc.size = cmLen;
+		CMCopyProfile(&destProf, &profileLoc, srcProf);
+		
+		// TODO: color management using something OTHER than:
+		//CMFlattenProfile(destProf, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
 		
 		// Open the file for writing
 		tiff = TIFFOpen([path fileSystemRepresentation], "w");
@@ -238,7 +226,11 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 			OpenDisplayProfile(&cmProfile);
 		cmData = NULL;
 		cmOkay = NO;
-		CMFlattenProfile(cmProfile, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
+		CMProfileLocation profileLoc;
+		profileLoc.locType = cmBufferBasedProfile;
+		profileLoc.u.bufferLoc.buffer = cmData;
+		profileLoc.u.bufferLoc.size = cmLen;
+		CMCopyProfile(&destProf, &profileLoc, cmProfile);
 		
 		// Open the file for writing
 		tiff = TIFFOpen([path fileSystemRepresentation], "w");

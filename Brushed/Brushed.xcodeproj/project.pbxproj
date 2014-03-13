@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 44;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -180,8 +180,14 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = A8B12B8409BD8F460096101F /* Build configuration list for PBXProject "Brushed" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.0";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Brushed */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -247,15 +253,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A898E52009BEFC120075C7AB /* Deployment (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = "Deployment (Native)";
-		};
-		A898E53909BEFCA00075C7AB /* Development (Native) */ = {
+		A898E53909BEFCA00075C7AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -277,9 +275,9 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A898E53A09BEFCA00075C7AB /* Deployment (Universal) */ = {
+		A898E53A09BEFCA00075C7AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
@@ -304,45 +302,37 @@
 				);
 				WRAPPER_EXTENSION = app;
 			};
-			name = "Deployment (Universal)";
+			name = Release;
 		};
-		A898E53B09BEFCA00075C7AB /* Deployment (Native) */ = {
+		A8B12B8509BD8F460096101F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 3.3;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = Brushed;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Deployment (Native)";
-		};
-		A8B12B8509BD8F460096101F /* Development (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
+				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
+				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_ACTUAL)";
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				"SDKROOT[arch=i386]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A8B12B8609BD8F460096101F /* Deployment (Universal) */ = {
+		A8B12B8609BD8F460096101F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				"SDKROOT[arch=i386]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 			};
-			name = "Deployment (Universal)";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -350,22 +340,20 @@
 		A898E53809BEFCA00075C7AB /* Build configuration list for PBXNativeTarget "Brushed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A898E53909BEFCA00075C7AB /* Development (Native) */,
-				A898E53A09BEFCA00075C7AB /* Deployment (Universal) */,
-				A898E53B09BEFCA00075C7AB /* Deployment (Native) */,
+				A898E53909BEFCA00075C7AB /* Debug */,
+				A898E53A09BEFCA00075C7AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 		A8B12B8409BD8F460096101F /* Build configuration list for PBXProject "Brushed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A8B12B8509BD8F460096101F /* Development (Native) */,
-				A8B12B8609BD8F460096101F /* Deployment (Universal) */,
-				A898E52009BEFC120075C7AB /* Deployment (Native) */,
+				A8B12B8509BD8F460096101F /* Debug */,
+				A8B12B8609BD8F460096101F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

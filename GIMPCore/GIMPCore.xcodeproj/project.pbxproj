@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -243,9 +243,18 @@
 /* Begin PBXProject section */
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = A8E9640409BD8F4E0038694C /* Build configuration list for PBXProject "GIMPCore" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* GIMPCore */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
@@ -300,27 +309,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		A8E9640109BD8F4E0038694C /* Development (Native) */ = {
+		A8E9640109BD8F4E0038694C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
 					"-seg1addr",
 					0x01520000,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = GIMPCore;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -330,43 +334,9 @@
 				WRAPPER_EXTENSION = framework;
 				ZERO_LINK = YES;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A8E9640209BD8F4E0038694C /* Deployment (Universal) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_AUTO_VECTORIZATION = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = (
-					"-seg1addr",
-					0x01520000,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = GIMPCore;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = framework;
-			};
-			name = "Deployment (Universal)";
-		};
-		A8E9640309BD8F4E0038694C /* Deployment (Native) */ = {
+		A8E9640209BD8F4E0038694C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -375,16 +345,12 @@
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
 					"-seg1addr",
 					0x01520000,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = GIMPCore;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -393,28 +359,36 @@
 				);
 				WRAPPER_EXTENSION = framework;
 			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
-		A8E9640509BD8F4E0038694C /* Development (Native) */ = {
+		A8E9640509BD8F4E0038694C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.5;
+				"SDKROOT[arch=i386]" = macosx10.4;
+				"SDKROOT[arch=ppc]" = macosx10.4;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A8E9640609BD8F4E0038694C /* Deployment (Universal) */ = {
+		A8E9640609BD8F4E0038694C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
+				SDKROOT = macosx10.5;
+				"SDKROOT[arch=i386]" = macosx10.4;
+				"SDKROOT[arch=ppc]" = macosx10.4;
 			};
-			name = "Deployment (Universal)";
-		};
-		A8E9640709BD8F4E0038694C /* Deployment (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -422,22 +396,20 @@
 		A8E9640009BD8F4E0038694C /* Build configuration list for PBXNativeTarget "GIMPCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A8E9640109BD8F4E0038694C /* Development (Native) */,
-				A8E9640209BD8F4E0038694C /* Deployment (Universal) */,
-				A8E9640309BD8F4E0038694C /* Deployment (Native) */,
+				A8E9640109BD8F4E0038694C /* Debug */,
+				A8E9640209BD8F4E0038694C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 		A8E9640409BD8F4E0038694C /* Build configuration list for PBXProject "GIMPCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A8E9640509BD8F4E0038694C /* Development (Native) */,
-				A8E9640609BD8F4E0038694C /* Deployment (Universal) */,
-				A8E9640709BD8F4E0038694C /* Deployment (Native) */,
+				A8E9640509BD8F4E0038694C /* Debug */,
+				A8E9640609BD8F4E0038694C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

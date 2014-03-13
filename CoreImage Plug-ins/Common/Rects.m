@@ -1,26 +1,36 @@
 #import "Rects.h"
 
-inline IntPoint NSPointMakeIntPoint(NSPoint point)
+__private_extern__ inline IntPoint NSPointMakeIntPoint(NSPoint point)
 {
 	IntPoint newPoint;
 	
+#if defined(CGFLOAT_IS_DOUBLE) && CGFLOAT_IS_DOUBLE == 1
+	newPoint.x = floor(point.x);
+	newPoint.y = floor(point.y);
+#else
 	newPoint.x = floorf(point.x);
 	newPoint.y = floorf(point.y);
+#endif
 	
 	return newPoint; 
 }
 
-inline IntSize NSSizeMakeIntSize(NSSize size)
+__private_extern__ inline IntSize NSSizeMakeIntSize(NSSize size)
 {
 	IntSize newSize;
 	
+#if defined(CGFLOAT_IS_DOUBLE) && CGFLOAT_IS_DOUBLE == 1
+	newSize.width = ceil(size.width);
+	newSize.height = ceil(size.height);
+#else
 	newSize.width = ceilf(size.width);
 	newSize.height = ceilf(size.height);
+#endif
 	
 	return newSize;
 }
 
-inline NSPoint IntPointMakeNSPoint(IntPoint point)
+__private_extern__ inline NSPoint IntPointMakeNSPoint(IntPoint point)
 {
 	NSPoint newPoint;
 	
@@ -30,7 +40,7 @@ inline NSPoint IntPointMakeNSPoint(IntPoint point)
 	return newPoint;
 }
 
-inline IntPoint IntMakePoint(int x, int y)
+__private_extern__ inline IntPoint IntMakePoint(int x, int y)
 {
 	IntPoint newPoint;
 	
@@ -40,7 +50,7 @@ inline IntPoint IntMakePoint(int x, int y)
 	return newPoint;
 }
 
-inline NSSize IntSizeMakeNSSize(IntSize size)
+__private_extern__ inline NSSize IntSizeMakeNSSize(IntSize size)
 {
 	NSSize newSize;
 	
@@ -50,7 +60,7 @@ inline NSSize IntSizeMakeNSSize(IntSize size)
 	return newSize;
 }
 
-inline IntSize IntMakeSize(int width, int height)
+__private_extern__ inline IntSize IntMakeSize(int width, int height)
 {
 	IntSize newSize;
 	
@@ -60,7 +70,7 @@ inline IntSize IntMakeSize(int width, int height)
 	return newSize;
 }
 
-inline IntRect IntMakeRect(int x, int y, int width, int height)
+__private_extern__ inline IntRect IntMakeRect(int x, int y, int width, int height)
 {
 	IntRect newRect;
 	
@@ -72,13 +82,13 @@ inline IntRect IntMakeRect(int x, int y, int width, int height)
 	return newRect;
 }
 
-inline void IntOffsetRect(IntRect *rect, int x, int y)
+__private_extern__ inline void IntOffsetRect(IntRect *rect, int x, int y)
 {
 	rect->origin.x += x;
 	rect->origin.y += y;
 }
 
-inline BOOL IntPointInRect(IntPoint point, IntRect rect)
+__private_extern__ inline BOOL IntPointInRect(IntPoint point, IntRect rect)
 {
 	if (point.x < rect.origin.x) return NO;
 	if (point.x >= rect.origin.x + rect.size.width) return NO;
@@ -88,7 +98,7 @@ inline BOOL IntPointInRect(IntPoint point, IntRect rect)
 	return YES;
 }
 
-inline BOOL IntContainsRect(IntRect bigRect, IntRect littleRect)
+__private_extern__ inline BOOL IntContainsRect(IntRect bigRect, IntRect littleRect)
 {
 	if (littleRect.origin.x < bigRect.origin.x) return NO;
 	if (littleRect.origin.x + littleRect.size.width > bigRect.origin.x + bigRect.size.width) return NO;
@@ -98,7 +108,7 @@ inline BOOL IntContainsRect(IntRect bigRect, IntRect littleRect)
 	return YES;
 }
 
-inline IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect)
+__private_extern__ inline IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect)
 {
 	IntRect rect = littleRect;
 	
@@ -115,7 +125,7 @@ inline IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect)
 	return rect;
 }
 
-inline IntRect NSRectMakeIntRect(NSRect rect)
+__private_extern__ inline IntRect NSRectMakeIntRect(NSRect rect)
 {
 	IntRect newRect;
 	
@@ -125,7 +135,7 @@ inline IntRect NSRectMakeIntRect(NSRect rect)
 	return newRect;
 }
 
-inline NSRect IntRectMakeNSRect(IntRect rect)
+__private_extern__ inline NSRect IntRectMakeNSRect(IntRect rect)
 {
 	NSRect newRect;
 	
@@ -136,7 +146,7 @@ inline NSRect IntRectMakeNSRect(IntRect rect)
 }
 
 
-inline void premultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
+__private_extern__ inline void premultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
 {
 	int i, j, alphaPos, temp;
 	
@@ -160,7 +170,7 @@ inline void premultiplyBitmap(int spp, unsigned char *output, unsigned char *inp
 	}
 }
 
-inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
+__private_extern__ inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
 {
 	int i, j, alphaPos, newValue;
 	double alphaRatio;

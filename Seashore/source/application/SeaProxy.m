@@ -546,7 +546,7 @@
 
 - (IBAction)crash:(id)sender
 {
-	int i;
+	long i;
 	
 	for (i = 0; i < 5000; i++) {
 		*((char *)i) = 0xFF;

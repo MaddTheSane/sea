@@ -127,7 +127,7 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-#ifdef __ppc__
+#if defined( __ppc__ ) || defined( __ppc64__ )
 	vector unsigned char TOGGLERGBF = (vector unsigned char)(0x03, 0x00, 0x01, 0x02, 0x07, 0x04, 0x05, 0x06, 0x0B, 0x08, 0x09, 0x0A, 0x0F, 0x0C, 0x0D, 0x0E);
 	vector unsigned char TOGGLERGBR = (vector unsigned char)(0x01, 0x02, 0x03, 0x00, 0x05, 0x06, 0x07, 0x04, 0x09, 0x0A, 0x0B, 0x08, 0x0D, 0x0E, 0x0F, 0x0C);
 	vector unsigned char *vdata, *voverlay, *vresdata;
@@ -157,7 +157,7 @@
 	replace = [pluginData replace];
 	
 	// Convert from RGBA to ARGB
-#ifdef __ppc__
+#if defined( __ppc__ ) || defined( __ppc64__ )
 	vdata = (vector unsigned char *)data;
 	for (i = 0; i < vec_len; i++) {
 		vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBF);
@@ -176,7 +176,7 @@
 	resdata = [self executeChannel:pluginData withBitmap:data];
 }
 @catch (NSException *exception) {
-#ifdef __ppc__
+#if defined( __ppc__ ) || defined( __ppc64__ )
 	for (i = 0; i < vec_len; i++) {
 		vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBR);
 	}
@@ -187,12 +187,12 @@
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
 #endif
-	NSLog([exception reason]);
+	NSLog(@"%@", [exception reason]);
 	return;
 }
 
 	// Convert from ARGB to RGBA
-#ifdef __ppc__
+#if defined( __ppc__ ) || defined( __ppc64__ )
 	for (i = 0; i < vec_len; i++) {
 		vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBR);
 	}
@@ -223,7 +223,7 @@
 	IntRect selection;
 	
 	unsigned char ormask[16], *resdata, *datatouse;
-#ifdef __ppc__
+#if defined( __ppc__ ) || defined( __ppc64__ )
 	vector unsigned char TOALPHA = (vector unsigned char)(0x10, 0x00, 0x00, 0x00, 0x10, 0x04, 0x04, 0x04, 0x10, 0x08, 0x08, 0x08, 0x10, 0x0C, 0x0C, 0x0C);
 	vector unsigned char REVERTALPHA = (vector unsigned char)(0x00, 0x01, 0x02, 0x10, 0x04, 0x05, 0x06, 0x14, 0x08, 0x09, 0x0A, 0x18, 0x0C, 0x0D, 0x0E, 0x1C);
 	vector unsigned char HIGHVEC = (vector unsigned char)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -242,7 +242,7 @@
 	vec_len = width * height * 4;
 	if (vec_len % 16 == 0) { vec_len /= 16; }
 	else { vec_len /= 16; vec_len++; }
-#ifdef __ppc__
+#if defined( __ppc__ ) || defined( __ppc64__ )
 	vdata = (vector unsigned char *)data; // NB: data may equal newdata
 	nvdata = (vector unsigned char *)newdata;
 #else
@@ -251,7 +251,7 @@
 #endif
 	datatouse = newdata;
 	if (channel == kAlphaChannel) {
-#ifdef __ppc__
+#if defined( __ppc__ ) || defined( __ppc64__ )
 		for (i = 0; i < vec_len; i++) {
 			nvdata[i] = vec_perm(vdata[i], HIGHVEC, TOALPHA);
 		}
@@ -267,7 +267,7 @@
 			ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 		}
 		memcpy(&orvmask, ormask, 16);
-#ifdef __ppc__
+#if defined( __ppc__ ) || defined( __ppc64__ )
 		for (i = 0; i < vec_len; i++) {
 			nvdata[i] = vec_or(vdata[i], orvmask);
 		}
@@ -283,7 +283,7 @@
 	
 	// Restore alpha
 	if (channel == kAllChannels) {
-#ifdef __ppc__
+#if defined( __ppc__ ) || defined( __ppc64__ )
 		rvdata = (vector unsigned char *)resdata;
 		for (i = 0; i < vec_len; i++) {
 			rvdata[i] = vec_perm(rvdata[i], vdata[i], REVERTALPHA);

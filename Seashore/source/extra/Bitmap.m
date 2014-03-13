@@ -9,7 +9,7 @@ typedef struct {
 	int init_size;
 } PtrRecord;
 
-inline PtrRecord initPtrs(unsigned char *initial, int init_size)
+static inline PtrRecord initPtrs(unsigned char *initial, int init_size)
 {
 	PtrRecord ptrs;
 	
@@ -20,12 +20,12 @@ inline PtrRecord initPtrs(unsigned char *initial, int init_size)
 	return ptrs;
 }
 
-inline unsigned char *getPtr(PtrRecord ptrs)
+static inline unsigned char *getPtr(PtrRecord ptrs)
 {
 	return ptrs.ptrs[ptrs.n - 1];
 }
 
-inline unsigned char *getFinalPtr(PtrRecord ptrs)
+static inline unsigned char *getFinalPtr(PtrRecord ptrs)
 {
 	unsigned char *result;
 	
@@ -40,7 +40,7 @@ inline unsigned char *getFinalPtr(PtrRecord ptrs)
 	return result;
 }
 
-inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
+static inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
 {
 	unsigned char *result;
 	
@@ -57,7 +57,7 @@ inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
 	return result;
 }
 
-inline void freePtrs(PtrRecord ptrs)
+static inline void freePtrs(PtrRecord ptrs)
 {
 	int i;
 	
@@ -66,7 +66,7 @@ inline void freePtrs(PtrRecord ptrs)
 	}
 }
 
-inline void rotate_bytes(unsigned char *data, int pos1, int pos2)
+static inline void rotate_bytes(unsigned char *data, int pos1, int pos2)
 {
 	unsigned char tmp;
 	int i;
@@ -400,7 +400,7 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 	if (dspace == kInvertedGrayColorSpace) fail = @"Cannot convert to inverted gray color space";
 	if (dspace == kRGBColorSpace && dspp != 4) fail = @"Can only convert to 4 spp for RGB color space";
 	if (dspace == kGrayColorSpace && dspp != 2) fail = @"Can only convert to 2 spp for RGB color space";
-	if (fail) { NSLog(fail); return NULL; }
+	if (fail) { NSLog(@"%@", fail); return NULL; }
 	
 	// Create initial pointer
 	ptrs = initPtrs(ibitmap, ibypr * height);
@@ -524,7 +524,7 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 	return getFinalPtr(ptrs);
 }
 
-inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length)
+extern inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length)
 {
 	const int alphaPos = spp - 1;
 	const int outputSPP = spp - 1;
@@ -559,7 +559,7 @@ inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *inp
 	} 
 }
 
-inline void premultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
+extern inline void premultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
 {
 	int i, j, alphaPos, temp;
 	
@@ -583,7 +583,7 @@ inline void premultiplyBitmap(int spp, unsigned char *output, unsigned char *inp
 	}
 }
 
-inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
+extern inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
 {
 	int i, j, alphaPos, newValue;
 	double alphaRatio;
@@ -612,7 +612,7 @@ inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *i
 	}
 }
 
-inline unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where)
+extern inline unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where)
 {
 	int total, count;
 	int i, j;
@@ -635,7 +635,7 @@ inline unsigned char averagedComponentValue(int spp, unsigned char *data, int wi
 	return (total / count);
 }
 
-inline void OpenDisplayProfile(CMProfileRef *profile)
+extern inline void OpenDisplayProfile(CMProfileRef *profile)
 {
 	CMDeviceID device;
 	CMDeviceProfileID deviceID;
@@ -659,7 +659,7 @@ inline void OpenDisplayProfile(CMProfileRef *profile)
 	//}
 }
 
-inline void CloseDisplayProfile(CMProfileRef profile)
+extern inline void CloseDisplayProfile(CMProfileRef profile)
 {
 	CMCloseProfile(profile);
 }

@@ -2,47 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UTExportedTypeDeclarations</key>
-	<array>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.image</string>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeIdentifier</key>
-			<string>org.gimp.xcf</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://henning.makholm.net/xcftools/xcfspec.txt</string>
-			<key>UTTypeIconFile</key>
-			<string>XCF Icon.icns</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>xcf</string>
-					<string>XCF</string>
-				</array>
-				<key>com.apple.ostype</key>
-				<string>XCF</string>
-				<key>public.mime-type</key>
-				<string>image/x-xcf</string>
-			</dict>
-			<key>UTTypeDescription</key>
-			<string>GIMP image</string>
-		</dict>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>org.gimp.xcf</string>
-				<string>com.gimp.xcf</string>
-				<string>net.sourceforge.seashore.xcf</string>
-			</array>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>xcf</string>
@@ -58,6 +22,12 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>org.gimp.xcf</string>
+				<string>com.gimp.xcf</string>
+				<string>net.sourceforge.seashore.xcf</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSDocumentClass</key>
@@ -177,10 +147,6 @@
 			<string>SeaDocument</string>
 		</dict>
 		<dict>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>public.xbitmap-image</string>
-			</array>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>xbm</string>
@@ -196,6 +162,10 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.xbitmap-image</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSDocumentClass</key>
@@ -385,5 +355,35 @@ GNU General Public License v2.0</string>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>SeaApplication</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.image</string>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>GIMP image</string>
+			<key>UTTypeIconFile</key>
+			<string>XCF Icon</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.gimp.xcf</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://henning.makholm.net/xcftools/xcfspec.txt</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<string>XCF</string>
+				<key>public.filename-extension</key>
+				<array>
+					<string>xcf</string>
+					<string>XCF</string>
+				</array>
+				<key>public.mime-type</key>
+				<string>image/x-xcf</string>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

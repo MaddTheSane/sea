@@ -23,7 +23,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
 	
 	QLPreviewRequestSetDataRepresentation(preview, (CFDataRef)[[whiteboard printableImage] TIFFRepresentation], kUTTypeTIFF, NULL);
 	
-    [pool release];
+    [pool drain];
     return noErr;
 }
 

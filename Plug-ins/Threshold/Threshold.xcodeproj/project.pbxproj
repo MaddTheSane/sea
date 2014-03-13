@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -141,9 +141,18 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = A83C12FD09BD8F2A00E0B9B8 /* Build configuration list for PBXProject "Threshold" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Threshold */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -198,83 +207,51 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A83C12FA09BD8F2A00E0B9B8 /* Development (Native) */ = {
+		A83C12FA09BD8F2A00E0B9B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
 				PRODUCT_NAME = Threshold;
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = YES;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A83C12FB09BD8F2A00E0B9B8 /* Deployment (Universal) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				GCC_AUTO_VECTORIZATION = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
-				PRODUCT_NAME = Threshold;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = "Deployment (Universal)";
-		};
-		A83C12FC09BD8F2A00E0B9B8 /* Deployment (Native) */ = {
+		A83C12FB09BD8F2A00E0B9B8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = 4.0;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
 				PRODUCT_NAME = Threshold;
 				WRAPPER_EXTENSION = bundle;
 			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
-		A83C12FE09BD8F2A00E0B9B8 /* Development (Native) */ = {
+		A83C12FE09BD8F2A00E0B9B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.5;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A83C12FF09BD8F2A00E0B9B8 /* Deployment (Universal) */ = {
+		A83C12FF09BD8F2A00E0B9B8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx10.5;
 			};
-			name = "Deployment (Universal)";
-		};
-		A83C130009BD8F2A00E0B9B8 /* Deployment (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -282,22 +259,20 @@
 		A83C12F909BD8F2A00E0B9B8 /* Build configuration list for PBXNativeTarget "Threshold" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A83C12FA09BD8F2A00E0B9B8 /* Development (Native) */,
-				A83C12FB09BD8F2A00E0B9B8 /* Deployment (Universal) */,
-				A83C12FC09BD8F2A00E0B9B8 /* Deployment (Native) */,
+				A83C12FA09BD8F2A00E0B9B8 /* Debug */,
+				A83C12FB09BD8F2A00E0B9B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 		A83C12FD09BD8F2A00E0B9B8 /* Build configuration list for PBXProject "Threshold" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A83C12FE09BD8F2A00E0B9B8 /* Development (Native) */,
-				A83C12FF09BD8F2A00E0B9B8 /* Deployment (Universal) */,
-				A83C130009BD8F2A00E0B9B8 /* Deployment (Native) */,
+				A83C12FE09BD8F2A00E0B9B8 /* Debug */,
+				A83C12FF09BD8F2A00E0B9B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

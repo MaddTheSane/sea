@@ -26,7 +26,7 @@
 	IntPoint points[kMaxEffectToolPoints];
 
 	// A count of the points so far registered
-	int count;
+	NSInteger count;
 
 }
 
@@ -63,6 +63,6 @@
 	@discussion	Returns the number of clicks thus far.
 	@result		Returns an integer indicating the number of clicks thus far.
 */
-- (int)clickCount;
+- (NSInteger)clickCount;
 
 @end

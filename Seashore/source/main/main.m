@@ -11,7 +11,7 @@ BOOL globalReadOnlyWarning;
 
 BOOL isAltiVecAvailable()
 {
-#ifdef __ppc__
+#if defined( __ppc__ ) || defined( __ppc64__ )
 	int selectors[2] = { CTL_HW, HW_VECTORUNIT };
 	int hasVectorUnit = 0;
 	size_t length = sizeof(hasVectorUnit);

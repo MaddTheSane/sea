@@ -10,7 +10,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
-#import <CoreGraphics/CoreGraphics.h>
+#import <ApplicationServices/ApplicationServices.h>
 #import "SeaPlugins.h"
 
 @interface CIGloomClass : NSObject {

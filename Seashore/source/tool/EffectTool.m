@@ -60,7 +60,7 @@
 	return points[index];
 }
 
-- (int)clickCount
+- (NSInteger)clickCount
 {
 	return count;
 }
