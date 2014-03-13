@@ -20,6 +20,7 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		55909E8F18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55CA8EA318D12A9900FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Gaussian.xib; sourceTree = "<group>"; };
+		55CA8EC718D12C5C00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Gaussian.strings; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Gaussian.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Gaussian.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A831E1400789471D0009080F /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 				German,
 				"en-GB",
 				Base,
+				en,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Gaussian */;
 			projectDirPath = "";
@@ -192,6 +194,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8EA318D12A9900FB7F00 /* Base */,
+				55CA8EC718D12C5C00FB7F00 /* en */,
 			);
 			name = Gaussian.xib;
 			sourceTree = "<group>";

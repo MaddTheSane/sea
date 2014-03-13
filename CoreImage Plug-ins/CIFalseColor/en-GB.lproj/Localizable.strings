@@ -9,10 +9,10 @@
 	<key>description</key>
 	<string>Maps luminance of the selection to a color ramp of two colors.</string>
 	<key>groupName</key>
-	<string>Color Effect</string>
+	<string>Colour Effect</string>
 	<key>license</key>
 	<string>Public Domain</string>
 	<key>name</key>
-	<string>Color Ramp</string>
+	<string>Colour Ramp</string>
 </dict>
 </plist>

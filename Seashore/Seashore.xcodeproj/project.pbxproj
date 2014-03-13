@@ -1843,10 +1843,8 @@
 		55909E5B18CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E5C18CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E5D18CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E5E18CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E5F18CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6018CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E6118CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6218CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6318CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6418CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1975,6 +1973,15 @@
 		55CA8EB118D12AC600FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CICircularScreen.strings; sourceTree = "<group>"; };
 		55CA8EB318D12ACC00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CICircularWrap.strings; sourceTree = "<group>"; };
 		55CA8EB518D12AD800FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIVortex.strings; sourceTree = "<group>"; };
+		55CA8EB718D12BC000FB7F00 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CIPosterize.strings"; sourceTree = "<group>"; };
+		55CA8EB918D12BC200FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPosterize.strings; sourceTree = "<group>"; };
+		55CA8EBB18D12BDC00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CICrystallize.strings; sourceTree = "<group>"; };
+		55CA8EBD18D12BDD00FB7F00 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CICrystallize.strings"; sourceTree = "<group>"; };
+		55CA8ECF18D12D9D00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIDisplacementDistortion.strings; sourceTree = "<group>"; };
+		55CA8ED118D12DB500FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIDotScreen.strings; sourceTree = "<group>"; };
+		55CA8ED318D12E1E00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIEdges.strings; sourceTree = "<group>"; };
+		55CA8ED518D12E9A00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIEdgeWork.strings; sourceTree = "<group>"; };
+		55CA8ED718D12EC400FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIExposure.strings; sourceTree = "<group>"; };
 		A801053106945E1E00A80207 /* GradientTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientTool.h; sourceTree = "<group>"; };
 		A801053206945E1E00A80207 /* GradientTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientTool.m; sourceTree = "<group>"; };
 		A80983D50871420900F7412F /* JP2Exporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JP2Exporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -7421,7 +7428,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D50CB18CF9FBB005809E3 /* English */,
-				55909E5E18CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -7448,7 +7454,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D50EC18CF9FBC005809E3 /* English */,
-				55909E6118CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -7852,6 +7857,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8118D12A9600FB7F00 /* Base */,
+				55CA8EBB18D12BDC00FB7F00 /* en */,
+				55CA8EBD18D12BDD00FB7F00 /* en-GB */,
 			);
 			name = CICrystallize.xib;
 			sourceTree = "<group>";
@@ -7860,6 +7867,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8218D12A9600FB7F00 /* Base */,
+				55CA8ECF18D12D9D00FB7F00 /* en */,
 			);
 			name = CIDisplacementDistortion.xib;
 			sourceTree = "<group>";
@@ -7877,6 +7885,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8318D12A9700FB7F00 /* Base */,
+				55CA8ED118D12DB500FB7F00 /* en */,
 			);
 			name = CIDotScreen.xib;
 			sourceTree = "<group>";
@@ -7885,6 +7894,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8418D12A9700FB7F00 /* Base */,
+				55CA8ED318D12E1E00FB7F00 /* en */,
 			);
 			name = CIEdges.xib;
 			sourceTree = "<group>";
@@ -7893,6 +7903,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8518D12A9700FB7F00 /* Base */,
+				55CA8ED518D12E9A00FB7F00 /* en */,
 			);
 			name = CIEdgeWork.xib;
 			sourceTree = "<group>";
@@ -7901,6 +7912,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8618D12A9700FB7F00 /* Base */,
+				55CA8ED718D12EC400FB7F00 /* en */,
 			);
 			name = CIExposure.xib;
 			sourceTree = "<group>";
@@ -8021,6 +8033,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9618D12A9800FB7F00 /* Base */,
+				55CA8EB718D12BC000FB7F00 /* en-GB */,
+				55CA8EB918D12BC200FB7F00 /* en */,
 			);
 			name = CIPosterize.xib;
 			sourceTree = "<group>";

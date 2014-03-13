@@ -29,30 +29,18 @@ enum {
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-@interface InfoPanel : NSPanel {
-	// Info panels can come in a few different styles.
-	// This stores what we currently think the style is.
-	int panelStyle;
-	
+@interface InfoPanel : NSPanel <NSWindowDelegate>
+{
 	// Sometimes the panel is too close to the edge of the screen
 	// to fit, so it has to be flipped
 	BOOL panelFilpped;
 }
 
 /*!
-	@method		panelStyle
+	@property	panelStyle
 	@discussion	Allows other objects to know what kind of panel they are dealing with
-	@result		An int from the above enum.
 */
-- (int)panelStyle;
-
-/*!
-	@method		setPanelStyle:
-	@discussion Allows the style of the panel to change.
-	@param		newStyle
-				An element of the enum that the style is changing to.
-*/
-- (void) setPanelStyle:(int)newStyle;
+@property NSInteger panelStyle;
 
 /*!
 	@method		orderFrontToGoal:

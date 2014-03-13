@@ -20,6 +20,8 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		55909E9618CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55CA8EA618D12A9900FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Posterize.xib; sourceTree = "<group>"; };
+		55CA8EBF18D12C1A00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Posterize.strings; sourceTree = "<group>"; };
+		55CA8EC118D12C1D00FB7F00 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Posterize.strings"; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Posterize.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Posterize.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A831E1400789471D0009080F /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				German,
 				"en-GB",
 				Base,
+				en,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Posterize */;
 			projectDirPath = "";
@@ -190,6 +193,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8EA618D12A9900FB7F00 /* Base */,
+				55CA8EBF18D12C1A00FB7F00 /* en */,
+				55CA8EC118D12C1D00FB7F00 /* en-GB */,
 			);
 			name = Posterize.xib;
 			sourceTree = "<group>";

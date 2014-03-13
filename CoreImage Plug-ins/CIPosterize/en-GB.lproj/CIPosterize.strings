@@ -1,0 +1,15 @@
+
+/* Class = "NSPanel"; title = "Posterize"; ObjectID = "6"; */
+"6.title" = "Posterise";
+
+/* Class = "NSButtonCell"; title = "Ok"; ObjectID = "34"; */
+"34.title" = "Ok";
+
+/* Class = "NSTextFieldCell"; title = "Number of colours per channel:"; ObjectID = "35"; */
+"35.title" = "Number of colours per channel:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "37"; */
+"37.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "2"; ObjectID = "38"; */
+"38.title" = "2";
