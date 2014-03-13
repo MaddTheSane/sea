@@ -10,12 +10,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 
-@interface SepiaClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-}
+@interface SepiaClass : NSObject <SSSeaPlugin>
 
 /*!
 	@method		initWithManager:

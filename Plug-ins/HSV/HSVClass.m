@@ -1,10 +1,24 @@
 #import "HSVClass.h"
+#import "PluginData.h"
+#import "SeaWhiteboard.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 #define gUserDefaults [NSUserDefaults standardUserDefaults]
 
 @implementation HSVClass
+@synthesize panel;
+@synthesize seaPlugins;
+
+- (id)initWithManager:(SeaPlugins *)manager
+{
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+		[NSBundle loadNibNamed:@"HSV" owner:self];
+	}
+	
+	return self;
+}
 
 static inline void RGBtoHSV(int *ir, int *ig, int *ib)
 {
@@ -61,15 +75,14 @@ static inline void RGBtoHSV(int *ir, int *ig, int *ib)
 static inline void HSVtoRGB(int *ih, int *is, int *iv)
 {
 	int		i;
-	double	r, g, b;
+	double	r = 0, g = 0, b = 0;
 	double	f, w, q, t;
-	double	hue;
 	double	h, s, v;
-
+	
 	h = (double)*ih / 255.0;
 	s = (double)*is / 255.0;
 	v = (double)*iv / 255.0;
-
+	
 	if (s == 0.0) {
 		r = v;
 		g = v;
@@ -78,60 +91,57 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 	else {
 		if (h == 1.0)
 			h = 0.0;
-
+		
 		h *= 6.0;
-
+		
 		i = (int)h;
 		f = h - i;
 		w = v * (1.0 - s);
 		q = v * (1.0 - (s * f));
 		t = v * (1.0 - (s * (1.0 - f)));
-
+		
 		switch (i) {
 			case 0:
 				r = v;
 				g = t;
 				b = w;
-			break;
+				break;
+				
 			case 1:
 				r = q;
 				g = v;
 				b = w;
-			break;
+				break;
+				
 			case 2:
 				r = w;
 				g = v;
 				b = t;
-			break;
+				break;
+				
 			case 3:
 				r = w;
 				g = q;
 				b = v;
-			break;
+				break;
+				
 			case 4:
 				r = t;
 				g = w;
 				b = v;
-			break;
+				break;
+				
 			case 5:
 				r = v;
 				g = w;
 				b = q;
-			break;
+				break;
 		}
 	}
 	
 	*ih = r * 255.0;
 	*is = g * 255.0;
 	*iv = b * 255.0;
-}
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"HSV" owner:self];
-	
-	return self;
 }
 
 - (int)type
@@ -171,7 +181,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 	[valueSlider setFloatValue:value];
 	
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -184,7 +194,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self adjust];
 	[pluginData apply];
 	
@@ -200,7 +210,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[self adjust];
 	[pluginData apply];
 }
@@ -214,7 +224,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self adjust];
 	[pluginData preview];
 	refresh = NO;
@@ -224,7 +234,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -239,7 +249,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	hue = [hueSlider floatValue];
 	saturation = [saturationSlider floatValue];
 	value = [valueSlider floatValue];
@@ -252,7 +262,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -266,10 +276,9 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 	IntRect selection;
 	int spp, i, j, k, width, channel, pos;
 	unsigned char *data, *overlay, *replace;
-	double power;
 	int r, g, b;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];
@@ -306,7 +315,7 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	
 	if (pluginData != NULL) {
 

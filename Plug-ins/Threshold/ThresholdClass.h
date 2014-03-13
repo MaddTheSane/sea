@@ -9,12 +9,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
+#import "ThresholdView.h"
 
-@interface ThresholdClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface ThresholdClass : NSObject <SSSeaVisualPlugin>
+{
 	// The threshold range
 	IBOutlet id rangeLabel;
 	
@@ -24,11 +22,8 @@
 	// The bottom threshold slider
 	IBOutlet id bottomSlider;
 
-	// The panel for the plug-in
-	IBOutlet id panel;
-
 	// The view associated with this panel
-	IBOutlet id view;
+	IBOutlet ThresholdView *view;
 
 	// The various threshold values
 	int topValue, bottomValue;
@@ -38,7 +33,6 @@
 
 	// YES if the application succeeded
 	BOOL success;
-
 }
 
 /*!

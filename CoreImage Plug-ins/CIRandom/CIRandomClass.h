@@ -14,14 +14,12 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIRandomClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIRandomClass : NSObject <SSSeaPlugin>
+{
 	// YES if the application succeeded
 	BOOL success;
-
+	
+	NSBitmapImageRep *temp_rep;
 }
 
 /*!

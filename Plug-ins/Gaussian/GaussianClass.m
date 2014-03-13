@@ -5,11 +5,14 @@
 #define gUserDefaults [NSUserDefaults standardUserDefaults]
 
 @implementation GaussianClass
+@synthesize seaPlugins;
+@synthesize panel;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"Gaussian" owner:self];
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+	}
 	
 	return self;
 }
@@ -52,7 +55,7 @@
 	[radiusSlider setIntValue:radius];
 	
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
 	else
@@ -64,7 +67,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self gauss:BLUR_RLE];
 	[pluginData apply];
 	
@@ -82,7 +85,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[self gauss:BLUR_RLE];
 	[pluginData apply];
 }
@@ -96,7 +99,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self gauss:BLUR_RLE];
 	[pluginData preview];
 	if ([pluginData window]) [panel setAlphaValue:0.4];
@@ -107,7 +110,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -133,7 +136,6 @@
 	IntRect selection;
 	int i, j, k, l, spp, fspp, width, height, fwidth, channel;
 	unsigned char *data, *overlay, *replace, *workpad;
-	int numerator, denominator, t;
 	double vert, horz;
 	double n_p[5], n_m[5];
 	double d_p[5], d_m[5];
@@ -160,7 +162,7 @@
 	int val;
 	int initial_pp, initial_mm;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];

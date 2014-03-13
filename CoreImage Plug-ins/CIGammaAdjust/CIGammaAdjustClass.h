@@ -14,22 +14,13 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIGammaAdjustClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIGammaAdjustClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the gamma
 	IBOutlet id gammaLabel;
 	
 	// The slider for the gamma
 	IBOutlet id gammaSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The new gamma
-	float gamma;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;
@@ -40,7 +31,11 @@
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
+	NSBitmapImageRep *temp_rep;
 }
+
+// The new gamma
+@property CGFloat gamma;
 
 /*!
 	@method		initWithManager:

@@ -16,11 +16,8 @@
 
 #define gColorPanel [NSColorPanel sharedColorPanel]
 
-@interface CIMonochromeClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIMonochromeClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the intensity
 	IBOutlet id intensityLabel;
 	
@@ -30,15 +27,9 @@
 	// The main color to use
 	IBOutlet id mainColorWell;
 
-	// The panel for the plug-in
-	IBOutlet id panel;
-
 	// The value of the intensity
 	float intensity;
 	
-	// The color to be used
-	NSColor *mainNSColor;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -50,8 +41,9 @@
 	
 	// YES if the plug-in is running
 	BOOL running;
-
 }
+
+@property (strong) NSColor *mainColor;
 
 /*!
 	@method		initWithManager:

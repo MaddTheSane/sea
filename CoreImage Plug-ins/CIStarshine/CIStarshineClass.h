@@ -51,19 +51,18 @@
 	// YES if the plug-in is running
 	BOOL running;
 }
+// The color to be used
+@property (strong) NSColor *mainColor;
 
-	// The color to be used
-@property (strong) NSColor *mainNSColor;
-
-	// The new scale
+// The new scale
 @property NSInteger scale;
 	
-	// The new opacity
+// The new opacity
 @property CGFloat opacity;
 	
-	// The new width
-@property CGFloat star_width;
-	
+// The new width
+@property CGFloat starWidth;
+
 
 /*!
 	@method		initWithManager:

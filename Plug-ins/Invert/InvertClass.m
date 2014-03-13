@@ -1,12 +1,16 @@
 #import "InvertClass.h"
+#import "PluginData.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation InvertClass
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+	}
 	
 	return self;
 }
@@ -38,7 +42,7 @@
 	unsigned char *data, *overlay, *replace;
 	int pos, i, j, k, width, spp, channel;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];

@@ -10,12 +10,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 
-@interface RandomClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-}
+@interface RandomClass : NSObject <SSSeaPlugin>
 
 /*!
 	@method		initWithManager:

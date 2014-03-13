@@ -10,12 +10,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 
-@interface InvertClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-}
+@interface InvertClass : NSObject <SSSeaPlugin>
 
 /*!
 	@method		initWithManager:

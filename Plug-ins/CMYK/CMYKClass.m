@@ -3,10 +3,13 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation CMYKClass
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+	}
 	
 	return self;
 }
@@ -45,7 +48,7 @@
 	CMProfileRef *profile;
 	CMWorldRef cw, scw;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];
@@ -141,7 +144,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	
 	if (pluginData != NULL) {
 

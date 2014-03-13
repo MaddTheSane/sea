@@ -10,8 +10,9 @@
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	newdata = NULL;
+	if (self = [super init]) {
+		seaPlugins = manager;
+	}
 	
 	return self;
 }
@@ -50,7 +51,7 @@
 {
 	PluginData *pluginData;
 		
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[self determineContentBorders:pluginData];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
@@ -75,7 +76,7 @@
 {
 	PluginData *pluginData;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	}

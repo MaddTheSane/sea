@@ -14,34 +14,28 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIPinchClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIPinchClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the scale
 	IBOutlet id scaleLabel;
 	
 	// The slider for the scale
 	IBOutlet id scaleSlider;
 	
-	// The panel for the plug-in
-	IBOutlet id panel;
-
 	// YES if the application succeeded
 	BOOL success;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
-	// The scale of the bump
-	float scale;
-	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
 }
 
+// The scale of the bump
+@property CGFloat scale;
+	
 /*!
 	@method		initWithManager:
 	@discussion	Initializes an instance of this class with the given manager.

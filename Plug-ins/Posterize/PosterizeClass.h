@@ -10,19 +10,13 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 
-@interface PosterizeClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface PosterizeClass : NSObject <SSSeaVisualPlugin>
+{
 	// The posterize slider
 	IBOutlet id posterizeSlider;
 	
 	// The posterize label
 	IBOutlet id posterizeLabel;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The posterize value
 	int posterize;
@@ -32,7 +26,6 @@
 
 	// YES if the application succeeded
 	BOOL success;
-
 }
 
 /*!

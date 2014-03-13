@@ -5,10 +5,13 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation VertStripesClass
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+	}
 	
 	return self;
 }
@@ -66,7 +69,7 @@ static inline int specmod(int a, int b)
 	PluginData *pluginData;
 	
 	// Get plug-in data
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	width = [pluginData width];
 	height = [pluginData height];
 	spp = [pluginData spp];

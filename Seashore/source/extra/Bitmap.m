@@ -66,7 +66,7 @@ static inline void freePtrs(PtrRecord ptrs)
 	}
 }
 
-extern inline void rotate_bytes(unsigned char *data, int pos1, int pos2)
+void rotate_bytes(unsigned char *data, int pos1, int pos2)
 {
 	unsigned char tmp;
 	int i;

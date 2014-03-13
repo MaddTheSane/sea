@@ -5,10 +5,13 @@
 #define gUserDefaults [NSUserDefaults standardUserDefaults]
 
 @implementation MedianClass
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+	}
 	
 	return self;
 }
@@ -46,7 +49,7 @@ int compar(const void *a, const void *b)
 	int pos, i, j, x, y, z, k, width, spp, channel;
 	unsigned char vals[4][9];
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];

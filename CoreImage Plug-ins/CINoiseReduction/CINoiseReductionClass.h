@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CINoiseReductionClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CINoiseReductionClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the noise
 	IBOutlet id noiseLabel;
 	
@@ -30,9 +27,6 @@
 	
 	// The slider for the sharpness
 	IBOutlet id sharpSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The new noise
 	float noise;

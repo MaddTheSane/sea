@@ -1,15 +1,21 @@
 #import "BrightnessClass.h"
+#import "PluginData.h"
+#import "SeaWhiteboard.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 #define gUserDefaults [NSUserDefaults standardUserDefaults]
 
 @implementation BrightnessClass
+@synthesize panel;
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"Brightness" owner:self];
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+		[NSBundle loadNibNamed:@"Brightness" owner:self];
+	}
 	
 	return self;
 }
@@ -49,7 +55,7 @@
 	[contrastSlider setFloatValue:contrast];
 	
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];		
+	pluginData = [seaPlugins data];		
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -62,7 +68,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self adjust];
 	[pluginData apply];
 	
@@ -78,7 +84,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[self adjust];
 	[pluginData apply];
 }
@@ -92,7 +98,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self adjust];
 	[pluginData preview];
 	refresh = NO;
@@ -102,7 +108,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -127,7 +133,7 @@
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -141,7 +147,7 @@
 	float nvalue, value;
 	double power;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];

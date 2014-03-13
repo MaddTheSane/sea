@@ -15,11 +15,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIGloomClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIGloomClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the radius
 	IBOutlet id radiusLabel;
 	
@@ -31,9 +28,6 @@
 	
 	// The slider for the intensity
 	IBOutlet id intensitySlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The new radius
 	int radius;

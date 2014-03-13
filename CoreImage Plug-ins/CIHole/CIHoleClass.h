@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIHoleClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIHoleClass : NSObject <SSSeaPlugin>
+{
 	// YES if the application succeeded
 	BOOL success;
 

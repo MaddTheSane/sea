@@ -1,5 +1,7 @@
 #import "Globals.h"
 #import "SeaDocument.h"
+#import "PluginData.h"
+#import "SeaWhiteboard.h"
 
 /*!
 	@enum		k...Plugin
@@ -212,28 +214,6 @@ enum {
 - (BOOL)canReapply;
 
 /*!
- @method		execute
- @discussion	Executes the effect.
- */
-- (void)execute;
-
-/*!
- @method		executeGrey
- @discussion	Executes the effect for greyscale images.
- @param		pluginData
- The PluginData object.
- */
-- (void)executeGrey:(PluginData *)pluginData;
-
-/*!
- @method		executeColor
- @discussion	Executes the effect for colour images.
- @param		pluginData
- The PluginData object.
- */
-- (void)executeColor:(PluginData *)pluginData;
-
-/*!
  @method		validateMenuItem:
  @discussion	Determines whether a given menu item should be enabled or
  disabled.
@@ -307,40 +287,6 @@ enum {
  Ignored.
  */
 - (IBAction)update:(id)sender;
-
-/*!
- @method		execute
- @discussion	Executes the effect.
- */
-- (void)execute;
-
-/*!
- @method		executeGrey
- @discussion	Executes the effect for greyscale images.
- @param		pluginData
- The PluginData object.
- */
-- (void)executeGrey:(PluginData *)pluginData;
-
-/*!
- @method		executeGrey
- @discussion	Executes the effect for colour images.
- @param		pluginData
- The PluginData object.
- */
-- (void)executeColor:(PluginData *)pluginData;
-
-/*!
- @method		executeChannel:withBitmap:
- @discussion	Executes the effect with any necessary changes depending on channel selection
- (called by either executeGrey or executeColor).
- @param		pluginData
- The PluginData object.
- @param		data
- The bitmap data to work with (must be 8-bit ARGB).
- @result		Returns the resulting bitmap.
- */
-- (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data;
 
 /*!
  @method		validateMenuItem:

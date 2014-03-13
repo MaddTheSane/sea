@@ -10,19 +10,13 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 
-@interface PixellateClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface PixellateClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the scale
 	IBOutlet id scaleLabel;
 	
 	// The slider for the scale
 	IBOutlet id scaleSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The number of scale
 	int scale;
@@ -32,7 +26,6 @@
 	
 	// YES if the application succeeded
 	BOOL success;
-
 }
 
 /*!

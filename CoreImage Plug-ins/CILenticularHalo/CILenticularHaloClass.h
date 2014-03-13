@@ -16,10 +16,8 @@
 
 #define gColorPanel [NSColorPanel sharedColorPanel]
 
-@interface CILenticularHaloClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
+@interface CILenticularHaloClass : NSObject <SSSeaVisualPlugin>
+{
 
 	// The label displaying the overlap
 	IBOutlet id overlapLabel;
@@ -44,9 +42,6 @@
 
 	// The color to be used
 	NSColor *mainNSColor;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The new overlap
 	float overlap;

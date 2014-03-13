@@ -14,17 +14,13 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIKaleidoscopeClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIKaleidoscopeClass : NSObject <SSSeaPlugin>
+{
 	// YES if the application succeeded
 	BOOL success;
 
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-	
 }
 
 /*!

@@ -8,14 +8,16 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIMonochromeClass
+@synthesize seaPlugins;
+@synthesize panel;
+@synthesize mainColor = mainNSColor;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CIMonochrome" owner:self];
-	newdata = NULL;
-	mainNSColor = NULL;
-	running = NO;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CIMonochrome" owner:self];
+	}
 	
 	return self;
 }
@@ -61,7 +63,7 @@
 	
 	success = NO;
 	running = YES;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self preview:self];
 	if ([pluginData window])
@@ -75,7 +77,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -96,7 +98,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
@@ -112,7 +114,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -122,7 +124,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	if (newdata) { free(newdata); newdata = NULL; }
 	
@@ -144,7 +146,7 @@
 	if (running) {
 		refresh = YES;
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -161,7 +163,7 @@
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -170,7 +172,7 @@
 {
 	PluginData *pluginData;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	}

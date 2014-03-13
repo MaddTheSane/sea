@@ -6,11 +6,15 @@
 #define gUserDefaults [NSUserDefaults standardUserDefaults]
 
 @implementation ThresholdClass
+@synthesize panel;
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"Threshold" owner:self];
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+		[NSBundle loadNibNamed:@"Threshold" owner:self];
+	}
 	
 	return self;
 }
@@ -41,7 +45,7 @@
 
 	refresh = YES;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	
 	topValue = 0;
 	bottomValue = 255;
@@ -65,7 +69,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self adjust];
 	[pluginData apply];
 	
@@ -81,7 +85,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[self adjust];
 	[pluginData apply];
 }
@@ -95,7 +99,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self adjust];
 	[pluginData preview];
 	refresh = NO;
@@ -105,7 +109,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -120,7 +124,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	topValue = [topSlider intValue];
 	bottomValue = [bottomSlider intValue];
 	
@@ -135,7 +139,7 @@
 	[view setNeedsDisplay:YES];
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -147,7 +151,7 @@
 	int i, j, k, t1, t2, spp, width, channel, mid;
 	unsigned char *data, *overlay, *replace;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	

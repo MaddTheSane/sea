@@ -50,7 +50,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[self execute];
 	[pluginData apply];
 	success = YES;
@@ -70,7 +70,7 @@
 {
 	PluginData *pluginData;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	}

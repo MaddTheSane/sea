@@ -15,17 +15,13 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIInvertClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIInvertClass : NSObject <SSSeaPlugin>
+{
 	// YES if the application succeeded
 	BOOL success;
 
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-	
 }
 
 /*!

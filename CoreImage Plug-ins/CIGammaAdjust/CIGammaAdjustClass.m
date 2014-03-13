@@ -5,16 +5,19 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIGammaAdjustClass
+@synthesize panel;
+@synthesize seaPlugins;
+@synthesize gamma;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CIGammaAdjust" owner:self];
-	newdata = NULL;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CIGammaAdjust" owner:self];
+	}
 	
 	return self;
 }
-
 - (int)type
 {
 	return 0;
@@ -39,14 +42,14 @@
 {
 	PluginData *pluginData;
 	
-	gamma = 1.0;
+	self.gamma = 1.0;
 	
 	[gammaLabel setStringValue:[NSString stringWithFormat:@"%.2f", gamma]];
 	
 	[gammaSlider setIntValue:gamma * 100];
 	
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self preview:self];
 	if ([pluginData window])
@@ -60,24 +63,28 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (void)reapply
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
@@ -93,7 +100,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -103,7 +110,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	if (newdata) { free(newdata); newdata = NULL; }
 	
@@ -129,7 +136,7 @@
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -138,7 +145,7 @@
 {
 	PluginData *pluginData;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	}
@@ -250,25 +257,25 @@
 #endif
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
-@try {
-	resdata = [self executeChannel:pluginData withBitmap:data];
-}
-@catch (NSException *exception) {
+	@try {
+		resdata = [self executeChannel:pluginData withBitmap:data];
+	}
+	@catch (NSException *exception) {
 #ifdef __ppc__
-	for (i = 0; i < vec_len; i++) {
-		vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBR);
-	}
+		for (i = 0; i < vec_len; i++) {
+			vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBR);
+		}
 #else
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
-		vdata[i] = _mm_srli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
+		for (i = 0; i < vec_len; i++) {
+			vstore = _mm_slli_epi32(vdata[i], 24);
+			vdata[i] = _mm_srli_epi32(vdata[i], 8);
+			vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		}
 #endif
-	NSLog(@"%@", [exception reason]);
-	return;
-}
-
+		NSLog(@"%@", [exception reason]);
+		return;
+	}
+	
 	// Convert from ARGB to RGBA
 #ifdef __ppc__
 	for (i = 0; i < vec_len; i++) {
@@ -301,14 +308,14 @@
 	IntRect selection;
 	
 	unsigned char ormask[16], *resdata, *datatouse;
-	#ifdef __ppc__
+#ifdef __ppc__
 	vector unsigned char TOALPHA = (vector unsigned char)(0x10, 0x00, 0x00, 0x00, 0x10, 0x04, 0x04, 0x04, 0x10, 0x08, 0x08, 0x08, 0x10, 0x0C, 0x0C, 0x0C);
 	vector unsigned char REVERTALPHA = (vector unsigned char)(0x00, 0x01, 0x02, 0x10, 0x04, 0x05, 0x06, 0x14, 0x08, 0x09, 0x0A, 0x18, 0x0C, 0x0D, 0x0E, 0x1C);
 	vector unsigned char HIGHVEC = (vector unsigned char)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
 	vector unsigned char *vdata, *nvdata, *rvdata, orvmask;
-	#else
+#else
 	__m128i *vdata, *nvdata, orvmask;
-	#endif
+#endif
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -320,40 +327,40 @@
 	vec_len = width * height * 4;
 	if (vec_len % 16 == 0) { vec_len /= 16; }
 	else { vec_len /= 16; vec_len++; }
-	#ifdef __ppc__
+#ifdef __ppc__
 	vdata = (vector unsigned char *)data; // NB: data may equal newdata
 	nvdata = (vector unsigned char *)newdata;
-	#else
+#else
 	vdata = (__m128i *)data;
 	nvdata = (__m128i *)newdata;
-	#endif
+#endif
 	datatouse = newdata;
 	if (channel == kAlphaChannel) {
-		#ifdef __ppc__
+#ifdef __ppc__
 		for (i = 0; i < vec_len; i++) {
 			nvdata[i] = vec_perm(vdata[i], HIGHVEC, TOALPHA);
 		}
-		#else
+#else
 		for (i = 0; i < width * height; i++) {
 			newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 			newdata[i * 4] = 255;
 		}
-		#endif
+#endif
 	}
 	else {
 		for (i = 0; i < 16; i++) {
 			ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 		}
 		memcpy(&orvmask, ormask, 16);
-		#ifdef __ppc__
+#ifdef __ppc__
 		for (i = 0; i < vec_len; i++) {
 			nvdata[i] = vec_or(vdata[i], orvmask);
 		}
-		#else
+#else
 		for (i = 0; i < vec_len; i++) {
 			nvdata[i] = _mm_or_si128(vdata[i], orvmask);
 		}
-		#endif
+#endif
 	}
 	
 	// Run CoreImage effect
@@ -361,12 +368,12 @@
 	
 	// Restore alpha
 	if (channel == kAllChannels) {
-		#ifdef __ppc__
+#ifdef __ppc__
 		rvdata = (vector unsigned char *)resdata;
 		for (i = 0; i < vec_len; i++) {
 			rvdata[i] = vec_perm(rvdata[i], vdata[i], REVERTALPHA);
 		}
-		#else
+#else
 		for (i = 0; i < selection.size.height; i++) {
 			for(j = 0; j < selection.size.width; j++){
 				resdata[(i * selection.size.width + j) * 4 + 3] =
@@ -374,7 +381,7 @@
 					  j + selection.origin.x) * 4];
 			}
 		}
-		#endif
+#endif
 	}
 	
 	return resdata;
@@ -386,7 +393,6 @@
 	CIImage *input, *crop_output, *output, *background;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;

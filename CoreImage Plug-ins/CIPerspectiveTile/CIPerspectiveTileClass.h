@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIPerspectiveTileClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIPerspectiveTileClass : NSObject <SSSeaPlugin>
+{
 	// YES if the application succeeded
 	BOOL success;
 
@@ -30,7 +27,6 @@
 	
 	// Signals whether the bounds rectangle is valid
 	BOOL boundsValid;
-
 }
 
 /*!

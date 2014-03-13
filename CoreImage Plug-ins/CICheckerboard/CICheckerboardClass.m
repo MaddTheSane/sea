@@ -50,7 +50,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[self execute];
 	[pluginData apply];
 	success = YES;
@@ -70,7 +70,7 @@
 {
 	PluginData *pluginData;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	}
@@ -119,8 +119,7 @@
 {
 	IntRect selection;
 	int i, width, height;
-	unsigned char *data, *resdata, *overlay;
-	int vec_len;
+	unsigned char *resdata, *overlay;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -140,8 +139,7 @@
 		for (i = 0; i < selection.size.height; i++) {
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
 		}
-	}
-	else {
+	} else {
 		memcpy(overlay, resdata, width * height * 4);
 	}
 }
@@ -160,7 +158,6 @@
 	IntRect selection;
 	IntPoint point, apoint;
 	CIColor *backColorAlpha, *foreColorAlpha;
-	float angle;
 	int amount;
 	
 	// Get colors

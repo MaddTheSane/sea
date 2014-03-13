@@ -3,10 +3,13 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation RandomClass
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+	}
 	
 	return self;
 }
@@ -34,22 +37,6 @@
 #define int_mult(a,b,t)  ((t) = (a) * (b) + 0x80, ((((t) >> 8) + (t)) >> 8))
 #define alphaPos (spp - 1)
 	
-static inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
-{
-	unsigned char multi, alpha;
-	int t1, t2 = 0;
-	int k;
-	
-	if (srcPtr[srcLoc + alphaPos] == 0)
-		return;
-	
-	alpha = srcPtr[srcLoc + alphaPos];
-	for (k = 0; k < spp - 1; k++) {
-		destPtr[destLoc + k] = int_mult(srcPtr[srcLoc + k], alpha, t1) + int_mult(destPtr[destLoc + k], 255 - alpha, t2);
-	}
-}
-
-
 - (void)run
 {
 	PluginData *pluginData;
@@ -59,7 +46,7 @@ static inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, un
 	unsigned char background[4], random[4];
 	BOOL opaque;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];
@@ -82,7 +69,7 @@ static inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, un
 		}
 	}
 	
-	srand(time(nil));
+	srand(time(NULL));
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
 			
@@ -91,7 +78,7 @@ static inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, un
 				memcpy(&overlay[pos * spp], background, spp);
 				for (k = 0; k < spp; k++)
 					random[k] = (rand() << 8) >> 20;
-				specialMerge(spp, overlay, pos * spp, random, 0); 
+				specialMerge(spp, overlay, pos * spp, random, 0, 255);
 			}
 			else {
 				for (k = 0; k < spp; k++)

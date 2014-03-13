@@ -11,11 +11,8 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 
-@interface HSVClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface HSVClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the hue
 	IBOutlet id hueLabel;
 	
@@ -34,9 +31,6 @@
 	// The slider for the value
 	IBOutlet id valueSlider;
 
-	// The panel for the plug-in
-	IBOutlet id panel;
-
 	// The hue
 	float hue;
 
@@ -51,7 +45,6 @@
 
 	// YES if the application succeeded
 	BOOL success;
-
 }
 
 /*!

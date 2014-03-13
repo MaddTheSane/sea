@@ -8,15 +8,20 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIGaussianBlurClass
+@synthesize seaPlugins;
+@synthesize panel;
+@synthesize radius;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
 	[NSBundle loadNibNamed:@"CIGaussianBlur" owner:self];
-	newdata = NULL;
+	}
 	
 	return self;
 }
+
 
 - (int)type
 {
@@ -51,12 +56,12 @@
 	if (radius < 1 || radius > 100)
 		radius = 10;
 	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%d", radius]];
+	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
 	
-	[radiusSlider setIntValue:radius];
+	[radiusSlider setIntegerValue:radius];
 	
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -72,7 +77,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -91,7 +96,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -109,7 +114,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -119,7 +124,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	if (newdata) { free(newdata); newdata = NULL; }
 	
@@ -139,11 +144,11 @@
 	
 	[panel setAlphaValue:1.0];
 	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%d", radius]];
+	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -152,7 +157,7 @@
 {
 	PluginData *pluginData;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	}
@@ -226,7 +231,6 @@
 	vector unsigned char OPAQUEA = (vector unsigned char)(0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF);
 	vector unsigned char *vdata, *voverlay, *vresdata;
 #else
-	__m128i opaquea = _mm_set1_epi32(0x000000FF);
 	__m128i *vdata, *voverlay, *vresdata;
 	__m128i vstore;
 #endif
@@ -386,7 +390,6 @@
 	CIImage *unclampedInput, *clampedInput, *crop_output, *output, *background;
 	CIFilter *clamp, *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int i, vec_len, width, height;
@@ -394,12 +397,12 @@
 	BOOL opaque, done;
 	IntRect selection;
 	unsigned char ormask[16];
-	#ifdef __ppc__
+#ifdef __ppc__
 	vector unsigned char *vresdata, orvmask;
-	#else
+#else
 	__m128i *vresdata, orvmask;
-	#endif
-
+#endif
+	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
@@ -456,11 +459,11 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
+		temp_image = [context createCGImage:output fromRect:rect];
 		
 	}
 	else {
-	
+		
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
@@ -484,17 +487,17 @@
 			ormask[i] = (i % 4 == 3) ? 0xFF : 0x00;
 		}
 		memcpy(&orvmask, ormask, 16);
-		#ifdef __ppc__
+#ifdef __ppc__
 		vresdata = (vector unsigned char *)resdata;
 		for (i = 0; i < vec_len; i++) {
 			vresdata[i] = vec_or(vresdata[i], orvmask);
 		}
-		#else
+#else
 		vresdata = (__m128i *)resdata;
 		for (i = 0; i < vec_len; i++) {
 			vresdata[i] = _mm_or_si128(vresdata[i], orvmask);
 		}
-		#endif
+#endif
 	}
 	
 	return resdata;

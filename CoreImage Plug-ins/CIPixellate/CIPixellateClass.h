@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIPixellateClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIPixellateClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the scale
 	IBOutlet id scaleLabel;
 	
@@ -28,15 +25,6 @@
 	// The radio boxes for the type
 	IBOutlet id typeRadios;
 
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The new scale
-	int scale;
-
-	// YES if pixellate is centre-based
-	BOOL centerBased;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -45,8 +33,14 @@
 	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-
+	
+	NSBitmapImageRep *temp_rep;
 }
+// The new scale
+@property NSInteger scale;
+
+// YES if pixellate is centre-based
+@property BOOL centerBased;
 
 /*!
 	@method		initWithManager:

@@ -11,11 +11,8 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 
-@interface BrightnessClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface BrightnessClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the brightness
 	IBOutlet id brightnessLabel;
 	
@@ -27,9 +24,6 @@
 	
 	// The slider for the contrast
 	IBOutlet id contrastSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The brightness
 	float brightness;

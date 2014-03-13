@@ -11,19 +11,13 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 
-@interface SharpenClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface SharpenClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the extent
 	IBOutlet id extentLabel;
 	
 	// The slider for the extent
 	IBOutlet id extentSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The number of extent
 	int extent;
@@ -33,7 +27,6 @@
 	
 	// YES if the application succeeded
 	BOOL success;
-
 }
 
 /*!

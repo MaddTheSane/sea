@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIOpTileClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIOpTileClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the dot width
 	IBOutlet id squareWidthLabel;
 	
@@ -36,9 +33,6 @@
 	
 	// The slider for the scale
 	IBOutlet id scaleSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The new width
 	int squareWidth;

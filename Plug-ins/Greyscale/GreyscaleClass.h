@@ -10,12 +10,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 
-@interface GreyscaleClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-}
+@interface GreyscaleClass : NSObject <SSSeaPlugin>
 
 /*!
 	@method		initWithManager:

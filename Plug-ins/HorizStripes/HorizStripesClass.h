@@ -12,14 +12,10 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "SeaPlugins.h"
 
-@interface HorizStripesClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface HorizStripesClass : NSObject <SSSeaPlugin>
+{
 	// YES if the application succeeded
 	BOOL success;
-
 }
 
 /*!

@@ -12,11 +12,8 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "SeaPlugins.h"
 
-@interface CheckerboardClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CheckerboardClass : NSObject <SSSeaPlugin>
+{
 	// YES if the application succeeded
 	BOOL success;
 

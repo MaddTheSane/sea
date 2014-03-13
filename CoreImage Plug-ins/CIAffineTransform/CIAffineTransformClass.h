@@ -27,7 +27,6 @@
 	
 	// Signals whether the bounds rectangle is valid
 	BOOL boundsValid;
-
 }
 
 /*!

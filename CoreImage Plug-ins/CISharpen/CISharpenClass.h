@@ -14,22 +14,13 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CISharpenClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CISharpenClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the value
 	IBOutlet id valueLabel;
 	
 	// The slider for the value
 	IBOutlet id valueSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The value of the crystallize
-	float value;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;
@@ -40,7 +31,9 @@
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
+	NSBitmapImageRep *temp_rep;
 }
+@property CGFloat value;
 
 /*!
 	@method		initWithManager:

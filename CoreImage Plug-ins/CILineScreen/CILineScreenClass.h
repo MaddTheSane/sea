@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CILineScreenClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CILineScreenClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the dot width
 	IBOutlet id dotWidthLabel;
 	
@@ -36,9 +33,6 @@
 	
 	// The slider for the sharpness
 	IBOutlet id sharpnessSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The new width
 	int dotWidth;

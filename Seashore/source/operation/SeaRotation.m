@@ -70,7 +70,7 @@
 	[sheet orderOut:self];
 }
 
-extern inline float mod_float(float value, float divisor)
+static inline float mod_float(float value, float divisor)
 {
 	float result;
 	

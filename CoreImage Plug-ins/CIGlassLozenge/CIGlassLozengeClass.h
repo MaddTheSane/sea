@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIGlassLozengeClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIGlassLozengeClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the refraction
 	IBOutlet id refractionLabel;
 	
@@ -34,9 +31,6 @@
 	// The stepper for the radius
 	IBOutlet id radiusStepper;
 	
-	// The panel for the plug-in
-	IBOutlet id panel;
-
 	// YES if the application succeeded
 	BOOL success;
 

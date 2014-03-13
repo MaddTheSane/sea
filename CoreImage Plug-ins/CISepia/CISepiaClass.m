@@ -7,12 +7,16 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CISepiaClass
+@synthesize seaPlugins;
+@synthesize panel;
+@synthesize intensity;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CISepia" owner:self];
-	newdata = NULL;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CISepia" owner:self];
+	}
 	
 	return self;
 }
@@ -42,12 +46,12 @@
 	PluginData *pluginData;
 	
 	if ([gUserDefaults objectForKey:@"CISepia.intensity"])
-		intensity = [gUserDefaults integerForKey:@"CISepia.intensity"];
+		self.intensity = [gUserDefaults integerForKey:@"CISepia.intensity"];
 	else
-		intensity = 1.0;
+		self.intensity = 1.0;
 	
 	if (intensity < 0.0 || intensity > 1.0)
-		intensity = 1.0;
+		self.intensity = 1.0;
 	
 	[intensityLabel setStringValue:[NSString stringWithFormat:@"%.2f",	intensity]];
 	
@@ -55,7 +59,7 @@
 	
 	refresh = YES;
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self preview:self];
 	if ([pluginData window])
@@ -69,7 +73,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -86,7 +90,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
@@ -102,7 +106,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -112,7 +116,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	if (newdata) { free(newdata); newdata = NULL; }
 	
@@ -137,7 +141,7 @@
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -146,7 +150,7 @@
 {
 	PluginData *pluginData;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	}
@@ -213,15 +217,8 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-#ifdef __ppc__
-	vector unsigned char TOGGLERGBF = (vector unsigned char)(0x03, 0x00, 0x01, 0x02, 0x07, 0x04, 0x05, 0x06, 0x0B, 0x08, 0x09, 0x0A, 0x0F, 0x0C, 0x0D, 0x0E);
-	vector unsigned char TOGGLERGBR = (vector unsigned char)(0x01, 0x02, 0x03, 0x00, 0x05, 0x06, 0x07, 0x04, 0x09, 0x0A, 0x0B, 0x08, 0x0D, 0x0E, 0x0F, 0x0C);
-	vector unsigned char *vdata, *voverlay, *vresdata;
-#else
-	__m128i opaquea = _mm_set1_epi32(0x000000FF);
-	__m128i *vdata, *voverlay, *vresdata;
+	__m128i *vdata;
 	__m128i vstore;
-#endif
 	IntRect selection;
 	int i, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -243,40 +240,33 @@
 	replace = [pluginData replace];
 	
 	// Convert from RGBA to ARGB
-#ifdef __ppc__
-	vdata = (vector unsigned char *)data;
-	for (i = 0; i < vec_len; i++) {
-		vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBF);
-	}
-#else
 	vdata = (__m128i *)data;
 	for (i = 0; i < vec_len; i++) {
 		vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
-#endif
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
-@try {
-	resdata = [self executeChannel:pluginData withBitmap:data];
-}
-@catch (NSException *exception) {
+	@try {
+		resdata = [self executeChannel:pluginData withBitmap:data];
+	}
+	@catch (NSException *exception) {
 #ifdef __ppc__
-	for (i = 0; i < vec_len; i++) {
-		vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBR);
-	}
+		for (i = 0; i < vec_len; i++) {
+			vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBR);
+		}
 #else
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
-		vdata[i] = _mm_srli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
+		for (i = 0; i < vec_len; i++) {
+			vstore = _mm_slli_epi32(vdata[i], 24);
+			vdata[i] = _mm_srli_epi32(vdata[i], 8);
+			vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		}
 #endif
-	NSLog(@"%@", [exception reason]);
-	return;
-}
-
+		NSLog(@"%@", [exception reason]);
+		return;
+	}
+	
 	// Convert from ARGB to RGBA
 #ifdef __ppc__
 	for (i = 0; i < vec_len; i++) {
@@ -391,10 +381,9 @@
 - (unsigned char *)sepia:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
-	CIImage *input, *crop_output, *output, *background;
+	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;

@@ -14,17 +14,13 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIMotionBlurClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIMotionBlurClass : NSObject <SSSeaPlugin>
+{
 	// YES if the application succeeded
 	BOOL success;
 
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-	
 }
 
 /*!

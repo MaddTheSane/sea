@@ -8,12 +8,16 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIPinchClass
+@synthesize seaPlugins;
+@synthesize panel;
+@synthesize scale;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
 	[NSBundle loadNibNamed:@"CIPinch" owner:self];
-	newdata = NULL;
+	}
 	
 	return self;
 }
@@ -53,19 +57,19 @@
 	PluginData *pluginData;
 	
 	if ([gUserDefaults objectForKey:@"CIPinch.scale"])
-		scale = [gUserDefaults floatForKey:@"CIPinch.scale"];
+		self.scale = [gUserDefaults floatForKey:@"CIPinch.scale"];
 	else
-		scale = 0.5;
+		self.scale = 0.5;
 	refresh = YES;
 	
 	if (scale < -1.0 || scale > 1.0)
-		scale = 0.5;
+		self.scale = 0.5;
 	
 	[scaleLabel setStringValue:[NSString stringWithFormat:@"%.2f", scale]];
 	[scaleSlider setFloatValue:scale];
 	
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -81,7 +85,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -100,7 +104,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -118,7 +122,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -128,7 +132,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	if (newdata) { free(newdata); newdata = NULL; }
 	
@@ -153,7 +157,7 @@
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -162,7 +166,7 @@
 {
 	PluginData *pluginData;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	}
@@ -470,8 +474,7 @@
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];		
 		
-	}
-	else {
+	} else {
 	
 		// Create output core image
 		rect.origin.x = 0;

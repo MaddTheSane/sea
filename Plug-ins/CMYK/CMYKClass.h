@@ -10,12 +10,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 
-@interface CMYKClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-}
+@interface CMYKClass : NSObject <SSSeaPlugin>
 
 /*!
 	@method		initWithManager:

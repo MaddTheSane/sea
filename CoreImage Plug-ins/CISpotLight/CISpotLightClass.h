@@ -16,11 +16,8 @@
 
 #define gColorPanel [NSColorPanel sharedColorPanel]
 
-@interface CISpotLightClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CISpotLightClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the brightness
 	IBOutlet id brightnessLabel;
 	
@@ -48,26 +45,11 @@
 	// The main color to use
 	IBOutlet id mainColorWell;
 
-	// The color to be used
-	NSColor *mainNSColor;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
 	// YES if the application succeeded
 	BOOL success;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;
-	
-	// The brightness
-	float brightness;
-	
-	// The concentration
-	float concentration;
-	
-	// The srcHeight and destHeight
-	int srcHeight, destHeight;
 	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
@@ -75,7 +57,20 @@
 	// YES if the plug-in is running
 	BOOL running;
 
+	NSBitmapImageRep *temp_rep;
 }
+
+// The color to be used
+@property (strong) NSColor *mainColor;
+
+	// The brightness
+@property CGFloat brightness;
+	
+	// The concentration
+@property CGFloat concentration;
+	
+	// The srcHeight and destHeight
+@property NSInteger srcHeight, destHeight;
 
 /*!
 	@method		initWithManager:

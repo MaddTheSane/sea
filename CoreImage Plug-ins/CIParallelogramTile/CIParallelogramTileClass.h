@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIParallelogramTileClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIParallelogramTileClass : NSObject <SSSeaVisualPlugin>
+{
 	// YES if the application succeeded
 	BOOL success;
 
@@ -28,19 +25,14 @@
 	// The slider for the angle
 	IBOutlet id acuteSlider;
 	
-	// The panel for the plug-in
-	IBOutlet id panel;
-	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 	
 	// YES if the effect must be refreshed
 	BOOL refresh;
-	
-	// The new angle
-	float acute;
-	
 }
+// The new angle
+@property CGFloat acute;
 
 /*!
 	@method		initWithManager:

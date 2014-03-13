@@ -12,19 +12,13 @@
 #import "SeaPlugins.h"
 #import "GaussianFuncs.h"
 
-@interface GaussianClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface GaussianClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the radius of the blur
 	IBOutlet id radiusLabel;
 	
 	// The slider for the radius of the blur
 	IBOutlet id radiusSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The number of applications
 	int radius;
@@ -34,7 +28,6 @@
 	
 	// YES if the application succeeded
 	BOOL success;
-
 }
 
 /*!

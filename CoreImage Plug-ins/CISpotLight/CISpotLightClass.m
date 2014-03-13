@@ -8,14 +8,20 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CISpotLightClass
+@synthesize seaPlugins;
+@synthesize panel;
+@synthesize mainColor = mainNSColor;
+@synthesize brightness;
+@synthesize concentration;
+@synthesize destHeight;
+@synthesize srcHeight;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CISpotLight" owner:self];
-	newdata = NULL;
-	mainNSColor = NULL;
-	running = NO;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CISpotLight" owner:self];
+	}
 	
 	return self;
 }
@@ -55,52 +61,52 @@
 	PluginData *pluginData;
 	
 	if ([gUserDefaults objectForKey:@"CISpotLight.brightness"])
-		brightness = [gUserDefaults floatForKey:@"CISpotLight.brightness"];
+		self.brightness = [gUserDefaults floatForKey:@"CISpotLight.brightness"];
 	else
-		brightness = 3.0;
+		self.brightness = 3.0;
 	
 	if (brightness < 0.0 || brightness > 10.0)
-		brightness = 3.0;
+		self.brightness = 3.0;
 	
 	if ([gUserDefaults objectForKey:@"CISpotLight.concentration"])
-		concentration = [gUserDefaults floatForKey:@"CISpotLight.concentration"];
+		self.concentration = [gUserDefaults floatForKey:@"CISpotLight.concentration"];
 	else
-		concentration = 0.4;
+		self.concentration = 0.4;
 	
 	if (concentration < 0.0 || concentration > 2.0)
-		concentration = 0.4;
+		self.concentration = 0.4;
 	
 	if ([gUserDefaults objectForKey:@"CISpotLight.srcHeight"])
-		srcHeight = [gUserDefaults floatForKey:@"CISpotLight.srcHeight"];
+		self.srcHeight = [gUserDefaults floatForKey:@"CISpotLight.srcHeight"];
 	else
-		srcHeight = 150;
+		self.srcHeight = 150;
 	
 	if (srcHeight < 50 || srcHeight > 500)
 		srcHeight = 150;
 	
 	if ([gUserDefaults objectForKey:@"CISpotLight.destHeight"])
-		destHeight = [gUserDefaults floatForKey:@"CISpotLight.destHeight"];
+		self.destHeight = [gUserDefaults floatForKey:@"CISpotLight.destHeight"];
 	else
-		destHeight = 0;
+		self.destHeight = 0;
 	
 	if (destHeight < -100 || destHeight > 400)
-		destHeight = 0;
+		self.destHeight = 0;
 	
 	[brightnessLabel setStringValue:[NSString stringWithFormat:@"%.1f", brightness]];
 	[brightnessSlider setFloatValue:brightness];
 	[concentrationLabel setStringValue:[NSString stringWithFormat:@"%.2f", concentration]];
 	[concentrationSlider setFloatValue:concentration];
-	[srcHeightLabel setStringValue:[NSString stringWithFormat:@"%d", srcHeight]];
-	[srcHeightSlider setIntValue:srcHeight];
-	[destHeightLabel setStringValue:[NSString stringWithFormat:@"%d", destHeight]];
-	[destHeightSlider setIntValue:destHeight];
+	[srcHeightLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)srcHeight]];
+	[srcHeightSlider setIntegerValue:srcHeight];
+	[destHeightLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)destHeight]];
+	[destHeightSlider setIntegerValue:destHeight];
 	
-	mainNSColor = [[mainColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	self.mainColor = [[mainColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 	
 	refresh = YES;
 	success = NO;
 	running = YES;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -116,7 +122,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -141,7 +147,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -159,7 +165,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -169,7 +175,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	if (newdata) { free(newdata); newdata = NULL; }
 	
@@ -191,7 +197,7 @@
 	if (running) {
 		refresh = YES;
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -209,13 +215,13 @@
 	
 	[brightnessLabel setStringValue:[NSString stringWithFormat:@"%.1f", brightness]];
 	[concentrationLabel setStringValue:[NSString stringWithFormat:@"%.2f", concentration]];
-	[srcHeightLabel setStringValue:[NSString stringWithFormat:@"%d", srcHeight]];
-	[destHeightLabel setStringValue:[NSString stringWithFormat:@"%d", destHeight]];
+	[srcHeightLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)srcHeight]];
+	[destHeightLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)destHeight]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -224,7 +230,7 @@
 {
 	PluginData *pluginData;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	}
@@ -456,7 +462,6 @@
 	CIImage *input, *imm_output, *crop_output, *output, *background;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;
@@ -543,6 +548,7 @@
 	// Get data from output core image
 	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
 	CGImageRelease(temp_image);
+	temp_rep = [NSBitmapImageRep imageRepWithData:[temp_rep TIFFRepresentation]];
 	resdata = [temp_rep bitmapData];
 	
 	return resdata;

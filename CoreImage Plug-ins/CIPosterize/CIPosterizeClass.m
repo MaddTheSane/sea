@@ -7,12 +7,16 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIPosterizeClass
+@synthesize panel;
+@synthesize seaPlugins;
+@synthesize levels;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
 	[NSBundle loadNibNamed:@"CIPosterize" owner:self];
-	newdata = NULL;
+	}
 	
 	return self;
 }
@@ -43,20 +47,20 @@
 	
 
 	if ([gUserDefaults objectForKey:@"CIPosterize.levels"])
-		levels = [gUserDefaults integerForKey:@"CIPosterize.levels"];
+		self.levels = [gUserDefaults integerForKey:@"CIPosterize.levels"];
 	else
-		levels = 2;
+		self.levels = 2;
 	
 	if (levels < 2 || levels > 255)
-		levels = 2;
+		self.levels = 2;
 	
-	[levelsLabel setStringValue:[NSString stringWithFormat:@"%d", levels]];
+	[levelsLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)levels]];
 	
-	[levelsSlider setIntValue:levels];
+	[levelsSlider setIntegerValue:levels];
 	
 	success = NO;
 	refresh = YES;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self preview:self];
 	if ([pluginData window])
@@ -70,7 +74,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -87,7 +91,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
@@ -103,7 +107,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -113,7 +117,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	if (newdata) { free(newdata); newdata = NULL; }
 	
@@ -133,12 +137,12 @@
 	
 	[panel setAlphaValue:1.0];
 	
-	[levelsLabel setStringValue:[NSString stringWithFormat:@"%d", levels]];
+	[levelsLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)levels]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -147,7 +151,7 @@
 {
 	PluginData *pluginData;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	}
@@ -392,10 +396,9 @@
 - (unsigned char *)posterize:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
-	CIImage *input, *crop_output, *output, *background;
+	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;

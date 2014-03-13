@@ -6,11 +6,15 @@
 #define gUserDefaults [NSUserDefaults standardUserDefaults]
 
 @implementation SharpenClass
+@synthesize panel;
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"Sharpen" owner:self];
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+		[NSBundle loadNibNamed:@"Sharpen" owner:self];
+	}
 	
 	return self;
 }
@@ -53,7 +57,7 @@
 	[extentSlider setIntValue:extent];
 	
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -66,7 +70,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self sharpen];
 	[pluginData apply];
 	
@@ -84,7 +88,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData apply];
 }
 
@@ -97,7 +101,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self sharpen];
 	[pluginData preview];
 	refresh = NO;
@@ -107,7 +111,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -122,7 +126,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	extent = roundf([extentSlider floatValue]);
 	
 	[extentLabel setStringValue:[NSString stringWithFormat:@"%d", extent]];
@@ -130,7 +134,7 @@
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
+		pluginData = [seaPlugins data];
 		if ([pluginData window]) [panel setAlphaValue:0.4];
 	}
 }
@@ -174,7 +178,7 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 	PluginData *pluginData;
 	IntRect selection;
 	unsigned char *src_rows[4], *dst_row;
-	unsigned char *data, *overlay, *replace, *workpad;
+	unsigned char *data, *overlay, *replace;
 	unsigned char *src_ptr;
 	intneg *neg_rows[4];
 	intneg *neg_ptr;
@@ -182,7 +186,7 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 	void (*filter)(int, guchar *, guchar *, intneg *, intneg *, intneg *);
 	int y1, y2, x1, width;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];

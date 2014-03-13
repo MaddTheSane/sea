@@ -5,10 +5,13 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIHorizStripesClass
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
+	if (self = [super init]) {
+		seaPlugins = manager;
+	}
 	
 	return self;
 }
@@ -47,7 +50,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[self execute];
 	[pluginData apply];
 	success = YES;
@@ -67,7 +70,7 @@
 {
 	PluginData *pluginData;
 
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	}
@@ -117,8 +120,7 @@
 {
 	IntRect selection;
 	int i, width, height;
-	unsigned char *data, *resdata, *overlay;
-	int vec_len;
+	unsigned char *resdata, *overlay;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -138,8 +140,7 @@
 		for (i = 0; i < selection.size.height; i++) {
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
 		}
-	}
-	else {
+	} else {
 		memcpy(overlay, resdata, width * height * 4);
 	}
 }
@@ -147,7 +148,7 @@
 - (unsigned char *)stripes:(PluginData *)pluginData
 {
 	CIContext *context;
-	CIImage *crop_output, *pre_output, *output, *background;
+	CIImage *crop_output, *pre_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
 	NSBitmapImageRep *temp_rep;
