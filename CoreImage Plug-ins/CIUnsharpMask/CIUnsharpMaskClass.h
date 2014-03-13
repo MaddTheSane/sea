@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIUnsharpMaskClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIUnsharpMaskClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the radius
 	IBOutlet id radiusLabel;
 	
@@ -30,9 +27,6 @@
 	
 	// The slider for the intensity
 	IBOutlet id intensitySlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// The new radius
 	float radius;

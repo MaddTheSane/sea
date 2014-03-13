@@ -21,20 +21,19 @@
 	
 	// The slider for the radius
 	IBOutlet id radiusSlider;
-
-	// The new radius
-	float radius;
-
-	// YES if the effect must be refreshed
-	BOOL refresh;
 	
 	// YES if the application succeeded
 	BOOL success;
 	
+	// YES if the effect must be refreshed
+	BOOL refresh;
+	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-
 }
+
+// The new radius
+@property CGFloat radius;
 
 /*!
 	@method		initWithManager:

@@ -10,12 +10,15 @@
 @implementation CICircularScreenClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize dotWidth;
+@synthesize sharpness;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CICircularScreen" owner:self];
-	newdata = NULL;
+	if (self = [super init]) {
+		seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CICircularScreen" owner:self];
+	}
 	
 	return self;
 }
@@ -55,18 +58,19 @@
 	PluginData *pluginData;
 	
 	if ([gUserDefaults objectForKey:@"CICircularScreen.width"])
-		dotWidth = [gUserDefaults integerForKey:@"CICircularScreen.width"];
+		self.dotWidth = [gUserDefaults integerForKey:@"CICircularScreen.width"];
 	else
-		dotWidth = 6;
+		self.dotWidth = 6;
+	
 	if ([gUserDefaults objectForKey:@"CICircularScreen.sharpness"])
-		sharpness = [gUserDefaults floatForKey:@"CICircularScreen.sharpness"];
+		self.sharpness = [gUserDefaults floatForKey:@"CICircularScreen.sharpness"];
 	else
-		sharpness = 0.7;
+		self.sharpness = 0.7;
 			
 	if (dotWidth < 2 || dotWidth > 100)
-		dotWidth = 6;
+		self.dotWidth = 6;
 	if (sharpness < 0.0 || sharpness > 1.0)
-		sharpness = 0.7;
+		self.sharpness = 0.7;
 			
 	[dotWidthLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)dotWidth]];
 	[dotWidthSlider setIntegerValue:dotWidth];
@@ -406,8 +410,6 @@
 	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	CGImageDestinationRef temp_writer;
-	NSMutableData *temp_handler;
 	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
@@ -458,8 +460,7 @@
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];		
 		
-	}
-	else {
+	} else {
 	
 		// Create output core image
 		rect.origin.x = 0;
@@ -471,11 +472,8 @@
 	}
 	
 	// Get data from output core image
-	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
-	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
-	CGImageDestinationFinalize(temp_writer);
-	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 		
 	return resdata;

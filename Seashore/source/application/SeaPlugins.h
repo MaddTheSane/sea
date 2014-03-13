@@ -23,6 +23,8 @@ enum {
 				<b>Copyright:</b> N/A
 */
 
+@class PluginData;
+
 @interface SeaPlugins : NSObject {
 
 	// The SeaController object
@@ -41,10 +43,10 @@ enum {
 	IBOutlet id effectMenu;
 	
 	// The last effect applied
-	int lastEffect;
+	NSInteger lastEffect;
 	
 	// Stores the index of the "CIAffineTransform" plug-in - this plug-in handles Seashore CoreImage manipulation
-	int ciAffineTransformIndex;
+	NSInteger ciAffineTransformIndex;
 	
 }
 
@@ -90,7 +92,7 @@ enum {
 	@result		Returns the address of a record shared between Seashore and the
 				plug-in.
 */
-- (id)data;
+- (PluginData*)data;
 
 /*!
 	@method		run:
@@ -155,8 +157,6 @@ enum {
 - (BOOL)validateMenuItem:(id)menuItem;
 
 @end
-
-@class PluginData;
 
 @protocol SSSeaPlugin <NSObject>
 

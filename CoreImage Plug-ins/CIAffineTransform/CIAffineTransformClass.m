@@ -607,8 +607,6 @@
 	CIImage *unclampedInput, *clampedInput, *output;
 	CIFilter *clamp, *filter;
 	CGImageRef temp_image;
-	CGImageDestinationRef temp_writer;
-	NSMutableData *temp_handler;
 	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
@@ -664,11 +662,8 @@
 	temp_image = [context createCGImage:output fromRect:rect];
 
 	// Get data from output core image
-	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
-	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
-	CGImageDestinationFinalize(temp_writer);
-	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	
 	// Record the new width and height
@@ -681,12 +676,6 @@
 
 - (unsigned char *)unprepareImage:(unsigned char *)data spliceAlpha:(unsigned char *)alpha spp:(int)spp ispp:(int)ispp width:(int)width height:(int)height
 {
-	/*#ifdef __ppc__
-	vector unsigned char TOGGLERGBR = (vector unsigned char)(0x00, 0x01, 0x02, 0x13, 0x04, 0x05, 0x06, 0x17, 0x08, 0x09, 0x0A, 0x1B, 0x0C, 0x0D, 0x0E, 0x1F);
-	vector unsigned char HIGHVEC = (vector unsigned char)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
-	vector unsigned char *vdata, *rvdata, *ovdata;
-	int vec_len;
-	#endif*/
 	unsigned char *ndata;
 	int i;
 

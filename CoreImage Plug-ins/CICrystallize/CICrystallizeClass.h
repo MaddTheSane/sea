@@ -14,14 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CICrystallizeClass : NSObject
+@interface CICrystallizeClass : NSObject <SSSeaVisualPlugin>
 {
-	// The plug-in's manager
-	id seaPlugins;
-
-	// The radius of the crystallize
-	NSInteger radius;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -32,14 +26,8 @@
 	unsigned char *newdata;
 
 }
-	// The label displaying the radius
-@property (weak) IBOutlet NSTextField *radiusLabel;
-	
-	// The slider for the radius
-@property (weak) IBOutlet NSSlider *radiusSlider;
-
-	// The panel for the plug-in
-@property (weak) IBOutlet NSPanel *panel;
+// The radius of the crystallize
+@property NSInteger radius;
 
 /*!
 	@method		initWithManager:

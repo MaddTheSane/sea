@@ -22,9 +22,6 @@
 	// The slider for the intensity
 	IBOutlet id intensitySlider;
 
-	// The new intensity
-	float intensity;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -34,6 +31,9 @@
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 }
+
+	// The new intensity
+@property CGFloat intensity;
 
 /*!
 	@method		initWithManager:

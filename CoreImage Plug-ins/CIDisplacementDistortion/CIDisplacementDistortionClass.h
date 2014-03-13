@@ -17,17 +17,8 @@
 
 @interface CIDisplacementDistortionClass : NSObject <NSOpenSavePanelDelegate, SSSeaVisualPlugin>
 {
-	// The label displaying the scale
-	IBOutlet id scaleLabel;
-	
-	// The slider for the scale
-	IBOutlet id scaleSlider;
-
 	// The label displaying the current texture
 	IBOutlet id textureLabel;
-
-	// The scale of the crystallize
-	NSInteger scale;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;
@@ -40,8 +31,10 @@
 	
 	// The path of the texture to be used
 	NSString *texturePath;
-
 }
+
+// The scale of the crystallize
+@property NSInteger scale;
 
 /*!
 	@method		initWithManager:

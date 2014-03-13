@@ -28,13 +28,12 @@
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
-	// The scale of the bump
-	float scale;
-	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-
 }
+
+// The scale of the bump
+@property CGFloat scale;
 
 /*!
 	@method		initWithManager:

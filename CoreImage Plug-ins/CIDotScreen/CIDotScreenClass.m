@@ -8,12 +8,20 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIDotScreenClass
+@synthesize panel;
+@synthesize seaPlugins;
+@synthesize dotWidth;
+@synthesize ucr;
+@synthesize gcr;
+@synthesize sharpness;
+@synthesize angle;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CIDotScreen" owner:self];
-	newdata = NULL;
+	if (self = [super init]) {
+		seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CIDotScreen" owner:self];
+	}
 	
 	return self;
 }
@@ -41,37 +49,40 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = gUserDefaults;
 	
-	if ([gUserDefaults objectForKey:@"CIDotScreen.width"])
-		dotWidth = [gUserDefaults integerForKey:@"CIDotScreen.width"];
+	if ([defaults objectForKey:@"CIDotScreen.width"])
+		self.dotWidth = [defaults integerForKey:@"CIDotScreen.width"];
 	else
-		dotWidth = 6;
-	if ([gUserDefaults objectForKey:@"CIDotScreen.angle"])
-		angle = [gUserDefaults floatForKey:@"CIDotScreen.angle"];
+		self.dotWidth = 6;
+	
+	if ([defaults objectForKey:@"CIDotScreen.angle"])
+		self.angle = [defaults floatForKey:@"CIDotScreen.angle"];
 	else
-		angle = 0.0;
-	if ([gUserDefaults objectForKey:@"CIDotScreen.sharpness"])
-		sharpness = [gUserDefaults floatForKey:@"CIDotScreen.sharpness"];
+		self.angle = 0.0;
+	
+	if ([defaults objectForKey:@"CIDotScreen.sharpness"])
+		self.sharpness = [defaults floatForKey:@"CIDotScreen.sharpness"];
 	else
-		sharpness = 0.7;
-			
+		self.sharpness = 0.7;
+	
 	if (dotWidth < 2 || dotWidth > 100)
-		dotWidth = 6;
+		self.dotWidth = 6;
 	if (angle < -1.57 || angle > 1.57)
-		angle = 0.0;
+		self.angle = 0.0;
 	if (sharpness < 0.0 || sharpness > 1.0)
-		sharpness = 0.7;
-			
-	[dotWidthLabel setStringValue:[NSString stringWithFormat:@"%d", dotWidth]];
-	[dotWidthSlider setIntValue:dotWidth];
+		self.sharpness = 0.7;
+	
+	[dotWidthLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)dotWidth]];
+	[dotWidthSlider setIntegerValue:dotWidth];
 	[angleLabel setStringValue:[NSString stringWithFormat:@"%.2f", angle]];
-	[angleSlider setFloatValue:angle * 100.0];
+	[angleSlider setFloatValue:angle];
 	[sharpnessLabel setStringValue:[NSString stringWithFormat:@"%.2f", sharpness]];
 	[sharpnessSlider setFloatValue:sharpness];
 	
 	refresh = YES;
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -94,10 +105,14 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 		
 	[gUserDefaults setInteger:dotWidth forKey:@"CIDotScreen.width"];
 	[gUserDefaults setFloat:angle forKey:@"CIDotScreen.angle"];
@@ -159,7 +174,7 @@
 	
 	[panel setAlphaValue:1.0];
 	
-	[dotWidthLabel setStringValue:[NSString stringWithFormat:@"%d", dotWidth]];
+	[dotWidthLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)dotWidth]];
 	[angleLabel setStringValue:[NSString stringWithFormat:@"%.2f", angle]];
 	[sharpnessLabel setStringValue:[NSString stringWithFormat:@"%.2f", sharpness]];
 	
@@ -242,15 +257,8 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-#ifdef __ppc__
-	vector unsigned char TOGGLERGBF = (vector unsigned char)(0x03, 0x00, 0x01, 0x02, 0x07, 0x04, 0x05, 0x06, 0x0B, 0x08, 0x09, 0x0A, 0x0F, 0x0C, 0x0D, 0x0E);
-	vector unsigned char TOGGLERGBR = (vector unsigned char)(0x01, 0x02, 0x03, 0x00, 0x05, 0x06, 0x07, 0x04, 0x09, 0x0A, 0x0B, 0x08, 0x0D, 0x0E, 0x0F, 0x0C);
-	vector unsigned char *vdata, *voverlay, *vresdata;
-#else
-	__m128i opaquea = _mm_set1_epi32(0x000000FF);
-	__m128i *vdata, *voverlay, *vresdata;
+	__m128i *vdata;
 	__m128i vstore;
-#endif
 	IntRect selection;
 	int i, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -403,11 +411,9 @@
 - (unsigned char *)halftone:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
-	CIImage *input, *crop_output, *output, *background;
+	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	CGImageDestinationRef temp_writer;
-	NSMutableData *temp_handler;
 	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
@@ -470,11 +476,8 @@
 	}
 	
 	// Get data from output core image
-	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
-	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
-	CGImageDestinationFinalize(temp_writer);
-	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 		
 	return resdata;

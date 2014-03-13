@@ -16,9 +16,6 @@
 
 @interface CICMYKHalftoneClass : NSObject <SSSeaVisualPlugin>
 {
-	// The plug-in's manager
-	__weak id seaPlugins;
-
 	// The label displaying the dot width
 	IBOutlet id dotWidthLabel;
 	
@@ -49,21 +46,6 @@
 	// The slider for the UCR
 	IBOutlet id ucrSlider;
 
-	// The new width
-	NSInteger dotWidth;
-
-	// The new angle
-	float angle;
-	
-	// The new sharpness
-	float sharpness;
-	
-	// The new GCR
-	float gcr;
-	
-	// The new UCR
-	float ucr;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -72,8 +54,23 @@
 	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-
 }
+
+// The new angle
+@property CGFloat angle;
+	
+// The new sharpness
+@property CGFloat sharpness;
+	
+// The new GCR
+@property CGFloat gcr;
+	
+// The new UCR
+@property CGFloat ucr;
+
+// The new width
+@property NSInteger dotWidth;
+
 
 /*!
 	@method		initWithManager:

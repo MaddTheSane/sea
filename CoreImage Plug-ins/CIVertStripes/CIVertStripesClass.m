@@ -5,10 +5,13 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIVertStripesClass
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
+	if (self = [super init]) {
+		seaPlugins = manager;
+	}
 	
 	return self;
 }

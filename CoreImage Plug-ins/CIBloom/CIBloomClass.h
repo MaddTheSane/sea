@@ -17,12 +17,6 @@
 
 @interface CIBloomClass : NSObject <SSSeaVisualPlugin>
 {
-	// The new radius
-	NSInteger radius;
-
-	// The new intensity
-	CGFloat intensity;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -44,6 +38,12 @@
 	
 	// The slider for the intensity
 @property (weak) IBOutlet NSSlider *intensitySlider;
+
+	// The new radius
+@property NSInteger radius;
+
+	// The new intensity
+@property CGFloat intensity;
 
 
 /*!

@@ -10,14 +10,22 @@
 #define PI 3.14159265
 
 @implementation CIStarshineClass
+@synthesize mainNSColor;
+@synthesize seaPlugins;
+@synthesize panel;
+@synthesize opacity;
+@synthesize scale;
+@synthesize star_width;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CIStarshine" owner:self];
-	newdata = NULL;
-	mainNSColor = NULL;
-	running = NO;
+	if (self = [super init]) {
+		seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CIStarshine" owner:self];
+		newdata = NULL;
+		mainNSColor = NULL;
+		running = NO;
+	}
 	
 	return self;
 }
@@ -70,11 +78,11 @@
 		star_width = 2.5;
 	
 	if (scale < 0 || scale > 100)
-		scale = 15;
+		self.scale = 15;
 	if (opacity < -8.0 || opacity > 0.0)
-		opacity = -2.0;
+		self.opacity = -2.0;
 	if (star_width < 0.0 || star_width > 10.0)
-		star_width = 2.5;
+		self.star_width = 2.5;
 	
 	[scaleLabel setStringValue:[NSString stringWithFormat:@"%d", scale]];
 	[scaleSlider setFloatValue:scale];

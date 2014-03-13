@@ -8,12 +8,16 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CITwirlClass
+@synthesize panel;
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CITwirl" owner:self];
-	newdata = NULL;
+	if (self = [super init]) {
+		seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CITwirl" owner:self];
+		newdata = NULL;
+	}
 	
 	return self;
 }

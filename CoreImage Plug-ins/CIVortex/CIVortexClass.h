@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIVortexClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIVortexClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the angle
 	IBOutlet id angleLabel;
 	
@@ -27,9 +24,6 @@
 
 	// The checkbox for whether reverse directions
 	IBOutlet id reverseCheckbox;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// YES if the application succeeded
 	BOOL success;

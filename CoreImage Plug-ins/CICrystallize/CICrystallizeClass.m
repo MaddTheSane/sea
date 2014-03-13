@@ -9,16 +9,30 @@
 
 @implementation CICrystallizeClass
 @synthesize panel;
-@synthesize radiusLabel;
-@synthesize radiusSlider;
+@synthesize radius;
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CICrystallize" owner:self];
-	newdata = NULL;
+	if (self = [super init]) {
+		self.seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CICrystallize" owner:self];
+		[self addObserver:self forKeyPath:@"radius" options:NSKeyValueObservingOptionNew context:NULL];
+	}
 	
 	return self;
+}
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"radius"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if (object == self) {
+		[self update:nil];
+    }
 }
 
 - (int)type
@@ -46,20 +60,16 @@
 	PluginData *pluginData;
 	
 	if ([gUserDefaults objectForKey:@"CICrystallize.radius"])
-		radius = [gUserDefaults integerForKey:@"CICrystallize.radius"];
+		self.radius = [gUserDefaults integerForKey:@"CICrystallize.radius"];
 	else
-		radius = 20;
+		self.radius = 20;
 	refresh = YES;
 	
 	if (radius < 1 || radius > 60)
-		radius = 20;
-	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
-	
-	[radiusSlider setIntegerValue:radius];
+		self.radius = 20;
 	
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -138,11 +148,9 @@
 {
 	PluginData *pluginData;
 	
-	radius = roundf([radiusSlider floatValue]);
 	
 	[panel setAlphaValue:1.0];
 	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
@@ -386,8 +394,6 @@
 	CIImage *input, *imm_output, *crop_output, *output, *background;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	CGImageDestinationRef temp_writer;
-	NSMutableData *temp_handler;
 	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
@@ -471,11 +477,8 @@
 	}
 	
 	// Get data from output core image
-	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
-	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
-	CGImageDestinationFinalize(temp_writer);
-	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 		
 	return resdata;

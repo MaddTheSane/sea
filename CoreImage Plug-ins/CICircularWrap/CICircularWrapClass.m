@@ -10,12 +10,14 @@
 @implementation CICircularWrapClass
 @synthesize seaPlugins;
 @synthesize panel;
+@synthesize angle;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CICircularWrap" owner:self];
-	newdata = NULL;
+	if (self = [super init]) {
+		seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CICircularWrap" owner:self];
+	}
 	
 	return self;
 }
@@ -65,12 +67,12 @@
 
 	point = [pluginData point:0];
 	apoint = [pluginData point:1];
-	radius = (apoint.x - point.x) * (apoint.x - point.x) + (apoint.y - point.y) * (apoint.y - point.y);
+	radius = (apoint.x - point.x) * 2 + (apoint.y - point.y) * 2;
 	radius = sqrt(radius);
 
-	angle = 0.0;
-	if (bounds.size.width < PI * radius) angle = PI / 2.0 + bounds.size.width / (2.0 * radius);
-	else if (bounds.size.width < 2.0 * PI * radius) angle = (- 3 * PI + bounds.size.width / radius) / 2.0;
+	self.angle = 0.0;
+	if (bounds.size.width < PI * radius) self.angle = PI / 2.0 + bounds.size.width / (2.0 * radius);
+	else if (bounds.size.width < 2.0 * PI * radius) self.angle = (- 3 * PI + bounds.size.width / radius) / 2.0;
 	
 	[angleLabel setStringValue:[NSString stringWithFormat:@"%.2f", angle * -1.0]];
 	[angleSlider setFloatValue:angle * -100.0];
@@ -330,13 +332,13 @@
 {
 	int i, vec_len, width, height, channel;
 	unsigned char ormask[16], *resdata, *datatouse;
-	#ifdef __ppc__
+#ifdef __ppc__
 	vector unsigned char TOALPHA = (vector unsigned char)(0x10, 0x00, 0x00, 0x00, 0x10, 0x04, 0x04, 0x04, 0x10, 0x08, 0x08, 0x08, 0x10, 0x0C, 0x0C, 0x0C);
 	vector unsigned char HIGHVEC = (vector unsigned char)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
 	vector unsigned char *vdata, *rvdata, orvmask;
-	#else
+#else
 	__m128i *vdata, *rvdata, orvmask;
-	#endif
+#endif
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -347,40 +349,40 @@
 		vec_len = width * height * 4;
 		if (vec_len % 16 == 0) { vec_len /= 16; }
 		else { vec_len /= 16; vec_len++; }
-		#ifdef __ppc__
+#ifdef __ppc__
 		vdata = (vector unsigned char *)data; // NB: data may equal newdata
 		rvdata = (vector unsigned char *)newdata;
-		#else
+#else
 		vdata = (__m128i *)data;
 		rvdata = (__m128i *)newdata;
-		#endif
+#endif
 		datatouse = newdata;
 		if (channel == kPrimaryChannels) {
 			for (i = 0; i < 16; i++) {
 				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 			}
 			memcpy(&orvmask, ormask, 16);
-			#ifdef __ppc__
+#ifdef __ppc__
 			for (i = 0; i < vec_len; i++) {
 				rvdata[i] = vec_or(vdata[i], orvmask);
 			}
-			#else
+#else
 			for (i = 0; i < vec_len; i++) {
 				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
 			}
-			#endif
+#endif
 		}
 		else if (channel == kAlphaChannel) {
-			#ifdef __ppc__
+#ifdef __ppc__
 			for (i = 0; i < vec_len; i++) {
 				rvdata[i] = vec_perm(vdata[i], HIGHVEC, TOALPHA);
 			}
-			#else
+#else
 			for (i = 0; i < width * height; i++) {
 				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 				newdata[i * 4] = 255;
 			}
-			#endif
+#endif
 		}
 	}
 	
@@ -476,8 +478,6 @@
 	CIImage *input, *crop_output, *imm_output_1, *imm_output_2, *imm_output_3, *output, *background;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	CGImageDestinationRef temp_writer;
-	NSMutableData *temp_handler;
 	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
@@ -594,11 +594,8 @@
 	}
 	
 	// Get data from output core image
-	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
-	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
-	CGImageDestinationFinalize(temp_writer);
-	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	
 	return resdata;

@@ -8,12 +8,15 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIVortexClass
+@synthesize seaPlugins;
+@synthesize panel;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CIVortex" owner:self];
-	newdata = NULL;
+	if (self = [super init]) {
+		seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CIVortex" owner:self];
+	}
 	
 	return self;
 }

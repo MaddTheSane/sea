@@ -5,11 +5,13 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIWhitePointAdjustClass
+@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	newdata = NULL;
+	if (self = [super init]) {
+		seaPlugins = manager;
+	}
 	
 	return self;
 }

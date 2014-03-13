@@ -10,12 +10,13 @@
 @implementation CIEdgeWorkClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize radius;
+
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
 		seaPlugins = manager;
 		[NSBundle loadNibNamed:@"CIEdgeWork" owner:self];
-		newdata = NULL;
 	}
 	return self;
 }
@@ -45,17 +46,17 @@
 	PluginData *pluginData;
 	
 	if ([gUserDefaults objectForKey:@"CIEdgeWork.radius"])
-		radius = [gUserDefaults floatForKey:@"CIEdgeWork.radius"];
+		self.radius = [gUserDefaults floatForKey:@"CIEdgeWork.radius"];
 	else
-		radius = 3.0;
+		self.radius = 3.0;
 	refresh = YES;
 	
 	if (radius < 0.1 || radius > 20.0)
-		radius = 3.0;
+		self.radius = 3.0;
 	
 	[radiusLabel setStringValue:[NSString stringWithFormat:@"%.1f", radius]];
 	
-	[radiusSlider setIntValue:radius];
+	[radiusSlider setDoubleValue:radius];
 	
 	success = NO;
 	pluginData = [(SeaPlugins *)seaPlugins data];
@@ -337,8 +338,6 @@
 	CIImage *input, *crop_output, *imm_output, *imm_output2, *output, *background;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	CGImageDestinationRef temp_writer;
-	NSMutableData *temp_handler;
 	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
@@ -436,11 +435,8 @@
 	}
 	
 	// Get data from output core image
-	temp_handler = [NSMutableData dataWithLength:0];
-	temp_writer = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)temp_handler, kUTTypeTIFF, 1, NULL);
-	CGImageDestinationAddImage(temp_writer, temp_image, NULL);
-	CGImageDestinationFinalize(temp_writer);
-	temp_rep = [NSBitmapImageRep imageRepWithData:temp_handler];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 		
 	return resdata;

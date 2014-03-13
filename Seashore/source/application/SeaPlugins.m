@@ -249,7 +249,7 @@ BOOL checkRun(NSString *path, NSString *file)
 		return NULL;
 }
 
-- (id)data
+- (PluginData*)data
 {
 	return [gCurrentDocument pluginData];
 }

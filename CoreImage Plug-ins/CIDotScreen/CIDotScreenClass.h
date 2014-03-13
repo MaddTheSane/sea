@@ -14,11 +14,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CIDotScreenClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIDotScreenClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the dot width
 	IBOutlet id dotWidthLabel;
 	
@@ -37,24 +34,6 @@
 	// The slider for the sharpness
 	IBOutlet id sharpnessSlider;
 
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The new width
-	int dotWidth;
-
-	// The new angle
-	float angle;
-	
-	// The new sharpness
-	float sharpness;
-	
-	// The new GCR
-	float gcr;
-	
-	// The new UCR
-	float ucr;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -65,6 +44,21 @@
 	unsigned char *newdata;
 
 }
+
+	// The new width
+@property NSInteger dotWidth;
+
+	// The new angle
+@property CGFloat angle;
+	
+	// The new sharpness
+@property CGFloat sharpness;
+	
+	// The new GCR
+@property CGFloat gcr;
+	
+	// The new UCR
+@property CGFloat ucr;
 
 /*!
 	@method		initWithManager:

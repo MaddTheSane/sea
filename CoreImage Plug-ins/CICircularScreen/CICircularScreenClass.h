@@ -28,12 +28,6 @@
 	// The slider for the sharpness
 	IBOutlet id sharpnessSlider;
 
-	// The new width
-	NSInteger dotWidth;
-
-	// The new sharpness
-	CGFloat sharpness;
-	
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -44,6 +38,11 @@
 	unsigned char *newdata;
 
 }
+// The new width
+@property NSInteger dotWidth;
+
+// The new sharpness
+@property CGFloat sharpness;
 
 /*!
 	@method		initWithManager:

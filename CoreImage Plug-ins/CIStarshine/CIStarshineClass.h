@@ -16,11 +16,8 @@
 
 #define gColorPanel [NSColorPanel sharedColorPanel]
 
-@interface CIStarshineClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CIStarshineClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the scale
 	IBOutlet id scaleLabel;
 	
@@ -42,21 +39,6 @@
 	// The main color to use
 	IBOutlet id mainColorWell;
 
-	// The color to be used
-	NSColor *mainNSColor;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The new scale
-	int scale;
-	
-	// The new opacity
-	float opacity;
-	
-	// The new width
-	float star_width;
-	
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -68,8 +50,20 @@
 
 	// YES if the plug-in is running
 	BOOL running;
-
 }
+
+	// The color to be used
+@property (strong) NSColor *mainNSColor;
+
+	// The new scale
+@property NSInteger scale;
+	
+	// The new opacity
+@property CGFloat opacity;
+	
+	// The new width
+@property CGFloat star_width;
+	
 
 /*!
 	@method		initWithManager:

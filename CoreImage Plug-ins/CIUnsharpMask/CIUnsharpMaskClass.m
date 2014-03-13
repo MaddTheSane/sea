@@ -8,12 +8,16 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIUnsharpMaskClass
+@synthesize seaPlugins;
+@synthesize panel;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CIUnsharpMask" owner:self];
-	newdata = NULL;
+	if (self = [super init]) {
+		seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CIUnsharpMask" owner:self];
+		newdata = NULL;
+	}
 	
 	return self;
 }

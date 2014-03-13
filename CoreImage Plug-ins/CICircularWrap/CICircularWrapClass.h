@@ -28,9 +28,6 @@
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
-	// The angle of the twirl
-	float angle;
-	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
@@ -39,8 +36,10 @@
 	
 	// Signals whether the bounds rectangle is valid
 	BOOL boundsValid;
-
 }
+// The angle of the twirl
+@property CGFloat angle;
+	
 
 /*!
 	@method		initWithManager:

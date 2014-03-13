@@ -14,19 +14,13 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
-@interface CITorusLensClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CITorusLensClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the refraction
 	IBOutlet id refractionLabel;
 	
 	// The slider for the refraction
 	IBOutlet id refractionSlider;
-	
-	// The panel for the plug-in
-	IBOutlet id panel;
 
 	// YES if the application succeeded
 	BOOL success;
@@ -39,7 +33,6 @@
 	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-
 }
 
 /*!

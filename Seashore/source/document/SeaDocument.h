@@ -1,6 +1,8 @@
 #import "Globals.h"
 
-@class SeaSelection;
+@class SeaSelection, SeaWhiteboard;
+
+@class GIFExporter, JPEGExporter, JP2Exporter, PNGExporter, TIFFExporter, XCFExporter;
 
 /*!
 	@class		SeaDocument
@@ -11,13 +13,13 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface SeaDocument : NSDocument {
-
+@interface SeaDocument : NSDocument
+{
 	// The contents of the document (a subclass of SeaContent)
 	id contents;
 	
 	// The whiteboard that represents this document
-	id whiteboard;
+	SeaWhiteboard *whiteboard;
 	
 	// The selection manager for this document
 	SeaSelection *selection;
@@ -44,13 +46,18 @@
 	IBOutlet id docWindow;
 	
 	// The exporters
-	IBOutlet id gifExporter, jpegExporter, jp2Exporter, pngExporter, tiffExporter, xcfExporter;
+	IBOutlet GIFExporter *gifExporter;
+	IBOutlet JPEGExporter *jpegExporter;
+	IBOutlet JP2Exporter *jp2Exporter;
+	IBOutlet PNGExporter *pngExporter;
+	IBOutlet TIFFExporter *tiffExporter;
+	IBOutlet XCFExporter *xcfExporter;
 	
 	// The special texture exporter
 	IBOutlet id textureExporter;
 	
 	// An array of all possible exporters
-	id exporters;
+	NSArray *exporters;
 	
 	// The view to attach to the save panel
 	IBOutlet id accessoryView;
@@ -167,7 +174,7 @@
 	@discussion	Returns the whiteboard of the document.
 	@result		Returns an instance of SeaWhiteboard.
 */
-- (id)whiteboard;
+- (SeaWhiteboard*)whiteboard;
 
 /*!
 	@method		selection

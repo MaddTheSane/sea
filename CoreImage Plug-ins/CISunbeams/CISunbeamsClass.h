@@ -16,11 +16,8 @@
 
 #define gColorPanel [NSColorPanel sharedColorPanel]
 
-@interface CISunbeamsClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
+@interface CISunbeamsClass : NSObject <SSSeaVisualPlugin>
+{
 	// The label displaying the strength
 	IBOutlet id strengthLabel;
 	
@@ -36,18 +33,6 @@
 	// The main color to use
 	IBOutlet id mainColorWell;
 
-	// The color to be used
-	NSColor *mainNSColor;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The new strength
-	float strength;
-	
-	// The new contrast
-	float contrast;
-	
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -59,8 +44,13 @@
 
 	// YES if the plug-in is running
 	BOOL running;
-
 }
+@property (strong) NSColor *mainNSColor;
+	// The new strength
+@property CGFloat strength;
+	
+	// The new contrast
+@property CGFloat contrast;
 
 /*!
 	@method		initWithManager:
