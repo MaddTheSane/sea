@@ -493,399 +493,399 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB29F75151A66D200B7E8BE /* libIntRects.a */;
+			remoteGlobalIDString = 9EB29F75151A66D200B7E8BE;
 			remoteInfo = IntRects;
 		};
 		9EA1C903151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8D5B49B6048680CD000E48DA /* AffineTile+.bundle */;
+			remoteGlobalIDString = 8D5B49B6048680CD000E48DA;
 			remoteInfo = "AffineTile+";
 		};
 		9EA1C905151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB29FC7151A6AA300B7E8BE /* AffineTransform+.bundle */;
+			remoteGlobalIDString = 9EB29FC7151A6AA300B7E8BE;
 			remoteInfo = "AffineTransform+";
 		};
 		9EA1C907151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB29FD8151A6AA800B7E8BE /* Bloom+.bundle */;
+			remoteGlobalIDString = 9EB29FD8151A6AA800B7E8BE;
 			remoteInfo = "Bloom+";
 		};
 		9EA1C909151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB29FE9151A6AB000B7E8BE /* Brightness+.bundle */;
+			remoteGlobalIDString = 9EB29FE9151A6AB000B7E8BE;
 			remoteInfo = "Brightness+";
 		};
 		9EA1C90B151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB29FFA151A6AB700B7E8BE /* Bump+.bundle */;
+			remoteGlobalIDString = 9EB29FFA151A6AB700B7E8BE;
 			remoteInfo = "Bump+";
 		};
 		9EA1C90D151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A00B151A6ABE00B7E8BE /* Checkerboard+.bundle */;
+			remoteGlobalIDString = 9EB2A00B151A6ABE00B7E8BE;
 			remoteInfo = "Checkerboard+";
 		};
 		9EA1C90F151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A01C151A6AC400B7E8BE /* CircleSplash+.bundle */;
+			remoteGlobalIDString = 9EB2A01C151A6AC400B7E8BE;
 			remoteInfo = "CircleSplash+";
 		};
 		9EA1C911151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A02D151A6ACB00B7E8BE /* CircularScreen+.bundle */;
+			remoteGlobalIDString = 9EB2A02D151A6ACB00B7E8BE;
 			remoteInfo = "CircularScreen+";
 		};
 		9EA1C913151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A03E151A6AFF00B7E8BE /* CircularWrap+.bundle */;
+			remoteGlobalIDString = 9EB2A03E151A6AFF00B7E8BE;
 			remoteInfo = "CircularWrap+";
 		};
 		9EA1C915151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A04F151A6B0600B7E8BE /* CMYKHalftone+.bundle */;
+			remoteGlobalIDString = 9EB2A04F151A6B0600B7E8BE;
 			remoteInfo = "CMYKHalftone+";
 		};
 		9EA1C917151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A060151A6B0D00B7E8BE /* Crystallize+.bundle */;
+			remoteGlobalIDString = 9EB2A060151A6B0D00B7E8BE;
 			remoteInfo = "Crystallize+";
 		};
 		9EA1C919151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A071151A6B1C00B7E8BE /* DisplacementDistortion+.bundle */;
+			remoteGlobalIDString = 9EB2A071151A6B1C00B7E8BE;
 			remoteInfo = "DisplacementDistortion+";
 		};
 		9EA1C91B151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A082151A6B2300B7E8BE /* DotScreen+.bundle */;
+			remoteGlobalIDString = 9EB2A082151A6B2300B7E8BE;
 			remoteInfo = "DotScreen+";
 		};
 		9EA1C91D151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A093151A6B2800B7E8BE /* Edges+.bundle */;
+			remoteGlobalIDString = 9EB2A093151A6B2800B7E8BE;
 			remoteInfo = "Edges+";
 		};
 		9EA1C91F151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A0A4151A6B3200B7E8BE /* EdgeWork+.bundle */;
+			remoteGlobalIDString = 9EB2A0A4151A6B3200B7E8BE;
 			remoteInfo = "EdgeWork+";
 		};
 		9EA1C921151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A0B5151A6B3A00B7E8BE /* Exposure+.bundle */;
+			remoteGlobalIDString = 9EB2A0B5151A6B3A00B7E8BE;
 			remoteInfo = "Exposure+";
 		};
 		9EA1C923151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A0C6151A6B4100B7E8BE /* FalseColor+.bundle */;
+			remoteGlobalIDString = 9EB2A0C6151A6B4100B7E8BE;
 			remoteInfo = "FalseColor+";
 		};
 		9EA1C925151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A0D7151A6B4700B7E8BE /* GammaAdjust+.bundle */;
+			remoteGlobalIDString = 9EB2A0D7151A6B4700B7E8BE;
 			remoteInfo = "GammaAdjust+";
 		};
 		9EA1C927151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A0E8151A6B4E00B7E8BE /* GaussianBlur+.bundle */;
+			remoteGlobalIDString = 9EB2A0E8151A6B4E00B7E8BE;
 			remoteInfo = "GaussianBlur+";
 		};
 		9EA1C929151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A0F9151A6B5700B7E8BE /* GlassDistortion+.bundle */;
+			remoteGlobalIDString = 9EB2A0F9151A6B5700B7E8BE;
 			remoteInfo = "GlassDistortion+";
 		};
 		9EA1C92B151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A10A151A6B5C00B7E8BE /* GlassLozenge+.bundle */;
+			remoteGlobalIDString = 9EB2A10A151A6B5C00B7E8BE;
 			remoteInfo = "GlassLozenge+";
 		};
 		9EA1C92D151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A11B151A6B6300B7E8BE /* Gloom+.bundle */;
+			remoteGlobalIDString = 9EB2A11B151A6B6300B7E8BE;
 			remoteInfo = "Gloom+";
 		};
 		9EA1C92F151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A12C151A6B6B00B7E8BE /* HatchedScreen+.bundle */;
+			remoteGlobalIDString = 9EB2A12C151A6B6B00B7E8BE;
 			remoteInfo = "HatchedScreen+";
 		};
 		9EA1C931151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A13D151A6B7C00B7E8BE /* Hole+.bundle */;
+			remoteGlobalIDString = 9EB2A13D151A6B7C00B7E8BE;
 			remoteInfo = "Hole+";
 		};
 		9EA1C933151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A14E151A6B8600B7E8BE /* HorizStripes+.bundle */;
+			remoteGlobalIDString = 9EB2A14E151A6B8600B7E8BE;
 			remoteInfo = "HorizStripes+";
 		};
 		9EA1C935151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A15F151A6B8E00B7E8BE /* Invert+.bundle */;
+			remoteGlobalIDString = 9EB2A15F151A6B8E00B7E8BE;
 			remoteInfo = "Invert+";
 		};
 		9EA1C937151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A170151A6B9A00B7E8BE /* Kaleidoscope+.bundle */;
+			remoteGlobalIDString = 9EB2A170151A6B9A00B7E8BE;
 			remoteInfo = "Kaleidoscope+";
 		};
 		9EA1C939151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A181151A6BAB00B7E8BE /* LenticularHalo+.bundle */;
+			remoteGlobalIDString = 9EB2A181151A6BAB00B7E8BE;
 			remoteInfo = "LenticularHalo+";
 		};
 		9EA1C93B151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A192151A6BB700B7E8BE /* LineScreen+.bundle */;
+			remoteGlobalIDString = 9EB2A192151A6BB700B7E8BE;
 			remoteInfo = "LineScreen+";
 		};
 		9EA1C93D151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A1A3151A6BC200B7E8BE /* Median+.bundle */;
+			remoteGlobalIDString = 9EB2A1A3151A6BC200B7E8BE;
 			remoteInfo = "Median+";
 		};
 		9EA1C93F151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A1B4151A6BCB00B7E8BE /* Monochrome+.bundle */;
+			remoteGlobalIDString = 9EB2A1B4151A6BCB00B7E8BE;
 			remoteInfo = "Monochrome+";
 		};
 		9EA1C941151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A1C5151A6BD600B7E8BE /* MotionBlur+.bundle */;
+			remoteGlobalIDString = 9EB2A1C5151A6BD600B7E8BE;
 			remoteInfo = "MotionBlur+";
 		};
 		9EA1C943151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A1D6151A6BDE00B7E8BE /* NoiseReduction+.bundle */;
+			remoteGlobalIDString = 9EB2A1D6151A6BDE00B7E8BE;
 			remoteInfo = "NoiseReduction+";
 		};
 		9EA1C945151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A1E7151A6BEE00B7E8BE /* OpTile+.bundle */;
+			remoteGlobalIDString = 9EB2A1E7151A6BEE00B7E8BE;
 			remoteInfo = "OpTile+";
 		};
 		9EA1C947151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A1F8151A6BF900B7E8BE /* ParallelogramTile+.bundle */;
+			remoteGlobalIDString = 9EB2A1F8151A6BF900B7E8BE;
 			remoteInfo = "ParallelogramTile+";
 		};
 		9EA1C949151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A209151A6C0300B7E8BE /* PerspectiveTile+.bundle */;
+			remoteGlobalIDString = 9EB2A209151A6C0300B7E8BE;
 			remoteInfo = "PerspectiveTile+";
 		};
 		9EA1C94B151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A21A151A6C0E00B7E8BE /* PerspectiveTransform+.bundle */;
+			remoteGlobalIDString = 9EB2A21A151A6C0E00B7E8BE;
 			remoteInfo = "PerspectiveTransform+";
 		};
 		9EA1C94D151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A22B151A6C1B00B7E8BE /* Pinch+.bundle */;
+			remoteGlobalIDString = 9EB2A22B151A6C1B00B7E8BE;
 			remoteInfo = "Pinch+";
 		};
 		9EA1C94F151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A23C151A6C2500B7E8BE /* Pixellate+.bundle */;
+			remoteGlobalIDString = 9EB2A23C151A6C2500B7E8BE;
 			remoteInfo = "Pixellate+";
 		};
 		9EA1C951151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A24D151A6C3100B7E8BE /* Pointillize+.bundle */;
+			remoteGlobalIDString = 9EB2A24D151A6C3100B7E8BE;
 			remoteInfo = "Pointillize+";
 		};
 		9EA1C953151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A25E151A6C3B00B7E8BE /* Posterize+.bundle */;
+			remoteGlobalIDString = 9EB2A25E151A6C3B00B7E8BE;
 			remoteInfo = "Posterize+";
 		};
 		9EA1C955151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A26F151A6C4900B7E8BE /* Random+.bundle */;
+			remoteGlobalIDString = 9EB2A26F151A6C4900B7E8BE;
 			remoteInfo = "Random+";
 		};
 		9EA1C957151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A280151A6C5300B7E8BE /* Sepia+.bundle */;
+			remoteGlobalIDString = 9EB2A280151A6C5300B7E8BE;
 			remoteInfo = "Sepia+";
 		};
 		9EA1C959151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A291151A6C6100B7E8BE /* Sharpen+.bundle */;
+			remoteGlobalIDString = 9EB2A291151A6C6100B7E8BE;
 			remoteInfo = "Sharpen+";
 		};
 		9EA1C95B151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A2A2151A6C6D00B7E8BE /* SpotLight+.bundle */;
+			remoteGlobalIDString = 9EB2A2A2151A6C6D00B7E8BE;
 			remoteInfo = "SpotLight+";
 		};
 		9EA1C95D151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A2B3151A6C7C00B7E8BE /* Starshine+.bundle */;
+			remoteGlobalIDString = 9EB2A2B3151A6C7C00B7E8BE;
 			remoteInfo = "Starshine+";
 		};
 		9EA1C95F151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A2C4151A6C8B00B7E8BE /* Sunbeams+.bundle */;
+			remoteGlobalIDString = 9EB2A2C4151A6C8B00B7E8BE;
 			remoteInfo = "Sunbeams+";
 		};
 		9EA1C961151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A2D5151A6C9800B7E8BE /* TorusLens+.bundle */;
+			remoteGlobalIDString = 9EB2A2D5151A6C9800B7E8BE;
 			remoteInfo = "TorusLens+";
 		};
 		9EA1C963151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A2E6151A6CAF00B7E8BE /* TriangleTile+.bundle */;
+			remoteGlobalIDString = 9EB2A2E6151A6CAF00B7E8BE;
 			remoteInfo = "TriangleTile+";
 		};
 		9EA1C965151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A2F7151A6CBD00B7E8BE /* Twirl+.bundle */;
+			remoteGlobalIDString = 9EB2A2F7151A6CBD00B7E8BE;
 			remoteInfo = "Twirl+";
 		};
 		9EA1C967151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A308151A6CC800B7E8BE /* UnsharpMask+.bundle */;
+			remoteGlobalIDString = 9EB2A308151A6CC800B7E8BE;
 			remoteInfo = "UnsharpMask+";
 		};
 		9EA1C969151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A319151A6CD700B7E8BE /* VertStripes+.bundle */;
+			remoteGlobalIDString = 9EB2A319151A6CD700B7E8BE;
 			remoteInfo = "VertStripes+";
 		};
 		9EA1C96B151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A32A151A6CE800B7E8BE /* Vortex+.bundle */;
+			remoteGlobalIDString = 9EB2A32A151A6CE800B7E8BE;
 			remoteInfo = "Vortex+";
 		};
 		9EA1C96D151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A33B151A6CF700B7E8BE /* WhitePointAdjust+.bundle */;
+			remoteGlobalIDString = 9EB2A33B151A6CF700B7E8BE;
 			remoteInfo = "WhitePointAdjust+";
 		};
 		9EA1C96F151A95A80092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9EB2A34C151A6D0400B7E8BE /* ZoomBlur+.bundle */;
+			remoteGlobalIDString = 9EB2A34C151A6D0400B7E8BE;
 			remoteInfo = "ZoomBlur+";
 		};
 		9EA1C9AD151A95EE0092087E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EA1C8C2151A95A30092087E /* SeaShore CI Plug-ins.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 9EB2A361151A6DF800B7E8BE /* CI Plugins */;
+			remoteGlobalIDString = 9EB2A361151A6DF800B7E8BE;
 			remoteInfo = "CI Plugins";
 		};
 		9ED9A6581515301F002DA733 /* PBXContainerItemProxy */ = {

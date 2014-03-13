@@ -9,14 +9,6 @@
 
 @implementation InstallerObject
 
-- (id)init
-{
-	// Specify ourselves as NSApp's delegate
-	[NSApp setDelegate:self];
-	
-	return self;
-}
-
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
 	// Runs the update

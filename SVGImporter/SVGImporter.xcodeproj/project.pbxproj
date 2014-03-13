@@ -1,0 +1,342 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXApplicationTarget section */
+		1601BCDBFEEE210811DB9C8B /* SVGImporter */ = {
+			isa = PBXApplicationTarget;
+			buildConfigurationList = 553B018018D25659006578A5 /* Build configuration list for PBXApplicationTarget "SVGImporter" */;
+			buildPhases = (
+				1601BCDCFEEE210811DB9C8B /* Sources */,
+				1601BCDEFEEE210811DB9C8B /* JavaArchive */,
+				1601BCDFFEEE210811DB9C8B /* Resources */,
+				1601BCE2FEEE210811DB9C8B /* Frameworks */,
+			);
+			dependencies = (
+			);
+			name = SVGImporter;
+			productName = SVGImporter;
+			productReference = 06D05853FF24F2DB11DB9C8B /* SVGImporter.app */;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>SVGImporter</string>
+	<key>CFBundleGetInfoString</key>
+	<string>0.1.6</string>
+	<key>CFBundleIconFile</key>
+	<string></string>
+	<key>CFBundleIdentifier</key>
+	<string>net.sourceforge.seashore.svgimporter</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>SVGImporter</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1.6</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>0.1.6</string>
+	<key>Java</key>
+	<dict>
+		<key>ClassPath</key>
+		<string>$JAVAROOT/SVGImporter.jar</string>
+		<key>JVMVersion</key>
+		<string>1.4+</string>
+		<key>MainClass</key>
+		<string>SVGImporter</string>
+		<key>Properties</key>
+		<dict>
+			<key>apple.awt.textantialiasing</key>
+			<string>on</string>
+			<key>com.apple.macos.useScreenMenuBar</key>
+			<string>true</string>
+		</dict>
+		<key>WorkingDirectory</key>
+		<string>$APP_PACKAGE/Contents/Resources/Java</string>
+	</dict>
+	<key>LSUIElement</key>
+	<true/>
+</dict>
+</plist>
+";
+		};
+/* End PBXApplicationTarget section */
+
+/* Begin PBXBuildFile section */
+		1601BCDDFEEE210811DB9C8B /* SVGImporter.java in Sources */ = {isa = PBXBuildFile; fileRef = 01F12F4EFEC8CE6A11DB9C8B /* SVGImporter.java */; settings = {ATTRIBUTES = (); }; };
+		A828B76407E80C57000E3439 /* batik-dom.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75307E80C56000E3439 /* batik-dom.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B76507E80C57000E3439 /* batik-svggen.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75407E80C56000E3439 /* batik-svggen.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B76607E80C57000E3439 /* batik-transcoder.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75507E80C56000E3439 /* batik-transcoder.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B76707E80C57000E3439 /* js.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75607E80C56000E3439 /* js.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B76807E80C57000E3439 /* batik-script.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75707E80C56000E3439 /* batik-script.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B76907E80C57000E3439 /* batik-xml.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75807E80C56000E3439 /* batik-xml.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B76A07E80C57000E3439 /* batik-util.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75907E80C57000E3439 /* batik-util.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B76B07E80C57000E3439 /* batik-css.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75A07E80C57000E3439 /* batik-css.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B76C07E80C57000E3439 /* xml-apis.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75B07E80C57000E3439 /* xml-apis.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B76D07E80C57000E3439 /* batik-parser.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75C07E80C57000E3439 /* batik-parser.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B76E07E80C57000E3439 /* batik-ext.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75D07E80C57000E3439 /* batik-ext.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B76F07E80C57000E3439 /* batik-svg-dom.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75E07E80C57000E3439 /* batik-svg-dom.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B77007E80C57000E3439 /* xerces_2_5_0.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B75F07E80C57000E3439 /* xerces_2_5_0.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B77107E80C57000E3439 /* batik-bridge.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B76007E80C57000E3439 /* batik-bridge.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B77207E80C57000E3439 /* batik-gvt.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B76107E80C57000E3439 /* batik-gvt.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B77307E80C57000E3439 /* batik-gui-util.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B76207E80C57000E3439 /* batik-gui-util.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+		A828B77407E80C57000E3439 /* batik-awt-util.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = A828B76307E80C57000E3439 /* batik-awt-util.jar */; settings = {ATTRIBUTES = (Merge, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		01F12F4EFEC8CE6A11DB9C8B /* SVGImporter.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = SVGImporter.java; sourceTree = "<group>"; tabWidth = 8; };
+		06D05853FF24F2DB11DB9C8B /* SVGImporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = SVGImporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A828B75307E80C56000E3439 /* batik-dom.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-dom.jar"; path = "lib/batik-dom.jar"; sourceTree = "<group>"; };
+		A828B75407E80C56000E3439 /* batik-svggen.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-svggen.jar"; path = "lib/batik-svggen.jar"; sourceTree = "<group>"; };
+		A828B75507E80C56000E3439 /* batik-transcoder.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-transcoder.jar"; path = "lib/batik-transcoder.jar"; sourceTree = "<group>"; };
+		A828B75607E80C56000E3439 /* js.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = js.jar; path = lib/js.jar; sourceTree = "<group>"; };
+		A828B75707E80C56000E3439 /* batik-script.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-script.jar"; path = "lib/batik-script.jar"; sourceTree = "<group>"; };
+		A828B75807E80C56000E3439 /* batik-xml.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-xml.jar"; path = "lib/batik-xml.jar"; sourceTree = "<group>"; };
+		A828B75907E80C57000E3439 /* batik-util.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-util.jar"; path = "lib/batik-util.jar"; sourceTree = "<group>"; };
+		A828B75A07E80C57000E3439 /* batik-css.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-css.jar"; path = "lib/batik-css.jar"; sourceTree = "<group>"; };
+		A828B75B07E80C57000E3439 /* xml-apis.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "xml-apis.jar"; path = "lib/xml-apis.jar"; sourceTree = "<group>"; };
+		A828B75C07E80C57000E3439 /* batik-parser.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-parser.jar"; path = "lib/batik-parser.jar"; sourceTree = "<group>"; };
+		A828B75D07E80C57000E3439 /* batik-ext.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-ext.jar"; path = "lib/batik-ext.jar"; sourceTree = "<group>"; };
+		A828B75E07E80C57000E3439 /* batik-svg-dom.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-svg-dom.jar"; path = "lib/batik-svg-dom.jar"; sourceTree = "<group>"; };
+		A828B75F07E80C57000E3439 /* xerces_2_5_0.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = xerces_2_5_0.jar; path = lib/xerces_2_5_0.jar; sourceTree = "<group>"; };
+		A828B76007E80C57000E3439 /* batik-bridge.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-bridge.jar"; path = "lib/batik-bridge.jar"; sourceTree = "<group>"; };
+		A828B76107E80C57000E3439 /* batik-gvt.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-gvt.jar"; path = "lib/batik-gvt.jar"; sourceTree = "<group>"; };
+		A828B76207E80C57000E3439 /* batik-gui-util.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-gui-util.jar"; path = "lib/batik-gui-util.jar"; sourceTree = "<group>"; };
+		A828B76307E80C57000E3439 /* batik-awt-util.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "batik-awt-util.jar"; path = "lib/batik-awt-util.jar"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1601BCE2FEEE210811DB9C8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A828B76407E80C57000E3439 /* batik-dom.jar in Frameworks */,
+				A828B76507E80C57000E3439 /* batik-svggen.jar in Frameworks */,
+				A828B76607E80C57000E3439 /* batik-transcoder.jar in Frameworks */,
+				A828B76707E80C57000E3439 /* js.jar in Frameworks */,
+				A828B76807E80C57000E3439 /* batik-script.jar in Frameworks */,
+				A828B76907E80C57000E3439 /* batik-xml.jar in Frameworks */,
+				A828B76A07E80C57000E3439 /* batik-util.jar in Frameworks */,
+				A828B76B07E80C57000E3439 /* batik-css.jar in Frameworks */,
+				A828B76C07E80C57000E3439 /* xml-apis.jar in Frameworks */,
+				A828B76D07E80C57000E3439 /* batik-parser.jar in Frameworks */,
+				A828B76E07E80C57000E3439 /* batik-ext.jar in Frameworks */,
+				A828B76F07E80C57000E3439 /* batik-svg-dom.jar in Frameworks */,
+				A828B77007E80C57000E3439 /* xerces_2_5_0.jar in Frameworks */,
+				A828B77107E80C57000E3439 /* batik-bridge.jar in Frameworks */,
+				A828B77207E80C57000E3439 /* batik-gvt.jar in Frameworks */,
+				A828B77307E80C57000E3439 /* batik-gui-util.jar in Frameworks */,
+				A828B77407E80C57000E3439 /* batik-awt-util.jar in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01F12F4DFEC8CE2211DB9C8B = {
+			isa = PBXGroup;
+			children = (
+				01F12F4EFEC8CE6A11DB9C8B /* SVGImporter.java */,
+				A828B77707E80C5C000E3439 /* Resources */,
+				01F12F4FFEC8CEF111DB9C8B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		01F12F4FFEC8CEF111DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				06D05853FF24F2DB11DB9C8B /* SVGImporter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A828B77707E80C5C000E3439 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A828B75307E80C56000E3439 /* batik-dom.jar */,
+				A828B75407E80C56000E3439 /* batik-svggen.jar */,
+				A828B75507E80C56000E3439 /* batik-transcoder.jar */,
+				A828B75607E80C56000E3439 /* js.jar */,
+				A828B75707E80C56000E3439 /* batik-script.jar */,
+				A828B75807E80C56000E3439 /* batik-xml.jar */,
+				A828B75907E80C57000E3439 /* batik-util.jar */,
+				A828B75A07E80C57000E3439 /* batik-css.jar */,
+				A828B75B07E80C57000E3439 /* xml-apis.jar */,
+				A828B75C07E80C57000E3439 /* batik-parser.jar */,
+				A828B75D07E80C57000E3439 /* batik-ext.jar */,
+				A828B75E07E80C57000E3439 /* batik-svg-dom.jar */,
+				A828B75F07E80C57000E3439 /* xerces_2_5_0.jar */,
+				A828B76007E80C57000E3439 /* batik-bridge.jar */,
+				A828B76107E80C57000E3439 /* batik-gvt.jar */,
+				A828B76207E80C57000E3439 /* batik-gui-util.jar */,
+				A828B76307E80C57000E3439 /* batik-awt-util.jar */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXJavaArchiveBuildPhase section */
+		1601BCDEFEEE210811DB9C8B /* JavaArchive */ = {
+			isa = PBXJavaArchiveBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXJavaArchiveBuildPhase section */
+
+/* Begin PBXProject section */
+		01F12F4CFEC8CE2211DB9C8B /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 553B017F18D25659006578A5 /* Build configuration list for PBXProject "SVGImporter" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 1;
+			mainGroup = 01F12F4DFEC8CE2211DB9C8B;
+			productRefGroup = 01F12F4FFEC8CEF111DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1601BCDBFEEE210811DB9C8B /* SVGImporter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1601BCDFFEEE210811DB9C8B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1601BCDCFEEE210811DB9C8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1601BCDDFEEE210811DB9C8B /* SVGImporter.java in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		553B017918D25658006578A5 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+			};
+			name = Development;
+		};
+		553B017A18D25658006578A5 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+			};
+			name = Deployment;
+		};
+		553B017B18D25658006578A5 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+			};
+			name = Default;
+		};
+		553B017C18D25658006578A5 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				JAVA_ARCHIVE_COMPRESSION = YES;
+				JAVA_COMPILER = /usr/bin/javac;
+				JAVA_COMPILER_SOURCE_VERSION = 1.4;
+				JAVA_COMPILER_TARGET_VM_VERSION = 1.4;
+				JAVA_ONLY = YES;
+				JAVA_SOURCE_SUBDIR = .;
+				PREBINDING = NO;
+				PRODUCT_NAME = SVGImporter;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		553B017D18D25658006578A5 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				JAVA_ARCHIVE_COMPRESSION = YES;
+				JAVA_COMPILER = /usr/bin/javac;
+				JAVA_COMPILER_SOURCE_VERSION = 1.4;
+				JAVA_COMPILER_TARGET_VM_VERSION = 1.4;
+				JAVA_ONLY = YES;
+				JAVA_SOURCE_SUBDIR = .;
+				PREBINDING = NO;
+				PRODUCT_NAME = SVGImporter;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		553B017E18D25658006578A5 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				JAVA_ARCHIVE_COMPRESSION = YES;
+				JAVA_COMPILER = /usr/bin/javac;
+				JAVA_COMPILER_SOURCE_VERSION = 1.4;
+				JAVA_COMPILER_TARGET_VM_VERSION = 1.4;
+				JAVA_ONLY = YES;
+				JAVA_SOURCE_SUBDIR = .;
+				PREBINDING = NO;
+				PRODUCT_NAME = SVGImporter;
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		553B017F18D25659006578A5 /* Build configuration list for PBXProject "SVGImporter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				553B017918D25658006578A5 /* Development */,
+				553B017A18D25658006578A5 /* Deployment */,
+				553B017B18D25658006578A5 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		553B018018D25659006578A5 /* Build configuration list for PBXApplicationTarget "SVGImporter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				553B017C18D25658006578A5 /* Development */,
+				553B017D18D25658006578A5 /* Deployment */,
+				553B017E18D25658006578A5 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 01F12F4CFEC8CE2211DB9C8B /* Project object */;
+}

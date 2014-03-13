@@ -1,0 +1,389 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		553B019318D256FB006578A5 /* SVGImporter.app in Resources */ = {isa = PBXBuildFile; fileRef = 553B019218D256F5006578A5 /* SVGImporter.app */; };
+		A81BE7500876504B007D886A /* Installer.icns in Resources */ = {isa = PBXBuildFile; fileRef = A81BE74F0876504B007D886A /* Installer.icns */; };
+		A873F74007E86FB000D77206 /* SVG Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = A873F73F07E86FB000D77206 /* SVG Icon.icns */; };
+		A8B275D607E54D6800701EA8 /* InstallerObject.h in Headers */ = {isa = PBXBuildFile; fileRef = A874C2BA07E54CD20019511F /* InstallerObject.h */; };
+		A8B275D807E54D6800701EA8 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		A8B275D907E54D6800701EA8 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F589968102801C730116BBC0 /* Credits.rtf */; };
+		A8B275DB07E54D6800701EA8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		A8B275DC07E54D6800701EA8 /* InstallerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A874C2BB07E54CD20019511F /* InstallerObject.m */; };
+		A8B275DE07E54D6800701EA8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		553B019118D256F5006578A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 553B018D18D256F5006578A5 /* SVGImporter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06D05853FF24F2DB11DB9C8B;
+			remoteInfo = SVGImporter;
+		};
+		553B019518D2572F006578A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 553B018D18D256F5006578A5 /* SVGImporter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1601BCDBFEEE210811DB9C8B;
+			remoteInfo = SVGImporter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		553B018D18D256F5006578A5 /* SVGImporter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVGImporter.xcodeproj; path = ../SVGImporter.xcodeproj; sourceTree = SOURCE_ROOT; };
+		A81BE74F0876504B007D886A /* Installer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Installer.icns; sourceTree = "<group>"; };
+		A873F73F07E86FB000D77206 /* SVG Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "SVG Icon.icns"; path = "../../Seashore/resources/icons/SVG Icon.icns"; sourceTree = SOURCE_ROOT; };
+		A874C2BA07E54CD20019511F /* InstallerObject.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = InstallerObject.h; sourceTree = "<group>"; };
+		A874C2BB07E54CD20019511F /* InstallerObject.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = InstallerObject.m; sourceTree = "<group>"; };
+		A8B275DF07E54D6800701EA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8B275E007E54D6800701EA8 /* SVG Installer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SVG Installer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F589968102801C730116BBC0 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A8B275DD07E54D6800701EA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8B275DE07E54D6800701EA8 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A874C2BA07E54CD20019511F /* InstallerObject.h */,
+				A874C2BB07E54CD20019511F /* InstallerObject.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A8B275E007E54D6800701EA8 /* SVG Installer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Updater */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = Updater;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				553B018D18D256F5006578A5 /* SVGImporter.xcodeproj */,
+				A873F73F07E86FB000D77206 /* SVG Icon.icns */,
+				A81BE74F0876504B007D886A /* Installer.icns */,
+				F589968102801C730116BBC0 /* Credits.rtf */,
+				A8B275DF07E54D6800701EA8 /* Info.plist */,
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		553B018E18D256F5006578A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				553B019218D256F5006578A5 /* SVGImporter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A8B275D507E54D6800701EA8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8B275D607E54D6800701EA8 /* InstallerObject.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A8B275D407E54D6800701EA8 /* Installer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 553B016F18D25641006578A5 /* Build configuration list for PBXNativeTarget "Installer" */;
+			buildPhases = (
+				A8B275D507E54D6800701EA8 /* Headers */,
+				A8B275D707E54D6800701EA8 /* Resources */,
+				A8B275DA07E54D6800701EA8 /* Sources */,
+				A8B275DD07E54D6800701EA8 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				553B019618D2572F006578A5 /* PBXTargetDependency */,
+			);
+			name = Installer;
+			productInstallPath = "$(HOME)/Applications";
+			productName = Updater;
+			productReference = A8B275E007E54D6800701EA8 /* SVG Installer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 553B016E18D25641006578A5 /* Build configuration list for PBXProject "Installer" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 0;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Updater */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 553B018E18D256F5006578A5 /* Products */;
+					ProjectRef = 553B018D18D256F5006578A5 /* SVGImporter.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				A8B275D407E54D6800701EA8 /* Installer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		553B019218D256F5006578A5 /* SVGImporter.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SVGImporter.app;
+			remoteRef = 553B019118D256F5006578A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A8B275D707E54D6800701EA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8B275D807E54D6800701EA8 /* MainMenu.nib in Resources */,
+				A8B275D907E54D6800701EA8 /* Credits.rtf in Resources */,
+				A873F74007E86FB000D77206 /* SVG Icon.icns in Resources */,
+				A81BE7500876504B007D886A /* Installer.icns in Resources */,
+				553B019318D256FB006578A5 /* SVGImporter.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A8B275DA07E54D6800701EA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8B275DB07E54D6800701EA8 /* main.m in Sources */,
+				A8B275DC07E54D6800701EA8 /* InstallerObject.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		553B019618D2572F006578A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SVGImporter;
+			targetProxy = 553B019518D2572F006578A5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29B97319FDCFA39411CA2CEA /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		553B016818D25640006578A5 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+			};
+			name = Development;
+		};
+		553B016918D25640006578A5 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+			};
+			name = Deployment;
+		};
+		553B016A18D25640006578A5 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+			};
+			name = Default;
+		};
+		553B016B18D25640006578A5 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "SVG Installer";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		553B016C18D25640006578A5 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUGGING_SYMBOLS = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "SVG Installer";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		553B016D18D25640006578A5 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "SVG Installer";
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		553B016E18D25641006578A5 /* Build configuration list for PBXProject "Installer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				553B016818D25640006578A5 /* Development */,
+				553B016918D25640006578A5 /* Deployment */,
+				553B016A18D25640006578A5 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		553B016F18D25641006578A5 /* Build configuration list for PBXNativeTarget "Installer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				553B016B18D25640006578A5 /* Development */,
+				553B016C18D25640006578A5 /* Deployment */,
+				553B016D18D25640006578A5 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
