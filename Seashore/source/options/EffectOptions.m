@@ -5,8 +5,8 @@
 #import "PluginClass.h"
 #import "InfoPanel.h"
 
-
 @implementation EffectOptions
+
 - (void)awakeFromNib
 {
 	NSInteger effectIndex;
@@ -26,12 +26,12 @@
     }	
 }
 
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(int)rowIndex
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex
 {
 	return [[SeaController seaPlugins] pointPluginsNames][rowIndex];
 }
 
-- (int)numberOfRowsInTableView:(NSTableView *)tableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
 	return [[[SeaController seaPlugins] pointPluginsNames] count];
 }
@@ -43,7 +43,7 @@
 	[[[gCurrentDocument tools] getTool:kEffectTool] reset];
 }
 
-- (int)selectedRow
+- (NSInteger)selectedRow
 {
 	return [effectTable selectedRow];
 }
@@ -65,7 +65,6 @@
 
 - (IBAction)closeEffects:(id)sender
 {
-
 	[NSApp stopModal];
 	if (parentWin){
 		[parentWin removeChildWindow:panel];

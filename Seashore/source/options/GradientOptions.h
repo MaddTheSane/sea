@@ -33,7 +33,7 @@
 	@result		Returns an integer representing the gradient type to be used see
 				GIMPCore).
 */
-- (int)type;
+- (NSInteger)type;
 
 /*!
 	@method		repeat
@@ -41,7 +41,7 @@
 	@result		Returns an integer representing the repeating style to be used
 				see GIMPCore).
 */
-- (int)repeat;
+- (NSInteger)repeat;
 
 /*!
 	@method		supersample

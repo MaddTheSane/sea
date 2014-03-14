@@ -39,7 +39,7 @@
 			[sourceLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"source set document", @"Source: (%d, %d) from whole document"), sourcePoint.x, sourcePoint.y]];
 	}
 	else {
-		[sourceLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"source unset", @"Source: Unset")]];
+		[sourceLabel setStringValue:LOCALSTR(@"source unset", @"Source: Unset")];
 	}
 }
 

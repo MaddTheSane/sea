@@ -33,7 +33,7 @@
         <customObject id="-3" userLabel="Application"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="267" y="-225" width="960" height="724"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="724" height="480"/>
@@ -99,7 +99,7 @@ DQ
                                             <button toolTip="Zoom in on the document view" id="16599">
                                                 <rect key="frame" x="656" y="0.0" width="32" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="new" imagePosition="only" alignment="center" inset="2" id="16793">
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="16793">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -110,7 +110,7 @@ DQ
                                             <button toolTip="Zoom out the document view" id="16597">
                                                 <rect key="frame" x="594" y="0.0" width="32" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="delete" imagePosition="only" alignment="center" inset="2" id="16792">
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" inset="2" id="16792">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -5123,11 +5123,11 @@ DQ
                         <rect key="frame" x="20" y="41" width="216" height="162"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="pW7-Ok-ht6">
-                            <rect key="frame" x="1" y="1" width="214" height="160"/>
+                            <rect key="frame" x="1" y="1" width="198" height="160"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="14" id="11980">
-                                    <rect key="frame" x="0.0" y="0.0" width="214" height="160"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="198" height="160"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5447,14 +5447,12 @@ DQ
         <image name="NSAddTemplate" width="8" height="8"/>
         <image name="NSRemoveTemplate" width="8" height="8"/>
         <image name="center-align" width="19" height="13"/>
-        <image name="delete" width="32" height="23"/>
         <image name="duplicate" width="32" height="23"/>
         <image name="help-button" width="15" height="16"/>
         <image name="hide-info" width="33" height="23"/>
         <image name="info-bg" width="1" height="132"/>
         <image name="layer-info" width="13" height="13"/>
         <image name="left-align" width="18" height="13"/>
-        <image name="new" width="32" height="23"/>
         <image name="normal" width="32" height="23"/>
         <image name="right-align" width="19" height="13"/>
         <image name="trueview-not" width="32" height="23"/>

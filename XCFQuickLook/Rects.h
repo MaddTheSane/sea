@@ -14,12 +14,12 @@
 				<b>Copyright:</b> N/A
 */
 
-#include <Cocoa/Cocoa.h>
+#import <Cocoa/Cocoa.h>
 #ifdef MAIN_COMPILE
 #import <GIMPCore/GIMPCore.h>
-#import <zlib.h>
-#import <unistd.h>
-#import <sys/time.h>
+#include <zlib.h>
+#include <unistd.h>
+#include <sys/time.h>
 #endif
 
 #ifndef INTRECT_T
@@ -65,7 +65,20 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The NSPoint to convert.
 	@result		Returns an IntPoint with similar values to the NSPoint.
 */
- IntPoint NSPointMakeIntPoint(NSPoint point);
+static inline IntPoint NSPointMakeIntPoint(NSPoint point)
+{
+	IntPoint newPoint;
+	
+#if defined(CGFLOAT_IS_DOUBLE) && CGFLOAT_IS_DOUBLE == 1
+	newPoint.x = floor(point.x);
+	newPoint.y = floor(point.y);
+#else
+	newPoint.x = floorf(point.x);
+	newPoint.y = floorf(point.y);
+#endif
+	
+	return newPoint;
+}
 
 /*!
 	@function	NSSizeMakeIntSize
@@ -75,7 +88,20 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The NSSize to convert.
 	@result		Returns an IntSize with similar values to the NSSize.
 */
- IntSize NSSizeMakeIntSize(NSSize size);
+static inline IntSize NSSizeMakeIntSize(NSSize size)
+{
+	IntSize newSize;
+	
+#if defined(CGFLOAT_IS_DOUBLE) && CGFLOAT_IS_DOUBLE == 1
+	newSize.width = ceil(size.width);
+	newSize.height = ceil(size.height);
+#else
+	newSize.width = ceilf(size.width);
+	newSize.height = ceilf(size.height);
+#endif
+	
+	return newSize;
+}
 
 /*!
 	@function	IntPointMakeNSPoint
@@ -84,16 +110,15 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The IntPoint to convert.
 	@result		Returns a NSPoint with similar values to the IntPoint.
 */
- NSPoint IntPointMakeNSPoint(IntPoint point);
-
-/*!
-	@function	IntSizeMakeNSSize
-	@discussion	Given an IntSize makes an NSSize with similar values.
-	@param		size
-				The IntSize to convert.
-	@result		Returns a NSSize with similar values to the IntSize.
-*/
- NSSize IntSizeMakeNSSize(IntSize size);
+static inline NSPoint IntPointMakeNSPoint(IntPoint point)
+{
+	NSPoint newPoint;
+	
+	newPoint.x = point.x;
+	newPoint.y = point.y;
+	
+	return newPoint;
+}
 
 /*!
 	@function	IntMakePoint
@@ -104,7 +129,32 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The y co-ordinate of the new point.
 	@result		Returns an IntPoint with the given co-ordinates.
 */
- IntPoint IntMakePoint(int x, int y);
+static inline IntPoint IntMakePoint(int x, int y)
+{
+	IntPoint newPoint;
+	
+	newPoint.x = x;
+	newPoint.y = y;
+	
+	return newPoint;
+}
+
+/*!
+	@function	IntSizeMakeNSSize
+	@discussion	Given an IntSize makes an NSSize with similar values.
+	@param		size
+				The IntSize to convert.
+	@result		Returns a NSSize with similar values to the IntSize.
+*/
+static inline NSSize IntSizeMakeNSSize(IntSize size)
+{
+	NSSize newSize;
+	
+	newSize.width = size.width;
+	newSize.height = size.height;
+	
+	return newSize;
+}
 
 /*!
 	@function	IntMakeSize
@@ -115,7 +165,15 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The height of the new size.
 	@result		Returns an IntSize with the given values.
 */
- IntSize IntMakeSize(int width, int height);
+static inline IntSize IntMakeSize(int width, int height)
+{
+	IntSize newSize;
+	
+	newSize.width = width;
+	newSize.height = height;
+	
+	return newSize;
+}
 
 /*!
 	@function	IntMakeRect
@@ -130,7 +188,17 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The height of the new rectangle.
 	@result		Returns an IntRect with the given values.
 */
- IntRect IntMakeRect(int x, int y, int width, int height);
+static inline IntRect IntMakeRect(int x, int y, int width, int height)
+{
+	IntRect newRect;
+	
+	newRect.origin.x = x;
+	newRect.origin.y = y;
+	newRect.size.width = width;
+	newRect.size.height = height;
+	
+	return newRect;
+}
 
 /*!
 	@function	IntOffsetRect
@@ -143,7 +211,11 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 	@param		y
 				The amount by which to offset the y co-ordinates.
 */
- void IntOffsetRect(IntRect *rect, int x, int y);
+static inline void IntOffsetRect(IntRect *rect, int x, int y)
+{
+	rect->origin.x += x;
+	rect->origin.y += y;
+}
 
 /*!
 	@function	IntPointInRect
@@ -156,7 +228,15 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The rectangle in which to test for the point.
 	@result		YES if the point lies within the rectangle, NO otherwise.
 */
- BOOL IntPointInRect(IntPoint point, IntRect rect);
+static inline BOOL IntPointInRect(IntPoint point, IntRect rect)
+{
+	if (point.x < rect.origin.x) return NO;
+	if (point.x >= rect.origin.x + rect.size.width) return NO;
+	if (point.y < rect.origin.y) return NO;
+	if (point.y >= rect.origin.y + rect.size.height) return NO;
+	
+	return YES;
+}
 
 /*!
 	@function	IntContainsRect
@@ -170,7 +250,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 	@result		Returns YES if the bigRect entirely contains the littleRect, NO
 				otherwise.
 */
- BOOL IntContainsRect(IntRect bigRect, IntRect littleRect);
+__private_extern__ BOOL IntContainsRect(IntRect bigRect, IntRect littleRect);
 
 /*!
 	@function	IntConstrainRect
@@ -182,7 +262,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 	@result		Returns an IntRect that is the littleRect constrained to the
 				bigRect.
 */
- IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect);
+__private_extern__ IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect);
 
 /*!
 	@function	NSConstrainRect
@@ -194,7 +274,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 	@result		Returns an NSRect that is the littleRect constrained to the
 				bigRect.
 */
- NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect);
+__private_extern__ NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect);
 
 /*!
 	@function	IntSumRects
@@ -205,7 +285,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The second IntRect that we are adding to the aguend.
 	@result		Returns an IntRect that contains the aguend and addend.
 */
- IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
+__private_extern__ IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
 
 /*!
 	@function	NSRectMakeIntRect
@@ -215,7 +295,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The NSRect to convert.
 	@result		Returns an IntRect at least the size of NSRect.
 */
- IntRect NSRectMakeIntRect(NSRect rect);
+__private_extern__ IntRect NSRectMakeIntRect(NSRect rect);
 
 /*!
 	@function	IntRectMakeNSRect
@@ -224,7 +304,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The IntRect to convert.
 	@result		Returns an NSRect with similar values to the NSRect.
 */
- NSRect IntRectMakeNSRect(IntRect rect);
+__private_extern__ NSRect IntRectMakeNSRect(IntRect rect);
 
 /*!
 	@function	NSPointRotateNSPoint
@@ -237,4 +317,4 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The number of radians that point is rotated.
 	@result		Returns an NSPoint with the defined rotation.
 */
- NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians);
+__private_extern__ NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians);

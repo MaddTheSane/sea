@@ -7,7 +7,7 @@
 
 - (void)awakeFromNib
 {
-	int index;
+	NSInteger index;
 	
 	if ([gUserDefaults objectForKey:@"gradient type"] == NULL) {
 		[typePopup selectItemAtIndex:GIMP_GRADIENT_LINEAR];
@@ -32,12 +32,12 @@
 	}
 }
 
-- (int)type
+- (NSInteger)type
 {
 	return [[typePopup selectedItem] tag];
 }
 
-- (int)repeat
+- (NSInteger)repeat
 {
 	return [[repeatPopup selectedItem] tag];
 }

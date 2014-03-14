@@ -25,7 +25,7 @@ static inline PixelRegion pixel_region_make(unsigned char *data, int width, int 
 	return pr;
 }
 
-inline void pixel_region_info(PixelRegion pr, int *width, int *height, int *spp)
+static inline void pixel_region_info(PixelRegion pr, int *width, int *height, int *spp)
 {
 	*width = pr.w;
 	*height = pr.h;
@@ -57,4 +57,3 @@ static inline void pixel_region_get_row(PixelRegion *pr, gint x, gint y, gint w,
 		}
 	}
 }
-

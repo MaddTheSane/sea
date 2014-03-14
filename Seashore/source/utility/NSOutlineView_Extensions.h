@@ -13,7 +13,8 @@
 
 @end
 
-@interface SeaOutlineView : NSOutlineView{
+@interface SeaOutlineView : NSOutlineView
+{
 	// The document the outline view is in
 	IBOutlet id document;
 	

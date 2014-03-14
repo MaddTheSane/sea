@@ -64,11 +64,12 @@
 }
 
 - (void)selectItems:(NSArray *)items byExtendingSelection:(BOOL)extend {
-    int i, totalCount = [items count];
+    NSInteger i, totalCount = [items count];
     if (extend==NO) [self deselectAll:nil];
     for (i = 0; i < totalCount; i++) {
-        int row = [self rowForItem:items[i]];
-        if(row>=0) [self selectRow: row byExtendingSelection:YES];
+        NSInteger row = [self rowForItem:items[i]];
+        if(row>=0)
+			[self selectRow: row byExtendingSelection:YES];
     }
 }
 

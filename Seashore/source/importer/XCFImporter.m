@@ -9,17 +9,14 @@
 
 @implementation XCFImporter
 
-static inline void fix_endian_read(int *input, int size)
+static inline void fix_endian_read(int *input, size_t size)
 {
 #ifdef __LITTLE_ENDIAN__
-	int i;
-	
-	for (i = 0; i < size; i++) {
-		input[i] = ntohl(input[i]);
-	}
+	dispatch_apply(size, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		input[i] = CFSwapInt32BigToHost(input[i]);
+	});
 #endif
 }
-
 
 - (BOOL)readHeader:(FILE *)file
 {
@@ -163,8 +160,6 @@ static inline void fix_endian_read(int *input, int size)
 		if (offset != 0) {
 			layer = [[XCFLayer alloc] initWithFile:file offset:offset document:doc sharedInfo:&info];
 			if (layer == NULL) {
-				for (i = 0; i < [layers count]; i++)
-					layers[i];
 				fclose(file);
 				return NO;
 			}

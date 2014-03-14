@@ -27,29 +27,6 @@
 	id parentWin;
 }
 
-
-/*!
-	@method		tableView:objectValueForTableColumn:row:
-	@discussion	Returns the name of a given row in the effect table.
-	@param		tableView
-				Ignored.
-	@param		tableColumn
-				Ignored.
-	@param		rowIndex
-				The row of the table.
-	@result		An NSString representing the name of the effect.
-*/
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(int)rowIndex;
-
-/*!
-	@method		numberOfRowsInTableView:
-	@discussion	Returns the number of rows in the effect table.
-	@param		tableView
-				Ignored.
-	@result		An integer representing the number of rows.
-*/
-- (int)numberOfRowsInTableView:(NSTableView *)tableView;
-
 /*!
 	@method		tableViewSelectionDidChange:
 	@discussion	Called when the effect table's selection changes.

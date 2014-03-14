@@ -2271,8 +2271,6 @@
 		DC0D5652104205E10037378A /* XCFSpotlight.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFSpotlight.xcodeproj; path = ../XCFSpotlight/XCFSpotlight.xcodeproj; sourceTree = SOURCE_ROOT; };
 		DC1124480FB08A490040BB8A /* SeaShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaShadowView.h; sourceTree = "<group>"; };
 		DC1124490FB08A490040BB8A /* SeaShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaShadowView.m; sourceTree = "<group>"; };
-		DC2004B01055FF37006B673A /* WebSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSlider.h; sourceTree = "<group>"; };
-		DC2004B11055FF37006B673A /* WebSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSlider.m; sourceTree = "<group>"; };
 		DC30949C108A95AB0084361E /* SeaWindowContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaWindowContent.h; sourceTree = "<group>"; };
 		DC30949D108A95AB0084361E /* SeaWindowContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaWindowContent.m; sourceTree = "<group>"; };
 		DC3B6F5C0FD37C13000F0427 /* LayerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerDataSource.h; sourceTree = "<group>"; };
@@ -4434,8 +4432,6 @@
 				DCC905500FC62CDD00C74521 /* Layer Pane */,
 				DC414BA8102F54FD00B66F04 /* StatusUtility.h */,
 				DC414BA9102F54FD00B66F04 /* StatusUtility.m */,
-				DC2004B01055FF37006B673A /* WebSlider.h */,
-				DC2004B11055FF37006B673A /* WebSlider.m */,
 				DCD6A5A3114DA294002A4CFD /* WarningsUtility.h */,
 				DCD6A5A4114DA294002A4CFD /* WarningsUtility.m */,
 				DCA87C09105A195800234465 /* BannerView.h */,

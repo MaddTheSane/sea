@@ -9,8 +9,8 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface TextureExporter : NSObject {
-
+@interface TextureExporter : NSObject <NSTableViewDataSource>
+{
 	// The document associated with this object
     IBOutlet id document;
 
@@ -26,7 +26,6 @@
 	IBOutlet id newCategoryRadio;
 	
 	IBOutlet id nameTextbox;
-
 }
 
 /*!
@@ -62,13 +61,5 @@
 - (IBAction)existingCategoryClick:(id)sender;
 
 - (IBAction)newCategoryClick:(id)sender;
-
-/*
-*/
-- (void)selectButton:(int)button;
-
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)column row:(int)row;
-
-- (int)numberOfRowsInTableView:(NSTableView *)tableView;
 
 @end

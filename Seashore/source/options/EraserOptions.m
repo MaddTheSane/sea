@@ -9,7 +9,7 @@
 
 - (void)awakeFromNib
 {
-	int value;
+	NSInteger value;
 	
 	if ([gUserDefaults objectForKey:@"eraser opacity"] == NULL) {
 		value = 100;
@@ -19,7 +19,7 @@
 		if (value < [opacitySlider minValue] || value > [opacitySlider maxValue])
 			value = 100;
 	}
-	[opacitySlider setIntValue:value];
+	[opacitySlider setIntegerValue:value];
 	[opacityLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"opacity", @"Opacity: %d%%"), value]];
 	[mimicBrushCheckbox setState:[gUserDefaults boolForKey:@"eraser mimicBrush"]];
 }

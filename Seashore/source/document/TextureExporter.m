@@ -82,14 +82,14 @@ enum {
 	}
 }
 
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)column row:(int)row
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)column row:(NSInteger)row
 {
 	NSArray *groupNames = [[[SeaController utilitiesManager] textureUtilityFor:document] groupNames];
 
 	return groupNames[row];
 }
 
-- (int)numberOfRowsInTableView:(NSTableView *)tableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
 	NSArray *groupNames = [[[SeaController utilitiesManager] textureUtilityFor:document] groupNames];
 
