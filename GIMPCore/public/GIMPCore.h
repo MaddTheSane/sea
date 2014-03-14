@@ -22,6 +22,9 @@
 #ifndef GIMPCORE_H
 #define GIMPCORE_H
 
+#include <unistd.h>
+#include <stdlib.h>
+
 #ifndef INTRECT_T
 #define INTRECT_T
 typedef struct { int x; int y; } IntPoint;

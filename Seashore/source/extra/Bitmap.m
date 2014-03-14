@@ -1,4 +1,5 @@
-#include "Bitmap.h"
+#include <stdlib.h>
+#import "Bitmap.h"
 #import "bitstring.h"
 
 #define kMaxPtrsInPtrRecord 8
@@ -66,7 +67,7 @@ static inline void freePtrs(PtrRecord ptrs)
 	}
 }
 
-void rotate_bytes(unsigned char *data, int pos1, int pos2)
+static inline void rotate_bytes(unsigned char *data, int pos1, int pos2)
 {
 	unsigned char tmp;
 	int i;

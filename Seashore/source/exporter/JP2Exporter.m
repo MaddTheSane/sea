@@ -62,11 +62,7 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 
 - (BOOL)hasOptions
 {
-#ifdef MACOS_10_4_COMPILE
 	return YES;
-#else
-	return NO;
-#endif
 }
 
 - (float)reviseCompression
@@ -121,7 +117,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 
 - (void)showOptions:(id)document
 {
-#ifdef MACOS_10_4_COMPILE
 	unsigned char *data;
 	int width = [(SeaContent *)[document contents] width], height = [(SeaContent *)[document contents] height], spp = [[document contents] spp];
 	int i, j, k, x, y;
@@ -185,12 +180,10 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	else
 		[gUserDefaults setInteger:printCompression forKey:@"jp2 print compression"];
 	free(sampleData);
-#endif
 }
 
 - (IBAction)compressionChanged:(id)sender
 {
-#ifdef MACOS_10_4_COMPILE
 	id compressImage;
 	float value;
 	
@@ -203,12 +196,10 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	[compressImage setSize:NSMakeSize(160, 160)];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
-#endif
 }
 
 - (IBAction)targetChanged:(id)sender
 {
-#ifdef MACOS_10_4_COMPILE
 	id compressImage;
 	float value;
 	
@@ -228,14 +219,11 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	[compressImage setSize:NSMakeSize(160, 160)];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
-#endif
 }
 
 - (IBAction)endPanel:(id)sender
 {
-#ifdef MACOS_10_4_COMPILE
 	[NSApp stopModal];
-#endif
 }
 
 - (NSString *)title
@@ -258,7 +246,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 
 - (BOOL)writeDocument:(id)document toFile:(NSString *)path
 {
-#ifdef MACOS_10_4_COMPILE
 	int width, height, spp;
 	unsigned char *srcData, *destData;
 	NSBitmapImageRep *imageRep;
@@ -328,9 +315,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 		free(destData);
 	
 	return YES;
-#else
-	return NO;
-#endif
 }
 
 @end

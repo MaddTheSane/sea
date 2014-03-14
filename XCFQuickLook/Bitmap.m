@@ -9,7 +9,7 @@ typedef struct {
 	int init_size;
 } PtrRecord;
 
- PtrRecord initPtrs(unsigned char *initial, int init_size)
+static inline PtrRecord initPtrs(unsigned char *initial, int init_size)
 {
 	PtrRecord ptrs;
 	
@@ -20,12 +20,12 @@ typedef struct {
 	return ptrs;
 }
 
- unsigned char *getPtr(PtrRecord ptrs)
+static inline unsigned char *getPtr(PtrRecord ptrs)
 {
 	return ptrs.ptrs[ptrs.n - 1];
 }
 
- unsigned char *getFinalPtr(PtrRecord ptrs)
+static inline unsigned char *getFinalPtr(PtrRecord ptrs)
 {
 	unsigned char *result;
 	
@@ -40,7 +40,7 @@ typedef struct {
 	return result;
 }
 
-unsigned char *mallocPtr(PtrRecord *ptrs, int size)
+static inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
 {
 	unsigned char *result;
 	
@@ -57,7 +57,7 @@ unsigned char *mallocPtr(PtrRecord *ptrs, int size)
 	return result;
 }
 
- void freePtrs(PtrRecord ptrs)
+static inline void freePtrs(PtrRecord ptrs)
 {
 	int i;
 	
@@ -66,7 +66,7 @@ unsigned char *mallocPtr(PtrRecord *ptrs, int size)
 	}
 }
 
- void rotate_bytes(unsigned char *data, int pos1, int pos2)
+static inline void rotate_bytes(unsigned char *data, int pos1, int pos2)
 {
 	unsigned char tmp;
 	int i;

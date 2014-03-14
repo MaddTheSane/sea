@@ -983,7 +983,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[self setNeedsDisplay:YES];
 }
 
-#ifdef MACOS_10_4_COMPILE
 - (void)tabletProximity:(NSEvent *)theEvent
 {
 	if (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_3) {
@@ -993,7 +992,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		}
 	}
 }
-#endif
 
 - (void)tabletPoint:(NSEvent *)theEvent
 {

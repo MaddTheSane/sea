@@ -24,11 +24,7 @@
 	sspp = [imageRep samplesPerPixel];
 	srcPtr = [imageRep bitmapData];
 	format = 0;
-	#ifdef MACOS_10_4_COMPILE
-	if (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_3) {
 		format = [imageRep bitmapFormat];
-	}
-	#endif
 	
 	// Determine the width and height of this layer
 	width = [imageRep pixelsWide];
@@ -77,13 +73,9 @@
 	}
 	
 	// Unpremultiply the image if required
-	#ifdef MACOS_10_4_COMPILE
 	if (hasAlpha && !((format & NSAlphaNonpremultipliedBitmapFormat) >> 1)) {
-	#endif
 		unpremultiplyBitmap(spp, data, data, width * height);
-	#ifdef MACOS_10_4_COMPILE
 	}
-	#endif
 		
 	return self;
 }
