@@ -152,7 +152,7 @@
 	centerBased = ([typeRadios selectedColumn] == 1);
 	[panel setAlphaValue:1.0];
 	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%d", scale]];
+	[scaleLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)scale]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 

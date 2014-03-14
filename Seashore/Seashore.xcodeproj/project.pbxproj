@@ -708,6 +708,22 @@
 		55E5E4C818D273E40082E60F /* VertStripesClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5E35F18D26A300082E60F /* VertStripesClass.m */; };
 		55E5E4C918D277530082E60F /* StandardMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC14FF04C0F1A700A80207 /* StandardMerge.m */; };
 		55E5E4CA18D277D90082E60F /* ColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC150304C0F2FD00A80207 /* ColorConversion.m */; };
+		55E5E4CD18D27A370082E60F /* Brightness.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3A518D26A8F0082E60F /* Brightness.bundle */; };
+		55E5E4CE18D27A370082E60F /* Checkerboard.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3B518D26A950082E60F /* Checkerboard.bundle */; };
+		55E5E4CF18D27A370082E60F /* CMYK.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3CA18D26D0D0082E60F /* CMYK.bundle */; };
+		55E5E4D018D27A370082E60F /* Gaussian.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3DA18D26D100082E60F /* Gaussian.bundle */; };
+		55E5E4D118D27A370082E60F /* Greyscale.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3EA18D26D120082E60F /* Greyscale.bundle */; };
+		55E5E4D218D27A370082E60F /* Horizontal Stripes.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */; };
+		55E5E4D318D27A370082E60F /* HSV.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E41C18D26EC00082E60F /* HSV.bundle */; };
+		55E5E4D418D27A370082E60F /* Invert.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E42C18D26EC40082E60F /* Invert.bundle */; };
+		55E5E4D518D27A370082E60F /* Median.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E43C18D26EC70082E60F /* Median.bundle */; };
+		55E5E4D618D27A370082E60F /* Pixellate.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E44818D26FB50082E60F /* Pixellate.bundle */; };
+		55E5E4D718D27A370082E60F /* Posterize.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E45418D26FB80082E60F /* Posterize.bundle */; };
+		55E5E4D818D27A370082E60F /* Random.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E46018D26FBB0082E60F /* Random.bundle */; };
+		55E5E4D918D27A370082E60F /* Sepia.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E46C18D26FBF0082E60F /* Sepia.bundle */; };
+		55E5E4DA18D27A370082E60F /* Sharpen.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E47818D26FC50082E60F /* Sharpen.bundle */; };
+		55E5E4DB18D27A370082E60F /* Threshold.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E48418D26FC70082E60F /* Threshold.bundle */; };
+		55E5E4DC18D27A370082E60F /* Vertical Stripes.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */; };
 		A80983D70871420900F7412F /* JP2Exporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A80983D50871420900F7412F /* JP2Exporter.m */; };
 		A8138D660CEFD5FA00C2F880 /* Seashore Effects Guide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8138D640CEFD5FA00C2F880 /* Seashore Effects Guide.pdf */; };
 		A81F6EB307C2EE35005C2DBD /* XBMImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A81F6EB107C2EE35005C2DBD /* XBMImporter.m */; };
@@ -1435,6 +1451,13 @@
 			remoteGlobalIDString = 55E5E48618D26FD70082E60F;
 			remoteInfo = "HSV copy 2 copy";
 		};
+		55E5E4CB18D27A1E0082E60F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55E5E39318D26A870082E60F;
+			remoteInfo = "Universal Plugs";
+		};
 		A89B83D80A426D8200AD6941 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 35B158630A2C089A005B688F /* Brushed.xcodeproj */;
@@ -1465,6 +1488,22 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				55E5E4CD18D27A370082E60F /* Brightness.bundle in Copy PlugIns */,
+				55E5E4CE18D27A370082E60F /* Checkerboard.bundle in Copy PlugIns */,
+				55E5E4CF18D27A370082E60F /* CMYK.bundle in Copy PlugIns */,
+				55E5E4D018D27A370082E60F /* Gaussian.bundle in Copy PlugIns */,
+				55E5E4D118D27A370082E60F /* Greyscale.bundle in Copy PlugIns */,
+				55E5E4D218D27A370082E60F /* Horizontal Stripes.bundle in Copy PlugIns */,
+				55E5E4D318D27A370082E60F /* HSV.bundle in Copy PlugIns */,
+				55E5E4D418D27A370082E60F /* Invert.bundle in Copy PlugIns */,
+				55E5E4D518D27A370082E60F /* Median.bundle in Copy PlugIns */,
+				55E5E4D618D27A370082E60F /* Pixellate.bundle in Copy PlugIns */,
+				55E5E4D718D27A370082E60F /* Posterize.bundle in Copy PlugIns */,
+				55E5E4D818D27A370082E60F /* Random.bundle in Copy PlugIns */,
+				55E5E4D918D27A370082E60F /* Sepia.bundle in Copy PlugIns */,
+				55E5E4DA18D27A370082E60F /* Sharpen.bundle in Copy PlugIns */,
+				55E5E4DB18D27A370082E60F /* Threshold.bundle in Copy PlugIns */,
+				55E5E4DC18D27A370082E60F /* Vertical Stripes.bundle in Copy PlugIns */,
 				55BD2E6318D103CE00C4EE1B /* Edges+.bundle in Copy PlugIns */,
 				55BD2E6418D103CE00C4EE1B /* Edge Work+.bundle in Copy PlugIns */,
 				55BD2E6518D103CE00C4EE1B /* Exposure+.bundle in Copy PlugIns */,
@@ -2024,18 +2063,18 @@
 		55E5E3B718D26AC50082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Brightness.strings; sourceTree = "<group>"; };
 		55E5E3CA18D26D0D0082E60F /* CMYK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CMYK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E3DA18D26D100082E60F /* Gaussian.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Gaussian.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E3EA18D26D120082E60F /* Checkerboard copy 2.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checkerboard copy 2.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E5E3EA18D26D120082E60F /* Greyscale.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Greyscale.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E3F918D26E0F0082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Gaussian.strings; sourceTree = "<group>"; };
 		55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Horizontal Stripes.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E41C18D26EC00082E60F /* HSV.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HSV.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E42C18D26EC40082E60F /* Invert.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Invert.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E43C18D26EC70082E60F /* Median.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Median.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E44818D26FB50082E60F /* Median copy.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Median copy.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E45418D26FB80082E60F /* Median copy 2.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Median copy 2.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E46018D26FBB0082E60F /* Median copy copy.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Median copy copy.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E46C18D26FBF0082E60F /* Median copy copy 2.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Median copy copy 2.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E47818D26FC50082E60F /* HSV copy.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HSV copy.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E48418D26FC70082E60F /* HSV copy 2.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HSV copy 2.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E5E44818D26FB50082E60F /* Pixellate.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pixellate.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E5E45418D26FB80082E60F /* Posterize.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Posterize.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E5E46018D26FBB0082E60F /* Random.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Random.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E5E46C18D26FBF0082E60F /* Sepia.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sepia.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E5E47818D26FC50082E60F /* Sharpen.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sharpen.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E5E48418D26FC70082E60F /* Threshold.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Threshold.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vertical Stripes.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E49218D270410082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HSV.strings; sourceTree = "<group>"; };
 		55E5E49318D2704B0082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Pixellate.strings; sourceTree = "<group>"; };
@@ -2216,7 +2255,7 @@
 		A8E5085804576FB200A80207 /* OptionsUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsUtility.h; sourceTree = "<group>"; };
 		A8E5085904576FB200A80207 /* OptionsUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsUtility.m; sourceTree = "<group>"; };
 		A8EDF154078959C80022BB31 /* Seashore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seashore.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8EDF16707895A9F0022BB31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		A8EDF16707895A9F0022BB31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		A8EDF39F07895DBE0022BB31 /* PluginClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginClass.h; path = source/application/PluginClass.h; sourceTree = SOURCE_ROOT; };
 		A8EF9CC00536DE2000A80207 /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rects.m; sourceTree = "<group>"; };
 		A8F0FFCE0A35E06200259FD6 /* GIFExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIFExporter.h; sourceTree = "<group>"; };
@@ -3118,17 +3157,17 @@
 				55E5E3B518D26A950082E60F /* Checkerboard.bundle */,
 				55E5E3CA18D26D0D0082E60F /* CMYK.bundle */,
 				55E5E3DA18D26D100082E60F /* Gaussian.bundle */,
-				55E5E3EA18D26D120082E60F /* Checkerboard copy 2.bundle */,
+				55E5E3EA18D26D120082E60F /* Greyscale.bundle */,
 				55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */,
 				55E5E41C18D26EC00082E60F /* HSV.bundle */,
 				55E5E42C18D26EC40082E60F /* Invert.bundle */,
 				55E5E43C18D26EC70082E60F /* Median.bundle */,
-				55E5E44818D26FB50082E60F /* Median copy.bundle */,
-				55E5E45418D26FB80082E60F /* Median copy 2.bundle */,
-				55E5E46018D26FBB0082E60F /* Median copy copy.bundle */,
-				55E5E46C18D26FBF0082E60F /* Median copy copy 2.bundle */,
-				55E5E47818D26FC50082E60F /* HSV copy.bundle */,
-				55E5E48418D26FC70082E60F /* HSV copy 2.bundle */,
+				55E5E44818D26FB50082E60F /* Pixellate.bundle */,
+				55E5E45418D26FB80082E60F /* Posterize.bundle */,
+				55E5E46018D26FBB0082E60F /* Random.bundle */,
+				55E5E46C18D26FBF0082E60F /* Sepia.bundle */,
+				55E5E47818D26FC50082E60F /* Sharpen.bundle */,
+				55E5E48418D26FC70082E60F /* Threshold.bundle */,
 				55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */,
 			);
 			name = Products;
@@ -5617,7 +5656,7 @@
 			);
 			name = Greyscale;
 			productName = CIAffineTile;
-			productReference = 55E5E3EA18D26D120082E60F /* Checkerboard copy 2.bundle */;
+			productReference = 55E5E3EA18D26D120082E60F /* Greyscale.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55E5E3FE18D26EBD0082E60F /* Horizontal Stripes */ = {
@@ -5702,7 +5741,7 @@
 			);
 			name = Pixellate;
 			productName = CIAffineTile;
-			productReference = 55E5E44818D26FB50082E60F /* Median copy.bundle */;
+			productReference = 55E5E44818D26FB50082E60F /* Pixellate.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55E5E44A18D26FB80082E60F /* Posterize */ = {
@@ -5719,7 +5758,7 @@
 			);
 			name = Posterize;
 			productName = CIAffineTile;
-			productReference = 55E5E45418D26FB80082E60F /* Median copy 2.bundle */;
+			productReference = 55E5E45418D26FB80082E60F /* Posterize.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55E5E45618D26FBB0082E60F /* Random */ = {
@@ -5736,7 +5775,7 @@
 			);
 			name = Random;
 			productName = CIAffineTile;
-			productReference = 55E5E46018D26FBB0082E60F /* Median copy copy.bundle */;
+			productReference = 55E5E46018D26FBB0082E60F /* Random.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55E5E46218D26FBF0082E60F /* Sepia */ = {
@@ -5753,7 +5792,7 @@
 			);
 			name = Sepia;
 			productName = CIAffineTile;
-			productReference = 55E5E46C18D26FBF0082E60F /* Median copy copy 2.bundle */;
+			productReference = 55E5E46C18D26FBF0082E60F /* Sepia.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55E5E46E18D26FC50082E60F /* Sharpen */ = {
@@ -5770,7 +5809,7 @@
 			);
 			name = Sharpen;
 			productName = CIAffineTile;
-			productReference = 55E5E47818D26FC50082E60F /* HSV copy.bundle */;
+			productReference = 55E5E47818D26FC50082E60F /* Sharpen.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55E5E47A18D26FC70082E60F /* Threshold */ = {
@@ -5787,7 +5826,7 @@
 			);
 			name = Threshold;
 			productName = CIAffineTile;
-			productReference = 55E5E48418D26FC70082E60F /* HSV copy 2.bundle */;
+			productReference = 55E5E48418D26FC70082E60F /* Threshold.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55E5E48618D26FD70082E60F /* Vertical Stripes */ = {
@@ -5822,6 +5861,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				55E5E4CC18D27A1E0082E60F /* PBXTargetDependency */,
 				55909F2118D0083800F43F90 /* PBXTargetDependency */,
 				35B157380A2C015A005B688F /* PBXTargetDependency */,
 				35B1573A0A2C015E005B688F /* PBXTargetDependency */,
@@ -7914,6 +7954,11 @@
 			isa = PBXTargetDependency;
 			target = 55E5E48618D26FD70082E60F /* Vertical Stripes */;
 			targetProxy = 55E5E4AC18D270920082E60F /* PBXContainerItemProxy */;
+		};
+		55E5E4CC18D27A1E0082E60F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55E5E39318D26A870082E60F /* Universal Plugs */;
+			targetProxy = 55E5E4CB18D27A1E0082E60F /* PBXContainerItemProxy */;
 		};
 		A89B83D90A426D8200AD6941 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

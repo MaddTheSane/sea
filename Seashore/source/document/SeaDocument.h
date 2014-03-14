@@ -3,6 +3,7 @@
 @class SeaSelection, SeaWhiteboard;
 
 @class GIFExporter, JPEGExporter, JP2Exporter, PNGExporter, TIFFExporter, XCFExporter;
+@class TextureExporter;
 
 /*!
 	@class		SeaDocument
@@ -54,7 +55,7 @@
 	IBOutlet XCFExporter *xcfExporter;
 	
 	// The special texture exporter
-	IBOutlet id textureExporter;
+	IBOutlet TextureExporter *textureExporter;
 	
 	// An array of all possible exporters
 	NSArray *exporters;

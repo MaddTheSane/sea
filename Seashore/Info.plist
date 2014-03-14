@@ -12,15 +12,14 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>xcf</string>
-				<string>XCF</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>XCF Icon.icns</string>
+			<string>XCF Icon</string>
 			<key>CFBundleTypeName</key>
 			<string>GIMP image</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
-				<string>XCF</string>
+				<string>XCF </string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -39,15 +38,14 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>bmp</string>
-				<string>BMP</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>BMP Icon.icns</string>
+			<string>BMP Icon</string>
 			<key>CFBundleTypeName</key>
 			<string>Windows bitmap image</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
-				<string>BMP</string>
+				<string>BMP </string>
 				<string>BMPf</string>
 			</array>
 			<key>CFBundleTypeRole</key>
@@ -67,10 +65,9 @@
 				<string>pic</string>
 				<string>pict</string>
 				<string>PCT</string>
-				<string>PICT</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>PICT Icon.icns</string>
+			<string>PICT Icon</string>
 			<key>CFBundleTypeName</key>
 			<string>QuickDraw picture</string>
 			<key>CFBundleTypeOSTypes</key>
@@ -92,10 +89,9 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>pdf</string>
-				<string>PDF</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>PDF Icon.icns</string>
+			<string>PDF Icon</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>application/pdf</string>
@@ -104,7 +100,7 @@
 			<string>Portable Document Format (PDF)</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
-				<string>PDF</string>
+				<string>PDF </string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
@@ -121,12 +117,10 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>jpg</string>
-				<string>JPG</string>
 				<string>jpeg</string>
-				<string>JPEG</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>JPEG Icon.icns</string>
+			<string>JPEG Icon</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>image/jpeg</string>
@@ -152,15 +146,14 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>xbm</string>
-				<string>XBM</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>XBM Icon.icns</string>
+			<string>XBM Icon</string>
 			<key>CFBundleTypeName</key>
 			<string>X11 bitmap</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
-				<string>XBM</string>
+				<string>XBM </string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
@@ -177,12 +170,10 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>tiff</string>
-				<string>TIFF</string>
 				<string>tif</string>
-				<string>TIF</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>TIFF Icon.icns</string>
+			<string>TIFF Icon</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>image/tiff</string>
@@ -208,10 +199,9 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>png</string>
-				<string>PNG</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>PNG Icon.icns</string>
+			<string>PNG Icon</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>image/png</string>
@@ -230,17 +220,14 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
-			<key>NSDocumentClass</key>
-			<string>SeaDocument</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>jp2</string>
-				<string>JP2</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>JP2 Icon.icns</string>
+			<string>JP2 Icon</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>image/jp2</string>
@@ -249,7 +236,8 @@
 			<string>JPEG 2000 image</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
-				<string>jp2</string>
+				<string>jp2 </string>
+				<string>jp2k</string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -261,17 +249,14 @@
 			<false/>
 			<key>NSDocumentClass</key>
 			<string>SeaDocument</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>Binary</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>gif</string>
-				<string>GIF</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>GIF Icon.icns</string>
+			<string>GIF Icon</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>image/gif</string>
@@ -280,7 +265,7 @@
 			<string>Graphics Interchange Format (GIF)</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
-				<string>GIF</string>
+				<string>GIF </string>
 				<string>GIFf</string>
 				<string>GIFF</string>
 			</array>
@@ -294,14 +279,11 @@
 			<false/>
 			<key>NSDocumentClass</key>
 			<string>SeaDocument</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>Binary</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>svg</string>
-				<string>SVG</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>SVG Icon.icns</string>
@@ -313,8 +295,8 @@
 			<string>SVG document</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
-				<string>svg</string>
-				<string>SVG</string>
+				<string>svg </string>
+				<string>SVG </string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
@@ -326,14 +308,12 @@
 			<false/>
 			<key>NSDocumentClass</key>
 			<string>SeaDocument</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>Binary</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Seashore 0.5.2 - GNU General Public License</string>
+	<string>Seashore 0.6.0 - GNU General Public License</string>
 	<key>CFBundleIdentifier</key>
 	<string>net.sourceforge.seashore</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -343,15 +323,15 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.5.2</string>
+	<string>0.6.0</string>
 	<key>CFBundleSignature</key>
 	<string>SeSh</string>
 	<key>CFBundleVersion</key>
-	<string>20100909</string>
+	<string>20140313</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright (c) 1995-2010 Mark Pazolli et al.
+	<string>Copyright © 1995-2010 Mark Pazolli et al.
 GNU General Public License v2.0</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
@@ -376,14 +356,17 @@ GNU General Public License v2.0</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>com.apple.ostype</key>
-				<string>XCF</string>
+				<array>
+					<string>XCF </string>
+				</array>
 				<key>public.filename-extension</key>
 				<array>
 					<string>xcf</string>
-					<string>XCF</string>
 				</array>
 				<key>public.mime-type</key>
-				<string>image/x-xcf</string>
+				<array>
+					<string>image/x-xcf</string>
+				</array>
 			</dict>
 		</dict>
 	</array>
