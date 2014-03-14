@@ -11231,6 +11231,7 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = Seashore;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -11254,6 +11255,7 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = Seashore;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -11845,6 +11847,7 @@
 				55E5E39618D26A870082E60F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55E5E3A218D26A8F0082E60F /* Build configuration list for PBXNativeTarget "Brightness" */ = {
 			isa = XCConfigurationList;

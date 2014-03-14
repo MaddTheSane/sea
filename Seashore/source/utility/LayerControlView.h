@@ -22,10 +22,10 @@
 	IBOutlet id rightPane;
 	
 	// The buttons
-	IBOutlet id newButton;
-	IBOutlet id dupButton;
-	IBOutlet id delButton;
-	IBOutlet id shButton;
+	IBOutlet NSButton *newButton;
+	IBOutlet NSButton *dupButton;
+	IBOutlet NSButton *delButton;
+	IBOutlet NSButton *shButton;
 	
 	IBOutlet id divider;
 	

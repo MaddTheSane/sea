@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
@@ -357,7 +357,7 @@ DQ
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button toolTip="Show or hide point information" id="3577">
-                                                <rect key="frame" x="92" y="0.0" width="33" height="23"/>
+                                                <rect key="frame" x="93" y="0.0" width="33" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="hide-info" imagePosition="only" alignment="center" inset="2" id="16783">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -368,9 +368,9 @@ DQ
                                                 </connections>
                                             </button>
                                             <button toolTip="Permanently delete this layer" id="1615">
-                                                <rect key="frame" x="30" y="0.0" width="32" height="23"/>
+                                                <rect key="frame" x="31" y="0.0" width="32" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="delete" imagePosition="only" alignment="center" inset="2" id="16782">
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="16782">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -379,7 +379,7 @@ DQ
                                                 </connections>
                                             </button>
                                             <button toolTip="Duplicate the currently selected layer" id="1614">
-                                                <rect key="frame" x="61" y="0.0" width="32" height="23"/>
+                                                <rect key="frame" x="62" y="0.0" width="32" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="duplicate" imagePosition="only" alignment="center" inset="2" id="16781">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -390,9 +390,9 @@ DQ
                                                 </connections>
                                             </button>
                                             <button toolTip="Add a new layer to this document" id="1611">
-                                                <rect key="frame" x="-1" y="0.0" width="32" height="23"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="new" imagePosition="only" alignment="center" inset="2" id="16780">
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="16780">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -1538,7 +1538,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="2az-qY-cA8">
                             <rect key="frame" x="1" y="1" width="438" height="54"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1007" customClass="NSTextViewRedirect">
                                     <rect key="frame" x="0.0" y="0.0" width="438" height="54"/>
@@ -1556,12 +1556,12 @@ Gw
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="1" controlSize="small" horizontal="YES" id="17053">
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" controlSize="small" horizontal="YES" id="17053">
                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" controlSize="small" horizontal="NO" id="17052">
-                            <rect key="frame" x="428" y="1" width="11" height="54"/>
+                            <rect key="frame" x="425" y="1" width="14" height="54"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
@@ -3501,12 +3501,12 @@ Gw
                     <font key="titleFont" metaFont="system"/>
                 </box>
                 <segmentedControl verticalHuggingPriority="750" id="6458">
-                    <rect key="frame" x="5" y="6" width="68" height="15"/>
+                    <rect key="frame" x="7" y="6" width="64" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <segmentedCell key="cell" controlSize="mini" state="on" alignment="left" style="automatic" trackingMode="selectOne" id="16946">
                         <font key="font" metaFont="miniSystem"/>
                         <segments>
-                            <segment image="left-align" imageScaling="none" width="20" selected="YES"/>
+                            <segment image="left-align" width="20" selected="YES"/>
                             <segment image="center-align" imageScaling="none" width="20" tag="1"/>
                             <segment image="right-align" imageScaling="none" width="20"/>
                         </segments>
@@ -4488,12 +4488,12 @@ DQ
                 <rect key="frame" x="0.0" y="0.0" width="335" height="367"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button id="2896">
-                        <rect key="frame" x="254" y="22" width="63" height="19"/>
+                    <button verticalHuggingPriority="750" id="2896">
+                        <rect key="frame" x="269" y="19" width="47" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="done" imagePosition="only" alignment="center" inset="2" id="17004">
+                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" inset="2" id="17004">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="miniSystem"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
@@ -5013,12 +5013,12 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button id="10987">
-                        <rect key="frame" x="220" y="16" width="63" height="19"/>
+                    <button verticalHuggingPriority="750" id="10987">
+                        <rect key="frame" x="250" y="19" width="47" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="done" imagePosition="only" alignment="center" state="on" inset="2" id="17032">
+                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" controlSize="mini" state="on" borderStyle="border" inset="2" id="17032">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="miniSystem"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
@@ -5087,12 +5087,12 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button id="10989">
-                        <rect key="frame" x="222" y="16" width="63" height="19"/>
+                    <button verticalHuggingPriority="750" id="10989">
+                        <rect key="frame" x="249" y="19" width="47" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="done" imagePosition="only" alignment="center" inset="2" id="17037">
+                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" inset="2" id="17037">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="miniSystem"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
@@ -5123,11 +5123,11 @@ DQ
                         <rect key="frame" x="20" y="41" width="216" height="162"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="pW7-Ok-ht6">
-                            <rect key="frame" x="1" y="1" width="198" height="160"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <rect key="frame" x="1" y="1" width="214" height="160"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="14" id="11980">
-                                    <rect key="frame" x="0.0" y="0.0" width="198" height="160"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="214" height="160"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5163,12 +5163,12 @@ DQ
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <button id="11989">
-                        <rect key="frame" x="175" y="16" width="63" height="19"/>
+                    <button verticalHuggingPriority="750" id="11989">
+                        <rect key="frame" x="190" y="19" width="47" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="done" imagePosition="only" alignment="center" inset="2" id="17038">
+                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" inset="2" id="17038">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="miniSystem"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
@@ -5444,9 +5444,10 @@ DQ
         <image name="7-not" width="35" height="27"/>
         <image name="8-not" width="35" height="27"/>
         <image name="9-not" width="35" height="27"/>
+        <image name="NSAddTemplate" width="8" height="8"/>
+        <image name="NSRemoveTemplate" width="8" height="8"/>
         <image name="center-align" width="19" height="13"/>
         <image name="delete" width="32" height="23"/>
-        <image name="done" width="63" height="19"/>
         <image name="duplicate" width="32" height="23"/>
         <image name="help-button" width="15" height="16"/>
         <image name="hide-info" width="33" height="23"/>
