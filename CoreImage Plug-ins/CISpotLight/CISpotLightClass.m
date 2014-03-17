@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -59,33 +59,34 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CISpotLight.brightness"])
-		self.brightness = [gUserDefaults floatForKey:@"CISpotLight.brightness"];
+	if ([defaults objectForKey:@"CISpotLight.brightness"])
+		self.brightness = [defaults floatForKey:@"CISpotLight.brightness"];
 	else
 		self.brightness = 3.0;
 	
 	if (brightness < 0.0 || brightness > 10.0)
 		self.brightness = 3.0;
 	
-	if ([gUserDefaults objectForKey:@"CISpotLight.concentration"])
-		self.concentration = [gUserDefaults floatForKey:@"CISpotLight.concentration"];
+	if ([defaults objectForKey:@"CISpotLight.concentration"])
+		self.concentration = [defaults floatForKey:@"CISpotLight.concentration"];
 	else
 		self.concentration = 0.4;
 	
 	if (concentration < 0.0 || concentration > 2.0)
 		self.concentration = 0.4;
 	
-	if ([gUserDefaults objectForKey:@"CISpotLight.srcHeight"])
-		self.srcHeight = [gUserDefaults floatForKey:@"CISpotLight.srcHeight"];
+	if ([defaults objectForKey:@"CISpotLight.srcHeight"])
+		self.srcHeight = [defaults floatForKey:@"CISpotLight.srcHeight"];
 	else
 		self.srcHeight = 150;
 	
 	if (srcHeight < 50 || srcHeight > 500)
 		srcHeight = 150;
 	
-	if ([gUserDefaults objectForKey:@"CISpotLight.destHeight"])
-		self.destHeight = [gUserDefaults floatForKey:@"CISpotLight.destHeight"];
+	if ([defaults objectForKey:@"CISpotLight.destHeight"])
+		self.destHeight = [defaults floatForKey:@"CISpotLight.destHeight"];
 	else
 		self.destHeight = 0;
 	
@@ -120,25 +121,27 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	running = NO;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:brightness forKey:@"CISpotLight.brightness"];
-	[gUserDefaults setFloat:concentration forKey:@"CISpotLight.concentration"];
-	[gUserDefaults setInteger:srcHeight forKey:@"CISpotLight.srcHeight"];
-	[gUserDefaults setInteger:destHeight forKey:@"CISpotLight.destHeight"];
+	[defaults setFloat:brightness forKey:@"CISpotLight.brightness"];
+	[defaults setFloat:concentration forKey:@"CISpotLight.concentration"];
+	[defaults setInteger:srcHeight forKey:@"CISpotLight.srcHeight"];
+	[defaults setInteger:destHeight forKey:@"CISpotLight.destHeight"];
 	
 	[gColorPanel orderOut:self];
 }

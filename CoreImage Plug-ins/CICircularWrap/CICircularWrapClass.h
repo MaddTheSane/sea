@@ -16,12 +16,6 @@
 
 @interface CICircularWrapClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the angle
-	IBOutlet id angleLabel;
-	
-	// The slider for the angle
-	IBOutlet id angleSlider;
-
 	// YES if the application succeeded
 	BOOL success;
 
@@ -36,6 +30,8 @@
 	
 	// Signals whether the bounds rectangle is valid
 	BOOL boundsValid;
+	
+	NSBitmapImageRep *temp_rep;
 }
 // The angle of the twirl
 @property CGFloat angle;

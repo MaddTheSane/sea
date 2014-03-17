@@ -3,8 +3,6 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIBumpClass
@@ -55,9 +53,10 @@
 - (void)run
 {
 	PluginData *pluginData;
-	
-	if ([gUserDefaults objectForKey:@"CIBump.scale"])
-		scale = [gUserDefaults integerForKey:@"CIBump.scale"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if ([defaults objectForKey:@"CIBump.scale"])
+		scale = [defaults integerForKey:@"CIBump.scale"];
 	else
 		scale = 0.5;
 	refresh = YES;
@@ -80,9 +79,9 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
 	if (refresh)
 		[self execute];
 	[pluginData apply];
@@ -99,7 +98,7 @@
 		newdata = NULL;
 	}
 		
-	[gUserDefaults setFloat:scale forKey:@"CIBump.scale"];
+	[defaults setFloat:scale forKey:@"CIBump.scale"];
 }
 
 - (void)reapply

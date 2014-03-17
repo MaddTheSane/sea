@@ -49,8 +49,7 @@
 	unsigned char *sampleData;
 	
 	// The NSImageBitmapRep used by the uncompressed preview
-	id realImageRep;
-
+	NSBitmapImageRep *realImageRep;
 }
 
 /*!
@@ -59,12 +58,6 @@
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)init;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		compressionChanged:

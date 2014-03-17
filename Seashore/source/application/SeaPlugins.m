@@ -238,7 +238,8 @@ BOOL checkRun(NSString *path, NSString *file)
 
 - (void)terminate
 {
-	[gUserDefaults setInteger:[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: kEffectTool] selectedRow] forKey:@"effectIndex"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: kEffectTool] selectedRow] forKey:@"effectIndex"];
 }
 
 - (id)affinePlugin

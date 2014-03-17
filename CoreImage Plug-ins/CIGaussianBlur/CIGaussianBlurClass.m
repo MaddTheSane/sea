@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -46,9 +46,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIGaussianBlur.radius"])
-		radius = [gUserDefaults integerForKey:@"CIGaussianBlur.radius"];
+	if ([defaults objectForKey:@"CIGaussianBlur.radius"])
+		radius = [defaults integerForKey:@"CIGaussianBlur.radius"];
 	else
 		radius = 10;
 	refresh = YES;
@@ -75,10 +76,11 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -89,7 +91,7 @@
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setInteger:radius forKey:@"CIGaussianBlur.radius"];
+	[defaults setInteger:radius forKey:@"CIGaussianBlur.radius"];
 }
 
 - (void)reapply

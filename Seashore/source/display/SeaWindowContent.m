@@ -5,16 +5,17 @@
 
 -(void)awakeFromNib
 {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	dict = @{@(kOptionsBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", optionsBar, @"view", nonOptionsBar, @"nonView", @"above", @"side", @0.0f, @"oldValue", nil],
 			 @(kSidebar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", sidebar, @"view", nonSidebar, @"nonView", @"left", @"side", @0.0f, @"oldValue", nil],
 			 @(kPointInformation): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", pointInformation, @"view", layers, @"nonView", @"below", @"side", @0.0f, @"oldValue", nil],
 			 @(kWarningsBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", warningsBar, @"view", mainDocumentView, @"nonView", @"above", @"side", @0.0f, @"oldValue", nil],
 			 @(kStatusBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", statusBar, @"view", mainDocumentView, @"nonView", @"below", @"side", @0.0f, @"oldValue", nil]};
 	
-	int i;
+	NSInteger i;
 	for(i = kOptionsBar; i <= kStatusBar; i++){
-		NSString *key = [NSString stringWithFormat:@"region%dvisibility", i];
-		if([gUserDefaults objectForKey: key] && ![gUserDefaults boolForKey:key]){
+		NSString *key = [NSString stringWithFormat:@"region%ldvisibility", (long)i];
+		if([defaults objectForKey: key] && ![defaults boolForKey:key]){
 			// We need to hide it
 			[self setVisibility: NO forRegion: i];
 		}
@@ -31,6 +32,7 @@
 
 -(void)setVisibility:(BOOL)visibility forRegion:(int)region
 {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *thisDict = dict[@(region)];
 	BOOL currentVisibility = [thisDict[@"visibility"] boolValue];
 	
@@ -81,7 +83,7 @@
 		[nonView setNeedsDisplay:YES];
 		
 		thisDict[@"oldValue"] = @(oldValue);
-		[gUserDefaults setObject: @"NO" forKey:[NSString stringWithFormat:@"region%dvisibility", region]];		
+		[defaults setObject: @"NO" forKey:[NSString stringWithFormat:@"region%dvisibility", region]];		
 	}else{
 		NSRect newRect = [view frame];
 		if([side isEqual:@"above"] || [side isEqual:@"below"]){
@@ -110,7 +112,7 @@
 				
 		[nonView setNeedsDisplay:YES];
 		
-		[gUserDefaults setObject: @"YES" forKey:[NSString stringWithFormat:@"region%dvisibility", region]];
+		[defaults setObject: @"YES" forKey:[NSString stringWithFormat:@"region%dvisibility", region]];
 	}
 	thisDict[@"visibility"] = @(visibility);
 }

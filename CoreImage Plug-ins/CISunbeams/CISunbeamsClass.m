@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -57,13 +57,14 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CISunbeams.strength"])
-		strength = [gUserDefaults floatForKey:@"CISunbeams.strength"];
+	if ([defaults objectForKey:@"CISunbeams.strength"])
+		strength = [defaults floatForKey:@"CISunbeams.strength"];
 	else
 		strength = 0.5;
-	if ([gUserDefaults objectForKey:@"CISunbeams.contrast"])
-		contrast = [gUserDefaults floatForKey:@"CISunbeams.contrast"];
+	if ([defaults objectForKey:@"CISunbeams.contrast"])
+		contrast = [defaults floatForKey:@"CISunbeams.contrast"];
 	else
 		contrast = 1.0;
 	
@@ -94,10 +95,11 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -110,8 +112,8 @@
 	running = NO;
 	if (newdata) { free(newdata); newdata = NULL; }
 	
-	[gUserDefaults setFloat:strength forKey:@"CISunbeams.strength"];
-	[gUserDefaults setFloat:contrast forKey:@"CISunbeams.contrast"];
+	[defaults setFloat:strength forKey:@"CISunbeams.strength"];
+	[defaults setFloat:contrast forKey:@"CISunbeams.contrast"];
 	
 	[gColorPanel orderOut:self];
 

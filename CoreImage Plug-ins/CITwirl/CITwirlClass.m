@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -55,9 +55,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CITwirl.angle"])
-		angle = [gUserDefaults integerForKey:@"CITwirl.angle"];
+	if ([defaults objectForKey:@"CITwirl.angle"])
+		angle = [defaults integerForKey:@"CITwirl.angle"];
 	else
 		angle = 3.14;
 	refresh = YES;
@@ -84,9 +85,9 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -98,7 +99,7 @@
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:angle forKey:@"CITwirl.angle"];
+	[defaults setFloat:angle forKey:@"CITwirl.angle"];
 }
 
 - (void)reapply

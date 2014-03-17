@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -54,9 +54,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIVortex.angle"])
-		angle = [gUserDefaults integerForKey:@"CIVortex.angle"];
+	if ([defaults objectForKey:@"CIVortex.angle"])
+		angle = [defaults integerForKey:@"CIVortex.angle"];
 	else
 		angle = 56.55;
 	refresh = YES;
@@ -83,10 +84,11 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -97,7 +99,7 @@
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:angle forKey:@"CIVortex.angle"];
+	[defaults setFloat:angle forKey:@"CIVortex.angle"];
 }
 
 - (void)reapply

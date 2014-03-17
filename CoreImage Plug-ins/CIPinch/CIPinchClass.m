@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -55,9 +55,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIPinch.scale"])
-		self.scale = [gUserDefaults floatForKey:@"CIPinch.scale"];
+	if ([defaults objectForKey:@"CIPinch.scale"])
+		self.scale = [defaults floatForKey:@"CIPinch.scale"];
 	else
 		self.scale = 0.5;
 	refresh = YES;
@@ -83,21 +84,23 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:scale forKey:@"CIPinch.scale"];
+	[defaults setFloat:scale forKey:@"CIPinch.scale"];
 }
 
 - (void)reapply

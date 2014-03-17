@@ -3,8 +3,6 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
-
 @implementation ThresholdClass
 @synthesize panel;
 @synthesize seaPlugins;

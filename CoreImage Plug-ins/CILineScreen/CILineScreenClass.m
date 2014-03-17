@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -44,17 +44,18 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CILineScreen.width"])
-		dotWidth = [gUserDefaults integerForKey:@"CILineScreen.width"];
+	if ([defaults objectForKey:@"CILineScreen.width"])
+		dotWidth = [defaults integerForKey:@"CILineScreen.width"];
 	else
 		dotWidth = 6;
-	if ([gUserDefaults objectForKey:@"CILineScreen.angle"])
-		angle = [gUserDefaults floatForKey:@"CILineScreen.angle"];
+	if ([defaults objectForKey:@"CILineScreen.angle"])
+		angle = [defaults floatForKey:@"CILineScreen.angle"];
 	else
 		angle = 0.0;
-	if ([gUserDefaults objectForKey:@"CILineScreen.sharpness"])
-		sharpness = [gUserDefaults floatForKey:@"CILineScreen.sharpness"];
+	if ([defaults objectForKey:@"CILineScreen.sharpness"])
+		sharpness = [defaults floatForKey:@"CILineScreen.sharpness"];
 	else
 		sharpness = 0.7;
 			
@@ -88,23 +89,25 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setInteger:dotWidth forKey:@"CILineScreen.width"];
-	[gUserDefaults setFloat:angle forKey:@"CILineScreen.angle"];
-	[gUserDefaults setFloat:sharpness forKey:@"CILineScreen.sharpness"];
+	[defaults setInteger:dotWidth forKey:@"CILineScreen.width"];
+	[defaults setFloat:angle forKey:@"CILineScreen.angle"];
+	[defaults setFloat:sharpness forKey:@"CILineScreen.sharpness"];
 }
 
 - (void)reapply

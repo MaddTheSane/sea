@@ -39,6 +39,7 @@
 	int value;
 	NSString *string;
 	float xres, yres;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Determine the working index
 	if (global)
@@ -91,11 +92,11 @@
 	[interpolationPopup selectItemAtIndex:[interpolationPopup indexOfItemWithTag:GIMP_INTERPOLATION_LINEAR]];
 	
 	// Set the interpolation style
-	if ([gUserDefaults objectForKey:@"interpolation"] == NULL) {
+	if ([defaults objectForKey:@"interpolation"] == NULL) {
 		value = GIMP_INTERPOLATION_CUBIC;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"interpolation"];
+		value = [defaults integerForKey:@"interpolation"];
 		if (value < 0 || value >= [interpolationPopup numberOfItems])
 			value = GIMP_INTERPOLATION_CUBIC;
 	}
@@ -110,6 +111,7 @@
 	id contents = [document contents];
 	int newWidth, newHeight;
 	float xres, yres;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Get the resolutions
 	xres = [contents xres];
@@ -119,7 +121,7 @@
 	[NSApp stopModal];
 	[NSApp endSheet:sheet];
 	[sheet orderOut:self];
-	[gUserDefaults setInteger:[interpolationPopup indexOfSelectedItem] forKey:@"interpolation"];
+	[defaults setInteger:[interpolationPopup indexOfSelectedItem] forKey:@"interpolation"];
 
 	// Parse width and height	
 	newWidth = PixelsFromFloat([widthValue floatValue],units,xres);

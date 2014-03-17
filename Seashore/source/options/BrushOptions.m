@@ -17,46 +17,47 @@ enum {
 
 - (void)awakeFromNib
 {
-	int rate, style;
+	NSInteger rate, style;
 	BOOL fadeOn, pressureOn;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"brush fade"] == NULL) {
+	if ([defaults objectForKey:@"brush fade"] == NULL) {
 		[fadeCheckbox setState:NSOffState];
 		[fadeCheckbox setTitle:[NSString stringWithFormat:LOCALSTR(@"fade-out", @"Fade-out: %d"), 10]];
 		[fadeSlider setIntValue:10];
 		[fadeSlider setEnabled:NO];
 	}
 	else {
-		rate = [gUserDefaults integerForKey:@"brush fade rate"];
+		rate = [defaults integerForKey:@"brush fade rate"];
 		if (rate < 1 || rate > 120)
 			rate = 10;
-		fadeOn = [gUserDefaults boolForKey:@"brush fade"];
+		fadeOn = [defaults boolForKey:@"brush fade"];
 		[fadeCheckbox setState:fadeOn];
 		[fadeCheckbox setTitle:[NSString stringWithFormat:LOCALSTR(@"fade-out", @"Fade-out: %d"), rate]];
 		[fadeSlider setIntValue:rate];
 		[fadeSlider setEnabled:fadeOn];
 	}
 	
-	if ([gUserDefaults objectForKey:@"brush pressure"] == NULL) {
+	if ([defaults objectForKey:@"brush pressure"] == NULL) {
 		[pressureCheckbox setState:NSOffState];
 		[pressurePopup selectItemAtIndex:kLinear];
 		[pressurePopup setEnabled:NO];
 	}
 	else {
-		style = [gUserDefaults integerForKey:@"brush pressure style"];
+		style = [defaults integerForKey:@"brush pressure style"];
 		if (style < kQuadratic || style > kSquareRoot)
 			style = kLinear;
-		pressureOn = [gUserDefaults boolForKey:@"brush pressure"];
+		pressureOn = [defaults boolForKey:@"brush pressure"];
 		[pressureCheckbox setState:pressureOn];
 		[pressurePopup selectItemAtIndex:style];
 		[pressurePopup setEnabled:pressureOn];
 	}
 	
-	if ([gUserDefaults objectForKey:@"brush scale"] == NULL) {
+	if ([defaults objectForKey:@"brush scale"] == NULL) {
 		[scaleCheckbox setState:NSOnState];
 	}
 	else {
-		[scaleCheckbox setState:[gUserDefaults boolForKey:@"brush scale"]];
+		[scaleCheckbox setState:[defaults boolForKey:@"brush scale"]];
 	}
 	
 	isErasing = NO;
@@ -171,11 +172,12 @@ enum {
 
 - (void)shutdown
 {
-	[gUserDefaults setObject:[fadeCheckbox state] ? @"YES" : @"NO" forKey:@"brush fade"];
-	[gUserDefaults setInteger:[fadeSlider intValue] forKey:@"brush fade rate"];
-	[gUserDefaults setObject:[pressureCheckbox state] ? @"YES" : @"NO" forKey:@"brush pressure"];
-	[gUserDefaults setInteger:[pressurePopup indexOfSelectedItem] forKey:@"brush pressure style"];
-	[gUserDefaults setInteger:[scaleCheckbox state] forKey:@"brush scale"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setBool:[fadeCheckbox state] forKey:@"brush fade"];
+	[defaults setInteger:[fadeSlider integerValue] forKey:@"brush fade rate"];
+	[defaults setBool:[pressureCheckbox state] forKey:@"brush pressure"];
+	[defaults setInteger:[pressurePopup indexOfSelectedItem] forKey:@"brush pressure style"];
+	[defaults setInteger:[scaleCheckbox state] forKey:@"brush scale"];
 }
 
 @end

@@ -83,37 +83,38 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 {
 	NSData *tempData;
 	float xdpi, ydpi;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Get bounderies from preferences
-	if ([gUserDefaults objectForKey:@"boundaries"] && [gUserDefaults boolForKey:@"boundaries"])
+	if ([defaults objectForKey:@"boundaries"] && [defaults boolForKey:@"boundaries"])
 		layerBounds = YES;
 	else
 		layerBounds = NO;
 
 	// Get bounderies from preferences
-	if ([gUserDefaults objectForKey:@"guides"] && ![gUserDefaults boolForKey:@"guides"])
+	if ([defaults objectForKey:@"guides"] && ![defaults boolForKey:@"guides"])
 		guides = NO;
 	else
 		guides = YES;
 	
 	// Get rulers from preferences
-	if ([gUserDefaults objectForKey:@"rulers"] && [gUserDefaults boolForKey:@"rulers"])
+	if ([defaults objectForKey:@"rulers"] && [defaults boolForKey:@"rulers"])
 		rulers = YES;
 	else
 		rulers = NO;
 	
 	// Determine if this is our first run from preferences
-	if ([gUserDefaults objectForKey:@"version"] == NULL)  {
+	if ([defaults objectForKey:@"version"] == NULL)  {
 		firstRun = YES;
-		[gUserDefaults setObject:@"0.1.9" forKey:@"version"];
+		[defaults setObject:@"0.1.9" forKey:@"version"];
 	}
 	else {
-		if ([[gUserDefaults stringForKey:@"version"] isEqualToString:@"0.1.9"]) {
+		if ([[defaults stringForKey:@"version"] isEqualToString:@"0.1.9"]) {
 			firstRun = NO;
 		}
 		else {
 			firstRun = YES;
-			[gUserDefaults setObject:@"0.1.9" forKey:@"version"];
+			[defaults setObject:@"0.1.9" forKey:@"version"];
 		}
 	}
 	
@@ -122,136 +123,136 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 		runCount = 1;
 	}
 	else {
-		if ([gUserDefaults objectForKey:@"runCount"])
-			runCount =  [gUserDefaults integerForKey:@"runCount"] + 1;
+		if ([defaults objectForKey:@"runCount"])
+			runCount =  [defaults integerForKey:@"runCount"] + 1;
 		else
 			runCount = 1;
 	}
 
 	// Get memory cache size from preferences
 	memoryCacheSize = 4096;
-	if ([gUserDefaults objectForKey:@"memoryCacheSize"])
-		memoryCacheSize = [gUserDefaults integerForKey:@"memoryCacheSize"];
+	if ([defaults objectForKey:@"memoryCacheSize"])
+		memoryCacheSize = [defaults integerForKey:@"memoryCacheSize"];
 	if (memoryCacheSize < 128 || memoryCacheSize > 32768)
 		memoryCacheSize = 4096;
 
 	// Get the use of the checkerboard pattern
-	if ([gUserDefaults objectForKey:@"useCheckerboard"])
-		useCheckerboard = [gUserDefaults boolForKey:@"useCheckerboard"];
+	if ([defaults objectForKey:@"useCheckerboard"])
+		useCheckerboard = [defaults boolForKey:@"useCheckerboard"];
 	else
 		useCheckerboard = YES;
 	
 	// Get the fewerWarnings
-	if ([gUserDefaults objectForKey:@"fewerWarnings"])
-		fewerWarnings = [gUserDefaults boolForKey:@"fewerWarnings"];
+	if ([defaults objectForKey:@"fewerWarnings"])
+		fewerWarnings = [defaults boolForKey:@"fewerWarnings"];
 	else
 		fewerWarnings = NO;
 		
 	//  Get the effectsPanel
-	if ([gUserDefaults objectForKey:@"effectsPanel"])
-		effectsPanel = [gUserDefaults boolForKey:@"effectsPanel"];
+	if ([defaults objectForKey:@"effectsPanel"])
+		effectsPanel = [defaults boolForKey:@"effectsPanel"];
 	else
 		effectsPanel = NO;
 	
 	//  Get the smartInterpolation
-	if ([gUserDefaults objectForKey:@"smartInterpolation"])
-		smartInterpolation = [gUserDefaults boolForKey:@"smartInterpolation"];
+	if ([defaults objectForKey:@"smartInterpolation"])
+		smartInterpolation = [defaults boolForKey:@"smartInterpolation"];
 	else
 		smartInterpolation = YES;
 	
 	//  Get the openUntitled
-	if ([gUserDefaults objectForKey:@"openUntitled"])
-		openUntitled = [gUserDefaults boolForKey:@"openUntitled"];
+	if ([defaults objectForKey:@"openUntitled"])
+		openUntitled = [defaults boolForKey:@"openUntitled"];
 	else
 		openUntitled = YES;
 		
 	// Get the selection colour
 	selectionColor = kBlackColor;
-	if ([gUserDefaults objectForKey:@"selectionColor"])
-		selectionColor = [gUserDefaults integerForKey:@"selectionColor"];
+	if ([defaults objectForKey:@"selectionColor"])
+		selectionColor = [defaults integerForKey:@"selectionColor"];
 	if (selectionColor < 0 || selectionColor >= kMaxColor)
 		selectionColor = kBlackColor;
 	
 	// If the layer bounds are white (the alternative is the selection color)
 	whiteLayerBounds = YES;
-	if ([gUserDefaults objectForKey:@"whiteLayerBounds"])
-		whiteLayerBounds = [gUserDefaults boolForKey:@"whiteLayerBounds"];
+	if ([defaults objectForKey:@"whiteLayerBounds"])
+		whiteLayerBounds = [defaults boolForKey:@"whiteLayerBounds"];
 
 	// Get the guide colour
 	guideColor = kYellowColor;
-	if ([gUserDefaults objectForKey:@"guideColor"])
-		guideColor = [gUserDefaults integerForKey:@"guideColor"];
+	if ([defaults objectForKey:@"guideColor"])
+		guideColor = [defaults integerForKey:@"guideColor"];
 	if (guideColor < 0 || guideColor >= kMaxColor)
 		guideColor = kYellowColor;
 	
 	// Determine the initial color (from preferences if possible)
-	if ([gUserDefaults objectForKey:@"windowBackColor"] == NULL) {
+	if ([defaults objectForKey:@"windowBackColor"] == NULL) {
 		windowBackColor = [NSColor colorWithCalibratedRed:0.6667 green:0.6667 blue:0.6667 alpha:1.0];
 	}
 	else {
-		tempData = [gUserDefaults dataForKey:@"windowBackColor"];
+		tempData = [defaults dataForKey:@"windowBackColor"];
 		if (tempData != nil)
 			windowBackColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:tempData];
 	}
 	
 	// Get the default document size
 	width = 512;
-	if ([gUserDefaults objectForKey:@"width"])
-		width = [gUserDefaults integerForKey:@"width"];
+	if ([defaults objectForKey:@"width"])
+		width = [defaults integerForKey:@"width"];
 	height = 384;
-	if ([gUserDefaults objectForKey:@"height"])
-		height = [gUserDefaults integerForKey:@"height"];
+	if ([defaults objectForKey:@"height"])
+		height = [defaults integerForKey:@"height"];
 	
 	// The resolution for new documents
 	resolution = 72;
-	if ([gUserDefaults objectForKey:@"resolution"])
-		resolution = [gUserDefaults integerForKey:@"resolution"];
+	if ([defaults objectForKey:@"resolution"])
+		resolution = [defaults integerForKey:@"resolution"];
 	if (resolution != 72 && resolution != 96 && resolution != 150 && resolution != 300)
 		resolution = 72;
 	
 	// Units used in the new document
 	newUnits = kPixelUnits;
-	if ([gUserDefaults objectForKey:@"units"])
-		newUnits = [gUserDefaults integerForKey:@"units"];
+	if ([defaults objectForKey:@"units"])
+		newUnits = [defaults integerForKey:@"units"];
 	
 	// Mode used for the new document
 	mode = 0;
-	if ([gUserDefaults objectForKey:@"mode"])
-		mode = [gUserDefaults integerForKey:@"mode"];
+	if ([defaults objectForKey:@"mode"])
+		mode = [defaults integerForKey:@"mode"];
 
 	// Mode used for the new document
 	resolutionHandling = kUse72dpiResolution;
-	if ([gUserDefaults objectForKey:@"resolutionHandling"])
-		resolutionHandling = [gUserDefaults integerForKey:@"resolutionHandling"];
+	if ([defaults objectForKey:@"resolutionHandling"])
+		resolutionHandling = [defaults integerForKey:@"resolutionHandling"];
 
 	//  Get the multithreaded
-	if ([gUserDefaults objectForKey:@"transparentBackground"])
-		transparentBackground = [gUserDefaults boolForKey:@"transparentBackground"];
+	if ([defaults objectForKey:@"transparentBackground"])
+		transparentBackground = [defaults boolForKey:@"transparentBackground"];
 	else
 		transparentBackground = NO;
 
 	//  Get the multithreaded
-	if ([gUserDefaults objectForKey:@"multithreaded"])
-		multithreaded = [gUserDefaults boolForKey:@"multithreaded"];
+	if ([defaults objectForKey:@"multithreaded"])
+		multithreaded = [defaults boolForKey:@"multithreaded"];
 	else
 		multithreaded = YES;
 		
 	//  Get the ignoreFirstTouch
-	if ([gUserDefaults objectForKey:@"ignoreFirstTouch"])
-		ignoreFirstTouch = [gUserDefaults boolForKey:@"ignoreFirstTouch"];
+	if ([defaults objectForKey:@"ignoreFirstTouch"])
+		ignoreFirstTouch = [defaults boolForKey:@"ignoreFirstTouch"];
 	else
 		ignoreFirstTouch = NO;
 		
 	// Get the mouseCoalescing
-	if ([gUserDefaults objectForKey:@"newMouseCoalescing"])
-		mouseCoalescing = [gUserDefaults boolForKey:@"newMouseCoalescing"];
+	if ([defaults objectForKey:@"newMouseCoalescing"])
+		mouseCoalescing = [defaults boolForKey:@"newMouseCoalescing"];
 	else
 		mouseCoalescing = YES;
 		
 	// Get the checkForUpdates
-	if ([gUserDefaults objectForKey:@"checkForUpdates"]) {
-		checkForUpdates = [gUserDefaults boolForKey:@"checkForUpdates"];
-		lastCheck = [[gUserDefaults objectForKey:@"lastCheck"] doubleValue];
+	if ([defaults objectForKey:@"checkForUpdates"]) {
+		checkForUpdates = [defaults boolForKey:@"checkForUpdates"];
+		lastCheck = [[defaults objectForKey:@"lastCheck"] doubleValue];
 	}
 	else {
 		checkForUpdates = YES;
@@ -259,14 +260,14 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	}
 	
 	// Get the preciseCursor
-	if ([gUserDefaults objectForKey:@"preciseCursor"])
-		preciseCursor = [gUserDefaults boolForKey:@"preciseCursor"];
+	if ([defaults objectForKey:@"preciseCursor"])
+		preciseCursor = [defaults boolForKey:@"preciseCursor"];
 	else
 		preciseCursor = NO;
 
 	// Get the useCoreImage
-	if ([gUserDefaults objectForKey:@"useCoreImage"])
-		useCoreImage = [gUserDefaults boolForKey:@"useCoreImage"];
+	if ([defaults objectForKey:@"useCoreImage"])
+		useCoreImage = [defaults boolForKey:@"useCoreImage"];
 	else
 		useCoreImage = YES;
 		
@@ -289,11 +290,12 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 {
 	NSString *fontName;
 	float fontSize;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Get the font name and size
-	if ([gUserDefaults objectForKey:@"fontName"] && [gUserDefaults objectForKey:@"fontSize"]) {
-		fontName = [gUserDefaults objectForKey:@"fontName"];
-		fontSize = [gUserDefaults floatForKey:@"fontSize"];
+	if ([defaults objectForKey:@"fontName"] && [defaults objectForKey:@"fontSize"]) {
+		fontName = [defaults objectForKey:@"fontName"];
+		fontSize = [defaults floatForKey:@"fontSize"];
 		[[NSFontManager sharedFontManager] setSelectedFont:[NSFont fontWithName:fontName size:fontSize] isMultiple:NO];
 	}
 	else {
@@ -322,6 +324,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 - (void)terminate
 {
 	NSFont *font = [[NSFontManager sharedFontManager] selectedFont];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	// For some unknown reason NSColorListMode causes a crash on boot
 	NSColorPanel* colorPanel = [NSColorPanel sharedColorPanel];
@@ -329,36 +332,36 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 		[colorPanel setMode:NSWheelModeColorPanel];
 	}
 	
-	[gUserDefaults setObject:(guides ? @"YES" : @"NO") forKey:@"guides"];
-	[gUserDefaults setObject:(layerBounds ? @"YES" : @"NO") forKey:@"boundaries"];
-	[gUserDefaults setObject:(rulers ? @"YES" : @"NO") forKey:@"rulers"];
-	[gUserDefaults setInteger:memoryCacheSize forKey:@"memoryCacheSize"];
-	[gUserDefaults setObject:(fewerWarnings ? @"YES" : @"NO") forKey:@"fewerWarnings"];
-	[gUserDefaults setObject:(effectsPanel ? @"YES" : @"NO") forKey:@"effectsPanel"];
-	[gUserDefaults setObject:(smartInterpolation ? @"YES" : @"NO") forKey:@"smartInterpolation"];
-	[gUserDefaults setObject:(openUntitled ? @"YES" : @"NO") forKey:@"openUntitled"];
-	[gUserDefaults setObject:(multithreaded ? @"YES" : @"NO") forKey:@"multithreaded"];
-	[gUserDefaults setObject:(ignoreFirstTouch ? @"YES" : @"NO") forKey:@"ignoreFirstTouch"];
-	[gUserDefaults setObject:(mouseCoalescing ? @"YES" : @"NO") forKey:@"newMouseCoalescing"];
-	[gUserDefaults setObject:(checkForUpdates ? @"YES" : @"NO") forKey:@"checkForUpdates"];
-	[gUserDefaults setObject:(preciseCursor ? @"YES" : @"NO") forKey:@"preciseCursor"];
-	[gUserDefaults setObject:(useCoreImage ? @"YES" : @"NO") forKey:@"useCoreImage"];
-	[gUserDefaults setObject:(transparentBackground ? @"YES" : @"NO") forKey:@"transparentBackground"];
-	[gUserDefaults setObject:(useCheckerboard ? @"YES" : @"NO") forKey:@"useCheckerboard"];
-	[gUserDefaults setObject:[NSArchiver archivedDataWithRootObject:windowBackColor] forKey:@"windowBackColor"];
-	[gUserDefaults setInteger:selectionColor forKey:@"selectionColor"];
-	[gUserDefaults setObject:(whiteLayerBounds ? @"YES" : @"NO") forKey:@"whiteLayerBounds"];
-	[gUserDefaults setInteger:guideColor forKey:@"guideColor"];
-	[gUserDefaults setInteger:width forKey:@"width"];
-	[gUserDefaults setInteger:height forKey:@"height"];
-	[gUserDefaults setInteger:resolution forKey:@"resolution"];
-	[gUserDefaults setInteger:newUnits forKey:@"units"];
-	[gUserDefaults setInteger:mode forKey:@"mode"];
-	[gUserDefaults setInteger:resolutionHandling forKey:@"resolutionHandling"];
-	[gUserDefaults setInteger:runCount forKey:@"runCount"];
-	[gUserDefaults setObject:[font fontName] forKey:@"fontName"];
-	[gUserDefaults setFloat:[font pointSize] forKey:@"fontSize"];
-	[gUserDefaults setObject:[NSString stringWithFormat:@"%f", lastCheck] forKey:@"lastCheck"];
+	[defaults setBool:guides forKey:@"guides"];
+	[defaults setBool:layerBounds forKey:@"boundaries"];
+	[defaults setObject:(rulers ? @"YES" : @"NO") forKey:@"rulers"];
+	[defaults setInteger:memoryCacheSize forKey:@"memoryCacheSize"];
+	[defaults setObject:(fewerWarnings ? @"YES" : @"NO") forKey:@"fewerWarnings"];
+	[defaults setObject:(effectsPanel ? @"YES" : @"NO") forKey:@"effectsPanel"];
+	[defaults setObject:(smartInterpolation ? @"YES" : @"NO") forKey:@"smartInterpolation"];
+	[defaults setObject:(openUntitled ? @"YES" : @"NO") forKey:@"openUntitled"];
+	[defaults setObject:(multithreaded ? @"YES" : @"NO") forKey:@"multithreaded"];
+	[defaults setObject:(ignoreFirstTouch ? @"YES" : @"NO") forKey:@"ignoreFirstTouch"];
+	[defaults setObject:(mouseCoalescing ? @"YES" : @"NO") forKey:@"newMouseCoalescing"];
+	[defaults setObject:(checkForUpdates ? @"YES" : @"NO") forKey:@"checkForUpdates"];
+	[defaults setObject:(preciseCursor ? @"YES" : @"NO") forKey:@"preciseCursor"];
+	[defaults setObject:(useCoreImage ? @"YES" : @"NO") forKey:@"useCoreImage"];
+	[defaults setObject:(transparentBackground ? @"YES" : @"NO") forKey:@"transparentBackground"];
+	[defaults setObject:(useCheckerboard ? @"YES" : @"NO") forKey:@"useCheckerboard"];
+	[defaults setObject:[NSArchiver archivedDataWithRootObject:windowBackColor] forKey:@"windowBackColor"];
+	[defaults setInteger:selectionColor forKey:@"selectionColor"];
+	[defaults setBool:whiteLayerBounds forKey:@"whiteLayerBounds"];
+	[defaults setInteger:guideColor forKey:@"guideColor"];
+	[defaults setInteger:width forKey:@"width"];
+	[defaults setInteger:height forKey:@"height"];
+	[defaults setInteger:resolution forKey:@"resolution"];
+	[defaults setInteger:newUnits forKey:@"units"];
+	[defaults setInteger:mode forKey:@"mode"];
+	[defaults setInteger:resolutionHandling forKey:@"resolutionHandling"];
+	[defaults setInteger:runCount forKey:@"runCount"];
+	[defaults setObject:[font fontName] forKey:@"fontName"];
+	[defaults setFloat:[font pointSize] forKey:@"fontSize"];
+	[defaults setDouble:lastCheck forKey:@"lastCheck"];
 }
 
 - (NSToolbarItem *) toolbar: (NSToolbar *)toolbar itemForItemIdentifier: (NSString *) itemIdent willBeInsertedIntoToolbar:(BOOL) willBeInserted

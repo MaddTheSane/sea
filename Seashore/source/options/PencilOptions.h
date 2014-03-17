@@ -10,20 +10,14 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface PencilOptions : AbstractPaintOptions {
-	
+@interface PencilOptions : AbstractPaintOptions
+{	
 	// A slider indicating the size of the pencil block
 	IBOutlet id sizeSlider;
 	
 	// Are we erasing stuff?
 	BOOL isErasing;
 }
-
-/*!
-	@method		awakeFromNib
-	@discussion	Loads previous options from preferences.
-*/
-- (void)awakeFromNib;
 
 /*!
 	@method		pencilSize

@@ -19,22 +19,23 @@
 
 - (id)init
 {		
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Load the textures
 	[self loadTextures:NO];
 	
 	// Determine the currently active texture group
-	if ([gUserDefaults objectForKey:@"active texture group"] == NULL)
+	if ([defaults objectForKey:@"active texture group"] == NULL)
 		activeGroupIndex = 0;
 	else
-		activeGroupIndex = [gUserDefaults integerForKey:@"active texture group"];
+		activeGroupIndex = [defaults integerForKey:@"active texture group"];
 	if (activeGroupIndex < 0 || activeGroupIndex >= [groups count])
 		activeGroupIndex = 0;
 		
 	// Determine the currently active texture 	
-	if ([gUserDefaults objectForKey:@"active texture"] == NULL)
+	if ([defaults objectForKey:@"active texture"] == NULL)
 		activeTextureIndex = 0;
 	else
-		activeTextureIndex = [gUserDefaults integerForKey:@"active texture"];
+		activeTextureIndex = [defaults integerForKey:@"active texture"];
 	if (activeTextureIndex < 0 || activeTextureIndex >= [groups[activeGroupIndex] count])
 		activeTextureIndex = 0;
 		
@@ -83,13 +84,6 @@
 
 - (void)dealloc
 {
-	int i;
-	
-	// Release any existing textures
-	if (textures) {
-		for (i = 0; i < [textures count]; i++)
-			[textures allValues][i];
-	}
 	if ([view documentView]) [view documentView];
 }
 
@@ -105,8 +99,9 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:activeTextureIndex forKey:@"active texture"];
-	[gUserDefaults setInteger:activeGroupIndex forKey:@"active texture group"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:activeTextureIndex forKey:@"active texture"];
+	[defaults setInteger:activeGroupIndex forKey:@"active texture group"];
 
 }
 
@@ -129,12 +124,6 @@
 	BOOL isDirectory;
 	id texture;
 	int i, j;
-	
-	// Release any existing textures
-	if (textures) {
-		for (i = 0; i < [textures count]; i++)
-			[textures allValues][i];
-	}
 	
 	// Create a dictionary of all textures
 	textures = @{};

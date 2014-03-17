@@ -16,36 +16,6 @@
 
 @interface CICMYKHalftoneClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the dot width
-	IBOutlet id dotWidthLabel;
-	
-	// The slider for the width
-	IBOutlet id dotWidthSlider;
-
-	// The label displaying the angle
-	IBOutlet id angleLabel;
-	
-	// The slider for the angle
-	IBOutlet id angleSlider;
-
-	// The label displaying the sharpness
-	IBOutlet id sharpnessLabel;
-	
-	// The slider for the sharpness
-	IBOutlet id sharpnessSlider;
-
-	// The label displaying the GCR
-	IBOutlet id gcrLabel;
-	
-	// The slider for the GCR
-	IBOutlet id gcrSlider;
-
-	// The label displaying the UCR
-	IBOutlet id ucrLabel;
-	
-	// The slider for the UCR
-	IBOutlet id ucrSlider;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	

@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -49,7 +49,7 @@
 - (void)run
 {
 	PluginData *pluginData;
-	NSUserDefaults *defaults = gUserDefaults;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"CIDotScreen.width"])
 		self.dotWidth = [defaults integerForKey:@"CIDotScreen.width"];
@@ -96,10 +96,11 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -114,9 +115,9 @@
 		newdata = NULL;
 	}
 		
-	[gUserDefaults setInteger:dotWidth forKey:@"CIDotScreen.width"];
-	[gUserDefaults setFloat:angle forKey:@"CIDotScreen.angle"];
-	[gUserDefaults setFloat:sharpness forKey:@"CIDotScreen.sharpness"];
+	[defaults setInteger:dotWidth forKey:@"CIDotScreen.width"];
+	[defaults setFloat:angle forKey:@"CIDotScreen.angle"];
+	[defaults setFloat:sharpness forKey:@"CIDotScreen.sharpness"];
 }
 
 - (void)reapply

@@ -9,8 +9,9 @@
 
 - (void)awakeWithMaster:(id)imaster andString:(id)iprefString
 {
-	int ratioIndex;
+	NSInteger ratioIndex;
 	id customItem;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	master = imaster;
 	prefString = iprefString;
@@ -18,34 +19,34 @@
 	[ratioCheckbox setState:NSOffState];
 	[ratioPopup setEnabled:[ratioCheckbox state]];
 	
-	if ([gUserDefaults objectForKey:[NSString stringWithFormat:@"%@ ratio index", prefString]] == NULL) {
+	if ([defaults objectForKey:[NSString stringWithFormat:@"%@ ratio index", prefString]] == NULL) {
 		[ratioPopup selectItemAtIndex:1];
 	}
 	else {
-		ratioIndex = [gUserDefaults integerForKey:[NSString stringWithFormat:@"%@ ratio index", prefString]];
+		ratioIndex = [defaults integerForKey:[NSString stringWithFormat:@"%@ ratio index", prefString]];
 		if (ratioIndex < 0 || ratioIndex > customItemIndex) ratioIndex = 1;
 		[ratioPopup selectItemAtIndex:ratioIndex];
 	}
 
-	if ([gUserDefaults objectForKey:[NSString stringWithFormat:@"%@ ratio horiz", prefString]] == NULL) {
+	if ([defaults objectForKey:[NSString stringWithFormat:@"%@ ratio horiz", prefString]] == NULL) {
 		ratioX = 2.0;
 	}
 	else {
-		ratioX = [gUserDefaults integerForKey:[NSString stringWithFormat:@"%@ ratio horiz", prefString]];
+		ratioX = [defaults integerForKey:[NSString stringWithFormat:@"%@ ratio horiz", prefString]];
 	}
 	
-	if ([gUserDefaults objectForKey:[NSString stringWithFormat:@"%@ ratio vert", prefString]] == NULL) {
+	if ([defaults objectForKey:[NSString stringWithFormat:@"%@ ratio vert", prefString]] == NULL) {
 		ratioY = 1.0;
 	}
 	else {
-		ratioY = [gUserDefaults integerForKey:[NSString stringWithFormat:@"%@ ratio vert", prefString]];
+		ratioY = [defaults integerForKey:[NSString stringWithFormat:@"%@ ratio vert", prefString]];
 	}
 	
-	if ([gUserDefaults objectForKey:[NSString stringWithFormat:@"%@ ratio type", prefString]] == NULL) {
+	if ([defaults objectForKey:[NSString stringWithFormat:@"%@ ratio type", prefString]] == NULL) {
 		aspectType = kRatioAspectType;
 	}
 	else {
-		aspectType = [gUserDefaults integerForKey:[NSString stringWithFormat:@"%@ ratio type", prefString]];
+		aspectType = [defaults integerForKey:[NSString stringWithFormat:@"%@ ratio type", prefString]];
 	}
 	
 	customItem = [ratioPopup itemAtIndex:customItemIndex];
@@ -230,10 +231,11 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:[ratioPopup indexOfSelectedItem] forKey:[NSString stringWithFormat:@"%@ ratio index", prefString]];
-	[gUserDefaults setFloat:ratioX forKey:[NSString stringWithFormat:@"%@ ratio index", prefString]];
-	[gUserDefaults setFloat:ratioY forKey:[NSString stringWithFormat:@"%@ ratio index", prefString]];
-	[gUserDefaults setInteger:aspectType forKey:[NSString stringWithFormat:@"%@ ratio index", prefString]];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[ratioPopup indexOfSelectedItem] forKey:[NSString stringWithFormat:@"%@ ratio index", prefString]];
+	[defaults setFloat:ratioX forKey:[NSString stringWithFormat:@"%@ ratio index", prefString]];
+	[defaults setFloat:ratioY forKey:[NSString stringWithFormat:@"%@ ratio index", prefString]];
+	[defaults setInteger:aspectType forKey:[NSString stringWithFormat:@"%@ ratio index", prefString]];
 }
 
 @end

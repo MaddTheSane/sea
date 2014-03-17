@@ -3,8 +3,6 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CICircularScreenClass
@@ -56,14 +54,15 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CICircularScreen.width"])
-		self.dotWidth = [gUserDefaults integerForKey:@"CICircularScreen.width"];
+	if ([defaults objectForKey:@"CICircularScreen.width"])
+		self.dotWidth = [defaults integerForKey:@"CICircularScreen.width"];
 	else
 		self.dotWidth = 6;
 	
-	if ([gUserDefaults objectForKey:@"CICircularScreen.sharpness"])
-		self.sharpness = [gUserDefaults floatForKey:@"CICircularScreen.sharpness"];
+	if ([defaults objectForKey:@"CICircularScreen.sharpness"])
+		self.sharpness = [defaults floatForKey:@"CICircularScreen.sharpness"];
 	else
 		self.sharpness = 0.7;
 			
@@ -86,22 +85,24 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setInteger:dotWidth forKey:@"CICircularScreen.width"];
-	[gUserDefaults setFloat:sharpness forKey:@"CICircularScreen.sharpness"];
+	[defaults setInteger:dotWidth forKey:@"CICircularScreen.width"];
+	[defaults setFloat:sharpness forKey:@"CICircularScreen.sharpness"];
 }
 
 - (void)reapply

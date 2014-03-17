@@ -11,11 +11,12 @@
 
 - (void)awakeFromNib
 {
-	if ([gUserDefaults objectForKey:@"position anchor"] == NULL) {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if ([defaults objectForKey:@"position anchor"] == NULL) {
 		[canAnchorCheckbox setState:NSOffState];
-	}
-	else {
-		[canAnchorCheckbox setState:[gUserDefaults boolForKey:@"position anchor"]];
+	} else {
+		[canAnchorCheckbox setState:[defaults boolForKey:@"position anchor"]];
 	}
 	function = kMovingLayer;
 }
@@ -72,7 +73,8 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setObject:[canAnchorCheckbox state] ? @"YES" : @"NO" forKey:@"position anchor"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:[canAnchorCheckbox state] ? @"YES" : @"NO" forKey:@"position anchor"];
 }
 
 @end

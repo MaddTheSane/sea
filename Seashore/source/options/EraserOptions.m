@@ -10,18 +10,19 @@
 - (void)awakeFromNib
 {
 	NSInteger value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"eraser opacity"] == NULL) {
+	if ([defaults objectForKey:@"eraser opacity"] == NULL) {
 		value = 100;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"eraser opacity"];
+		value = [defaults integerForKey:@"eraser opacity"];
 		if (value < [opacitySlider minValue] || value > [opacitySlider maxValue])
 			value = 100;
 	}
 	[opacitySlider setIntegerValue:value];
 	[opacityLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"opacity", @"Opacity: %d%%"), value]];
-	[mimicBrushCheckbox setState:[gUserDefaults boolForKey:@"eraser mimicBrush"]];
+	[mimicBrushCheckbox setState:[defaults boolForKey:@"eraser mimicBrush"]];
 }
 
 - (IBAction)opacityChanged:(id)sender
@@ -41,8 +42,9 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:[opacitySlider intValue] forKey:@"eraser opacity"];
-	[gUserDefaults setObject:[mimicBrushCheckbox state] ? @"YES" : @"NO" forKey:@"eraser mimicBrush"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[opacitySlider intValue] forKey:@"eraser opacity"];
+	[defaults setObject:[mimicBrushCheckbox state] ? @"YES" : @"NO" forKey:@"eraser mimicBrush"];
 }
 
 @end

@@ -2,8 +2,6 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIBrightnessClass
@@ -81,9 +79,9 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
 	if (refresh)
 		[self execute];
 	[pluginData apply];
@@ -100,9 +98,9 @@
 		newdata = NULL;
 	}
 		
-	[gUserDefaults setDouble:brightness forKey:@"CIBrightness.brightness"];
-	[gUserDefaults setDouble:contrast / 10 forKey:@"CIBrightness.contrast"];
-	[gUserDefaults setDouble:saturation forKey:@"CIBrightness.saturation"];
+	[defaults setDouble:brightness forKey:@"CIBrightness.brightness"];
+	[defaults setDouble:contrast / 10 forKey:@"CIBrightness.contrast"];
+	[defaults setDouble:saturation forKey:@"CIBrightness.saturation"];
 }
 
 - (void)reapply

@@ -3,8 +3,6 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIPointillizeClass
@@ -45,9 +43,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIPointillize.radius"])
-		self.radius = [gUserDefaults integerForKey:@"CIPointillize.radius"];
+	if ([defaults objectForKey:@"CIPointillize.radius"])
+		self.radius = [defaults integerForKey:@"CIPointillize.radius"];
 	else
 		self.radius = 20;
 	refresh = YES;
@@ -74,10 +73,11 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -88,7 +88,7 @@
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setInteger:radius forKey:@"CIPointillize.radius"];
+	[defaults setInteger:radius forKey:@"CIPointillize.radius"];
 }
 
 - (void)reapply

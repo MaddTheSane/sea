@@ -9,13 +9,14 @@
 
 - (void)awakeFromNib
 {
-	int value;
+	NSInteger value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"pencil size"] == NULL) {
+	if ([defaults objectForKey:@"pencil size"] == NULL) {
 		value = 1;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"pencil size"];
+		value = [defaults integerForKey:@"pencil size"];
 		if (value < [sizeSlider minValue] || value > [sizeSlider maxValue])
 			value = 1;
 	}
@@ -72,7 +73,8 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:[sizeSlider intValue] forKey:@"pencil size"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[sizeSlider intValue] forKey:@"pencil size"];
 }
 
 @end

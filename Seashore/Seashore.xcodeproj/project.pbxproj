@@ -1653,6 +1653,10 @@
 		551E572918D0268500E4CDAF /* Exposure+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Exposure+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E573A18D0268A00E4CDAF /* False Color+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "False Color+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
+		557B939718D77CD6003ABCD6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		557B939818D77FF8003ABCD6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		557B939A18D781EB003ABCD6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CICMYKHalftone.strings; sourceTree = "<group>"; };
+		557B939C18D781ED003ABCD6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CICMYKHalftone.strings"; sourceTree = "<group>"; };
 		557D504918CF9FBA005809E3 /* CIAffineTileClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIAffineTileClass.h; sourceTree = "<group>"; };
 		557D504A18CF9FBA005809E3 /* CIAffineTileClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIAffineTileClass.m; sourceTree = "<group>"; };
 		557D504C18CF9FBA005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -8054,6 +8058,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D508818CF9FBB005809E3 /* English */,
+				557B939718D77CD6003ABCD6 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -8070,6 +8075,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D509E18CF9FBB005809E3 /* English */,
+				557B939818D77FF8003ABCD6 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -8526,6 +8532,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8018D12A9600FB7F00 /* Base */,
+				557B939A18D781EB003ABCD6 /* en */,
+				557B939C18D781ED003ABCD6 /* en-GB */,
 			);
 			name = CICMYKHalftone.xib;
 			sourceTree = "<group>";

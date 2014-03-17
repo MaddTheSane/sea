@@ -10,14 +10,15 @@
 {
 	float values[4];
 	NSData *tempData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Determine the initial color (from preferences if possible)
-	if ([gUserDefaults objectForKey:@"transparency color data"] == NULL) {
+	if ([defaults objectForKey:@"transparency color data"] == NULL) {
 		values[0] = values[1] = values[2] = values[3] = 1.0;
 		color = [NSColor colorWithCalibratedRed:values[0] green:values[1] blue:values[2] alpha:values[3]];
 	}
 	else {
-		tempData = [gUserDefaults dataForKey:@"transparency color data"];
+		tempData = [defaults dataForKey:@"transparency color data"];
 		if (tempData != nil)
 			color = (NSColor *)[NSUnarchiver unarchiveObjectWithData:tempData];
 	}
@@ -48,7 +49,8 @@
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
 	int i;
-	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
 	// Change the colour
 	color = [sender color];
 	if (![[color colorSpaceName] isEqualToString:NSNamedColorSpace])
@@ -59,7 +61,7 @@
 		[[documents[i] docView] setNeedsDisplay:YES];
 	}
 
-	[gUserDefaults setObject:[NSArchiver archivedDataWithRootObject:color] forKey:@"transparency color data"];
+	[defaults setObject:[NSArchiver archivedDataWithRootObject:color] forKey:@"transparency color data"];
 
 }
 

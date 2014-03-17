@@ -57,7 +57,6 @@
 	
 	// A timer that delays colour changes
 	id delay_timer;
-	
 }
 
 /*!
@@ -66,18 +65,6 @@
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)init;
-
-/*!
-	@method		awakeFromNib
-	@discussion	Configures the utility's interface.
-*/
-- (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		foreground

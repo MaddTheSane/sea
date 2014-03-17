@@ -2,7 +2,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 @implementation PixellateClass
 @synthesize panel;
@@ -41,9 +41,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"Pixellate.scale"])
-		scale = [gUserDefaults integerForKey:@"Pixellate.scale"];
+	if ([defaults objectForKey:@"Pixellate.scale"])
+		scale = [defaults integerForKey:@"Pixellate.scale"];
 	else
 		scale = 8;
 		
@@ -67,10 +68,11 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
-	if (refresh) [self pixellate];
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if (refresh)
+		[self pixellate];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -80,7 +82,7 @@
 	[panel orderOut:self];
 	success = YES;
 	
-	[gUserDefaults setInteger:scale forKey:@"Pixellate.scale"];
+	[defaults setInteger:scale forKey:@"Pixellate.scale"];
 }
 
 - (void)reapply

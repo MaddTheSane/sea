@@ -2,7 +2,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 @implementation GaussianClass
 @synthesize seaPlugins;
@@ -40,9 +40,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"Gaussian.radius"])
-		radius = [gUserDefaults integerForKey:@"Gaussian.radius"];
+	if ([defaults objectForKey:@"Gaussian.radius"])
+		radius = [defaults integerForKey:@"Gaussian.radius"];
 	else
 		radius = 1;
 	refresh = YES;
@@ -65,10 +66,11 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self gauss:BLUR_RLE];
+	if (refresh)
+		[self gauss:BLUR_RLE];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -78,7 +80,7 @@
 	[panel orderOut:self];
 	success = YES;
 	
-	[gUserDefaults setInteger:radius forKey:@"Gaussian.radius"];
+	[defaults setInteger:radius forKey:@"Gaussian.radius"];
 }
 
 - (void)reapply

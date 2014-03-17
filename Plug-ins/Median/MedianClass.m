@@ -2,7 +2,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 @implementation MedianClass
 @synthesize seaPlugins;

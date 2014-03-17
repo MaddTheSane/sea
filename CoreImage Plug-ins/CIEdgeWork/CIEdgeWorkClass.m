@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -44,9 +44,10 @@
 - (void)run
 {
 	PluginData *pluginData;
-	
-	if ([gUserDefaults objectForKey:@"CIEdgeWork.radius"])
-		self.radius = [gUserDefaults floatForKey:@"CIEdgeWork.radius"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if ([defaults objectForKey:@"CIEdgeWork.radius"])
+		self.radius = [defaults floatForKey:@"CIEdgeWork.radius"];
 	else
 		self.radius = 3.0;
 	refresh = YES;
@@ -73,9 +74,9 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -87,7 +88,7 @@
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:radius forKey:@"CIEdgeWork.radius"];
+	[defaults setFloat:radius forKey:@"CIEdgeWork.radius"];
 }
 
 - (void)reapply

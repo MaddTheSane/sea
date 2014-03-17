@@ -57,28 +57,29 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 
 - (id)init
 {
-	int value;
+	NSInteger value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"jpeg target"] == NULL)
+	if ([defaults objectForKey:@"jpeg target"] == NULL)
 		targetWeb = YES;
 	else
-		targetWeb = [gUserDefaults boolForKey:@"jpeg target"];
+		targetWeb = [defaults boolForKey:@"jpeg target"];
 	
-	if ([gUserDefaults objectForKey:@"jpeg web compression"] == NULL) {
+	if ([defaults objectForKey:@"jpeg web compression"] == NULL) {
 		value = 26;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"jpeg web compression"];
+		value = [defaults integerForKey:@"jpeg web compression"];
 		if (value < 0 || value > kMaxCompression)
 			value = 26;
 	}
 	webCompression = value;
 	
-	if ([gUserDefaults objectForKey:@"jpeg print compression"] == NULL) {
+	if ([defaults objectForKey:@"jpeg print compression"] == NULL) {
 		value = 30;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"jpeg print compression"];
+		value = [defaults integerForKey:@"jpeg print compression"];
 		if (value < 0 || value > kMaxCompression)
 			value = 30;
 	}
@@ -131,6 +132,7 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 
 - (void)showOptions:(id)document
 {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	unsigned char *temp, *data;
 	int width = [(SeaContent *)[document contents] width], height = [(SeaContent *)[document contents] height], spp = [[document contents] spp];
 	int i, j, k, x, y;
@@ -190,11 +192,11 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	[panel orderOut:self];
 	
 	// Clean-up
-	[gUserDefaults setObject:(targetWeb ? @"YES" : @"NO") forKey:@"jpeg target"];
+	[defaults setObject:(targetWeb ? @"YES" : @"NO") forKey:@"jpeg target"];
 	if (targetWeb)
-		[gUserDefaults setInteger:webCompression forKey:@"jpeg web compression"];
+		[defaults setInteger:webCompression forKey:@"jpeg web compression"];
 	else
-		[gUserDefaults setInteger:printCompression forKey:@"jpeg print compression"];
+		[defaults setInteger:printCompression forKey:@"jpeg print compression"];
 	free(sampleData);
 }
 

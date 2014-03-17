@@ -223,13 +223,14 @@ id seaController;
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Inform those that wish to know
 	for (SeaPrefs *thePrefs in terminationObjects) {
 		[thePrefs terminate];
 	}
 	
 	// Save the changes in preferences
-	[gUserDefaults synchronize];
+	[defaults synchronize];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication

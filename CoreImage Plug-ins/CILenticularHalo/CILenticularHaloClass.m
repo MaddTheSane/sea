@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -54,17 +54,18 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CILenticularHalo.overlap"])
-		overlap = [gUserDefaults floatForKey:@"CILenticularHalo.overlap"];
+	if ([defaults objectForKey:@"CILenticularHalo.overlap"])
+		overlap = [defaults floatForKey:@"CILenticularHalo.overlap"];
 	else
 		overlap = 0.77;
-	if ([gUserDefaults objectForKey:@"CILenticularHalo.strength"])
-		strength = [gUserDefaults floatForKey:@"CILenticularHalo.strength"];
+	if ([defaults objectForKey:@"CILenticularHalo.strength"])
+		strength = [defaults floatForKey:@"CILenticularHalo.strength"];
 	else
 		strength = 0.5;
-	if ([gUserDefaults objectForKey:@"CILenticularHalo.contrast"])
-		contrast = [gUserDefaults floatForKey:@"CILenticularHalo.contrast"];
+	if ([defaults objectForKey:@"CILenticularHalo.contrast"])
+		contrast = [defaults floatForKey:@"CILenticularHalo.contrast"];
 	else
 		contrast = 1.0;
 			
@@ -101,24 +102,26 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
-	[panel orderOut:self];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
+	[panel orderOut:sender];
 	success = YES;
 	running = NO;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:overlap forKey:@"CILenticularHalo.overlap"];
-	[gUserDefaults setFloat:strength forKey:@"CILenticularHalo.strength"];
-	[gUserDefaults setFloat:contrast forKey:@"CILenticularHalo.contrast"];
+	[defaults setFloat:overlap forKey:@"CILenticularHalo.overlap"];
+	[defaults setFloat:strength forKey:@"CILenticularHalo.strength"];
+	[defaults setFloat:contrast forKey:@"CILenticularHalo.contrast"];
 	
 	[gColorPanel orderOut:self];
 

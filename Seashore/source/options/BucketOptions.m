@@ -9,25 +9,26 @@
 
 - (void)awakeFromNib
 {
-	int value;
+	NSInteger value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"bucket tolerance"] == NULL) {
+	if ([defaults objectForKey:@"bucket tolerance"] == NULL) {
 		[toleranceSlider setIntValue:15];
 		[toleranceLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"tolerance", @"Tolerance: %d"), 15]];
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"bucket tolerance"];
+		value = [defaults integerForKey:@"bucket tolerance"];
 		if (value < 0 || value > 255)
 			value = 0;
-		[toleranceSlider setIntValue:value];
+		[toleranceSlider setIntegerValue:value];
 		[toleranceLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"tolerance", @"Tolerance: %d"), value]];
 	}
 	
-	if([gUserDefaults objectForKey:@"bucket intervals"] == NULL){
+	if([defaults objectForKey:@"bucket intervals"] == NULL){
 		[intervalsSlider setIntValue:15];
 	}else{
-		value = [gUserDefaults integerForKey:@"bucket intervals"];
-		[intervalsSlider setIntValue: value];
+		value = [defaults integerForKey:@"bucket intervals"];
+		[intervalsSlider setIntegerValue:value];
 	}
 	
 }
@@ -54,8 +55,9 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:[toleranceSlider intValue] forKey:@"bucket tolerance"];
-	[gUserDefaults setInteger:[intervalsSlider intValue] forKey:@"bucket intervals"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[toleranceSlider intValue] forKey:@"bucket tolerance"];
+	[defaults setInteger:[intervalsSlider intValue] forKey:@"bucket intervals"];
 }
 
 @end

@@ -9,13 +9,17 @@
 
 - (void)awakeFromNib
 {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSInteger effectIndex;
 	parentWin = nil;
 	NSArray *pointPlugins = [[SeaController seaPlugins] pointPlugins];
 	if ([pointPlugins count]) {
-		if ([gUserDefaults objectForKey:@"effectIndex"]) effectIndex = [gUserDefaults integerForKey:@"effectIndex"];
-		else effectIndex = 0;
-		if (effectIndex < 0 || effectIndex >= [pointPlugins count]) effectIndex = 0;
+		if ([defaults objectForKey:@"effectIndex"])
+			effectIndex = [defaults integerForKey:@"effectIndex"];
+		else
+			effectIndex = 0;
+		if (effectIndex < 0 || effectIndex >= [pointPlugins count])
+			effectIndex = 0;
 
 		[effectTable noteNumberOfRowsChanged];
 		[effectTable selectRowIndexes:[NSIndexSet indexSetWithIndex:effectIndex] byExtendingSelection:NO];

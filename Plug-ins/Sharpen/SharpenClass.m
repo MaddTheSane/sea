@@ -3,8 +3,6 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
-
 @implementation SharpenClass
 @synthesize panel;
 @synthesize seaPlugins;
@@ -42,9 +40,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"Sharpen.extent"])
-		extent = [gUserDefaults integerForKey:@"Sharpen.extent"];
+	if ([defaults objectForKey:@"Sharpen.extent"])
+		extent = [defaults integerForKey:@"Sharpen.extent"];
 	else
 		extent = 15;
 	refresh = YES;
@@ -68,20 +67,22 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self sharpen];
+	if (refresh)
+		[self sharpen];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
-	[panel orderOut:self];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
+	[panel orderOut:sender];
 	success = YES;
 	
-	[gUserDefaults setInteger:extent forKey:@"Sharpen.extent"];
+	[defaults setInteger:extent forKey:@"Sharpen.extent"];
 }
 
 - (void)reapply

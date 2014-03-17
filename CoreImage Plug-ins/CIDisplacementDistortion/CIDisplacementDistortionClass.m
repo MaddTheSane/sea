@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -58,9 +58,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIDisplacementDistortion.scale"])
-		self.scale = [gUserDefaults integerForKey:@"CIDisplacementDistortion.scale"];
+	if ([defaults objectForKey:@"CIDisplacementDistortion.scale"])
+		self.scale = [defaults integerForKey:@"CIDisplacementDistortion.scale"];
 	else
 		self.scale = 50;
 	refresh = YES;
@@ -83,9 +84,9 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -100,7 +101,7 @@
 		newdata = NULL;
 	}
 		
-	[gUserDefaults setInteger:scale forKey:@"CICrystallize.scale"];
+	[defaults setInteger:scale forKey:@"CICrystallize.scale"];
 }
 
 - (void)reapply

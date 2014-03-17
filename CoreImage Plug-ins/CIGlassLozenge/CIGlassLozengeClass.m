@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -54,17 +54,18 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIGlassLozenge.refraction"])
-		refraction = [gUserDefaults floatForKey:@"CIGlassLozenge.refraction"];
+	if ([defaults objectForKey:@"CIGlassLozenge.refraction"])
+		refraction = [defaults floatForKey:@"CIGlassLozenge.refraction"];
 	else
 		refraction = 1.7;
 	
 	if (refraction < -5.0 || refraction > 5.0)
 		refraction = 1.7;
 		
-	if ([gUserDefaults objectForKey:@"CIGlassLozenge.radius"])
-		radius = [gUserDefaults integerForKey:@"CIGlassLozenge.radius"];
+	if ([defaults objectForKey:@"CIGlassLozenge.radius"])
+		radius = [defaults integerForKey:@"CIGlassLozenge.radius"];
 	else
 		radius = 100;
 	
@@ -94,10 +95,11 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -108,8 +110,8 @@
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:refraction forKey:@"CIGlassLozenge.refraction"];
-	[gUserDefaults setInteger:radius forKey:@"CIGlassLozenge.radius"];
+	[defaults setFloat:refraction forKey:@"CIGlassLozenge.refraction"];
+	[defaults setInteger:radius forKey:@"CIGlassLozenge.radius"];
 }
 
 - (void)reapply

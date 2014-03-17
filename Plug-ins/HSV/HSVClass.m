@@ -4,7 +4,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 @implementation HSVClass
 @synthesize panel;

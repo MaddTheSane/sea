@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -45,9 +45,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIUnsharpMask.radius"])
-		radius = [gUserDefaults floatForKey:@"CIUnsharpMask.radius"];
+	if ([defaults objectForKey:@"CIUnsharpMask.radius"])
+		radius = [defaults floatForKey:@"CIUnsharpMask.radius"];
 	else
 		radius = 2.5;
 	
@@ -57,8 +58,8 @@
 	[radiusLabel setStringValue:[NSString stringWithFormat:@"%.1f", radius]];
 	[radiusSlider setFloatValue:radius];
 	
-	if ([gUserDefaults objectForKey:@"CIUnsharpMask.intensity"])
-		intensity = [gUserDefaults floatForKey:@"CIUnsharpMask.intensity"];
+	if ([defaults objectForKey:@"CIUnsharpMask.intensity"])
+		intensity = [defaults floatForKey:@"CIUnsharpMask.intensity"];
 	else
 		intensity = 0.5;
 	
@@ -84,10 +85,11 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -98,8 +100,8 @@
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:radius forKey:@"CIUnsharpMask.radius"];
-	[gUserDefaults setFloat:intensity forKey:@"CIUnsharpMask.intensity"];
+	[defaults setFloat:radius forKey:@"CIUnsharpMask.radius"];
+	[defaults setFloat:intensity forKey:@"CIUnsharpMask.intensity"];
 }
 
 - (void)reapply

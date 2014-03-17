@@ -2,7 +2,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -44,10 +44,10 @@
 - (void)run
 {
 	PluginData *pluginData;
-	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	if ([gUserDefaults objectForKey:@"CIPosterize.levels"])
-		self.levels = [gUserDefaults integerForKey:@"CIPosterize.levels"];
+	if ([defaults objectForKey:@"CIPosterize.levels"])
+		self.levels = [defaults integerForKey:@"CIPosterize.levels"];
 	else
 		self.levels = 2;
 	

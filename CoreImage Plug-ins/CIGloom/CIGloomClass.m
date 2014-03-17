@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -44,9 +44,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIGloom.radius"])
-		radius = [gUserDefaults integerForKey:@"CIGloom.radius"];
+	if ([defaults objectForKey:@"CIGloom.radius"])
+		radius = [defaults integerForKey:@"CIGloom.radius"];
 	else
 		radius = 10;
 	refresh = YES;
@@ -57,8 +58,8 @@
 	[radiusLabel setStringValue:[NSString stringWithFormat:@"%d", radius]];
 	[radiusSlider setFloatValue:radius];
 	
-	if ([gUserDefaults objectForKey:@"CIGloom.intensity"])
-		intensity = [gUserDefaults floatForKey:@"CIGloom.intensity"];
+	if ([defaults objectForKey:@"CIGloom.intensity"])
+		intensity = [defaults floatForKey:@"CIGloom.intensity"];
 	else
 		intensity = 1.0;
 	refresh = YES;
@@ -84,22 +85,24 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:radius forKey:@"CIGloom.radius"];
-	[gUserDefaults setFloat:intensity forKey:@"CIGloom.intensity"];
+	[defaults setFloat:radius forKey:@"CIGloom.radius"];
+	[defaults setFloat:intensity forKey:@"CIGloom.intensity"];
 }
 
 - (void)reapply

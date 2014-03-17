@@ -29,6 +29,8 @@
 
 - (void)terminate
 {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
 	pegasusUtilities = nil;
 	toolboxUtilities = nil;
 	brushUtilities = nil;
@@ -38,7 +40,7 @@
 	statusUtilities = nil;
 	
 	// Force such information to be written to the hard disk
-	[gUserDefaults synchronize];
+	[defaults synchronize];
 }
 
 - (void)shutdownFor:(id)doc

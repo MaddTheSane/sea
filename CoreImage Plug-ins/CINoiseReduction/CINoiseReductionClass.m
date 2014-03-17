@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -44,9 +44,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CINoiseReduction.noise"])
-		noise = [gUserDefaults floatForKey:@"CINoiseReduction.noise"];
+	if ([defaults objectForKey:@"CINoiseReduction.noise"])
+		noise = [defaults floatForKey:@"CINoiseReduction.noise"];
 	else
 		noise = 0.02;
 	
@@ -56,8 +57,8 @@
 	[noiseLabel setStringValue:[NSString stringWithFormat:@"%.1f%%", noise * 100.0]];
 	[noiseSlider setFloatValue:noise * 100.0];
 	
-	if ([gUserDefaults objectForKey:@"CINoiseReduction.sharp"])
-		sharp = [gUserDefaults floatForKey:@"CINoiseReduction.sharp"];
+	if ([defaults objectForKey:@"CINoiseReduction.sharp"])
+		sharp = [defaults floatForKey:@"CINoiseReduction.sharp"];
 	else
 		sharp = 0.4;
 	
@@ -83,9 +84,8 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -97,8 +97,8 @@
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:sharp forKey:@"CINoiseReduction.noise"];
-	[gUserDefaults setFloat:sharp forKey:@"CINoiseReduction.sharp"];
+	[defaults setFloat:sharp forKey:@"CINoiseReduction.noise"];
+	[defaults setFloat:sharp forKey:@"CINoiseReduction.sharp"];
 }
 
 - (void)reapply

@@ -30,28 +30,29 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 
 - (id)init
 {
-	int value;
+	NSInteger value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"jp2 target"] == NULL)
+	if ([defaults objectForKey:@"jp2 target"] == NULL)
 		targetWeb = YES;
 	else
-		targetWeb = [gUserDefaults boolForKey:@"jp2 target"];
+		targetWeb = [defaults boolForKey:@"jp2 target"];
 	
-	if ([gUserDefaults objectForKey:@"jp2 web compression"] == NULL) {
+	if ([defaults objectForKey:@"jp2 web compression"] == NULL) {
 		value = 26;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"jp2 web compression"];
+		value = [defaults integerForKey:@"jp2 web compression"];
 		if (value < 0 || value > kMaxCompression)
 			value = 26;
 	}
 	webCompression = value;
 	
-	if ([gUserDefaults objectForKey:@"jp2 print compression"] == NULL) {
+	if ([defaults objectForKey:@"jp2 print compression"] == NULL) {
 		value = 30;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"jp2 print compression"];
+		value = [defaults integerForKey:@"jp2 print compression"];
 		if (value < 0 || value > kMaxCompression)
 			value = 30;
 	}
@@ -122,6 +123,7 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	int i, j, k, x, y;
 	id realImage, compressImage;
 	float value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Work things out
 	if (targetWeb)
@@ -174,11 +176,11 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	[panel orderOut:self];
 	
 	// Clean-up
-	[gUserDefaults setObject:(targetWeb ? @"YES" : @"NO") forKey:@"jp2 target"];
+	[defaults setObject:(targetWeb ? @"YES" : @"NO") forKey:@"jp2 target"];
 	if (targetWeb)
-		[gUserDefaults setInteger:webCompression forKey:@"jp2 web compression"];
+		[defaults setInteger:webCompression forKey:@"jp2 web compression"];
 	else
-		[gUserDefaults setInteger:printCompression forKey:@"jp2 print compression"];
+		[defaults setInteger:printCompression forKey:@"jp2 print compression"];
 	free(sampleData);
 }
 

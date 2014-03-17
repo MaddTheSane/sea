@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -46,14 +46,15 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIPixellate.scale"])
-		self.scale = [gUserDefaults floatForKey:@"CIPixellate.scale"];
+	if ([defaults objectForKey:@"CIPixellate.scale"])
+		self.scale = [defaults floatForKey:@"CIPixellate.scale"];
 	else
 		scale = 8;
 	
-	if ([gUserDefaults objectForKey:@"CIPixellate.centerBased"])
-		self.centerBased = [gUserDefaults boolForKey:@"CIPixellate.centerBased"];
+	if ([defaults objectForKey:@"CIPixellate.centerBased"])
+		self.centerBased = [defaults boolForKey:@"CIPixellate.centerBased"];
 	else
 		self.centerBased = YES;
 	
@@ -82,10 +83,11 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -96,8 +98,8 @@
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setInteger:scale forKey:@"CIPixellate.scale"];
-	[gUserDefaults setObject:(centerBased) ? @"YES" : @"NO" forKey:@"CIPixellate.scale"];
+	[defaults setInteger:scale forKey:@"CIPixellate.scale"];
+	[defaults setObject:(centerBased) ? @"YES" : @"NO" forKey:@"CIPixellate.scale"];
 }
 
 - (void)reapply

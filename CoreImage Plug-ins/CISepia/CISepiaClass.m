@@ -2,7 +2,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -44,9 +44,10 @@
 - (void)run
 {
 	PluginData *pluginData;
-	
-	if ([gUserDefaults objectForKey:@"CISepia.intensity"])
-		self.intensity = [gUserDefaults integerForKey:@"CISepia.intensity"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if ([defaults objectForKey:@"CISepia.intensity"])
+		self.intensity = [defaults integerForKey:@"CISepia.intensity"];
 	else
 		self.intensity = 1.0;
 	

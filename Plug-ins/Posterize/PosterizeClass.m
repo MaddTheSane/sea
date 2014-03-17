@@ -2,8 +2,6 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
-
 @implementation PosterizeClass
 @synthesize panel;
 @synthesize seaPlugins;
@@ -41,9 +39,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	if ([gUserDefaults objectForKey:@"Posterize.posterize"])
-		posterize = [gUserDefaults integerForKey:@"Posterize.posterize"];
+	if ([defaults objectForKey:@"Posterize.posterize"])
+		posterize = [defaults integerForKey:@"Posterize.posterize"];
 	else
 		posterize = 2;
 	refresh = YES;
@@ -70,20 +69,22 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
-	if (refresh) [self posterize];
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if (refresh)
+		[self posterize];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	
-	[gUserDefaults setInteger:posterize forKey:@"Posterize.posterize"];
+	[defaults setInteger:posterize forKey:@"Posterize.posterize"];
 }
 
 - (void)reapply

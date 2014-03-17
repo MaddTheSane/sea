@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -60,18 +60,19 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIStarshine.scale"])
-		self.scale = [gUserDefaults floatForKey:@"CIStarshine.scale"];
+	if ([defaults objectForKey:@"CIStarshine.scale"])
+		self.scale = [defaults floatForKey:@"CIStarshine.scale"];
 	else
 		self.scale = 15;
 	
-	if ([gUserDefaults objectForKey:@"CIStarshine.opacity"])
-		self.opacity = [gUserDefaults floatForKey:@"CIStarshine.opacity"];
+	if ([defaults objectForKey:@"CIStarshine.opacity"])
+		self.opacity = [defaults floatForKey:@"CIStarshine.opacity"];
 	else
 		self.opacity = -2.0;
-	if ([gUserDefaults objectForKey:@"CIStarshine.width"])
-		self.starWidth = [gUserDefaults floatForKey:@"CIStarshine.width"];
+	if ([defaults objectForKey:@"CIStarshine.width"])
+		self.starWidth = [defaults floatForKey:@"CIStarshine.width"];
 	else
 		self.starWidth = 2.5;
 	
@@ -108,9 +109,9 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -123,9 +124,9 @@
 	running = NO;
 	if (newdata) { free(newdata); newdata = NULL; }
 	
-	[gUserDefaults setInteger:scale forKey:@"CIStarshine.scale"];
-	[gUserDefaults setFloat:opacity forKey:@"CIStarshine.opacity"];
-	[gUserDefaults setFloat:star_width forKey:@"CIStarshine.width"];
+	[defaults setInteger:scale forKey:@"CIStarshine.scale"];
+	[defaults setFloat:opacity forKey:@"CIStarshine.opacity"];
+	[defaults setFloat:star_width forKey:@"CIStarshine.width"];
 	
 	[gColorPanel orderOut:self];
 

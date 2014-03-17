@@ -56,10 +56,10 @@
 #define PI 3.14159265
 
 /*!
-	@defined	gUserDefaults
+	@defined	defaults
 	@discussion	Allows quick reference to the standard user defaults manager.
 */
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 /*!
 	@defined	gColorPanel

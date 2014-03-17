@@ -10,24 +10,25 @@
 
 - (void)awakeFromNib
 {
-	int value;
+	NSInteger value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"wand tolerance"] == NULL) {
+	if ([defaults objectForKey:@"wand tolerance"] == NULL) {
 		[toleranceSlider setIntValue:15];
 		[toleranceLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"tolerance", @"Tolerance: %d"), 15]];
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"wand tolerance"];
+		value = [defaults integerForKey:@"wand tolerance"];
 		if (value < 0 || value > 255)
 			value = 0;
 		[toleranceSlider setIntValue:value];
 		[toleranceLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"tolerance", @"Tolerance: %d"), value]];
 	}
 	
-	if([gUserDefaults objectForKey:@"wand intervals"] == NULL){
+	if([defaults objectForKey:@"wand intervals"] == NULL){
 		[intervalsSlider setIntValue:15];
 	}else{
-		value = [gUserDefaults integerForKey:@"wand intervals"];
+		value = [defaults integerForKey:@"wand intervals"];
 		[intervalsSlider setIntValue: value];
 	}
 }
@@ -49,8 +50,9 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:[toleranceSlider intValue] forKey:@"wand tolerance"];
-	[gUserDefaults setInteger:[intervalsSlider intValue] forKey:@"wand intervals"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[toleranceSlider intValue] forKey:@"wand tolerance"];
+	[defaults setInteger:[intervalsSlider intValue] forKey:@"wand intervals"];
 }
 
 @end

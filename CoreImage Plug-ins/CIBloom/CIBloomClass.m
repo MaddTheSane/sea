@@ -3,8 +3,6 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIBloomClass
@@ -45,9 +43,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIBloom.radius"])
-		self.radius = [gUserDefaults integerForKey:@"CIBloom.radius"];
+	if ([defaults objectForKey:@"CIBloom.radius"])
+		self.radius = [defaults integerForKey:@"CIBloom.radius"];
 	else
 		self.radius = 10;
 	refresh = YES;
@@ -55,8 +54,8 @@
 	if (radius < 0 || radius > 0.1)
 		self.radius = 10;
 	
-	if ([gUserDefaults objectForKey:@"CIBloom.intensity"])
-		self.intensity = [gUserDefaults floatForKey:@"CIBloom.intensity"];
+	if ([defaults objectForKey:@"CIBloom.intensity"])
+		self.intensity = [defaults floatForKey:@"CIBloom.intensity"];
 	else
 		self.intensity = 1.0;
 	refresh = YES;
@@ -77,10 +76,11 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -95,8 +95,8 @@
 		newdata = NULL;
 	}
 		
-	[gUserDefaults setFloat:radius forKey:@"CIBloom.radius"];
-	[gUserDefaults setFloat:intensity forKey:@"CIBloom.intensity"];
+	[defaults setFloat:radius forKey:@"CIBloom.radius"];
+	[defaults setFloat:intensity forKey:@"CIBloom.intensity"];
 }
 
 - (void)reapply

@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -45,9 +45,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIMonochrome.intensity"])
-		intensity = [gUserDefaults floatForKey:@"CIMonochrome.intensity"];
+	if ([defaults objectForKey:@"CIMonochrome.intensity"])
+		intensity = [defaults floatForKey:@"CIMonochrome.intensity"];
 	else
 		intensity = 1.0;
 	refresh = YES;
@@ -75,9 +76,9 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData apply];
 	
@@ -90,7 +91,7 @@
 	running = NO;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:intensity forKey:@"CIMonochrome.intensity"];
+	[defaults setFloat:intensity forKey:@"CIMonochrome.intensity"];
 	[gColorPanel orderOut:self];
 }
 

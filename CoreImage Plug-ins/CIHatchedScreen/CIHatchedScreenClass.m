@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -44,17 +44,18 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CIHatchedScreen.width"])
-		dotWidth = [gUserDefaults integerForKey:@"CIHatchedScreen.width"];
+	if ([defaults objectForKey:@"CIHatchedScreen.width"])
+		dotWidth = [defaults integerForKey:@"CIHatchedScreen.width"];
 	else
 		dotWidth = 6;
-	if ([gUserDefaults objectForKey:@"CIHatchedScreen.angle"])
-		angle = [gUserDefaults floatForKey:@"CIHatchedScreen.angle"];
+	if ([defaults objectForKey:@"CIHatchedScreen.angle"])
+		angle = [defaults floatForKey:@"CIHatchedScreen.angle"];
 	else
 		angle = 0.0;
-	if ([gUserDefaults objectForKey:@"CIHatchedScreen.sharpness"])
-		sharpness = [gUserDefaults floatForKey:@"CIHatchedScreen.sharpness"];
+	if ([defaults objectForKey:@"CIHatchedScreen.sharpness"])
+		sharpness = [defaults floatForKey:@"CIHatchedScreen.sharpness"];
 	else
 		sharpness = 0.7;
 			
@@ -88,23 +89,25 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setInteger:dotWidth forKey:@"CIHatchedScreen.width"];
-	[gUserDefaults setFloat:angle forKey:@"CIHatchedScreen.angle"];
-	[gUserDefaults setFloat:sharpness forKey:@"CIHatchedScreen.sharpness"];
+	[defaults setInteger:dotWidth forKey:@"CIHatchedScreen.width"];
+	[defaults setFloat:angle forKey:@"CIHatchedScreen.angle"];
+	[defaults setFloat:sharpness forKey:@"CIHatchedScreen.sharpness"];
 }
 
 - (void)reapply

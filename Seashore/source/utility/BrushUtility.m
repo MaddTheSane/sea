@@ -13,22 +13,23 @@
 
 - (id)init
 {		
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Load the brushes
 	[self loadBrushes:NO];
 	
 	// Determine the currently active brush group
-	if ([gUserDefaults objectForKey:@"active brush group"] == NULL)
+	if ([defaults objectForKey:@"active brush group"] == NULL)
 		activeGroupIndex = 0;
 	else
-		activeGroupIndex = [gUserDefaults integerForKey:@"active brush group"];
+		activeGroupIndex = [defaults integerForKey:@"active brush group"];
 	if (activeGroupIndex < 0 || activeGroupIndex >= [groups count])
 		activeGroupIndex = 0;
 		
 	// Determine the currently active brush 	
-	if ([gUserDefaults objectForKey:@"active brush"] == NULL)
+	if ([defaults objectForKey:@"active brush"] == NULL)
 		activeBrushIndex = 12;
 	else
-		activeBrushIndex = [gUserDefaults integerForKey:@"active brush"];
+		activeBrushIndex = [defaults integerForKey:@"active brush"];
 	if (activeBrushIndex < 0 || activeBrushIndex >= [groups[activeGroupIndex] count])
 		activeBrushIndex = 0;
 	
@@ -82,8 +83,9 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:activeBrushIndex forKey:@"active brush"];
-	[gUserDefaults setInteger:activeGroupIndex forKey:@"active brush group"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:activeBrushIndex forKey:@"active brush"];
+	[defaults setInteger:activeGroupIndex forKey:@"active brush group"];
 }
 
 - (void)activate:(id)sender

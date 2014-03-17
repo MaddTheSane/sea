@@ -3,7 +3,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
+
 
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -55,9 +55,10 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CITorusLens.refraction"])
-		refraction = [gUserDefaults floatForKey:@"CITorusLens.refraction"];
+	if ([defaults objectForKey:@"CITorusLens.refraction"])
+		refraction = [defaults floatForKey:@"CITorusLens.refraction"];
 	else
 		refraction = 1.7;
 	
@@ -83,21 +84,23 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
-	[panel orderOut:self];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
+	[panel orderOut:sender];
 	success = YES;
 	if (newdata) { free(newdata); newdata = NULL; }
 		
-	[gUserDefaults setFloat:refraction forKey:@"CITorusLens.refraction"];
+	[defaults setFloat:refraction forKey:@"CITorusLens.refraction"];
 }
 
 - (void)reapply

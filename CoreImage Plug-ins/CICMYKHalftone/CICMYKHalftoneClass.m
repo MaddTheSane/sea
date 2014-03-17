@@ -3,8 +3,6 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CICMYKHalftoneClass
@@ -49,29 +47,30 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"CICMYKHalftone.width"])
-		self.dotWidth = [gUserDefaults integerForKey:@"CICMYKHalftone.width"];
+	if ([defaults objectForKey:@"CICMYKHalftone.width"])
+		self.dotWidth = [defaults integerForKey:@"CICMYKHalftone.width"];
 	else
 		self.dotWidth = 6;
 	
-	if ([gUserDefaults objectForKey:@"CICMYKHalftone.angle"])
-		self.angle = [gUserDefaults floatForKey:@"CICMYKHalftone.angle"];
+	if ([defaults objectForKey:@"CICMYKHalftone.angle"])
+		self.angle = [defaults floatForKey:@"CICMYKHalftone.angle"];
 	else
 		self.angle = 0.0;
 	
-	if ([gUserDefaults objectForKey:@"CICMYKHalftone.sharpness"])
-		self.sharpness = [gUserDefaults floatForKey:@"CICMYKHalftone.sharpness"];
+	if ([defaults objectForKey:@"CICMYKHalftone.sharpness"])
+		self.sharpness = [defaults floatForKey:@"CICMYKHalftone.sharpness"];
 	else
 		self.sharpness = 0.7;
 	
-	if ([gUserDefaults objectForKey:@"CICMYKHalftone.gcr"])
-		self.gcr = [gUserDefaults floatForKey:@"CICMYKHalftone.gcr"];
+	if ([defaults objectForKey:@"CICMYKHalftone.gcr"])
+		self.gcr = [defaults floatForKey:@"CICMYKHalftone.gcr"];
 	else
 		self.gcr = 1.0;
 	
-	if ([gUserDefaults objectForKey:@"CICMYKHalftone.ucr"])
-		self.ucr = [gUserDefaults floatForKey:@"CICMYKHalftone.ucr"];
+	if ([defaults objectForKey:@"CICMYKHalftone.ucr"])
+		self.ucr = [defaults floatForKey:@"CICMYKHalftone.ucr"];
 	else
 		self.ucr = 0.5;
 	
@@ -90,23 +89,10 @@
 	if (ucr < 0.0 || ucr > 1.0)
 		self.ucr = 0.5;
 	
-	[dotWidthLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)dotWidth]];
-	[dotWidthSlider setIntegerValue:dotWidth];
-	[angleLabel setStringValue:[NSString stringWithFormat:@"%.2f", angle]];
-	[angleSlider setFloatValue:angle];
-	[sharpnessLabel setStringValue:[NSString stringWithFormat:@"%.2f", sharpness]];
-	[sharpnessSlider setFloatValue:sharpness];
-	[gcrLabel setStringValue:[NSString stringWithFormat:@"%.2f", gcr]];
-	[gcrSlider setFloatValue:gcr];
-	[ucrLabel setStringValue:[NSString stringWithFormat:@"%.2f", ucr]];
-	[ucrSlider setFloatValue:ucr];
-	
 	refresh = YES;
 	success = NO;
 	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels) {
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -117,10 +103,10 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	PluginData *pluginData = [seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -129,13 +115,16 @@
 	if ([pluginData window]) [NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 		
-	[gUserDefaults setInteger:dotWidth forKey:@"CICMYKHalftone.width"];
-	[gUserDefaults setFloat:angle forKey:@"CICMYKHalftone.angle"];
-	[gUserDefaults setFloat:sharpness forKey:@"CICMYKHalftone.sharpness"];
-	[gUserDefaults setFloat:gcr forKey:@"CICMYKHalftone.gcr"];
-	[gUserDefaults setFloat:ucr forKey:@"CICMYKHalftone.ucr"];
+	[defaults setInteger:dotWidth forKey:@"CICMYKHalftone.width"];
+	[defaults setFloat:angle forKey:@"CICMYKHalftone.angle"];
+	[defaults setFloat:sharpness forKey:@"CICMYKHalftone.sharpness"];
+	[defaults setFloat:gcr forKey:@"CICMYKHalftone.gcr"];
+	[defaults setFloat:ucr forKey:@"CICMYKHalftone.ucr"];
 }
 
 - (void)reapply
@@ -143,12 +132,13 @@
 	PluginData *pluginData;
 	
 	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -186,19 +176,7 @@
 {
 	PluginData *pluginData;
 	
-	dotWidth = [dotWidthSlider intValue];
-	angle = roundf([angleSlider floatValue]) / 100.0;
-	sharpness = [sharpnessSlider floatValue];
-	ucr = [ucrSlider floatValue];
-	gcr = [gcrSlider floatValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	[dotWidthLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)dotWidth]];
-	[angleLabel setStringValue:[NSString stringWithFormat:@"%.2f", angle]];
-	[sharpnessLabel setStringValue:[NSString stringWithFormat:@"%.2f", sharpness]];
-	[ucrLabel setStringValue:[NSString stringWithFormat:@"%.2f", ucr]];
-	[gcrLabel setStringValue:[NSString stringWithFormat:@"%.2f", gcr]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
@@ -285,7 +263,6 @@
 - (void)executeColor:(PluginData *)pluginData
 {
 	__m128i *vdata;
-	__m128i vstore;
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -312,37 +289,37 @@
 	premultiplyBitmap(4, newdata, data, width * height);
 	// Convert from RGBA to ARGB
 	vdata = (__m128i *)newdata;
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_srli_epi32(vdata[i], 24);
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
+	});
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
 	@try {
 		resdata = [self executeChannel:pluginData withBitmap:newdata];
 	}
 	@catch (NSException *exception) {
-		for (i = 0; i < vec_len; i++) {
-			vstore = _mm_slli_epi32(vdata[i], 24);
+		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 			vdata[i] = _mm_srli_epi32(vdata[i], 8);
 			vdata[i] = _mm_add_epi32(vdata[i], vstore);
-		}
+		});
 		
 		NSLog(@"%@", [exception reason]);
 		return;
 	}
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
 		unpremultiplyBitmap(4, resdata, resdata, selection.size.width * selection.size.height);
-	}else {
+	} else {
 		unpremultiplyBitmap(4, resdata, resdata, width * height);
 	}
 	// Convert from ARGB to RGBA
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
+	});
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
@@ -350,8 +327,7 @@
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
 		}
-	}
-	else {
+	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, resdata, width * height * 4);
 	}
@@ -380,11 +356,10 @@
 				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 			}
 			memcpy(&orvmask, ormask, 16);
-			for (i = 0; i < vec_len; i++) {
+			dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
-			}
-		}
-		else if (channel == kAlphaChannel) {
+			});
+		} else if (channel == kAlphaChannel) {
 			for (i = 0; i < width * height; i++) {
 				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 				newdata[i * 4] = 255;
