@@ -39,7 +39,6 @@
 }
 // The angle of the twirl
 @property CGFloat angle;
-	
 
 /*!
 	@method		initWithManager:

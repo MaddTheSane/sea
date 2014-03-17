@@ -227,7 +227,7 @@
 	}
 	
 	// Get data from output core image
-	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
 	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	

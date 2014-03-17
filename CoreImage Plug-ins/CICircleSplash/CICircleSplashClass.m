@@ -57,7 +57,10 @@
 	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	success = YES;
 }
 
@@ -78,8 +81,7 @@
 	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
-	}
-	else {
+	} else {
 		[self executeColor:pluginData];
 	}
 }
@@ -89,7 +91,7 @@
 	IntRect selection;
 	int i, spp, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len, max;
+	size_t vec_len, max;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -147,19 +149,11 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-#ifdef __ppc__
-	vector unsigned char TOGGLERGBF = (vector unsigned char)(0x03, 0x00, 0x01, 0x02, 0x07, 0x04, 0x05, 0x06, 0x0B, 0x08, 0x09, 0x0A, 0x0F, 0x0C, 0x0D, 0x0E);
-	vector unsigned char TOGGLERGBR = (vector unsigned char)(0x01, 0x02, 0x03, 0x00, 0x05, 0x06, 0x07, 0x04, 0x09, 0x0A, 0x0B, 0x08, 0x0D, 0x0E, 0x0F, 0x0C);
-	vector unsigned char *vdata, *voverlay, *vresdata;
-#else
-	__m128i opaquea = _mm_set1_epi32(0x000000FF);
-	__m128i *vdata, *voverlay, *vresdata;
-	__m128i vstore;
-#endif
+	__m128i *vdata;
 	IntRect selection;
-	int i, width, height;
+	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len;
+	size_t vec_len;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -170,72 +164,56 @@
 	width = [pluginData width];
 	height = [pluginData height];
 	vec_len = width * height * 4;
-	if (vec_len % 16 == 0) { vec_len /= 16; }
-	else { vec_len /= 16; vec_len++; }
+	if (vec_len % 16 == 0) {
+		vec_len /= 16;
+	} else {
+		vec_len /= 16;
+		vec_len++;
+	}
 	data = [pluginData data];
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
 	premultiplyBitmap(4, newdata, data, width * height);
 	// Convert from RGBA to ARGB
-#ifdef __ppc__
-	vdata = (vector unsigned char *)newdata;
-	for (i = 0; i < vec_len; i++) {
-		vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBF);
-	}
-#else
 	vdata = (__m128i *)newdata;
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_srli_epi32(vdata[i], 24);
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
-#endif
+	});
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
-@try {
-	resdata = [self executeChannel:pluginData withBitmap:newdata];
-}
-@catch (NSException *exception) {
-#ifdef __ppc__
-	for (i = 0; i < vec_len; i++) {
-		vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBR);
+	@try {
+		resdata = [self executeChannel:pluginData withBitmap:newdata];
 	}
-#else
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
-		vdata[i] = _mm_srli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+	@catch (NSException *exception) {
+		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
+			vdata[i] = _mm_srli_epi32(vdata[i], 8);
+			vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		});
+		NSLog(@"%@", [exception reason]);
+		return;
 	}
-#endif
-	NSLog(@"%@", [exception reason]);
-	return;
-}
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
 		unpremultiplyBitmap(4, resdata, resdata, selection.size.width * selection.size.height);
 	}else {
 		unpremultiplyBitmap(4, resdata, resdata, width * height);
 	}
 	// Convert from ARGB to RGBA
-#ifdef __ppc__
-	for (i = 0; i < vec_len; i++) {
-		vdata[i] = vec_perm(vdata[i], vdata[i], TOGGLERGBR);
-	}
-#else
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
-#endif
+	});
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (i = 0; i < selection.size.height; i++) {
+		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
-		}
-	}
-	else {
+		});
+	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, resdata, width * height * 4);
 	}
@@ -243,15 +221,10 @@
 
 - (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-	int i, vec_len, width, height, channel;
+	int width, height, channel;
 	unsigned char ormask[16], *resdata, *datatouse;
-#ifdef __ppc__
-	vector unsigned char TOALPHA = (vector unsigned char)(0x10, 0x00, 0x00, 0x00, 0x10, 0x04, 0x04, 0x04, 0x10, 0x08, 0x08, 0x08, 0x10, 0x0C, 0x0C, 0x0C);
-	vector unsigned char HIGHVEC = (vector unsigned char)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
-	vector unsigned char *vdata, *rvdata, orvmask;
-#else
 	__m128i *vdata, *rvdata, orvmask;
-#endif
+	size_t vec_len;
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -262,40 +235,22 @@
 		vec_len = width * height * 4;
 		if (vec_len % 16 == 0) { vec_len /= 16; }
 		else { vec_len /= 16; vec_len++; }
-#ifdef __ppc__
-		vdata = (vector unsigned char *)data; // NB: data may equal newdata
-		rvdata = (vector unsigned char *)newdata;
-#else
 		vdata = (__m128i *)data;
 		rvdata = (__m128i *)newdata;
-#endif
 		datatouse = newdata;
 		if (channel == kPrimaryChannels) {
-			for (i = 0; i < 16; i++) {
+			for (int i = 0; i < 16; i++) {
 				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 			}
 			memcpy(&orvmask, ormask, 16);
-#ifdef __ppc__
-			for (i = 0; i < vec_len; i++) {
-				rvdata[i] = vec_or(vdata[i], orvmask);
-			}
-#else
-			for (i = 0; i < vec_len; i++) {
+			dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
-			}
-#endif
-		}
-		else if (channel == kAlphaChannel) {
-#ifdef __ppc__
-			for (i = 0; i < vec_len; i++) {
-				rvdata[i] = vec_perm(vdata[i], HIGHVEC, TOALPHA);
-			}
-#else
-			for (i = 0; i < width * height; i++) {
+			});
+		} else if (channel == kAlphaChannel) {
+			dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 				newdata[i * 4] = 255;
-			}
-#endif
+			});
 		}
 	}
 	
@@ -311,7 +266,6 @@
 	CIImage *input, *crop_output, *imm_output, *output, *background;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;
@@ -320,7 +274,6 @@
 	IntPoint point, apoint;
 	BOOL opaque;
 	CIColor *backColor;
-	float angle;
 	int radius;
 	
 	// Check if image is opaque
@@ -401,7 +354,7 @@
 	}
 	
 	// Get data from output core image
-	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
 	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	

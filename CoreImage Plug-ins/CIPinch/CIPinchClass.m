@@ -191,8 +191,13 @@
 	width = [pluginData width];
 	height = [pluginData height];
 	vec_len = width * height * spp;
-	if (vec_len % 16 == 0) { vec_len /= 16; }
-	else { vec_len /= 16; vec_len++; }
+	vec_len = width * height * spp;
+	if (vec_len % 16 == 0) {
+		vec_len /= 16;
+	} else {
+		vec_len /= 16;
+		vec_len++;
+	}
 	data = [pluginData data];
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
@@ -256,8 +261,12 @@
 	width = [pluginData width];
 	height = [pluginData height];
 	vec_len = width * height * 4;
-	if (vec_len % 16 == 0) { vec_len /= 16; }
-	else { vec_len /= 16; vec_len++; }
+	if (vec_len % 16 == 0) {
+		vec_len /= 16;
+	} else {
+		vec_len /= 16;
+		vec_len++;
+	}
 	data = [pluginData data];
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
@@ -486,7 +495,7 @@
 	}
 	
 	// Get data from output core image
-	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
 	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	

@@ -73,8 +73,7 @@
 	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
-	}
-	else {
+	} else {
 		[self executeColor:pluginData];
 	}
 }
@@ -82,8 +81,8 @@
 - (void)executeGrey:(PluginData *)pluginData
 {
 	IntRect selection;
-	int i, j, spp, width, height;
-	unsigned char *data, *overlay, *resdata;
+	int i, j, width, height;
+	unsigned char *overlay, *resdata;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -106,8 +105,7 @@
 				overlay[(width * (selection.origin.y + j) + selection.origin.x + i) * 2 + 1] = resdata[i * 4 + 3];
 			}
 		}
-	}
-	else {
+	} else {
 		for (i = 0; i < width * height; i++) {
 			overlay[i * 2] = resdata[i * 4];
 			overlay[i * 2 + 1] = resdata[i * 4 + 3];
@@ -150,7 +148,6 @@
 	CIImage *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;
@@ -195,7 +192,6 @@
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -209,21 +205,17 @@
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image
-	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
 	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	

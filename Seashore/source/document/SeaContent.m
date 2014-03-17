@@ -927,7 +927,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	tempArray = @[];
 	for (i = 0; i < [deletedLayers count]; i++) {
 		if (i == lostIndex)
-			tempArray = [tempArray arrayByAddingObject:[[NSString alloc] initWithString:@"BLANK"]];
+			tempArray = [tempArray arrayByAddingObject:@"BLANK"];
 		else
 			tempArray = [tempArray arrayByAddingObject:deletedLayers[i]];
 	}

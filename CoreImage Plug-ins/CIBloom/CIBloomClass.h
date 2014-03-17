@@ -26,25 +26,13 @@
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
+	NSBitmapImageRep *temp_rep;
 }
-	// The label displaying the radius
-@property (weak) IBOutlet NSTextField *radiusLabel;
-	
-	// The slider for the radius
-@property (weak) IBOutlet NSSlider *radiusSlider;
-
-	// The label displaying the intensity
-@property (weak) IBOutlet NSTextField *intensityLabel;
-	
-	// The slider for the intensity
-@property (weak) IBOutlet NSSlider *intensitySlider;
-
-	// The new radius
+// The new radius
 @property NSInteger radius;
 
-	// The new intensity
+// The new intensity
 @property CGFloat intensity;
-
 
 /*!
 	@method		initWithManager:

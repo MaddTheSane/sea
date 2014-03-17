@@ -8,11 +8,7 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIBloomClass
-@synthesize radiusSlider;
-@synthesize radiusLabel;
 @synthesize panel;
-@synthesize intensityLabel;
-@synthesize intensitySlider;
 @synthesize seaPlugins;
 @synthesize intensity;
 @synthesize radius;
@@ -59,9 +55,6 @@
 	if (radius < 0 || radius > 0.1)
 		self.radius = 10;
 	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
-	[radiusSlider setFloatValue:radius];
-	
 	if ([gUserDefaults objectForKey:@"CIBloom.intensity"])
 		self.intensity = [gUserDefaults floatForKey:@"CIBloom.intensity"];
 	else
@@ -71,13 +64,8 @@
 	if (intensity < 0.0 || intensity > 1.0)
 		intensity = 1.0;
 	
-	[intensityLabel setStringValue:[NSString stringWithFormat:@"%.0f%%", intensity * 100.0]];
-	[intensitySlider setFloatValue:intensity];
-	
 	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self preview:self];
 	success = NO;
 	if ([pluginData window])
@@ -163,14 +151,8 @@
 {
 	PluginData *pluginData;
 	
-	radius = [radiusSlider intValue];
-	intensity = [intensitySlider floatValue];
-	
 	[panel setAlphaValue:1.0];
 	
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) 
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
-	[intensityLabel setStringValue:[NSString stringWithFormat:@"%.0f%%", intensity * 100.0]];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];
@@ -187,8 +169,7 @@
 	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
-	}
-	else {
+	} else {
 		[self executeColor:pluginData];
 	}
 }
@@ -198,7 +179,7 @@
 	IntRect selection;
 	int i, spp, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len, max;
+	size_t vec_len, max;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -209,8 +190,12 @@
 	width = [pluginData width];
 	height = [pluginData height];
 	vec_len = width * height * spp;
-	if (vec_len % 16 == 0) { vec_len /= 16; }
-	else { vec_len /= 16; vec_len++; }
+	if (vec_len % 16 == 0) {
+		vec_len /= 16;
+	} else {
+		vec_len /= 16;
+		vec_len++;
+	}
 	data = [pluginData data];
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
@@ -252,11 +237,10 @@
 - (void)executeColor:(PluginData *)pluginData
 {
 	__m128i *vdata;
-	__m128i vstore;
 	IntRect selection;
-	int i, width, height;
+	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len;
+	size_t vec_len, i;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -267,30 +251,34 @@
 	width = [pluginData width];
 	height = [pluginData height];
 	vec_len = width * height * 4;
-	if (vec_len % 16 == 0) { vec_len /= 16; }
-	else { vec_len /= 16; vec_len++; }
+	if (vec_len % 16 == 0) {
+		vec_len /= 16;
+	} else {
+		vec_len /= 16;
+		vec_len++;
+	}
 	data = [pluginData data];
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
 	premultiplyBitmap(4, newdata, data, width * height);
 	// Convert from RGBA to ARGB
 	vdata = (__m128i *)newdata;
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_srli_epi32(vdata[i], 24);
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
+	});
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
 	@try {
 		resdata = [self executeChannel:pluginData withBitmap:newdata];
 	}
 	@catch (NSException *exception) {
-		for (i = 0; i < vec_len; i++) {
-			vstore = _mm_slli_epi32(vdata[i], 24);
+		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 			vdata[i] = _mm_srli_epi32(vdata[i], 8);
 			vdata[i] = _mm_add_epi32(vdata[i], vstore);
-		}
+		});
 		
 		NSLog(@"%@", [exception reason]);
 		return;
@@ -301,11 +289,11 @@
 		unpremultiplyBitmap(4, resdata, resdata, width * height);
 	}
 	// Convert from ARGB to RGBA
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
+	});
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
@@ -344,15 +332,14 @@
 				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 			}
 			memcpy(&orvmask, ormask, 16);
-			for (i = 0; i < vec_len; i++) {
+			dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
-			}
-		}
-		else if (channel == kAlphaChannel) {
-			for (i = 0; i < width * height; i++) {
+			});
+		} else if (channel == kAlphaChannel) {
+			dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 				newdata[i * 4] = 255;
-			}
+			});
 		}
 	}
 	
@@ -368,7 +355,6 @@
 	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;
@@ -400,7 +386,6 @@
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -413,21 +398,18 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
-		
+		temp_image = [context createCGImage:output fromRect:rect];
 	} else {
-	
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image
-	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
 	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 		

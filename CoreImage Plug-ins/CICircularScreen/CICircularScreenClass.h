@@ -16,18 +16,6 @@
 
 @interface CICircularScreenClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the dot width
-	IBOutlet id dotWidthLabel;
-	
-	// The slider for the width
-	IBOutlet id dotWidthSlider;
-
-	// The label displaying the sharpness
-	IBOutlet id sharpnessLabel;
-	
-	// The slider for the sharpness
-	IBOutlet id sharpnessSlider;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -37,6 +25,7 @@
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
+	NSBitmapImageRep *temp_rep;
 }
 // The new width
 @property NSInteger dotWidth;
