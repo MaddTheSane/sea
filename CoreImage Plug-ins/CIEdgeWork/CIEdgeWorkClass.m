@@ -3,8 +3,6 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIEdgeWorkClass
@@ -47,17 +45,13 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	if ([defaults objectForKey:@"CIEdgeWork.radius"])
-		self.radius = [defaults floatForKey:@"CIEdgeWork.radius"];
+		self.radius = [defaults doubleForKey:@"CIEdgeWork.radius"];
 	else
 		self.radius = 3.0;
 	refresh = YES;
 	
 	if (radius < 0.1 || radius > 20.0)
 		self.radius = 3.0;
-	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%.1f", radius]];
-	
-	[radiusSlider setDoubleValue:radius];
 	
 	success = NO;
 	pluginData = [seaPlugins data];
@@ -96,9 +90,7 @@
 	PluginData *pluginData;
 	
 	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
 	if (newdata) { free(newdata); newdata = NULL; }
@@ -111,19 +103,16 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	PluginData *pluginData = [seaPlugins data];
+	if (refresh)
+		[self execute];
 	[pluginData preview];
 	refresh = NO;
 }
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	[pluginData cancel];
 	if (newdata) { free(newdata); newdata = NULL; }
 	
@@ -139,17 +128,13 @@
 {
 	PluginData *pluginData;
 	
-	radius = roundf([radiusSlider floatValue] * 10.0) / 10.0;
-	
 	[panel setAlphaValue:1.0];
-	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%.1f", radius]];
-	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -194,12 +179,12 @@
 	replace = [pluginData replace];
 	
 	// Convert from GA to ARGB
-	for (i = 0; i < width * height; i++) {
+	dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 		newdata[i * 4] = data[i * 2 + 1];
 		newdata[i * 4 + 1] = data[i * 2];
 		newdata[i * 4 + 2] = data[i * 2];
 		newdata[i * 4 + 3] = data[i * 2];
-	}
+	});
 	
 	// Run CoreImage effect
 	resdata = [self executeChannel:pluginData withBitmap:newdata];
@@ -216,10 +201,10 @@
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (i = 0; i < selection.size.height; i++) {
+		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(newdata[selection.size.width * 2 * i]), selection.size.width * 2);
-		}
+		});
 	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, newdata, width * height * 2);
@@ -229,11 +214,10 @@
 - (void)executeColor:(PluginData *)pluginData
 {
 	__m128i *vdata;
-	__m128i vstore;
 	IntRect selection;
-	int i, width, height;
+	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len;
+	size_t vec_len;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -257,22 +241,22 @@
 	
 	// Convert from RGBA to ARGB
 	vdata = (__m128i *)newdata;
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_srli_epi32(vdata[i], 24);
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
+	});
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
 	@try {
 		resdata = [self executeChannel:pluginData withBitmap:newdata];
 	}
 	@catch (NSException *exception) {
-		for (i = 0; i < vec_len; i++) {
-			vstore = _mm_slli_epi32(vdata[i], 24);
+		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 			vdata[i] = _mm_srli_epi32(vdata[i], 8);
 			vdata[i] = _mm_add_epi32(vdata[i], vstore);
-		}
+		});
 		NSLog(@"%@", [exception reason]);
 		return;
 	}
@@ -282,20 +266,19 @@
 		unpremultiplyBitmap(4, resdata, resdata, width * height);
 	}
 	// Convert from ARGB to RGBA
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
+	});
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (i = 0; i < selection.size.height; i++) {
+		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
-		}
-	}
-	else {
+		});
+	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, resdata, width * height * 4);
 	}
@@ -324,15 +307,15 @@
 				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 			}
 			memcpy(&orvmask, ormask, 16);
-			for (i = 0; i < vec_len; i++) {
+			dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
-			}
+			});
 		}
 		else if (channel == kAlphaChannel) {
-			for (i = 0; i < width * height; i++) {
+			dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 				newdata[i * 4] = 255;
-			}
+			});
 		}
 	}
 	
@@ -348,7 +331,6 @@
 	CIImage *input, *crop_output, *imm_output, *imm_output2, *output, *background;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;

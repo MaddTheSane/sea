@@ -16,15 +16,6 @@
 
 @interface CIExposureClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the value
-	IBOutlet id valueLabel;
-	
-	// The slider for the value
-	IBOutlet id valueSlider;
-
-	// The value of the crystallize
-	float value;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -34,7 +25,10 @@
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
+	NSBitmapImageRep *temp_rep;
 }
+
+@property CGFloat exposureValue;
 
 /*!
 	@method		initWithManager:

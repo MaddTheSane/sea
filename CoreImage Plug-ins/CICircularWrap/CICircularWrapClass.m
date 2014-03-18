@@ -191,9 +191,9 @@
 - (void)executeGrey:(PluginData *)pluginData
 {
 	IntRect selection;
-	int i, spp, width, height;
+	int spp, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len, max;
+	size_t vec_len, max;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -232,17 +232,17 @@
 		max = selection.size.width * selection.size.height;
 	else
 		max = width * height;
-	for (i = 0; i < max; i++) {
+	dispatch_apply(max, dispatch_get_global_queue(0, 0), ^(size_t i) {
 		newdata[i * 2] = resdata[i * 4];
 		newdata[i * 2 + 1] = resdata[i * 4 + 3];
-	}
+	});
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (i = 0; i < selection.size.height; i++) {
+		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(newdata[selection.size.width * 2 * i]), selection.size.width * 2);
-		}
+		});
 	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, newdata, width * height * 2);
@@ -478,7 +478,6 @@
 	
 	// Position correctly
 	if (boundsValid) {
-	
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -494,10 +493,7 @@
 		[offsetTransform translateXBy:-bounds.origin.x yBy:-height + bounds.origin.y + bounds.size.height];
 		[filter setValue:offsetTransform forKey:@"inputTransform"];
 		imm_output_2 = [filter valueForKey:@"outputImage"];
-		
-	
-	}
-	else {
+	} else {
 		imm_output_2 = input;
 	}
 	
@@ -549,7 +545,6 @@
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image

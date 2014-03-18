@@ -16,12 +16,6 @@
 
 @interface CIEdgeWorkClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the radius
-	IBOutlet id radiusLabel;
-	
-	// The slider for the radius
-	IBOutlet id radiusSlider;
-	
 	// YES if the application succeeded
 	BOOL success;
 	
@@ -30,6 +24,8 @@
 	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
+	
+	NSBitmapImageRep *temp_rep;
 }
 
 // The new radius

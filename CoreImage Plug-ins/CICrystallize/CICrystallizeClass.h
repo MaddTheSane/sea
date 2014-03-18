@@ -25,6 +25,7 @@
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
+	NSBitmapImageRep *temp_rep;
 }
 // The radius of the crystallize
 @property NSInteger radius;

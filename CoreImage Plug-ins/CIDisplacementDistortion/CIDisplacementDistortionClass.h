@@ -17,9 +17,6 @@
 
 @interface CIDisplacementDistortionClass : NSObject <NSOpenSavePanelDelegate, SSSeaVisualPlugin>
 {
-	// The label displaying the current texture
-	IBOutlet id textureLabel;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -31,7 +28,11 @@
 	
 	// The path of the texture to be used
 	NSString *texturePath;
+	
+	NSBitmapImageRep *temp_rep;
 }
+// The label displaying the current texture
+@property (weak) IBOutlet NSTextField *textureLabel;
 
 // The scale of the crystallize
 @property NSInteger scale;

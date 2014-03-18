@@ -16,12 +16,6 @@
 
 @interface CIEdgesClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the intensity
-	IBOutlet id intensityLabel;
-	
-	// The slider for the intensity
-	IBOutlet id intensitySlider;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -30,6 +24,8 @@
 	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
+	
+	NSBitmapImageRep *temp_rep;
 }
 
 	// The new intensity

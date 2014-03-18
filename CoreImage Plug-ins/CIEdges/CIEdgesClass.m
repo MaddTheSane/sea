@@ -56,10 +56,6 @@
 	if (intensity < 0.0 || intensity > 10.0)
 		self.intensity = 1.0;
 	
-	[intensityLabel setStringValue:[NSString stringWithFormat:@"%.2f", intensity]];
-	
-	[intensitySlider setFloatValue:intensity];
-	
 	success = NO;
 	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
@@ -89,7 +85,10 @@
 		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 		
 	[defaults setFloat:intensity forKey:@"CIEdges.intensity"];
 }
@@ -99,12 +98,13 @@
 	PluginData *pluginData;
 	
 	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -117,18 +117,20 @@
 	PluginData *pluginData;
 	
 	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData preview];
 	refresh = NO;
 }
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	
@@ -142,17 +144,13 @@
 {
 	PluginData *pluginData;
 	
-	intensity = [intensitySlider floatValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) 
-	[intensityLabel setStringValue:[NSString stringWithFormat:@"%.2f", intensity]];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -233,11 +231,10 @@
 - (void)executeColor:(PluginData *)pluginData
 {
 	__m128i *vdata;
-	__m128i vstore;
 	IntRect selection;
 	int i, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len;
+	size_t vec_len;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -260,22 +257,22 @@
 	premultiplyBitmap(4, newdata, data, width * height);
 	// Convert from RGBA to ARGB
 	vdata = (__m128i *)newdata;
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_srli_epi32(vdata[i], 24);
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
+	});
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
 	@try {
 		resdata = [self executeChannel:pluginData withBitmap:newdata];
 	}
 	@catch (NSException *exception) {
-		for (i = 0; i < vec_len; i++) {
-			vstore = _mm_slli_epi32(vdata[i], 24);
+		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 			vdata[i] = _mm_srli_epi32(vdata[i], 8);
 			vdata[i] = _mm_add_epi32(vdata[i], vstore);
-		}
+		});
 		NSLog(@"%@", [exception reason]);
 		return;
 	}
@@ -285,11 +282,11 @@
 		unpremultiplyBitmap(4, resdata, resdata, width * height);
 	}
 	// Convert from ARGB to RGBA
-	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	}
+	});
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
@@ -306,15 +303,10 @@
 
 - (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-	int i, vec_len, width, height, channel;
+	int width, height, channel;
 	unsigned char ormask[16], *resdata, *datatouse;
-#ifdef __ppc__
-	vector unsigned char TOALPHA = (vector unsigned char)(0x10, 0x00, 0x00, 0x00, 0x10, 0x04, 0x04, 0x04, 0x10, 0x08, 0x08, 0x08, 0x10, 0x0C, 0x0C, 0x0C);
-	vector unsigned char HIGHVEC = (vector unsigned char)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
-	vector unsigned char *vdata, *rvdata, orvmask;
-#else
 	__m128i *vdata, *rvdata, orvmask;
-#endif
+	size_t vec_len;
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -325,34 +317,23 @@
 		vec_len = width * height * 4;
 		if (vec_len % 16 == 0) { vec_len /= 16; }
 		else { vec_len /= 16; vec_len++; }
-#ifdef __ppc__
-		vdata = (vector unsigned char *)data; // NB: data may equal newdata
-		rvdata = (vector unsigned char *)newdata;
-#else
 		vdata = (__m128i *)data;
 		rvdata = (__m128i *)newdata;
-#endif
 		datatouse = newdata;
 		if (channel == kPrimaryChannels) {
-			for (i = 0; i < 16; i++) {
+			for (int i = 0; i < 16; i++) {
 				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 			}
 			memcpy(&orvmask, ormask, 16);
-#ifdef __ppc__
-			for (i = 0; i < vec_len; i++) {
-				rvdata[i] = vec_or(vdata[i], orvmask);
-			}
-#else
-			for (i = 0; i < vec_len; i++) {
+			dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
-			}
-#endif
+			});
 		}
 		else if (channel == kAlphaChannel) {
-			for (i = 0; i < width * height; i++) {
+			dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 				newdata[i * 4] = 255;
-			}
+			});
 		}
 	}
 	
@@ -368,7 +349,6 @@
 	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;

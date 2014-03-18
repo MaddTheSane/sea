@@ -1,7 +1,7 @@
-author = "Mark Pazolli";
-copyright = "Public Domain 2007";
-description = "Applies a displacement distortion effect to the selection.";
+//author = "Mark Pazolli";
+//copyright = "Public Domain 2007";
+//description = "Applies a displacement distortion effect to the selection.";
 groupName = "Stylise";
-license = "Public Domain";
-name = "Displacement Distortion";
-"texture label" = "Texture: %@";
+//license = "Public Domain";
+//name = "Displacement Distortion";
+//"texture label" = "Texture: %@";

@@ -16,24 +16,6 @@
 
 @interface CIDotScreenClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the dot width
-	IBOutlet id dotWidthLabel;
-	
-	// The slider for the width
-	IBOutlet id dotWidthSlider;
-
-	// The label displaying the angle
-	IBOutlet id angleLabel;
-	
-	// The slider for the angle
-	IBOutlet id angleSlider;
-
-	// The label displaying the sharpness
-	IBOutlet id sharpnessLabel;
-	
-	// The slider for the sharpness
-	IBOutlet id sharpnessSlider;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -43,22 +25,16 @@
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
+	NSBitmapImageRep *temp_rep;
 }
-
-	// The new width
+// The new width
 @property NSInteger dotWidth;
 
-	// The new angle
+// The new angle
 @property CGFloat angle;
-	
-	// The new sharpness
+
+// The new sharpness
 @property CGFloat sharpness;
-	
-	// The new GCR
-@property CGFloat gcr;
-	
-	// The new UCR
-@property CGFloat ucr;
 
 /*!
 	@method		initWithManager:

@@ -11,28 +11,16 @@
 @synthesize panel;
 @synthesize seaPlugins;
 @synthesize scale;
+@synthesize textureLabel;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
 		seaPlugins = manager;
 		[NSBundle loadNibNamed:@"CIDisplacementDistortion" owner:self];
-		[self addObserver:self forKeyPath:@"scale" options:NSKeyValueObservingOptionNew context:NULL];
 	}
 	
 	return self;
-}
-
-- (void)dealloc
-{
-    [self removeObserver:self forKeyPath:@"scale"];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if (object == self) {
-        [self update:nil];
-    }
 }
 
 - (int)type
@@ -402,7 +390,6 @@
 	CIImage *input, *imm_output, *crop_output, *output, *background, *texture_output;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;
