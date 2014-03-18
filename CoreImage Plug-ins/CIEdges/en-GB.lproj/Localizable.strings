@@ -1,6 +1,6 @@
 //author = "Mark Pazolli";
 //copyright = "Public Domain 2007";
-//description = "Applies color edges effect to the selection.";
+//description = "Applies color edges effect to the selection";
 groupName = "Stylise";
 //license = "Public Domain";
 name = "Colour Edges";

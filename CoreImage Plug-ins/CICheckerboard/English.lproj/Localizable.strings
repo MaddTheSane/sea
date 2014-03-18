@@ -1,7 +1,7 @@
 author = "Mark Pazolli";
 copyright = "Public Domain 2007";
-description = "Generates a checkboard for the selection.";
+description = "Generates a checkboard for the selection";
 groupName = "Generate";
-instruction = "Click twice: first to locate the left-side of a box, then to locate the right-side of a box.";
+instruction = "Click twice: first to locate the left-side of a box, then to locate the right-side of a box";
 license = "Public Domain";
 name = "Checkerboard";

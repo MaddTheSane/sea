@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CIGammaAdjustClass">
             <connections>
-                <outlet property="gammaLabel" destination="21" id="29"/>
-                <outlet property="gammaSlider" destination="14" id="30"/>
                 <outlet property="panel" destination="6" id="32"/>
             </connections>
         </customObject>
@@ -49,11 +47,12 @@ DQ
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="14">
                         <rect key="frame" x="18" y="59" width="283" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="300" doubleValue="75" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="36">
+                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="3" doubleValue="0.75" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="36">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="23"/>
+                            <binding destination="-2" name="value" keyPath="self.gamma" id="cLl-ff-b7G"/>
                         </connections>
                     </slider>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
@@ -77,6 +76,7 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="soL-VD-HNS"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="0.75" id="38">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="3Ca-lo-o2m"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -99,6 +99,9 @@ Gw
                     <constraint firstItem="7" firstAttribute="width" secondItem="16" secondAttribute="width" id="tdj-fF-dv9"/>
                 </constraints>
             </view>
+            <connections>
+                <binding destination="-2" name="title" keyPath="self.gamma" id="SH5-0l-T7Z"/>
+            </connections>
         </window>
     </objects>
 </document>

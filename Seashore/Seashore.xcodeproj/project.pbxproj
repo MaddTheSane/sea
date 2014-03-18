@@ -242,7 +242,6 @@
 		55909E1A18CFD6DD00F43F90 /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BDC80A04BF04B000A80207 /* Bitmap.m */; };
 		55909E1D18CFD6DD00F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		55909E2618CFD70E00F43F90 /* CIDisplacementDistortionClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D50BB18CF9FBB005809E3 /* CIDisplacementDistortionClass.m */; };
-		55909E2718CFD71200F43F90 /* default-distort.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 557D50BC18CF9FBB005809E3 /* default-distort.tiff */; };
 		55909E2918CFD71A00F43F90 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50BF18CF9FBB005809E3 /* Localizable.strings */; };
 		55909E2C18CFD80400F43F90 /* CICMYKHalftone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909E2E18CFD80400F43F90 /* CICMYKHalftone.xib */; };
 		55909E3418CFD92C00F43F90 /* CICrystallize.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909E3318CFD92700F43F90 /* CICrystallize.xib */; };
@@ -1692,7 +1691,6 @@
 		557D50B418CF9FBB005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D50BA18CF9FBB005809E3 /* CIDisplacementDistortionClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIDisplacementDistortionClass.h; sourceTree = "<group>"; };
 		557D50BB18CF9FBB005809E3 /* CIDisplacementDistortionClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIDisplacementDistortionClass.m; sourceTree = "<group>"; };
-		557D50BC18CF9FBB005809E3 /* default-distort.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "default-distort.tiff"; sourceTree = "<group>"; };
 		557D50C018CF9FBB005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D50C618CF9FBB005809E3 /* CIDotScreenClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIDotScreenClass.h; sourceTree = "<group>"; };
 		557D50C718CF9FBB005809E3 /* CIDotScreenClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIDotScreenClass.m; sourceTree = "<group>"; };
@@ -1703,20 +1701,20 @@
 		557D50DC18CF9FBC005809E3 /* CIEdgeWorkClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIEdgeWorkClass.h; sourceTree = "<group>"; };
 		557D50DD18CF9FBC005809E3 /* CIEdgeWorkClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIEdgeWorkClass.m; sourceTree = "<group>"; };
 		557D50E118CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D50E718CF9FBC005809E3 /* CIExposureClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIExposureClass.h; sourceTree = "<group>"; };
-		557D50E818CF9FBC005809E3 /* CIExposureClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIExposureClass.m; sourceTree = "<group>"; };
+		557D50E718CF9FBC005809E3 /* CIExposureClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CIExposureClass.h; sourceTree = "<group>"; };
+		557D50E818CF9FBC005809E3 /* CIExposureClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CIExposureClass.m; sourceTree = "<group>"; };
 		557D50EC18CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D50F218CF9FBC005809E3 /* CIFalseColorClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIFalseColorClass.h; sourceTree = "<group>"; };
-		557D50F318CF9FBC005809E3 /* CIFalseColorClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIFalseColorClass.m; sourceTree = "<group>"; };
+		557D50F218CF9FBC005809E3 /* CIFalseColorClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CIFalseColorClass.h; sourceTree = "<group>"; };
+		557D50F318CF9FBC005809E3 /* CIFalseColorClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CIFalseColorClass.m; sourceTree = "<group>"; };
 		557D50F518CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D50FB18CF9FBC005809E3 /* CIGammaAdjustClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIGammaAdjustClass.h; sourceTree = "<group>"; };
-		557D50FC18CF9FBC005809E3 /* CIGammaAdjustClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGammaAdjustClass.m; sourceTree = "<group>"; };
+		557D50FB18CF9FBC005809E3 /* CIGammaAdjustClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CIGammaAdjustClass.h; sourceTree = "<group>"; };
+		557D50FC18CF9FBC005809E3 /* CIGammaAdjustClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CIGammaAdjustClass.m; sourceTree = "<group>"; };
 		557D510018CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D510618CF9FBC005809E3 /* CIGaussianBlurClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIGaussianBlurClass.h; sourceTree = "<group>"; };
-		557D510718CF9FBC005809E3 /* CIGaussianBlurClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGaussianBlurClass.m; sourceTree = "<group>"; };
+		557D510618CF9FBC005809E3 /* CIGaussianBlurClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CIGaussianBlurClass.h; sourceTree = "<group>"; };
+		557D510718CF9FBC005809E3 /* CIGaussianBlurClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CIGaussianBlurClass.m; sourceTree = "<group>"; };
 		557D510B18CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D511118CF9FBC005809E3 /* CIGlassDistortionClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIGlassDistortionClass.h; sourceTree = "<group>"; };
-		557D511218CF9FBC005809E3 /* CIGlassDistortionClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGlassDistortionClass.m; sourceTree = "<group>"; };
+		557D511118CF9FBC005809E3 /* CIGlassDistortionClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CIGlassDistortionClass.h; sourceTree = "<group>"; };
+		557D511218CF9FBC005809E3 /* CIGlassDistortionClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CIGlassDistortionClass.m; sourceTree = "<group>"; };
 		557D511318CF9FBC005809E3 /* default-distort.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "default-distort.tiff"; sourceTree = "<group>"; };
 		557D511718CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D511D18CF9FBC005809E3 /* CIGlassLozengeClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIGlassLozengeClass.h; sourceTree = "<group>"; };
@@ -1851,7 +1849,6 @@
 		55909E6018CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6218CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6318CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E6418CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6518CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6618CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6718CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1891,6 +1888,8 @@
 		5599389718CFC72A00E92088 /* Bloom+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bloom+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938B218CFCCCA00E92088 /* Checkerboard+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checkerboard+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938C118CFCCCC00E92088 /* Circular Screen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Screen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		559A635018D8B25C00FD74A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGlassDistortion.strings; sourceTree = "<group>"; };
+		559A635218D8B26100FD74A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGaussianBlur.strings; sourceTree = "<group>"; };
 		55BD2B9218D0CA7C00C4EE1B /* Gamma Adjust+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gamma Adjust+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2BA218D0CA7E00C4EE1B /* Gaussian Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gaussian Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2BB018D0CB0C00C4EE1B /* Glass Distortion+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Glass Distortion+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3490,7 +3489,6 @@
 			children = (
 				557D50BA18CF9FBB005809E3 /* CIDisplacementDistortionClass.h */,
 				557D50BB18CF9FBB005809E3 /* CIDisplacementDistortionClass.m */,
-				557D50BC18CF9FBB005809E3 /* default-distort.tiff */,
 				55909E3918CFD9BD00F43F90 /* CIDisplacementDistortion.xib */,
 				557D50BF18CF9FBB005809E3 /* Localizable.strings */,
 			);
@@ -6157,7 +6155,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55909E2718CFD71200F43F90 /* default-distort.tiff in Resources */,
 				55909E3718CFD9BD00F43F90 /* CIDisplacementDistortion.xib in Resources */,
 				55909E2918CFD71A00F43F90 /* Localizable.strings in Resources */,
 			);
@@ -8161,7 +8158,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D510B18CF9FBC005809E3 /* English */,
-				55909E6418CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -8612,6 +8608,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8818D12A9700FB7F00 /* Base */,
+				559A635218D8B26100FD74A2 /* en */,
 			);
 			name = CIGaussianBlur.xib;
 			sourceTree = "<group>";
@@ -8620,6 +8617,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8918D12A9700FB7F00 /* Base */,
+				559A635018D8B25C00FD74A2 /* en */,
 			);
 			name = CIGlassDistortion.xib;
 			sourceTree = "<group>";

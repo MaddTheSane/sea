@@ -16,12 +16,6 @@
 
 @interface CIGammaAdjustClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the gamma
-	IBOutlet id gammaLabel;
-	
-	// The slider for the gamma
-	IBOutlet id gammaSlider;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -33,7 +27,6 @@
 
 	NSBitmapImageRep *temp_rep;
 }
-
 // The new gamma
 @property CGFloat gamma;
 
