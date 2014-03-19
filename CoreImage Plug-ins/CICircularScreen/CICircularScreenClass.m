@@ -2,7 +2,6 @@
 #import "CICircularScreenClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CICircularScreenClass

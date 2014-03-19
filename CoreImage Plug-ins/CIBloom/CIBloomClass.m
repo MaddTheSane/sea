@@ -2,7 +2,6 @@
 #import "CIBloomClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIBloomClass
@@ -13,9 +12,11 @@
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CIBloom" owner:self];
-	newdata = NULL;
+	if (self = [super init]) {
+		seaPlugins = manager;
+		[NSBundle loadNibNamed:@"CIBloom" owner:self];
+		
+	}
 	
 	return self;
 }

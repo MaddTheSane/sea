@@ -279,6 +279,7 @@
 		559938B618CFCCCC00E92088 /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF9CC00536DE2000A80207 /* Rects.m */; };
 		559938B718CFCCCC00E92088 /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BDC80A04BF04B000A80207 /* Bitmap.m */; };
 		559938BA18CFCCCC00E92088 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
+		559A635318D8B5E700FD74A2 /* default-distort.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 557D511318CF9FBC005809E3 /* default-distort.tiff */; };
 		55BD2B8618D0CA7C00C4EE1B /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF9CC00536DE2000A80207 /* Rects.m */; };
 		55BD2B8818D0CA7C00C4EE1B /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BDC80A04BF04B000A80207 /* Bitmap.m */; };
 		55BD2B8A18D0CA7C00C4EE1B /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
@@ -1652,6 +1653,7 @@
 		551E572918D0268500E4CDAF /* Exposure+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Exposure+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E573A18D0268A00E4CDAF /* False Color+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "False Color+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
+		5579919A18DA2C4A0061AC70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGlassLozenge.strings; sourceTree = "<group>"; };
 		557B939718D77CD6003ABCD6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557B939818D77FF8003ABCD6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557B939A18D781EB003ABCD6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CICMYKHalftone.strings; sourceTree = "<group>"; };
@@ -1850,7 +1852,6 @@
 		55909E6218CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6318CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6518CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		55909E6618CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6718CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6818CFEEAD00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E6918CFEEAE00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -6157,6 +6158,7 @@
 			files = (
 				55909E3718CFD9BD00F43F90 /* CIDisplacementDistortion.xib in Resources */,
 				55909E2918CFD71A00F43F90 /* Localizable.strings in Resources */,
+				559A635318D8B5E700FD74A2 /* default-distort.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8175,7 +8177,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				557D512218CF9FBC005809E3 /* English */,
-				55909E6618CFEEAD00F43F90 /* en-GB */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -8626,6 +8627,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8A18D12A9700FB7F00 /* Base */,
+				5579919A18DA2C4A0061AC70 /* en */,
 			);
 			name = CIGlassLozenge.xib;
 			sourceTree = "<group>";
