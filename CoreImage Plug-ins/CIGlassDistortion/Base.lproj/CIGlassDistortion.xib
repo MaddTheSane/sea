@@ -8,8 +8,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="CIGlassDistortionClass">
             <connections>
                 <outlet property="panel" destination="6" id="32"/>
-                <outlet property="scaleLabel" destination="21" id="29"/>
-                <outlet property="scaleSlider" destination="14" id="30"/>
                 <outlet property="textureLabel" destination="33" id="40"/>
             </connections>
         </customObject>

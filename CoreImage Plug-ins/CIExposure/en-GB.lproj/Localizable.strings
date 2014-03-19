@@ -1,6 +1,6 @@
 author = "Mark Pazolli";
 copyright = "Public Domain 2007";
-description = "Applies a crystillizing effect to the selection";
 groupName = "Enhance";
+description = "Applies a crystillising effect to the selection";
 license = "Public Domain";
 name = "Exposure";
