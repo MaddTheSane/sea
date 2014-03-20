@@ -76,12 +76,16 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 		
-	[defaults setFloat:value forKey:@"CIExposure.value"];
+	[defaults setDouble:value forKey:@"CIExposure.value"];
 }
 
 - (void)reapply
@@ -90,7 +94,10 @@
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -100,10 +107,10 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData preview];
 	refresh = NO;
 }
@@ -114,7 +121,10 @@
 	
 	pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	
@@ -129,7 +139,7 @@
 	PluginData *pluginData;
 	
 	if (value > 0.0 && value < 0.02)
-		value = 0.0; /* Force zero point */
+		self.exposureValue = 0.0; /* Force zero point */
 	
 	[panel setAlphaValue:1.0];
 	
@@ -207,8 +217,7 @@
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(newdata[selection.size.width * 2 * i]), selection.size.width * 2);
 		});
-	}
-	else {
+	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, newdata, width * height * 2);
 	}
@@ -218,9 +227,9 @@
 {
 	__m128i *vdata;
 	IntRect selection;
-	int i, width, height;
+	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len;
+	size_t vec_len;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -272,12 +281,11 @@
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (i = 0; i < selection.size.height; i++) {
+		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
-		}
-	}
-	else {
+		});
+	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, resdata, width * height * 4);
 	}
@@ -308,19 +316,19 @@
 	nvdata = (__m128i *)newdata;
 	datatouse = newdata;
 	if (channel == kAlphaChannel) {
-		for (i = 0; i < width * height; i++) {
+		dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 			newdata[i * 4] = 255;
-		}
+		});
 	}
 	else {
 		for (i = 0; i < 16; i++) {
 			ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 		}
 		memcpy(&orvmask, ormask, 16);
-		for (i = 0; i < vec_len; i++) {
+		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			nvdata[i] = _mm_or_si128(vdata[i], orvmask);
-		}
+		});
 	}
 	
 	// Run CoreImage effect
@@ -377,7 +385,6 @@
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -392,7 +399,6 @@
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];
 	} else {
-	
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;

@@ -59,7 +59,8 @@
 	PluginData *pluginData;
 	
 	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -81,7 +82,10 @@
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -119,7 +123,7 @@
 	PluginData *pluginData;
 	
 	if (gamma > 1.0 && gamma < 1.02)
-		gamma = 1.0; /* Force one point */
+		self.gamma = 1.0; /* Force one point */
 	
 	[panel setAlphaValue:1.0];
 	
@@ -273,10 +277,11 @@
 
 - (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-	int i, j, vec_len, width, height, channel;
+	int width, height, channel;
 	IntRect selection;
 	unsigned char ormask[16], *resdata, *datatouse;
 	__m128i *vdata, *nvdata, orvmask;
+	size_t vec_len;
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -301,7 +306,7 @@
 			newdata[i * 4] = 255;
 		});
 	} else {
-		for (i = 0; i < 16; i++) {
+		for (int i = 0; i < 16; i++) {
 			ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 		}
 		memcpy(&orvmask, ormask, 16);
@@ -315,13 +320,13 @@
 	
 	// Restore alpha
 	if (channel == kAllChannels) {
-		for (i = 0; i < selection.size.height; i++) {
-			for(j = 0; j < selection.size.width; j++){
+		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
+			for(size_t j = 0; j < selection.size.width; j++){
 				resdata[(i * selection.size.width + j) * 4 + 3] =
 				data[(width * (i + selection.origin.y) +
 					  j + selection.origin.x) * 4];
 			}
-		}
+		});
 	}
 	
 	return resdata;
