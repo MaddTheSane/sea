@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CILineScreenClass">
             <connections>
-                <outlet property="angleLabel" destination="35" id="58"/>
-                <outlet property="angleSlider" destination="34" id="57"/>
-                <outlet property="dotWidthLabel" destination="21" id="29"/>
-                <outlet property="dotWidthSlider" destination="14" id="30"/>
                 <outlet property="panel" destination="6" id="32"/>
-                <outlet property="sharpnessLabel" destination="40" id="54"/>
-                <outlet property="sharpnessSlider" destination="39" id="53"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -58,6 +52,7 @@ DQ
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="23"/>
+                            <binding destination="-2" name="value" keyPath="self.dotWidth" id="eG3-DN-IAb"/>
                         </connections>
                     </slider>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
@@ -81,10 +76,14 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="sgr-9E-4xp"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="6" id="64">
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="QcI-9r-LcB"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.dotWidth" id="ghj-23-wua"/>
+                        </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="33">
                         <rect key="frame" x="18" y="133" width="39" height="14"/>
@@ -98,11 +97,12 @@ Gw
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="34">
                         <rect key="frame" x="18" y="106" width="283" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="-157" maxValue="157" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="66">
+                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="-1.5700000000000001" maxValue="1.5700000000000001" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="66">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="47"/>
+                            <binding destination="-2" name="value" keyPath="self.angle" id="nVr-A5-xe5"/>
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35">
@@ -112,10 +112,14 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="hgI-Nx-KXT"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="0.00" id="67">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="rNS-3X-3A9"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.angle" id="d2z-bD-WI7"/>
+                        </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38">
                         <rect key="frame" x="18" y="86" width="61" height="14"/>
@@ -134,6 +138,7 @@ Gw
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="48"/>
+                            <binding destination="-2" name="value" keyPath="self.sharpness" id="avt-ag-A3N"/>
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40">
@@ -143,10 +148,14 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="Ziy-1S-1Ti"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="0.70" id="70">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="DpN-JR-yHu"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.sharpness" id="wg5-B4-cdH"/>
+                        </connections>
                     </textField>
                 </subviews>
                 <constraints>

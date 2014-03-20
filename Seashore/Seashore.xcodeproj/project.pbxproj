@@ -498,7 +498,6 @@
 		55BD2E0E18D0D4A900C4EE1B /* CIKaleidoscopeClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D515A18CF9FBD005809E3 /* CIKaleidoscopeClass.m */; };
 		55BD2E0F18D0D4AC00C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D515B18CF9FBD005809E3 /* Localizable.strings */; };
 		55BD2E1018D0D4BC00C4EE1B /* CILenticularHaloClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D516318CF9FBD005809E3 /* CILenticularHaloClass.m */; };
-		55BD2E1118D0D4BC00C4EE1B /* HaloColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D516918CF9FBD005809E3 /* HaloColorWell.m */; };
 		55BD2E1218D0D4C300C4EE1B /* CILenticularHalo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909EC118CFFE6300F43F90 /* CILenticularHalo.xib */; };
 		55BD2E1318D0D4C300C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D516618CF9FBD005809E3 /* Localizable.strings */; };
 		55BD2E1418D0D4D300C4EE1B /* CILineScreenClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D517018CF9FBD005809E3 /* CILineScreenClass.m */; };
@@ -507,7 +506,6 @@
 		55BD2E1718D0D4DE00C4EE1B /* CIMedianClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D517B18CF9FBD005809E3 /* CIMedianClass.m */; };
 		55BD2E1818D0D4E300C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D517C18CF9FBD005809E3 /* Localizable.strings */; };
 		55BD2E1918D0D4EC00C4EE1B /* CIMonochromeClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D518418CF9FBE005809E3 /* CIMonochromeClass.m */; };
-		55BD2E1A18D0D4EC00C4EE1B /* MonochromeColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D518B18CF9FBE005809E3 /* MonochromeColorWell.m */; };
 		55BD2E1B18D0D4F400C4EE1B /* CIMonochrome.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909EC718CFFE9C00F43F90 /* CIMonochrome.xib */; };
 		55BD2E1C18D0D4F400C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D518718CF9FBE005809E3 /* Localizable.strings */; };
 		55BD2E1D18D0D4FB00C4EE1B /* CIMotionBlurClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D519118CF9FBE005809E3 /* CIMotionBlurClass.m */; };
@@ -1655,6 +1653,9 @@
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5575356B18DB78AA00AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIHatchedScreen.strings; sourceTree = "<group>"; };
 		5575356D18DB78B500AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGloom.strings; sourceTree = "<group>"; };
+		5575356F18DB89A500AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CILenticularHalo.strings; sourceTree = "<group>"; };
+		5575357118DB9A1A00AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CILineScreen.strings; sourceTree = "<group>"; };
+		5575357318DBA07200AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIMonochrome.strings; sourceTree = "<group>"; };
 		5579919A18DA2C4A0061AC70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGlassLozenge.strings; sourceTree = "<group>"; };
 		557991B518DA4BD80061AC70 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557991B618DA56CA0061AC70 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1748,8 +1749,6 @@
 		557D516218CF9FBD005809E3 /* CILenticularHaloClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CILenticularHaloClass.h; sourceTree = "<group>"; };
 		557D516318CF9FBD005809E3 /* CILenticularHaloClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CILenticularHaloClass.m; sourceTree = "<group>"; };
 		557D516718CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D516818CF9FBD005809E3 /* HaloColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HaloColorWell.h; sourceTree = "<group>"; };
-		557D516918CF9FBD005809E3 /* HaloColorWell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HaloColorWell.m; sourceTree = "<group>"; };
 		557D516F18CF9FBD005809E3 /* CILineScreenClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CILineScreenClass.h; sourceTree = "<group>"; };
 		557D517018CF9FBD005809E3 /* CILineScreenClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CILineScreenClass.m; sourceTree = "<group>"; };
 		557D517418CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1759,8 +1758,6 @@
 		557D518318CF9FBE005809E3 /* CIMonochromeClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIMonochromeClass.h; sourceTree = "<group>"; };
 		557D518418CF9FBE005809E3 /* CIMonochromeClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIMonochromeClass.m; sourceTree = "<group>"; };
 		557D518818CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D518A18CF9FBE005809E3 /* MonochromeColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonochromeColorWell.h; sourceTree = "<group>"; };
-		557D518B18CF9FBE005809E3 /* MonochromeColorWell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonochromeColorWell.m; sourceTree = "<group>"; };
 		557D519018CF9FBE005809E3 /* CIMotionBlurClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIMotionBlurClass.h; sourceTree = "<group>"; };
 		557D519118CF9FBE005809E3 /* CIMotionBlurClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIMotionBlurClass.m; sourceTree = "<group>"; };
 		557D519318CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -3633,8 +3630,6 @@
 				557D516318CF9FBD005809E3 /* CILenticularHaloClass.m */,
 				55909EC118CFFE6300F43F90 /* CILenticularHalo.xib */,
 				557D516618CF9FBD005809E3 /* Localizable.strings */,
-				557D516818CF9FBD005809E3 /* HaloColorWell.h */,
-				557D516918CF9FBD005809E3 /* HaloColorWell.m */,
 			);
 			path = CILenticularHalo;
 			sourceTree = "<group>";
@@ -3667,8 +3662,6 @@
 				557D518418CF9FBE005809E3 /* CIMonochromeClass.m */,
 				55909EC718CFFE9C00F43F90 /* CIMonochrome.xib */,
 				557D518718CF9FBE005809E3 /* Localizable.strings */,
-				557D518A18CF9FBE005809E3 /* MonochromeColorWell.h */,
-				557D518B18CF9FBE005809E3 /* MonochromeColorWell.m */,
 			);
 			path = CIMonochrome;
 			sourceTree = "<group>";
@@ -6949,7 +6942,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55BD2C1718D0CE9900C4EE1B /* Bitmap.m in Sources */,
-				55BD2E1118D0D4BC00C4EE1B /* HaloColorWell.m in Sources */,
 				55BD2E1018D0D4BC00C4EE1B /* CILenticularHaloClass.m in Sources */,
 				55BD2C1818D0CE9900C4EE1B /* Rects.m in Sources */,
 			);
@@ -6981,7 +6973,6 @@
 			files = (
 				55BD2C4118D0CF3300C4EE1B /* Bitmap.m in Sources */,
 				55BD2E1918D0D4EC00C4EE1B /* CIMonochromeClass.m in Sources */,
-				55BD2E1A18D0D4EC00C4EE1B /* MonochromeColorWell.m in Sources */,
 				55BD2C4218D0CF3300C4EE1B /* Rects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8600,6 +8591,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8D18D12A9700FB7F00 /* Base */,
+				5575356F18DB89A500AC0FBC /* en */,
 			);
 			name = CILenticularHalo.xib;
 			sourceTree = "<group>";
@@ -8608,6 +8600,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8E18D12A9700FB7F00 /* Base */,
+				5575357118DB9A1A00AC0FBC /* en */,
 			);
 			name = CILineScreen.xib;
 			sourceTree = "<group>";
@@ -8616,6 +8609,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8F18D12A9700FB7F00 /* Base */,
+				5575357318DBA07200AC0FBC /* en */,
 			);
 			name = CIMonochrome.xib;
 			sourceTree = "<group>";

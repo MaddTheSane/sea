@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
@@ -55,6 +55,7 @@ DQ
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="23"/>
+                            <binding destination="-2" name="value" keyPath="self.intensity" id="fj8-ga-Ni4"/>
                         </connections>
                     </slider>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
@@ -78,12 +79,18 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="mrp-Q0-U8W"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="100%" id="43">
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="percent" minimumIntegerDigits="1" maximumIntegerDigits="309" id="Z0C-sQ-AaE">
+                                <integer key="multiplier" value="100"/>
+                            </numberFormatter>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.intensity" id="aQN-dy-iuR"/>
+                        </connections>
                     </textField>
-                    <colorWell continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33" customClass="MonochromeColorWell">
+                    <colorWell continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33">
                         <rect key="frame" x="20" y="20" width="52" height="24"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
@@ -92,6 +99,7 @@ Gw
                         </constraints>
                         <color key="color" red="0.058130498975515366" green="0.055541899055242538" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
+                            <binding destination="-2" name="value" keyPath="self.mainColor" id="xPm-BT-sJ4"/>
                             <outlet property="ciMonochrome" destination="-2" id="37"/>
                         </connections>
                     </colorWell>

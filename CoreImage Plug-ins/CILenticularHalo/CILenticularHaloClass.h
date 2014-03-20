@@ -18,40 +18,9 @@
 
 @interface CILenticularHaloClass : NSObject <SSSeaVisualPlugin>
 {
-
-	// The label displaying the overlap
-	IBOutlet id overlapLabel;
-	
-	// The slider for the overlap
-	IBOutlet id overlapSlider;
-
-	// The label displaying the strength
-	IBOutlet id strengthLabel;
-	
-	// The slider for the strength
-	IBOutlet id strengthSlider;
-
-	// The label displaying the contrast
-	IBOutlet id contrastLabel;
-	
-	// The slider for the contrast
-	IBOutlet id contrastSlider;
-
 	// The main color to use
-	IBOutlet id mainColorWell;
+	IBOutlet NSColorWell *mainColorWell;
 
-	// The color to be used
-	NSColor *mainNSColor;
-
-	// The new overlap
-	float overlap;
-
-	// The new strength
-	float strength;
-	
-	// The new contrast
-	float contrast;
-	
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -66,6 +35,17 @@
 
 	NSBitmapImageRep *temp_rep;
 }
+// The color to be used
+@property (strong) NSColor *mainColor;
+
+	// The new overlap
+@property CGFloat overlap;
+
+	// The new strength
+@property CGFloat strength;
+	
+	// The new contrast
+@property CGFloat contrast;
 
 /*!
 	@method		initWithManager:
@@ -163,14 +143,6 @@
 				Ignored.
 */
 - (IBAction)cancel:(id)sender;
-
-/*!
-	@method		setColor:
-	@discussion	Sets the color of the receiver.
-	@param		color
-				The new color for the color well.
-*/
-- (void)setColor:(NSColor *)color;
 
 /*!
 	@method		update:

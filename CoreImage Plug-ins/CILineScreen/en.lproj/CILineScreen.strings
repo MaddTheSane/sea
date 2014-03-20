@@ -1,0 +1,27 @@
+
+/* Class = "NSPanel"; title = "Hatched Screen"; ObjectID = "6"; */
+"6.title" = "Hatched Screen";
+
+/* Class = "NSButtonCell"; title = "Ok"; ObjectID = "60"; */
+"60.title" = "Ok";
+
+/* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "61"; */
+"61.title" = "Width:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "63"; */
+"63.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "6"; ObjectID = "64"; */
+"64.title" = "6";
+
+/* Class = "NSTextFieldCell"; title = "Angle:"; ObjectID = "65"; */
+"65.title" = "Angle:";
+
+/* Class = "NSTextFieldCell"; title = ".00"; ObjectID = "67"; */
+"67.title" = ".00";
+
+/* Class = "NSTextFieldCell"; title = "Sharpness:"; ObjectID = "68"; */
+"68.title" = "Sharpness:";
+
+/* Class = "NSTextFieldCell"; title = ".70"; ObjectID = "70"; */
+"70.title" = ".70";
