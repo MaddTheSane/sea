@@ -194,6 +194,16 @@
 		551E574418D0271400E4CDAF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50F418CF9FBC005809E3 /* Localizable.strings */; };
 		5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in Copy Spotlight plug-in */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; };
 		5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in Copy QuickLook plug-in */ = {isa = PBXBuildFile; fileRef = 5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */; };
+		5575352518DB56CA00AC0FBC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		5575352B18DB56CB00AC0FBC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5575352918DB56CB00AC0FBC /* InfoPlist.strings */; };
+		5575352F18DB56CB00AC0FBC /* SeashoreKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575352E18DB56CB00AC0FBC /* SeashoreKit.m */; };
+		5575354B18DB576600AC0FBC /* SSKPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 5575354918DB576600AC0FBC /* SSKPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5575354C18DB576600AC0FBC /* SSKPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575354A18DB576600AC0FBC /* SSKPlugin.m */; };
+		5575354D18DB578C00AC0FBC /* SeashoreKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5575352D18DB56CB00AC0FBC /* SeashoreKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5575355018DB59A600AC0FBC /* SSKCIPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 5575354E18DB59A600AC0FBC /* SSKCIPlugin.h */; };
+		5575355118DB59A600AC0FBC /* SSKCIPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575354F18DB59A600AC0FBC /* SSKCIPlugin.m */; };
+		5575355218DB59D200AC0FBC /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
+		5575355318DB59D200AC0FBC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A518D0138C00E4CDAF /* QuartzCore.framework */; };
 		557D533518CF9FEC005809E3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		557D534118CFA016005809E3 /* CIAffineTileClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D504A18CF9FBA005809E3 /* CIAffineTileClass.m */; };
 		557D534918CFA121005809E3 /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF9CC00536DE2000A80207 /* Rects.m */; };
@@ -1653,6 +1663,17 @@
 		551E572918D0268500E4CDAF /* Exposure+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Exposure+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E573A18D0268A00E4CDAF /* False Color+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "False Color+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
+		5575352418DB56CA00AC0FBC /* SeashoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SeashoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5575352818DB56CB00AC0FBC /* SeashoreKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SeashoreKit-Info.plist"; sourceTree = "<group>"; };
+		5575352A18DB56CB00AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5575352C18DB56CB00AC0FBC /* SeashoreKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SeashoreKit-Prefix.pch"; sourceTree = "<group>"; };
+		5575352D18DB56CB00AC0FBC /* SeashoreKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeashoreKit.h; sourceTree = "<group>"; };
+		5575352E18DB56CB00AC0FBC /* SeashoreKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeashoreKit.m; sourceTree = "<group>"; };
+		5575353518DB56CB00AC0FBC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		5575354918DB576600AC0FBC /* SSKPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKPlugin.h; sourceTree = "<group>"; };
+		5575354A18DB576600AC0FBC /* SSKPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKPlugin.m; sourceTree = "<group>"; };
+		5575354E18DB59A600AC0FBC /* SSKCIPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKCIPlugin.h; sourceTree = "<group>"; };
+		5575354F18DB59A600AC0FBC /* SSKCIPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKCIPlugin.m; sourceTree = "<group>"; };
 		5579919A18DA2C4A0061AC70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGlassLozenge.strings; sourceTree = "<group>"; };
 		557991B518DA4BD80061AC70 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557991B618DA56CA0061AC70 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -2415,6 +2436,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5575352018DB56CA00AC0FBC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5575352518DB56CA00AC0FBC /* Cocoa.framework in Frameworks */,
+				5575355218DB59D200AC0FBC /* Quartz.framework in Frameworks */,
+				5575355318DB59D200AC0FBC /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		557D533018CF9FEC005809E3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -3137,6 +3168,7 @@
 				55E5E47818D26FC50082E60F /* Sharpen.bundle */,
 				55E5E48418D26FC70082E60F /* Threshold.bundle */,
 				55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */,
+				5575352418DB56CA00AC0FBC /* SeashoreKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3149,6 +3181,7 @@
 				2A37F4AFFDCFA73011CA2CEA /* Main Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				35B156C70A2C0092005B688F /* Projects */,
+				5575352618DB56CB00AC0FBC /* SeashoreKit */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				A89B83D30A426D4C00AD6941 /* Disk Image Items */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
@@ -3227,6 +3260,7 @@
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				F5CE25B003D7112D013D2EC9 /* ApplicationServices.framework */,
 				557D533418CF9FEC005809E3 /* Cocoa.framework */,
+				5575353518DB56CB00AC0FBC /* XCTest.framework */,
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -3333,6 +3367,30 @@
 				5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5575352618DB56CB00AC0FBC /* SeashoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				5575352D18DB56CB00AC0FBC /* SeashoreKit.h */,
+				5575352E18DB56CB00AC0FBC /* SeashoreKit.m */,
+				5575354918DB576600AC0FBC /* SSKPlugin.h */,
+				5575354A18DB576600AC0FBC /* SSKPlugin.m */,
+				5575354E18DB59A600AC0FBC /* SSKCIPlugin.h */,
+				5575354F18DB59A600AC0FBC /* SSKCIPlugin.m */,
+				5575352718DB56CB00AC0FBC /* Supporting Files */,
+			);
+			path = SeashoreKit;
+			sourceTree = "<group>";
+		};
+		5575352718DB56CB00AC0FBC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5575352818DB56CB00AC0FBC /* SeashoreKit-Info.plist */,
+				5575352918DB56CB00AC0FBC /* InfoPlist.strings */,
+				5575352C18DB56CB00AC0FBC /* SeashoreKit-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		557D504518CF9FBA005809E3 /* CIAffineTile */ = {
@@ -4603,6 +4661,19 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		5575352118DB56CA00AC0FBC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5575354B18DB576600AC0FBC /* SSKPlugin.h in Headers */,
+				5575354D18DB578C00AC0FBC /* SeashoreKit.h in Headers */,
+				5575355018DB59A600AC0FBC /* SSKCIPlugin.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		550AEAF018CFC5DE008918BA /* Brightness+ */ = {
 			isa = PBXNativeTarget;
@@ -4705,6 +4776,24 @@
 			productName = CIAffineTile;
 			productReference = 551E573A18D0268A00E4CDAF /* False Color+.bundle */;
 			productType = "com.apple.product-type.bundle";
+		};
+		5575352318DB56CA00AC0FBC /* SeashoreKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5575354718DB56CC00AC0FBC /* Build configuration list for PBXNativeTarget "SeashoreKit" */;
+			buildPhases = (
+				5575351F18DB56CA00AC0FBC /* Sources */,
+				5575352018DB56CA00AC0FBC /* Frameworks */,
+				5575352118DB56CA00AC0FBC /* Headers */,
+				5575352218DB56CA00AC0FBC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SeashoreKit;
+			productName = SeashoreKit;
+			productReference = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		557D533218CF9FEC005809E3 /* Affine Tile+ */ = {
 			isa = PBXNativeTarget;
@@ -5891,6 +5980,7 @@
 			projectRoot = "";
 			targets = (
 				A8EDF05C078959C80022BB31 /* Seashore */,
+				5575352318DB56CA00AC0FBC /* SeashoreKit */,
 				A89B83C60A426D3B00AD6941 /* Seashore Disk Image */,
 				55909DFD18CFD59A00F43F90 /* CoreImage-based Plug-ins */,
 				557D533218CF9FEC005809E3 /* Affine Tile+ */,
@@ -6065,6 +6155,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				551E574418D0271400E4CDAF /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5575352218DB56CA00AC0FBC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5575352B18DB56CB00AC0FBC /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6729,6 +6827,16 @@
 				551E572E18D0268A00E4CDAF /* Rects.m in Sources */,
 				551E574318D0271000E4CDAF /* CIFalseColorClass.m in Sources */,
 				551E572F18D0268A00E4CDAF /* Bitmap.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5575351F18DB56CA00AC0FBC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5575354C18DB576600AC0FBC /* SSKPlugin.m in Sources */,
+				5575352F18DB56CB00AC0FBC /* SeashoreKit.m in Sources */,
+				5575355118DB59A600AC0FBC /* SSKCIPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7970,6 +8078,14 @@
 			name = SVGContent.xib;
 			sourceTree = "<group>";
 		};
+		5575352918DB56CB00AC0FBC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5575352A18DB56CB00AC0FBC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		557D504B18CF9FBA005809E3 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -9157,6 +9273,49 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		5575354318DB56CC00AC0FBC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SeashoreKit/SeashoreKit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "SeashoreKit/SeashoreKit-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		5575354418DB56CC00AC0FBC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SeashoreKit/SeashoreKit-Prefix.pch";
+				INFOPLIST_FILE = "SeashoreKit/SeashoreKit-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
 		};
@@ -11320,6 +11479,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		5575354718DB56CC00AC0FBC /* Build configuration list for PBXNativeTarget "SeashoreKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5575354318DB56CC00AC0FBC /* Debug */,
+				5575354418DB56CC00AC0FBC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		557D533E18CF9FEC005809E3 /* Build configuration list for PBXNativeTarget "Affine Tile+" */ = {
 			isa = XCConfigurationList;
