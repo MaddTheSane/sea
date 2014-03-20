@@ -250,7 +250,7 @@ static inline BOOL IntPointInRect(IntPoint point, IntRect rect)
 	@result		Returns YES if the bigRect entirely contains the littleRect, NO
 				otherwise.
 */
-__private_extern__ BOOL IntContainsRect(IntRect bigRect, IntRect littleRect);
+extern BOOL IntContainsRect(IntRect bigRect, IntRect littleRect);
 
 /*!
 	@function	IntConstrainRect
@@ -262,7 +262,7 @@ __private_extern__ BOOL IntContainsRect(IntRect bigRect, IntRect littleRect);
 	@result		Returns an IntRect that is the littleRect constrained to the
 				bigRect.
 */
-__private_extern__ IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect);
+extern IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect);
 
 /*!
 	@function	NSConstrainRect
@@ -274,7 +274,7 @@ __private_extern__ IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect)
 	@result		Returns an NSRect that is the littleRect constrained to the
 				bigRect.
 */
-__private_extern__ NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect);
+extern NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect);
 
 /*!
 	@function	IntSumRects
@@ -285,7 +285,7 @@ __private_extern__ NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect);
 				The second IntRect that we are adding to the aguend.
 	@result		Returns an IntRect that contains the aguend and addend.
 */
-__private_extern__ IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
+extern IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
 
 /*!
 	@function	NSRectMakeIntRect
@@ -295,7 +295,7 @@ __private_extern__ IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
 				The NSRect to convert.
 	@result		Returns an IntRect at least the size of NSRect.
 */
-__private_extern__ IntRect NSRectMakeIntRect(NSRect rect);
+extern IntRect NSRectMakeIntRect(NSRect rect);
 
 /*!
 	@function	IntRectMakeNSRect
@@ -304,7 +304,7 @@ __private_extern__ IntRect NSRectMakeIntRect(NSRect rect);
 				The IntRect to convert.
 	@result		Returns an NSRect with similar values to the NSRect.
 */
-__private_extern__ NSRect IntRectMakeNSRect(IntRect rect);
+extern NSRect IntRectMakeNSRect(IntRect rect);
 
 /*!
 	@function	NSPointRotateNSPoint
@@ -317,4 +317,4 @@ __private_extern__ NSRect IntRectMakeNSRect(IntRect rect);
 				The number of radians that point is rotated.
 	@result		Returns an NSPoint with the defined rotation.
 */
-__private_extern__ NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians);
+extern NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians);

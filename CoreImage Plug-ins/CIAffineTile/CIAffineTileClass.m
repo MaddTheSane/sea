@@ -6,7 +6,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIAffineTileClass
-@synthesize seaPlugins;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {

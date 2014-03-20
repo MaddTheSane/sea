@@ -7,7 +7,4 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface SeashoreKit : NSObject
-
-@end
+#import <SeashoreKit/Rects.h>

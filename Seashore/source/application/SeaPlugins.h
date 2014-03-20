@@ -229,7 +229,6 @@ enum {
 
 @property (weak) IBOutlet NSPanel *panel;
 
-
 /*!
  @method		sanity
  @discussion	Returns a string to indicate this is a Seashore plug-in.

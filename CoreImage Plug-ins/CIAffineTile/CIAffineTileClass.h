@@ -13,22 +13,11 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
+#import <SeashoreKit/SeashoreKit.h>
+#import <SeashoreKit/SSKCIPlugin.h>
 
-@interface CIAffineTileClass : NSObject <SSSeaPlugin>
+@interface CIAffineTileClass : SSKCIPlugin
 {
-	// YES if the application succeeded
-	BOOL success;
-
-	// Some temporary space we need preallocated for greyscale data
-	unsigned char *newdata;
-		
-	// Determines the boundaries of the layer
-	CGRect bounds;
-	
-	// Signals whether the bounds rectangle is valid
-	BOOL boundsValid;
-	
-	NSBitmapImageRep *temp_rep;
 }
 
 /*!
