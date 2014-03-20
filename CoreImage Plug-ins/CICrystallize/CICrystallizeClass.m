@@ -6,14 +6,17 @@
 
 @implementation CICrystallizeClass
 @synthesize panel;
-@synthesize radius;
 @synthesize seaPlugins;
+@synthesize nibArray;
+@synthesize radius;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CICrystallize" owner:self];
+		NSArray *tmpArray;
+		[gOurBundle loadNibNamed:@"CICrystallize" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -174,7 +177,6 @@
 	// Get plug-in data
 	width = [pluginData width];
 	height = [pluginData height];
-	vec_len = width * height * spp;
 	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;

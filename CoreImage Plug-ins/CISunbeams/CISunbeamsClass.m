@@ -10,15 +10,18 @@
 @implementation CISunbeamsClass
 @synthesize panel;
 @synthesize seaPlugins;
-@synthesize mainNSColor;
+@synthesize nibArray;
+@synthesize mainColor = mainNSColor;
 @synthesize contrast;
 @synthesize strength;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CISunbeams" owner:self];
+		NSArray *tmp;
+		self.seaPlugins = manager;
+		[gOurBundle loadNibNamed:@"CISunbeams" owner:self topLevelObjects:&tmp];
+		self.nibArray = tmp;
 	}
 	
 	return self;
@@ -226,7 +229,6 @@
 	height = [pluginData height];
 	spp = [pluginData spp];
 	vec_len = width * height * spp;
-	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;
 	} else {
@@ -274,7 +276,6 @@
 - (void)executeColor:(PluginData *)pluginData
 {
 	__m128i *vdata;
-	__m128i vstore;
 	IntRect selection;
 	int i, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -302,7 +303,7 @@
 	// Convert from RGBA to ARGB
 	vdata = (__m128i *)newdata;
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_srli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
@@ -313,7 +314,7 @@
 	}
 	@catch (NSException *exception) {
 		for (i = 0; i < vec_len; i++) {
-			vstore = _mm_slli_epi32(vdata[i], 24);
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 			vdata[i] = _mm_srli_epi32(vdata[i], 8);
 			vdata[i] = _mm_add_epi32(vdata[i], vstore);
 		}
@@ -327,7 +328,7 @@
 	}
 	// Convert from ARGB to RGBA
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}

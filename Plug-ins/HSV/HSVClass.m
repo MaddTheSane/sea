@@ -9,12 +9,15 @@
 @implementation HSVClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"HSV" owner:self];
+		[gOurBundle loadNibNamed:@"HSV" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;

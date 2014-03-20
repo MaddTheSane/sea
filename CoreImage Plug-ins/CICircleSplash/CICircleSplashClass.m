@@ -10,7 +10,7 @@
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
+		self.seaPlugins = manager;
 	}
 	
 	return self;

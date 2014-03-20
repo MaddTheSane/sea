@@ -6,12 +6,15 @@
 @implementation ThresholdClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"Threshold" owner:self];
+		[gOurBundle loadNibNamed:@"Threshold" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -146,7 +149,7 @@
 {
 	PluginData *pluginData;
 	IntRect selection;
-	int i, j, k, t1, t2, spp, width, channel, mid;
+	int i, j, k, spp, width, channel, mid;
 	unsigned char *data, *overlay, *replace;
 	
 	pluginData = [seaPlugins data];

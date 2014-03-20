@@ -8,16 +8,19 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIPixellateClass
-@synthesize scale;
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
 @synthesize centerBased;
+@synthesize scale;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CIPixellate" owner:self];
+		[gOurBundle loadNibNamed:@"CIPixellate" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -194,7 +197,6 @@
 	width = [pluginData width];
 	height = [pluginData height];
 	vec_len = width * height * spp;
-	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;
 	} else {
@@ -242,7 +244,6 @@
 - (void)executeColor:(PluginData *)pluginData
 {
 	__m128i *vdata, *voverlay, *vresdata;
-	__m128i vstore;
 	IntRect selection;
 	int i, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -276,7 +277,7 @@
 #else
 	vdata = (__m128i *)newdata;
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_srli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
@@ -293,7 +294,7 @@
 		}
 #else
 		for (i = 0; i < vec_len; i++) {
-			vstore = _mm_slli_epi32(vdata[i], 24);
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 			vdata[i] = _mm_srli_epi32(vdata[i], 8);
 			vdata[i] = _mm_add_epi32(vdata[i], vstore);
 		}
@@ -313,7 +314,7 @@
 	}
 #else
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}

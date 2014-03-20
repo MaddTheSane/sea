@@ -9,13 +9,15 @@
 @synthesize seaPlugins;
 @synthesize intensity;
 @synthesize radius;
+@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CIBloom" owner:self];
-		
+		self.seaPlugins = manager;
+		NSArray *tmpArray;
+		[gOurBundle loadNibNamed:@"CIBloom" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -228,8 +230,7 @@
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(newdata[selection.size.width * 2 * i]), selection.size.width * 2);
 		}
-	}
-	else {
+	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, newdata, width * height * 2);
 	}

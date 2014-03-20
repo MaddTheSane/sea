@@ -1653,6 +1653,8 @@
 		551E572918D0268500E4CDAF /* Exposure+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Exposure+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E573A18D0268A00E4CDAF /* False Color+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "False Color+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
+		5575356B18DB78AA00AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIHatchedScreen.strings; sourceTree = "<group>"; };
+		5575356D18DB78B500AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGloom.strings; sourceTree = "<group>"; };
 		5579919A18DA2C4A0061AC70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGlassLozenge.strings; sourceTree = "<group>"; };
 		557991B518DA4BD80061AC70 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557991B618DA56CA0061AC70 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1726,7 +1728,7 @@
 		557D511E18CF9FBC005809E3 /* CIGlassLozengeClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGlassLozengeClass.m; sourceTree = "<group>"; };
 		557D512218CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D512818CF9FBC005809E3 /* CIGloomClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIGloomClass.h; sourceTree = "<group>"; };
-		557D512918CF9FBC005809E3 /* CIGloomClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGloomClass.m; sourceTree = "<group>"; };
+		557D512918CF9FBC005809E3 /* CIGloomClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CIGloomClass.m; sourceTree = "<group>"; };
 		557D512D18CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D513318CF9FBD005809E3 /* CIHatchedScreenClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIHatchedScreenClass.h; sourceTree = "<group>"; };
 		557D513418CF9FBD005809E3 /* CIHatchedScreenClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIHatchedScreenClass.m; sourceTree = "<group>"; };
@@ -8580,6 +8582,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8B18D12A9700FB7F00 /* Base */,
+				5575356D18DB78B500AC0FBC /* en */,
 			);
 			name = CIGloom.xib;
 			sourceTree = "<group>";
@@ -8588,6 +8591,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8C18D12A9700FB7F00 /* Base */,
+				5575356B18DB78AA00AC0FBC /* en */,
 			);
 			name = CIHatchedScreen.xib;
 			sourceTree = "<group>";

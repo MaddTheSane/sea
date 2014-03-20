@@ -10,9 +10,10 @@
 #define PI 3.14159265
 
 @implementation CIStarshineClass
-@synthesize mainColor = mainNSColor;
 @synthesize seaPlugins;
 @synthesize panel;
+@synthesize nibArray;
+@synthesize mainColor = mainNSColor;
 @synthesize opacity;
 @synthesize scale;
 @synthesize starWidth = star_width;
@@ -20,8 +21,10 @@
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CIStarshine" owner:self];
+		NSArray *tmpArray;
+		self.seaPlugins = manager;
+		[gOurBundle loadNibNamed:@"CIStarshine" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -243,7 +246,6 @@
 	height = [pluginData height];
 	spp = [pluginData spp];
 	vec_len = width * height * spp;
-	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;
 	} else {
@@ -296,7 +298,6 @@
 	vector unsigned char *vdata, *voverlay, *vresdata;
 #else
 	__m128i *vdata, *voverlay, *vresdata;
-	__m128i vstore;
 #endif
 	IntRect selection;
 	int i, width, height;
@@ -331,7 +332,7 @@
 #else
 	vdata = (__m128i *)newdata;
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_srli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
@@ -348,7 +349,7 @@
 		}
 #else
 		for (i = 0; i < vec_len; i++) {
-			vstore = _mm_slli_epi32(vdata[i], 24);
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 			vdata[i] = _mm_srli_epi32(vdata[i], 8);
 			vdata[i] = _mm_add_epi32(vdata[i], vstore);
 		}
@@ -368,7 +369,7 @@
 	}
 #else
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
@@ -457,7 +458,6 @@
 	CIImage *input, *crop_output, *halo, *output, *background;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;

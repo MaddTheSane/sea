@@ -9,12 +9,15 @@
 @synthesize brightness;
 @synthesize contrast;
 @synthesize saturation;
+@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CIBrightness" owner:self];
+		NSArray *tmpArray;
+		self.seaPlugins = manager;
+		[gOurBundle loadNibNamed:@"CIBrightness" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 		[self addObserver:self forKeyPath:@"brightness" options:NSKeyValueObservingOptionNew context:NULL];
         [self addObserver:self forKeyPath:@"contrast" options:NSKeyValueObservingOptionNew context:NULL];
         [self addObserver:self forKeyPath:@"saturation" options:NSKeyValueObservingOptionNew context:NULL];
@@ -193,7 +196,6 @@
 	// Get plug-in data
 	width = [pluginData width];
 	height = [pluginData height];
-	vec_len = width * height * spp;
 	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;

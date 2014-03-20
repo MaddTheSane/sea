@@ -7,14 +7,17 @@
 @implementation CIGlassLozengeClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
 @synthesize radius;
 @synthesize refraction;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CIGlassLozenge" owner:self];
+		[gOurBundle loadNibNamed:@"CIGlassLozenge" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -190,7 +193,6 @@
 	width = [pluginData width];
 	height = [pluginData height];
 	spp = [pluginData spp];
-	vec_len = width * height * spp;
 	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;

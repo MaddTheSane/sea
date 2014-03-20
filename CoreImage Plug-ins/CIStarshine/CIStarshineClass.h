@@ -50,6 +50,8 @@
 
 	// YES if the plug-in is running
 	BOOL running;
+	
+	NSBitmapImageRep *temp_rep;
 }
 // The color to be used
 @property (strong) NSColor *mainColor;

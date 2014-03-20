@@ -33,7 +33,7 @@
 
 	NSBitmapImageRep *temp_rep;
 }
-@property CGFloat value;
+@property CGFloat sharpenValue;
 
 /*!
 	@method		initWithManager:

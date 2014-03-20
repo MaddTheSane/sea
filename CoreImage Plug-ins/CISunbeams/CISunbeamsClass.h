@@ -44,12 +44,15 @@
 
 	// YES if the plug-in is running
 	BOOL running;
-}
-@property (strong) NSColor *mainNSColor;
-	// The new strength
-@property CGFloat strength;
 	
-	// The new contrast
+	NSBitmapImageRep *temp_rep;
+}
+@property (strong) NSColor *mainColor;
+
+// The new strength
+@property CGFloat strength;
+
+// The new contrast
 @property CGFloat contrast;
 
 /*!

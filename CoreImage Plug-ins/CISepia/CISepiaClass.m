@@ -9,13 +9,16 @@
 @implementation CISepiaClass
 @synthesize seaPlugins;
 @synthesize panel;
+@synthesize nibArray;
 @synthesize intensity;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CISepia" owner:self];
+		[gOurBundle loadNibNamed:@"CISepia" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -176,7 +179,6 @@
 	width = [pluginData width];
 	height = [pluginData height];
 	vec_len = width * height * spp;
-	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;
 	} else {
@@ -224,7 +226,6 @@
 - (void)executeColor:(PluginData *)pluginData
 {
 	__m128i *vdata;
-	__m128i vstore;
 	IntRect selection;
 	int i, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -252,7 +253,7 @@
 	// Convert from RGBA to ARGB
 	vdata = (__m128i *)data;
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_srli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
@@ -268,7 +269,7 @@
 		}
 #else
 		for (i = 0; i < vec_len; i++) {
-			vstore = _mm_slli_epi32(vdata[i], 24);
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 			vdata[i] = _mm_srli_epi32(vdata[i], 8);
 			vdata[i] = _mm_add_epi32(vdata[i], vstore);
 		}
@@ -284,7 +285,7 @@
 	}
 #else
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
@@ -309,14 +310,7 @@
 	IntRect selection;
 	
 	unsigned char ormask[16], *resdata, *datatouse;
-#ifdef __ppc__
-	vector unsigned char TOALPHA = (vector unsigned char)(0x10, 0x00, 0x00, 0x00, 0x10, 0x04, 0x04, 0x04, 0x10, 0x08, 0x08, 0x08, 0x10, 0x0C, 0x0C, 0x0C);
-	vector unsigned char REVERTALPHA = (vector unsigned char)(0x00, 0x01, 0x02, 0x10, 0x04, 0x05, 0x06, 0x14, 0x08, 0x09, 0x0A, 0x18, 0x0C, 0x0D, 0x0E, 0x1C);
-	vector unsigned char HIGHVEC = (vector unsigned char)(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
-	vector unsigned char *vdata, *nvdata, *rvdata, orvmask;
-#else
 	__m128i *vdata, *nvdata, orvmask;
-#endif
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];

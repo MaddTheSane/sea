@@ -8,12 +8,15 @@
 @synthesize panel;
 @synthesize seaPlugins;
 @synthesize scale;
+@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CIBump" owner:self];
+		NSArray *tmpArray;
+		self.seaPlugins = manager;
+		[gOurBundle loadNibNamed:@"CIBump" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -189,7 +192,6 @@
 	// Get plug-in data
 	width = [pluginData width];
 	height = [pluginData height];
-	vec_len = width * height * spp;
 	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;

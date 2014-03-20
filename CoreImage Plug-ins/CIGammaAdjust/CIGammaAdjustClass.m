@@ -6,13 +6,16 @@
 @implementation CIGammaAdjustClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
 @synthesize gamma;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CIGammaAdjust" owner:self];
+		[gOurBundle loadNibNamed:@"CIGammaAdjust" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -162,7 +165,6 @@
 	// Get plug-in data
 	width = [pluginData width];
 	height = [pluginData height];
-	vec_len = width * height * spp;
 	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;

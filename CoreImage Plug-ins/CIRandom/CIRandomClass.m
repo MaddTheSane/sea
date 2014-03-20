@@ -72,9 +72,8 @@
 - (void)executeGrey:(PluginData *)pluginData
 {
 	IntRect selection;
-	int i, j, spp, width, height;
-	unsigned char *data, *overlay, *replace, *resdata;
-	int vec_len, max;
+	int i, j, width, height;
+	unsigned char *overlay, *replace, *resdata;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -113,8 +112,7 @@
 {
 	IntRect selection;
 	int i, width, height;
-	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len;
+	unsigned char *resdata, *overlay, *replace;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -136,8 +134,7 @@
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
 		}
-	}
-	else {
+	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, resdata, width * height * 4);
 	}

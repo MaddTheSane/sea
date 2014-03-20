@@ -11,7 +11,7 @@
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
+		self.seaPlugins = manager;
 	}
 	
 	return self;
@@ -75,13 +75,11 @@
 
 - (void)execute
 {
-	PluginData *pluginData;
-
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
+	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
-	}
-	else {
+	} else {
 		[self executeColor:pluginData];
 	}
 }
@@ -91,7 +89,7 @@
 	IntRect selection;
 	int i, spp, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len, max;
+	size_t vec_len, max;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -101,7 +99,6 @@
 	// Get plug-in data
 	width = [pluginData width];
 	height = [pluginData height];
-	vec_len = width * height * spp;
 	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;
@@ -129,10 +126,10 @@
 		max = selection.size.width * selection.size.height;
 	else
 		max = width * height;
-	for (i = 0; i < max; i++) {
+	dispatch_apply(max, dispatch_get_global_queue(0, 0), ^(size_t i) {
 		newdata[i * 2] = resdata[i * 4];
 		newdata[i * 2 + 1] = resdata[i * 4 + 3];
-	}
+	});
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
@@ -152,7 +149,7 @@
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	size_t vec_len, i;
+	size_t vec_len;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -208,10 +205,10 @@
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (i = 0; i < selection.size.height; i++) {
+		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
-		}
+		});
 	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, resdata, width * height * 4);
@@ -322,8 +319,7 @@
 		bounds.size.width = contentRight - contentLeft + 1;
 		bounds.size.height = contentBottom - contentTop + 1;
 		boundsValid = YES;
-	}
-	else {
+	} else {
 		boundsValid = NO;
 	}
 }
@@ -373,7 +369,6 @@
 		
 	// Position correctly
 	if (boundsValid) {
-	
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -389,8 +384,6 @@
 		[offsetTransform translateXBy:-bounds.origin.x yBy:-height + bounds.origin.y + bounds.size.height];
 		[filter setValue:offsetTransform forKey:@"inputTransform"];
 		imm_output_2 = [filter valueForKey:@"outputImage"];
-		
-	
 	} else {
 		imm_output_2 = input;
 	}
@@ -420,17 +413,13 @@
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image

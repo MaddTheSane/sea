@@ -2,17 +2,18 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-
-
 @implementation PixellateClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"Pixellate" owner:self];
+		[gOurBundle loadNibNamed:@"Pixellate" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;

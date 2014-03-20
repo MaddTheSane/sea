@@ -11,7 +11,7 @@
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
+		self.seaPlugins = manager;
 	}
 	
 	return self;
@@ -49,9 +49,8 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[self determineContentBorders:pluginData];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -74,13 +73,11 @@
 }
 - (void)execute
 {
-	PluginData *pluginData;
-
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
+	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
-	}
-	else {
+	} else {
 		[self executeColor:pluginData];
 	}
 }
@@ -139,8 +136,7 @@
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(newdata[selection.size.width * 2 * i]), selection.size.width * 2);
 		}
-	}
-	else {
+	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, newdata, width * height * 2);
 	}
@@ -321,13 +317,10 @@
 		bounds.size.width = contentRight - contentLeft + 1;
 		bounds.size.height = contentBottom - contentTop + 1;
 		boundsValid = YES;
-	}
-	else {
+	} else {
 		boundsValid = NO;
 	}
 }
-
-#define PI 3.14159265
 
 - (unsigned char *)transform:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
@@ -604,7 +597,6 @@
 	ndata = malloc(make_128(width * height * 4));
 	
 	if (spp == 2) {
-	
 		for (i = 0; i < width * height; i++) {
 			/* The transformation apparently will always return spp as 4, which means that when 
 			 transforming something that's greyscale, if we force the spp of the output to have been
@@ -615,7 +607,6 @@
 				ndata[i * 2 + 1] = (alpha ?  alpha[i * ispp] : 0xFF);
 			//}
 		}
-		
 	} else {
 		for (i = 0; i < width * height; i++) {
 			ndata[i * 4] = data[i * ispp];
@@ -623,7 +614,6 @@
 			ndata[i * 4 + 2] = data[i * ispp + 2];
 			ndata[i * 4 + 3] = (alpha ? alpha[i * ispp] : 0xFF);
 		}
-		
 	}
 	
 	return ndata;

@@ -6,12 +6,15 @@
 @implementation SharpenClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"Sharpen" owner:self];
+		[gOurBundle loadNibNamed:@"Sharpen" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;

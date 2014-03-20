@@ -16,12 +16,6 @@
 
 @interface CIPointillizeClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the radius
-	IBOutlet id radiusLabel;
-	
-	// The slider for the radius
-	IBOutlet id radiusSlider;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	

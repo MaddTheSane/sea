@@ -228,7 +228,7 @@ enum {
 @protocol SSSeaVisualPlugin <SSSeaPlugin>
 
 @property (weak) IBOutlet NSPanel *panel;
-
+@property (strong) NSArray *nibArray;
 
 /*!
  @method		sanity

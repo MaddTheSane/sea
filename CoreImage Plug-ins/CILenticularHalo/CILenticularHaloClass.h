@@ -64,6 +64,7 @@
 	// YES if the plug-in is running
 	BOOL running;
 
+	NSBitmapImageRep *temp_rep;
 }
 
 /*!

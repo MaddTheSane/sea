@@ -594,8 +594,7 @@ void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, i
 		if (input[alphaPos] == 255) {
 			for (j = 0; j < spp; j++)
 				output[i * spp + j] = input[i * spp + j];
-		}
-		else {
+		} else {
 			if (input[alphaPos] != 0) {
 				alphaRatio = 255.0 / input[alphaPos];
 				for (j = 0; j < spp - 1; j++) {
@@ -604,8 +603,7 @@ void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, i
 					output[i * spp + j] = newValue;
 				}
 				output[alphaPos] = input[alphaPos];
-			}
-			else {
+			} else {
 				for (j = 0; j < spp; j++)
 					output[i * spp + j] = 0;
 			}

@@ -10,7 +10,7 @@
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
+		self.seaPlugins = manager;
 	}
 	
 	return self;
@@ -153,7 +153,6 @@
 	CIImage *crop_output, *output, *background;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;

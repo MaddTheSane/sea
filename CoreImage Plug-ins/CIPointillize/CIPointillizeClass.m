@@ -8,13 +8,16 @@
 @implementation CIPointillizeClass
 @synthesize seaPlugins;
 @synthesize panel;
+@synthesize nibArray;
 @synthesize radius;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-	[NSBundle loadNibNamed:@"CIPointillize" owner:self];
+		[gOurBundle loadNibNamed:@"CIPointillize" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -53,10 +56,6 @@
 	
 	if (radius < 1 || radius > 60)
 		self.radius = 20;
-	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
-	
-	[radiusSlider setIntegerValue:radius];
 	
 	success = NO;
 	pluginData = [seaPlugins data];
@@ -139,11 +138,8 @@
 {
 	PluginData *pluginData;
 	
-	radius = roundf([radiusSlider floatValue]);
-	
 	[panel setAlphaValue:1.0];
 	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
@@ -180,7 +176,6 @@
 	// Get plug-in data
 	width = [pluginData width];
 	height = [pluginData height];
-	vec_len = width * height * spp;
 	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;
@@ -229,7 +224,6 @@
 - (void)executeColor:(PluginData *)pluginData
 {
 	__m128i *vdata;
-	__m128i vstore;
 	IntRect selection;
 	int i, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -263,7 +257,7 @@
 #else
 	vdata = (__m128i *)newdata;
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_srli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
@@ -280,7 +274,7 @@
 		}
 #else
 		for (i = 0; i < vec_len; i++) {
-			vstore = _mm_slli_epi32(vdata[i], 24);
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 			vdata[i] = _mm_srli_epi32(vdata[i], 8);
 			vdata[i] = _mm_add_epi32(vdata[i], vstore);
 		}
@@ -300,7 +294,7 @@
 	}
 #else
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}

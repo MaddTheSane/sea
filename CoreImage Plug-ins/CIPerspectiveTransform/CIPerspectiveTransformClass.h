@@ -27,6 +27,8 @@
 	
 	// Signals whether the bounds rectangle is valid
 	BOOL boundsValid;
+	
+	NSBitmapImageRep *temp_rep;
 }
 
 /*!

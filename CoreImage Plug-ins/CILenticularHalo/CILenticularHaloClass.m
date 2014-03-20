@@ -10,12 +10,15 @@
 @implementation CILenticularHaloClass
 @synthesize seaPlugins;
 @synthesize panel;
+@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CILenticularHalo" owner:self];
+		NSArray *tmpArray;
+		self.seaPlugins = manager;
+		[gOurBundle loadNibNamed:@"CILenticularHalo" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -238,7 +241,6 @@
 	height = [pluginData height];
 	spp = [pluginData spp];
 	vec_len = width * height * spp;
-	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;
 	} else {
@@ -290,9 +292,7 @@
 	vector unsigned char TOGGLERGBR = (vector unsigned char)(0x01, 0x02, 0x03, 0x00, 0x05, 0x06, 0x07, 0x04, 0x09, 0x0A, 0x0B, 0x08, 0x0D, 0x0E, 0x0F, 0x0C);
 	vector unsigned char *vdata, *voverlay, *vresdata;
 #else
-	__m128i opaquea = _mm_set1_epi32(0x000000FF);
 	__m128i *vdata, *voverlay, *vresdata;
-	__m128i vstore;
 #endif
 	IntRect selection;
 	int i, width, height;
@@ -327,7 +327,7 @@
 #else
 	vdata = (__m128i *)newdata;
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_srli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
 		vdata[i] = _mm_slli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
@@ -344,7 +344,7 @@
 	}
 #else
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
@@ -364,7 +364,7 @@
 	}
 #else
 	for (i = 0; i < vec_len; i++) {
-		vstore = _mm_slli_epi32(vdata[i], 24);
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
 		vdata[i] = _mm_srli_epi32(vdata[i], 8);
 		vdata[i] = _mm_add_epi32(vdata[i], vstore);
 	}
@@ -453,7 +453,6 @@
 	CIImage *input, *crop_output, *halo, *output, *background;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	CGSize size;
 	CGRect rect;
 	int width, height;
