@@ -39,13 +39,12 @@
 	PluginData *pluginData;
 	IntRect selection;
 	unsigned char *data, *overlay, *replace;
-	int pos, i, j, k, width, spp, channel;
+	int pos, i, j, width, spp, channel;
 	CMBitmap srcBitmap, destBitmap;
 	CMProfileRef srcProf, destProf;
 	CMDeviceID device;
 	CMDeviceProfileID deviceID;
 	CMProfileLocation profileLoc;
-	CMProfileRef *profile;
 	CMWorldRef cw, scw;
 	
 	pluginData = [seaPlugins data];

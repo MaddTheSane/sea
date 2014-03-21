@@ -215,22 +215,22 @@
 	return exifData;
 }
 
-- (id)layer:(int)index
+- (id)layer:(NSInteger)index
 {
 	return layers[index];
 }
 
-- (int)layerCount
+- (NSInteger)layerCount
 {
 	return [layers count];
 }
 
-- (id)activeLayer
+- (SeaLayer*)activeLayer
 {
 	return (activeLayerIndex < 0) ? NULL : layers[activeLayerIndex];
 }
 
-- (int)activeLayerIndex
+- (NSInteger)activeLayerIndex
 {
 	return activeLayerIndex;
 }

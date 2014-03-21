@@ -161,13 +161,12 @@
 	CGRect rect;
 	int width, height;
 	unsigned char *resdata;
-	BOOL opaque;
+	BOOL opaque = ![pluginData hasAlpha];
 	CIColor *backColor;
 	IntRect selection;
 	
-	// Check if image is opaque
-	opaque = ![pluginData hasAlpha];
-	if (opaque) backColor = [CIColor colorWithRed:1.0 green:1.0 blue:1.0];
+	if (opaque)
+		backColor = [CIColor colorWithRed:1.0 green:1.0 blue:1.0];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];

@@ -244,14 +244,12 @@
 	unsigned char *resdata;
 	IntRect selection;
 	IntPoint point, apoint;
-	CIColor *mainColor;
-	CIColor *backColor;
+	CIColor *mainColor, *backColor;
 	
-	// Check if image is opaque
 	backColor = [CIColor colorWithRed:0 green:0 blue:0];
 	
 	// Get relevant color
-	mainColor = [CIColor colorWithRed:[mainNSColor redComponent] green:[mainNSColor greenComponent] blue:[mainNSColor blueComponent] alpha:[mainNSColor alphaComponent]];
+	mainColor = [[CIColor alloc] initWithColor:mainNSColor];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];

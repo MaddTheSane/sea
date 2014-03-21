@@ -205,12 +205,9 @@
 	int width, height;
 	unsigned char *resdata;
 	IntRect selection;
-	CIColor *mainColor;
+	CIColor *mainColor = [[CIColor alloc] initWithColor:mainNSColor];
 	IntPoint point1, point2, point3;
 	CGFloat halo_width, halo_radius;
-	
-	// Get foreground color
-	mainColor = [[CIColor alloc] initWithColor:mainNSColor];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];

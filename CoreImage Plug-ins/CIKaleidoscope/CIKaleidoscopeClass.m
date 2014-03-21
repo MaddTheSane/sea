@@ -76,7 +76,7 @@
 
 - (unsigned char *)kaleidoscope:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-	CIContext *context;
+	CIContext *context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	CIImage *input, *crop_output, *imm_output, *output, *background;
 	CIFilter *filter;
 	CGImageRef temp_image;
@@ -86,17 +86,14 @@
 	unsigned char *resdata;
 	IntRect selection;
 	IntPoint point, apoint;
-	BOOL opaque;
+	BOOL opaque = ![pluginData hasAlpha];
 	CIColor *backColor;
 	double angle;
 	
-	// Check if image is opaque
-	opaque = ![pluginData hasAlpha];
-	if (opaque && [pluginData spp] == 4) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] redComponent] green:[[pluginData backColor:YES] greenComponent] blue:[[pluginData backColor:YES] blueComponent]];
-	else if (opaque) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent]];
+	if (opaque)
+		backColor = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];

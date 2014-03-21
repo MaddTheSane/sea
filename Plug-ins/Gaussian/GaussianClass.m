@@ -141,7 +141,7 @@
 	PluginData *pluginData;
 	IntRect selection;
 	int i, j, k, l, spp, fspp, width, height, fwidth, channel;
-	unsigned char *data, *overlay, *replace, *workpad;
+	unsigned char *data, *overlay, *replace;
 	double vert, horz;
 	double n_p[5], n_m[5];
 	double d_p[5], d_m[5];

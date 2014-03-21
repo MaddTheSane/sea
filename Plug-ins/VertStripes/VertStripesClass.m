@@ -57,11 +57,10 @@ static inline int specmod(int a, int b)
 - (void)run
 {
 	int width, height;
-	unsigned char *overlay, *replace;
+	unsigned char *overlay;
 	IntRect selection;
 	IntPoint point, apoint;
-	BOOL opaque;
-	unsigned char backColor[4], backColorAlpha[4], foreColorAlpha[4];
+	unsigned char backColorAlpha[4], foreColorAlpha[4];
 	int amount;
 	int spp, channel, pos;
 	int i, j, k;
@@ -94,9 +93,7 @@ static inline int specmod(int a, int b)
 		backColorAlpha[1] = [[pluginData backColor:YES] greenComponent] * 255;
 		backColorAlpha[2] = [[pluginData backColor:YES] blueComponent] * 255;
 		backColorAlpha[3] = [[pluginData backColor:YES] alphaComponent] * 255;
-
-	}
-	else {
+	} else {
 		foreColorAlpha[0] = [[pluginData foreColor:YES] whiteComponent] * 255;
 		foreColorAlpha[1] = [[pluginData foreColor:YES] alphaComponent] * 255;
 		backColorAlpha[0] = [[pluginData backColor:YES] whiteComponent] * 255;
@@ -106,15 +103,13 @@ static inline int specmod(int a, int b)
 	// Run checkboard
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
-			
 			pos = j * width + i;
 			
 			black = (specmod(i - point.x, amount * 2) < amount);
 			for (k = 0; k < spp; k++) {
 				if (black) {
 					memcpy(&(overlay[pos * spp]), foreColorAlpha, spp);
-				}
-				else {
+				} else {
 					memcpy(&(overlay[pos * spp]), backColorAlpha, spp);
 				}
 			}

@@ -89,15 +89,11 @@
 	IntPoint point, apoint;
 	float angle;
 	int radius;
-	BOOL opaque;
+	BOOL opaque = ![pluginData hasAlpha];
 	CIColor *backColor;
 	
-	// Check if image is opaque
-	opaque = ![pluginData hasAlpha];
-	if (opaque && [pluginData spp] == 4)
+	if (opaque)
 		backColor = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
-	else if (opaque)
-		backColor = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent]];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];

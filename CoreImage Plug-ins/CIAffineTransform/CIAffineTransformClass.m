@@ -336,14 +336,12 @@
 	IntPoint point, apoint;
 	double scale, angle;
 	int baselen;
-	BOOL opaque;
+	BOOL opaque = ![pluginData hasAlpha];
 	CIColor *backColor;
 	NSAffineTransform *offsetTransform, *trueTransform;
 	
-	// Check if image is opaque
-	opaque = ![pluginData hasAlpha];
-	if (opaque && [pluginData spp] == 4) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] redComponent] green:[[pluginData backColor:YES] greenComponent] blue:[[pluginData backColor:YES] blueComponent]];
-	else if (opaque) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent]];
+	if (opaque)
+		backColor = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];

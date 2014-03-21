@@ -1861,6 +1861,7 @@
 		559938C118CFCCCC00E92088 /* Circular Screen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Screen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559A635018D8B25C00FD74A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGlassDistortion.strings; sourceTree = "<group>"; };
 		559A635218D8B26100FD74A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGaussianBlur.strings; sourceTree = "<group>"; };
+		559E255818DCB79000D0F3DB /* CICommon-RestoreAlpha.mi */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc.preprocessed; path = "CICommon-RestoreAlpha.mi"; sourceTree = "<group>"; };
 		55BD2B9218D0CA7C00C4EE1B /* Gamma Adjust+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gamma Adjust+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2BA218D0CA7E00C4EE1B /* Gaussian Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gaussian Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2BB018D0CB0C00C4EE1B /* Glass Distortion+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Glass Distortion+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4107,6 +4108,7 @@
 			children = (
 				55BD2BDC18D0CC4100C4EE1B /* CI-Info.plist */,
 				5575357418DBA82F00AC0FBC /* CICommon.mi */,
+				559E255818DCB79000D0F3DB /* CICommon-RestoreAlpha.mi */,
 				557D504518CF9FBA005809E3 /* CIAffineTile */,
 				557D504E18CF9FBA005809E3 /* CIAffineTransform */,
 				557D505718CF9FBA005809E3 /* CIBloom */,
