@@ -86,7 +86,7 @@ extern id gNewFont;
 		attributes = @{NSFontAttributeName: font, NSForegroundColorAttributeName: color, NSParagraphStyleAttributeName: paraStyle};
 	text = [[textbox textStorage] string];
 	fontSize = NSSizeMakeIntSize([text sizeWithAttributes:attributes]);
-	fontSize.width += [[NSString stringWithString:@"x"] sizeWithAttributes:attributes].width;
+	fontSize.width += [@"x" sizeWithAttributes:attributes].width;
 	slantWidth = ceil(MAX(sin([font italicAngle]) * [font pointSize], 0.0));
 	if (outline) slantWidth += (outline + 1) / 2;
 	fontSize.width += slantWidth * 2;

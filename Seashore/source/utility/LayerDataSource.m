@@ -219,7 +219,7 @@ NSFileHandle *NewFileHandleForWritingFile(NSString *dirpath, NSString *basename,
 // We promised the files, so now lets make good on that promise!
 - (NSArray *)outlineView:(NSOutlineView *)outlineView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedItems:(NSArray *)items
 {
-    int i = 0, count = [items count];
+    NSInteger i = 0, count = [items count];
     NSMutableArray *filenames = [NSMutableArray array];
     for (i=0; i<count; i++) {
         SeaLayer *layer = (SeaLayer *)items[i];

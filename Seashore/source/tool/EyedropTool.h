@@ -16,13 +16,6 @@
 
 }
 
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
 /*!
 	@method		sampleSize
 	@discussion	Returns the size of the sample square.

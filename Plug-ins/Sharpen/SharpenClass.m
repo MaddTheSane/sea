@@ -187,7 +187,7 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 	intneg *neg_rows[4];
 	intneg *neg_ptr;
 	int swidth, spp, rspp, row, count, i, y, channel;
-	void (*filter)(int, guchar *, guchar *, intneg *, intneg *, intneg *);
+	void (*filter)(int, guchar *, guchar *, intneg *, intneg *, intneg *) = NULL;
 	int y1, y2, x1, width;
 	
 	pluginData = [seaPlugins data];

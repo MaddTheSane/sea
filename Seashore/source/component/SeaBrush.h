@@ -78,12 +78,6 @@ typedef struct {
 - (id)initWithContentsOfFile:(NSString *)path;
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		activate
 	@discussion	Activates the brush.
 */

@@ -1,9 +1,6 @@
 #import "CISharpenClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
-
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CISharpenClass
@@ -413,7 +410,7 @@
 - (unsigned char *)sharpen:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
-	CIImage *input, *crop_output, *output, *background;
+	CIImage *input, *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
 	CGSize size;

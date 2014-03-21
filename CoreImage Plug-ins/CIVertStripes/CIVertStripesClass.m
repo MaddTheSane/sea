@@ -82,9 +82,8 @@
 - (void)executeGrey:(PluginData *)pluginData
 {
 	IntRect selection;
-	int i, j, spp, width, height;
-	unsigned char *data, *overlay, *resdata;
-	int vec_len, max;
+	int i, j, width, height;
+	unsigned char *overlay, *resdata;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -120,8 +119,7 @@
 {
 	IntRect selection;
 	int i, width, height;
-	unsigned char *data, *resdata, *overlay;
-	int vec_len;
+	unsigned char *resdata, *overlay;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -150,7 +148,7 @@
 - (unsigned char *)stripes:(PluginData *)pluginData
 {
 	CIContext *context;
-	CIImage *crop_output, *output, *background;
+	CIImage *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
 	CGSize size;
@@ -160,14 +158,18 @@
 	IntRect selection;
 	IntPoint point, apoint;
 	CIColor *backColorAlpha, *foreColorAlpha;
-	float angle;
 	int amount;
 	
 	// Get colors
-	if ([pluginData spp] == 4) foreColorAlpha = [CIColor colorWithRed:[[pluginData foreColor:YES] redComponent] green:[[pluginData foreColor:YES] greenComponent] blue:[[pluginData foreColor:YES] blueComponent] alpha:[[pluginData foreColor:YES] alphaComponent]];
-	else  foreColorAlpha = [CIColor colorWithRed:[[pluginData foreColor:YES] whiteComponent] green:[[pluginData foreColor:YES] whiteComponent] blue:[[pluginData foreColor:YES] whiteComponent] alpha:[[pluginData foreColor:YES] alphaComponent]];
-	if ([pluginData spp] == 4) backColorAlpha = [CIColor colorWithRed:[[pluginData backColor:YES] redComponent] green:[[pluginData backColor:YES] greenComponent] blue:[[pluginData backColor:YES] blueComponent] alpha:[[pluginData backColor:YES] alphaComponent]];
-	else  backColorAlpha = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent] alpha:[[pluginData backColor:YES] alphaComponent]];
+	if ([pluginData spp] == 4)
+		foreColorAlpha = [[CIColor alloc] initWithColor:[pluginData foreColor:NO]];
+	else
+		foreColorAlpha = [CIColor colorWithRed:[[pluginData foreColor:YES] whiteComponent] green:[[pluginData foreColor:YES] whiteComponent] blue:[[pluginData foreColor:YES] whiteComponent] alpha:[[pluginData foreColor:YES] alphaComponent]];
+	
+	if ([pluginData spp] == 4)
+		backColorAlpha = [[CIColor alloc] initWithColor:[pluginData backColor:NO]];
+	else
+		backColorAlpha = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent] alpha:[[pluginData backColor:YES] alphaComponent]];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];

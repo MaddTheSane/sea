@@ -1,9 +1,6 @@
 #import "CIPosterizeClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
-
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIPosterizeClass
@@ -230,7 +227,7 @@
 	vector unsigned char TOGGLERGBR = (vector unsigned char)(0x01, 0x02, 0x03, 0x00, 0x05, 0x06, 0x07, 0x04, 0x09, 0x0A, 0x0B, 0x08, 0x0D, 0x0E, 0x0F, 0x0C);
 	vector unsigned char *vdata, *voverlay, *vresdata;
 #else
-	__m128i *vdata, *voverlay, *vresdata;
+	__m128i *vdata;
 #endif
 	IntRect selection;
 	int i, width, height;

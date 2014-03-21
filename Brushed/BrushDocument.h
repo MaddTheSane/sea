@@ -69,12 +69,6 @@ typedef struct
 // Set the values suitably for a new document
 - (id)init;
 
-// Apply current settings to the interface
-- (void)awakeFromNib;
-
-// Release additional memory associated with this document
-- (void)dealloc;
-
 // Returns an image representing the brush
 - (NSImage *)brushImage;
 

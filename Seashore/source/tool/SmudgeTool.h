@@ -28,12 +28,6 @@
 }
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		useMouseCoalescing
 	@discussion	Returns whether or not this tool should use mouse coalescing.
 	@result		Returns YES if this tool should use mouse coalescing, NO

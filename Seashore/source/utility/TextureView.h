@@ -40,12 +40,6 @@
 - (id)initWithMaster:(id)sender;
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		acceptsFirstMouse:
 	@discussion	Returns whether or not the window accepts the first mouse click
 				upon it.

@@ -36,12 +36,6 @@
 }
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		mouseUpAt:withEvent:
 	@discussion	Handles mouse up events.
 	@param		iwhere

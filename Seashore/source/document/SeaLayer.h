@@ -156,12 +156,6 @@
 */
 - (id)initFloatingWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata;
 
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
 // COMPRESSION METHODS
 
 /*!

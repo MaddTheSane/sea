@@ -7,6 +7,7 @@
 @implementation GaussianClass
 @synthesize seaPlugins;
 @synthesize panel;
+@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {

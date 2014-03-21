@@ -81,11 +81,6 @@
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)init;
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 // PROPERTY METHODS
 

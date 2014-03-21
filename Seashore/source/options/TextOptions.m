@@ -10,6 +10,10 @@
 
 id gNewFont;
 
+@interface NSObject (changeFont)
+- (IBAction)changeSpecialFont:(id)sender;
+@end
+
 @implementation TextOptions
 
 - (void)awakeFromNib
