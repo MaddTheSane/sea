@@ -6,16 +6,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIPerspectiveTileClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -49,7 +39,7 @@
 
 - (void)run
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[self determineContentBorders:pluginData];
 	
@@ -65,7 +55,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];

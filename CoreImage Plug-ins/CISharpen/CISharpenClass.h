@@ -13,30 +13,10 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
-@interface CISharpenClass : NSObject <SSSeaVisualPlugin>
-{
-	// YES if the effect must be refreshed
-	BOOL refresh;
-	
-	// YES if the application succeeded
-	BOOL success;
-	
-	// Some temporary space we need preallocated for greyscale data
-	unsigned char *newdata;
-
-	NSBitmapImageRep *temp_rep;
-}
+@interface CISharpenClass : SSKCIPlugin
 @property CGFloat sharpenValue;
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type
@@ -73,14 +53,6 @@
 - (void)run;
 
 /*!
-	@method		apply:
-	@discussion	Applies the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)apply:(id)sender;
-
-/*!
 	@method		reapply
 	@discussion	Applies the plug-in with previous settings.
 */
@@ -92,84 +64,5 @@
 	@result		Returns YES if the plug-in can be applied again, NO otherwise.
 */
 - (BOOL)canReapply;
-
-/*!
-	@method		preview:
-	@discussion	Previews the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
-
-/*!
-	@method		update:
-	@discussion	Updates the panel's labels.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
-
-/*!
-	@method		execute
-	@discussion	Executes the effect.
-*/
-- (void)execute;
-
-/*!
-	@method		executeGrey
-	@discussion	Executes the effect for greyscale images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeGrey:(PluginData *)pluginData;
-
-/*!
-	@method		executeColor
-	@discussion	Executes the effect for colour images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeColor:(PluginData *)pluginData;
-
-/*!
-	@method		executeChannel:withBitmap:
-	@discussion	Executes the effect with any necessary changes depending on channel selection
-				(called by either executeGrey or executeColor). 
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data;
-
-/*!
-	@method		sharpen:withBitmap:
-	@discussion	Called by execute once preparation is complete.
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)sharpen:(PluginData *)pluginData withBitmap:(unsigned char *)data;
-
-/*!
-	@method		validateMenuItem:
-	@discussion	Determines whether a given menu item should be enabled or
-				disabled.
-	@param		menuItem
-				The menu item to be validated.
-	@result		YES if the menu item should be enabled, NO otherwise.
-*/
-- (BOOL)validateMenuItem:(id)menuItem;
 
 @end

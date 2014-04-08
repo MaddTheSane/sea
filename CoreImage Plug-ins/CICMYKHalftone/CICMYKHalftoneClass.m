@@ -145,11 +145,6 @@
 
 - (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-	return [self halftone:pluginData withBitmap:data];
-}
-
-- (unsigned char *)halftone:(PluginData *)pluginData withBitmap:(unsigned char *)data
-{
 	CIContext *context;
 	CIImage *input, *crop_output, *output;
 	CIFilter *filter;

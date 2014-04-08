@@ -96,9 +96,8 @@
 /*!
 	@method		openRecent:
 	@discussion The action from the open recent popup menu.
-	@param		path
+	@param		sender
 				The path of the file.
-	@result		Returns an instance of the freshly opened document.
 */
 - (IBAction)openRecent:(id)sender;
 

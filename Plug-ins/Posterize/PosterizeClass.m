@@ -3,16 +3,12 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation PosterizeClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize posterizeValue = posterize;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"Posterize" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -56,7 +52,7 @@
 	
 	refresh = YES;
 	
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	
 	success = NO;
 	[self preview:self];
@@ -69,7 +65,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	if (refresh)
@@ -89,7 +85,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[self posterize];
 	[pluginData apply];
@@ -102,7 +98,7 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (refresh)
 		[self posterize];
@@ -110,29 +106,15 @@
 	refresh = NO;
 }
 
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData;
 	
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [seaPlugins data];
+		pluginData = [self.seaPlugins data];
 		if ([pluginData window])
 			[panel setAlphaValue:0.4];
 	}
@@ -140,12 +122,11 @@
 
 - (void)posterize
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	int i, j, k, spp, width, channel, value;
 	unsigned char *data, *overlay, *replace;
 	
-	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	

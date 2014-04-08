@@ -93,11 +93,6 @@
 
 - (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-	return [self crystallize:pluginData withBitmap:data];
-}
-
-- (unsigned char *)crystallize:(PluginData *)pluginData withBitmap:(unsigned char *)data
-{
 	CIContext *context;
 	CIImage *input, *imm_output, *crop_output, *output, *background;
 	CIFilter *filter;

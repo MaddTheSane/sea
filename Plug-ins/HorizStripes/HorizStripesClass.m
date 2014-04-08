@@ -3,20 +3,9 @@
 #import "SeaWhiteboard.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation HorizStripesClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -67,10 +56,9 @@ static inline int specmod(int a, int b)
 	int spp, pos;
 	int i, j, k;
 	BOOL black;
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	// Get plug-in data
-	pluginData = [seaPlugins data];
 	width = [pluginData width];
 	spp = [pluginData spp];
 	selection = [pluginData selection];
@@ -112,8 +100,7 @@ static inline int specmod(int a, int b)
 			for (k = 0; k < spp; k++) {
 				if (black) {
 					memcpy(&(overlay[pos * spp]), foreColorAlpha, spp);
-				}
-				else {
+				} else {
 					memcpy(&(overlay[pos * spp]), backColorAlpha, spp);
 				}
 			}

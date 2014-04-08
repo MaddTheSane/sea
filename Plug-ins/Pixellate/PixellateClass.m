@@ -3,16 +3,12 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation PixellateClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize scale;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"Pixellate" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -55,7 +51,7 @@
 	
 	refresh = YES;
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -66,7 +62,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	if (refresh)
@@ -76,7 +72,8 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	
@@ -85,7 +82,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[pluginData apply];
 }
@@ -97,7 +94,7 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (refresh)
 		[self pixellate];
@@ -107,7 +104,7 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[pluginData cancel];
 	
@@ -121,13 +118,13 @@
 
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData;
 	
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
-		[self preview:self];
-		pluginData = [seaPlugins data];
+		[self preview:sender];
+		pluginData = [self.seaPlugins data];
 		if ([pluginData window])
 			[panel setAlphaValue:0.4];
 	}
@@ -135,14 +132,13 @@
 
 - (void)pixellate
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *data, *overlay, *replace, newPixel[4];
 	NSInteger pos, i, j, k, i2, j2;
 	int width, height, spp, channel;
 	int total[4], n, x_stblk, x_endblk, y_stblk, y_endblk;
 	
-	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];

@@ -5,18 +5,14 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation HSVClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize hue;
 @synthesize saturation;
 @synthesize value;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"HSV" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -172,7 +168,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 	self.hue = self.saturation = self.value = 0.0;
 	
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -183,7 +179,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (refresh)
 		[self adjust];
@@ -200,7 +196,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[self adjust];
 	[pluginData apply];
@@ -213,7 +209,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (refresh)
 		[self adjust];
@@ -221,29 +217,15 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 	refresh = NO;
 }
 
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData;
 	
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [seaPlugins data];
+		pluginData = [self.seaPlugins data];
 		if ([pluginData window])
 			[panel setAlphaValue:0.4];
 	}
@@ -254,13 +236,12 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 
 - (void)adjust
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	int spp, i, j, width, channel, pos;
 	unsigned char *data, *overlay, *replace;
 	int r, g, b;
 	
-	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];
@@ -293,10 +274,9 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (pluginData != NULL) {
-
 		if ([pluginData channel] == kAlphaChannel)
 			return NO;
 		

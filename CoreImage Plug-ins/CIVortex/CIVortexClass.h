@@ -13,34 +13,15 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
-@interface CIVortexClass : NSObject <SSSeaVisualPlugin>
+@interface CIVortexClass : SSKCIPlugin
 {
 	// The checkbox for whether reverse directions
 	IBOutlet NSButton *reverseCheckbox;
-
-	// YES if the application succeeded
-	BOOL success;
-
-	// YES if the effect must be refreshed
-	BOOL refresh;
-	
-	// Some temporary space we need preallocated for greyscale data
-	unsigned char *newdata;
-
-	NSBitmapImageRep *temp_rep;
 }
 // The angle of the twirl
 @property CGFloat angle;
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type

@@ -5,16 +5,12 @@
 
 
 @implementation GaussianClass
-@synthesize seaPlugins;
-@synthesize panel;
-@synthesize nibArray;
 @synthesize radius;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"Gaussian" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -57,7 +53,7 @@
 		radius = 1;
 	
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
 	else
@@ -67,7 +63,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if (refresh)
@@ -77,7 +73,8 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	
@@ -86,7 +83,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[self gauss:BLUR_RLE];
 	[pluginData apply];
@@ -99,7 +96,7 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (refresh)
 		[self gauss:BLUR_RLE];
@@ -107,20 +104,6 @@
 	if ([pluginData window])
 		[panel setAlphaValue:0.4];
 	refresh = NO;
-}
-
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
 }
 
 - (IBAction)update:(id)sender
@@ -131,7 +114,7 @@
 
 - (void)gauss:(BlurMethod)method
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	int i, j, k, l, spp, fspp, width, height, fwidth, channel;
 	unsigned char *data, *overlay, *replace;
@@ -161,7 +144,6 @@
 	int val;
 	int initial_pp, initial_mm;
 	
-	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];
@@ -227,7 +209,6 @@
         }
 		
 		for (col = 0; col < width; col++) {
-			
 			switch (method) {
 				case BLUR_IIR:
 					memset(val_p, 0, height * spp * sizeof (double));

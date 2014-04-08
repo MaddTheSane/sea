@@ -5,17 +5,13 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation BrightnessClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize brightness;
 @synthesize contrast;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"Brightness" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -52,7 +48,7 @@
 	self.brightness = self.contrast = 0.0;
 	
 	success = NO;
-	pluginData = [seaPlugins data];		
+	pluginData = [self.seaPlugins data];
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -63,7 +59,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (refresh)
 		[self adjust];
@@ -72,14 +68,15 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 }
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[self adjust];
 	[pluginData apply];
@@ -92,40 +89,12 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (refresh)
 		[self adjust];
 	[pluginData preview];
 	refresh = NO;
-}
-
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
-- (IBAction)update:(id)sender
-{
-	PluginData *pluginData;
-	[panel setAlphaValue:1.0];
-	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
 }
 
 - (void)adjust
@@ -137,7 +106,7 @@
 	float nvalue, value;
 	double power;
 	
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];

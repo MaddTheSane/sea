@@ -160,11 +160,6 @@
 
 - (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-	return [self bump:pluginData withBitmap:data];
-}
-
-- (unsigned char *)bump:(PluginData *)pluginData withBitmap:(unsigned char *)data
-{
 	CIContext *context;
 	CIImage *input, *crop_output, *output;
 	CIFilter *filter;

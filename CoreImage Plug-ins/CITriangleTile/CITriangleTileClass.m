@@ -5,16 +5,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CITriangleTileClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -48,7 +38,7 @@
 
 - (void)run
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -105,11 +95,11 @@
 	if (apoint.x - point.x == 0)
 		angle = M_PI / 2.0;
 	else if (apoint.x - point.x > 0)
-		angle = atanf((float)(point.y - apoint.y) / fabsf((float)(apoint.x - point.x)));
+		angle = atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
 	else if (apoint.x - point.x < 0 && point.y - apoint.y > 0)
-		angle = M_PI - atanf((float)(point.y - apoint.y) / fabsf((float)(apoint.x - point.x)));
+		angle = M_PI - atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
 	else
-		angle = -M_PI - atanf((float)(point.y - apoint.y) / fabsf((float)(apoint.x - point.x)));
+		angle = -M_PI - atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
 	radius = (apoint.x - point.x) * (apoint.x - point.x) + (apoint.y - point.y) * (apoint.y - point.y);
 	radius = sqrt(radius);
 	

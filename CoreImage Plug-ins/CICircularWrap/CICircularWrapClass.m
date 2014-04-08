@@ -199,11 +199,6 @@
 
 - (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-	return [self wrap:pluginData withBitmap:data];
-}
-
-- (unsigned char *)wrap:(PluginData *)pluginData withBitmap:(unsigned char *)data
-{
 	CIContext *context;
 	CIImage *input, *crop_output, *imm_output_1, *imm_output_2, *imm_output_3, *output, *background;
 	CIFilter *filter;

@@ -20,15 +20,6 @@
 @property NSInteger radius;
 
 /*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
-
-/*!
 	@method		type
 	@discussion	Returns the type of plug-in so Seashore can correctly interact with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
@@ -74,26 +65,5 @@
 	@result		Returns YES if the plug-in can be applied again, NO otherwise.
 */
 - (BOOL)canReapply;
-
-/*!
-	@method		crystallize:withBitmap:
-	@discussion	Called by execute once preparation is complete.
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)crystallize:(PluginData *)pluginData withBitmap:(unsigned char *)data;
-
-/*!
-	@method		validateMenuItem:
-	@discussion	Determines whether a given menu item should be enabled or
-				disabled.
-	@param		menuItem
-				The menu item to be validated.
-	@result		YES if the menu item should be enabled, NO otherwise.
-*/
-- (BOOL)validateMenuItem:(id)menuItem;
 
 @end

@@ -9,17 +9,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
-@interface InvertClass : NSObject <SSSeaPlugin>
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
+@interface InvertClass : SSKPlugin
 
 /*!
 	@method		type

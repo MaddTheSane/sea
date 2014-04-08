@@ -78,6 +78,11 @@
 	[super update:sender];
 }
 
+- (BOOL)restoreAlpha
+{
+	return YES;
+}
+
 - (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;

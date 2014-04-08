@@ -10,21 +10,15 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 #import "ThresholdView.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
-@interface ThresholdClass : NSObject <SSSeaVisualPlugin>
-{
-	// The threshold range
-	IBOutlet NSTextField *rangeLabel;
-	
-	// The view associated with this panel
-	IBOutlet ThresholdView *view;
+@interface ThresholdClass : SSKVisualPlugin
+// The threshold range
+@property (weak) IBOutlet NSTextField *rangeLabel;
 
-	// YES if the effect must be refreshed
-	BOOL refresh;
+// The view associated with this panel
+@property (weak) IBOutlet ThresholdView *view;
 
-	// YES if the application succeeded
-	BOOL success;
-}
 /*!
 	@property	topValue
 	@discussion	Returns the value of the top slider.
@@ -38,15 +32,6 @@
 	@result		Returns an integer representing value of the bottom slider.
 */
 @property NSInteger bottomValue;
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type

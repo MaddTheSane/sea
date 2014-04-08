@@ -4,16 +4,6 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation InvertClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -37,12 +27,11 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *data, *overlay, *replace;
 	int pos, i, j, k, width, spp, channel;
 	
-	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];

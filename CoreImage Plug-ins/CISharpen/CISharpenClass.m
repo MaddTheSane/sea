@@ -4,16 +4,12 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CISharpenClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize sharpenValue = value;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CISharpen" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -56,7 +52,7 @@
 		self.sharpenValue = 0.4;
 	
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self preview:self];
 	if ([pluginData window])
@@ -68,7 +64,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if (refresh)
@@ -92,7 +88,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -108,53 +104,12 @@
 	return success;
 }
 
-- (IBAction)preview:(id)sender
+- (BOOL)restoreAlpha
 {
-	PluginData *pluginData = [seaPlugins data];
-	
-	if (refresh)
-		[self execute];
-	[pluginData preview];
-	refresh = NO;
+	return YES;
 }
 
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
-- (IBAction)update:(id)sender
-{
-	PluginData *pluginData;
-	
-	[panel setAlphaValue:1.0];
-	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
-}
-
-#define CLASSMETHOD sharpen
-#import "CICommon-RestoreAlpha.mi"
-
-- (unsigned char *)sharpen:(PluginData *)pluginData withBitmap:(unsigned char *)data
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
 	CIImage *input, *crop_output, *output;

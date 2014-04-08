@@ -2,19 +2,7 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-
-
 @implementation MedianClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -43,13 +31,12 @@ int compar(const void *a, const void *b)
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *data, *overlay, *replace;
 	int pos, i, j, x, y, z, k, width, spp, channel;
 	unsigned char vals[4][9];
 	
-	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];

@@ -23,7 +23,7 @@
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7">
                         <rect key="frame" x="269" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="push" title="Ok" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="60">
+                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="60">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -110,7 +110,7 @@ Gw
                         <constraints>
                             <constraint firstAttribute="width" constant="38" id="G5Y-3H-6tK"/>
                         </constraints>
-                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="0.40" id="67">
+                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title=".40" id="67">
                             <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="3zN-J4-GJK"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>

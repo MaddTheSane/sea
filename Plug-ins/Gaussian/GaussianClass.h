@@ -11,26 +11,11 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 #import "GaussianFuncs.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
-@interface GaussianClass : NSObject <SSSeaVisualPlugin>
-{
-	// YES if the blurring must be refreshed
-	BOOL refresh;
-	
-	// YES if the application succeeded
-	BOOL success;
-}
+@interface GaussianClass : SSKVisualPlugin
 // The number of applications
 @property NSInteger radius;
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type

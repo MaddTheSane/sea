@@ -6,17 +6,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CheckerboardClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
-
 - (int)type
 {
 	return 1;
@@ -66,10 +55,9 @@ static inline int specmod(int a, int b)
 	int spp, channel, pos;
 	int i, j, k;
 	BOOL black;
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	// Get plug-in data
-	pluginData = [seaPlugins data];
 	width = [pluginData width];
 	height = [pluginData height];
 	spp = [pluginData spp];
@@ -94,9 +82,7 @@ static inline int specmod(int a, int b)
 		backColorAlpha[1] = [[pluginData backColor:YES] greenComponent] * 255;
 		backColorAlpha[2] = [[pluginData backColor:YES] blueComponent] * 255;
 		backColorAlpha[3] = [[pluginData backColor:YES] alphaComponent] * 255;
-
-	}
-	else {
+	} else {
 		foreColorAlpha[0] = [[pluginData foreColor:YES] whiteComponent] * 255;
 		foreColorAlpha[1] = [[pluginData foreColor:YES] alphaComponent] * 255;
 		backColorAlpha[0] = [[pluginData backColor:YES] whiteComponent] * 255;
@@ -115,8 +101,7 @@ static inline int specmod(int a, int b)
 			for (k = 0; k < spp; k++) {
 				if (black) {
 					memcpy(&(overlay[pos * spp]), foreColorAlpha, spp);
-				}
-				else {
+				} else {
 					memcpy(&(overlay[pos * spp]), backColorAlpha, spp);
 				}
 			}

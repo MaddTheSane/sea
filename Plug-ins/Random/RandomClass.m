@@ -3,16 +3,6 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation RandomClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -39,14 +29,13 @@
 	
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *data, *overlay, *replace;
 	int pos, i, j, k, width, spp;
 	unsigned char background[4], random[4];
 	BOOL opaque;
 	
-	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];
@@ -60,8 +49,7 @@
 		if (spp == 2) {
 			background[0] = [[pluginData backColor:NO] whiteComponent] * 255;
 			background[1] = 255;
-		}
-		else {
+		} else {
 			background[0] = [[pluginData backColor:NO] redComponent] * 255;
 			background[1] = [[pluginData backColor:NO] greenComponent] * 255;
 			background[2] = [[pluginData backColor:NO] blueComponent] * 255;
@@ -69,7 +57,7 @@
 		}
 	}
 	
-	srand(time(NULL) & 0xffffffff);
+	//srand(time(NULL) & 0xffffffff);
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
 			

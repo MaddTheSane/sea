@@ -1,20 +1,9 @@
 #import "VertStripesClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation VertStripesClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -65,10 +54,9 @@ static inline int specmod(int a, int b)
 	int spp, channel, pos;
 	int i, j, k;
 	BOOL black;
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	// Get plug-in data
-	pluginData = [seaPlugins data];
 	width = [pluginData width];
 	height = [pluginData height];
 	spp = [pluginData spp];

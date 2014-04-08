@@ -329,7 +329,7 @@
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
-		[self preview:self];
+		[self preview:sender];
 		pluginData = [self.seaPlugins data];
 		if ([pluginData window])
 			[panel setAlphaValue:0.4];

@@ -4,16 +4,12 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation SharpenClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize extent;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"Sharpen" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -56,7 +52,7 @@
 		self.extent = 15;
 	
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -67,7 +63,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if (refresh)
@@ -87,7 +83,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[pluginData apply];
 }
@@ -99,7 +95,7 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (refresh)
 		[self sharpen];
@@ -107,29 +103,15 @@
 	refresh = NO;
 }
 
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [seaPlugins data];
+		pluginData = [self.seaPlugins data];
 		if ([pluginData window])
 			[panel setAlphaValue:0.4];
 	}
@@ -168,7 +150,7 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 
 - (void)sharpen
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *src_rows[4], *dst_row;
 	unsigned char *data, *overlay, *replace;
@@ -179,7 +161,6 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 	void (*filter)(int, guchar *, guchar *, intneg *, intneg *, intneg *) = NULL;
 	int y1, y2, x1, width;
 	
-	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];

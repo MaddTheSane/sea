@@ -5,9 +5,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIStarshineClass
-@synthesize seaPlugins;
-@synthesize panel;
-@synthesize nibArray;
 @synthesize mainColor = mainNSColor;
 @synthesize opacity;
 @synthesize scale;
@@ -15,9 +12,8 @@
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CIStarshine" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -86,7 +82,7 @@
 	refresh = YES;
 	success = NO;
 	running = YES;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -100,7 +96,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if (refresh)
@@ -128,11 +124,9 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
 	if (newdata) {
@@ -146,19 +140,9 @@
 	return NO;
 }
 
-- (IBAction)preview:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	if (refresh)
-		[self execute];
-	[pluginData preview];
-	refresh = NO;
-}
-
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[pluginData cancel];
 	if (newdata) {
@@ -176,39 +160,7 @@
 	[gColorPanel orderOut:self];
 }
 
-- (void)setColor:(NSColor *)color
-{
-	PluginData *pluginData;
-	
-	mainNSColor = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	if (running) {
-		refresh = YES;
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
-}
-
-- (IBAction)update:(id)sender
-{
-	PluginData *pluginData;
-	
-	[panel setAlphaValue:1.0];
-	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
-}
-
-#define CLASSMETHOD starshine
-#include "CICommon.mi"
-
-- (unsigned char *)starshine:(PluginData *)pluginData withBitmap:(unsigned char *)data
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
 	CIImage *input, *crop_output, *halo, *output;
@@ -225,7 +177,7 @@
 	double angle;
 	
 	// Get foreground color
-	mainColor = [[CIColor alloc] initWithColor:mainNSColor];
+	mainColor = [[CIColor alloc] initWithColor:self.mainColor];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
@@ -311,7 +263,7 @@
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (pluginData != NULL) {
 		if ([pluginData channel] == kAlphaChannel)

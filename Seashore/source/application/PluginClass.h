@@ -11,9 +11,7 @@
 				<b>Copyright:</b> N/A
 */
 
-@interface PluginClass : NSObject {
-
-}
+@protocol PluginClass <NSObject>
 
 /*!
 	@method		initWithManager:

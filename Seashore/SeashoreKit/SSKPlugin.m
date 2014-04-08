@@ -7,8 +7,14 @@
 //
 
 #import "SSKPlugin.h"
+#import "PluginClass.h"
+
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 #define make_128(x) (x + 16 - (x % 16))
+
+@interface SSKPlugin () <PluginClass>
+
+@end
 
 @implementation SSKPlugin
 @synthesize seaPlugins;

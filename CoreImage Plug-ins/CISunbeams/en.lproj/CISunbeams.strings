@@ -3,7 +3,7 @@
 "6.title" = "Circular Screen";
 
 /* Class = "NSButtonCell"; title = "Ok"; ObjectID = "72"; */
-"72.title" = "Ok";
+"72.title" = "OK";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "73"; */
 "73.title" = "Cancel";

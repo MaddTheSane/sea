@@ -10,30 +10,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
-@interface BrightnessClass : NSObject <SSSeaVisualPlugin>
-{
-	// YES if the effect must be refreshed
-	BOOL refresh;
-
-	// YES if the application succeeded
-	BOOL success;
-}
+@interface BrightnessClass : SSKVisualPlugin
 // The brightness
 @property CGFloat brightness;
 
 // The contrast
 @property CGFloat contrast;
-
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type

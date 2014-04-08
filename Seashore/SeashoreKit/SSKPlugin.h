@@ -25,6 +25,13 @@
 
 - (void)savePluginPreferences;
 
+/*!
+ @method		initWithManager:
+ @discussion	Initializes an instance of this class with the given manager.
+ @param		manager
+ The SeaPlugins instance responsible for managing the plug-ins.
+ @result		Returns instance upon success (or NULL otherwise).
+ */
 - (instancetype)initWithManager:(SeaPlugins *)manager;
 
 /*!
@@ -88,7 +95,7 @@
  * @method		determineContentBorders
  * @discussion	Determines the content borders, must be called before executing.
  * @param		pluginData
- *					The PluginData object.
+ *				The PluginData object.
  */
 - (void)determineContentBorders:(PluginData *)pluginData;
 

@@ -1,20 +1,9 @@
 #import "CIVertStripesClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIVertStripesClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -48,7 +37,7 @@
 
 - (void)run
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[self execute];
 	[pluginData apply];
@@ -67,7 +56,7 @@
 
 - (void)execute
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];

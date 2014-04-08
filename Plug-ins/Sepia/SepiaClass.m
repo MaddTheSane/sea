@@ -1,20 +1,9 @@
 #import "SepiaClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
 #define int_mult(a,b,t)  ((t) = (a) * (b) + 0x80, ((((t) >> 8) + (t)) >> 8))
 
 @implementation SepiaClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -38,13 +27,12 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *data, *overlay, *replace;
 	int pos, i, j, width, spp, channel;
 	int t[5];
 	
-	pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];
@@ -86,9 +74,7 @@
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData;
-
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	if ([pluginData spp] != 4 || [pluginData channel] == kAlphaChannel)
 		return NO;
 

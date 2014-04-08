@@ -23,7 +23,7 @@
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7">
                         <rect key="frame" x="269" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="push" title="Ok" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="89">
+                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="89">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -89,7 +89,7 @@ Gw
                             <binding destination="-2" name="value" keyPath="self.scale" id="OyF-co-huo"/>
                         </connections>
                     </textField>
-                    <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="68" customClass="StarshineColorWell">
+                    <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="68">
                         <rect key="frame" x="20" y="20" width="52" height="24"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
@@ -99,7 +99,7 @@ Gw
                         <color key="color" red="1" green="0.96739059686660767" blue="0.73579096794128418" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
                             <action selector="update:" target="-2" id="cJ9-da-nJ6"/>
-                            <binding destination="-2" name="value" keyPath="self.mainNSColor" id="2Jf-w0-3rp"/>
+                            <binding destination="-2" name="value" keyPath="self.mainColor" id="2h4-rj-s2V"/>
                         </connections>
                     </colorWell>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="71">

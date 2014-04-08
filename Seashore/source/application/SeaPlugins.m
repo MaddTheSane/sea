@@ -196,7 +196,7 @@ BOOL checkRun(NSString *path, NSString *file)
 		plugin = plugins[i];
         
 		// If the plug-in is a basic plug-in add it to the effects menu
-		if ([(PluginClass *)plugin type] == kBasicPlugin) {
+		if ([(id <PluginClass>)plugin type] == kBasicPlugin) {
 			
 			// Add or find group submenu
 			submenuItem = [effectMenu itemWithTitle:[plugin groupName]];
@@ -220,7 +220,7 @@ BOOL checkRun(NSString *path, NSString *file)
 			}
 			
 		}
-		else if ([(PluginClass *)plugin type] == kPointPlugin) {
+		else if ([(id <PluginClass>)plugin type] == kPointPlugin) {
 			pointPluginsNames = [pointPluginsNames arrayByAddingObject:[NSString stringWithFormat:@"%@ / %@", [plugin groupName], [plugin name]]];
 			pointPlugins = [pointPlugins arrayByAddingObject:plugin];
 		}
@@ -258,7 +258,7 @@ BOOL checkRun(NSString *path, NSString *file)
 
 - (IBAction)run:(id)sender
 {
-	[(PluginClass *)plugins[[sender tag] - 10000] run];
+	[(id <PluginClass>)plugins[[sender tag] - 10000] run];
 	lastEffect = [sender tag] - 10000;
 }
 

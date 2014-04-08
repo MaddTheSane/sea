@@ -5,9 +5,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CISpotLightClass
-@synthesize seaPlugins;
-@synthesize panel;
-@synthesize nibArray;
 @synthesize mainColor = mainNSColor;
 @synthesize brightness;
 @synthesize concentration;
@@ -16,9 +13,8 @@
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CISpotLight" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -98,7 +94,7 @@
 	refresh = YES;
 	success = NO;
 	running = YES;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	
 	[self preview:self];
@@ -111,7 +107,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if (refresh)
@@ -141,7 +137,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -159,7 +155,7 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (refresh)
 		[self execute];
@@ -169,7 +165,7 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[pluginData cancel];
 	if (newdata) {
@@ -187,39 +183,7 @@
 	[gColorPanel orderOut:self];
 }
 
-- (void)setColor:(NSColor *)color
-{
-	PluginData *pluginData;
-	
-	mainNSColor = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	if (running) {
-		refresh = YES;
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
-}
-
-- (IBAction)update:(id)sender
-{
-	PluginData *pluginData;
-	
-	[panel setAlphaValue:1.0];
-	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
-}
-
-#define CLASSMETHOD pinch
-#include "CICommon.mi"
-
-- (unsigned char *)pinch:(PluginData *)pluginData withBitmap:(unsigned char *)data
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
 	CIImage *input, *imm_output, *crop_output, *output, *background;

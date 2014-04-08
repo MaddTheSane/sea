@@ -119,11 +119,6 @@
 
 - (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-	return [self noiseReduction:pluginData withBitmap:data];
-}
-
-- (unsigned char *)noiseReduction:(PluginData *)pluginData withBitmap:(unsigned char *)data
-{
 	CIContext *context;
 	CIImage *input, *crop_output, *output;
 	CIFilter *filter;

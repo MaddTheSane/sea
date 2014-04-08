@@ -5,17 +5,13 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CITwirlClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize angle;
 @synthesize reverseCheckbox;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CITwirl" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -70,7 +66,7 @@
 	[reverseCheckbox setState:(angle < 0.0)];
 	self.angle = fabs(angle);
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -84,7 +80,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if (refresh)
@@ -107,7 +103,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -123,52 +119,7 @@
 	return NO;
 }
 
-- (IBAction)preview:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	if (refresh)
-		[self execute];
-	[pluginData preview];
-	refresh = NO;
-}
-
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
-- (IBAction)update:(id)sender
-{
-	PluginData *pluginData;
-	[panel setAlphaValue:1.0];
-	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
-}
-
-#define CLASSMETHOD twirl
-#include "CICommon.mi"
-
-- (unsigned char *)twirl:(PluginData *)pluginData withBitmap:(unsigned char *)data
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
 	CIImage *input, *crop_output, *imm_output, *output, *background;
