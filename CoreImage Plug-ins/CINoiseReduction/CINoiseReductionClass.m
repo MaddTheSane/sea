@@ -8,6 +8,8 @@
 @synthesize seaPlugins;
 @synthesize panel;
 @synthesize nibArray;
+@synthesize noise;
+@synthesize sharp;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -47,26 +49,20 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"CINoiseReduction.noise"])
-		noise = [defaults floatForKey:@"CINoiseReduction.noise"];
+		self.noise = [defaults floatForKey:@"CINoiseReduction.noise"];
 	else
-		noise = 0.02;
+		self.noise = 0.02;
 	
 	if (noise < 0.0 || noise > 0.1)
-		noise = 0.02;
-	
-	[noiseLabel setStringValue:[NSString stringWithFormat:@"%.1f%%", noise * 100.0]];
-	[noiseSlider setFloatValue:noise * 100.0];
+		self.noise = 0.02;
 	
 	if ([defaults objectForKey:@"CINoiseReduction.sharp"])
-		sharp = [defaults floatForKey:@"CINoiseReduction.sharp"];
+		self.sharp = [defaults floatForKey:@"CINoiseReduction.sharp"];
 	else
-		sharp = 0.4;
+		self.sharp = 0.4;
 	
 	if (sharp < 0.0 || sharp > 2.0)
-		sharp = 0.4;
-	
-	[sharpLabel setStringValue:[NSString stringWithFormat:@"%.2f", sharp]];
-	[sharpSlider setFloatValue:sharp * 100.0];
+		self.sharp = 0.4;
 	
 	refresh = YES;
 	success = NO;
@@ -85,27 +81,32 @@
 - (IBAction)apply:(id)sender
 {
 	PluginData *pluginData = [seaPlugins data];
+	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
-		
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
+	
 	[defaults setFloat:sharp forKey:@"CINoiseReduction.noise"];
 	[defaults setFloat:sharp forKey:@"CINoiseReduction.sharp"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -124,9 +125,8 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if (refresh)
 		[self execute];
 	[pluginData preview];
@@ -135,11 +135,13 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	
@@ -153,19 +155,14 @@
 {
 	PluginData *pluginData;
 	
-	noise = [noiseSlider floatValue] / 100.0;
-	sharp = [sharpSlider floatValue] / 100.0;
-	
 	[panel setAlphaValue:1.0];
 	
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) 
-	[noiseLabel setStringValue:[NSString stringWithFormat:@"%.1f%%", noise * 100.0]];
-	[sharpLabel setStringValue:[NSString stringWithFormat:@"%.2f", sharp]];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -209,7 +206,6 @@
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -222,18 +218,14 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+		temp_image = [context createCGImage:output fromRect:rect];
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image

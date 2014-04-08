@@ -7,9 +7,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CIMonochromeClass">
             <connections>
-                <outlet property="intensityLabel" destination="21" id="29"/>
-                <outlet property="intensitySlider" destination="14" id="30"/>
-                <outlet property="mainColorWell" destination="33" id="34"/>
                 <outlet property="panel" destination="6" id="32"/>
             </connections>
         </customObject>

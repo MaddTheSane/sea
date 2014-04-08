@@ -47,9 +47,8 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[self execute];
 	[pluginData apply];
 	success = YES;
@@ -67,13 +66,11 @@
 
 - (void)execute
 {
-	PluginData *pluginData;
-
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
+	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
-	}
-	else {
+	} else {
 		[self executeColor:pluginData];
 	}
 }
@@ -155,12 +152,9 @@
 	unsigned char *resdata;
 	IntRect selection;
 	IntPoint point, apoint;
-	CIColor *backColorAlpha, *foreColorAlpha;
+	CIColor *backColorAlpha = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
+	CIColor *foreColorAlpha = [[CIColor alloc] initWithColor:[pluginData foreColor:YES]];
 	int amount;
-	
-	// Get colors
-	foreColorAlpha = [[CIColor alloc] initWithColor:[pluginData foreColor:YES]];
-	backColorAlpha = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];

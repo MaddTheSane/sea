@@ -84,14 +84,18 @@
 	if ([pluginData window]) [NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
-		
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
+	
 	[defaults setInteger:radius forKey:@"CICrystallize.radius"];
 }
 
 - (void)reapply
 {
 	PluginData *pluginData = [seaPlugins data];
+	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
@@ -109,6 +113,7 @@
 - (IBAction)preview:(id)sender
 {
 	PluginData *pluginData = [seaPlugins data];
+	
 	if (refresh)
 		[self execute];
 	[pluginData preview];
@@ -117,9 +122,8 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	if (newdata) {
 		free(newdata);

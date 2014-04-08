@@ -67,9 +67,8 @@
 	NCWNewColorWorld(&scw, destProf, srcProf);
 	
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
-
 		pos = j * width + selection.origin.x;
-
+		
 		if (channel == kPrimaryChannels) {
 			srcBitmap.image = (char *)&(data[pos * 3]);
 			srcBitmap.width = selection.size.width;
@@ -77,8 +76,7 @@
 			srcBitmap.rowBytes = selection.size.width * 3;
 			srcBitmap.pixelSize = 8 * 3;
 			srcBitmap.space = cmRGB24Space;
-		}
-		else {
+		} else {
 			srcBitmap.image = (char *)&(data[pos * 4]);
 			srcBitmap.width = selection.size.width;
 			srcBitmap.height = 1;
@@ -86,7 +84,7 @@
 			srcBitmap.pixelSize = 8 * 4;
 			srcBitmap.space = cmRGBA32Space;
 		}
-
+		
 		destBitmap.image = (char *)&(overlay[pos * 4]);
 		destBitmap.width = selection.size.width;
 		destBitmap.height = 1;
@@ -141,18 +139,14 @@
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	
 	if (pluginData != NULL) {
-
 		if ([pluginData channel] == kAlphaChannel)
 			return NO;
 		
 		if ([pluginData spp] == 2)
 			return NO;
-	
 	}
 	
 	return YES;

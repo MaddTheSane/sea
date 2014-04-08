@@ -57,7 +57,7 @@
 	if (intensity < 0.0 || intensity > 1.0)
 		self.intensity = 1.0;
 	
-	mainNSColor = [[mainColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	mainNSColor = [NSColor blueColor];
 	
 	success = NO;
 	running = YES;
@@ -87,21 +87,26 @@
 	[panel orderOut:self];
 	success = YES;
 	running = NO;
-	if (newdata) { free(newdata); newdata = NULL; }
-		
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
+	
 	[defaults setFloat:intensity forKey:@"CIMonochrome.intensity"];
 	[gColorPanel orderOut:self];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -111,9 +116,8 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;

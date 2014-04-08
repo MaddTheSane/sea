@@ -126,8 +126,11 @@
 	[panel orderOut:self];
 	success = YES;
 	running = NO;
-	if (newdata) { free(newdata); newdata = NULL; }
-		
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
+	
 	[defaults setFloat:brightness forKey:@"CISpotLight.brightness"];
 	[defaults setFloat:concentration forKey:@"CISpotLight.concentration"];
 	[defaults setInteger:srcHeight forKey:@"CISpotLight.srcHeight"];
@@ -166,11 +169,13 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	

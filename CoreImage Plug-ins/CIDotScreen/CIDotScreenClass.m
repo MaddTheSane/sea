@@ -113,10 +113,14 @@
 - (void)reapply
 {
 	PluginData *pluginData = [seaPlugins data];
+	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -126,9 +130,8 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -136,11 +139,13 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	

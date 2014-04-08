@@ -99,8 +99,11 @@
 		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
-		
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
+	
 	[defaults setInteger:dotWidth forKey:@"CIHatchedScreen.width"];
 	[defaults setFloat:angle forKey:@"CIHatchedScreen.angle"];
 	[defaults setFloat:sharpness forKey:@"CIHatchedScreen.sharpness"];
@@ -108,15 +111,15 @@
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -126,9 +129,8 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -136,11 +138,13 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	
@@ -155,7 +159,7 @@
 	PluginData *pluginData;
 	
 	if (angle > -0.015 && angle < 0.00)
-		angle = 0.00; /* Force a zero point */
+		self.angle = 0.00; /* Force a zero point */
 	
 	[panel setAlphaValue:1.0];
 	
@@ -242,18 +246,14 @@
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	
 	if (pluginData != NULL) {
-
 		if ([pluginData channel] == kAlphaChannel)
 			return NO;
 		
 		if ([pluginData spp] == 2)
 			return NO;
-	
 	}
 	
 	return YES;

@@ -93,6 +93,7 @@
 - (void)reapply
 {
 	PluginData *pluginData = [seaPlugins data];
+	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
@@ -119,9 +120,8 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	if (newdata) {
 		free(newdata);

@@ -95,23 +95,28 @@
 		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
-		
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
+	
 	[defaults setFloat:radius forKey:@"CIGloom.radius"];
 	[defaults setFloat:intensity forKey:@"CIGloom.intensity"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -121,9 +126,8 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -131,11 +135,13 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	
@@ -151,7 +157,6 @@
 	
 	[panel setAlphaValue:1.0];
 	
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) 
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];

@@ -7,7 +7,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CILenticularHaloClass">
             <connections>
-                <outlet property="mainColorWell" destination="68" id="69"/>
                 <outlet property="panel" destination="6" id="32"/>
             </connections>
         </customObject>

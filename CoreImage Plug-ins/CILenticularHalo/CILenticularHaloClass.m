@@ -85,7 +85,7 @@
 	if (contrast < 0.0 || contrast > 5.0)
 		self.contrast = 1.0;
 	
-	self.mainColor = [[mainColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	self.mainColor = [NSColor colorWithCalibratedRed:1.0 green:247.0/255.0 blue:188.0 / 255.0 alpha:1];
 	
 	refresh = YES;
 	success = NO;
@@ -133,12 +133,13 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply

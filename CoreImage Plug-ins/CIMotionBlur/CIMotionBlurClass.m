@@ -73,8 +73,6 @@
 #define CLASSMETHOD motionBlur
 #include "CICommon.mi"
 
-#define PI 3.14159265
-
 - (unsigned char *)motionBlur:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
@@ -89,7 +87,7 @@
 	IntPoint point, apoint;
 	BOOL opaque = ![pluginData hasAlpha];
 	CIColor *backColor;
-	CGFloat angle;
+	double angle;
 	int radius;
 	
 	if (opaque)
@@ -105,14 +103,14 @@
 	point = [pluginData point:0];
 	apoint = [pluginData point:1];
 	if (apoint.x - point.x == 0)
-		angle = PI / 2.0;
+		angle = M_PI / 2.0;
 	else if (apoint.x - point.x > 0)
-		angle = atanf((float)(point.y - apoint.y) / fabsf((float)(apoint.x - point.x)));
+		angle = atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
 	else if (apoint.x - point.x < 0 && point.y - apoint.y > 0)
-		angle = PI - atanf((float)(point.y - apoint.y) / fabsf((float)(apoint.x - point.x)));
+		angle = M_PI - atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
 	else
-		angle = -PI - atanf((float)(point.y - apoint.y) / fabsf((float)(apoint.x - point.x)));
-	radius = (apoint.x - point.x) * (apoint.x - point.x) + (apoint.y - point.y) * (apoint.y - point.y);
+		angle = -M_PI - atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
+	radius = (apoint.x - point.x) * 2 + (apoint.y - point.y) * 2;
 	radius = sqrt(radius);
 	radius = MIN(100, MAX(radius, 0));
 	

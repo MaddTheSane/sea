@@ -52,9 +52,6 @@
 	return @"Seashore Approved (Bobo)";
 }
 
-#undef PI
-#define PI M_PI
-
 - (void)run
 {
 	PluginData *pluginData;
@@ -71,10 +68,10 @@
 	radius = sqrt(radius);
 
 	self.angle = 0.0;
-	if (bounds.size.width < PI * radius)
-		self.angle = PI / 2.0 + bounds.size.width / (2.0 * radius);
-	else if (bounds.size.width < 2.0 * PI * radius)
-		self.angle = (- 3 * PI + bounds.size.width / radius) / 2.0;
+	if (bounds.size.width < M_PI * radius)
+		self.angle = M_PI / 2.0 + bounds.size.width / (2.0 * radius);
+	else if (bounds.size.width < 2.0 * M_PI * radius)
+		self.angle = (- 3 * M_PI + bounds.size.width / radius) / 2.0;
 	
 	refresh = YES;
 	success = NO;
@@ -114,9 +111,8 @@
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels) newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
@@ -133,9 +129,8 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if (refresh)
 		[self execute];
 	[pluginData preview];
@@ -144,9 +139,8 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	if (newdata) {
 		free(newdata);
@@ -165,7 +159,8 @@
 {
 	PluginData *pluginData;
 	
-	if (angle > 0.0 && angle < 0.02) angle = 0.0; /* Force a zero point */
+	if (angle > 0.0 && angle < 0.02)
+		self.angle = 0.0; /* Force a zero point */
 	
 	[panel setAlphaValue:1.0];
 	

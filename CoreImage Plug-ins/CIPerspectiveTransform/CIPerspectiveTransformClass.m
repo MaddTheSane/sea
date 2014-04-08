@@ -48,32 +48,31 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-		
 	[self determineContentBorders:pluginData];
 	
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
-		newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
+	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	success = YES;
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
-		newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
+	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -146,14 +145,10 @@
 		bounds.size.width = contentRight - contentLeft + 1;
 		bounds.size.height = contentBottom - contentTop + 1;
 		boundsValid = YES;
-	}
-	else {
+	} else {
 		boundsValid = NO;
 	}
 }
-
-
-#define PI 3.14159265
 
 - (unsigned char *)tile:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
@@ -240,13 +235,11 @@
 		[filter setValue:background forKey:@"inputBackgroundImage"];
 		[filter setValue:imm_output forKey:@"inputImage"];
 		output = [filter valueForKey:@"outputImage"];
-	}
-	else {
+	} else {
 		output = imm_output;
 	}
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -259,18 +252,14 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+		temp_image = [context createCGImage:output fromRect:rect];
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image

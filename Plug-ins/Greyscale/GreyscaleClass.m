@@ -127,18 +127,14 @@
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	
 	if (pluginData != NULL) {
-
 		if ([pluginData channel] == kAlphaChannel)
 			return NO;
 		
 		if ([pluginData spp] == 2)
 			return NO;
-	
 	}
 	
 	return YES;

@@ -3,7 +3,6 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 #define make_128(x) (x + 16 - (x % 16))
-#define PI 3.14159265
 
 @implementation CIStarshineClass
 @synthesize seaPlugins;
@@ -114,27 +113,32 @@
 	[panel orderOut:self];
 	success = YES;
 	running = NO;
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[defaults setInteger:scale forKey:@"CIStarshine.scale"];
 	[defaults setFloat:opacity forKey:@"CIStarshine.opacity"];
 	[defaults setFloat:star_width forKey:@"CIStarshine.width"];
 	
 	[gColorPanel orderOut:self];
-
+	
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -144,9 +148,8 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -154,11 +157,13 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	
@@ -214,8 +219,8 @@
 	IntRect selection;
 	CIColor *mainColor;
 	IntPoint point1, point2;
-	float radius;
-	float angle;
+	double radius;
+	double angle;
 	
 	// Get foreground color
 	mainColor = [[CIColor alloc] initWithColor:mainNSColor];
@@ -230,14 +235,15 @@
 	point1 = [pluginData point:0];
 	point2 = [pluginData point:1];
 	if (point2.x - point1.x == 0)
-		angle = PI / 2.0;
+		angle = M_PI / 2.0;
 	else if (point2.x - point1.x > 0)
 		angle = atanf((float)(point1.y - point2.y) / fabsf((float)(point2.x - point1.x)));
 	else if (point2.x - point1.x < 0 && point1.y - point2.y > 0)
-		angle = PI - atanf((float)(point1.y - point2.y) / fabsf((float)(point2.x - point1.x)));
+		angle = M_PI - atanf((float)(point1.y - point2.y) / fabsf((float)(point2.x - point1.x)));
 	else
-		angle = -PI - atanf((float)(point1.y - point2.y) / fabsf((float)(point2.x - point1.x)));
-	if (angle < 0) angle = 2 * PI + angle;
+		angle = -M_PI - atanf((float)(point1.y - point2.y) / fabsf((float)(point2.x - point1.x)));
+	if (angle < 0)
+		angle = 2 * M_PI + angle;
 	radius = abs(point2.x - point1.x) * abs(point2.x - point1.x) + abs(point2.y - point1.y) * abs(point2.y - point1.y);
 	radius = sqrt(radius);
 	// radius /= 4.0;
@@ -271,7 +277,6 @@
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -284,18 +289,14 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+		temp_image = [context createCGImage:output fromRect:rect];
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image
@@ -308,18 +309,14 @@
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	
 	if (pluginData != NULL) {
-
 		if ([pluginData channel] == kAlphaChannel)
 			return NO;
 		
 		if ([pluginData spp] == 2)
 			return NO;
-	
 	}
 	
 	return YES;

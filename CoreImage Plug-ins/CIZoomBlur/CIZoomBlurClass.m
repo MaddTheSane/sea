@@ -48,16 +48,15 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	success = YES;
 }
 
@@ -102,7 +101,7 @@
 	selection = [pluginData selection];
 	point = [pluginData point:0];
 	apoint = [pluginData point:1];
-	amount = (apoint.x - point.x) * (apoint.x - point.x) + (apoint.y - point.y) * (apoint.y - point.y);
+	amount = (apoint.x - point.x) * 2 + (apoint.y - point.y) * 2;
 	amount = sqrt(amount);
 	amount = MIN(200, MAX(amount, 0));
 	
@@ -133,13 +132,11 @@
 		[filter setValue:background forKey:@"inputBackgroundImage"];
 		[filter setValue:imm_output forKey:@"inputImage"];
 		output = [filter valueForKey:@"outputImage"];
-	}
-	else {
+	} else {
 		output = imm_output;
 	}
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -152,18 +149,14 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+		temp_image = [context createCGImage:output fromRect:rect];
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image

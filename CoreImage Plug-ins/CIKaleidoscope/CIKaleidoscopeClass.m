@@ -49,15 +49,15 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	success = YES;
 }
 
@@ -102,13 +102,13 @@
 	point = [pluginData point:0];
 	apoint = [pluginData point:1];
 	if (apoint.x - point.x == 0)
-		angle = PI / 2.0;
+		angle = M_PI / 2.0;
 	else if (apoint.x - point.x > 0)
 		angle = atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
 	else if (apoint.x - point.x < 0 && point.y - apoint.y > 0)
-		angle = PI - atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
+		angle = M_PI - atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
 	else
-		angle = -PI - atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
+		angle = -M_PI - atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
 	
 	// Create core image with data
 	size.width = width;

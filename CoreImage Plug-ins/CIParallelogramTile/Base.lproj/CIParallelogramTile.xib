@@ -62,11 +62,12 @@ Gw
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="34">
                         <rect key="frame" x="18" y="59" width="283" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="-157" maxValue="157" doubleValue="78" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="63">
+                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="-1.5700000000000001" maxValue="1.5700000000000001" doubleValue="0.78000000000000003" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="63">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="47"/>
+                            <binding destination="-2" name="value" keyPath="self.acute" id="KyH-Zb-w9p"/>
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35">
@@ -76,10 +77,14 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="FRe-Ii-nNl"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="0.78" id="64">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="xhA-ls-Qpy"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.acute" id="Kp1-pO-0Pf"/>
+                        </connections>
                     </textField>
                 </subviews>
                 <constraints>

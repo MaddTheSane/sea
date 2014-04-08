@@ -18,9 +18,6 @@
 
 @interface CIMonochromeClass : NSObject <SSSeaVisualPlugin>
 {
-	// The main color to use
-	IBOutlet id mainColorWell;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	

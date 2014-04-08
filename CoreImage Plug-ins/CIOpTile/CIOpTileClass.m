@@ -8,6 +8,9 @@
 @synthesize panel;
 @synthesize seaPlugins;
 @synthesize nibArray;
+@synthesize angle;
+@synthesize scale;
+@synthesize squareWidth;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -57,33 +60,24 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	if ([defaults objectForKey:@"CIOpTile.width"])
-		squareWidth = [defaults integerForKey:@"CIOpTile.width"];
+		self.squareWidth = [defaults integerForKey:@"CIOpTile.width"];
 	else
-		squareWidth = 65;
-	angle = 0.0;
+		self.squareWidth = 65;
+	self.angle = 0.0;
 	if ([defaults objectForKey:@"CIOpTile.scale"])
-		scale = [defaults floatForKey:@"CIOpTile.scale"];
+		self.scale = [defaults floatForKey:@"CIOpTile.scale"];
 	else
-		scale = 2.8;
+		self.scale = 2.8;
 			
 	if (squareWidth < 10 || squareWidth > 400)
-		squareWidth = 65;
+		self.squareWidth = 65;
 	if (scale < 0.1 || scale > 10.0)
-		scale = 2.8;
+		self.scale = 2.8;
 			
-	[squareWidthLabel setStringValue:[NSString stringWithFormat:@"%d", squareWidth]];
-	[squareWidthSlider setIntValue:squareWidth];
-	[angleLabel setStringValue:[NSString stringWithFormat:@"%.2f", angle]];
-	[angleSlider setFloatValue:angle * 100.0];
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%.1f", scale]];
-	[scaleSlider setFloatValue:scale];
-	
 	refresh = YES;
 	success = NO;
 	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -104,24 +98,31 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
-		
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
+	
 	[defaults setInteger:squareWidth forKey:@"CIOpTile.width"];
 	[defaults setFloat:scale forKey:@"CIOpTile.scale"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels) newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
+	if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels)
+		newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -131,21 +132,23 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData preview];
 	refresh = NO;
 }
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	
@@ -159,22 +162,17 @@
 {
 	PluginData *pluginData;
 	
-	squareWidth = [squareWidthSlider intValue];
-	angle = roundf([angleSlider floatValue]) / 100.0;
-	scale = [scaleSlider floatValue];
-	if (angle > -0.035 && angle < 0.00) angle = 0.00; /* Force a zero point */
+	if (angle > -0.035 && angle < 0.00)
+		self.angle = 0.00; /* Force a zero point */
 	
 	[panel setAlphaValue:1.0];
-	
-	[squareWidthLabel setStringValue:[NSString stringWithFormat:@"%d", squareWidth]];
-	[angleLabel setStringValue:[NSString stringWithFormat:@"%.2f", angle]];
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%.1f", scale]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -224,7 +222,7 @@
 	[filter setValue:@(squareWidth) forKey:@"inputWidth"];
 	[filter setValue:@(angle) forKey:@"inputAngle"];
 	[filter setValue:@(scale) forKey:@"inputScale"];
-	imm_output = [filter valueForKey: @"outputImage"];
+	imm_output = [filter valueForKey:@"outputImage"];
 	
 	// Add opaque background (if required)
 	if (opaque) {
@@ -237,13 +235,11 @@
 		[filter setValue:background forKey:@"inputBackgroundImage"];
 		[filter setValue:imm_output forKey:@"inputImage"];
 		output = [filter valueForKey:@"outputImage"];
-	}
-	else {
+	} else {
 		output = imm_output;
 	}
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -256,18 +252,14 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+		temp_image = [context createCGImage:output fromRect:rect];
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image
@@ -280,18 +272,14 @@
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	
 	if (pluginData != NULL) {
-
 		if ([pluginData channel] == kAlphaChannel)
 			return NO;
 		
 		if ([pluginData spp] == 2)
 			return NO;
-	
 	}
 	
 	return YES;

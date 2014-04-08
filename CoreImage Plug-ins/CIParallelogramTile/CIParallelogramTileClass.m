@@ -58,22 +58,17 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"CIParallelogramTile.acute"])
-		acute = [defaults floatForKey:@"CIParallelogramTile.acute"];
+		self.acute = [defaults floatForKey:@"CIParallelogramTile.acute"];
 	else
-		acute = 0.78;
+		self.acute = 0.78;
 	
 	if (acute < -1.57 || acute > 1.57)
-		acute = 0.78;
-	
-	[acuteLabel setStringValue:[NSString stringWithFormat:@"%.2f", acute]];
-	[acuteSlider setFloatValue:acute * 100.0];
+		self.acute = 0.78;
 	
 	refresh = YES;
 	success = NO;
 	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -86,7 +81,7 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+	
 	if (refresh)
 		[self execute];
 	[pluginData apply];
@@ -98,22 +93,25 @@
 		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[defaults setFloat:acute forKey:@"CILineScreen.acute"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -123,9 +121,8 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self execute];
 	[pluginData preview];
 	refresh = NO;
@@ -133,11 +130,13 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	
@@ -151,12 +150,10 @@
 {
 	PluginData *pluginData;
 	
-	acute = roundf([acuteSlider floatValue]) / 100.0;
-	if (acute > -0.015 && acute < 0.00) acute = 0.00; /* Force a zero point */
+	if (acute > -0.015 && acute < 0.00)
+		self.acute = 0.00; /* Force a zero point */
 	
 	[panel setAlphaValue:1.0];
-	
-	[acuteLabel setStringValue:[NSString stringWithFormat:@"%.2f", acute]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
@@ -168,8 +165,6 @@
 
 #define CLASSMETHOD tile
 #include "CICommon.mi"
-
-#define PI 3.14159265
 
 - (unsigned char *)tile:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
@@ -185,7 +180,7 @@
 	IntPoint point, apoint, yapoint;
 	BOOL opaque = ![pluginData hasAlpha];
 	CIColor *backColor;
-	float angle;
+	CGFloat angle;
 	int radius;
 	
 	if (opaque)
@@ -202,14 +197,14 @@
 	apoint = [pluginData point:1];
 	yapoint = [pluginData point:2];
 	if (apoint.x - point.x == 0)
-		angle = PI / 2.0;
+		angle = M_PI / 2.0;
 	else if (apoint.x - point.x > 0)
-		angle = atanf((float)(point.y - apoint.y) / fabsf((float)(apoint.x - point.x)));
+		angle = atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
 	else if (apoint.x - point.x < 0 && point.y - apoint.y > 0)
-		angle = PI - atanf((float)(point.y - apoint.y) / fabsf((float)(apoint.x - point.x)));
+		angle = M_PI - atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
 	else
-		angle = -PI - atanf((float)(point.y - apoint.y) / fabsf((float)(apoint.x - point.x)));
-	radius = (apoint.x - point.x) * (apoint.x - point.x) + (apoint.y - point.y) * (apoint.y - point.y);
+		angle = -M_PI - atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
+	radius = (apoint.x - point.x) * 2 + (apoint.y - point.y) * 2;
 	radius = sqrt(radius);
 
 	// Create core image with data
@@ -241,13 +236,11 @@
 		[filter setValue:background forKey:@"inputBackgroundImage"];
 		[filter setValue:imm_output forKey:@"inputImage"];
 		output = [filter valueForKey:@"outputImage"];
-	}
-	else {
+	} else {
 		output = imm_output;
 	}
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -261,17 +254,13 @@
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image

@@ -88,9 +88,8 @@
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData apply];
 }
 
@@ -101,9 +100,8 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self pixellate];
 	[pluginData preview];
 	refresh = NO;
@@ -111,9 +109,8 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -126,9 +123,8 @@
 
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	scale = [scaleSlider intValue];
 	
 	[scaleLabel setStringValue:[NSString stringWithFormat:@"%d", scale]];
@@ -168,7 +164,7 @@
 	
 	for (j = y_stblk; j < y_endblk; j++) {
 		for (i = x_stblk; i < x_endblk; i++) {
-		
+			
 			// Sum and count the present pixels in the  block
 			total[0] = total[1] = total[2] = total[3] = 0;
 			n = 0;
@@ -190,19 +186,19 @@
 					for (k = 0; k < spp; k++) {
 						newPixel[k] = total[k] / n;
 					}
-				break;
+					break;
 				case kPrimaryChannels:
 					for (k = 0; k < spp - 1; k++) {
 						newPixel[k] = total[k] / n;
 					}
 					newPixel[spp - 1] = 255;
-				break;
+					break;
 				case kAlphaChannel:
 					for (k = 0; k < spp - 1; k++) {
 						newPixel[k] = total[spp - 1] / n;
 					}
 					newPixel[spp - 1] = 255;
-				break;
+					break;
 			}
 			
 			// Fill the block with this pixel

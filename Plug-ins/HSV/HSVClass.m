@@ -36,8 +36,7 @@ static inline void RGBtoHSV(int *ir, int *ig, int *ib)
 	if (r > g) {
 		max = MAX (r, b);
 		min = MIN (g, b);
-	}
-	else {
+	} else {
 		max = MAX (g, b);
 		min = MIN (r, b);
     }
@@ -50,11 +49,9 @@ static inline void RGBtoHSV(int *ir, int *ig, int *ib)
 
 		if (r == max) {
 			h = (g - b) / delta;
-        }
-		else if (g == max) {
+        } else if (g == max) {
 			h = 2.0 + (b - r) / delta;
-        }
-		else if (b == max) {
+        } else if (b == max) {
 			h = 4.0 + (r - g) / delta;
         }
 
@@ -64,8 +61,7 @@ static inline void RGBtoHSV(int *ir, int *ig, int *ib)
 			h += 1.0;
 		else if (h > 1.0)
 			h -= 1.0;
-	}
-	else {
+	} else {
 		s = 0.0;
 		h = 0.0;
 	}
@@ -90,8 +86,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 		r = v;
 		g = v;
 		b = v;
-	}
-	else {
+	} else {
 		if (h == 1.0)
 			h = 0.0;
 		
@@ -195,9 +190,8 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self adjust];
 	[pluginData apply];
 	
@@ -211,9 +205,8 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[self adjust];
 	[pluginData apply];
 }
@@ -225,9 +218,8 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if (refresh) [self adjust];
 	[pluginData preview];
 	refresh = NO;
@@ -235,9 +227,8 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -250,9 +241,8 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	hue = [hueSlider floatValue];
 	saturation = [saturationSlider floatValue];
 	value = [valueSlider floatValue];
@@ -294,7 +284,6 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 	
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
-		
 			pos = (j * width + i) * spp;
 			r = data[pos];
 			g = data[pos + 1];
@@ -309,16 +298,13 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 			overlay[pos + 1] = (unsigned char)g;
 			overlay[pos + 2] = (unsigned char)b;
 			replace[j * width + i] = 255;
-
 		}
 	}
 }
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	
 	if (pluginData != NULL) {
 
@@ -327,7 +313,6 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 		
 		if ([pluginData spp] == 2)
 			return NO;
-	
 	}
 	
 	return YES;

@@ -48,9 +48,8 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[self execute];
 	[pluginData apply];
 	success = YES;
@@ -68,13 +67,11 @@
 
 - (void)execute
 {
-	PluginData *pluginData;
-
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
+	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
-	}
-	else {
+	} else {
 		[self executeColor:pluginData];
 	}
 }
@@ -139,8 +136,7 @@
 		for (i = 0; i < selection.size.height; i++) {
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
 		}
-	}
-	else {
+	} else {
 		memcpy(overlay, resdata, width * height * 4);
 	}
 }
@@ -193,7 +189,6 @@
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -206,18 +201,14 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+		temp_image = [context createCGImage:output fromRect:rect];
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image
