@@ -11378,6 +11378,7 @@
 				5575354418DB56CC00AC0FBC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		557D533E18CF9FEC005809E3 /* Build configuration list for PBXNativeTarget "Affine Tile+" */ = {
 			isa = XCConfigurationList;
