@@ -7,19 +7,13 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import <SeashoreKit/SSKPlugin.h>
+#import <SeashoreKit/SSKVisualPlugin.h>
 
-@interface SSKCIPlugin : SSKPlugin
+@interface SSKCIPlugin : SSKVisualPlugin
 {
 	@protected
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-	
-	// Determines the boundaries of the layer
-	CGRect bounds;
-	
-	// Signals whether the bounds rectangle is valid
-	BOOL boundsValid;
 	
 	NSBitmapImageRep *temp_rep;
 }
@@ -58,7 +52,8 @@
  */
 - (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data;
 
-- (unsigned char *)tile:(PluginData *)pluginData withBitmap:(unsigned char *)data;
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data;
 
+- (BOOL)restoreAlpha;
 
 @end

@@ -37,22 +37,6 @@ static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xre
 	return NO;
 }
 
-static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
-{
-	if (cmData == NULL) {
-		cmData = malloc(*size);
-		memcpy(cmData, data, *size);
-		cmLen = *size;
-	}
-	else {
-		cmData = realloc(cmData, cmLen + *size);
-		memcpy(&(cmData[cmLen]), data, *size);
-		cmLen += *size;
-	}
-	
-	return 0;
-}
-
 @implementation JPEGExporter
 
 - (id)init
@@ -270,7 +254,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	NSData *imageData;
 	NSDictionary *exifData;
 	CMProfileRef cmProfile;
-	Boolean cmmNotFound;
 	
 	// Get the data to write
 	srcData = [(SeaWhiteboard *)[document whiteboard] data];

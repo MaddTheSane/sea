@@ -90,7 +90,6 @@ enum {
 	CMProfileRef cmProfile;
 	CMProfileRef srcProf, destProf;
 	CMWorldRef cw;
-	Boolean cmmNotFound;
 	CMBitmap srcBitmap, destBitmap;
 	TIFF *tiff;
 

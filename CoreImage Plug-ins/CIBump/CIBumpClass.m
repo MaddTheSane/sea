@@ -5,10 +5,7 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIBumpClass
-@synthesize panel;
-@synthesize seaPlugins;
 @synthesize scale;
-@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -162,8 +159,10 @@
 	}
 }
 
-#define CLASSMETHOD bump
-#include "CICommon.mi"
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
+{
+	return [self bump:pluginData withBitmap:data];
+}
 
 - (unsigned char *)bump:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {

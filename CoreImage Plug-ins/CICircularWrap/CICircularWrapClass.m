@@ -5,16 +5,12 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CICircularWrapClass
-@synthesize seaPlugins;
-@synthesize panel;
-@synthesize nibArray;
 @synthesize angle;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CICircularWrap" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -172,87 +168,76 @@
 			[panel setAlphaValue:0.4];
 	}
 }
-#define NO_PREMULTIPLY
-#define CLASSMETHOD wrap
-#include "CICommon.mi"
 
-- (void)determineContentBorders:(PluginData *)pluginData
+- (void)executeColor:(PluginData *)pluginData
 {
-	int contentLeft, contentRight, contentTop, contentBottom;
-	int width, height;
-	int spp;
-	unsigned char *data;
-	int i, j, k;
+	__m128i *vdata;
 	IntRect selection;
+	int width, height;
+	unsigned char *data, *resdata, *overlay, *replace;
+	size_t vec_len;
 	
-	// Start out with invalid content borders
-	contentLeft = contentRight = contentTop = contentBottom =  -1;
+	// Set-up plug-in
+	[pluginData setOverlayOpacity:255];
+	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	selection = [pluginData selection];
 	
-	// Select the appropriate data for working out the content borders
-	data = [pluginData data];
+	// Get plug-in data
 	width = [pluginData width];
 	height = [pluginData height];
-	selection = [pluginData selection];
-	spp = [pluginData spp];
-	
-	// Determine left content margin
-	for (i = 0; i < width && contentLeft == -1; i++) {
-		for (j = 0; j < height && contentLeft == -1; j++) {
-			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
-				for (k = 0; k < spp; k++) {
-					if (data[j * width * spp + i * spp + k] != data[k])
-						contentLeft = i;
-				}
-			}
-		}
-	}
-	
-	// Determine right content margin
-	for (i = width - 1; i >= 0 && contentRight == -1; i--) {
-		for (j = 0; j < height && contentRight == -1; j++) {
-			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
-				for (k = 0; k < spp; k++) {
-					if (data[j * width * spp + i * spp + k] != data[k])
-						contentRight = i;
-				}
-			}
-		}
-	}
-	
-	// Determine top content margin
-	for (j = 0; j < height && contentTop == -1; j++) {
-		for (i = 0; i < width && contentTop == -1; i++) {
-			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
-				for (k = 0; k < spp; k++) {
-					if (data[j * width * spp + i * spp + k] != data[k])
-						contentTop = j;
-				}
-			}
-		}
-	}
-	
-	// Determine bottom content margin
-	for (j = height - 1; j >= 0 && contentBottom == -1; j--) {
-		for (i = 0; i < width && contentBottom == -1; i++) {
-			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
-				for (k = 0; k < spp; k++) {
-					if (data[j * width * spp + i * spp + k] != data[k])
-						contentBottom = j;
-				}
-			}
-		}
-	}
-	
-	// Put into bounds
-	if (contentLeft != -1 && contentTop != -1 && contentRight != -1 && contentBottom != -1) {
-		bounds.origin.x = contentLeft;
-		bounds.origin.y = contentTop;
-		bounds.size.width = contentRight - contentLeft + 1;
-		bounds.size.height = contentBottom - contentTop + 1;
-		boundsValid = YES;
+	vec_len = width * height * 4;
+	if (vec_len % 16 == 0) {
+		vec_len /= 16;
 	} else {
-		boundsValid = NO;
+		vec_len /= 16;
+		vec_len++;
 	}
+	data = [pluginData data];
+	overlay = [pluginData overlay];
+	replace = [pluginData replace];
+	vdata = (__m128i *)data;
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
+		vdata[i] = _mm_slli_epi32(vdata[i], 8);
+		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+	});
+	
+	// Run CoreImage effect (exception handling is essential because we've altered the image data)
+	@try {
+		resdata = [self executeChannel:pluginData withBitmap:data];
+	}
+	@catch (NSException *exception) {
+		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
+			vdata[i] = _mm_srli_epi32(vdata[i], 8);
+			vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		});
+		NSLog(@"%@", [exception reason]);
+		return;
+	}
+
+	// Convert from ARGB to RGBA
+	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
+		vdata[i] = _mm_srli_epi32(vdata[i], 8);
+		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+	});
+	
+	// Copy to destination
+	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
+		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
+			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
+			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
+		});
+	} else {
+		memset(replace, 0xFF, width * height);
+		memcpy(overlay, resdata, width * height * 4);
+	}
+}
+
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
+{
+	return [self wrap:pluginData withBitmap:data];
 }
 
 - (unsigned char *)wrap:(PluginData *)pluginData withBitmap:(unsigned char *)data

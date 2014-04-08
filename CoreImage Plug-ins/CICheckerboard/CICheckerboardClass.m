@@ -4,16 +4,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CICheckerboardClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {

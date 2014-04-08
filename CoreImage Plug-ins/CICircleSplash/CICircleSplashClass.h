@@ -13,12 +13,10 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
+#import <SeashoreKit/SSKPlugin.h>
 
-@interface CICircleSplashClass : NSObject <SSSeaPlugin>
+@interface CICircleSplashClass : SSKPlugin
 {
-	// YES if the application succeeded
-	BOOL success;
-
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;	
 

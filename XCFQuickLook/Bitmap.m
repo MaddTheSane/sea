@@ -402,7 +402,7 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 	if (dspace == kInvertedGrayColorSpace) fail = @"Cannot convert to inverted gray color space";
 	if (dspace == kRGBColorSpace && dspp != 4) fail = @"Can only convert to 4 spp for RGB color space";
 	if (dspace == kGrayColorSpace && dspp != 2) fail = @"Can only convert to 2 spp for RGB color space";
-	if (fail) { NSLog(fail); return NULL; }
+	if (fail) { NSLog(@"%@",fail); return NULL; }
 	
 	// Create initial pointer
 	ptrs = initPtrs(ibitmap, ibypr * height);

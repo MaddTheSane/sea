@@ -63,7 +63,7 @@ enum {
 				possible. You should always check for failed conversions. The
 				block of memory is safe for use with AltiVec.
 */
-__private_extern__ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat) DEPRECATED_ATTRIBUTE;
+extern unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat) DEPRECATED_ATTRIBUTE;
 
 /*!
 	@function	stripAlphaToWhite
@@ -146,7 +146,7 @@ extern unsigned char averagedComponentValue(int spp, unsigned char *data, int wi
 	@param		profile
 				The profile to make the default display's profile.
 */
-__private_extern__ void OpenDisplayProfile(CMProfileRef *profile) DEPRECATED_ATTRIBUTE;
+extern void OpenDisplayProfile(CMProfileRef *profile) DEPRECATED_ATTRIBUTE;
 
 /*!
 	@function	CloseDisplayProfile
@@ -154,4 +154,4 @@ __private_extern__ void OpenDisplayProfile(CMProfileRef *profile) DEPRECATED_ATT
 	@param		profile
 				The profile to make the default display's profile.
 */
-__private_extern__ void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_ATTRIBUTE;
+extern void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_ATTRIBUTE;

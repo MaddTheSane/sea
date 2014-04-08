@@ -15,8 +15,13 @@
 	__weak SeaPlugins *seaPlugins;
 	// YES if the application succeeded
 	BOOL success;
+	
+	// Determines the boundaries of the layer
+	CGRect bounds;
+	
+	// Signals whether the bounds rectangle is valid
+	BOOL boundsValid;
 }
-
 @property (weak) SeaPlugins *seaPlugins;
 
 - (instancetype)initWithManager:(SeaPlugins *)manager;
@@ -77,5 +82,7 @@
  @result		YES if the menu item should be enabled, NO otherwise.
  */
 - (BOOL)validateMenuItem:(id)menuItem;
+
+- (void)determineContentBorders:(PluginData *)pluginData;
 
 @end

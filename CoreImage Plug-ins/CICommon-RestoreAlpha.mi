@@ -139,7 +139,8 @@
 
 - (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-	int vec_len, width, height, channel;
+	size_t vec_len;
+	int width, height, channel;
 	unsigned char ormask[16], *resdata, *datatouse;
 	IntRect selection;
 	__m128i *vdata, *nvdata, orvmask;

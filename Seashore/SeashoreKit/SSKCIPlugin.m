@@ -13,11 +13,7 @@
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
-		seaPlugins = manager;
-	}
-	
-	return self;
+	return self = [super initWithManager:manager];
 }
 
 - (int)type
@@ -32,9 +28,8 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[self determineContentBorders:pluginData];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -44,6 +39,11 @@
 		newdata = NULL;
 	}
 	success = YES;
+}
+
+- (BOOL)restoreAlpha
+{
+	return NO;
 }
 
 - (void)reapply
@@ -58,13 +58,11 @@
 
 - (void)execute
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
-	}
-	else {
+	} else {
 		[self executeColor:pluginData];
 	}
 }
@@ -72,9 +70,9 @@
 - (void)executeGrey:(PluginData *)pluginData
 {
 	IntRect selection;
-	int i, spp, width, height;
+	int spp, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len, max;
+	size_t vec_len, max;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -84,7 +82,7 @@
 	// Get plug-in data
 	width = [pluginData width];
 	height = [pluginData height];
-	vec_len = width * height * spp;
+	spp = [pluginData spp];
 	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;
@@ -112,17 +110,17 @@
 		max = selection.size.width * selection.size.height;
 	else
 		max = width * height;
-	for (i = 0; i < max; i++) {
+	dispatch_apply(max, dispatch_get_global_queue(0, 0), ^(size_t i) {
 		newdata[i * 2] = resdata[i * 4];
 		newdata[i * 2 + 1] = resdata[i * 4 + 3];
-	}
+	});
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (i = 0; i < selection.size.height; i++) {
+		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(newdata[selection.size.width * 2 * i]), selection.size.width * 2);
-		}
+		});
 	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, newdata, width * height * 2);
@@ -135,7 +133,7 @@
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	size_t vec_len, i;
+	size_t vec_len;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -191,14 +189,20 @@
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (i = 0; i < selection.size.height; i++) {
+		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
-		}
+		});
 	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, resdata, width * height * 4);
 	}
+}
+
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
+{
+
+	return NULL;
 }
 
 - (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data
@@ -206,220 +210,85 @@
 	size_t vec_len;
 	int width, height, channel;
 	unsigned char ormask[16], *resdata, *datatouse;
-	__m128i *vdata, *rvdata, orvmask;
+	IntRect selection;
+	__m128i *vdata, *nvdata, *rvdata, orvmask;
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
 	datatouse = data;
-	if (channel == kPrimaryChannels || channel == kAlphaChannel) {
-		width = [pluginData width];
-		height = [pluginData height];
+	width = [pluginData width];
+	height = [pluginData height];
+	selection = [pluginData selection];
+	vdata = (__m128i *)data;
+	if ([self restoreAlpha]) {
 		vec_len = width * height * 4;
-		if (vec_len % 16 == 0) { vec_len /= 16; }
-		else { vec_len /= 16; vec_len++; }
-		vdata = (__m128i *)data;
-		rvdata = (__m128i *)newdata;
-		datatouse = newdata;
-		if (channel == kPrimaryChannels) {
-			for (int i = 0; i < 16; i++) {
-				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
-			}
-			memcpy(&orvmask, ormask, 16);
-			dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
-			});
+		if (vec_len % 16 == 0) {
+			vec_len /= 16;
+		} else {
+			vec_len /= 16;
+			vec_len++;
 		}
-		else if (channel == kAlphaChannel) {
+		nvdata = (__m128i *)newdata;
+		datatouse = newdata;
+		if (channel == kAlphaChannel) {
 			dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 				newdata[i * 4] = 255;
 			});
+		} else {
+			for (short i = 0; i < 16; i++) {
+				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
+			}
+			memcpy(&orvmask, ormask, 16);
+			dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+				nvdata[i] = _mm_or_si128(vdata[i], orvmask);
+			});
+		}
+	} else {
+		if (channel == kPrimaryChannels || channel == kAlphaChannel) {
+			width = [pluginData width];
+			height = [pluginData height];
+			vec_len = width * height * 4;
+			if (vec_len % 16 == 0) {
+				vec_len /= 16;
+			} else {
+				vec_len /= 16;
+				vec_len++;
+			}
+			rvdata = (__m128i *)newdata;
+			datatouse = newdata;
+			if (channel == kPrimaryChannels) {
+				for (short i = 0; i < 16; i++) {
+					ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
+				}
+				memcpy(&orvmask, ormask, 16);
+				dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+					rvdata[i] = _mm_or_si128(vdata[i], orvmask);
+				});
+			} else if (channel == kAlphaChannel) {
+				dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
+					newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
+					newdata[i * 4] = 255;
+				});
+			}
 		}
 	}
 	
 	// Run CoreImage effect
-	resdata = [self tile:pluginData withBitmap:datatouse];
+	resdata = [self coreImageEffect:pluginData withBitmap:datatouse];
 	
-	return resdata;
-}
-
-- (void)determineContentBorders:(PluginData *)pluginData
-{
-	int contentLeft, contentRight, contentTop, contentBottom;
-	int width, height;
-	int spp;
-	unsigned char *data;
-	int i, j;
-	IntRect selection;
-	
-	// Start out with invalid content borders
-	contentLeft = contentRight = contentTop = contentBottom =  -1;
-	
-	// Select the appropriate data for working out the content borders
-	data = [pluginData data];
-	width = [pluginData width];
-	height = [pluginData height];
-	selection = [pluginData selection];
-	spp = [pluginData spp];
-	
-	// Determine left content margin
-	for (i = 0; i < width && contentLeft == -1; i++) {
-		for (j = 0; j < height && contentLeft == -1; j++) {
-			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
-				contentLeft = i;
-			}
+	if ([self restoreAlpha]) {
+		// Restore alpha
+		if (channel == kAllChannels) {
+			dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
+				for(int j = 0; j < selection.size.width; j++){
+					resdata[(i * selection.size.width + j) * 4 + 3] =
+					data[(width * (i + selection.origin.y) +
+						  j + selection.origin.x) * 4];
+				}
+			});
 		}
 	}
-	
-	// Determine right content margin
-	for (i = width - 1; i >= 0 && contentRight == -1; i--) {
-		for (j = 0; j < height && contentRight == -1; j++) {
-			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
-				contentRight = i;
-			}
-		}
-	}
-	
-	// Determine top content margin
-	for (j = 0; j < height && contentTop == -1; j++) {
-		for (i = 0; i < width && contentTop == -1; i++) {
-			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
-				contentTop = j;
-			}
-		}
-	}
-	
-	// Determine bottom content margin
-	for (j = height - 1; j >= 0 && contentBottom == -1; j--) {
-		for (i = 0; i < width && contentBottom == -1; i++) {
-			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
-				contentBottom = j;
-			}
-		}
-	}
-	
-	// Put into bounds
-	if (contentLeft != -1 && contentTop != -1 && contentRight != -1 && contentBottom != -1) {
-		bounds.origin.x = contentLeft;
-		bounds.origin.y = contentTop;
-		bounds.size.width = contentRight - contentLeft + 1;
-		bounds.size.height = contentBottom - contentTop + 1;
-		boundsValid = YES;
-	}
-	else {
-		boundsValid = NO;
-	}
-}
-
-- (unsigned char *)tile:(PluginData *)pluginData withBitmap:(unsigned char *)data
-{
-	CIContext *context;
-	CIImage *input, *crop_output, *imm_output_1, *imm_output_2, *output;
-	CIFilter *filter;
-	CGImageRef temp_image;
-	CGSize size;
-	CGRect rect;
-	int width, height;
-	unsigned char *resdata;
-	IntRect selection;
-	IntPoint point, apoint;
-	float scale, angle;
-	int baselen;
-	NSAffineTransform *offsetTransform, *trueTransform;
-	
-	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
-	
-	// Get plug-in data
-	width = [pluginData width];
-	height = [pluginData height];
-	selection = [pluginData selection];
-	point = [pluginData point:0];
-	apoint = [pluginData point:1];
-	baselen = (apoint.x - point.x) * (apoint.x - point.x) + (apoint.y - point.y) * (apoint.y - point.y);
-	baselen = sqrt(baselen);
-	if (boundsValid) scale = (float)baselen / (float)bounds.size.width;
-	else scale = (float)baselen / (float)width;
-	if (apoint.x - point.x != 0)
-		angle = atan((float)(point.y - apoint.y) / (float)(apoint.x - point.x));
-	else
-		angle = M_PI / 2 * ((point.y - apoint.y > 0) ? 1 : -1);
-	trueTransform = [NSAffineTransform transform];
-	[trueTransform translateXBy:point.x yBy:height - point.y];
-	[trueTransform scaleBy:scale];
-	[trueTransform rotateByRadians:angle];
-	
-	// Create core image with data
-	size.width = width;
-	size.height = height;
-	input = [CIImage imageWithBitmapData:[NSData dataWithBytesNoCopy:data length:width * height * 4 freeWhenDone:NO] bytesPerRow:width * 4 size:size format:kCIFormatARGB8 colorSpace:[pluginData displayProf]];
-	
-	// Position correctly
-	if (boundsValid) {
-		
-		// Crop to selection
-		filter = [CIFilter filterWithName:@"CICrop"];
-		[filter setDefaults];
-		[filter setValue:input forKey:@"inputImage"];
-		[filter setValue:[CIVector vectorWithX:bounds.origin.x Y:height - bounds.size.height - bounds.origin.y Z:bounds.size.width W:bounds.size.height] forKey:@"inputRectangle"];
-		imm_output_1 = [filter valueForKey:@"outputImage"];
-		
-		// Offset properly
-		filter = [CIFilter filterWithName:@"CIAffineTransform"];
-		[filter setDefaults];
-		[filter setValue:imm_output_1 forKey:@"inputImage"];
-		offsetTransform = [NSAffineTransform transform];
-		[offsetTransform translateXBy:-bounds.origin.x yBy:-height + bounds.origin.y + bounds.size.height];
-		[filter setValue:offsetTransform forKey:@"inputTransform"];
-		imm_output_2 = [filter valueForKey:@"outputImage"];
-		
-		
-	} else {
-		imm_output_2 = input;
-	}
-	
-	// Run filter
-	filter = [CIFilter filterWithName:@"CIAffineTile"];
-	if (filter == NULL) {
-		@throw [NSException exceptionWithName:@"CoreImageFilterNotFoundException" reason:[NSString stringWithFormat:@"The Core Image filter named \"%@\" was not found.", @"CIAffineTile"] userInfo:NULL];
-	}
-	[filter setDefaults];
-	[filter setValue:imm_output_2 forKey:@"inputImage"];
-	[filter setValue:trueTransform forKey:@"inputTransform"];
-	output = [filter valueForKey: @"outputImage"];
-	
-	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
-		// Crop to selection
-		filter = [CIFilter filterWithName:@"CICrop"];
-		[filter setDefaults];
-		[filter setValue:output forKey:@"inputImage"];
-		[filter setValue:[CIVector vectorWithX:selection.origin.x Y:height - selection.size.height - selection.origin.y Z:selection.size.width W:selection.size.height] forKey:@"inputRectangle"];
-		crop_output = [filter valueForKey:@"outputImage"];
-		
-		// Create output core image
-		rect.origin.x = selection.origin.x;
-		rect.origin.y = height - selection.size.height - selection.origin.y;
-		rect.size.width = selection.size.width;
-		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];
-		
-	}
-	else {
-		
-		// Create output core image
-		rect.origin.x = 0;
-		rect.origin.y = 0;
-		rect.size.width = width;
-		rect.size.height = height;
-		temp_image = [context createCGImage:output fromRect:rect];
-		
-	}
-	
-	// Get data from output core image
-	temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
-	CGImageRelease(temp_image);
-	resdata = [temp_rep bitmapData];
 	
 	return resdata;
 }

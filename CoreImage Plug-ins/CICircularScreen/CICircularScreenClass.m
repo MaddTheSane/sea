@@ -5,9 +5,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CICircularScreenClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize dotWidth;
 @synthesize sharpness;
 
@@ -15,7 +12,6 @@
 {
 	if (self = [super init]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CICircularScreen" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -173,8 +169,10 @@
 	}
 }
 
-#define CLASSMETHOD halftone
-#include "CICommon.mi"
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
+{
+	return [self halftone:pluginData withBitmap:data];
+}
 
 - (unsigned char *)halftone:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {

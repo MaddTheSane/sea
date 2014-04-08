@@ -13,25 +13,12 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
-@interface CICircularWrapClass : NSObject <SSSeaVisualPlugin>
+@interface CICircularWrapClass : SSKCIPlugin
 {
-	// YES if the application succeeded
-	BOOL success;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
-	
-	// Some temporary space we need preallocated for greyscale data
-	unsigned char *newdata;
-
-	// Determines the boundaries of the layer
-	CGRect bounds;
-	
-	// Signals whether the bounds rectangle is valid
-	BOOL boundsValid;
-	
-	NSBitmapImageRep *temp_rep;
 }
 // The angle of the twirl
 @property CGFloat angle;
@@ -142,48 +129,6 @@
 				Ignored.
 */
 - (IBAction)update:(id)sender;
-
-/*!
-	@method		determineContentBorders
-	@discussion	Determines the content borders, must be called before executing.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)determineContentBorders:(PluginData *)pluginData;
-
-/*!
-	@method		execute
-	@discussion	Executes the effect.
-*/
-- (void)execute;
-
-/*!
-	@method		executeGrey
-	@discussion	Executes the effect for greyscale images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeGrey:(PluginData *)pluginData;
-
-/*!
-	@method		executeGrey
-	@discussion	Executes the effect for colour images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeColor:(PluginData *)pluginData;
-
-/*!
-	@method		executeChannel:withBitmap:
-	@discussion	Executes the effect with any necessary changes depending on channel selection
-				(called by either executeGrey or executeColor). 
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data;
 
 /*!
 	@method		wrap:

@@ -4,18 +4,14 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIBrightnessClass
-@synthesize seaPlugins;
-@synthesize panel;
 @synthesize brightness;
 @synthesize contrast;
 @synthesize saturation;
-@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CIBrightness" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 		[self addObserver:self forKeyPath:@"brightness" options:NSKeyValueObservingOptionNew context:NULL];
@@ -37,6 +33,11 @@
     if (object == self) {
         [self update:nil];
     }
+}
+
+- (BOOL)restoreAlpha
+{
+	return YES;
 }
 
 - (int)type
@@ -166,8 +167,10 @@
 	}
 }
 
-#define CLASSMETHOD adjust
-#import "CICommon-RestoreAlpha.mi"
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
+{
+	return [self adjust:pluginData withBitmap:data];
+}
 
 - (unsigned char *)adjust:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {

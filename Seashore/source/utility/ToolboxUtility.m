@@ -18,6 +18,7 @@
 #import "StatusUtility.h"
 #import "SeaWindowContent.h"
 #import "WarningsUtility.h"
+#import <SeashoreKit/SeashoreKit.h>
 
 static NSString*	DocToolbarIdentifier 	= @"Document Toolbar Instance Identifier";
 
@@ -332,13 +333,13 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		// Deselect the old tool
 		int i;
 		for(i = 0; i < [selectionTools count]; i++)
-			[[selectionTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%d-%@", [[selectionTBView cellAtRow:0 column:i] tag] % 100, ([[selectionTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
+			[[selectionTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%ld-%@", [[selectionTBView cellAtRow:0 column:i] tag] % 100, ([[selectionTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
 		for(i = 0; i < [drawTools count]; i++)
-			[[drawTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%d-%@", [[drawTBView cellAtRow:0 column:i] tag] % 100, ([[drawTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
+			[[drawTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%ld-%@", [[drawTBView cellAtRow:0 column:i] tag] % 100, ([[drawTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
 		for(i = 0; i < [effectTools count]; i++)
-			[[effectTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%d-%@", [[effectTBView cellAtRow:0 column:i] tag] % 100, ([[effectTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
+			[[effectTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%ld-%@", [[effectTBView cellAtRow:0 column:i] tag] % 100, ([[effectTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
 		for(i = 0; i < [transformTools count]; i++)
-			[[transformTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%d-%@", [[transformTBView cellAtRow:0 column:i] tag] % 100, ([[transformTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
+			[[transformTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%ld-%@", [[transformTBView cellAtRow:0 column:i] tag] % 100, ([[transformTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
 
 		[self update:YES];
 	}

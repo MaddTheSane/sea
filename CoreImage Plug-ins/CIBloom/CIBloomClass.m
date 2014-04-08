@@ -5,11 +5,8 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIBloomClass
-@synthesize panel;
-@synthesize seaPlugins;
 @synthesize intensity;
 @synthesize radius;
-@synthesize nibArray;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -165,8 +162,10 @@
 	}
 }
 
-#define CLASSMETHOD noiseReduction
-#include "CICommon.mi"
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
+{
+	return [self noiseReduction:pluginData withBitmap:data];
+}
 
 - (unsigned char *)noiseReduction:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {

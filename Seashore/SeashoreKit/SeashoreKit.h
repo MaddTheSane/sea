@@ -8,3 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <SeashoreKit/Rects.h>
+#import <SeashoreKit/SSKPlugin.h>
+#import <SeashoreKit/SSKVisualPlugin.h>
+#import <SeashoreKit/SSKCIPlugin.h>

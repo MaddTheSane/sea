@@ -10,22 +10,6 @@
 static unsigned char *cmData;
 static unsigned int cmLen;
 
-static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
-{
-	if (cmData == NULL) {
-		cmData = malloc(*size);
-		memcpy(cmData, data, *size);
-		cmLen = *size;
-	}
-	else {
-		cmData = realloc(cmData, cmLen + *size);
-		memcpy(&(cmData[cmLen]), data, *size);
-		cmLen += *size;
-	}
-	
-	return 0;
-}
-
 @implementation JP2Exporter
 
 - (id)init
@@ -253,7 +237,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	NSBitmapImageRep *imageRep;
 	NSData *imageData;
 	CMProfileRef cmProfile;
-	Boolean cmmNotFound;
 	BOOL hasAlpha = NO;
 	int i, j;
 	

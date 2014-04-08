@@ -16,8 +16,12 @@
 #import <SeashoreKit/SeashoreKit.h>
 #import <SeashoreKit/SSKCIPlugin.h>
 
-@interface CIAffineTileClass : SSKCIPlugin
+@interface CIAffineTileClass : SSKPlugin
 {
+	// Some temporary space we need preallocated for greyscale data
+	unsigned char *newdata;
+		
+	NSBitmapImageRep *temp_rep;
 }
 
 /*!
