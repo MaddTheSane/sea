@@ -50,24 +50,26 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"CIHatchedScreen.width"])
-		dotWidth = [defaults integerForKey:@"CIHatchedScreen.width"];
+		self.dotWidth = [defaults integerForKey:@"CIHatchedScreen.width"];
 	else
-		dotWidth = 6;
+		self.dotWidth = 6;
+	
 	if ([defaults objectForKey:@"CIHatchedScreen.angle"])
-		angle = [defaults floatForKey:@"CIHatchedScreen.angle"];
+		self.angle = [defaults floatForKey:@"CIHatchedScreen.angle"];
 	else
-		angle = 0.0;
+		self.angle = 0.0;
+	
 	if ([defaults objectForKey:@"CIHatchedScreen.sharpness"])
-		sharpness = [defaults floatForKey:@"CIHatchedScreen.sharpness"];
+		self.sharpness = [defaults floatForKey:@"CIHatchedScreen.sharpness"];
 	else
-		sharpness = 0.7;
+		self.sharpness = 0.7;
 			
 	if (dotWidth < 2 || dotWidth > 100)
-		dotWidth = 6;
+		self.dotWidth = 6;
 	if (angle < -1.57 || angle > 1.57)
-		angle = 0.0;
+		self.angle = 0.0;
 	if (sharpness < 0.0 || sharpness > 1.0)
-		sharpness = 0.7;
+		self.sharpness = 0.7;
 			
 	refresh = YES;
 	success = NO;
@@ -131,7 +133,8 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData preview];
 	refresh = NO;
 }

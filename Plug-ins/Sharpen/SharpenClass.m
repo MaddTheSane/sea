@@ -7,6 +7,7 @@
 @synthesize panel;
 @synthesize seaPlugins;
 @synthesize nibArray;
+@synthesize extent;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -46,17 +47,13 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"Sharpen.extent"])
-		extent = [defaults integerForKey:@"Sharpen.extent"];
+		self.extent = [defaults integerForKey:@"Sharpen.extent"];
 	else
-		extent = 15;
+		self.extent = 15;
 	refresh = YES;
 	
 	if (extent < 0 || extent > 99)
-		extent = 15;
-	
-	[extentLabel setStringValue:[NSString stringWithFormat:@"%d", extent]];
-	
-	[extentSlider setIntValue:extent];
+		self.extent = 15;
 	
 	success = NO;
 	pluginData = [seaPlugins data];
@@ -104,7 +101,8 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self sharpen];
+	if (refresh)
+		[self sharpen];
 	[pluginData preview];
 	refresh = NO;
 }
@@ -127,15 +125,13 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	extent = roundf([extentSlider floatValue]);
-	
-	[extentLabel setStringValue:[NSString stringWithFormat:@"%d", extent]];
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -192,8 +188,10 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 	x1 = selection.origin.x;
 	channel = [pluginData channel];
 	spp = [pluginData spp];
-	if (channel == kAlphaChannel) rspp = 2;
-	else rspp = spp;
+	if (channel == kAlphaChannel)
+		rspp = 2;
+	else
+		rspp = spp;
 	swidth = selection.size.width * rspp;
 	width = [pluginData width];
 	data = [pluginData data];

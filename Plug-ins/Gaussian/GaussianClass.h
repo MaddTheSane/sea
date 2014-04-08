@@ -14,12 +14,6 @@
 
 @interface GaussianClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the radius of the blur
-	IBOutlet id radiusLabel;
-	
-	// The slider for the radius of the blur
-	IBOutlet id radiusSlider;
-
 	// YES if the blurring must be refreshed
 	BOOL refresh;
 	

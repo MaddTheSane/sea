@@ -6,6 +6,7 @@
 @synthesize panel;
 @synthesize seaPlugins;
 @synthesize nibArray;
+@synthesize scale;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -45,16 +46,12 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"Pixellate.scale"])
-		scale = [defaults integerForKey:@"Pixellate.scale"];
+		self.scale = [defaults integerForKey:@"Pixellate.scale"];
 	else
-		scale = 8;
+		self.scale = 8;
 		
 	if (scale < 0 || scale > 100)
-		scale = 8;
-	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%d", scale]];
-	
-	[scaleSlider setIntValue:scale];
+		self.scale = 8;
 	
 	refresh = YES;
 	success = NO;
@@ -102,7 +99,8 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self pixellate];
+	if (refresh)
+		[self pixellate];
 	[pluginData preview];
 	refresh = NO;
 }
@@ -125,15 +123,13 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	scale = [scaleSlider intValue];
-	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%d", scale]];
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -142,7 +138,8 @@
 	PluginData *pluginData;
 	IntRect selection;
 	unsigned char *data, *overlay, *replace, newPixel[4];
-	int pos, i, j, k, i2, j2, width, height, spp, channel;
+	NSInteger pos, i, j, k, i2, j2;
+	int width, height, spp, channel;
 	int total[4], n, x_stblk, x_endblk, y_stblk, y_endblk;
 	
 	pluginData = [seaPlugins data];

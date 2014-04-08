@@ -58,19 +58,17 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	if ([defaults objectForKey:@"CIBump.scale"])
-		scale = [defaults integerForKey:@"CIBump.scale"];
+		self.scale = [defaults integerForKey:@"CIBump.scale"];
 	else
-		scale = 0.5;
+		self.scale = 0.5;
 	refresh = YES;
 	
 	if (scale < -1.0 || scale > 1.0)
-		scale = 0.5;
+		self.scale = 0.5;
 	
 	success = NO;
 	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels) {
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -107,9 +105,7 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels) {
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
 	if (newdata) {
@@ -127,7 +123,8 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData preview];
 	refresh = NO;
 }

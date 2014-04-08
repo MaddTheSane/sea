@@ -13,21 +13,14 @@
 
 @interface SharpenClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the extent
-	IBOutlet id extentLabel;
-	
-	// The slider for the extent
-	IBOutlet id extentSlider;
-
-	// The number of extent
-	int extent;
-
 	// YES if the blurring must be refreshed
 	BOOL refresh;
 	
 	// YES if the application succeeded
 	BOOL success;
 }
+// The number of extent
+@property NSInteger extent;
 
 /*!
 	@method		initWithManager:

@@ -14,19 +14,10 @@
 @interface ThresholdClass : NSObject <SSSeaVisualPlugin>
 {
 	// The threshold range
-	IBOutlet id rangeLabel;
+	IBOutlet NSTextField *rangeLabel;
 	
-	// The top threshold slider
-	IBOutlet id topSlider;
-	
-	// The bottom threshold slider
-	IBOutlet id bottomSlider;
-
 	// The view associated with this panel
 	IBOutlet ThresholdView *view;
-
-	// The various threshold values
-	int topValue, bottomValue;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;
@@ -34,6 +25,19 @@
 	// YES if the application succeeded
 	BOOL success;
 }
+/*!
+	@property	topValue
+	@discussion	Returns the value of the top slider.
+	@result		Returns an integer representing value of the top slider.
+*/
+@property NSInteger topValue;
+
+/*!
+	@property	bottomValue
+	@discussion	Returns the value of the bottom slider.
+	@result		Returns an integer representing value of the bottom slider.
+*/
+@property NSInteger bottomValue;
 
 /*!
 	@method		initWithManager:
@@ -129,20 +133,6 @@
 	@discussion	Executes the adjustments.
 */
 - (void)adjust;
-
-/*!
-	@method		topValue
-	@discussion	Returns the value of the top slider.
-	@result		Returns an integer representing value of the top slider.
-*/
-- (int)topValue;
-
-/*!
-	@method		bottomValue
-	@discussion	Returns the value of the bottom slider.
-	@result		Returns an integer representing value of the bottom slider.
-*/
-- (int)bottomValue;
 
 /*!
 	@method		validateMenuItem:

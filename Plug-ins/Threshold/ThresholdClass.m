@@ -7,6 +7,8 @@
 @synthesize panel;
 @synthesize seaPlugins;
 @synthesize nibArray;
+@synthesize bottomValue;
+@synthesize topValue;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -48,13 +50,11 @@
 	
 	pluginData = [seaPlugins data];
 	
-	topValue = 0;
-	bottomValue = 255;
+	self.topValue = 0;
+	self.bottomValue = 255;
 	
-	[rangeLabel setStringValue:[NSString stringWithFormat:@"%d - %d", topValue, bottomValue]];
+	[rangeLabel setStringValue:[NSString stringWithFormat:@"%ld - %ld", (long)topValue, (long)bottomValue]];
 	
-	[topSlider setIntValue:topValue];
-	[bottomSlider setIntValue:bottomValue];
 	[view calculateHistogram:pluginData];
 	
 	success = NO;
@@ -70,7 +70,8 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -98,7 +99,8 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData preview];
 	refresh = NO;
 }
@@ -121,13 +123,10 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	topValue = [topSlider intValue];
-	bottomValue = [bottomSlider intValue];
-	
 	if (topValue < bottomValue)
-		[rangeLabel setStringValue:[NSString stringWithFormat:@"%d - %d", topValue, bottomValue]];
+		[rangeLabel setStringValue:[NSString stringWithFormat:@"%ld - %ld", (long)topValue, (long)bottomValue]];
 	else
-		[rangeLabel setStringValue:[NSString stringWithFormat:@"%d - %d", bottomValue, topValue]];
+		[rangeLabel setStringValue:[NSString stringWithFormat:@"%ld - %ld", (long)bottomValue, (long)topValue]];
 	
 	[panel setAlphaValue:1.0];
 	refresh = YES;
@@ -136,7 +135,8 @@
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -190,16 +190,6 @@
 			}
 		}
 	}
-}
-
-- (int)topValue
-{
-	return topValue;
-}
-
-- (int)bottomValue
-{
-	return bottomValue;
 }
 
 - (BOOL)validateMenuItem:(id)menuItem

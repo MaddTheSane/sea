@@ -4,12 +4,12 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-
-
 @implementation BrightnessClass
 @synthesize panel;
 @synthesize seaPlugins;
 @synthesize nibArray;
+@synthesize brightness;
+@synthesize contrast;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -49,13 +49,7 @@
 
 	refresh = NO;
 	
-	brightness = contrast = 0.0;
-	
-	[brightnessLabel setStringValue:[NSString stringWithFormat:@"%.2f", brightness]];
-	[contrastLabel setStringValue:[NSString stringWithFormat:@"%.2f", contrast]];
-	
-	[brightnessSlider setFloatValue:brightness];
-	[contrastSlider setFloatValue:contrast];
+	self.brightness = self.contrast = 0.0;
 	
 	success = NO;
 	pluginData = [seaPlugins data];		
@@ -71,7 +65,8 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -99,7 +94,8 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData preview];
 	refresh = NO;
 }
@@ -121,19 +117,14 @@
 - (IBAction)update:(id)sender
 {
 	PluginData *pluginData;
-	brightness = [brightnessSlider floatValue];
-	contrast = [contrastSlider floatValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	[brightnessLabel setStringValue:[NSString stringWithFormat:@"%.2f", brightness]];
-	[contrastLabel setStringValue:[NSString stringWithFormat:@"%.2f", contrast]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 

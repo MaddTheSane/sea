@@ -4,12 +4,13 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-
-
 @implementation HSVClass
 @synthesize panel;
 @synthesize seaPlugins;
 @synthesize nibArray;
+@synthesize hue;
+@synthesize saturation;
+@synthesize value;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -168,15 +169,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 	refresh = NO;
 	
-	hue = saturation = value = 0.0;
-	
-	[hueLabel setStringValue:[NSString stringWithFormat:@"%.2f", hue]];
-	[saturationLabel setStringValue:[NSString stringWithFormat:@"%.2f", saturation]];
-	[valueLabel setStringValue:[NSString stringWithFormat:@"%.2f", value]];
-	
-	[hueSlider setFloatValue:hue];
-	[saturationSlider setFloatValue:saturation];
-	[valueSlider setFloatValue:value];
+	self.hue = self.saturation = self.value = 0.0;
 	
 	success = NO;
 	pluginData = [seaPlugins data];
@@ -192,13 +185,15 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 }
@@ -220,7 +215,8 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData preview];
 	refresh = NO;
 }
@@ -243,20 +239,13 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	hue = [hueSlider floatValue];
-	saturation = [saturationSlider floatValue];
-	value = [valueSlider floatValue];
-	
-	[hueLabel setStringValue:[NSString stringWithFormat:@"%.2f", hue]];
-	[saturationLabel setStringValue:[NSString stringWithFormat:@"%.2f", saturation]];
-	[valueLabel setStringValue:[NSString stringWithFormat:@"%.2f", value]];
-	
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 

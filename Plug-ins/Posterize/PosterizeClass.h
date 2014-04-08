@@ -12,21 +12,15 @@
 
 @interface PosterizeClass : NSObject <SSSeaVisualPlugin>
 {
-	// The posterize slider
-	IBOutlet id posterizeSlider;
-	
-	// The posterize label
-	IBOutlet id posterizeLabel;
-
-	// The posterize value
-	int posterize;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 
 	// YES if the application succeeded
 	BOOL success;
 }
+// The posterize value
+@property NSInteger posterizeValue;
+
 
 /*!
 	@method		initWithManager:

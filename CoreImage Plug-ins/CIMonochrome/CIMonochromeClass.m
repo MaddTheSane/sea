@@ -118,7 +118,8 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData preview];
 	refresh = NO;
 }

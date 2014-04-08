@@ -63,7 +63,9 @@
 		self.squareWidth = [defaults integerForKey:@"CIOpTile.width"];
 	else
 		self.squareWidth = 65;
+	
 	self.angle = 0.0;
+	
 	if ([defaults objectForKey:@"CIOpTile.scale"])
 		self.scale = [defaults floatForKey:@"CIOpTile.scale"];
 	else

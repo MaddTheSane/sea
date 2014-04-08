@@ -132,7 +132,8 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData preview];
 	refresh = NO;
 }
@@ -160,7 +161,7 @@
 	PluginData *pluginData;
 	
 	if (angle > -0.015 && angle < 0.00)
-		angle = 0.00; /* Force a zero point */
+		self.angle = 0.00; /* Force a zero point */
 	
 	[panel setAlphaValue:1.0];
 	

@@ -13,31 +13,18 @@
 
 @interface BrightnessClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the brightness
-	IBOutlet id brightnessLabel;
-	
-	// The slider for the brightness
-	IBOutlet id brightnessSlider;
-
-	// The label displaying the contrast
-	IBOutlet id contrastLabel;
-	
-	// The slider for the contrast
-	IBOutlet id contrastSlider;
-
-	// The brightness
-	float brightness;
-
-	// The contrast
-	float contrast;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 
 	// YES if the application succeeded
 	BOOL success;
-
 }
+// The brightness
+@property CGFloat brightness;
+
+// The contrast
+@property CGFloat contrast;
+
 
 /*!
 	@method		initWithManager:

@@ -26,10 +26,14 @@
                         <rect key="frame" x="306" y="61" width="42" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="2" id="56">
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="sTk-Zz-XM5"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.posterizeValue" id="Mgj-RX-bD5"/>
+                        </connections>
                     </textField>
                     <button verticalHuggingPriority="750" id="44">
                         <rect key="frame" x="259" y="12" width="92" height="32"/>
@@ -53,6 +57,7 @@ DQ
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="51"/>
+                            <binding destination="-2" name="value" keyPath="self.posterizeValue" id="Da4-d3-tmb"/>
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" id="46">

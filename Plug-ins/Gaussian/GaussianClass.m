@@ -56,10 +56,6 @@
 	if (radius < 0 || radius > 100)
 		radius = 1;
 	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
-	
-	[radiusSlider setIntegerValue:radius];
-	
 	success = NO;
 	pluginData = [seaPlugins data];
 	if ([pluginData window])
@@ -105,9 +101,11 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self gauss:BLUR_RLE];
+	if (refresh)
+		[self gauss:BLUR_RLE];
 	[pluginData preview];
-	if ([pluginData window]) [panel setAlphaValue:0.4];
+	if ([pluginData window])
+		[panel setAlphaValue:0.4];
 	refresh = NO;
 }
 
@@ -127,9 +125,6 @@
 
 - (IBAction)update:(id)sender
 {
-	radius = roundf([radiusSlider floatValue]);
-	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 }

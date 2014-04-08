@@ -103,7 +103,8 @@
 	PluginData *pluginData = [seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -123,7 +124,6 @@
 	[defaults setFloat:star_width forKey:@"CIStarshine.width"];
 	
 	[gColorPanel orderOut:self];
-	
 }
 
 - (void)reapply
@@ -150,7 +150,8 @@
 {
 	PluginData *pluginData = [seaPlugins data];
 	
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData preview];
 	refresh = NO;
 }
@@ -184,7 +185,8 @@
 		refresh = YES;
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
