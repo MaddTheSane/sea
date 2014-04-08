@@ -13,39 +13,19 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
 #define gColorPanel [NSColorPanel sharedColorPanel]
 
-@interface CIMonochromeClass : NSObject <SSSeaVisualPlugin>
+@interface CIMonochromeClass : SSKCIPlugin
 {
-	// YES if the effect must be refreshed
-	BOOL refresh;
-	
-	// YES if the application succeeded
-	BOOL success;
-	
-	// Some temporary space we need preallocated for greyscale data
-	unsigned char *newdata;
-	
 	// YES if the plug-in is running
 	BOOL running;
-
-	NSBitmapImageRep *temp_rep;
 }
-
 @property (strong) NSColor *mainColor;
 
 // The value of the intensity
 @property CGFloat intensity;
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type
@@ -82,14 +62,6 @@
 - (void)run;
 
 /*!
-	@method		apply:
-	@discussion	Applies the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)apply:(id)sender;
-
-/*!
 	@method		reapply
 	@discussion	Applies the plug-in with previous settings.
 */
@@ -101,75 +73,6 @@
 	@result		Returns YES if the plug-in can be applied again, NO otherwise.
 */
 - (BOOL)canReapply;
-
-/*!
-	@method		preview:
-	@discussion	Previews the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
-
-/*!
-	@method		update:
-	@discussion	Updates the panel's labels.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
-
-/*!
-	@method		execute
-	@discussion	Executes the effect.
-*/
-- (void)execute;
-
-/*!
-	@method		executeGrey
-	@discussion	Executes the effect for greyscale images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeGrey:(PluginData *)pluginData;
-
-/*!
-	@method		executeColor
-	@discussion	Executes the effect for colour images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeColor:(PluginData *)pluginData;
-
-/*!
-	@method		executeChannel:withBitmap:
-	@discussion	Executes the effect with any necessary changes depending on channel selection
-				(called by either executeGrey or executeColor). 
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data;
-
-/*!
-	@method		monochrome:withBitmap:
-	@discussion	Called by execute once preparation is complete.
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)monochrome:(PluginData *)pluginData withBitmap:(unsigned char *)data;
 
 /*!
 	@method		validateMenuItem:

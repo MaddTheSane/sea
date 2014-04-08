@@ -5,16 +5,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIMotionBlurClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -48,7 +38,7 @@
 
 - (void)run
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -141,13 +131,11 @@
 		[filter setValue:background forKey:@"inputBackgroundImage"];
 		[filter setValue:imm_output forKey:@"inputImage"];
 		output = [filter valueForKey:@"outputImage"];
-	}
-	else {
+	} else {
 		output = imm_output;
 	}
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -160,11 +148,8 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+		temp_image = [context createCGImage:output fromRect:rect];
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;

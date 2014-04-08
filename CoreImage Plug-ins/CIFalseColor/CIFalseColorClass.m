@@ -4,16 +4,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIFalseColorClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -37,7 +27,7 @@
 
 - (void)run
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
@@ -60,7 +50,7 @@
 
 - (void)execute
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
@@ -226,8 +216,7 @@
 			newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
 			newdata[i * 4] = 255;
 		});
-	}
-	else {
+	} else {
 		for (i = 0; i < 16; i++) {
 			ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 		}

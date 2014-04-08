@@ -14,37 +14,18 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
-@interface CIGlassDistortionClass : NSObject <NSOpenSavePanelDelegate, SSSeaVisualPlugin>
+@interface CIGlassDistortionClass : SSKCIPlugin <NSOpenSavePanelDelegate>
 {
 	// The label displaying the current texture
-	IBOutlet id textureLabel;
+	IBOutlet NSTextField *textureLabel;
 
-	// YES if the effect must be refreshed
-	BOOL refresh;
-	
-	// YES if the application succeeded
-	BOOL success;
-	
-	// Some temporary space we need preallocated for greyscale data
-	unsigned char *newdata;
-	
 	// The path of the texture to be used
 	NSString *texturePath;
-
-	NSBitmapImageRep *temp_rep;
 }
 // The scale of the crystallize
 @property NSInteger scale;
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type
@@ -81,14 +62,6 @@
 - (void)run;
 
 /*!
-	@method		apply:
-	@discussion	Applies the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)apply:(id)sender;
-
-/*!
 	@method		reapply
 	@discussion	Applies the plug-in with previous settings.
 */
@@ -102,81 +75,12 @@
 - (BOOL)canReapply;
 
 /*!
-	@method		preview:
-	@discussion	Previews the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
-
-/*!
-	@method		update:
-	@discussion	Updates the panel's labels.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
-
-/*!
 	@method		selectTexture:
 	@discussion	Selects the texture to be used for glass distortion.
 	@param		sender
 				Ignored.
 */
 - (IBAction)selectTexture:(id)sender;
-
-/*!
-	@method		execute
-	@discussion	Executes the effect.
-*/
-- (void)execute;
-
-/*!
-	@method		executeGrey
-	@discussion	Executes the effect for greyscale images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeGrey:(PluginData *)pluginData;
-
-/*!
-	@method		executeColor
-	@discussion	Executes the effect for colour images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeColor:(PluginData *)pluginData;
-
-/*!
-	@method		executeChannel:withBitmap:
-	@discussion	Executes the effect with any necessary changes depending on channel selection
-				(called by either executeGrey or executeColor). 
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data;
-
-/*!
-	@method		glass:withBitmap:
-	@discussion	Called by execute once preparation is complete.
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)glass:(PluginData *)pluginData withBitmap:(unsigned char *)data;
 
 /*!
 	@method		validateMenuItem:

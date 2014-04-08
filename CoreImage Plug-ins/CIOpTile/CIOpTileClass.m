@@ -5,18 +5,14 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIOpTileClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize angle;
 @synthesize scale;
 @synthesize squareWidth;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CIOpTile" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -78,7 +74,7 @@
 			
 	refresh = YES;
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self preview:self];
 	if ([pluginData window])
@@ -90,7 +86,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if (refresh)
@@ -115,7 +111,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels)
 		newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
@@ -132,56 +128,15 @@
 	return NO;
 }
 
-- (IBAction)preview:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	if (refresh)
-		[self execute];
-	[pluginData preview];
-	refresh = NO;
-}
-
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData;
-	
 	if (angle > -0.035 && angle < 0.00)
 		self.angle = 0.00; /* Force a zero point */
 	
-	[panel setAlphaValue:1.0];
-	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
+	[super update:sender];
 }
 
-#define CLASSMETHOD halftone
-#include "CICommon.mi"
-
-- (unsigned char *)halftone:(PluginData *)pluginData withBitmap:(unsigned char *)data
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
 	CIImage *input, *crop_output, *imm_output, *output, *background;
@@ -274,7 +229,7 @@
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (pluginData != NULL) {
 		if ([pluginData channel] == kAlphaChannel)

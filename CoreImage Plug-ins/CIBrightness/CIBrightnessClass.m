@@ -10,7 +10,7 @@
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
 		[gOurBundle loadNibNamed:@"CIBrightness" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
@@ -70,7 +70,7 @@
 	
 	refresh = YES;
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self preview:self];
 	if ([pluginData window])
@@ -92,7 +92,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];

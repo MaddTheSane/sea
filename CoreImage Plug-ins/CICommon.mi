@@ -1,6 +1,6 @@
 - (void)execute
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];

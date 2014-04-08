@@ -6,15 +6,6 @@
 
 @implementation CIAffineTileClass
 
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
-
 - (int)type
 {
 	return 1;
@@ -47,7 +38,7 @@
 
 - (void)run
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[self determineContentBorders:pluginData];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));

@@ -13,23 +13,12 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
+#import <SeashoreKit/SSKPlugin.h>
 
-@interface CIHorizStripesClass : NSObject <SSSeaPlugin>
+@interface CIHorizStripesClass : SSKPlugin
 {
-	// YES if the application succeeded
-	BOOL success;
-	
 	NSBitmapImageRep *temp_rep;
 }
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type

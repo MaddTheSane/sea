@@ -28,7 +28,7 @@
 
 - (void)run
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[self determineContentBorders:pluginData];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
@@ -58,7 +58,7 @@
 
 - (void)execute
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
@@ -201,7 +201,7 @@
 
 - (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-
+	NSAssert(NO, @"This should be subclassed");
 	return NULL;
 }
 
@@ -295,7 +295,7 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (refresh)
 		[self execute];
@@ -305,7 +305,7 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[pluginData cancel];
 	if (newdata) {
@@ -330,7 +330,7 @@
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
-		pluginData = [seaPlugins data];
+		pluginData = [self.seaPlugins data];
 		if ([pluginData window])
 			[panel setAlphaValue:0.4];
 	}
@@ -338,7 +338,8 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
+	[self savePluginPreferences];
 	
 	if (refresh)
 		[self execute];

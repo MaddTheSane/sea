@@ -5,16 +5,12 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIGlassDistortionClass
-@synthesize seaPlugins;
-@synthesize panel;
-@synthesize nibArray;
 @synthesize scale;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CIGlassDistortion" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -57,7 +53,7 @@
 		self.scale = 200;
 	
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self preview:self];
 	if ([pluginData window])
@@ -69,31 +65,15 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[super apply:sender];
 	
-	if (refresh)
-		[self execute];
-	[pluginData apply];
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	if ([pluginData window])
-		[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = YES;
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-		
 	[defaults setInteger:scale forKey:@"CICrystallize.scale"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -109,44 +89,6 @@
 	return success;
 }
 
-- (IBAction)preview:(id)sender
-{
-	if (refresh)
-		[self execute];
-	[self.seaPlugins.data preview];
-	refresh = NO;
-}
-
-- (IBAction)cancel:(id)sender
-{
-	[[self.seaPlugins data] cancel];
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
-- (IBAction)update:(id)sender
-{
-	PluginData *pluginData;
-	[panel setAlphaValue:1.0];
-	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
-}
-
 - (void)panelSelectionDidChange:(id)openPanel
 {
 	if ([[openPanel filenames] count] > 0) {
@@ -160,14 +102,13 @@
 
 - (IBAction)selectTexture:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
-	NSOpenPanel *openPanel;
+	PluginData *pluginData = [self.seaPlugins data];
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	NSURL *path = [[[NSBundle mainBundle] resourceURL] URLByAppendingPathComponent:@"textures"];
 	
 	if (texturePath) {
 		texturePath = nil;
 	}
-	openPanel = [NSOpenPanel openPanel];
 	[openPanel setTreatsFilePackagesAsDirectories:YES];
 	[openPanel setDelegate:self];
 	if ([pluginData window])
@@ -191,10 +132,7 @@
 	}];
 }
 
-#define CLASSMETHOD glass
-#include "CICommon.mi"
-
-- (unsigned char *)glass:(PluginData *)pluginData withBitmap:(unsigned char *)data
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
 	CIImage *input, *imm_output, *crop_output, *output, *background;

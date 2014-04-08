@@ -5,15 +5,11 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CICrystallizeClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize radius;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
-		self.seaPlugins = manager;
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
 		[gOurBundle loadNibNamed:@"CICrystallize" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
@@ -57,7 +53,7 @@
 		self.radius = 20;
 	
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -71,30 +67,15 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	if (refresh)
-		[self execute];
-	[pluginData apply];
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = YES;
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
+	[super apply:sender];
 	
 	[defaults setInteger:radius forKey:@"CICrystallize.radius"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -110,51 +91,10 @@
 	return NO;
 }
 
-- (IBAction)preview:(id)sender
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
-	PluginData *pluginData = [seaPlugins data];
-	
-	if (refresh)
-		[self execute];
-	[pluginData preview];
-	refresh = NO;
+	return [self crystallize:pluginData withBitmap:data];
 }
-
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
-- (IBAction)update:(id)sender
-{
-	PluginData *pluginData;
-	
-	[panel setAlphaValue:1.0];
-	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
-}
-
-#define CLASSMETHOD crystallize
-#include "CICommon.mi"
 
 - (unsigned char *)crystallize:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {

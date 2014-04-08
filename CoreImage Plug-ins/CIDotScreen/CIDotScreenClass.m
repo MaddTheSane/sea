@@ -5,18 +5,14 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIDotScreenClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize dotWidth;
 @synthesize sharpness;
 @synthesize angle;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CIDotScreen" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -46,7 +42,7 @@
 
 - (void)run
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"CIDotScreen.width"])
@@ -73,9 +69,7 @@
 	
 	refresh = YES;
 	success = NO;
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -84,27 +78,10 @@
 	// Nothing to go here
 }
 
-- (IBAction)apply:(id)sender
+- (void)savePluginPreferences
 {
-	PluginData *pluginData = [seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if (refresh)
-		[self execute];
-	[pluginData apply];
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	if ([pluginData window])
-		[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = YES;
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-		
 	[defaults setInteger:dotWidth forKey:@"CIDotScreen.width"];
 	[defaults setFloat:angle forKey:@"CIDotScreen.angle"];
 	[defaults setFloat:sharpness forKey:@"CIDotScreen.sharpness"];
@@ -112,7 +89,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -128,54 +105,18 @@
 	return success;
 }
 
-- (IBAction)preview:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	if (refresh)
-		[self execute];
-	[pluginData preview];
-	refresh = NO;
-}
-
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData;
-	
 	if (angle > -0.015 && angle < 0.00)
 		self.angle = 0.00; /* Force a zero point */
 	
-	[panel setAlphaValue:1.0];
-	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
+	[super update:sender];
 }
 
-#define CLASSMETHOD halftone
-#include "CICommon.mi"
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
+{
+	return [self halftone:pluginData withBitmap:data];
+}
 
 - (unsigned char *)halftone:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
@@ -253,7 +194,7 @@
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (pluginData != NULL) {
 		if ([pluginData channel] == kAlphaChannel)
@@ -261,7 +202,6 @@
 		
 		if ([pluginData spp] == 2)
 			return NO;
-	
 	}
 	
 	return YES;

@@ -5,16 +5,12 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIEdgeWorkClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize radius;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CIEdgeWork" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -56,7 +52,7 @@
 		self.radius = 3.0;
 	
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -70,30 +66,15 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	if (refresh)
-		[self execute];
-	[pluginData apply];
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = YES;
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
+	[super apply:sender];
 	
 	[defaults setFloat:radius forKey:@"CIEdgeWork.radius"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -109,52 +90,7 @@
 	return success;
 }
 
-- (IBAction)preview:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	if (refresh)
-		[self execute];
-	[pluginData preview];
-	refresh = NO;
-}
-
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
-- (IBAction)update:(id)sender
-{
-	PluginData *pluginData;
-	
-	[panel setAlphaValue:1.0];
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
-}
-
-#define CLASSMETHOD edges
-#include "CICommon.mi"
-
-- (unsigned char *)edges:(PluginData *)pluginData withBitmap:(unsigned char *)data
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
 	CIImage *input, *crop_output, *imm_output, *imm_output2, *output, *background;
@@ -220,13 +156,11 @@
 		[filter setValue:background forKey:@"inputBackgroundImage"];
 		[filter setValue:imm_output2 forKey:@"inputImage"];
 		output = [filter valueForKey:@"outputImage"];
-	}
-	else {
+	} else {
 		output = imm_output2;
 	}
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -239,18 +173,14 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+		temp_image = [context createCGImage:output fromRect:rect];
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image

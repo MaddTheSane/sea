@@ -4,16 +4,12 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIGammaAdjustClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize gamma;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CIGammaAdjust" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -47,7 +43,7 @@
 	self.gamma = 1.0;
 	
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self preview:self];
 	if ([pluginData window])
@@ -57,30 +53,9 @@
 	// Nothing to go here
 }
 
-- (IBAction)apply:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	if (refresh)
-		[self execute];
-	[pluginData apply];
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	if ([pluginData window])
-		[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = YES;
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-}
-
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
@@ -95,56 +70,15 @@
 	return success;
 }
 
-- (IBAction)preview:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	if (refresh)
-		[self execute];
-	[pluginData preview];
-	refresh = NO;
-}
-
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData;
-	
 	if (gamma > 1.0 && gamma < 1.02)
 		self.gamma = 1.0; /* Force one point */
 	
-	[panel setAlphaValue:1.0];
-	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
+	[super update:sender];
 }
 
-#define CLASSMETHOD gammaAdjust
-#import "CICommon-RestoreAlpha.mi"
-
-- (unsigned char *)gammaAdjust:(PluginData *)pluginData withBitmap:(unsigned char *)data
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
 	CIImage *input, *crop_output, *output;

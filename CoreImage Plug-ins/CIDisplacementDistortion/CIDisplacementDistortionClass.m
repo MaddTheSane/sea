@@ -5,16 +5,12 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIDisplacementDistortionClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize scale;
 @synthesize textureLabel;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
-		self.seaPlugins = manager;
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
 		[gOurBundle loadNibNamed:@"CIDisplacementDistortion" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
@@ -58,7 +54,7 @@
 		self.scale = 50;
 	
 	success = NO;
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
@@ -72,30 +68,15 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	if (refresh)
-		[self execute];
-	[pluginData apply];
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = YES;
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
+	[super apply:sender];
 	
 	[defaults setInteger:scale forKey:@"CICrystallize.scale"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -111,62 +92,20 @@
 	return success;
 }
 
-- (IBAction)preview:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	if (refresh)
-		[self execute];
-	[pluginData preview];
-	refresh = NO;
-}
-
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
-- (IBAction)update:(id)sender
-{
-	PluginData *pluginData;
-	[panel setAlphaValue:1.0];
-	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
-}
-
 - (void)panelSelectionDidChange:(id)openPanel
 {
 	if ([[openPanel URLs] count] > 0) {
 		texturePath = [[openPanel URLs][0] path];
 		if (texturePath) {
 			refresh = YES;
-			[self preview:NULL];
+			[self preview:nil];
 		}
 	}
 }
 
 - (IBAction)selectTexture:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	
 	if (texturePath) {
@@ -196,9 +135,10 @@
 		[self preview:nil];
 	}];
 }
-
-#define CLASSMETHOD displace
-#include "CICommon.mi"
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
+{
+	return [self displace:pluginData withBitmap:data];
+}
 
 - (unsigned char *)displace:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {

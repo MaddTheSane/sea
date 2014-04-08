@@ -13,13 +13,18 @@
 @implementation SSKPlugin
 @synthesize seaPlugins;
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (instancetype)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
 		self.seaPlugins = manager;
 	}
 	
 	return self;
+}
+
+- (void)savePluginPreferences
+{
+	
 }
 
 - (NSString*)sanity
@@ -83,7 +88,6 @@
 	int spp = [pluginData spp];
 	unsigned char *data = [pluginData data];
 	int i, j;
-	IntRect selection = [pluginData selection];
 	
 	// Determine left content margin
 	for (i = 0; i < width && contentLeft == -1; i++) {

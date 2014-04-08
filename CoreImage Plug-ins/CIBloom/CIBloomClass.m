@@ -10,8 +10,7 @@
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
-		self.seaPlugins = manager;
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
 		[gOurBundle loadNibNamed:@"CIBloom" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
@@ -63,7 +62,7 @@
 	if (intensity < 0.0 || intensity > 1.0)
 		intensity = 1.0;
 	
-	pluginData = [seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self preview:self];
 	success = NO;
@@ -85,7 +84,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
@@ -112,7 +111,7 @@
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];
-		pluginData = [seaPlugins data];
+		pluginData = [self.seaPlugins data];
 		if ([pluginData window])
 			[panel setAlphaValue:0.4];
 	}

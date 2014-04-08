@@ -12,7 +12,6 @@
 @interface SSKPlugin : NSObject
 {
 	@protected
-	__weak SeaPlugins *seaPlugins;
 	// YES if the application succeeded
 	BOOL success;
 	
@@ -23,6 +22,8 @@
 	BOOL boundsValid;
 }
 @property (weak) SeaPlugins *seaPlugins;
+
+- (void)savePluginPreferences;
 
 - (instancetype)initWithManager:(SeaPlugins *)manager;
 

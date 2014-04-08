@@ -2,20 +2,9 @@
 #import "CIAffineTransformClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIAffineTransformClass
-@synthesize seaPlugins;
-
-- (id)initWithManager:(SeaPlugins *)manager
-{
-	if (self = [super init]) {
-		self.seaPlugins = manager;
-	}
-	
-	return self;
-}
 
 - (int)type
 {
@@ -49,7 +38,7 @@
 
 - (void)run
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	[self determineContentBorders:pluginData];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
@@ -73,7 +62,7 @@
 }
 - (void)execute
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
@@ -525,10 +514,9 @@
 	CGRect rect;
 	unsigned char *resdata;
 	NSPoint point[4], minPoint, maxPoint;
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	// Find core image context
-	pluginData = [seaPlugins data];
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Create core image with data
