@@ -1,0 +1,15 @@
+
+/* Class = "NSPanel"; title = "Sharpen"; ObjectID = "6"; */
+"6.title" = "Sharpen";
+
+/* Class = "NSButtonCell"; title = "Ok"; ObjectID = "34"; */
+"34.title" = "Ok";
+
+/* Class = "NSTextFieldCell"; title = "Extent:"; ObjectID = "35"; */
+"35.title" = "Extent:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "37"; */
+"37.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = ".40"; ObjectID = "38"; */
+"38.title" = ".40";

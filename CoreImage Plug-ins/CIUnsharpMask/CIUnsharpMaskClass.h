@@ -16,24 +16,6 @@
 
 @interface CIUnsharpMaskClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the radius
-	IBOutlet id radiusLabel;
-	
-	// The slider for the radius
-	IBOutlet id radiusSlider;
-
-	// The label displaying the intensity
-	IBOutlet id intensityLabel;
-	
-	// The slider for the intensity
-	IBOutlet id intensitySlider;
-
-	// The new radius
-	float radius;
-
-	// The new intensity
-	float intensity;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -45,6 +27,10 @@
 
 	NSBitmapImageRep *temp_rep;
 }
+// The new radius
+@property CGFloat radius;
+// The new intensity
+@property CGFloat intensity;
 
 /*!
 	@method		initWithManager:

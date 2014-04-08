@@ -18,27 +18,6 @@
 
 @interface CIStarshineClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the scale
-	IBOutlet id scaleLabel;
-	
-	// The slider for the scale
-	IBOutlet id scaleSlider;
-
-	// The label displaying the opacity
-	IBOutlet id opacityLabel;
-	
-	// The slider for the opacity
-	IBOutlet id opacitySlider;
-	
-	// The label displaying the width
-	IBOutlet id widthLabel;
-	
-	// The slider for the width
-	IBOutlet id widthSlider;
-	
-	// The main color to use
-	IBOutlet id mainColorWell;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	

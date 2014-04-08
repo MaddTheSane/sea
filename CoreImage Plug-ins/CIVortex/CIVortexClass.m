@@ -8,6 +8,7 @@
 @synthesize seaPlugins;
 @synthesize panel;
 @synthesize nibArray;
+@synthesize angle;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -57,23 +58,20 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"CIVortex.angle"])
-		angle = [defaults integerForKey:@"CIVortex.angle"];
+		self.angle = [defaults integerForKey:@"CIVortex.angle"];
 	else
-		angle = 56.55;
+		self.angle = 56.55;
 	refresh = YES;
 	
 	if (angle < -94.25 || angle > 94.25)
-		angle = 56.55;
+		self.angle = 56.55;
 	
-	[angleLabel setStringValue:[NSString stringWithFormat:@"%.2f", angle]];
-	[angleSlider setFloatValue:abs(angle * 100.0)];
 	[reverseCheckbox setState:(angle < 0.0)];
+	self.angle = fabs(self.angle);
 	
 	success = NO;
 	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -94,25 +92,29 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 		
-	[defaults setFloat:angle forKey:@"CIVortex.angle"];
+	[defaults setDouble:angle forKey:@"CIVortex.angle"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -122,21 +124,23 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData preview];
 	refresh = NO;
 }
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	
@@ -149,12 +153,7 @@
 - (IBAction)update:(id)sender
 {
 	PluginData *pluginData;
-	
-	angle = [angleSlider floatValue] / 100.0 * ([reverseCheckbox state] ? -1.0 : 1.0);
-	
 	[panel setAlphaValue:1.0];
-	
-	[angleLabel setStringValue:[NSString stringWithFormat:@"%.2f", angle]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
@@ -182,7 +181,8 @@
 	BOOL opaque = ![pluginData hasAlpha];
 	CIColor *backColor;
 	int radius;
-	
+	CGFloat tmpAngle = angle * ([reverseCheckbox state] ? -1.0 : 1.0);
+
 	if (opaque)
 		backColor = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
 		
@@ -212,7 +212,7 @@
 	[filter setValue:input forKey:@"inputImage"];
 	[filter setValue:[CIVector vectorWithX:point.x Y:height - point.y] forKey:@"inputCenter"];
 	[filter setValue:@(radius) forKey:@"inputRadius"];
-	[filter setValue:@(angle) forKey:@"inputAngle"];
+	[filter setValue:@(tmpAngle) forKey:@"inputAngle"];
 	imm_output = [filter valueForKey: @"outputImage"];
 	
 	// Add opaque background (if required)

@@ -47,17 +47,13 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"CISharpen.value"])
-		value = [defaults floatForKey:@"CISharpen.value"];
+		self.sharpenValue = [defaults floatForKey:@"CISharpen.value"];
 	else
-		value = 0.4;
+		self.sharpenValue = 0.4;
 	refresh = YES;
 	
 	if (value < 0.0 || value > 5.0)
-		value = 0.4;
-	
-	[valueLabel setStringValue:[NSString stringWithFormat:@"%.2f", value]];
-	
-	[valueSlider setFloatValue:value];
+		self.sharpenValue = 0.4;
 	
 	success = NO;
 	pluginData = [seaPlugins data];
@@ -137,16 +133,14 @@
 {
 	PluginData *pluginData;
 	
-	value = [valueSlider floatValue];
-	
 	[panel setAlphaValue:1.0];
 	
-	[valueLabel setStringValue:[NSString stringWithFormat:@"%.2f", value]];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 

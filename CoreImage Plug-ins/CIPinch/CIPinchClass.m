@@ -66,9 +66,6 @@
 	if (scale < -1.0 || scale > 1.0)
 		self.scale = 0.5;
 	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%.2f", scale]];
-	[scaleSlider setFloatValue:scale];
-	
 	success = NO;
 	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
@@ -151,11 +148,7 @@
 {
 	PluginData *pluginData;
 	
-	scale = [scaleSlider floatValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%.2f", scale]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {

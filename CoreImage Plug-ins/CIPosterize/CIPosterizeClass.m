@@ -54,10 +54,6 @@
 	if (levels < 2 || levels > 255)
 		self.levels = 2;
 	
-	[levelsLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)levels]];
-	
-	[levelsSlider setIntegerValue:levels];
-	
 	success = NO;
 	refresh = YES;
 	pluginData = [seaPlugins data];
@@ -133,11 +129,7 @@
 {
 	PluginData *pluginData;
 	
-	levels = [levelsSlider intValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	[levelsLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)levels]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 

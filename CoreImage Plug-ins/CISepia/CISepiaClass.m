@@ -54,10 +54,6 @@
 	if (intensity < 0.0 || intensity > 1.0)
 		self.intensity = 1.0;
 	
-	[intensityLabel setStringValue:[NSString stringWithFormat:@"%.2f",	intensity]];
-	
-	[intensitySlider setIntValue:intensity];
-	
 	refresh = YES;
 	success = NO;
 	pluginData = [seaPlugins data];
@@ -95,7 +91,10 @@
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -133,11 +132,7 @@
 {
 	PluginData *pluginData;
 	
-	intensity = [intensitySlider floatValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	[intensityLabel setStringValue:[NSString stringWithFormat:@"%.2f", intensity]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 

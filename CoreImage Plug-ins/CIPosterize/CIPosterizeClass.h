@@ -16,12 +16,6 @@
 
 @interface CIPosterizeClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the levels
-	IBOutlet id levelsLabel;
-	
-	// The slider for the posterize
-	IBOutlet id levelsSlider;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -33,7 +27,6 @@
 	
 	NSBitmapImageRep *temp_rep;
 }
-
 // The new number of levels
 @property NSInteger levels;
 

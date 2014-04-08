@@ -60,25 +60,21 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"CISunbeams.strength"])
-		strength = [defaults floatForKey:@"CISunbeams.strength"];
+		self.strength = [defaults floatForKey:@"CISunbeams.strength"];
 	else
-		strength = 0.5;
+		self.strength = 0.5;
+	
 	if ([defaults objectForKey:@"CISunbeams.contrast"])
-		contrast = [defaults floatForKey:@"CISunbeams.contrast"];
+		self.contrast = [defaults floatForKey:@"CISunbeams.contrast"];
 	else
-		contrast = 1.0;
+		self.contrast = 1.0;
 	
 	if (strength < 0.0 || strength > 3.0)
-		strength = 0.5;
+		self.strength = 0.5;
 	if (contrast < 0.0 || contrast > 5.0)
-		contrast = 1.0;
+		self.contrast = 1.0;
 	
-	[strengthLabel setStringValue:[NSString stringWithFormat:@"%.1f", strength]];
-	[strengthSlider setFloatValue:strength];
-	[contrastLabel setStringValue:[NSString stringWithFormat:@"%.1f", contrast]];
-	[contrastSlider setFloatValue:contrast];
-	
-	mainNSColor = [[mainColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	self.mainColor = [NSColor colorWithCalibratedRed:1.0 green:247.0/255.0 blue:188.0 / 255.0 alpha:1];
 	
 	refresh = YES;
 	success = NO;
@@ -180,13 +176,7 @@
 {
 	PluginData *pluginData;
 	
-	strength = [strengthSlider floatValue];
-	contrast = [contrastSlider floatValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	[strengthLabel setStringValue:[NSString stringWithFormat:@"%.1f", strength]];
-	[contrastLabel setStringValue:[NSString stringWithFormat:@"%.1f", contrast]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 

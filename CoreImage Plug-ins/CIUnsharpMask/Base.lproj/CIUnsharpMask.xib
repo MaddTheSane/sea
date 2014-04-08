@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CIUnsharpMaskClass">
             <connections>
-                <outlet property="intensityLabel" destination="35" id="39"/>
-                <outlet property="intensitySlider" destination="34" id="36"/>
                 <outlet property="panel" destination="6" id="32"/>
-                <outlet property="radiusLabel" destination="21" id="29"/>
-                <outlet property="radiusSlider" destination="14" id="30"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -56,6 +52,7 @@ DQ
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="23"/>
+                            <binding destination="-2" name="value" keyPath="self.radius" id="vd5-zD-3yq"/>
                         </connections>
                     </slider>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
@@ -79,10 +76,14 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="tJZ-cZ-wqD"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="2.5" id="45">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="1" maximumFractionDigits="1" id="jr3-Y5-TPh"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.radius" id="cjV-7y-dHz"/>
+                        </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="33">
                         <rect key="frame" x="18" y="86" width="53" height="14"/>
@@ -101,6 +102,7 @@ Gw
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="38"/>
+                            <binding destination="-2" name="value" keyPath="self.intensity" id="Mpn-iT-7QS"/>
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35">
@@ -110,10 +112,14 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="0YI-fx-U5N"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="0.50" id="48">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="7Fj-ck-RCH"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.intensity" id="Oiw-km-Vdm"/>
+                        </connections>
                     </textField>
                 </subviews>
                 <constraints>

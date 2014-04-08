@@ -16,12 +16,6 @@
 
 @interface CISharpenClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the value
-	IBOutlet id valueLabel;
-	
-	// The slider for the value
-	IBOutlet id valueSlider;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	

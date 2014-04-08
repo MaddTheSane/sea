@@ -8,6 +8,8 @@
 @synthesize panel;
 @synthesize seaPlugins;
 @synthesize nibArray;
+@synthesize angle;
+@synthesize reverseCheckbox;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -65,10 +67,8 @@
 	if (angle < -12.57 || angle > 12.57)
 		angle = 3.14;
 	
-	[angleLabel setStringValue:[NSString stringWithFormat:@"%.2f", angle]];
-	[angleSlider setFloatValue:abs(angle * 100.0)];
 	[reverseCheckbox setState:(angle < 0.0)];
-	
+	self.angle = fabs(angle);
 	success = NO;
 	pluginData = [seaPlugins data];
 	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
@@ -148,18 +148,14 @@
 - (IBAction)update:(id)sender
 {
 	PluginData *pluginData;
-	
-	angle = [angleSlider floatValue] / 100.0 * ([reverseCheckbox state] ? -1.0 : 1.0);
-	
 	[panel setAlphaValue:1.0];
-	
-	[angleLabel setStringValue:[NSString stringWithFormat:@"%.2f", angle]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -181,7 +177,8 @@
 	BOOL opaque = ![pluginData hasAlpha];
 	CIColor *backColor;
 	int radius;
-	
+	CGFloat tmpAngle = angle * ([reverseCheckbox state] ? -1.0 : 1.0);
+
 	if (opaque)
 		backColor = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
 		
@@ -211,7 +208,7 @@
 	[filter setValue:input forKey:@"inputImage"];
 	[filter setValue:[CIVector vectorWithX:point.x Y:height - point.y] forKey:@"inputCenter"];
 	[filter setValue:@(radius) forKey:@"inputRadius"];
-	[filter setValue:@(angle) forKey:@"inputAngle"];
+	[filter setValue:@(tmpAngle) forKey:@"inputAngle"];
 	imm_output = [filter valueForKey: @"outputImage"];
 	
 	// Add opaque background (if required)

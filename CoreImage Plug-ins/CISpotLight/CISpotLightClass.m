@@ -93,24 +93,14 @@
 	if (destHeight < -100 || destHeight > 400)
 		self.destHeight = 0;
 	
-	[brightnessLabel setStringValue:[NSString stringWithFormat:@"%.1f", brightness]];
-	[brightnessSlider setFloatValue:brightness];
-	[concentrationLabel setStringValue:[NSString stringWithFormat:@"%.2f", concentration]];
-	[concentrationSlider setFloatValue:concentration];
-	[srcHeightLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)srcHeight]];
-	[srcHeightSlider setIntegerValue:srcHeight];
-	[destHeightLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)destHeight]];
-	[destHeightSlider setIntegerValue:destHeight];
-	
-	self.mainColor = [[mainColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	self.mainColor = [NSColor colorWithCalibratedWhite:1.0 alpha:1.0];
 	
 	refresh = YES;
 	success = NO;
 	running = YES;
 	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
+	
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -148,15 +138,15 @@
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -166,10 +156,10 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData preview];
 	refresh = NO;
 }
@@ -209,23 +199,14 @@
 {
 	PluginData *pluginData;
 	
-	brightness = [brightnessSlider floatValue];
-	concentration = [concentrationSlider floatValue];
-	destHeight = [destHeightSlider intValue];
-	srcHeight = [srcHeightSlider intValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	[brightnessLabel setStringValue:[NSString stringWithFormat:@"%.1f", brightness]];
-	[concentrationLabel setStringValue:[NSString stringWithFormat:@"%.2f", concentration]];
-	[srcHeightLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)srcHeight]];
-	[destHeightLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)destHeight]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -244,12 +225,8 @@
 	unsigned char *resdata;
 	IntRect selection;
 	IntPoint point, apoint;
-	CIColor *mainColor, *backColor;
-	
-	backColor = [CIColor colorWithRed:0 green:0 blue:0];
-	
-	// Get relevant color
-	mainColor = [[CIColor alloc] initWithColor:mainNSColor];
+	CIColor *mainColor = [[CIColor alloc] initWithColor:mainNSColor];
+	CIColor *backColor = [CIColor colorWithRed:0 green:0 blue:0];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
@@ -292,7 +269,6 @@
 	output = [filter valueForKey:@"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -305,18 +281,14 @@
 		rect.origin.y = height - selection.size.height - selection.origin.y;
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
-		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+		temp_image = [context createCGImage:output fromRect:rect];
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image

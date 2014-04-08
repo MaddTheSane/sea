@@ -1856,6 +1856,14 @@
 		55909E7A18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E7D18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E8818CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5593805918F3A2590022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CITwirl.strings; sourceTree = "<group>"; };
+		5593805B18F3A4D20022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CISunbeams.strings; sourceTree = "<group>"; };
+		5593805D18F3A5F60022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIStarshine.strings; sourceTree = "<group>"; };
+		5593805F18F3A8200022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CISharpen.strings; sourceTree = "<group>"; };
+		5593806118F3A9540022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CISepia.strings; sourceTree = "<group>"; };
+		5593806318F3AA440022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPixellate.strings; sourceTree = "<group>"; };
+		5593806518F3AA460022C282 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CIPixellate.strings"; sourceTree = "<group>"; };
+		5593806718F3AAC00022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPinch.strings; sourceTree = "<group>"; };
 		5599389718CFC72A00E92088 /* Bloom+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bloom+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938B218CFCCCA00E92088 /* Checkerboard+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checkerboard+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938C118CFCCCC00E92088 /* Circular Screen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Screen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -8620,6 +8628,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9318D12A9800FB7F00 /* Base */,
+				5593806718F3AAC00022C282 /* en */,
 			);
 			name = CIPinch.xib;
 			sourceTree = "<group>";
@@ -8628,6 +8637,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9418D12A9800FB7F00 /* Base */,
+				5593806318F3AA440022C282 /* en */,
+				5593806518F3AA460022C282 /* en-GB */,
 			);
 			name = CIPixellate.xib;
 			sourceTree = "<group>";
@@ -8654,6 +8665,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9718D12A9800FB7F00 /* Base */,
+				5593806118F3A9540022C282 /* en */,
 			);
 			name = CISepia.xib;
 			sourceTree = "<group>";
@@ -8662,6 +8674,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9818D12A9800FB7F00 /* Base */,
+				5593805F18F3A8200022C282 /* en */,
 			);
 			name = CISharpen.xib;
 			sourceTree = "<group>";
@@ -8678,6 +8691,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9A18D12A9800FB7F00 /* Base */,
+				5593805D18F3A5F60022C282 /* en */,
 			);
 			name = CIStarshine.xib;
 			sourceTree = "<group>";
@@ -8686,6 +8700,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9B18D12A9800FB7F00 /* Base */,
+				5593805B18F3A4D20022C282 /* en */,
 			);
 			name = CISunbeams.xib;
 			sourceTree = "<group>";
@@ -8702,6 +8717,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9D18D12A9900FB7F00 /* Base */,
+				5593805918F3A2590022C282 /* en */,
 			);
 			name = CITwirl.xib;
 			sourceTree = "<group>";

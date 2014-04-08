@@ -1,0 +1,24 @@
+
+/* Class = "NSPanel"; title = "Pixellate"; ObjectID = "6"; */
+"6.title" = "Pixellate";
+
+/* Class = "NSButtonCell"; title = "Top-left based"; ObjectID = "40"; */
+"40.title" = "Top-left based";
+
+/* Class = "NSButtonCell"; title = "Centre based"; ObjectID = "41"; */
+"41.title" = "Centre based";
+
+/* Class = "NSButtonCell"; title = "Ok"; ObjectID = "45"; */
+"45.title" = "Ok";
+
+/* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "46"; */
+"46.title" = "Scale:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "48"; */
+"48.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "8"; ObjectID = "49"; */
+"49.title" = "8";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "50"; */
+"50.title" = "Radio";

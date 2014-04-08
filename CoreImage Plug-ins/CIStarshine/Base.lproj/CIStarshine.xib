@@ -7,14 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CIStarshineClass">
             <connections>
-                <outlet property="mainColorWell" destination="68" id="69"/>
-                <outlet property="opacityLabel" destination="73" id="79"/>
-                <outlet property="opacitySlider" destination="72" id="80"/>
                 <outlet property="panel" destination="6" id="32"/>
-                <outlet property="scaleLabel" destination="40" id="87"/>
-                <outlet property="scaleSlider" destination="39" id="86"/>
-                <outlet property="widthLabel" destination="76" id="78"/>
-                <outlet property="widthSlider" destination="75" id="77"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -106,8 +99,8 @@ Gw
                         </constraints>
                         <color key="color" red="1" green="0.96739059686660767" blue="0.73579096794128418" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
+                            <action selector="update:" target="-2" id="cJ9-da-nJ6"/>
                             <binding destination="-2" name="value" keyPath="self.mainNSColor" id="2Jf-w0-3rp"/>
-                            <outlet property="ciStarshine" destination="-2" id="70"/>
                         </connections>
                     </colorWell>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="71">

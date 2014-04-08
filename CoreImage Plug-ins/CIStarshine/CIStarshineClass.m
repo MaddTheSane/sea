@@ -82,14 +82,7 @@
 	if (star_width < 0.0 || star_width > 10.0)
 		self.starWidth = 2.5;
 	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)scale]];
-	[scaleSlider setFloatValue:scale];
-	[opacityLabel setStringValue:[NSString stringWithFormat:@"%.1f", opacity]];
-	[opacitySlider setFloatValue:opacity];
-	[widthLabel setStringValue:[NSString stringWithFormat:@"%.1f", star_width]];
-	[widthSlider setFloatValue:star_width];
-	
-	self.mainColor = [[mainColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	self.mainColor = [NSColor colorWithCalibratedRed:1.0 green:247.0/255.0 blue:188.0 / 255.0 alpha:1];
 	
 	refresh = YES;
 	success = NO;
@@ -194,21 +187,14 @@
 {
 	PluginData *pluginData;
 	
-	scale = [scaleSlider intValue];
-	opacity = [opacitySlider floatValue];
-	star_width = [widthSlider floatValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)scale]];
-	[opacityLabel setStringValue:[NSString stringWithFormat:@"%.1f", opacity]];
-	[widthLabel setStringValue:[NSString stringWithFormat:@"%.1f", star_width]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 

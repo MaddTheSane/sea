@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CISunbeamsClass">
             <connections>
-                <outlet property="contrastLabel" destination="61" id="66"/>
-                <outlet property="contrastSlider" destination="60" id="65"/>
-                <outlet property="mainColorWell" destination="68" id="69"/>
                 <outlet property="panel" destination="6" id="32"/>
-                <outlet property="strengthLabel" destination="40" id="64"/>
-                <outlet property="strengthSlider" destination="39" id="63"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -71,6 +66,7 @@ Gw
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="48"/>
+                            <binding destination="-2" name="value" keyPath="self.strength" id="8Qf-GB-kqd"/>
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40">
@@ -80,10 +76,14 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="ueA-Wg-wzk"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="0.0" id="76">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="1" maximumFractionDigits="1" id="1PS-9r-xJC"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.strength" id="oAI-jz-SOU"/>
+                        </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="59">
                         <rect key="frame" x="18" y="86" width="53" height="14"/>
@@ -102,6 +102,7 @@ Gw
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="67"/>
+                            <binding destination="-2" name="value" keyPath="self.contrast" id="aYk-8l-HZ3"/>
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="61">
@@ -111,10 +112,14 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="8KJ-4c-6y0"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="1.0" id="79">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="1" maximumFractionDigits="1" id="fxD-FM-NYZ"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.contrast" id="rMQ-Wm-yGE"/>
+                        </connections>
                     </textField>
                     <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="68" customClass="SunbeamsColorWell">
                         <rect key="frame" x="20" y="20" width="52" height="24"/>
@@ -125,6 +130,8 @@ Gw
                         </constraints>
                         <color key="color" red="1" green="0.96739059686660767" blue="0.73579096794128418" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
+                            <action selector="update:" target="-2" id="e4C-DO-vTV"/>
+                            <binding destination="-2" name="value" keyPath="self.mainColor" id="Mz1-43-beF"/>
                             <outlet property="ciSunbeams" destination="-2" id="70"/>
                         </connections>
                     </colorWell>

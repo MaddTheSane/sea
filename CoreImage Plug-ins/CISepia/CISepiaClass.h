@@ -16,12 +16,6 @@
 
 @interface CISepiaClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the intensity
-	IBOutlet id intensityLabel;
-	
-	// The slider for the intensity
-	IBOutlet id intensitySlider;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -33,7 +27,6 @@
 	
 	NSBitmapImageRep *temp_rep;
 }
-
 // The new intensity
 @property CGFloat intensity;
 

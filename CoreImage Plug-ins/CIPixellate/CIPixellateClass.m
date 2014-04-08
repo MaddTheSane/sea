@@ -61,10 +61,6 @@
 	if (scale < 1 || scale > 100)
 		scale = 8;
 	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)scale]];
-	
-	[scaleSlider setIntegerValue:scale];
-
 	[typeRadios setState:scale atRow:0 column:(centerBased) ? 1 : 0];
 	
 	refresh = YES;
@@ -150,11 +146,8 @@
 {
 	PluginData *pluginData;
 	
-	scale = [scaleSlider intValue];
 	centerBased = ([typeRadios selectedColumn] == 1);
 	[panel setAlphaValue:1.0];
-	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)scale]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 

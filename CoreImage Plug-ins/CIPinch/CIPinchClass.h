@@ -16,12 +16,6 @@
 
 @interface CIPinchClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the scale
-	IBOutlet id scaleLabel;
-	
-	// The slider for the scale
-	IBOutlet id scaleSlider;
-	
 	// YES if the application succeeded
 	BOOL success;
 
@@ -33,7 +27,6 @@
 
 	NSBitmapImageRep *temp_rep;
 }
-
 // The scale of the bump
 @property CGFloat scale;
 	

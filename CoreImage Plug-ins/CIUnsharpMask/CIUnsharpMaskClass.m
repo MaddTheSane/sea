@@ -2,15 +2,14 @@
 #import "CIUnsharpMaskClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
-
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIUnsharpMaskClass
 @synthesize seaPlugins;
 @synthesize panel;
 @synthesize nibArray;
+@synthesize intensity;
+@synthesize radius;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -50,26 +49,20 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"CIUnsharpMask.radius"])
-		radius = [defaults floatForKey:@"CIUnsharpMask.radius"];
+		self.radius = [defaults doubleForKey:@"CIUnsharpMask.radius"];
 	else
-		radius = 2.5;
+		self.radius = 2.5;
 	
 	if (radius < 0.0 || radius > 1.0)
-		radius = 2.5;
-	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%.1f", radius]];
-	[radiusSlider setFloatValue:radius];
+		self.radius = 2.5;
 	
 	if ([defaults objectForKey:@"CIUnsharpMask.intensity"])
-		intensity = [defaults floatForKey:@"CIUnsharpMask.intensity"];
+		self.intensity = [defaults doubleForKey:@"CIUnsharpMask.intensity"];
 	else
-		intensity = 0.5;
+		self.intensity = 0.5;
 	
 	if (intensity < 0.0 || intensity > 1.0)
-		intensity = 0.5;
-	
-	[intensityLabel setStringValue:[NSString stringWithFormat:@"%.2f", intensity]];
-	[intensitySlider setFloatValue:intensity];
+		self.intensity = 0.5;
 	
 	refresh = YES;
 	success = NO;
@@ -97,13 +90,17 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 		
-	[defaults setFloat:radius forKey:@"CIUnsharpMask.radius"];
-	[defaults setFloat:intensity forKey:@"CIUnsharpMask.intensity"];
+	[defaults setDouble:radius forKey:@"CIUnsharpMask.radius"];
+	[defaults setDouble:intensity forKey:@"CIUnsharpMask.intensity"];
 }
 
 - (void)reapply
@@ -140,7 +137,10 @@
 	
 	pluginData = [seaPlugins data];
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	
@@ -154,14 +154,7 @@
 {
 	PluginData *pluginData;
 	
-	radius = [radiusSlider floatValue];
-	intensity = [intensitySlider floatValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) 
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%.1f", radius]];
-	[intensityLabel setStringValue:[NSString stringWithFormat:@"%.2f", intensity]];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
 		[self preview:self];
@@ -207,10 +200,9 @@
 	[filter setValue:input forKey:@"inputImage"];
 	[filter setValue:@(radius) forKey:@"inputRadius"];
 	[filter setValue:@(intensity) forKey:@"inputIntensity"];
-	output = [filter valueForKey: @"outputImage"];
+	output = [filter valueForKey:@"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -224,17 +216,13 @@
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image

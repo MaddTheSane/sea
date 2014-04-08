@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="BlurClass">
+        <customObject id="-2" userLabel="File's Owner" customClass="CISharpenClass">
             <connections>
                 <outlet property="panel" destination="6" id="32"/>
-                <outlet property="valueLabel" destination="21" id="29"/>
-                <outlet property="valueSlider" destination="14" id="30"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -54,6 +52,7 @@ DQ
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="23"/>
+                            <binding destination="-2" name="value" keyPath="self.sharpenValue" id="rj4-oJ-vCh"/>
                         </connections>
                     </slider>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
@@ -77,10 +76,14 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="eqi-Ek-jhx"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="0.40" id="38">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="h2O-f0-meh"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.sharpenValue" id="pw6-az-SrI"/>
+                        </connections>
                     </textField>
                 </subviews>
                 <constraints>

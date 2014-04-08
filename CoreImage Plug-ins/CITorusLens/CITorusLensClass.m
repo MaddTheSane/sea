@@ -2,15 +2,13 @@
 #import "CITorusLensClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
-
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CITorusLensClass
 @synthesize seaPlugins;
 @synthesize panel;
 @synthesize nibArray;
+@synthesize refraction;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -60,22 +58,17 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"CITorusLens.refraction"])
-		refraction = [defaults floatForKey:@"CITorusLens.refraction"];
+		self.refraction = [defaults doubleForKey:@"CITorusLens.refraction"];
 	else
-		refraction = 1.7;
+		self.refraction = 1.7;
 	
 	if (refraction < -5.0 || refraction > 5.0)
-		refraction = 1.7;
+		self.refraction = 1.7;
 		
-	[refractionLabel setStringValue:[NSString stringWithFormat:@"%.1f", refraction]];
-	[refractionSlider setFloatValue:refraction];
-	
 	refresh = YES;
 	success = NO;
 	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -153,12 +146,7 @@
 {
 	PluginData *pluginData;
 	
-	refraction = [refractionSlider floatValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	[refractionLabel setStringValue:[NSString stringWithFormat:@"%.1f", refraction]];
-	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp || [sender tag] == 99) {
 		[self preview:self];
