@@ -76,6 +76,10 @@
 
 @end
 
+@interface NSObject (remFromPar)
+- (void)removeFromParent;
+@end
+
 @implementation SeaOutlineView
 
 /* This NSOutlineView subclass is necessary only if you want to delete items by dragging them to the trash.  In order to support drags to the trash, you need to implement draggedImage:endedAt:operation: and handle the NSDragOperationDelete operation.  For any other operation, pass the message to the superclass */

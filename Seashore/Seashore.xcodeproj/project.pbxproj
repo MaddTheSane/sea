@@ -1864,6 +1864,13 @@
 		5593806318F3AA440022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPixellate.strings; sourceTree = "<group>"; };
 		5593806518F3AA460022C282 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CIPixellate.strings"; sourceTree = "<group>"; };
 		5593806718F3AAC00022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPinch.strings; sourceTree = "<group>"; };
+		5593806918F3AB900022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPointillize.strings; sourceTree = "<group>"; };
+		5593806B18F3AB960022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIParallelogramTile.strings; sourceTree = "<group>"; };
+		5593806D18F3ABFD0022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIUnsharpMask.strings; sourceTree = "<group>"; };
+		5593806F18F3AC1E0022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CITorusLens.strings; sourceTree = "<group>"; };
+		5593807118F3AC800022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIOpTile.strings; sourceTree = "<group>"; };
+		5593807318F3AC840022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CINoiseReduction.strings; sourceTree = "<group>"; };
+		5593807518F3AD050022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGammaAdjust.strings; sourceTree = "<group>"; };
 		5599389718CFC72A00E92088 /* Bloom+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bloom+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938B218CFCCCA00E92088 /* Checkerboard+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checkerboard+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938C118CFCCCC00E92088 /* Circular Screen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Screen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2194,7 +2201,7 @@
 		A8C268190554875500A80207 /* RectSelectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectSelectTool.h; sourceTree = "<group>"; };
 		A8C2681A0554875500A80207 /* RectSelectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectSelectTool.m; sourceTree = "<group>"; };
 		A8C47DA4045285AE00A80207 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
-		A8CA47A406D82C10006F0681 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A8CA47A406D82C10006F0681 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A8CA58EB07936EBF004BE921 /* PluginData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginData.h; sourceTree = "<group>"; };
 		A8CA58EC07936EBF004BE921 /* PluginData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PluginData.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A8CB36A40456C87500A80207 /* BucketTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BucketTool.h; sourceTree = "<group>"; };
@@ -8532,6 +8539,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8718D12A9700FB7F00 /* Base */,
+				5593807518F3AD050022C282 /* en */,
 			);
 			name = CIGammaAdjust.xib;
 			sourceTree = "<group>";
@@ -8612,6 +8620,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9018D12A9700FB7F00 /* Base */,
+				5593807318F3AC840022C282 /* en */,
 			);
 			name = CINoiseReduction.xib;
 			sourceTree = "<group>";
@@ -8620,6 +8629,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9218D12A9800FB7F00 /* Base */,
+				5593806B18F3AB960022C282 /* en */,
 			);
 			name = CIParallelogramTile.xib;
 			sourceTree = "<group>";
@@ -8647,6 +8657,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9518D12A9800FB7F00 /* Base */,
+				5593806918F3AB900022C282 /* en */,
 			);
 			name = CIPointillize.xib;
 			sourceTree = "<group>";
@@ -8709,6 +8720,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9C18D12A9800FB7F00 /* Base */,
+				5593806F18F3AC1E0022C282 /* en */,
 			);
 			name = CITorusLens.xib;
 			sourceTree = "<group>";
@@ -8726,6 +8738,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9E18D12A9900FB7F00 /* Base */,
+				5593806D18F3ABFD0022C282 /* en */,
 			);
 			name = CIUnsharpMask.xib;
 			sourceTree = "<group>";
@@ -8743,6 +8756,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9118D12A9800FB7F00 /* Base */,
+				5593807118F3AC800022C282 /* en */,
 			);
 			name = CIOpTile.xib;
 			sourceTree = "<group>";

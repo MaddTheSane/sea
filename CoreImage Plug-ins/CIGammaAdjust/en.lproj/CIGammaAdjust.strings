@@ -1,0 +1,15 @@
+
+/* Class = "NSPanel"; title = "Gamma Adjust"; ObjectID = "6"; */
+"6.title" = "Gamma Adjust";
+
+/* Class = "NSButtonCell"; title = "Ok"; ObjectID = "34"; */
+"34.title" = "Ok";
+
+/* Class = "NSTextFieldCell"; title = "Gamma:"; ObjectID = "35"; */
+"35.title" = "Gamma:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "37"; */
+"37.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = ".75"; ObjectID = "38"; */
+"38.title" = ".75";

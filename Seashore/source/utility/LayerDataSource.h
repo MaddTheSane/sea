@@ -11,7 +11,7 @@
 
 @class SeaDocument;
 
-@interface LayerDataSource : NSObject {
+@interface LayerDataSource : NSObject <NSOutlineViewDataSource> {
 	// The document this data source is connected to
 	IBOutlet SeaDocument *document;
 

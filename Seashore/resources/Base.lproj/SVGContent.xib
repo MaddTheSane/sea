@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -17,9 +17,8 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="SVG Load" customClass="NSPanel">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="alertPanel" id="5" userLabel="SVG Load" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="409" y="434" width="240" height="115"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="6">
@@ -67,7 +66,6 @@
         </window>
         <window title="Open" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="27" userLabel="Scaling" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="311" y="595" width="344" height="144"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="28">
@@ -142,7 +140,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="40">
-                        <rect key="frame" x="271" y="13" width="59" height="32"/>
+                        <rect key="frame" x="248" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="62">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -173,6 +171,17 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E4j-cs-dAa">
+                        <rect key="frame" x="166" y="13" width="82" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="p8F-TM-7mQ">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="39" firstAttribute="trailing" secondItem="45" secondAttribute="trailing" id="1p6-NS-2be"/>
@@ -189,16 +198,19 @@ DQ
                     <constraint firstAttribute="trailing" secondItem="40" secondAttribute="trailing" constant="20" symbolic="YES" id="E9v-QR-aSd"/>
                     <constraint firstAttribute="trailing" secondItem="45" secondAttribute="trailing" constant="20" symbolic="YES" id="FYG-p5-cm5"/>
                     <constraint firstItem="36" firstAttribute="baseline" secondItem="38" secondAttribute="baseline" id="Hdz-PI-C1F"/>
+                    <constraint firstItem="40" firstAttribute="width" secondItem="E4j-cs-dAa" secondAttribute="width" id="MPA-qs-DfH"/>
                     <constraint firstItem="35" firstAttribute="leading" secondItem="34" secondAttribute="trailing" constant="8" symbolic="YES" id="Meb-Hm-Lgm"/>
                     <constraint firstItem="36" firstAttribute="baseline" secondItem="39" secondAttribute="baseline" id="MfG-3b-ngx"/>
                     <constraint firstItem="40" firstAttribute="top" secondItem="38" secondAttribute="bottom" constant="20" symbolic="YES" id="OEg-Y4-avj"/>
                     <constraint firstItem="36" firstAttribute="width" secondItem="34" secondAttribute="width" id="P3c-eR-yyT"/>
                     <constraint firstItem="39" firstAttribute="trailing" secondItem="30" secondAttribute="trailing" id="SiQ-UO-yyM"/>
+                    <constraint firstItem="40" firstAttribute="baseline" secondItem="E4j-cs-dAa" secondAttribute="baseline" id="TCr-uO-2cV"/>
                     <constraint firstItem="36" firstAttribute="baseline" secondItem="35" secondAttribute="baseline" id="WR1-4a-hsP"/>
                     <constraint firstItem="36" firstAttribute="width" secondItem="39" secondAttribute="width" id="XGo-0p-hEg"/>
                     <constraint firstItem="36" firstAttribute="width" secondItem="35" secondAttribute="width" id="XcV-K3-fcC"/>
                     <constraint firstItem="39" firstAttribute="baseline" secondItem="38" secondAttribute="baseline" id="Xyg-Mn-Gry"/>
                     <constraint firstItem="30" firstAttribute="top" secondItem="43" secondAttribute="bottom" constant="7" id="g0Z-QP-epk"/>
+                    <constraint firstItem="40" firstAttribute="leading" secondItem="E4j-cs-dAa" secondAttribute="trailing" constant="12" symbolic="YES" id="gZw-DX-2C3"/>
                     <constraint firstItem="43" firstAttribute="baseline" secondItem="45" secondAttribute="baseline" id="l4b-dt-JFb"/>
                     <constraint firstItem="36" firstAttribute="baseline" secondItem="31" secondAttribute="baseline" id="lc9-U6-Yih"/>
                     <constraint firstItem="36" firstAttribute="width" secondItem="38" secondAttribute="width" id="oan-i8-fnw"/>

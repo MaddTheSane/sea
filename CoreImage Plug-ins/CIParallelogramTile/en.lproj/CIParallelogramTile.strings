@@ -1,0 +1,15 @@
+
+/* Class = "NSPanel"; title = "Parallelogram"; ObjectID = "6"; */
+"6.title" = "Parallelogram";
+
+/* Class = "NSButtonCell"; title = "Ok"; ObjectID = "60"; */
+"60.title" = "Ok";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "61"; */
+"61.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "Angle:"; ObjectID = "62"; */
+"62.title" = "Angle:";
+
+/* Class = "NSTextFieldCell"; title = "0.78"; ObjectID = "64"; */
+"64.title" = "0.78";

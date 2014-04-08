@@ -8,6 +8,7 @@
 @synthesize seaPlugins;
 @synthesize panel;
 @synthesize nibArray;
+@synthesize radius;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -55,9 +56,9 @@
 	if (radius < 0 || radius > 100)
 		radius = 1;
 	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%d", radius]];
+	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
 	
-	[radiusSlider setIntValue:radius];
+	[radiusSlider setIntegerValue:radius];
 	
 	success = NO;
 	pluginData = [seaPlugins data];
@@ -131,7 +132,7 @@
 {
 	radius = roundf([radiusSlider floatValue]);
 	
-	[radiusLabel setStringValue:[NSString stringWithFormat:@"%d", radius]];
+	[radiusLabel setStringValue:[NSString stringWithFormat:@"%ld", (long)radius]];
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 }
