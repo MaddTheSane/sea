@@ -14,21 +14,14 @@
 
 @interface GaussianClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the radius of the blur
-	IBOutlet id radiusLabel;
-	
-	// The slider for the radius of the blur
-	IBOutlet id radiusSlider;
-
-	// The number of applications
-	int radius;
-
 	// YES if the blurring must be refreshed
 	BOOL refresh;
 	
 	// YES if the application succeeded
 	BOOL success;
 }
+// The number of applications
+@property NSInteger radius;
 
 /*!
 	@method		initWithManager:

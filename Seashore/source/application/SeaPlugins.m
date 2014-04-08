@@ -8,6 +8,7 @@
 #import "ToolboxUtility.h"
 #import "UtilitiesManager.h"
 #import "OptionsUtility.h"
+#import "CIAffineTransformClass.h"
 
 extern BOOL useAltiVec;
 

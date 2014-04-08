@@ -7,13 +7,16 @@
 @implementation CIEdgeWorkClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
 @synthesize radius;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
-		[NSBundle loadNibNamed:@"CIEdgeWork" owner:self];
+		NSArray *tmpArray;
+		self.seaPlugins = manager;
+		[gOurBundle loadNibNamed:@"CIEdgeWork" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	return self;
 }
@@ -70,7 +73,8 @@
 	PluginData *pluginData = [seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if (refresh) [self execute];
+	if (refresh)
+		[self execute];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -79,20 +83,25 @@
 	if ([pluginData window]) [NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
-	if (newdata) { free(newdata); newdata = NULL; }
-		
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
+	
 	[defaults setFloat:radius forKey:@"CIEdgeWork.radius"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 }
 
 - (BOOL)canReapply
@@ -103,6 +112,7 @@
 - (IBAction)preview:(id)sender
 {
 	PluginData *pluginData = [seaPlugins data];
+	
 	if (refresh)
 		[self execute];
 	[pluginData preview];
@@ -112,8 +122,12 @@
 - (IBAction)cancel:(id)sender
 {
 	PluginData *pluginData = [seaPlugins data];
+	
 	[pluginData cancel];
-	if (newdata) { free(newdata); newdata = NULL; }
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
 	
 	[panel setAlphaValue:1.0];
 	
@@ -137,192 +151,8 @@
 	}
 }
 
-- (void)execute
-{
-	PluginData *pluginData;
-
-	pluginData = [seaPlugins data];
-	if ([pluginData spp] == 2) {
-		[self executeGrey:pluginData];
-	}
-	else {
-		[self executeColor:pluginData];
-	}
-}
-
-- (void)executeGrey:(PluginData *)pluginData
-{
-	IntRect selection;
-	int i, spp, width, height;
-	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len, max;
-	
-	// Set-up plug-in
-	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
-	selection = [pluginData selection];
-	
-	// Get plug-in data
-	width = [pluginData width];
-	height = [pluginData height];
-	vec_len = width * height * spp;
-	vec_len = width * height * spp;
-	if (vec_len % 16 == 0) {
-		vec_len /= 16;
-	} else {
-		vec_len /= 16;
-		vec_len++;
-	}
-	data = [pluginData data];
-	overlay = [pluginData overlay];
-	replace = [pluginData replace];
-	
-	// Convert from GA to ARGB
-	dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		newdata[i * 4] = data[i * 2 + 1];
-		newdata[i * 4 + 1] = data[i * 2];
-		newdata[i * 4 + 2] = data[i * 2];
-		newdata[i * 4 + 3] = data[i * 2];
-	});
-	
-	// Run CoreImage effect
-	resdata = [self executeChannel:pluginData withBitmap:newdata];
-	
-	// Convert from output to GA
-	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height))
-		max = selection.size.width * selection.size.height;
-	else
-		max = width * height;
-	for (i = 0; i < max; i++) {
-		newdata[i * 2] = resdata[i * 4];
-		newdata[i * 2 + 1] = resdata[i * 4 + 3];
-	}
-	
-	// Copy to destination
-	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
-			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
-			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(newdata[selection.size.width * 2 * i]), selection.size.width * 2);
-		});
-	} else {
-		memset(replace, 0xFF, width * height);
-		memcpy(overlay, newdata, width * height * 2);
-	}
-}
-
-- (void)executeColor:(PluginData *)pluginData
-{
-	__m128i *vdata;
-	IntRect selection;
-	int width, height;
-	unsigned char *data, *resdata, *overlay, *replace;
-	size_t vec_len;
-	
-	// Set-up plug-in
-	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
-	selection = [pluginData selection];
-	
-	// Get plug-in data
-	width = [pluginData width];
-	height = [pluginData height];
-	vec_len = width * height * 4;
-	if (vec_len % 16 == 0) {
-		vec_len /= 16;
-	} else {
-		vec_len /= 16;
-		vec_len++;
-	}
-	data = [pluginData data];
-	overlay = [pluginData overlay];
-	replace = [pluginData replace];
-	premultiplyBitmap(4, newdata, data, width * height);
-	
-	// Convert from RGBA to ARGB
-	vdata = (__m128i *)newdata;
-	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
-		vdata[i] = _mm_slli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	});
-	
-	// Run CoreImage effect (exception handling is essential because we've altered the image data)
-	@try {
-		resdata = [self executeChannel:pluginData withBitmap:newdata];
-	}
-	@catch (NSException *exception) {
-		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-			vdata[i] = _mm_srli_epi32(vdata[i], 8);
-			vdata[i] = _mm_add_epi32(vdata[i], vstore);
-		});
-		NSLog(@"%@", [exception reason]);
-		return;
-	}
-	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		unpremultiplyBitmap(4, resdata, resdata, selection.size.width * selection.size.height);
-	}else {
-		unpremultiplyBitmap(4, resdata, resdata, width * height);
-	}
-	// Convert from ARGB to RGBA
-	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-		vdata[i] = _mm_srli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	});
-	
-	// Copy to destination
-	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
-			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
-			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
-		});
-	} else {
-		memset(replace, 0xFF, width * height);
-		memcpy(overlay, resdata, width * height * 4);
-	}
-}
-
-- (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data
-{
-	int i, vec_len, width, height, channel;
-	unsigned char ormask[16], *resdata, *datatouse;
-	__m128i *vdata, *rvdata, orvmask;
-	
-	// Make adjustments for the channel
-	channel = [pluginData channel];
-	datatouse = data;
-	if (channel == kPrimaryChannels || channel == kAlphaChannel) {
-		width = [pluginData width];
-		height = [pluginData height];
-		vec_len = width * height * 4;
-		if (vec_len % 16 == 0) { vec_len /= 16; }
-		else { vec_len /= 16; vec_len++; }
-		vdata = (__m128i *)data;
-		rvdata = (__m128i *)newdata;
-		datatouse = newdata;
-		if (channel == kPrimaryChannels) {
-			for (i = 0; i < 16; i++) {
-				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
-			}
-			memcpy(&orvmask, ormask, 16);
-			dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
-			});
-		}
-		else if (channel == kAlphaChannel) {
-			dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
-				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
-				newdata[i * 4] = 255;
-			});
-		}
-	}
-	
-	// Run CoreImage effect
-	resdata = [self edges:pluginData withBitmap:datatouse];
-	
-	return resdata;
-}
+#define CLASSMETHOD edges
+#include "CICommon.mi"
 
 - (unsigned char *)edges:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
@@ -334,18 +164,16 @@
 	CGRect rect;
 	int width, height;
 	unsigned char *resdata;
-	BOOL opaque;
+	BOOL opaque = ![pluginData hasAlpha];
 	CIColor *backColor, *foreColor;
 	IntRect selection;
 	
-	// Check if image is opaque
-	opaque = ![pluginData hasAlpha];
-	if (opaque && [pluginData spp] == 4) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] redComponent] green:[[pluginData backColor:YES] greenComponent] blue:[[pluginData backColor:YES] blueComponent]];
-	else if (opaque) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent]];
+	if (opaque)
+		backColor = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
 	
 	// Get foreground color
-	if ([pluginData spp] == 4) foreColor = [CIColor colorWithRed:[[pluginData foreColor:YES] redComponent] green:[[pluginData foreColor:YES] greenComponent] blue:[[pluginData foreColor:YES] blueComponent] alpha:[[pluginData foreColor:YES] alphaComponent]];
-	else foreColor = [CIColor colorWithRed:[[pluginData foreColor:YES] whiteComponent] green:[[pluginData foreColor:YES] whiteComponent] blue:[[pluginData foreColor:YES] whiteComponent] alpha:[[pluginData foreColor:YES] alphaComponent]];
+	if (opaque)
+		backColor = [[CIColor alloc] initWithColor:[pluginData foreColor:YES]];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];

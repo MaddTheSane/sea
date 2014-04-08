@@ -16,28 +16,20 @@
 
 @interface CITwirlClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the angle
-	IBOutlet id angleLabel;
-	
-	// The slider for the angle
-	IBOutlet id angleSlider;
-
-	// The checkbox for whether reverse directions
-	IBOutlet id reverseCheckbox;
-
 	// YES if the application succeeded
 	BOOL success;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
-	// The angle of the twirl
-	float angle;
-	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
+	NSBitmapImageRep *temp_rep;
 }
+@property (weak) IBOutlet NSButton *reverseCheckbox;
+// The angle of the twirl
+@property CGFloat angle;
 
 /*!
 	@method		initWithManager:

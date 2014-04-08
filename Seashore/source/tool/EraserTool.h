@@ -68,11 +68,6 @@ typedef struct {
 	IntPoint lastWhere;
 	
 }
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		acceptsLineDraws

@@ -42,7 +42,7 @@
 	PluginData *pluginData;
 	IntRect selection;
 	unsigned char *data, *overlay, *replace;
-	int pos, i, j, k, width, spp, channel;
+	int pos, i, j, k, width, spp;
 	unsigned char background[4], random[4];
 	BOOL opaque;
 	
@@ -69,7 +69,7 @@
 		}
 	}
 	
-	srand(time(NULL));
+	srand(time(NULL) & 0xffffffff);
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
 			

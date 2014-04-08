@@ -41,7 +41,7 @@
 	PluginData *pluginData;
 	IntRect selection;
 	unsigned char *data, *overlay, *replace;
-	int pos, i, j, k, width, spp, channel;
+	int pos, i, j, width, spp, channel;
 	int t[5];
 	
 	pluginData = [seaPlugins data];

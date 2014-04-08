@@ -126,12 +126,6 @@ enum {
 - (id)initWithContent:(SeaContent *)cont;
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		compositor
 	@discussion	Returns the instance of the compositor
 */

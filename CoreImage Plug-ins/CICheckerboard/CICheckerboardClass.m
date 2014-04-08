@@ -9,7 +9,7 @@
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
+		self.seaPlugins = manager;
 	}
 	
 	return self;
@@ -47,9 +47,8 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[self execute];
 	[pluginData apply];
 	success = YES;
@@ -67,9 +66,8 @@
 
 - (void)execute
 {
-	PluginData *pluginData;
-
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
+	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
 	} else {
@@ -157,10 +155,8 @@
 	int amount;
 	
 	// Get colors
-	if ([pluginData spp] == 4) foreColorAlpha = [CIColor colorWithRed:[[pluginData foreColor:YES] redComponent] green:[[pluginData foreColor:YES] greenComponent] blue:[[pluginData foreColor:YES] blueComponent] alpha:[[pluginData foreColor:YES] alphaComponent]];
-	else  foreColorAlpha = [CIColor colorWithRed:[[pluginData foreColor:YES] whiteComponent] green:[[pluginData foreColor:YES] whiteComponent] blue:[[pluginData foreColor:YES] whiteComponent] alpha:[[pluginData foreColor:YES] alphaComponent]];
-	if ([pluginData spp] == 4) backColorAlpha = [CIColor colorWithRed:[[pluginData backColor:YES] redComponent] green:[[pluginData backColor:YES] greenComponent] blue:[[pluginData backColor:YES] blueComponent] alpha:[[pluginData backColor:YES] alphaComponent]];
-	else  backColorAlpha = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent] alpha:[[pluginData backColor:YES] alphaComponent]];
+	foreColorAlpha = [[CIColor alloc] initWithColor:[pluginData foreColor:YES]];
+	backColorAlpha = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];

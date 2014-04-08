@@ -72,12 +72,6 @@ typedef struct {
 }
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		acceptsLineDraws
 	@discussion	Returns whether or not this tool wants to allow line draws.
 	@result		Returns YES if the tool does want to allow line draws, NO

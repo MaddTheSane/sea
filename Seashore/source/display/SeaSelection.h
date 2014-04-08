@@ -69,12 +69,6 @@ enum {
 - (id)initWithDocument:(id)doc;
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		active
 	@discussion	Returns whether the current selection is active or not.
 	@result		Returns YES if the selection is active, NO otherwise.

@@ -51,11 +51,11 @@
     return [self itemAtRow: [self selectedRow]]; 
 }
 
-- (NSArray *)allSelectedItems {
+- (NSArray *)allSelectedItems
+{
     NSMutableArray *items = [NSMutableArray array];
     NSIndexSet *selectedIndexes = [self selectedRowIndexes];
-	int i;
-	for(i = 0; i < [self numberOfRows]; i++){
+	for(NSInteger i = 0; i < [self numberOfRows]; i++){
 		if([selectedIndexes containsIndex:i]){
 			[items addObject: [self itemAtRow: i]];
 		}
@@ -63,7 +63,8 @@
     return items;
 }
 
-- (void)selectItems:(NSArray *)items byExtendingSelection:(BOOL)extend {
+- (void)selectItems:(NSArray *)items byExtendingSelection:(BOOL)extend
+{
     NSInteger i, totalCount = [items count];
     if (extend==NO) [self deselectAll:nil];
     for (i = 0; i < totalCount; i++) {
@@ -73,6 +74,10 @@
     }
 }
 
+@end
+
+@interface NSObject (remFromPar)
+- (void)removeFromParent;
 @end
 
 @implementation SeaOutlineView

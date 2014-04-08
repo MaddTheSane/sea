@@ -4,17 +4,20 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-
-
 @implementation BrightnessClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
+@synthesize brightness;
+@synthesize contrast;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"Brightness" owner:self];
+		[gOurBundle loadNibNamed:@"Brightness" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -46,13 +49,7 @@
 
 	refresh = NO;
 	
-	brightness = contrast = 0.0;
-	
-	[brightnessLabel setStringValue:[NSString stringWithFormat:@"%.2f", brightness]];
-	[contrastLabel setStringValue:[NSString stringWithFormat:@"%.2f", contrast]];
-	
-	[brightnessSlider setFloatValue:brightness];
-	[contrastSlider setFloatValue:contrast];
+	self.brightness = self.contrast = 0.0;
 	
 	success = NO;
 	pluginData = [seaPlugins data];		
@@ -66,10 +63,10 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -82,9 +79,8 @@
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[self adjust];
 	[pluginData apply];
 }
@@ -96,19 +92,18 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData preview];
 	refresh = NO;
 }
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -122,19 +117,14 @@
 - (IBAction)update:(id)sender
 {
 	PluginData *pluginData;
-	brightness = [brightnessSlider floatValue];
-	contrast = [contrastSlider floatValue];
-	
 	[panel setAlphaValue:1.0];
-	
-	[brightnessLabel setStringValue:[NSString stringWithFormat:@"%.2f", brightness]];
-	[contrastLabel setStringValue:[NSString stringWithFormat:@"%.2f", contrast]];
 	
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -160,29 +150,20 @@
 	
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
-		
+			
 			for (k = 0; k < spp; k++) {
-
+				
 				pos = (j * width + i) * spp + k;
 				
 				if ((channel == kPrimaryChannels || channel == kAlphaChannel) && k == spp - 1) {
-				
 					overlay[pos] = 255;
 					
-				}
-				else if (channel == kAllChannels && k == spp - 1) {
-				
+				} else if (channel == kAllChannels && k == spp - 1) {
+					
 					overlay[pos] = data[pos];
-					
-				}
-				
-				else if (channel == kAlphaChannel && k > 0) {
-				
+				} else if (channel == kAlphaChannel && k > 0) {
 					overlay[pos] = overlay[pos - k];
-					
-				}
-				else {
-
+				} else {
 					if (channel == kAlphaChannel)
 						value = data[(j * width + i + 1) * spp - 1] / 255.0;
 					else
@@ -192,36 +173,34 @@
 						value = value * (1.0 + brightness);
 					else
 						value = value + ((1.0 - value) * brightness);
-
+					
 					if (contrast < 0.0) {
 						if (value > 0.5)
 							nvalue = 1.0 - value;
 						else
 							nvalue = value;
-
+						
 						if (nvalue < 0.0)
 							nvalue = 0.0;
-
+						
 						nvalue = 0.5 * pow (nvalue * 2.0 , (double) (1.0 + contrast));
-
+						
 						if (value > 0.5)
 							value = 1.0 - nvalue;
 						else
 							value = nvalue;
-					}
-					else {
-						
+					} else {
 						if (value > 0.5)
 							nvalue = 1.0 - value;
 						else
 							nvalue = value;
-
+						
 						if (nvalue < 0.0)
 							nvalue = 0.0;
-
+						
 						power = (contrast == 1.0) ? 127 : 1.0 / (1.0 - contrast);
 						nvalue = 0.5 * pow (2.0 * nvalue, power);
-
+						
 						if (value > 0.5)
 							value = 1.0 - nvalue;
 						else
@@ -231,11 +210,9 @@
 					overlay[pos] = value * 255.0;
 					
 				}
-			
 			}
 			
 			replace[j * width + i] = 255;
-
 		}
 	}
 }

@@ -48,12 +48,6 @@
 - (id)initWithDocument:(id)newDocument andView:(id)newView;
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		resetCursorRects
 	@discussion	Sets the current cursor for the view (this is an overridden
 				method).

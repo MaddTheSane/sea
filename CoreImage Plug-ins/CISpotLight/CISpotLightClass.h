@@ -18,33 +18,6 @@
 
 @interface CISpotLightClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the brightness
-	IBOutlet id brightnessLabel;
-	
-	// The slider for the brightness
-	IBOutlet id brightnessSlider;
-	
-	// The label displaying the concentration
-	IBOutlet id concentrationLabel;
-	
-	// The slider for the concentration
-	IBOutlet id concentrationSlider;
-	
-	// The label displaying the destHeight
-	IBOutlet id destHeightLabel;
-	
-	// The slider for the destHeight
-	IBOutlet id destHeightSlider;
-	
-	// The label displaying the srcHeight
-	IBOutlet id srcHeightLabel;
-	
-	// The slider for the scale
-	IBOutlet id srcHeightSlider;
-	
-	// The main color to use
-	IBOutlet id mainColorWell;
-
 	// YES if the application succeeded
 	BOOL success;
 
@@ -63,13 +36,13 @@
 // The color to be used
 @property (strong) NSColor *mainColor;
 
-	// The brightness
+// The brightness
 @property CGFloat brightness;
 	
-	// The concentration
+// The concentration
 @property CGFloat concentration;
 	
-	// The srcHeight and destHeight
+// The srcHeight and destHeight
 @property NSInteger srcHeight, destHeight;
 
 /*!

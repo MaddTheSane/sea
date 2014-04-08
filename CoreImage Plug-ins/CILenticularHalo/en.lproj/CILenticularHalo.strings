@@ -1,0 +1,27 @@
+
+/* Class = "NSPanel"; title = "Circular Screen"; ObjectID = "6"; */
+"6.title" = "Circular Screen";
+
+/* Class = "NSButtonCell"; title = "Ok"; ObjectID = "72"; */
+"72.title" = "Ok";
+
+/* Class = "NSTextFieldCell"; title = "Overlap:"; ObjectID = "73"; */
+"73.title" = "Overlap:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "75"; */
+"75.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = ".77"; ObjectID = "76"; */
+"76.title" = ".77";
+
+/* Class = "NSTextFieldCell"; title = "Strength:"; ObjectID = "77"; */
+"77.title" = "Strength:";
+
+/* Class = "NSTextFieldCell"; title = ".0"; ObjectID = "79"; */
+"79.title" = ".0";
+
+/* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "80"; */
+"80.title" = "Contrast:";
+
+/* Class = "NSTextFieldCell"; title = "1.0"; ObjectID = "82"; */
+"82.title" = "1.0";

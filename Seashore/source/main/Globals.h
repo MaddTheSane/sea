@@ -50,12 +50,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 /*!
-	@defined	PI
-	@discussion	The value of pi to 8 decimal places.
-*/
-#define PI 3.14159265
-
-/*!
 	@defined	defaults
 	@discussion	Allows quick reference to the standard user defaults manager.
 */

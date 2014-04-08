@@ -7,10 +7,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ThresholdClass">
             <connections>
-                <outlet property="bottomSlider" destination="35" id="36"/>
                 <outlet property="panel" destination="6" id="32"/>
                 <outlet property="rangeLabel" destination="21" id="41"/>
-                <outlet property="topSlider" destination="14" id="30"/>
                 <outlet property="view" destination="39" id="40"/>
             </connections>
         </customObject>
@@ -18,7 +16,6 @@
         <customObject id="-3" userLabel="Application"/>
         <window title="Threshold" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="334" y="375" width="365" height="273"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="5">
@@ -47,6 +44,7 @@ DQ
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="23"/>
+                            <binding destination="-2" name="value" keyPath="self.topValue" id="OFz-Up-Tgj"/>
                         </connections>
                     </slider>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
@@ -82,6 +80,7 @@ DQ
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="38"/>
+                            <binding destination="-2" name="value" keyPath="self.bottomValue" id="i0B-pG-FwI"/>
                         </connections>
                     </slider>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="39" customClass="ThresholdView">

@@ -35,7 +35,7 @@
 					[NSBundle loadNibNamed:@"CocoaContent" owner:self];
 					[resMenu setEnabled:NO];
 					[pdfPanel center];
-					[pageLabel setStringValue:[NSString stringWithFormat:@"of %d", [imageRep pageCount]]];
+					[pageLabel setStringValue:[NSString stringWithFormat:@"of %ld", (long)[imageRep pageCount]]];
 					[NSApp runModalForWindow:pdfPanel];
 					[pdfPanel orderOut:self];
 					value = [pageInput intValue];

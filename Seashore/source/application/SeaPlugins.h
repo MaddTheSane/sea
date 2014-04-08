@@ -60,18 +60,6 @@ enum {
 - (id)init;
 
 /*!
-	@method		awakeFromNib
-	@discussion	Adds plug-ins to the menu.
-*/
-- (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		terminate
 	@discussion	Saves preferences to disk (this method is called before the
 				application exits by the SeaController).
@@ -228,6 +216,7 @@ enum {
 @protocol SSSeaVisualPlugin <SSSeaPlugin>
 
 @property (weak) IBOutlet NSPanel *panel;
+@property (strong) NSArray *nibArray;
 
 /*!
  @method		sanity

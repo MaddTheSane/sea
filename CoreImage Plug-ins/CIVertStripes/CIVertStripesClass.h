@@ -19,6 +19,7 @@
 	// YES if the application succeeded
 	BOOL success;
 
+	NSBitmapImageRep *temp_rep;
 }
 
 /*!

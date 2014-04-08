@@ -7,8 +7,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SharpenClass">
             <connections>
-                <outlet property="extentLabel" destination="21" id="29"/>
-                <outlet property="extentSlider" destination="14" id="30"/>
                 <outlet property="panel" destination="6" id="32"/>
             </connections>
         </customObject>
@@ -16,7 +14,6 @@
         <customObject id="-3" userLabel="Application"/>
         <window title="Sharpen" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="396" y="387" width="365" height="120"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="5">
@@ -54,6 +51,7 @@ DQ
                         </sliderCell>
                         <connections>
                             <action selector="update:" target="-2" id="23"/>
+                            <binding destination="-2" name="value" keyPath="self.extent" id="QsD-0z-vkW"/>
                         </connections>
                     </slider>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
@@ -76,10 +74,14 @@ DQ
                             <constraint firstAttribute="width" constant="38" id="Kmg-Qo-uaO"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="1" id="39">
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="1hy-Rv-fbE"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.extent" id="LI1-ft-3sZ"/>
+                        </connections>
                     </textField>
                 </subviews>
                 <constraints>

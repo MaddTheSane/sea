@@ -58,14 +58,13 @@ static inline int specmod(int a, int b)
 
 - (void)run
 {
-	int width, height;
-	unsigned char *overlay, *replace;
+	int width;
+	unsigned char *overlay;
 	IntRect selection;
 	IntPoint point, apoint;
-	BOOL opaque;
-	unsigned char backColor[4], backColorAlpha[4], foreColorAlpha[4];
+	unsigned char backColorAlpha[4], foreColorAlpha[4];
 	int amount;
-	int spp, channel, pos;
+	int spp, pos;
 	int i, j, k;
 	BOOL black;
 	PluginData *pluginData;

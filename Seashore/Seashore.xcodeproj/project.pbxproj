@@ -464,7 +464,6 @@
 		55BD2E0E18D0D4A900C4EE1B /* CIKaleidoscopeClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D515A18CF9FBD005809E3 /* CIKaleidoscopeClass.m */; };
 		55BD2E0F18D0D4AC00C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D515B18CF9FBD005809E3 /* Localizable.strings */; };
 		55BD2E1018D0D4BC00C4EE1B /* CILenticularHaloClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D516318CF9FBD005809E3 /* CILenticularHaloClass.m */; };
-		55BD2E1118D0D4BC00C4EE1B /* HaloColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D516918CF9FBD005809E3 /* HaloColorWell.m */; };
 		55BD2E1218D0D4C300C4EE1B /* CILenticularHalo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909EC118CFFE6300F43F90 /* CILenticularHalo.xib */; };
 		55BD2E1318D0D4C300C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D516618CF9FBD005809E3 /* Localizable.strings */; };
 		55BD2E1418D0D4D300C4EE1B /* CILineScreenClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D517018CF9FBD005809E3 /* CILineScreenClass.m */; };
@@ -473,7 +472,6 @@
 		55BD2E1718D0D4DE00C4EE1B /* CIMedianClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D517B18CF9FBD005809E3 /* CIMedianClass.m */; };
 		55BD2E1818D0D4E300C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D517C18CF9FBD005809E3 /* Localizable.strings */; };
 		55BD2E1918D0D4EC00C4EE1B /* CIMonochromeClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D518418CF9FBE005809E3 /* CIMonochromeClass.m */; };
-		55BD2E1A18D0D4EC00C4EE1B /* MonochromeColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D518B18CF9FBE005809E3 /* MonochromeColorWell.m */; };
 		55BD2E1B18D0D4F400C4EE1B /* CIMonochrome.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909EC718CFFE9C00F43F90 /* CIMonochrome.xib */; };
 		55BD2E1C18D0D4F400C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D518718CF9FBE005809E3 /* Localizable.strings */; };
 		55BD2E1D18D0D4FB00C4EE1B /* CIMotionBlurClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D519118CF9FBE005809E3 /* CIMotionBlurClass.m */; };
@@ -511,15 +509,12 @@
 		55BD2E3E18D0D63200C4EE1B /* CISharpen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909EE018CFFFC900F43F90 /* CISharpen.xib */; };
 		55BD2E3F18D0D63200C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D521018CF9FBF005809E3 /* Localizable.strings */; };
 		55BD2E4018D0D63A00C4EE1B /* CISpotLightClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D521818CF9FBF005809E3 /* CISpotLightClass.m */; };
-		55BD2E4118D0D63A00C4EE1B /* SpotLightColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D521F18CF9FBF005809E3 /* SpotLightColorWell.m */; };
 		55BD2E4218D0D64100C4EE1B /* CISpotLight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909EF918D0002200F43F90 /* CISpotLight.xib */; };
 		55BD2E4318D0D64100C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D521B18CF9FBF005809E3 /* Localizable.strings */; };
 		55BD2E4418D0D64D00C4EE1B /* CIStarshineClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D522518CF9FC0005809E3 /* CIStarshineClass.m */; };
-		55BD2E4518D0D64D00C4EE1B /* StarshineColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D522C18CF9FC0005809E3 /* StarshineColorWell.m */; };
 		55BD2E4618D0D65200C4EE1B /* CIStarshine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909EFC18D0003F00F43F90 /* CIStarshine.xib */; };
 		55BD2E4718D0D65200C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D522818CF9FC0005809E3 /* Localizable.strings */; };
 		55BD2E4818D0D65C00C4EE1B /* CISunbeamsClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D523218CF9FC0005809E3 /* CISunbeamsClass.m */; };
-		55BD2E4918D0D65C00C4EE1B /* SunbeamsColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D523918CF9FC0005809E3 /* SunbeamsColorWell.m */; };
 		55BD2E4A18D0D66200C4EE1B /* CISunbeams.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909EFF18D0005700F43F90 /* CISunbeams.xib */; };
 		55BD2E4B18D0D66200C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D523518CF9FC0005809E3 /* Localizable.strings */; };
 		55BD2E4C18D0D66D00C4EE1B /* CITorusLens.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909F0218D0006F00F43F90 /* CITorusLens.xib */; };
@@ -1617,6 +1612,12 @@
 		5575354A18DB576600AC0FBC /* SSKPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKPlugin.m; sourceTree = "<group>"; };
 		5575354E18DB59A600AC0FBC /* SSKCIPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKCIPlugin.h; sourceTree = "<group>"; };
 		5575354F18DB59A600AC0FBC /* SSKCIPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKCIPlugin.m; sourceTree = "<group>"; };
+		5575356B18DB78AA00AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIHatchedScreen.strings; sourceTree = "<group>"; };
+		5575356D18DB78B500AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGloom.strings; sourceTree = "<group>"; };
+		5575356F18DB89A500AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CILenticularHalo.strings; sourceTree = "<group>"; };
+		5575357118DB9A1A00AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CILineScreen.strings; sourceTree = "<group>"; };
+		5575357318DBA07200AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIMonochrome.strings; sourceTree = "<group>"; };
+		5575357418DBA82F00AC0FBC /* CICommon.mi */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc.preprocessed; path = CICommon.mi; sourceTree = "<group>"; };
 		5579919A18DA2C4A0061AC70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGlassLozenge.strings; sourceTree = "<group>"; };
 		557991B518DA4BD80061AC70 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557991B618DA56CA0061AC70 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1690,7 +1691,7 @@
 		557D511E18CF9FBC005809E3 /* CIGlassLozengeClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGlassLozengeClass.m; sourceTree = "<group>"; };
 		557D512218CF9FBC005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D512818CF9FBC005809E3 /* CIGloomClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIGloomClass.h; sourceTree = "<group>"; };
-		557D512918CF9FBC005809E3 /* CIGloomClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIGloomClass.m; sourceTree = "<group>"; };
+		557D512918CF9FBC005809E3 /* CIGloomClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CIGloomClass.m; sourceTree = "<group>"; };
 		557D512D18CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D513318CF9FBD005809E3 /* CIHatchedScreenClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIHatchedScreenClass.h; sourceTree = "<group>"; };
 		557D513418CF9FBD005809E3 /* CIHatchedScreenClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIHatchedScreenClass.m; sourceTree = "<group>"; };
@@ -1710,8 +1711,6 @@
 		557D516218CF9FBD005809E3 /* CILenticularHaloClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CILenticularHaloClass.h; sourceTree = "<group>"; };
 		557D516318CF9FBD005809E3 /* CILenticularHaloClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CILenticularHaloClass.m; sourceTree = "<group>"; };
 		557D516718CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D516818CF9FBD005809E3 /* HaloColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HaloColorWell.h; sourceTree = "<group>"; };
-		557D516918CF9FBD005809E3 /* HaloColorWell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HaloColorWell.m; sourceTree = "<group>"; };
 		557D516F18CF9FBD005809E3 /* CILineScreenClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CILineScreenClass.h; sourceTree = "<group>"; };
 		557D517018CF9FBD005809E3 /* CILineScreenClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CILineScreenClass.m; sourceTree = "<group>"; };
 		557D517418CF9FBD005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1721,8 +1720,6 @@
 		557D518318CF9FBE005809E3 /* CIMonochromeClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIMonochromeClass.h; sourceTree = "<group>"; };
 		557D518418CF9FBE005809E3 /* CIMonochromeClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIMonochromeClass.m; sourceTree = "<group>"; };
 		557D518818CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D518A18CF9FBE005809E3 /* MonochromeColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonochromeColorWell.h; sourceTree = "<group>"; };
-		557D518B18CF9FBE005809E3 /* MonochromeColorWell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonochromeColorWell.m; sourceTree = "<group>"; };
 		557D519018CF9FBE005809E3 /* CIMotionBlurClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIMotionBlurClass.h; sourceTree = "<group>"; };
 		557D519118CF9FBE005809E3 /* CIMotionBlurClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIMotionBlurClass.m; sourceTree = "<group>"; };
 		557D519318CF9FBE005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1765,18 +1762,12 @@
 		557D521718CF9FBF005809E3 /* CISpotLightClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CISpotLightClass.h; sourceTree = "<group>"; };
 		557D521818CF9FBF005809E3 /* CISpotLightClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CISpotLightClass.m; sourceTree = "<group>"; };
 		557D521C18CF9FBF005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D521E18CF9FBF005809E3 /* SpotLightColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotLightColorWell.h; sourceTree = "<group>"; };
-		557D521F18CF9FBF005809E3 /* SpotLightColorWell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotLightColorWell.m; sourceTree = "<group>"; };
 		557D522418CF9FC0005809E3 /* CIStarshineClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIStarshineClass.h; sourceTree = "<group>"; };
 		557D522518CF9FC0005809E3 /* CIStarshineClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIStarshineClass.m; sourceTree = "<group>"; };
 		557D522918CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D522B18CF9FC0005809E3 /* StarshineColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarshineColorWell.h; sourceTree = "<group>"; };
-		557D522C18CF9FC0005809E3 /* StarshineColorWell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StarshineColorWell.m; sourceTree = "<group>"; };
 		557D523118CF9FC0005809E3 /* CISunbeamsClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CISunbeamsClass.h; sourceTree = "<group>"; };
 		557D523218CF9FC0005809E3 /* CISunbeamsClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CISunbeamsClass.m; sourceTree = "<group>"; };
 		557D523618CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		557D523818CF9FC0005809E3 /* SunbeamsColorWell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SunbeamsColorWell.h; sourceTree = "<group>"; };
-		557D523918CF9FC0005809E3 /* SunbeamsColorWell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SunbeamsColorWell.m; sourceTree = "<group>"; };
 		557D523E18CF9FC0005809E3 /* CITorusLensClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CITorusLensClass.h; sourceTree = "<group>"; };
 		557D523F18CF9FC0005809E3 /* CITorusLensClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CITorusLensClass.m; sourceTree = "<group>"; };
 		557D524318CF9FC0005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1829,11 +1820,27 @@
 		55909E7A18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E7D18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E8818CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5593805918F3A2590022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CITwirl.strings; sourceTree = "<group>"; };
+		5593805B18F3A4D20022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CISunbeams.strings; sourceTree = "<group>"; };
+		5593805D18F3A5F60022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIStarshine.strings; sourceTree = "<group>"; };
+		5593805F18F3A8200022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CISharpen.strings; sourceTree = "<group>"; };
+		5593806118F3A9540022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CISepia.strings; sourceTree = "<group>"; };
+		5593806318F3AA440022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPixellate.strings; sourceTree = "<group>"; };
+		5593806518F3AA460022C282 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CIPixellate.strings"; sourceTree = "<group>"; };
+		5593806718F3AAC00022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPinch.strings; sourceTree = "<group>"; };
+		5593806918F3AB900022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPointillize.strings; sourceTree = "<group>"; };
+		5593806B18F3AB960022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIParallelogramTile.strings; sourceTree = "<group>"; };
+		5593806D18F3ABFD0022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIUnsharpMask.strings; sourceTree = "<group>"; };
+		5593806F18F3AC1E0022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CITorusLens.strings; sourceTree = "<group>"; };
+		5593807118F3AC800022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIOpTile.strings; sourceTree = "<group>"; };
+		5593807318F3AC840022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CINoiseReduction.strings; sourceTree = "<group>"; };
+		5593807518F3AD050022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGammaAdjust.strings; sourceTree = "<group>"; };
 		5599389718CFC72A00E92088 /* Bloom+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bloom+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938B218CFCCCA00E92088 /* Checkerboard+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checkerboard+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938C118CFCCCC00E92088 /* Circular Screen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Screen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559A635018D8B25C00FD74A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGlassDistortion.strings; sourceTree = "<group>"; };
 		559A635218D8B26100FD74A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGaussianBlur.strings; sourceTree = "<group>"; };
+		559E255818DCB79000D0F3DB /* CICommon-RestoreAlpha.mi */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc.preprocessed; path = "CICommon-RestoreAlpha.mi"; sourceTree = "<group>"; };
 		55BD2B9218D0CA7C00C4EE1B /* Gamma Adjust+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gamma Adjust+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2BA218D0CA7E00C4EE1B /* Gaussian Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gaussian Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2BB018D0CB0C00C4EE1B /* Glass Distortion+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Glass Distortion+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2158,7 +2165,7 @@
 		A8C268190554875500A80207 /* RectSelectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectSelectTool.h; sourceTree = "<group>"; };
 		A8C2681A0554875500A80207 /* RectSelectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectSelectTool.m; sourceTree = "<group>"; };
 		A8C47DA4045285AE00A80207 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
-		A8CA47A406D82C10006F0681 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A8CA47A406D82C10006F0681 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A8CA58EB07936EBF004BE921 /* PluginData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginData.h; sourceTree = "<group>"; };
 		A8CA58EC07936EBF004BE921 /* PluginData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PluginData.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A8CB36A40456C87500A80207 /* BucketTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BucketTool.h; sourceTree = "<group>"; };
@@ -3633,8 +3640,6 @@
 				557D516318CF9FBD005809E3 /* CILenticularHaloClass.m */,
 				55909EC118CFFE6300F43F90 /* CILenticularHalo.xib */,
 				557D516618CF9FBD005809E3 /* Localizable.strings */,
-				557D516818CF9FBD005809E3 /* HaloColorWell.h */,
-				557D516918CF9FBD005809E3 /* HaloColorWell.m */,
 			);
 			path = CILenticularHalo;
 			sourceTree = "<group>";
@@ -3667,8 +3672,6 @@
 				557D518418CF9FBE005809E3 /* CIMonochromeClass.m */,
 				55909EC718CFFE9C00F43F90 /* CIMonochrome.xib */,
 				557D518718CF9FBE005809E3 /* Localizable.strings */,
-				557D518A18CF9FBE005809E3 /* MonochromeColorWell.h */,
-				557D518B18CF9FBE005809E3 /* MonochromeColorWell.m */,
 			);
 			path = CIMonochrome;
 			sourceTree = "<group>";
@@ -3819,8 +3822,6 @@
 				557D521818CF9FBF005809E3 /* CISpotLightClass.m */,
 				55909EF918D0002200F43F90 /* CISpotLight.xib */,
 				557D521B18CF9FBF005809E3 /* Localizable.strings */,
-				557D521E18CF9FBF005809E3 /* SpotLightColorWell.h */,
-				557D521F18CF9FBF005809E3 /* SpotLightColorWell.m */,
 			);
 			path = CISpotLight;
 			sourceTree = "<group>";
@@ -3832,8 +3833,6 @@
 				557D522518CF9FC0005809E3 /* CIStarshineClass.m */,
 				55909EFC18D0003F00F43F90 /* CIStarshine.xib */,
 				557D522818CF9FC0005809E3 /* Localizable.strings */,
-				557D522B18CF9FC0005809E3 /* StarshineColorWell.h */,
-				557D522C18CF9FC0005809E3 /* StarshineColorWell.m */,
 			);
 			path = CIStarshine;
 			sourceTree = "<group>";
@@ -3845,8 +3844,6 @@
 				557D523218CF9FC0005809E3 /* CISunbeamsClass.m */,
 				55909EFF18D0005700F43F90 /* CISunbeams.xib */,
 				557D523518CF9FC0005809E3 /* Localizable.strings */,
-				557D523818CF9FC0005809E3 /* SunbeamsColorWell.h */,
-				557D523918CF9FC0005809E3 /* SunbeamsColorWell.m */,
 			);
 			path = CISunbeams;
 			sourceTree = "<group>";
@@ -4127,6 +4124,8 @@
 			isa = PBXGroup;
 			children = (
 				55BD2BDC18D0CC4100C4EE1B /* CI-Info.plist */,
+				5575357418DBA82F00AC0FBC /* CICommon.mi */,
+				559E255818DCB79000D0F3DB /* CICommon-RestoreAlpha.mi */,
 				557D504518CF9FBA005809E3 /* CIAffineTile */,
 				557D504E18CF9FBA005809E3 /* CIAffineTransform */,
 				557D505718CF9FBA005809E3 /* CIBloom */,
@@ -6980,7 +6979,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55BD2C1718D0CE9900C4EE1B /* Bitmap.m in Sources */,
-				55BD2E1118D0D4BC00C4EE1B /* HaloColorWell.m in Sources */,
 				55BD2E1018D0D4BC00C4EE1B /* CILenticularHaloClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7009,7 +7007,7 @@
 			files = (
 				55BD2C4118D0CF3300C4EE1B /* Bitmap.m in Sources */,
 				55BD2E1918D0D4EC00C4EE1B /* CIMonochromeClass.m in Sources */,
-				55BD2E1A18D0D4EC00C4EE1B /* MonochromeColorWell.m in Sources */,
+				55BD2C4218D0CF3300C4EE1B /* Rects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7134,7 +7132,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55BD2E4118D0D63A00C4EE1B /* SpotLightColorWell.m in Sources */,
 				55BD2D0518D0D08600C4EE1B /* Bitmap.m in Sources */,
 				55BD2E4018D0D63A00C4EE1B /* CISpotLightClass.m in Sources */,
 			);
@@ -7146,7 +7143,6 @@
 			files = (
 				55BD2D1318D0D08F00C4EE1B /* Bitmap.m in Sources */,
 				55BD2E4418D0D64D00C4EE1B /* CIStarshineClass.m in Sources */,
-				55BD2E4518D0D64D00C4EE1B /* StarshineColorWell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7156,7 +7152,6 @@
 			files = (
 				55BD2D2118D0D09200C4EE1B /* Bitmap.m in Sources */,
 				55BD2E4818D0D65C00C4EE1B /* CISunbeamsClass.m in Sources */,
-				55BD2E4918D0D65C00C4EE1B /* SunbeamsColorWell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8544,6 +8539,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8718D12A9700FB7F00 /* Base */,
+				5593807518F3AD050022C282 /* en */,
 			);
 			name = CIGammaAdjust.xib;
 			sourceTree = "<group>";
@@ -8579,6 +8575,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8B18D12A9700FB7F00 /* Base */,
+				5575356D18DB78B500AC0FBC /* en */,
 			);
 			name = CIGloom.xib;
 			sourceTree = "<group>";
@@ -8587,6 +8584,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8C18D12A9700FB7F00 /* Base */,
+				5575356B18DB78AA00AC0FBC /* en */,
 			);
 			name = CIHatchedScreen.xib;
 			sourceTree = "<group>";
@@ -8595,6 +8593,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8D18D12A9700FB7F00 /* Base */,
+				5575356F18DB89A500AC0FBC /* en */,
 			);
 			name = CILenticularHalo.xib;
 			sourceTree = "<group>";
@@ -8603,6 +8602,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8E18D12A9700FB7F00 /* Base */,
+				5575357118DB9A1A00AC0FBC /* en */,
 			);
 			name = CILineScreen.xib;
 			sourceTree = "<group>";
@@ -8611,6 +8611,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E8F18D12A9700FB7F00 /* Base */,
+				5575357318DBA07200AC0FBC /* en */,
 			);
 			name = CIMonochrome.xib;
 			sourceTree = "<group>";
@@ -8619,6 +8620,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9018D12A9700FB7F00 /* Base */,
+				5593807318F3AC840022C282 /* en */,
 			);
 			name = CINoiseReduction.xib;
 			sourceTree = "<group>";
@@ -8627,6 +8629,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9218D12A9800FB7F00 /* Base */,
+				5593806B18F3AB960022C282 /* en */,
 			);
 			name = CIParallelogramTile.xib;
 			sourceTree = "<group>";
@@ -8635,6 +8638,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9318D12A9800FB7F00 /* Base */,
+				5593806718F3AAC00022C282 /* en */,
 			);
 			name = CIPinch.xib;
 			sourceTree = "<group>";
@@ -8643,6 +8647,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9418D12A9800FB7F00 /* Base */,
+				5593806318F3AA440022C282 /* en */,
+				5593806518F3AA460022C282 /* en-GB */,
 			);
 			name = CIPixellate.xib;
 			sourceTree = "<group>";
@@ -8651,6 +8657,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9518D12A9800FB7F00 /* Base */,
+				5593806918F3AB900022C282 /* en */,
 			);
 			name = CIPointillize.xib;
 			sourceTree = "<group>";
@@ -8669,6 +8676,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9718D12A9800FB7F00 /* Base */,
+				5593806118F3A9540022C282 /* en */,
 			);
 			name = CISepia.xib;
 			sourceTree = "<group>";
@@ -8677,6 +8685,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9818D12A9800FB7F00 /* Base */,
+				5593805F18F3A8200022C282 /* en */,
 			);
 			name = CISharpen.xib;
 			sourceTree = "<group>";
@@ -8693,6 +8702,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9A18D12A9800FB7F00 /* Base */,
+				5593805D18F3A5F60022C282 /* en */,
 			);
 			name = CIStarshine.xib;
 			sourceTree = "<group>";
@@ -8701,6 +8711,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9B18D12A9800FB7F00 /* Base */,
+				5593805B18F3A4D20022C282 /* en */,
 			);
 			name = CISunbeams.xib;
 			sourceTree = "<group>";
@@ -8709,6 +8720,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9C18D12A9800FB7F00 /* Base */,
+				5593806F18F3AC1E0022C282 /* en */,
 			);
 			name = CITorusLens.xib;
 			sourceTree = "<group>";
@@ -8717,6 +8729,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9D18D12A9900FB7F00 /* Base */,
+				5593805918F3A2590022C282 /* en */,
 			);
 			name = CITwirl.xib;
 			sourceTree = "<group>";
@@ -8725,6 +8738,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9E18D12A9900FB7F00 /* Base */,
+				5593806D18F3ABFD0022C282 /* en */,
 			);
 			name = CIUnsharpMask.xib;
 			sourceTree = "<group>";
@@ -8742,6 +8756,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CA8E9118D12A9800FB7F00 /* Base */,
+				5593807118F3AC800022C282 /* en */,
 			);
 			name = CIOpTile.xib;
 			sourceTree = "<group>";
@@ -8990,6 +9005,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9002,6 +9021,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIBrightnessClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9020,6 +9043,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9032,6 +9059,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIBumpClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9050,6 +9081,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9062,6 +9097,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIEdgesClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9080,6 +9119,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9092,6 +9135,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIEdgeWorkClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9110,6 +9157,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9122,6 +9173,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIExposureClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9140,6 +9195,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9152,6 +9211,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIFalseColorClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9221,6 +9284,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9233,6 +9300,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIAffineTileClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9281,6 +9352,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9293,6 +9368,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CICircularWrapClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9311,6 +9390,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9323,6 +9406,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CICMYKHalftoneClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9341,6 +9428,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9353,6 +9444,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CICircleSplashClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9371,6 +9466,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9383,6 +9482,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CICrystallizeClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9415,6 +9518,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9427,6 +9534,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIDisplacementDistortionClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9445,6 +9556,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9457,6 +9572,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIDotScreenClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9475,6 +9594,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9487,6 +9610,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIBloomClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9505,6 +9632,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9517,6 +9648,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CICheckerboardClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9535,6 +9670,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9547,6 +9686,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CICircularScreenClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9565,6 +9708,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9577,6 +9724,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIGammaAdjustClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9595,6 +9746,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9607,6 +9762,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIGaussianBlurClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9625,6 +9784,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9637,6 +9800,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIGlassDistortionClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9655,6 +9822,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9667,6 +9838,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIGlassLozengeClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9685,6 +9860,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9697,6 +9876,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIGloomClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9715,6 +9898,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9727,6 +9914,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIHatchedScreenClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9745,6 +9936,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9757,6 +9952,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIHoleClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9775,6 +9974,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9787,6 +9990,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIHorizStripesClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9805,6 +10012,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9817,6 +10028,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIInvertClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9835,6 +10050,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9847,6 +10066,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIKaleidoscopeClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9865,6 +10088,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9877,6 +10104,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CILenticularHaloClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9895,6 +10126,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9907,6 +10142,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CILineScreenClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9925,6 +10164,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9937,6 +10180,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIMedianClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9955,6 +10202,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9967,6 +10218,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIMonochromeClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9985,6 +10240,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9997,6 +10256,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIMotionBlurClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10015,6 +10278,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10027,6 +10294,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CINoiseReductionClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10045,6 +10316,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10057,6 +10332,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIOpTileClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10075,6 +10354,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10087,6 +10370,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIParallelogramTileClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10105,6 +10392,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10117,6 +10408,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIPerspectiveTileClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10135,6 +10430,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10147,6 +10446,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIPerspectiveTransformClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10165,6 +10468,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10177,6 +10484,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIPinchClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10195,6 +10506,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10207,6 +10522,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIPixellateClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10225,6 +10544,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10237,6 +10560,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIPointillizeClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10255,6 +10582,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10267,6 +10598,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIPosterizeClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10285,6 +10620,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10297,6 +10636,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIRandomClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10315,6 +10658,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10327,6 +10674,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CISepiaClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10345,6 +10696,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10357,6 +10712,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CISharpenClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10375,6 +10734,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10387,6 +10750,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CISpotLightClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10405,6 +10772,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10417,6 +10788,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIStarshineClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10435,6 +10810,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10447,6 +10826,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CISunbeamsClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10465,6 +10848,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10477,6 +10864,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CITorusLensClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10495,6 +10886,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10507,6 +10902,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CITriangleTileClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10525,6 +10924,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10537,6 +10940,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CITwirlClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10555,6 +10962,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10567,6 +10978,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIUnsharpMaskClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10585,6 +11000,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10597,6 +11016,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIVertStripesClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10615,6 +11038,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10627,6 +11054,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIVortexClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10645,6 +11076,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10657,6 +11092,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIWhitePointAdjustClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10675,6 +11114,10 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10687,6 +11130,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIZoomBlurClass;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";

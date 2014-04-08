@@ -29,7 +29,7 @@ typedef struct {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@class SeaWhiteboard;
+@class SeaWhiteboard, SeaLayer;
 
 @interface SeaContent : NSObject {
 	IntPoint gScreenResolution;
@@ -282,7 +282,7 @@ typedef struct {
 				The index of the desired layer.
 	@result		An instance of SeaLayer corresponding to the specified index.
 */
-- (id)layer:(int)index;
+- (SeaLayer*)layer:(NSInteger)index;
 
 /*!
 	@method		layerCount
@@ -290,21 +290,21 @@ typedef struct {
 	@result		Returns an integer indicating the total number of layers in the
 				document.
 */
-- (int)layerCount;
+- (NSInteger)layerCount;
 
 /*!
 	@method		activeLayer
 	@discussion	Returns the currently active layer.
 	@result		An instance of SeaLayer representing the active layer.
 */
-- (id)activeLayer;
+- (SeaLayer*)activeLayer;
 
 /*!
 	@method		activeLayerIndex
 	@discussion	Returns the index of the currently active layer.
 	@result		Returns an integer representing the index of the active layer.
 */
-- (int)activeLayerIndex;
+- (NSInteger)activeLayerIndex;
 
 
 /*!

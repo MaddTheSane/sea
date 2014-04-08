@@ -12,21 +12,14 @@
 
 @interface PixellateClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the scale
-	IBOutlet id scaleLabel;
-	
-	// The slider for the scale
-	IBOutlet id scaleSlider;
-
-	// The number of scale
-	int scale;
-
 	// YES if the blurring must be refreshed
 	BOOL refresh;
 	
 	// YES if the application succeeded
 	BOOL success;
 }
+// The number of scale
+@property NSInteger scale;
 
 /*!
 	@method		initWithManager:

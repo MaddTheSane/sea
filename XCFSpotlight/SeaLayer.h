@@ -10,8 +10,8 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface SeaLayer : NSObject {
-	
+@interface SeaLayer : NSObject
+{
 	// The layer's height, width and mode
 	int height, width, mode;
 	
@@ -81,11 +81,6 @@
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)init;
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 // PROPERTY METHODS
 

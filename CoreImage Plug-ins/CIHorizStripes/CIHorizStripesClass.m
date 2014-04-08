@@ -1,7 +1,6 @@
 #import "CIHorizStripesClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIHorizStripesClass
@@ -10,7 +9,7 @@
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
+		self.seaPlugins = manager;
 	}
 	
 	return self;
@@ -48,9 +47,8 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[self execute];
 	[pluginData apply];
 	success = YES;
@@ -68,13 +66,11 @@
 
 - (void)execute
 {
-	PluginData *pluginData;
-
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
+	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
-	}
-	else {
+	} else {
 		[self executeColor:pluginData];
 	}
 }
@@ -82,9 +78,8 @@
 - (void)executeGrey:(PluginData *)pluginData
 {
 	IntRect selection;
-	int i, j, spp, width, height;
-	unsigned char *data, *overlay, *resdata;
-	int vec_len, max;
+	int i, j, width, height;
+	unsigned char *overlay, *resdata;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
@@ -107,19 +102,18 @@
 				overlay[(width * (selection.origin.y + j) + selection.origin.x + i) * 2 + 1] = resdata[i * 4 + 3];
 			}
 		}
-	}
-	else {
-		for (i = 0; i < width * height; i++) {
+	} else {
+		dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			overlay[i * 2] = resdata[i * 4];
 			overlay[i * 2 + 1] = resdata[i * 4 + 3];
-		}
+		});
 	}
 }
 
 - (void)executeColor:(PluginData *)pluginData
 {
 	IntRect selection;
-	int i, width, height;
+	int width, height;
 	unsigned char *resdata, *overlay;
 	
 	// Set-up plug-in
@@ -137,9 +131,9 @@
 
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (i = 0; i < selection.size.height; i++) {
+		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
-		}
+		});
 	} else {
 		memcpy(overlay, resdata, width * height * 4);
 	}
@@ -151,7 +145,6 @@
 	CIImage *crop_output, *pre_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
-	NSBitmapImageRep *temp_rep;
 	NSAffineTransform *rotateTransform;
 	CGSize size;
 	CGRect rect;
@@ -159,15 +152,9 @@
 	unsigned char *resdata;
 	IntRect selection;
 	IntPoint point, apoint;
-	CIColor *backColorAlpha, *foreColorAlpha;
-	float angle;
+	CIColor *backColorAlpha = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
+	CIColor *foreColorAlpha = [[CIColor alloc] initWithColor:[pluginData foreColor:YES]];
 	int amount;
-	
-	// Get colors
-	if ([pluginData spp] == 4) foreColorAlpha = [CIColor colorWithRed:[[pluginData foreColor:YES] redComponent] green:[[pluginData foreColor:YES] greenComponent] blue:[[pluginData foreColor:YES] blueComponent] alpha:[[pluginData foreColor:YES] alphaComponent]];
-	else  foreColorAlpha = [CIColor colorWithRed:[[pluginData foreColor:YES] whiteComponent] green:[[pluginData foreColor:YES] whiteComponent] blue:[[pluginData foreColor:YES] whiteComponent] alpha:[[pluginData foreColor:YES] alphaComponent]];
-	if ([pluginData spp] == 4) backColorAlpha = [CIColor colorWithRed:[[pluginData backColor:YES] redComponent] green:[[pluginData backColor:YES] greenComponent] blue:[[pluginData backColor:YES] blueComponent] alpha:[[pluginData backColor:YES] alphaComponent]];
-	else  backColorAlpha = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent] alpha:[[pluginData backColor:YES] alphaComponent]];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
@@ -207,7 +194,6 @@
 	output = [filter valueForKey: @"outputImage"];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
@@ -221,17 +207,13 @@
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];		
-		
-	}
-	else {
-	
+	} else {
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		
 	}
 	
 	// Get data from output core image

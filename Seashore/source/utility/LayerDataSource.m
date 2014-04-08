@@ -17,6 +17,10 @@
 #define LAYER_VISIBLE_COL @"Layer Visible Checkbox Column"
 #define INFO_BUTTON_COL	@"Info Button Column"
 
+@interface NSObject (remFromPar)
+- (void)removeFromParent;
+@end
+
 @implementation LayerDataSource
 - (void)awakeFromNib
 {
@@ -56,7 +60,7 @@
     NSArray *selection = [self selectedNodes];
     
     // Tell all of the selected nodes to remove themselves from the model.
-    [selection makeObjectsPerformSelector: @selector(removeFromParent)];
+    [selection makeObjectsPerformSelector:@selector(removeFromParent)];
     [outlineView deselectAll:nil];
     [outlineView reloadData];
 }
@@ -66,12 +70,12 @@
 // ================================================================
 
 // Required methods. These methods must handle the case of a "nil" item, which indicates the root item.
-- (id)outlineView:(NSOutlineView *)olv child:(int)index ofItem:(id)item
+- (id)outlineView:(NSOutlineView *)olv child:(NSInteger)index ofItem:(id)item
 {
 	if(!document)
 		return 0;
 	if(item != nil)
-		NSLog(@"%@ says olv %@ requested a child at %d for %@ erroniously", self, olv, index, item);
+		NSLog(@"%@ says olv %@ requested a child at %ld for %@ erroniously", self, olv, (long)index, item);
 	return [[document contents] layer:index];
 }
 
@@ -81,7 +85,7 @@
 	return NO;
 }
 
-- (int)outlineView:(NSOutlineView *)olv numberOfChildrenOfItem:(id)item
+- (NSInteger)outlineView:(NSOutlineView *)olv numberOfChildrenOfItem:(id)item
 {
 	if(!document)
 		return 0;
@@ -219,7 +223,7 @@ NSFileHandle *NewFileHandleForWritingFile(NSString *dirpath, NSString *basename,
 // We promised the files, so now lets make good on that promise!
 - (NSArray *)outlineView:(NSOutlineView *)outlineView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedItems:(NSArray *)items
 {
-    int i = 0, count = [items count];
+    NSInteger i = 0, count = [items count];
     NSMutableArray *filenames = [NSMutableArray array];
     for (i=0; i<count; i++) {
         SeaLayer *layer = (SeaLayer *)items[i];

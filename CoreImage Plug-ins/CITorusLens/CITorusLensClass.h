@@ -16,24 +16,19 @@
 
 @interface CITorusLensClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the refraction
-	IBOutlet id refractionLabel;
-	
-	// The slider for the refraction
-	IBOutlet id refractionSlider;
-
 	// YES if the application succeeded
 	BOOL success;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
-	// The extent of the refraction
-	float refraction;
-	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
+	
+	NSBitmapImageRep *temp_rep;
 }
+// The extent of the refraction
+@property CGFloat refraction;
 
 /*!
 	@method		initWithManager:

@@ -16,24 +16,6 @@
 
 @interface CINoiseReductionClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the noise
-	IBOutlet id noiseLabel;
-	
-	// The slider for the noise
-	IBOutlet id noiseSlider;
-
-	// The label displaying the sharpness
-	IBOutlet id sharpLabel;
-	
-	// The slider for the sharpness
-	IBOutlet id sharpSlider;
-
-	// The new noise
-	float noise;
-
-	// The new sharpness
-	float sharp;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -43,7 +25,10 @@
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
+	NSBitmapImageRep *temp_rep;
 }
+@property CGFloat noise;
+@property CGFloat sharp;
 
 /*!
 	@method		initWithManager:

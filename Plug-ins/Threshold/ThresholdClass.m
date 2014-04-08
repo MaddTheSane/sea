@@ -6,12 +6,17 @@
 @implementation ThresholdClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
+@synthesize bottomValue;
+@synthesize topValue;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"Threshold" owner:self];
+		[gOurBundle loadNibNamed:@"Threshold" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -45,13 +50,11 @@
 	
 	pluginData = [seaPlugins data];
 	
-	topValue = 0;
-	bottomValue = 255;
+	self.topValue = 0;
+	self.bottomValue = 255;
 	
-	[rangeLabel setStringValue:[NSString stringWithFormat:@"%d - %d", topValue, bottomValue]];
+	[rangeLabel setStringValue:[NSString stringWithFormat:@"%ld - %ld", (long)topValue, (long)bottomValue]];
 	
-	[topSlider setIntValue:topValue];
-	[bottomSlider setIntValue:bottomValue];
 	[view calculateHistogram:pluginData];
 	
 	success = NO;
@@ -65,10 +68,10 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
@@ -81,9 +84,8 @@
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[self adjust];
 	[pluginData apply];
 }
@@ -95,19 +97,18 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData preview];
 	refresh = NO;
 }
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -120,16 +121,12 @@
 
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
-	topValue = [topSlider intValue];
-	bottomValue = [bottomSlider intValue];
+	PluginData *pluginData = [seaPlugins data];
 	
 	if (topValue < bottomValue)
-		[rangeLabel setStringValue:[NSString stringWithFormat:@"%d - %d", topValue, bottomValue]];
+		[rangeLabel setStringValue:[NSString stringWithFormat:@"%ld - %ld", (long)topValue, (long)bottomValue]];
 	else
-		[rangeLabel setStringValue:[NSString stringWithFormat:@"%d - %d", bottomValue, topValue]];
+		[rangeLabel setStringValue:[NSString stringWithFormat:@"%ld - %ld", (long)bottomValue, (long)topValue]];
 	
 	[panel setAlphaValue:1.0];
 	refresh = YES;
@@ -138,7 +135,8 @@
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -146,7 +144,7 @@
 {
 	PluginData *pluginData;
 	IntRect selection;
-	int i, j, k, t1, t2, spp, width, channel, mid;
+	int i, j, k, spp, width, channel, mid;
 	unsigned char *data, *overlay, *replace;
 	
 	pluginData = [seaPlugins data];
@@ -165,7 +163,6 @@
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
 			
 			if (channel == kAllChannels || channel == kPrimaryChannels) {
-				
 				mid = 0;
 				for (k = 0; k < spp - 1; k++)
 					mid += data[(j * width + i) * spp + k];
@@ -179,11 +176,7 @@
 				overlay[(j * width + i + 1) * spp - 1] = data[(j * width + i + 1) * spp - 1];
 				
 				replace[j * width + i] = 255;
-				
-			}
-			
-			else if (channel == kAlphaChannel) {
-			
+			} else if (channel == kAlphaChannel) {
 				mid = data[(j * width + i + 1) * spp - 1];
 				
 				if (MIN(topValue, bottomValue) <= mid && mid <= MAX(topValue, bottomValue))
@@ -194,21 +187,9 @@
 				overlay[(j * width + i + 1) * spp - 1] = 255;
 				
 				replace[j * width + i] = 255;
-				
 			}
-			
 		}
 	}
-}
-
-- (int)topValue
-{
-	return topValue;
-}
-
-- (int)bottomValue
-{
-	return bottomValue;
 }
 
 - (BOOL)validateMenuItem:(id)menuItem

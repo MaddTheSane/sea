@@ -16,33 +16,6 @@
 
 @interface CIOpTileClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the dot width
-	IBOutlet id squareWidthLabel;
-	
-	// The slider for the width
-	IBOutlet id squareWidthSlider;
-
-	// The label displaying the angle
-	IBOutlet id angleLabel;
-	
-	// The slider for the angle
-	IBOutlet id angleSlider;
-
-	// The label displaying the scale
-	IBOutlet id scaleLabel;
-	
-	// The slider for the scale
-	IBOutlet id scaleSlider;
-
-	// The new width
-	int squareWidth;
-
-	// The new angle
-	float angle;
-	
-	// The new scale
-	float scale;
-	
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -52,7 +25,17 @@
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 
+	NSBitmapImageRep *temp_rep;
 }
+// The new width
+@property NSInteger squareWidth;
+
+// The new angle
+@property CGFloat angle;
+	
+// The new scale
+@property CGFloat scale;
+	
 
 /*!
 	@method		initWithManager:

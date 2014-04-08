@@ -18,21 +18,6 @@
 
 @interface CISunbeamsClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the strength
-	IBOutlet id strengthLabel;
-	
-	// The slider for the strength
-	IBOutlet id strengthSlider;
-
-	// The label displaying the contrast
-	IBOutlet id contrastLabel;
-	
-	// The slider for the contrast
-	IBOutlet id contrastSlider;
-
-	// The main color to use
-	IBOutlet id mainColorWell;
-
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -44,12 +29,15 @@
 
 	// YES if the plug-in is running
 	BOOL running;
-}
-@property (strong) NSColor *mainNSColor;
-	// The new strength
-@property CGFloat strength;
 	
-	// The new contrast
+	NSBitmapImageRep *temp_rep;
+}
+@property (strong) NSColor *mainColor;
+
+// The new strength
+@property CGFloat strength;
+
+// The new contrast
 @property CGFloat contrast;
 
 /*!

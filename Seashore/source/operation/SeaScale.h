@@ -113,12 +113,6 @@ typedef struct {
 - (id)init;
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		run:
 	@discussion	Presents the user with a sheet allowing him to scale the
 				document's or active layer's contents.

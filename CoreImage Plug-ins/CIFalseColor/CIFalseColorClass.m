@@ -9,7 +9,7 @@
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
+		self.seaPlugins = manager;
 	}
 	
 	return self;
@@ -269,17 +269,10 @@
 	IntRect selection;
 	
 	// Find colors
-	if ([pluginData spp] == 4) {
-		foreNSColor = [pluginData foreColor:YES];
-		foreColor = [CIColor colorWithRed:[foreNSColor redComponent] green:[foreNSColor greenComponent] blue:[foreNSColor blueComponent]];
-		backNSColor = [pluginData backColor:YES];
-		backColor = [CIColor colorWithRed:[backNSColor redComponent] green:[backNSColor greenComponent] blue:[backNSColor blueComponent]];
-	} else {
-		foreNSColor = [pluginData foreColor:YES];
-		foreColor = [CIColor colorWithRed:[foreNSColor whiteComponent] green:[foreNSColor whiteComponent] blue:[foreNSColor whiteComponent]];
-		backNSColor = [pluginData backColor:YES];
-		backColor = [CIColor colorWithRed:[backNSColor whiteComponent] green:[backNSColor whiteComponent] blue:[backNSColor whiteComponent]];
-	}
+	foreNSColor = [pluginData foreColor:YES];
+	foreColor = [[CIColor alloc] initWithColor:foreNSColor];
+	backNSColor = [pluginData backColor:YES];
+	backColor = [[CIColor alloc] initWithColor:backNSColor];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];

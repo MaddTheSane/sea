@@ -18,18 +18,6 @@
 
 @interface CIMonochromeClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the intensity
-	IBOutlet id intensityLabel;
-	
-	// The slider for the intensity
-	IBOutlet id intensitySlider;
-
-	// The main color to use
-	IBOutlet id mainColorWell;
-
-	// The value of the intensity
-	float intensity;
-	
 	// YES if the effect must be refreshed
 	BOOL refresh;
 	
@@ -41,9 +29,14 @@
 	
 	// YES if the plug-in is running
 	BOOL running;
+
+	NSBitmapImageRep *temp_rep;
 }
 
 @property (strong) NSColor *mainColor;
+
+// The value of the intensity
+@property CGFloat intensity;
 
 /*!
 	@method		initWithManager:
@@ -124,14 +117,6 @@
 				Ignored.
 */
 - (IBAction)cancel:(id)sender;
-
-/*!
-	@method		setColor:
-	@discussion	Sets the color of the receiver.
-	@param		color
-				The new color for the color well.
-*/
-- (void)setColor:(NSColor *)color;
 
 /*!
 	@method		update:

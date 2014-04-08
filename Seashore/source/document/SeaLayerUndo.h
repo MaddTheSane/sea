@@ -70,11 +70,6 @@ typedef struct {
 */
 - (id)initWithDocument:(id)doc forLayer:(id)ilayer;
 
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		checkDiskSpace

@@ -16,14 +16,8 @@
 
 @interface CIPixellateClass : NSObject <SSSeaVisualPlugin>
 {
-	// The label displaying the scale
-	IBOutlet id scaleLabel;
-	
-	// The slider for the scale
-	IBOutlet id scaleSlider;
-
 	// The radio boxes for the type
-	IBOutlet id typeRadios;
+	IBOutlet NSMatrix *typeRadios;
 
 	// YES if the effect must be refreshed
 	BOOL refresh;

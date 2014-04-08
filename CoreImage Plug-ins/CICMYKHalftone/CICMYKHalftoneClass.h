@@ -27,7 +27,6 @@
 	
 	NSBitmapImageRep *temp_rep;
 }
-
 // The new angle
 @property CGFloat angle;
 	

@@ -8,8 +8,8 @@
 				Copyright (c) 1997-1998 Michael Sweet
 */
 
-typedef int intneg;
-typedef int intpos;
+typedef NSInteger intneg;
+typedef NSInteger intpos;
 
 intneg neg_lut[256];   /* Negative coefficient LUT */
 intpos pos_lut[256];   /* Positive coefficient LUT */
@@ -20,10 +20,10 @@ int extent;
 #define guchar unsigned char
 
 static inline void
-compute_luts (int extent)
+compute_luts (NSInteger extent)
 {
-	int i;       /* Looping var */
-	int fact;    /* 1 - sharpness */
+	NSInteger i;       /* Looping var */
+	NSInteger fact;    /* 1 - sharpness */
 	
 	fact = 100 - extent;
 	if (fact < 1)
@@ -54,7 +54,7 @@ graya_filter (int   width,     /* I - Width of line in pixels */
 				 neg1[-2] - neg1[2] -
 				 neg2[-2] - neg2[0] - neg2[2]);
 		pixel = (pixel + 4) >> 3;
-		*dst++ = CLAMP0255 (pixel);
+		*dst++ = CLAMP0255(pixel);
 		
 		*dst++ = *src++;
 		neg0 += 2;

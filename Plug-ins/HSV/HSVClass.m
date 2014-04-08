@@ -4,17 +4,21 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-
-
 @implementation HSVClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
+@synthesize hue;
+@synthesize saturation;
+@synthesize value;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"HSV" owner:self];
+		[gOurBundle loadNibNamed:@"HSV" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -33,8 +37,7 @@ static inline void RGBtoHSV(int *ir, int *ig, int *ib)
 	if (r > g) {
 		max = MAX (r, b);
 		min = MIN (g, b);
-	}
-	else {
+	} else {
 		max = MAX (g, b);
 		min = MIN (r, b);
     }
@@ -47,11 +50,9 @@ static inline void RGBtoHSV(int *ir, int *ig, int *ib)
 
 		if (r == max) {
 			h = (g - b) / delta;
-        }
-		else if (g == max) {
+        } else if (g == max) {
 			h = 2.0 + (b - r) / delta;
-        }
-		else if (b == max) {
+        } else if (b == max) {
 			h = 4.0 + (r - g) / delta;
         }
 
@@ -61,8 +62,7 @@ static inline void RGBtoHSV(int *ir, int *ig, int *ib)
 			h += 1.0;
 		else if (h > 1.0)
 			h -= 1.0;
-	}
-	else {
+	} else {
 		s = 0.0;
 		h = 0.0;
 	}
@@ -87,8 +87,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 		r = v;
 		g = v;
 		b = v;
-	}
-	else {
+	} else {
 		if (h == 1.0)
 			h = 0.0;
 		
@@ -170,15 +169,7 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 	refresh = NO;
 	
-	hue = saturation = value = 0.0;
-	
-	[hueLabel setStringValue:[NSString stringWithFormat:@"%.2f", hue]];
-	[saturationLabel setStringValue:[NSString stringWithFormat:@"%.2f", saturation]];
-	[valueLabel setStringValue:[NSString stringWithFormat:@"%.2f", value]];
-	
-	[hueSlider setFloatValue:hue];
-	[saturationSlider setFloatValue:saturation];
-	[valueSlider setFloatValue:value];
+	self.hue = self.saturation = self.value = 0.0;
 	
 	success = NO;
 	pluginData = [seaPlugins data];
@@ -192,25 +183,25 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[self adjust];
 	[pluginData apply];
 }
@@ -222,19 +213,18 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self adjust];
+	if (refresh)
+		[self adjust];
 	[pluginData preview];
 	refresh = NO;
 }
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -247,23 +237,15 @@ static inline void HSVtoRGB(int *ih, int *is, int *iv)
 
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
-	hue = [hueSlider floatValue];
-	saturation = [saturationSlider floatValue];
-	value = [valueSlider floatValue];
-	
-	[hueLabel setStringValue:[NSString stringWithFormat:@"%.2f", hue]];
-	[saturationLabel setStringValue:[NSString stringWithFormat:@"%.2f", saturation]];
-	[valueLabel setStringValue:[NSString stringWithFormat:@"%.2f", value]];
+	PluginData *pluginData = [seaPlugins data];
 	
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -274,7 +256,7 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 {
 	PluginData *pluginData;
 	IntRect selection;
-	int spp, i, j, k, width, channel, pos;
+	int spp, i, j, width, channel, pos;
 	unsigned char *data, *overlay, *replace;
 	int r, g, b;
 	
@@ -291,7 +273,6 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 	
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
-		
 			pos = (j * width + i) * spp;
 			r = data[pos];
 			g = data[pos + 1];
@@ -306,16 +287,13 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 			overlay[pos + 1] = (unsigned char)g;
 			overlay[pos + 2] = (unsigned char)b;
 			replace[j * width + i] = 255;
-
 		}
 	}
 }
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData;
-	
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	
 	if (pluginData != NULL) {
 
@@ -324,7 +302,6 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 		
 		if ([pluginData spp] == 2)
 			return NO;
-	
 	}
 	
 	return YES;

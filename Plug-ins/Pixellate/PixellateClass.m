@@ -2,17 +2,19 @@
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-
-
 @implementation PixellateClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
+@synthesize scale;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"Pixellate" owner:self];
+		[gOurBundle loadNibNamed:@"Pixellate" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -44,16 +46,12 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"Pixellate.scale"])
-		scale = [defaults integerForKey:@"Pixellate.scale"];
+		self.scale = [defaults integerForKey:@"Pixellate.scale"];
 	else
-		scale = 8;
+		self.scale = 8;
 		
 	if (scale < 0 || scale > 100)
-		scale = 8;
-	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%d", scale]];
-	
-	[scaleSlider setIntValue:scale];
+		self.scale = 8;
 	
 	refresh = YES;
 	success = NO;
@@ -87,9 +85,8 @@
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData apply];
 }
 
@@ -100,19 +97,18 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self pixellate];
+	if (refresh)
+		[self pixellate];
 	[pluginData preview];
 	refresh = NO;
 }
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -125,18 +121,15 @@
 
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	scale = [scaleSlider intValue];
-	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%d", scale]];
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -145,7 +138,8 @@
 	PluginData *pluginData;
 	IntRect selection;
 	unsigned char *data, *overlay, *replace, newPixel[4];
-	int pos, i, j, k, i2, j2, width, height, spp, channel;
+	NSInteger pos, i, j, k, i2, j2;
+	int width, height, spp, channel;
 	int total[4], n, x_stblk, x_endblk, y_stblk, y_endblk;
 	
 	pluginData = [seaPlugins data];
@@ -167,7 +161,7 @@
 	
 	for (j = y_stblk; j < y_endblk; j++) {
 		for (i = x_stblk; i < x_endblk; i++) {
-		
+			
 			// Sum and count the present pixels in the  block
 			total[0] = total[1] = total[2] = total[3] = 0;
 			n = 0;
@@ -189,19 +183,19 @@
 					for (k = 0; k < spp; k++) {
 						newPixel[k] = total[k] / n;
 					}
-				break;
+					break;
 				case kPrimaryChannels:
 					for (k = 0; k < spp - 1; k++) {
 						newPixel[k] = total[k] / n;
 					}
 					newPixel[spp - 1] = 255;
-				break;
+					break;
 				case kAlphaChannel:
 					for (k = 0; k < spp - 1; k++) {
 						newPixel[k] = total[spp - 1] / n;
 					}
 					newPixel[spp - 1] = 255;
-				break;
+					break;
 			}
 			
 			// Fill the block with this pixel

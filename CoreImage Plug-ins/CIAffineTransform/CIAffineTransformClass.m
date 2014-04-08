@@ -11,7 +11,7 @@
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
-		seaPlugins = manager;
+		self.seaPlugins = manager;
 	}
 	
 	return self;
@@ -49,9 +49,8 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[self determineContentBorders:pluginData];
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -74,13 +73,11 @@
 }
 - (void)execute
 {
-	PluginData *pluginData;
-
-	pluginData = [seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
+	
 	if ([pluginData spp] == 2) {
 		[self executeGrey:pluginData];
-	}
-	else {
+	} else {
 		[self executeColor:pluginData];
 	}
 }
@@ -139,8 +136,7 @@
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(newdata[selection.size.width * 2 * i]), selection.size.width * 2);
 		}
-	}
-	else {
+	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, newdata, width * height * 2);
 	}
@@ -321,13 +317,10 @@
 		bounds.size.width = contentRight - contentLeft + 1;
 		bounds.size.height = contentBottom - contentTop + 1;
 		boundsValid = YES;
-	}
-	else {
+	} else {
 		boundsValid = NO;
 	}
 }
-
-#define PI 3.14159265
 
 - (unsigned char *)transform:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
@@ -343,14 +336,12 @@
 	IntPoint point, apoint;
 	double scale, angle;
 	int baselen;
-	BOOL opaque;
+	BOOL opaque = ![pluginData hasAlpha];
 	CIColor *backColor;
 	NSAffineTransform *offsetTransform, *trueTransform;
 	
-	// Check if image is opaque
-	opaque = ![pluginData hasAlpha];
-	if (opaque && [pluginData spp] == 4) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] redComponent] green:[[pluginData backColor:YES] greenComponent] blue:[[pluginData backColor:YES] blueComponent]];
-	else if (opaque) backColor = [CIColor colorWithRed:[[pluginData backColor:YES] whiteComponent] green:[[pluginData backColor:YES] whiteComponent] blue:[[pluginData backColor:YES] whiteComponent]];
+	if (opaque)
+		backColor = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
@@ -604,7 +595,6 @@
 	ndata = malloc(make_128(width * height * 4));
 	
 	if (spp == 2) {
-	
 		for (i = 0; i < width * height; i++) {
 			/* The transformation apparently will always return spp as 4, which means that when 
 			 transforming something that's greyscale, if we force the spp of the output to have been
@@ -615,7 +605,6 @@
 				ndata[i * 2 + 1] = (alpha ?  alpha[i * ispp] : 0xFF);
 			//}
 		}
-		
 	} else {
 		for (i = 0; i < width * height; i++) {
 			ndata[i * 4] = data[i * ispp];
@@ -623,7 +612,6 @@
 			ndata[i * 4 + 2] = data[i * ispp + 2];
 			ndata[i * 4 + 3] = (alpha ? alpha[i * ispp] : 0xFF);
 		}
-		
 	}
 	
 	return ndata;

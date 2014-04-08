@@ -6,12 +6,16 @@
 @implementation SharpenClass
 @synthesize panel;
 @synthesize seaPlugins;
+@synthesize nibArray;
+@synthesize extent;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
+		NSArray *tmpArray;
 		self.seaPlugins = manager;
-		[NSBundle loadNibNamed:@"Sharpen" owner:self];
+		[gOurBundle loadNibNamed:@"Sharpen" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
 	}
 	
 	return self;
@@ -43,17 +47,13 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if ([defaults objectForKey:@"Sharpen.extent"])
-		extent = [defaults integerForKey:@"Sharpen.extent"];
+		self.extent = [defaults integerForKey:@"Sharpen.extent"];
 	else
-		extent = 15;
+		self.extent = 15;
 	refresh = YES;
 	
 	if (extent < 0 || extent > 99)
-		extent = 15;
-	
-	[extentLabel setStringValue:[NSString stringWithFormat:@"%d", extent]];
-	
-	[extentSlider setIntValue:extent];
+		self.extent = 15;
 	
 	success = NO;
 	pluginData = [seaPlugins data];
@@ -87,9 +87,8 @@
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData apply];
 }
 
@@ -100,19 +99,18 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	if (refresh) [self sharpen];
+	if (refresh)
+		[self sharpen];
 	[pluginData preview];
 	refresh = NO;
 }
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -125,18 +123,15 @@
 
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [seaPlugins data];
 	
-	pluginData = [seaPlugins data];
-	extent = roundf([extentSlider floatValue]);
-	
-	[extentLabel setStringValue:[NSString stringWithFormat:@"%d", extent]];
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
 		[self preview:self];
 		pluginData = [seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
@@ -146,8 +141,7 @@ static inline void get_row(unsigned char *out_row, unsigned char *in_row, int sp
 	
 	if (channel == kAllChannels || channel == kPrimaryChannels) {
 		memcpy(out_row, in_row, width * spp);
-	}
-	else {
+	} else {
 		for (i = 0; i < width; i++)
 			out_row[i * 2] = in_row[(i + 1) * spp - 1];
 	}
@@ -159,13 +153,11 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 	
 	if (channel == kAllChannels) {
 		memcpy(out_row, in_row, width * spp);
-	}
-	else if (channel == kPrimaryChannels) {
+	} else if (channel == kPrimaryChannels) {
 		memcpy(out_row, in_row, width * spp);
 		for (i = 0; i < width; i++)
 			out_row[i * spp - 1] = 255;
-	}
-	else {
+	} else {
 		for (i = 0; i < width; i++) {
 			for (j = 0; j < spp - 1; j++)
 				out_row[i * spp + j] = in_row[i * 2];
@@ -184,7 +176,7 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 	intneg *neg_rows[4];
 	intneg *neg_ptr;
 	int swidth, spp, rspp, row, count, i, y, channel;
-	void (*filter)(int, guchar *, guchar *, intneg *, intneg *, intneg *);
+	void (*filter)(int, guchar *, guchar *, intneg *, intneg *, intneg *) = NULL;
 	int y1, y2, x1, width;
 	
 	pluginData = [seaPlugins data];
@@ -196,8 +188,10 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 	x1 = selection.origin.x;
 	channel = [pluginData channel];
 	spp = [pluginData spp];
-	if (channel == kAlphaChannel) rspp = 2;
-	else rspp = spp;
+	if (channel == kAlphaChannel)
+		rspp = 2;
+	else
+		rspp = spp;
 	swidth = selection.size.width * rspp;
 	width = [pluginData width];
 	data = [pluginData data];
@@ -211,52 +205,50 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 		neg_rows[row] = malloc(swidth * sizeof(intneg));
     }
 	dst_row = malloc(swidth);
-
+	
 	get_row(src_rows[0], &(data[(y1 * width + x1) * spp]), spp, channel, selection.size.width);
 	
 	for (i = swidth, src_ptr = src_rows[0], neg_ptr = neg_rows[0]; i > 0; i--, src_ptr++, neg_ptr++)
 		*neg_ptr = neg_lut[*src_ptr];
-
+	
 	row = 1;
 	count = 1;
-
+	
 	switch (rspp) {
-		case 2 :
+		case 2:
 			filter = graya_filter;
-		break;
-		case 4 :
+			break;
+			
+		case 4:
 			filter = rgba_filter;
-		break;
+			break;
 	}
 	
 	for (y = y1; y < y2; y++) {
-
 		if ((y + 1) < y2) {
-
+			
 			if (count >= 3)
 				count--;
-
+			
 			get_row(src_rows[row], &(data[((y + 1) * width + x1) * spp]), spp, channel, selection.size.width);
-	
+			
 			for (i = swidth, src_ptr = src_rows[row], neg_ptr = neg_rows[row]; i > 0; i--, src_ptr++, neg_ptr++)
 				*neg_ptr = neg_lut[*src_ptr];
-
+			
 			count++;
 			row = (row + 1) & 3;
 			
-		}
-		else {
+		} else {
 			count--;
 		}
-
+		
 		if (count == 3) {
 			(* filter) (selection.size.width, src_rows[(row + 2) & 3], dst_row,
-				neg_rows[(row + 1) & 3] + rspp,
-				neg_rows[(row + 2) & 3] + rspp,
-				neg_rows[(row + 3) & 3] + rspp);
+						neg_rows[(row + 1) & 3] + rspp,
+						neg_rows[(row + 2) & 3] + rspp,
+						neg_rows[(row + 3) & 3] + rspp);
 			set_row(&(overlay[(y * width + x1) * spp]), dst_row, spp, channel, selection.size.width);
-		}
-		else if (count == 2) {
+		} else if (count == 2) {
 			if (y == y1)
 				set_row(&(overlay[(y * width + x1) * spp]), src_rows[0], spp, channel, selection.size.width);
 			else
@@ -264,7 +256,7 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 		}
 		
 	}
-
+	
 	for (row = 0; row < 4; row ++) {
 		free(src_rows[row]);
 		free(neg_rows[row]);

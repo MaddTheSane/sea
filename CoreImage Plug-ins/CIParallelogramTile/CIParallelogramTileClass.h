@@ -19,17 +19,13 @@
 	// YES if the application succeeded
 	BOOL success;
 
-	// The label displaying the angle
-	IBOutlet id acuteLabel;
-	
-	// The slider for the angle
-	IBOutlet id acuteSlider;
-	
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 	
 	// YES if the effect must be refreshed
 	BOOL refresh;
+
+	NSBitmapImageRep *temp_rep;
 }
 // The new angle
 @property CGFloat acute;
