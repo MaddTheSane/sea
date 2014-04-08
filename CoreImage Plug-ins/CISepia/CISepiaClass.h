@@ -13,20 +13,9 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
-@interface CISepiaClass : NSObject <SSSeaVisualPlugin>
-{
-	// YES if the effect must be refreshed
-	BOOL refresh;
-	
-	// YES if the application succeeded
-	BOOL success;
-	
-	// Some temporary space we need preallocated for greyscale data
-	unsigned char *newdata;
-	
-	NSBitmapImageRep *temp_rep;
-}
+@interface CISepiaClass : SSKCIPlugin
 // The new intensity
 @property CGFloat intensity;
 

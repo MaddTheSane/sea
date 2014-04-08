@@ -5,17 +5,13 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CIPixellateClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize centerBased;
 @synthesize scale;
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	if (self = [super init]) {
+	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;
-		self.seaPlugins = manager;
 		[gOurBundle loadNibNamed:@"CIPixellate" owner:self topLevelObjects:&tmpArray];
 		self.nibArray = tmpArray;
 	}
@@ -65,10 +61,9 @@
 	
 	refresh = YES;
 	success = NO;
-	pluginData = [seaPlugins data];
-	//if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels){
+	pluginData = [self.seaPlugins data];
+	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
-	//}
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -79,7 +74,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	if (refresh)
@@ -89,7 +84,8 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	if (newdata) {
@@ -103,7 +99,7 @@
 
 - (void)reapply
 {
-	PluginData *pluginData = [seaPlugins data];
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
@@ -119,54 +115,14 @@
 	return success;
 }
 
-- (IBAction)preview:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	if (refresh)
-		[self execute];
-	[pluginData preview];
-	refresh = NO;
-}
-
-- (IBAction)cancel:(id)sender
-{
-	PluginData *pluginData = [seaPlugins data];
-	
-	[pluginData cancel];
-	if (newdata) {
-		free(newdata);
-		newdata = NULL;
-	}
-	
-	[panel setAlphaValue:1.0];
-	
-	[NSApp stopModal];
-	[NSApp endSheet:panel];
-	[panel orderOut:self];
-	success = NO;
-}
-
 - (IBAction)update:(id)sender
 {
-	PluginData *pluginData;
-	
 	centerBased = ([typeRadios selectedColumn] == 1);
-	[panel setAlphaValue:1.0];
 	
-	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp) { 
-		[self preview:self];
-		pluginData = [seaPlugins data];
-		if ([pluginData window])
-			[panel setAlphaValue:0.4];
-	}
+	[super update:sender];
 }
 
-#define CLASSMETHOD pixellate
-#include "CICommon.mi"
-
-- (unsigned char *)pixellate:(PluginData *)pluginData withBitmap:(unsigned char *)data
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {
 	CIContext *context;
 	CIImage *input, *crop_output, *output, *imm_output, *background;
@@ -258,7 +214,7 @@
 
 - (void)finishing
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *data, *overlay, *replace, newPixel[4];
 	NSInteger pos, i, j, k, i2, j2;
@@ -269,7 +225,6 @@
 	if (centerBased)
 		return;
 	
-	pluginData = [seaPlugins data];
 	selection = [pluginData selection];
 	spp = [pluginData spp];
 	width = [pluginData width];
