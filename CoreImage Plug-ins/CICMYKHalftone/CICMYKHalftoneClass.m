@@ -5,9 +5,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CICMYKHalftoneClass
-@synthesize panel;
-@synthesize seaPlugins;
-@synthesize nibArray;
 @synthesize angle;
 @synthesize sharpness;
 @synthesize gcr;
@@ -190,8 +187,10 @@
 	}
 }
 
-#define CLASSMETHOD halftone
-#include "CICommon.mi"
+- (unsigned char *)coreImageEffect:(PluginData *)pluginData withBitmap:(unsigned char *)data
+{
+	return [self halftone:pluginData withBitmap:data];
+}
 
 - (unsigned char *)halftone:(PluginData *)pluginData withBitmap:(unsigned char *)data
 {

@@ -73,7 +73,7 @@ DQ
                         <constraints>
                             <constraint firstAttribute="width" constant="38" id="r9q-h4-GPx"/>
                         </constraints>
-                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="0.00" id="50">
+                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title=".00" id="50">
                             <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="lMg-X9-qaE"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -159,7 +159,6 @@ DQ
                     </slider>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="33" firstAttribute="leading" secondItem="35" secondAttribute="trailing" constant="8" symbolic="YES" id="7UB-Kh-oqm"/>
                     <constraint firstItem="41" firstAttribute="top" secondItem="40" secondAttribute="bottom" constant="8" symbolic="YES" id="AM0-xT-hBD"/>
                     <constraint firstItem="35" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="BBw-ZS-bxA"/>
                     <constraint firstItem="40" firstAttribute="top" secondItem="35" secondAttribute="bottom" constant="8" symbolic="YES" id="BmB-lQ-jbR"/>
@@ -179,12 +178,10 @@ DQ
                     <constraint firstItem="39" firstAttribute="baseline" secondItem="41" secondAttribute="baseline" id="YgK-xN-8MN"/>
                     <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" constant="20" symbolic="YES" id="Yqo-Wh-1hO"/>
                     <constraint firstItem="14" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="cBp-lH-WAX"/>
-                    <constraint firstItem="39" firstAttribute="leading" secondItem="41" secondAttribute="trailing" constant="8" symbolic="YES" id="crX-8s-VWs"/>
                     <constraint firstItem="34" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="e7P-x5-tH8"/>
                     <constraint firstItem="13" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="eBo-P0-3af"/>
                     <constraint firstItem="35" firstAttribute="top" secondItem="34" secondAttribute="bottom" constant="8" symbolic="YES" id="ezF-44-ZLg"/>
                     <constraint firstItem="21" firstAttribute="leading" secondItem="14" secondAttribute="trailing" constant="8" symbolic="YES" id="jgS-kD-YHe"/>
-                    <constraint firstItem="21" firstAttribute="leading" secondItem="14" secondAttribute="trailing" constant="8" symbolic="YES" id="qY4-8S-COe"/>
                     <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="20" symbolic="YES" id="qZ1-6d-iAw"/>
                     <constraint firstItem="7" firstAttribute="baseline" secondItem="16" secondAttribute="baseline" id="rf9-Dv-qdE"/>
                     <constraint firstItem="41" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="uyT-qg-osx"/>

@@ -16,10 +16,6 @@
 #import <SeashoreKit/SSKCIPlugin.h>
 
 @interface CICircularWrapClass : SSKCIPlugin
-{
-	// YES if the effect must be refreshed
-	BOOL refresh;
-}
 // The angle of the twirl
 @property CGFloat angle;
 

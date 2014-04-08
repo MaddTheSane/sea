@@ -133,14 +133,6 @@
 - (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data;
 
 /*!
-	@method		determineContentBorders
-	@discussion	Determines the content borders, must be called before executing.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)determineContentBorders:(PluginData *)pluginData;
-
-/*!
 	@method		tile:
 	@discussion	Called by execute once preparation is complete.
 	@param		pluginData

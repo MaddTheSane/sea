@@ -16,10 +16,6 @@
 #import <SeashoreKit/SSKCIPlugin.h>
 
 @interface CICircularScreenClass : SSKCIPlugin
-{
-	// YES if the effect must be refreshed
-	BOOL refresh;
-}
 // The new width
 @property NSInteger dotWidth;
 

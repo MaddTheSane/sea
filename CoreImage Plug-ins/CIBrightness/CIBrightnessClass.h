@@ -16,10 +16,6 @@
 #import <SeashoreKit/SSKCIPlugin.h>
 
 @interface CIBrightnessClass : SSKCIPlugin
-{
-	// YES if the effect must be refreshed
-	BOOL refresh;
-}
 // The value of the brightness
 @property CGFloat brightness;
 
@@ -73,14 +69,6 @@
 - (void)run;
 
 /*!
-	@method		apply:
-	@discussion	Applies the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)apply:(id)sender;
-
-/*!
 	@method		reapply
 	@discussion	Applies the plug-in with previous settings.
 */
@@ -92,30 +80,6 @@
 	@result		Returns YES if the plug-in can be applied again, NO otherwise.
 */
 - (BOOL)canReapply;
-
-/*!
-	@method		preview:
-	@discussion	Previews the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
-
-/*!
-	@method		update:
-	@discussion	Updates the panel's labels.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
 
 /*!
 	@method		adjust:withBitmap:

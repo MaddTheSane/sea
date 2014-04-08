@@ -293,6 +293,70 @@
 	return resdata;
 }
 
+- (IBAction)preview:(id)sender
+{
+	PluginData *pluginData = [seaPlugins data];
+	
+	if (refresh)
+		[self execute];
+	[pluginData preview];
+	refresh = NO;
+}
+
+- (IBAction)cancel:(id)sender
+{
+	PluginData *pluginData = [seaPlugins data];
+	
+	[pluginData cancel];
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
+	
+	[panel setAlphaValue:1.0];
+	
+	[NSApp stopModal];
+	[NSApp endSheet:panel];
+	[panel orderOut:self];
+	success = NO;
+}
+
+- (IBAction)update:(id)sender
+{
+	PluginData *pluginData;
+	
+	[panel setAlphaValue:1.0];
+	
+	refresh = YES;
+	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
+		[self preview:self];
+		pluginData = [seaPlugins data];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
+	}
+}
+
+- (IBAction)apply:(id)sender
+{
+	PluginData *pluginData = [seaPlugins data];
+	
+	if (refresh)
+		[self execute];
+	[pluginData apply];
+	
+	[panel setAlphaValue:1.0];
+	
+	[NSApp stopModal];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
+	[panel orderOut:self];
+	success = YES;
+	if (newdata) {
+		free(newdata);
+		newdata = NULL;
+	}
+}
+
 - (BOOL)validateMenuItem:(id)menuItem
 {
 	return YES;

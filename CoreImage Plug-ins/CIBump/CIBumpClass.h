@@ -16,9 +16,6 @@
 #import <SeashoreKit/SSKCIPlugin.h>
 
 @interface CIBumpClass : SSKCIPlugin
-{
-	BOOL refresh;
-}
 // The scale of the bump
 @property CGFloat scale;
 
