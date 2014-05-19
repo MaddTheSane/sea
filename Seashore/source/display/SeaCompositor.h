@@ -89,7 +89,7 @@ typedef struct {
 				The layer to composite.
 	@param		options
 				The options for compositing.
-	@param		andData
+	@param		destPtr
 				A pointer to the data the layer should be composited onto.
 */
 - (void)compositeLayer:(SeaLayer *)layer withOptions:(CompositorOptions)options andData:(unsigned char *)destPtr;

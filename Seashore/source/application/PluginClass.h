@@ -2,7 +2,7 @@
 #import "SeaPlugins.h"
 
 /*!
-	@class		PluginClass
+	@protocol	PluginClass
 	@abstract	A basic class from which to build plug-ins.
 	@discussion	This class is in the public domain allowing plug-ins of any
 				license to be made compatible with Seashore.

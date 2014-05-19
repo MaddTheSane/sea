@@ -134,7 +134,7 @@
 	@discussion	Returns the window to use for the plug-in's panel.
 	@result		Returns the window to use for the plug-in's panel.
 */
-- (id)window;
+- (NSWindow *)window;
 
 /*!
 	@method		setOverlayBehaviour:

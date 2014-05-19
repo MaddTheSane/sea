@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application">
+            <connections>
+                <outlet property="delegate" destination="448" id="gVZ-Gv-F2e"/>
+            </connections>
+        </customObject>
         <menu title="MainMenu" systemMenu="main" id="29" userLabel="MainMenu">
             <items>
                 <menuItem title="NewApplication" id="56">
@@ -957,14 +961,14 @@ CA
                         <rect key="frame" x="20" y="20" width="440" height="290"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" id="w0l-wE-1H6">
-                            <rect key="frame" x="1" y="1" width="423" height="288"/>
+                            <rect key="frame" x="1" y="1" width="438" height="288"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" baseWritingDirection="leftToRight" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="4078">
-                                    <rect key="frame" x="0.0" y="0.0" width="423" height="5850"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="438" height="5710"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="423" height="288"/>
+                                    <size key="minSize" width="438" height="288"/>
                                     <size key="maxSize" width="465" height="10000000"/>
                                     <attributedString key="textStorage">
                                         <fragment content="The GNU General Public License (GPL)">
@@ -1419,7 +1423,7 @@ This General Public License does not permit incorporating your program into prop
                                         </fragment>
                                     </attributedString>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="423" height="288"/>
+                                    <size key="minSize" width="438" height="288"/>
                                     <size key="maxSize" width="465" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -1430,7 +1434,7 @@ This General Public License does not permit incorporating your program into prop
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="7366">
-                            <rect key="frame" x="424" y="1" width="15" height="288"/>
+                            <rect key="frame" x="423" y="1" width="16" height="288"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>

@@ -2,12 +2,12 @@
 #import <sys/sysctl.h>
 
 int randomTable[4096];
-int globalUniqueDocID;
+extern int globalUniqueDocID;
 int tempFileCount;
 int diskWarningLevel;
 BOOL useAltiVec;
 BOOL userWarnedOnDiskSpace;
-BOOL globalReadOnlyWarning;
+extern BOOL globalReadOnlyWarning;
 
 BOOL isAltiVecAvailable()
 {

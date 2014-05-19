@@ -10,7 +10,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
-#import <SeashoreKit/SSKCIPlugin.h>
+#import "SSKCIPlugin.h"
 
 @interface SharpenClass : SSKVisualPlugin
 // The number of extent

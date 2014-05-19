@@ -18,29 +18,27 @@
 
 - (void)awakeFromNib
 {
-	int i;
-	editableTypes = [NSMutableDictionary dictionary];
-	viewableTypes = [NSMutableDictionary dictionary];
+	editableTypes = [[NSMutableDictionary alloc] init];
+	viewableTypes = [[NSMutableDictionary alloc] init];
 	
 	// The document controller is responsible for tracking document types
 	// In addition, as it's in control of open, it also must know the types for import and export
 	NSArray *allDocumentTypes = [[[NSBundle mainBundle] infoDictionary]
 							  valueForKey:@"CFBundleDocumentTypes"];
-	for(i = 0; i < [allDocumentTypes count]; i++){
-		NSDictionary *typeDict = allDocumentTypes[i];
+	for (NSDictionary *typeDict in allDocumentTypes) {
 		NSMutableSet *assembly = [NSMutableSet set];
 
 		[assembly addObjectsFromArray:typeDict[@"CFBundleTypeExtensions"]];
 		[assembly addObjectsFromArray:typeDict[@"CFBundleTypeOSTypes"]];
-		[assembly addObjectsFromArray:typeDict[@"LSItemContentTypes"]];
+		//[assembly addObjectsFromArray:typeDict[@"LSItemContentTypes"]];
 		
 		NSString* key = typeDict[@"CFBundleTypeName"];
-		[assembly addObject:key];
+		//[assembly addObject:key];
 				
 		NSString *role = typeDict[@"CFBundleTypeRole"];
-		if([role isEqual:@"Editor"]){
+		if ([role isEqual:@"Editor"]) {
 			editableTypes[key] = assembly;
-		}else if ([role isEqual:@"Viewer"]) {
+		} else if ([role isEqual:@"Viewer"]) {
 			viewableTypes[key] = assembly;
 		}
 	}
@@ -309,9 +307,7 @@
 		}
 	}
 	
-	NSEnumerator *e = [set objectEnumerator];
-	NSString *candidate;
-	while (candidate = [e nextObject]) {
+	for (NSString *candidate in set) {
 		// I think we don't care about case in types
 		if(![aType caseInsensitiveCompare:candidate]){
 			return YES;

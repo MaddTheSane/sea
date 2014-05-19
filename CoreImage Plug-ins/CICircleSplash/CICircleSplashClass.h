@@ -13,7 +13,7 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
-#import <SeashoreKit/SSKPlugin.h>
+#import "SSKPlugin.h"
 
 @interface CICircleSplashClass : SSKPlugin
 {

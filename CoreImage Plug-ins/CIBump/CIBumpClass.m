@@ -1,4 +1,4 @@
-#import <SeashoreKit/Bitmap.h>
+#import "Bitmap.h"
 #import "CIBumpClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]

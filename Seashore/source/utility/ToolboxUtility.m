@@ -18,7 +18,7 @@
 #import "StatusUtility.h"
 #import "SeaWindowContent.h"
 #import "WarningsUtility.h"
-#import <SeashoreKit/SeashoreKit.h>
+#import "SeashoreKit.h"
 
 static NSString*	DocToolbarIdentifier 	= @"Document Toolbar Instance Identifier";
 

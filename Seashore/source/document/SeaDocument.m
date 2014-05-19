@@ -27,10 +27,12 @@
 #import "SeaWindowContent.h"
 
 extern int globalUniqueDocID;
+int globalUniqueDocID;
 
 extern IntPoint gScreenResolution;
 
 extern BOOL globalReadOnlyWarning;
+BOOL globalReadOnlyWarning;
 
 enum {
 	kNoStart = 0,
@@ -49,7 +51,7 @@ enum {
 	
 	// Initialize superclass first
 	if (![super init])
-		return NULL;
+		return nil;
 	
 	// Reset uniqueLayerID
 	uniqueLayerID = -1;

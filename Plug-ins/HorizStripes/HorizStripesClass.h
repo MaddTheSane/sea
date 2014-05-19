@@ -11,7 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "SeaPlugins.h"
-#import <SeashoreKit/SSKCIPlugin.h>
+#import "SSKCIPlugin.h"
 
 @interface HorizStripesClass : SSKPlugin
 

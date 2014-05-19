@@ -3,6 +3,8 @@
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 
+@protocol PluginClass;
+
 /*!
 	@enum		k...Plugin
 	@constant	kBasicPlugin
@@ -33,7 +35,7 @@ enum {
 	IBOutlet id controller;
 
 	// An array of all Seahore's plug-ins
-	NSArray *plugins;
+	NSMutableArray *plugins;
 
 	// The plug-ins used by the effect tool
 	NSArray *pointPlugins;
@@ -70,10 +72,10 @@ enum {
 /*!
 	@method		affinePlugin
 	@discussion	Returns the plug-in to be used for Core Image affine transforms.
-	@results	Returns an instance of the plug-in to be used  for Core Image
+	@result		Returns an instance of the plug-in to be used  for Core Image
 				affine transforms or NULL if no such instance exists.
 */
-- (id)affinePlugin;
+- (id <PluginClass>)affinePlugin;
 
 /*!
 	@method		data

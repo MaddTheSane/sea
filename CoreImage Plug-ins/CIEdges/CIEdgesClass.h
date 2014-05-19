@@ -13,7 +13,7 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
-#import <SeashoreKit/SSKCIPlugin.h>
+#import "SSKCIPlugin.h"
 
 @interface CIEdgesClass : SSKCIPlugin
 // The new intensity

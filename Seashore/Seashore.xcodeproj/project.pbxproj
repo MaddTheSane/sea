@@ -182,27 +182,7 @@
 		551E574418D0271400E4CDAF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50F418CF9FBC005809E3 /* Localizable.strings */; };
 		5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in Copy Spotlight plug-in */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; };
 		5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in Copy QuickLook plug-in */ = {isa = PBXBuildFile; fileRef = 5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */; };
-		5575352518DB56CA00AC0FBC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
-		5575352B18DB56CB00AC0FBC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5575352918DB56CB00AC0FBC /* InfoPlist.strings */; };
-		5575354B18DB576600AC0FBC /* SSKPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 5575354918DB576600AC0FBC /* SSKPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5575354C18DB576600AC0FBC /* SSKPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575354A18DB576600AC0FBC /* SSKPlugin.m */; };
-		5575354D18DB578C00AC0FBC /* SeashoreKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5575352D18DB56CB00AC0FBC /* SeashoreKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5575355018DB59A600AC0FBC /* SSKCIPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 5575354E18DB59A600AC0FBC /* SSKCIPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5575355118DB59A600AC0FBC /* SSKCIPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575354F18DB59A600AC0FBC /* SSKCIPlugin.m */; };
-		5575355218DB59D200AC0FBC /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
-		5575355318DB59D200AC0FBC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A518D0138C00E4CDAF /* QuartzCore.framework */; };
-		5575355418DB5AF700AC0FBC /* PluginData.h in Headers */ = {isa = PBXBuildFile; fileRef = A8CA58EB07936EBF004BE921 /* PluginData.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5575355518DB5AFE00AC0FBC /* PluginData.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CA58EC07936EBF004BE921 /* PluginData.m */; };
-		5575355618DB5B2B00AC0FBC /* Rects.h in Headers */ = {isa = PBXBuildFile; fileRef = A8E00A1D04BE5DF800A80207 /* Rects.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5575355718DB5B3300AC0FBC /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF9CC00536DE2000A80207 /* Rects.m */; };
-		5575355818DB5B6100AC0FBC /* SeaController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CE256603D66572013D2EC9 /* SeaController.m */; };
 		5575355918DB5B6800AC0FBC /* SeaController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CE256603D66572013D2EC9 /* SeaController.m */; };
-		5575355B18DB5CDB00AC0FBC /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BDC80A04BF04B000A80207 /* Bitmap.m */; };
-		5575355C18DB5CE100AC0FBC /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = A8BDC80904BF04B000A80207 /* Bitmap.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5575356018DB5D3400AC0FBC /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5575356118DB5D4A00AC0FBC /* SeashoreKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5575356218DB5DBF00AC0FBC /* SeaPlugins.h in Headers */ = {isa = PBXBuildFile; fileRef = A8537AED0788D9F5004EF3B7 /* SeaPlugins.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5575356318DB608600AC0FBC /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
 		557D533518CF9FEC005809E3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		557D534118CFA016005809E3 /* CIAffineTileClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D504A18CF9FBA005809E3 /* CIAffineTileClass.m */; };
 		557D536718CFAAF6005809E3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
@@ -254,78 +234,6 @@
 		55909F1D18D0082800F43F90 /* Crystallize+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DF818CFD43900F43F90 /* Crystallize+.bundle */; };
 		55909F1E18D0082800F43F90 /* Displacement Distortion+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909E2418CFD6DD00F43F90 /* Displacement Distortion+.bundle */; };
 		55909F1F18D0082800F43F90 /* Dot Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909E4818CFDA6900F43F90 /* Dot Screen+.bundle */; };
-		5593808A18F465E60022C282 /* SSKVisualPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 5593808818F465E60022C282 /* SSKVisualPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5593808B18F465E60022C282 /* SSKVisualPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5593808918F465E60022C282 /* SSKVisualPlugin.m */; };
-		5593808C18F46F3D0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593808D18F46F3D0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593808E18F46F3E0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593808F18F46F3E0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809018F46F3F0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809118F46F3F0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809218F46F400022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809318F46F400022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809418F46F410022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809518F46F410022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809618F46F420022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809718F46F430022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809818F46F430022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809918F46F430022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809A18F46F450022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809B18F46F450022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809C18F46F460022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809D18F46F460022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809E18F46F470022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		5593809F18F46F470022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380A018F46F480022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380A118F46F490022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380A218F46F490022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380A318F46F4A0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380A418F46F4B0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380A518F46F4C0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380A618F46F4C0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380A718F46F4D0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380A818F46F4D0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380A918F46F4E0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380AA18F46F4E0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380AB18F46F4E0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380AC18F46F4F0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380AD18F46F500022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380AE18F46F510022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380AF18F46F510022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380B018F46F520022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380B118F46F520022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380B218F46F530022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380B318F46F530022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380B418F46F540022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380B518F46F540022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380B618F46F560022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380B718F46F560022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380B818F46F570022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380B918F46F570022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380BA18F46F580022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380BB18F46F590022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380BC18F46F5A0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380BD18F46F5B0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380BE18F46F5B0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380BF18F46F5C0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380C018F46F5C0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380C118F46F5E0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380C218F46F5F0022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380C318F46F600022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380C418F46F600022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380C518F46F610022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380C618F46F620022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380C718F46F620022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380C818F46F630022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380C918F46F630022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380CA18F46F640022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380CB18F46F640022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380CC18F46F650022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380CD18F46F650022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380CE18F46F660022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380CF18F46F670022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380D018F46F680022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
-		559380D118F46F690022C282 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */; };
 		5599388418CFC69700E92088 /* CIBrightnessClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D506718CF9FBA005809E3 /* CIBrightnessClass.m */; };
 		5599388618CFC6A600E92088 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D506A18CF9FBA005809E3 /* Localizable.strings */; };
 		5599388818CFC6F100E92088 /* CIBumpClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D507218CF9FBA005809E3 /* CIBumpClass.m */; };
@@ -597,6 +505,14 @@
 		55BD2E8A18D103CE00C4EE1B /* Vortex+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D8518D0D0B900C4EE1B /* Vortex+.bundle */; };
 		55BD2E8B18D103CE00C4EE1B /* White Point Adjust+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */; };
 		55BD2E8C18D103CE00C4EE1B /* Zoom Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */; };
+		55DA7C751926C170002F6A3A /* SSKPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575354A18DB576600AC0FBC /* SSKPlugin.m */; };
+		55DA7C761926C170002F6A3A /* SSKVisualPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5593808918F465E60022C282 /* SSKVisualPlugin.m */; };
+		55DA7C771926C170002F6A3A /* SSKCIPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575354F18DB59A600AC0FBC /* SSKCIPlugin.m */; };
+		55DA7C781926C183002F6A3A /* PluginData.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CA58EC07936EBF004BE921 /* PluginData.m */; };
+		55DA7C791926C228002F6A3A /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BDC80A04BF04B000A80207 /* Bitmap.m */; };
+		55DA7C7A1926C22F002F6A3A /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF9CC00536DE2000A80207 /* Rects.m */; };
+		55DA7C7B1926C26C002F6A3A /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
+		55DA7C7C1926C26C002F6A3A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A518D0138C00E4CDAF /* QuartzCore.framework */; };
 		55E5E39D18D26A8F0082E60F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		55E5E3AD18D26A950082E60F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		55E5E3B118D26A950082E60F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D528718CF9FC1005809E3 /* Localizable.strings */; };
@@ -916,13 +832,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
 			remoteInfo = XCFQuickLook;
-		};
-		5575355D18DB5D1400AC0FBC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5575352318DB56CA00AC0FBC;
-			remoteInfo = SeashoreKit;
 		};
 		55909E0118CFD5A700F43F90 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1543,7 +1452,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5575356118DB5D4A00AC0FBC /* SeashoreKit.framework in Copy Frameworks */,
 				55850B3713D63BA100C3B2CB /* GIMPCore.framework in Copy Frameworks */,
 				55850B3813D63BA100C3B2CB /* TIFF.framework in Copy Frameworks */,
 			);
@@ -1603,7 +1511,6 @@
 		551E572918D0268500E4CDAF /* Exposure+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Exposure+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E573A18D0268A00E4CDAF /* False Color+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "False Color+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
-		5575352418DB56CA00AC0FBC /* SeashoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SeashoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5575352818DB56CB00AC0FBC /* SeashoreKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SeashoreKit-Info.plist"; sourceTree = "<group>"; };
 		5575352A18DB56CB00AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5575352C18DB56CB00AC0FBC /* SeashoreKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SeashoreKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -2336,7 +2243,6 @@
 				550AEAF618CFC5DE008918BA /* Cocoa.framework in Frameworks */,
 				551E56AE18D0139900E4CDAF /* Quartz.framework in Frameworks */,
 				551E56AF18D0139900E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593808E18F46F3E0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2347,7 +2253,6 @@
 				550AEB0418CFC5E1008918BA /* Cocoa.framework in Frameworks */,
 				551E56B018D0139A00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56B118D0139A00E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593808F18F46F3E0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2358,7 +2263,6 @@
 				551E568C18D0132900E4CDAF /* Cocoa.framework in Frameworks */,
 				551E56C218D0139F00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56C318D0139F00E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593809818F46F430022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2369,7 +2273,6 @@
 				551E56A618D0138C00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56A718D0138C00E4CDAF /* QuartzCore.framework in Frameworks */,
 				551E569B18D0132B00E4CDAF /* Cocoa.framework in Frameworks */,
-				5593809918F46F430022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2380,7 +2283,6 @@
 				551E572018D0268500E4CDAF /* Quartz.framework in Frameworks */,
 				551E572118D0268500E4CDAF /* QuartzCore.framework in Frameworks */,
 				551E572218D0268500E4CDAF /* Cocoa.framework in Frameworks */,
-				5593809A18F46F450022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2391,17 +2293,6 @@
 				551E573118D0268A00E4CDAF /* Quartz.framework in Frameworks */,
 				551E573218D0268A00E4CDAF /* QuartzCore.framework in Frameworks */,
 				551E573318D0268A00E4CDAF /* Cocoa.framework in Frameworks */,
-				5593809B18F46F450022C282 /* SeashoreKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5575352018DB56CA00AC0FBC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5575352518DB56CA00AC0FBC /* Cocoa.framework in Frameworks */,
-				5575355218DB59D200AC0FBC /* Quartz.framework in Frameworks */,
-				5575355318DB59D200AC0FBC /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2409,7 +2300,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5575356318DB608600AC0FBC /* SeashoreKit.framework in Frameworks */,
 				557D533518CF9FEC005809E3 /* Cocoa.framework in Frameworks */,
 				551E56A818D0139700E4CDAF /* Quartz.framework in Frameworks */,
 				551E56A918D0139700E4CDAF /* QuartzCore.framework in Frameworks */,
@@ -2423,7 +2313,6 @@
 				557D536718CFAAF6005809E3 /* Cocoa.framework in Frameworks */,
 				551E56AA18D0139800E4CDAF /* Quartz.framework in Frameworks */,
 				551E56AB18D0139800E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593808C18F46F3D0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2434,7 +2323,6 @@
 				55909D9E18CFCCF400F43F90 /* Cocoa.framework in Frameworks */,
 				551E56B818D0139C00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56B918D0139C00E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593809318F46F400022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2445,7 +2333,6 @@
 				55909DAD18CFCCF700F43F90 /* Cocoa.framework in Frameworks */,
 				551E56BA18D0139D00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56BB18D0139D00E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593809418F46F410022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2456,7 +2343,6 @@
 				55909DBB18CFCE5500F43F90 /* Cocoa.framework in Frameworks */,
 				551E56B418D0139B00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56B518D0139B00E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593809118F46F3F0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2467,7 +2353,6 @@
 				55909DF118CFD43900F43F90 /* Cocoa.framework in Frameworks */,
 				551E56BC18D0139D00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56BD18D0139D00E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593809518F46F410022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2478,7 +2363,6 @@
 				55909E1D18CFD6DD00F43F90 /* Cocoa.framework in Frameworks */,
 				551E56BE18D0139E00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56BF18D0139E00E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593809618F46F420022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2489,7 +2373,6 @@
 				55909E4018CFDA6900F43F90 /* Cocoa.framework in Frameworks */,
 				551E56C018D0139E00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56C118D0139E00E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593809718F46F430022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2500,7 +2383,6 @@
 				5599389018CFC72A00E92088 /* Cocoa.framework in Frameworks */,
 				551E56AC18D0139800E4CDAF /* Quartz.framework in Frameworks */,
 				551E56AD18D0139800E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593808D18F46F3D0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2511,7 +2393,6 @@
 				559938AB18CFCCCA00E92088 /* Cocoa.framework in Frameworks */,
 				551E56B218D0139A00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56B318D0139A00E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593809018F46F3F0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2522,7 +2403,6 @@
 				559938BA18CFCCCC00E92088 /* Cocoa.framework in Frameworks */,
 				551E56B618D0139C00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56B718D0139C00E4CDAF /* QuartzCore.framework in Frameworks */,
-				5593809218F46F400022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2533,7 +2413,6 @@
 				55BD2B8A18D0CA7C00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2B8B18D0CA7C00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2B8C18D0CA7C00C4EE1B /* Cocoa.framework in Frameworks */,
-				5593809C18F46F460022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2544,7 +2423,6 @@
 				55BD2B9A18D0CA7E00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2B9B18D0CA7E00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2B9C18D0CA7E00C4EE1B /* Cocoa.framework in Frameworks */,
-				5593809D18F46F460022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2555,7 +2433,6 @@
 				55BD2BA918D0CB0C00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2BAA18D0CB0C00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2BAB18D0CB0C00C4EE1B /* Cocoa.framework in Frameworks */,
-				5593809E18F46F470022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2566,7 +2443,6 @@
 				55BD2BB718D0CB0E00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2BB818D0CB0E00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2BB918D0CB0E00C4EE1B /* Cocoa.framework in Frameworks */,
-				5593809F18F46F470022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2577,7 +2453,6 @@
 				55BD2BC518D0CB7F00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2BC618D0CB7F00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2BC718D0CB7F00C4EE1B /* Cocoa.framework in Frameworks */,
-				559380A018F46F480022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2588,7 +2463,6 @@
 				55BD2BD318D0CB8300C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2BD418D0CB8300C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2BD518D0CB8300C4EE1B /* Cocoa.framework in Frameworks */,
-				559380A118F46F490022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2599,7 +2473,6 @@
 				55BD2BE218D0CE1900C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2BE318D0CE1900C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2BE418D0CE1900C4EE1B /* Cocoa.framework in Frameworks */,
-				559380A218F46F490022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2610,7 +2483,6 @@
 				55BD2BF018D0CE1C00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2BF118D0CE1C00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2BF218D0CE1C00C4EE1B /* Cocoa.framework in Frameworks */,
-				559380A318F46F4A0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2621,7 +2493,6 @@
 				55BD2BFE18D0CE7E00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2BFF18D0CE7E00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C0018D0CE7E00C4EE1B /* Cocoa.framework in Frameworks */,
-				559380A418F46F4B0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2632,7 +2503,6 @@
 				55BD2C0C18D0CE9700C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2C0D18D0CE9700C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C0E18D0CE9700C4EE1B /* Cocoa.framework in Frameworks */,
-				559380A518F46F4C0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2643,7 +2513,6 @@
 				55BD2C1A18D0CE9900C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2C1B18D0CE9900C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C1C18D0CE9900C4EE1B /* Cocoa.framework in Frameworks */,
-				559380A618F46F4C0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2654,7 +2523,6 @@
 				55BD2C2818D0CF2D00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2C2918D0CF2D00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C2A18D0CF2D00C4EE1B /* Cocoa.framework in Frameworks */,
-				559380A718F46F4D0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2665,7 +2533,6 @@
 				55BD2C3618D0CF3000C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2C3718D0CF3000C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C3818D0CF3000C4EE1B /* Cocoa.framework in Frameworks */,
-				559380A818F46F4D0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2676,7 +2543,6 @@
 				55BD2C4418D0CF3300C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2C4518D0CF3300C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C4618D0CF3300C4EE1B /* Cocoa.framework in Frameworks */,
-				559380A918F46F4E0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2687,7 +2553,6 @@
 				55BD2C5218D0CF9500C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2C5318D0CF9500C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C5418D0CF9500C4EE1B /* Cocoa.framework in Frameworks */,
-				559380AA18F46F4E0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2698,7 +2563,6 @@
 				55BD2C6018D0CF9700C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2C6118D0CF9700C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C6218D0CF9700C4EE1B /* Cocoa.framework in Frameworks */,
-				559380AB18F46F4E0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2709,7 +2573,6 @@
 				55BD2C6E18D0CF9B00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2C6F18D0CF9B00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C7018D0CF9B00C4EE1B /* Cocoa.framework in Frameworks */,
-				559380AC18F46F4F0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2720,7 +2583,6 @@
 				55BD2C7C18D0CF9F00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2C7D18D0CF9F00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C7E18D0CF9F00C4EE1B /* Cocoa.framework in Frameworks */,
-				559380AD18F46F500022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2731,7 +2593,6 @@
 				55BD2C8A18D0D02D00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2C8B18D0D02D00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C8C18D0D02D00C4EE1B /* Cocoa.framework in Frameworks */,
-				559380AE18F46F510022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2742,7 +2603,6 @@
 				55BD2C9818D0D03300C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2C9918D0D03300C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2C9A18D0D03300C4EE1B /* Cocoa.framework in Frameworks */,
-				559380AF18F46F510022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2753,7 +2613,6 @@
 				55BD2CA618D0D03900C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2CA718D0D03900C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2CA818D0D03900C4EE1B /* Cocoa.framework in Frameworks */,
-				559380B018F46F520022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2764,7 +2623,6 @@
 				55BD2CB418D0D03D00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2CB518D0D03D00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2CB618D0D03D00C4EE1B /* Cocoa.framework in Frameworks */,
-				559380B118F46F520022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2775,7 +2633,6 @@
 				55BD2CC218D0D05100C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2CC318D0D05100C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2CC418D0D05100C4EE1B /* Cocoa.framework in Frameworks */,
-				559380B218F46F530022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2786,7 +2643,6 @@
 				55BD2CD018D0D05400C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2CD118D0D05400C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2CD218D0D05400C4EE1B /* Cocoa.framework in Frameworks */,
-				559380B318F46F530022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2797,7 +2653,6 @@
 				55BD2CDE18D0D06600C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2CDF18D0D06600C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2CE018D0D06600C4EE1B /* Cocoa.framework in Frameworks */,
-				559380B418F46F540022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2808,7 +2663,6 @@
 				55BD2CEC18D0D07100C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2CED18D0D07100C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2CEE18D0D07100C4EE1B /* Cocoa.framework in Frameworks */,
-				559380B518F46F540022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2819,7 +2673,6 @@
 				55BD2CFA18D0D08300C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2CFB18D0D08300C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2CFC18D0D08300C4EE1B /* Cocoa.framework in Frameworks */,
-				559380B618F46F560022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2830,7 +2683,6 @@
 				55BD2D0818D0D08600C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2D0918D0D08600C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2D0A18D0D08600C4EE1B /* Cocoa.framework in Frameworks */,
-				559380B718F46F560022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2841,7 +2693,6 @@
 				55BD2D1618D0D08F00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2D1718D0D08F00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2D1818D0D08F00C4EE1B /* Cocoa.framework in Frameworks */,
-				559380B818F46F570022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2852,7 +2703,6 @@
 				55BD2D2418D0D09200C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2D2518D0D09200C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2D2618D0D09200C4EE1B /* Cocoa.framework in Frameworks */,
-				559380B918F46F570022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2863,7 +2713,6 @@
 				55BD2D3218D0D09F00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2D3318D0D09F00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2D3418D0D09F00C4EE1B /* Cocoa.framework in Frameworks */,
-				559380BA18F46F580022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2874,7 +2723,6 @@
 				55BD2D4018D0D0A200C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2D4118D0D0A200C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2D4218D0D0A200C4EE1B /* Cocoa.framework in Frameworks */,
-				559380BB18F46F590022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2885,7 +2733,6 @@
 				55BD2D4E18D0D0A800C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2D4F18D0D0A800C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2D5018D0D0A800C4EE1B /* Cocoa.framework in Frameworks */,
-				559380BC18F46F5A0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2896,7 +2743,6 @@
 				55BD2D5C18D0D0AA00C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2D5D18D0D0AA00C4EE1B /* QuartzCore.framework in Frameworks */,
 				55BD2D5E18D0D0AA00C4EE1B /* Cocoa.framework in Frameworks */,
-				559380BD18F46F5B0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2907,7 +2753,6 @@
 				55BD2D6B18D0D0B300C4EE1B /* Cocoa.framework in Frameworks */,
 				55BD2D6C18D0D0B300C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2D6D18D0D0B300C4EE1B /* QuartzCore.framework in Frameworks */,
-				559380BE18F46F5B0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2918,7 +2763,6 @@
 				55BD2D7C18D0D0B900C4EE1B /* Cocoa.framework in Frameworks */,
 				55BD2D7D18D0D0B900C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2D7E18D0D0B900C4EE1B /* QuartzCore.framework in Frameworks */,
-				559380BF18F46F5C0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2929,7 +2773,6 @@
 				55BD2D8D18D0D0C100C4EE1B /* Cocoa.framework in Frameworks */,
 				55BD2D8E18D0D0C100C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2D8F18D0D0C100C4EE1B /* QuartzCore.framework in Frameworks */,
-				559380C018F46F5C0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2940,7 +2783,6 @@
 				55BD2D9E18D0D0C500C4EE1B /* Cocoa.framework in Frameworks */,
 				55BD2D9F18D0D0C500C4EE1B /* Quartz.framework in Frameworks */,
 				55BD2DA018D0D0C500C4EE1B /* QuartzCore.framework in Frameworks */,
-				559380C118F46F5E0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2949,7 +2791,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E39D18D26A8F0082E60F /* Cocoa.framework in Frameworks */,
-				559380C218F46F5F0022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2958,7 +2799,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E3AD18D26A950082E60F /* Cocoa.framework in Frameworks */,
-				559380C318F46F600022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2967,7 +2807,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E3C218D26D0D0082E60F /* Cocoa.framework in Frameworks */,
-				559380C418F46F600022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2976,7 +2815,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E3D218D26D100082E60F /* Cocoa.framework in Frameworks */,
-				559380C518F46F610022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2985,7 +2823,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E3E218D26D120082E60F /* Cocoa.framework in Frameworks */,
-				559380C618F46F620022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2994,7 +2831,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E40418D26EBD0082E60F /* Cocoa.framework in Frameworks */,
-				559380C718F46F620022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3003,7 +2839,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E41418D26EC00082E60F /* Cocoa.framework in Frameworks */,
-				559380C818F46F630022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3012,7 +2847,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E42418D26EC40082E60F /* Cocoa.framework in Frameworks */,
-				559380C918F46F630022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3021,7 +2855,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E43418D26EC70082E60F /* Cocoa.framework in Frameworks */,
-				559380CA18F46F640022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3030,7 +2863,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E44318D26FB50082E60F /* Cocoa.framework in Frameworks */,
-				559380CB18F46F640022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3039,7 +2871,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E44F18D26FB80082E60F /* Cocoa.framework in Frameworks */,
-				559380CC18F46F650022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3048,7 +2879,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E45B18D26FBB0082E60F /* Cocoa.framework in Frameworks */,
-				559380CD18F46F650022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3057,7 +2887,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E46718D26FBF0082E60F /* Cocoa.framework in Frameworks */,
-				559380CE18F46F660022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3066,7 +2895,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E47318D26FC50082E60F /* Cocoa.framework in Frameworks */,
-				559380CF18F46F670022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3075,7 +2903,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E47F18D26FC70082E60F /* Cocoa.framework in Frameworks */,
-				559380D018F46F680022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3084,7 +2911,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E5E48B18D26FD70082E60F /* Cocoa.framework in Frameworks */,
-				559380D118F46F690022C282 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3099,7 +2925,8 @@
 				A8EDF14D078959C80022BB31 /* ApplicationServices.framework in Frameworks */,
 				A8BF652708E6FEAB006E9BFC /* Carbon.framework in Frameworks */,
 				A8EDF14C078959C80022BB31 /* Cocoa.framework in Frameworks */,
-				5575356018DB5D3400AC0FBC /* SeashoreKit.framework in Frameworks */,
+				55DA7C7B1926C26C002F6A3A /* Quartz.framework in Frameworks */,
+				55DA7C7C1926C26C002F6A3A /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3193,7 +3020,6 @@
 				55E5E47818D26FC50082E60F /* Sharpen.bundle */,
 				55E5E48418D26FC70082E60F /* Threshold.bundle */,
 				55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */,
-				5575352418DB56CA00AC0FBC /* SeashoreKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4679,24 +4505,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		5575352118DB56CA00AC0FBC /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5575356218DB5DBF00AC0FBC /* SeaPlugins.h in Headers */,
-				5575354B18DB576600AC0FBC /* SSKPlugin.h in Headers */,
-				5575355C18DB5CE100AC0FBC /* Bitmap.h in Headers */,
-				5593808A18F465E60022C282 /* SSKVisualPlugin.h in Headers */,
-				5575354D18DB578C00AC0FBC /* SeashoreKit.h in Headers */,
-				5575355618DB5B2B00AC0FBC /* Rects.h in Headers */,
-				5575355018DB59A600AC0FBC /* SSKCIPlugin.h in Headers */,
-				5575355418DB5AF700AC0FBC /* PluginData.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		550AEAF018CFC5DE008918BA /* Brightness+ */ = {
 			isa = PBXNativeTarget;
@@ -4799,24 +4607,6 @@
 			productName = CIAffineTile;
 			productReference = 551E573A18D0268A00E4CDAF /* False Color+.bundle */;
 			productType = "com.apple.product-type.bundle";
-		};
-		5575352318DB56CA00AC0FBC /* SeashoreKit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5575354718DB56CC00AC0FBC /* Build configuration list for PBXNativeTarget "SeashoreKit" */;
-			buildPhases = (
-				5575351F18DB56CA00AC0FBC /* Sources */,
-				5575352018DB56CA00AC0FBC /* Frameworks */,
-				5575352118DB56CA00AC0FBC /* Headers */,
-				5575352218DB56CA00AC0FBC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SeashoreKit;
-			productName = SeashoreKit;
-			productReference = 5575352418DB56CA00AC0FBC /* SeashoreKit.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 		557D533218CF9FEC005809E3 /* Affine Tile+ */ = {
 			isa = PBXNativeTarget;
@@ -5938,7 +5728,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				5575355E18DB5D1400AC0FBC /* PBXTargetDependency */,
 				55E5E4CC18D27A1E0082E60F /* PBXTargetDependency */,
 				55909F2118D0083800F43F90 /* PBXTargetDependency */,
 				35B157380A2C015A005B688F /* PBXTargetDependency */,
@@ -6004,7 +5793,6 @@
 			projectRoot = "";
 			targets = (
 				A8EDF05C078959C80022BB31 /* Seashore */,
-				5575352318DB56CA00AC0FBC /* SeashoreKit */,
 				A89B83C60A426D3B00AD6941 /* Seashore Disk Image */,
 				55909DFD18CFD59A00F43F90 /* CoreImage-based Plug-ins */,
 				557D533218CF9FEC005809E3 /* Affine Tile+ */,
@@ -6179,14 +5967,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				551E574418D0271400E4CDAF /* Localizable.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5575352218DB56CA00AC0FBC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5575352B18DB56CB00AC0FBC /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6842,20 +6622,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5575351F18DB56CA00AC0FBC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5575355518DB5AFE00AC0FBC /* PluginData.m in Sources */,
-				5575355818DB5B6100AC0FBC /* SeaController.m in Sources */,
-				5575354C18DB576600AC0FBC /* SSKPlugin.m in Sources */,
-				5575355B18DB5CDB00AC0FBC /* Bitmap.m in Sources */,
-				5575355718DB5B3300AC0FBC /* Rects.m in Sources */,
-				5575355118DB59A600AC0FBC /* SSKCIPlugin.m in Sources */,
-				5593808B18F465E60022C282 /* SSKVisualPlugin.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		557D532F18CF9FEC005809E3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -7419,17 +7185,20 @@
 				A8EDF116078959C80022BB31 /* BucketOptions.m in Sources */,
 				A8EDF117078959C80022BB31 /* PencilOptions.m in Sources */,
 				A8EDF118078959C80022BB31 /* ZoomOptions.m in Sources */,
+				55DA7C771926C170002F6A3A /* SSKCIPlugin.m in Sources */,
 				A8EDF119078959C80022BB31 /* BrushOptions.m in Sources */,
 				A8EDF11A078959C80022BB31 /* PositionOptions.m in Sources */,
 				A8EDF11B078959C80022BB31 /* TextureUtility.m in Sources */,
 				A8EDF11C078959C80022BB31 /* TextureView.m in Sources */,
 				A8EDF11D078959C80022BB31 /* SeaTexture.m in Sources */,
+				55DA7C761926C170002F6A3A /* SSKVisualPlugin.m in Sources */,
 				A8EDF11E078959C80022BB31 /* LayerSettings.m in Sources */,
 				A8EDF11F078959C80022BB31 /* BucketTool.m in Sources */,
 				A8EDF120078959C80022BB31 /* TextTool.m in Sources */,
 				A8EDF121078959C80022BB31 /* TextOptions.m in Sources */,
 				A8EDF122078959C80022BB31 /* InfoUtility.m in Sources */,
 				A8EDF123078959C80022BB31 /* EyedropOptions.m in Sources */,
+				55DA7C781926C183002F6A3A /* PluginData.m in Sources */,
 				A8EDF124078959C80022BB31 /* EyedropTool.m in Sources */,
 				A8EDF125078959C80022BB31 /* SeaSelection.m in Sources */,
 				A8EDF126078959C80022BB31 /* SeaWarning.m in Sources */,
@@ -7439,6 +7208,7 @@
 				A8EDF12D078959C80022BB31 /* ColorConversion.m in Sources */,
 				A8EDF12E078959C80022BB31 /* Bucket.m in Sources */,
 				A8EDF12F078959C80022BB31 /* SeaOperations.m in Sources */,
+				55DA7C751926C170002F6A3A /* SSKPlugin.m in Sources */,
 				A8EDF130078959C80022BB31 /* SeaCompositor.m in Sources */,
 				A8EDF131078959C80022BB31 /* AbstractTool.m in Sources */,
 				A8EDF132078959C80022BB31 /* BrushTool.m in Sources */,
@@ -7497,6 +7267,7 @@
 				A8F984D80BEEB83700375C73 /* MovePanel.m in Sources */,
 				A84DAD650BEF435B00E4311A /* EffectOptions.m in Sources */,
 				A8C207420CD46C2C00F91B3C /* WindowBackColorWell.m in Sources */,
+				55DA7C7A1926C22F002F6A3A /* Rects.m in Sources */,
 				A8FEC68D0D9F64DB00F47425 /* SeaApplication.m in Sources */,
 				DC11244A0FB08A490040BB8A /* SeaShadowView.m in Sources */,
 				DC493D6E0FB8ABAA009D352D /* SeaCursors.m in Sources */,
@@ -7505,6 +7276,7 @@
 				DCC900AB0FC50A3000C74521 /* SeaToolbarItem.m in Sources */,
 				DCC903C40FC5EB9500C74521 /* SeaOptionsView.m in Sources */,
 				DCC904930FC5F76600C74521 /* LayerControlView.m in Sources */,
+				55DA7C791926C228002F6A3A /* Bitmap.m in Sources */,
 				DC3B6F5E0FD37C14000F0427 /* LayerDataSource.m in Sources */,
 				DC3B6F850FD48F9B000F0427 /* LayerCell.m in Sources */,
 				DCA8928E0FD4AAA3002BEC8A /* NSArray_Extensions.m in Sources */,
@@ -7565,11 +7337,6 @@
 			isa = PBXTargetDependency;
 			name = XCFQuickLook;
 			targetProxy = 5528598713D62FBF001564E5 /* PBXContainerItemProxy */;
-		};
-		5575355E18DB5D1400AC0FBC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5575352318DB56CA00AC0FBC /* SeashoreKit */;
-			targetProxy = 5575355D18DB5D1400AC0FBC /* PBXContainerItemProxy */;
 		};
 		55909E0218CFD5A700F43F90 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -9227,67 +8994,12 @@
 			};
 			name = Release;
 		};
-		5575354318DB56CC00AC0FBC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SeashoreKit/SeashoreKit-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INFOPLIST_FILE = "SeashoreKit/SeashoreKit-Info.plist";
-				LD_DYLIB_INSTALL_NAME = "@rpath/$(EXECUTABLE_PATH)";
-				OTHER_LDFLAGS = (
-					"-undefined",
-					dynamic_lookup,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = framework;
-			};
-			name = Debug;
-		};
-		5575354418DB56CC00AC0FBC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SeashoreKit/SeashoreKit-Prefix.pch";
-				INFOPLIST_FILE = "SeashoreKit/SeashoreKit-Info.plist";
-				LD_DYLIB_INSTALL_NAME = "@rpath/$(EXECUTABLE_PATH)";
-				OTHER_LDFLAGS = (
-					"-undefined",
-					dynamic_lookup,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = framework;
-			};
-			name = Release;
-		};
 		557D533F18CF9FEC005809E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIAffineTileClass;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11664,9 +11376,11 @@
 					USE_CENTERING_CLIPVIEW,
 					MAIN_COMPILE,
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Seashore;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -11686,9 +11400,11 @@
 					USE_CENTERING_CLIPVIEW,
 					MAIN_COMPILE,
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Seashore;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -11717,7 +11433,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"__private_extern=__attribute__((visibility(\\\"hidden\\\")))",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -11725,8 +11444,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					SeashoreKit,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -11755,13 +11482,22 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "__private_extern=__attribute__((visibility(\\\"hidden\\\")))";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					SeashoreKit,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
@@ -11821,15 +11557,6 @@
 			buildConfigurations = (
 				551E573818D0268A00E4CDAF /* Debug */,
 				551E573918D0268A00E4CDAF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5575354718DB56CC00AC0FBC /* Build configuration list for PBXNativeTarget "SeashoreKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5575354318DB56CC00AC0FBC /* Debug */,
-				5575354418DB56CC00AC0FBC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -263,9 +263,9 @@
 /*!
 	@method		writeToFile:ofType:
 	@discussion	Writes the document's data to disk.
-	@param		path
+	@param		filename
 				The path of the file that the data should be written to.
-	@param		type
+	@param		ignore
 				The type of the file that the data that should be written to.
 	@result		Returns YES if the file is successfully written, NO otherwise.
 */
@@ -350,7 +350,7 @@
 /*!
 	@method		windowDidResignKey:
 	@discussion	Called when the document loses key focus.
-	@param		notification
+	@param		aNotification
 				Ignored.
 */
 - (void)windowDidResignKey:(NSNotification *)aNotification;

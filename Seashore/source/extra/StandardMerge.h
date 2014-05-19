@@ -42,7 +42,7 @@
 	@param		srcOpacity
 				The opacity with which the source pixel should replace.
 */
-__private_extern__ void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+__private_extern void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	replacePrimaryMerge
@@ -61,7 +61,7 @@ __private_extern__ void replaceMerge(int spp, unsigned char *destPtr, int destLo
 	@param		srcOpacity
 				The opacity with which the source pixel should replace.
 */
-__private_extern__ void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+__private_extern void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	replaceAlphaMerge
@@ -80,7 +80,7 @@ __private_extern__ void replacePrimaryMerge(int spp, unsigned char *destPtr, int
 	@param		srcOpacity
 				The opacity with which the source pixel should replace.
 */
-__private_extern__ void replaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+__private_extern void replaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	specialMerge
@@ -101,7 +101,7 @@ __private_extern__ void replaceAlphaMerge(int spp, unsigned char *destPtr, int d
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-__private_extern__ void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+__private_extern void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	normalMerge
@@ -122,7 +122,7 @@ __private_extern__ void specialMerge(int spp, unsigned char *destPtr, int destLo
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-__private_extern__ void normalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+__private_extern void normalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	eraseMerge
@@ -143,7 +143,7 @@ __private_extern__ void normalMerge(int spp, unsigned char *destPtr, int destLoc
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-__private_extern__ void eraseMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+__private_extern void eraseMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	primaryMerge
@@ -167,7 +167,7 @@ __private_extern__ void eraseMerge(int spp, unsigned char *destPtr, int destLoc,
 				YES if merges to destination pixel whose alpha is zero should be
 				skipped, NO otherwise.
 */
-__private_extern__ void primaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity, BOOL lazy);
+__private_extern void primaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity, BOOL lazy);
 
 /*!
 	@function	alphaMerge
@@ -188,7 +188,7 @@ __private_extern__ void primaryMerge(int spp, unsigned char *destPtr, int destLo
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-__private_extern__ void alphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+__private_extern void alphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	blendPixel
@@ -209,7 +209,7 @@ __private_extern__ void alphaMerge(int spp, unsigned char *destPtr, int destLoc,
 	@param		blend
 				The amount of blending to go on (between 0 and 255 inclusive).
 */
-__private_extern__ void blendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int blend);
+__private_extern void blendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int blend);
 
 /*!
 	@function	selectMerge
@@ -232,8 +232,6 @@ __private_extern__ void blendPixel(int spp, unsigned char *destPtr, int destLoc,
 				composited.
 	@param		srcLoc
 				The position in that block of the pixel.
-	@param		srcOpacity
-				The opacity with which the source pixel should be composited.
 */
 __private_extern__ void selectMerge(int choice, int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc);
 

@@ -14,7 +14,7 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
-#import <SeashoreKit/SSKCIPlugin.h>
+#import "SSKCIPlugin.h"
 
 @interface CIDisplacementDistortionClass : SSKCIPlugin <NSOpenSavePanelDelegate>
 {

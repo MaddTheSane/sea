@@ -11,7 +11,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 #import "GaussianFuncs.h"
-#import <SeashoreKit/SSKCIPlugin.h>
+#import "SSKCIPlugin.h"
 
 @interface GaussianClass : SSKVisualPlugin
 // The number of applications

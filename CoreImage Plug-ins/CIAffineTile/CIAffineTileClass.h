@@ -13,8 +13,8 @@
 #import "SeaPlugins.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
-#import <SeashoreKit/SeashoreKit.h>
-#import <SeashoreKit/SSKCIPlugin.h>
+#import "SeashoreKit.h"
+#import "SSKCIPlugin.h"
 
 @interface CIAffineTileClass : SSKPlugin
 {

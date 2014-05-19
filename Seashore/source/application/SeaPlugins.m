@@ -14,19 +14,7 @@ extern BOOL useAltiVec;
 
 @implementation SeaPlugins
 
-NSInteger plugin_sort(id obj1, id obj2, void *context)
-{
-	int result;
-	
-	result = [[obj1 groupName] caseInsensitiveCompare:[obj2 groupName]];
-	if (result == NSOrderedSame) {
-		result = [[obj1 name] caseInsensitiveCompare:[obj2 name]];
-	}
-	
-	return result;
-}
-
-BOOL checkRun(NSString *path, NSString *file)
+static BOOL checkRun(NSString *path, NSString *file)
 {
 	NSDictionary *infoDict;
 	BOOL canRun;
@@ -105,7 +93,7 @@ BOOL checkRun(NSString *path, NSString *file)
 	lastEffect = -1;
 	
 	// Add standard plug-ins
-	plugins = @[];
+	plugins = [[NSMutableArray alloc] init];
 	pluginsPath = [gMainBundle builtInPlugInsPath];
 	pre_files = [gFileManager directoryContentsAtPath:pluginsPath];
 	files = [NSMutableArray arrayWithCapacity:[pre_files count]];
@@ -123,12 +111,12 @@ BOOL checkRun(NSString *path, NSString *file)
 		if ([pre_files_name hasSuffix:@"+.bundle"]) {
 			found = NO;
 			range.location = 0;
-			range.length = [pre_files_name length] - (sizeof("+.bundle") - 1);
+			range.length = [pre_files_name length] - (strlen("+.bundle") - 1);
 			found_id = -1;
 			for (j = 0; j < [files count] && !found; j++) {
 				files_name = files[j];
 				next_range.location = 0;
-				next_range.length = [files_name length] - (sizeof(".bundle") - 1);
+				next_range.length = [files_name length] - (strlen(".bundle") - 1);
 				if ([[files_name substringWithRange:next_range] isEqualToString:[pre_files_name substringWithRange:range]]) {
 					found = YES;
 					found_id = j;
@@ -136,16 +124,18 @@ BOOL checkRun(NSString *path, NSString *file)
 			}
 			can_run = checkRun(pluginsPath, pre_files_name);
 			if (can_run) {
-				if (found) files[found_id] = pre_files_name;
-				else [files addObject:pre_files_name];
+				if (found)
+					files[found_id] = pre_files_name;
+				else
+					[files addObject:pre_files_name];
 			}
 		}
 	}
 	
 	// Check added plug-ins
 	ciAffineTransformIndex = -1;
-	for (i = 0; i < [files count]; i++) {		
-		bundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/%@", pluginsPath, files[i]]];
+	for (NSString *file in files) {
+		bundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/%@", pluginsPath, file]];
 		if (bundle && [bundle principalClass]) {
 			success = NO;
 			plugin = [[bundle principalClass] alloc];
@@ -153,7 +143,7 @@ BOOL checkRun(NSString *path, NSString *file)
 				if ([plugin respondsToSelector:@selector(initWithManager:)]) {
 					[plugin initWithManager:self];
 					if ([plugin respondsToSelector:@selector(sanity)] && [[plugin sanity] isEqualToString:@"Seashore Approved (Bobo)"]) {
-						plugins = [plugins arrayByAddingObject:plugin];
+						[plugins addObject:plugin];
 						success = YES;
 					}		
 				}
@@ -162,7 +152,16 @@ BOOL checkRun(NSString *path, NSString *file)
 	}
 	
 	// Sort and retain plug-ins
-	plugins = [plugins sortedArrayUsingFunction:plugin_sort context:NULL];
+	[plugins sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+		NSComparisonResult result;
+		
+		result = [[obj1 groupName] caseInsensitiveCompare:[obj2 groupName]];
+		if (result == NSOrderedSame) {
+			result = [[obj1 name] caseInsensitiveCompare:[obj2 name]];
+		}
+		
+		return result;
+	}];
 
 	// Determine affine transform plug-in
 	for (i = 0; i < [plugins count]; i++) {
@@ -170,8 +169,7 @@ BOOL checkRun(NSString *path, NSString *file)
 		if ([plugin respondsToSelector:@selector(runAffineTransform:withImage:spp:width:height:opaque:newWidth:newHeight:)]) {
 			if (ciAffineTransformIndex == -1) {
 				ciAffineTransformIndex = i;
-			}
-			else {
+			} else {
 				NSLog(@"Multiple plug-ins are affine transform capable (using first): %@ %@", files[ciAffineTransformIndex], files[i]);
 			}
 		}
@@ -248,7 +246,7 @@ BOOL checkRun(NSString *path, NSString *file)
 	if (ciAffineTransformIndex >= 0)
 		return plugins[ciAffineTransformIndex];
 	else
-		return NULL;
+		return nil;
 }
 
 - (PluginData*)data
@@ -294,7 +292,7 @@ BOOL checkRun(NSString *path, NSString *file)
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	id document = gCurrentDocument;
+	SeaDocument *document = gCurrentDocument;
 	
 	// Never when there is no document
 	if (document == NULL)

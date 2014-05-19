@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SeashoreKit/SeaPlugins.h>
+#import "SeaPlugins.h"
+#import "PluginClass.h"
 
-@interface SSKPlugin : NSObject
+@interface SSKPlugin : NSObject <PluginClass>
 {
 	@protected
 	// YES if the application succeeded
