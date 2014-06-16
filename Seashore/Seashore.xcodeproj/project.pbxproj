@@ -1520,20 +1520,12 @@
 		5575354A18DB576600AC0FBC /* SSKPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKPlugin.m; sourceTree = "<group>"; };
 		5575354E18DB59A600AC0FBC /* SSKCIPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKCIPlugin.h; sourceTree = "<group>"; };
 		5575354F18DB59A600AC0FBC /* SSKCIPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKCIPlugin.m; sourceTree = "<group>"; };
-		5575356B18DB78AA00AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIHatchedScreen.strings; sourceTree = "<group>"; };
-		5575356D18DB78B500AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGloom.strings; sourceTree = "<group>"; };
-		5575356F18DB89A500AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CILenticularHalo.strings; sourceTree = "<group>"; };
-		5575357118DB9A1A00AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CILineScreen.strings; sourceTree = "<group>"; };
-		5575357318DBA07200AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIMonochrome.strings; sourceTree = "<group>"; };
 		5575357418DBA82F00AC0FBC /* CICommon.mi */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc.preprocessed; path = CICommon.mi; sourceTree = "<group>"; };
-		5579919A18DA2C4A0061AC70 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGlassLozenge.strings; sourceTree = "<group>"; };
 		557991B518DA4BD80061AC70 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557991B618DA56CA0061AC70 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557991B718DA57350061AC70 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557B939718D77CD6003ABCD6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557B939818D77FF8003ABCD6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		557B939A18D781EB003ABCD6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CICMYKHalftone.strings; sourceTree = "<group>"; };
-		557B939C18D781ED003ABCD6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CICMYKHalftone.strings"; sourceTree = "<group>"; };
 		557D504918CF9FBA005809E3 /* CIAffineTileClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIAffineTileClass.h; sourceTree = "<group>"; };
 		557D504A18CF9FBA005809E3 /* CIAffineTileClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIAffineTileClass.m; sourceTree = "<group>"; };
 		557D504C18CF9FBA005809E3 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1728,28 +1720,64 @@
 		55909E7A18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E7D18CFEEAF00F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55909E8818CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		5593805918F3A2590022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CITwirl.strings; sourceTree = "<group>"; };
-		5593805B18F3A4D20022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CISunbeams.strings; sourceTree = "<group>"; };
-		5593805D18F3A5F60022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIStarshine.strings; sourceTree = "<group>"; };
-		5593805F18F3A8200022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CISharpen.strings; sourceTree = "<group>"; };
-		5593806118F3A9540022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CISepia.strings; sourceTree = "<group>"; };
-		5593806318F3AA440022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPixellate.strings; sourceTree = "<group>"; };
-		5593806518F3AA460022C282 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CIPixellate.strings"; sourceTree = "<group>"; };
-		5593806718F3AAC00022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPinch.strings; sourceTree = "<group>"; };
-		5593806918F3AB900022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPointillize.strings; sourceTree = "<group>"; };
-		5593806B18F3AB960022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIParallelogramTile.strings; sourceTree = "<group>"; };
-		5593806D18F3ABFD0022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIUnsharpMask.strings; sourceTree = "<group>"; };
-		5593806F18F3AC1E0022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CITorusLens.strings; sourceTree = "<group>"; };
-		5593807118F3AC800022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIOpTile.strings; sourceTree = "<group>"; };
-		5593807318F3AC840022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CINoiseReduction.strings; sourceTree = "<group>"; };
-		5593807518F3AD050022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGammaAdjust.strings; sourceTree = "<group>"; };
 		5593808818F465E60022C282 /* SSKVisualPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKVisualPlugin.h; sourceTree = "<group>"; };
 		5593808918F465E60022C282 /* SSKVisualPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKVisualPlugin.m; sourceTree = "<group>"; };
+		55969703194F755D0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		55969704194F75680068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SeaDocument.xib; sourceTree = "<group>"; };
+		55969705194F75710068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CocoaContent.xib; sourceTree = "<group>"; };
+		55969708194F75820068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SVGContent.xib; sourceTree = "<group>"; };
+		55969709194F758C0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIBloom.xib; sourceTree = "<group>"; };
+		5596970A194F759E0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIBrightness.xib; sourceTree = "<group>"; };
+		5596970B194F75AD0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIBump.xib; sourceTree = "<group>"; };
+		5596970C194F75BE0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CICircularScreen.xib; sourceTree = "<group>"; };
+		5596970D194F75CD0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CICircularWrap.xib; sourceTree = "<group>"; };
+		5596970E194F75DC0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CICMYKHalftone.xib; sourceTree = "<group>"; };
+		5596970F194F75E00068C5AC /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "en-GB.lproj/CICMYKHalftone.xib"; sourceTree = "<group>"; };
+		55969710194F75EE0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CICrystallize.xib; sourceTree = "<group>"; };
+		55969711194F75F20068C5AC /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "en-GB.lproj/CICrystallize.xib"; sourceTree = "<group>"; };
+		55969712194F75FF0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIDisplacementDistortion.xib; sourceTree = "<group>"; };
+		55969713194F760E0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIDotScreen.xib; sourceTree = "<group>"; };
+		55969714194F76190068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIEdges.xib; sourceTree = "<group>"; };
+		55969715194F76260068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIEdgeWork.xib; sourceTree = "<group>"; };
+		55969716194F76350068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIExposure.xib; sourceTree = "<group>"; };
+		55969717194F76450068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIGammaAdjust.xib; sourceTree = "<group>"; };
+		55969718194F765E0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIGaussianBlur.xib; sourceTree = "<group>"; };
+		55969719194F76710068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIGlassDistortion.xib; sourceTree = "<group>"; };
+		5596971A194F767E0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIGlassLozenge.xib; sourceTree = "<group>"; };
+		5596971B194F76940068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIGloom.xib; sourceTree = "<group>"; };
+		5596971C194F76A30068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIHatchedScreen.xib; sourceTree = "<group>"; };
+		5596971D194F76B00068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CILenticularHalo.xib; sourceTree = "<group>"; };
+		5596971E194F76BE0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CILineScreen.xib; sourceTree = "<group>"; };
+		5596971F194F78350068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIMonochrome.xib; sourceTree = "<group>"; };
+		55969720194F78440068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CINoiseReduction.xib; sourceTree = "<group>"; };
+		55969721194F78520068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIOpTile.xib; sourceTree = "<group>"; };
+		55969722194F785F0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIParallelogramTile.xib; sourceTree = "<group>"; };
+		55969723194F786C0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIPinch.xib; sourceTree = "<group>"; };
+		55969724194F787D0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIPixellate.xib; sourceTree = "<group>"; };
+		55969725194F78840068C5AC /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "en-GB.lproj/CIPixellate.xib"; sourceTree = "<group>"; };
+		55969726194F789C0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIPointillize.xib; sourceTree = "<group>"; };
+		55969727194F78A80068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIPosterize.xib; sourceTree = "<group>"; };
+		55969728194F78AC0068C5AC /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "en-GB.lproj/CIPosterize.xib"; sourceTree = "<group>"; };
+		55969729194F78B80068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CISepia.xib; sourceTree = "<group>"; };
+		5596972A194F78C60068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CISharpen.xib; sourceTree = "<group>"; };
+		5596972D194F78DB0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CISpotLight.xib; sourceTree = "<group>"; };
+		5596972E194F78EA0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIStarshine.xib; sourceTree = "<group>"; };
+		5596972F194F78FA0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CISunbeams.xib; sourceTree = "<group>"; };
+		55969730194F79050068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CITorusLens.xib; sourceTree = "<group>"; };
+		55969731194F79110068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CITwirl.xib; sourceTree = "<group>"; };
+		55969732194F791E0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIUnsharpMask.xib; sourceTree = "<group>"; };
+		55969733194F792D0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CIVortex.xib; sourceTree = "<group>"; };
+		55969734194F793A0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Brightness.xib; sourceTree = "<group>"; };
+		55969735194F79490068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Gaussian.xib; sourceTree = "<group>"; };
+		55969736194F79560068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/HSV.xib; sourceTree = "<group>"; };
+		55969737194F79620068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Pixellate.xib; sourceTree = "<group>"; };
+		55969738194F796E0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Posterize.xib; sourceTree = "<group>"; };
+		55969739194F79720068C5AC /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "en-GB.lproj/Posterize.xib"; sourceTree = "<group>"; };
+		5596973A194F79810068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Sharpen.xib; sourceTree = "<group>"; };
+		5596973B194F798C0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Threshold.xib; sourceTree = "<group>"; };
 		5599389718CFC72A00E92088 /* Bloom+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bloom+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938B218CFCCCA00E92088 /* Checkerboard+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checkerboard+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938C118CFCCCC00E92088 /* Circular Screen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Screen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		559A635018D8B25C00FD74A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGlassDistortion.strings; sourceTree = "<group>"; };
-		559A635218D8B26100FD74A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIGaussianBlur.strings; sourceTree = "<group>"; };
 		559E255818DCB79000D0F3DB /* CICommon-RestoreAlpha.mi */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc.preprocessed; path = "CICommon-RestoreAlpha.mi"; sourceTree = "<group>"; };
 		55BD2B9218D0CA7C00C4EE1B /* Gamma Adjust+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gamma Adjust+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2BA218D0CA7E00C4EE1B /* Gaussian Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gaussian Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1790,63 +1818,6 @@
 		55BD2D8518D0D0B900C4EE1B /* Vortex+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vortex+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "White Point Adjust+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zoom Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55CA8E7718D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SeaDocument.xib; sourceTree = "<group>"; };
-		55CA8E7818D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		55CA8E7918D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CocoaContent.xib; sourceTree = "<group>"; };
-		55CA8E7A18D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SVGContent.xib; sourceTree = "<group>"; };
-		55CA8E7B18D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIBloom.xib; sourceTree = "<group>"; };
-		55CA8E7C18D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIBrightness.xib; sourceTree = "<group>"; };
-		55CA8E7D18D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIBump.xib; sourceTree = "<group>"; };
-		55CA8E7E18D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CICircularScreen.xib; sourceTree = "<group>"; };
-		55CA8E7F18D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CICircularWrap.xib; sourceTree = "<group>"; };
-		55CA8E8018D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CICMYKHalftone.xib; sourceTree = "<group>"; };
-		55CA8E8118D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CICrystallize.xib; sourceTree = "<group>"; };
-		55CA8E8218D12A9600FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIDisplacementDistortion.xib; sourceTree = "<group>"; };
-		55CA8E8318D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIDotScreen.xib; sourceTree = "<group>"; };
-		55CA8E8418D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIEdges.xib; sourceTree = "<group>"; };
-		55CA8E8518D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIEdgeWork.xib; sourceTree = "<group>"; };
-		55CA8E8618D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIExposure.xib; sourceTree = "<group>"; };
-		55CA8E8718D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIGammaAdjust.xib; sourceTree = "<group>"; };
-		55CA8E8818D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIGaussianBlur.xib; sourceTree = "<group>"; };
-		55CA8E8918D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIGlassDistortion.xib; sourceTree = "<group>"; };
-		55CA8E8A18D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIGlassLozenge.xib; sourceTree = "<group>"; };
-		55CA8E8B18D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIGloom.xib; sourceTree = "<group>"; };
-		55CA8E8C18D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIHatchedScreen.xib; sourceTree = "<group>"; };
-		55CA8E8D18D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CILenticularHalo.xib; sourceTree = "<group>"; };
-		55CA8E8E18D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CILineScreen.xib; sourceTree = "<group>"; };
-		55CA8E8F18D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIMonochrome.xib; sourceTree = "<group>"; };
-		55CA8E9018D12A9700FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CINoiseReduction.xib; sourceTree = "<group>"; };
-		55CA8E9118D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIOpTile.xib; sourceTree = "<group>"; };
-		55CA8E9218D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIParallelogramTile.xib; sourceTree = "<group>"; };
-		55CA8E9318D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIPinch.xib; sourceTree = "<group>"; };
-		55CA8E9418D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIPixellate.xib; sourceTree = "<group>"; };
-		55CA8E9518D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIPointillize.xib; sourceTree = "<group>"; };
-		55CA8E9618D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIPosterize.xib; sourceTree = "<group>"; };
-		55CA8E9718D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CISepia.xib; sourceTree = "<group>"; };
-		55CA8E9818D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CISharpen.xib; sourceTree = "<group>"; };
-		55CA8E9918D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CISpotLight.xib; sourceTree = "<group>"; };
-		55CA8E9A18D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIStarshine.xib; sourceTree = "<group>"; };
-		55CA8E9B18D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CISunbeams.xib; sourceTree = "<group>"; };
-		55CA8E9C18D12A9800FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CITorusLens.xib; sourceTree = "<group>"; };
-		55CA8E9D18D12A9900FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CITwirl.xib; sourceTree = "<group>"; };
-		55CA8E9E18D12A9900FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIUnsharpMask.xib; sourceTree = "<group>"; };
-		55CA8E9F18D12A9900FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIVortex.xib; sourceTree = "<group>"; };
-		55CA8EAB18D12AAE00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIBloom.strings; sourceTree = "<group>"; };
-		55CA8EAD18D12AB700FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIBrightness.strings; sourceTree = "<group>"; };
-		55CA8EAF18D12ABE00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIBump.strings; sourceTree = "<group>"; };
-		55CA8EB118D12AC600FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CICircularScreen.strings; sourceTree = "<group>"; };
-		55CA8EB318D12ACC00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CICircularWrap.strings; sourceTree = "<group>"; };
-		55CA8EB518D12AD800FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIVortex.strings; sourceTree = "<group>"; };
-		55CA8EB718D12BC000FB7F00 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CIPosterize.strings"; sourceTree = "<group>"; };
-		55CA8EB918D12BC200FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPosterize.strings; sourceTree = "<group>"; };
-		55CA8EBB18D12BDC00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CICrystallize.strings; sourceTree = "<group>"; };
-		55CA8EBD18D12BDD00FB7F00 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CICrystallize.strings"; sourceTree = "<group>"; };
-		55CA8ECF18D12D9D00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIDisplacementDistortion.strings; sourceTree = "<group>"; };
-		55CA8ED118D12DB500FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIDotScreen.strings; sourceTree = "<group>"; };
-		55CA8ED318D12E1E00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIEdges.strings; sourceTree = "<group>"; };
-		55CA8ED518D12E9A00FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIEdgeWork.strings; sourceTree = "<group>"; };
-		55CA8ED718D12EC400FB7F00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIExposure.strings; sourceTree = "<group>"; };
-		55E5E28E18D26A2F0082E60F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Brightness.xib; sourceTree = "<group>"; };
 		55E5E29218D26A2F0082E60F /* BrightnessClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessClass.h; sourceTree = "<group>"; };
 		55E5E29318D26A2F0082E60F /* BrightnessClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrightnessClass.m; sourceTree = "<group>"; };
 		55E5E29818D26A2F0082E60F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1856,7 +1827,6 @@
 		55E5E2A818D26A2F0082E60F /* CMYKClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMYKClass.h; sourceTree = "<group>"; };
 		55E5E2A918D26A2F0082E60F /* CMYKClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMYKClass.m; sourceTree = "<group>"; };
 		55E5E2AC18D26A2F0082E60F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		55E5E2C318D26A2F0082E60F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Gaussian.xib; sourceTree = "<group>"; };
 		55E5E2C818D26A2F0082E60F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55E5E2CC18D26A2F0082E60F /* GaussianClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GaussianClass.h; sourceTree = "<group>"; };
 		55E5E2CD18D26A2F0082E60F /* GaussianClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GaussianClass.m; sourceTree = "<group>"; };
@@ -1867,7 +1837,6 @@
 		55E5E2DD18D26A2F0082E60F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55E5E2E118D26A2F0082E60F /* HorizStripesClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizStripesClass.h; sourceTree = "<group>"; };
 		55E5E2E218D26A2F0082E60F /* HorizStripesClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizStripesClass.m; sourceTree = "<group>"; };
-		55E5E2E618D26A2F0082E60F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HSV.xib; sourceTree = "<group>"; };
 		55E5E2EB18D26A2F0082E60F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55E5E2EF18D26A300082E60F /* HSVClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSVClass.h; sourceTree = "<group>"; };
 		55E5E2F018D26A300082E60F /* HSVClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSVClass.m; sourceTree = "<group>"; };
@@ -1878,12 +1847,10 @@
 		55E5E2FF18D26A300082E60F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55E5E30418D26A300082E60F /* MedianClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedianClass.h; sourceTree = "<group>"; };
 		55E5E30518D26A300082E60F /* MedianClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedianClass.m; sourceTree = "<group>"; };
-		55E5E30818D26A300082E60F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Pixellate.xib; sourceTree = "<group>"; };
 		55E5E30A18D26A300082E60F /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55E5E30D18D26A300082E60F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55E5E31218D26A300082E60F /* PixellateClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PixellateClass.h; sourceTree = "<group>"; };
 		55E5E31318D26A300082E60F /* PixellateClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PixellateClass.m; sourceTree = "<group>"; };
-		55E5E31618D26A300082E60F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Posterize.xib; sourceTree = "<group>"; };
 		55E5E31818D26A300082E60F /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55E5E31C18D26A300082E60F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55E5E32118D26A300082E60F /* PosterizeClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PosterizeClass.h; sourceTree = "<group>"; };
@@ -1895,12 +1862,10 @@
 		55E5E33018D26A300082E60F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55E5E33518D26A300082E60F /* SepiaClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SepiaClass.h; sourceTree = "<group>"; };
 		55E5E33618D26A300082E60F /* SepiaClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SepiaClass.m; sourceTree = "<group>"; };
-		55E5E33918D26A300082E60F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Sharpen.xib; sourceTree = "<group>"; };
 		55E5E33E18D26A300082E60F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55E5E34318D26A300082E60F /* SharpenClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharpenClass.h; sourceTree = "<group>"; };
 		55E5E34418D26A300082E60F /* SharpenClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharpenClass.m; sourceTree = "<group>"; };
 		55E5E34518D26A300082E60F /* SharpenFuncs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharpenFuncs.h; sourceTree = "<group>"; };
-		55E5E34818D26A300082E60F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Threshold.xib; sourceTree = "<group>"; };
 		55E5E34D18D26A300082E60F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55E5E35218D26A300082E60F /* ThresholdClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThresholdClass.h; sourceTree = "<group>"; };
 		55E5E35318D26A300082E60F /* ThresholdClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThresholdClass.m; sourceTree = "<group>"; };
@@ -1911,11 +1876,9 @@
 		55E5E35F18D26A300082E60F /* VertStripesClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VertStripesClass.m; sourceTree = "<group>"; };
 		55E5E3A518D26A8F0082E60F /* Brightness.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Brightness.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E3B518D26A950082E60F /* Checkerboard.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Checkerboard.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E3B718D26AC50082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Brightness.strings; sourceTree = "<group>"; };
 		55E5E3CA18D26D0D0082E60F /* CMYK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CMYK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E3DA18D26D100082E60F /* Gaussian.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Gaussian.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E3EA18D26D120082E60F /* Greyscale.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Greyscale.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E3F918D26E0F0082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Gaussian.strings; sourceTree = "<group>"; };
 		55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Horizontal Stripes.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E41C18D26EC00082E60F /* HSV.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HSV.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E42C18D26EC40082E60F /* Invert.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Invert.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1927,12 +1890,6 @@
 		55E5E47818D26FC50082E60F /* Sharpen.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sharpen.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E48418D26FC70082E60F /* Threshold.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Threshold.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vertical Stripes.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E49218D270410082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HSV.strings; sourceTree = "<group>"; };
-		55E5E49318D2704B0082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Pixellate.strings; sourceTree = "<group>"; };
-		55E5E49418D2705B0082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Posterize.strings; sourceTree = "<group>"; };
-		55E5E49518D2705D0082E60F /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Posterize.strings"; sourceTree = "<group>"; };
-		55E5E49618D2706A0082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Sharpen.strings; sourceTree = "<group>"; };
-		55E5E49718D270780082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Threshold.strings; sourceTree = "<group>"; };
 		A801053106945E1E00A80207 /* GradientTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientTool.h; sourceTree = "<group>"; };
 		A801053206945E1E00A80207 /* GradientTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientTool.m; sourceTree = "<group>"; };
 		A80983D50871420900F7412F /* JP2Exporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JP2Exporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -7699,7 +7656,7 @@
 		551E56D218D01A7500E4CDAF /* SeaDocument.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E7718D12A9600FB7F00 /* Base */,
+				55969704194F75680068C5AC /* en */,
 			);
 			name = SeaDocument.xib;
 			sourceTree = "<group>";
@@ -7707,7 +7664,7 @@
 		551E56D718D01AB500E4CDAF /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E7818D12A9600FB7F00 /* Base */,
+				55969703194F755D0068C5AC /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -7715,7 +7672,7 @@
 		551E56DC18D01AD900E4CDAF /* CocoaContent.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E7918D12A9600FB7F00 /* Base */,
+				55969705194F75710068C5AC /* en */,
 			);
 			name = CocoaContent.xib;
 			sourceTree = "<group>";
@@ -7723,7 +7680,7 @@
 		551E56E118D01AF900E4CDAF /* SVGContent.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E7A18D12A9600FB7F00 /* Base */,
+				55969708194F75820068C5AC /* en */,
 			);
 			name = SVGContent.xib;
 			sourceTree = "<group>";
@@ -8200,8 +8157,7 @@
 		55909DD518CFCF3600F43F90 /* CIBloom.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E7B18D12A9600FB7F00 /* Base */,
-				55CA8EAB18D12AAE00FB7F00 /* en */,
+				55969709194F758C0068C5AC /* en */,
 			);
 			name = CIBloom.xib;
 			sourceTree = "<group>";
@@ -8209,8 +8165,7 @@
 		55909DDA18CFCF5600F43F90 /* CIBrightness.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E7C18D12A9600FB7F00 /* Base */,
-				55CA8EAD18D12AB700FB7F00 /* en */,
+				5596970A194F759E0068C5AC /* en */,
 			);
 			name = CIBrightness.xib;
 			sourceTree = "<group>";
@@ -8218,8 +8173,7 @@
 		55909DDF18CFCF7600F43F90 /* CIBump.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E7D18D12A9600FB7F00 /* Base */,
-				55CA8EAF18D12ABE00FB7F00 /* en */,
+				5596970B194F75AD0068C5AC /* en */,
 			);
 			name = CIBump.xib;
 			sourceTree = "<group>";
@@ -8227,8 +8181,7 @@
 		55909DE818CFD06500F43F90 /* CICircularWrap.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E7F18D12A9600FB7F00 /* Base */,
-				55CA8EB318D12ACC00FB7F00 /* en */,
+				5596970D194F75CD0068C5AC /* en */,
 			);
 			name = CICircularWrap.xib;
 			sourceTree = "<group>";
@@ -8236,9 +8189,8 @@
 		55909E2E18CFD80400F43F90 /* CICMYKHalftone.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8018D12A9600FB7F00 /* Base */,
-				557B939A18D781EB003ABCD6 /* en */,
-				557B939C18D781ED003ABCD6 /* en-GB */,
+				5596970E194F75DC0068C5AC /* en */,
+				5596970F194F75E00068C5AC /* en-GB */,
 			);
 			name = CICMYKHalftone.xib;
 			sourceTree = "<group>";
@@ -8246,9 +8198,8 @@
 		55909E3318CFD92700F43F90 /* CICrystallize.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8118D12A9600FB7F00 /* Base */,
-				55CA8EBB18D12BDC00FB7F00 /* en */,
-				55CA8EBD18D12BDD00FB7F00 /* en-GB */,
+				55969710194F75EE0068C5AC /* en */,
+				55969711194F75F20068C5AC /* en-GB */,
 			);
 			name = CICrystallize.xib;
 			sourceTree = "<group>";
@@ -8256,8 +8207,7 @@
 		55909E3918CFD9BD00F43F90 /* CIDisplacementDistortion.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8218D12A9600FB7F00 /* Base */,
-				55CA8ECF18D12D9D00FB7F00 /* en */,
+				55969712194F75FF0068C5AC /* en */,
 			);
 			name = CIDisplacementDistortion.xib;
 			sourceTree = "<group>";
@@ -8265,8 +8215,7 @@
 		55909E5118CFDF4C00F43F90 /* CICircularScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E7E18D12A9600FB7F00 /* Base */,
-				55CA8EB118D12AC600FB7F00 /* en */,
+				5596970C194F75BE0068C5AC /* en */,
 			);
 			name = CICircularScreen.xib;
 			sourceTree = "<group>";
@@ -8274,8 +8223,7 @@
 		55909EA318CFFD1C00F43F90 /* CIDotScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8318D12A9700FB7F00 /* Base */,
-				55CA8ED118D12DB500FB7F00 /* en */,
+				55969713194F760E0068C5AC /* en */,
 			);
 			name = CIDotScreen.xib;
 			sourceTree = "<group>";
@@ -8283,8 +8231,7 @@
 		55909EA618CFFD4600F43F90 /* CIEdges.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8418D12A9700FB7F00 /* Base */,
-				55CA8ED318D12E1E00FB7F00 /* en */,
+				55969714194F76190068C5AC /* en */,
 			);
 			name = CIEdges.xib;
 			sourceTree = "<group>";
@@ -8292,8 +8239,7 @@
 		55909EA918CFFD6700F43F90 /* CIEdgeWork.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8518D12A9700FB7F00 /* Base */,
-				55CA8ED518D12E9A00FB7F00 /* en */,
+				55969715194F76260068C5AC /* en */,
 			);
 			name = CIEdgeWork.xib;
 			sourceTree = "<group>";
@@ -8301,8 +8247,7 @@
 		55909EAC18CFFD8400F43F90 /* CIExposure.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8618D12A9700FB7F00 /* Base */,
-				55CA8ED718D12EC400FB7F00 /* en */,
+				55969716194F76350068C5AC /* en */,
 			);
 			name = CIExposure.xib;
 			sourceTree = "<group>";
@@ -8310,8 +8255,7 @@
 		55909EAF18CFFD9D00F43F90 /* CIGammaAdjust.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8718D12A9700FB7F00 /* Base */,
-				5593807518F3AD050022C282 /* en */,
+				55969717194F76450068C5AC /* en */,
 			);
 			name = CIGammaAdjust.xib;
 			sourceTree = "<group>";
@@ -8319,8 +8263,7 @@
 		55909EB218CFFDBC00F43F90 /* CIGaussianBlur.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8818D12A9700FB7F00 /* Base */,
-				559A635218D8B26100FD74A2 /* en */,
+				55969718194F765E0068C5AC /* en */,
 			);
 			name = CIGaussianBlur.xib;
 			sourceTree = "<group>";
@@ -8328,8 +8271,7 @@
 		55909EB518CFFDE500F43F90 /* CIGlassDistortion.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8918D12A9700FB7F00 /* Base */,
-				559A635018D8B25C00FD74A2 /* en */,
+				55969719194F76710068C5AC /* en */,
 			);
 			name = CIGlassDistortion.xib;
 			sourceTree = "<group>";
@@ -8337,8 +8279,7 @@
 		55909EB818CFFE0900F43F90 /* CIGlassLozenge.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8A18D12A9700FB7F00 /* Base */,
-				5579919A18DA2C4A0061AC70 /* en */,
+				5596971A194F767E0068C5AC /* en */,
 			);
 			name = CIGlassLozenge.xib;
 			sourceTree = "<group>";
@@ -8346,8 +8287,7 @@
 		55909EBB18CFFE2600F43F90 /* CIGloom.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8B18D12A9700FB7F00 /* Base */,
-				5575356D18DB78B500AC0FBC /* en */,
+				5596971B194F76940068C5AC /* en */,
 			);
 			name = CIGloom.xib;
 			sourceTree = "<group>";
@@ -8355,8 +8295,7 @@
 		55909EBE18CFFE4200F43F90 /* CIHatchedScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8C18D12A9700FB7F00 /* Base */,
-				5575356B18DB78AA00AC0FBC /* en */,
+				5596971C194F76A30068C5AC /* en */,
 			);
 			name = CIHatchedScreen.xib;
 			sourceTree = "<group>";
@@ -8364,8 +8303,7 @@
 		55909EC118CFFE6300F43F90 /* CILenticularHalo.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8D18D12A9700FB7F00 /* Base */,
-				5575356F18DB89A500AC0FBC /* en */,
+				5596971D194F76B00068C5AC /* en */,
 			);
 			name = CILenticularHalo.xib;
 			sourceTree = "<group>";
@@ -8373,8 +8311,7 @@
 		55909EC418CFFE8100F43F90 /* CILineScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8E18D12A9700FB7F00 /* Base */,
-				5575357118DB9A1A00AC0FBC /* en */,
+				5596971E194F76BE0068C5AC /* en */,
 			);
 			name = CILineScreen.xib;
 			sourceTree = "<group>";
@@ -8382,8 +8319,7 @@
 		55909EC718CFFE9C00F43F90 /* CIMonochrome.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E8F18D12A9700FB7F00 /* Base */,
-				5575357318DBA07200AC0FBC /* en */,
+				5596971F194F78350068C5AC /* en */,
 			);
 			name = CIMonochrome.xib;
 			sourceTree = "<group>";
@@ -8391,8 +8327,7 @@
 		55909ECA18CFFEBA00F43F90 /* CINoiseReduction.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9018D12A9700FB7F00 /* Base */,
-				5593807318F3AC840022C282 /* en */,
+				55969720194F78440068C5AC /* en */,
 			);
 			name = CINoiseReduction.xib;
 			sourceTree = "<group>";
@@ -8400,8 +8335,7 @@
 		55909ECE18CFFF1A00F43F90 /* CIParallelogramTile.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9218D12A9800FB7F00 /* Base */,
-				5593806B18F3AB960022C282 /* en */,
+				55969722194F785F0068C5AC /* en */,
 			);
 			name = CIParallelogramTile.xib;
 			sourceTree = "<group>";
@@ -8409,8 +8343,7 @@
 		55909ED118CFFF4B00F43F90 /* CIPinch.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9318D12A9800FB7F00 /* Base */,
-				5593806718F3AAC00022C282 /* en */,
+				55969723194F786C0068C5AC /* en */,
 			);
 			name = CIPinch.xib;
 			sourceTree = "<group>";
@@ -8418,9 +8351,8 @@
 		55909ED418CFFF6100F43F90 /* CIPixellate.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9418D12A9800FB7F00 /* Base */,
-				5593806318F3AA440022C282 /* en */,
-				5593806518F3AA460022C282 /* en-GB */,
+				55969724194F787D0068C5AC /* en */,
+				55969725194F78840068C5AC /* en-GB */,
 			);
 			name = CIPixellate.xib;
 			sourceTree = "<group>";
@@ -8428,8 +8360,7 @@
 		55909ED718CFFF7A00F43F90 /* CIPointillize.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9518D12A9800FB7F00 /* Base */,
-				5593806918F3AB900022C282 /* en */,
+				55969726194F789C0068C5AC /* en */,
 			);
 			name = CIPointillize.xib;
 			sourceTree = "<group>";
@@ -8437,9 +8368,8 @@
 		55909EDA18CFFF9300F43F90 /* CIPosterize.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9618D12A9800FB7F00 /* Base */,
-				55CA8EB718D12BC000FB7F00 /* en-GB */,
-				55CA8EB918D12BC200FB7F00 /* en */,
+				55969727194F78A80068C5AC /* en */,
+				55969728194F78AC0068C5AC /* en-GB */,
 			);
 			name = CIPosterize.xib;
 			sourceTree = "<group>";
@@ -8447,8 +8377,7 @@
 		55909EDD18CFFFB300F43F90 /* CISepia.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9718D12A9800FB7F00 /* Base */,
-				5593806118F3A9540022C282 /* en */,
+				55969729194F78B80068C5AC /* en */,
 			);
 			name = CISepia.xib;
 			sourceTree = "<group>";
@@ -8456,8 +8385,7 @@
 		55909EE018CFFFC900F43F90 /* CISharpen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9818D12A9800FB7F00 /* Base */,
-				5593805F18F3A8200022C282 /* en */,
+				5596972A194F78C60068C5AC /* en */,
 			);
 			name = CISharpen.xib;
 			sourceTree = "<group>";
@@ -8465,7 +8393,7 @@
 		55909EF918D0002200F43F90 /* CISpotLight.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9918D12A9800FB7F00 /* Base */,
+				5596972D194F78DB0068C5AC /* en */,
 			);
 			name = CISpotLight.xib;
 			sourceTree = "<group>";
@@ -8473,8 +8401,7 @@
 		55909EFC18D0003F00F43F90 /* CIStarshine.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9A18D12A9800FB7F00 /* Base */,
-				5593805D18F3A5F60022C282 /* en */,
+				5596972E194F78EA0068C5AC /* en */,
 			);
 			name = CIStarshine.xib;
 			sourceTree = "<group>";
@@ -8482,8 +8409,7 @@
 		55909EFF18D0005700F43F90 /* CISunbeams.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9B18D12A9800FB7F00 /* Base */,
-				5593805B18F3A4D20022C282 /* en */,
+				5596972F194F78FA0068C5AC /* en */,
 			);
 			name = CISunbeams.xib;
 			sourceTree = "<group>";
@@ -8491,8 +8417,7 @@
 		55909F0218D0006F00F43F90 /* CITorusLens.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9C18D12A9800FB7F00 /* Base */,
-				5593806F18F3AC1E0022C282 /* en */,
+				55969730194F79050068C5AC /* en */,
 			);
 			name = CITorusLens.xib;
 			sourceTree = "<group>";
@@ -8500,8 +8425,7 @@
 		55909F0518D0008C00F43F90 /* CITwirl.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9D18D12A9900FB7F00 /* Base */,
-				5593805918F3A2590022C282 /* en */,
+				55969731194F79110068C5AC /* en */,
 			);
 			name = CITwirl.xib;
 			sourceTree = "<group>";
@@ -8509,8 +8433,7 @@
 		55909F0818D000A300F43F90 /* CIUnsharpMask.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9E18D12A9900FB7F00 /* Base */,
-				5593806D18F3ABFD0022C282 /* en */,
+				55969732194F791E0068C5AC /* en */,
 			);
 			name = CIUnsharpMask.xib;
 			sourceTree = "<group>";
@@ -8518,8 +8441,7 @@
 		55909F0B18D000BB00F43F90 /* CIVortex.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9F18D12A9900FB7F00 /* Base */,
-				55CA8EB518D12AD800FB7F00 /* en */,
+				55969733194F792D0068C5AC /* en */,
 			);
 			name = CIVortex.xib;
 			sourceTree = "<group>";
@@ -8527,8 +8449,7 @@
 		55BD2E6218D0ECE400C4EE1B /* CIOpTile.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8E9118D12A9800FB7F00 /* Base */,
-				5593807118F3AC800022C282 /* en */,
+				55969721194F78520068C5AC /* en */,
 			);
 			name = CIOpTile.xib;
 			sourceTree = "<group>";
@@ -8536,8 +8457,7 @@
 		55E5E28D18D26A2F0082E60F /* Brightness.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55E5E28E18D26A2F0082E60F /* Base */,
-				55E5E3B718D26AC50082E60F /* en */,
+				55969734194F793A0068C5AC /* en */,
 			);
 			name = Brightness.xib;
 			sourceTree = "<group>";
@@ -8569,8 +8489,7 @@
 		55E5E2C218D26A2F0082E60F /* Gaussian.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55E5E2C318D26A2F0082E60F /* Base */,
-				55E5E3F918D26E0F0082E60F /* en */,
+				55969735194F79490068C5AC /* en */,
 			);
 			name = Gaussian.xib;
 			sourceTree = "<group>";
@@ -8602,8 +8521,7 @@
 		55E5E2E518D26A2F0082E60F /* HSV.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55E5E2E618D26A2F0082E60F /* Base */,
-				55E5E49218D270410082E60F /* en */,
+				55969736194F79560068C5AC /* en */,
 			);
 			name = HSV.xib;
 			sourceTree = "<group>";
@@ -8638,8 +8556,7 @@
 		55E5E30718D26A300082E60F /* Pixellate.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55E5E30818D26A300082E60F /* Base */,
-				55E5E49318D2704B0082E60F /* en */,
+				55969737194F79620068C5AC /* en */,
 			);
 			name = Pixellate.xib;
 			sourceTree = "<group>";
@@ -8656,9 +8573,8 @@
 		55E5E31518D26A300082E60F /* Posterize.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55E5E31618D26A300082E60F /* Base */,
-				55E5E49418D2705B0082E60F /* en */,
-				55E5E49518D2705D0082E60F /* en-GB */,
+				55969738194F796E0068C5AC /* en */,
+				55969739194F79720068C5AC /* en-GB */,
 			);
 			name = Posterize.xib;
 			sourceTree = "<group>";
@@ -8692,8 +8608,7 @@
 		55E5E33818D26A300082E60F /* Sharpen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55E5E33918D26A300082E60F /* Base */,
-				55E5E49618D2706A0082E60F /* en */,
+				5596973A194F79810068C5AC /* en */,
 			);
 			name = Sharpen.xib;
 			sourceTree = "<group>";
@@ -8709,8 +8624,7 @@
 		55E5E34718D26A300082E60F /* Threshold.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55E5E34818D26A300082E60F /* Base */,
-				55E5E49718D270780082E60F /* en */,
+				5596973B194F798C0068C5AC /* en */,
 			);
 			name = Threshold.xib;
 			sourceTree = "<group>";
@@ -11448,7 +11362,7 @@
 					"$(inherited)",
 					SeashoreKit,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-undefined",
@@ -11493,7 +11407,7 @@
 					"$(inherited)",
 					SeashoreKit,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,

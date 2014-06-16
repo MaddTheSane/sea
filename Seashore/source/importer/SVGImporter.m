@@ -35,7 +35,7 @@ extern IntSize getDocumentSize(char *path);
 	[scalePanel orderOut:self];
 	
 	// Add all plug-ins to the array
-	importerPath = [[gMainBundle builtInPlugInsPath] stringByAppendingString:@"/SVGImporter.app/Contents/MacOS/SVGImporter"];
+	importerPath = [[gMainBundle builtInPlugInsPath] stringByAppendingPathComponent:@"SVGImporter.app/Contents/MacOS/SVGImporter"];
 	if ([gFileManager fileExistsAtPath:importerPath]) {
 		if (![gFileManager fileExistsAtPath:@"/tmp/seaimport"]) [gFileManager createDirectoryAtPath:@"/tmp/seaimport" attributes:NULL];
 		path_in = path;

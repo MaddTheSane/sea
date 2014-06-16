@@ -28,8 +28,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		55CA8EA718D12A9900FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		55CA8EA818D12A9900FB7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BrushDocument.xib; sourceTree = "<group>"; };
+		5596973E194F799B0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5596973F194F79A60068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BrushDocument.xib; sourceTree = "<group>"; };
 		A80D889E043EE40D00A80207 /* BrushView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BrushView.h; sourceTree = "<group>"; };
 		A80D889F043EE40D00A80207 /* BrushView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BrushView.m; sourceTree = "<group>"; };
 		A84A94EA043DB32500A80207 /* BrushDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrushDocument.h; sourceTree = "<group>"; };
@@ -193,6 +193,7 @@
 				German,
 				"en-GB",
 				Base,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Brushed */;
 			projectDirPath = "";
@@ -235,7 +236,7 @@
 		55909F1018D000EB00F43F90 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8EA718D12A9900FB7F00 /* Base */,
+				5596973E194F799B0068C5AC /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -243,7 +244,7 @@
 		55909F1518D0010700F43F90 /* BrushDocument.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55CA8EA818D12A9900FB7F00 /* Base */,
+				5596973F194F79A60068C5AC /* en */,
 			);
 			name = BrushDocument.xib;
 			sourceTree = "<group>";
@@ -313,7 +314,7 @@
 		A8B12B8509BD8F460096101F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx;
@@ -323,7 +324,7 @@
 		A8B12B8609BD8F460096101F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PREBINDING = NO;
 				SDKROOT = macosx;
 			};

@@ -32,13 +32,13 @@ enum {
 	
 	// Determine the path
 	if ([existingCategoryRadio state] == NSOnState) {
-		path = [[[gMainBundle resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:groupNames[[categoryTable selectedRow]]];
+		path = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"textures"] stringByAppendingPathComponent:groupNames[[categoryTable selectedRow]]];
 	}
 	else {
-		path = [[[gMainBundle resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:[categoryTextbox stringValue]];
+		path = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"textures"] stringByAppendingPathComponent:[categoryTextbox stringValue]];
 		[gFileManager createDirectoryAtPath:path attributes:nil];
 	}
-	path = [path stringByAppendingFormat:@"/%@.png", [nameTextbox stringValue]];
+	path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [nameTextbox stringValue]]];
 	
 	// Write document
 	[document writeToFile:path ofType:@"Portable Network Graphics Image"];

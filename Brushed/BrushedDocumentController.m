@@ -4,8 +4,9 @@
 
 - (NSInteger)runModalOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)extensions
 {
+	NSURL *brushesResources = [[[NSBundle mainBundle] resourceURL] URLByAppendingPathComponent:@"brushes" isDirectory:YES];
 	[openPanel setTreatsFilePackagesAsDirectories:YES];
-	[openPanel setDirectoryURL:[NSURL fileURLWithPath:@"/Applications/Seashore.app/Contents/Resources/brushes/"]];
+	[openPanel setDirectoryURL:brushesResources];
 	openPanel.allowedFileTypes = extensions;
 	
 	return [openPanel runModal];

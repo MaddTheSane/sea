@@ -47,9 +47,11 @@ static NSString*	SelectInverseToolbarItemIdentifier = @"Select Inverse Toolbar I
 static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item Identifier";
 
 @implementation ToolboxUtility
+@synthesize background;
 
 - (id)init
 {
+	if (self = [super init]) {
 	foreground = [NSColor colorWithDeviceRed:0.0 green:0.0 blue:0.0 alpha:1.0];
 	background = [NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:1.0];
 	delay_timer = NULL;
@@ -74,7 +76,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 					 @(kZoomTool),
 					 @(kPositionTool)];
 	
-	
+	}
 	return self;
 }
 
@@ -224,11 +226,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	return foreground;
 }
 
-- (NSColor *)background
-{
-	return background;
-}
-
 - (void)setForeground:(NSColor *)color
 {
 	foreground = color;
@@ -237,11 +234,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	}
 	delay_timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:[[document tools] getTool:kTextTool]  selector:@selector(preview:) userInfo:NULL repeats:NO];
 	[(StatusUtility *)[[SeaController utilitiesManager] statusUtilityFor:document] updateQuickColor];
-}
-
-- (void)setBackground:(NSColor *)color
-{
-	background = color;
 }
 
 - (id)colorView

@@ -116,16 +116,17 @@
 {
 	NSArray *files;
 	NSString *tempPathA, *tempPathB;
-	NSArray *newValues, *newKeys, *tempBrushArray, *tempArray;
+	NSArray *newValues, *newKeys, *tempArray;
+	NSMutableArray *tempBrushArray;
 	BOOL isDirectory;
 	id tempBrush;
 	int i, j;
 	
 	// Create a dictionary of all brushes
 	brushes = @{};
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/brushes"]];
+	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
 	for (i = 0; i < [files count]; i++) {
-		tempPathA = [[[gMainBundle resourcePath] stringByAppendingString:@"/brushes/"] stringByAppendingString:files[i]];
+		tempPathA = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"] stringByAppendingPathComponent:files[i]];
 		if ([[tempPathA pathExtension] isEqualToString:@"gbr"]) {
 			tempBrush = [[SeaBrush alloc] initWithContentsOfFile:tempPathA];
 			if (tempBrush) {
@@ -137,23 +138,23 @@
 	}
 	
 	// Create the all group
-	tempBrushArray = [[brushes allValues] sortedArrayUsingSelector:@selector(compare:)];
+	tempBrushArray = [[[brushes allValues] sortedArrayUsingSelector:@selector(compare:)] mutableCopy];
 	groups = @[tempBrushArray];
 	groupNames = @[LOCALSTR(@"all group", @"All")];
 	
 	// Create the custom groups
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/brushes"]];
+	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
 	for (i = 0; i < [files count]; i++) {
-		tempPathA = [[gMainBundle resourcePath] stringByAppendingString:@"/brushes/"];
-		tempPathB = [tempPathA stringByAppendingString:files[i]];
+		tempPathA = [[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"];
+		tempPathB = [tempPathA stringByAppendingPathComponent:files[i]];
 		if ([[tempPathB pathExtension] isEqualToString:@"txt"]) {
 			tempArray = [NSArray arrayWithContentsOfFile:tempPathB];
 			if (tempArray) {
-				tempBrushArray = @[];
+				[tempBrushArray removeAllObjects];
 				for (j = 0; j < [tempArray count]; j++) {
-					tempBrush = brushes[[tempPathA stringByAppendingString:tempArray[j]]];
+					tempBrush = brushes[[tempPathA stringByAppendingPathComponent:tempArray[j]]];
 					if (tempBrush) {
-						tempBrushArray = [tempBrushArray arrayByAddingObject:tempBrush];
+						[tempBrushArray addObject:tempBrush];
 					}
 				}
 				if ([tempBrushArray count] > 0) {
@@ -166,29 +167,26 @@
 	customGroups = [groups count] - 1;
 	
 	// Create the other groups
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/brushes"]];
+	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
 	for (i = 0; i < [files count]; i++) {
-		tempPathA = [[[gMainBundle resourcePath] stringByAppendingString:@"/brushes/"] stringByAppendingString:files[i]];
+		tempPathA = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"] stringByAppendingPathComponent:files[i]];
 		[gFileManager fileExistsAtPath:tempPathA isDirectory:&isDirectory];
 		if (isDirectory) {
-			tempPathA = [tempPathA stringByAppendingString:@"/"];
 			tempArray = [gFileManager subpathsAtPath:tempPathA];
-			tempBrushArray = @[];
+			tempBrushArray = [[NSMutableArray alloc] init];
 			for (j = 0; j < [tempArray count]; j++) {
-				tempBrush = brushes[[tempPathA stringByAppendingString:tempArray[j]]];
+				tempBrush = brushes[[tempPathA stringByAppendingPathComponent:tempArray[j]]];
 				if (tempBrush) {
-					tempBrushArray = [tempBrushArray arrayByAddingObject:tempBrush];
+					[tempBrushArray addObject:tempBrush];
 				}
 			}
 			if ([tempBrushArray count] > 0) {
-				tempBrushArray = [tempBrushArray sortedArrayUsingSelector:@selector(compare:)];
+				[tempBrushArray sortUsingSelector:@selector(localizedStandardCompare:)];
 				groups = [groups arrayByAddingObject:tempBrushArray];
 				groupNames = [groupNames arrayByAddingObject:[tempPathA lastPathComponent]];
 			}
 		}
 	}
-	
-	// Retain the groups and groupNames
 	
 	// Update utility if requested
 	if (update)

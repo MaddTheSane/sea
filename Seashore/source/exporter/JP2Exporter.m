@@ -14,6 +14,9 @@ static unsigned int cmLen;
 
 - (id)init
 {
+	if (!(self = [super init])) {
+		return nil;
+	}
 	NSInteger value;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
@@ -117,9 +120,9 @@ static unsigned int cmLen;
 	
 	// Revise the compression
 	if (targetWeb)
-		[compressSlider setIntValue:webCompression];
+		[compressSlider setIntegerValue:webCompression];
 	else
-		[compressSlider setIntValue:printCompression];
+		[compressSlider setIntegerValue:printCompression];
 	value = [self reviseCompression];
 	
 	// Set-up the sample data
@@ -197,9 +200,9 @@ static unsigned int cmLen;
 	
 	// Revise the compression
 	if (targetWeb)
-		[compressSlider setIntValue:webCompression];
+		[compressSlider setIntegerValue:webCompression];
 	else
-		[compressSlider setIntValue:printCompression];
+		[compressSlider setIntegerValue:printCompression];
 	value = [self reviseCompression];
 	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];

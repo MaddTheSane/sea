@@ -61,6 +61,8 @@
 	id delay_timer;
 }
 
+@property (strong) NSColor *background;
+
 /*!
 	@method		init
 	@discussion	Initializes an instance of this class.

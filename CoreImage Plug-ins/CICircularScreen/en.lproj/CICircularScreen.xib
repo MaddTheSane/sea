@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1080" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CICircularScreenClass">
+            <connections>
+                <outlet property="dotWidthLabel" destination="21" id="29"/>
+                <outlet property="dotWidthSlider" destination="14" id="30"/>
+                <outlet property="panel" destination="6" id="32"/>
+                <outlet property="sharpnessLabel" destination="40" id="54"/>
+                <outlet property="sharpnessSlider" destination="39" id="53"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <window title="Circular Screen" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES"/>
+            <rect key="contentRect" x="66" y="477" width="365" height="161"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <view key="contentView" id="5">
+                <rect key="frame" x="0.0" y="0.0" width="365" height="161"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                        <rect key="frame" x="269" y="13" width="82" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="push" title="Ok" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="60">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="apply:" target="-2" id="26"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="13">
+                        <rect key="frame" x="18" y="127" width="38" height="14"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="Width:" id="61">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="14">
+                        <rect key="frame" x="18" y="103" width="283" height="21"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <sliderCell key="cell" continuous="YES" alignment="left" minValue="2" maxValue="100" doubleValue="6" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="62">
+                            <font key="font" size="12" name="Helvetica-Oblique"/>
+                        </sliderCell>
+                        <connections>
+                            <action selector="update:" target="-2" id="23"/>
+                            <binding destination="-2" name="value" keyPath="self.dotWidth" id="IXu-XW-USk"/>
+                        </connections>
+                    </slider>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
+                        <rect key="frame" x="187" y="13" width="82" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="63">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="cancel:" target="-2" id="25"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                        <rect key="frame" x="305" y="105" width="42" height="14"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="38" id="ATL-nL-Cl4"/>
+                        </constraints>
+                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="6" id="64">
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="OZF-qt-ifC"/>
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.dotWidth" id="A0O-gM-2ED"/>
+                        </connections>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38">
+                        <rect key="frame" x="18" y="83" width="61" height="14"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="Sharpness:" id="65">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="39">
+                        <rect key="frame" x="18" y="59" width="283" height="21"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" doubleValue="0.69999999999999996" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="66">
+                            <font key="font" size="12" name="Helvetica-Oblique"/>
+                        </sliderCell>
+                        <connections>
+                            <action selector="update:" target="-2" id="48"/>
+                            <binding destination="-2" name="value" keyPath="self.sharpness" id="AXp-uH-ivU"/>
+                        </connections>
+                    </slider>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40">
+                        <rect key="frame" x="305" y="61" width="42" height="14"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="38" id="VFJ-NC-4nh"/>
+                        </constraints>
+                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title=".70" id="67">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="Mmb-7G-U5z"/>
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.sharpness" id="5zs-Jk-BRS"/>
+                        </connections>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="13" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="2jN-iN-y9N"/>
+                    <constraint firstItem="14" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="6st-mI-TyI"/>
+                    <constraint firstItem="38" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="HBT-Bb-bF5"/>
+                    <constraint firstItem="21" firstAttribute="top" secondItem="13" secondAttribute="bottom" constant="8" symbolic="YES" id="IQW-og-kOz"/>
+                    <constraint firstItem="40" firstAttribute="leading" secondItem="39" secondAttribute="trailing" constant="8" symbolic="YES" id="Jqg-Ck-KYr"/>
+                    <constraint firstItem="7" firstAttribute="leading" secondItem="16" secondAttribute="trailing" constant="12" symbolic="YES" id="LLI-Iu-beP"/>
+                    <constraint firstItem="39" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="RoM-zb-KWt"/>
+                    <constraint firstItem="16" firstAttribute="top" secondItem="39" secondAttribute="bottom" constant="20" symbolic="YES" id="Si2-J9-TKA"/>
+                    <constraint firstAttribute="trailing" secondItem="40" secondAttribute="trailing" constant="20" symbolic="YES" id="UtY-5d-fQ7"/>
+                    <constraint firstItem="13" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" id="XBn-RX-utw"/>
+                    <constraint firstItem="40" firstAttribute="top" secondItem="38" secondAttribute="bottom" constant="8" symbolic="YES" id="Z8I-CI-LT5"/>
+                    <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" constant="20" symbolic="YES" id="e3w-T0-tyc"/>
+                    <constraint firstItem="7" firstAttribute="width" secondItem="16" secondAttribute="width" id="fC2-5b-JNd"/>
+                    <constraint firstItem="38" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="8" symbolic="YES" id="fcB-dN-BF2"/>
+                    <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="20" symbolic="YES" id="kym-1J-HCC"/>
+                    <constraint firstItem="40" firstAttribute="baseline" secondItem="39" secondAttribute="baseline" id="rLB-iF-Z0C"/>
+                    <constraint firstItem="21" firstAttribute="leading" secondItem="14" secondAttribute="trailing" constant="8" symbolic="YES" id="rO9-ew-Unq"/>
+                    <constraint firstItem="7" firstAttribute="baseline" secondItem="16" secondAttribute="baseline" id="ukd-Zq-Zbo"/>
+                    <constraint firstAttribute="trailing" secondItem="21" secondAttribute="trailing" constant="20" symbolic="YES" id="xSz-Pc-XaU"/>
+                    <constraint firstItem="21" firstAttribute="baseline" secondItem="14" secondAttribute="baseline" id="ydZ-kI-fjJ"/>
+                </constraints>
+            </view>
+        </window>
+    </objects>
+</document>

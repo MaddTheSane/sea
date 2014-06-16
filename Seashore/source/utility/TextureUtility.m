@@ -119,63 +119,63 @@
 
 - (void)loadTextures:(BOOL)update
 {
-	NSArray *files, *subfiles, *newValues, *newKeys, *array;
+	NSArray *files, *subfiles, *newValues, *newKeys;
+	NSMutableArray *array;
 	NSString *path;
 	BOOL isDirectory;
 	id texture;
-	int i, j;
+	int j;
 	
 	// Create a dictionary of all textures
 	textures = @{};
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/textures"]];
-	for (i = 0; i < [files count]; i++) {
-		path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:files[i]];
+	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"textures"]];
+	for (NSString *file in files) {
+		path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"textures"] stringByAppendingPathComponent:file];
 		texture = [[SeaTexture alloc] initWithContentsOfFile:path];
 		if (texture) {
 			newKeys = [[textures allKeys] arrayByAddingObject:path];
 			newValues = [[textures allValues] arrayByAddingObject:texture];
 			textures = [NSDictionary dictionaryWithObjects:newValues forKeys:newKeys];
 		}
+		
 	}
 	
 	// Create the all group
-	array = [[textures allValues] sortedArrayUsingSelector:@selector(compare:)];
-	groups = @[array];
+	array = [[[textures allValues] sortedArrayUsingSelector:@selector(compare:)] mutableCopy];
+	groups = @[[array copy]];
 	groupNames = @[LOCALSTR(@"all group", @"All")];
 	
 	// Create the other groups
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/textures"]];
+	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"textures"]];
 	[files sortedArrayUsingSelector:@selector(compare:)];
-	for (i = 0; i < [files count]; i++) {
-		path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:files[i]];
+	for (NSString *file in files) {
+		path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"textures"] stringByAppendingPathComponent:file];
 		[gFileManager fileExistsAtPath:path isDirectory:&isDirectory];
 		if (isDirectory) {
-			path = [path stringByAppendingString:@"/"];
 			subfiles = [gFileManager subpathsAtPath:path];
-			array = @[];
+			[array removeAllObjects];
 			for (j = 0; j < [subfiles count]; j++) {
 				texture = textures[[path stringByAppendingString:subfiles[j]]];
 				if (texture) {
-					array = [array arrayByAddingObject:texture];
+					[array addObject:texture];
 				}
 			}
 			if ([array count] > 0) {
-				array = [array sortedArrayUsingSelector:@selector(compare:)];
-				groups = [groups arrayByAddingObject:array];
+				[array sortUsingSelector:@selector(compare:)];
+				groups = [groups arrayByAddingObject:[array copy]];
 				groupNames = [groupNames arrayByAddingObject:[path lastPathComponent]];
 			}
 		}
 	}
-	
-	// Retain the groups and groupNames
-	
 	// Update utility if requested
-	if (update) [self update];
+	if (update)
+		[self update];
 }
 
 - (void)addTextureFromPath:(NSString *)path
 {
-	NSArray *files, *subfiles, *newValues, *newKeys, *oldValues, *oldKeys, *array;
+	NSArray *files, *subfiles, *oldValues, *oldKeys;
+	NSMutableArray *newValues, *newKeys, *array;
 	NSString *tpath;
 	BOOL isDirectory;
 	id texture;
@@ -185,51 +185,50 @@
 	
 	// Update dictionary of all textures
 	if (textures[path]) {
-		newKeys = @[];
-		newValues = @[];
+		newKeys = [NSMutableArray new];
+		newValues = [NSMutableArray new];
 		oldKeys = [textures allKeys];
 		oldValues = [textures allValues];
-		for (i = 0; i < [oldKeys count]; i++) {
-			if (![path isEqualToString:oldKeys[i]]) {
-				newKeys = [newKeys arrayByAddingObject:oldKeys[i]];
-				newValues = [newValues arrayByAddingObject:oldValues[i]];
+		for (NSString *oldKey in oldKeys) {
+			if (![path isEqualToString:oldKey]) {
+				[newKeys addObject:oldKey];
+				[newValues addObject:texture[oldKey]];
 			}
 		}
 	}
 	else {
-		newKeys = [textures allKeys];
-		newValues = [textures allValues];
+		newKeys = [[textures allKeys] mutableCopy];
+		newValues = [[textures allValues] mutableCopy];
 	}
 	texture = [[SeaTexture alloc] initWithContentsOfFile:path];
 	if (texture) {
-		newKeys = [newKeys arrayByAddingObject:path];
-		newValues = [newValues arrayByAddingObject:texture];
-		textures = [NSDictionary dictionaryWithObjects:newValues forKeys:newKeys];
+		[newKeys addObject:path];
+		[newValues addObject:texture];
+		textures = [[NSDictionary alloc] initWithObjects:newValues forKeys:newKeys];
 	}
 	
 	// Create the all group
-	array = [[textures allValues] sortedArrayUsingSelector:@selector(compare:)];
+	array = [[[textures allValues] sortedArrayUsingSelector:@selector(compare:)] mutableCopy];
 	groups = @[array];
 	groupNames = @[LOCALSTR(@"all group", @"All")];
 	
 	// Create the other groups
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/textures"]];
+	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"textures"]];
 	[files sortedArrayUsingSelector:@selector(compare:)];
-	for (i = 0; i < [files count]; i++) {
-		tpath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:files[i]];
+	for (NSString *file in files) {
+		tpath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"textures"] stringByAppendingPathComponent:file];
 		[gFileManager fileExistsAtPath:tpath isDirectory:&isDirectory];
 		if (isDirectory) {
-			tpath = [tpath stringByAppendingString:@"/"];
 			subfiles = [gFileManager subpathsAtPath:tpath];
-			array = @[];
+			array = [NSMutableArray new];
 			for (j = 0; j < [subfiles count]; j++) {
 				texture = textures[[tpath stringByAppendingString:subfiles[j]]];
 				if (texture) {
-					array = [array arrayByAddingObject:texture];
+					[array addObject:texture];
 				}
 			}
 			if ([array count] > 0) {
-				array = [array sortedArrayUsingSelector:@selector(compare:)];
+				[array sortUsingSelector:@selector(compare:)];
 				groups = [groups arrayByAddingObject:array];
 				groupNames = [groupNames arrayByAddingObject:[tpath lastPathComponent]];
 			}

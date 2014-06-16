@@ -9,9 +9,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface AbstractExporter : NSObject {
-
-}
+@interface AbstractExporter : NSObject
 
 /*!
 	@method		hasOptions
@@ -48,6 +46,8 @@
 				associated with this exporter.
 */
 - (NSString *)extension;
+
+- (NSString *)fileType;
 
 /*!
 	@method		optionsString
