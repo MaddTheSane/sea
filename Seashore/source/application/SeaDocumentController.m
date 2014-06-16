@@ -6,7 +6,7 @@
 
 @implementation SeaDocumentController
 
-- (id)init
+- (instancetype)init
 {
 	if (![super init])
 		return NULL;

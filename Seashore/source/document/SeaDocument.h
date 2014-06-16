@@ -109,7 +109,7 @@
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
+- (instancetype)init;
 
 /*!
 	@method		initWithPasteboard
@@ -117,7 +117,7 @@
 				layer.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithPasteboard;
+- (instancetype)initWithPasteboard;
 
 /*!
 	@method		initWithContentsOfFile:ofType:
@@ -128,7 +128,7 @@
 				The type of file with which this class is being initialized.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithContentsOfFile:(NSString *)path ofType:(NSString *)type;
+- (instancetype)initWithContentsOfFile:(NSString *)path ofType:(NSString *)type;
 
 /*!
 	@method		initWithData:type:width:height:
@@ -143,7 +143,7 @@
 				The height of the data with which this class is being initialized.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithData:(unsigned char *)data type:(int)type width:(int)width height:(int)height;
+- (instancetype)initWithData:(unsigned char *)data type:(int)type width:(int)width height:(int)height;
 
 /*!
 	@method		saveDocument:

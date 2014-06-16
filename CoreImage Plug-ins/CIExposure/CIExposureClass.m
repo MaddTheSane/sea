@@ -6,7 +6,7 @@
 @implementation CIExposureClass
 @synthesize exposureValue = value;
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (instancetype)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;

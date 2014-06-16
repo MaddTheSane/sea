@@ -21,7 +21,7 @@
 	return kPositionTool;
 }
 
-- (id)init
+- (instancetype)init
 {
 	if(![super init])
 		return NULL;

@@ -29,7 +29,7 @@
 	return kCloneTool;
 }
 
-- (id)init
+- (instancetype)init
 {
 	if(![super init])
 		return NULL;

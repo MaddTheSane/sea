@@ -16,7 +16,7 @@ typedef struct {
 
 @implementation BrushDocument
 
-- (id)init
+- (instancetype)init
 {
 	// Initialize superclass first
 	if (![super init])
@@ -472,7 +472,8 @@ typedef struct {
 	switch ([menuItem tag]) {
 		case 120:
 		case 121:
-			if (pixmap == NULL && mask == NULL) return NO;
+			if (pixmap == NULL && mask == NULL)
+				return NO;
 		break;
 	}
 	

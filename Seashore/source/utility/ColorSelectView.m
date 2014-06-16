@@ -14,7 +14,7 @@
 
 @implementation ColorSelectView
 
-- (id)initWithFrame:(NSRect)frame
+- (instancetype)initWithFrame:(NSRect)frame
 {
 	// Initialize the super
 	if (![super initWithFrame:frame])

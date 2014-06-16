@@ -4,7 +4,7 @@
 
 @implementation TextureView
 
-- (id)initWithMaster:(id)sender
+- (instancetype)initWithMaster:(id)sender
 {
 	// Initializes superclass first
 	if (![super init])

@@ -186,7 +186,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	return YES;
 }
 
-- (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
+- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
 {
 	SharedXCFInfo info;
 	size_t layerOffsets, offset;

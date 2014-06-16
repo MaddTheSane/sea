@@ -175,7 +175,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	return YES;
 }
 
-- (id)initWithContentsOfFile:(NSString *)path;
+- (instancetype)initWithContentsOfFile:(NSString *)path;
 {
 	if (self = [super init]) {
 		SharedXCFInfo info;

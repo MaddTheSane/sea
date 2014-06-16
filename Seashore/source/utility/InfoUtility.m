@@ -20,7 +20,7 @@
 
 @implementation InfoUtility
 
-- (id)init
+- (instancetype)init
 {
 	return self;
 }

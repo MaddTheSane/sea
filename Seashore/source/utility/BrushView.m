@@ -4,7 +4,7 @@
 
 @implementation BrushView
 
-- (id)initWithMaster:(id)sender
+- (instancetype)initWithMaster:(id)sender
 {
 	if (![super init])
 		return NULL;

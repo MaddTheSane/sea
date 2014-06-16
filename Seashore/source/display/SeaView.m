@@ -54,7 +54,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 @implementation SeaView
 
-- (id)initWithDocument:(id)doc 
+- (instancetype)initWithDocument:(id)doc 
 {	
 	NSRect frame;
 	int xres, yres;

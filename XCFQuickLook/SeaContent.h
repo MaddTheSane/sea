@@ -84,7 +84,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
+- (instancetype)init;
 
 // PROPERTY METHODS
 

@@ -35,7 +35,7 @@
 				The brush utility that will control the contents of this view.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithMaster:(id)sender;
+- (instancetype)initWithMaster:(id)sender;
 
 /*!
 	@method		mouseDown:

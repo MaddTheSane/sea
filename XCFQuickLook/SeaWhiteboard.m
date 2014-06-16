@@ -7,7 +7,7 @@
 
 @implementation SeaWhiteboard
 
-- (id)initWithContent:(SeaContent *)cont
+- (instancetype)initWithContent:(SeaContent *)cont
 {
 	CMProfileRef destProf;
 	int layerWidth, layerHeight;

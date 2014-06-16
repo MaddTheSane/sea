@@ -5,7 +5,7 @@
 
 @implementation SeaCompositor
 
-- (id)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board
+- (instancetype)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board
 {
 	int i;
 	

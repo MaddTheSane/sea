@@ -14,7 +14,7 @@ id seaController;
 
 @implementation SeaController
 
-- (id)init
+- (instancetype)init
 {
 	// Remember ourselves
 	seaController = self;

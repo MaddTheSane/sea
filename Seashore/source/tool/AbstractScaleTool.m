@@ -17,7 +17,7 @@
 #import "SeaLayer.h"
 
 @implementation AbstractScaleTool
-- (id)init
+- (instancetype)init
 {
 	if (![super init])
 		return NULL;

@@ -68,7 +68,7 @@ typedef struct {
 				The layer with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc forLayer:(id)ilayer;
+- (instancetype)initWithDocument:(id)doc forLayer:(id)ilayer;
 
 
 /*!

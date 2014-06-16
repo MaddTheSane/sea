@@ -6,7 +6,7 @@
 
 @implementation CocoaLayer
 
-- (id)initWithImageRep:(NSBitmapImageRep *)imageRep document:(id)doc spp:(int)lspp
+- (instancetype)initWithImageRep:(NSBitmapImageRep *)imageRep document:(id)doc spp:(int)lspp
 {
 	int i, space, bps, sspp;
 	unsigned char *srcPtr;

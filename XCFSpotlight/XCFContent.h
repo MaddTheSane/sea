@@ -66,6 +66,6 @@ typedef struct
 				The path of the XCF file with which to initalize this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithContentsOfFile:(NSString *)path;
+- (instancetype)initWithContentsOfFile:(NSString *)path;
 
 @end

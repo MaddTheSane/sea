@@ -12,7 +12,7 @@
 
 @implementation SeaRotation
 
-- (id)init
+- (instancetype)init
 {
 	undoMax = kNumberOfRotationRecordsPerMalloc;
 	undoRecords = malloc(undoMax * sizeof(RotationUndoRecord));

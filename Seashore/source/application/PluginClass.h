@@ -20,7 +20,7 @@
 				The SeaPlugins instance responsible for managing the plug-ins.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithManager:(SeaPlugins *)manager;
+- (instancetype)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type

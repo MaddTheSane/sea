@@ -19,7 +19,7 @@
 
 @implementation SeaCursors
 
-- (id)initWithDocument:(id)newDocument andView:(id)newView
+- (instancetype)initWithDocument:(id)newDocument andView:(id)newView
 {
 	document = newDocument;
 	view = newView;

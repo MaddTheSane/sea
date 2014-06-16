@@ -6,7 +6,7 @@
 
 @implementation SeaContent
 
-- (id)init
+- (instancetype)init
 {
 	if (self = [super init]) {
 		// Set the data members to reasonable values

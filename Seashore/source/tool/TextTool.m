@@ -25,7 +25,7 @@ extern id gNewFont;
 	return kTextTool;
 }
 
-- (id)init
+- (instancetype)init
 {
 	if(![super init])
 		return NULL;

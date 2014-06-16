@@ -7,7 +7,7 @@
 @implementation CIParallelogramTileClass
 @synthesize acute;
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (instancetype)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super initWithManager:manager]) {
 		NSArray *tmp;

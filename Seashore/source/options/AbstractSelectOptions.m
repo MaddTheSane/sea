@@ -4,7 +4,7 @@
 
 @implementation AbstractSelectOptions
 
-- (id)init
+- (instancetype)init
 {
 	self = [super init];
 	mode = kDefaultMode;

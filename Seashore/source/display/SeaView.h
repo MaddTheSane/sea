@@ -126,7 +126,7 @@ enum {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc;
+- (instancetype)initWithDocument:(id)doc;
 
 /*!
 	@method		changeSpecialFont:

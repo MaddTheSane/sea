@@ -13,7 +13,7 @@
 
 @implementation OptionsUtility
 
-- (id)init
+- (instancetype)init
 {
 	currentTool = -1;
 	

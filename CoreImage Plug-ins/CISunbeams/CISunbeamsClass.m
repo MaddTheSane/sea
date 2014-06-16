@@ -9,7 +9,7 @@
 @synthesize contrast;
 @synthesize strength;
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (instancetype)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super initWithManager:manager]) {
 		NSArray *tmp;

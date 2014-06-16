@@ -6,7 +6,7 @@
 @implementation SharpenClass
 @synthesize extent;
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (instancetype)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;

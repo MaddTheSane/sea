@@ -11,7 +11,7 @@
 
 @implementation SSKCIPlugin
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (instancetype)initWithManager:(SeaPlugins *)manager
 {
 	return self = [super initWithManager:manager];
 }

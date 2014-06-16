@@ -36,7 +36,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 @implementation SeaContent
 
-- (id)initWithDocument:(id)doc
+- (instancetype)initWithDocument:(id)doc
 {
 	// Set the data members to reasonable values
 	xres = yres = 72;
@@ -57,7 +57,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return self;
 }
 
-- (id)initFromPasteboardWithDocument:(id)doc
+- (instancetype)initFromPasteboardWithDocument:(id)doc
 {
 	id pboard = [NSPasteboard generalPasteboard];
 	NSString *imageRepDataType;
@@ -153,7 +153,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return self;
 }
 
-- (id)initWithDocument:(id)doc type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque
+- (instancetype)initWithDocument:(id)doc type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque
 {	
 	// Call the core initializer
 	if (![self initWithDocument:doc])
@@ -170,7 +170,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return self;
 }
 
-- (id)initWithDocument:(id)doc data:(unsigned char *)ddata type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres
+- (instancetype)initWithDocument:(id)doc data:(unsigned char *)ddata type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])

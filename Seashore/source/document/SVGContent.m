@@ -103,7 +103,7 @@ IntSize getDocumentSize(char *path)
 	return [[SeaDocumentController sharedDocumentController] type: aType isContainedInDocType: @"SVG document"];
 }
 
-- (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path
+- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path
 {
 	NSString *importerPath;
 	NSImageRep *imageRep;

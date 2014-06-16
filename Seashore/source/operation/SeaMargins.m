@@ -12,7 +12,7 @@
 
 @implementation SeaMargins
 
-- (id)init
+- (instancetype)init
 {
 	undoMax = kNumberOfMarginRecordsPerMalloc;
 	undoRecords = malloc(undoMax * sizeof(MarginUndoRecord));

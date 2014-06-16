@@ -39,7 +39,7 @@ static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xre
 
 @implementation JPEGExporter
 
-- (id)init
+- (instancetype)init
 {
 	NSInteger value;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

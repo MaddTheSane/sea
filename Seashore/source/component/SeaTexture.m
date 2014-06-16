@@ -2,7 +2,7 @@
 
 @implementation SeaTexture
 
-- (id)initWithContentsOfFile:(NSString *)path
+- (instancetype)initWithContentsOfFile:(NSString *)path
 {
 	unsigned char *tempBitmap;
 	NSBitmapImageRep *tempBitmapRep;

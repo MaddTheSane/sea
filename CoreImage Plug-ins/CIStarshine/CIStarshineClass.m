@@ -10,7 +10,7 @@
 @synthesize scale;
 @synthesize starWidth = star_width;
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (instancetype)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;

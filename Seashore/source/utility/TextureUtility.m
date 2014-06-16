@@ -17,7 +17,7 @@
 
 @implementation TextureUtility
 
-- (id)init
+- (instancetype)init
 {		
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Load the textures

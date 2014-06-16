@@ -44,7 +44,7 @@ enum {
 
 @implementation SeaDocument
 
-- (id)init
+- (instancetype)init
 {
 	int dtype, dwidth, dheight, dres;
 	BOOL dopaque;
@@ -81,7 +81,7 @@ enum {
 	return self;
 }
 
-- (id)initWithPasteboard
+- (instancetype)initWithPasteboard
 {
 	// Initialize superclass first
 	if (![super init])
@@ -113,7 +113,7 @@ enum {
 	return self;
 }
 
-- (id)initWithContentsOfFile:(NSString *)path ofType:(NSString *)type
+- (instancetype)initWithContentsOfFile:(NSString *)path ofType:(NSString *)type
 {
 	// Initialize superclass first
 	if (![super init])
@@ -148,7 +148,7 @@ enum {
 	return self;
 }
 
-- (id)initWithData:(unsigned char *)data type:(int)type width:(int)width height:(int)height
+- (instancetype)initWithData:(unsigned char *)data type:(int)type width:(int)width height:(int)height
 {
 	// Initialize superclass first
 	if (![super init])

@@ -15,7 +15,7 @@
 
 @implementation SeaSelection
 
-- (id)initWithDocument:(id)doc
+- (instancetype)initWithDocument:(id)doc
 {
 	// Remember the document we are representing
 	document = doc;

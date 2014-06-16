@@ -12,7 +12,7 @@ static unsigned int cmLen;
 
 @implementation JP2Exporter
 
-- (id)init
+- (instancetype)init
 {
 	if (!(self = [super init])) {
 		return nil;

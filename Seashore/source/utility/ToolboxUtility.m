@@ -49,7 +49,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 @implementation ToolboxUtility
 @synthesize background;
 
-- (id)init
+- (instancetype)init
 {
 	if (self = [super init]) {
 	foreground = [NSColor colorWithDeviceRed:0.0 green:0.0 blue:0.0 alpha:1.0];

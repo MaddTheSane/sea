@@ -21,7 +21,7 @@
 
 @implementation SeaPrintView
 
-- (id)initWithDocument:(id)doc 
+- (instancetype)initWithDocument:(id)doc 
 {	
 	NSRect frame;
 		

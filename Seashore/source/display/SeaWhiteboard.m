@@ -18,7 +18,7 @@ extern IntPoint gScreenResolution;
 
 @implementation SeaWhiteboard
 
-- (id)initWithDocument:(id)doc
+- (instancetype)initWithDocument:(id)doc
 {
 	if (self = [super init]) {
 		CMProfileRef destProf;

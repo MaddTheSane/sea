@@ -68,7 +68,7 @@
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
+- (instancetype)init;
 
 /*!
 	@method		foreground

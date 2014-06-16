@@ -7,7 +7,7 @@
 
 @implementation SeaCompositor
 
-- (id)initWithDocument:(id)doc
+- (instancetype)initWithDocument:(id)doc
 {
 	if (self = [super init]) {
 		int i;

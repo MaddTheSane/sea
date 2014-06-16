@@ -79,7 +79,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 
 @implementation SeaPrefs
 
-- (id)init
+- (instancetype)init
 {
 	NSData *tempData;
 	float xdpi, ydpi;

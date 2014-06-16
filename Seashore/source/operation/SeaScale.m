@@ -11,7 +11,7 @@
 
 @implementation SeaScale
 
-- (id)init
+- (instancetype)init
 {
 	undoMax = kNumberOfScaleRecordsPerMalloc;
 	undoRecords = malloc(undoMax * sizeof(ScaleUndoRecord));

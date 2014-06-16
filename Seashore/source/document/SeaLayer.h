@@ -86,7 +86,7 @@
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc;
+- (instancetype)initWithDocument:(id)doc;
 
 /*!
 	@method		initWithDocument:width:height:opaque:spp:
@@ -104,7 +104,7 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc width:(int)lwidth height:(int)lheight opaque:(BOOL)opaque spp:(int)lspp;
+- (instancetype)initWithDocument:(id)doc width:(int)lwidth height:(int)lheight opaque:(BOOL)opaque spp:(int)lspp;
 
 /*!
 	@method		initWithDocument:rect:data:spp:
@@ -125,7 +125,7 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata spp:(int)lspp;
+- (instancetype)initWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata spp:(int)lspp;
 
 /*!
 	@method		initWithDocument:layer:type:
@@ -139,7 +139,7 @@
 				The layer whose contents to mimic.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc layer:(SeaLayer*)layer;
+- (instancetype)initWithDocument:(id)doc layer:(SeaLayer*)layer;
 
 /*!
 	@method		initFloatingWithDocument:rect:data:
@@ -154,7 +154,7 @@
 				The data with which to initialize the instance. This should be
 				of the format prescibed by the document.
 */
-- (id)initFloatingWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata;
+- (instancetype)initFloatingWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata;
 
 // COMPRESSION METHODS
 

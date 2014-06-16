@@ -37,7 +37,7 @@ inline static int parse_value(char *input, char *value)
 }
 
 
-- (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path
+- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path
 {
 	FILE *file;
 	char buffer[4096], temp;

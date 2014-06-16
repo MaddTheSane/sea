@@ -42,7 +42,7 @@
 }
 
 
-- (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path
+- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path
 {
 	NSImageRep *imageRep;
 	NSImage *image;

@@ -35,6 +35,6 @@
 				information).
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithFile:(FILE *)file offset:(size_t)offset document:(id)doc sharedInfo:(SharedXCFInfo *)info;
+- (instancetype)initWithFile:(FILE *)file offset:(size_t)offset document:(id)doc sharedInfo:(SharedXCFInfo *)info;
 
 @end

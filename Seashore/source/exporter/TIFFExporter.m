@@ -21,7 +21,7 @@ enum {
 
 @implementation TIFFExporter
 
-- (id)init
+- (instancetype)init
 {
 	return self;
 }

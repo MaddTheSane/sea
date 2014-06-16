@@ -6,7 +6,7 @@
 
 @implementation XBMLayer
 
-- (id)initWithFile:(FILE *)file offset:(int)offset document:(id)doc sharedInfo:(SharedXBMInfo *)info
+- (instancetype)initWithFile:(FILE *)file offset:(int)offset document:(id)doc sharedInfo:(SharedXBMInfo *)info
 {
 	unsigned char value;
 	char string[9], temp;

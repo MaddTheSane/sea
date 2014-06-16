@@ -123,7 +123,7 @@ enum {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithContent:(SeaContent *)cont;
+- (instancetype)initWithContent:(SeaContent *)cont;
 
 /*!
 	@method		compositor

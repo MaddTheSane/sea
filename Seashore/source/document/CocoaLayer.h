@@ -30,6 +30,6 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithImageRep:(id)imageRep document:(id)doc spp:(int)lspp;
+- (instancetype)initWithImageRep:(id)imageRep document:(id)doc spp:(int)lspp;
 
 @end

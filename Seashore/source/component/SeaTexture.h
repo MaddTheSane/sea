@@ -34,7 +34,7 @@
 				The path of the file with which to initalize this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithContentsOfFile:(NSString *)path;
+- (instancetype)initWithContentsOfFile:(NSString *)path;
 
 /*!
 	@method		activate

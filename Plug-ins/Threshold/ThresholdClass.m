@@ -9,7 +9,7 @@
 @synthesize rangeLabel;
 @synthesize view;
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (instancetype)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super init]) {
 		NSArray *tmpArray;

@@ -70,7 +70,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board;
+- (instancetype)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board;
 
 /*!
 	@method		compositeLayer:withOptions:

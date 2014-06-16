@@ -29,7 +29,7 @@
 				The frame with which to initialize the view.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithFrame:(NSRect)frame;
+- (instancetype)initWithFrame:(NSRect)frame;
 
 /*!
 	@method		setDocument:

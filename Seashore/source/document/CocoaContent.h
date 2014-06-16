@@ -53,7 +53,7 @@
 				The path of the image file with which to initalize this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
+- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
 
 /*!
 	@method		endPanel:

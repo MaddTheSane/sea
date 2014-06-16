@@ -5,7 +5,7 @@
 @implementation PixellateClass
 @synthesize scale;
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (instancetype)initWithManager:(SeaPlugins *)manager
 {
 	if (self = [super initWithManager:manager]) {
 		NSArray *tmpArray;

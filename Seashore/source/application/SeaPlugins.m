@@ -78,7 +78,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 	return canRun;
 }
 
-- (id)init
+- (instancetype)init
 {
 	NSString *pluginsPath, *pre_files_name, *files_name;
 	NSArray *pre_files;

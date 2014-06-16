@@ -45,7 +45,7 @@
 	@param			newView
 				The SeaView that uses these cursors
 */
-- (id)initWithDocument:(id)newDocument andView:(id)newView;
+- (instancetype)initWithDocument:(id)newDocument andView:(id)newView;
 
 /*!
 	@method		resetCursorRects

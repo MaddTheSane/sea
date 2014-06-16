@@ -11,7 +11,7 @@
 
 @implementation BrushUtility
 
-- (id)init
+- (instancetype)init
 {		
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Load the brushes

@@ -14,7 +14,7 @@ extern BOOL userWarnedOnDiskSpace;
 
 @implementation SeaLayerUndo
 
-- (id)initWithDocument:(id)doc forLayer:(id)ilayer
+- (instancetype)initWithDocument:(id)doc forLayer:(id)ilayer
 {
 	// Setup our local variables
 	document = doc;

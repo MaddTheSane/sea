@@ -67,7 +67,7 @@ typedef struct
 }
 
 // Set the values suitably for a new document
-- (id)init;
+- (instancetype)init;
 
 // Returns an image representing the brush
 - (NSImage *)brushImage;
@@ -91,7 +91,7 @@ typedef struct
 - (BOOL)readFromFile:(NSString *)path ofType:(NSString *)docType;
 
 // Undoes the image to that which is stored by a given undo record
-- (void)undoImageTo:(int)index;
+- (void)undoImageTo:(NSInteger)index;
 
 // Undoes the name to a given string
 - (void)undoNameTo:(NSString *)string;
@@ -109,7 +109,7 @@ typedef struct
 - (IBAction)import:(id)sender;
 
 // Export the brush's graphic
-- (IBAction)export:(id)sender;
+- (IBAction)exportGraphic:(id)sender;
 
 // The following calls changeName: before scheduling saving (two events cannot occur in the same loop)
 - (IBAction)preSaveDocument:(id)sender;

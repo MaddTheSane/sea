@@ -91,7 +91,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc;
+- (instancetype)initWithDocument:(id)doc;
 
 /*!
 	@method		initForPasteboardWithDocument:
@@ -101,7 +101,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initFromPasteboardWithDocument:(id)doc;
+- (instancetype)initFromPasteboardWithDocument:(id)doc;
 
 /*!
 	@method		initWithDocument:type:width:height:res:opaque:
@@ -124,7 +124,7 @@ typedef struct {
 				YES if the background layer should be opaque, NO otherwise.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque;
+- (instancetype)initWithDocument:(id)doc type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque;
 
 /*!
 	@method		initWithDocument:data:type:width:height:res:
@@ -149,7 +149,7 @@ typedef struct {
 				YES if the background layer should be opaque, NO otherwise.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc data:(unsigned char *)ddata type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
+- (instancetype)initWithDocument:(id)doc data:(unsigned char *)ddata type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
 
 // PROPERTY METHODS
 

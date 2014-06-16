@@ -21,7 +21,7 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 
 @implementation SeaBrush
 
-- (id)initWithContentsOfFile:(NSString *)path
+- (instancetype)initWithContentsOfFile:(NSString *)path
 {
 	if (self = [super init]) {
 	FILE *file;

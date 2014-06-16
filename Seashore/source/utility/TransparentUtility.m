@@ -6,7 +6,7 @@
 
 @implementation TransparentUtility
 
-- (id)init
+- (instancetype)init
 {
 	float values[4];
 	NSData *tempData;

@@ -479,7 +479,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	return YES;
 }
 
-- (id)initWithFile:(FILE *)file offset:(int)offset sharedInfo:(SharedXCFInfo *)info
+- (instancetype)initWithFile:(FILE *)file offset:(int)offset sharedInfo:(SharedXCFInfo *)info
 {
 	if (self = [super init]) {
 		int i;
