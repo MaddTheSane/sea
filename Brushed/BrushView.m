@@ -26,7 +26,7 @@
 		}
 		where.x = [self bounds].size.width / 2 - [brushImage size].width / 2;
 		where.y = [self bounds].size.height / 2 - [brushImage size].height / 2;
-		[brushImage compositeToPoint:where operation:NSCompositeSourceOver];
+		[brushImage drawAtPoint:where fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	}
 }
 

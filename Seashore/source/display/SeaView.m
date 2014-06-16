@@ -838,7 +838,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			outPoint.x -= 12;
 			outPoint.y -= 10;
 			outPoint.y += 26;
-			[crossImage compositeToPoint:outPoint operation:NSCompositeSourceOver fraction:(float)[cloneTool sourceSetting] / 100.0];
+			[crossImage drawAtPoint:outPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:(CGFloat)[cloneTool sourceSetting] / 100.0];
 		}
 	}else if (curToolIndex == kEffectTool){
 		// Draw effect tool dots

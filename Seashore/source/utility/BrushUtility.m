@@ -181,7 +181,7 @@
 				}
 			}
 			if ([tempBrushArray count] > 0) {
-				[tempBrushArray sortUsingSelector:@selector(localizedStandardCompare:)];
+				[tempBrushArray sortUsingSelector:@selector(compare:)];
 				groups = [groups arrayByAddingObject:tempBrushArray];
 				groupNames = [groupNames arrayByAddingObject:[tempPathA lastPathComponent]];
 			}

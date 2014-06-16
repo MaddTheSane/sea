@@ -123,10 +123,11 @@ static inline void fix_endian_write(int *input, int size)
 		parasites = [contents parasites];
 		for (i = 0; i < count; i++) {
 			parasite = parasites[i];
-			tempIntString[0] = ([(__bridge NSString*)parasite.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) + 1;
+			NSString *parasiteName = (__bridge NSString*)parasite.name;
+			tempIntString[0] = ([parasiteName lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) + 1;
 			fix_endian_write(tempIntString, 1);
 			fwrite(tempIntString, sizeof(int), 1, file);
-			fwrite([(__bridge NSString*)parasite.name UTF8String], sizeof(char), ([(__bridge NSString*)parasite.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) + 1, file);
+			fwrite([parasiteName UTF8String], sizeof(char), ([parasiteName lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) + 1, file);
 			tempIntString[0] = parasite.flags;
 			tempIntString[1] = parasite.size;
 			fix_endian_write(tempIntString, 2);
@@ -272,8 +273,9 @@ static inline void fix_endian_write(int *input, int size)
 	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height], spp = [[document contents] spp];
 	int tilesPerRow = (width % XCF_TILE_WIDTH) ? (width / XCF_TILE_WIDTH + 1) : (width / XCF_TILE_WIDTH);
 	int tilesPerColumn = (height % XCF_TILE_HEIGHT) ? (height / XCF_TILE_HEIGHT + 1) : (height / XCF_TILE_HEIGHT);
-	int offsetPos, oldPos, whichTile, i, j, k, tileWidth, tileHeight, tileSize, srcLoc, destLoc, compressedLength;
+	int whichTile, i, j, k, tileWidth, tileHeight, tileSize, srcLoc, destLoc, compressedLength;
 	unsigned char *totalData, *tileData, *compressedTileData;
+	long offsetPos, oldPos;
 
 	// Direct to the layer's pixels
 	tempIntString[0] = ftell(file) + 2 * sizeof(int);
@@ -362,7 +364,7 @@ static inline void fix_endian_write(int *input, int size)
 
 - (BOOL)writeLayer:(int)index file:(FILE *)file
 {	
-	int storedOffset;
+	long storedOffset;
 	
 	// If the previous layer was a floating one we need to make some changes
 	if (floatingFiller != -1) {
@@ -396,7 +398,7 @@ static inline void fix_endian_write(int *input, int size)
 - (BOOL)writeDocument:(id)doc toFile:(NSString *)path
 {
 	FILE *file;
-	int i, offsetPos, oldPos, layerCount;
+	NSInteger i, offsetPos, oldPos, layerCount;
 	ParasiteData exifParasite;
 	NSString *errorString;
 	NSData *exifContainer;
@@ -410,7 +412,7 @@ static inline void fix_endian_write(int *input, int size)
 	if ([[document contents] exifData]) {
 		exifContainer = [NSPropertyListSerialization dataFromPropertyList:[[document contents] exifData] format:NSPropertyListXMLFormat_v1_0 errorDescription:&errorString];
 		if (exifContainer) {
-			exifParasite.name = @"exif-plist";
+			exifParasite.name = CFSTR("exif-plist");
 			exifParasite.flags = 0;
 			exifParasite.size = [exifContainer length];
 			exifParasite.data = malloc(exifParasite.size);

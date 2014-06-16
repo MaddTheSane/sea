@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		5554404F194F969A006CC667 /* Other Applications */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 55544052194F969B006CC667 /* Build configuration list for PBXAggregateTarget "Other Applications" */;
+			buildPhases = (
+			);
+			dependencies = (
+				55544054194F96A8006CC667 /* PBXTargetDependency */,
+				55544056194F96A8006CC667 /* PBXTargetDependency */,
+			);
+			name = "Other Applications";
+			productName = "Other Applications";
+		};
 		55909DFD18CFD59A00F43F90 /* CoreImage-based Plug-ins */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 55909DFE18CFD59A00F43F90 /* Build configuration list for PBXAggregateTarget "CoreImage-based Plug-ins" */;
@@ -832,6 +844,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
 			remoteInfo = XCFQuickLook;
+		};
+		55544053194F96A8006CC667 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35B158630A2C089A005B688F /* Brushed.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A898E52509BEFCA00075C7AB;
+			remoteInfo = Brushed;
+		};
+		55544055194F96A8006CC667 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35B1586B0A2C08A4005B688F /* Pat2PNG.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A8F100CB09C126A6003F15A3;
+			remoteInfo = Pat2PNG;
 		};
 		55909E0118CFD5A700F43F90 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -5824,6 +5850,7 @@
 				55E5E46E18D26FC50082E60F /* Sharpen */,
 				55E5E47A18D26FC70082E60F /* Threshold */,
 				55E5E48618D26FD70082E60F /* Vertical Stripes */,
+				5554404F194F969A006CC667 /* Other Applications */,
 			);
 		};
 /* End PBXProject section */
@@ -7294,6 +7321,16 @@
 			isa = PBXTargetDependency;
 			name = XCFQuickLook;
 			targetProxy = 5528598713D62FBF001564E5 /* PBXContainerItemProxy */;
+		};
+		55544054194F96A8006CC667 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Brushed;
+			targetProxy = 55544053194F96A8006CC667 /* PBXContainerItemProxy */;
+		};
+		55544056194F96A8006CC667 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Pat2PNG;
+			targetProxy = 55544055194F96A8006CC667 /* PBXContainerItemProxy */;
 		};
 		55909E0218CFD5A700F43F90 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -8905,6 +8942,20 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		55544050194F969B006CC667 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		55544051194F969B006CC667 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -11474,6 +11525,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		55544052194F969B006CC667 /* Build configuration list for PBXAggregateTarget "Other Applications" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55544050194F969B006CC667 /* Debug */,
+				55544051194F969B006CC667 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		557D533E18CF9FEC005809E3 /* Build configuration list for PBXNativeTarget "Affine Tile+" */ = {
 			isa = XCConfigurationList;

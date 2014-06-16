@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1080" identifier="macosx"/>
+        <deployment defaultVersion="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
@@ -1901,11 +1901,11 @@ Gw
                         <rect key="frame" x="46" y="126" width="248" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="9yS-N0-Caa">
-                            <rect key="frame" x="1" y="1" width="246" height="94"/>
+                            <rect key="frame" x="1" y="1" width="230" height="94"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" id="415" customClass="NSExtendedTableView">
-                                    <rect key="frame" x="0.0" y="0.0" width="246" height="94"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="231" height="94"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5215,37 +5215,37 @@ DQ
                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     <size key="cellSize" width="35" height="27"/>
                     <size key="intercellSpacing" width="-1" height="0.0"/>
-                    <buttonCell key="prototype" type="bevel" image="1-not" imagePosition="left" alignment="left" inset="2" id="17044">
+                    <buttonCell key="prototype" type="bevel" image="1-sel" imagePosition="only" alignment="left" alternateImage="1-not" inset="2" id="17044">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <cells>
                         <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="0-not" imagePosition="left" alignment="left" state="on" inset="2" id="16536">
+                            <buttonCell type="bevel" bezelStyle="regularSquare" image="0-not" imagePosition="only" alignment="left" state="on" inset="2" id="16536">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                         </column>
                         <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="1-not" imagePosition="left" alignment="left" tag="1" inset="2" id="16537">
+                            <buttonCell type="bevel" bezelStyle="regularSquare" image="1-not" imagePosition="only" alignment="left" tag="1" inset="2" id="16537">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                         </column>
                         <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="2-not" imagePosition="left" alignment="left" tag="2" inset="2" id="16538">
+                            <buttonCell type="bevel" bezelStyle="regularSquare" image="2-not" imagePosition="only" alignment="left" tag="2" inset="2" id="16538">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                         </column>
                         <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="3-not" imagePosition="left" alignment="left" tag="3" inset="2" id="16539">
+                            <buttonCell type="bevel" bezelStyle="regularSquare" image="3-not" imagePosition="only" alignment="left" tag="3" inset="2" id="16539">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                         </column>
                         <column>
-                            <buttonCell type="bevel" title="Rdio" bezelStyle="regularSquare" image="4-not" imagePosition="left" alignment="left" tag="4" inset="2" id="16540">
+                            <buttonCell type="bevel" title="Rdio" bezelStyle="regularSquare" image="4-not" imagePosition="only" alignment="left" tag="4" inset="2" id="16540">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -5415,6 +5415,7 @@ DQ
     <resources>
         <image name="0-not" width="35" height="27"/>
         <image name="1-not" width="35" height="27"/>
+        <image name="1-sel" width="35" height="27"/>
         <image name="10-not" width="35" height="27"/>
         <image name="11-not" width="35" height="27"/>
         <image name="12-not" width="35" height="27"/>

@@ -41,8 +41,8 @@
 - (void)drawRect:(NSRect)rect
 {
 	NSArray *textures = [master textures];
-	int textureCount =  [textures count];
-	int activeTextureIndex = [master activeTextureIndex];
+	NSInteger textureCount =  [textures count];
+	NSInteger activeTextureIndex = [master activeTextureIndex];
 	int i, j, elemNo;
 	NSImage *thumbnail;
 	NSRect elemRect, tempRect;
@@ -80,8 +80,7 @@
 				
 				// Draw the thumbnail
 				thumbnail = [textures[elemNo] thumbnail];
-				[thumbnail compositeToPoint:NSMakePoint(i * kTexturePreviewSize + kTexturePreviewSize / 2 - [thumbnail size].width / 2, j * kTexturePreviewSize + kTexturePreviewSize / 2 + [thumbnail size].height / 2) operation:NSCompositeSourceOver];
-				
+				[thumbnail drawAtPoint:NSMakePoint(i * kTexturePreviewSize + kTexturePreviewSize / 2 - [thumbnail size].width / 2, j * kTexturePreviewSize + kTexturePreviewSize / 2 + [thumbnail size].height / 2) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 			}
 			
 		}
@@ -91,7 +90,7 @@
 - (void)update
 {
 	NSArray *textures = [master textures];
-	int textureCount =  [textures count];
+	NSInteger textureCount =  [textures count];
 	NSSize size = NSMakeSize(kTexturePreviewSize * kTexturesPerRow + 1, ((textureCount % kTexturesPerRow == 0) ? (textureCount / kTexturesPerRow) : (textureCount / kTexturesPerRow + 1)) * kTexturePreviewSize);
 	
 	[self setFrameSize:size];

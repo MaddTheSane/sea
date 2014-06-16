@@ -114,7 +114,7 @@
 			[[self stringValue] drawInRect:cellFrame withAttributes:attrs];
 		}
 		
-        [image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
+		[image drawAtPoint:imageFrame.origin fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	}else{
 		[super drawWithFrame:cellFrame inView:controlView];
 	}

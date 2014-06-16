@@ -1,6 +1,6 @@
 #import "BrushDocument.h"
 
-typedef struct {
+typedef struct _BrushHeader {
   unsigned int   header_size;  /*  header_size = sizeof (BrushHeader) + brush name  */
   unsigned int   version;      /*  brush file version #  */
   unsigned int   width;        /*  width of brush  */
@@ -15,6 +15,12 @@ typedef struct {
 #define int_mult(a,b,t)  ((t) = (a) * (b) + 0x80, ((((t) >> 8) + (t)) >> 8))
 
 @implementation BrushDocument
+@synthesize view;
+@synthesize spacingLabel;
+@synthesize spacingSlider;
+@synthesize nameTextField;
+@synthesize typeButton;
+@synthesize dimensionsLabel;
 
 - (instancetype)init
 {
@@ -38,7 +44,7 @@ typedef struct {
 - (void)awakeFromNib
 {
 	// Set interface elements to match brush settings
-	[spacingSlider setIntValue:(spacing == 1) ? 0 : spacing];
+	[spacingSlider setIntegerValue:(spacing == 1) ? 0 : spacing];
 	[spacingLabel setStringValue:[NSString stringWithFormat:@"Spacing - %d%%", spacing]];
 	[nameTextField setStringValue:name];
 	if (usePixmap) [typeButton setTitle:@"Type - Full Colour"];
@@ -48,7 +54,7 @@ typedef struct {
 
 - (void)dealloc
 {
-	int i;
+	NSInteger i;
 	
 	if (undoRecords) {
 		for (i = 0; i < undoRecordsSize; i++) {
@@ -65,7 +71,7 @@ typedef struct {
 	NSImage *brushImage;
 	
 	// If we have no width or height in the image return NULL
-	if (width == 0 || height == 0) return NULL;
+	if (width == 0 || height == 0) return nil;
 	
 	// Create the representation
 	if (usePixmap)
@@ -102,7 +108,8 @@ typedef struct {
 - (BOOL)changeImage:(NSBitmapImageRep *)newImage
 {
 	BOOL invert, isRGB, useAlpha;
-	int i, j, t, spp = [newImage samplesPerPixel];
+	int i, j, t;
+	NSInteger spp = [newImage samplesPerPixel];
 	unsigned char *data = [newImage bitmapData];
 	
 	// Check we can handle this image
@@ -244,13 +251,13 @@ typedef struct {
 	fread(&header, sizeof(BrushHeader), 1, file);
 
 	// Convert brush header to proper endianess
-	header.header_size = ntohl(header.header_size);
-	header.version = ntohl(header.version);
-	header.width = ntohl(header.width);
-	header.height = ntohl(header.height);
-	header.bytes = ntohl(header.bytes);
-	header.magic_number = ntohl(header.magic_number);
-	header.spacing = ntohl(header.spacing);
+	header.header_size = CFSwapInt32BigToHost(header.header_size);
+	header.version = CFSwapInt32BigToHost(header.version);
+	header.width = CFSwapInt32BigToHost(header.width);
+	header.height = CFSwapInt32BigToHost(header.height);
+	header.bytes = CFSwapInt32BigToHost(header.bytes);
+	header.magic_number = CFSwapInt32BigToHost(header.magic_number);
+	header.spacing = CFSwapInt32BigToHost(header.spacing);
 	
 	// Check version compatibility
 	versionGood = (header.version == 2 && header.magic_number == GBRUSH_MAGIC);
@@ -315,7 +322,7 @@ typedef struct {
 	return YES;
 }
 
-- (void)undoImageTo:(int)index
+- (void)undoImageTo:(NSInteger)index
 {
 	// Allow the redo
 	[[[self undoManager] prepareWithInvocationTarget:self] undoImageTo:curUndoPos];
@@ -375,22 +382,14 @@ typedef struct {
 	// Set-up the header
 	if ([name length] > 128) tempName = [name substringToIndex:128];
 	else tempName = name;
-	header.header_size = strlen([name UTF8String]) + 1 + sizeof(header);
-	header.version = 2;
-	header.width = width;
-	header.height = height;
-	header.bytes = (usePixmap) ? 4 : 1;
-	header.magic_number = GBRUSH_MAGIC;
-	header.spacing = spacing;
-	
 	// Convert brush header to proper endianess
-	header.header_size = htonl(header.header_size);
-	header.version = htonl(header.version);
-	header.width = htonl(header.width);
-	header.height = htonl(header.height);
-	header.bytes = htonl(header.bytes);
-	header.magic_number = htonl(header.magic_number);
-	header.spacing = htonl(header.spacing);
+	header.header_size = CFSwapInt32HostToBig((int)(strlen([name UTF8String]) + 1 + sizeof(header)));
+	header.version = CFSwapInt32HostToBig(2);
+	header.width = CFSwapInt32HostToBig(width);
+	header.height = CFSwapInt32HostToBig(height);
+	header.bytes = CFSwapInt32HostToBig((usePixmap) ? 4 : 1);
+	header.magic_number = CFSwapInt32HostToBig(GBRUSH_MAGIC);
+	header.spacing = CFSwapInt32HostToBig(spacing);
 	
 	// Write the header
 	fwrite(&header, sizeof(BrushHeader), 1, file);
@@ -435,7 +434,7 @@ typedef struct {
 	}];
 }
 
-- (IBAction)export:(id)sender
+- (IBAction)exportGraphic:(id)sender
 {
 	NSSavePanel *savePanel = [NSSavePanel savePanel];
 	

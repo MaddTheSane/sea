@@ -8,12 +8,13 @@
 */
 
 #import "Globals.h"
+@class BrushDocument;
 
 @interface BrushView : NSView
 {
 
 	// The document associated with this view
-	IBOutlet id document;
+	IBOutlet BrushDocument *document;
 
 }
 

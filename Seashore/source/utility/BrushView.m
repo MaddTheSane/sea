@@ -74,7 +74,7 @@
 				
 				// Draw the thumbnail
 				thumbnail = [brushes[elemNo] thumbnail];
-				[thumbnail compositeToPoint:NSMakePoint(i * kBrushPreviewSize + kBrushPreviewSize / 2 - [thumbnail size].width / 2, j * kBrushPreviewSize + kBrushPreviewSize / 2 + [thumbnail size].height / 2) operation:NSCompositeSourceOver];
+				[thumbnail drawAtPoint:NSMakePoint(i * kBrushPreviewSize + kBrushPreviewSize / 2 - [thumbnail size].width / 2, j * kBrushPreviewSize + kBrushPreviewSize / 2 + [thumbnail size].height / 2) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 				
 				// Draw the pixel tag if needed
 				pixelTag = [brushes[elemNo] pixelTag];
@@ -94,7 +94,7 @@
 - (void)update
 {
 	NSArray *brushes = [master brushes];
-	int brushCount =  [brushes count];
+	NSInteger brushCount =  [brushes count];
 	
 	[self setFrameSize:NSMakeSize(kBrushPreviewSize * kBrushesPerRow + 1, ((brushCount % kBrushesPerRow == 0) ? (brushCount / kBrushesPerRow) : (brushCount / kBrushesPerRow + 1)) * kBrushPreviewSize)];
 }

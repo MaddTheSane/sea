@@ -9,6 +9,7 @@
 */
 
 #import "Globals.h"
+#import "BrushView.h"
 
 typedef struct
 {
@@ -19,8 +20,8 @@ typedef struct
 	BOOL usePixmap;
 } BitmapUndo;
 
-@interface BrushDocument : NSDocument {
-
+@interface BrushDocument : NSDocument <NSWindowDelegate>
+{
 	// A grayscale mask of the brush
 	unsigned char *mask;
 	
@@ -29,8 +30,8 @@ typedef struct
 	
 	// All previous bitmaps (for undos)
 	BitmapUndo *undoRecords;
-	int undoRecordsSize;
-	int curUndoPos;
+	NSInteger undoRecordsSize;
+	NSInteger curUndoPos;
 	
 	// The spacing between brush strokes
 	int spacing;
@@ -48,23 +49,23 @@ typedef struct
 	// Do we use the pixmap or the mask?
 	BOOL usePixmap;
 	
+}
+
 	// The view displaying the brush
-	IBOutlet id view;
+@property (weak) IBOutlet BrushView *view;
 	
 	// The label and slider that present the brush's spacing options
-    IBOutlet id spacingLabel;
-    IBOutlet id spacingSlider;
+@property (weak) IBOutlet NSTextField *spacingLabel;
+@property (weak) IBOutlet NSSlider *spacingSlider;
 	
 	// The text field for the name
-	IBOutlet id nameTextField;
+@property (weak) IBOutlet NSTextField *nameTextField;
 	
 	// The label specifying the brush type (monochrome or full colour)
-	IBOutlet id typeButton;
+@property (weak) IBOutlet NSButton *typeButton;
 	
 	// The label specifying the dimensions of the brush
-	IBOutlet id dimensionsLabel;
-
-}
+@property (weak) IBOutlet NSTextField *dimensionsLabel;
 
 // Set the values suitably for a new document
 - (instancetype)init;
