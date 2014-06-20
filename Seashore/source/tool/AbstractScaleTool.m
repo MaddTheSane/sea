@@ -19,8 +19,8 @@
 @implementation AbstractScaleTool
 - (instancetype)init
 {
-	if (![super init])
-		return NULL;
+	if (!(self = [super init]))
+		return nil;
 
 	translating = NO;
 	scalingDir = kNoDir;

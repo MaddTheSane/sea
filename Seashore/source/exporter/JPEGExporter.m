@@ -41,6 +41,7 @@ static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xre
 
 - (instancetype)init
 {
+	if (self = [super init]) {
 	NSInteger value;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
@@ -68,6 +69,7 @@ static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xre
 			value = 30;
 	}
 	printCompression = value;
+	}
 	
 	return self;
 }

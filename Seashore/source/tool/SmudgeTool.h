@@ -63,8 +63,6 @@
 	@param		where
 				Where in the document the mouse up event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse up event.
 */
@@ -81,7 +79,7 @@
 /*!
 	@method		intermediateStroke:
 	@discussion	Specifies an intermediate point in the stroke.
-	@param		Where in the document to place the intermediate
+	@param		where in the document to place the intermediate
 				stroke.
 */
 - (void)intermediateStroke:(IntPoint)where;

@@ -17,10 +17,9 @@
 
 - (instancetype)init
 {
-	if(![super init])
-		return NULL;
-	count = 0;
-	seaPlugins = [SeaController seaPlugins];
+	if(self = [super init]) {
+		seaPlugins = [SeaController seaPlugins];
+	}
 	return self;
 }
 

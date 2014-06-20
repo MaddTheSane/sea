@@ -13,6 +13,7 @@
 
 - (instancetype)init
 {		
+	if (self = [super init]) {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Load the brushes
 	[self loadBrushes:NO];
@@ -32,6 +33,7 @@
 		activeBrushIndex = [defaults integerForKey:@"active brush"];
 	if (activeBrushIndex < 0 || activeBrushIndex >= [groups[activeGroupIndex] count])
 		activeBrushIndex = 0;
+	}
 	
 	return self;
 }

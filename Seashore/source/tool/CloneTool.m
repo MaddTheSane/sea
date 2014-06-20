@@ -29,13 +29,6 @@
 	return kCloneTool;
 }
 
-- (instancetype)init
-{
-	if(![super init])
-		return NULL;
-	return self;
-}
-
 - (BOOL)acceptsLineDraws
 {
 	return NO;

@@ -84,6 +84,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	NSData *tempData;
 	float xdpi, ydpi;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if (self = [super init]) {
 	
 	// Get bounderies from preferences
 	if ([defaults objectForKey:@"boundaries"] && [defaults boolForKey:@"boundaries"])
@@ -282,6 +283,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	// NSLog(@"Screen resolution (dpi): %d x %d", mainScreenResolution.x, mainScreenResolution.y);
 #endif
 	gScreenResolution = [self screenResolution];
+	}
 
 	return self;
 }

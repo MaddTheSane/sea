@@ -56,6 +56,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (instancetype)initWithDocument:(id)doc 
 {	
+	if (self = [super init]) {
 	NSRect frame;
 	int xres, yres;
 	
@@ -138,6 +139,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	}
 	else if (xres > 300) {
 		[[SeaController seaWarning] addMessage:LOCALSTR(@"high res message", @"This image has a high resolution. Seashore's performance may therefore be reduced. You can reduce the resolution using \"Image > Resolution...\" (with \"Preserve size\" checked). This will result in a lower-quality image.") forDocument: document level:kLowImportance];
+	}
 	}
 	
     return self;

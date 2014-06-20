@@ -10,7 +10,7 @@
 - (instancetype)init
 {
 	if(![super init])
-		return NULL;
+		return nil;
 	pegasusUtilities = [[NSMutableDictionary alloc] init];
 	toolboxUtilities = [[NSMutableDictionary alloc] init];
 	brushUtilities = [[NSMutableDictionary alloc] init];

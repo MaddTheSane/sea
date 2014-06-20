@@ -4,13 +4,13 @@
 /*!
 	@struct		CachedMask
 	@discussion	Specifies a cached mask entry.
-	@param		index1
+	@field		index1
 				The corresponding horizontal subsample entry.
-	@param		index2
+	@field		index2
 				The corresponding horizontal subsample entry.
-	@param		scale
+	@field		scale
 				The corresponding scaling entry (major axis).
-	@param		lastCheck
+	@field		lastCheck
 				The time the entry was last used.
 */
 typedef struct {
@@ -172,7 +172,7 @@ typedef struct {
 				according to the fractional part of the point.
 	@param		point
 				An NSPoint at which the mask is being plotted.
-	@param		pressure
+	@param		value
 				An integer representing the pressure.
 	@result		Returns a reference to an 8-bit single-channel bitmap.
 */

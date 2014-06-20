@@ -11,17 +11,11 @@
 	if (self = [super init]) {
 		// Set the data members to reasonable values
 		xres = yres = 72;
-		height = width = type = 0;
-		lostprops = NULL; lostprops_len = 0;
-		parasites = NULL; parasites_count = 0;
-		exifData = NULL;
-		layers = NULL; activeLayerIndex = 0;
 		layersToUndo = [NSMutableArray array];
 		layersToRedo = [NSMutableArray array];
 		orderings = [NSMutableArray array];
 		deletedLayers = [[NSArray alloc] init];
-		selectedChannel = kAllChannels; trueView = NO;
-		cmykSave = NO;
+		selectedChannel = kAllChannels;
 		gScreenResolution = IntMakePoint(1024, 768);
 	}
 	
@@ -39,7 +33,8 @@
 		}
 		free(parasites);
 	}
-	if (lostprops) free(lostprops);
+	if (lostprops)
+		free(lostprops);
 }
 
 - (int)type
@@ -54,13 +49,13 @@
 	switch (type) {
 		case XCF_RGB_IMAGE:
 			result = 4;
-		break;
+			break;
 		case XCF_GRAY_IMAGE:
 			result = 2;
-		break;
+			break;
 		default:
 			NSLog(@"Document type not recognised by spp");
-		break;
+			break;
 	}
 	
 	return result;

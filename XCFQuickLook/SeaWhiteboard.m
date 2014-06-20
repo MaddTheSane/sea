@@ -6,9 +6,11 @@
 #import "Bitmap.h"
 
 @implementation SeaWhiteboard
+@synthesize compositor;
 
 - (instancetype)initWithContent:(SeaContent *)cont
 {
+	if (self = [super init]) {
 	CMProfileRef destProf;
 	int layerWidth, layerHeight;
 	
@@ -19,8 +21,8 @@
 	// Initialize the compostior
 	compositor = NULL;
 
-	if (compositor == NULL)	compositor = [SeaCompositor alloc];
-	[compositor initWithContents:contents andWhiteboard:self];
+	if (compositor == NULL)
+		compositor = [[SeaCompositor alloc] initWithContents:contents andWhiteboard:self];
 	
 	// Record the width, height and use of greys
 	width = [contents width];
@@ -51,12 +53,8 @@
 	
 	// Set the locking thread to NULL
 	lockingThread = NULL;
-	
+	}
 	return self;
-}
-
-- (SeaCompositor *)compositor{
-	return compositor;
 }
 
 - (void)dealloc

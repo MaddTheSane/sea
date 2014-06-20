@@ -55,8 +55,8 @@ typedef struct {
 @interface SeaCompositor : NSObject {
 
 	// The contents associated with this compositor
-	SeaContent *contents;
-	SeaWhiteboard *whiteboard;
+	__weak SeaContent *contents;
+	__weak SeaWhiteboard *whiteboard;
 	
 	// The random table
 	int randomTable[RANDOM_TABLE_SIZE];

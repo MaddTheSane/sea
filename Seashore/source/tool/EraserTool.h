@@ -24,7 +24,7 @@ typedef struct {
 #define kMaxETPoints 16384
 
 /*!
-	@class		BrushTool
+	@class		EraserTool
 	@abstract	The paintbrush's role in Seashore is much the same as that in
 				the GIMP. 
 	@discussion	Shift key - Draws straight lines.<br>Control key - Draws lines
@@ -91,8 +91,6 @@ typedef struct {
 	@param		where
 				Where in the document the mouse down event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse down event.
 */
@@ -112,8 +110,6 @@ typedef struct {
 	@param		where
 				Where in the document the mouse down event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse dragged event.
 */
@@ -131,8 +127,6 @@ typedef struct {
 	@param		where
 				Where in the document the mouse up event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse up event.
 */
@@ -149,7 +143,7 @@ typedef struct {
 /*!
 	@method		intermediateStroke:
 	@discussion	Specifies an intermediate point in the stroke.
-	@param		Where in the document to place the intermediate
+	@param		where in the document to place the intermediate
 				stroke.
 */
 - (void)intermediateStroke:(IntPoint)where;

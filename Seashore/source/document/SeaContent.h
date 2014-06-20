@@ -32,7 +32,6 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaContent : NSObject {
 	
 	// The document associated with this object
@@ -145,8 +144,6 @@ typedef struct {
 				The resolution with which to intialize the instance (note that
 				it is an integer not an IntResolution because this method only
 				accepts square resolutions).
-	@param		dopaque
-				YES if the background layer should be opaque, NO otherwise.
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (instancetype)initWithDocument:(id)doc data:(unsigned char *)ddata type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
@@ -443,14 +440,12 @@ typedef struct {
 /*!
 	@method		layerAbove
 	@discussion	Selects the layer above the current one. Wraps if at the top.
-	@result		Calls set active layer index.
 */
 - (void)layerAbove;
 
 /*!
 	@method		layerBelow
 	@discussion	Selects the layer below the current one. Wraps if at the bottom.
-	@result		Calls set active layer index.
 */
 - (void)layerBelow;
 
@@ -502,6 +497,7 @@ typedef struct {
 	@discussion	Adds a layer to the document based on the pasteboard's contents
 				handles updates and undos).
 	@param		pboard
+				The pasteboard
 				
 */
 - (void)addLayerFromPasteboard:(id)pboard;
@@ -711,7 +707,7 @@ typedef struct {
 				Any array of all of the layers that should be merged.
 	@param		useRepresenation
 				Whether or not to use the image's bitmap representation.
-	@param		withName
+	@param		newName
 				The name of the new layer that will be output
 */
 - (void)merge:(NSArray *)mergingLayers useRepresentation: (BOOL)useRepresenation withName:(NSString *)newName;

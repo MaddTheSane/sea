@@ -38,6 +38,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (instancetype)initWithDocument:(id)doc
 {
+	if (self = [super init]) {
 	// Set the data members to reasonable values
 	xres = yres = 72;
 	height = width = type = 0;
@@ -53,6 +54,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	cmykSave = NO;
 	keeper = allocKeeper();
 	document = doc;
+	}
 	
 	return self;
 }
@@ -82,23 +84,14 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		imageRepData = [pboard dataForType:imageRepDataType];
 		imageRep = [[NSBitmapImageRep alloc] initWithData:imageRepData];
 	}
+	if ((self = [self initWithDocument:doc]) == nil) {
+		return nil;
+	}
 	
 	// Fill out as many of the properties as possible
 	height = [imageRep pixelsHigh];
 	width = [imageRep pixelsWide];
-	xres = yres = 72;
-	lostprops = NULL; lostprops_len = 0;
-	parasites = NULL; parasites_count = 0;
-	exifData = NULL;
-	layersToUndo = [[NSMutableArray alloc] init];
-	layersToRedo = [[NSMutableArray alloc] init];
-	orderings = [[NSMutableArray alloc] init];
-	deletedLayers = [[NSArray alloc] init];
-	selectedChannel = kAllChannels; trueView = NO;
-	cmykSave = NO;
-	keeper = allocKeeper();
-	document = doc;
-	
+
 	// Determine the color space of the pasteboard image and the type
 	space = -1;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace]) {

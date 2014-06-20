@@ -19,6 +19,7 @@
 
 - (instancetype)init
 {		
+	if (self = [super init]) {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Load the textures
 	[self loadTextures:NO];
@@ -43,6 +44,7 @@
 	[opacitySlider setIntValue:100];
 	[opacityLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"opacity", @"Opacity: %d%%"), [opacitySlider intValue]]];
 	opacity = 255;
+	}
 	
 	return self;
 }

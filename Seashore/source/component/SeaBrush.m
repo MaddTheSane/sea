@@ -92,7 +92,8 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 				NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
 				return NULL;
 			}
-		break;
+			break;
+			
 		case 4:
 			usePixmap = YES;
 			tempSize = width * height * 4;
@@ -103,11 +104,12 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 			}
 			prePixmap = malloc(tempSize);
 			premultiplyBitmap(4, prePixmap, pixmap, width * height);
-		break;
+			break;
+			
 		default:
 			NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
 			return nil;
-		break;
+			break;
 	}
 
 	// Close the brush file

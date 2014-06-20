@@ -29,10 +29,8 @@
 
 - (void)dealloc
 {
-	int i;
-	
 	if (parasites) {
-		for (i = 0; i < parasites_count; i++) {
+		for (int i = 0; i < parasites_count; i++) {
 			CFRelease(parasites[i].name);
 			free(parasites[i].data);
 		}
@@ -54,13 +52,13 @@
 	switch (type) {
 		case XCF_RGB_IMAGE:
 			result = 4;
-		break;
+			break;
 		case XCF_GRAY_IMAGE:
 			result = 2;
-		break;
+			break;
 		default:
 			NSLog(@"Document type not recognised by spp");
-		break;
+			break;
 	}
 	
 	return result;

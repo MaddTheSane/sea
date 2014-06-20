@@ -17,12 +17,14 @@
 
 - (instancetype)initWithDocument:(id)doc
 {
+	if (self = [super init]) {
 	// Remember the document we are representing
 	document = doc;
 	
 	// Sets the data members to appropriate initial values
 	active = NO;
 	mask = NULL;
+	}
 	
 	return self;
 }

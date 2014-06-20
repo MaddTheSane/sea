@@ -14,10 +14,12 @@
 
 - (instancetype)init
 {
+	if (self = [super init]) {
 	undoMax = kNumberOfMarginRecordsPerMalloc;
 	undoRecords = malloc(undoMax * sizeof(MarginUndoRecord));
 	undoCount = 0;
 	sheetShown = FALSE;
+	}
 	
 	return self;
 }

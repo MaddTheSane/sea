@@ -35,8 +35,6 @@
 	@param		where
 				Where in the document the mouse down event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse down event.
 */
@@ -48,8 +46,6 @@
 	@param		where
 				Where in the document the mouse down event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse dragged event.
 */
@@ -61,8 +57,6 @@
 	@param		where
 				Where in the document the mouse up event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse up event.
 */

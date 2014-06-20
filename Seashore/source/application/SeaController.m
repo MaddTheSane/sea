@@ -16,6 +16,7 @@ id seaController;
 
 - (instancetype)init
 {
+	if (self = [super init]) {
 	// Remember ourselves
 	seaController = self;
 	
@@ -27,18 +28,18 @@ id seaController;
 
 	// We want to know when ColorSync changes
 	[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(colorSyncChanged:) name:@"AppleColorSyncPreferencesChangedNotification" object:NULL];
-	
+	}
 	return self;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	NSString *crashReport = [NSString stringWithFormat:@"%@/Library/Logs/CrashReporter/Seashore.crash.log", NSHomeDirectory()];
-	NSString *trashedReport = [NSString stringWithFormat:@"%@/.Trash/Seashore.crash.log", NSHomeDirectory()];
+	NSFileManager *fileManager = [NSFileManager defaultManager];
 
 	// Run initial tests
-	if ([seaPrefs firstRun] && [gFileManager fileExistsAtPath:crashReport]) {
-		if ([gFileManager movePath:crashReport toPath:trashedReport handler:NULL]) {
+	if ([seaPrefs firstRun] && [fileManager fileExistsAtPath:crashReport]) {
+		if ([fileManager trashItemAtURL:[NSURL fileURLWithPath:crashReport] resultingItemURL:NULL error:NULL]) {
 			[seaWarning addMessage:LOCALSTR(@"old crash report message", @"Seashore has moved its old crash report to the Trash so that it will be deleted next time you empty the trash.") level:kModerateImportance];
 		}
 	}

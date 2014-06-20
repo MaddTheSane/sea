@@ -11,11 +11,6 @@
 
 @implementation SSKCIPlugin
 
-- (instancetype)initWithManager:(SeaPlugins *)manager
-{
-	return self = [super initWithManager:manager];
-}
-
 - (int)type
 {
 	return 1;

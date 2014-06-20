@@ -181,7 +181,7 @@ enum {
 	@param		destructively
 				YES if the overlay is to be destroyed during the selection, NO
 				otherwise.
-	@param		rect
+	@param		selectionRect
 				The rectangle contianing the section of the overlay to be
 				considered for selection.
 	@param		mode

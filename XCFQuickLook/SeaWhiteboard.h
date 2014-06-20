@@ -59,9 +59,6 @@ enum {
 	// The document associated with this whiteboard
 	SeaContent *contents;
 	
-	// The compositor for this whiteboard
-	SeaCompositor *compositor;
-	
 	IntPoint gScreenResolution;
 
 	// The width and height of the whitebaord
@@ -113,6 +110,9 @@ enum {
 	CGColorSpaceRef cgDisplayProf;
 	
 }
+
+	// The compositor for this whiteboard
+@property (strong) SeaCompositor *compositor;
 
 // CREATION METHODS
 

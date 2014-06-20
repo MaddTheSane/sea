@@ -21,12 +21,6 @@ enum {
 
 @implementation TIFFExporter
 
-- (instancetype)init
-{
-	return self;
-}
-
-
 - (BOOL)hasOptions
 {
 	return YES;

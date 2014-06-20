@@ -10,10 +10,12 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
+@class SeaDocument;
+
 @interface SeaLayer : NSObject {
 	
 	// The document that contains this layer
-	id document;
+	__weak SeaDocument *document;
 	
 	// The object responsible for changes to our bitmap
 	id seaLayerUndo;
@@ -86,7 +88,7 @@
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc;
+- (instancetype)initWithDocument:(SeaDocument *)doc;
 
 /*!
 	@method		initWithDocument:width:height:opaque:spp:
@@ -104,7 +106,7 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc width:(int)lwidth height:(int)lheight opaque:(BOOL)opaque spp:(int)lspp;
+- (instancetype)initWithDocument:(SeaDocument *)doc width:(int)lwidth height:(int)lheight opaque:(BOOL)opaque spp:(int)lspp;
 
 /*!
 	@method		initWithDocument:rect:data:spp:
@@ -125,7 +127,7 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata spp:(int)lspp;
+- (instancetype)initWithDocument:(SeaDocument *)doc rect:(IntRect)lrect data:(unsigned char *)ldata spp:(int)lspp;
 
 /*!
 	@method		initWithDocument:layer:type:
@@ -139,7 +141,7 @@
 				The layer whose contents to mimic.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc layer:(SeaLayer*)layer;
+- (instancetype)initWithDocument:(SeaDocument *)doc layer:(SeaLayer*)layer;
 
 /*!
 	@method		initFloatingWithDocument:rect:data:
@@ -154,7 +156,7 @@
 				The data with which to initialize the instance. This should be
 				of the format prescibed by the document.
 */
-- (instancetype)initFloatingWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata;
+- (instancetype)initFloatingWithDocument:(SeaDocument *)doc rect:(IntRect)lrect data:(unsigned char *)ldata;
 
 // COMPRESSION METHODS
 
@@ -503,9 +505,9 @@
 	@discussion	Scales the contents of the layer to match the specified height
 				and width. Interpolation (allowing for smoother scaling) is used
 				as specified but no adjustment is made to the layer's offsets.
-	@param		width
+	@param		newWidth
 				The revised width of the document or layer.
-	@param		height
+	@param		newHeight
 				The revised height of the document or layer.
 	@param		interpolation
 				The interpolation style to be used (see GIMPCore).

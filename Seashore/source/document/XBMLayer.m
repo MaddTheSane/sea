@@ -14,8 +14,8 @@
 	BOOL oddWidth = NO;
 	
 	// Initialize superclass first
-	if (![super initWithDocument:doc])
-		return NULL;
+	if (!(self =[super initWithDocument:doc]))
+		return nil;
 	
 	// Set the samples per pixel correctly
 	spp = 2; width = info->width; height = info->height;

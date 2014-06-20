@@ -90,9 +90,9 @@ extern void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *inp
 				both point to the same block of memory.
 	@param		spp
 				The samples per pixel of the original bitmap.
-	@param		output
+	@param		destPtr
 				The block of memory in which to place the premultiplied bitmap.
-	@param		input
+	@param		srcPtr
 				The block of memory containing the original bitmap.
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
@@ -107,9 +107,9 @@ extern void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *sr
 				block of memory.
 	@param		spp
 				The samples per pixel of the original bitmap.
-	@param		output
+	@param		destPtr
 				The block of memory in which to place the premultiplied bitmap.
-	@param		input
+	@param		srcPtr
 				The block of memory containing the original bitmap.
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).

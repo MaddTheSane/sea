@@ -8,7 +8,8 @@
 
 - (instancetype)init
 {
-	float values[4];
+	if (self = [super init]) {
+	CGFloat values[4];
 	NSData *tempData;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
@@ -21,6 +22,7 @@
 		tempData = [defaults dataForKey:@"transparency color data"];
 		if (tempData != nil)
 			color = (NSColor *)[NSUnarchiver unarchiveObjectWithData:tempData];
+	}
 	}
 	
 	return self;

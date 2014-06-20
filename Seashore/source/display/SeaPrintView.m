@@ -21,19 +21,20 @@
 
 @implementation SeaPrintView
 
-- (instancetype)initWithDocument:(id)doc 
+- (instancetype)initWithDocument:(SeaDocument*)doc
 {	
 	NSRect frame;
 		
 	// Remember the document this view is displaying
-	document = doc;
 
 	// Determine the frame at 100% 72-dpi
-	frame = NSMakeRect(0, 0, [(SeaContent *)[document contents] width] * (72.0 / (float)[[document contents] xres]), [(SeaContent *)[document contents] height] * (72.0 / (float)[[document contents] yres]));
+	frame = NSMakeRect(0, 0, [[doc contents] width] * (72.0 / (float)[[doc contents] xres]), [[doc contents] height] * (72.0 / (float)[[document contents] yres]));
 
 	// Initialize superclass
-	if ([super initWithFrame:frame] == NULL)
+	if (!(self = [super initWithFrame:frame]))
 		return NULL;
+	
+	document = doc;
 	
     return self;
 }

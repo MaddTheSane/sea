@@ -43,6 +43,8 @@ enum {
 };
 
 @implementation SeaDocument
+@synthesize contents;
+@synthesize measureStyle;
 
 - (instancetype)init
 {
@@ -50,7 +52,7 @@ enum {
 	BOOL dopaque;
 	
 	// Initialize superclass first
-	if (![super init])
+	if (!(self = [super init]))
 		return nil;
 	
 	// Reset uniqueLayerID
@@ -84,7 +86,7 @@ enum {
 - (instancetype)initWithPasteboard
 {
 	// Initialize superclass first
-	if (![super init])
+	if (!(self = [super init]))
 		return NULL;
 	
 	// Reset uniqueLayerID
@@ -116,7 +118,7 @@ enum {
 - (instancetype)initWithContentsOfFile:(NSString *)path ofType:(NSString *)type
 {
 	// Initialize superclass first
-	if (![super init])
+	if (!(self = [super init]))
 		return NULL;
 	
 	// Reset uniqueLayerID
@@ -151,7 +153,7 @@ enum {
 - (instancetype)initWithData:(unsigned char *)data type:(int)type width:(int)width height:(int)height
 {
 	// Initialize superclass first
-	if (![super init])
+	if (!(self = [super init]))
 		return NULL;
 	
 	// Reset uniqueLayerID
@@ -228,11 +230,6 @@ enum {
 {
 	current = YES;
 	[super saveDocumentAs:sender];
-}
-
-- (id)contents
-{
-	return contents;
 }
 
 - (id)whiteboard
@@ -597,16 +594,6 @@ enum {
 - (IBAction)customRedo:(id)sender
 {
 	[[self undoManager] redo];
-}
-
-- (void)changeMeasuringStyle:(int)aStyle
-{
-	measureStyle = aStyle;
-}
-
-- (int)measureStyle
-{
-	return measureStyle;
 }
 
 - (BOOL)locked

@@ -4,11 +4,11 @@
 /*!
 	@struct		CTPointRecord
 	@discussion	Specifies a point to be drawn.
-	@param		point
+	@field		point
 				The point to be drawn.
-	@param		pressure
+	@field		pressure
 				The presure of the point to be drawn
-	@param		special
+	@field		special
 				0 = normal, 2 = terminate
 */
 typedef struct {
@@ -215,7 +215,7 @@ typedef struct {
 /*!
 	@method		intermediateStroke:
 	@discussion	Specifies an intermediate point in the stroke.
-	@param		Where in the document to place the intermediate
+	@param		where in the document to place the intermediate
 				stroke.
 */
 - (void)intermediateStroke:(IntPoint)where;

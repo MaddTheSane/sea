@@ -17,11 +17,10 @@
 - (instancetype)initWithFrame:(NSRect)frame
 {
 	// Initialize the super
-	if (![super initWithFrame:frame])
-		return NULL;
-	
-	// Set data members appropriately
-	mouseDownOnSwap = NO;
+	if (self = [super initWithFrame:frame]) {
+		// Set data members appropriately
+		mouseDownOnSwap = NO;
+	}
 	
 	return self;
 }

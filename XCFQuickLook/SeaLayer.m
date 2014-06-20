@@ -13,13 +13,7 @@
 		// Set the data members to reasonable values
 		height = width = mode = 0;
 		opacity = 255; xoff = yoff = 0;
-		spp = 4; visible = YES; data = NULL; hasAlpha = YES;
-		lostprops = NULL;
-		lostprops_len = 0;
-		compressed = NO;
-		thumbnail = NULL;
-		thumbData = NULL;
-		floating = NO;
+		spp = 4;
 		srand(time(NULL));
 		
 		uniqueLayerID = rand();

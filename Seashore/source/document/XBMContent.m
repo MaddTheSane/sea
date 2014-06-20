@@ -45,8 +45,8 @@ inline static int parse_value(char *input, char *value)
 	id layer;
 	
 	// Initialize superclass first
-	if (![super initWithDocument:doc])
-		return NULL;
+	if (!(self = [super initWithDocument:doc]))
+		return nil;
 	
 	// Parse the width and height of the image
 	file = fopen([path fileSystemRepresentation], "rb");

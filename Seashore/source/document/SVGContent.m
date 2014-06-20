@@ -116,7 +116,7 @@ IntSize getDocumentSize(char *path)
 	
 	// Initialize superclass first
 	if (![super initWithDocument:doc])
-		return NULL;
+		return nil;
 		
 	// Load nib file
 	[NSBundle loadNibNamed:@"SVGContent" owner:self];

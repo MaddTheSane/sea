@@ -7,7 +7,7 @@
 - (instancetype)initWithMaster:(id)sender
 {
 	if (![super init])
-		return NULL;
+		return nil;
 	
 	master = sender;
 	[self update];

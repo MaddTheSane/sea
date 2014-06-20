@@ -7,14 +7,14 @@
 - (instancetype)initWithMaster:(id)sender
 {
 	// Initializes superclass first
-	if (![super init])
-		return NULL;
+	if (self = [super init]) {
 	
 	// Remember our master
 	master = sender;
 	
 	// Update ourselves
 	[self update];
+	}
 	
 	return self;
 }

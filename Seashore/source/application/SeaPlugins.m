@@ -89,6 +89,10 @@ static BOOL checkRun(NSString *path, NSString *file)
 	BOOL success, found, can_run;
 	NSRange range, next_range;
 	
+	if ((self = [super init]) == nil) {
+		return nil;
+	}
+	
 	// Set the last effect to nothing
 	lastEffect = -1;
 	
@@ -138,6 +142,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 		bundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/%@", pluginsPath, file]];
 		if (bundle && [bundle principalClass]) {
 			success = NO;
+			// TODO: Init better 
 			plugin = [[bundle principalClass] alloc];
 			if (plugin) {
 				if ([plugin respondsToSelector:@selector(initWithManager:)]) {

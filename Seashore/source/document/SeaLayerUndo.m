@@ -16,6 +16,7 @@ extern BOOL userWarnedOnDiskSpace;
 
 - (instancetype)initWithDocument:(id)doc forLayer:(id)ilayer
 {
+	if (self = [super init]) {
 	// Setup our local variables
 	document = doc;
 	layer = ilayer;
@@ -30,7 +31,8 @@ extern BOOL userWarnedOnDiskSpace;
 	memory_cache_len = memoryCacheSize * 1024;
 	memory_cache = malloc(memory_cache_len);
 	memory_cache_pos = 0;
-	
+}
+
 	return self;
 }
 

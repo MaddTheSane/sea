@@ -137,7 +137,7 @@
 	unsigned char *data, *overlay, *replace, newPixel[4];
 	NSInteger pos, i, j, k, i2, j2;
 	int width, height, spp, channel;
-	int total[4], n, x_stblk, x_endblk, y_stblk, y_endblk;
+	int total[4], n = 1, x_stblk, x_endblk, y_stblk, y_endblk;
 	
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
@@ -197,7 +197,7 @@
 			// Fill the block with this pixel
 			for (j2 = 0; j2 < scale; j2++) {
 				for (i2 = 0; i2 < scale; i2++) {
-					pos = (j * scale + j2) * width + (i * scale + i2);
+					//pos = (j * scale + j2) * width + (i * scale + i2);
 					if (i * scale + i2 < width && j * scale + j2 < height) {
 						pos = (j * scale + j2) * width + (i * scale + i2);
 						for (k = 0; k < spp; k++) {

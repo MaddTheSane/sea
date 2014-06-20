@@ -21,6 +21,7 @@
 
 - (instancetype)initWithDocument:(id)newDocument andView:(id)newView
 {
+	if (self = [super init]) {
 	document = newDocument;
 	view = newView;
 	/* Set-up the cursors */
@@ -47,7 +48,7 @@
 	[smudgeCursor setOnMouseEntered:YES];
 	effectCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"effect-cursor"] hotSpot:NSMakePoint(1, 1)];
 	[smudgeCursor setOnMouseEntered:YES];
-	noopCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"noop-cursor"] hotSpot:NSMakePoint(7, 7)];
+	noopCursor = [NSCursor operationNotAllowedCursor];
 	[noopCursor setOnMouseEntered:YES];
 	
 	// Additional Cursors
@@ -89,6 +90,7 @@
 	
 	scrollingMode = NO;
 	scrollingMouseDown = NO;
+	}
 	
 	return self;
 }

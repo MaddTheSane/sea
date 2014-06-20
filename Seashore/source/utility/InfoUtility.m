@@ -20,11 +20,6 @@
 
 @implementation InfoUtility
 
-- (instancetype)init
-{
-	return self;
-}
-
 - (void)awakeFromNib
 {
 	// Shown By Default

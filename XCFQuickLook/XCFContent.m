@@ -76,7 +76,7 @@ static inline void fix_endian_read(int *input, size_t size)
 					fread(tempIntString, sizeof(int), 1, file);
 					fix_endian_read(tempIntString, 1);
 					info->cmap_len = (int)tempIntString[0];
-					info->cmap = calloc(256 * 3, sizeof(char));
+					info->cmap = calloc(256 * 3, sizeof(unsigned char));
 					fread(info->cmap, sizeof(char), info->cmap_len * 3, file);
 				}
 				

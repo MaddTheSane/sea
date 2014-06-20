@@ -260,7 +260,7 @@
 	data = [pluginData data];
 	width = [pluginData width];
 	height = [pluginData height];
-	selection = [pluginData selection];
+	//selection = [pluginData selection];
 	spp = [pluginData spp];
 	
 	// Determine left content margin

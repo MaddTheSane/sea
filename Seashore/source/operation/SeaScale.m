@@ -13,9 +13,11 @@
 
 - (instancetype)init
 {
+	if (self = [super init]) {
 	undoMax = kNumberOfScaleRecordsPerMalloc;
 	undoRecords = malloc(undoMax * sizeof(ScaleUndoRecord));
 	undoCount = 0;
+	}
 	
 	return self;
 }

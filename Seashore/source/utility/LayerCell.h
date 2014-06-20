@@ -10,26 +10,16 @@
 */
 
 @interface LayerCell : NSTextFieldCell {
-    NSImage *image;	
 	// We need to know if the cell is selected because
 	// we do some drawing.
 	BOOL selected;
 }
 
 /*!
-	@method		setImage:
-	@discussion For setting the image showing the layer thumbnail.
-	@param		anImage
-				An NSImage representing the icon.
+	@property	image
+	@discussion	Gets and sets the image used in this cell's view.
 */
-- (void)setImage:(NSImage *)anImage;
-
-/*!
-	@method		image
-	@discussion	Gives the image used in this cell's view.
-	@result		An NSImage of the thumbnail.
-*/
-- (NSImage *)image;
+@property (strong) NSImage *image;
 
 /*!
 	@method		drawWithFrame:inView:

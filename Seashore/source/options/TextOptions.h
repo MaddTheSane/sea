@@ -104,7 +104,7 @@
 	@param		sender
 				Ignored.
 */
-- (IBAction)update:(id)seder;
+- (IBAction)update:(id)sender;
 
 /*!
 	@method		shutdown

@@ -2,6 +2,7 @@
 #import "NSBezierPath_Extensions.h"
 
 @implementation LayerCell
+@synthesize image;
 
 - (instancetype)init
 {
@@ -15,21 +16,11 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LayerCell *cell = (LayerCell *)[super copyWithZone:zone];
-    // The image ivar will be directly copied; we need to retain or copy it.
-    cell->image = image;
+	if (cell) {
+		// The image ivar will be directly copied; we need to retain or copy it.
+		cell.image = image;
+	}
     return cell;
-}
-
-- (void)setImage:(NSImage *)anImage
-{
-    if (anImage != image) {
-        image = anImage;
-    }
-}
-
-- (NSImage *)image
-{
-    return image;
 }
 
 - (NSRect)imageRectForBounds:(NSRect)cellFrame

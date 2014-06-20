@@ -15,15 +15,6 @@
 	return kCropTool;
 }	
 
-- (instancetype)init
-{
-	if(![super init])
-		return NULL;
-	
-	cropRect.size.width = cropRect.size.height = 0;
-	return self;
-}
-
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	if(cropRect.size.width > 0 && cropRect.size.height > 0){

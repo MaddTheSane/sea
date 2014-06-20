@@ -9,10 +9,12 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli		
 */
 
+@class SeaDocument;
+
 @interface SeaPrintView : NSView {
 
 	// The document associated with this view
-	id document;
+	SeaDocument *document;
 	
 }
 

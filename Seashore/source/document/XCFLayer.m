@@ -492,7 +492,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	
 	// Initialize superclass first
 	if (![super  initWithDocument:doc])
-		return NULL;
+		return nil;
 
 	// Go to the given offset
 	fseek(file, offset, SEEK_SET);

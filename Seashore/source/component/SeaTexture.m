@@ -4,6 +4,7 @@
 
 - (instancetype)initWithContentsOfFile:(NSString *)path
 {
+	if (self = [super init]) {
 	unsigned char *tempBitmap;
 	NSBitmapImageRep *tempBitmapRep;
 	int k, j, l, bpr, spp;
@@ -33,7 +34,7 @@
 	greyTexture = malloc(width * height);
 	
 	// Copy in the data
-	if ((spp == 3 || spp == 4) && [[tempBitmapRep colorSpaceName] isEqualTo:NSCalibratedRGBColorSpace] || [[tempBitmapRep colorSpaceName] isEqualTo:NSDeviceRGBColorSpace]) {
+	if ((spp == 3 || spp == 4) && ([[tempBitmapRep colorSpaceName] isEqualTo:NSCalibratedRGBColorSpace] || [[tempBitmapRep colorSpaceName] isEqualTo:NSDeviceRGBColorSpace])) {
 		
 		for (j = 0; j < height; j++) {
 			if (spp == 3)
@@ -51,7 +52,7 @@
 		}
 		
 	}
-	else if ((spp == 1 || spp == 2) && [[tempBitmapRep colorSpaceName] isEqualTo:NSCalibratedWhiteColorSpace] || [[tempBitmapRep colorSpaceName] isEqualTo:NSDeviceWhiteColorSpace]) {
+	else if ((spp == 1 || spp == 2) && ([[tempBitmapRep colorSpaceName] isEqualTo:NSCalibratedWhiteColorSpace] || [[tempBitmapRep colorSpaceName] isEqualTo:NSDeviceWhiteColorSpace])) {
 		
 		for (j = 0; j < height; j++) {
 			if (spp == 1) {
@@ -78,6 +79,7 @@
 	
 	// Remember the texture name
 	name = [[path lastPathComponent] stringByDeletingPathExtension];
+	}
 	
 	return self;
 }

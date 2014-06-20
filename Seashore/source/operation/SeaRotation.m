@@ -14,9 +14,11 @@
 
 - (instancetype)init
 {
+	if (self = [super init]) {
 	undoMax = kNumberOfRotationRecordsPerMalloc;
 	undoRecords = malloc(undoMax * sizeof(RotationUndoRecord));
 	undoCount = 0;
+	}
 	
 	return self;
 }

@@ -6,8 +6,9 @@
 
 - (instancetype)init
 {
-	self = [super init];
-	mode = kDefaultMode;
+	if (self = [super init]) {
+		mode = kDefaultMode;
+	}
 	
 	return self;
 }

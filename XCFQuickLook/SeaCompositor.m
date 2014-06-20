@@ -7,6 +7,7 @@
 
 - (instancetype)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board
 {
+	if (self = [super init]) {
 	int i;
 	
 	// Remember the document we are compositing for
@@ -17,7 +18,7 @@
 	srandom(RANDOM_SEED);
 	for (i = 0; i < 4096; i++)
 		randomTable[i] = random();
-	
+	}
 	return self;
 }
 

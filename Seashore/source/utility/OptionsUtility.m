@@ -15,7 +15,9 @@
 
 - (instancetype)init
 {
-	currentTool = -1;
+	if (self = [super init]) {
+		currentTool = -1;
+	}
 	
 	return self;
 }

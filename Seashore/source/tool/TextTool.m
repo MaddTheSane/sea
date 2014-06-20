@@ -27,11 +27,11 @@ extern id gNewFont;
 
 - (instancetype)init
 {
-	if(![super init])
-		return NULL;
+	if(self = [super init]) {
 	// Set up the font manager
 	fontManager = [NSFontManager sharedFontManager];
 	running = NO;
+	}
 	return self;
 }
 

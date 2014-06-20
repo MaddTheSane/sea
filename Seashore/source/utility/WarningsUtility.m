@@ -10,8 +10,7 @@
 
 - (instancetype)init
 {
-	self = [super init];
-	if(self ){
+	if(self = [super init]){
 		mostRecentImportance = -1;
 	}
 	return self;	

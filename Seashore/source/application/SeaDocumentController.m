@@ -8,8 +8,8 @@
 
 - (instancetype)init
 {
-	if (![super init])
-		return NULL;
+	if (!(self = [super init]))
+		return nil;
 		
 	stopNotingRecentDocuments = NO;
 	

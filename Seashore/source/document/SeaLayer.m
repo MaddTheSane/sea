@@ -17,26 +17,25 @@
 
 @implementation SeaLayer
 
-- (instancetype)initWithDocument:(id)doc
+- (instancetype)initWithDocument:(SeaDocument *)doc
 {	
 	// Set the data members to reasonable values
-	height = width = mode = 0;
-	opacity = 255; xoff = yoff = 0;
-	spp = 4; visible = YES; data = NULL; hasAlpha = YES;
-	lostprops = NULL; lostprops_len = 0;
-	compressed = NO; document = doc;
-	thumbnail = NULL; thumbData = NULL;
-	floating = NO;
-	seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
-	uniqueLayerID = [(SeaDocument *)doc uniqueLayerID];
-	if (uniqueLayerID == 0)
-		name = [[NSString alloc] initWithString:LOCALSTR(@"background layer", @"Background")];
-	else
-		name = [[NSString alloc] initWithFormat:LOCALSTR(@"layer title", @"Layer %d"), uniqueLayerID];
-	oldNames = [[NSArray alloc] init];
-	undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%d-l%d", [document uniqueDocID], [self uniqueLayerID]];
-	affinePlugin = [[SeaController seaPlugins] affinePlugin];
-	
+	if (self = [super init]) {
+		opacity = 255;
+		spp = 4; visible = YES;
+		hasAlpha = YES;
+		lostprops = NULL;
+		document = doc;
+		seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
+		uniqueLayerID = [doc uniqueLayerID];
+		if (uniqueLayerID == 0)
+			name = [[NSString alloc] initWithString:LOCALSTR(@"background layer", @"Background")];
+		else
+			name = [[NSString alloc] initWithFormat:LOCALSTR(@"layer title", @"Layer %d"), uniqueLayerID];
+		oldNames = [[NSArray alloc] init];
+		undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%d-l%d", [document uniqueDocID], [self uniqueLayerID]];
+		affinePlugin = [[SeaController seaPlugins] affinePlugin];
+	}
 	return self;
 }
 
@@ -44,7 +43,7 @@
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])
-		return NULL;
+		return nil;
 	
 	// Extract appropriate values of master
 	width = lwidth; height = lheight;
@@ -69,7 +68,7 @@
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])
-		return NULL;
+		return nil;
 	
 	// Derive the width and height from the imageRep
 	xoff = lrect.origin.x; yoff = lrect.origin.y;
@@ -92,7 +91,7 @@
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])
-		return NULL;
+		return nil;
 		
 	// Synchronize properties
 	width = [layer width];

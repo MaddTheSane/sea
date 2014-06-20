@@ -23,7 +23,7 @@
 static inline void RGBtoHSV(int *ir, int *ig, int *ib)
 {
 	double max, min, delta;
-	double h, s, v;
+	double h = 0, s, v;
 	double r, g, b;
 	
 	r = (double)*ir / 255.0;
@@ -245,7 +245,7 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
 	selection = [pluginData selection];
-	channel = [pluginData channel];
+	//channel = [pluginData channel];
 	spp = [pluginData spp];
 	width = [pluginData width];
 	data = [pluginData data];

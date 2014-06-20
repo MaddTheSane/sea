@@ -52,12 +52,12 @@
 	
 	// Initialize superclass first
 	if (![super initWithDocument:doc])
-		return NULL;
+		return nil;
 	
 	// Open the image
 	image = [[NSImage alloc] initByReferencingFile:path];
 	if (image == NULL) {
-		return NULL;
+		return nil;
 	}
 	
 	// Form a bitmap representation of the file at the specified path

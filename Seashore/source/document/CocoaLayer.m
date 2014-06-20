@@ -17,7 +17,7 @@
 	
 	// Initialize superclass first
 	if (![super initWithDocument:doc])
-		return NULL;
+		return nil;
 	
 	// Fill out variables
 	bps = [imageRep bitsPerSample];

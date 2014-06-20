@@ -200,7 +200,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	
 	// Initialize superclass first
 	if (![super initWithDocument:doc])
-		return NULL;
+		return nil;
 	
 	// Open the file
 	file = fopen([path fileSystemRepresentation], "rb");

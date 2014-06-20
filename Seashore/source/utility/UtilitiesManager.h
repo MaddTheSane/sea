@@ -56,7 +56,7 @@
 /*!
 	@method		activate
 	@discussion	Activates all utilities with the given document.
-	@param		doc
+	@param		sender
 				The document to activate the utilities with.
 */
 - (void)activate:(id)sender;

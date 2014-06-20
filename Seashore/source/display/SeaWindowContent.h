@@ -1,5 +1,19 @@
 #import "Globals.h"
 
+enum
+{
+	kOptionsBar,
+	kSidebar,
+	kPointInformation,
+	kStatusBar,
+	kWarningsBar
+};
+
+@class SeaDocument;
+@class SeaOptionsView;
+@class LayerControlView;
+@class BannerView;
+
 /*!
 	@class		SeaWindowContent
 	@abstract	Provides a view manages all of the various subviews in the document window.
@@ -10,22 +24,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-enum
-{
-	kOptionsBar,
-	kSidebar,
-	kPointInformation,
-	kStatusBar,
-	kWarningsBar
-};
-
-
-@class SeaDocument;
-@class SeaOptionsView;
-@class LayerControlView;
-@class BannerView;
-
 @interface SeaWindowContent : NSView {
 	IBOutlet SeaDocument *document;
 

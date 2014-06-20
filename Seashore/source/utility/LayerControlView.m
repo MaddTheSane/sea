@@ -3,15 +3,6 @@
 
 @implementation LayerControlView
 
-- (instancetype)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
-		statusUtility = nil;
-    }
-    return self;
-}
-
 - (void)resetCursorRects
 {
 	if(drawThumb){

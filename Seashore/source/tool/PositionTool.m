@@ -24,7 +24,7 @@
 - (instancetype)init
 {
 	if(![super init])
-		return NULL;
+		return nil;
 	
 	scale = -1;
 	rotation = 0.0;

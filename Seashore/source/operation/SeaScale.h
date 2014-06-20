@@ -71,7 +71,7 @@ typedef struct {
 	IBOutlet id sheet;
 	
 	// The working index associated with this object
-	int workingIndex;
+	NSInteger workingIndex;
 	
 	// The x and y scaling values
     IBOutlet id xScaleValue;
