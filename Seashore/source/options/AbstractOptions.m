@@ -5,6 +5,7 @@
 #import "SeaPrefs.h"
 #import "SeaDocument.h"
 #import "AspectRatio.h"
+#import "SeaView.h"
 
 static int lastTool = -1;
 static BOOL forceAlt = NO;

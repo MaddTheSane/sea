@@ -13,11 +13,11 @@
 @interface PencilOptions : AbstractPaintOptions
 {	
 	// A slider indicating the size of the pencil block
-	IBOutlet id sizeSlider;
-	
-	// Are we erasing stuff?
-	BOOL isErasing;
+	IBOutlet NSSlider *sizeSlider;
 }
+
+// Are we erasing stuff?
+@property (readonly) BOOL pencilIsErasing;
 
 /*!
 	@method		pencilSize
@@ -35,20 +35,12 @@
 - (BOOL)useTextures;
 
 /*!
-	@method		pencilIsErasing
-	@discussion	Returns whether or not the pencil is erasing.
-	@result		Returns YES if the pencil is erasing, NO if the pencil is using
-				its normal operation.
-*/
-- (BOOL)pencilIsErasing;
-
-/*!
 	@method		updateModifiers:
 	@discussion	Updates the modifier pop-up.
 	@param		modifiers
 				An unsigned int representing the new modifiers.
 */
-- (void)updateModifiers:(unsigned int)modifiers;
+- (void)updateModifiers:(AbstractModifiers)modifiers;
 
 /*!
 	@method		modifierPopupChanged:

@@ -3,6 +3,7 @@
 #import "SeaController.h"
 #import "SeaPrefs.h"
 #import "UtilitiesManager.h"
+#import "SeaView.h"
 
 @implementation TransparentUtility
 
@@ -42,15 +43,13 @@
 		[gColorPanel setContinuous:NO];
 		[gColorPanel setAction:@selector(changeColor:)];
 		[gColorPanel setTarget:self];
-	}
-	else
+	} else
 		[gColorPanel orderOut:self];
 }
 
 - (void)changeColor:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	// Change the colour
@@ -59,8 +58,8 @@
 		[[sender color] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	
 	// Call for all documents' views to respond to the change
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *doc in documents) {
+		[doc docView].needsDisplay = YES;
 	}
 
 	[defaults setObject:[NSArchiver archivedDataWithRootObject:color] forKey:@"transparency color data"];

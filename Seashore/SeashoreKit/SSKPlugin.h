@@ -57,13 +57,6 @@
 - (NSString *)groupName;
 
 /*!
- @method		sanity
- @discussion	Returns a string to indicate this is a Seashore plug-in.
- @result		Returns the NSString "Seashore Approved (Bobo)".
- */
-- (NSString *)sanity;
-
-/*!
  @method		run
  @discussion	Runs the plug-in.
  */

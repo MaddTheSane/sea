@@ -62,13 +62,6 @@
 - (NSString *)instruction;
 
 /*!
-	@method		sanity
-	@discussion	Returns a string to indicate this is a Seashore plug-in.
-	@result		Returns the NSString "Seashore Approved (Bobo)".
-*/
-- (NSString *)sanity;
-
-/*!
 	@method		run
 	@discussion	Runs the plug-in.
 */
@@ -86,5 +79,14 @@
 	@result		Returns YES if the plug-in can be applied again, NO otherwise.
 */
 - (BOOL)canReapply;
+
+@optional
+
+/*!
+	@method		sanity
+	@discussion	Returns a string to indicate this is a Seashore plug-in.
+	@result		Returns the NSString "Seashore Approved (Bobo)".
+*/
+- (NSString *)sanity;
 
 @end

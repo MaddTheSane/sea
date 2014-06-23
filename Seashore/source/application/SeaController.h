@@ -12,33 +12,34 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface SeaController : NSObject {
-	
-	// An outlet to the utilities manager of the application
-	IBOutlet id utilitiesManager;
-	
-	// An outlet to the plug-ins manager of the application
-	IBOutlet id seaPlugins;
-	
-	// An outlet to the preferences manager of the application
-	IBOutlet id seaPrefs;
-	
-	// An outlet to the proxy object of the application
-	IBOutlet id seaProxy;
-	
-	// An outlet to the help manager of the application
-	IBOutlet id seaHelp;
+@class SeaPlugins, SeaPrefs, UtilitiesManager, SeaProxy;
+@class SeaHelp, SeaWarning;
 
-	// An outlet to the warning manager of the application
-	IBOutlet id seaWarning;
-	
-	// The window containing the GNU General Public License
-	IBOutlet id licenseWindow;
-	
+@interface SeaController : NSObject <NSApplicationDelegate>
+{
 	// An array of objects wishing to recieve the terminate message
 	NSArray *terminationObjects;
-
 }
+	// An outlet to the utilities manager of the application
+@property (weak) IBOutlet UtilitiesManager *utilitiesManager;
+
+// An outlet to the plug-ins manager of the application
+@property (weak) IBOutlet SeaPlugins *seaPlugins;
+
+// An outlet to the preferences manager of the application
+@property (weak) IBOutlet SeaPrefs *seaPrefs;
+
+// An outlet to the proxy object of the application
+@property (weak) IBOutlet SeaProxy *seaProxy;
+	
+// An outlet to the help manager of the application
+@property (weak) IBOutlet SeaHelp *seaHelp;
+
+// An outlet to the warning manager of the application
+@property (weak) IBOutlet SeaWarning *seaWarning;
+
+// The window containing the GNU General Public License
+@property (weak) IBOutlet NSWindow *licenseWindow;
 
 /*!
 	@method		init
@@ -60,42 +61,42 @@
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of UtilitiesManager.
 */
-+ (id)utilitiesManager;
++ (UtilitiesManager *)utilitiesManager;
 
 /*!
 	@method		seaPlugins
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of SeaPlugins.
 */
-+ (id)seaPlugins;
++ (SeaPlugins *)seaPlugins;
 
 /*!
 	@method		seaPrefs
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of SeaPrefs.
 */
-+ (id)seaPrefs;
++ (SeaPrefs *)seaPrefs;
 
 /*!
 	@method		seaProxy
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of SeaProxy.
 */
-+ (id)seaProxy;
++ (SeaProxy *)seaProxy;
 
 /*!
 	@method		seaHelp
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of SeaHelp.
 */
-+ (id)seaHelp;
++ (SeaHelp *)seaHelp;
 
 /*!
 	@method		seaWarning
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of SeaWarning.
 */
-+ (id)seaWarning;
++ (SeaWarning *)seaWarning;
 
 /*!
 	@method		revert:

@@ -7,6 +7,7 @@
 #import "SeaLayer.h"
 #import "SeaTools.h"
 #import "EffectOptions.h"
+#import "SeaView.h"
 
 @implementation EffectTool
 

@@ -14,6 +14,7 @@
 #import "SeaController.h"
 #import "UtilitiesManager.h"
 #import "TextureUtility.h"
+#import "SeaView.h"
 
 @implementation BucketTool
 

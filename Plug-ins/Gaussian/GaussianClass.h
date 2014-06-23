@@ -82,14 +82,6 @@
 - (IBAction)preview:(id)sender;
 
 /*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
-
-/*!
 	@method		update:
 	@discussion	Updates the panel's labels.
 	@param		sender

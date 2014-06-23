@@ -52,7 +52,6 @@
 /*!
 	@method		run
 	@discussion	Runs the plug-in.
-	@result		YES if the plug-in was run successfully, NO otherwise.
 */
 - (void)run;
 
@@ -84,14 +83,6 @@
 				Ignored.
 */
 - (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
 
 /*!
 	@method		update:

@@ -251,7 +251,7 @@
 	int spp;
 	unsigned char *data;
 	int i, j;
-	IntRect selection;
+	//IntRect selection;
 	
 	// Start out with invalid content borders
 	contentLeft = contentRight = contentTop = contentBottom =  -1;

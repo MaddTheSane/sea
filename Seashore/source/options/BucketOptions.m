@@ -4,6 +4,7 @@
 #import "UtilitiesManager.h"
 #import "SeaHelp.h"
 #import "SeaTools.h"
+#import "SeaPrefs.h"
 
 @implementation BucketOptions
 

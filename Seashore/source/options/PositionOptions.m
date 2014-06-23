@@ -6,6 +6,7 @@
 #import "SeaDocument.h"
 #import "SeaSelection.h"
 #import "AspectRatio.h"
+#import "SeaView.h"
 
 @implementation PositionOptions
 
@@ -65,9 +66,8 @@
 	[self setFunctionFromIndex: [[sender selectedItem] tag]];	
 	
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
-	for (i = 0; i < [documents count]; i++) {
-		[[(SeaDocument *)documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *doc in documents) {
+		[doc docView].needsDisplay = YES;
 	}
 }
 

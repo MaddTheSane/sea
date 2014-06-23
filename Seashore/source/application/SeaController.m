@@ -10,9 +10,16 @@
 #import "SeaTools.h"
 #import "SeaDocumentController.h"
 
-id seaController;
+static SeaController *seaController;
 
 @implementation SeaController
+@synthesize licenseWindow;
+@synthesize seaHelp;
+@synthesize seaPlugins;
+@synthesize seaPrefs;
+@synthesize seaProxy;
+@synthesize seaWarning;
+@synthesize utilitiesManager;
 
 - (instancetype)init
 {
@@ -58,38 +65,8 @@ id seaController;
 	
 	// Check for update
 	if ([seaPrefs checkForUpdates]) {
-		[seaHelp checkForUpdate:NULL];
+		[seaHelp checkForUpdate:nil];
 	}
-}
-
-- (id)utilitiesManager
-{
-	return utilitiesManager;
-}
-
-- (id)seaPlugins
-{
-	return seaPlugins;
-}
-
-- (id)seaPrefs
-{
-	return seaPrefs;
-}
-
-- (id)seaProxy
-{
-	return seaProxy;
-}
-
-- (id)seaHelp
-{
-	return seaHelp;
-}
-
-- (id)seaWarning
-{
-	return seaWarning;
 }
 
 + (id)utilitiesManager
@@ -197,7 +174,7 @@ id seaController;
 - (IBAction)showLicense:(id)sender
 {
 	[licenseWindow setLevel:NSFloatingWindowLevel];
-	[licenseWindow makeKeyAndOrderFront:self];
+	[licenseWindow makeKeyAndOrderFront:sender];
 }
 
 - (IBAction)newDocumentFromPasteboard:(id)sender
@@ -241,7 +218,7 @@ id seaController;
 
 - (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)app
 {
-	return [seaPrefs openUntitled];
+	return [self.seaPrefs openUntitled];
 }
 
 - (BOOL)applicationOpenUntitledFile:(NSApplication *)app

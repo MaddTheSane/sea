@@ -4,7 +4,7 @@
 
 @class GIFExporter, JPEGExporter, JP2Exporter, PNGExporter, TIFFExporter, XCFExporter;
 @class TextureExporter;
-@class SeaContent;
+@class SeaContent, SeaView;
 
 /*!
 	@class		SeaDocument
@@ -18,9 +18,6 @@
 @interface SeaDocument : NSDocument
 {
 	// The contents of the document (a subclass of SeaContent)
-	
-	// The whiteboard that represents this document
-	SeaWhiteboard *whiteboard;
 	
 	// The selection manager for this document
 	SeaSelection *selection;
@@ -104,6 +101,9 @@
 
 @property (strong, readonly) SeaContent *contents;
 @property (setter = changeMeasuringStyle:) int measureStyle;
+
+// The whiteboard that represents this document
+@property (strong) SeaWhiteboard *whiteboard;
 // CREATION METHODS
 
 /*!
@@ -173,13 +173,6 @@
 - (SeaContent*)contents;
 
 /*!
-	@method		whiteboard
-	@discussion	Returns the whiteboard of the document.
-	@result		Returns an instance of SeaWhiteboard.
-*/
-- (SeaWhiteboard*)whiteboard;
-
-/*!
 	@method		selection
 	@discussion	Returns the selection manager of the document.
 	@result		Returns an instance of SeaSelection.
@@ -227,7 +220,7 @@
 	@discussion	Returns the document view of the document.
 	@result		Returns an instance of SeaView.
 */
-- (id)docView;
+- (SeaView*)docView;
 
 /*!
 	@method		window

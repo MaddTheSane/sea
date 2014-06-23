@@ -238,7 +238,7 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 {
 	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
-	int spp, i, j, width, channel, pos;
+	int spp, i, j, width, /*channel,*/ pos;
 	unsigned char *data, *overlay, *replace;
 	int r, g, b;
 	

@@ -10,12 +10,11 @@
 				<b>Copyright:</b> N/A
 */
 
-@interface PluginData : NSObject {
+@class SeaDocument;
 
-	// The document associated with this object
-    IBOutlet id document;
-
-}
+@interface PluginData : NSObject
+// The document associated with this object
+@property (weak) IBOutlet SeaDocument *document;
 
 /*!
 	@method		selection

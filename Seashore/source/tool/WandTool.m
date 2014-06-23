@@ -7,6 +7,7 @@
 #import "SeaWhiteboard.h"
 #import "WandOptions.h"
 #import "SeaSelection.h"
+#import "SeaView.h"
 
 @implementation WandTool
 

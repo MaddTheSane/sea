@@ -45,6 +45,7 @@ enum {
 @implementation SeaDocument
 @synthesize contents;
 @synthesize measureStyle;
+@synthesize whiteboard;
 
 - (instancetype)init
 {
@@ -232,11 +233,6 @@ enum {
 	[super saveDocumentAs:sender];
 }
 
-- (id)whiteboard
-{
-	return whiteboard;
-}
-
 - (SeaSelection*)selection
 {
 	return selection;
@@ -387,7 +383,7 @@ enum {
 
 - (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
 {
-	NSInteger i, exporterIndex = -1;
+	NSInteger exporterIndex = -1;
 	
 	// Implement the view that allows us to select layers
 	[savePanel setAccessoryView:accessoryView];

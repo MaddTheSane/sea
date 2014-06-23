@@ -1,6 +1,7 @@
 #import "AbstractSelectOptions.h"
 #import "SeaSelection.h"
 #import "SeaDocument.h"
+#import "SeaView.h"
 
 @implementation AbstractSelectOptions
 
@@ -71,10 +72,9 @@
 	[self setModeFromModifier: [[sender selectedItem] tag]];
 	// Since the selection method changed via the popup menu, we need to update all of the docs
 	// This is not nessisary in the above method because that case is already handled
-	int i;
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	for (i = 0; i < [documents count]; i++) {
-		[[(SeaDocument *)documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *doc in documents) {
+		[doc docView].needsDisplay = YES;
 	}
 }
 @end

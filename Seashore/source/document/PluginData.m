@@ -11,6 +11,7 @@
 #import "SeaTools.h"
 
 @implementation PluginData
+@synthesize document;
 
 - (IntRect)selection
 {

@@ -51,7 +51,6 @@
 /*!
 	@method		run
 	@discussion	Runs the plug-in.
-	@result		YES if the plug-in was run successfully, NO otherwise.
 */
 - (void)run;
 

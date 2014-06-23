@@ -20,6 +20,12 @@
 #import "WarningsUtility.h"
 #import "SeashoreKit.h"
 
+@interface NSObject (toolbarSelectors)
+- (void)forward:(id)selector;
+- (void)backward:(id)selector;
+- (void)selectOpaque:(id)selector;
+@end
+
 static NSString*	DocToolbarIdentifier 	= @"Document Toolbar Instance Identifier";
 
 static NSString*	SelectionIdentifier 	= @"Selection  Item Identifier";
@@ -167,7 +173,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	} else if ([itemIdent isEqual: InspectorToolbarItemIdentifier]) {
         return [[ImageToolbarItem alloc] initWithItemIdentifier: InspectorToolbarItemIdentifier label: LOCALSTR(@"information", @"Information") image: @"inspector" toolTip: LOCALSTR(@"information tooltip", @"Show or hide point information") target: [[SeaController utilitiesManager] infoUtilityFor:document]  selector: @selector(toggle:)];
 	} else if ([itemIdent isEqual: FloatAnchorToolbarItemIdentifier]) {
-        return [[ImageToolbarItem alloc] initWithItemIdentifier: FloatAnchorToolbarItemIdentifier label: LOCALSTR(@"float", @"Float") image: @"float-tb" toolTip: LOCALSTR(@"float tooltip", @"Float or anchor the current selection") target: [document contents] selector: @selector(toggleFloatingSelection)];
+        return [[ImageToolbarItem alloc] initWithItemIdentifier: FloatAnchorToolbarItemIdentifier label: LOCALSTR(@"float", @"Float") image: @"float-tb" toolTip: LOCALSTR(@"float tooltip", @"Float or anchor the current selection") target: [document contents] selector: @selector(toggleFloatingSelection:)];
 	} else if ([itemIdent isEqual: DuplicateSelectionToolbarItemIdentifier]) {
         return [[ImageToolbarItem alloc] initWithItemIdentifier: DuplicateSelectionToolbarItemIdentifier label: LOCALSTR(@"duplicate", @"Duplicate") image: @"duplicatesel-tb" toolTip: LOCALSTR(@"duplicate tooltip", @"Duplicate the current selection") target: [document contents] selector: @selector(duplicate:)];
 	} else if ([itemIdent isEqual: SelectNoneToolbarItemIdentifier]) {

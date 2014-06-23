@@ -9,6 +9,7 @@
 #import "SeaHelpers.h"
 #import "SeaController.h"
 #import "SeaPrefs.h"
+#import "SeaView.h"
 
 @implementation GradientTool
 

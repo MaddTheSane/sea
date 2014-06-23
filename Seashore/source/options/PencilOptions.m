@@ -4,8 +4,15 @@
 #import "SeaHelp.h"
 #import "SeaTools.h"
 #import "SeaDocument.h"
+#import "SeaPrefs.h"
+#import "SeaView.h"
+
+@interface PencilOptions ()
+@property (readwrite) BOOL pencilIsErasing;
+@end
 
 @implementation PencilOptions
+@synthesize pencilIsErasing = isErasing;
 
 - (void)awakeFromNib
 {
@@ -20,8 +27,8 @@
 		if (value < [sizeSlider minValue] || value > [sizeSlider maxValue])
 			value = 1;
 	}
-	[sizeSlider setIntValue:value];
-	isErasing = NO;
+	[sizeSlider setIntegerValue:value];
+	self.pencilIsErasing = NO;
 }
 
 - (int)pencilSize
@@ -34,22 +41,17 @@
 	return [[SeaController seaPrefs] useTextures];
 }
 
-- (BOOL)pencilIsErasing
-{
-	return isErasing;
-}
-
-- (void)updateModifiers:(unsigned int)modifiers
+- (void)updateModifiers:(AbstractModifiers)modifiers
 {
 	[super updateModifiers:modifiers];
 	int modifier = [super modifier];
 	
 	switch (modifier) {
 		case kAltModifier:
-			isErasing = YES;
+			self.pencilIsErasing = YES;
 			break;
 		default:
-			isErasing = NO;
+			self.pencilIsErasing = NO;
 			break;
 	}
 }
@@ -58,23 +60,23 @@
 {
 	switch ([[sender selectedItem] tag]) {
 		case kAltModifier:
-			isErasing = YES;
+			self.pencilIsErasing = YES;
 			break;
 		default:
-			isErasing = NO;
+			self.pencilIsErasing = NO;
 			break;
 	}
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
-	for (i = 0; i < [documents count]; i++) {
-		[[(SeaDocument *)documents[i] docView] setNeedsDisplay:YES];
+
+	for (SeaDocument *doc in documents) {
+		[doc docView].needsDisplay = YES;
 	}
 }
 
 - (void)shutdown
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setInteger:[sizeSlider intValue] forKey:@"pencil size"];
+	[defaults setInteger:[sizeSlider integerValue] forKey:@"pencil size"];
 }
 
 @end

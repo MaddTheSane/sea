@@ -33,11 +33,6 @@
 	
 }
 
-- (NSString*)sanity
-{
-	return @"Nope";
-}
-
 - (int)type
 {
 	return 1;

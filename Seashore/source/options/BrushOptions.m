@@ -6,6 +6,8 @@
 #import "UtilitiesManager.h"
 #import "SeaWarning.h"
 #import "SeaDocument.h"
+#import "SeaPrefs.h"
+#import "SeaView.h"
 
 enum {
 	kQuadratic,
@@ -34,7 +36,7 @@ enum {
 		fadeOn = [defaults boolForKey:@"brush fade"];
 		[fadeCheckbox setState:fadeOn];
 		[fadeCheckbox setTitle:[NSString stringWithFormat:LOCALSTR(@"fade-out", @"Fade-out: %d"), rate]];
-		[fadeSlider setIntValue:rate];
+		[fadeSlider setIntegerValue:rate];
 		[fadeSlider setEnabled:fadeOn];
 	}
 	
@@ -163,10 +165,9 @@ enum {
 	}
 	// We now need to update all of the documents because the modifiers, and thus possibly
 	// the cursors and guides may have changed.
-	int i;
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	for (i = 0; i < [documents count]; i++) {
-		[[(SeaDocument *)documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *doc in documents) {
+		[doc docView].needsDisplay = YES;
 	}
 }
 
