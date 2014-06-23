@@ -246,24 +246,18 @@ enum {
 /*!
 	@method		generalPrefs
 	@discussion	Shows the general preferences.
-	@param		sender
-				Ignored.
 */
 - (void) generalPrefs;
 
 /*!
 	@method		newPrefs
 	@discussion	Shows the new preferences.
-	@param		sender
-				Ignored.
 */
 - (void) newPrefs;
 
 /*!
 	@method		colorPrefs
 	@discussion	Shows the color preferences.
-	@param		sender
-				Ignored.
 */
 - (void) colorPrefs;
  
@@ -703,7 +697,7 @@ enum {
 	@method		screenResolution
 	@discussion	Returns the screen resolution to be used when calculating view size.
 				Considers resolution handling preference.
-	@param		Returns either (0, 0) (ignore image resolution), (72, 72) (assume 72 dpi)
+	@return		Returns either (0, 0) (ignore image resolution), (72, 72) (assume 72 dpi)
 				or the true screen resolution.
 */
 - (IntPoint)screenResolution;

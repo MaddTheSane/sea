@@ -938,7 +938,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)scrollWheel:(NSEvent *)theEvent
 {
-	unsigned int mods;
+	NSUInteger mods;
 	NSPoint globalPoint;
 	
 	// Check for zoom-in or zoom-out
@@ -1138,7 +1138,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	double angle;
 	NSPoint origin, newScrollPoint;
 	NSClipView *view;
-	id options = [[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions];
+	AbstractOptions *options = [[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions];
 	
 	NSRect visRect = [(NSClipView *)[self superview] documentVisibleRect];
 	localPoint = [self convertPoint:[theEvent locationInWindow] fromView:NULL];
@@ -1273,7 +1273,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	id curTool = [[document tools] currentTool];
 	NSPoint localPoint;
 	IntPoint localActiveLayerPoint;
-	id options = [[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions];
+	AbstractOptions *options = [[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions];
 	
 	// Get xScale, yScale
 	xScale = [[document contents] xscale];
@@ -1339,7 +1339,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	id curLayer, activeLayer;
 	IntPoint oldOffsets;
 	unichar key;
-	unsigned int mods;
+	NSUInteger mods;
 	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	BOOL floating = [[document selection] floating];
 	
@@ -1684,7 +1684,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	}else if (y < 0) {
 		[[document contents] anchorSelection];
 	}else if (y > 0) {
-		unsigned int mods = [event modifierFlags];
+		NSUInteger mods = [event modifierFlags];
 		[[document contents] makeSelectionFloat:(mods & NSAlternateKeyMask) >> 19];
     }
 }

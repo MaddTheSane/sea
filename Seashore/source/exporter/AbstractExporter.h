@@ -1,7 +1,7 @@
 #import "Globals.h"
 
 /*!
-	@class		AbstractExporter
+	@protocol	AbstractExporter
 	@abstract	Acts as a base class for all exporters.
 	@discussion	N/A
 				<br><br>
@@ -9,7 +9,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface AbstractExporter : NSObject
+@protocol AbstractExporter <NSObject>
 
 /*!
 	@method		hasOptions

@@ -62,6 +62,11 @@ enum {
 	return @"TIFF image";
 }
 
+- (NSString *)fileType
+{
+	return (NSString*)kUTTypeTIFF;
+}
+
 - (NSString *)extension
 {
 	return @"tiff";

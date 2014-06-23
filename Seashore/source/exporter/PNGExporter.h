@@ -10,8 +10,6 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface PNGExporter : AbstractExporter {
-
-}
+@interface PNGExporter : NSObject <AbstractExporter>
 
 @end

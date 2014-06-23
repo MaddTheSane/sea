@@ -37,6 +37,6 @@
 	@param		modifier
 				The modifier of the new mode to be set, from the k...Modifier enum.
 */
-- (void)setModeFromModifier:(unsigned int)modifier;
+- (void)setModeFromModifier:(AbstractModifiers)modifier;
 
 @end

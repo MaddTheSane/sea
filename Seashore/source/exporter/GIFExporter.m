@@ -11,9 +11,19 @@
 	return NO;
 }
 
+- (NSString *)optionsString
+{
+	return @"";
+}
+
 - (IBAction) showOptions: (id) sender
 {
 	
+}
+
+- (NSString *)fileType
+{
+	return (NSString*)kUTTypeGIF;
 }
 
 - (NSString *) title

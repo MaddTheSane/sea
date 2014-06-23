@@ -40,7 +40,7 @@
 /*!
 	@method		setIgnoresMove
 	@discussion	Used beacuse for some selection modes you don't do a move
-	@param		ingoring
+	@param		ignoring
 				Whether or not to ignore the move.
 */
 - (void)setIgnoresMove:(BOOL)ignoring;

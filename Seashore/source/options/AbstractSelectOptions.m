@@ -29,7 +29,7 @@
 
 }
 
-- (void)setModeFromModifier:(unsigned int)modifier
+- (void)setModeFromModifier:(AbstractModifiers)modifier
 {
 	switch (modifier) {
 		case kNoModifier:
@@ -59,7 +59,7 @@
 	}
 }
 
-- (void)updateModifiers:(unsigned int)modifiers
+- (void)updateModifiers:(AbstractModifiers)modifiers
 {
 	[super updateModifiers:modifiers];
 	int modifier = [super modifier];

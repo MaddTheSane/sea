@@ -225,6 +225,11 @@ static unsigned int cmLen;
 	return @"jp2";
 }
 
+- (NSString *)fileType
+{
+	return (NSString*)kUTTypeJPEG2000;
+}
+
 - (NSString *)optionsString
 {
 	if (targetWeb)

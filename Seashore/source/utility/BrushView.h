@@ -40,7 +40,7 @@
 /*!
 	@method		mouseDown:
 	@discussion	Handles mouse down events inside the view.
-	@param		theEvent
+	@param		event
 				The event triggering this method.
 */
 - (void)mouseDown:(NSEvent *)event;

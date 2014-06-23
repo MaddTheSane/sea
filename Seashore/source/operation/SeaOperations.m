@@ -1,40 +1,12 @@
 #import "SeaOperations.h"
+#import "SeaAlignment.h"
+#import "SeaMargins.h"
+#import "SeaResolution.h"
+#import "SeaScale.h"
+#import "SeaDocRotation.h"
+#import "SeaRotation.h"
+#import "SeaFlip.h"
 
 @implementation SeaOperations
-
-- (id)seaAlignment
-{
-	return seaAlignment;
-}
-
-- (id)seaMargins
-{
-	return seaMargins;
-}
-
-- (id)seaResolution
-{
-	return seaResolution;
-}
-
-- (id)seaScale
-{
-	return seaScale;
-}
-
-- (id)seaDocRotation
-{
-	return seaDocRotation;
-}
-
-- (id)seaRotation
-{
-	return seaRotation;
-}
-
-- (id)seaFlip
-{
-	return seaFlip;
-}
 
 @end

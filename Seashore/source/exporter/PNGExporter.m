@@ -11,6 +11,16 @@
 	return NO;
 }
 
+- (NSString *)fileType
+{
+	return (NSString*)kUTTypePNG;
+}
+
+- (NSString *)optionsString
+{
+	return @"";
+}
+
 - (IBAction)showOptions:(id)sender
 {
 }

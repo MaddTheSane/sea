@@ -16,7 +16,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface JPEGExporter : AbstractExporter {
+@interface JPEGExporter : NSObject <AbstractExporter> {
 
 	// The compression factor to be used with the web target (between 0 and 30)
 	int webCompression;

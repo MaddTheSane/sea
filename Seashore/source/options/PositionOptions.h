@@ -59,7 +59,7 @@ enum {
 	@param		index
 				The modifier index of the new modifier.
 */
-- (void)setFunctionFromIndex:(unsigned int)index;
+- (void)setFunctionFromIndex:(NSInteger)index;
 
 /*!
 	@method		toolFunction

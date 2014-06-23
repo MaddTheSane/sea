@@ -11,7 +11,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface XCFExporter : AbstractExporter {
+@interface XCFExporter : NSObject <AbstractExporter> {
 	
 	// The version of this document
 	int version;

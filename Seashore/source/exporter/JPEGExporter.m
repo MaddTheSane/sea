@@ -42,33 +42,33 @@ static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xre
 - (instancetype)init
 {
 	if (self = [super init]) {
-	NSInteger value;
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	if ([defaults objectForKey:@"jpeg target"] == NULL)
-		targetWeb = YES;
-	else
-		targetWeb = [defaults boolForKey:@"jpeg target"];
-	
-	if ([defaults objectForKey:@"jpeg web compression"] == NULL) {
-		value = 26;
-	}
-	else {
-		value = [defaults integerForKey:@"jpeg web compression"];
-		if (value < 0 || value > kMaxCompression)
+		NSInteger value;
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		
+		if ([defaults objectForKey:@"jpeg target"] == NULL)
+			targetWeb = YES;
+		else
+			targetWeb = [defaults boolForKey:@"jpeg target"];
+		
+		if ([defaults objectForKey:@"jpeg web compression"] == NULL) {
 			value = 26;
-	}
-	webCompression = value;
-	
-	if ([defaults objectForKey:@"jpeg print compression"] == NULL) {
-		value = 30;
-	}
-	else {
-		value = [defaults integerForKey:@"jpeg print compression"];
-		if (value < 0 || value > kMaxCompression)
+		}
+		else {
+			value = [defaults integerForKey:@"jpeg web compression"];
+			if (value < 0 || value > kMaxCompression)
+				value = 26;
+		}
+		webCompression = value;
+		
+		if ([defaults objectForKey:@"jpeg print compression"] == NULL) {
 			value = 30;
-	}
-	printCompression = value;
+		}
+		else {
+			value = [defaults integerForKey:@"jpeg print compression"];
+			if (value < 0 || value > kMaxCompression)
+				value = 30;
+		}
+		printCompression = value;
 	}
 	
 	return self;
@@ -238,6 +238,11 @@ static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xre
 - (NSString *)extension
 {
 	return @"jpg";
+}
+
+- (NSString *)fileType
+{
+	return (NSString*)kUTTypeJPEG;
 }
 
 - (NSString *)optionsString

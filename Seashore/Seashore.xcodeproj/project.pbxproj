@@ -703,7 +703,6 @@
 		A8EDF136078959C80022BB31 /* IndiciesKeeper.m in Sources */ = {isa = PBXBuildFile; fileRef = A835EAB305355C3800A80207 /* IndiciesKeeper.m */; };
 		A8EDF137078959C80022BB31 /* XBMLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A829BDFB053976DD00A80207 /* XBMLayer.m */; };
 		A8EDF138078959C80022BB31 /* XBMContent.m in Sources */ = {isa = PBXBuildFile; fileRef = A829BDFF053976F900A80207 /* XBMContent.m */; };
-		A8EDF13A078959C80022BB31 /* AbstractExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D9FDA1053C0B5500A80207 /* AbstractExporter.m */; };
 		A8EDF13B078959C80022BB31 /* NSPreciseImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A881BF3B053C498800A80207 /* NSPreciseImageView.m */; };
 		A8EDF13C078959C80022BB31 /* RectSelectOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C2681505547AA800A80207 /* RectSelectOptions.m */; };
 		A8EDF13D078959C80022BB31 /* RectSelectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C2681A0554875500A80207 /* RectSelectTool.m */; };
@@ -7201,7 +7200,6 @@
 				A8EDF136078959C80022BB31 /* IndiciesKeeper.m in Sources */,
 				A8EDF137078959C80022BB31 /* XBMLayer.m in Sources */,
 				A8EDF138078959C80022BB31 /* XBMContent.m in Sources */,
-				A8EDF13A078959C80022BB31 /* AbstractExporter.m in Sources */,
 				A8EDF13B078959C80022BB31 /* NSPreciseImageView.m in Sources */,
 				A8EDF13C078959C80022BB31 /* RectSelectOptions.m in Sources */,
 				A8EDF13D078959C80022BB31 /* RectSelectTool.m in Sources */,

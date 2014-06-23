@@ -42,7 +42,7 @@ static BOOL forceAlt = NO;
 	}
 }
 
-- (void)updateModifiers:(unsigned int)modifiers
+- (void)updateModifiers:(AbstractModifiers)modifiers
 {
 	NSInteger index;
 	
@@ -82,7 +82,7 @@ static BOOL forceAlt = NO;
 	
 }
 
-- (NSComparisonPredicateModifier)modifier
+- (AbstractModifiers)modifier
 {
 	return [[modifierPopup selectedItem] tag];
 }

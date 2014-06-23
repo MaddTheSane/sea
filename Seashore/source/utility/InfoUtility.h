@@ -57,13 +57,6 @@ enum {
 }
 
 /*!
-	@method		init
-	@discussion	Initializes an instance of this class.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (instancetype)init;
-
-/*!
 	@method		awakeFromNib
 	@discussion	Configures the utility's interface.
 */

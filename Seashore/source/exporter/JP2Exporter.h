@@ -16,7 +16,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface JP2Exporter : AbstractExporter {
+@interface JP2Exporter : NSObject <AbstractExporter> {
 
 	// The compression factor to be used with the web target (between 0 and 30)
 	NSInteger webCompression;

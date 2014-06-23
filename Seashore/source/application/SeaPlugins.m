@@ -142,21 +142,18 @@ static BOOL checkRun(NSString *path, NSString *file)
 		bundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/%@", pluginsPath, file]];
 		if (bundle && [bundle principalClass]) {
 			success = NO;
-			// TODO: Init better 
-			plugin = [[bundle principalClass] alloc];
-			if (plugin) {
-				if ([plugin respondsToSelector:@selector(initWithManager:)]) {
-					[plugin initWithManager:self];
-					if ([plugin respondsToSelector:@selector(sanity)] && [[plugin sanity] isEqualToString:@"Seashore Approved (Bobo)"]) {
-						[plugins addObject:plugin];
-						success = YES;
-					}		
-				}
+			if (![[bundle principalClass] instancesRespondToSelector:@selector(initWithManager:)]) {
+				continue;
+			}
+			plugin = [[[bundle principalClass] alloc] initWithManager:self];
+			if ([plugin respondsToSelector:@selector(sanity)] && [[plugin sanity] isEqualToString:@"Seashore Approved (Bobo)"]) {
+				[plugins addObject:plugin];
+				success = YES;
 			}
 		}
 	}
 	
-	// Sort and retain plug-ins
+	// Sort plug-ins
 	[plugins sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
 		NSComparisonResult result;
 		

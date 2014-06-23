@@ -25,8 +25,18 @@ static inline void fix_endian_write(int *input, int size)
 	return NO;
 }
 
+- (NSString *)optionsString
+{
+	return @"";
+}
+
 - (IBAction)showOptions:(id)sender
 {
+}
+
+- (NSString *)fileType
+{
+	return @"org.gimp.xcf";
 }
 
 - (NSString *)title

@@ -10,25 +10,20 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface TIFFExporter : AbstractExporter {
+@class SeaDocument;
+
+@interface TIFFExporter : NSObject <AbstractExporter> {
 	
 	// The associated document
-	IBOutlet id idocument;
+	IBOutlet SeaDocument *idocument;
 	
 	// The panel allowing colour space choice
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// The radio buttons specifying the target
-	IBOutlet id targetRadios;
+	IBOutlet NSMatrix *targetRadios;
 
 }
-
-/*!
-	@method		init
-	@discussion	Initializes an instance of this class.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (instancetype)init;
 
 /*!
 	@method		targetChanged:

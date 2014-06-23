@@ -9,66 +9,59 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface SeaOperations : NSObject {
+@class SeaAlignment, SeaMargins, SeaResolution, SeaScale, SeaDocRotation;
+@class SeaRotation, SeaFlip;
 
-	// Outlets to the instances of the same name
-	IBOutlet id seaAlignment;
-    IBOutlet id seaMargins;
-    IBOutlet id seaResolution;
-    IBOutlet id seaScale;
-	IBOutlet id seaDocRotation;
-	IBOutlet id seaRotation;
-	IBOutlet id seaFlip;
-
-}
+@interface SeaOperations : NSObject
 
 /*!
-	@method		seaAlignment
+	@property	seaAlignment
 	@discussion	Returns the instance of the same name.
 	@result		Returns an instance of the SeaAlignment class.
 */
-- (id)seaAlignment;
+
+@property (weak) IBOutlet SeaAlignment *seaAlignment;
 
 /*!
-	@method		seaMargins
+	@property	seaMargins
 	@discussion	Returns the instance of the same name.
 	@result		Returns an instance of the SeaMargins class.
 */
-- (id)seaMargins;
+@property (weak) IBOutlet SeaMargins *seaMargins;
 
 /*!
-	@method		seaResoulution
+	@property	seaResoulution
 	@discussion	Returns the instance of the same name.
 	@result		Returns an instance of the SeaResoulution class.
 */
-- (id)seaResolution;
+@property (weak) IBOutlet SeaResolution *seaResolution;
 
 /*!
-	@method		seaScale
+	@property	seaScale
 	@discussion	Returns the instance of the same name.
 	@result		Returns an instance of the SeaScale class.
 */
-- (id)seaScale;
+@property (weak) IBOutlet SeaScale *seaScale;
 
 /*!
-	@method		seaDocRotation
+	@property	seaDocRotation
 	@discussion	Returns the instance of the same name.
 	@result		Returns an instance of the SeaDocRotation class.
 */
-- (id)seaDocRotation;
+@property (weak) IBOutlet SeaDocRotation *seaDocRotation;
 
 /*!
-	@method		seaRotation
+	@property	seaRotation
 	@discussion	Returns the instance of the same name.
 	@result		Returns an instance of the SeaRotation class.
 */
-- (id)seaRotation;
+@property (weak) IBOutlet SeaRotation *seaRotation;
 
 /*!
-	@method		seaFlip
+	@property	seaFlip
 	@discussion	Returns the instance of the same name.
 	@result		Returns an instance of the SeaFlip class.
 */
-- (id)seaFlip;
+@property (weak) IBOutlet SeaFlip *seaFlip;
 
 @end

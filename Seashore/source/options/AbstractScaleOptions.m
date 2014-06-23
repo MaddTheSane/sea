@@ -14,7 +14,7 @@
 }
 
 
-- (void)updateModifiers:(unsigned int)modifiers
+- (void)updateModifiers:(AbstractModifiers)modifiers
 {
 	[super updateModifiers:modifiers];
 

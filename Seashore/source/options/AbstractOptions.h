@@ -19,7 +19,7 @@
 	@constant	kReservedModifier2
 				Indicates a reserved modifier (no shortcut key).
 */
-enum {
+typedef NS_ENUM(NSInteger, AbstractModifiers) {
 	kNoModifier = 0,
 	kAltModifier = 1,
 	kShiftModifier = 2,
@@ -84,14 +84,14 @@ enum {
 	@param		modifiers
 				An unsigned int representing the new modifiers.
 */
-- (void)updateModifiers:(unsigned int)modifiers;
+- (void)updateModifiers:(AbstractModifiers)modifiers;
 
 /*!
 	@method		modifier
 	@discussion	Returns an indication of the modifier.
 	@result		Returns an integer indicating the active modifier's tag.
 */
-- (NSComparisonPredicateModifier)modifier;
+- (AbstractModifiers)modifier;
 
 
 /*!

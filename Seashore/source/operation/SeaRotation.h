@@ -75,9 +75,6 @@ typedef struct {
 	@method		run:
 	@discussion	Presents the user with a sheet allowing him to configure the
 				document's or layer's margins.
-	@param		global
-				YES if the document's margins should be changed, NO if the
-				layer's margins should be changed.
 */
 - (void)run;
 

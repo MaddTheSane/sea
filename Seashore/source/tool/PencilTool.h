@@ -86,7 +86,8 @@
 /*!
 	@method		intermediateStroke:
 	@discussion	Specifies an intermediate point in the stroke.
-	@param		Where in the document to place the intermediate
+	@param		where
+				The position in the document to place the intermediate
 				stroke.
 */
 - (void)intermediateStroke:(IntPoint)where;

@@ -4,11 +4,11 @@
 /*!
 	@struct		ETPointRecord
 	@discussion	Specifies a point to be drawn.
-	@param		point
+	@field		point
 				The point to be drawn.
-	@param		pressure
+	@field		pressure
 				The presure of the point to be drawn
-	@param		special
+	@field		special
 				0 = normal, 2 = terminate
 */
 typedef struct {

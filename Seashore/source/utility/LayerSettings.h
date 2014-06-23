@@ -108,8 +108,6 @@
 	@method		setOffsetsLeft:top:index:
 	@discussion	Adjusts the offsets of a given layer (handles updates and
 				undos).
-	@param		newName
-				The name to which the layer should be renamed.
 	@param		index
 				The index of the layer to rename.
 */

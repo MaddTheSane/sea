@@ -183,18 +183,18 @@ enum {
 - (void)awakeFromNib
 {
 	id seaView;
-	#ifdef USE_CENTERING_CLIPVIEW
+#ifdef USE_CENTERING_CLIPVIEW
 	id newClipView;
-	#endif
+#endif
 	
 	// Believe it or not sometimes this function is called after it has already run
 	if (whiteboard == NULL) {
 		exporters = @[gifExporter,
-					 jpegExporter,
-					 jp2Exporter,
-					 pngExporter,
-					 tiffExporter,
-					 xcfExporter];
+					  jpegExporter,
+					  jp2Exporter,
+					  pngExporter,
+					  tiffExporter,
+					  xcfExporter];
 		
 		// Create a fresh whiteboard and selection manager
 		whiteboard = [[SeaWhiteboard alloc] initWithDocument:self];
@@ -203,10 +203,10 @@ enum {
 		
 		// Setup the view to display the whiteboard
 		seaView = [[SeaView alloc] initWithDocument:self];
-		#ifdef USE_CENTERING_CLIPVIEW
+#ifdef USE_CENTERING_CLIPVIEW
 		newClipView = [[CenteringClipView alloc] initWithFrame:[[view contentView] frame]];
 		[(NSScrollView *)view setContentView:newClipView];
-		#endif
+#endif
 		[view setDocumentView:seaView];
 		[view setDrawsBackground:NO];
 		
@@ -353,14 +353,13 @@ enum {
 - (BOOL)writeToFile:(NSString *)path ofType:(NSString *)type
 {
 	BOOL result = NO;
-	int i;
 	
-	for (i = 0; i < [exporters count]; i++) {
+	for (id<AbstractExporter> exporter in exporters) {
 		if ([[SeaDocumentController sharedDocumentController]
 			 type: type
-			 isContainedInDocType:[exporters[i] title]
+			 isContainedInDocType:[exporter title]
 			 ]) {
-			[exporters[i] writeDocument:self toFile:path];
+			[exporter writeDocument:self toFile:path];
 			result = YES;
 		}
 	}
@@ -394,12 +393,12 @@ enum {
 	[savePanel setAccessoryView:accessoryView];
 	
 	// Find the default exporter's index
-	for (i = 0; i < [exporters count]; i++) {
+	for (id<AbstractExporter> exporter in exporters) {
 		if ([[SeaDocumentController sharedDocumentController]
 			 type: [self fileType]
-			 isContainedInDocType:[exporters[i] title]
+			 isContainedInDocType:[exporter title]
 			 ]) {
-			exporterIndex = i;
+			exporterIndex = [exporters indexOfObject:exporter];
 			break;
 		}
 	}
@@ -412,8 +411,9 @@ enum {
 	
 	// Add in our exporters
 	[exportersPopUp removeAllItems];
-	for (i = 0; i < [exporters count]; i++)
-		[exportersPopUp addItemWithTitle:[exporters[i] title]];
+	for (id<AbstractExporter> exporter in exporters) {
+		[exportersPopUp addItemWithTitle:[exporter title]];
+	}
 	[exportersPopUp selectItemAtIndex:exporterIndex];
 	[savePanel setRequiredFileType:[exporters[exporterIndex] extension]];
 	
