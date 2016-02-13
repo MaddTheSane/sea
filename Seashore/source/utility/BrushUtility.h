@@ -13,7 +13,7 @@
 @interface BrushUtility : AbstractPanelUtility {
 
 	// The brush grouping pop-up
-	IBOutlet id brushGroupPopUp;
+	IBOutlet NSPopUpButton *brushGroupPopUp;
 
 	// The label that presents the user with the brushes name
 	IBOutlet id brushNameLabel;

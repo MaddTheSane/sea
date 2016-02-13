@@ -1,3 +1,4 @@
+#include <ApplicationServices/ApplicationServices.h>
 #import "CMYKClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]

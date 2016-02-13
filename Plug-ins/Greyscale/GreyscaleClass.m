@@ -1,3 +1,4 @@
+#include <ApplicationServices/ApplicationServices.h>
 #import "GreyscaleClass.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"

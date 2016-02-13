@@ -46,6 +46,6 @@
 	@discussion	Returns the current transparency colour.
 	@result		Returns the current transparency colour.
 */
-- (id)color;
+- (NSColor*)color;
 
 @end

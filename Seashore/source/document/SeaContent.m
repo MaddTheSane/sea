@@ -29,6 +29,7 @@
 #import "StatusUtility.h"
 #import "SeaDocumentController.h"
 #import "SeaDocument.h"
+#import "CenteringClipView.h"
 
 extern IntPoint gScreenResolution;
 static NSString*	FloatAnchorToolbarItemIdentifier = @"Float/Anchor Toolbar Item Identifier";
@@ -1546,7 +1547,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		rect.size.width = width;
 		rect.size.height = height;
 		data = malloc(make_128(rect.size.width * rect.size.height * spp));
-		memcpy(data, [[[[document whiteboard] image] representations][0] bitmapData], rect.size.width * rect.size.height * spp);
+		memcpy(data, [(NSBitmapImageRep*)[[[document whiteboard] image] representations][0] bitmapData], rect.size.width * rect.size.height * spp);
 		NSEnumerator *e = [layers objectEnumerator];
 		while(layer = [e nextObject]){
 			[ordering setValue: [NSNumber numberWithInt:[layers indexOfObject: layer]] forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];

@@ -9,6 +9,8 @@
 				Copyright (c) 1995 Spencer Kimball and Peter Mattis
 */
 
+#import <Foundation/Foundation.h>
+
 typedef enum
 {
 	PROP_END                   =  0,
@@ -45,13 +47,13 @@ typedef enum
 	@constant	COMPRESS_RLE
 				Indicates compression through run-length encoding is used.
 */
-typedef enum
+typedef NS_ENUM(int, XcfCompressionType)
 {
 	COMPRESS_NONE              =  0,
 	COMPRESS_RLE               =  1,
 	COMPRESS_ZLIB              =  2,  /* unused */
 	COMPRESS_FRACTAL           =  3   /* unused */
-} XcfCompressionType;
+};
 
 
 /*!
@@ -99,7 +101,7 @@ typedef enum
 	@constant	XCF_GRAIN_MERGE_MODE
 				The grain merge merge technique.
 */	
-typedef enum
+typedef NS_ENUM(int, XcfLayerMode)
 {
 	XCF_NORMAL_MODE,			/* 0 */
 	XCF_DISSOLVE_MODE,			/* 1 */
@@ -127,7 +129,7 @@ typedef enum
 	XCF_ERASE_MODE,				/**< skip >*/
 	XCF_REPLACE_MODE,			/**< skip >*/
 	XCF_ANTI_ERASE_MODE			/**< skip >*/
-} XcfLayerMode;
+};
 
 
 #define XCF_TILE_WIDTH 64
@@ -145,12 +147,12 @@ typedef enum
 				loading, as such elsewhere you do not need to account for
 				this document type).
 */
-typedef enum
+typedef NS_ENUM(int, XcfImageType)
 {
 	XCF_RGB_IMAGE,
 	XCF_GRAY_IMAGE,
 	XCF_INDEXED_IMAGE
-} XcfImageType;
+};
 
 /*!
 	@enum		GimpImageType
@@ -167,7 +169,7 @@ typedef enum
 	@constant   GIMP_INDEXEDA_IMAGE
 				Specifies the layer's data is in the INDEXEDA format.
 */
-typedef enum
+typedef NS_ENUM(int, GimpImageType)
 {
   GIMP_RGB_IMAGE,
   GIMP_RGBA_IMAGE,
@@ -175,7 +177,7 @@ typedef enum
   GIMP_GRAYA_IMAGE,
   GIMP_INDEXED_IMAGE,
   GIMP_INDEXEDA_IMAGE
-} GimpImageType;
+};
 
 
 /*!
@@ -218,7 +220,7 @@ enum {
 	@constant	kFloatingFormat
 				Specifies the colour components are specified as floating point values.
 */
-enum {
+typedef NS_OPTIONS(unsigned int, GIMPBitmapFormat) {
 	kAlphaFirstFormat = 1 << 0,
 	kAlphaNonPremultipliedFormat = 1 << 1,
 	kFloatingFormat = 1 << 2

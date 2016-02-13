@@ -4,7 +4,7 @@
 - (BOOL)containsObjectIdenticalTo:(id)object;
 @end
 
-@interface NSMutableArray(MyExtensions)
-- (void)insertObjectsFromArray:(NSArray *)array atIndex:(NSInteger)index;
+@interface NSMutableArray<ObjectType> (MyExtensions)
+- (void)insertObjectsFromArray:(NSArray<ObjectType> *)array atIndex:(NSInteger)index;
 @end
 

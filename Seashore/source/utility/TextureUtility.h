@@ -11,12 +11,11 @@
 */
 
 @interface TextureUtility : AbstractPanelUtility {
-	
 	// The proxy object
 	IBOutlet id seaProxy;
 	
 	// The texture grouping pop-up
-    IBOutlet id textureGroupPopUp;
+    IBOutlet NSPopUpButton *textureGroupPopUp;
 	
 	// The label that presents the user with the texture name
 	IBOutlet id textureNameLabel;

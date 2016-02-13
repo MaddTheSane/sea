@@ -15,7 +15,7 @@
 	IBOutlet id document;
 	
 	// The pop-up men that reflect the currently active channel
-	IBOutlet id channelSelectionPopup;
+	IBOutlet NSPopUpButton *channelSelectionPopup;
 	
 	// If this is checked, the user wants to see a normal view, not a channel specific one
 	IBOutlet id trueViewCheckbox;

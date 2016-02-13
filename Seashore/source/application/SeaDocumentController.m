@@ -80,7 +80,7 @@
 			NSImage *image = [[NSWorkspace sharedWorkspace] iconForFile: path];
 			[recentMenu addItemWithTitle: filename];
 			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setRepresentedObject:path];
-			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setImage: image];
+			[[(NSMenu*)recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setImage: image];
 		}
 	}else {
 		[recentMenu setEnabled:NO];

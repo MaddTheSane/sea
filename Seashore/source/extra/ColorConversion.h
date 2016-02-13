@@ -13,6 +13,10 @@
 
 #import "Globals.h"
 
+#ifndef __private_extern
+#define __private_extern __attribute__((visibility("hidden")))
+#endif
+
 /*!
 	@function	RGBtoHSV
 	@discussion	Converts a set of RGB (red, green, blue) values to HSV hue

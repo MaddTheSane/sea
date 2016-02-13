@@ -1,4 +1,4 @@
-#import "Bitmap.h"
+#import <SeashoreKit/Bitmap.h>
 #import "CIMonochromeClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
