@@ -91,8 +91,8 @@
 
 - (void)panelSelectionDidChange:(id)openPanel
 {
-	if ([[openPanel filenames] count] > 0) {
-		texturePath = [openPanel filenames][0];
+	if ([[openPanel URLs] count] > 0) {
+		texturePath = [[openPanel URLs][0] path];
 		if (texturePath) {
 			refresh = YES;
 			[self preview:NULL];

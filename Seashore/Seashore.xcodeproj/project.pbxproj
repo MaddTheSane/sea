@@ -2364,7 +2364,7 @@
 		F5AA7D7C039BB03D0140AD59 /* SeaContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaContent.h; sourceTree = "<group>"; };
 		F5AA7D7D039BB03D0140AD59 /* SeaContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaContent.m; sourceTree = "<group>"; };
 		F5B107C003C59B34012F5DCB /* XCFContent.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XCFContent.h; sourceTree = "<group>"; };
-		F5B107C103C59B34012F5DCB /* XCFContent.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XCFContent.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		F5B107C103C59B34012F5DCB /* XCFContent.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XCFContent.m; sourceTree = "<group>"; };
 		F5B278BB03EF6E4701A0A16F /* SeaMargins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaMargins.h; sourceTree = "<group>"; };
 		F5B278BC03EF6E4701A0A16F /* SeaMargins.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaMargins.m; sourceTree = "<group>"; };
 		F5B278BF03EF952B01A0A16F /* SeaLayerUndo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaLayerUndo.h; sourceTree = "<group>"; };

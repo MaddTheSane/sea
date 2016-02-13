@@ -49,18 +49,30 @@ typedef struct {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@class SeaLayer, SeaDocument;
+@class SeaLayer;
+#if MAIN_COMPILE
+@class SeaDocument;
+#else
+@class SeaContent;
+@class SeaWhiteboard;
+#endif
 
 @interface SeaCompositor : NSObject {
-
+#if MAIN_COMPILE
 	// The document associated with this compositor
 	SeaDocument *document;
+#else
+	// The contents associated with this compositor
+	__weak SeaContent *contents;
+	__weak SeaWhiteboard *whiteboard;
+#endif
 	
 	// The random table
 	int randomTable[RANDOM_TABLE_SIZE];
 	
 }
 
+#if MAIN_COMPILE
 /*!
 	@method		initWithDocument:
 	@discussion	Initializes an instance of this class with the given document.
@@ -69,6 +81,18 @@ typedef struct {
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (instancetype)initWithDocument:(id)doc;
+
+#else
+
+/*!
+	@method		initWithContents:andWhiteboard:
+	@discussion	Initializes an instance of this class with the given document.
+	@param		doc
+ The document with which to initialize the instance.
+	@result		Returns instance upon success (or NULL otherwise).
+ */
+- (instancetype)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board;
+#endif
 
 /*!
 	@method		compositeLayer:withOptions:

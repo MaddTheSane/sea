@@ -48,14 +48,14 @@
 		DC0D53A91041FFB30037378A /* Rects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rects.h; path = ../Seashore/source/extra/Rects.h; sourceTree = "<group>"; };
 		DC0D53AA1041FFB30037378A /* RLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RLE.m; path = ../Seashore/source/extra/RLE.m; sourceTree = "<group>"; };
 		DC0D53AB1041FFB30037378A /* RLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RLE.h; path = ../Seashore/source/extra/RLE.h; sourceTree = "<group>"; };
-		DC0D53AC1041FFB30037378A /* SeaContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaContent.h; sourceTree = "<group>"; };
-		DC0D53AD1041FFB30037378A /* SeaContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaContent.m; sourceTree = "<group>"; };
-		DC0D53AE1041FFB30037378A /* XCFContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFContent.h; sourceTree = "<group>"; };
-		DC0D53AF1041FFB30037378A /* XCFContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFContent.m; sourceTree = "<group>"; };
-		DC0D53B01041FFB30037378A /* SeaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaLayer.h; sourceTree = "<group>"; };
-		DC0D53B11041FFB30037378A /* SeaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaLayer.m; sourceTree = "<group>"; };
-		DC0D53B21041FFB30037378A /* XCFLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFLayer.h; sourceTree = "<group>"; };
-		DC0D53B31041FFB30037378A /* XCFLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFLayer.m; sourceTree = "<group>"; };
+		DC0D53AC1041FFB30037378A /* SeaContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeaContent.h; path = ../Seashore/source/document/SeaContent.h; sourceTree = "<group>"; };
+		DC0D53AD1041FFB30037378A /* SeaContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeaContent.m; path = ../Seashore/source/document/SeaContent.m; sourceTree = "<group>"; };
+		DC0D53AE1041FFB30037378A /* XCFContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCFContent.h; path = ../Seashore/source/document/XCFContent.h; sourceTree = "<group>"; };
+		DC0D53AF1041FFB30037378A /* XCFContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCFContent.m; path = ../Seashore/source/document/XCFContent.m; sourceTree = "<group>"; };
+		DC0D53B01041FFB30037378A /* SeaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeaLayer.h; path = ../Seashore/source/document/SeaLayer.h; sourceTree = "<group>"; };
+		DC0D53B11041FFB30037378A /* SeaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeaLayer.m; path = ../Seashore/source/document/SeaLayer.m; sourceTree = "<group>"; };
+		DC0D53B21041FFB30037378A /* XCFLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCFLayer.h; path = ../Seashore/source/document/XCFLayer.h; sourceTree = "<group>"; };
+		DC0D53B31041FFB30037378A /* XCFLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCFLayer.m; path = ../Seashore/source/document/XCFLayer.m; sourceTree = "<group>"; };
 		DC0D54CA104200B40037378A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 

@@ -1,5 +1,6 @@
 #import "SeaContent.h"
 #import "SeaLayer.h"
+#if MAIN_COMPILE
 #import "SeaDocument.h"
 #import "UtilitiesManager.h"
 #import "SeaController.h"
@@ -30,13 +31,27 @@
 #import "SeaDocumentController.h"
 #import "SeaDocument.h"
 #import "CenteringClipView.h"
+#import "IndiciesKeeper.h"
 
 extern IntPoint gScreenResolution;
 static NSString*	FloatAnchorToolbarItemIdentifier = @"Float/Anchor Toolbar Item Identifier";
 static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection Toolbar Item Identifier";
+#endif
 
-@implementation SeaContent
+@implementation SeaContent {
+#if MAIN_COMPILE
+	// The keeper we use to keep IndiciesRecords in memory
+	IndiciesKeeper keeper;
+#else
+	IntPoint gScreenResolution;
+#endif
+}
+@synthesize selectedChannel;
+@synthesize cmykSave;
+@synthesize trueView;
+@synthesize activeLayerIndex;
 
+#if MAIN_COMPILE
 - (instancetype)initWithDocument:(id)doc
 {
 	if (self = [super init]) {
@@ -181,13 +196,38 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return self;
 }
 
+#else
+
+- (instancetype)init
+{
+	if (self = [super init]) {
+		// Set the data members to reasonable values
+		xres = yres = 72;
+		height = width = type = 0;
+		lostprops = NULL; lostprops_len = 0;
+		parasites = NULL; parasites_count = 0;
+		exifData = NULL;
+		layers = NULL; activeLayerIndex = 0;
+		layersToUndo = [NSMutableArray array];
+		layersToRedo = [NSMutableArray array];
+		orderings = [NSMutableArray array];
+		deletedLayers = [[NSArray alloc] init];
+		selectedChannel = kAllChannels; trueView = NO;
+		cmykSave = NO;
+		gScreenResolution = IntMakePoint(1024, 768);
+	}
+	
+	return self;
+}
+#endif
+
 - (void)dealloc
 {
-	int i;
-	
+#if MAIN_COMPILE
 	freeKeeper(&keeper);
+#endif
 	if (parasites) {
-		for (i = 0; i < parasites_count; i++) {
+		for (int i = 0; i < parasites_count; i++) {
 			CFRelease(parasites[i].name);
 			free(parasites[i].data);
 		}
@@ -197,6 +237,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		free(lostprops);
 }
 
+#if MAIN_COMPILE
 - (void)setMarginLeft:(int)left top:(int)top right:(int)right bottom:(int)bottom
 {
 	id layer;
@@ -214,6 +255,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	}
 	[[document selection] adjustOffset:IntMakePoint(left, top)];
 }
+#endif
 
 - (int)type
 {
@@ -251,7 +293,12 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (float)xscale
 {
-	float xscale = [[document docView] zoom];
+	float xscale =
+#if MAIN_COMPILE
+	[[document docView] zoom];
+#else
+	1.0;
+#endif
 	
 	if (gScreenResolution.x != 0 && xres != gScreenResolution.x)
 		xscale /= ((float)xres / (float)gScreenResolution.x);
@@ -261,19 +308,25 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (float)yscale
 {
-	float yscale = [[document docView] zoom];
-	
+	float yscale =
+#if MAIN_COMPILE
+[[document docView] zoom];
+#else
+	1;
+#endif
 	if (gScreenResolution.y != 0 && yres != gScreenResolution.y)
 		yscale /= ((float)yres / (float)gScreenResolution.y);
 	
 	return yscale;
 }
 
+#if MAIN_COMPILE
 - (void)setResolution:(IntResolution)newRes
 {
 	xres = newRes.x;
 	yres = newRes.y;
 }
+#endif
 
 - (int)height
 {
@@ -285,21 +338,13 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return width;
 }
 
+#if MAIN_COMPILE
 - (void)setWidth:(int)newWidth height:(int)newHeight
 {
 	width = newWidth;
 	height = newHeight;
 }
-
-- (int)selectedChannel
-{
-	return selectedChannel;
-}
-
-- (void)setSelectedChannel:(int)value;
-{
-	selectedChannel = value;
-}
+#endif
 
 - (char *)lostprops
 {
@@ -378,16 +423,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	parasites[parasites_count - 1] = parasite;
 }
 
-- (BOOL)trueView
-{
-	return trueView;
-}
-
-- (void)setTrueView:(BOOL)value
-{
-	trueView = value;
-}
-
+#if MAIN_COMPILE
 - (NSColor *)foreground
 {
 	id foreground;
@@ -413,6 +449,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	else
 		return [[background colorUsingColorSpaceName:NSDeviceWhiteColorSpace] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 }
+#endif
 
 - (void)setCMYKSave:(BOOL)value
 {
@@ -439,21 +476,12 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return [layers count];
 }
 
-- (id)activeLayer
+- (SeaLayer*)activeLayer
 {
 	return (activeLayerIndex < 0) ? NULL : layers[activeLayerIndex];
 }
 
-- (NSInteger)activeLayerIndex
-{
-	return activeLayerIndex;
-}
-
-- (void)setActiveLayerIndex:(NSInteger)value
-{
-	activeLayerIndex = value;
-}
-
+#if MAIN_COMPILE
 - (void)layerBelow
 {
 	NSInteger newIndex;
@@ -1819,5 +1847,6 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	
 	return YES;
 }
+#endif
 
 @end

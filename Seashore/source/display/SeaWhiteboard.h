@@ -1,7 +1,9 @@
 #import "Globals.h"
 #import "SeaCompositor.h"
 
+#if MAIN_COMPILE
 @class SeaDocument;
+#endif
 
 /*!
 	@enum		k...ChannelsView
@@ -53,13 +55,21 @@ enum {
 				Copyright (c) 2005 Daniel Jalkut
 */
 
-@interface SeaWhiteboard : NSObject {
+#if !MAIN_COMPILE
+@class SeaContent;
+@class SeaCompositor;
+#endif
 
+@interface SeaWhiteboard : NSObject {
+#if MAIN_COMPILE
 	// The document associated with this whiteboard
 	SeaDocument *document;
+#else
+	// The document associated with this whiteboard
+	SeaContent *contents;
 	
-	// The compositor for this whiteboard
-	id compositor;
+	IntPoint gScreenResolution;
+#endif
 	
 	// The width and height of the whitebaord
 	int width, height;
@@ -111,8 +121,12 @@ enum {
 	
 }
 
+/// The compositor for this whiteboard
+@property (strong) SeaCompositor *compositor;
+
 // CREATION METHODS
 
+#if MAIN_COMPILE
 /*!
 	@method		initWithDocument:
 	@discussion	Initializes an instance of this class with the given document.
@@ -121,6 +135,16 @@ enum {
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (instancetype)initWithDocument:(id)doc;
+#else
+/*!
+	@method		initWithDocument:
+	@discussion	Initializes an instance of this class with the given document.
+	@param		doc
+				The document with which to initialize the instance.
+	@result		Returns instance upon success (or NULL otherwise).
+ */
+- (instancetype)initWithContent:(SeaContent *)cont;
+#endif
 
 /*!
 	@method		compositor
@@ -280,6 +304,7 @@ enum {
 */
 @property (readonly) IntRect imageRect;
 
+#if MAIN_COMPILE
 /*!
 	@method		image
 	@discussion	Returns an image representing the whiteboard (which may be CMYK
@@ -287,6 +312,7 @@ enum {
 	@result		Returns an NSImage representing the whiteboard.
 */
 - (NSImage *)image;
+#endif
 
 /*!
 	@method		printableImage

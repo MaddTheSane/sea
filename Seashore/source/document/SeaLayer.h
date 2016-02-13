@@ -10,15 +10,18 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
+#if MAIN_COMPILE
 @class SeaDocument;
+#endif
 
 @interface SeaLayer : NSObject {
-	
+#if MAIN_COMPILE
 	// The document that contains this layer
 	__weak SeaDocument *document;
 	
 	// The object responsible for changes to our bitmap
 	id seaLayerUndo;
+#endif
 	
 	// The layer's height, width and mode
 	int height, width, mode;
@@ -80,6 +83,7 @@
 
 // CREATION METHODS
 
+#if MAIN_COMPILE
 /*!
 	@method		initWithDocument:
 	@discussion	Initializes an instance of this class with the given document.
@@ -157,7 +161,11 @@
 				of the format prescibed by the document.
 */
 - (instancetype)initFloatingWithDocument:(SeaDocument *)doc rect:(IntRect)lrect data:(unsigned char *)ldata;
+#else
+- (instancetype)init;
+#endif
 
+#if MAIN_COMPILE
 // COMPRESSION METHODS
 
 /*!
@@ -187,6 +195,7 @@
 	@result		Returns the document associated with this layer.
 */
 - (id)document;
+#endif
 
 /*!
 	@method		width
@@ -218,6 +227,7 @@
 */
 - (int)yoff;
 
+#if MAIN_COMPILE
 /*!
 	@method		localRect
 	@discussion	For finding out where it is, simply a combination of the above values.
@@ -277,6 +287,7 @@
 				YES if the layer should be trimmed afterwards, NO otherwise.
 */
 - (void)setRotation:(float)degrees interpolation:(int)interpolation withTrim:(BOOL)trim;
+#endif
 
 /*!
 	@method		visible
@@ -351,6 +362,13 @@
 */
 - (NSString *)name;
 
+#if MAIN_COMPILE
+@property (nonatomic, copy) NSString *name;
+#else
+@property (readonly, copy) NSString *name;
+#endif
+
+#if MAIN_COMPILE
 /*!
 	@method		setName:
 	@discussion	Sets the name of the layer (the old name will be retained until
@@ -359,13 +377,14 @@
 				The revised name of the layer.
 */
 - (void)setName:(NSString *)newName;
+#endif
 
 /*!
 	@method		data
 	@discussion	Returns the bitmap data for the layer.
 	@result		Returns a pointer to the bitmap data for the layer.
 */
-- (unsigned char *)data;
+- (unsigned char *)data NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		hasAlpha
@@ -376,12 +395,14 @@
 */
 - (BOOL)hasAlpha;
 
+#if MAIN_COMPILE
 /*!
 	@method		toggleAlpha
 	@discussion	Toggles whether or not the layer should be considered active
 				handles undos).
 */
 - (void)toggleAlpha;
+#endif
 
 /*!
 	@method		introduceAlpha
@@ -390,6 +411,7 @@
 */
 - (void)introduceAlpha;
 
+#if MAIN_COMPILE
 /*!
 	@method		canToggleAlpha
 	@discussion	Returns whether or not the user should be permitted to toggle
@@ -400,6 +422,7 @@
 				channel treament, NO otherwise.
 */
 - (BOOL)canToggleAlpha;
+#endif
 
 /*!
 	@method		lostprops
@@ -408,7 +431,7 @@
 	@result		Returns a pointer to the block of memory containing the lost
 				properties of the layer.
 */
-- (char *)lostprops;
+- (char *)lostprops NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		lostprops_len
@@ -428,6 +451,7 @@
 */
 - (int)uniqueLayerID;
 
+#if MAIN_COMPILE
 /*!
 	@method		index
 	@discussion	Returns the index of this layer at the current moment. This
@@ -436,6 +460,7 @@
 	@result		Returns an integer indicating the current index of the layer.
 */
 - (int)index;
+#endif
 
 /*!
 	@method		floating
@@ -445,6 +470,7 @@
 */
 - (BOOL)floating;
 
+#if MAIN_COMPILE
 // EXTRA METHODS
 
 /*!
@@ -525,5 +551,6 @@
 				The type to which the layer's bitmap is being converted.
 */
 - (void)convertFromType:(int)srcType to:(int)destType;
+#endif
 
 @end

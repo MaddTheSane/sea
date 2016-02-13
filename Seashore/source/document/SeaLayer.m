@@ -1,23 +1,30 @@
 #import "SeaLayer.h"
 #import "SeaContent.h"
+#if MAIN_COMPILE
 #import "SeaDocument.h"
 #import "SeaLayerUndo.h"
 #import "SeaController.h"
 #import "UtilitiesManager.h"
 #import "PegasusUtility.h"
+#endif
 #import "Bitmap.h"
+#if MAIN_COMPILE
 #import "SeaWarning.h"
 #import "SeaPrefs.h"
 #import "SeaPlugins.h"
 #import "CIAffineTransformClass.h"
+#endif
 #include <ApplicationServices/ApplicationServices.h>
 #include <sys/stat.h>
 #include <sys/mount.h>
+#if MAIN_COMPILE
 #include <GIMPCore/GIMPCore.h>
+#endif
 #include "ColorSyncDeprecated.h"
 
 @implementation SeaLayer
 
+#if MAIN_COMPILE
 - (instancetype)initWithDocument:(SeaDocument *)doc
 {	
 	// Set the data members to reasonable values
@@ -148,19 +155,45 @@
 	return self;
 }
 
-- (void)dealloc
-{	
-	struct stat sb;
+#else
+
+- (instancetype)init
+{
+	if (self = [super init]) {
+		// Set the data members to reasonable values
+		height = width = mode = 0;
+		opacity = 255; xoff = yoff = 0;
+		spp = 4;
+		srand(time(NULL));
+		
+		uniqueLayerID = rand();
+		if (uniqueLayerID == 0)
+			name = [[NSString alloc] initWithString:LOCALSTR(@"background layer", @"Background")];
+		else
+			name = [[NSString alloc] initWithFormat:LOCALSTR(@"layer title", @"Layer %d"), uniqueLayerID];
+		oldNames = [[NSArray alloc] init];
+	}
 	
+	return self;
+}
+
+#endif
+
+- (void)dealloc
+{
 	if (data) free(data);
 	if (thumbData) free(thumbData);
+#if MAIN_COMPILE
+	struct stat sb;
 	if (data == NULL) {
 		if (stat([undoFilePath fileSystemRepresentation], &sb) == 0) {
 			unlink([undoFilePath fileSystemRepresentation]);
 		}
 	}
+#endif
 }
 
+#if MAIN_COMPILE
 - (void)compress
 {
 	FILE *file;
@@ -232,6 +265,7 @@
 {
 	return document;
 }
+#endif
 
 - (int)width
 {
@@ -253,6 +287,7 @@
 	return yoff;
 }
 
+#if MAIN_COMPILE
 - (IntRect)localRect
 {
 	return IntMakeRect(xoff, yoff, width, height);
@@ -551,6 +586,7 @@
 		[self setCocoaRotation:degrees interpolation:interpolation withTrim:trim];
 	}
 }
+#endif
 
 - (BOOL)visible
 {
@@ -597,6 +633,7 @@
 	return name;
 }
 
+#if MAIN_COMPILE
 - (void)setName:(NSString *)newName
 {
 	if (name) {
@@ -604,6 +641,7 @@
 		name = newName;
 	}
 }
+#endif
 
 - (unsigned char *)data
 {
@@ -615,6 +653,7 @@
 	return hasAlpha;
 }
 
+#if MAIN_COMPILE
 - (void)toggleAlpha
 {
 	// Do nothing if we can't do anything
@@ -630,12 +669,14 @@
 	// Make action undoable
 	[[[document undoManager] prepareWithInvocationTarget:self] toggleAlpha];
 }
+#endif
 
 - (void)introduceAlpha
 {
 	hasAlpha = YES;
 }
 
+#if MAIN_COMPILE
 - (BOOL)canToggleAlpha
 {
 	int i;
@@ -652,6 +693,7 @@
 	
 	return YES;
 }
+#endif
 
 - (char *)lostprops
 {
@@ -668,6 +710,7 @@
 	return uniqueLayerID;
 }
 
+#if MAIN_COMPILE
 - (int)index
 {
 	int i;
@@ -679,12 +722,14 @@
 	
 	return -1;
 }
+#endif
 
 - (BOOL)floating
 {
 	return floating;
 }
 
+#if MAIN_COMPILE
 - (id)seaLayerUndo
 {
 	return seaLayerUndo;
@@ -1003,5 +1048,6 @@
 		
 	}
 }
+#endif
 
 @end

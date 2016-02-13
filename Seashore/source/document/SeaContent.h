@@ -1,7 +1,13 @@
 #import "Globals.h"
+#if MAIN_COMPILE
 #import "IndiciesKeeper.h"
+#endif
 
+#if MAIN_COMPILE
 @class SeaDocument;
+#else
+@class SeaWhiteboard;
+#endif
 @class SeaLayer;
 
 /*!
@@ -35,8 +41,10 @@ typedef struct {
 */
 @interface SeaContent : NSObject {
 	
+#if MAIN_COMPILE
 	// The document associated with this object
 	SeaDocument *document;
+#endif
 	
 	// The document's x and y resolution
 	int xres, yres;
@@ -66,9 +74,6 @@ typedef struct {
 	//  If YES the user wants the typical view otherwise the user wants the channel-specific view
 	BOOL trueView;
 	
-	// The keeper we use to keep IndiciesRecords in memory
-	IndiciesKeeper keeper;
-	
 	// All the parasites
 	ParasiteData *parasites;
 	int parasites_count;
@@ -80,9 +85,31 @@ typedef struct {
 	NSDictionary *exifData;
 	
 }
+/*!
+	@property	cmykSave
+	@discussion	Shows whether TIFF files should be saved using the CMYK colour
+ space.
+ */
+@property (setter = setCMYKSave:) BOOL cmykSave;
+
+/*!
+	@property	trueView
+	@discussion	Shows whether the document view should be showing all channels
+ or just the channel being edited.
+ */
+@property BOOL trueView;
+
+/*!
+	@property	activeLayerIndex
+	@discussion	The index of the currently active layer.
+ */
+@property NSInteger activeLayerIndex;
+
+@property int selectedChannel;
 
 // CREATION METHODS
 
+#if MAIN_COMPILE
 /*!
 	@method		initWithDocument:
 	@discussion	Initializes an instance of this class with the given document.
@@ -148,58 +175,60 @@ typedef struct {
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (instancetype)initWithDocument:(id)doc data:(unsigned char *)ddata type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
+#endif
 
-// PROPERTY METHODS
+#pragma mark PROPERTY METHODS
 
 /*!
-	@method		type
+	@property	type
 	@discussion	Returns the document type.
 	@result		Returns an integer representing the document type (see Constants
 				documentation).
 */
-- (int)type;
+@property (readonly) int type;
 
 /*!
-	@method		spp
+	@property	spp
 	@discussion	Returns the samples per pixel of the document.
 	@result		Returns an integer indicating the samples per pixel of the
 				document.
 */
-- (int)spp;
+@property (readonly) int spp;
 
 /*!
-	@method		xres
+	@property	xres
 	@discussion	Returns the horizontal resolution of the document.
 	@result		Returns the horizontal resolution as an integer in
 				dots-per-inch.
 */
-- (int)xres;
+@property (readonly) int xres;
 
 /*!
-	@method		yres
+	@property	yres
 	@discussion	Returns the vertical resolution of the document.
 	@result		Returns the vertical resolution as an integer in dots-per-inch.
 */
-- (int)yres;
+@property (readonly) int yres;
 
 /*!
-	@method		xscale
+	@property	xscale
 	@discussion	Returns how much the image should be scaled by horizontally given
 				the current zoom and resolution.
 	@result		A floating-point number indicating how much the image should be scaled
 				by horizontally given the current zoom and resolution.
 */
-- (float)xscale;
+@property (readonly) float xscale;
 
 /*!
-	@method		yscale
+	@property	yscale
 	@discussion	Returns how much the image should be scaled by vertically given
 				the current zoom and resolution.
 	@result		A floating-point number indicating how much the image should be scaled
 				by vertically given the current zoom and resolution.
 */
-- (float)yscale;
+@property (readonly) float yscale;
 
+#if MAIN_COMPILE
 /*!
 	@method		setResolution:
 	@discussion	Sets the horizontal and vertical resolutions for the document.
@@ -208,21 +237,21 @@ typedef struct {
 				IntPoint see Globals documentation for more information).
 */
 - (void)setResolution:(IntResolution)newRes;
+#endif
 
 /*!
-	@method		height
-	@discussion	Returns the height of the document.
-	@result		Returns the height as an integer in pixels.
+	@property	height
+	@discussion	The height of the document in pixels.
 */
-- (int)height;
+@property (readonly) int height;
 
 /*!
-	@method		width
-	@discussion	Returns the width of the document.
-	@result		Returns the width as an integer in pixels.
+	@property	width
+	@discussion	The width of the document in pixels.
 */
-- (int)width;
+@property (readonly) int width;
 
+#if MAIN_COMPILE
 /*!
 	@method		setWidth:height:
 	@discussion	Sets the width and height for the document.
@@ -250,6 +279,7 @@ typedef struct {
 				The adjustment to be made to the bottom margin (in pixels).
 */
 - (void)setMarginLeft:(int)left top:(int)top right:(int)right bottom:(int)bottom;
+#endif
 
 /*!
 	@method		selectedChannel
@@ -274,7 +304,7 @@ typedef struct {
 	@result		Returns a pointer to the block of memory containing the lost
 				properties of the document.
 */
-- (char *)lostprops;
+- (char *)lostprops NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		lostprops_len
@@ -353,6 +383,7 @@ typedef struct {
 */
 - (void)setTrueView:(BOOL)value;
 
+#if MAIN_COMPILE
 /*!
 	@method		foreground
 	@discussion	Returns the foreground colour, converting it to the same colour
@@ -370,6 +401,7 @@ typedef struct {
 	@result		Returns a NSColor representing the background colour.
 */
 - (NSColor *)background;
+#endif
 
 /*!
 	@method		setCMYKSave
@@ -422,7 +454,7 @@ typedef struct {
 	@discussion	Returns the currently active layer.
 	@result		An instance of SeaLayer representing the active layer.
 */
-- (id)activeLayer;
+- (SeaLayer*)activeLayer;
 
 /*!
 	@method		activeLayerIndex
@@ -431,6 +463,7 @@ typedef struct {
 */
 - (NSInteger)activeLayerIndex;
 
+#if MAIN_COMPILE
 /*!
 	@method		setActiveLayerIndex:
 	@param		value
@@ -766,5 +799,6 @@ typedef struct {
 				before the conversion.
 */
 - (void)revertToType:(int)newType withRecord:(IndiciesRecord)record;
+#endif
 
 @end

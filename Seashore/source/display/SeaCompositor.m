@@ -1,12 +1,17 @@
 #import "SeaCompositor.h"
+#if MAIN_COMPILE
 #import "SeaDocument.h"
+#endif
 #import "SeaWhiteboard.h"
 #import "SeaLayer.h"
 #import "SeaContent.h"
+#if MAIN_COMPILE
 #import "SeaSelection.h"
+#endif
 
 @implementation SeaCompositor
 
+#if MAIN_COMPILE
 - (instancetype)initWithDocument:(id)doc
 {
 	if (self = [super init]) {
@@ -23,6 +28,24 @@
 	
 	return self;
 }
+#else
+- (instancetype)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board
+{
+	if (self = [super init]) {
+		int i;
+		
+		// Remember the document we are compositing for
+		contents = cont;
+		whiteboard = board;
+		
+		// Work out the random table for the dissolve effect
+		srandom(RANDOM_SEED);
+		for (i = 0; i < 4096; i++)
+			randomTable[i] = random();
+	}
+	return self;
+}
+#endif
 
 - (void)compositeLayer:(SeaLayer *)layer withOptions:(CompositorOptions)options
 {
@@ -31,20 +54,27 @@
 
 - (void)compositeLayer:(SeaLayer *)layer withOptions:(CompositorOptions)options andData:(unsigned char *)destPtr
 {
-	unsigned char *srcPtr, *overlay, *mask, *replace;
 	int lwidth = [layer width], lheight = [layer height], mode = [layer mode];
+#if MAIN_COMPILE
+	unsigned char *mask;
 	int opacity = [layer opacity];
 	int selectedChannel = [[document contents] selectedChannel];
 	int xoff = [layer xoff], yoff = [layer yoff], selectOpacity;
-	int startX, startY, endX, endY, t1;
-	int i, j, k, srcLoc, destLoc;
-	unsigned char tempSpace[4], tempSpace2[4];
-	BOOL insertOverlay, overlayOkay;
+	int t1;
 	IntPoint point, maskOffset, trueMaskOffset;
 	IntSize maskSize;
 	IntRect selectRect;
+#else
+	int opacity = [layer opacity], selectedChannel = [contents selectedChannel];
+	int xoff = [layer xoff], yoff = [layer yoff], selectOpacity;
+#endif
+	unsigned char *srcPtr, *overlay, *replace;
+	int startX, startY, endX, endY;
+	int i, j, k, srcLoc, destLoc;
+	unsigned char tempSpace[4], tempSpace2[4];
+	BOOL insertOverlay, overlayOkay;
 	BOOL floating;
-	
+
 	// If the layer has an opacity of zero it does not need to be composited
 	if (opacity == 0)
 		return;
@@ -55,6 +85,7 @@
 	else
 		insertOverlay = options.insertOverlay;
 	
+#if MAIN_COMPILE
 	// Determine what is being copied
 	startX = MAX(options.rect.origin.x - xoff, (xoff < 0) ? -xoff : 0);
 	startY = MAX(options.rect.origin.y - yoff, (yoff < 0) ? -yoff : 0);
@@ -74,6 +105,27 @@
 	trueMaskOffset = IntMakePoint(maskOffset.x - selectRect.origin.x, maskOffset.y -  selectRect.origin.y);
 	maskSize = [[document selection] maskSize];
 	floating = [layer floating];
+#else
+	// Determine what is being copied
+	startX = MAX(options.rect.origin.x - xoff, (xoff < 0) ? -xoff : 0);
+	startY = MAX(options.rect.origin.y - yoff, (yoff < 0) ? -yoff : 0);
+	endX = MIN([contents width] - xoff, lwidth);
+	endX = MIN(endX, options.rect.origin.x + options.rect.size.width - xoff);
+	endY = MIN([contents height] - yoff, lheight);
+	endY = MIN(endY, options.rect.origin.y + options.rect.size.height - yoff);
+	
+	// Get some stuff we're going to use later
+	//selectRect = [(SeaSelection *)[document selection] localRect];
+	srcPtr = [(SeaLayer *)layer data];
+	if(!destPtr) destPtr = [whiteboard data];
+	overlay = [whiteboard overlay];
+	replace = [whiteboard replace];
+	//mask = [[document selection] mask];
+	//maskOffset = [[document selection] maskOffset];
+	//trueMaskOffset = IntMakePoint(maskOffset.x - selectRect.origin.x, maskOffset.y -  selectRect.origin.y);
+	//maskSize = [[document selection] maskSize];
+	floating = [layer floating];
+#endif
 	
 	// Check what we are doing has a point
 	if (endX - startX <= 0) return;
@@ -112,6 +164,7 @@
 						selectOpacity = options.overlayOpacity;
 					break;
 				}
+#if MAIN_COMPILE
 				if (options.useSelection) {
 					point.x = i;
 					point.y = j;
@@ -124,6 +177,9 @@
 				else {
 					overlayOkay = YES;
 				}
+#else
+				overlayOkay = YES;
+#endif
 				
 				// Don't do anything if there's no point
 				if (selectOpacity == 0)
@@ -199,19 +255,28 @@
 
 - (void)compositeLayer:(SeaLayer *)layer withFloat:(SeaLayer *)floatingLayer andOptions:(CompositorOptions)options
 {
-	unsigned char *srcPtr, *floatPtr, *destPtr, *overlay, *mask, *replace;
+	unsigned char *srcPtr, *floatPtr, *destPtr, *overlay, *replace;
 	int lwidth = [layer width], lheight = [layer height], mode = [layer mode];
 	int lfwidth = [floatingLayer width], lfheight = [floatingLayer height];
-	int opacity = [layer opacity], selectedChannel = [[document contents] selectedChannel];
+
+	int opacity = [layer opacity];
+#if MAIN_COMPILE
+	unsigned char *mask;
+	int selectedChannel = [[document contents] selectedChannel];
+#else
+	int selectedChannel = [contents selectedChannel];
+#endif
 	int xoff = [layer xoff], yoff = [layer yoff], selectOpacity;
 	int xfoff = [floatingLayer xoff], yfoff = [floatingLayer yoff];
 	int startX, startY, endX, endY;
 	int i, j, k, srcLoc, destLoc, floatLoc, tx, ty;
 	unsigned char tempSpace[4], tempSpace2[4], tempSpace3[4];
 	BOOL insertOverlay;
+#if MAIN_COMPILE
 	IntPoint maskOffset, trueMaskOffset;
 	IntSize maskSize;
 	IntRect selectRect;
+#endif
 	BOOL floating;
 	
 	// If the layer has an opacity of zero it does not need to be composited
@@ -224,6 +289,7 @@
 	else
 		insertOverlay = options.insertOverlay;
 	
+#if MAIN_COMPILE
 	// Determine what is being copied
 	startX = MAX(options.rect.origin.x - xoff, (xoff < 0) ? -xoff : 0);
 	startY = MAX(options.rect.origin.y - yoff, (yoff < 0) ? -yoff : 0);
@@ -244,6 +310,28 @@
 	trueMaskOffset = IntMakePoint(maskOffset.x - selectRect.origin.x, maskOffset.y -  selectRect.origin.y);
 	maskSize = [[document selection] maskSize];
 	floating = [layer floating];
+#else
+	// Determine what is being copied
+	startX = MAX(options.rect.origin.x - xoff, (xoff < 0) ? -xoff : 0);
+	startY = MAX(options.rect.origin.y - yoff, (yoff < 0) ? -yoff : 0);
+	endX = MIN([contents width] - xoff, lwidth);
+	endX = MIN(endX, options.rect.origin.x + options.rect.size.width - xoff);
+	endY = MIN([contents height] - yoff, lheight);
+	endY = MIN(endY, options.rect.origin.y + options.rect.size.height - yoff);
+	
+	// Get some stuff we're going to use later
+	//selectRect = [(SeaSelection *)[document selection] localRect];
+	srcPtr = [(SeaLayer *)layer data];
+	floatPtr = [(SeaLayer *)floatingLayer data];
+	destPtr = [whiteboard data];
+	overlay = [whiteboard overlay];
+	replace = [whiteboard replace];
+	//mask = [[document selection] mask];
+	//maskOffset = [[document selection] maskOffset];
+	//trueMaskOffset = IntMakePoint(maskOffset.x - selectRect.origin.x, maskOffset.y -  selectRect.origin.y);
+	//maskSize = [[document selection] maskSize];
+	floating = [layer floating];
+#endif
 	
 	// Check what we are doing has a point
 	if (endX - startX <= 0) return;

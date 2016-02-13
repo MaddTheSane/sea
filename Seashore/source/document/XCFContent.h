@@ -26,8 +26,7 @@
 				<--- YES if the mask of a layer was composited to its alpha
 				channel, NO otherwise.
 */
-typedef struct
-{
+typedef struct {
 	unsigned char *cmap;
 	int cmap_len;
 	int compression;
@@ -58,6 +57,7 @@ typedef struct
 
 }
 
+#if MAIN_COMPILE
 /*!
 	@method		typeIsEditable:
 	@discussion	Whether or not the type is XCFContent
@@ -67,7 +67,9 @@ typedef struct
 
 */
 + (BOOL)typeIsEditable:(NSString *)type;
+#endif
 
+#if MAIN_COMPILE
 /*!
 	@method		initWithDocument:contentsOfFile:
 	@discussion	Initializes an instance of this class with the given XCF file.
@@ -78,5 +80,17 @@ typedef struct
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
+#else
+/*!
+	@method		initWithDocument:contentsOfFile:
+	@discussion	Initializes an instance of this class with the given XCF file.
+	@param		doc
+				The document with which to initialize the instance.
+	@param		path
+				The path of the XCF file with which to initalize this class.
+	@result		Returns instance upon success (or NULL otherwise).
+ */
+- (instancetype)initWithContentsOfFile:(NSString *)path;
+#endif
 
 @end
