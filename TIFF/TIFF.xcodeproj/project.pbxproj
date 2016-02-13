@@ -275,7 +275,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 			};
 			buildConfigurationList = A85D0B2509BD8F60009BD89D /* Build configuration list for PBXProject "TIFF" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -377,6 +377,7 @@
 					0x01530000,
 					"-lz",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.remotesensing.libtiff;
 				PRODUCT_NAME = TIFF;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -404,6 +405,7 @@
 					0x01530000,
 					"-lz",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.remotesensing.libtiff;
 				PRODUCT_NAME = TIFF;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -412,6 +414,7 @@
 		A85D0B2609BD8F60009BD89D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;

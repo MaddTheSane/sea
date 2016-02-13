@@ -382,7 +382,8 @@
 
 - (IBAction)openColorSyncPanel:(id)sender
 {
-	CMLaunchControlPanel(0);
+	//CMLaunchControlPanel(0);
+	NSBeep();
 }
 
 - (BOOL)validateMenuItem:(id)menuItem

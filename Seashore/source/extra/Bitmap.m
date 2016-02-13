@@ -115,6 +115,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 		destBitmap.space = cmGrayA16Space;
 		
 		// Execute the conversion
+		// FIXME: What is the replacement API!?
 		CMOpenProfile(&srcProf, iprofile);
 		CMGetDefaultProfileBySpace(cmGrayData, &destProf);
 		NCWNewColorWorld(&cw, srcProf, destProf);
@@ -145,6 +146,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 		destBitmap.space = cmRGBA32Space;
 		
 		// Execute the conversion
+		// FIXME: What is the replacement API!?
 		CMOpenProfile(&srcProf, iprofile);
 		OpenDisplayProfile(&destProf);
 		NCWNewColorWorld(&cw, srcProf, destProf);
@@ -654,6 +656,7 @@ void OpenDisplayProfile(CMProfileRef *profile)
     StatusError = CMOpenProfile(profile, &profileLoc);
 	
 	if (StatusError != noErr) {*/
+		// FIXME: What is the replacement API!?
 		CMGetDefaultDevice(cmDisplayDeviceClass, &device);
 		CMGetDeviceDefaultProfileID(cmDisplayDeviceClass, device, &deviceID);
 		CMGetDeviceProfile(cmDisplayDeviceClass, device, deviceID, &profileLoc);
@@ -663,6 +666,7 @@ void OpenDisplayProfile(CMProfileRef *profile)
 
 void CloseDisplayProfile(CMProfileRef profile)
 {
+	// FIXME: What is the replacement API!?
 	CMCloseProfile(profile);
 }
 

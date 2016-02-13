@@ -185,8 +185,8 @@
 		551E574218D0270900E4CDAF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50EB18CF9FBC005809E3 /* Localizable.strings */; };
 		551E574318D0271000E4CDAF /* CIFalseColorClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D50F318CF9FBC005809E3 /* CIFalseColorClass.m */; };
 		551E574418D0271400E4CDAF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50F418CF9FBC005809E3 /* Localizable.strings */; };
-		5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in Copy Spotlight plug-in */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; };
-		5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in Copy QuickLook plug-in */ = {isa = PBXBuildFile; fileRef = 5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */; };
+		5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in Copy Spotlight plug-in */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in Copy QuickLook plug-in */ = {isa = PBXBuildFile; fileRef = 5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55472B851C6EDCCA0065A852 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; };
 		55472B861C6EDCCA0065A852 /* SeashoreKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55472B8A1C6EDD300065A852 /* Rects.h in Headers */ = {isa = PBXBuildFile; fileRef = A8E00A1D04BE5DF800A80207 /* Rects.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -298,10 +298,10 @@
 		557D536E18CFAB28005809E3 /* CIAffineTransformClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D505318CF9FBA005809E3 /* CIAffineTransformClass.m */; };
 		557D536F18CFABA3005809E3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D505418CF9FBA005809E3 /* Localizable.strings */; };
 		557D537018CFABAB005809E3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D504B18CF9FBA005809E3 /* Localizable.strings */; };
-		557D537518CFAD2F005809E3 /* Affine Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 557D533318CF9FEC005809E3 /* Affine Tile+.bundle */; };
-		557D537618CFAD2F005809E3 /* Affine Transform+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 557D536C18CFAAF6005809E3 /* Affine Transform+.bundle */; };
-		55850B3713D63BA100C3B2CB /* GIMPCore.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E20A2C00D0005B688F /* GIMPCore.framework */; };
-		55850B3813D63BA100C3B2CB /* TIFF.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E90A2C00E0005B688F /* TIFF.framework */; };
+		557D537518CFAD2F005809E3 /* Affine Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 557D533318CF9FEC005809E3 /* Affine Tile+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		557D537618CFAD2F005809E3 /* Affine Transform+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 557D536C18CFAAF6005809E3 /* Affine Transform+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55850B3713D63BA100C3B2CB /* GIMPCore.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E20A2C00D0005B688F /* GIMPCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55850B3813D63BA100C3B2CB /* TIFF.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E90A2C00E0005B688F /* TIFF.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55850B3E13D63BC500C3B2CB /* GIMPCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E20A2C00D0005B688F /* GIMPCore.framework */; };
 		55850B3F13D63BC500C3B2CB /* TIFF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E90A2C00E0005B688F /* TIFF.framework */; };
 		55909D9E18CFCCF400F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
@@ -335,14 +335,14 @@
 		55909E4C18CFDB2000F43F90 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50CA18CF9FBB005809E3 /* Localizable.strings */; };
 		55909E4F18CFDF4C00F43F90 /* CICircularScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909E5118CFDF4C00F43F90 /* CICircularScreen.xib */; };
 		55909EA118CFFD1C00F43F90 /* CIDotScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909EA318CFFD1C00F43F90 /* CIDotScreen.xib */; };
-		55909F1818D0082800F43F90 /* Checkerboard+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 559938B218CFCCCA00E92088 /* Checkerboard+.bundle */; };
-		55909F1918D0082800F43F90 /* Circular Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 559938C118CFCCCC00E92088 /* Circular Screen+.bundle */; };
-		55909F1A18D0082800F43F90 /* Circular Wrap+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DA518CFCCF400F43F90 /* Circular Wrap+.bundle */; };
-		55909F1B18D0082800F43F90 /* CMYK Halftone+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DB418CFCCF700F43F90 /* CMYK Halftone+.bundle */; };
-		55909F1C18D0082800F43F90 /* Circle Splash+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DC018CFCE5500F43F90 /* Circle Splash+.bundle */; };
-		55909F1D18D0082800F43F90 /* Crystallize+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DF818CFD43900F43F90 /* Crystallize+.bundle */; };
-		55909F1E18D0082800F43F90 /* Displacement Distortion+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909E2418CFD6DD00F43F90 /* Displacement Distortion+.bundle */; };
-		55909F1F18D0082800F43F90 /* Dot Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909E4818CFDA6900F43F90 /* Dot Screen+.bundle */; };
+		55909F1818D0082800F43F90 /* Checkerboard+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 559938B218CFCCCA00E92088 /* Checkerboard+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55909F1918D0082800F43F90 /* Circular Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 559938C118CFCCCC00E92088 /* Circular Screen+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55909F1A18D0082800F43F90 /* Circular Wrap+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DA518CFCCF400F43F90 /* Circular Wrap+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55909F1B18D0082800F43F90 /* CMYK Halftone+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DB418CFCCF700F43F90 /* CMYK Halftone+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55909F1C18D0082800F43F90 /* Circle Splash+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DC018CFCE5500F43F90 /* Circle Splash+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55909F1D18D0082800F43F90 /* Crystallize+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909DF818CFD43900F43F90 /* Crystallize+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55909F1E18D0082800F43F90 /* Displacement Distortion+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909E2418CFD6DD00F43F90 /* Displacement Distortion+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55909F1F18D0082800F43F90 /* Dot Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909E4818CFDA6900F43F90 /* Dot Screen+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5599388418CFC69700E92088 /* CIBrightnessClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D506718CF9FBA005809E3 /* CIBrightnessClass.m */; };
 		5599388618CFC6A600E92088 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D506A18CF9FBA005809E3 /* Localizable.strings */; };
 		5599388818CFC6F100E92088 /* CIBumpClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D507218CF9FBA005809E3 /* CIBumpClass.m */; };
@@ -350,9 +350,9 @@
 		5599389018CFC72A00E92088 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		5599389A18CFC74A00E92088 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D505F18CF9FBA005809E3 /* Localizable.strings */; };
 		5599389B18CFC74D00E92088 /* CIBloomClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D505C18CF9FBA005809E3 /* CIBloomClass.m */; };
-		559938A218CFC8C800E92088 /* Brightness+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 550AEAFC18CFC5DE008918BA /* Brightness+.bundle */; };
-		559938A318CFC8C800E92088 /* Bump+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 550AEB0A18CFC5E1008918BA /* Bump+.bundle */; };
-		559938A418CFC8C800E92088 /* Bloom+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 5599389718CFC72A00E92088 /* Bloom+.bundle */; };
+		559938A218CFC8C800E92088 /* Brightness+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 550AEAFC18CFC5DE008918BA /* Brightness+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		559938A318CFC8C800E92088 /* Bump+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 550AEB0A18CFC5E1008918BA /* Bump+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		559938A418CFC8C800E92088 /* Bloom+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 5599389718CFC72A00E92088 /* Bloom+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		559938AB18CFCCCA00E92088 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		559938BA18CFCCCC00E92088 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		559A635318D8B5E700FD74A2 /* default-distort.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 557D511318CF9FBC005809E3 /* default-distort.tiff */; };
@@ -572,48 +572,48 @@
 		55BD2E5E18D0D6C300C4EE1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D524B18CF9FC0005809E3 /* Localizable.strings */; };
 		55BD2E5F18D0D6CA00C4EE1B /* CITriangleTileClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D524A18CF9FC0005809E3 /* CITriangleTileClass.m */; };
 		55BD2E6018D0ECE400C4EE1B /* CIOpTile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD2E6218D0ECE400C4EE1B /* CIOpTile.xib */; };
-		55BD2E6318D103CE00C4EE1B /* Edges+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E569318D0132900E4CDAF /* Edges+.bundle */; };
-		55BD2E6418D103CE00C4EE1B /* Edge Work+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E56A218D0132B00E4CDAF /* Edge Work+.bundle */; };
-		55BD2E6518D103CE00C4EE1B /* Exposure+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E572918D0268500E4CDAF /* Exposure+.bundle */; };
-		55BD2E6618D103CE00C4EE1B /* False Color+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E573A18D0268A00E4CDAF /* False Color+.bundle */; };
-		55BD2E6718D103CE00C4EE1B /* Gamma Adjust+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2B9218D0CA7C00C4EE1B /* Gamma Adjust+.bundle */; };
-		55BD2E6818D103CE00C4EE1B /* Gaussian Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BA218D0CA7E00C4EE1B /* Gaussian Blur+.bundle */; };
-		55BD2E6918D103CE00C4EE1B /* Glass Distortion+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BB018D0CB0C00C4EE1B /* Glass Distortion+.bundle */; };
-		55BD2E6A18D103CE00C4EE1B /* Glass Lozenge+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BBE18D0CB0E00C4EE1B /* Glass Lozenge+.bundle */; };
-		55BD2E6B18D103CE00C4EE1B /* Gloom+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BCC18D0CB7F00C4EE1B /* Gloom+.bundle */; };
-		55BD2E6C18D103CE00C4EE1B /* Hatched Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BDA18D0CB8300C4EE1B /* Hatched Screen+.bundle */; };
-		55BD2E6D18D103CE00C4EE1B /* Hole+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BE918D0CE1900C4EE1B /* Hole+.bundle */; };
-		55BD2E6E18D103CE00C4EE1B /* Horizontal Stripes+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BF718D0CE1C00C4EE1B /* Horizontal Stripes+.bundle */; };
-		55BD2E6F18D103CE00C4EE1B /* Invert+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C0518D0CE7E00C4EE1B /* Invert+.bundle */; };
-		55BD2E7018D103CE00C4EE1B /* Kaleidoscope+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C1318D0CE9700C4EE1B /* Kaleidoscope+.bundle */; };
-		55BD2E7118D103CE00C4EE1B /* Lenticular Halo+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C2118D0CE9900C4EE1B /* Lenticular Halo+.bundle */; };
-		55BD2E7218D103CE00C4EE1B /* Line Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C2F18D0CF2D00C4EE1B /* Line Screen+.bundle */; };
-		55BD2E7318D103CE00C4EE1B /* Median+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C3D18D0CF3000C4EE1B /* Median+.bundle */; };
-		55BD2E7418D103CE00C4EE1B /* Monochrome+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C4B18D0CF3300C4EE1B /* Monochrome+.bundle */; };
-		55BD2E7518D103CE00C4EE1B /* Motion Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C5918D0CF9500C4EE1B /* Motion Blur+.bundle */; };
-		55BD2E7618D103CE00C4EE1B /* Noise Reduction+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C6718D0CF9700C4EE1B /* Noise Reduction+.bundle */; };
-		55BD2E7718D103CE00C4EE1B /* Op Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C7518D0CF9B00C4EE1B /* Op Tile+.bundle */; };
-		55BD2E7818D103CE00C4EE1B /* Parallelogram Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C8318D0CF9F00C4EE1B /* Parallelogram Tile+.bundle */; };
-		55BD2E7918D103CE00C4EE1B /* Perspective Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C9118D0D02D00C4EE1B /* Perspective Tile+.bundle */; };
-		55BD2E7A18D103CE00C4EE1B /* Perspective Transform+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C9F18D0D03300C4EE1B /* Perspective Transform+.bundle */; };
-		55BD2E7B18D103CE00C4EE1B /* Pinch+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CAD18D0D03900C4EE1B /* Pinch+.bundle */; };
-		55BD2E7C18D103CE00C4EE1B /* Pixellate+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CBB18D0D03D00C4EE1B /* Pixellate+.bundle */; };
-		55BD2E7D18D103CE00C4EE1B /* Pointillize+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CC918D0D05100C4EE1B /* Pointillize+.bundle */; };
-		55BD2E7E18D103CE00C4EE1B /* Posterize+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CD718D0D05400C4EE1B /* Posterize+.bundle */; };
-		55BD2E7F18D103CE00C4EE1B /* Random+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CE518D0D06600C4EE1B /* Random+.bundle */; };
-		55BD2E8018D103CE00C4EE1B /* Sepia+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CF318D0D07100C4EE1B /* Sepia+.bundle */; };
-		55BD2E8118D103CE00C4EE1B /* Sharpen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D0118D0D08300C4EE1B /* Sharpen+.bundle */; };
-		55BD2E8218D103CE00C4EE1B /* Spotlight+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D0F18D0D08600C4EE1B /* Spotlight+.bundle */; };
-		55BD2E8318D103CE00C4EE1B /* Starshine+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D1D18D0D08F00C4EE1B /* Starshine+.bundle */; };
-		55BD2E8418D103CE00C4EE1B /* Sunbeams+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D2B18D0D09200C4EE1B /* Sunbeams+.bundle */; };
-		55BD2E8518D103CE00C4EE1B /* Torus Lens+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D3918D0D09F00C4EE1B /* Torus Lens+.bundle */; };
-		55BD2E8618D103CE00C4EE1B /* Triangle Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D4718D0D0A200C4EE1B /* Triangle Tile+.bundle */; };
-		55BD2E8718D103CE00C4EE1B /* Twirl+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D5518D0D0A800C4EE1B /* Twirl+.bundle */; };
-		55BD2E8818D103CE00C4EE1B /* Unsharp Mask+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D6318D0D0AA00C4EE1B /* Unsharp Mask+.bundle */; };
-		55BD2E8918D103CE00C4EE1B /* Vertical Stripes+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D7418D0D0B300C4EE1B /* Vertical Stripes+.bundle */; };
-		55BD2E8A18D103CE00C4EE1B /* Vortex+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D8518D0D0B900C4EE1B /* Vortex+.bundle */; };
-		55BD2E8B18D103CE00C4EE1B /* White Point Adjust+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */; };
-		55BD2E8C18D103CE00C4EE1B /* Zoom Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */; };
+		55BD2E6318D103CE00C4EE1B /* Edges+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E569318D0132900E4CDAF /* Edges+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6418D103CE00C4EE1B /* Edge Work+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E56A218D0132B00E4CDAF /* Edge Work+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6518D103CE00C4EE1B /* Exposure+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E572918D0268500E4CDAF /* Exposure+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6618D103CE00C4EE1B /* False Color+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 551E573A18D0268A00E4CDAF /* False Color+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6718D103CE00C4EE1B /* Gamma Adjust+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2B9218D0CA7C00C4EE1B /* Gamma Adjust+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6818D103CE00C4EE1B /* Gaussian Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BA218D0CA7E00C4EE1B /* Gaussian Blur+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6918D103CE00C4EE1B /* Glass Distortion+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BB018D0CB0C00C4EE1B /* Glass Distortion+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6A18D103CE00C4EE1B /* Glass Lozenge+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BBE18D0CB0E00C4EE1B /* Glass Lozenge+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6B18D103CE00C4EE1B /* Gloom+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BCC18D0CB7F00C4EE1B /* Gloom+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6C18D103CE00C4EE1B /* Hatched Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BDA18D0CB8300C4EE1B /* Hatched Screen+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6D18D103CE00C4EE1B /* Hole+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BE918D0CE1900C4EE1B /* Hole+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6E18D103CE00C4EE1B /* Horizontal Stripes+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2BF718D0CE1C00C4EE1B /* Horizontal Stripes+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E6F18D103CE00C4EE1B /* Invert+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C0518D0CE7E00C4EE1B /* Invert+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7018D103CE00C4EE1B /* Kaleidoscope+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C1318D0CE9700C4EE1B /* Kaleidoscope+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7118D103CE00C4EE1B /* Lenticular Halo+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C2118D0CE9900C4EE1B /* Lenticular Halo+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7218D103CE00C4EE1B /* Line Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C2F18D0CF2D00C4EE1B /* Line Screen+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7318D103CE00C4EE1B /* Median+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C3D18D0CF3000C4EE1B /* Median+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7418D103CE00C4EE1B /* Monochrome+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C4B18D0CF3300C4EE1B /* Monochrome+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7518D103CE00C4EE1B /* Motion Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C5918D0CF9500C4EE1B /* Motion Blur+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7618D103CE00C4EE1B /* Noise Reduction+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C6718D0CF9700C4EE1B /* Noise Reduction+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7718D103CE00C4EE1B /* Op Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C7518D0CF9B00C4EE1B /* Op Tile+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7818D103CE00C4EE1B /* Parallelogram Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C8318D0CF9F00C4EE1B /* Parallelogram Tile+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7918D103CE00C4EE1B /* Perspective Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C9118D0D02D00C4EE1B /* Perspective Tile+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7A18D103CE00C4EE1B /* Perspective Transform+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2C9F18D0D03300C4EE1B /* Perspective Transform+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7B18D103CE00C4EE1B /* Pinch+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CAD18D0D03900C4EE1B /* Pinch+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7C18D103CE00C4EE1B /* Pixellate+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CBB18D0D03D00C4EE1B /* Pixellate+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7D18D103CE00C4EE1B /* Pointillize+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CC918D0D05100C4EE1B /* Pointillize+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7E18D103CE00C4EE1B /* Posterize+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CD718D0D05400C4EE1B /* Posterize+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E7F18D103CE00C4EE1B /* Random+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CE518D0D06600C4EE1B /* Random+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8018D103CE00C4EE1B /* Sepia+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2CF318D0D07100C4EE1B /* Sepia+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8118D103CE00C4EE1B /* Sharpen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D0118D0D08300C4EE1B /* Sharpen+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8218D103CE00C4EE1B /* Spotlight+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D0F18D0D08600C4EE1B /* Spotlight+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8318D103CE00C4EE1B /* Starshine+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D1D18D0D08F00C4EE1B /* Starshine+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8418D103CE00C4EE1B /* Sunbeams+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D2B18D0D09200C4EE1B /* Sunbeams+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8518D103CE00C4EE1B /* Torus Lens+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D3918D0D09F00C4EE1B /* Torus Lens+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8618D103CE00C4EE1B /* Triangle Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D4718D0D0A200C4EE1B /* Triangle Tile+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8718D103CE00C4EE1B /* Twirl+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D5518D0D0A800C4EE1B /* Twirl+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8818D103CE00C4EE1B /* Unsharp Mask+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D6318D0D0AA00C4EE1B /* Unsharp Mask+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8918D103CE00C4EE1B /* Vertical Stripes+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D7418D0D0B300C4EE1B /* Vertical Stripes+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8A18D103CE00C4EE1B /* Vortex+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D8518D0D0B900C4EE1B /* Vortex+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8B18D103CE00C4EE1B /* White Point Adjust+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55BD2E8C18D103CE00C4EE1B /* Zoom Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55D0662D1C6EEA7A00BEDAE9 /* StandardMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC14FF04C0F1A700A80207 /* StandardMerge.m */; };
 		55D0662E1C6EEAA100BEDAE9 /* ColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC150304C0F2FD00A80207 /* ColorConversion.m */; };
 		55D066301C6EEAF200BEDAE9 /* Graphics.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55D0662F1C6EEAF200BEDAE9 /* Graphics.xcassets */; };
@@ -676,22 +676,22 @@
 		55E5E4C818D273E40082E60F /* VertStripesClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5E35F18D26A300082E60F /* VertStripesClass.m */; };
 		55E5E4C918D277530082E60F /* StandardMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC14FF04C0F1A700A80207 /* StandardMerge.m */; };
 		55E5E4CA18D277D90082E60F /* ColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC150304C0F2FD00A80207 /* ColorConversion.m */; };
-		55E5E4CD18D27A370082E60F /* Brightness.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3A518D26A8F0082E60F /* Brightness.bundle */; };
-		55E5E4CE18D27A370082E60F /* Checkerboard.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3B518D26A950082E60F /* Checkerboard.bundle */; };
-		55E5E4CF18D27A370082E60F /* CMYK.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3CA18D26D0D0082E60F /* CMYK.bundle */; };
-		55E5E4D018D27A370082E60F /* Gaussian.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3DA18D26D100082E60F /* Gaussian.bundle */; };
-		55E5E4D118D27A370082E60F /* Greyscale.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3EA18D26D120082E60F /* Greyscale.bundle */; };
-		55E5E4D218D27A370082E60F /* Horizontal Stripes.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */; };
-		55E5E4D318D27A370082E60F /* HSV.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E41C18D26EC00082E60F /* HSV.bundle */; };
-		55E5E4D418D27A370082E60F /* Invert.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E42C18D26EC40082E60F /* Invert.bundle */; };
-		55E5E4D518D27A370082E60F /* Median.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E43C18D26EC70082E60F /* Median.bundle */; };
-		55E5E4D618D27A370082E60F /* Pixellate.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E44818D26FB50082E60F /* Pixellate.bundle */; };
-		55E5E4D718D27A370082E60F /* Posterize.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E45418D26FB80082E60F /* Posterize.bundle */; };
-		55E5E4D818D27A370082E60F /* Random.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E46018D26FBB0082E60F /* Random.bundle */; };
-		55E5E4D918D27A370082E60F /* Sepia.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E46C18D26FBF0082E60F /* Sepia.bundle */; };
-		55E5E4DA18D27A370082E60F /* Sharpen.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E47818D26FC50082E60F /* Sharpen.bundle */; };
-		55E5E4DB18D27A370082E60F /* Threshold.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E48418D26FC70082E60F /* Threshold.bundle */; };
-		55E5E4DC18D27A370082E60F /* Vertical Stripes.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */; };
+		55E5E4CD18D27A370082E60F /* Brightness.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3A518D26A8F0082E60F /* Brightness.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4CE18D27A370082E60F /* Checkerboard.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3B518D26A950082E60F /* Checkerboard.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4CF18D27A370082E60F /* CMYK.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3CA18D26D0D0082E60F /* CMYK.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D018D27A370082E60F /* Gaussian.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3DA18D26D100082E60F /* Gaussian.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D118D27A370082E60F /* Greyscale.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3EA18D26D120082E60F /* Greyscale.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D218D27A370082E60F /* Horizontal Stripes.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D318D27A370082E60F /* HSV.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E41C18D26EC00082E60F /* HSV.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D418D27A370082E60F /* Invert.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E42C18D26EC40082E60F /* Invert.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D518D27A370082E60F /* Median.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E43C18D26EC70082E60F /* Median.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D618D27A370082E60F /* Pixellate.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E44818D26FB50082E60F /* Pixellate.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D718D27A370082E60F /* Posterize.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E45418D26FB80082E60F /* Posterize.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D818D27A370082E60F /* Random.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E46018D26FBB0082E60F /* Random.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D918D27A370082E60F /* Sepia.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E46C18D26FBF0082E60F /* Sepia.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4DA18D27A370082E60F /* Sharpen.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E47818D26FC50082E60F /* Sharpen.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4DB18D27A370082E60F /* Threshold.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E48418D26FC70082E60F /* Threshold.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4DC18D27A370082E60F /* Vertical Stripes.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		A80983D70871420900F7412F /* JP2Exporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A80983D50871420900F7412F /* JP2Exporter.m */; };
 		A8138D660CEFD5FA00C2F880 /* Seashore Effects Guide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8138D640CEFD5FA00C2F880 /* Seashore Effects Guide.pdf */; };
 		A827DCE907D06EEB000E45A1 /* SeaAlignment.m in Sources */ = {isa = PBXBuildFile; fileRef = A827DCE707D06EEB000E45A1 /* SeaAlignment.m */; };
@@ -1391,6 +1391,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 55E5E39318D26A870082E60F;
 			remoteInfo = "Universal Plugs";
+		};
+		55FD123D1C6EF321009FB22C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35B156E30A2C00E0005B688F /* TIFF.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = TIFF;
+		};
+		55FD123F1C6EF326009FB22C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35B156DC0A2C00D0005B688F /* GIMPCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A8A7BDC907C1E06C006AB467;
+			remoteInfo = GIMPCore;
 		};
 		A89B83D80A426D8200AD6941 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -4701,6 +4715,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				55FD12401C6EF326009FB22C /* PBXTargetDependency */,
+				55FD123E1C6EF321009FB22C /* PBXTargetDependency */,
 			);
 			name = SeashoreKit;
 			productName = SeashoreKit;
@@ -5847,7 +5863,7 @@
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 				TargetAttributes = {
 					55472B7D1C6EDCCA0065A852 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -7816,6 +7832,16 @@
 			target = 55E5E39318D26A870082E60F /* Universal Plugs */;
 			targetProxy = 55E5E4CB18D27A1E0082E60F /* PBXContainerItemProxy */;
 		};
+		55FD123E1C6EF321009FB22C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TIFF;
+			targetProxy = 55FD123D1C6EF321009FB22C /* PBXContainerItemProxy */;
+		};
+		55FD12401C6EF326009FB22C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GIMPCore;
+			targetProxy = 55FD123F1C6EF326009FB22C /* PBXContainerItemProxy */;
+		};
 		A89B83D90A426D8200AD6941 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Brushed;
@@ -8873,6 +8899,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -8889,6 +8916,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -8911,6 +8939,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -8927,6 +8956,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -8949,6 +8979,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -8965,6 +8996,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -8987,6 +9019,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9003,6 +9036,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9025,6 +9059,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9041,6 +9076,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9063,6 +9099,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9079,6 +9116,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9182,6 +9220,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9198,6 +9237,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9216,6 +9256,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9228,6 +9269,7 @@
 				CIPrincipalClass = CIAffineTransformClass;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9250,6 +9292,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9266,6 +9309,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9288,6 +9332,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9304,6 +9349,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9326,6 +9372,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9342,6 +9389,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9364,6 +9412,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9380,6 +9429,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9416,6 +9466,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9432,6 +9483,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9454,6 +9506,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9470,6 +9523,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9492,6 +9546,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9508,6 +9563,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9530,6 +9586,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9546,6 +9603,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9568,6 +9626,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9584,6 +9643,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9606,6 +9666,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9622,6 +9683,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9644,6 +9706,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9660,6 +9723,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9682,6 +9746,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9698,6 +9763,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9720,6 +9786,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9736,6 +9803,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9758,6 +9826,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9774,6 +9843,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9796,6 +9866,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9812,6 +9883,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9834,6 +9906,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9850,6 +9923,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9872,6 +9946,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9888,6 +9963,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9910,6 +9986,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9926,6 +10003,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9948,6 +10026,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9964,6 +10043,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9986,6 +10066,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10002,6 +10083,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10024,6 +10106,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10040,6 +10123,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10062,6 +10146,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10078,6 +10163,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10100,6 +10186,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10116,6 +10203,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10138,6 +10226,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10154,6 +10243,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10176,6 +10266,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10192,6 +10283,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10214,6 +10306,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10230,6 +10323,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10252,6 +10346,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10268,6 +10363,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10290,6 +10386,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10306,6 +10403,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10328,6 +10426,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10344,6 +10443,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10366,6 +10466,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10382,6 +10483,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10404,6 +10506,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10420,6 +10523,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10442,6 +10546,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10458,6 +10563,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10480,6 +10586,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10496,6 +10603,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10518,6 +10626,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10534,6 +10643,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10556,6 +10666,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10572,6 +10683,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10594,6 +10706,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10610,6 +10723,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10632,6 +10746,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10648,6 +10763,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10670,6 +10786,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10686,6 +10803,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10708,6 +10826,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10724,6 +10843,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10746,6 +10866,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10762,6 +10883,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10784,6 +10906,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10800,6 +10923,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10822,6 +10946,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10838,6 +10963,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10860,6 +10986,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10876,6 +11003,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10898,6 +11026,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10914,6 +11043,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10936,6 +11066,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10952,6 +11083,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10974,6 +11106,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10990,6 +11123,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11012,6 +11146,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11028,6 +11163,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11061,6 +11197,7 @@
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11074,6 +11211,7 @@
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11092,6 +11230,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11104,6 +11243,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11122,6 +11262,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11134,6 +11275,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11152,6 +11294,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11164,6 +11307,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11182,6 +11326,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11194,6 +11339,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11212,6 +11358,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11224,6 +11371,7 @@
 				CIPrincipalClass = HorizStripesClass;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11242,6 +11390,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11254,6 +11403,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11272,6 +11422,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11284,6 +11435,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11302,6 +11454,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11314,6 +11467,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11332,6 +11486,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11344,6 +11499,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11362,6 +11518,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11374,6 +11531,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11392,6 +11550,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11404,6 +11563,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11422,6 +11582,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11434,6 +11595,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11452,6 +11614,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11464,6 +11627,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11482,6 +11646,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11494,6 +11659,7 @@
 				CIPrincipalClass = "$(PRODUCT_NAME)Class";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11512,6 +11678,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11524,6 +11691,7 @@
 				CIPrincipalClass = VertStripesClass;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11559,6 +11727,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @executable_path/../Frameworks";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore;
 				PRODUCT_NAME = Seashore;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -11582,6 +11751,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @executable_path/../Frameworks";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore;
 				PRODUCT_NAME = Seashore;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -11609,6 +11779,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (

@@ -47,6 +47,7 @@
 	replace = [pluginData replace];
 	channel = [pluginData channel];
 	
+	// FIXME: What is the replacement API!?
 	CMGetDefaultDevice(cmDisplayDeviceClass, &device);
 	CMGetDeviceDefaultProfileID(cmDisplayDeviceClass, device, &deviceID);
 	CMGetDeviceProfile(cmDisplayDeviceClass, device, deviceID, &profileLoc);
@@ -81,6 +82,7 @@
 		destBitmap.pixelSize = 8 * 4;
 		destBitmap.space = cmCMYK32Space;
 		
+		// FIXME: What is the replacement API!?
 		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
 		
 		srcBitmap.image = (char *)&(overlay[pos * 4]);
@@ -109,6 +111,7 @@
 		
 	}
 	
+	// FIXME: What is the replacement API!?
 	CWDisposeColorWorld(cw);
 	CWDisposeColorWorld(scw);
 	CMCloseProfile(srcProf);
