@@ -57,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55B95A951C6FB13600E37A8C /* TIFF.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = TIFF.modulemap; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* TIFF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TIFF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A854ACBE09BC12A2004AD947 /* t4.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = t4.h; sourceTree = "<group>"; };
@@ -150,6 +151,7 @@
 		089C1665FE841158C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				55B95A951C6FB13600E37A8C /* TIFF.modulemap */,
 				8DC2EF5A0486A6940098B216 /* Info.plist */,
 			);
 			name = Resources;
@@ -372,6 +374,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/Frameworks";
+				MODULEMAP_FILE = TIFF.modulemap;
 				OTHER_LDFLAGS = (
 					"-seg1addr",
 					0x01530000,
@@ -400,6 +403,7 @@
 				GCC_OPTIMIZATION_LEVEL = 3;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/Frameworks";
+				MODULEMAP_FILE = TIFF.modulemap;
 				OTHER_LDFLAGS = (
 					"-seg1addr",
 					0x01530000,

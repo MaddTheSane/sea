@@ -1,0 +1,21 @@
+framework module TIFF {
+	umbrella header "tiff.h"
+
+	export *
+	module * { export * }
+	
+	module configuration {
+		header "tiffconf.h"
+		export *
+	}
+	
+	explicit module io {
+		header "tiffio.h"
+		export *
+	}
+	
+	explicit module version {
+		header "tiffvers.h"
+		export *
+	}
+}
