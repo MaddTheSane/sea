@@ -548,12 +548,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (void)importPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
-	NSArray *filenames = [panel filenames];
-	int i;
+	NSArray<NSURL*> *filenames = [panel URLs];
 	
 	if (returnCode == NSOKButton) {
-		for (i = 0; i < [filenames count]; i++) {
-			[self importLayerFromFile:filenames[i]];
+		for (NSURL *aURL in filenames) {
+			[self importLayerFromFile:[aURL path]];
 		}
 	}
 }
@@ -639,7 +638,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 - (void)addLayerObject:(id)layer
 {
 	NSArray *tempArray = @[];
-	int i, index;
+	NSInteger i, index;
 	
 	// Inform the helpers we will change the layer
 	[[document helpers] activeLayerWillChange];
@@ -782,7 +781,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 - (void)copyLayer:(id)layer
 {
 	NSArray *tempArray = @[];
-	int i, index;
+	NSInteger i, index;
 	
 	// Inform the helpers we will change the layer
 	[[document helpers] activeLayerWillChange];
@@ -1550,7 +1549,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		memcpy(data, [(NSBitmapImageRep*)[[[document whiteboard] image] representations][0] bitmapData], rect.size.width * rect.size.height * spp);
 		NSEnumerator *e = [layers objectEnumerator];
 		while(layer = [e nextObject]){
-			[ordering setValue: [NSNumber numberWithInt:[layers indexOfObject: layer]] forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
+			[ordering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
 		}
 		[tempArray addObject:tempLayer];
 	}else{
@@ -1558,7 +1557,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		// Here we find out the dimensions of the new layer, plus keep track of
 		// which layers are not going to be merged (tempArray).
 		while(layer = [e nextObject]) {
-			[ordering setValue: [NSNumber numberWithInt:[layers indexOfObject: layer]] forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
+			[ordering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
 			if([mergingLayers indexOfObject:layer] != NSNotFound){
 				IntRect thisRect = IntMakeRect([layer xoff], [layer yoff], [layer width], [layer height]);
 				rect = IntSumRects(rect, thisRect);
@@ -1621,7 +1620,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Get the current orderings for the undo history
 	NSEnumerator *e = [layers objectEnumerator];
 	while(layer = [e nextObject])
-		[newOrdering setValue: [NSNumber numberWithInt:[layers indexOfObject: layer]] forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
+		[newOrdering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
 	
 	// Make action undoable
 	[[[document undoManager] prepareWithInvocationTarget:self] redoMergeWith:[layers count] andOrdering: newOrdering];
@@ -1666,7 +1665,8 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	CompositorOptions options;
 	unsigned char *data;
 	SeaLayer *layer;
-	int i, spp = [self spp];
+	NSInteger i;
+	int spp = [self spp];
 	
 	// Create the replacement flat layer
 	data = malloc(make_128(rect.size.width * rect.size.height * spp));
@@ -1747,7 +1747,6 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 {
 	IndiciesRecord record;
 	id layer;
-	int i;
 	
 	// Do nothing if there is nothing to do
 	if (newType == type)
@@ -1756,7 +1755,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Make action undoable
 	record.length = [layers count];
 	record.indicies = malloc([layers count] * sizeof(int));
-	for (i = 0; i < [layers count]; i++) {
+	for (NSInteger i = 0; i < [layers count]; i++) {
 		layer = layers[i]; 
 		record.indicies[i] = [[layer seaLayerUndo] takeSnapshot:IntMakeRect(0, 0, [(SeaLayer *)layer width], [(SeaLayer *)layer height]) automatic:NO];
 	}
@@ -1765,8 +1764,8 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[[document undoManager] prepareWithInvocationTarget:self] revertToType:type withRecord:record];
 	
 	// Go through and convert all layers to the new given type
-	for (i = 0; i < [layers count]; i++)
-		[layers[i] convertFromType:type to:newType];
+	for (SeaLayer *layer in layers)
+		[layer convertFromType:type to:newType];
 		
 	// Then save the new type
 	type = newType;
@@ -1777,14 +1776,15 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (void)revertToType:(int)newType withRecord:(IndiciesRecord)record
 {
-	int i;
+	NSInteger i;
 	
 	// Make action undoable
 	[[[document undoManager] prepareWithInvocationTarget:self] convertToType:type];
 	
 	// Go through and convert all layers to the new given type
-	for (i = 0; i < [layers count]; i++)
-		[layers[i] convertFromType:type to:newType];
+	for (SeaLayer *layer in layers) {
+		[layer convertFromType:type to:newType];
+	}
 
 	// Then save the new type
 	type = newType;

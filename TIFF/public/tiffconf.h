@@ -8,6 +8,8 @@
 #ifndef _TIFFCONF_
 #define _TIFFCONF_
 
+#include <stddef.h>
+
 /* Define to 1 if the system has the type `int16'. */
 /* #undef HAVE_INT16 */
 
@@ -21,7 +23,11 @@
 #define SIZEOF_INT 4
 
 /* The size of a `long', as computed by sizeof. */
+#if __LP64__
+#define SIZEOF_LONG 8
+#else
 #define SIZEOF_LONG 4
+#endif
 
 /* Compatibility stuff. */
 

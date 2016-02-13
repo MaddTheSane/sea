@@ -22,6 +22,7 @@
 #ifndef GIMPCORE_H
 #define GIMPCORE_H
 
+#include <CoreFoundation/CoreFoundation.h>
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -32,13 +33,13 @@ typedef struct { int width; int height; } IntSize;
 typedef struct { IntPoint origin; IntSize size; } IntRect;
 #endif /* INTRECT_T */
 
-typedef enum {
+typedef CF_ENUM(int, GimpInterpolationType) {
   GIMP_INTERPOLATION_NONE, 		/* Specifies no interpolation. */
   GIMP_INTERPOLATION_LINEAR, 	/* Specifies lower-quality but faster linear interpolation. */
   GIMP_INTERPOLATION_CUBIC		/* Specifies high-quality cubic interpolation */
-} GimpInterpolationType;
+};
 
-typedef enum {
+typedef CF_ENUM(int, GimpGradientType) {
   GIMP_GRADIENT_LINEAR,                /* Specifies linear gradient */
   GIMP_GRADIENT_BILINEAR,              /* Specifies bi-linear gradient */
   GIMP_GRADIENT_RADIAL,                /* Specifies radial gradient */
@@ -50,17 +51,17 @@ typedef enum {
   GIMP_GRADIENT_SHAPEBURST_DIMPLED,    /* Specifies shapeburst (dimpled) gradient (NYI) */
   GIMP_GRADIENT_SPIRAL_CLOCKWISE,      /* Specifies spiral (clockwise) gradient */
   GIMP_GRADIENT_SPIRAL_ANTICLOCKWISE   /* Specifies spiral (anticlockwise) gradient */
-} GimpGradientType;
+};
 
-typedef enum {
+typedef CF_ENUM(int, GimpRepeatMode) {
   GIMP_REPEAT_NONE,       /* Specifies no repeat */
   GIMP_REPEAT_SAWTOOTH,   /* Specifies sawtooth repeat wave */
   GIMP_REPEAT_TRIANGULAR  /* Specifies triangular repeat wave */
-} GimpRepeatMode;
+};
 
 typedef struct {
-	 int gradient_type;					/* Specifies the gradient type */
-	 int repeat;						/* Specifies the repeat mode */
+	 GimpGradientType gradient_type;	/* Specifies the gradient type */
+	 GimpRepeatMode repeat;				/* Specifies the repeat mode */
 	 unsigned int supersample;			/* Specifies whether supersampling should be used */
 	 int max_depth;						/* Specifies the maximum depth for use in supersampling */
 	 double threshold;					/* Specifies the threshold for use in supersampling */
@@ -85,7 +86,7 @@ typedef void (* ProgressFunction) (int max, int current);
 	Scales the pixels of the source bitmap so that they fill the destination
 	bitmap using the specified interpolation style (see GCConstants).
 */
-void GCScalePixels(unsigned char *dest, int destWidth, int destHeight, unsigned char *src, int srcWidth, int srcHeight, int interpolation, int spp);
+void GCScalePixels(unsigned char *dest, int destWidth, int destHeight, unsigned char *src, int srcWidth, int srcHeight, GimpInterpolationType interpolation, int spp);
 
 /*
 	GCDrawEllipse()
@@ -113,6 +114,6 @@ void GCDrawPolygon(unsigned char *dest, int destWidth, int destHeight, GimpVecto
 	
 	Rotates the given bitmap through the specified angle (in radians).
 */
-void GCRotateImage(unsigned char **dest, int *destWidth, int *destHeight, int *destX, int *destY, unsigned char *src, int srcWidth, int srcHeight, float angle, int interpolation_type, int spp, ProgressFunction progress_callback);
+void GCRotateImage(unsigned char **dest, int *destWidth, int *destHeight, int *destX, int *destY, unsigned char *src, int srcWidth, int srcHeight, float angle, GimpInterpolationType interpolation_type, int spp, ProgressFunction progress_callback);
 
 #endif /* GIMPCORE_H */

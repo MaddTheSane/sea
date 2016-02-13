@@ -4,6 +4,7 @@
 #import "SeaContent.h"
 #import "SeaLayer.h"
 #import "Bitmap.h"
+#include "ColorSyncDeprecated.h"
 
 @implementation SeaWhiteboard
 @synthesize compositor;

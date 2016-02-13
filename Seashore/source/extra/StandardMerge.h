@@ -12,6 +12,11 @@
 
 #import "Globals.h"
 
+#ifndef __private_extern
+#define __private_extern __attribute__((visibility("hidden")))
+#endif
+
+
 /*!
 	@defined	RANDOM_SEED
 	@discussion	The value to be used by the dissolve merge technique.
@@ -233,5 +238,5 @@ __private_extern void blendPixel(int spp, unsigned char *destPtr, int destLoc, u
 	@param		srcLoc
 				The position in that block of the pixel.
 */
-__private_extern__ void selectMerge(int choice, int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc);
+__private_extern void selectMerge(int choice, int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc);
 

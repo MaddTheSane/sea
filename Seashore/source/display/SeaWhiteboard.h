@@ -131,21 +131,17 @@ enum {
 // OVERLAY METHODS
 
 /*!
-	@method		setOverlayBehaviour:
-	@discussion	Sets the overlay behaviour.
-	@param		value
-				The new overlay behaviour (see SeaWhiteboard).
+	@property	setOverlayBehaviour:
+	@discussion	The overlay behaviour (see SeaWhiteboard).
 */
-- (void)setOverlayBehaviour:(int)value;
+@property int overlayBehaviour;
 
 /*!
-	@method		setOverlayOpacity:
-	@discussion	Sets the opacity of the overlay.
-	@param		value
-				An integer from 0 to 255 representing the revised opacity of the
+	@property	setOverlayOpacity:
+	@discussion	An integer from 0 to 255 representing the opacity of the
 				overlay.
 */
-- (void)setOverlayOpacity:(int)value;
+@property int overlayOpacity;
 
 /*!
 	@method		applyOverlay
@@ -167,7 +163,7 @@ enum {
 	@discussion	Returns the bitmap data of the overlay.
 	@result		Returns a pointer to the bitmap data of the overlay.
 */
-- (unsigned char *)overlay;
+- (unsigned char *)overlay NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		replace
@@ -175,7 +171,7 @@ enum {
 	@result		Returns a pointer to the 8 bits per pixel replace mask of the
 				overlay.
 */
-- (unsigned char *)replace;
+- (unsigned char *)replace NS_RETURNS_INNER_POINTER;
 
 // READJUSTING METHODS
 
@@ -215,11 +211,11 @@ enum {
 // CMYK PREVIEWING METHODS
 
 /*!
-	@method		CMYKPreview
+	@property	CMYKPreview
 	@discussion	Returns whether or not CMYK previewing is active.
-	@result		Returns YES if the CMYK previewing is active, NO otherwise.
+	@result		Returns \c YES if the CMYK previewing is active, \c NO otherwise.
 */
-- (BOOL)CMYKPreview;
+@property (readonly) BOOL CMYKPreview;
 
 
 /*!
@@ -275,14 +271,14 @@ enum {
 // ACCESSOR METHODS
 
 /*!
-	@method		imageRect
+	@property	imageRect
 	@discussion	Returns the rectangle in which the whiteboard's image should be
 				plotted. This is only not equal to the document rectangle if
 				whiteboardIsLayerSpecific returns YES.
 	@result		Returns an IntRect indicating the rectangle in which the
 				whiteboard's image should be plotted. 
 */
-- (IntRect)imageRect;
+@property (readonly) IntRect imageRect;
 
 /*!
 	@method		image
@@ -306,7 +302,7 @@ enum {
 	@discussion	Returns the bitmap data for the whiteboard.
 	@result		Returns a pointer to the bitmap data for the whiteboard.
 */
-- (unsigned char *)data;
+- (unsigned char *)data NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		altData
@@ -314,7 +310,7 @@ enum {
 	@result		Returns a pointer to the alternate bitmap data for the
 				whiteboard.
 */
-- (unsigned char *)altData;
+- (unsigned char *)altData NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		displayProf

@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "SeaPrintView.h"
 #import "SeaView.h"
 #import "SeaDocument.h"
@@ -125,7 +127,7 @@
 	return YES;
 }
 
-static inline float mod(float a, float b)
+static inline float mod(float a, float b) __attribute__((__overloadable__))
 {
 	float result;
 	
@@ -137,21 +139,34 @@ static inline float mod(float a, float b)
 	return result;
 }
 
+static inline double mod(double a, double b) __attribute__((__overloadable__))
+{
+	double result;
+	
+	result = fabs(a);
+	while (result - b > 0.0) {
+		result -= b;
+	}
+	
+	return result;
+}
+
+
 - (NSRect)rectForPage:(int)page
 {
 	NSPrintInfo *pi = [[NSPrintOperation currentOperation] printInfo];
 	NSRect bounds, paper, result;
-	float scale;
+	CGFloat scale;
 	int horizPages, vertPages;
 	
 	// Work out the image's bounds
-	bounds = NSMakeRect(0, 0, [(SeaContent *)[document contents] width] * (72.0 / (float)[[document contents] xres]), [(SeaContent *)[document contents] height] * (72.0 / (float)[[document contents] yres]));
+	bounds = NSMakeRect(0, 0, [[document contents] width] * (72.0 / (float)[[document contents] xres]), [[document contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
 	
 	// Work out the paper's bounding rectangle
 	paper.size = [pi paperSize];
 	paper.size.height -= [pi topMargin] + [pi bottomMargin];
 	paper.size.width -= [pi leftMargin] + [pi rightMargin];
-	scale = [[pi dictionary][NSPrintScalingFactor] floatValue];
+	scale = [[pi dictionary][NSPrintScalingFactor] doubleValue];
 	paper.size.height /= scale;
 	paper.size.width /= scale;
 	
@@ -167,8 +182,8 @@ static inline float mod(float a, float b)
 		page--;
 	
 		// Otherwise do tiling
-		horizPages = ceil((float)bounds.size.width / (float)paper.size.width);
-		vertPages = ceil((float)bounds.size.height / (float)paper.size.height);
+		horizPages = ceil(bounds.size.width / paper.size.width);
+		vertPages = ceil(bounds.size.height / paper.size.height);
 		
 		// Work out origin
 		result.origin.x = (page % horizPages) * paper.size.width;

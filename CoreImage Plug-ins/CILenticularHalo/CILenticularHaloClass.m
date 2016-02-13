@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "Bitmap.h"
 #import "CILenticularHaloClass.h"
 
@@ -175,7 +177,7 @@
 	halo_radius = sqrt(halo_radius);
 	halo_width = abs(point3.x - point1.x) * abs(point3.x - point1.x) + abs(point3.y - point1.y) * abs(point3.y - point1.y);
 	halo_width = sqrt(halo_width);
-	halo_width = abs(halo_width - halo_radius);
+	halo_width = fabs(halo_width - halo_radius);
 	
 	// Create core image with data
 	size.width = width;

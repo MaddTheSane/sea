@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #import "Bitmap.h"
 #import "bitstring.h"
+#include "ColorSyncDeprecated.h"
 
 #define kMaxPtrsInPtrRecord 8
 

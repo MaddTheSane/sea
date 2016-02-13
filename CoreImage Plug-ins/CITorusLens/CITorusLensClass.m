@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "Bitmap.h"
 #import "CITorusLensClass.h"
 
@@ -162,7 +164,7 @@
 	lens_radius = sqrt(lens_radius);
 	lens_width = abs(point3.x - point1.x) * abs(point3.x - point1.x) + abs(point3.y - point1.y) * abs(point3.y - point1.y);
 	lens_width = sqrt(lens_width);
-	lens_width = abs(lens_width - lens_radius);
+	lens_width = fabs(lens_width - lens_radius);
 	lens_radius += lens_width;
 	
 	// Create core image with data

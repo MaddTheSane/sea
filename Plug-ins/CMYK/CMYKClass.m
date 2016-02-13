@@ -1,5 +1,6 @@
 #include <ApplicationServices/ApplicationServices.h>
 #import "CMYKClass.h"
+#include "ColorSyncDeprecated.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 

@@ -6,6 +6,7 @@
 #import "Bitmap.h"
 #import "SeaDocument.h"
 #import "Bitmap.h"
+#include "ColorSyncDeprecated.h"
 
 static unsigned char *cmData;
 static unsigned int cmLen;

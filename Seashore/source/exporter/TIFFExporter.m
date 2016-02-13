@@ -6,6 +6,7 @@
 #import "Bitmap.h"
 #import <TIFF/tiff.h>
 #import <TIFF/tiffio.h>
+#include "ColorSyncDeprecated.h"
 
 static unsigned char *cmData;
 static int cmLen;

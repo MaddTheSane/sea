@@ -96,7 +96,7 @@ NSRect IntRectMakeNSRect(IntRect rect)
 	return newRect;
 }
 
-NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians)
+NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, CGFloat radians)
 {
 	if(radians == 0.0)
 		return initialPoint;

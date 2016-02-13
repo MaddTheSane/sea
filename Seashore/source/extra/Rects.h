@@ -317,4 +317,4 @@ extern NSRect IntRectMakeNSRect(IntRect rect);
 				The number of radians that point is rotated.
 	@result		Returns an NSPoint with the defined rotation.
 */
-extern NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians);
+extern NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, CGFloat radians);

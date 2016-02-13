@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "Bitmap.h"
 #import "CISunbeamsClass.h"
 
@@ -165,7 +167,7 @@
 	IntRect selection;
 	CIColor *mainColor = [[CIColor alloc] initWithColor:mainNSColor];
 	IntPoint point1, point2, point3;
-	float halo_width, halo_radius;
+	CGFloat halo_width, halo_radius;
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
@@ -181,7 +183,7 @@
 	halo_radius = sqrt(halo_radius);
 	halo_width = abs(point3.x - point1.x) * abs(point3.x - point1.x) + abs(point3.y - point1.y) * abs(point3.y - point1.y);
 	halo_width = sqrt(halo_width);
-	halo_width = abs(halo_width - halo_radius);
+	halo_width = fabs(halo_width - halo_radius);
 	
 	// Create core image with data
 	size.width = width;

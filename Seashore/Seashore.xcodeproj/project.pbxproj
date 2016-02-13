@@ -1984,6 +1984,7 @@
 		559938B218CFCCCA00E92088 /* Checkerboard+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checkerboard+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938C118CFCCCC00E92088 /* Circular Screen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Screen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559E255818DCB79000D0F3DB /* CICommon-RestoreAlpha.mi */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc.preprocessed; path = "CICommon-RestoreAlpha.mi"; sourceTree = "<group>"; };
+		55B95A981C6FBA5D00E37A8C /* ColorSyncDeprecated.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorSyncDeprecated.h; sourceTree = "<group>"; };
 		55BD2B9218D0CA7C00C4EE1B /* Gamma Adjust+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gamma Adjust+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2BA218D0CA7E00C4EE1B /* Gaussian Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gaussian Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2BB018D0CB0C00C4EE1B /* Glass Distortion+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Glass Distortion+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4376,6 +4377,7 @@
 				A8C207400CD46C2C00F91B3C /* WindowBackColorWell.m */,
 				DC709EE30A61A173000B8333 /* Units.h */,
 				DC709EE50A61A35C000B8333 /* Units.m */,
+				55B95A981C6FBA5D00E37A8C /* ColorSyncDeprecated.h */,
 			);
 			name = "Extra Sources";
 			path = source/extra;
@@ -12005,12 +12007,8 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"__private_extern=__attribute__((visibility(\\\"hidden\\\")))",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -12052,7 +12050,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "__private_extern=__attribute__((visibility(\\\"hidden\\\")))";
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;

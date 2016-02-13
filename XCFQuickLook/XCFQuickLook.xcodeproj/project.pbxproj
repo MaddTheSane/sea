@@ -52,12 +52,12 @@
 		8D576316048677EA00EA77CD /* XCFQuickLook.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCFQuickLook.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C86B05260671AA6E00DD9006 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
-		DC0E91361041DD3F00C3FC48 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
-		DC0E91371041DD3F00C3FC48 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		DC0E91381041DD3F00C3FC48 /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rects.m; sourceTree = "<group>"; };
-		DC0E91391041DD3F00C3FC48 /* Rects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rects.h; sourceTree = "<group>"; };
-		DC0E913A1041DD3F00C3FC48 /* RLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLE.m; sourceTree = "<group>"; };
-		DC0E913B1041DD3F00C3FC48 /* RLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RLE.h; sourceTree = "<group>"; };
+		DC0E91361041DD3F00C3FC48 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = main/Globals.h; sourceTree = "<group>"; };
+		DC0E91371041DD3F00C3FC48 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = main/Constants.h; sourceTree = "<group>"; };
+		DC0E91381041DD3F00C3FC48 /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rects.m; path = extra/Rects.m; sourceTree = "<group>"; };
+		DC0E91391041DD3F00C3FC48 /* Rects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rects.h; path = extra/Rects.h; sourceTree = "<group>"; };
+		DC0E913A1041DD3F00C3FC48 /* RLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RLE.m; path = extra/RLE.m; sourceTree = "<group>"; };
+		DC0E913B1041DD3F00C3FC48 /* RLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RLE.h; path = extra/RLE.h; sourceTree = "<group>"; };
 		DC0E913C1041DD3F00C3FC48 /* SeaContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaContent.h; sourceTree = "<group>"; };
 		DC0E913D1041DD3F00C3FC48 /* SeaContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaContent.m; sourceTree = "<group>"; };
 		DC0E913E1041DD3F00C3FC48 /* XCFContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFContent.h; sourceTree = "<group>"; };
@@ -66,14 +66,14 @@
 		DC0E91411041DD3F00C3FC48 /* SeaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaLayer.m; sourceTree = "<group>"; };
 		DC0E91421041DD3F00C3FC48 /* XCFLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFLayer.h; sourceTree = "<group>"; };
 		DC0E91431041DD3F00C3FC48 /* XCFLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFLayer.m; sourceTree = "<group>"; };
-		DC0E91441041DD3F00C3FC48 /* ColorConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorConversion.h; sourceTree = "<group>"; };
-		DC0E91451041DD3F00C3FC48 /* ColorConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorConversion.m; sourceTree = "<group>"; };
-		DC0E91461041DD3F00C3FC48 /* StandardMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardMerge.h; sourceTree = "<group>"; };
-		DC0E91471041DD3F00C3FC48 /* StandardMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandardMerge.m; sourceTree = "<group>"; };
+		DC0E91441041DD3F00C3FC48 /* ColorConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorConversion.h; path = extra/ColorConversion.h; sourceTree = "<group>"; };
+		DC0E91451041DD3F00C3FC48 /* ColorConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorConversion.m; path = extra/ColorConversion.m; sourceTree = "<group>"; };
+		DC0E91461041DD3F00C3FC48 /* StandardMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StandardMerge.h; path = extra/StandardMerge.h; sourceTree = "<group>"; };
+		DC0E91471041DD3F00C3FC48 /* StandardMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StandardMerge.m; path = extra/StandardMerge.m; sourceTree = "<group>"; };
 		DC0E91481041DD3F00C3FC48 /* SeaCompositor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaCompositor.h; sourceTree = "<group>"; };
 		DC0E91491041DD3F00C3FC48 /* SeaCompositor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaCompositor.m; sourceTree = "<group>"; };
-		DC0E914A1041DD3F00C3FC48 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
-		DC0E914B1041DD3F00C3FC48 /* Bitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bitmap.m; sourceTree = "<group>"; };
+		DC0E914A1041DD3F00C3FC48 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bitmap.h; path = extra/Bitmap.h; sourceTree = "<group>"; };
+		DC0E914B1041DD3F00C3FC48 /* Bitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bitmap.m; path = extra/Bitmap.m; sourceTree = "<group>"; };
 		DC0E914C1041DD3F00C3FC48 /* SeaWhiteboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaWhiteboard.h; sourceTree = "<group>"; };
 		DC0E914D1041DD3F00C3FC48 /* SeaWhiteboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaWhiteboard.m; sourceTree = "<group>"; };
 		DC0E916B1041DD6300C3FC48 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -132,15 +132,10 @@
 		08FB77AFFE84173DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				55B95A971C6FB94C00E37A8C /* Shared with Seashore */,
 				61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */,
 				2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.m */,
 				08FB77B6FE84183AC02AAC07 /* main.c */,
-				DC0E91361041DD3F00C3FC48 /* Globals.h */,
-				DC0E91371041DD3F00C3FC48 /* Constants.h */,
-				DC0E91381041DD3F00C3FC48 /* Rects.m */,
-				DC0E91391041DD3F00C3FC48 /* Rects.h */,
-				DC0E913A1041DD3F00C3FC48 /* RLE.m */,
-				DC0E913B1041DD3F00C3FC48 /* RLE.h */,
 				DC0E913C1041DD3F00C3FC48 /* SeaContent.h */,
 				DC0E913D1041DD3F00C3FC48 /* SeaContent.m */,
 				DC0E913E1041DD3F00C3FC48 /* XCFContent.h */,
@@ -149,14 +144,8 @@
 				DC0E91411041DD3F00C3FC48 /* SeaLayer.m */,
 				DC0E91421041DD3F00C3FC48 /* XCFLayer.h */,
 				DC0E91431041DD3F00C3FC48 /* XCFLayer.m */,
-				DC0E91441041DD3F00C3FC48 /* ColorConversion.h */,
-				DC0E91451041DD3F00C3FC48 /* ColorConversion.m */,
-				DC0E91461041DD3F00C3FC48 /* StandardMerge.h */,
-				DC0E91471041DD3F00C3FC48 /* StandardMerge.m */,
 				DC0E91481041DD3F00C3FC48 /* SeaCompositor.h */,
 				DC0E91491041DD3F00C3FC48 /* SeaCompositor.m */,
-				DC0E914A1041DD3F00C3FC48 /* Bitmap.h */,
-				DC0E914B1041DD3F00C3FC48 /* Bitmap.m */,
 				DC0E914C1041DD3F00C3FC48 /* SeaWhiteboard.h */,
 				DC0E914D1041DD3F00C3FC48 /* SeaWhiteboard.m */,
 			);
@@ -169,6 +158,26 @@
 				8D576316048677EA00EA77CD /* XCFQuickLook.qlgenerator */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		55B95A971C6FB94C00E37A8C /* Shared with Seashore */ = {
+			isa = PBXGroup;
+			children = (
+				DC0E91361041DD3F00C3FC48 /* Globals.h */,
+				DC0E91371041DD3F00C3FC48 /* Constants.h */,
+				DC0E91381041DD3F00C3FC48 /* Rects.m */,
+				DC0E91391041DD3F00C3FC48 /* Rects.h */,
+				DC0E913A1041DD3F00C3FC48 /* RLE.m */,
+				DC0E913B1041DD3F00C3FC48 /* RLE.h */,
+				DC0E91441041DD3F00C3FC48 /* ColorConversion.h */,
+				DC0E91451041DD3F00C3FC48 /* ColorConversion.m */,
+				DC0E914A1041DD3F00C3FC48 /* Bitmap.h */,
+				DC0E914B1041DD3F00C3FC48 /* Bitmap.m */,
+				DC0E91461041DD3F00C3FC48 /* StandardMerge.h */,
+				DC0E91471041DD3F00C3FC48 /* StandardMerge.m */,
+			);
+			name = "Shared with Seashore";
+			path = ../Seashore/source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

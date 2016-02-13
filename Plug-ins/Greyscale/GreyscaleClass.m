@@ -2,6 +2,7 @@
 #import "GreyscaleClass.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
+#include "ColorSyncDeprecated.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 

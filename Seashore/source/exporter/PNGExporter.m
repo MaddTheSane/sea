@@ -69,7 +69,7 @@
 	
 	// Make an image representation from the data
 	imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&destData pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:spp hasAlpha:hasAlpha isPlanar:NO colorSpaceName:(spp > 2) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:width * spp bitsPerPixel:8 * spp];
-	imageData = [imageRep representationUsingType:NSPNGFileType properties:NULL];
+	imageData = [imageRep representationUsingType:NSPNGFileType properties:@{}];
 		
 	// Save our file and let's go
 	[imageData writeToFile:path atomically:YES];

@@ -58,7 +58,7 @@
 			points[0] =  NSPointMakeIntPoint(where);
 			lastPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 		}
-		else if ([[NSApp currentEvent] clickCount] == 1 && intermediate && !(abs(startPoint.x - where.x) < anchorRadius && abs(startPoint.y - where.y) < anchorRadius)) {
+		else if ([[NSApp currentEvent] clickCount] == 1 && intermediate && !(fabs(startPoint.x - where.x) < anchorRadius && fabs(startPoint.y - where.y) < anchorRadius)) {
 			
 			// Check this point is different to the last
 			if (pos < kMaxLTPoints - 1) {

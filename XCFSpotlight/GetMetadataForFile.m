@@ -4,6 +4,7 @@
 
 #import "XCFContent.h"
 #import "XCFLayer.h"
+#import "GetMetadataForFile.h"
 
 /* -----------------------------------------------------------------------------
  Step 1

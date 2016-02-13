@@ -2,6 +2,7 @@
 #import "IndiciesKeeper.h"
 
 @class SeaDocument;
+@class SeaLayer;
 
 /*!
 	@struct		ParasiteData
@@ -48,7 +49,7 @@ typedef struct {
 	int lostprops_len;
 	
 	// The layers in the document
-	NSArray *layers;
+	NSArray<SeaLayer*> *layers;
 	
 	// These are layers that are no longer in the document but are kept for undo operations
 	NSArray *deletedLayers;	

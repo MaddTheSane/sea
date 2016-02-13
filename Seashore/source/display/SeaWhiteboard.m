@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "SeaWhiteboard.h"
 #import "StandardMerge.h"
 #import "SeaLayer.h"
@@ -11,12 +13,15 @@
 #import "ToolboxUtility.h"
 #import "SeaController.h"
 #import "UtilitiesManager.h"
+#include "ColorSyncDeprecated.h"
 
 extern BOOL useAltiVec;
 
 extern IntPoint gScreenResolution;
 
 @implementation SeaWhiteboard
+@synthesize overlayBehaviour;
+@synthesize overlayOpacity;
 
 - (instancetype)initWithDocument:(id)doc
 {
@@ -89,16 +94,6 @@ extern IntPoint gScreenResolution;
 	if (overlay) free(overlay);
 	if (replace) free(replace);
 	if (altData) free(altData);
-}
-
-- (void)setOverlayBehaviour:(int)value
-{
-	overlayBehaviour = value;
-}
-
-- (void)setOverlayOpacity:(int)value
-{
-	overlayOpacity = value;
 }
 
 - (IntRect)applyOverlay

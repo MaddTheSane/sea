@@ -102,7 +102,7 @@ static SeaController *seaController;
 - (IBAction)revert:(id)sender
 {
 	id newDocument;
-	NSString *filename = [gCurrentDocument fileName];
+	NSString *filename = [[gCurrentDocument fileURL] path];
 	NSRect frame = [[[gCurrentDocument windowControllers][0] window] frame];
 	id window;
 	
@@ -122,7 +122,7 @@ static SeaController *seaController;
 - (IBAction)editLastSaved:(id)sender
 {
 	id originalDocument, currentDocument = gCurrentDocument;
-	NSString *old_path = [currentDocument fileName], *new_path = NULL;
+	NSString *old_path = [[currentDocument fileURL] path], *new_path = NULL;
 	int i;
 	BOOL done;
 	

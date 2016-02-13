@@ -146,7 +146,7 @@ extern unsigned char averagedComponentValue(int spp, unsigned char *data, int wi
 	@param		profile
 				The profile to make the default display's profile.
 */
-extern void OpenDisplayProfile(CMProfileRef *profile) DEPRECATED_ATTRIBUTE;
+extern void OpenDisplayProfile(CMProfileRef *profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
 	@function	CloseDisplayProfile
@@ -154,4 +154,4 @@ extern void OpenDisplayProfile(CMProfileRef *profile) DEPRECATED_ATTRIBUTE;
 	@param		profile
 				The profile to make the default display's profile.
 */
-extern void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_ATTRIBUTE;
+extern void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;

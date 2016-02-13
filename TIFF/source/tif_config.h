@@ -210,7 +210,11 @@
 #define SIZEOF_INT 4
 
 /* The size of a `long', as computed by sizeof. */
+#if __LP64__
+#define SIZEOF_LONG 8
+#else
 #define SIZEOF_LONG 4
+#endif
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1

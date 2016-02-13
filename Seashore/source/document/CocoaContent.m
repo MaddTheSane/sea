@@ -67,9 +67,6 @@
 		if (![imageRep isKindOfClass:[NSBitmapImageRep class]]) {
 			if ([imageRep isKindOfClass:[NSPDFImageRep class]]) {
 				
-				[image setScalesWhenResized:YES];
-				[image setDataRetained:YES];
-				
 				[NSBundle loadNibNamed:@"CocoaContent" owner:self];
 				[resMenu setEnabled:YES];
 				[pdfPanel center];

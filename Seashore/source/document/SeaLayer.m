@@ -10,10 +10,11 @@
 #import "SeaPrefs.h"
 #import "SeaPlugins.h"
 #import "CIAffineTransformClass.h"
-#import <ApplicationServices/ApplicationServices.h>
-#import <sys/stat.h>
-#import <sys/mount.h>
-#import <GIMPCore/GIMPCore.h>
+#include <ApplicationServices/ApplicationServices.h>
+#include <sys/stat.h>
+#include <sys/mount.h>
+#include <GIMPCore/GIMPCore.h>
+#include "ColorSyncDeprecated.h"
 
 @implementation SeaLayer
 
