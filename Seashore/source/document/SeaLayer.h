@@ -198,42 +198,42 @@
 #endif
 
 /*!
-	@method		width
+	@property	width
 	@discussion	Returns the width of the layer.
 	@result		Returns an integer representing the width of the layer.
 */
-- (int)width;
+@property (readonly) int width;
 
 /*!
-	@method		height
+	@property	height
 	@discussion	Returns the height of the layer.
 	@result		Returns an integer representing the height of the layer.
 */
-- (int)height;
+@property (readonly) int height;
 
 /*!
-	@method		xoff
+	@property	xoff
 	@discussion	Returns the horizontal offset of the layer.
 	@result		Returns an integer representing the horizontal offset of the
 				layer (from the top-left).
 */
-- (int)xoff;
+@property (readonly) int xoff;
 
 /*!
-	@method		yoff
+	@property	yoff
 	@discussion	Returns the vertical offset of the layer.
 	@result		Returns an integer representing the vertical offset of the layer
 				from the top-left).
 */
-- (int)yoff;
+@property (readonly) int yoff;
 
 #if MAIN_COMPILE
 /*!
-	@method		localRect
+	@property	localRect
 	@discussion	For finding out where it is, simply a combination of the above values.
 	@result		An Integer Rectangle
 */
-- (IntRect)localRect;
+@property (readonly) IntRect localRect;
 
 /*!
 	@method		setOffsets:
@@ -288,6 +288,11 @@
 */
 - (void)setRotation:(float)degrees interpolation:(int)interpolation withTrim:(BOOL)trim;
 #endif
+
+@property BOOL visible;
+@property BOOL linked;
+@property int opacity;
+@property int mode;
 
 /*!
 	@method		visible
@@ -380,20 +385,20 @@
 #endif
 
 /*!
-	@method		data
+	@property	data
 	@discussion	Returns the bitmap data for the layer.
 	@result		Returns a pointer to the bitmap data for the layer.
 */
-- (unsigned char *)data NS_RETURNS_INNER_POINTER;
+@property (readonly) unsigned char *data NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		hasAlpha
+	@property	hasAlpha
 	@discussion	Returns whether or not the layer's alpha channel should be
 				considered active.
 	@result		Returns YES if the layer's alpha channel should be considered
 				active, NO otherwise.
 */
-- (BOOL)hasAlpha;
+@property (readonly) BOOL hasAlpha;
 
 #if MAIN_COMPILE
 /*!
@@ -413,7 +418,7 @@
 
 #if MAIN_COMPILE
 /*!
-	@method		canToggleAlpha
+	@property	canToggleAlpha
 	@discussion	Returns whether or not the user should be permitted to toggle
 				the alpha channel treatment. Users aren't permitted to toggle
 				the alpha channel treatment off if the alpha channel is not
@@ -421,7 +426,7 @@
 	@result		Returns YES if the user should be permitted to toggle the alpha
 				channel treament, NO otherwise.
 */
-- (BOOL)canToggleAlpha;
+@property (readonly) BOOL canToggleAlpha;
 #endif
 
 /*!
@@ -444,31 +449,31 @@
 - (int)lostprops_len;
 
 /*!
-	@method		uniqueLayerID
+	@property	uniqueLayerID
 	@discussion	Returns an unique integer identifying the layer. Layer IDs are
 				numbered sequentially.
 	@result		Returns an unique integer identifying the layer.
 */
-- (int)uniqueLayerID;
+@property (readonly) int uniqueLayerID;
 
 #if MAIN_COMPILE
 /*!
-	@method		index
+	@property	index
 	@discussion	Returns the index of this layer at the current moment. This
 				method is a linear time operation. Use it sparingly maybe
 				uniqueLayerID would serve your purpose better?
 	@result		Returns an integer indicating the current index of the layer.
 */
-- (int)index;
+@property (readonly) int index;
 #endif
 
 /*!
-	@method		floating
+	@property	floating
 	@discussion	Returns whether or not the layer is a floating layer.
 	@result		Returns YES if the layer is a floating layer, NO otherwise. This
 				implementation of the method always returns NO.
 */
-- (BOOL)floating;
+@property (readonly) BOOL floating;
 
 #if MAIN_COMPILE
 // EXTRA METHODS

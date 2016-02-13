@@ -87,8 +87,8 @@ typedef struct {
 /*!
 	@method		initWithContents:andWhiteboard:
 	@discussion	Initializes an instance of this class with the given document.
-	@param		doc
- The document with which to initialize the instance.
+	@param		cont
+				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
  */
 - (instancetype)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board;

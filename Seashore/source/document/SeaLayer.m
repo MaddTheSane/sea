@@ -486,7 +486,6 @@
 	
 	// Determine the output image
 	image_out = [[NSImage alloc] initWithSize:NSMakeSize(width, height)];
-	[image_out setCachedSeparately:YES];
 	[image_out recache];
 	[image_out lockFocus];
 	
@@ -588,70 +587,24 @@
 }
 #endif
 
-- (BOOL)visible
-{
-	return visible;
-}
-
-- (void)setVisible:(BOOL)value
-{
-	visible = value;
-}
-
-- (BOOL)linked
-{
-	return linked;
-}
-
-- (void)setLinked:(BOOL)value
-{
-	linked = value;
-}
-
-- (int)opacity
-{
-	return opacity;
-}
-
-- (void)setOpacity:(int)value
-{
-	opacity = value;
-}
-
-- (int)mode
-{
-	return mode;
-}
-
-- (void)setMode:(int)value
-{
-	mode = value;
-}
-
-- (NSString *)name
-{
-	return name;
-}
+@synthesize visible;
+@synthesize linked;
+@synthesize opacity;
+@synthesize mode;
+@synthesize name;
 
 #if MAIN_COMPILE
 - (void)setName:(NSString *)newName
 {
 	if (name) {
 		oldNames = [oldNames arrayByAddingObject:name];
-		name = newName;
+		name = [newName copy];
 	}
 }
 #endif
 
-- (unsigned char *)data
-{
-	return data;
-}
-
-- (BOOL)hasAlpha
-{
-	return hasAlpha;
-}
+@synthesize data;
+@synthesize hasAlpha;
 
 #if MAIN_COMPILE
 - (void)toggleAlpha

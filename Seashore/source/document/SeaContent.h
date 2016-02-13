@@ -40,7 +40,6 @@ typedef struct {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface SeaContent : NSObject {
-	
 #if MAIN_COMPILE
 	// The document associated with this object
 	SeaDocument *document;
@@ -324,7 +323,7 @@ typedef struct {
 	@result		Returns an array of ParasiteData records of length given by the
 				parasites_count method.
 */
-- (ParasiteData *)parasites;
+- (ParasiteData *)parasites NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		parasites_count
