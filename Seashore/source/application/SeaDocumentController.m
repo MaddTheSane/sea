@@ -297,7 +297,7 @@
 		return YES;
 	}
 	
-	NSMutableSet *set = editableTypes[key];
+	NSMutableSet<NSString*> *set = editableTypes[key];
 	if(!set){
 		set = viewableTypes[key];
 		// That's wierd, someone has passed in an invalid type

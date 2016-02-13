@@ -692,6 +692,7 @@
 		55E5E4DA18D27A370082E60F /* Sharpen.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E47818D26FC50082E60F /* Sharpen.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4DB18D27A370082E60F /* Threshold.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E48418D26FC70082E60F /* Threshold.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4DC18D27A370082E60F /* Vertical Stripes.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55FD12411C6F0352009FB22C /* AbstractExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = A8D9FDA0053C0B5500A80207 /* AbstractExporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A80983D70871420900F7412F /* JP2Exporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A80983D50871420900F7412F /* JP2Exporter.m */; };
 		A8138D660CEFD5FA00C2F880 /* Seashore Effects Guide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8138D640CEFD5FA00C2F880 /* Seashore Effects Guide.pdf */; };
 		A827DCE907D06EEB000E45A1 /* SeaAlignment.m in Sources */ = {isa = PBXBuildFile; fileRef = A827DCE707D06EEB000E45A1 /* SeaAlignment.m */; };
@@ -4583,6 +4584,7 @@
 				55472BB91C6EE2010065A852 /* SeaLayer.h in Headers */,
 				55472BBD1C6EE2010065A852 /* TextureExporter.h in Headers */,
 				55472BDA1C6EE5400065A852 /* Units.h in Headers */,
+				55FD12411C6F0352009FB22C /* AbstractExporter.h in Headers */,
 				55472BDC1C6EE5730065A852 /* IndiciesKeeper.h in Headers */,
 				55472BCD1C6EE4EC0065A852 /* SeaWhiteboard.h in Headers */,
 				55472BA61C6EE1530065A852 /* SeaHelp.h in Headers */,

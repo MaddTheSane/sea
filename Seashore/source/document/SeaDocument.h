@@ -1,4 +1,5 @@
 #import "Globals.h"
+#import "AbstractExporter.h"
 
 @class SeaSelection, SeaWhiteboard;
 
@@ -55,7 +56,7 @@
 	IBOutlet TextureExporter *textureExporter;
 	
 	// An array of all possible exporters
-	NSArray *exporters;
+	NSArray<id<AbstractExporter>> *exporters;
 	
 	// The view to attach to the save panel
 	IBOutlet id accessoryView;
