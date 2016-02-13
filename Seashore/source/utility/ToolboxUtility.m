@@ -20,6 +20,10 @@
 #import "WarningsUtility.h"
 #import "SeashoreKit.h"
 
+@interface ToolboxUtility () <NSFileManagerDelegate>
+
+@end
+
 @interface NSObject (toolbarSelectors)
 - (void)forward:(id)selector;
 - (void)backward:(id)selector;
