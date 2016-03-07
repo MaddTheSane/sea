@@ -30,7 +30,7 @@
 
 		[assembly addObjectsFromArray:typeDict[@"CFBundleTypeExtensions"]];
 		[assembly addObjectsFromArray:typeDict[@"CFBundleTypeOSTypes"]];
-		//[assembly addObjectsFromArray:typeDict[@"LSItemContentTypes"]];
+		[assembly addObjectsFromArray:typeDict[@"LSItemContentTypes"]];
 		
 		NSString* key = typeDict[@"CFBundleTypeName"];
 		//[assembly addObject:key];
@@ -286,16 +286,20 @@
 	return array;
 }
 
+- (NSArray *)fileExtensionsFromType:(NSString *)typeName
+{
+	return @[];
+}
 
 - (BOOL)type:(NSString *)aType isContainedInDocType:(NSString*) key
 {
 	// We need to special case these for some reason, I don't know why
-	if([key isEqual:@"Gimp image"] &&
-	   (![aType caseInsensitiveCompare:@"com.gimp.xcf"] ||
-	    ![aType caseInsensitiveCompare:@"net.sourceforge.xcf"] ||
-		![aType caseInsensitiveCompare:@"Gimp Document"])){
-		return YES;
-	}
+	//if([key isEqual:@"Gimp image"] &&
+	//   (![aType caseInsensitiveCompare:@"com.gimp.xcf"] ||
+	//    ![aType caseInsensitiveCompare:@"net.sourceforge.xcf"] ||
+	//	![aType caseInsensitiveCompare:@"Gimp Document"])){
+	//	return YES;
+	//}
 	
 	NSMutableSet<NSString*> *set = editableTypes[key];
 	if(!set){
