@@ -106,7 +106,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	cursorsManager = [[SeaCursors alloc] initWithDocument: doc andView: self];
 	
 	// Register for drag operations
-	[self registerForDraggedTypes:@[NSTIFFPboardType, NSPICTPboardType, NSFilenamesPboardType]];
+	[self registerForDraggedTypes:@[NSPasteboardTypeTIFF, NSFilenamesPboardType]];
 	
 	// Set up the rulers
 	[[document scrollView] setHasHorizontalRuler:YES];
@@ -501,7 +501,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	}
 	
 	[cursorsManager setCloseRect:NSMakeRect(0, 0, 0, 0)];
-	if (intermediate && curToolIndex == kEllipseSelectTool || special) {
+	if ((intermediate && curToolIndex == kEllipseSelectTool) || special) {
 		// The ellipse tool is currently being dragged, so draw its marching ants
 		tempSelectRect = [(EllipseSelectTool *)[[document tools] currentTool] selectionRect];
 		tempRect = IntRectMakeNSRect(tempSelectRect);
@@ -1774,7 +1774,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	xScale = [[document contents] xscale];
 	yScale = [[document contents] yscale];
 	localPoint.x = localPoint.y = -1;
-	tempPoint = [self convertPoint:[[self window] convertScreenToBase:[NSEvent mouseLocation]] fromView:NULL];
+	tempPoint = [self convertPoint:[self window].mouseLocationOutsideOfEventStream fromView:NULL];
 	// tempPoint.y = [self bounds].size.height - tempPoint.y;
 	if (!NSMouseInRect(tempPoint, [self visibleRect], YES) || ![[self window] isVisible])
 		return localPoint;
@@ -1813,7 +1813,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Accept copy operations if possible
     if (sourceDragMask & NSDragOperationCopy) {
-		if ([[pboard types] containsObject:NSTIFFPboardType] || [[pboard types] containsObject:NSPICTPboardType]) {
+		if ([[pboard types] containsObject:NSPasteboardTypeTIFF]) {
         	if (layer != [[document contents] activeLayer] && ![document locked] && ![[document selection] floating] ) {
 				return NSDragOperationCopy;
 			}
@@ -1854,7 +1854,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	if (sourceDragMask & NSDragOperationCopy) {
 	
 		// Accept TIFFs as new layers
-		if ([[pboard types] containsObject:NSTIFFPboardType]) {
+		if ([[pboard types] containsObject:NSPasteboardTypeTIFF]) {
 			if (layer != NULL) {
 				[[document contents] copyLayer:layer];
 				return YES;
@@ -1866,10 +1866,10 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		}
 		
 		// Accept PICTs as new layers
-		if ([[pboard types] containsObject:NSPICTPboardType]) {
-			[[document contents] addLayerFromPasteboard:pboard];
-			return YES;
-		}
+		//if ([[pboard types] containsObject:NSPICTPboardType]) {
+		//	[[document contents] addLayerFromPasteboard:pboard];
+		//	return YES;
+		//}
 		
 		// Accept files as new layers
 		if ([[pboard types] containsObject:NSFilenamesPboardType]) {
@@ -1980,7 +1980,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		case 262: /* Paste */
 			if ([[document selection] floating])
 				return NO;
-			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSTIFFPboardType, NSPICTPboardType]];
+			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 			if (availableType)
 				return YES;
 			else

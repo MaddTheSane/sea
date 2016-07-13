@@ -901,16 +901,16 @@
 		}
 		if (containsNothing) {
 			free(data);
-			NSRunAlertPanel(LOCALSTR(@"empty selection copy title", @"Selection empty"), LOCALSTR(@"empty selection copy body", @"The selection cannot be copied since it is empty."), LOCALSTR(@"ok", @"OK"), NULL, NULL);
+			NSRunAlertPanel(LOCALSTR(@"empty selection copy title", @"Selection empty"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"empty selection copy body", @"The selection cannot be copied since it is empty."));
 			return;
 		}
 		
 		// Declare the data being added to the pasteboard
-		[pboard declareTypes:@[NSTIFFPboardType] owner:NULL];
+		[pboard declareTypes:@[NSPasteboardTypeTIFF] owner:NULL];
 		
 		// Add it to the pasteboard
 		imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&data pixelsWide:globalRect.size.width pixelsHigh:globalRect.size.height bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:globalRect.size.width * spp bitsPerPixel:8 * spp];
-		[pboard setData:[imageRep TIFFRepresentation] forType:NSTIFFPboardType]; 
+		[pboard setData:[imageRep TIFFRepresentation] forType:NSPasteboardTypeTIFF];
 		
 		// Stores the point of the last copied selection and its size
 		sel_point = globalRect.origin;

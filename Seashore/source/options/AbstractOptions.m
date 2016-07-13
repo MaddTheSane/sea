@@ -43,7 +43,7 @@ static BOOL forceAlt = NO;
 	}
 }
 
-- (void)updateModifiers:(AbstractModifiers)modifiers
+- (void)updateModifiers:(NSEventModifierFlags)modifiers
 {
 	NSInteger index;
 	
@@ -75,10 +75,8 @@ static BOOL forceAlt = NO;
 	}
 	// We now need to update all of the documents because the modifiers, and thus possibly
 	// the cursors and guides may have changed.
-	int i;
-	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *doc in [[NSDocumentController sharedDocumentController] documents]) {
+		[[doc docView] setNeedsDisplay:YES];
 	}
 	
 }

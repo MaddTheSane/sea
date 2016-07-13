@@ -11,14 +11,14 @@
 	NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
 	
 	// Copy the image to the pasteboard
-	[pasteboard declareTypes:@[NSTIFFPboardType] owner:nil];
-	[pasteboard setData:[image TIFFRepresentation] forType:NSTIFFPboardType];
+	[pasteboard declareTypes:@[NSPasteboardTypeTIFF] owner:nil];
+	[pasteboard setData:[image TIFFRepresentation] forType:NSPasteboardTypeTIFF];
 }
 
 - (IBAction)paste:(id)sender
 {
 	NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
-	NSString *dataType = [pasteboard availableTypeFromArray:@[NSTIFFPboardType]];
+	NSString *dataType = [pasteboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 	
 	// Copy the image from the pasteboard
 	if (dataType) {

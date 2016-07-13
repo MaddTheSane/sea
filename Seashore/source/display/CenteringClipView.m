@@ -1,5 +1,7 @@
 #ifdef USE_CENTERING_CLIPVIEW
 
+#include <math.h>
+#include <tgmath.h>
 #import "CenteringClipView.h"
 
 @implementation CenteringClipView
@@ -29,13 +31,13 @@
 {
 	NSRect docRect = [[self documentView] frame];
 	NSRect clipRect = [self bounds];
-	NSPoint point;
+	NSPoint point = NSZeroPoint;
 	
 	// If the document is horizontally larger than the scroll view...
 	if (docRect.size.width > clipRect.size.width) {
 		
 		// Request the scroll bars be shown and make the given point the center
-		point.x = roundf(centerPoint.x - clipRect.size.width / 2.0);
+		point.x = round(centerPoint.x - clipRect.size.width / 2.0);
 		
 	}
 	
@@ -43,7 +45,7 @@
 	if (docRect.size.height > clipRect.size.height) {
 		
 		// Request the scroll bars be shown and make the given point the center
-		point.y = roundf(centerPoint.y - clipRect.size.height / 2.0);
+		point.y = round(centerPoint.y - clipRect.size.height / 2.0);
 	
 	}
 	

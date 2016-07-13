@@ -8,10 +8,10 @@
 
 - (instancetype)initWithImageRep:(NSBitmapImageRep*)imageRep document:(id)doc spp:(int)lspp
 {
-	int i, space, bps = [imageRep bitsPerSample], sspp = [imageRep samplesPerPixel];
+	NSInteger i, bps = [imageRep bitsPerSample], sspp = [imageRep samplesPerPixel];
 	unsigned char *srcPtr = [imageRep bitmapData];
-	CMProfileLocation cmProfileLoc;
-	int bipp, bypr;
+	ColorSyncProfileRef cmProfileLoc;
+	NSInteger bipp, bypr;
 	id profile;
 	
 	// Initialize superclass first
@@ -19,14 +19,14 @@
 		return NULL;
 	
 	// Determine the width and height of this layer
-	width = [imageRep pixelsWide];
-	height = [imageRep pixelsHigh];
+	width = (int)[imageRep pixelsWide];
+	height = (int)[imageRep pixelsHigh];
 	
 	// Determine samples per pixel
 	spp = lspp;
 
 	// Determine the color space
-	space = -1;
+	BMPColorSpace space = -1;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace])
 		space = kGrayColorSpace;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedBlackColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceBlackColorSpace])
@@ -35,7 +35,7 @@
 		space = kRGBColorSpace;
 	if ([[imageRep colorSpaceName] isEqualToString:NSDeviceCMYKColorSpace])
 		space = kCMYKColorSpace;
-	if (space == -1) {
+	if ((int)space == -1) {
 		NSLog(@"Color space %@ not yet handled.", [imageRep colorSpaceName]);
 		return NULL;
 	}
@@ -43,15 +43,14 @@
 	// Extract color profile
 	profile = [imageRep valueForProperty:NSImageColorSyncProfileData];
 	if (profile) {
-		cmProfileLoc.locType = cmBufferBasedProfile;
-		cmProfileLoc.u.bufferLoc.buffer = (Ptr)[profile bytes];
-		cmProfileLoc.u.bufferLoc.size = [profile length];
+		cmProfileLoc = ColorSyncProfileCreate((__bridge CFDataRef)(profile), NULL);
 	}
 	
 	// Convert data to what we want
 	bipp = [imageRep bitsPerPixel];
 	bypr = [imageRep bytesPerRow];
-	data = convertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, (profile) ? &cmProfileLoc : NULL, bps, 0);
+	data = convertBitmapColorSync(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
+	CFRelease(cmProfileLoc);
 	if (!data) {
 		NSLog(@"Required conversion not supported.");
 		return NULL;

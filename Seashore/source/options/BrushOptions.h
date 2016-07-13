@@ -106,9 +106,9 @@
 	@method		updateModifiers:
 	@discussion	Updates the modifier pop-up.
 	@param		modifiers
-				An unsigned int representing the new modifiers.
+				An \c NSEventModifierFlags representing the new modifiers.
 */
-- (void)updateModifiers:(unsigned int)modifiers;
+- (void)updateModifiers:(NSEventModifierFlags)modifiers;
 
 /*!
 	@method		modifierPopupChanged:

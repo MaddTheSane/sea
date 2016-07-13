@@ -489,7 +489,7 @@
 		focusObject = [contents layer:workingIndex];
 	
 	// Handle a unit change
-	units = [sender indexOfSelectedItem];
+	units = (int)[sender indexOfSelectedItem];
 	[widthValue setStringValue:StringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
 	[heightValue setStringValue:StringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
 	[heightUnits setTitle:UnitsString(units)];
@@ -517,7 +517,7 @@
 	switch ([[presetsMenu selectedItem] tag]) {
 		case 0:
 			pboard = [NSPasteboard generalPasteboard];
-			availableType = [pboard availableTypeFromArray:@[NSTIFFPboardType, NSPICTPboardType]];
+			availableType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 			if (availableType) {
 				image = [[NSImage alloc] initWithData:[pboard dataForType:availableType]];
 				size = NSSizeMakeIntSize([image size]);

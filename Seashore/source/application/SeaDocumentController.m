@@ -150,7 +150,7 @@
 	NSSize paperSize;
 	IntSize size = IntMakeSize(0, 0);
 	float res;
-	int selectedTag;
+	NSInteger selectedTag;
 	
 	selectedTag = [[templatesMenu selectedItem] tag];
 	res = [[resMenu selectedItem] tag];
@@ -164,7 +164,7 @@
 		break;
 		case 2:
 			pboard = [NSPasteboard generalPasteboard];
-			availableType = [pboard availableTypeFromArray:@[NSTIFFPboardType, NSPICTPboardType]];
+			availableType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 			if (availableType) {
 				image = [[NSImage alloc] initWithData:[pboard dataForType:availableType]];
 				size = NSSizeMakeIntSize([image size]);

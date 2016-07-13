@@ -107,7 +107,7 @@ static SeaController *seaController;
 	id window;
 	
 	// Question whether to proceed with reverting
-	if (NSRunAlertPanel(LOCALSTR(@"revert title", @"Revert"), [NSString stringWithFormat:LOCALSTR(@"revert body", @"\"%@\" has been edited. Are you sure you want to undo changes?"), [gCurrentDocument displayName]], LOCALSTR(@"revert", @"Revert"), LOCALSTR(@"cancel", @"Cancel"), NULL) == NSAlertDefaultReturn) {
+	if (NSRunAlertPanel(LOCALSTR(@"revert title", @"Revert"), LOCALSTR(@"revert body", @"\"%@\" has been edited. Are you sure you want to undo changes?"), LOCALSTR(@"revert", @"Revert"), LOCALSTR(@"cancel", @"Cancel"), NULL, [gCurrentDocument displayName]) == NSAlertDefaultReturn) {
 		
 		// Close the document and reopen it
 		[gCurrentDocument close];
@@ -121,6 +121,7 @@ static SeaController *seaController;
 
 - (IBAction)editLastSaved:(id)sender
 {
+	NSFileManager *fm = [NSFileManager defaultManager];
 	id originalDocument, currentDocument = gCurrentDocument;
 	NSString *old_path = [[currentDocument fileURL] path], *new_path = NULL;
 	int i;
@@ -131,13 +132,13 @@ static SeaController *seaController;
 	for (i = 1; i <= 64 && !done; i++) {
 		if (i == 1) {
 			new_path = [[old_path stringByDeletingPathExtension] stringByAppendingFormat:@" (Original).%@", [old_path pathExtension]];
-			if ([gFileManager fileExistsAtPath:new_path] == NO) {
+			if ([fm fileExistsAtPath:new_path] == NO) {
 				done = YES;
 			}
 		}
 		else {
 			new_path = [[old_path stringByDeletingPathExtension] stringByAppendingFormat:@" (Original %d).%@", i, [old_path pathExtension]];
-			if ([gFileManager fileExistsAtPath:new_path] == NO) {
+			if ([fm fileExistsAtPath:new_path] == NO) {
 				done = YES;
 			}
 		}
@@ -148,16 +149,16 @@ static SeaController *seaController;
 	}
 	
 	// Copy the contents on disk and open so the last saved version can be edited
-	if ([gFileManager copyPath:old_path toPath:new_path handler:nil]) {
+	if ([fm copyItemAtPath:old_path toPath:new_path error:NULL]) {
 		originalDocument = [(SeaDocumentController *)[NSDocumentController sharedDocumentController] openNonCurrentFile:new_path];
 	}
 	else {
-		NSRunAlertPanel(LOCALSTR(@"locked title", @"Operation Failed"), [NSString stringWithFormat:LOCALSTR(@"locked body", @"The \"Compare to Last Saved\" operation failed. The most likely cause for this is that the disk the original is kept on is full or read-only."), [gCurrentDocument displayName]], LOCALSTR(@"ok", @"OK"), NULL, NULL);
+		NSRunAlertPanel(LOCALSTR(@"locked title", @"Operation Failed"), LOCALSTR(@"locked body", @"The \"Compare to Last Saved\" operation failed. The most likely cause for this is that the disk the original is kept on is full or read-only."), LOCALSTR(@"ok", @"OK"), NULL, NULL, [gCurrentDocument displayName]);
 		return;
 	}
 	
 	// Finally remove the file we just created
-	[gFileManager removeFileAtPath:new_path handler:NULL];
+	[fm removeItemAtPath:new_path error:NULL];
 }
 
 - (void)colorSyncChanged:(NSNotification *)notification
@@ -182,7 +183,7 @@ static SeaController *seaController;
 	NSDocument *document;
 	
 	// Ensure that the document is valid
-	if(![[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSTIFFPboardType, NSPICTPboardType]]){
+	if(![[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSPasteboardTypeTIFF]]){
 		NSBeep();
 		return;
 	}
@@ -234,13 +235,13 @@ static SeaController *seaController;
 	
 	switch ([menuItem tag]) {
 		case 175:
-			return gCurrentDocument && [gCurrentDocument fileName] && [gCurrentDocument isDocumentEdited] && [gCurrentDocument current];
+			return gCurrentDocument && [gCurrentDocument fileURL] && [gCurrentDocument isDocumentEdited] && [gCurrentDocument current];
 		break;
 		case 176:
-			return gCurrentDocument && [gCurrentDocument fileName] && [gCurrentDocument current];
+			return gCurrentDocument && [gCurrentDocument fileURL] && [gCurrentDocument current];
 		break;
 		case 400:
-			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSTIFFPboardType, NSPICTPboardType]];
+			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 			if (availableType)
 				return YES;
 			else

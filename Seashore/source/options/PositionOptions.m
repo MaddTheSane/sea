@@ -31,7 +31,7 @@
 {
 	return function;
 }
-- (void)setFunctionFromIndex:(NSInteger)index
+- (void)setFunctionFromIndex:(AbstractModifiers)index
 {
 	switch (index) {
 		case kShiftModifier:
@@ -54,10 +54,10 @@
 	}*/
 }
 
-- (void)updateModifiers:(AbstractModifiers)modifiers
+- (void)updateModifiers:(NSEventModifierFlags)modifiers
 {
 	[super updateModifiers:modifiers];
-	int modifier = [super modifier];
+	AbstractModifiers modifier = [super modifier];
 	[self setFunctionFromIndex: modifier];
 }
 

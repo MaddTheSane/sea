@@ -25,7 +25,7 @@
 - (void)awakeFromNib
 {
 	// Register to get our custom type, strings, and filenames. Try dragging each into the view!
-    [outlineView registerForDraggedTypes:@[SEA_LAYER_PBOARD_TYPE, NSStringPboardType, NSFilenamesPboardType]];
+    [outlineView registerForDraggedTypes:@[SEA_LAYER_PBOARD_TYPE, NSPasteboardTypeString, NSFilenamesPboardType]];
 	[outlineView setVerticalMotionCanBeginDrag: YES];
 
 	[outlineView setIndentationPerLevel: 0.0];
@@ -243,17 +243,17 @@ NSFileHandle *NewFileHandleForWritingFile(NSString *dirpath, NSString *basename,
     draggedNodes = items; // Don't retain since this is just holding temporaral drag information, and it is only used during a drag!  We could put this in the pboard actually.
     
     // Provide data for our custom type, and simple NSStrings.
-    [pboard declareTypes:@[SEA_LAYER_PBOARD_TYPE, NSTIFFPboardType, NSFilesPromisePboardType, NSStringPboardType] owner:self];
+    [pboard declareTypes:@[SEA_LAYER_PBOARD_TYPE, NSPasteboardTypeTIFF, NSFilesPromisePboardType, NSPasteboardTypeString] owner:self];
 	
     // the actual data doesn't matter since DragDropSimplePboardType drags aren't recognized by anyone but us!.
     [pboard setData:[NSData data] forType:SEA_LAYER_PBOARD_TYPE]; 
-	[pboard setData:[draggedNodes[0] TIFFRepresentation] forType:NSTIFFPboardType];
+	[pboard setData:[draggedNodes[0] TIFFRepresentation] forType:NSPasteboardTypeTIFF];
 
     // Put the promised type we handle on the pasteboard.
     [pboard setPropertyList:@[@"tif"] forType:NSFilesPromisePboardType];
 	
     // Put string data on the pboard... notice you candrag into TextEdit!
-    [pboard setString: [draggedNodes[0] name] forType: NSStringPboardType];
+    [pboard setString: [draggedNodes[0] name] forType: NSPasteboardTypeString];
     
     return YES;
 }

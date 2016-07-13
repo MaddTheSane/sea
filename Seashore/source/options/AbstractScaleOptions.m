@@ -14,7 +14,7 @@
 }
 
 
-- (void)updateModifiers:(AbstractModifiers)modifiers
+- (void)updateModifiers:(NSEventModifierFlags)modifiers
 {
 	[super updateModifiers:modifiers];
 

@@ -89,17 +89,17 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	unsigned char *data;
 	
 	// Get the data from the pasteboard
-	imageRepDataType = [pboard availableTypeFromArray:@[NSTIFFPboardType]];
-	if (imageRepDataType == NULL) {
-		imageRepDataType = [pboard availableTypeFromArray:@[NSPICTPboardType]];
-		imageRepData = [pboard dataForType:imageRepDataType];
-		image = [[NSImage alloc] initWithData:imageRepData];
-		imageRep = [[NSBitmapImageRep alloc] initWithData:[image TIFFRepresentation]];
-	}
-	else {
+	imageRepDataType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
+	//if (imageRepDataType == NULL) {
+	//	imageRepDataType = [pboard availableTypeFromArray:@[NSPICTPboardType]];
+	//	imageRepData = [pboard dataForType:imageRepDataType];
+	//	image = [[NSImage alloc] initWithData:imageRepData];
+	//	imageRep = [[NSBitmapImageRep alloc] initWithData:[image TIFFRepresentation]];
+	//}
+	//else {
 		imageRepData = [pboard dataForType:imageRepDataType];
 		imageRep = [[NSBitmapImageRep alloc] initWithData:imageRepData];
-	}
+	//}
 	if ((self = [self initWithDocument:doc]) == nil) {
 		return nil;
 	}
@@ -709,24 +709,24 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	NSPoint centerPoint;
 	
 	// Get the data from the pasteboard
-	imageRepDataType = [pboard availableTypeFromArray:@[NSTIFFPboardType]];
-	if (imageRepDataType == NULL) {
-		imageRepDataType = [pboard availableTypeFromArray:@[NSPICTPboardType]];
-		imageRepData = [pboard dataForType:imageRepDataType];
-		image = [[NSImage alloc] initWithData:imageRepData];
-		imageRep = [[NSBitmapImageRep alloc] initWithData:[image TIFFRepresentation]];
-	}
-	else {
+	imageRepDataType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
+	//if (imageRepDataType == NULL) {
+	//	imageRepDataType = [pboard availableTypeFromArray:@[NSPICTPboardType]];
+	//	imageRepData = [pboard dataForType:imageRepDataType];
+	//	image = [[NSImage alloc] initWithData:imageRepData];
+	//	imageRep = [[NSBitmapImageRep alloc] initWithData:[image TIFFRepresentation]];
+	//}
+	//else {
 		imageRepData = [pboard dataForType:imageRepDataType];
 		imageRep = [[NSBitmapImageRep alloc] initWithData:imageRepData];
-	}
+	//}
 	
 	// Determine the color space of pasteboard image
 	space = -1;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace])
 		space = kGrayColorSpace;
-	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedBlackColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceBlackColorSpace])
-		space = kInvertedGrayColorSpace;
+	//if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedBlackColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceBlackColorSpace])
+	//	space = kInvertedGrayColorSpace;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedRGBColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceRGBColorSpace])
 		space = kRGBColorSpace;
 	if ([[imageRep colorSpaceName] isEqualToString:NSDeviceCMYKColorSpace])
@@ -1078,17 +1078,17 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		return;
 	
 	// Get the data from the pasteboard
-	imageRepDataType = [pboard availableTypeFromArray:@[NSTIFFPboardType]];
-	if (imageRepDataType == NULL) {
-		imageRepDataType = [pboard availableTypeFromArray:@[NSPICTPboardType]];
-		imageRepData = [pboard dataForType:imageRepDataType];
-		image = [[NSImage alloc] initWithData:imageRepData];
-		imageRep = [[NSBitmapImageRep alloc] initWithData:[image TIFFRepresentation]];
-	}
-	else {
+	imageRepDataType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
+	//if (imageRepDataType == NULL) {
+	//	imageRepDataType = [pboard availableTypeFromArray:@[NSPICTPboardType]];
+	//	imageRepData = [pboard dataForType:imageRepDataType];
+	//	image = [[NSImage alloc] initWithData:imageRepData];
+	//	imageRep = [[NSBitmapImageRep alloc] initWithData:[image TIFFRepresentation]];
+	//}
+	//else {
 		imageRepData = [pboard dataForType:imageRepDataType];
 		imageRep = [[NSBitmapImageRep alloc] initWithData:imageRepData];
-	}
+	//}
 	
 	// Determine the color space of pasteboard image
 	space = -1;
@@ -1481,11 +1481,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	}
 
 	// Declare the data being added to the pasteboard
-	[pboard declareTypes:@[NSTIFFPboardType] owner:NULL];
+	[pboard declareTypes:@[NSPasteboardTypeTIFF] owner:NULL];
 	
 	// Add it to the pasteboard
 	imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&ndata pixelsWide:globalRect.size.width pixelsHigh:globalRect.size.height bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:globalRect.size.width * spp bitsPerPixel:8 * spp];
-	[pboard setData:[imageRep TIFFRepresentation] forType:NSTIFFPboardType]; 
+	[pboard setData:[imageRep TIFFRepresentation] forType:NSPasteboardTypeTIFF]; 
 	
 	// Clean out the remains
 	if (ndata != data) {

@@ -60,10 +60,10 @@
 	}
 }
 
-- (void)updateModifiers:(AbstractModifiers)modifiers
+- (void)updateModifiers:(NSEventModifierFlags)modifiers
 {
 	[super updateModifiers:modifiers];
-	int modifier = [super modifier];
+	AbstractModifiers modifier = [super modifier];
 	[self setModeFromModifier: modifier];
 }
 

@@ -40,7 +40,7 @@
 	@param		modifiers
 				An unsigned int representing the new modifiers.
 */
-- (void)updateModifiers:(AbstractModifiers)modifiers;
+- (void)updateModifiers:(NSEventModifierFlags)modifiers;
 
 /*!
 	@method		modifierPopupChanged:

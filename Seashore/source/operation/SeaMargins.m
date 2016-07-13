@@ -570,7 +570,7 @@
 	switch ([[presetsMenu selectedItem] tag]) {
 		case 0:
 			pboard = [NSPasteboard generalPasteboard];
-			availableType = [pboard availableTypeFromArray:@[NSTIFFPboardType, NSPICTPboardType]];
+			availableType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 			if (availableType) {
 				image = [[NSImage alloc] initWithData:[pboard dataForType:availableType]];
 				size = NSSizeMakeIntSize([image size]);

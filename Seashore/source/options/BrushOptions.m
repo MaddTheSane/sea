@@ -138,10 +138,10 @@ enum {
 	return isErasing;
 }
 
-- (void)updateModifiers:(unsigned int)modifiers
+- (void)updateModifiers:(NSEventModifierFlags)modifiers
 {
 	[super updateModifiers:modifiers];
-	int modifier = [super modifier];
+	AbstractModifiers modifier = [super modifier];
 	
 	switch (modifier) {
 		case kAltModifier:
