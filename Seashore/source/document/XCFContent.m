@@ -61,7 +61,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	int propType, propSize;
 	BOOL finished = NO;
 	int lostprops_pos;
-	int parasites_start;
+	long parasites_start;
 	char *nameString;
 	int pos, i;
 	
@@ -83,7 +83,7 @@ static inline void fix_endian_read(int *input, size_t size)
 			
 				// Store the color map and complain if we are using the problematic version 0 XCF file
 				if (version == 0) {
-					NSRunAlertPanel(LOCALSTR(@"indexed color title", @"Indexed colour not supported"), LOCALSTR(@"indexed color body", @"XCF files using indexed colours are only supported if they are of version 1 or greater. This is because version 0 is known to have certain problems with indexed colours."), LOCALSTR(@"ok", @"OK"), NULL, NULL);
+					NSRunAlertPanel(LOCALSTR(@"indexed color title", @"Indexed colour not supported"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"indexed color body", @"XCF files using indexed colours are only supported if they are of version 1 or greater. This is because version 0 is known to have certain problems with indexed colours."));
 					return NO;
 				}
 				else {
@@ -221,7 +221,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	
 	// Express warning if necessary
 	if (version > 2)
-		NSRunAlertPanel(LOCALSTR(@"xcf version title", @"XCF version not supported"), LOCALSTR(@"xcf version body", @"The version of the XCF file you are trying to load is not supported by this program, loading may fail."), LOCALSTR(@"ok", @"OK"), NULL, NULL);
+		NSRunAlertPanel(LOCALSTR(@"xcf version title", @"XCF version not supported"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"xcf version body", @"The version of the XCF file you are trying to load is not supported by this program, loading may fail."));
 	
 	// NSLog(@"Properties begin: %d", ftell(file));
 	

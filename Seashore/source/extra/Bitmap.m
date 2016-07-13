@@ -8,10 +8,10 @@
 typedef struct {
 	unsigned char *ptrs[kMaxPtrsInPtrRecord];
 	int n;
-	int init_size;
+	size_t init_size;
 } PtrRecord;
 
-static inline PtrRecord initPtrs(unsigned char *initial, int init_size)
+static inline PtrRecord initPtrs(unsigned char *initial, size_t init_size)
 {
 	PtrRecord ptrs;
 	
@@ -42,7 +42,7 @@ static inline unsigned char *getFinalPtr(PtrRecord ptrs)
 	return result;
 }
 
-static inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
+static inline unsigned char *mallocPtr(PtrRecord *ptrs, size_t size)
 {
 	unsigned char *result;
 	
@@ -61,21 +61,121 @@ static inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
 
 static inline void freePtrs(PtrRecord ptrs)
 {
-	int i;
+	size_t i;
 	
 	for (i = 1; i < ptrs.n - 1; i++) {
 		free(ptrs.ptrs[i]);
 	}
 }
 
-static inline void rotate_bytes(unsigned char *data, int pos1, int pos2)
+static inline void rotate_bytes(unsigned char *data, size_t pos1, size_t pos2)
 {
 	unsigned char tmp;
-	int i;
+	ssize_t i;
 	
 	tmp = data[pos1];
 	for (i = pos1; i < pos2 - 1; i++) data[i] = data[i + 1];
 	data[pos2] = tmp;
+}
+
+void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp, BMPColorSpace dspace, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, BMPColorSpace ispace, NSInteger ibps, ColorSyncProfileRef iprofile)
+{
+	ColorSyncDataDepth srcDepth = 0;
+	ColorSyncDataDepth dstDepth = kColorSync8BitInteger;
+	ColorSyncDataLayout dstLayout = kColorSyncAlphaLast | kColorSyncByteOrderDefault;
+	ColorSyncDataLayout srcLayout;
+	ColorSyncProfileRef destProf;
+	size_t srcBytesPerRow;
+	size_t dstBytesPerRow;
+	ColorSyncTransformRef cw;
+	
+	switch (ispace) {
+		case kGrayColorSpace:
+		case kInvertedGrayColorSpace:
+			if (ibps == 8) {
+				srcDepth = kColorSync8BitInteger;
+			} else {
+				srcDepth = kColorSync16BitInteger;
+			}
+			if (ispp == 1) {
+				srcLayout = kColorSyncByteOrderDefault | kColorSyncAlphaNone;
+			} else {
+				srcLayout = kColorSyncByteOrderDefault | kColorSyncAlphaLast;
+			}
+			srcBytesPerRow = width * ispp * (ibps / 8);
+			break;
+			
+		case kRGBColorSpace:
+			if (ibps == 8) {
+				srcDepth = kColorSync8BitInteger;
+			} else {
+				srcDepth = kColorSync16BitInteger;
+			}
+			if (ispp == 3) {
+				srcLayout = kColorSyncByteOrderDefault | kColorSyncAlphaNone;
+			} else {
+				srcLayout = kColorSyncByteOrderDefault | kColorSyncAlphaLast;
+			}
+			srcBytesPerRow = width * ispp * (ibps / 8);
+			break;
+			
+		case kCMYKColorSpace:
+			if (ibps == 8) {
+				srcDepth = kColorSync8BitInteger;
+			} else {
+				srcDepth = kColorSync16BitInteger;
+			}
+			srcLayout = kColorSyncByteOrderDefault | kColorSyncAlphaNone;
+			srcBytesPerRow = width * ispp * (ibps / 8);
+			break;
+
+		default:
+			break;
+	}
+	
+	switch (dspace) {
+		case kGrayColorSpace:
+		case kInvertedGrayColorSpace:
+			destProf = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
+			dstBytesPerRow = width * 2;
+			break;
+			
+		case kRGBColorSpace:
+			destProf = ColorSyncProfileCreateWithName(kColorSyncSRGBProfile);
+			dstBytesPerRow = width * 4;
+			break;
+			
+		default:
+			break;
+	}
+	
+	
+	// Define the source
+	//ColorSyncDataDepth dstDepth = kColorSync8BitInteger;
+	//ColorSyncDataLayout dstLayout = kColorSyncAlphaLast | kColorSyncByteOrderDefault;
+	//size_t srcBytesPerRow = width * ispp * (ibps / 8);
+	//size_t dstBytesPerRow = width * 2;
+	
+	
+	
+	// Execute the conversion
+	NSArray<NSDictionary<NSString*,id>*>*
+	profSeq = @[
+				@{(__bridge NSString*)kColorSyncProfile: (__bridge id)iprofile,
+				  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+				  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+				  },
+				
+				@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+				  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+				  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+				  },
+				];
+	
+	cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+	ColorSyncTransformConvert(cw, width, height, dbitmap, dstDepth, dstLayout, dstBytesPerRow, ibitmap, srcDepth, srcLayout, srcBytesPerRow, NULL);
+	CFRelease(destProf);
+	CFRelease(cw);
 }
 
 /*
@@ -89,6 +189,8 @@ static inline void rotate_bytes(unsigned char *data, int pos1, int pos2)
 
 void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigned char *ibitmap, int width, int height, int ispp, int ispace, int ibps, CMProfileLocation *iprofile)
 {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	CMProfileRef srcProf, destProf;
 	CMBitmap srcBitmap, destBitmap;
 	CMWorldRef cw;
@@ -292,6 +394,7 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 		CMCloseProfile(srcProf);
 		
 	}
+#pragma GCC diagnostic pop
 }
 
 /*
@@ -301,9 +404,9 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 	RGB -> Gray
 */
 
-void covertBitmapNoColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigned char *ibitmap, int width, int height, int ispp, int ispace, int ibps)
+void covertBitmapNoColorSync(unsigned char *dbitmap, NSInteger dspp, BMPColorSpace dspace, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, BMPColorSpace ispace, NSInteger ibps)
 {
-	int i, j;
+	NSInteger i, j;
 	
 	if (ispace == kGrayColorSpace && dspace == kGrayColorSpace) {
 		
@@ -384,6 +487,8 @@ void covertBitmapNoColorSync(unsigned char *dbitmap, int dspp, int dspace, unsig
 
 unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int ibipp, int ibypr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat)
 {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	PtrRecord ptrs;
 	unsigned char *bitmap, *pbitmap;
 	int pos;
@@ -506,6 +611,153 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 		pbitmap = getPtr(ptrs);
 		bitmap = mallocPtr(&ptrs, width * height * dspp);
 		covertBitmapColorSync(bitmap, dspp, dspace, pbitmap, width, height, ispp, ispace, ibps, iprofile);
+	}
+	else {
+		pbitmap = getPtr(ptrs);
+		bitmap = mallocPtr(&ptrs, width * height * dspp);
+		covertBitmapNoColorSync(bitmap, dspp, dspace, pbitmap, width, height, ispp, ispace, ibps);
+	}
+	
+	// Add in alpha (not 16-bit friendly)
+	s_hasalpha = (ispace == kRGBColorSpace && ispp == 4) || (ispace == kGrayColorSpace && ispp == 2);
+	if (!s_hasalpha) {
+		for (i = 0; i < width * height; i++) {
+			pbitmap = getPtr(ptrs);
+			pbitmap[(i + 1) * dspp - 1] = 255;
+		}
+	}
+	
+	// Return result
+	freePtrs(ptrs);
+	
+	return getFinalPtr(ptrs);
+#pragma GCC diagnostic pop
+}
+
+unsigned char *convertBitmapColorSync(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger ibipp, NSInteger ibypr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, NSBitmapFormat iformat)
+{
+	PtrRecord ptrs;
+	unsigned char *bitmap, *pbitmap;
+	NSInteger pos;
+	BOOL s_hasalpha;
+	NSString *fail;
+	NSInteger i, j, k, l;
+	
+#ifdef DEBUG
+	if (!iprofile) {
+		NSLog(@"No ColorSync profile!");
+	}
+#endif
+	
+	// Point out conversions that are not possible
+	fail = NULL;
+	if (dbps != 8) fail = @"Only converts to 8 bps";
+	if (dspace == kCMYKColorSpace) fail = @"Cannot convert to CMYK color space";
+	if (dspace == kInvertedGrayColorSpace) fail = @"Cannot convert to inverted gray color space";
+	if (dspace == kRGBColorSpace && dspp != 4) fail = @"Can only convert to 4 spp for RGB color space";
+	if (dspace == kGrayColorSpace && dspp != 2) fail = @"Can only convert to 2 spp for RGB color space";
+	if (fail) { NSLog(@"%@", fail); return NULL; }
+	
+	// Create initial pointer
+	ptrs = initPtrs(ibitmap, ibypr * height);
+	
+	// Convert to from 1-, 2- or 4-bit to 8-bit
+	if (ibps < 8) {
+		pbitmap = getPtr(ptrs);
+		bitmap = mallocPtr(&ptrs, width * height * ispp);
+		for (j = 0; j < height; j++) {
+			for (i = 0; i < width; i++) {
+				for (k = 0; k < ispp; k++) {
+					pos = (j * width + i) * ispp + k;
+					bitmap[pos] = 0;
+					for (l = 0; l < ibps; l++) {
+						if (bit_test(&pbitmap[j * ibypr + (i * ibipp + l) / 8], 7 - ((i * ibipp + l) % 8))) {
+							bit_set(&bitmap[pos], l);
+						}
+						bitmap[pos] *= (255 / ((1 << ibps) - 1));
+					}
+				}
+			}
+		}
+		ibps = 8;
+		ibipp = ispp * 8;
+		ibypr = width * ispp;
+		iprofile = NULL; /* Sorry no ColorSync profiles for less than 8 bits */
+	}
+	
+	// Remove redundant bits and bytes
+	if (ibps == 8) {
+		if (ibipp != ispp * 8 || ibypr != width * ispp) {
+			pbitmap = getPtr(ptrs);
+			bitmap = mallocPtr(&ptrs, width * height * ispp);
+			for (j = 0; j < height; j++) {
+				for (i = 0; i < width; i++) {
+					for (k = 0; k < ispp; k++) {
+						bitmap[(j * width + i) * ispp + k] = pbitmap[j * ibypr + i * (ibipp / 8) + k];
+					}
+				}
+			}
+			ibipp = ispp * 8;
+			ibypr = width * ispp;
+		}
+	}
+	else if (ibps == 16) {
+		if (ibipp != ispp * 16 || ibypr != width * ispp * 2) {
+			pbitmap = getPtr(ptrs);
+			bitmap = mallocPtr(&ptrs, width * height * ispp * 2);
+			for (j = 0; j < height; j++) {
+				for (i = 0; i < width; i++) {
+					for (k = 0; k < ispp; k++) {
+						bitmap[((j * width + i) * ispp + k) * 2] = pbitmap[j * ibypr + i * (ibipp / 8) + k * 2];
+						bitmap[((j * width + i) * ispp + k) * 2 + 1] = pbitmap[j * ibypr + i * (ibipp / 8) + k * 2 + 1];
+					}
+				}
+			}
+			ibipp = ispp * 16;
+			ibypr = width * ispp * 2;
+		}
+	}
+	
+	// Swap alpha (if necessary)
+	if (iformat & kAlphaFirstFormat) {
+		pbitmap = getPtr(ptrs); /* Note: transform is destructive (other destructive transforms follow) */
+		if (ibps == 8) {
+			for (i = 0; i < width * height; i++) {
+				rotate_bytes(pbitmap, i * ispp, (i + 1) * ispp - 1);
+			}
+		}
+		else if (ibps == 16) {
+			pbitmap = getPtr(ptrs);
+			for (i = 0; i < width * height; i++) {
+				rotate_bytes(pbitmap, i * ispp * 2, i * ispp * 2 - 1);
+				rotate_bytes(pbitmap, i * ispp * 2, i * ispp * 2 - 1);
+			}
+		}
+		iformat = iformat & ~(kAlphaFirstFormat);
+	}
+	
+	// Convert inverted gray color space
+	if (ispace == kInvertedGrayColorSpace) {
+		pbitmap = getPtr(ptrs);
+		if (ibps == 8) {
+			for (i = 0; i < width * height; i++) {
+				pbitmap[i * ispp] = ~pbitmap[i * ispp];
+			}
+		}
+		else if (ibps == 16) {
+			for (i = 0; i < width * height; i++) {
+				pbitmap[i * ispp * 2] = ~pbitmap[i * ispp * 2];
+				pbitmap[i * ispp * 2 + 1] = ~pbitmap[i * ispp * 2 + 1];
+			}
+		}
+		ispace = kGrayColorSpace;
+	}
+	
+	// Convert colour space
+	if (iprofile || ispace == kCMYKColorSpace) {
+		pbitmap = getPtr(ptrs);
+		bitmap = mallocPtr(&ptrs, width * height * dspp);
+		covertBitmapColorSyncProfile(bitmap, dspp, dspace, pbitmap, width, height, ispp, ispace, ibps, iprofile);
 	}
 	else {
 		pbitmap = getPtr(ptrs);

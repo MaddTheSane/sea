@@ -94,7 +94,7 @@ enum {
 	int overlayOpacity;
 	
 	// The colour world for colour space conversions
-	CMWorldRef cw;
+	ColorSyncTransformRef cw;
 	
 	// The whiteboard's samples per pixel
 	int spp;
@@ -116,7 +116,7 @@ enum {
 	NSThread *lockingThread;
 	
 	// The display profile
-	CMProfileRef displayProf;
+	ColorSyncProfileRef displayProf;
 	CGColorSpaceRef cgDisplayProf;
 	
 }

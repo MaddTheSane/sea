@@ -10,7 +10,7 @@
 {
 	int i, space, bps, sspp;
 	unsigned char *srcPtr;
-	CMProfileLocation cmProfileLoc;
+	ColorSyncProfileRef cmProfileLoc;
 	int bipp, bypr;
 	id profile;
 	NSBitmapFormat format;
@@ -51,15 +51,13 @@
 	// Extract color profile
 	profile = [imageRep valueForProperty:NSImageColorSyncProfileData];
 	if (profile) {
-		cmProfileLoc.locType = cmBufferBasedProfile;
-		cmProfileLoc.u.bufferLoc.buffer = (Ptr)[profile bytes];
-		cmProfileLoc.u.bufferLoc.size = (UInt32)[profile length];
+		cmProfileLoc = ColorSyncProfileCreate((__bridge CFDataRef)(profile), NULL);
 	}
 	
 	// Convert data to what we want
 	bipp = [imageRep bitsPerPixel];
 	bypr = [imageRep bytesPerRow];
-	data = convertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, (profile) ? &cmProfileLoc : NULL, bps, format);
+	data = convertBitmapColorSync(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, format);
 	if (!data) {
 		NSLog(@"Required conversion not supported.");
 		return nil;

@@ -411,7 +411,7 @@ enum {
 		[exportersPopUp addItemWithTitle:[exporter title]];
 	}
 	[exportersPopUp selectItemAtIndex:exporterIndex];
-	[savePanel setRequiredFileType:[exporters[exporterIndex] extension]];
+	savePanel.allowedFileTypes = @[exporters[exporterIndex].fileType];
 	
 	// Finally set the options button state appropriately
 	[optionsButton setEnabled:[exporters[[exportersPopUp indexOfSelectedItem]] hasOptions]];
@@ -428,7 +428,7 @@ enum {
 
 - (IBAction)exporterChanged:(id)sender
 {
-	[(NSSavePanel *)[exportersPopUp window] setRequiredFileType:[exporters[[exportersPopUp indexOfSelectedItem]] extension]];
+	((NSSavePanel*)[exportersPopUp window]).allowedFileTypes = @[[exporters[[exportersPopUp indexOfSelectedItem]] fileType]];
 	[self setFileType:[exporters[[exportersPopUp indexOfSelectedItem]] title]];
 	[optionsButton setEnabled:[exporters[[exportersPopUp indexOfSelectedItem]] hasOptions]];
 	[optionsSummary setStringValue:[exporters[[exportersPopUp indexOfSelectedItem]] optionsString]];

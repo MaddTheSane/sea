@@ -105,6 +105,7 @@ IntSize getDocumentSize(char *path)
 
 - (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path
 {
+	NSFileManager *fm = [NSFileManager defaultManager];
 	NSString *importerPath;
 	NSImageRep *imageRep;
 	id layer;
@@ -113,6 +114,7 @@ IntSize getDocumentSize(char *path)
 	NSString *path_in, *path_out, *width_arg, *height_arg;
 	NSArray *args;
 	NSTask *task;
+	NSString *tmpSeaImport = @"/tmp/seaimport/";
 	
 	// Initialize superclass first
 	if (![super initWithDocument:doc])
@@ -132,10 +134,11 @@ IntSize getDocumentSize(char *path)
 	
 	// Add all plug-ins to the array
 	importerPath = [[gMainBundle builtInPlugInsPath] stringByAppendingPathComponent:@"SVGImporter.app/Contents/MacOS/SVGImporter"];
-	if ([gFileManager fileExistsAtPath:importerPath]) {
-		if (![gFileManager fileExistsAtPath:@"/tmp/seaimport"]) [gFileManager createDirectoryAtPath:@"/tmp/seaimport" attributes:@{}];
+	if ([fm fileExistsAtPath:importerPath]) {
+		if (![fm fileExistsAtPath:tmpSeaImport])
+			[fm createDirectoryAtPath:tmpSeaImport withIntermediateDirectories:YES attributes:@{} error:NULL];
 		path_in = path;
-		path_out = [NSString stringWithFormat:@"/tmp/seaimport/%@.png", [[path lastPathComponent] stringByDeletingPathExtension]];
+		path_out = [[tmpSeaImport stringByAppendingPathComponent:path.lastPathComponent] stringByAppendingPathExtension:@"png"];
 		if (size.width > 0 && size.height > 0 && size.width < kMaxImageSize && size.height < kMaxImageSize) {
 			width_arg = [NSString stringWithFormat:@"%d", size.width];
 			height_arg = [NSString stringWithFormat:@"%d", size.height];
@@ -200,7 +203,7 @@ IntSize getDocumentSize(char *path)
 	layers = @[layer];
 	
 	// Now forget the NSImage
-	[gFileManager removeFileAtPath:path_out handler:NULL];
+	[fm removeItemAtPath:path_out error:NULL];
 	
 	return self;
 }

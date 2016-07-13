@@ -20,7 +20,7 @@
 	@constant	kCMYKColorSpace
 				Indicates the CMYK colour space
 */
-enum {
+typedef NS_ENUM(int, BMPColorSpace) {
 	kGrayColorSpace,
 	kInvertedGrayColorSpace,
 	kRGBColorSpace,
@@ -63,7 +63,46 @@ enum {
 				possible. You should always check for failed conversions. The
 				block of memory is safe for use with AltiVec.
 */
-extern unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat) DEPRECATED_ATTRIBUTE;
+extern unsigned char *convertBitmap(int dspp, BMPColorSpace dspace, int dbps, unsigned char *ibitmap, int width, int height, BMPColorSpace ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat) DEPRECATED_ATTRIBUTE;
+
+/*!
+	@function	convertBitmap
+	@discussion	Given a bitmap converts the bitmap to the given type. The
+ conversion will not affect the premultiplication of the data.
+	@param		dspp
+ The samples per pixel of the desired bitmap.
+	@param		dspace
+ The colour space of the desired bitmap.
+	@param		dbps
+ The bits per sample of the desired bitmap.
+	@param		ibitmap
+ The original bitmap.
+	@param		width
+ The width of the bitmap.
+	@param		height
+ The height of the bitmap.
+	@param		ispp
+ The samples per pixel of the original bitmap.
+	@param		iebpp
+ The number of extra bytes per pixel of the original bitmap.
+	@param		iebpr
+ The number of extra bytes per row of the original bitmap.
+	@param		ispace
+ The colour space of the original bitmap.
+	@param		iprofile
+ The ColorSync profile of the original bitmap or
+ NULL if none exists.
+	@param		ibps
+ The bits per sample of the original bitmap.
+	@param		iformat
+ The format of the original bitmap.
+	@result		Returns a block of memory containing the desired bitmap which
+ must be freed after use or NULL if the conversion was not
+ possible. You should always check for failed conversions. The
+ block of memory is safe for use with AltiVec.
+ */
+extern unsigned char *convertBitmapColorSync(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger iebpp, NSInteger iebpr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, NSBitmapFormat iformat);
+
 
 /*!
 	@function	stripAlphaToWhite

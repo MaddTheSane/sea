@@ -34,7 +34,7 @@ extern IntPoint gScreenResolution;
 - (instancetype)initWithDocument:(id)doc
 {
 	if (self = [super init]) {
-		CMProfileRef destProf;
+		ColorSyncProfileRef destProf;
 		int layerWidth, layerHeight;
 		NSString *pluginPath;
 		NSBundle *bundle;
@@ -77,10 +77,25 @@ extern IntPoint gScreenResolution;
 		altData = NULL;
 		
 		// Create the colour world
-		OpenDisplayProfile(&displayProf);
+		displayProf = ColorSyncProfileCreateWithDisplayID(0);
 		cgDisplayProf = CGColorSpaceCreateWithPlatformColorSpace(displayProf);
-		CMGetDefaultProfileBySpace(cmCMYKData, &destProf);
-		NCWNewColorWorld(&cw, displayProf, destProf);
+		destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile);
+		NSArray<NSDictionary<NSString*,id>*>*
+		profSeq = @[
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)displayProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+					  },
+					
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+					  },
+					];
+		
+		cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+		
+		CFRelease(destProf);
 		
 		// Set the locking thread to NULL
 		lockingThread = NULL;
@@ -91,7 +106,7 @@ extern IntPoint gScreenResolution;
 - (instancetype)initWithContent:(SeaContent *)cont
 {
 	if (self = [super init]) {
-		CMProfileRef destProf;
+		ColorSyncProfileRef destProf;
 		int layerWidth, layerHeight;
 		
 		gScreenResolution = IntMakePoint(1024, 768);
@@ -126,10 +141,25 @@ extern IntPoint gScreenResolution;
 		altData = NULL;
 		
 		// Create the colour world
-		OpenDisplayProfile(&displayProf);
+		displayProf = ColorSyncProfileCreateWithDisplayID(0);
 		cgDisplayProf = CGColorSpaceCreateWithPlatformColorSpace(displayProf);
-		CMGetDefaultProfileBySpace(cmCMYKData, &destProf);
-		NCWNewColorWorld(&cw, displayProf, destProf);
+		destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile);
+		NSArray<NSDictionary<NSString*,id>*>*
+		profSeq = @[
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)displayProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+					  },
+					
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+					  },
+					];
+		
+		cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+		
+		CFRelease(destProf);
 		
 		// Set the locking thread to NULL
 		lockingThread = NULL;
@@ -141,9 +171,9 @@ extern IntPoint gScreenResolution;
 - (void)dealloc
 {	
 	// Free the room we took for everything else
-	if (displayProf) CloseDisplayProfile(displayProf);
+	if (displayProf) CFRelease(displayProf);
 	if (cgDisplayProf) CGColorSpaceRelease(cgDisplayProf);
-	if (cw) CWDisposeColorWorld(cw);
+	if (cw) CFRelease(cw);
 	if (data) free(data);
 	if (overlay) free(overlay);
 	if (replace) free(replace);
@@ -525,19 +555,17 @@ extern IntPoint gScreenResolution;
 
 - (NSColor *)matchColor:(NSColor *)color
 {
-	CMColor cmColor;
 	NSColor *result;
 	
 	// Determine the RGB color
-	cmColor.rgb.red = ([color redComponent] * 65535.0);
-	cmColor.rgb.green = ([color greenComponent] * 65535.0);
-	cmColor.rgb.blue = ([color blueComponent] * 65535.0);
+	float srcColor[] = {color.redComponent, color.greenComponent, color.blueComponent};
+	float dstColor[4] = {0};
 	
 	// Match color
-	CWMatchColors(cw, &cmColor, 1);
+	ColorSyncTransformConvert(cw, 1, 1, dstColor, kColorSync32BitFloat, kColorSyncAlphaNone | kColorSyncByteOrderDefault, sizeof(dstColor), srcColor, kColorSync32BitFloat, kColorSyncAlphaNone | kColorSyncByteOrderDefault, sizeof(srcColor), NULL);
 	
 	// Calculate result
-	result = [NSColor colorWithDeviceCyan:(CGFloat)cmColor.cmyk.cyan / 65536.0 magenta:(CGFloat)cmColor.cmyk.magenta / 65536.0 yellow:(CGFloat)cmColor.cmyk.yellow / 65536.0 black:(CGFloat)cmColor.cmyk.black / 65536.0 alpha:[color alphaComponent]];
+	result = [NSColor colorWithDeviceCyan:dstColor[0] magenta:dstColor[1] yellow:dstColor[2] black:dstColor[3] alpha:[color alphaComponent]];
 	
 	return result;
 }
@@ -734,22 +762,9 @@ extern IntPoint gScreenResolution;
 			// Define the source
 			tempData = malloc(majorUpdateRect.size.width * 3);
 			stripAlphaToWhite(4, tempData, data + ((majorUpdateRect.origin.y + i) * width + majorUpdateRect.origin.x) * 4, majorUpdateRect.size.width);
-			srcBitmap.image = (char *)tempData;
-			srcBitmap.width = majorUpdateRect.size.width;
-			srcBitmap.height = 1;
-			srcBitmap.rowBytes = majorUpdateRect.size.width * 3;
-			srcBitmap.pixelSize = 8 * 3;
-			srcBitmap.space = cmRGB24Space;
-		
-			// Define the destination
-			destBitmap = srcBitmap;
-			destBitmap.image = (char *)altData + ((majorUpdateRect.origin.y + i) * width + majorUpdateRect.origin.x) * 4;
-			destBitmap.rowBytes = majorUpdateRect.size.width * 4;
-			destBitmap.pixelSize = 8 * 4;
-			destBitmap.space = cmCMYK32Space;
 			
 			// Execute the conversion
-			CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
+			ColorSyncTransformConvert(cw, majorUpdateRect.size.width, 1, (char *)altData + ((majorUpdateRect.origin.y + i) * width + majorUpdateRect.origin.x) * 4, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, majorUpdateRect.size.width * 4, tempData, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, majorUpdateRect.size.width * 3, NULL);
 			
 			// Clean up after ourselves
 			free(tempData);
@@ -761,23 +776,9 @@ extern IntPoint gScreenResolution;
 		// Define the source
 		tempData = malloc(width * height * 3);
 		stripAlphaToWhite(4, tempData, data, width * height);
-		srcBitmap.image = (char *)tempData;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * 3;
-		srcBitmap.pixelSize = 8 * 3;
-		srcBitmap.space = cmRGB24Space;
-	
-		// Define the destination
-		destBitmap.image = (char *)altData;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 4;
-		destBitmap.pixelSize = 8 * 4;
-		destBitmap.space = cmCMYK32Space;
 		
 		// Execute the conversion
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
+		ColorSyncTransformConvert(cw, width, height, altData, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, width * 4, tempData, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, width * 3, NULL);
 
 		// Clean up after ourselves
 		free(tempData);
@@ -948,15 +949,30 @@ extern IntPoint gScreenResolution;
 
 - (void)updateColorWorld
 {
-	CMProfileRef destProf;
+	ColorSyncProfileRef destProf;
 	
-	if (cw) CWDisposeColorWorld(cw);
-	if (displayProf) CloseDisplayProfile(displayProf);
+	if (cw) CFRelease(cw);
+	if (displayProf) CFRelease(displayProf);
 	if (cgDisplayProf) CGColorSpaceRelease(cgDisplayProf);
-	OpenDisplayProfile(&displayProf);
+	displayProf = ColorSyncProfileCreateWithDisplayID(0);
 	cgDisplayProf = CGColorSpaceCreateWithPlatformColorSpace(displayProf);
-	CMGetDefaultProfileBySpace(cmCMYKData, &destProf);
-	NCWNewColorWorld(&cw, displayProf, destProf);
+	destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile);
+	NSArray<NSDictionary<NSString*,id>*>*
+	profSeq = @[
+				@{(__bridge NSString*)kColorSyncProfile: (__bridge id)displayProf,
+				  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+				  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+				  },
+				
+				@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+				  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+				  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+				  },
+				];
+	
+	cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+	
+	CFRelease(destProf);
 	if ([self CMYKPreview])
 		[self update];
 }

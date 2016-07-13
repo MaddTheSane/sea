@@ -30,23 +30,26 @@
 - (IBAction)showOptions:(id)sender;
 
 /*!
-	@method		title
+	@property	title
 	@discussion	Returns the title of the exporter (as will be displayed in the
  save panel). This must be equal to the CFBundleTypeName in the
  CFBundleDocumentTypes array.
 	@result		Returns an NSString representing the title of the exporter.
 */
+@property (readonly, copy) NSString *title;
 - (NSString *)title;
 
 /*!
-	@method		extension
+	@property	extension
 	@discussion	Returns the FIRST extension of the file format associated with this
 				exporter.
 	@result		Returns a NSString representing the extension of the file format
 				associated with this exporter.
 */
+@property (readonly, copy) NSString *extension;
 - (NSString *)extension;
 
+@property (readonly, copy) NSString *fileType;
 - (NSString *)fileType;
 
 /*!
