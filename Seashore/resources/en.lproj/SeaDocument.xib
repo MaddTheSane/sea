@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <deployment identifier="macosx"/>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11129.15"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SeaDocument">
@@ -30,7 +32,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
@@ -63,7 +65,7 @@
                                             <button verticalHuggingPriority="750" id="16691">
                                                 <rect key="frame" x="549" y="1" width="105" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
-                                                <buttonCell key="cell" type="push" title="&lt;alt>" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="16796">
+                                                <buttonCell key="cell" type="push" title="&lt;alt&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="16796">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -74,7 +76,7 @@
                                             <button verticalHuggingPriority="750" id="16680">
                                                 <rect key="frame" x="654" y="1" width="105" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
-                                                <buttonCell key="cell" type="push" title="&lt;default>" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="16795">
+                                                <buttonCell key="cell" type="push" title="&lt;default&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="16795">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                     <string key="keyEquivalent" base64-UTF8="YES">
@@ -291,7 +293,7 @@ DQ
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="39" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="9834" id="7811" customClass="SeaOutlineView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="543"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="42"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="2" height="3"/>
                                                     <color key="backgroundColor" red="0.89411770999999995" green="0.91764712000000004" blue="0.94509810000000005" alpha="1" colorSpace="deviceRGB"/>
@@ -765,7 +767,7 @@ Gw
                     <box toolTip="Horizontal resolution" title="Box" titlePosition="noTitle" id="534">
                         <rect key="frame" x="17" y="56" width="220" height="134"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <view key="contentView">
+                        <view key="contentView" id="Dp2-GQ-AbO">
                             <rect key="frame" x="2" y="2" width="216" height="130"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -925,7 +927,7 @@ Gw
                     <box title="Box" titlePosition="noTitle" id="608">
                         <rect key="frame" x="17" y="56" width="294" height="277"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <view key="contentView">
+                        <view key="contentView" id="6c7-xV-mnU">
                             <rect key="frame" x="2" y="2" width="290" height="273"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -1264,7 +1266,7 @@ Gw
                     <box title="Box" titlePosition="noTitle" id="557">
                         <rect key="frame" x="17" y="56" width="294" height="208"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <view key="contentView">
+                        <view key="contentView" id="KFx-Ct-MXa">
                             <rect key="frame" x="2" y="2" width="290" height="204"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -1537,13 +1539,13 @@ Gw
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1007" customClass="NSTextViewRedirect">
-                                    <rect key="frame" x="0.0" y="0.0" width="438" height="54"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="423" height="54"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="438" height="54"/>
+                                    <size key="minSize" width="423" height="54"/>
                                     <size key="maxSize" width="466" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="438" height="54"/>
+                                    <size key="minSize" width="423" height="54"/>
                                     <size key="maxSize" width="466" height="10000000"/>
                                     <connections>
                                         <outlet property="delegate" destination="310" id="1017"/>
@@ -1905,10 +1907,10 @@ Gw
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" id="415" customClass="NSExtendedTableView">
-                                    <rect key="frame" x="0.0" y="0.0" width="231" height="94"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="231" height="19"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
                                         <tableColumn editable="NO" width="228" minWidth="228" maxWidth="228" id="413">
@@ -2133,7 +2135,7 @@ Gw
                     <box title="Box" titlePosition="noTitle" id="755">
                         <rect key="frame" x="17" y="56" width="275" height="76"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <view key="contentView">
+                        <view key="contentView" id="RnM-mh-m3S">
                             <rect key="frame" x="2" y="2" width="271" height="72"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -3493,7 +3495,7 @@ Gw
                 <segmentedControl verticalHuggingPriority="750" id="6458">
                     <rect key="frame" x="7" y="6" width="64" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <segmentedCell key="cell" controlSize="mini" state="on" alignment="left" style="automatic" trackingMode="selectOne" id="16946">
+                    <segmentedCell key="cell" controlSize="mini" state="on" borderStyle="border" alignment="left" style="automatic" trackingMode="selectOne" id="16946">
                         <font key="font" metaFont="miniSystem"/>
                         <segments>
                             <segment image="left-align" width="20" selected="YES"/>
@@ -5114,10 +5116,10 @@ DQ
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="14" id="11980">
-                                    <rect key="frame" x="0.0" y="0.0" width="214" height="160"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="197" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
                                         <tableColumn editable="NO" width="194" minWidth="8" maxWidth="1000" id="11981">
@@ -5432,8 +5434,8 @@ DQ
         <image name="7-not" width="35" height="27"/>
         <image name="8-not" width="35" height="27"/>
         <image name="9-not" width="35" height="27"/>
-        <image name="NSAddTemplate" width="8" height="8"/>
-        <image name="NSRemoveTemplate" width="8" height="8"/>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="center-align" width="19" height="13"/>
         <image name="duplicate" width="32" height="23"/>
         <image name="help-button" width="15" height="16"/>

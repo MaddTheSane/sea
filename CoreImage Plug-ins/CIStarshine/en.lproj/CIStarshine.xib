@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CIStarshineClass">
@@ -15,7 +16,7 @@
         <window title="Starshine" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="66" y="439" width="365" height="211"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="365" height="211"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -55,7 +56,7 @@ Gw
                         </textFieldCell>
                     </textField>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="39">
-                        <rect key="frame" x="18" y="151" width="283" height="20"/>
+                        <rect key="frame" x="18" y="150" width="283" height="21"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="100" doubleValue="15" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="92">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
@@ -65,7 +66,7 @@ Gw
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40">
-                        <rect key="frame" x="305" y="153" width="42" height="14"/>
+                        <rect key="frame" x="305" y="152" width="42" height="14"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="38" id="nIs-tm-Gi3"/>
                         </constraints>
@@ -94,7 +95,7 @@ Gw
                         </connections>
                     </colorWell>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="71">
-                        <rect key="frame" x="18" y="131" width="48" height="14"/>
+                        <rect key="frame" x="18" y="130" width="48" height="14"/>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Opacity:" id="94">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -102,7 +103,7 @@ Gw
                         </textFieldCell>
                     </textField>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="72">
-                        <rect key="frame" x="18" y="105" width="283" height="20"/>
+                        <rect key="frame" x="18" y="103" width="283" height="21"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" minValue="-8" doubleValue="-2" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="95">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
@@ -112,7 +113,7 @@ Gw
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="73">
-                        <rect key="frame" x="305" y="107" width="42" height="14"/>
+                        <rect key="frame" x="305" y="105" width="42" height="14"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="38" id="dve-qe-AEu"/>
                         </constraints>
@@ -127,7 +128,7 @@ Gw
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="74">
-                        <rect key="frame" x="18" y="85" width="39" height="14"/>
+                        <rect key="frame" x="18" y="83" width="39" height="14"/>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Width:" id="97">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -135,7 +136,7 @@ Gw
                         </textFieldCell>
                     </textField>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="75">
-                        <rect key="frame" x="18" y="59" width="283" height="20"/>
+                        <rect key="frame" x="18" y="59" width="283" height="21"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="10" doubleValue="2.5" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="98">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
@@ -177,6 +178,7 @@ Gw
                     <constraint firstItem="72" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="bvZ-8Z-eEa"/>
                     <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="20" symbolic="YES" id="cSq-1u-GKe"/>
                     <constraint firstAttribute="trailing" secondItem="76" secondAttribute="trailing" constant="20" symbolic="YES" id="cya-Kh-jkJ"/>
+                    <constraint firstItem="16" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="68" secondAttribute="trailing" priority="999" constant="8" symbolic="YES" id="e6D-c0-ut1"/>
                     <constraint firstItem="68" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="hN6-xW-eBu"/>
                     <constraint firstItem="72" firstAttribute="baseline" secondItem="73" secondAttribute="baseline" id="ifB-AK-UOB"/>
                     <constraint firstItem="74" firstAttribute="top" secondItem="72" secondAttribute="bottom" constant="8" symbolic="YES" id="ije-Ck-8wn"/>
