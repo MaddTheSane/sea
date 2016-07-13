@@ -71,7 +71,7 @@
 - (IBAction)flatten:(id)sender
 {
 	// Warn before flattening the image
-	if (NSRunAlertPanel(LOCALSTR(@"flatten title", @"Information will be lost"), LOCALSTR(@"flatten body", @"Parts of the document that are not currently visible will be lost. Are you sure you wish to continue?"), LOCALSTR(@"flatten", @"Flatten"), LOCALSTR(@"cancel", @"Cancel"), NULL) == NSAlertDefaultReturn)
+	if (NSRunAlertPanel(LOCALSTR(@"flatten title", @"Information will be lost"), @"%@", LOCALSTR(@"flatten", @"Flatten"), LOCALSTR(@"cancel", @"Cancel"), NULL, LOCALSTR(@"flatten body", @"Parts of the document that are not currently visible will be lost. Are you sure you wish to continue?")) == NSAlertDefaultReturn)
 		[[gCurrentDocument contents] flatten];
 }
 

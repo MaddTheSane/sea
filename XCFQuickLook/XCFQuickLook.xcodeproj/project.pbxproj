@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C05A19C06CAA52B00D84F6F /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.m */; };
+		55AAF2AB1D36D9BA00E2ADF9 /* ColorSyncDeprecated.h in Headers */ = {isa = PBXBuildFile; fileRef = 55AAF2AA1D36D9BA00E2ADF9 /* ColorSyncDeprecated.h */; };
 		61E3BCFB0870B4F2002186A0 /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */; };
 		8D576312048677EA00EA77CD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B6FE84183AC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
@@ -48,6 +49,7 @@
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
 		55909E9B18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		55AAF2AA1D36D9BA00E2ADF9 /* ColorSyncDeprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorSyncDeprecated.h; path = extra/ColorSyncDeprecated.h; sourceTree = "<group>"; };
 		61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateThumbnailForURL.m; sourceTree = "<group>"; };
 		8D576316048677EA00EA77CD /* XCFQuickLook.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCFQuickLook.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 		55B95A971C6FB94C00E37A8C /* Shared with Seashore */ = {
 			isa = PBXGroup;
 			children = (
+				55AAF2AA1D36D9BA00E2ADF9 /* ColorSyncDeprecated.h */,
 				DC0E914A1041DD3F00C3FC48 /* Bitmap.h */,
 				DC0E914B1041DD3F00C3FC48 /* Bitmap.m */,
 				DC0E91441041DD3F00C3FC48 /* ColorConversion.h */,
@@ -191,6 +194,7 @@
 				DC0E914F1041DD3F00C3FC48 /* Constants.h in Headers */,
 				DC0E91511041DD3F00C3FC48 /* Rects.h in Headers */,
 				DC0E91531041DD3F00C3FC48 /* RLE.h in Headers */,
+				55AAF2AB1D36D9BA00E2ADF9 /* ColorSyncDeprecated.h in Headers */,
 				DC0E91541041DD3F00C3FC48 /* SeaContent.h in Headers */,
 				DC0E91561041DD3F00C3FC48 /* XCFContent.h in Headers */,
 				DC0E91581041DD3F00C3FC48 /* SeaLayer.h in Headers */,
@@ -340,6 +344,7 @@
 		2CA326230896AD4900168862 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
@@ -356,6 +361,7 @@
 		2CA326240896AD4900168862 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = c99;

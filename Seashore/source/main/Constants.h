@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum
+typedef NS_ENUM(int, PropType)
 {
 	PROP_END                   =  0,
 	PROP_COLORMAP              =  1,
@@ -38,7 +38,7 @@ typedef enum
 	PROP_UNIT                  = 22,
 	PROP_PATHS                 = 23,
 	PROP_USER_UNIT             = 24
-} PropType;
+};
 
 /*!
 	@enum		XcfCompressionType
