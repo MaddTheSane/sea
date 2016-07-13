@@ -49,7 +49,7 @@
 	channel = [pluginData channel];
 	
 	// FIXME: What is the replacement API!?
-	// TODO convert to ColorSyncTransformRef
+	// TODO: convert to ColorSyncTransformRef
 	CMGetDefaultDevice(cmDisplayDeviceClass, &device);
 	CMGetDeviceDefaultProfileID(cmDisplayDeviceClass, device, &deviceID);
 	CMGetDeviceProfile(cmDisplayDeviceClass, device, deviceID, &profileLoc);
@@ -113,7 +113,6 @@
 		
 	}
 	
-	// FIXME: What is the replacement API!?
 	CWDisposeColorWorld(cw);
 	CWDisposeColorWorld(scw);
 	CMCloseProfile(srcProf);

@@ -752,7 +752,6 @@ extern IntPoint gScreenResolution;
 - (void)forcedCMYKUpdate:(IntRect)majorUpdateRect
 {
 	unsigned char *tempData;
-	CMBitmap srcBitmap, destBitmap;
 	int i;
 
 	// Define the source

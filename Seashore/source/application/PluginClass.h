@@ -29,6 +29,7 @@
 	@result		Returns an integer indicating the plug-in's type.
 */
 - (int)type;
+@property (readonly) int type;
 
 /*!
 	@method		points
@@ -38,6 +39,7 @@
 				requires to operate.
 */
 - (int)points;
+@property (readonly) int points;
 
 /*!
 	@method		name
@@ -45,6 +47,7 @@
 	@result		Returns an NSString indicating the plug-in's name.
 */
 - (NSString *)name;
+@property (readonly, copy) NSString *name;
 
 /*!
 	@method		groupName
@@ -52,6 +55,7 @@
 	@result		Returns an NSString indicating the plug-in's group name.
 */
 - (NSString *)groupName;
+@property (readonly, copy) NSString *groupName;
 
 /*!
 	@method		instruction
@@ -60,6 +64,7 @@
 				(127 chars max).
 */
 - (NSString *)instruction;
+@property (readonly, copy) NSString *instruction;
 
 /*!
 	@method		run
@@ -79,6 +84,7 @@
 	@result		Returns YES if the plug-in can be applied again, NO otherwise.
 */
 - (BOOL)canReapply;
+@property (readonly) BOOL canReapply;
 
 @optional
 
@@ -88,5 +94,6 @@
 	@result		Returns the NSString "Seashore Approved (Bobo)".
 */
 - (NSString *)sanity;
+@property (readonly, copy) NSString *sanity;
 
 @end

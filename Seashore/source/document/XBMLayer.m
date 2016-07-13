@@ -6,7 +6,7 @@
 
 @implementation XBMLayer
 
-- (instancetype)initWithFile:(FILE *)file offset:(int)offset document:(id)doc sharedInfo:(SharedXBMInfo *)info
+- (instancetype)initWithFile:(FILE *)file offset:(long)offset document:(id)doc sharedInfo:(SharedXBMInfo *)info
 {
 	unsigned char value;
 	char string[9], temp;
@@ -41,7 +41,7 @@
 		do {
 			i++;
 			string[i] = fgetc(file);
-		} while ((i < 8) && (string[i] >= '0' && string[i] <= '9' || string[i] >= 'a' && string[i] <= 'f' || string[i] >= 'A' && string[i] <= 'F' || string[i] == 'x') && !(ferror(file) || feof(file)));
+		} while ((i < 8) && ((string[i] >= '0' && string[i] <= '9') || (string[i] >= 'a' && string[i] <= 'f') || (string[i] >= 'A' && string[i] <= 'F') || string[i] == 'x') && !(ferror(file) || feof(file)));
 		
 		// Fail if something went wrong
 		if (ferror(file) || feof(file)) {

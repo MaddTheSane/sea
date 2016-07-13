@@ -23,20 +23,23 @@
 	@result		Returns a IntRect indicating the active selection.
 */
 - (IntRect)selection;
+@property (readonly) IntRect selection;
 
 /*!
 	@method		data
 	@discussion	Returns the bitmap data of the layer.
 	@result		Returns a pointer to the bitmap data of the layer.
 */
-- (unsigned char *)data;
+- (unsigned char *)data NS_RETURNS_INNER_POINTER;
+@property (readonly) unsigned char *data NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		whiteboardData
 	@discussion	Returns the bitmap data of the document.
 	@result		Returns a pointer to the bitmap data of the document.
 */
-- (unsigned char *)whiteboardData;
+- (unsigned char *)whiteboardData NS_RETURNS_INNER_POINTER;
+@property (readonly) unsigned char *whiteboardData NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		replace
@@ -44,14 +47,16 @@
 	@result		Returns a pointer to the 8 bits per pixel replace mask of the
 				overlay.
 */
-- (unsigned char *)replace;
+- (unsigned char *)replace NS_RETURNS_INNER_POINTER;
+@property (readonly) unsigned char *replace NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		overlay
 	@discussion	Returns the bitmap data of the overlay.
 	@result		Returns a pointer to the bitmap data of the overlay.
 */
-- (unsigned char *)overlay;
+- (unsigned char *)overlay NS_RETURNS_INNER_POINTER;
+@property (readonly) unsigned char *overlay NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		spp
@@ -59,6 +64,7 @@
 	@result		Returns an integer indicating the document's sample per pixel.
 */
 - (int)spp;
+@property (readonly) int spp;
 
 /*!
 	@method		channel
@@ -66,6 +72,7 @@
 	@result		Returns an integer representing the currently selected channel.
 */
 - (int)channel;
+@property (readonly) int channel;
 
 /*!
 	@method		width
@@ -73,6 +80,7 @@
 	@result		Returns an integer indicating the layer's width in pixels.
 */
 - (int)width;
+@property (readonly) int width;
 
 /*!
 	@method		height
@@ -80,6 +88,7 @@
 	@result		Returns an integer indicating the layer's height in pixels.
 */
 - (int)height;
+@property (readonly) int height;
 
 /*!
 	@method		hasAlpha
@@ -88,6 +97,7 @@
 				otherwise.
 */
 - (BOOL)hasAlpha;
+@property (readonly) BOOL hasAlpha;
 
 /*!
 	@method		point:
@@ -127,6 +137,7 @@
 				Seashore is using.
 */
 - (CGColorSpaceRef)displayProf;
+@property (readonly) CGColorSpaceRef displayProf;
 
 /*!
 	@method		window

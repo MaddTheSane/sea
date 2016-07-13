@@ -1,5 +1,7 @@
 #import "Bitmap.h"
 #import "CIAffineTileClass.h"
+#include <math.h>
+#include <tgmath.h>
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 #define make_128(x) (x + 16 - (x % 16))
@@ -76,7 +78,7 @@
 	unsigned char *resdata;
 	IntRect selection;
 	IntPoint point, apoint;
-	float scale, angle;
+	CGFloat scale, angle;
 	int baselen;
 	NSAffineTransform *offsetTransform, *trueTransform;
 	
