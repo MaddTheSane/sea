@@ -109,9 +109,19 @@
 		return [document window];
 }
 
+- (int)overlayBehaviour
+{
+	return [[document whiteboard] overlayBehaviour];
+}
+
 - (void)setOverlayBehaviour:(int)value
 {
 	[[document whiteboard] setOverlayBehaviour:value];
+}
+
+- (int)overlayOpacity
+{
+	return [[document whiteboard] overlayOpacity];
 }
 
 - (void)setOverlayOpacity:(int)value

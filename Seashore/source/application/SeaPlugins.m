@@ -13,6 +13,8 @@
 extern BOOL useAltiVec;
 
 @implementation SeaPlugins
+@synthesize pointPluginsNames;
+@synthesize pointPlugins;
 
 static BOOL checkRun(NSString *path, NSString *file)
 {
@@ -84,7 +86,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 	NSArray *pre_files;
 	NSMutableArray *files;
 	NSBundle *bundle;
-	id plugin;
+	id<SeaPluginClass> plugin;
 	int i, j, found_id;
 	BOOL success, found, can_run;
 	NSRange range, next_range;
@@ -196,7 +198,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 		plugin = plugins[i];
         
 		// If the plug-in is a basic plug-in add it to the effects menu
-		if ([(id <PluginClass>)plugin type] == kBasicPlugin) {
+		if ([(id <SeaPluginClass>)plugin type] == kBasicPlugin) {
 			
 			// Add or find group submenu
 			submenuItem = [effectMenu itemWithTitle:[plugin groupName]];
@@ -220,7 +222,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 			}
 			
 		}
-		else if ([(id <PluginClass>)plugin type] == kPointPlugin) {
+		else if ([(id <SeaPluginClass>)plugin type] == kPointPlugin) {
 			pointPluginsNames = [pointPluginsNames arrayByAddingObject:[NSString stringWithFormat:@"%@ / %@", [plugin groupName], [plugin name]]];
 			pointPlugins = [pointPlugins arrayByAddingObject:plugin];
 		}
@@ -258,7 +260,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 
 - (IBAction)run:(id)sender
 {
-	[(id <PluginClass>)plugins[[sender tag] - 10000] run];
+	[(id <SeaPluginClass>)plugins[[sender tag] - 10000] run];
 	lastEffect = [sender tag] - 10000;
 }
 
@@ -275,16 +277,6 @@ static BOOL checkRun(NSString *path, NSString *file)
 - (BOOL)hasLastEffect
 {
 	return lastEffect != -1 && [plugins[lastEffect] canReapply];
-}
-
-- (NSArray *)pointPluginsNames
-{
-	return pointPluginsNames;
-}
-
-- (NSArray *)pointPlugins
-{
-	return pointPlugins;
 }
 
 - (id)activePointEffect

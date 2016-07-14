@@ -10,7 +10,7 @@
 #import "SeaPlugins.h"
 #import "PluginClass.h"
 
-@interface SSKPlugin : NSObject <PluginClass>
+@interface SSKPlugin : NSObject <SeaPluginClass>
 {
 	@protected
 	// YES if the application succeeded
@@ -23,6 +23,8 @@
 	BOOL boundsValid;
 }
 @property (weak) SeaPlugins *seaPlugins;
+
+@property BOOL success;
 
 - (void)savePluginPreferences;
 
@@ -43,18 +45,18 @@
 - (int)type;
 
 /*!
- @method		name
+ @property		name
  @discussion	Returns the plug-in's name.
  @result		Returns an NSString indicating the plug-in's name.
  */
-- (NSString *)name;
+@property (readonly, copy) NSString *name;
 
 /*!
- @method		groupName
+ @property		groupName
  @discussion	Returns the plug-in's group name.
  @result		Returns an NSString indicating the plug-in's group name.
  */
-- (NSString *)groupName;
+@property (readonly, copy) NSString *groupName;
 
 /*!
  @method		run
@@ -69,11 +71,11 @@
 - (void)reapply;
 
 /*!
- @method		canReapply
- @discussion Returns whether or not the plug-in can be applied again.
+ @property		canReapply
+ @discussion	Returns whether or not the plug-in can be applied again.
  @result		Returns YES if the plug-in can be applied again, NO otherwise.
  */
-- (BOOL)canReapply;
+@property (readonly) BOOL canReapply;
 
 /*!
  * @method		validateMenuItem:

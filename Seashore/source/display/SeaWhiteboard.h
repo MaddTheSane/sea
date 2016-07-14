@@ -1,3 +1,4 @@
+#import <Foundation/Foundation.h>
 #import "Globals.h"
 #import "SeaCompositor.h"
 
@@ -16,7 +17,7 @@
 	@constant	kCMYKPreviewView
 				Indicates that all channels are being viewed in CMYK previewing mode.
 */
-enum {
+typedef NS_ENUM(int, SeaChannelsView) {
 	kAllChannelsView,
 	kPrimaryChannelsView,
 	kAlphaChannelView,
@@ -36,7 +37,7 @@ enum {
 				Indicates the overlay is to be composited on to the underlying layer with the
 				replace data being used as a mask.
 */
-enum {
+typedef NS_ENUM(int, SeaOverlayBehaviour) {
 	kNormalBehaviour,
 	kErasingBehaviour,
 	kReplacingBehaviour,
@@ -88,7 +89,7 @@ enum {
 	unsigned char *replace;
 	
 	// The behaviour of the overlay
-	int overlayBehaviour;
+	SeaOverlayBehaviour overlayBehaviour;
 	
 	// The opacity for the overlay
 	int overlayOpacity;
@@ -158,7 +159,7 @@ enum {
 	@property	setOverlayBehaviour:
 	@discussion	The overlay behaviour (see SeaWhiteboard).
 */
-@property int overlayBehaviour;
+@property SeaOverlayBehaviour overlayBehaviour;
 
 /*!
 	@property	setOverlayOpacity:

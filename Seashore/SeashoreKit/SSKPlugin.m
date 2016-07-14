@@ -12,12 +12,13 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 #define make_128(x) (x + 16 - (x % 16))
 
-@interface SSKPlugin () <PluginClass>
+@interface SSKPlugin () <SeaPluginClass>
 
 @end
 
 @implementation SSKPlugin
 @synthesize seaPlugins;
+@synthesize success;
 
 - (instancetype)initWithManager:(SeaPlugins *)manager
 {
