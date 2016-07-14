@@ -9,14 +9,14 @@
 - (IBAction)toggleTextures:(id)sender
 {
 	NSWindow *w = [gCurrentDocument window];
-	NSPoint p = [w convertBaseToScreen:[w mouseLocationOutsideOfEventStream]];
+	NSPoint p = [NSEvent mouseLocation];
 	[(BrushUtility *)[[SeaController utilitiesManager] textureUtilityFor:gCurrentDocument] showPanelFrom: p onWindow: w];
 }
 
 - (IBAction)toggleBrushes:(id)sender
 {
 	NSWindow *w = [gCurrentDocument window];
-	NSPoint p = [w convertBaseToScreen:[w mouseLocationOutsideOfEventStream]];
+	NSPoint p = [NSEvent mouseLocation];
 	[(TextureUtility *)[[SeaController utilitiesManager] brushUtilityFor:gCurrentDocument] showPanelFrom: p onWindow: w];
 }
 

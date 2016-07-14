@@ -6,10 +6,6 @@
 #import "Bitmap.h"
 #import "SeaDocument.h"
 #import "Bitmap.h"
-#include "ColorSyncDeprecated.h"
-
-static unsigned char *cmData;
-static unsigned int cmLen;
 
 @implementation JP2Exporter
 
@@ -164,7 +160,7 @@ static unsigned int cmLen;
 	[panel orderOut:self];
 	
 	// Clean-up
-	[defaults setObject:(targetWeb ? @"YES" : @"NO") forKey:@"jp2 target"];
+	[defaults setObject:(targetWeb ? @YES : @NO) forKey:@"jp2 target"];
 	if (targetWeb)
 		[defaults setInteger:webCompression forKey:@"jp2 web compression"];
 	else
@@ -245,7 +241,6 @@ static unsigned int cmLen;
 	unsigned char *srcData, *destData;
 	NSBitmapImageRep *imageRep;
 	NSData *imageData;
-	CMProfileRef cmProfile;
 	BOOL hasAlpha = NO;
 	int i, j;
 	
@@ -278,24 +273,18 @@ static unsigned int cmLen;
 	
 	// Embed ColorSync profile
 	if (!targetWeb) {
+		ColorSyncProfileRef cmProfile;
 		if (spp < 3)
-			CMGetDefaultProfileBySpace(cmGrayData, &cmProfile);
+			cmProfile = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
 		else
-			OpenDisplayProfile(&cmProfile);
-		cmData = NULL;
-		CMProfileLocation profileLoc;
-		profileLoc.locType = cmBufferBasedProfile;
-		profileLoc.u.bufferLoc.buffer = cmData;
-		profileLoc.u.bufferLoc.size = cmLen;
-		CMProfileRef tempProfile;
-		CMCopyProfile(&tempProfile, &profileLoc, cmProfile);
+			cmProfile = ColorSyncProfileCreateWithDisplayID(0);
+		NSData *cmData = CFBridgingRelease(ColorSyncProfileCopyData(cmProfile, NULL));
 
 		//CMFlattenProfile(cmProfile, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
 		if (cmData) {
-			[imageRep setProperty:NSImageColorSyncProfileData withValue:[NSData dataWithBytes:cmData length:cmLen]];
-			free(cmData);
+			[imageRep setProperty:NSImageColorSyncProfileData withValue:cmData];
 		}
-		if (spp >= 3) CloseDisplayProfile(cmProfile);
+		CFRelease(cmProfile);
 	}
 	
 	// Finally build the JPEG 2000 data

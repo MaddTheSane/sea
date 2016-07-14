@@ -6,14 +6,10 @@
 #import "Bitmap.h"
 #import "SeaDocument.h"
 #import "Bitmap.h"
-#include "ColorSyncDeprecated.h"
 
-static unsigned char *cmData;
-static unsigned int cmLen;
-
-static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xres, int yres)
+static BOOL JPEGReviseResolution(unsigned char *input, size_t len, int xres, int yres)
 {
-	int dataPos;
+	size_t dataPos;
 	short *temp;
 	unsigned short xress, yress;
 	
@@ -59,7 +55,7 @@ static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xre
 			if (value < 0 || value > kMaxCompression)
 				value = 26;
 		}
-		webCompression = value;
+		webCompression = (int)value;
 		
 		if ([defaults objectForKey:@"jpeg print compression"] == NULL) {
 			value = 30;
@@ -69,7 +65,7 @@ static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xre
 			if (value < 0 || value > kMaxCompression)
 				value = 30;
 		}
-		printCompression = value;
+		printCompression = (int)value;
 	}
 	
 	return self;
@@ -261,7 +257,6 @@ static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xre
 	NSBitmapImageRep *imageRep;
 	NSData *imageData;
 	NSDictionary *exifData;
-	CMProfileRef cmProfile;
 	
 	// Get the data to write
 	srcData = [(SeaWhiteboard *)[document whiteboard] data];
@@ -285,24 +280,17 @@ static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xre
 	
 	// Embed ColorSync profile
 	if (!targetWeb) {
+		ColorSyncProfileRef cmProfile;
 		if (spp < 3)
-			CMGetDefaultProfileBySpace(cmGrayData, &cmProfile);
+			cmProfile = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
 		else
-			OpenDisplayProfile(&cmProfile);
-		cmData = NULL;
-		//CMFlattenProfile(cmProfile, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
-		CMProfileLocation profileLoc;
-		profileLoc.locType = cmBufferBasedProfile;
-		profileLoc.u.bufferLoc.buffer = cmData;
-		profileLoc.u.bufferLoc.size = cmLen;
-		CMProfileRef tempProfile;
-		CMCopyProfile(&tempProfile, &profileLoc, cmProfile);
+			cmProfile = ColorSyncProfileCreateWithDisplayID(0);
+		NSData *cmData = CFBridgingRelease(ColorSyncProfileCopyData(cmProfile, NULL));
 
 		if (cmData) {
-			[imageRep setProperty:NSImageColorSyncProfileData withValue:[NSData dataWithBytes:cmData length:cmLen]];
-			free(cmData);
+			[imageRep setProperty:NSImageColorSyncProfileData withValue:cmData];
 		}
-		if (spp >= 3) CloseDisplayProfile(cmProfile);
+		CFRelease(cmProfile);
 	}
 	
 	// Finally build the JPEG data

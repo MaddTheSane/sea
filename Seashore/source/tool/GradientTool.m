@@ -39,8 +39,8 @@
 	[[document whiteboard] setOverlayOpacity:255];
 	
 	// Determine gradient information
-	info.repeat = [options repeat];
-	info.gradient_type = [(GradientOptions *)options type];
+	info.repeat = (int)[options repeat];
+	info.gradient_type = (int)[(GradientOptions *)options type];
 	info.supersample = [options supersample];
 	if (info.gradient_type == GIMP_GRADIENT_CONICAL_ASYMMETRIC || info.gradient_type == GIMP_GRADIENT_SPIRAL_CLOCKWISE || info.gradient_type == GIMP_GRADIENT_SPIRAL_ANTICLOCKWISE) {
 		info.supersample = YES;

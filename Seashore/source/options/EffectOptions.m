@@ -60,7 +60,7 @@
 - (IBAction)showEffects:(id)sender
 {
 	NSWindow *w = [gCurrentDocument window];
-	NSPoint p = [w convertBaseToScreen:[w mouseLocationOutsideOfEventStream]];
+	NSPoint p = [NSEvent mouseLocation];
 	[panel orderFrontToGoal:p onWindow: w];
 	parentWin = w;
 	

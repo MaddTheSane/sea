@@ -12,7 +12,7 @@
 				A panel with an arrow on the left side.
 				This would be for a vertical list of elements.
 */
-enum {
+typedef NS_ENUM(NSInteger, SeaPanelStyle) {
 	kFloatingPanelStyle,
 	kVerticalPanelStyle,
 	kHorizontalPanelStyle
@@ -40,7 +40,7 @@ enum {
 	@property	panelStyle
 	@discussion	Allows other objects to know what kind of panel they are dealing with
 */
-@property NSInteger panelStyle;
+@property SeaPanelStyle panelStyle;
 
 /*!
 	@method		orderFrontToGoal:

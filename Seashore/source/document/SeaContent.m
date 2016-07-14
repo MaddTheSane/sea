@@ -84,7 +84,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	NSImage *image;
 	int sspp, dspp, space;
 	id profile;
-	CMProfileLocation cmProfileLoc;
+	ColorSyncProfileRef cmProfileLoc;
 	int bipp, bypr, bps;
 	unsigned char *data;
 	
@@ -134,9 +134,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Extract color profile
 	profile = [imageRep valueForProperty:NSImageColorSyncProfileData];
 	if (profile) {
-		cmProfileLoc.locType = cmBufferBasedProfile;
-		cmProfileLoc.u.bufferLoc.buffer = (Ptr)[profile bytes];
-		cmProfileLoc.u.bufferLoc.size = [profile length];
+		cmProfileLoc = ColorSyncProfileCreate(profile, NULL);
 	}
 	
 	// Put it in a nice form
@@ -148,7 +146,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		dspp = 4;
 	else
 		dspp = 2;
-	data = convertBitmap(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], width, height, sspp, bipp, bypr, space, (profile) ? &cmProfileLoc : NULL, bps, 0);
+	data = convertBitmapColorSync(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
 	if (!data) {
 		NSLog(@"Required conversion not supported.");
 		return NULL;
@@ -158,6 +156,10 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Add layer
 	layers = @[[[SeaLayer alloc] initWithDocument:doc rect:IntMakeRect(0, 0, width, height) data:data spp:dspp]];
 	activeLayerIndex = 0;
+	
+	if (cmProfileLoc) {
+		CFRelease(cmProfileLoc);
+	}
 	
 	return self;
 }

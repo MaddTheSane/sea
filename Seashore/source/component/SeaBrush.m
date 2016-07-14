@@ -231,7 +231,6 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	
 	// Wrap it up in an NSImage
 	thumbnail = [[NSImage alloc] initWithSize:NSMakeSize(thumbWidth, thumbHeight)];
-	[thumbnail setScalesWhenResized:YES];
 	[thumbnail addRepresentation:tempRep];
 	
 	return thumbnail;

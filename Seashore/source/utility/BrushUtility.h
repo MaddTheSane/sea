@@ -1,6 +1,10 @@
 #import "Globals.h"
 #import "AbstractPanelUtility.h"
 
+
+@class SeaDocument;
+@class SeaBrush;
+
 /*!
 	@class		BrushUtility
 	@abstract	Loads and manages all brushes for the user.
@@ -9,40 +13,39 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
 @interface BrushUtility : AbstractPanelUtility {
 
 	// The brush grouping pop-up
 	IBOutlet NSPopUpButton *brushGroupPopUp;
 
 	// The label that presents the user with the brushes name
-	IBOutlet id brushNameLabel;
+	IBOutlet NSTextField *brushNameLabel;
 	
 	// The label and slider that present spacing to the user
-    IBOutlet id spacingLabel;
-    IBOutlet id spacingSlider;
+    IBOutlet NSTextField *spacingLabel;
+    IBOutlet NSSlider *spacingSlider;
 	
 	// The view that displays the brushes
-    IBOutlet id view;
+    IBOutlet NSScrollView *view;
 		
 	// The document which is the focus of this utility
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// An dictionary of all brushes known to Seashore
-	NSDictionary *brushes;
+	NSDictionary<NSString*, SeaBrush*> *brushes;
 	
 	// An array of all groups (an array of an array SeaBrush's) and group names (an array of NSString's)
 	NSArray *groups;
-	NSArray *groupNames;
+	NSArray<NSString*> *groupNames;
 	
 	// The index of the currently active group
 	NSInteger activeGroupIndex;
 	
 	// The index of the currently active brush
-	int activeBrushIndex;
+	NSInteger activeBrushIndex;
 	
 	// The number of custom groups
-	int customGroups;
+	NSInteger customGroups;
 	
 }
 
@@ -102,12 +105,12 @@
 - (id)activeBrush;
 
 /*!
-	@method		activeBrushIndex
+	@property	activeBrushIndex
 	@discussion	Returns the index of the currently active brush.
 	@result		Returns an integer representing the index of the currently
 				active brush.
 */
-- (int)activeBrushIndex;
+@property (nonatomic) NSInteger activeBrushIndex;
 
 /*!
 	@method		setActiveBrushIndex:
@@ -115,7 +118,7 @@
 	@param		index
 				The index of the brush to activate.
 */
-- (void)setActiveBrushIndex:(int)index;
+- (void)setActiveBrushIndex:(NSInteger)index;
 
 /*!
 	@method		brushes
@@ -123,6 +126,6 @@
 	@result		Returns an array with all the brushes in the currently active
 				group. 
 */
-- (NSArray *)brushes;
+- (NSArray<SeaBrush*> *)brushes;
 
 @end

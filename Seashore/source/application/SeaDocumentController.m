@@ -286,10 +286,10 @@
 	return array;
 }
 
-- (NSArray *)fileExtensionsFromType:(NSString *)typeName
-{
-	return @[];
-}
+//- (NSArray *)fileExtensionsFromType:(NSString *)typeName
+//{
+//	return @[];
+//}
 
 - (BOOL)type:(NSString *)aType isContainedInDocType:(NSString*) key
 {

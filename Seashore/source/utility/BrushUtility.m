@@ -10,6 +10,7 @@
 #endif
 
 @implementation BrushUtility
+@synthesize activeBrushIndex;
 
 - (instancetype)init
 {		
@@ -40,7 +41,7 @@
 
 - (void)awakeFromNib
 {
-	int yoff, i;
+	NSInteger yoff, i;
 
 	[super awakeFromNib];
 	
@@ -116,28 +117,25 @@
 
 - (void)loadBrushes:(BOOL)update
 {
-	NSArray *files;
-	NSString *tempPathA, *tempPathB;
-	NSArray *newValues, *newKeys, *tempArray;
+	NSArray *tempArray;
 	NSMutableArray *tempBrushArray;
 	BOOL isDirectory;
 	id tempBrush;
-	int i, j;
 	
 	// Create a dictionary of all brushes
-	brushes = @{};
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
-	for (i = 0; i < [files count]; i++) {
-		tempPathA = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"] stringByAppendingPathComponent:files[i]];
+	NSMutableDictionary *tmpBrushDict = [NSMutableDictionary dictionary];
+	NSArray<NSString*> *files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
+	for (NSString *file in files) {
+		NSString *tempPathA = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"] stringByAppendingPathComponent:file];
 		if ([[tempPathA pathExtension] isEqualToString:@"gbr"]) {
-			tempBrush = [[SeaBrush alloc] initWithContentsOfFile:tempPathA];
+			SeaBrush *tempBrush = [[SeaBrush alloc] initWithContentsOfFile:tempPathA];
 			if (tempBrush) {
-				newKeys = [[brushes allKeys] arrayByAddingObject:tempPathA];
-				newValues = [[brushes allValues] arrayByAddingObject:tempBrush];
-				brushes = [NSDictionary dictionaryWithObjects:newValues forKeys:newKeys];
+				[tmpBrushDict setObject:tempBrush forKey:tempPathA];
 			}
 		}
 	}
+	
+	brushes = [tmpBrushDict copy];
 	
 	// Create the all group
 	tempBrushArray = [[[brushes allValues] sortedArrayUsingSelector:@selector(compare:)] mutableCopy];
@@ -146,15 +144,15 @@
 	
 	// Create the custom groups
 	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
-	for (i = 0; i < [files count]; i++) {
-		tempPathA = [[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"];
-		tempPathB = [tempPathA stringByAppendingPathComponent:files[i]];
+	for (NSString *file in files) {
+		NSString *tempPathA = [[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"];
+		NSString *tempPathB = [tempPathA stringByAppendingPathComponent:file];
 		if ([[tempPathB pathExtension] isEqualToString:@"txt"]) {
 			tempArray = [NSArray arrayWithContentsOfFile:tempPathB];
 			if (tempArray) {
 				[tempBrushArray removeAllObjects];
-				for (j = 0; j < [tempArray count]; j++) {
-					tempBrush = brushes[[tempPathA stringByAppendingPathComponent:tempArray[j]]];
+				for (NSString *tmpNam in tempArray) {
+					tempBrush = brushes[[tempPathA stringByAppendingPathComponent:tmpNam]];
 					if (tempBrush) {
 						[tempBrushArray addObject:tempBrush];
 					}
@@ -170,14 +168,14 @@
 	
 	// Create the other groups
 	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
-	for (i = 0; i < [files count]; i++) {
-		tempPathA = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"] stringByAppendingPathComponent:files[i]];
+	for (NSString *file in files) {
+		NSString *tempPathA = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"] stringByAppendingPathComponent:file];
 		[gFileManager fileExistsAtPath:tempPathA isDirectory:&isDirectory];
 		if (isDirectory) {
-			tempArray = [gFileManager subpathsAtPath:tempPathA];
-			tempBrushArray = [[NSMutableArray alloc] init];
-			for (j = 0; j < [tempArray count]; j++) {
-				tempBrush = brushes[[tempPathA stringByAppendingPathComponent:tempArray[j]]];
+			NSArray<NSString*> *tempArray = [gFileManager subpathsAtPath:tempPathA];
+			NSMutableArray *tempBrushArray = [[NSMutableArray alloc] init];
+			for (NSString *tmpNam in tempArray) {
+				SeaBrush *tempBrush = brushes[[tempPathA stringByAppendingPathComponent:tmpNam]];
 				if (tempBrush) {
 					[tempBrushArray addObject:tempBrush];
 				}
@@ -215,12 +213,7 @@
 	return groups[activeGroupIndex][activeBrushIndex];
 }
 
-- (int)activeBrushIndex
-{
-	return activeBrushIndex;
-}
-
-- (void)setActiveBrushIndex:(int)index
+- (void)setActiveBrushIndex:(NSInteger)index
 {
 	id oldBrush = groups[activeGroupIndex][activeBrushIndex];
 	id newBrush = groups[activeGroupIndex][index];

@@ -16,19 +16,19 @@
 	IBOutlet id seaProxy;
 
 	// The pop-up menu specifying the alignment to be used
-	IBOutlet id alignmentControl;
+	IBOutlet NSSegmentedControl *alignmentControl;
 
 	// The checkbox specifying the outline of the font
-	IBOutlet id outlineCheckbox;
+	IBOutlet NSButton *outlineCheckbox;
 	
 	// The slider specifying the outline of the font
-	IBOutlet id outlineSlider;
+	IBOutlet NSSlider *outlineSlider;
 		
 	// A label specifying the font
-	IBOutlet id fontLabel;
+	IBOutlet NSTextField *fontLabel;
 	
 	// The checkbox specifying whether a fringe is okay
-	IBOutlet id fringeCheckbox;
+	IBOutlet NSButton *fringeCheckbox;
 	
 	// The font manager associated with the text tool
 	id fontManager;

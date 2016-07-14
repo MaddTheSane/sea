@@ -121,7 +121,7 @@
 	}else if([[tableColumn identifier] isEqualToString:LAYER_VISIBLE_COL]){
 		[[document contents] setVisible:[object boolValue] forLayer:[(SeaLayer *)item index]];
 	}else if([[tableColumn identifier] isEqualToString:INFO_BUTTON_COL]){
-		NSPoint p = [[outlineView window] convertBaseToScreen:[[outlineView window] mouseLocationOutsideOfEventStream]];
+		NSPoint p = [NSEvent mouseLocation];
 		[[[[SeaController utilitiesManager] pegasusUtilityFor:document] layerSettings] showSettings:item from:p];
 	}else{
 		NSLog(@"Setting the value for unknown column %@", tableColumn);

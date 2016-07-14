@@ -6,11 +6,6 @@
 #import "Bitmap.h"
 #import <TIFF/tiff.h>
 #import <TIFF/tiffio.h>
-#include "ColorSyncDeprecated.h"
-
-static unsigned char *cmData;
-static int cmLen;
-static BOOL cmOkay;
 
 enum {
    openReadSpool = 1,	/* start read data process */
@@ -87,10 +82,11 @@ enum {
 	unsigned char *srcData, *tempData, *destData, *buf;
 	//NSBitmapImageRep *imageRep;
 	BOOL hasAlpha = NO;
-	CMProfileRef cmProfile;
-	CMProfileRef srcProf, destProf;
-	CMWorldRef cw;
-	CMBitmap srcBitmap, destBitmap;
+	BOOL cmOkay = NO;
+	
+	ColorSyncProfileRef cmProfile;
+	ColorSyncProfileRef srcProf, destProf;
+	ColorSyncTransformRef cw;
 	TIFF *tiff;
 
 	// Get the data to write
@@ -116,45 +112,39 @@ enum {
 		spp--;
 		
 		// Establish the color world
-		OpenDisplayProfile(&srcProf);
-		CMGetDefaultProfileBySpace(cmCMYKData, &destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-
-		// Define the source
-		srcBitmap.image = (char *)tempData;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * 3;
-		srcBitmap.pixelSize = 8 * 3;
-		srcBitmap.space = cmRGB24Space;
-	
-		// Define the destination
-		destBitmap = srcBitmap;
+		srcProf = ColorSyncProfileCreateWithDisplayID(0);
+		destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile);
+		NSArray<NSDictionary<NSString*,id>*>*
+		profSeq = @[
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)srcProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+					  },
+					
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+					  },
+					];
+		
+		cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+		
 		destData = malloc(width * height * 4);
-		destBitmap.image = (char *)destData;
-		destBitmap.rowBytes = width * 4;
-		destBitmap.pixelSize = 8 * 4;
-		destBitmap.space = cmCMYK32Space;
-			
-		// Execute the conversion
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
+
+		ColorSyncTransformConvert(cw, width, height, destData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaNone, width * 4, tempData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaNone, width * 3, NULL);
 		
 		// Clean up after ourselves
-		if (cw) CWDisposeColorWorld(cw);
+		if (cw) CFRelease(cw);
 		free(tempData);
-		CloseDisplayProfile(srcProf);
+		CFRelease(srcProf);
 		
 		// Embed ColorSync profile
-		cmData = NULL;
+		NSData *cmData = CFBridgingRelease(ColorSyncProfileCopyData(destProf, NULL));
 		cmOkay = NO;
-		CMProfileLocation profileLoc;
-		profileLoc.locType = cmBufferBasedProfile;
-		profileLoc.u.bufferLoc.buffer = cmData;
-		profileLoc.u.bufferLoc.size = cmLen;
-		CMCopyProfile(&destProf, &profileLoc, srcProf);
-		
-		// TODO: color management using something OTHER than:
-		//CMFlattenProfile(destProf, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
+		if (cmData) {
+			cmOkay = YES;
+		}
+		CFRelease(destProf);
 		
 		// Open the file for writing
 		tiff = TIFFOpen([path fileSystemRepresentation], "w");
@@ -174,7 +164,7 @@ enum {
 		TIFFSetField(tiff, TIFFTAG_YRESOLUTION, (float)yres);
 		TIFFSetField(tiff, TIFFTAG_RESOLUTIONUNIT, RESUNIT_INCH);
 		TIFFSetField(tiff, TIFFTAG_SOFTWARE, "Seashore 0.2.0");
-		if (cmOkay) TIFFSetField(tiff, TIFFTAG_ICCPROFILE, cmLen, cmData);
+		if (cmOkay) TIFFSetField(tiff, TIFFTAG_ICCPROFILE, (int)cmData.length, cmData.bytes);
 		TIFFSetField(tiff, TIFFTAG_ROWSPERSTRIP, (width * 4 * height > 8192) ? (8192 / (width * 4) + 1) : height);
 		linebytes = 4 * width;
 		if (TIFFScanlineSize(tiff) > linebytes) {
@@ -195,8 +185,6 @@ enum {
 		// Close the file
 		TIFFClose(tiff);
 		free(buf);
-		if (cmData) { free(cmData); }
-		
 	}
 	else {
 		
@@ -216,16 +204,16 @@ enum {
 		
 		// Get embedded ColorSync profile
 		if (spp < 3)
-			CMGetDefaultProfileBySpace(cmGrayData, &cmProfile);
+			cmProfile = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
 		else
-			OpenDisplayProfile(&cmProfile);
-		cmData = NULL;
-		cmOkay = NO;
-		CMProfileLocation profileLoc;
-		profileLoc.locType = cmBufferBasedProfile;
-		profileLoc.u.bufferLoc.buffer = cmData;
-		profileLoc.u.bufferLoc.size = cmLen;
-		CMCopyProfile(&destProf, &profileLoc, cmProfile);
+			cmProfile = ColorSyncProfileCreateWithDisplayID(0);
+		NSData *cmData = CFBridgingRelease(ColorSyncProfileCopyData(cmProfile, NULL));
+		BOOL cmOkay = NO;
+		if (cmData) {
+			cmOkay = YES;
+		}
+		CFRelease(cmProfile);
+		cmProfile = nil;
 		
 		// Open the file for writing
 		tiff = TIFFOpen([path fileSystemRepresentation], "w");
@@ -247,7 +235,7 @@ enum {
 		TIFFSetField(tiff, TIFFTAG_YRESOLUTION, (float)yres);
 		TIFFSetField(tiff, TIFFTAG_RESOLUTIONUNIT, RESUNIT_INCH);
 		TIFFSetField(tiff, TIFFTAG_SOFTWARE, "Seashore 0.1.9");
-		if (cmOkay) TIFFSetField(tiff, TIFFTAG_ICCPROFILE, cmLen, cmData);
+		if (cmOkay) TIFFSetField(tiff, TIFFTAG_ICCPROFILE, (int)cmData.length, cmData.bytes);
 		TIFFSetField(tiff, TIFFTAG_ROWSPERSTRIP, (width * spp * height > 8192) ? (8192 / (width * spp) + 1) : height);
 		linebytes = spp * width;
 		if (TIFFScanlineSize(tiff) > linebytes) {
@@ -268,9 +256,6 @@ enum {
 		// Close the file
 		TIFFClose(tiff);
 		free(buf);
-		if (cmData) { free(cmData); }
-		if (spp >= 3) CloseDisplayProfile(cmProfile);
-		
 	}
 	
 	// If the destination data is not equivalent to the source data free the former

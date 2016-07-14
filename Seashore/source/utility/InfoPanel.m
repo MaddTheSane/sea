@@ -56,31 +56,31 @@
 {
 	NSRect oldFrame = [self frame];
 	if(panelStyle == kVerticalPanelStyle){
-        oldFrame.origin.x = goal.x - oldFrame.size.width / 2;
-        oldFrame.origin.y = goal.y - oldFrame.size.height;
-    }else if(panelStyle == kHorizontalPanelStyle){
-        oldFrame.origin.x = goal.x;
-	oldFrame.origin.y = goal.y - 2 * oldFrame.size.height / 3;
-    }
-    
-    NSRect screenRect = [[parent screen] visibleFrame];
-    float right = screenRect.size.width + screenRect.origin.x;
-    if(oldFrame.size.width + oldFrame.origin.x > right){
-        oldFrame.origin.x = right - oldFrame.size.width;
-    }else if(oldFrame.origin.x < screenRect.origin.x){
-        oldFrame.origin.x = screenRect.origin.x;
-    }
-    
-    float top = screenRect.size.height + screenRect.origin.y;
-    if(oldFrame.size.height + oldFrame.origin.y > top){
-        oldFrame.origin.y = top - oldFrame.size.height;
-    }else if(oldFrame.origin.y < screenRect.origin.y){
-        oldFrame.origin.y = screenRect.origin.y;
-    }
-    
+		oldFrame.origin.x = goal.x - oldFrame.size.width / 2;
+		oldFrame.origin.y = goal.y - oldFrame.size.height;
+	}else if(panelStyle == kHorizontalPanelStyle){
+		oldFrame.origin.x = goal.x;
+		oldFrame.origin.y = goal.y - 2 * oldFrame.size.height / 3;
+	}
+	
+	NSRect screenRect = [[parent screen] visibleFrame];
+	float right = screenRect.size.width + screenRect.origin.x;
+	if(oldFrame.size.width + oldFrame.origin.x > right){
+		oldFrame.origin.x = right - oldFrame.size.width;
+	}else if(oldFrame.origin.x < screenRect.origin.x){
+		oldFrame.origin.x = screenRect.origin.x;
+	}
+	
+	float top = screenRect.size.height + screenRect.origin.y;
+	if(oldFrame.size.height + oldFrame.origin.y > top){
+		oldFrame.origin.y = top - oldFrame.size.height;
+	}else if(oldFrame.origin.y < screenRect.origin.y){
+		oldFrame.origin.y = screenRect.origin.y;
+	}
+	
 	[self setFrame:oldFrame display: YES];
 	[parent addChildWindow:self ordered:NSWindowAbove];
-
+	
 	[self orderFront:self];
 }
 

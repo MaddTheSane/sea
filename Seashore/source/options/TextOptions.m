@@ -28,7 +28,7 @@ id gNewFont;
 		ivalue = NSLeftTextAlignment;
 	}
 	else {
-		ivalue = [defaults integerForKey:@"text alignment"];
+		ivalue = (int)[defaults integerForKey:@"text alignment"];
 		if (ivalue < 0 || ivalue >= [alignmentControl segmentCount])
 			ivalue = NSLeftTextAlignment;
 	}
@@ -39,7 +39,7 @@ id gNewFont;
 		ivalue = 5;
 	}
 	else {
-		ivalue = [defaults integerForKey:@"text outline slider"];
+		ivalue = (int)[defaults integerForKey:@"text outline slider"];
 		if (ivalue < 1 || ivalue > 24)
 			ivalue = 5;
 	}

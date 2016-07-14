@@ -39,7 +39,7 @@
 			while([queue count] > 0){
 				NSDictionary *thisWarning = queue[0];
 				if([thisWarning[@"importance"] intValue] <= [[SeaController seaPrefs] warningLevel]){
-					NSRunAlertPanel(NULL, thisWarning[@"message"], NULL, NULL, NULL);
+					NSRunAlertPanel(NULL, @"%@", NULL, NULL, NULL, thisWarning[@"message"]);
 				}
 				[queue removeObjectAtIndex:0];
 			}

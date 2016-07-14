@@ -20,9 +20,12 @@
 #if MAIN_COMPILE
 #include <GIMPCore/GIMPCore.h>
 #endif
-#include "ColorSyncDeprecated.h"
 
 @implementation SeaLayer
+@synthesize xOffset = xoff;
+@synthesize yOffset = yoff;
+@synthesize width;
+@synthesize height;
 
 #if MAIN_COMPILE
 - (instancetype)initWithDocument:(SeaDocument *)doc
@@ -267,26 +270,6 @@
 }
 #endif
 
-- (int)width
-{
-	return width;
-}
-
-- (int)height
-{
-	return height;
-}
-
-- (int)xoff
-{
-	return xoff;
-}
-
-- (int)yoff
-{
-	return yoff;
-}
-
 #if MAIN_COMPILE
 - (IntRect)localRect
 {
@@ -301,15 +284,14 @@
 
 - (void)trimLayer
 {
-	int i, j;
 	int left, right, top, bottom;
 	
 	// Start out with invalid content borders
 	left = right = top = bottom =  -1;
 	
 	// Determine left content margin
-	for (i = 0; i < width && left == -1; i++) {
-		for (j = 0; j < height && left == -1; j++) {
+	for (int i = 0; i < width && left == -1; i++) {
+		for (int j = 0; j < height && left == -1; j++) {
 			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
 				left = i;
 			}
@@ -317,8 +299,8 @@
 	}
 	
 	// Determine right content margin
-	for (i = width - 1; i >= 0 && right == -1; i--) {
-		for (j = 0; j < height && right == -1; j++) {
+	for (int i = width - 1; i >= 0 && right == -1; i--) {
+		for (int j = 0; j < height && right == -1; j++) {
 			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
 				right = width - 1 - i;
 			}
@@ -326,8 +308,8 @@
 	}
 	
 	// Determine top content margin
-	for (j = 0; j < height && top == -1; j++) {
-		for (i = 0; i < width && top == -1; i++) {
+	for (int j = 0; j < height && top == -1; j++) {
+		for (int i = 0; i < width && top == -1; i++) {
 			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
 				top = j;
 			}
@@ -335,8 +317,8 @@
 	}
 	
 	// Determine bottom content margin
-	for (j = height - 1; j >= 0 && bottom == -1; j--) {
-		for (i = 0; i < width && bottom == -1; i++) {
+	for (int j = height - 1; j >= 0 && bottom == -1; j--) {
+		for (int i = 0; i < width && bottom == -1; i++) {
 			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
 				bottom = height - 1 - j;
 			}
@@ -351,10 +333,9 @@
 - (void)flipHorizontally
 {
 	unsigned char temp[4];
-	int i, j;
 	
-	for (j = 0; j < height; j++) {
-		for (i = 0; i < width / 2; i++) {
+	for (int j = 0; j < height; j++) {
+		for (int i = 0; i < width / 2; i++) {
 			memcpy(temp, &(data[(j * width + i) * spp]), spp);
 			memcpy(&(data[(j * width + i) * spp]), &(data[(j * width + (width - i - 1)) * spp]), spp);
 			memcpy(&(data[(j * width + (width - i - 1)) * spp]), temp, spp);
@@ -367,10 +348,9 @@
 - (void)flipVertically
 {
 	unsigned char temp[4];
-	int i, j;
 	
-	for (j = 0; j < height / 2; j++) {
-		for (i = 0; i < width; i++) {
+	for (int j = 0; j < height / 2; j++) {
+		for (int i = 0; i < width; i++) {
 			memcpy(temp, &(data[(j * width + i) * spp]), spp);
 			memcpy(&(data[(j * width + i) * spp]), &(data[((height - j - 1) * width + i) * spp]), spp);
 			memcpy(&(data[((height - j - 1) * width + i) * spp]), temp, spp);
@@ -382,25 +362,21 @@
 
 - (void)rotateLeft
 {
-	int newWidth, newHeight, ox, oy;
-	unsigned char *newData;
-	int i, j, k;
+	int newWidth = height;
+	int newHeight = width;
+	unsigned char *newData = malloc(make_128(newWidth * newHeight * spp));
 	
-	newWidth = height;
-	newHeight = width;
-	newData = malloc(make_128(newWidth * newHeight * spp));
-	
-	for (j = 0; j < height; j++) {
-		for (i = 0; i < width; i++) {
-			for (k = 0; k < spp; k++) {
+	for (int j = 0; j < height; j++) {
+		for (int i = 0; i < width; i++) {
+			for (int k = 0; k < spp; k++) {
 				newData[((newHeight - i - 1) * newWidth + j) * spp + k] = data[(j * width + i) * spp + k]; 
 			}
 		}
 	}
 	free(data);
 	
-	ox = [(SeaContent *)[document contents] width] - xoff - width;
-	oy = yoff;
+	int ox = [(SeaContent *)[document contents] width] - xoff - width;
+	int oy = yoff;
 	
 	width = newWidth;
 	height = newHeight;
@@ -412,25 +388,21 @@
 
 - (void)rotateRight
 {
-	int newWidth, newHeight, ox, oy;
-	unsigned char *newData;
-	int i, j, k;
+	int newWidth = height;
+	int newHeight = width;
+	unsigned char *newData = malloc(make_128(newWidth * newHeight * spp));
 	
-	newWidth = height;
-	newHeight = width;
-	newData = malloc(make_128(newWidth * newHeight * spp));
-	
-	for (j = 0; j < height; j++) {
-		for (i = 0; i < width; i++) {
-			for (k = 0; k < spp; k++) {
+	for (int j = 0; j < height; j++) {
+		for (int i = 0; i < width; i++) {
+			for (int k = 0; k < spp; k++) {
 				newData[(i * newWidth + (newWidth - j - 1)) * spp + k] = data[(j * width + i) * spp + k]; 
 			}
 		}
 	}
 	free(data);
 	
-	ox = xoff;
-	oy = [(SeaContent *)[document contents] height] - yoff - height;
+	int ox = xoff;
+	int oy = [(SeaContent *)[document contents] height] - yoff - height;
 	
 	width = newWidth;
 	height = newHeight;
@@ -448,7 +420,7 @@
 	NSBitmapImageRep *in_rep, *final_rep;
 	NSPoint point[4], minPoint, maxPoint, transformPoint;
 	int i, oldHeight, oldWidth;
-	int ispp, bipp, bypr, ispace, ibps;
+	NSInteger ispp, bipp, bypr, ibps;
 	
 	// Define the rotation
 	at = [NSAffineTransform transform];
@@ -513,9 +485,9 @@
 	ispp = [final_rep samplesPerPixel];
 	bipp = [final_rep bitsPerPixel];
 	bypr = [final_rep bytesPerRow];
-	ispace = (ispp > 2) ? kRGBColorSpace : kGrayColorSpace;
+	BMPColorSpace ispace = (ispp > 2) ? kRGBColorSpace : kGrayColorSpace;
 	ibps = [final_rep bitsPerPixel] / [final_rep samplesPerPixel];
-	data = convertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcData, width, height, ispp, bipp, bypr, ispace, NULL, ibps, 0); 
+	data = convertBitmapColorSync(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcData, width, height, ispp, bipp, bypr, ispace, NULL, ibps, 0);
 	
 	// Clean up
 	unpremultiplyBitmap(spp, data, data, width * height);
@@ -785,8 +757,7 @@
 		// Formulate the premultiplied data from the data
 		premultiplyBitmap(spp, pmImageData, data, width * height);
 	
-	}
-	else {
+	} else {
 	
 		// Strip the alpha channel
 		for (i = 0; i < width * height; i++) {
@@ -908,11 +879,9 @@
 	}
 }
 
-- (void)convertFromType:(int)srcType to:(int)destType
+- (void)convertFromType:(XcfImageType)srcType to:(XcfImageType)destType
 {
-	CMBitmap srcBitmap, destBitmap;
-	CMProfileRef srcProf, destProf;
-	CMWorldRef cw;
+	//CMBitmap srcBitmap, destBitmap;
 	unsigned char *newData, *oldData;
 	int i;
 	
@@ -925,32 +894,35 @@
 		return;
 		
 	if (srcType == XCF_RGB_IMAGE && destType == XCF_GRAY_IMAGE) {
-	
+		ColorSyncProfileRef srcProf, destProf;
+		ColorSyncTransformRef cw;
+
 		// Create colour world
-		OpenDisplayProfile(&srcProf);
-		CMGetDefaultProfileBySpace(cmGrayData, &destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
+		srcProf = ColorSyncProfileCreateWithDisplayID(0);
+		destProf = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
+		NSArray<NSDictionary<NSString*,id>*>*
+		profSeq = @[
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)srcProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+					  },
+					
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+					  },
+					];
+		cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
 	
 		// Define the source
 		oldData = data;
-		srcBitmap.image = (char *)oldData;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * 4;
-		srcBitmap.pixelSize = 8 * 4;
-		srcBitmap.space = cmRGBA32Space;
-	
+		
 		// Define the destination
 		newData = malloc(make_128(width * height * 2));
-		destBitmap.image = (char *)newData;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 2;
-		destBitmap.pixelSize = 8 * 2;
-		destBitmap.space = cmGrayA16Space;
 		
 		// Execute the conversion
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
+		ColorSyncTransformConvert(cw, width, height, newData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaLast, width * 2, oldData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaLast, width * 4, NULL);
+
 		for (i = 0; i < width * height; i++)
 			newData[i * 2 + 1] = oldData[i * 4 + 3];
 		data = newData;
@@ -958,37 +930,40 @@
 		spp = 2;
 		
 		// Get rid of the colour world - we no longer need it
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(srcProf);
+		CFRelease(cw);
+		CFRelease(srcProf);
+		CFRelease(destProf);
 		
-	}
-	else if (srcType == XCF_GRAY_IMAGE && destType == XCF_RGB_IMAGE) {
-	
+	} else if (srcType == XCF_GRAY_IMAGE && destType == XCF_RGB_IMAGE) {
+		ColorSyncProfileRef srcProf, destProf;
+		ColorSyncTransformRef cw;
+
 		// Create colour world
-		CMGetDefaultProfileBySpace(cmGrayData, &srcProf);
-		OpenDisplayProfile(&destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-	
+		destProf = ColorSyncProfileCreateWithDisplayID(0);
+		srcProf = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
+		NSArray<NSDictionary<NSString*,id>*>*
+		profSeq = @[
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)srcProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+					  },
+					
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+					  },
+					];
+		cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+		
 		// Define the source
 		oldData = data;
-		srcBitmap.image = (char *)oldData;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * 2;
-		srcBitmap.pixelSize = 8 * 2;
-		srcBitmap.space = cmGrayA16Space;
 	
 		// Define the destination
 		newData = malloc(make_128(width * height * 4));
-		destBitmap.image = (char *)newData;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 4;
-		destBitmap.pixelSize = 8 * 4;
-		destBitmap.space = cmRGBA32Space;
 		
 		// Execute the conversion
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
+		ColorSyncTransformConvert(cw, width, height, newData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaLast, width * 4, oldData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaLast, width * 2, NULL);
+		
 		for (i = 0; i < width * height; i++)
 			newData[i * 4 + 3] = oldData[i * 2 + 1];
 		data = newData;
@@ -996,9 +971,9 @@
 		spp = 4;
 		
 		// Get rid of the colour world - we no longer need it
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(destProf);
-		
+		CFRelease(cw);
+		CFRelease(srcProf);
+		CFRelease(destProf);
 	}
 }
 #endif

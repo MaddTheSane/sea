@@ -212,20 +212,20 @@
 @property (readonly) int height;
 
 /*!
-	@property	xoff
+	@property	xOffset
 	@discussion	Returns the horizontal offset of the layer.
 	@result		Returns an integer representing the horizontal offset of the
 				layer (from the top-left).
 */
-@property (readonly) int xoff;
+@property (readonly, getter=xoff) int xOffset;
 
 /*!
-	@property	yoff
+	@property	yOffset
 	@discussion	Returns the vertical offset of the layer.
 	@result		Returns an integer representing the vertical offset of the layer
 				from the top-left).
 */
-@property (readonly) int yoff;
+@property (readonly, getter=yoff) int yOffset;
 
 #if MAIN_COMPILE
 /*!
@@ -555,7 +555,7 @@
 	@param		destType
 				The type to which the layer's bitmap is being converted.
 */
-- (void)convertFromType:(int)srcType to:(int)destType;
+- (void)convertFromType:(XcfImageType)srcType to:(XcfImageType)destType;
 #endif
 
 @end
