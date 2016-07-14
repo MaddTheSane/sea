@@ -881,7 +881,6 @@
 
 - (void)convertFromType:(XcfImageType)srcType to:(XcfImageType)destType
 {
-	//CMBitmap srcBitmap, destBitmap;
 	unsigned char *newData, *oldData;
 	int i;
 	

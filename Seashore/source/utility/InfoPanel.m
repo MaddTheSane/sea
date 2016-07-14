@@ -64,7 +64,7 @@
 	}
 	
 	NSRect screenRect = [[parent screen] visibleFrame];
-	float right = screenRect.size.width + screenRect.origin.x;
+	CGFloat right = screenRect.size.width + screenRect.origin.x;
 	if(oldFrame.size.width + oldFrame.origin.x > right){
 		oldFrame.origin.x = right - oldFrame.size.width;
 	}else if(oldFrame.origin.x < screenRect.origin.x){
