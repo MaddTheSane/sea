@@ -10,7 +10,7 @@ import Cocoa
 import SeashoreKit
 
 
-private func specmod(a: Int32, _ b: Int32) -> Int32 {
+private func specmod<A where A: SignedIntegerType>(a: A, _ b: A) -> A {
 	if (a < 0) {
 		return b + a % b;
 	} else {
@@ -100,14 +100,6 @@ public final class SwiftHorizStripes: SSKPlugin {
 		// Apply the change and record success
 		pluginData.apply()
 		success = true;
-	}
-	
-	public override func reapply() {
-		run()
-	}
-	
-	public override var canReapply: Bool {
-		return false
 	}
 	
 	public override func validateMenuItem(menuItem: AnyObject!) -> Bool {

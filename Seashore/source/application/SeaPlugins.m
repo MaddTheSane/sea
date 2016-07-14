@@ -1,3 +1,4 @@
+#import <Foundation/Foundation.h>
 #import "SeaPlugins.h"
 #import "PluginClass.h"
 #import "SeaSelection.h"
@@ -24,12 +25,20 @@ static BOOL checkRun(NSString *path, NSString *file)
 	
 	// Get dictionary
 	canRun = YES;
-	infoDict = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/%@/Contents/Info.plist", path, file]];
+	{
+		NSString *bundDir = [path stringByAppendingPathComponent:file];
+		NSBundle *bund = [NSBundle bundleWithPath:bundDir];
+		infoDict = [bund infoDictionary];
+	}
+	
+	if (!infoDict) {
+		infoDict = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/%@/Contents/Info.plist", path, file]];
+	}
 	
 	// Check special
 	value = infoDict[@"SpecialPlugin"];
 	if (value != NULL) {
-		if ([value isEqualToString:@"YES"] || [value isEqualToString:@"yes"] || [value isEqualToString:@"1"]) {
+		if ([value boolValue]) {
 			canRun = NO;
 		}
 	}
@@ -38,17 +47,17 @@ static BOOL checkRun(NSString *path, NSString *file)
 #ifndef __ppc__
 	value = infoDict[@"PPCOnly"];
 	if (value != NULL) {
-		if ([value isEqualToString:@"YES"] || [value isEqualToString:@"yes"] || [value isEqualToString:@"1"]) {
+		if ([value boolValue]) {
 			canRun = NO;
 		}
 	}
 #endif
 	
 	// Check Intel
-#ifndef __i386__
+#if !(defined(__i386__) || defined(__x86_64__))
 	value = infoDict[@"IntelOnly"];
 	if (value != NULL) {
-		if ([value isEqualToString:@"YES"] || [value isEqualToString:@"yes"] || [value isEqualToString:@"1"]) {
+		if ([value boolValue]) {
 			canRun = NO;
 		}
 	}
@@ -58,7 +67,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 #ifdef __ppc__
 	value = [infoDict objectForKey:@"AltiVecOrSSERequired"];
 	if (value != NULL) {
-		if ([value isEqualToString:@"YES"] || [value isEqualToString:@"yes"] || [value isEqualToString:@"1"]) {
+		if ([value boolValue]) {
 			if (useAltiVec == NO) canRun = NO;
 		}
 	}
@@ -101,7 +110,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 	// Add standard plug-ins
 	plugins = [[NSMutableArray alloc] init];
 	pluginsPath = [gMainBundle builtInPlugInsPath];
-	pre_files = [gFileManager directoryContentsAtPath:pluginsPath];
+	pre_files = [gFileManager contentsOfDirectoryAtPath:pluginsPath error:NULL];
 	files = [NSMutableArray arrayWithCapacity:[pre_files count]];
 	for (i = 0; i < [pre_files count]; i++) {
 		pre_files_name = pre_files[i];
@@ -141,7 +150,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 	// Check added plug-ins
 	ciAffineTransformIndex = -1;
 	for (NSString *file in files) {
-		bundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/%@", pluginsPath, file]];
+		bundle = [NSBundle bundleWithPath:[pluginsPath stringByAppendingPathComponent:file]];
 		if (bundle && [bundle principalClass]) {
 			success = NO;
 			if (![[bundle principalClass] instancesRespondToSelector:@selector(initWithManager:)]) {
