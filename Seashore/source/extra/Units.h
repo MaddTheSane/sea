@@ -6,6 +6,7 @@
 				<b>License:</b> GNU General Public License<br>
 */
 
+#import <Foundation/NSObjCRuntime.h>
 #import "Globals.h"
 
 /*!
@@ -17,7 +18,7 @@
 	@constant	kMillimeterUnits
 				The units are millimetres.
 */
-enum {
+typedef NS_ENUM(NSInteger, SeaUnits) {
 	kPixelUnits,
 	kInchUnits,
 	kMillimeterUnits

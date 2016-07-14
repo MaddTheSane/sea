@@ -27,66 +27,66 @@ static NSString*	GeneralPrefsIdentifier 	= @"General Preferences Item Identifier
 static NSString*	NewPrefsIdentifier 	= @"New Preferences Item Identifier";
 static NSString*    ColorPrefsIdentifier = @"Color Preferences Item Identifier";
 
-static int GetIntFromDictionaryForKey(CFDictionaryRef desc, CFStringRef key)
+static int GetIntFromDictionaryForKey(NSDictionary *desc, NSString *key)
 {
-    CFNumberRef value;
+    NSNumber *value;
     int num = 0;
     
-	if ((value = CFDictionaryGetValue(desc, key)) == NULL || CFGetTypeID(value) != CFNumberGetTypeID())
+	if ((value = desc[key]) == NULL || ![value isKindOfClass:[NSNumber class]])
         return 0;
-    CFNumberGetValue(value, kCFNumberIntType, &num);
-    
+	num = value.intValue;
+	
 	return num;
 }
 
-CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
+CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 {
     CGDisplayErr err = kCGErrorFailure;
-    io_connect_t displayPort;
-    CFDictionaryRef displayDict;
-	CFDictionaryRef displayModeDict;
-	CGDirectDisplayID displayID;
 	
 	// Get the main display
-	displayModeDict = CGDisplayCurrentMode(kCGDirectMainDisplay);
-	displayID = kCGDirectMainDisplay;
+	CGDirectDisplayID displayID = kCGDirectMainDisplay;
+	CGDisplayModeRef displayMode = CGDisplayCopyDisplayMode(displayID);
 	
     // Grab a connection to IOKit for the requested display
-    displayPort = CGDisplayIOServicePort( displayID );
+    io_connect_t displayPort = CGDisplayIOServicePort( displayID );
     if ( displayPort != MACH_PORT_NULL ) {
 	
         // Find out what IOKit knows about this display
-        displayDict = IOCreateDisplayInfoDictionary(displayPort, 0);
+        NSDictionary *displayDict = CFBridgingRelease(IODisplayCreateInfoDictionary(displayPort, 0));
         if ( displayDict != NULL ) {
-            const double mmPerInch = 25.4;
-            double horizontalSizeInInches = (double)GetIntFromDictionaryForKey(displayDict, CFSTR(kDisplayHorizontalImageSize)) / mmPerInch;
-            double verticalSizeInInches = (double)GetIntFromDictionaryForKey(displayDict, CFSTR(kDisplayVerticalImageSize)) / mmPerInch;
-
-            // Make sure to release the dictionary we got from IOKit
-            CFRelease(displayDict);
+            static const double mmPerInch = 25.4;
+            double horizontalSizeInInches = (double)GetIntFromDictionaryForKey(displayDict, @kDisplayHorizontalImageSize) / mmPerInch;
+            double verticalSizeInInches = (double)GetIntFromDictionaryForKey(displayDict, @kDisplayVerticalImageSize) / mmPerInch;
 
             // Now we can calculate the actual DPI
             // with information from the displayModeDict
-            *horizontalDPI = (float)GetIntFromDictionaryForKey( displayModeDict, kCGDisplayWidth ) / horizontalSizeInInches;
-            *verticalDPI = (float)GetIntFromDictionaryForKey( displayModeDict, kCGDisplayHeight ) / verticalSizeInInches;
+            *horizontalDPI = (CGFloat)CGDisplayModeGetWidth(displayMode) / horizontalSizeInInches;
+            *verticalDPI = (CGFloat)CGDisplayModeGetHeight(displayMode) / verticalSizeInInches;
             err = CGDisplayNoErr;
         }
-		
     }
+	CGDisplayModeRelease(displayMode);
 	
     return err;
 }
 
-@interface SeaPrefs () <NSFileManagerDelegate>
+@interface SeaPrefs () <NSFileManagerDelegate, NSToolbarDelegate>
 
 @end
 
 @implementation SeaPrefs
+@synthesize runCount;
+@synthesize useCheckerboard;
+@synthesize memoryCacheSize;
+@synthesize firstRun;
+//@synthesize mode;
+@synthesize guideColorIndex = guideColor;
+@synthesize selectionColorIndex = selectionColor;
 
 - (instancetype)init
 {
 	NSData *tempData;
-	float xdpi, ydpi;
+	CGFloat xdpi, ydpi;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if (self = [super init]) {
 	
@@ -626,17 +626,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	return rulers;
 }
 
-- (BOOL)firstRun
-{
-	return firstRun;
-}
-
-- (int)memoryCacheSize
-{
-	return memoryCacheSize;
-}
-
-- (int)warningLevel
+- (SeaWarningImportance)warningLevel
 {
 	return (fewerWarnings) ? kModerateImportance : kVeryLowImportance;
 }
@@ -706,11 +696,6 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	}
 }
 
-- (BOOL) useCheckerboard
-{
-	return useCheckerboard;
-}
-
 - (IBAction)defaultWindowBack:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
@@ -741,7 +726,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	return windowBackColor;
 }
 
-- (NSColor *)selectionColor:(float)alpha
+- (NSColor *)selectionColor:(CGFloat)alpha
 {	
 	NSColor *result;
 	//float alpha = light ? 0.20 : 0.40;
@@ -763,11 +748,6 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	result = [result colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	
 	return result;
-}
-
-- (int)selectionColorIndex
-{
-	return selectionColor;
 }
 
 - (IBAction)selectionColorChanged:(id)sender
@@ -797,7 +777,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	}
 }
 
-- (NSColor *)guideColor:(float)alpha
+- (NSColor *)guideColor:(CGFloat)alpha
 {	
 	NSColor *result;
 	//float alpha = light ? 0.20 : 0.40;
@@ -819,11 +799,6 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	result = [result colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	
 	return result;
-}
-
-- (int)guideColorIndex
-{
-	return guideColor;
 }
 
 - (IBAction)guideColorChanged:(id)sender
@@ -905,7 +880,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	return result;
 }
 
-- (int)resolution
+- (NSInteger)resolution
 {
 	switch (resolution) {
 		case 72:
@@ -931,7 +906,7 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 	return newUnits;
 }
 
-- (int)mode
+- (NSInteger)mode
 {
 	return mode;
 }
@@ -956,11 +931,6 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
 - (BOOL)transparentBackground
 {
 	return transparentBackground;
-}
-
-- (int)runCount
-{
-	return runCount;
 }
 
 - (BOOL)openUntitled

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" generatesPrototypingConstraints="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11129.15"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
         <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
@@ -953,7 +953,7 @@ CA
         <window title="Seashore License" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="license window" animationBehavior="default" id="204" userLabel="License Win">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="160" y="545" width="480" height="413"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="207">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="413"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -968,7 +968,7 @@ CA
                                     <rect key="frame" x="0.0" y="0.0" width="423" height="5850"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="423" height="288"/>
+                                    <size key="minSize" width="438" height="288"/>
                                     <size key="maxSize" width="465" height="10000000"/>
                                     <attributedString key="textStorage">
                                         <fragment content="The GNU General Public License (GPL)">
@@ -1423,7 +1423,7 @@ This General Public License does not permit incorporating your program into prop
                                         </fragment>
                                     </attributedString>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="423" height="288"/>
+                                    <size key="minSize" width="438" height="288"/>
                                     <size key="maxSize" width="465" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -1434,20 +1434,20 @@ This General Public License does not permit incorporating your program into prop
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="7366">
-                            <rect key="frame" x="424" y="1" width="15" height="288"/>
+                            <rect key="frame" x="423" y="1" width="16" height="288"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="203">
-                        <rect key="frame" x="143" y="376" width="196" height="17"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="203">
+                        <rect key="frame" x="142" y="376" width="196" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Seashore Licensing Agreement" id="7298">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" preferredMaxLayoutWidth="428" translatesAutoresizingMaskIntoConstraints="NO" id="206">
-                        <rect key="frame" x="25" y="340" width="432" height="28"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="428" translatesAutoresizingMaskIntoConstraints="NO" id="206">
+                        <rect key="frame" x="24" y="340" width="432" height="28"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="center" title="Except for plug-ins, Seashore is covered by version 2 of the GNU General Public License." id="7299">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1554,7 +1554,7 @@ This General Public License does not permit incorporating your program into prop
         <window title="Instant Help" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="instant help window" animationBehavior="default" id="912" userLabel="Instant Help Win" customClass="SeaUtilityPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" utility="YES" nonactivatingPanel="YES"/>
             <rect key="contentRect" x="1066" y="669" width="355" height="118"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <value key="minSize" type="size" width="213" height="101"/>
             <view key="contentView" id="913">
                 <rect key="frame" x="0.0" y="0.0" width="355" height="118"/>
@@ -1594,7 +1594,7 @@ This General Public License does not permit incorporating your program into prop
         <window title="Warnings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="warning window" animationBehavior="default" id="1249" userLabel="Warning Win" customClass="SeaUtilityPanel">
             <windowStyleMask key="styleMask" titled="YES" utility="YES" nonactivatingPanel="YES"/>
             <rect key="contentRect" x="651" y="480" width="355" height="130"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <value key="minSize" type="size" width="213" height="101"/>
             <view key="contentView" id="1248">
                 <rect key="frame" x="0.0" y="0.0" width="355" height="130"/>
@@ -1646,7 +1646,7 @@ This General Public License does not permit incorporating your program into prop
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="1329" userLabel="Preferences Win" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="496" y="365" width="432" height="359"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="1330">
                 <rect key="frame" x="0.0" y="0.0" width="432" height="359"/>
@@ -1680,7 +1680,7 @@ This General Public License does not permit incorporating your program into prop
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
             <rect key="contentRect" x="180" y="638" width="303" height="91"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="2247">
                 <rect key="frame" x="0.0" y="0.0" width="303" height="91"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -2171,7 +2171,7 @@ DQ
         <window title="New Image" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="2877" userLabel="New Image" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="223" y="314" width="277" height="286"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="2878">
                 <rect key="frame" x="0.0" y="0.0" width="277" height="286"/>
@@ -2543,12 +2543,9 @@ DQ
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3717">
-                    <rect key="frame" x="276" y="270" width="10" height="14"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="6" id="bjl-W2-x7Z"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="*" id="7359">
-                        <font key="font" metaFont="label"/>
+                    <rect key="frame" x="276" y="268" width="10" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="*" id="7359">
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -2691,7 +2688,7 @@ DQ
                 <constraint firstItem="7284" firstAttribute="leading" secondItem="3698" secondAttribute="leading" id="J9x-9N-AIY"/>
                 <constraint firstItem="3717" firstAttribute="leading" secondItem="3690" secondAttribute="trailing" constant="10" id="Kc8-Oc-for"/>
                 <constraint firstItem="3759" firstAttribute="leading" secondItem="3697" secondAttribute="trailing" constant="18" id="L6g-Z2-m00"/>
-                <constraint firstItem="3717" firstAttribute="top" secondItem="3685" secondAttribute="bottom" constant="8" symbolic="YES" id="Mme-go-KHB"/>
+                <constraint firstItem="3717" firstAttribute="baseline" secondItem="3690" secondAttribute="baseline" id="LqB-MD-Bi9"/>
                 <constraint firstItem="7287" firstAttribute="leading" secondItem="3687" secondAttribute="leading" id="NcP-qb-2BP"/>
                 <constraint firstItem="3697" firstAttribute="trailing" secondItem="5932" secondAttribute="trailing" id="OZX-0m-M8M"/>
                 <constraint firstItem="3701" firstAttribute="top" secondItem="3759" secondAttribute="bottom" constant="91" id="RoV-eA-YSG"/>
@@ -2705,7 +2702,6 @@ DQ
                 <constraint firstItem="7286" firstAttribute="leading" secondItem="3678" secondAttribute="leading" id="WaE-pl-dFc"/>
                 <constraint firstItem="3697" firstAttribute="leading" secondItem="5932" secondAttribute="leading" id="XcC-xW-9H5"/>
                 <constraint firstItem="7287" firstAttribute="top" secondItem="7284" secondAttribute="bottom" constant="6" id="Y4P-jC-ajC"/>
-                <constraint firstItem="7284" firstAttribute="top" secondItem="3717" secondAttribute="bottom" constant="11" id="ZVa-Dl-p9E"/>
                 <constraint firstItem="7284" firstAttribute="top" secondItem="3690" secondAttribute="bottom" constant="7" id="bZ2-4c-r18"/>
                 <constraint firstAttribute="bottom" secondItem="3701" secondAttribute="bottom" constant="20" symbolic="YES" id="bZY-Fe-46x"/>
                 <constraint firstItem="3677" firstAttribute="leading" secondItem="3676" secondAttribute="leading" constant="19" id="eNx-XY-1eg"/>

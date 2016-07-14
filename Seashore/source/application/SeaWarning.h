@@ -14,7 +14,7 @@
 	@constant	kVeryLowImportance
 				Used when the message is of little importance (e.g. user advice).
 */
-enum {
+typedef NS_ENUM(NSInteger, SeaWarningImportance) {
 	kUIImportance,
 	kHighImportance,
 	kModerateImportance,

@@ -127,7 +127,7 @@
 	return YES;
 }
 
-static inline float mod(float a, float b) __attribute__((__overloadable__))
+__unused static inline float mod(float a, float b) __attribute__((__overloadable__))
 {
 	float result;
 	
@@ -139,7 +139,7 @@ static inline float mod(float a, float b) __attribute__((__overloadable__))
 	return result;
 }
 
-static inline double mod(double a, double b) __attribute__((__overloadable__))
+__unused static inline double mod(double a, double b) __attribute__((__overloadable__))
 {
 	double result;
 	
