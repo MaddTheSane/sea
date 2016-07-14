@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11129.15"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
         <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
@@ -2013,7 +2013,6 @@ Gw
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="702" y="566" width="207" height="139"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
-            <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="695">
                 <rect key="frame" x="0.0" y="0.0" width="207" height="139"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -2423,14 +2422,14 @@ Gw
                 <outlet property="colorsMenu" destination="3892" id="4274"/>
                 <outlet property="document" destination="-2" id="1605"/>
                 <outlet property="drawMenu" destination="3869" id="3875"/>
-                <outlet property="drawTBView" destination="16559" id="16585"/>
+                <outlet property="drawTBView" destination="Mm6-mY-MuX" id="5cx-IY-ejm"/>
                 <outlet property="effectMenu" destination="3879" id="3891"/>
-                <outlet property="effectTBView" destination="16547" id="16586"/>
+                <outlet property="effectTBView" destination="Kxj-gd-GoC" id="Hzy-36-0Ge"/>
                 <outlet property="optionsUtility" destination="1599" id="2613"/>
                 <outlet property="selectionMenu" destination="3857" id="3876"/>
-                <outlet property="selectionTBView" destination="16532" id="16542"/>
+                <outlet property="selectionTBView" destination="MKw-c5-6Jx" id="oks-SU-sJB"/>
                 <outlet property="transformMenu" destination="3887" id="3890"/>
-                <outlet property="transformTBView" destination="16553" id="16584"/>
+                <outlet property="transformTBView" destination="4C7-Ki-uyR" id="WhM-UT-6FZ"/>
             </connections>
         </customObject>
         <customObject id="1599" userLabel="OptionsUtility" customClass="OptionsUtility">
@@ -5207,205 +5206,6 @@ DQ
                 </menuItem>
             </items>
         </menu>
-        <customView id="16531" userLabel="selectionTBView">
-            <rect key="frame" x="0.0" y="0.0" width="171" height="27"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <subviews>
-                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" id="16532">
-                    <rect key="frame" x="0.0" y="0.0" width="171" height="27"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    <size key="cellSize" width="35" height="27"/>
-                    <size key="intercellSpacing" width="-1" height="0.0"/>
-                    <buttonCell key="prototype" type="bevel" image="1-sel" imagePosition="only" alignment="left" alternateImage="1-not" inset="2" id="17044">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <cells>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="0-not" imagePosition="only" alignment="left" state="on" inset="2" id="16536">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="1-not" imagePosition="only" alignment="left" tag="1" inset="2" id="16537">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="2-not" imagePosition="only" alignment="left" tag="2" inset="2" id="16538">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="3-not" imagePosition="only" alignment="left" tag="3" inset="2" id="16539">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" title="Rdio" bezelStyle="regularSquare" image="4-not" imagePosition="only" alignment="left" tag="4" inset="2" id="16540">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                    </cells>
-                    <connections>
-                        <action selector="selectToolFromSender:" target="1598" id="16543"/>
-                    </connections>
-                </matrix>
-            </subviews>
-        </customView>
-        <customView id="16544" userLabel="effectTBView">
-            <rect key="frame" x="0.0" y="0.0" width="99" height="27"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <subviews>
-                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" id="16547">
-                    <rect key="frame" x="-2" y="0.0" width="103" height="27"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    <size key="cellSize" width="35" height="27"/>
-                    <size key="intercellSpacing" width="-1" height="0.0"/>
-                    <buttonCell key="prototype" type="bevel" image="1-not" imagePosition="left" alignment="left" inset="2" id="17045">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <cells>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="15-not" imagePosition="left" alignment="left" state="on" tag="15" inset="2" id="16571">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="14-not" imagePosition="left" alignment="left" tag="14" inset="2" id="16572">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="13-not" imagePosition="left" alignment="left" tag="13" inset="2" id="16573">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                    </cells>
-                    <connections>
-                        <action selector="selectToolFromSender:" target="1598" id="16595"/>
-                    </connections>
-                </matrix>
-            </subviews>
-        </customView>
-        <customView id="16545" userLabel="drawTBView">
-            <rect key="frame" x="0.0" y="0.0" width="204" height="27"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <subviews>
-                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" id="16559">
-                    <rect key="frame" x="-1" y="0.0" width="205" height="27"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    <size key="cellSize" width="35" height="27"/>
-                    <size key="intercellSpacing" width="-1" height="0.0"/>
-                    <buttonCell key="prototype" type="bevel" image="1-not" imagePosition="left" alignment="left" inset="2" id="17046">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <cells>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="5-not" imagePosition="left" alignment="left" state="on" tag="5" inset="2" id="16565">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="6-not" imagePosition="left" alignment="left" tag="6" inset="2" id="16566">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="8-not" imagePosition="left" alignment="left" tag="8" inset="2" id="16567">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="9-not" imagePosition="left" alignment="left" tag="9" inset="2" id="16568">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="10-not" imagePosition="left" alignment="left" tag="10" inset="2" id="16569">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" image="11-not" imagePosition="left" alignment="left" tag="11" inset="2" id="16570">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                                <connections>
-                                    <action selector="selectToolFromSender:" target="1598" id="16579"/>
-                                </connections>
-                            </buttonCell>
-                        </column>
-                    </cells>
-                    <connections>
-                        <action selector="selectToolFromSender:" target="1598" id="16596"/>
-                    </connections>
-                </matrix>
-            </subviews>
-        </customView>
-        <customView id="16546" userLabel="transformTBView">
-            <rect key="frame" x="0.0" y="0.0" width="136" height="27"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <subviews>
-                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" id="16553">
-                    <rect key="frame" x="0.0" y="0.0" width="137" height="27"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    <size key="cellSize" width="35" height="27"/>
-                    <size key="intercellSpacing" width="-1" height="0.0"/>
-                    <buttonCell key="prototype" type="bevel" image="1-not" imagePosition="left" alignment="left" inset="2" id="17047">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <cells>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="7-not" imagePosition="left" alignment="left" state="on" tag="7" inset="2" id="16574">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="12-not" imagePosition="left" alignment="left" tag="12" inset="2" id="16575">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="16-not" imagePosition="left" alignment="left" tag="16" inset="2" id="16576">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                        <column>
-                            <buttonCell type="bevel" bezelStyle="regularSquare" image="17-not" imagePosition="left" alignment="left" tag="17" inset="2" id="16577">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </column>
-                    </cells>
-                    <connections>
-                        <action selector="selectToolFromSender:" target="1598" id="16578"/>
-                    </connections>
-                </matrix>
-            </subviews>
-        </customView>
         <customObject id="16701" userLabel="WarningsUtility" customClass="WarningsUtility">
             <connections>
                 <outlet property="document" destination="-2" id="16707"/>
@@ -5413,38 +5213,131 @@ DQ
                 <outlet property="windowContent" destination="6" id="16703"/>
             </connections>
         </customObject>
+        <segmentedControl verticalHuggingPriority="750" id="MKw-c5-6Jx">
+            <rect key="frame" x="0.0" y="0.0" width="170" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <segmentedCell key="cell" borderStyle="border" alignment="left" style="roundRect" trackingMode="selectOne" id="7Zp-xr-90j">
+                <font key="font" metaFont="cellTitle"/>
+                <segments>
+                    <segment image="rectangle" width="32">
+                        <nil key="label"/>
+                    </segment>
+                    <segment image="circle" width="32" tag="1">
+                        <nil key="label"/>
+                    </segment>
+                    <segment image="lasso" width="32" tag="2">
+                        <nil key="label"/>
+                    </segment>
+                    <segment image="poly-lasso" tag="3">
+                        <nil key="label"/>
+                    </segment>
+                    <segment image="wand" tag="4">
+                        <nil key="label"/>
+                    </segment>
+                </segments>
+            </segmentedCell>
+            <connections>
+                <action selector="selectToolFromSender:" target="1598" id="pJ2-pe-XUi"/>
+            </connections>
+            <point key="canvasLocation" x="200" y="272.5"/>
+        </segmentedControl>
+        <segmentedControl verticalHuggingPriority="750" id="Kxj-gd-GoC">
+            <rect key="frame" x="0.0" y="0.0" width="104" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <segmentedCell key="cell" borderStyle="border" alignment="left" style="roundRect" trackingMode="selectOne" id="rBk-U8-LFc">
+                <font key="font" metaFont="cellTitle"/>
+                <segments>
+                    <segment image="effect" width="32" tag="15"/>
+                    <segment image="smudge" width="32" tag="14"/>
+                    <segment image="clone" width="32" tag="13">
+                        <nil key="label"/>
+                    </segment>
+                </segments>
+            </segmentedCell>
+            <connections>
+                <action selector="selectToolFromSender:" target="1598" id="JrD-Yx-tfy"/>
+            </connections>
+            <point key="canvasLocation" x="375" y="338.5"/>
+        </segmentedControl>
+        <segmentedControl verticalHuggingPriority="750" id="Mm6-mY-MuX">
+            <rect key="frame" x="0.0" y="0.0" width="203" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <segmentedCell key="cell" borderStyle="border" alignment="left" style="roundRect" trackingMode="selectOne" id="I5R-8K-M95">
+                <font key="font" metaFont="cellTitle"/>
+                <segments>
+                    <segment image="pencil" width="32" tag="5"/>
+                    <segment image="paintbrush" width="32" tag="6"/>
+                    <segment image="text" width="32" tag="8">
+                        <nil key="label"/>
+                    </segment>
+                    <segment image="eraser" tag="9">
+                        <nil key="label"/>
+                    </segment>
+                    <segment image="bucket" tag="10">
+                        <nil key="label"/>
+                    </segment>
+                    <segment image="gradient" tag="11">
+                        <nil key="label"/>
+                    </segment>
+                </segments>
+            </segmentedCell>
+            <connections>
+                <action selector="selectToolFromSender:" target="1598" id="q7B-Lv-IPI"/>
+            </connections>
+            <point key="canvasLocation" x="521" y="274.5"/>
+        </segmentedControl>
+        <segmentedControl verticalHuggingPriority="750" id="4C7-Ki-uyR">
+            <rect key="frame" x="0.0" y="0.0" width="137" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <segmentedCell key="cell" borderStyle="border" alignment="left" style="roundRect" trackingMode="selectOne" id="zUb-ug-GsO">
+                <font key="font" metaFont="cellTitle"/>
+                <segments>
+                    <segment image="eyedrop" width="32" tag="7"/>
+                    <segment image="crop" width="32" tag="12"/>
+                    <segment image="zoom" width="32" tag="16">
+                        <nil key="label"/>
+                    </segment>
+                    <segment image="move" tag="17">
+                        <nil key="label"/>
+                    </segment>
+                </segments>
+            </segmentedCell>
+            <connections>
+                <action selector="selectToolFromSender:" target="1598" id="NoL-po-zQq"/>
+            </connections>
+            <point key="canvasLocation" x="5" y="64.5"/>
+        </segmentedControl>
     </objects>
     <resources>
-        <image name="0-not" width="35" height="27"/>
-        <image name="1-not" width="35" height="27"/>
-        <image name="1-sel" width="35" height="27"/>
-        <image name="10-not" width="35" height="27"/>
-        <image name="11-not" width="35" height="27"/>
-        <image name="12-not" width="35" height="27"/>
-        <image name="13-not" width="35" height="27"/>
-        <image name="14-not" width="35" height="27"/>
-        <image name="15-not" width="35" height="27"/>
-        <image name="16-not" width="35" height="27"/>
-        <image name="17-not" width="35" height="27"/>
-        <image name="2-not" width="35" height="27"/>
-        <image name="3-not" width="35" height="27"/>
-        <image name="4-not" width="35" height="27"/>
-        <image name="5-not" width="35" height="27"/>
-        <image name="6-not" width="35" height="27"/>
-        <image name="7-not" width="35" height="27"/>
-        <image name="8-not" width="35" height="27"/>
-        <image name="9-not" width="35" height="27"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
+        <image name="bucket" width="22" height="22"/>
         <image name="center-align" width="19" height="13"/>
+        <image name="circle" width="22" height="22"/>
+        <image name="clone" width="22" height="22"/>
+        <image name="crop" width="22" height="22"/>
         <image name="duplicate" width="32" height="23"/>
+        <image name="effect" width="22" height="22"/>
+        <image name="eraser" width="22" height="22"/>
+        <image name="eyedrop" width="22" height="22"/>
+        <image name="gradient" width="22" height="22"/>
         <image name="help-button" width="15" height="16"/>
         <image name="hide-info" width="33" height="23"/>
         <image name="info-bg" width="1" height="132"/>
+        <image name="lasso" width="22" height="22"/>
         <image name="layer-info" width="13" height="13"/>
         <image name="left-align" width="18" height="13"/>
+        <image name="move" width="22" height="22"/>
         <image name="normal" width="32" height="23"/>
+        <image name="paintbrush" width="22" height="22"/>
+        <image name="pencil" width="22" height="22"/>
+        <image name="poly-lasso" width="22" height="22"/>
+        <image name="rectangle" width="22" height="22"/>
         <image name="right-align" width="19" height="13"/>
+        <image name="smudge" width="22" height="22"/>
+        <image name="text" width="22" height="22"/>
         <image name="trueview-not" width="32" height="23"/>
+        <image name="wand" width="22" height="22"/>
+        <image name="zoom" width="22" height="22"/>
     </resources>
 </document>

@@ -228,7 +228,7 @@
 	@discussion	Returns the window of the document.
 	@result		Returns an instance of NSWindow.
 */
-- (id)window;
+- (NSWindow*)window;
 
 /*!
 	@method		updateWindowColor

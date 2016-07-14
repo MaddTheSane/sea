@@ -574,24 +574,23 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return success;
 }
 
-- (void)importPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
-{
-	NSArray<NSURL*> *filenames = [panel URLs];
-	
-	if (returnCode == NSOKButton) {
-		for (NSURL *aURL in filenames) {
-			[self importLayerFromFile:[aURL path]];
-		}
-	}
-}
-
 - (void)importLayer
 {
 	// Run import dialog
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 
 	NSArray *types = [(SeaDocumentController*)[NSDocumentController sharedDocumentController] readableTypes];
-	[openPanel beginSheetForDirectory:NULL file:NULL types:types modalForWindow:[document window] modalDelegate:self didEndSelector:@selector(importPanelDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+	openPanel.allowedFileTypes = types;
+	[openPanel beginSheetModalForWindow:[document window] completionHandler:^(NSInteger result) {
+		NSArray<NSURL*> *filenames = [openPanel URLs];
+		
+		if (result == NSOKButton) {
+			for (NSURL *aURL in filenames) {
+				[self importLayerFromFile:[aURL path]];
+			}
+		}
+
+	}];
 }
 
 - (void)addLayer:(NSInteger)index

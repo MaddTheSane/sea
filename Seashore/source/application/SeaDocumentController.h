@@ -158,6 +158,7 @@
 	@result		Returns the instance variable of the same name.
 */
 - (int)type;
+@property (readonly) int type;
 
 /*!
 	@method		width
@@ -165,6 +166,7 @@
 	@result		Returns the instance variable of the same name.
 */
 - (int)width;
+@property (readonly) int width;
 
 /*!
 	@method		height
@@ -172,6 +174,7 @@
 	@result		Returns the instance variable of the same name.
 */
 - (int)height;
+@property (readonly) int height;
 
 /*!
 	@method		resolution
@@ -179,6 +182,7 @@
 	@result		Returns the instance variable of the same name.
 */
 - (int)resolution;
+@property (readonly) int resolution;
 
 /*!
 	@method		opaque
@@ -186,6 +190,7 @@
 	@result		Returns the instance variable of the same name.
 */
 - (int)opaque;
+@property (readonly) int opaque;
 
 /*!
 	@method		units
@@ -193,6 +198,7 @@
 	@result		Returns the instance variable of the same name.
 */
 - (int)units;
+@property (readonly) int units;
 
 /*!
 	@method		editableTypes
@@ -213,7 +219,7 @@
 	@discussion	All of the kinds of type strings we can read in.
 	@result		Flat list of all of the types.
 */
-- (NSArray*)readableTypes;
+- (NSArray<NSString*>*)readableTypes;
 
 /*!
 	@method		type:isContainedInDocType:

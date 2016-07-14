@@ -285,13 +285,13 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		/* Disable or enable the tool */
 		if ([[document selection] floating]) {
 			for (i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
-				[[selectionTBView cellAtRow:0 column:i] setEnabled:NO ];				
+				[selectionTBView setEnabled:NO forSegment:i];
 			}
 			[selectionMenu setEnabled:NO];
 		}
 		else {
 			for (i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
-				[[selectionTBView cellAtRow:0 column: i] setEnabled:YES];
+				[selectionTBView setEnabled:YES forSegment:i];
 			}
 			[selectionMenu setEnabled:YES];
 		}
@@ -314,9 +314,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[self changeToolTo:[sender tag] % 100];
 }
 
-- (IBAction)selectToolFromSender:(id)sender
+- (IBAction)selectToolFromSender:(NSSegmentedControl*)sender
 {
-	[self changeToolTo:[[sender selectedCell] tag] % 100];
+	[self changeToolTo:[[sender cell] tagForSegment:sender.selectedSegment] % 100];
 }
 
 - (void)changeToolTo:(int)newTool
@@ -335,13 +335,18 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		// Deselect the old tool
 		int i;
 		for(i = 0; i < [selectionTools count]; i++)
-			[[selectionTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%ld-%@", [[selectionTBView cellAtRow:0 column:i] tag] % 100, ([[selectionTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
+			[selectionTBView setSelected:NO forSegment:i];
 		for(i = 0; i < [drawTools count]; i++)
-			[[drawTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%ld-%@", [[drawTBView cellAtRow:0 column:i] tag] % 100, ([[drawTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
+			[drawTBView setSelected:NO forSegment:i];
 		for(i = 0; i < [effectTools count]; i++)
-			[[effectTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%ld-%@", [[effectTBView cellAtRow:0 column:i] tag] % 100, ([[effectTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
+			[effectTBView setSelected:NO forSegment:i];
 		for(i = 0; i < [transformTools count]; i++)
-			[[transformTBView cellAtRow:0 column:i] setImage:[NSImage imageNamed:[NSString stringWithFormat:@"%ld-%@", [[transformTBView cellAtRow:0 column:i] tag] % 100, ([[transformTBView cellAtRow:0 column:i] tag] % 100 == tool ? @"sel" : @"not" )]]] ;
+			[transformTBView setSelected:NO forSegment:i];
+		
+		[selectionTBView selectSegmentWithTag:tool];
+		[drawTBView selectSegmentWithTag:tool];
+		[effectTBView selectSegmentWithTag:tool];
+		[transformTBView selectSegmentWithTag:tool];
 
 		[self update:YES];
 	}
@@ -366,7 +371,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)setEffectEnabled:(BOOL)enable
 {
-	[[effectTBView cellAtRow: 0 column: kEffectTool] setEnabled: enable];
+	[effectTBView setEnabled:enable forSegment:kEffectTool];
+	//[[effectTBView cellAtRow: 0 column: kEffectTool] setEnabled: enable];
 }
 
 - (BOOL)validateMenuItem:(id)menuItem

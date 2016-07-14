@@ -41,10 +41,10 @@
 	// The toolbar
 	id toolbar;
 
-	IBOutlet id selectionTBView;
-	IBOutlet id drawTBView;
-	IBOutlet id effectTBView;
-	IBOutlet id transformTBView;
+	IBOutlet NSSegmentedControl *selectionTBView;
+	IBOutlet NSSegmentedControl *drawTBView;
+	IBOutlet NSSegmentedControl *effectTBView;
+	IBOutlet NSSegmentedControl *transformTBView;
 	
 	IBOutlet id selectionMenu;
 	IBOutlet id drawMenu;
