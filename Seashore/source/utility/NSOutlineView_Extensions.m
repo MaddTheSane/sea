@@ -66,12 +66,16 @@
 - (void)selectItems:(NSArray *)items byExtendingSelection:(BOOL)extend
 {
     NSInteger i, totalCount = [items count];
-    if (extend==NO) [self deselectAll:nil];
+	NSMutableIndexSet *idxSet = [[NSMutableIndexSet alloc] init];
+    if (extend==NO)
+		[self deselectAll:nil];
     for (i = 0; i < totalCount; i++) {
         NSInteger row = [self rowForItem:items[i]];
-        if(row>=0)
-			[self selectRow: row byExtendingSelection:YES];
+		if(row>=0)
+			[idxSet addIndex:row];
     }
+	
+	[self selectRowIndexes: idxSet byExtendingSelection:YES];
 }
 
 @end
@@ -93,6 +97,20 @@
     } else {
         [super draggedImage:image endedAt:screenPoint operation:operation];
     }
+}
+
+- (void)draggingSession:(NSDraggingSession *)session endedAtPoint:(NSPoint)screenPoint operation:(NSDragOperation)operation
+{
+	if (operation == NSDragOperationDelete) {
+		// Tell all of the dragged nodes to remove themselves from the model.
+		NSArray *selection = [(LayerDataSource *)[self dataSource] draggedNodes];
+		[selection makeObjectsPerformSelector: @selector(removeFromParent)];
+		[self deselectAll:nil];
+		[self reloadData];
+	} else {
+		[super draggingSession:session endedAtPoint:screenPoint operation:operation];
+	}
+
 }
 
 -(void)highlightSelectionInClipRect:(NSRect)theClipRect

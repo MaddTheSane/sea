@@ -77,6 +77,10 @@ CGDisplayErr GetMainDisplayDPI(float *horizontalDPI, float *verticalDPI)
     return err;
 }
 
+@interface SeaPrefs () <NSFileManagerDelegate>
+
+@end
+
 @implementation SeaPrefs
 
 - (instancetype)init

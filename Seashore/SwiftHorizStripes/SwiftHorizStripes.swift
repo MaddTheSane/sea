@@ -27,26 +27,26 @@ public final class SwiftHorizStripes: SSKPlugin {
 		return 2
 	}
 	
-	public override var name: String! {
+	public override var name: String {
 		return NSBundle(forClass: self.dynamicType).localizedStringForKey("name", value: "HorizStripes", table: nil)
 	}
 	
-	public override var groupName: String! {
+	public override var groupName: String {
 		return NSBundle(forClass: self.dynamicType).localizedStringForKey("groupName", value: "Generate", table: nil)
 	}
 	
-	public override var instruction: String! {
+	public override var instruction: String {
 		return NSBundle(forClass: self.dynamicType).localizedStringForKey("instruction", value: "Needs localization.", table: nil)
 	}
 
-	public override var sanity: String! {
+	public override var sanity: String {
 		return "Seashore Approved (Bobo)"
 	}
 	
 	public override func run()  {
 		var backColorAlpha = [UInt8](count: 4, repeatedValue: 0)
 		var foreColorAlpha = [UInt8](count: 4, repeatedValue: 0)
-		let pluginData = seaPlugins.data!;
+		let pluginData = seaPlugins.data
 		
 		// Get plug-in data
 		let width = pluginData.width

@@ -6,6 +6,8 @@
 
 @class SeaPlugins;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
 	@protocol	SeaPluginClass
 	@abstract	A basic class from which to build plug-ins.
@@ -59,12 +61,11 @@
 @property (readonly, copy) NSString *groupName;
 
 /*!
-	@method		instruction
+	@property	instruction
 	@discussion	Returns the plug-in's instructions.
 	@result		Returns a NSString indicating the plug-in's instructions
 				(127 chars max).
 */
-- (NSString *)instruction;
 @property (readonly, copy) NSString *instruction;
 
 /*!
@@ -86,7 +87,7 @@
 */
 @property (readonly) BOOL canReapply;
 
-- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
+- (BOOL)validateMenuItem:(nullable NSMenuItem*)menuItem;
 
 
 @optional
@@ -170,7 +171,7 @@ enum {
 	@result		Returns an instance of the plug-in to be used  for Core Image
 				affine transforms or NULL if no such instance exists.
 */
-@property (readonly, retain) id<SeaPluginClass> affinePlugin;
+@property (readonly, retain, nullable) id<SeaPluginClass> affinePlugin;
 
 /*!
 	@property	data
@@ -187,7 +188,7 @@ enum {
 	@param		sender
 				The menu item for the plug-in.
 */
-- (IBAction)run:(id)sender;
+- (IBAction)run:(nullable id)sender;
 
 /*!
 	@method		reapplyEffect
@@ -195,7 +196,7 @@ enum {
 	@param		sender
 				Ignored.
 */
-- (IBAction)reapplyEffect:(id)sender;
+- (IBAction)reapplyEffect:(nullable id)sender;
 
 /*!
 	@method		cancelReapply
@@ -231,7 +232,7 @@ enum {
 				the effect table.
 	@result		Returns an instance of the plug-in's class.
 */
-- (id<SeaPluginClass>)activePointEffect;
+- (nullable id<SeaPluginClass>)activePointEffect;
 
 /*!
 	@method		validateMenuItem:
@@ -241,6 +242,8 @@ enum {
 				The menu item to be validated.
 	@result		YES if the menu item should be enabled, NO otherwise.
 */
-- (BOOL)validateMenuItem:(id)menuItem;
+- (BOOL)validateMenuItem:(nullable id)menuItem;
 
 @end
+
+NS_ASSUME_NONNULL_END

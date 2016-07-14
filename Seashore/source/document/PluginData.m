@@ -109,12 +109,12 @@
 		return [document window];
 }
 
-- (int)overlayBehaviour
+- (SeaOverlayBehaviour)overlayBehaviour
 {
 	return [[document whiteboard] overlayBehaviour];
 }
 
-- (void)setOverlayBehaviour:(int)value
+- (void)setOverlayBehaviour:(SeaOverlayBehaviour)value
 {
 	[[document whiteboard] setOverlayBehaviour:value];
 }

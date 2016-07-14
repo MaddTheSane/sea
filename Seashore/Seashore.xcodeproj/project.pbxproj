@@ -12290,6 +12290,7 @@
 				555F59911D373CEC0085AC96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		557D533E18CF9FEC005809E3 /* Build configuration list for PBXNativeTarget "Affine Tile+" */ = {
 			isa = XCConfigurationList;
