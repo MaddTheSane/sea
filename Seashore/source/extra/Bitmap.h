@@ -24,7 +24,8 @@ typedef NS_ENUM(int, BMPColorSpace) {
 	kGrayColorSpace,
 	kInvertedGrayColorSpace,
 	kRGBColorSpace,
-	kCMYKColorSpace
+	kCMYKColorSpace,
+	BMPColorSpaceInvalid = -1,
 };
 
 /*!
@@ -63,7 +64,7 @@ typedef NS_ENUM(int, BMPColorSpace) {
 				possible. You should always check for failed conversions. The
 				block of memory is safe for use with AltiVec.
 */
-extern unsigned char *convertBitmap(int dspp, BMPColorSpace dspace, int dbps, unsigned char *ibitmap, int width, int height, BMPColorSpace ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat) DEPRECATED_ATTRIBUTE;
+extern unsigned char *convertBitmap(int dspp, BMPColorSpace dspace, int dbps, unsigned char *ibitmap, int width, int height, BMPColorSpace ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat) DEPRECATED_ATTRIBUTE UNAVAILABLE_ATTRIBUTE;
 
 /*!
 	@function	convertBitmap
@@ -120,7 +121,7 @@ extern unsigned char *convertBitmapColorSync(NSInteger dspp, BMPColorSpace dspac
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length);
+extern void stripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length);
 
 /*!
 	@function	premultiplyBitmap
@@ -136,7 +137,7 @@ extern void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *inp
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
+extern void premultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length);
 
 /*!
 	@function	unpremultiplyBitmap
@@ -153,7 +154,7 @@ extern void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *sr
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern void unpremultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
+extern void unpremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length);
 
 /*!
 	@function	averagedComponentValue
@@ -185,7 +186,7 @@ extern unsigned char averagedComponentValue(int spp, unsigned char *data, int wi
 	@param		profile
 				The profile to make the default display's profile.
 */
-extern void OpenDisplayProfile(CMProfileRef *profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern void OpenDisplayProfile(CMProfileRef *profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
 
 /*!
 	@function	CloseDisplayProfile
@@ -193,4 +194,4 @@ extern void OpenDisplayProfile(CMProfileRef *profile) DEPRECATED_IN_MAC_OS_X_VER
 	@param		profile
 				The profile to make the default display's profile.
 */
-extern void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;

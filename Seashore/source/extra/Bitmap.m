@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #import "Bitmap.h"
 #import "bitstring.h"
-#include "ColorSyncDeprecated.h"
 
 #define kMaxPtrsInPtrRecord 8
 
@@ -181,225 +180,6 @@ void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp, BMPCol
 /*
 	Gray -> Gray
 	RGB -> RGB
-	CMYK -> RGB
-	CMYK -> Gray
-	Gray -> RGB
-	RGB -> Gray
-*/
-
-void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigned char *ibitmap, int width, int height, int ispp, int ispace, int ibps, CMProfileLocation *iprofile)
-{
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-	CMProfileRef srcProf, destProf;
-	CMBitmap srcBitmap, destBitmap;
-	CMWorldRef cw;
-	BOOL mustClose;
-	
-	if (ispace == kGrayColorSpace && dspace == kGrayColorSpace) {
-	
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		if (ibps == 8)
-			srcBitmap.space = (ispp == 1) ? cmGray8Space : cmGrayA16Space;
-		else
-			srcBitmap.space = (ispp == 1) ? cmGray16Space : cmGrayA32Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 2;
-		destBitmap.pixelSize = 8 * 2;
-		destBitmap.space = cmGrayA16Space;
-		
-		// Execute the conversion
-		// FIXME: What is the replacement API!?
-		CMOpenProfile(&srcProf, iprofile);
-		CMGetDefaultProfileBySpace(cmGrayData, &destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CMCloseProfile(srcProf);
-	
-	}
-	else if (ispace == kRGBColorSpace && dspace == kRGBColorSpace) {
-		
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		if (ibps == 8)
-			srcBitmap.space = (ispp == 3) ? cmRGB24Space : cmRGBA32Space;
-		else
-			srcBitmap.space = (ispp == 3) ? cmRGB48Space : cmRGBA64Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 4;
-		destBitmap.pixelSize = 8 * 4;
-		destBitmap.space = cmRGBA32Space;
-		
-		// Execute the conversion
-		// FIXME: What is the replacement API!?
-		CMOpenProfile(&srcProf, iprofile);
-		OpenDisplayProfile(&destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(destProf);
-		CMCloseProfile(srcProf);
-		
-	}
-	else if (ispace == kCMYKColorSpace && dspace == kRGBColorSpace) {
-	
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		srcBitmap.space = (ibps == 8) ? cmCMYK32Space : cmCMYK64Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 4;
-		destBitmap.pixelSize = 8 * 4;
-		destBitmap.space = cmRGBA32Space;
-		
-		// Execute the conversion
-		if (iprofile == NULL) {
-			CMGetDefaultProfileBySpace(cmCMYKData, &srcProf);
-			mustClose = NO;
-		}
-		else {
-			CMOpenProfile(&srcProf, iprofile);
-			mustClose = YES;
-		}
-		OpenDisplayProfile(&destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(destProf);
-		if (mustClose) {
-			CMCloseProfile(srcProf);
-		}
-	
-	}
-	else if (ispace == kCMYKColorSpace && dspace == kGrayColorSpace) {
-	
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		srcBitmap.space = (ibps == 8) ? cmCMYK32Space : cmCMYK64Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 2;
-		destBitmap.pixelSize = 8 * 2;
-		destBitmap.space = cmGrayA16Space;
-		
-		// Execute the conversion
-		if (iprofile == NULL) {
-			CMGetDefaultProfileBySpace(cmCMYKData, &srcProf);
-			mustClose = NO;
-		}
-		else {
-			CMOpenProfile(&srcProf, iprofile);
-			mustClose = YES;
-		}
-		OpenDisplayProfile(&destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(destProf);
-		if (mustClose) {
-			CMCloseProfile(srcProf);
-		}
-	
-	}
-	else if (ispace == kGrayColorSpace && dspace == kRGBColorSpace) {
-		
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		if (ibps == 8)
-			srcBitmap.space = (ispp == 1) ? cmGray8Space : cmGrayA16Space;
-		else
-			srcBitmap.space = (ispp == 1) ? cmGray16Space : cmGrayA32Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 4;
-		destBitmap.pixelSize = 8 * 4;
-		destBitmap.space = cmRGBA32Space;
-		
-		// Execute the conversion
-		CMOpenProfile(&srcProf, iprofile);
-		OpenDisplayProfile(&destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(destProf);
-		CMCloseProfile(srcProf);
-		
-	}
-	else if (ispace == kRGBColorSpace && dspace == kGrayColorSpace) {
-		
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		if (ibps == 8)
-			srcBitmap.space = (ispp == 3) ? cmRGB24Space : cmRGBA32Space;
-		else
-			srcBitmap.space = (ispp == 3) ? cmRGB48Space : cmRGBA64Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 2;
-		destBitmap.pixelSize = 8 * 2;
-		destBitmap.space = cmGrayA16Space;
-		
-		// Execute the conversion
-		CMOpenProfile(&srcProf, iprofile);
-		CMGetDefaultProfileBySpace(cmGrayData, &destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CMCloseProfile(srcProf);
-		
-	}
-#pragma GCC diagnostic pop
-}
-
-/*
-	Gray -> Gray
-	RGB -> RGB
 	Gray -> RGB
 	RGB -> Gray
 */
@@ -483,155 +263,6 @@ void covertBitmapNoColorSync(unsigned char *dbitmap, NSInteger dspp, BMPColorSpa
 				
 	}
 	
-}
-
-unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int ibipp, int ibypr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat)
-{
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-	PtrRecord ptrs;
-	unsigned char *bitmap, *pbitmap;
-	int pos;
-	BOOL s_hasalpha;
-	NSString *fail;
-	int i, j, k, l;
-
-#ifdef DEBUG
-	if (!iprofile) {
-		NSLog(@"No ColorSync profile!");
-	}
-#endif
-	
-	// Point out conversions that are not possible
-	fail = NULL;
-	if (dbps != 8) fail = @"Only converts to 8 bps";
-	if (dspace == kCMYKColorSpace) fail = @"Cannot convert to CMYK color space";
-	if (dspace == kInvertedGrayColorSpace) fail = @"Cannot convert to inverted gray color space";
-	if (dspace == kRGBColorSpace && dspp != 4) fail = @"Can only convert to 4 spp for RGB color space";
-	if (dspace == kGrayColorSpace && dspp != 2) fail = @"Can only convert to 2 spp for RGB color space";
-	if (fail) { NSLog(@"%@", fail); return NULL; }
-	
-	// Create initial pointer
-	ptrs = initPtrs(ibitmap, ibypr * height);
-	
-	// Convert to from 1-, 2- or 4-bit to 8-bit
-	if (ibps < 8) {
-		pbitmap = getPtr(ptrs);
-		bitmap = mallocPtr(&ptrs, width * height * ispp); 
-		for (j = 0; j < height; j++) {
-			for (i = 0; i < width; i++) {
-				for (k = 0; k < ispp; k++) {
-					pos = (j * width + i) * ispp + k;
-					bitmap[pos] = 0;
-					for (l = 0; l < ibps; l++) {
-						if (bit_test(&pbitmap[j * ibypr + (i * ibipp + l) / 8], 7 - ((i * ibipp + l) % 8))) {
-							bit_set(&bitmap[pos], l);
-						}
-						bitmap[pos] *= (255 / ((1 << ibps) - 1));
-					}
-				}
-			}
-		}
-		ibps = 8;
-		ibipp = ispp * 8;
-		ibypr = width * ispp;
-		iprofile = NULL; /* Sorry no ColorSync profiles for less than 8 bits */
-	}
-	
-	// Remove redundant bits and bytes
-	if (ibps == 8) {
-		if (ibipp != ispp * 8 || ibypr != width * ispp) {
-			pbitmap = getPtr(ptrs);
-			bitmap = mallocPtr(&ptrs, width * height * ispp);
-			for (j = 0; j < height; j++) {
-				for (i = 0; i < width; i++) {
-					for (k = 0; k < ispp; k++) {
-						bitmap[(j * width + i) * ispp + k] = pbitmap[j * ibypr + i * (ibipp / 8) + k];
-					}
-				}
-			}
-			ibipp = ispp * 8;
-			ibypr = width * ispp;
-		}
-	}
-	else if (ibps == 16) {
-		if (ibipp != ispp * 16 || ibypr != width * ispp * 2) {
-			pbitmap = getPtr(ptrs);
-			bitmap = mallocPtr(&ptrs, width * height * ispp * 2);
-			for (j = 0; j < height; j++) {
-				for (i = 0; i < width; i++) {
-					for (k = 0; k < ispp; k++) {
-						bitmap[((j * width + i) * ispp + k) * 2] = pbitmap[j * ibypr + i * (ibipp / 8) + k * 2];
-						bitmap[((j * width + i) * ispp + k) * 2 + 1] = pbitmap[j * ibypr + i * (ibipp / 8) + k * 2 + 1];
-					}
-				}
-			}
-			ibipp = ispp * 16;
-			ibypr = width * ispp * 2;
-		}
-	}
-	
-	// Swap alpha (if necessary)
-	if (iformat & kAlphaFirstFormat) {
-		pbitmap = getPtr(ptrs); /* Note: transform is destructive (other destructive transforms follow) */
-		if (ibps == 8) {
-			for (i = 0; i < width * height; i++) {
-				rotate_bytes(pbitmap, i * ispp, (i + 1) * ispp - 1);
-			}
-		}
-		else if (ibps == 16) {
-			pbitmap = getPtr(ptrs);
-			for (i = 0; i < width * height; i++) {
-				rotate_bytes(pbitmap, i * ispp * 2, i * ispp * 2 - 1);
-				rotate_bytes(pbitmap, i * ispp * 2, i * ispp * 2 - 1);
-			}
-		}
-		iformat = iformat & ~(kAlphaFirstFormat);
-	}
-
-	// Convert inverted gray color space
-	if (ispace == kInvertedGrayColorSpace) {
-		pbitmap = getPtr(ptrs);
-		if (ibps == 8) {
-			for (i = 0; i < width * height; i++) {
-				pbitmap[i * ispp] = ~pbitmap[i * ispp];
-			}
-		}
-		else if (ibps == 16) {
-			for (i = 0; i < width * height; i++) {
-				pbitmap[i * ispp * 2] = ~pbitmap[i * ispp * 2];
-				pbitmap[i * ispp * 2 + 1] = ~pbitmap[i * ispp * 2 + 1];
-			}
-		}
-		ispace = kGrayColorSpace;
-	}
-
-	// Convert colour space
-	if (iprofile || ispace == kCMYKColorSpace) {
-		pbitmap = getPtr(ptrs);
-		bitmap = mallocPtr(&ptrs, width * height * dspp);
-		covertBitmapColorSync(bitmap, dspp, dspace, pbitmap, width, height, ispp, ispace, ibps, iprofile);
-	}
-	else {
-		pbitmap = getPtr(ptrs);
-		bitmap = mallocPtr(&ptrs, width * height * dspp);
-		covertBitmapNoColorSync(bitmap, dspp, dspace, pbitmap, width, height, ispp, ispace, ibps);
-	}
-	
-	// Add in alpha (not 16-bit friendly)
-	s_hasalpha = (ispace == kRGBColorSpace && ispp == 4) || (ispace == kGrayColorSpace && ispp == 2);
-	if (!s_hasalpha) {
-		for (i = 0; i < width * height; i++) {
-			pbitmap = getPtr(ptrs);
-			pbitmap[(i + 1) * dspp - 1] = 255;
-		}
-	}
-	
-	// Return result
-	freePtrs(ptrs);
-	
-	return getFinalPtr(ptrs);
-#pragma GCC diagnostic pop
 }
 
 unsigned char *convertBitmapColorSync(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger ibipp, NSInteger ibypr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, NSBitmapFormat iformat)
@@ -780,30 +411,28 @@ unsigned char *convertBitmapColorSync(NSInteger dspp, BMPColorSpace dspace, NSIn
 	return getFinalPtr(ptrs);
 }
 
-void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length)
+void stripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
 {
-	const int alphaPos = spp - 1;
-	const int outputSPP = spp - 1;
+	const NSInteger alphaPos = spp - 1;
+	const NSInteger outputSPP = spp - 1;
 	unsigned char alpha;
 	double alphaRatio;
-	int t1, t2, newValue;
-	int i, k;
+	NSInteger t1, t2, newValue;
 	
 	memset(output, 255, length * outputSPP);
 	
-	for (i = 0; i < length; i++) {
+	for (NSInteger i = 0; i < length; i++) {
 		
 		alpha = input[i * spp + alphaPos];
 		
 		if (alpha == 255) {
-			for (k = 0; k < outputSPP; k++)
+			for (NSInteger k = 0; k < outputSPP; k++)
 				output[i * outputSPP + k] = input[i * spp + k];
-		}
-		else {
+		} else {
 			if (alpha != 0) {
 
 				alphaRatio = 255.0 / alpha;
-				for (k = 0; k < outputSPP; k++) {
+				for (NSInteger k = 0; k < outputSPP; k++) {
 					newValue = 0.5 + input[i * spp + k] * alphaRatio;
 					newValue = MIN(newValue, 255);
 					output[i * outputSPP + k] = int_mult(newValue, alpha, t1) + int_mult(255, (255 - alpha), t2);
@@ -815,33 +444,33 @@ void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int
 	} 
 }
 
-void premultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
+void premultiplyBitmap(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
 {
-	int i, j, alphaPos, temp;
+	NSInteger alphaPos, temp;
 	
-	for (i = 0; i < length; i++) {
+	for (NSInteger i = 0; i < length; i++) {
 		alphaPos = (i + 1) * spp - 1;
 		if (input[alphaPos] == 255) {
-			for (j = 0; j < spp; j++)
+			for (NSInteger j = 0; j < spp; j++)
 				output[i * spp + j] = input[i * spp + j];
 		}
 		else {
 			if (input[alphaPos] != 0) {
-				for (j = 0; j < spp - 1; j++)
+				for (NSInteger j = 0; j < spp - 1; j++)
 					output[i * spp + j] = int_mult(input[i * spp + j], input[alphaPos], temp);
 				output[alphaPos] = input[alphaPos];
 			}
 			else {
-				for (j = 0; j < spp; j++)
+				for (NSInteger j = 0; j < spp; j++)
 					output[i * spp + j] = 0;
 			}
 		}
 	}
 }
 
-void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
+void unpremultiplyBitmap(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
 {
-	int i, j, alphaPos, newValue;
+	NSInteger i, j, alphaPos, newValue;
 	double alphaRatio;
 	
 	for (i = 0; i < length; i++) {
@@ -891,35 +520,3 @@ unsigned char averagedComponentValue(int spp, unsigned char *data, int width, in
 	
 	return (total / count);
 }
-
-void OpenDisplayProfile(CMProfileRef *profile)
-{
-	CMDeviceID device;
-	CMDeviceProfileID deviceID;
-	CMProfileLocation profileLoc;
-
-	// Actually, maybe we don't need the generic profile after all
-    /*OSStatus StatusError = noErr;
-    
-    // build up a profile location for ColorSync
-    profileLoc.locType        = cmPathBasedProfile;
-    strcpy(profileLoc.u.pathLoc.path, "/System/Library/ColorSync/Profiles/Generic RGB Profile.icc");
-    
-    // Open the pro	file with ColourSync
-    StatusError = CMOpenProfile(profile, &profileLoc);
-	
-	if (StatusError != noErr) {*/
-		// FIXME: What is the replacement API!?
-		CMGetDefaultDevice(cmDisplayDeviceClass, &device);
-		CMGetDeviceDefaultProfileID(cmDisplayDeviceClass, device, &deviceID);
-		CMGetDeviceProfile(cmDisplayDeviceClass, device, deviceID, &profileLoc);
-		CMOpenProfile(profile, &profileLoc);
-	//}
-}
-
-void CloseDisplayProfile(CMProfileRef profile)
-{
-	// FIXME: What is the replacement API!?
-	CMCloseProfile(profile);
-}
-

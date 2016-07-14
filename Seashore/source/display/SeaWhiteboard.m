@@ -19,7 +19,6 @@
 #import "SeaController.h"
 #import "UtilitiesManager.h"
 #endif
-#include "ColorSyncDeprecated.h"
 
 extern BOOL useAltiVec;
 

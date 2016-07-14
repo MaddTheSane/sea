@@ -1,6 +1,5 @@
 #include <ApplicationServices/ApplicationServices.h>
 #import "CMYKClass.h"
-#include "ColorSyncDeprecated.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
@@ -77,7 +76,7 @@
 			srcLayout |= kColorSyncAlphaLast;
 		}
 		
-		ColorSyncTransformConvert(cw, selection.size.width, 1, dstBytes, kColorSync8BitInteger, kColorSyncAlphaLast | kColorSyncByteOrderDefault, selection.size.width * 4, srcBytes, srcDepth, srcLayout, srcRowBytes, NULL);
+		ColorSyncTransformConvert(cw, selection.size.width, 1, dstBytes, kColorSync8BitInteger, srcLayout, srcRowBytes, srcBytes, srcDepth, srcLayout, srcRowBytes, NULL);
 		
 		for (int i = selection.size.width; i >= 0; i--) {
 			if (channel == kPrimaryChannels)

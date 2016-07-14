@@ -82,8 +82,8 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	NSData *imageRepData;
 	NSBitmapImageRep *imageRep;
 	NSImage *image;
-	int sspp, dspp, space;
-	id profile;
+	NSInteger sspp, dspp, space;
+	NSData *profile;
 	ColorSyncProfileRef cmProfileLoc;
 	int bipp, bypr, bps;
 	unsigned char *data;
@@ -134,7 +134,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Extract color profile
 	profile = [imageRep valueForProperty:NSImageColorSyncProfileData];
 	if (profile) {
-		cmProfileLoc = ColorSyncProfileCreate(profile, NULL);
+		cmProfileLoc = ColorSyncProfileCreate((__bridge CFDataRef)(profile), NULL);
 	}
 	
 	// Put it in a nice form
@@ -703,10 +703,10 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	IntRect rect;
 	id layer;
 	unsigned char *data, *tdata;
-	int i, spp = [[document contents] spp], sspp, dspp, space;
-	CMProfileLocation cmProfileLoc;
-	int bipp, bypr, bps;
-	id profile;
+	NSInteger i, spp = [[document contents] spp], sspp, dspp;
+	BMPColorSpace space;
+	ColorSyncProfileRef cmProfileLoc;
+	NSInteger bipp, bypr, bps;
 	NSPoint centerPoint;
 	
 	// Get the data from the pasteboard
@@ -738,11 +738,9 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	}
 	
 	// Extract color profile
-	profile = [imageRep valueForProperty:NSImageColorSyncProfileData];
+	NSData *profile = [imageRep valueForProperty:NSImageColorSyncProfileData];
 	if (profile) {
-		cmProfileLoc.locType = cmBufferBasedProfile;
-		cmProfileLoc.u.bufferLoc.buffer = (Ptr)[profile bytes];
-		cmProfileLoc.u.bufferLoc.size = [profile length];
+		cmProfileLoc = ColorSyncProfileCreate((__bridge CFDataRef)(profile), NULL);
 	}
 	
 	// Work out the correct center point
@@ -765,7 +763,10 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	if (spp == 4 && selectedChannel == kAlphaChannel) {
 		dspp = 2;
 	}
-	data = convertBitmap(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, (profile) ? &cmProfileLoc : NULL, bps, 0);
+	data = convertBitmapColorSync(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
+	if (cmProfileLoc) {
+		CFRelease(cmProfileLoc);
+	}
 	if (!data) {
 		NSLog(@"Required conversion not supported.");
 		return;
@@ -1063,13 +1064,14 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	NSBitmapImageRep *imageRep;
 	NSImage *image;
 	IntRect rect;
-	id pboard = [NSPasteboard generalPasteboard];
+	NSPasteboard *pboard = [NSPasteboard generalPasteboard];
 	id layer;
 	unsigned char *data, *tdata;
-	int i, spp = [[document contents] spp], sspp, dspp, space;
-	CMProfileLocation cmProfileLoc;
-	int bipp, bypr, bps;
-	id profile;
+	NSInteger i, spp = [[document contents] spp], sspp, dspp;
+	BMPColorSpace space;
+	ColorSyncProfileRef cmProfileLoc = NULL;
+	NSInteger bipp, bypr, bps;
+	NSData *profile;
 	NSPoint centerPoint;
 	IntPoint sel_point;
 	IntSize sel_size;
@@ -1146,7 +1148,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	if (spp == 4 && selectedChannel == kAlphaChannel) {
 		dspp = 2;
 	}
-	data = convertBitmap(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, (profile) ? &cmProfileLoc : NULL, bps, 0);
+	data = convertBitmapColorSync(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
 	if (!data) {
 		NSLog(@"Required conversion not supported.");
 		return;

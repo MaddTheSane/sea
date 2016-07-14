@@ -2,7 +2,6 @@
 #import "GreyscaleClass.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
-#include "ColorSyncDeprecated.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
@@ -31,63 +30,58 @@
 - (void)run
 {
 	PluginData *pluginData = [self.seaPlugins data];
-	IntRect selection;
-	unsigned char *data, *overlay, *replace;
-	int pos, i, j, width, spp, channel;
-	CMBitmap srcBitmap, destBitmap;
-	CMProfileRef srcProf, destProf;
-	CMDeviceID device;
-	CMDeviceProfileID deviceID;
-	CMProfileLocation profileLoc;
-	CMWorldRef cw;
-	
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
-	selection = [pluginData selection];
-	spp = [pluginData spp];
-	width = [pluginData width];
-	data = [pluginData data];
-	overlay = [pluginData overlay];
-	replace = [pluginData replace];
-	channel = [pluginData channel];
-
-	CMGetDefaultDevice(cmDisplayDeviceClass, &device);
-	CMGetDeviceDefaultProfileID(cmDisplayDeviceClass, device, &deviceID);
-	CMGetDeviceProfile(cmDisplayDeviceClass, device, deviceID, &profileLoc);
-	CMOpenProfile(&srcProf, &profileLoc);
-	CMGetDefaultProfileBySpace(cmGrayData, &destProf);
-	NCWNewColorWorld(&cw, srcProf, destProf);
+	IntRect selection = [pluginData selection];
+	int width = [pluginData width];
+	unsigned char *data = [pluginData data];
+	unsigned char *overlay = [pluginData overlay];
+	unsigned char *replace = [pluginData replace];
+	int channel = [pluginData channel];
 	
-	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
-		pos = j * width + selection.origin.x;
-
+	ColorSyncProfileRef srcProf = ColorSyncProfileCreateWithDisplayID(0);
+	ColorSyncProfileRef destProf = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
+	NSArray *profSeq = @[
+						 @{(__bridge NSString*)kColorSyncProfile: (__bridge id)srcProf,
+						   (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+						   (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+						   },
+						 
+						 @{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+						   (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+						   (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToPCS,
+						   },
+						 
+						 @{(__bridge NSString*)kColorSyncProfile: (__bridge id)srcProf,
+						   (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+						   (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+						   },
+						 ];
+	
+	ColorSyncTransformRef cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+	
+	for (int j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
+		int pos = j * width + selection.origin.x;
+		
+		ColorSyncDataLayout srcLayout = kColorSyncByteOrderDefault;
+		ColorSyncDataDepth srcDepth = kColorSync8BitInteger;
+		size_t srcRowBytes;
+		void *srcBytes;
+		void *dstBytes = &(overlay[pos * 4]);
+		
 		if (channel == kPrimaryChannels) {
-			srcBitmap.image = (char *)&(data[pos * 3]);
-			srcBitmap.width = selection.size.width;
-			srcBitmap.height = 1;
-			srcBitmap.rowBytes = selection.size.width * 3;
-			srcBitmap.pixelSize = 8 * 3;
-			srcBitmap.space = cmRGB24Space;
+			srcBytes = &(data[pos * 3]);
+			srcRowBytes = selection.size.width * 3;
+			srcLayout |= kColorSyncAlphaNone;
 		} else {
-			srcBitmap.image = (char *)&(data[pos * 4]);
-			srcBitmap.width = selection.size.width;
-			srcBitmap.height = 1;
-			srcBitmap.rowBytes = selection.size.width * 4;
-			srcBitmap.pixelSize = 8 * 4;
-			srcBitmap.space = cmRGBA32Space;
+			srcBytes = &(data[pos * 4]);
+			srcRowBytes = selection.size.width * 4;
+			srcLayout |= kColorSyncAlphaLast;
 		}
-
-		destBitmap.image = (char *)&(overlay[pos * 4]);
-		destBitmap.width = selection.size.width;
-		destBitmap.height = 1;
-		destBitmap.rowBytes = selection.size.width;
-		destBitmap.pixelSize = 8;
-		destBitmap.space = cmGray8Space;
 		
+		ColorSyncTransformConvert(cw, selection.size.width, 1, dstBytes, kColorSync8BitInteger, srcLayout, srcRowBytes, srcBytes, srcDepth, srcLayout, srcRowBytes, NULL);
 		
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-				
-		for (i = selection.size.width; i >= 0; i--) {
+		for (int i = selection.size.width; i >= 0; i--) {
 			overlay[(pos + i) * 4] = overlay[pos * 4 + i];
 			overlay[(pos + i) * 4 + 1] = overlay[pos * 4 + i];
 			overlay[(pos + i) * 4 + 2] = overlay[pos * 4 + i];
@@ -97,11 +91,11 @@
 				overlay[(pos + i) * 4 + 3] = data[(pos + i) * 4 + 3];
 			replace[pos + i] = 255;
 		}
-		
 	}
 	
-	CWDisposeColorWorld(cw);
-	CMCloseProfile(srcProf);
+	CFRelease(cw);
+	CFRelease(srcProf);
+	CFRelease(destProf);
 	
 	[pluginData apply];
 }

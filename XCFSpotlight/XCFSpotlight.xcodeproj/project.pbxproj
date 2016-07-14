@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		55AAF2A71D36D97900E2ADF9 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 55AAF2A61D36D97900E2ADF9 /* Bitmap.h */; };
-		55AAF2A91D36D99500E2ADF9 /* ColorSyncDeprecated.h in Headers */ = {isa = PBXBuildFile; fileRef = 55AAF2A81D36D99500E2ADF9 /* ColorSyncDeprecated.h */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
 		C86B05270671AA6E00DD9006 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86B05260671AA6E00DD9006 /* CoreServices.framework */; };
@@ -37,7 +36,6 @@
 		55909E9C18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/schema.strings"; sourceTree = "<group>"; };
 		55909E9D18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		55AAF2A61D36D97900E2ADF9 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bitmap.h; path = ../Seashore/source/extra/Bitmap.h; sourceTree = "<group>"; };
-		55AAF2A81D36D99500E2ADF9 /* ColorSyncDeprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorSyncDeprecated.h; path = ../Seashore/source/extra/ColorSyncDeprecated.h; sourceTree = "<group>"; };
 		55B95A961C6FB71700E37A8C /* GetMetadataForFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetMetadataForFile.h; sourceTree = "<group>"; };
 		8D576316048677EA00EA77CD /* XCFSpotlight.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCFSpotlight.mdimporter; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 		08FB77AFFE84173DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				55AAF2A81D36D99500E2ADF9 /* ColorSyncDeprecated.h */,
 				55AAF2A61D36D97900E2ADF9 /* Bitmap.h */,
 				DC0D53A41041FFB30037378A /* main.m */,
 				DC0D53A51041FFB30037378A /* GetMetadataForFile.m */,
@@ -158,7 +155,6 @@
 				DC0D53BC1041FFB30037378A /* SeaContent.h in Headers */,
 				DC0D53BE1041FFB30037378A /* XCFContent.h in Headers */,
 				DC0D53C01041FFB30037378A /* SeaLayer.h in Headers */,
-				55AAF2A91D36D99500E2ADF9 /* ColorSyncDeprecated.h in Headers */,
 				DC0D53C21041FFB30037378A /* XCFLayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
