@@ -1,6 +1,5 @@
 #import "TexturizeClass.h"
-
-extern int render(unsigned char *image_in, int width_in, int height_in, unsigned char *image_out, int width_out, int height_out, int overlap, int channels, char tileable, id progressBar);
+#import "render.hpp"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
@@ -10,13 +9,20 @@ extern int render(unsigned char *image_in, int width_in, int height_in, unsigned
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"Texturize" owner:self];
+	if (self = [super init]) {
+		seaPlugins = manager;
+		[NSBundle loadNibNamed:@"Texturize" owner:self];
+	}
 	
 	return self;
 }
 
 - (int)type
+{
+	return 0;
+}
+
+-(int)points
 {
 	return 0;
 }
@@ -48,9 +54,14 @@ extern int render(unsigned char *image_in, int width_in, int height_in, unsigned
 	iheight = [pluginData height];
 	
 	if (iwidth < 64 || iheight < 64) {
+		NSAlert *alert = [[NSAlert alloc] init];
 		smallTitle = [gOurBundle localizedStringForKey:@"small title" value:@"Image too small" table:NULL];
 		smallBody = [gOurBundle localizedStringForKey:@"small body" value:@"The texturize plug-in can only be used with images that are larger than 64 pixels in both width and height." table:NULL];
-		NSRunAlertPanel(smallTitle, smallBody, [gOurBundle localizedStringForKey:@"ok" value:@"OK" table:NULL], NULL, NULL);
+		alert.messageText = smallTitle;
+		alert.informativeText = smallBody;
+		
+		[alert runModal];
+		[alert release];
 		return;
 	}
 	
@@ -150,9 +161,9 @@ extern int render(unsigned char *image_in, int width_in, int height_in, unsigned
 
 - (IBAction)update:(id)sender
 {
-	overlap = roundf([overlapSlider floatValue]);
-	width = roundf([widthSlider floatValue]);
-	height = roundf([heightSlider floatValue]);
+	overlap = round([overlapSlider doubleValue]);
+	width = round([widthSlider doubleValue]);
+	height = round([heightSlider doubleValue]);
 	
 	[overlapLabel setStringValue:[NSString stringWithFormat:@"%.0f%%", overlap]];
 	[widthLabel setStringValue:[NSString stringWithFormat:@"%.0f%%", width]];

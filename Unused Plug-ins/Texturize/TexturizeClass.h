@@ -9,48 +9,48 @@
 */
 
 #import <Cocoa/Cocoa.h>
-#import "SeaPlugins.h"
+#import <SeashoreKit/SeaPlugins.h>
 
-@interface TexturizeClass : NSObject {
+@interface TexturizeClass : NSObject <SeaPluginClass> {
 
 	// The plug-in's manager
-	id seaPlugins;
+	__unsafe_unretained SeaPlugins *seaPlugins;
 
 	// The label displaying the overlap
-	IBOutlet id overlapLabel;
+	IBOutlet NSTextField *overlapLabel;
 	
 	// The slider for the overlap
-	IBOutlet id overlapSlider;
+	IBOutlet NSSlider *overlapSlider;
 
 	// The label displaying the width
-	IBOutlet id widthLabel;
+	IBOutlet NSTextField *widthLabel;
 	
 	// The slider for the width
-	IBOutlet id widthSlider;
+	IBOutlet NSSlider *widthSlider;
 	
 	// The label displaying the height
-	IBOutlet id heightLabel;
+	IBOutlet NSTextField *heightLabel;
 	
 	// The slider for the height
-	IBOutlet id heightSlider;
+	IBOutlet NSSlider *heightSlider;
 	
 	// The checkbox indicating whether the resulting texture should be tileable
-	IBOutlet id tileableCheckbox;
+	IBOutlet NSButton *tileableCheckbox;
 	
 	// The panel for the plug-in
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// The progress bar to indicate progress
-	IBOutlet id progressBar;
+	IBOutlet NSProgressIndicator *progressBar;
 
 	// The overlap
-	float overlap;
+	CGFloat overlap;
 	
 	// The width
-	float width;
+	CGFloat width;
 	
 	// The height
-	float height;
+	CGFloat height;
 	
 	// Should the resulting texture be tileable?
 	BOOL tileable;

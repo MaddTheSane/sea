@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "BlurClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
@@ -5,16 +7,35 @@
 #define gUserDefaults [NSUserDefaults standardUserDefaults]
 
 @implementation BlurClass
+{
+	NSArray *nibObjs;
+}
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"Blur" owner:self];
+	if (self = [super init]) {
+		seaPlugins = manager;
+		NSArray *tmpNibObjs;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"Blur" owner:self topLevelObjects:&tmpNibObjs];
+		nibObjs = [tmpNibObjs retain];
+	}
 	
 	return self;
 }
 
+- (void)dealloc
+{
+	[nibObjs release];
+	
+	[super dealloc];
+}
+
 - (int)type
+{
+	return 0;
+}
+
+-(int)points
 {
 	return 0;
 }
@@ -47,12 +68,11 @@
 	if (applications < 0 || applications > 100)
 		applications = 1;
 	
-	[applicationsLabel setStringValue:[NSString stringWithFormat:@"%d", applications]];
-	
-	[applicationsSlider setIntValue:applications];
+	applicationsLabel.integerValue = applications;
+	applicationsSlider.integerValue = applications;
 	
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
 	else
@@ -63,7 +83,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	if (refresh) [self blur];
 	[pluginData apply];
 	
@@ -106,7 +126,7 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -119,25 +139,23 @@
 
 - (IBAction)update:(id)sender
 {
-	applications = roundf([applicationsSlider floatValue]);
+	applications = round([applicationsSlider doubleValue]);
 	
-	[applicationsLabel setStringValue:[NSString stringWithFormat:@"%d", applications]];
+	applicationsLabel.integerValue = applications;
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 }
 
 - (void)blur
 {
-	PluginData *pluginData;
-	IntRect selection;
-	int i, j, k, l, x, y, count, spp, width, channel;
+	int l, spp, width, channel;
 	unsigned char *data, *overlay, *replace, *workpad;
 	int numerator, denominator, t;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:kReplacingBehaviour];
-	selection = [pluginData selection];
+	IntRect selection = [pluginData selection];
 	spp = [pluginData spp];
 	width = [pluginData width];
 	data = [pluginData data];
@@ -145,20 +163,20 @@
 	replace = [pluginData replace];
 	channel = [pluginData channel];
 	
-	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
-		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
+	for (int j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
+		for (int i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
 		
 			if (channel == kAllChannels) {
 			
 				denominator = 0;
 				l = 0;
 				
-				for (k = 0; k < spp - 1; k++) {
+				for (int k = 0; k < spp - 1; k++) {
 				
 					numerator = 0;
 					
-					for (x = i - 1; x < i + 2; x++) {
-						for (y = j - 1; y < j + 2; y++) {
+					for (int x = i - 1; x < i + 2; x++) {
+						for (int y = j - 1; y < j + 2; y++) {
 							if (x >= selection.origin.x && y >= selection.origin.y  && x < selection.origin.x + selection.size.width && y < selection.origin.y + selection.size.height) {
 								t = (y * width) + x;
 								numerator += data[t * spp + k] * data[(t + 1) * spp - 1];
@@ -170,25 +188,22 @@
 						}
 					}
 					
-					t = (denominator == 0) ? t = 0 : (int)(roundf((float)numerator / (float)denominator));
+					t = (denominator == 0) ? t = 0 : (int)(round((float)numerator / (float)denominator));
 					overlay[((j * width) + i) * spp + k] = t;
 					
 				}
 				
-				t = (l == 0) ? t = 0 : (int)(roundf((float)denominator / (float)l));
+				t = (l == 0) ? t = 0 : (int)(round((float)denominator / (float)l));
 				overlay[((j * width) + i + 1) * spp - 1] = t;
 				replace[(j * width) + i] = 255;
-				
-			}
-			else if (channel == kPrimaryChannels) {
-			
-				for (k = 0; k < spp - 1; k++) {
+			} else if (channel == kPrimaryChannels) {
+				for (int k = 0; k < spp - 1; k++) {
 				
 					numerator = 0;
 					denominator = 0;
 				
-					for (x = i - 1; x < i + 2; x++) {
-						for (y = j - 1; y < j + 2; y++) {
+					for (int x = i - 1; x < i + 2; x++) {
+						for (int y = j - 1; y < j + 2; y++) {
 							if (x >= selection.origin.x && y >= selection.origin.y  && x < selection.origin.x + selection.size.width && y < selection.origin.y + selection.size.height) {
 								t = (y * width) + x;
 								numerator += data[t * spp + k];
@@ -197,7 +212,7 @@
 						}
 					}
 					
-					t = (int)(roundf((float)numerator / (float)denominator));
+					t = (int)(round((float)numerator / (float)denominator));
 					overlay[((j * width) + i) * spp + k] = t;
 					
 				}
@@ -205,14 +220,13 @@
 				overlay[((j * width) + i + 1) * spp - 1] = 255;
 				replace[(j * width) + i] = 255;
 			
-			}
-			else if (channel == kAlphaChannel) {
+			} else if (channel == kAlphaChannel) {
 			
 				numerator = 0;
 				denominator = 0;
 			
-				for (x = i - 1; x < i + 2; x++) {
-					for (y = j - 1; y < j + 2; y++) {
+				for (int x = i - 1; x < i + 2; x++) {
+					for (int y = j - 1; y < j + 2; y++) {
 						if (x >= selection.origin.x && y >= selection.origin.y  && x < selection.origin.x + selection.size.width && y < selection.origin.y + selection.size.height) {
 							t = (y * width) + x;
 							numerator += data[(t + 1) * spp - 1];
@@ -221,8 +235,8 @@
 					}
 				}
 				
-				t = (int)(roundf((float)numerator / (float)denominator));
-				for (k = 0; k < spp - 1; k++) {
+				t = (int)(round((float)numerator / (float)denominator));
+				for (int k = 0; k < spp - 1; k++) {
 					overlay[((j * width) + i) * spp + k] = t;
 				}
 				
@@ -238,26 +252,26 @@
 	
 		workpad = malloc(selection.size.width * selection.size.height * spp);
 		
-		for (count = 1; count < applications; count++) {
+		for (int count = 1; count < applications; count++) {
 			
-			for (j = 0; j < selection.size.height; j++) {
+			for (int j = 0; j < selection.size.height; j++) {
 				memcpy(&(workpad[j * selection.size.width * spp]), &(overlay[((j + selection.origin.y) * width + selection.origin.x) * spp]), selection.size.width * spp);
 			}
 			
-			for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
-				for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
+			for (int j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
+				for (int i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
 					
 					if (channel == kAllChannels) {
 				
 						denominator = 0;
 						l = 0;
 						
-						for (k = 0; k < spp - 1; k++) {
+						for (int k = 0; k < spp - 1; k++) {
 						
 							numerator = 0;
 							
-							for (x = i - 1; x < i + 2; x++) {
-								for (y = j - 1; y < j + 2; y++) {
+							for (int x = i - 1; x < i + 2; x++) {
+								for (int y = j - 1; y < j + 2; y++) {
 									if (x >= selection.origin.x && y >= selection.origin.y  && x < selection.origin.x + selection.size.width && y < selection.origin.y + selection.size.height) {
 										t = ((y - selection.origin.y) * selection.size.width) + (x - selection.origin.x);
 										numerator += workpad[t * spp + k] * workpad[(t + 1) * spp - 1];
@@ -269,25 +283,24 @@
 								}
 							}
 							
-							t = (denominator == 0) ? t = 0 : (int)(roundf((float)numerator / (float)denominator));
+							t = (denominator == 0) ? t = 0 : (int)(round((float)numerator / (float)denominator));
 							overlay[((j * width) + i) * spp + k] = t;
 							
 						}
 						
-						t = (l == 0) ? t = 0 : (int)(roundf((float)denominator / (float)l));
+						t = (l == 0) ? t = 0 : (int)(round((float)denominator / (float)l));
 						overlay[((j * width) + i + 1) * spp - 1] = t;
 						replace[(j * width) + i] = 255;
 						
-					}
-					else if (channel == kPrimaryChannels) {
+					} else if (channel == kPrimaryChannels) {
 					
-						for (k = 0; k < spp - 1; k++) {
+						for (int k = 0; k < spp - 1; k++) {
 						
 								numerator = 0;
 								denominator = 0;
 							
-								for (x = i - 1 - selection.origin.x; x < i - selection.origin.x + 2; x++) {
-									for (y = j - 1 - selection.origin.y; y < j - selection.origin.y + 2; y++) {
+								for (int x = i - 1 - selection.origin.x; x < i - selection.origin.x + 2; x++) {
+									for (int y = j - 1 - selection.origin.y; y < j - selection.origin.y + 2; y++) {
 										if (x >= 0 && y >= 0  && x < selection.size.width && y < selection.size.height) {
 											t = ((y - selection.origin.y) * selection.size.width) + (x - selection.origin.x);
 											numerator += workpad[t * spp + k];
@@ -296,19 +309,16 @@
 									}
 								}
 								
-								t = (int)(roundf((float)numerator / (float)denominator));
+								t = (int)(round((float)numerator / (float)denominator));
 								overlay[((j * width) + i) * spp + k] = t;
 							
 						}
-						
-					}
-					else if (channel == kAlphaChannel) {
-			
+					} else if (channel == kAlphaChannel) {
 						numerator = 0;
 						denominator = 0;
 					
-						for (x = i - 1 - selection.origin.x; x < i - selection.origin.x + 2; x++) {
-							for (y = j - 1 - selection.origin.y; y < j - selection.origin.y + 2; y++) {
+						for (int x = i - 1 - selection.origin.x; x < i - selection.origin.x + 2; x++) {
+							for (int y = j - 1 - selection.origin.y; y < j - selection.origin.y + 2; y++) {
 								if (x >= 0 && y >= 0  && x < selection.size.width && y < selection.size.height) {
 									t = ((y - selection.origin.y) * selection.size.width) + (x - selection.origin.x);
 									numerator += workpad[t * spp];
@@ -317,20 +327,17 @@
 							}
 						}
 						
-						t = (int)(roundf((float)numerator / (float)denominator));
-						for (k = 0; k < spp - 1; k++) {
+						t = (int)(round((float)numerator / (float)denominator));
+						for (int k = 0; k < spp - 1; k++) {
 							overlay[((j * width) + i) * spp + k] = t;
 						}
 					
 					}
-				
 				}
 			}
-			
 		}
 		
 		free(workpad);
-		
 	}
 }
 

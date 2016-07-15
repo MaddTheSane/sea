@@ -8,24 +8,24 @@
 */
 
 #import <Cocoa/Cocoa.h>
-#import "SeaPlugins.h"
+#import <SeashoreKit/SeaPlugins.h>
 
-@interface BlurClass : NSObject {
+@interface BlurClass : NSObject <SeaPluginClass> {
 
 	// The plug-in's manager
-	id seaPlugins;
+	__unsafe_unretained SeaPlugins *seaPlugins;
 
 	// The label displaying the number of applications
-	IBOutlet id applicationsLabel;
+	IBOutlet NSTextField *applicationsLabel;
 	
 	// The slider for the number of applications
-	IBOutlet id applicationsSlider;
+	IBOutlet NSSlider *applicationsSlider;
 
 	// The panel for the plug-in
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 
 	// The number of applications
-	int applications;
+	NSInteger applications;
 
 	// YES if the blurring must be refreshed
 	BOOL refresh;

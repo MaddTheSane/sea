@@ -60,6 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @property (readonly, copy) NSString *groupName;
 
+@optional
 /*!
 	@property	instruction
 	@discussion	Returns the plug-in's instructions.
@@ -67,6 +68,8 @@ NS_ASSUME_NONNULL_BEGIN
 				(127 chars max).
 */
 @property (readonly, copy) NSString *instruction;
+
+@required
 
 /*!
 	@method		run
