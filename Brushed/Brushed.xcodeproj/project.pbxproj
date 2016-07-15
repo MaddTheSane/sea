@@ -41,7 +41,7 @@
 		A898E53D09BEFCA00075C7AB /* Brushed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brushed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A89B63D504403A9E00D5D43C /* BrushedDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BrushedDocumentController.h; sourceTree = "<group>"; };
 		A89B63D604403A9E00D5D43C /* BrushedDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BrushedDocumentController.m; sourceTree = "<group>"; };
-		A8EC24B8043D9B5A00A80207 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
+		A8EC24B8043D9B5A00A80207 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,16 +176,15 @@
 			};
 			buildConfigurationList = A8B12B8409BD8F460096101F /* Build configuration list for PBXProject "Brushed" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
-				"en-GB",
 				Base,
 				en,
+				"en-GB",
+				ja,
+				fr,
+				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Brushed */;
 			projectDirPath = "";
@@ -244,7 +243,7 @@
 		A8EC24B7043D9B5A00A80207 /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A8EC24B8043D9B5A00A80207 /* English */,
+				A8EC24B8043D9B5A00A80207 /* en */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
