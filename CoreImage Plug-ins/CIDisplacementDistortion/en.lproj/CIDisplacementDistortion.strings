@@ -1,0 +1,21 @@
+
+/* Class = "NSWindow"; title = "Displacement Distortion"; ObjectID = "6"; */
+"6.title" = "Displacement Distortion";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "42"; */
+"42.title" = "OK";
+
+/* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "43"; */
+"43.title" = "Scale:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "45"; */
+"45.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "50"; ObjectID = "46"; */
+"46.title" = "50";
+
+/* Class = "NSTextFieldCell"; title = "Texture: Default"; ObjectID = "47"; */
+"47.title" = "Texture: Default";
+
+/* Class = "NSButtonCell"; title = "Select..."; ObjectID = "48"; */
+"48.title" = "Select...";

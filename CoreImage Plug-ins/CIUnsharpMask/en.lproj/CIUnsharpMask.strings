@@ -1,0 +1,21 @@
+
+/* Class = "NSWindow"; title = "Sharpen Edges"; ObjectID = "6"; */
+"6.title" = "Sharpen Edges";
+
+/* Class = "NSButtonCell"; title = "Ok"; ObjectID = "41"; */
+"41.title" = "Ok";
+
+/* Class = "NSTextFieldCell"; title = "Radius:"; ObjectID = "42"; */
+"42.title" = "Radius:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "44"; */
+"44.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "2.5"; ObjectID = "45"; */
+"45.title" = "2.5";
+
+/* Class = "NSTextFieldCell"; title = "Intensity:"; ObjectID = "46"; */
+"46.title" = "Intensity:";
+
+/* Class = "NSTextFieldCell"; title = ".50"; ObjectID = "48"; */
+"48.title" = ".50";

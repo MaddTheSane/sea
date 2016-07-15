@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ThresholdClass">
+            <connections>
+                <outlet property="panel" destination="6" id="32"/>
+                <outlet property="rangeLabel" destination="21" id="41"/>
+                <outlet property="view" destination="39" id="40"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Threshold" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES"/>
+            <rect key="contentRect" x="334" y="375" width="365" height="271"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <view key="contentView" id="5">
+                <rect key="frame" x="0.0" y="0.0" width="365" height="271"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                        <rect key="frame" x="269" y="13" width="82" height="32"/>
+                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="44">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="apply:" target="-2" id="26"/>
+                        </connections>
+                    </button>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="14">
+                        <rect key="frame" x="18" y="83" width="329" height="20"/>
+                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="255" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="45">
+                            <font key="font" size="12" name="Helvetica"/>
+                        </sliderCell>
+                        <connections>
+                            <action selector="update:" target="-2" id="23"/>
+                            <binding destination="-2" name="value" keyPath="self.topValue" id="OFz-Up-Tgj"/>
+                        </connections>
+                    </slider>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16">
+                        <rect key="frame" x="187" y="13" width="82" height="32"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="46">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent">.</string>
+                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="cancel:" target="-2" id="25"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                        <rect key="frame" x="141" y="109" width="84" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="N6Y-F4-5xm"/>
+                        </constraints>
+                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="center" title="0 - 255" id="47">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="35">
+                        <rect key="frame" x="18" y="59" width="329" height="20"/>
+                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="255" doubleValue="255" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="48">
+                            <font key="font" size="12" name="Helvetica"/>
+                        </sliderCell>
+                        <connections>
+                            <action selector="update:" target="-2" id="38"/>
+                            <binding destination="-2" name="value" keyPath="self.bottomValue" id="i0B-pG-FwI"/>
+                        </connections>
+                    </slider>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="39" customClass="ThresholdView">
+                        <rect key="frame" x="55" y="131" width="256" height="120"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="120" id="PGX-UN-w6Y"/>
+                            <constraint firstAttribute="width" constant="256" id="hWv-2T-F19"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="thresholdClass" destination="-2" id="42"/>
+                        </connections>
+                    </customView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="16" firstAttribute="width" secondItem="7" secondAttribute="width" id="2CP-Zg-BPU"/>
+                    <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="20" symbolic="YES" id="9ti-T3-GQD"/>
+                    <constraint firstItem="35" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="D5L-62-gEu"/>
+                    <constraint firstAttribute="centerX" secondItem="21" secondAttribute="centerX" id="Nqm-JI-mer"/>
+                    <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" constant="20" symbolic="YES" id="Rxx-dW-fc7"/>
+                    <constraint firstItem="21" firstAttribute="top" secondItem="39" secondAttribute="bottom" constant="8" symbolic="YES" id="TCS-st-n0q"/>
+                    <constraint firstItem="35" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="8" symbolic="YES" id="UPs-ed-Pwh"/>
+                    <constraint firstItem="16" firstAttribute="baseline" secondItem="7" secondAttribute="baseline" id="aFK-2X-GJw"/>
+                    <constraint firstItem="39" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" id="awz-pt-qTV"/>
+                    <constraint firstAttribute="trailing" secondItem="35" secondAttribute="trailing" constant="20" symbolic="YES" id="bG7-zW-pwW"/>
+                    <constraint firstAttribute="centerX" secondItem="39" secondAttribute="centerX" id="biu-fI-0pF"/>
+                    <constraint firstItem="7" firstAttribute="leading" secondItem="16" secondAttribute="trailing" constant="12" symbolic="YES" id="fAv-aV-FOF"/>
+                    <constraint firstItem="14" firstAttribute="top" secondItem="21" secondAttribute="bottom" constant="8" symbolic="YES" id="gOF-HL-uvi"/>
+                    <constraint firstItem="7" firstAttribute="top" secondItem="35" secondAttribute="bottom" constant="20" symbolic="YES" id="lE8-YG-kG2"/>
+                    <constraint firstAttribute="centerX" secondItem="14" secondAttribute="centerX" id="xK0-3g-Nna"/>
+                    <constraint firstItem="14" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="zoh-aA-USV"/>
+                </constraints>
+            </view>
+        </window>
+    </objects>
+</document>
