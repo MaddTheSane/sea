@@ -10,7 +10,7 @@
 		55F084871D3996A200A34BF3 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 556CBD211D3995AB007D73A1 /* SeashoreKit.framework */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		A831E1410789471D0009080F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A831E13F0789471D0009080F /* Localizable.strings */; };
-		A8CA58350793689B004BE921 /* Blur.nib in Resources */ = {isa = PBXBuildFile; fileRef = A8CA58330793689B004BE921 /* Blur.nib */; };
+		A8CA58350793689B004BE921 /* Blur.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CA58330793689B004BE921 /* Blur.xib */; };
 		A8D55D7A0792124D00B6C7C8 /* BlurClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D55D780792124D00B6C7C8 /* BlurClass.m */; };
 /* End PBXBuildFile section */
 
@@ -549,8 +549,8 @@
 		556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Seashore.xcodeproj; path = ../../Seashore/Seashore.xcodeproj; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Blur.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Blur.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A831E1400789471D0009080F /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A8CA58340793689B004BE921 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Blur.nib; sourceTree = "<group>"; };
+		A831E1400789471D0009080F /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A8CA58340793689B004BE921 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Blur.xib; sourceTree = "<group>"; };
 		A8D55D770792124D00B6C7C8 /* BlurClass.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BlurClass.h; sourceTree = "<group>"; };
 		A8D55D780792124D00B6C7C8 /* BlurClass.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BlurClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -592,7 +592,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A8CA58330793689B004BE921 /* Blur.nib */,
+				A8CA58330793689B004BE921 /* Blur.xib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				A831E13F0789471D0009080F /* Localizable.strings */,
 			);
@@ -746,7 +746,7 @@
 			};
 			buildConfigurationList = A8582DD609BD8EF90098D48C /* Build configuration list for PBXProject "Blur" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
@@ -1293,7 +1293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A831E1410789471D0009080F /* Localizable.strings in Resources */,
-				A8CA58350793689B004BE921 /* Blur.nib in Resources */,
+				A8CA58350793689B004BE921 /* Blur.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1322,17 +1322,17 @@
 		A831E13F0789471D0009080F /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A831E1400789471D0009080F /* English */,
+				A831E1400789471D0009080F /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		A8CA58330793689B004BE921 /* Blur.nib */ = {
+		A8CA58330793689B004BE921 /* Blur.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A8CA58340793689B004BE921 /* English */,
+				A8CA58340793689B004BE921 /* en */,
 			);
-			name = Blur.nib;
+			name = Blur.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1346,16 +1346,12 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 3.3;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.Blur;
 				PRODUCT_NAME = Blur;
 				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
@@ -1364,11 +1360,9 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 3.3;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.Blur;
 				PRODUCT_NAME = Blur;
 				WRAPPER_EXTENSION = bundle;
@@ -1380,6 +1374,7 @@
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_TESTABILITY = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
