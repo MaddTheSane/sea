@@ -23,7 +23,7 @@
 
 @implementation BrushTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kBrushTool;
 }

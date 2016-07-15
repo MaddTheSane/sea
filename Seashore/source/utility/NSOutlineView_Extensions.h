@@ -22,6 +22,5 @@
 	BOOL isFirst;
 }
 
-- (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation;
 @end
 

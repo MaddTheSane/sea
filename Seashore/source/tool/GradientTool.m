@@ -13,7 +13,7 @@
 
 @implementation GradientTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kGradientTool;
 }

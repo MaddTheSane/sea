@@ -1,4 +1,5 @@
 #import "Globals.h"
+#import "SeaTools.h"
 
 @class SeaDocument;
 
@@ -30,7 +31,7 @@
 				This method must be defined by subclasses.
 	@result		Returns an element of the k...Tool enum
 */
-- (int)toolId;
+- (SeaToolsDefines)toolId;
 
 /*!
 	@method		setOptions:
@@ -132,19 +133,19 @@
 - (void)fineMouseUpAt:(NSPoint)where withEvent:(NSEvent *)event;
 
 /*!
-	 @method		intermediate
+	 @property		intermediate
 	 @discussion	This is used to detect if there is currently a mouse drag
 	 @result		Returns a BOOL: YES if there is currently an action being made.
 */
-- (BOOL) intermediate;
+@property (readonly) BOOL intermediate;
 
 /*!
-	@method		isFineTool
+	@property	fineTool
 	@discussion	Returns whether the tool needs an NSPoint input as opposed to an IntPoint
 				input (i.e. whether fineMouse... or mouse... should be called).
 	@result		Returns YES if the tool needs an NSPoint input as opposed to an IntPoint
 				input, NO otherwise. The implementation in this class always returns NO.
 */
-- (BOOL)isFineTool;
+@property (readonly, getter=isFineTool) BOOL fineTool;
 
 @end

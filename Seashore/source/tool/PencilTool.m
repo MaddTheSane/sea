@@ -19,7 +19,7 @@
 
 @implementation PencilTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kPencilTool;
 }

@@ -10,7 +10,7 @@
 
 - (void)flipDocHorizontally
 {
-	int i, layerCount;
+	NSInteger i, layerCount;
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] flipDocHorizontally];
 	[[document selection] clearSelection];
@@ -23,7 +23,7 @@
 
 - (void)flipDocVertically
 {
-	int i, layerCount;
+	NSInteger i, layerCount;
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] flipDocVertically];
 	[[document selection] clearSelection];
@@ -36,7 +36,8 @@
 
 - (void)rotateDocLeft
 {
-	int i, layerCount, width, height;
+	NSInteger i, layerCount;
+	int width, height;
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] rotateDocRight];
 	[[document selection] clearSelection];
@@ -52,7 +53,8 @@
 
 - (void)rotateDocRight
 {
-	int i, layerCount, width, height;
+	NSInteger i, layerCount;
+	int width, height;
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] rotateDocLeft];
 	[[document selection] clearSelection];

@@ -19,7 +19,7 @@
 		if (value < 0 || value > 100)
 			value = 50;
 	}
-	[rateSlider setIntValue:value];
+	[rateSlider setIntegerValue:value];
 	[rateLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"rate", @"Rate: %d%%"), value]];
 	//[mergedCheckbox setState:[defaults boolForKey:@"smudge merged"]];
 }

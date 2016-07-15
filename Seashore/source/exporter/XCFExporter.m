@@ -134,7 +134,7 @@ static inline void fix_endian_write(int *input, int size)
 		for (i = 0; i < count; i++) {
 			parasite = parasites[i];
 			NSString *parasiteName = (__bridge NSString*)parasite.name;
-			tempIntString[0] = ([parasiteName lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) + 1;
+			tempIntString[0] = (int)([parasiteName lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) + 1;
 			fix_endian_write(tempIntString, 1);
 			fwrite(tempIntString, sizeof(int), 1, file);
 			fwrite([parasiteName UTF8String], sizeof(char), ([parasiteName lengthOfBytesUsingEncoding:NSUTF8StringEncoding]) + 1, file);
@@ -148,7 +148,7 @@ static inline void fix_endian_write(int *input, int size)
 		}
 		size = ftell(file) - offsetPos;
 		fseek(file, -size - sizeof(int), SEEK_CUR);
-		tempIntString[0] = size;
+		tempIntString[0] = (int)size;
 		fix_endian_write(tempIntString, 1);
 		fwrite(tempIntString, sizeof(int), 1, file);
 		fseek(file, size, SEEK_CUR);
@@ -171,10 +171,10 @@ static inline void fix_endian_write(int *input, int size)
 	return YES;
 }
 
-- (BOOL)writeLayerHeader:(int)index file:(FILE *)file
+- (BOOL)writeLayerHeader:(NSInteger)index file:(FILE *)file
 {
-	id contents = [document contents];
-	id layer = [contents layer:index];
+	SeaContent *contents = [document contents];
+	SeaLayer *layer = [contents layer:index];
 
 	// Write the width, height and type of the layer
 	tempIntString[0] = [(SeaLayer *)layer width];
@@ -185,7 +185,7 @@ static inline void fix_endian_write(int *input, int size)
 	
 	// Write the name of the layer
 	if ([layer name]) {
-		tempIntString[0] = strlen([[layer name] UTF8String]) + 1;
+		tempIntString[0] = (int)(strlen([[layer name] UTF8String]) + 1);
 		fix_endian_write(tempIntString, 1);
 		fwrite(tempIntString, sizeof(int), 1, file);
 		fwrite([[layer name] UTF8String], sizeof(char), strlen([[layer name] UTF8String]) + 1, file);
@@ -202,7 +202,7 @@ static inline void fix_endian_write(int *input, int size)
 	return YES;
 }
 
-- (BOOL)writeLayerProperties:(int)index file:(FILE *)file
+- (BOOL)writeLayerProperties:(NSInteger)index file:(FILE *)file
 {
 	SeaLayer *layer = [[document contents] layer:index];
 	
@@ -216,7 +216,7 @@ static inline void fix_endian_write(int *input, int size)
 	
 	// Write if the layer is floating
 	if ([layer floating]) {
-		floatingFiller = ftell(file) + 2 * sizeof(int);
+		floatingFiller = (int)(ftell(file) + 2 * sizeof(int));
 		tempIntString[0] = PROP_FLOATING_SELECTION;
 		tempIntString[1] = sizeof(int);
 		tempIntString[2] = 0;
@@ -277,10 +277,10 @@ static inline void fix_endian_write(int *input, int size)
 	return YES;
 }
 
-- (BOOL)writeLayerPixels:(int)index file:(FILE *)file
+- (BOOL)writeLayerPixels:(NSInteger)index file:(FILE *)file
 {
-	id layer = [[document contents] layer:index];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height], spp = [[document contents] spp];
+	SeaLayer *layer = [[document contents] layer:index];
+	int width = [layer width], height = [layer height], spp = [[document contents] spp];
 	int tilesPerRow = (width % XCF_TILE_WIDTH) ? (width / XCF_TILE_WIDTH + 1) : (width / XCF_TILE_WIDTH);
 	int tilesPerColumn = (height % XCF_TILE_HEIGHT) ? (height / XCF_TILE_HEIGHT + 1) : (height / XCF_TILE_HEIGHT);
 	int whichTile, i, j, k, tileWidth, tileHeight, tileSize, srcLoc, destLoc, compressedLength;
@@ -288,7 +288,7 @@ static inline void fix_endian_write(int *input, int size)
 	long offsetPos, oldPos;
 
 	// Direct to the layer's pixels
-	tempIntString[0] = ftell(file) + 2 * sizeof(int);
+	tempIntString[0] = (int)(ftell(file) + 2 * sizeof(int));
 	tempIntString[1] = 0;
 	fix_endian_write(tempIntString, 2);
 	fwrite(tempIntString, sizeof(int), 2, file);
@@ -297,7 +297,7 @@ static inline void fix_endian_write(int *input, int size)
 	tempIntString[0] = width;
 	tempIntString[1] = height;
 	tempIntString[2] = spp;
-	tempIntString[3] = ftell(file) + sizeof(int) * 5;
+	tempIntString[3] = (int)(ftell(file) + sizeof(int) * 5);
 	tempIntString[4] = 0;
 	fix_endian_write(tempIntString, 5);
 	fwrite(tempIntString, sizeof(int), 5, file);
@@ -323,7 +323,7 @@ static inline void fix_endian_write(int *input, int size)
 		// Fill in the offset
 		oldPos = ftell(file);
 		fseek(file, offsetPos + whichTile * sizeof(int), SEEK_SET);
-		tempIntString[0] = oldPos;
+		tempIntString[0] = (int)oldPos;
 		fix_endian_write(tempIntString, 1);
 		fwrite(tempIntString, sizeof(int), 1, file);
 		fseek(file, oldPos, SEEK_SET);
@@ -372,7 +372,7 @@ static inline void fix_endian_write(int *input, int size)
 }
 
 
-- (BOOL)writeLayer:(int)index file:(FILE *)file
+- (BOOL)writeLayer:(NSInteger)index file:(FILE *)file
 {	
 	long storedOffset;
 	
@@ -380,7 +380,7 @@ static inline void fix_endian_write(int *input, int size)
 	if (floatingFiller != -1) {
 		storedOffset = ftell(file);
 		fseek(file, floatingFiller, SEEK_SET);
-		tempIntString[0] = storedOffset;
+		tempIntString[0] = (int)storedOffset;
 		fix_endian_write(tempIntString, 1);
 		fwrite(tempIntString, sizeof(int), 1, file);
 		fseek(file, storedOffset, SEEK_SET);
@@ -424,7 +424,7 @@ static inline void fix_endian_write(int *input, int size)
 		if (exifContainer) {
 			exifParasite.name = CFSTR("exif-plist");
 			exifParasite.flags = 0;
-			exifParasite.size = [exifContainer length];
+			exifParasite.size = (int)[exifContainer length];
 			exifParasite.data = malloc(exifParasite.size);
 			memcpy(exifParasite.data, (char *)[exifContainer bytes], exifParasite.size);
 			[[document contents] addParasite:exifParasite];
@@ -459,7 +459,7 @@ static inline void fix_endian_write(int *input, int size)
 		// Fill in the offset
 		oldPos = ftell(file);
 		fseek(file, offsetPos + i * sizeof(int), SEEK_SET);
-		tempIntString[0] = oldPos;
+		tempIntString[0] = (int)oldPos;
 		fix_endian_write(tempIntString, 1);
 		fwrite(tempIntString, sizeof(int), 1, file);
 		fseek(file, oldPos, SEEK_SET);

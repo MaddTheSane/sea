@@ -27,14 +27,16 @@
 				undo, NO otherwise.
 */
 typedef struct {
-	int index;
-	float rotation;
-	int undoIndex;
+	NSInteger index;
+	CGFloat rotation;
+	NSInteger undoIndex;
 	IntRect rect;
 	BOOL isRotated;
 	BOOL withTrim;
 	BOOL disableAlpha;
 } RotationUndoRecord;
+
+@class SeaDocument;
 
 /*!
 	@class		SeaRotation
@@ -44,12 +46,11 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaRotation : NSObject
 {
 
 	// The document and sheet associated with this object
-    IBOutlet id document;
+    IBOutlet SeaDocument *document;
 	IBOutlet id sheet;
 	
 	// A label specifying the layer being rotated
@@ -105,7 +106,7 @@ typedef struct {
 				YES if the layer should be trimmed of alpha after rotation, NO
 				otherwise.
 */
-- (void)rotate:(float)degrees withTrim:(BOOL)trim;
+- (void)rotate:(CGFloat)degrees withTrim:(BOOL)trim;
 
 /*!
 	@method		undoRotation:
@@ -115,6 +116,6 @@ typedef struct {
 	@param		undoIndex
 				The index of the undo record to be used.
 */
-- (void)undoRotation:(int)undoIndex;
+- (void)undoRotation:(NSInteger)undoIndex;
 
 @end

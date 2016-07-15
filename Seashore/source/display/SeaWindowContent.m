@@ -25,12 +25,12 @@
 	[self setVisibility:NO forRegion:kWarningsBar];
 }
 
--(BOOL)visibilityForRegion:(int)region
+-(BOOL)visibilityForRegion:(NSInteger)region
 {
 	return [dict[@(region)][@"visibility"] boolValue];
 }
 
--(void)setVisibility:(BOOL)visibility forRegion:(int)region
+-(void)setVisibility:(BOOL)visibility forRegion:(NSInteger)region
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *thisDict = dict[@(region)];
@@ -83,7 +83,7 @@
 		[nonView setNeedsDisplay:YES];
 		
 		thisDict[@"oldValue"] = @(oldValue);
-		[defaults setObject: @"NO" forKey:[NSString stringWithFormat:@"region%dvisibility", region]];		
+		[defaults setObject: @"NO" forKey:[NSString stringWithFormat:@"region%ldvisibility", (long)region]];		
 	}else{
 		NSRect newRect = [view frame];
 		if([side isEqual:@"above"] || [side isEqual:@"below"]){
@@ -112,12 +112,12 @@
 				
 		[nonView setNeedsDisplay:YES];
 		
-		[defaults setObject: @"YES" forKey:[NSString stringWithFormat:@"region%dvisibility", region]];
+		[defaults setObject: @"YES" forKey:[NSString stringWithFormat:@"region%ldvisibility", (long)region]];
 	}
 	thisDict[@"visibility"] = @(visibility);
 }
 
--(float)sizeForRegion:(int)region
+-(CGFloat)sizeForRegion:(NSInteger)region
 {
 	if([self visibilityForRegion:region]){
 		NSMutableDictionary *thisDict = dict[@(region)];

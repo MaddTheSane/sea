@@ -9,7 +9,7 @@
 
 @implementation RectSelectTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kRectSelectTool;
 }

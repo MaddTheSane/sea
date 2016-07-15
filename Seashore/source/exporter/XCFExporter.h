@@ -1,6 +1,9 @@
 #import "Globals.h"
 #import "AbstractExporter.h"
 
+
+@class SeaDocument;
+
 /*!
 	@class		XCFExporter
 	@abstract	Exports to the XCF file format.
@@ -10,14 +13,13 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface XCFExporter : NSObject <AbstractExporter> {
 	
 	// The version of this document
 	int version;
 	
 	// The document that is being exported
-	id document;
+	SeaDocument *document;
 	
 	// These hold 64 bytes of temporary information for us 
 	int tempIntString[16];

@@ -14,7 +14,7 @@
 
 @implementation PolygonLassoTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kPolygonLassoTool;
 }

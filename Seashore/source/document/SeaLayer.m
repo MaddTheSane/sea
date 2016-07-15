@@ -50,7 +50,7 @@
 	return self;
 }
 
--  (instancetype)initWithDocument:(id)doc width:(int)lwidth height:(int)lheight opaque:(BOOL)opaque spp:(int)lspp;
+-  (instancetype)initWithDocument:(SeaDocument*)doc width:(int)lwidth height:(int)lheight opaque:(BOOL)opaque spp:(int)lspp;
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])
@@ -75,7 +75,7 @@
 	return self;
 }
 
-- (instancetype)initWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata spp:(int)lspp
+- (instancetype)initWithDocument:(SeaDocument*)doc rect:(IntRect)lrect data:(unsigned char *)ldata spp:(int)lspp
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])
@@ -98,7 +98,7 @@
 	return self;
 }
 
-- (instancetype)initWithDocument:(id)doc layer:(SeaLayer*)layer
+- (instancetype)initWithDocument:(SeaDocument*)doc layer:(SeaLayer*)layer
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])
@@ -126,7 +126,7 @@
 	return self;
 }
 
-- (instancetype)initFloatingWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata
+- (instancetype)initFloatingWithDocument:(SeaDocument*)doc rect:(IntRect)lrect data:(unsigned char *)ldata
 {
 	// Set the offsets, height and width
 	xoff = lrect.origin.x;

@@ -10,7 +10,7 @@
 
 @implementation CropTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kCropTool;
 }	
@@ -24,7 +24,7 @@
 	}
 	
 	if(![self isMovingOrScaling]){
-		int aspectType = [options aspectType];
+		SeaAspectType aspectType = [options aspectType];
 		NSSize ratio;
 		double xres, yres;
 		int modifier = [options modifier];
@@ -56,15 +56,20 @@
 				case kExactPixelAspectType:
 					cropRect.size.width = ratio.width;
 					cropRect.size.height = ratio.height;
-				break;
+					break;
+					
 				case kExactInchAspectType:
 					cropRect.size.width = ratio.width * xres;
 					cropRect.size.height = ratio.height * yres;
-				break;
+					break;
+					
 				case kExactMillimeterAspectType:
 					cropRect.size.width = ratio.width * xres * 0.03937;
 					cropRect.size.height = ratio.height * yres * 0.03937;
-				break;
+					break;
+					
+				default:
+					break;
 			}
 			[[document helpers] selectionChanged];
 		}
@@ -78,8 +83,7 @@
 									   andMask: NULL];
 	
 	if(![self isMovingOrScaling]){
-	
-		int aspectType = [options aspectType];
+		SeaAspectType aspectType = [options aspectType];
 		NSSize ratio;
 		id activeLayer;
 		
@@ -89,13 +93,11 @@
 		where.y += [activeLayer yoff];
 		
 		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {
-
 			// Determine the width of the cropping rectangle
 			if (startPoint.x < where.x) {
 				cropRect.origin.x = startPoint.x;
 				cropRect.size.width = where.x - startPoint.x;
-			}
-			else {
+			} else {
 				cropRect.origin.x = where.x;
 				cropRect.size.width = startPoint.x - where.x;
 			}
@@ -105,24 +107,20 @@
 				if (startPoint.y < where.y) {
 					cropRect.size.height = cropRect.size.width;
 					cropRect.origin.y = startPoint.y;
-				}
-				else {
+				} else {
 					cropRect.size.height = cropRect.size.width;
 					cropRect.origin.y = startPoint.y - cropRect.size.height;
 				}
-			}
-			else if (aspectType == kRatioAspectType) {
+			} else if (aspectType == kRatioAspectType) {
 				ratio = [options ratio];
 				if (startPoint.y < where.y) {
 					cropRect.size.height = cropRect.size.width * ratio.height;
 					cropRect.origin.y = startPoint.y;
-				}
-				else {
+				} else {
 					cropRect.size.height = cropRect.size.width * ratio.height;
 					cropRect.origin.y = startPoint.y - cropRect.size.height;
 				}
-			}
-			else {
+			} else {
 				if (startPoint.y < where.y) {
 					cropRect.origin.y = startPoint.y;
 					cropRect.size.height = where.y - startPoint.y;
@@ -132,13 +130,9 @@
 					cropRect.size.height = startPoint.y - where.y;
 				}
 			}
-			
-		}
-		else {
-		
+		} else {
 			cropRect.origin.x = where.x;
 			cropRect.origin.y = where.y;
-			
 		}
 
 		// Update the changes

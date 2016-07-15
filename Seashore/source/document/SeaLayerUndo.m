@@ -14,7 +14,7 @@ extern BOOL userWarnedOnDiskSpace;
 
 @implementation SeaLayerUndo
 
-- (instancetype)initWithDocument:(id)doc forLayer:(id)ilayer
+- (instancetype)initWithDocument:(SeaDocument*)doc forLayer:(SeaLayer*)ilayer
 {
 	if (self = [super init]) {
 	// Setup our local variables
@@ -86,7 +86,10 @@ extern BOOL userWarnedOnDiskSpace;
 	
 		// If it is too low display a warning
 		if (userWarnedOnDiskSpace == NO) {
-			NSRunAlertPanel(LOCALSTR(@"disk space title", @"Disk space low"), LOCALSTR(@"disk space body", @"Your system disk now has limited space, you should quit Seashore and free more space."), LOCALSTR(@"ok", @"OK"), NULL, NULL);
+			NSAlert *alert = [[NSAlert alloc] init];
+			alert.messageText = LOCALSTR(@"disk space title", @"Disk space low");
+			alert.informativeText = LOCALSTR(@"disk space body", @"Your system disk now has limited space, you should quit Seashore and free more space.");
+			[alert runModal];
 			userWarnedOnDiskSpace = YES;
 		}
 		
@@ -174,7 +177,7 @@ extern BOOL userWarnedOnDiskSpace;
 	}		
 }
 
-- (BOOL)loadMemoryCacheWithIndex:(int)index
+- (BOOL)loadMemoryCacheWithIndex:(NSInteger)index
 {
 	FILE *file;
 	struct stat sb;
@@ -237,7 +240,7 @@ extern BOOL userWarnedOnDiskSpace;
 	return YES;
 }
 
-- (int)takeSnapshot:(IntRect)rect automatic:(BOOL)automatic
+- (NSInteger)takeSnapshot:(IntRect)rect automatic:(BOOL)automatic
 {
 	unsigned char *data, *temp_ptr;
 	int i, width, rectSize, sectionSize, spp;
@@ -311,7 +314,7 @@ extern BOOL userWarnedOnDiskSpace;
 	return records_len - 1;
 }
 
-- (void)restoreSnapshot:(int)index automatic:(BOOL)automatic
+- (void)restoreSnapshot:(NSInteger)index automatic:(BOOL)automatic
 {
 	IntRect rect;
 	unsigned char *data, *temp_ptr, *o_temp_ptr = NULL, *odata = NULL;

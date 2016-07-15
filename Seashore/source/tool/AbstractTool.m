@@ -10,8 +10,9 @@
 #import "SeaContent.h"
 
 @implementation AbstractTool
+@synthesize intermediate;
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return -1;
 }
@@ -74,11 +75,5 @@
 {
 	return NO;
 }
-
-- (BOOL) intermediate
-{
-	return intermediate;
-}
-
 
 @end

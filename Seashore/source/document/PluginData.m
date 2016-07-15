@@ -69,7 +69,7 @@
 	return [(SeaLayer *)[[document contents] activeLayer] hasAlpha];
 }
 
-- (IntPoint)point:(int)index;
+- (IntPoint)point:(NSInteger)index;
 {
 	return [[[document tools] getTool:kEffectTool] point:index];
 }

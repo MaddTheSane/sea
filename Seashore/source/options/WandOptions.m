@@ -21,7 +21,7 @@
 		value = [defaults integerForKey:@"wand tolerance"];
 		if (value < 0 || value > 255)
 			value = 0;
-		[toleranceSlider setIntValue:value];
+		[toleranceSlider setIntegerValue:value];
 		[toleranceLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"tolerance", @"Tolerance: %d"), value]];
 	}
 	
@@ -29,7 +29,7 @@
 		[intervalsSlider setIntValue:15];
 	}else{
 		value = [defaults integerForKey:@"wand intervals"];
-		[intervalsSlider setIntValue: value];
+		[intervalsSlider setIntegerValue: value];
 	}
 }
 

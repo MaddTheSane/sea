@@ -18,8 +18,8 @@
 				The number of indicies in the record.
 */
 typedef struct {
-	int *indicies;
-	int length;
+	NSInteger *indicies;
+	size_t length;
 } IndiciesRecord;
 
 /*!
@@ -32,7 +32,7 @@ typedef struct {
 */
 typedef struct {
 	IndiciesRecord *stack;
-	int length;
+	size_t length;
 } IndiciesKeeper;
 
 /*!

@@ -185,12 +185,17 @@ extern IntPoint gScreenResolution;
 	int leftOffset, rightOffset, topOffset, bottomOffset;
 	int i, j, k, srcLoc, selectedChannel;
 	int xoff, yoff;
-	unsigned char *srcPtr, *mask;
-	int lwidth, lheight, selectOpacity, t1;
+	unsigned char *srcPtr;
+	int lwidth, lheight, selectOpacity;
 	IntRect rect, selectRect;
 	BOOL overlayOkay, overlayReplacing;
-	IntPoint point, maskOffset, trueMaskOffset;
+	IntPoint maskOffset, trueMaskOffset;
+#if MAIN_COMPILE
 	IntSize maskSize;
+	IntPoint point;
+	int t1;
+	unsigned char *mask;
+#endif
 	BOOL floating;
 	
 	// Fill out the local variables
@@ -571,7 +576,7 @@ extern IntPoint gScreenResolution;
 
 - (void)forcedChannelUpdate
 {
-	id layer, flayer;
+	id layer;
 	int layerWidth, layerHeight, lxoff, lyoff;
 	unsigned char *layerData, tempSpace[4], tempSpace2[4], *mask, *floatingData;
 	int i, j, k, temp, tx, ty, t, selectOpacity, nextOpacity;
@@ -579,6 +584,9 @@ extern IntPoint gScreenResolution;
 	IntSize maskSize = IntMakeSize(0, 0);
 	IntPoint point, maskOffset = IntMakePoint(0, 0);
 	BOOL useSelection, floating;
+#if MAIN_COMPILE
+	id flayer;
+#endif
 	
 	// Prepare variables for later use
 	mask = NULL;
@@ -786,7 +794,7 @@ extern IntPoint gScreenResolution;
 
 - (void)forcedUpdate
 {
-	int i, count = 0, layerCount =
+	NSInteger i, count = 0, layerCount =
 #if MAIN_COMPILE
 	[[document contents] layerCount];
 #else
@@ -794,8 +802,10 @@ extern IntPoint gScreenResolution;
 #endif
 	IntRect majorUpdateRect;
 	CompositorOptions options;
+#if MAIN_COMPILE
 	BOOL floating;
-
+#endif
+	
 	// Determine the major update rect
 	if (useUpdateRect) {
 		majorUpdateRect = IntConstrainRect(updateRect, IntMakeRect(0, 0, width, height));

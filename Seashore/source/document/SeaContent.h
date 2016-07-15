@@ -48,8 +48,11 @@ typedef struct {
 	// The document's x and y resolution
 	int xres, yres;
 	
-	// The document's height, width and type
-	int height, width, type;
+	// The document's height, width
+	int height, width;
+	
+	// The document's type
+	XcfImageType type;
 	
 	// The lost properties of the document
 	char *lostprops;

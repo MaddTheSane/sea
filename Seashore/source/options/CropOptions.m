@@ -23,7 +23,7 @@
 	return [aspectRatio ratio];
 }
 
-- (int)aspectType
+- (SeaAspectType)aspectType
 {
 	return [aspectRatio aspectType];
 }

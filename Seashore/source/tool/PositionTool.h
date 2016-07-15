@@ -23,8 +23,8 @@
 	IBOutlet id seaOperations;
 	
 	// The scale and rotation values
-	float scale;
-	float rotation;
+	CGFloat scale;
+	CGFloat rotation;
 	BOOL rotationDefined;
 
 }
@@ -63,25 +63,25 @@
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event;
 
 /*!
-	@method		scale
+	@property	scale
 	@discussion	Returns the scale value.
 	@result		Returns an floating point number representing the scale value.
 */
-- (float)scale;
+@property (readonly) CGFloat scale;
 
 /*!
-	@method		rotation
+	@property	rotation
 	@discussion	Returns the rotation value.
 	@result		Returns an float representing the rotation value in degrees.
 */
-- (float)rotation;
+@property (readonly) CGFloat rotation;
 
 /*!
-	@method		rotationDefined
+	@property	rotationDefined
 	@discussion	Returns whether or not the rotation value is defined.
 	@result		Returns YES if the rotation value is defined, NO otherwise.
 */
-- (BOOL)rotationDefined;
+@property (readonly) BOOL rotationDefined;
 
 /*!
 	@method		undoToOrigin:forLayer:
@@ -93,6 +93,6 @@
 	@param		index
 				The index of the layer to restore.
 */
-- (void)undoToOrigin:(IntPoint)origin forLayer:(int)index;
+- (void)undoToOrigin:(IntPoint)origin forLayer:(NSInteger)index;
 
 @end

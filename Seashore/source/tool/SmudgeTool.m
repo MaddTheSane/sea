@@ -16,12 +16,10 @@
 
 @implementation SmudgeTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kSmudgeTool;
 }
-
-
 
 - (BOOL)useMouseCoalescing
 {

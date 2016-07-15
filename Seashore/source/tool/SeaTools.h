@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -43,7 +44,8 @@
 	@constant	kLastSelectionTool
 				The last selection tool.
 */
-enum {
+typedef NS_ENUM(int, SeaToolsDefines) {
+	SeaToolsInvalid = -1, 
 	kRectSelectTool = 0,
 	kEllipseSelectTool = 1,
 	kLassoTool = 2,
@@ -98,6 +100,7 @@ enum {
 	IBOutlet id cloneTool;
 	IBOutlet id cropTool;
 	IBOutlet id effectTool;
+	//IBOutlet AbstractTool *zoomTool;
 	
 }
 
@@ -107,7 +110,7 @@ enum {
 				utility.
 	@result		Returns an object that is a subclass of AbstractTool.
 */
-- (id)currentTool;
+- (__kindof AbstractTool*)currentTool;
 
 /*!
 	@method		getTool:
@@ -116,13 +119,13 @@ enum {
 				The tool type for the tool you are seeking.
 	@result		Returns an object that is a subclass of AbstractTool.
 */
-- (id)getTool:(int)whichOne;
+- (__kindof AbstractTool*)getTool:(SeaToolsDefines)whichOne;
 
 /*!
 	@method		allTools
 	@discussion	This is purely for initialization to connect the options to the tools.
 	@result		Returns an array of AbstractTools.
 */
-- (NSArray *)allTools;
+- (NSArray<__kindof AbstractTool*> *)allTools;
 
 @end

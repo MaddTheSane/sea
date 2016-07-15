@@ -154,7 +154,7 @@
 	[panel orderOut:self];
 }
 
-- (void)setOffsetsLeft:(int)left top:(int)top index:(int)index
+- (void)setOffsetsLeft:(int)left top:(int)top index:(NSInteger)index
 {
 	SeaLayer* layer;
 	IntPoint oldOffsets;
@@ -175,7 +175,7 @@
 	[[document helpers] layerOffsetsChanged:index from:oldOffsets];
 }
 
-- (void)setName:(NSString *)newName index:(int)index
+- (void)setName:(NSString *)newName index:(NSInteger)index
 {
 	SeaLayer* layer;
 	
@@ -199,11 +199,11 @@
 	SeaLayer* layer = settingsLayer;
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] undoMode:[layer index] to:[layer mode]];
-	[layer setMode:[[modePopup selectedItem] tag]];
+	[layer setMode:(int)[[modePopup selectedItem] tag]];
 	[[document helpers] layerAttributesChanged:kActiveLayer hold:YES];
 }
 
-- (void)undoMode:(int)index to:(int)value
+- (void)undoMode:(NSInteger)index to:(int)value
 {
 	SeaLayer* layer = [[document contents] layer:index];
 	
@@ -226,7 +226,7 @@
 	[opacityLabel setStringValue:[NSString stringWithFormat:@"%.1f%%", (float)[opacitySlider intValue] / 2.55]];
 }
 
-- (void)undoOpacity:(int)index to:(int)value
+- (void)undoOpacity:(NSInteger)index to:(int)value
 {
 	SeaLayer* layer = [[document contents] layer:index];
 	
@@ -255,7 +255,7 @@
 
 - (IBAction)changeChannelEditing:(id)sender
 {
-	[[document contents] setSelectedChannel:[channelEditingMatrix selectedRow]];
+	[[document contents] setSelectedChannel:(int)[channelEditingMatrix selectedRow]];
 	[[document helpers] channelChanged];
 }
 

@@ -24,7 +24,7 @@
 
 @implementation CloneTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kCloneTool;
 }

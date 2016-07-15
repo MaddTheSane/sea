@@ -15,8 +15,11 @@
 
 
 @implementation PositionTool
+@synthesize scale;
+@synthesize rotation;
+@synthesize rotationDefined;
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kPositionTool;
 }
@@ -196,22 +199,7 @@
 	rotationDefined = NO;
 }
 
-- (float)scale
-{
-	return scale;
-}
-
-- (float)rotation
-{
-	return rotation;
-}
-
-- (BOOL)rotationDefined
-{
-	return rotationDefined;
-}
-
-- (void)undoToOrigin:(IntPoint)origin forLayer:(int)index
+- (void)undoToOrigin:(IntPoint)origin forLayer:(NSInteger)index
 {
 	IntPoint oldOffsets;
 	id layer = [[document contents] layer:index];

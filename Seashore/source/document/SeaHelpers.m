@@ -165,7 +165,7 @@
 	[(SeaWhiteboard *)[document whiteboard] update:rect inThread:thread];
 }
 
-- (void)layerAttributesChanged:(int)index hold:(BOOL)hold
+- (void)layerAttributesChanged:(NSInteger)index hold:(BOOL)hold
 {
 	id contents = [document contents], layer;
 	IntRect rect;
@@ -189,7 +189,7 @@
 		[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
 }
 
-- (void)layerBoundariesChanged:(int)index
+- (void)layerBoundariesChanged:(NSInteger)index
 {
 	id contents = [document contents], layer;
 	IntRect rect;
@@ -224,7 +224,7 @@
 
 }
 
-- (void)layerContentsChanged:(int)index
+- (void)layerContentsChanged:(NSInteger)index
 {
 	id contents = [document contents], layer;
 	IntRect rect;
@@ -258,7 +258,7 @@
 	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
 }
 
-- (void)layerOffsetsChanged:(int)index from:(IntPoint)oldOffsets
+- (void)layerOffsetsChanged:(NSInteger)index from:(IntPoint)oldOffsets
 {
 	id contents = [document contents], layer;
 	IntRect rectA, rectB, rectC;
@@ -300,7 +300,7 @@
 	}
 }
 
-- (void)layerLevelChanged:(int)index
+- (void)layerLevelChanged:(NSInteger)index
 {
 	id contents = [document contents], layer;
 	IntRect rect;

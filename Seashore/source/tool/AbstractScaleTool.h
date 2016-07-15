@@ -24,6 +24,11 @@ enum {
 	kLDir
 };
 
+
+#import "AbstractTool.h"
+
+@class AbstractScaleOptions;
+
 /*!
 	@class		AbstractScaleTool
 	@abstract	Acts as a base class for all scaling/translating actions.
@@ -32,10 +37,7 @@ enum {
 	<br><br>
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
-*/
-
-#import "AbstractTool.h"
-
+ */
 @interface AbstractScaleTool : AbstractTool {
 	// Are we moving
 	BOOL translating;

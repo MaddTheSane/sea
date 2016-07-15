@@ -16,6 +16,7 @@ extern IntSize getDocumentSize(char *path);
 - (BOOL)addToDocument:(id)doc contentsOfFile:(NSString *)path
 {
 	id imageRep, layer;
+	NSFileManager *fm = [NSFileManager defaultManager];
 	NSImage *image;
 	NSString *importerPath;
 	NSString *path_in, *path_out, *width_arg, *height_arg;
@@ -36,8 +37,8 @@ extern IntSize getDocumentSize(char *path);
 	
 	// Add all plug-ins to the array
 	importerPath = [[gMainBundle builtInPlugInsPath] stringByAppendingPathComponent:@"SVGImporter.app/Contents/MacOS/SVGImporter"];
-	if ([gFileManager fileExistsAtPath:importerPath]) {
-		if (![gFileManager fileExistsAtPath:@"/tmp/seaimport"]) [gFileManager createDirectoryAtPath:@"/tmp/seaimport" attributes:@{}];
+	if ([fm fileExistsAtPath:importerPath]) {
+		if (![fm fileExistsAtPath:@"/tmp/seaimport"]) [fm createDirectoryAtPath:@"/tmp/seaimport" withIntermediateDirectories:YES attributes:nil error:NULL];
 		path_in = path;
 		path_out = [NSString stringWithFormat:@"/tmp/seaimport/%@.png", [[path lastPathComponent] stringByDeletingPathExtension]];
 		if (size.width > 0 && size.height > 0 && size.width < kMaxImageSize && size.height < kMaxImageSize) {

@@ -16,7 +16,7 @@
 
 @implementation LassoTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kLassoTool;
 }

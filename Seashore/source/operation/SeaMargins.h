@@ -1,4 +1,5 @@
 #import "Globals.h"
+#import "Units.h"
 
 /*!
 	@defined	kNumberOfScaleRecordsPerMalloc
@@ -30,13 +31,13 @@
 				kAllLayers this array is not defined.
 */
 typedef struct {
-	int index;
+	NSInteger index;
 	int left;
 	int top;
 	int right;
 	int bottom;
 	BOOL isChanged;
-	int indicies[4];
+	NSInteger indicies[4];
 } MarginUndoRecord;
 
 /*!
@@ -54,6 +55,8 @@ enum {
 	kAllClipMode
 };
 
+@class SeaDocument;
+
 /*!
 	@class		SeaMargins
 	@abstract	Changes the margins of a document or its layers  according to
@@ -63,38 +66,37 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaMargins : NSObject {
 	
 	// The document and sheet associated with this object
-    IBOutlet id document;
+    IBOutlet SeaDocument *document;
     IBOutlet id sheet;
 	IBOutlet id box;
 	
 	// The working index associated with this object
-	int workingIndex;
+	NSInteger workingIndex;
 	
 	// The check box telling us whether to add margin's relative to content
-	IBOutlet id contentRelative;
+	IBOutlet NSButton *contentRelative;
 	
 	// The matrix telling us the behavior of clipping
-	IBOutlet id clippingMatrix;
+	IBOutlet NSMatrix *clippingMatrix;
 	
 	// The text boxes for how much the margins should be extended by
-	IBOutlet id leftValue;
-    IBOutlet id rightValue;
-    IBOutlet id topValue;
-    IBOutlet id bottomValue;
-    IBOutlet id widthValue;
-    IBOutlet id heightValue;
+	IBOutlet NSTextField *leftValue;
+    IBOutlet NSTextField *rightValue;
+    IBOutlet NSTextField *topValue;
+    IBOutlet NSTextField *bottomValue;
+    IBOutlet NSTextField *widthValue;
+    IBOutlet NSTextField *heightValue;
 	
 	// The text labels displaying the units
-    IBOutlet id leftLabel;
-    IBOutlet id rightLabel;
-    IBOutlet id topPopdown;
-    IBOutlet id bottomLabel;
-    IBOutlet id widthLabel;
-    IBOutlet id heightLabel;
+    IBOutlet NSButton *leftLabel;
+    IBOutlet NSButton *rightLabel;
+    IBOutlet NSPopUpButton *topPopdown;
+    IBOutlet NSButton *bottomLabel;
+    IBOutlet NSButton *widthLabel;
+    IBOutlet NSButton *heightLabel;
 
 	// Content margins
 	int contentTop;
@@ -104,16 +106,16 @@ enum {
 
 	// A list of various undo records required for undoing
 	MarginUndoRecord *undoRecords;
-	int undoMax, undoCount; 
+	NSInteger undoMax, undoCount;
 	
 	// A label specifying what margins will be changed
     IBOutlet id selectionLabel;
 	
 	// The presets menu
-	IBOutlet id presetsMenu;
+	IBOutlet NSPopUpButton *presetsMenu;
 	
 	// The units for the panel
-	int units;
+	SeaUnits units;
 	
 	// Sheet shown
 	bool sheetShown;
@@ -214,7 +216,7 @@ enum {
 				The index of the layer's margins to adjust (or kAllLayers to
 				indicate the entire document).
 */
-- (void)setMarginLeft:(int)left top:(int)top right:(int)right bottom:(int)bottom index:(int)index;
+- (void)setMarginLeft:(int)left top:(int)top right:(int)right bottom:(int)bottom index:(NSInteger)index;
 
 /*!
 	@method		undoMargins:
@@ -225,7 +227,7 @@ enum {
 				The index of the undo record corresponding to the margins
 				operation to be undone.
 */
-- (void)undoMargins:(int)undoIndex;
+- (void)undoMargins:(NSInteger)undoIndex;
 
 /*!
 	@method		marginsChanged:

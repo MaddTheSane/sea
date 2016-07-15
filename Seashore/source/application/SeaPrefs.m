@@ -203,15 +203,15 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	// Get the default document size
 	width = 512;
 	if ([defaults objectForKey:@"width"])
-		width = [defaults integerForKey:@"width"];
+		width = (int)[defaults integerForKey:@"width"];
 	height = 384;
 	if ([defaults objectForKey:@"height"])
-		height = [defaults integerForKey:@"height"];
+		height = (int)[defaults integerForKey:@"height"];
 	
 	// The resolution for new documents
 	resolution = 72;
 	if ([defaults objectForKey:@"resolution"])
-		resolution = [defaults integerForKey:@"resolution"];
+		resolution = (int)[defaults integerForKey:@"resolution"];
 	if (resolution != 72 && resolution != 96 && resolution != 150 && resolution != 300)
 		resolution = 72;
 	
@@ -501,7 +501,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 
 -(IBAction)setResolution:(id)sender
 {
-	resolution = [[resolutionMenu selectedItem] tag];
+	resolution = (int)[[resolutionMenu selectedItem] tag];
 	width =  PixelsFromFloat([widthValue floatValue],newUnits,resolution);
 	height =  PixelsFromFloat([heightValue floatValue],newUnits,resolution);
 	[self apply: self];

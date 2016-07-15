@@ -13,13 +13,15 @@
 	@constant	kExactMillimeterAspectType
 				Indicates exact specification in millimetres.
 */
-enum {
+typedef NS_ENUM(NSInteger, SeaAspectType) {
 	kNoAspectType = -2,
 	kRatioAspectType = -1,
 	kExactPixelAspectType = 0,
 	kExactInchAspectType = 1,
 	kExactMillimeterAspectType = 2
 };
+
+@class SeaDocument;
 
 /*		
 	@class		AspectRatio
@@ -29,42 +31,41 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2007 Mark Pazolli
 */
-
 @interface AspectRatio : NSObject {
 	// The host document
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 
 	// The controlling object
 	id master;
 
 	// The controlling object's identifier (used for preferences)
-	id prefString;
+	NSString *prefString;
 
 	// When checked indicates the cropping aspect ratio should be restricted
-	IBOutlet id ratioCheckbox;
+	IBOutlet NSButton *ratioCheckbox;
 	
 	// A popup menu indicating the aspect ratio
-	IBOutlet id ratioPopup;
+	IBOutlet NSPopUpButton *ratioPopup;
 	
 	// A panel for selecting the custom aspect ratio
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// Text boxes for custom ratio values
-    IBOutlet id xRatioValue;
-    IBOutlet id yRatioValue;
+    IBOutlet NSTextField *xRatioValue;
+    IBOutlet NSTextField *yRatioValue;
 	
 	// Various items associated with the aspect type
 	IBOutlet id toLabel;
 	IBOutlet id aspectTypePopup;
 	
 	// Custom ratio values
-	float ratioX, ratioY;
+	CGFloat ratioX, ratioY;
 	
 	// Forgotten values
-	float forgotX, forgotY;
+	CGFloat forgotX, forgotY;
 	
 	// The type of aspect ratio
-	int aspectType;
+	SeaAspectType aspectType;
 	
 }
 
@@ -95,21 +96,21 @@ enum {
 - (IBAction)changeCustomAspectType:(id)sender;
 
 /*!
-	@method		ratioX
+	@property	ratioX
 	@discussion	Returns the ratio/size for the crop.
 	@return		Returns a NSSize for the crop in the aspect type's
 				units. If it is a ratio the width = X / Y and the 
 				height = Y / X.
 */
-- (NSSize)ratio;
+@property (readonly) NSSize ratio;
 
 /*!
-	@method		aspectType
+	@property	aspectType
 	@discussion	Returns the type of aspect ratio.
 	@return		Returns a constant representing the type of aspect ratio
 				(see AspectRatio).
 */
-- (int)aspectType;
+@property (readonly) SeaAspectType aspectType;
 
 /*!
 	@method		update:

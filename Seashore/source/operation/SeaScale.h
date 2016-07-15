@@ -40,17 +40,17 @@
 				scaled.
 */
 typedef struct {
-	int index;
+	NSInteger index;
 	int unscaledWidth;
 	int unscaledHeight;
 	int scaledWidth;
 	int scaledHeight;
 	int scaledXOrg;
 	int scaledYOrg;
-	int interpolation;
+	GimpInterpolationType interpolation;
 	BOOL isMoving;
 	BOOL isScaled;
-	int *indicies;
+	NSInteger *indicies;
 	IntRect *rects;
 } ScaleUndoRecord;
 
@@ -155,7 +155,7 @@ typedef struct {
 				The index of the layer to be scaled (or kAllLayers to indicate
 				the entire document).
 */
-- (void)scaleToWidth:(int)width height:(int)height interpolation:(int)interpolation index:(int)index;
+- (void)scaleToWidth:(int)width height:(int)height interpolation:(GimpInterpolationType)interpolation index:(NSInteger)index;
 
 /*!
 	@method		scaleToWidth:height:xorg:yorg:interpolation:index:
@@ -177,7 +177,7 @@ typedef struct {
 				The index of the layer to be scaled (or kAllLayers to indicate
 				the entire document).
 */
-- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg interpolation:(int)interpolation index:(int)index;
+- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg interpolation:(GimpInterpolationType)interpolation index:(NSInteger)index;
 
 
 /*!
@@ -189,7 +189,7 @@ typedef struct {
 				The index of the undo record corresponding to the scale
 				operation to be undone.
 */
-- (void)undoScale:(int)undoIndex;
+- (void)undoScale:(NSInteger)undoIndex;
 
 /*!
 	@method		togglePreserveSize:

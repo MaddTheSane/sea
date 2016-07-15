@@ -15,7 +15,7 @@
 
 @implementation EyedropTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kEyedropTool;
 }

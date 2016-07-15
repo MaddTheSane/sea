@@ -10,8 +10,9 @@
 #import "SeaView.h"
 
 @implementation EffectTool
+@synthesize clickCount = count;
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kEffectTool;
 }
@@ -27,7 +28,7 @@
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	id pointEffect = [seaPlugins activePointEffect];
-	float xScale, yScale;
+	CGFloat xScale, yScale;
 	IntPoint layerOff;
 	
 	if (count < kMaxEffectToolPoints) {
@@ -55,14 +56,9 @@
 	[(EffectOptions *)options updateClickCount:self];
 }
 
-- (IntPoint)point:(int)index
+- (IntPoint)point:(NSInteger)index
 {
 	return points[index];
-}
-
-- (NSInteger)clickCount
-{
-	return count;
 }
 
 - (IntRect) selectionRect

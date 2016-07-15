@@ -56,13 +56,13 @@
 				value.
 	@result		The corresponding point from the effect tool.
 */
-- (IntPoint)point:(int)index;
+- (IntPoint)point:(NSInteger)index;
 
 /*!
-	@method		clickCount
+	@property	clickCount
 	@discussion	Returns the number of clicks thus far.
 	@result		Returns an integer indicating the number of clicks thus far.
 */
-- (NSInteger)clickCount;
+@property (readonly) NSInteger clickCount;
 
 @end

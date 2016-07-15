@@ -1,5 +1,9 @@
 #import "Globals.h"
 
+@class SeaLayer;
+@class SeaDocument;
+@class PegasusUtility;
+
 /*!
 	@class		LayerSettings
 	@abstract	Handles the panel that allows users to change the various
@@ -9,16 +13,13 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
-@class SeaLayer;
-
 @interface LayerSettings : NSObject {
 
 	// The document in focus
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// The PegasusUtility controlling us
-	IBOutlet id pegasusUtility;
+	IBOutlet PegasusUtility *pegasusUtility;
 
 	// The settings panel
     IBOutlet id panel;
@@ -42,22 +43,22 @@
 	int units;
 	
 	// The slider that indicates the opacity of the layer
-	IBOutlet id opacitySlider;
+	IBOutlet NSSlider *opacitySlider;
 	
 	// The label that reflects the value of the slider
-	IBOutlet id opacityLabel;
+	IBOutlet NSTextField *opacityLabel;
 	
 	// The pop-up menu that reflects the current mode of the layer
-	IBOutlet id modePopup;
+	IBOutlet NSPopUpButton *modePopup;
 		
 	// Whether or not this layer is linked
-	IBOutlet id linkedCheckbox;
+	IBOutlet NSButton *linkedCheckbox;
 	
 	// Whether or not the alpha layer is enabled
-	IBOutlet id alphaEnabledCheckbox;
+	IBOutlet NSButton *alphaEnabledCheckbox;
 	
 	// Channel editing
-	IBOutlet id channelEditingMatrix;
+	IBOutlet NSMatrix *channelEditingMatrix;
 	
 	// The layer whose settings are currently being changed
 	SeaLayer* settingsLayer;
@@ -111,7 +112,7 @@
 	@param		index
 				The index of the layer to rename.
 */
-- (void)setOffsetsLeft:(int)left top:(int)top index:(int)index;
+- (void)setOffsetsLeft:(int)left top:(int)top index:(NSInteger)index NS_SWIFT_NAME(setOffsets(left:top:index:));
 
 /*!
 	@method		setName:index:
@@ -121,7 +122,7 @@
 	@param		index
 				The index of the layer to rename.
 */
-- (void)setName:(NSString *)newName index:(int)index;
+- (void)setName:(NSString *)newName index:(NSInteger)index;
 
 /*!
 	@method		changeMode:
@@ -141,7 +142,7 @@
 	@param		value
 				The desired mode value after the undo.
 */
-- (void)undoMode:(int)index to:(int)value;
+- (void)undoMode:(NSInteger)index to:(int)value;
 
 /*!
 	@method		changeOpacity:
@@ -161,7 +162,7 @@
 	@param		value
 				The desired opacity value after the undo.
 */
-- (void)undoOpacity:(int)index to:(int)value;
+- (void)undoOpacity:(NSInteger)index to:(int)value;
 
 /*!
 	@method		changeLinked:

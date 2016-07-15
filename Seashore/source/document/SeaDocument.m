@@ -46,6 +46,8 @@ enum {
 @synthesize contents;
 @synthesize measureStyle;
 @synthesize whiteboard;
+@synthesize operations;
+@synthesize current;
 
 - (instancetype)init
 {
@@ -236,11 +238,6 @@ enum {
 - (SeaSelection*)selection
 {
 	return selection;
-}
-
-- (id)operations
-{
-	return operations;
 }
 
 - (id)tools
@@ -548,16 +545,6 @@ enum {
 
 	// Then call our supervisor
 	[super close];
-}
-
-- (BOOL)current
-{
-	return current;
-}
-
-- (void)setCurrent:(BOOL)value
-{
-	current = value;
 }
 
 - (int)uniqueLayerID

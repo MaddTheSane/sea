@@ -205,7 +205,7 @@ enum {
 	@constant	kLinkedLayers
 				Specifies all linked layers.
 */
-enum {
+NS_ENUM(NSInteger) {
 	kActiveLayer = -1,
 	kAllLayers = -2,
 	kLinkedLayers = -3

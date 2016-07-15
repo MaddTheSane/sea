@@ -62,7 +62,7 @@
 	[unitsMenu selectItemAtIndex: units];
 	[resMenu selectItemAtIndex:[(SeaPrefs *)[SeaController seaPrefs] resolution]];
 	[modeMenu selectItemAtIndex:[(SeaPrefs *)[SeaController seaPrefs] mode]];
-	resolution = [[resMenu selectedItem] tag];
+	resolution = (int)[[resMenu selectedItem] tag];
 	size = [(SeaPrefs *)[SeaController seaPrefs] size];
 	[widthInput setStringValue:StringFromPixels(size.width, units, resolution)];
 	[heightInput setStringValue:StringFromPixels(size.height, units, resolution)];
@@ -124,7 +124,7 @@
 - (IBAction)createDocument:(id)sender
 {
 	// Determine the resolution
-	resolution = [[resMenu selectedItem] tag];
+	resolution = (int)[[resMenu selectedItem] tag];
 
 	// Parse width and height	
 	width = PixelsFromFloat([widthInput floatValue], units, resolution); 
@@ -135,7 +135,7 @@
 	if (height < kMinImageSize || height > kMaxImageSize) { NSBeep(); return; }
 	
 	// Determine everything else
-	type = [modeMenu indexOfSelectedItem];
+	type = (int)[modeMenu indexOfSelectedItem];
 	opaque = ![backgroundCheckbox state];
 
 	// Create a new document
@@ -208,12 +208,12 @@
 - (IBAction)changeUnits:(id)sender
 {
 	IntSize size = IntMakeSize(0, 0);
-	int res = [[resMenu selectedItem] tag];
+	int res = (int)[[resMenu selectedItem] tag];
 
 	size.height =  PixelsFromFloat([heightInput floatValue],units,res);
 	size.width =  PixelsFromFloat([widthInput floatValue],units,res);
 
-	units = [[unitsMenu selectedItem] tag];
+	units = (int)[[unitsMenu selectedItem] tag];
 	[widthInput setStringValue:StringFromPixels(size.width, units, res)];
 	[heightInput setStringValue:StringFromPixels(size.height, units, res)];
 	[heightUnits setStringValue:UnitsString(units)];

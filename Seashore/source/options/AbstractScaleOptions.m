@@ -2,6 +2,8 @@
 #import "AspectRatio.h"
 
 @implementation AbstractScaleOptions
+@synthesize ignoresMove;
+@synthesize aspectType;
 
 - (instancetype)init
 {
@@ -23,30 +25,14 @@
 	} else {
 		aspectType = kNoAspectType;
 	}
-
 }
 
 - (NSSize)ratio
 {
-	if(aspectType == kRatioAspectType){
+	if (aspectType == kRatioAspectType) {
 		return NSMakeSize(1, 1);
 	}
 	return NSZeroSize;
-}
-
-- (int)aspectType
-{
-	return aspectType;
-}
-
-- (void)setIgnoresMove:(BOOL)ignoring
-{
-	ignoresMove = ignoring;
-}
-
-- (BOOL)ignoresMove
-{
-	return ignoresMove;
 }
 
 @end

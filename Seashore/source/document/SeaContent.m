@@ -77,19 +77,18 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (instancetype)initFromPasteboardWithDocument:(id)doc
 {
-	id pboard = [NSPasteboard generalPasteboard];
-	NSString *imageRepDataType;
+	NSPasteboard *pboard = [NSPasteboard generalPasteboard];
 	NSData *imageRepData;
 	NSBitmapImageRep *imageRep;
-	NSImage *image;
-	NSInteger sspp, dspp, space;
+	NSInteger sspp, dspp;
 	NSData *profile;
-	ColorSyncProfileRef cmProfileLoc;
-	int bipp, bypr, bps;
+	ColorSyncProfileRef cmProfileLoc = NULL;
+	NSInteger bipp, bypr, bps;
 	unsigned char *data;
+	BMPColorSpace space = -1;
 	
 	// Get the data from the pasteboard
-	imageRepDataType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
+	NSString *imageRepDataType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 	//if (imageRepDataType == NULL) {
 	//	imageRepDataType = [pboard availableTypeFromArray:@[NSPICTPboardType]];
 	//	imageRepData = [pboard dataForType:imageRepDataType];
@@ -105,11 +104,10 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	}
 	
 	// Fill out as many of the properties as possible
-	height = [imageRep pixelsHigh];
-	width = [imageRep pixelsWide];
+	height = (int)[imageRep pixelsHigh];
+	width = (int)[imageRep pixelsWide];
 
 	// Determine the color space of the pasteboard image and the type
-	space = -1;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace]) {
 		space = kGrayColorSpace;
 		type = XCF_GRAY_IMAGE;
@@ -147,6 +145,10 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	else
 		dspp = 2;
 	data = convertBitmapColorSync(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
+	if (cmProfileLoc) {
+		CFRelease(cmProfileLoc);
+	}
+	
 	if (!data) {
 		NSLog(@"Required conversion not supported.");
 		return NULL;
@@ -154,12 +156,8 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	unpremultiplyBitmap(dspp, data, data, width * height);
 	
 	// Add layer
-	layers = @[[[SeaLayer alloc] initWithDocument:doc rect:IntMakeRect(0, 0, width, height) data:data spp:dspp]];
+	layers = @[[[SeaLayer alloc] initWithDocument:doc rect:IntMakeRect(0, 0, width, height) data:data spp:(int)dspp]];
 	activeLayerIndex = 0;
-	
-	if (cmProfileLoc) {
-		CFRelease(cmProfileLoc);
-	}
 	
 	return self;
 }
@@ -696,21 +694,18 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 - (void)addLayerFromPasteboard:(id)pboard
 {
 	NSArray *tempArray = @[];
-	NSString *imageRepDataType;
 	NSData *imageRepData;
 	NSBitmapImageRep *imageRep;
-	NSImage *image;
 	IntRect rect;
 	id layer;
 	unsigned char *data, *tdata;
 	NSInteger i, spp = [[document contents] spp], sspp, dspp;
-	BMPColorSpace space;
-	ColorSyncProfileRef cmProfileLoc;
+	ColorSyncProfileRef cmProfileLoc = NULL;
 	NSInteger bipp, bypr, bps;
 	NSPoint centerPoint;
 	
 	// Get the data from the pasteboard
-	imageRepDataType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
+	NSString *imageRepDataType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 	//if (imageRepDataType == NULL) {
 	//	imageRepDataType = [pboard availableTypeFromArray:@[NSPICTPboardType]];
 	//	imageRepData = [pboard dataForType:imageRepDataType];
@@ -723,7 +718,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	//}
 	
 	// Determine the color space of pasteboard image
-	space = -1;
+	BMPColorSpace space = -1;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace])
 		space = kGrayColorSpace;
 	//if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedBlackColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceBlackColorSpace])
@@ -745,13 +740,13 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	
 	// Work out the correct center point
 	if (height > 64 && width > 64 && [imageRep pixelsHigh] > height - 12 && [imageRep pixelsWide] > width - 12) { 
-		rect = IntMakeRect(width / 2 - [imageRep pixelsWide] / 2, height / 2 - [imageRep pixelsHigh] / 2, [imageRep pixelsWide], [imageRep pixelsHigh]);
+		rect = IntMakeRect((int)(width / 2 - [imageRep pixelsWide] / 2), (int)(height / 2 - [imageRep pixelsHigh] / 2), (int)[imageRep pixelsWide], (int)[imageRep pixelsHigh]);
 	}
 	else {
 		centerPoint = [(CenteringClipView *)[[document docView] superview] centerPoint];
 		centerPoint.x /= [[document docView] zoom];
 		centerPoint.y /= [[document docView] zoom];
-		rect = IntMakeRect(centerPoint.x - [imageRep pixelsWide] / 2, centerPoint.y - [imageRep pixelsHigh] / 2, [imageRep pixelsWide], [imageRep pixelsHigh]);
+		rect = IntMakeRect((int)(centerPoint.x - [imageRep pixelsWide] / 2), (int)(centerPoint.y - [imageRep pixelsHigh] / 2), (int)[imageRep pixelsWide], (int)[imageRep pixelsHigh]);
 	}
 	
 	// Put it in a nice form
@@ -790,7 +785,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[document helpers] activeLayerWillChange];
 	
 	// Create a new array with all the existing layers and the one being added
-	layer = [[SeaLayer alloc] initWithDocument:document rect:rect data:data spp:spp];
+	layer = [[SeaLayer alloc] initWithDocument:document rect:rect data:data spp:(int)spp];
 	for (i = 0; i < [layers count] + 1; i++) {
 		if (i == activeLayerIndex)
 			tempArray = [tempArray arrayByAddingObject:layer];
@@ -1004,7 +999,10 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	}
 	if (containsNothing) {
 		free(data);
-		NSRunAlertPanel(LOCALSTR(@"empty selection title", @"Selection empty"), LOCALSTR(@"empty selection body", @"The selection cannot be floated since it is empty."), LOCALSTR(@"ok", @"OK"), NULL, NULL);
+		NSAlert *alert = [[NSAlert alloc] init];
+		alert.messageText = LOCALSTR(@"empty selection title", @"Selection empty");
+		alert.informativeText = LOCALSTR(@"empty selection body", @"The selection cannot be floated since it is empty.");
+		[alert runModal];
 		return;
 	}
 
@@ -1062,7 +1060,6 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	NSString *imageRepDataType;
 	NSData *imageRepData;
 	NSBitmapImageRep *imageRep;
-	NSImage *image;
 	IntRect rect;
 	NSPasteboard *pboard = [NSPasteboard generalPasteboard];
 	id layer;
@@ -1071,7 +1068,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	BMPColorSpace space;
 	ColorSyncProfileRef cmProfileLoc = NULL;
 	NSInteger bipp, bypr, bps;
-	NSData *profile;
+	//NSData *profile = nil;
 	NSPoint centerPoint;
 	IntPoint sel_point;
 	IntSize sel_size;
@@ -1109,7 +1106,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	}
 	
 	// Do not extract color profile
-	profile = NULL;
+	//profile = NULL;
 	
 	/*
 	Here the reason we don't extract the profile data is because data on the pasteboard is already
@@ -1124,7 +1121,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	 */
 	
 	// Work out the correct center point
-	sel_size = IntMakeSize([imageRep pixelsWide], [imageRep pixelsHigh]);
+	sel_size = IntMakeSize((int)[imageRep pixelsWide], (int)[imageRep pixelsHigh]);
 	if ([[document selection] selectionSizeMatch:sel_size]) {
 		sel_point = [[document selection] selectionPoint];
 		rect = IntMakeRect(sel_point.x, sel_point.y, sel_size.width, sel_size.height);

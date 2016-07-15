@@ -10,7 +10,7 @@
 {
 	NSInteger i, bps = [imageRep bitsPerSample], sspp = [imageRep samplesPerPixel];
 	unsigned char *srcPtr = [imageRep bitmapData];
-	ColorSyncProfileRef cmProfileLoc;
+	ColorSyncProfileRef cmProfileLoc = NULL;
 	NSInteger bipp, bypr;
 	id profile;
 	
@@ -29,8 +29,6 @@
 	BMPColorSpace space = -1;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace])
 		space = kGrayColorSpace;
-	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedBlackColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceBlackColorSpace])
-		space = kInvertedGrayColorSpace;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedRGBColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceRGBColorSpace])
 		space = kRGBColorSpace;
 	if ([[imageRep colorSpaceName] isEqualToString:NSDeviceCMYKColorSpace])

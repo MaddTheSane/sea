@@ -24,7 +24,7 @@
 
 @implementation EraserTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kEraserTool;
 }

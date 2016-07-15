@@ -98,7 +98,7 @@
 		value = GIMP_INTERPOLATION_CUBIC;
 	}
 	else {
-		value = [defaults integerForKey:@"interpolation"];
+		value = (int)[defaults integerForKey:@"interpolation"];
 		if (value < 0 || value >= [interpolationPopup numberOfItems])
 			value = GIMP_INTERPOLATION_CUBIC;
 	}
@@ -140,7 +140,7 @@
 	}
 	
 	// Make the changes
-	[self scaleToWidth:newWidth height:newHeight interpolation:[interpolationPopup indexOfSelectedItem] index:workingIndex]; 
+	[self scaleToWidth:newWidth height:newHeight interpolation:(GimpInterpolationType)[interpolationPopup indexOfSelectedItem] index:workingIndex];
 }
 
 - (IBAction)cancel:(id)sender
@@ -150,12 +150,13 @@
 	[sheet orderOut:self];
 }
 
-- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg moving:(BOOL)isMoving interpolation:(int)interpolation index:(int)index undoRecord:(ScaleUndoRecord *)undoRecord
+- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg moving:(BOOL)isMoving interpolation:(GimpInterpolationType)interpolation index:(NSInteger)index undoRecord:(ScaleUndoRecord *)undoRecord
 {
-	id contents = [document contents], curLayer;
+	SeaContent *contents = [document contents];
+	SeaLayer *curLayer;
 	int whichLayer, count, oldWidth, oldHeight;
-	int layerCount = [contents layerCount];
-	float xScale, yScale;
+	NSInteger layerCount = [contents layerCount];
+	CGFloat xScale, yScale;
 	int x, y;
 	
 	// Correct the index if necessary
@@ -251,7 +252,7 @@
 }
 
 
-- (void)scaleToWidth:(int)width height:(int)height interpolation:(int)interpolation index:(int)index
+- (void)scaleToWidth:(int)width height:(int)height interpolation:(GimpInterpolationType)interpolation index:(NSInteger)index
 {
 	ScaleUndoRecord undoRecord;
 	
@@ -277,7 +278,7 @@
 		[[document helpers] layerBoundariesChanged:index];
 }
 
-- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg interpolation:(int)interpolation index:(int)index
+- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg interpolation:(GimpInterpolationType)interpolation index:(NSInteger)index
 {
 	ScaleUndoRecord undoRecord;
 	
@@ -304,11 +305,12 @@
 	}
 }
 
-- (void)undoScale:(int)undoIndex
+- (void)undoScale:(NSInteger)undoIndex
 {
-	id contents = [document contents], curLayer;
-	int whichLayer;
-	int layerCount = [contents layerCount];
+	SeaContent *contents = [document contents];
+	SeaLayer *curLayer;
+	NSInteger whichLayer;
+	NSInteger layerCount = [contents layerCount];
 	ScaleUndoRecord undoRecord;
 	int changeX, changeY;
 	
@@ -341,8 +343,7 @@
 			// Now the image is no longer scaled
 			undoRecord.isScaled = NO;
 			
-		}
-		else {
+		} else {
 		
 			// Determine the current layer
 			curLayer = [[document contents] layer:undoRecord.index];
@@ -358,9 +359,7 @@
 			undoRecord.isScaled = NO;
 		
 		}
-	
-	}
-	else {
+	} else {
 		
 		// Otherwise just reverse the process with the information we stored on the original scaling
 		[self scaleToWidth:undoRecord.scaledWidth height:undoRecord.scaledHeight xorg: undoRecord.scaledXOrg yorg: undoRecord.scaledYOrg moving: undoRecord.isMoving interpolation:undoRecord.interpolation index:undoRecord.index undoRecord:NULL];

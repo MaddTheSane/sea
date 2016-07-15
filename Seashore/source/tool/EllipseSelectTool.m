@@ -12,7 +12,7 @@
 
 @implementation EllipseSelectTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kEllipseSelectTool;
 }
@@ -29,7 +29,7 @@
 
 	// Otherwise do the following...
 	if (![super isMovingOrScaling]) {
-		int aspectType = [options aspectType];
+		SeaAspectType aspectType = [options aspectType];
 		NSSize ratio;
 		double xres, yres;
 		int modifier;
@@ -63,15 +63,20 @@
 				case kExactPixelAspectType:
 					selectionRect.size.width = ratio.width;
 					selectionRect.size.height = ratio.height;
-				break;
+					break;
+					
 				case kExactInchAspectType:
 					selectionRect.size.width = ratio.width * xres;
 					selectionRect.size.height = ratio.height * yres;
-				break;
+					break;
+					
 				case kExactMillimeterAspectType:
 					selectionRect.size.width = ratio.width * xres * 0.03937;
 					selectionRect.size.height = ratio.height * yres * 0.03937;
-				break;
+					break;
+					
+				default:
+					break;
 			}
 		}
 		[[document helpers] selectionChanged];	
@@ -85,7 +90,7 @@
 	
 	// Check we have a valid start point
 	if (intermediate && ![super isMovingOrScaling]) {
-		int aspectType = [options aspectType];
+		SeaAspectType aspectType = [options aspectType];
 		NSSize ratio;
 	
 		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {

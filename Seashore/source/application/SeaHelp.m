@@ -73,6 +73,7 @@
 
 - (IBAction)checkForUpdate:(id)sender
 {
+	//TODO: port to NSURLConnection
 	NSURL *check_url;
 	
 	check_url = [NSURL URLWithString:@"http://seashore.sourceforge.net/current.xml"];

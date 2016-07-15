@@ -1,5 +1,6 @@
 #import "Globals.h"
 #import "AbstractOptions.h"
+#import "AspectRatio.h"
 
 /*		
 	@class		AbstractScaleOptions
@@ -12,7 +13,7 @@
 
 @interface AbstractScaleOptions : AbstractOptions {
 	// If shift is held down we need to 
-	int aspectType;
+	SeaAspectType aspectType;
 	
 	// Whether or not we ignore the move action
 	BOOL ignoresMove;
@@ -29,12 +30,12 @@
 - (NSSize)ratio;
 
 /*!
-	@method		aspectType
+	@property	aspectType
 	@discussion	Returns the type of aspect ratio.
 	@result		Returns a constant representing the type of aspect ratio
 				(see AspectRatio).
 */
-- (int)aspectType;
+@property (readonly) SeaAspectType aspectType;
 
 
 /*!
@@ -46,10 +47,10 @@
 - (void)setIgnoresMove:(BOOL)ignoring;
 
 /*!
-	@method		ignoresMove
+	@property	ignoresMove
 	@discussion	When there are special selctions modes we don't move
 	@result		YES if we should not register move drags
 */
-- (BOOL)ignoresMove;
+@property (nonatomic) BOOL ignoresMove;
 
 @end

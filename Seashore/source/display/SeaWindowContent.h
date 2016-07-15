@@ -44,7 +44,7 @@ enum
 	NSDictionary *dict;
 }
 
-- (BOOL)visibilityForRegion:(int)region;
-- (void)setVisibility:(BOOL)visibility forRegion:(int)region;
-- (float)sizeForRegion:(int)region;
+- (BOOL)visibilityForRegion:(NSInteger)region;
+- (void)setVisibility:(BOOL)visibility forRegion:(NSInteger)region;
+- (CGFloat)sizeForRegion:(NSInteger)region;
 @end

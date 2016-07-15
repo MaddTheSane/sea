@@ -18,7 +18,7 @@
 
 @implementation BucketTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kBucketTool;
 }

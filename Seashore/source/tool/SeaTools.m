@@ -11,9 +11,12 @@
 	return [self getTool:[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] tool]];
 }
 
-- (id)getTool:(int)whichOne
+- (id)getTool:(SeaToolsDefines)whichOne
 {
 	switch (whichOne) {
+		case SeaToolsInvalid:
+			return nil;
+			
 		case kRectSelectTool:
 			return rectSelectTool;
 		break;
@@ -65,6 +68,10 @@
 		case kEffectTool:
 			return effectTool;
 		break;
+			
+		case kZoomTool:
+			
+			break;
 	}
 	
 	return NULL;

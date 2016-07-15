@@ -16,6 +16,7 @@
 #endif
 
 @implementation TextureUtility
+@synthesize activeTextureIndex;
 
 - (instancetype)init
 {		
@@ -277,7 +278,7 @@
 	return groups[activeGroupIndex][activeTextureIndex];
 }
 
-- (int)activeTextureIndex
+- (NSInteger)activeTextureIndex
 {
 	if ([[SeaController seaPrefs] useTextures])
 		return activeTextureIndex;
@@ -285,7 +286,7 @@
 		return -1;
 }
 
-- (void)setActiveTextureIndex:(int)index
+- (void)setActiveTextureIndex:(NSInteger)index
 {
 	id oldTexture;
 	id newTexture;

@@ -72,12 +72,16 @@
 	[sheet orderOut:self];
 }
 
-static inline float mod_float(float value, float divisor)
+static inline CGFloat mod_float(CGFloat value, CGFloat divisor)
 {
-	float result;
+	CGFloat result;
 	
-	if (value < 0.0) result = value * -1.0;
-	else result = value;
+	if (value < 0.0) {
+		result = value * -1.0;
+	} else {
+		result = value;
+	}
+
 	while (result - 360.0 >= 0.0) {
 		result -= 360.0;
 	}
@@ -85,15 +89,17 @@ static inline float mod_float(float value, float divisor)
 	return result;
 }
 
-- (void)rotate:(float)degrees withTrim:(BOOL)trim
+- (void)rotate:(CGFloat)degrees withTrim:(BOOL)trim
 {
-	id contents = [document contents];
-	id activeLayer = [contents activeLayer];
+	SeaContent *contents = [document contents];
+	SeaLayer *activeLayer = [contents activeLayer];
 	RotationUndoRecord undoRecord;
 	
 	// Only rotate
-	if (degrees > 0) degrees = 360 - mod_float(degrees, 360);
-	else degrees = mod_float(degrees, 360);
+	if (degrees > 0)
+		degrees = 360 - mod_float(degrees, 360);
+	else
+		degrees = mod_float(degrees, 360);
 	if (degrees == 0.0)
 		return;
 
@@ -126,11 +132,11 @@ static inline float mod_float(float value, float divisor)
 	undoCount++;
 }
 
-- (void)undoRotation:(int)undoIndex
+- (void)undoRotation:(NSInteger)undoIndex
 {
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 	RotationUndoRecord undoRecord;
-	id layer;
+	SeaLayer *layer;
 	
 	// Prepare for redo
 	[[[document undoManager] prepareWithInvocationTarget:self] undoRotation:undoIndex];
@@ -140,29 +146,29 @@ static inline float mod_float(float value, float divisor)
 	
 	// Behave differently depending on whether things are already rotated
 	if (undoRecord.isRotated) {
-	
 		// If already rotated...
 		layer = [contents layer:undoRecord.index];
 		[layer setOffsets:IntMakePoint(undoRecord.rect.origin.x, undoRecord.rect.origin.y)];
-		[layer setMarginLeft:0 top:0 right:undoRecord.rect.size.width - [(SeaLayer *)layer width] bottom:undoRecord.rect.size.height - [(SeaLayer *)layer height]];
+		[layer setMarginLeft:0 top:0 right:undoRecord.rect.size.width - [layer width] bottom:undoRecord.rect.size.height - [layer height]];
 		[[layer seaLayerUndo] restoreSnapshot:undoRecord.undoIndex automatic:NO];
-		if (undoRecord.withTrim) [[document selection] selectOpaque];
-		else [[document selection] clearSelection];
-		if (undoRecord.disableAlpha) [layer toggleAlpha];
+		if (undoRecord.withTrim)
+			[[document selection] selectOpaque];
+		else
+			[[document selection] clearSelection];
+		if (undoRecord.disableAlpha)
+			[layer toggleAlpha];
 		[[document helpers] layerBoundariesChanged:kActiveLayer];
 		undoRecords[undoIndex].isRotated = NO;
-		
-	}
-	else {
-	
+	} else {
 		// If not rotated...
 		layer = [contents layer:undoRecord.index];
 		[layer setRotation:undoRecord.rotation interpolation:NSImageInterpolationHigh withTrim:undoRecord.withTrim];
-		if (undoRecord.withTrim) [[document selection] selectOpaque];
-		else [[document selection] clearSelection];
+		if (undoRecord.withTrim)
+			[[document selection] selectOpaque];
+		else
+			[[document selection] clearSelection];
 		[[document helpers] layerBoundariesChanged:kActiveLayer];
 		undoRecords[undoIndex].isRotated = YES;
-		
 	}
 }
 

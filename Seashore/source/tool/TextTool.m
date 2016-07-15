@@ -20,7 +20,7 @@ extern id gNewFont;
 
 @implementation TextTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kTextTool;
 }
@@ -51,7 +51,7 @@ extern id gNewFont;
 
 - (IntRect)drawOverlay
 {
-	int i, j, k, width, height, spp = [[document contents] spp], ispp, ispp2 = 0;
+	NSInteger i, j, k, width, height, spp = [[document contents] spp], ispp, ispp2 = 0;
 	NSFont *font;
 	IntSize fontSize;
 	NSDictionary *attributes;

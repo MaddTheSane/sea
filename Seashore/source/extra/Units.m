@@ -1,43 +1,49 @@
+#include <math.h>
+#include <tgmath.h>
 #import "Units.h"
 
-NSString *StringFromPixels(int pixels, int units, int resolution)
+NSString *StringFromPixels(int pixels, SeaUnits units, int resolution)
 {
 	NSString *result;
 	
 	switch (units) {
 		case kInchUnits:
 			result = [NSString stringWithFormat:@"%.2f", (float)pixels / resolution];
-		break;
+			break;
+			
 		case kMillimeterUnits:
 			result = [NSString stringWithFormat:@"%.0f", (float)pixels / resolution * 25.4];
-		break;
+			break;
+			
 		default:
 			result = [NSString stringWithFormat:@"%d", pixels];
-		break;
+			break;
 	}
 	return result;
 }
 
-int PixelsFromFloat(float measure, int units, int resolution)
+int PixelsFromFloat(CGFloat measure, SeaUnits units, int resolution)
 {
 	int result;
 	
 	switch (units) {
 		case kInchUnits:
-			result = roundf(measure * (float)resolution);
-		break;
+			result = round(measure * (CGFloat)resolution);
+			break;
+			
 		case kMillimeterUnits:
-			result = roundf(measure * (float)resolution / 25.4);
-		break;
+			result = round(measure * (CGFloat)resolution / 25.4);
+			break;
+			
 		default:
 			result = measure;
-		break;
+			break;
 	}
 	
 	return result;
 }
 
-NSString *UnitsString(int units)
+NSString *UnitsString(SeaUnits units)
 {
 	switch (units) {
 		case kPixelUnits:

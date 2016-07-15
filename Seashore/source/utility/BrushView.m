@@ -32,8 +32,8 @@
 {
 	NSArray *brushes = [master brushes];
 	NSInteger brushCount =  [brushes count];
-	int activeBrushIndex = [master activeBrushIndex];
-	int i, j, elemNo;
+	NSInteger activeBrushIndex = [master activeBrushIndex];
+	NSInteger i, j, elemNo;
 	NSImage *thumbnail;
 	NSRect elemRect, tempRect;
 	NSString *pixelTag;

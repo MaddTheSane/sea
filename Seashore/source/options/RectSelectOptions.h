@@ -1,6 +1,8 @@
 #import "Globals.h"
 #import "AbstractSelectOptions.h"
 
+@class AspectRatio;
+
 /*!
 	@class		RectSelectOptions
 	@abstract	Handles the options pane for the rectangular selection tool.
@@ -9,17 +11,16 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface RectSelectOptions : AbstractSelectOptions {
 
 	// The slider to select the radius for the rounded rectangle
-	IBOutlet id radiusSlider;
+	IBOutlet NSSlider *radiusSlider;
 	
 	// When checked indicates the rectangle should be rounded
-	IBOutlet id radiusCheckbox;
+	IBOutlet NSButton *radiusCheckbox;
 
 	// The AspectRatio instance linked to this options panel
-	IBOutlet id aspectRatio;
+	IBOutlet AspectRatio *aspectRatio;
 		
 }
 

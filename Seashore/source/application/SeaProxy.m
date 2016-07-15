@@ -142,7 +142,7 @@
 
 - (IBAction)setColorSpace:(id)sender
 {
-	[[gCurrentDocument contents] convertToType:[sender tag] - 240];
+	[[gCurrentDocument contents] convertToType:(int)([sender tag] - 240)];
 }
 
 - (IBAction)toggleLinked:(id)sender

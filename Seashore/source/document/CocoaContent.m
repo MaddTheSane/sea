@@ -149,8 +149,8 @@
 	}
 	
 	// Determine the height and width of the image
-	height = [imageRep pixelsHigh];
-	width = [imageRep pixelsWide];
+	height = (int)[imageRep pixelsHigh];
+	width = (int)[imageRep pixelsWide];
 	
 	// Determine the resolution of the image
 	if (!res_set) {
@@ -159,7 +159,6 @@
 	}
 	
 	// Determine the image type
-	test = [[imageRep colorSpaceName] isEqualToString:NSCalibratedBlackColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceBlackColorSpace];
 	test = test || [[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace];
 	if (test) 
 		type = XCF_GRAY_IMAGE;

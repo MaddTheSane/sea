@@ -1,3 +1,5 @@
+#import <AppKit/NSDocument.h>
+#import <AppKit/NSWindow.h>
 #import "Globals.h"
 #import "AbstractExporter.h"
 
@@ -6,6 +8,12 @@
 @class GIFExporter, JPEGExporter, JP2Exporter, PNGExporter, TIFFExporter, XCFExporter;
 @class TextureExporter;
 @class SeaContent, SeaView;
+@class SeaOperations;
+@class SeaHelpers;
+@class SeaTools;
+@class PluginData;
+@class TextureExporter;
+@class WarningsUtility;
 
 /*!
 	@class		SeaDocument
@@ -15,28 +23,22 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface SeaDocument : NSDocument
+@interface SeaDocument : NSDocument <NSWindowDelegate>
 {
-	// The contents of the document (a subclass of SeaContent)
-	
 	// The selection manager for this document
 	SeaSelection *selection;
 	
-	// The operations manager for this document
-	IBOutlet id operations;
-	
 	// The tools for this document
-	IBOutlet id tools;
+	IBOutlet SeaTools *tools;
 	
 	// An outlet to the helpers of this document
-	IBOutlet id helpers;
+	IBOutlet SeaHelpers *helpers;
 	
 	// An outlet to the warnings utility for this document
 	IBOutlet id warnings;
 	
 	// The plug-in data used by this document
-	IBOutlet id pluginData;
+	IBOutlet PluginData *pluginData;
 	
 	// An outlet to the view associated with this document
 	IBOutlet id view;
@@ -62,7 +64,7 @@
 	IBOutlet id accessoryView;
 	
 	// A pop-up menu of all possible exporters
-	IBOutlet id exportersPopUp;
+	IBOutlet NSPopUpButton *exportersPopUp;
 	
 	// The button showing the options for the exporter
 	IBOutlet id optionsButton;
@@ -100,7 +102,16 @@
 	
 }
 
-@property (strong, readonly) SeaContent *contents;
+/*!
+	@property	contents
+	@discussion	The contents of the document (a subclass of SeaContent)
+ */
+@property (strong, readonly) __kindof SeaContent *contents;
+
+/*!
+	@property	measureStyle
+	@discussion	The document's measure style
+ */
 @property (setter = changeMeasuringStyle:) int measureStyle;
 
 // The whiteboard that represents this document
@@ -181,18 +192,17 @@
 - (SeaSelection*)selection;
 
 /*!
-	@method		operations
-	@discussion	Returns the operation manager of the document.
-	@result		Returns an instance of SeaSelection.
+	@property	operations
+	@discussion	The operations manager for this document.
 */
-- (id)operations;
+@property (weak) IBOutlet SeaOperations *operations;
 
 /*!
 	@method		tools
 	@discussion	Returns the tools manager of the document.
 	@result		Returns an instance of SeaTools.
 */
-- (id)tools;
+- (SeaTools*)tools;
 
 /*!
 	@method		helpers
@@ -200,21 +210,21 @@
 				document.
 	@result		Returns an instance of SeaHelpers.
 */
-- (id)helpers;
+- (SeaHelpers*)helpers;
 
 /*!
 	@method		warnings
 	@discussion	Returns an object contaning the warning related methods.
 	@result		Returns an instance of WarningsUtility.
 */
-- (id)warnings;
+- (WarningsUtility*)warnings;
 
 /*!
 	@method		pluginData
 	@discussion	Returns the object shared between Seashore and most plug-ins.
 	@result		Returns an instance of PluginData.
 */
-- (id)pluginData;
+- (PluginData*)pluginData;
 
 /*!
 	@method		docView
@@ -241,7 +251,7 @@
 	@discussion	Returns the texture exporter.
 	@result		Returns an instance of TextureExporter.
 */
-- (id)textureExporter;
+- (TextureExporter*)textureExporter;
 
 // DOCUMENT METHODS
 
@@ -386,6 +396,14 @@
 				documents will be deleted upon closing!
 */
 - (void)setCurrent:(BOOL)value;
+
+/*!
+	@oroperty	current
+	@discussion	A boolean indicating whether the document is current.
+				Documents are not current, if they were created using the "Compare
+				to Last Saved" menu item and have not been resaved since.
+ */
+@property BOOL current;
 
 /*!
 	@method		uniqueLayerID

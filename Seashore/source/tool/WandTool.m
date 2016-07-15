@@ -11,7 +11,7 @@
 
 @implementation WandTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return kWandTool;
 }

@@ -99,7 +99,7 @@
 				value.
 	@result		The corresponding point from the effect tool.
 */
-- (IntPoint)point:(int)index;
+- (IntPoint)point:(NSInteger)index;
 
 /*!
 	@method		foreColor

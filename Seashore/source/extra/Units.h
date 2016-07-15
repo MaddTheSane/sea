@@ -9,6 +9,8 @@
 #import <Foundation/NSObjCRuntime.h>
 #import "Globals.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
 	@enum		k...Units
 	@constant	kPixelUnits
@@ -35,7 +37,7 @@ typedef NS_ENUM(NSInteger, SeaUnits) {
 				The resolution being used.
 	@result		Returns an NSString that is good for displaying the units.
 */
-NSString *StringFromPixels(int pixels, int units, int resolution);
+NSString *StringFromPixels(int pixels, SeaUnits units, int resolution);
 
 /*!
 	@function	PixelsfromFloat
@@ -48,7 +50,7 @@ NSString *StringFromPixels(int pixels, int units, int resolution);
 				The resolution being used.
 	@result		Returns an int that is the exact number of pixels.
 */
-int PixelsFromFloat(float measure, int units, int resolution);
+int PixelsFromFloat(CGFloat measure, SeaUnits units, int resolution);
 
 /*!
 	@function	UnitsString
@@ -57,4 +59,6 @@ int PixelsFromFloat(float measure, int units, int resolution);
 				The units to display.
 	@result		Returns an NSString that is the label for the units.
 */
-NSString *UnitsString(int units);
+NSString *UnitsString(SeaUnits units);
+
+NS_ASSUME_NONNULL_END

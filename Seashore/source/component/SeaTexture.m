@@ -7,7 +7,7 @@
 	if (self = [super init]) {
 	unsigned char *tempBitmap;
 	NSBitmapImageRep *tempBitmapRep;
-	int k, j, l, bpr, spp;
+	NSInteger k, j, l, bpr, spp;
 	BOOL isDir;
 	
 	// Check if file is a directory
@@ -17,8 +17,8 @@
 	
 	// Get the image
 	tempBitmapRep = [NSBitmapImageRep imageRepWithData:[NSData dataWithContentsOfFile:path]];
-	width = [tempBitmapRep pixelsWide];
-	height = [tempBitmapRep pixelsHigh];
+	width = (int)[tempBitmapRep pixelsWide];
+	height = (int)[tempBitmapRep pixelsHigh];
 	spp = [tempBitmapRep samplesPerPixel];
 	bpr = [tempBitmapRep bytesPerRow];
 	tempBitmap = [tempBitmapRep bitmapData];
