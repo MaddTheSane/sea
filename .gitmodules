@@ -1,0 +1,3 @@
+[submodule "Vendor/SVGImageRep"]
+	path = Vendor/SVGImageRep
+	url = https://github.com/MaddTheSane/SVGImageRep.git

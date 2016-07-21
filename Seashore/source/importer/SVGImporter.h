@@ -12,19 +12,19 @@
 @interface SVGImporter : NSObject {
 
 	// The length warning panel
-	IBOutlet id waitPanel;
+	IBOutlet NSPanel *waitPanel;
 	
 	// The spinner to update
-	IBOutlet id spinner;
+	IBOutlet NSProgressIndicator *spinner;
 
 	// The scaling panel
-	IBOutlet id scalePanel;
+	IBOutlet NSPanel *scalePanel;
 	
 	// The slider indicating the extent of scaling
-	IBOutlet id scaleSlider;
+	IBOutlet NSSlider *scaleSlider;
 	
 	// A label indicating the document's expected size
-	IBOutlet id sizeLabel;
+	IBOutlet NSTextField *sizeLabel;
 	
 	// The document's actual and scaled size
 	IntSize trueSize, size;

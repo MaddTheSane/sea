@@ -1,5 +1,8 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "SeaLayer.h"
+
+@class SeaDocument;
 
 /*!
 	@class		CocoaLayer
@@ -9,7 +12,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface CocoaLayer : SeaLayer {
 
 }
@@ -30,6 +32,6 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithImageRep:(id)imageRep document:(id)doc spp:(int)lspp;
+- (instancetype)initWithImageRep:(NSBitmapImageRep *)imageRep document:(SeaDocument*)doc spp:(int)lspp;
 
 @end

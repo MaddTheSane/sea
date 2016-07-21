@@ -106,7 +106,38 @@ IntSize getDocumentSize(char *path)
 
 - (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path
 {
+	// Initialize superclass first
+	if (![super initWithDocument:doc])
+		return nil;
+	
 	NSFileManager *fm = [NSFileManager defaultManager];
+	Class svgRep = NSClassFromString(@"SVGImageRep");
+	if (!svgRep) {
+		NSBundle *svgBundle = [NSBundle bundleWithPath:[[gMainBundle builtInPlugInsPath] stringByAppendingPathComponent:@"SVGImageRep.bundle"]];
+		if (svgBundle || [svgBundle load]) {
+			svgRep = NSClassFromString(@"SVGImageRep");
+		}
+	}
+	if (svgRep) {
+		NSImageRep *svg = [svgRep imageRepWithContentsOfFile:path];
+		NSImage *img = [[NSImage alloc] init];
+		[img addRepresentation:svg];
+		type = XCF_RGB_IMAGE;
+		xres = yres = 72;
+		NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:[img TIFFRepresentation]];
+
+		SeaLayer *layer = [[SVGLayer alloc] initWithImageRep:imageRep document:doc spp:(type == XCF_RGB_IMAGE) ? 4 : 2];
+		if (layer == NULL) {
+			return NULL;
+		}
+		layers = @[layer];
+		height = (int)[imageRep pixelsHigh];
+		width = (int)[imageRep pixelsWide];
+
+		return self;
+	}
+	
+	
 	NSString *importerPath;
 	NSImageRep *imageRep;
 	id layer;
@@ -117,10 +148,6 @@ IntSize getDocumentSize(char *path)
 	NSTask *task;
 	NSString *tmpSeaImport = @"/tmp/seaimport/";
 	
-	// Initialize superclass first
-	if (![super initWithDocument:doc])
-		return nil;
-		
 	// Load nib file
 	[NSBundle loadNibNamed:@"SVGContent" owner:self];
 	

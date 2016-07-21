@@ -12,7 +12,7 @@
 	unsigned char *srcPtr = [imageRep bitmapData];
 	ColorSyncProfileRef cmProfileLoc = NULL;
 	NSInteger bipp, bypr;
-	id profile;
+	NSData *profile;
 	
 	// Initialize superclass first
 	if (![super initWithDocument:doc])
@@ -33,7 +33,7 @@
 		space = kRGBColorSpace;
 	if ([[imageRep colorSpaceName] isEqualToString:NSDeviceCMYKColorSpace])
 		space = kCMYKColorSpace;
-	if ((int)space == -1) {
+	if (space == -1) {
 		NSLog(@"Color space %@ not yet handled.", [imageRep colorSpaceName]);
 		return NULL;
 	}
