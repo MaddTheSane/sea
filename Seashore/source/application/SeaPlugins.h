@@ -5,6 +5,7 @@
 #import "SeaWhiteboard.h"
 
 @class SeaPlugins;
+@class PluginData;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -125,9 +126,6 @@ enum {
 				<b>License:</b> Public Domain<br>
 				<b>Copyright:</b> N/A
 */
-
-@class PluginData;
-
 @interface SeaPlugins : NSObject {
 
 	// The SeaController object

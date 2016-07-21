@@ -11,7 +11,6 @@
 
 #import <AppKit/AppKit.h>
 
-int render(unsigned char *image_in, int width_in, int height_in, unsigned char *image_out, int width_out, int height_out, int overlap, int channels, char tileable, NSProgressIndicator *progressBar);
-
+int render(unsigned char *image_in, int width_in, int height_in, unsigned char *image_out, int width_out, int height_out, int overlap, int channels, bool tileable, NSProgressIndicator *progressBar);
 
 #endif /* render_h */

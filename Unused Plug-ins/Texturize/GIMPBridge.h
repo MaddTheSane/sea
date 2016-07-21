@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 typedef unsigned char guchar;
 typedef char gchar;
@@ -9,7 +10,7 @@ typedef unsigned int guint;
 typedef unsigned int guint32;
 typedef int gint;
 typedef int gint32;
-typedef char gboolean;
+typedef bool gboolean;
 typedef float gfloat;
 typedef double gdouble;
 typedef void *gpointer;

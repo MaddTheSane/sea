@@ -57,8 +57,16 @@
 
 	// YES if the application succeeded
 	BOOL success;
-
 }
+
+/// The overlap
+@property (nonatomic) CGFloat overlap;
+/// The width
+@property (nonatomic) CGFloat width;
+/// The height
+@property (nonatomic) CGFloat height;
+/// Should the resulting texture be tileable?
+@property (nonatomic, getter=isTileable) BOOL tileable;
 
 /*!
 	@method		initWithManager:

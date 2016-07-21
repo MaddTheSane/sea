@@ -1,3 +1,5 @@
+#include <cmath>
+#include <tgmath.h>
 #import "TexturizeClass.h"
 #import "render.hpp"
 
@@ -6,6 +8,27 @@
 #define gUserDefaults [NSUserDefaults standardUserDefaults]
 
 @implementation TexturizeClass
+@synthesize overlap;
+@synthesize width;
+@synthesize height;
+@synthesize tileable;
+
+#if 0
+- (void)setOverlap:(CGFloat)newOverlap
+{
+	overlap = round(newOverlap);
+}
+
+- (void)setWidth:(CGFloat)newWidth
+{
+	width = round(newWidth);
+}
+
+- (void)setHeight:(CGFloat)newHeight
+{
+	height = round(newHeight);
+}
+#endif
 
 - (id)initWithManager:(SeaPlugins *)manager
 {
@@ -73,8 +96,7 @@
 	if (overlap < 5.0 || overlap > 100.0)
 		overlap = 50.0;
 	
-	[overlapLabel setStringValue:[NSString stringWithFormat:@"%.0f%%", overlap]];
-	[overlapSlider setFloatValue:overlap];
+	self.overlap = overlap;
 	
 	if ([gUserDefaults objectForKey:@"Texturize.width"])
 		width = [gUserDefaults integerForKey:@"Texturize.width"];
@@ -84,8 +106,7 @@
 	if (width < 120.0 || width > 500.0)
 		width = 200.0;
 	
-	[widthLabel setStringValue:[NSString stringWithFormat:@"%.0f%%", width]];
-	[widthSlider setFloatValue:width];
+	self.width = width;
 	
 	if ([gUserDefaults objectForKey:@"Texturize.height"])
 		height = [gUserDefaults integerForKey:@"Texturize.height"];
@@ -95,13 +116,12 @@
 	if (height < 120.0 || height > 500.0)
 		height = 200.0;
 	
-	[heightLabel setStringValue:[NSString stringWithFormat:@"%.0f%%", height]];
-	[heightSlider setFloatValue:height];
+	self.height = height;
 	
 	if ([gUserDefaults objectForKey:@"Texturize.tileable"])
-		tileable = [gUserDefaults boolForKey:@"Texturize.tileable"];
+		self.tileable = [gUserDefaults boolForKey:@"Texturize.tileable"];
 	else
-		tileable = YES;
+		self.tileable = YES;
 	
 	[progressBar setIndeterminate:YES];
 	[progressBar setDoubleValue:0.0];
@@ -115,9 +135,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	[self texturize];
 	[pluginData apply];
 	
@@ -129,14 +147,12 @@
 	[gUserDefaults setFloat:overlap forKey:@"Texturize.overlap"];
 	[gUserDefaults setFloat:width forKey:@"Texturize.width"];
 	[gUserDefaults setFloat:height forKey:@"Texturize.height"];
-	[gUserDefaults setObject:tileable ? @"YES" : @"NO" forKey:@"Texturize.tileable"];
+	[gUserDefaults setBool:tileable forKey:@"Texturize.tileable"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
-	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	[self texturize];
 	[pluginData apply];
 }
@@ -148,9 +164,7 @@
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	[pluginData cancel];
 	
 	[NSApp stopModal];
@@ -161,6 +175,7 @@
 
 - (IBAction)update:(id)sender
 {
+	/*
 	overlap = round([overlapSlider doubleValue]);
 	width = round([widthSlider doubleValue]);
 	height = round([heightSlider doubleValue]);
@@ -168,18 +183,18 @@
 	[overlapLabel setStringValue:[NSString stringWithFormat:@"%.0f%%", overlap]];
 	[widthLabel setStringValue:[NSString stringWithFormat:@"%.0f%%", width]];
 	[heightLabel setStringValue:[NSString stringWithFormat:@"%.0f%%", height]];
+	 */
 }
 
 #define make_128(x) (x + 16 - (x % 16))
 
 - (void)texturize
 {
-	PluginData *pluginData;
-	int i, j, k, spp, iwidth, iheight;
+	int i, k, spp, iwidth, iheight;
 	int foverlap, owidth, oheight;
 	unsigned char *tdata, *idata, *odata;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	PluginData *pluginData = [seaPlugins data];
 	spp = [pluginData spp];
 	iwidth = [pluginData width];
 	iheight = [pluginData height];
@@ -188,13 +203,13 @@
 	for (i = 0; i < iwidth * iheight; i++) {
 		for (k = 0; k < spp - 1; k++) idata[i * (spp - 1) + k] = tdata[i * spp + k];
 	}
-	owidth = (int)floorf(iwidth * (width / 100.0f));
-	oheight = (int)floorf(iheight * (height / 100.0f));
+	owidth = (int)floor(iwidth * (width / 100.0f));
+	oheight = (int)floor(iheight * (height / 100.0f));
 	odata = (unsigned char *)malloc(make_128(owidth * oheight * spp));
 	for (i = 0; i < iheight; i++) {
 		memcpy(&(odata[owidth * i * (spp - 1)]), &(idata[iwidth * i * (spp - 1)]), iwidth * (spp - 1));
 	}
-	foverlap = (int)floorf((overlap / 100.0f) * MIN(iwidth, iheight));
+	foverlap = (int)floor((overlap / 100.0f) * MIN(iwidth, iheight));
 	[progressBar setIndeterminate:NO];
 	[progressBar display];
 	render(idata, iwidth, iheight, odata, owidth, oheight, foverlap, spp - 1, tileable, progressBar);

@@ -111,7 +111,7 @@ public:
 	   function which will be called if an error occurs;
 	   an error message is passed to this function. If this
 	   argument is omitted, exit(1) will be called. */
-	Graph(void (*err_function)(char *) = NULL);
+	Graph(void (*err_function)(const char *) = NULL);
 
 	/* Destructor */
 	~Graph();
@@ -186,7 +186,7 @@ private:
 	Block<arc>			*arc_block;
 	DBlock<nodeptr>		*nodeptr_block;
 
-	void	(*error_function)(char *);	/* this function is called if a error occurs,
+	void	(*error_function)(const char *);	/* this function is called if a error occurs,
 										   with a corresponding error message
 										   (or exit(1) is called if it's NULL) */
 
