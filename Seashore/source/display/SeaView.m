@@ -1726,10 +1726,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 - (IBAction)delete:(id)sender
 {
 	if ([[document selection] floating]) {
-		[[document contents] deleteLayer:kActiveLayer];
+		[(SeaContent*)[document contents] deleteLayer:kActiveLayer];
 		[[document selection] clearSelection];
-	}
-	else {
+	} else {
 		[[document selection] deleteSelection];
 	}
 }

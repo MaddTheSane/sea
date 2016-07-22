@@ -13,6 +13,8 @@
 #import "SeaTools.h"
 #import "StatusUtility.h"
 #import "LayerDataSource.h"
+#import "InfoUtility.h"
+#import "OptionsUtility.h"
 
 @implementation SeaHelpers
 

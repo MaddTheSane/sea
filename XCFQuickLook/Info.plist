@@ -12,7 +12,6 @@
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>org.gimp.xcf</string>
-				<string>net.sourceforge.seashore.xcf</string>
 			</array>
 		</dict>
 	</array>

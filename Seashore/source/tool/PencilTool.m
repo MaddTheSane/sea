@@ -37,7 +37,7 @@
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	id activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	BOOL hasAlpha = [layer hasAlpha];
 	unsigned char *overlay = [[document whiteboard] overlay];
 	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
@@ -88,7 +88,7 @@
 	}
 	else {
 		if ([options useTextures])
-			[[document whiteboard] setOverlayOpacity:[(TextureUtility*)[[SeaController utilitiesManager] textureUtilityFor:document] opacity]];
+			[[document whiteboard] setOverlayOpacity:[[[SeaController utilitiesManager] textureUtilityFor:document] opacity]];
 		else
 			[[document whiteboard] setOverlayOpacity:[color alphaComponent] * 255.0];
 	}
@@ -128,7 +128,7 @@
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
 	id activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	unsigned char *overlay = [[document whiteboard] overlay];
 	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
 	int xMod = (lastPoint.x > where.x) ? -1 : 1, yMod = (lastPoint.y > where.y) ? -1 : 1;

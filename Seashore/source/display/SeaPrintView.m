@@ -30,7 +30,7 @@
 	// Remember the document this view is displaying
 
 	// Determine the frame at 100% 72-dpi
-	frame = NSMakeRect(0, 0, [[doc contents] width] * (72.0 / (float)[[doc contents] xres]), [[doc contents] height] * (72.0 / (float)[[document contents] yres]));
+	frame = NSMakeRect(0, 0, [(SeaContent*)[doc contents] width] * (72.0 / (CGFloat)[[doc contents] xres]), [[doc contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
 
 	// Initialize superclass
 	if (!(self = [super initWithFrame:frame]))
@@ -160,7 +160,7 @@ __unused static inline double mod(double a, double b) __attribute__((__overloada
 	int horizPages, vertPages;
 	
 	// Work out the image's bounds
-	bounds = NSMakeRect(0, 0, [[document contents] width] * (72.0 / (float)[[document contents] xres]), [[document contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
+	bounds = NSMakeRect(0, 0, [(SeaContent*)[document contents] width] * (72.0 / (float)[[document contents] xres]), [[document contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
 	
 	// Work out the paper's bounding rectangle
 	paper.size = [pi paperSize];

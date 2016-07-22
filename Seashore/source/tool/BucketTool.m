@@ -87,7 +87,8 @@
 
 - (void)fillAtPoint:(IntPoint)point useTolerance:(BOOL)useTolerance delay:(BOOL)delay
 {
-	id layer = [[document contents] activeLayer], activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	SeaLayer *layer = [[document contents] activeLayer];
+	id activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
 	int tolerance, width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height], spp = [[document contents] spp];
 	int textureWidth = [(SeaTexture *)activeTexture width], textureHeight = [(SeaTexture *)activeTexture height];
 	unsigned char *overlay = [[document whiteboard] overlay], *data = [(SeaLayer *)layer data];
@@ -103,7 +104,7 @@
 	if ([options useTextures]) {
 		for (k = 0; k < spp - 1; k++)
 			basePixel[k] = 0;
-		basePixel[spp - 1] = [(TextureUtility*)[[SeaController utilitiesManager] textureUtilityFor:document] opacity];
+		basePixel[spp - 1] = [[[SeaController utilitiesManager] textureUtilityFor:document] opacity];
 	}
 	else {
 		if (spp == 4) {

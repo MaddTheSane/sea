@@ -1,4 +1,14 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "PegasusUtility.h"
+#import "TransparentUtility.h"
+#import "ToolboxUtility.h"
+#import "BrushUtility.h"
+#import "OptionsUtility.h"
+#import "TextureUtility.h"
+#import "InfoUtility.h"
+#import "StatusUtility.h"
+
 
 /*!
 	@class		UtilitiesManager
@@ -8,22 +18,21 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface UtilitiesManager : NSObject {
 	
 	// The controller object
 	IBOutlet id controller;
-	IBOutlet id transparentUtility;
+	IBOutlet TransparentUtility *transparentUtility;
 	
 	// Outlets to the various utilities of Seashore
-    NSMutableDictionary *pegasusUtilities;
-	NSMutableDictionary *transparentUtilities;
-	NSMutableDictionary *toolboxUtilities;
-	NSMutableDictionary *brushUtilities;
-	NSMutableDictionary *optionsUtilities;
-	NSMutableDictionary *textureUtilities;
-	NSMutableDictionary *infoUtilities;
-	NSMutableDictionary *statusUtilities;
+    NSMutableDictionary<NSNumber*,PegasusUtility*> *pegasusUtilities;
+	NSMutableDictionary<NSNumber*,TransparentUtility*> *transparentUtilities;
+	NSMutableDictionary<NSNumber*,ToolboxUtility*> *toolboxUtilities;
+	NSMutableDictionary<NSNumber*,BrushUtility*> *brushUtilities;
+	NSMutableDictionary<NSNumber*,OptionsUtility*> *optionsUtilities;
+	NSMutableDictionary<NSNumber*,TextureUtility*> *textureUtilities;
+	NSMutableDictionary<NSNumber*,InfoUtility*> *infoUtilities;
+	NSMutableDictionary<NSNumber*,StatusUtility*> *statusUtilities;
 	
 	// Various choices
 	int optionsChoice;
@@ -68,15 +77,15 @@
 				The document that the utility is requested for.
 	@result		Returns an instance of PegasusUtility.
 */
-- (id)pegasusUtilityFor:(id)doc;
-- (void)setPegasusUtility:(id)util for:(id)doc;
+- (PegasusUtility*)pegasusUtilityFor:(id)doc;
+- (void)setPegasusUtility:(PegasusUtility*)util for:(id)doc;
 
 /*!
 	@method		transparentUtilityFor:
 	@discussion	Returns the transparent colour utility.
 	@result		Returns an instance of TransparentUtility.
 */
-- (id)transparentUtility;
+- (TransparentUtility*)transparentUtility;
 
 /*!
 	@method		toolboxUtilityFor:
@@ -85,8 +94,8 @@
 				The document that the utility is requested for.
 	@result		Returns an instance of ToolboxUtility.
 */
-- (id)toolboxUtilityFor:(id)doc;
-- (void)setToolboxUtility:(id)util for:(id)doc;
+- (ToolboxUtility*)toolboxUtilityFor:(id)doc;
+- (void)setToolboxUtility:(ToolboxUtility*)util for:(id)doc;
 
 /*!
 	@method		brushUtilityFor:
@@ -95,8 +104,8 @@
 				The document that the utility is requested for.
 	@result		Returns an instance of BrushUtility.
 */
-- (id)brushUtilityFor:(id)doc;
-- (void)setBrushUtility:(id)util for:(id)doc;
+- (BrushUtility*)brushUtilityFor:(id)doc;
+- (void)setBrushUtility:(BrushUtility*)util for:(id)doc;
 
 
 /*!
@@ -106,8 +115,8 @@
 				The document that the utility is requested for.
 	@result		Returns an instance of TextureUtility.
 */
-- (id)textureUtilityFor:(id)doc;
-- (void)setTextureUtility:(id)util for:(id)doc;
+- (TextureUtility*)textureUtilityFor:(id)doc;
+- (void)setTextureUtility:(TextureUtility*)util for:(id)doc;
 
 /*!
 	@method		optionsUtilityFor:
@@ -116,8 +125,8 @@
 				The document that the utility is requested for.
 	@result		Returns an instance of OptionsUtility.
 */
-- (id)optionsUtilityFor:(id)doc;
-- (void)setOptionsUtility:(id)util for:(id)doc;
+- (OptionsUtility*)optionsUtilityFor:(id)doc;
+- (void)setOptionsUtility:(OptionsUtility*)util for:(id)doc;
 
 /*!
 	@method		infoUtilityFor:
@@ -126,8 +135,8 @@
 				The document that the utility is requested for.	
 	@result		Returns an instance of InfoUtility.
 */
-- (id)infoUtilityFor:(id)doc;
-- (void)setInfoUtility:(id)util for:(id)doc;
+- (InfoUtility*)infoUtilityFor:(id)doc;
+- (void)setInfoUtility:(InfoUtility*)util for:(id)doc;
 
 /*!
 	@method		statusUtilityFor:
@@ -136,8 +145,8 @@
 				The document that the utility is requested for.	
 	@result		Returns an instance of StatusUtility.
 */
-- (id)statusUtilityFor:(id)doc;
-- (void)setStatusUtility:(id)util for:(id)doc;
+- (StatusUtility*)statusUtilityFor:(id)doc;
+- (void)setStatusUtility:(StatusUtility*)util for:(id)doc;
 
 
 @end

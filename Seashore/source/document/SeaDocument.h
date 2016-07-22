@@ -1,5 +1,4 @@
-#import <AppKit/NSDocument.h>
-#import <AppKit/NSWindow.h>
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractExporter.h"
 
@@ -14,6 +13,9 @@
 @class PluginData;
 @class TextureExporter;
 @class WarningsUtility;
+@class LayerDataSource;
+@class SeaWarning;
+@class SeaView;
 
 /*!
 	@class		SeaDocument
@@ -35,16 +37,16 @@
 	IBOutlet SeaHelpers *helpers;
 	
 	// An outlet to the warnings utility for this document
-	IBOutlet id warnings;
+	IBOutlet SeaWarning *warnings;
 	
 	// The plug-in data used by this document
 	IBOutlet PluginData *pluginData;
 	
 	// An outlet to the view associated with this document
-	IBOutlet id view;
+	IBOutlet NSScrollView *view;
 	
 	// An outlet to the window associated with this document
-	IBOutlet id docWindow;
+	IBOutlet NSWindow *docWindow;
 	
 	// The exporters
 	IBOutlet GIFExporter *gifExporter;
@@ -61,19 +63,19 @@
 	NSArray<id<AbstractExporter>> *exporters;
 	
 	// The view to attach to the save panel
-	IBOutlet id accessoryView;
+	IBOutlet NSView *accessoryView;
 	
 	// A pop-up menu of all possible exporters
 	IBOutlet NSPopUpButton *exportersPopUp;
 	
 	// The button showing the options for the exporter
-	IBOutlet id optionsButton;
+	IBOutlet NSButton *optionsButton;
 	
 	// A summary of the export options
 	IBOutlet id optionsSummary;
 	
 	// The Layer Data Source
-	IBOutlet id dataSource;
+	IBOutlet LayerDataSource *dataSource;
 	
 	// The unique ID for layer
 	int uniqueLayerID;
@@ -114,7 +116,7 @@
  */
 @property (setter = changeMeasuringStyle:) int measureStyle;
 
-// The whiteboard that represents this document
+/// The whiteboard that represents this document
 @property (strong) SeaWhiteboard *whiteboard;
 // CREATION METHODS
 
@@ -182,7 +184,7 @@
 	@discussion	Returns the contents of the document.
 	@result		Returns an instance of SeaContent.
 */
-- (SeaContent*)contents;
+- (__kindof SeaContent*)contents;
 
 /*!
 	@method		selection
@@ -566,6 +568,6 @@
 	@method		dataSource
 	@result		Returns the data source used by the layers view
 */
-- (id) dataSource;
+- (LayerDataSource*) dataSource;
 
 @end

@@ -26,8 +26,6 @@
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>org.gimp.xcf</string>
-				<string>com.gimp.xcf</string>
-				<string>net.sourceforge.seashore.xcf</string>
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>

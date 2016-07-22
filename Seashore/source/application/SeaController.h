@@ -98,6 +98,15 @@
 */
 + (SeaWarning *)seaWarning;
 
+#if __has_feature(objc_class_property)
+@property (class, readonly, strong) UtilitiesManager *utilitiesManager;
+@property (class, readonly, strong) SeaPlugins *seaPlugins;
+@property (class, readonly, strong) SeaPrefs *seaPrefs;
+@property (class, readonly, strong) SeaProxy *seaProxy;
+@property (class, readonly, strong) SeaHelp *seaHelp;
+@property (class, readonly, strong) SeaWarning *seaWarning;
+#endif
+
 /*!
 	@method		revert:
 	@discussion	Implements a custom revert method that closes the current

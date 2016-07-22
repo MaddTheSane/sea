@@ -22,7 +22,7 @@
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id toolboxUtility = (ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document];
+	ToolboxUtility *toolboxUtility = [[SeaController utilitiesManager] toolboxUtilityFor:document];
 	NSColor *color = [self getColor];
 	
 	if (color != NULL) {

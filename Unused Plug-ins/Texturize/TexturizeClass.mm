@@ -144,10 +144,12 @@
 	[panel orderOut:self];
 	success = YES;
 	
-	[gUserDefaults setFloat:overlap forKey:@"Texturize.overlap"];
-	[gUserDefaults setFloat:width forKey:@"Texturize.width"];
-	[gUserDefaults setFloat:height forKey:@"Texturize.height"];
-	[gUserDefaults setBool:tileable forKey:@"Texturize.tileable"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	[defaults setFloat:overlap forKey:@"Texturize.overlap"];
+	[defaults setFloat:width forKey:@"Texturize.width"];
+	[defaults setFloat:height forKey:@"Texturize.height"];
+	[defaults setBool:tileable forKey:@"Texturize.tileable"];
 }
 
 - (void)reapply

@@ -101,21 +101,19 @@ static SeaController *seaController;
 
 - (IBAction)revert:(id)sender
 {
-	id newDocument;
-	NSString *filename = [[gCurrentDocument fileURL] path];
+	NSURL *fileURL = [gCurrentDocument fileURL];
 	NSRect frame = [[[gCurrentDocument windowControllers][0] window] frame];
-	id window;
 	
 	// Question whether to proceed with reverting
 	if (NSRunAlertPanel(LOCALSTR(@"revert title", @"Revert"), LOCALSTR(@"revert body", @"\"%@\" has been edited. Are you sure you want to undo changes?"), LOCALSTR(@"revert", @"Revert"), LOCALSTR(@"cancel", @"Cancel"), NULL, [gCurrentDocument displayName]) == NSAlertDefaultReturn) {
 		
 		// Close the document and reopen it
 		[gCurrentDocument close];
-		newDocument = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfFile:filename display:NO];
-		window = [[newDocument windowControllers][0] window];
-		[window setFrame:frame display:YES];
-		[window makeKeyAndOrderFront:self];		
-
+		[[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:fileURL display:NO completionHandler:^(NSDocument * _Nullable document, BOOL documentWasAlreadyOpen, NSError * _Nullable error) {
+			NSWindow *window = [[document windowControllers][0] window];
+			[window setFrame:frame display:YES];
+			[window makeKeyAndOrderFront:self];
+		}];
 	}
 }
 
@@ -150,7 +148,7 @@ static SeaController *seaController;
 	
 	// Copy the contents on disk and open so the last saved version can be edited
 	if ([fm copyItemAtPath:old_path toPath:new_path error:NULL]) {
-		originalDocument = [(SeaDocumentController *)[NSDocumentController sharedDocumentController] openNonCurrentFile:new_path];
+		originalDocument = [[SeaDocumentController sharedDocumentController] openNonCurrentFile:new_path];
 	}
 	else {
 		NSRunAlertPanel(LOCALSTR(@"locked title", @"Operation Failed"), LOCALSTR(@"locked body", @"The \"Compare to Last Saved\" operation failed. The most likely cause for this is that the disk the original is kept on is full or read-only."), LOCALSTR(@"ok", @"OK"), NULL, NULL, [gCurrentDocument displayName]);
@@ -164,11 +162,10 @@ static SeaController *seaController;
 - (void)colorSyncChanged:(NSNotification *)notification
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 	
-	// Tell all documents to update there colour worlds
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] whiteboard] updateColorWorld];
+	// Tell all documents to update their colour worlds
+	for (SeaDocument *doc in documents) {
+		[[doc whiteboard] updateColorWorld];
 	}
 }
 

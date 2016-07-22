@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -27,6 +28,8 @@ enum {
 	kPositionType
 };
 
+@class SeaDocument;
+
 /*!
 	@class		SeaView
 	@abstract	Responsible for drawing the whiteboard's image to screen.
@@ -35,11 +38,10 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli		
 */
-
 @interface SeaView : NSView {
 	
 	// The document associated with this view
-	id document;
+	SeaDocument *document;
 	
 	// The cursors manager for this view
 	id cursorsManager;
@@ -113,10 +115,10 @@ enum {
 	int eyedropToolMemory;
 	
 	// Values to tell when to trigger scroll
-	float scrollZoom, lastTrigger;
+	CGFloat scrollZoom, lastTrigger;
 
 	// The amount we've magnified it the time
-	float magnifyFactor;
+	CGFloat magnifyFactor;
 }
 
 /*!

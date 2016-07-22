@@ -9,7 +9,8 @@
 #import "ImageToolbarItem.h"
 #import "WindowBackColorWell.h"
 #import "SeaHelpers.h"
-#import <IOKit/graphics/IOGraphicsLib.h>
+#include <IOKit/graphics/IOGraphicsLib.h>
+#import "StatusUtility.h"
 
 enum {
 	kIgnoreResolution,

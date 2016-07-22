@@ -73,7 +73,7 @@ DQ
                             <action selector="cancel:" target="-2" id="25"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
                         <rect key="frame" x="305" y="86" width="42" height="14"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="50%" id="57">
                             <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="percent" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" id="p9J-7H-Dez">
@@ -97,7 +97,7 @@ DQ
                             <binding destination="-2" name="value" keyPath="self.height" id="TCZ-uL-rLu"/>
                         </connections>
                     </slider>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="36">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="36">
                         <rect key="frame" x="305" y="131" width="42" height="14"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="200%" id="60">
                             <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="percent" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" id="0To-kb-RBn">
@@ -129,7 +129,7 @@ DQ
                             <binding destination="-2" name="value" keyPath="self.width" id="FbE-JD-YYf"/>
                         </connections>
                     </slider>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="39">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39">
                         <rect key="frame" x="305" y="176" width="42" height="14"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="38" id="T5U-sk-hUk"/>

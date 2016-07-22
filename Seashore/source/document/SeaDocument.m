@@ -139,7 +139,7 @@ enum {
 	specialStart = kOpenStart;
 	
 	// Set the measure style
-	measureStyle = [(SeaPrefs *)[SeaController seaPrefs] newUnits];
+	measureStyle = [[SeaController seaPrefs] newUnits];
 	
 	// Do required work
 	if ([self readFromFile:path ofType:type]) {
@@ -185,7 +185,7 @@ enum {
 
 - (void)awakeFromNib
 {
-	id seaView;
+	SeaView *seaView;
 #ifdef USE_CENTERING_CLIPVIEW
 	id newClipView;
 #endif
@@ -217,7 +217,7 @@ enum {
 		[docWindow setFrame:[self standardFrame] display:YES];
 		
 		// Finally, if the doc has any warnings we are ready for them
-		[(SeaWarning *)[SeaController seaWarning] triggerQueue: self];
+		[[SeaController seaWarning] triggerQueue: self];
 	}
 	
 	[docWindow setAcceptsMouseMovedEvents:YES];
@@ -373,7 +373,7 @@ enum {
 	op = [NSPrintOperation printOperationWithView:printView printInfo:[self printInfo]];
 	
 	// Insist the view be scaled to fit
-	[op setShowPanels:showPanels];
+	[op setShowsPrintPanel:showPanels];
     [self runModalPrintOperation:op delegate:NULL didRunSelector:NULL contextInfo:NULL];
 }
 
@@ -445,11 +445,11 @@ enum {
 {
 	NSPoint point;
 	
-	[(UtilitiesManager *)[SeaController utilitiesManager] activate:self];
+	[[SeaController utilitiesManager] activate:self];
 	if ([docWindow attachedSheet])
-		[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:NO];
+		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:NO];
 	else
-		[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:YES];
+		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:YES];
 	point = [docWindow mouseLocationOutsideOfEventStream];
 	[[self docView] updateRulerMarkings:point andStationary:NSMakePoint(-256e6, -256e6)];
 	[(OptionsUtility *)[(UtilitiesManager *)[SeaController utilitiesManager] optionsUtilityFor:self] viewNeedsDisplay];
@@ -461,12 +461,12 @@ enum {
 	
 	[helpers endLineDrawing];
 	if ([docWindow attachedSheet])
-		[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:NO];
+		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:NO];
 	else
-		[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:YES];
+		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:YES];
 	point = NSMakePoint(-256e6, -256e6);
 	[[self docView] updateRulerMarkings:point andStationary:point];
-	[(OptionsUtility *)[(UtilitiesManager *)[SeaController utilitiesManager] optionsUtilityFor:self] viewNeedsDisplay];
+	[[[SeaController utilitiesManager] optionsUtilityFor:self] viewNeedsDisplay];
 	[gColorPanel orderOut:self];
 }
 

@@ -276,7 +276,7 @@
 		brushWidth = [(SeaBrush *)curBrush fakeWidth];
 		brushHeight = [(SeaBrush *)curBrush fakeHeight];
 		activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
-		brushSpacing = (double)[(BrushUtility*)[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
+		brushSpacing = (double)[[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
 		spp = [[document contents] spp];
 		bigRect = IntMakeRect(0, 0, 0, 0);
 		lastDate = [NSDate date];

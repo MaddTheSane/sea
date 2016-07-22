@@ -56,19 +56,21 @@
 		newest_version = [dict[@"current version"] intValue];
 		if (newest_version > installed_version) {
 			download_url = [NSURL URLWithString:dict[@"url"]];
-			if (NSRunAlertPanel(LOCALSTR(@"download available title", @"Update available"), LOCALSTR(@"download available body", @"An updated version of Seashore is now availble for download."), LOCALSTR(@"download now", @"Download now"), LOCALSTR(@"download later", @"Download later"), NULL) == NSAlertDefaultReturn) {
+			if (NSRunAlertPanel(LOCALSTR(@"download available title", @"Update available"), @"%@", LOCALSTR(@"download now", @"Download now"), LOCALSTR(@"download later", @"Download later"), NULL, LOCALSTR(@"download available body", @"An updated version of Seashore is now availble for download.")) == NSAlertDefaultReturn) {
 				[[NSWorkspace sharedWorkspace] openURL:download_url];
 			}
 		}
 		else {
-			if (adviseFailure)
-				NSRunAlertPanel(LOCALSTR(@"up-to-date title", @"Seashore up-to-date"), LOCALSTR(@"up-to-date body", @"Seashore is up-to-date."), LOCALSTR(@"ok", @"OK"), NULL, NULL);				
+			if (adviseFailure) {
+				NSRunAlertPanel(LOCALSTR(@"up-to-date title", @"Seashore up-to-date"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"up-to-date body", @"Seashore is up-to-date."));
+			}
 		}
 	}
 	else {
-		if (adviseFailure)
-			NSRunAlertPanel(LOCALSTR(@"download error title", @"Download error"), LOCALSTR(@"download error body", @"The file required to check if Seashore cannot be downloaded from the Internet. Please check your Internet connection and try again."), LOCALSTR(@"ok", @"OK"), NULL, NULL);
-	}	
+		if (adviseFailure) {
+			NSRunAlertPanel(LOCALSTR(@"download error title", @"Download error"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"download error body", @"The file required to check if Seashore cannot be downloaded from the Internet. Please check your Internet connection and try again."));
+		}
+	}
 }
 
 - (IBAction)checkForUpdate:(id)sender

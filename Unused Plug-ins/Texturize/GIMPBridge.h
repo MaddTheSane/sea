@@ -16,8 +16,12 @@ typedef double gdouble;
 typedef void *gpointer;
 typedef unsigned long gulong;
 
+#ifndef MAX
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
+#endif
+#ifndef MIN
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
+#endif
 #define g_warning(...)
 #define g_message(...)
 #define gimp_progress_init(...)

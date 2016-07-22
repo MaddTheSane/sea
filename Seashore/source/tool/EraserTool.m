@@ -208,7 +208,7 @@
 		brushHeight = [(SeaBrush *)curBrush fakeHeight];
 		activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
 		boptions = [[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:kBrushTool];
-		brushSpacing = (double)[(SeaBrush*)[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
+		brushSpacing = (double)[[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
 		fade = [options mimicBrush] && [boptions fade];
 		fadeValue = [boptions fadeValue];
 		spp = [[document contents] spp];
