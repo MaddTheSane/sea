@@ -38,7 +38,7 @@ typedef struct {
 				path = [theURL path];
 				
 				// Open the pattern file
-				file = fopen([path fileSystemRepresentation], "rb");
+				file = fopen([theURL fileSystemRepresentation], "rb");
 				if (file == NULL)
 					continue;
 				

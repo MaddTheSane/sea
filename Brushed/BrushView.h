@@ -12,10 +12,8 @@
 
 @interface BrushView : NSView
 {
-
-	// The document associated with this view
-	IBOutlet BrushDocument *document;
-
+	/// The document associated with this view
+	IBOutlet BrushDocument *__weak document;
 }
 
 @end

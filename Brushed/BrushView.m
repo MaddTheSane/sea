@@ -17,11 +17,9 @@
 	// Center and draw the image of the brush
 	if (brushImage != NULL) {
 		if (([brushImage size].width > [self bounds].size.width - 20.0) && ([brushImage size].height * ([self bounds].size.width - 20.0) / [brushImage size].width <= [self bounds].size.height)) {
-			[brushImage setScalesWhenResized:YES];
 			[brushImage setSize:NSMakeSize([self bounds].size.width - 20.0, [brushImage size].height * ([self bounds].size.width - 20.0) / [brushImage size].width)];
 		}
 		else if (([brushImage size].height > [self bounds].size.height - 20.0) && ([brushImage size].width * ([self bounds].size.height - 20.0) / [brushImage size].height <= [self bounds].size.width)) {
-			[brushImage setScalesWhenResized:YES];
 			[brushImage setSize:NSMakeSize([brushImage size].width * ([self bounds].size.height - 20.0) / [brushImage size].height, [self bounds].size.height - 20.0)];
 		}
 		where.x = [self bounds].size.width / 2 - [brushImage size].width / 2;

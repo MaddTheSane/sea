@@ -76,7 +76,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				A8F100DB09C126A6003F15A3 /* Info.plist */,
 			);
 			name = Pat2Tex;
 			sourceTree = "<group>";
@@ -95,6 +94,7 @@
 			children = (
 				A8B6866D047A42C700A80207 /* Credits.rtf */,
 				551E570918D01CE300E4CDAF /* MainMenu.xib */,
+				A8F100DB09C126A6003F15A3 /* Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -148,7 +148,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0730;
 			};
 			buildConfigurationList = A825847E09BD8F560024A3CC /* Build configuration list for PBXProject "Pat2PNG" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -234,6 +234,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -245,7 +246,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -279,7 +280,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -294,6 +295,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited) ";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.pat2png;
 				PRODUCT_NAME = Pat2PNG;
 				WRAPPER_EXTENSION = app;
 			};
@@ -307,6 +309,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited) ";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.pat2png;
 				PRODUCT_NAME = Pat2PNG;
 				WRAPPER_EXTENSION = app;
 			};

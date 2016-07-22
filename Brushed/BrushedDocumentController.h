@@ -15,8 +15,6 @@
 #import "Globals.h"
 
 @interface BrushedDocumentController : NSDocumentController
-{
-}
 
 // Allow customization of the open panel
 - (NSInteger)runModalOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)extensions;

@@ -12,8 +12,6 @@
 #import "Globals.h"
 
 @interface MainController : NSObject
-{
-}
 
 // Run the conversion process
 - (IBAction)run:(id)sender;
