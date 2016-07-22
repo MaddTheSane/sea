@@ -165,7 +165,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	} else if ([itemIdent isEqual: BackwardToolbarItemIdentifier]) {
         return [[ImageToolbarItem alloc] initWithItemIdentifier: BackwardToolbarItemIdentifier label: LOCALSTR(@"backward", @"Backward") imageNamed: @"backward-tb" toolTip: LOCALSTR(@"backward tooltip", @"Move the current layer backward") target: [[SeaController utilitiesManager] pegasusUtilityFor:document]  selector: @selector(backward:)];
 	} else if ([itemIdent isEqual: DeleteLayerToolbarItemIdentifier]) {
-        return [[ImageToolbarItem alloc] initWithItemIdentifier: DeleteLayerToolbarItemIdentifier label: LOCALSTR(@"delete", @"Delete") imageNamed: @"delete-tb" toolTip: LOCALSTR(@"delete tooltip", @"Delete the current layer") target: [[SeaController utilitiesManager] pegasusUtilityFor:document]  selector: @selector(deleteLayer:)];
+        return [[ImageToolbarItem alloc] initWithItemIdentifier: DeleteLayerToolbarItemIdentifier label: LOCALSTR(@"delete", @"Delete") image: [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kToolbarDeleteIcon)] toolTip: LOCALSTR(@"delete tooltip", @"Delete the current layer") target: [[SeaController utilitiesManager] pegasusUtilityFor:document]  selector: @selector(deleteLayer:)];
 	} else if ([itemIdent isEqual: ZoomInToolbarItemIdentifier]) {
         return [[ImageToolbarItem alloc] initWithItemIdentifier: ZoomInToolbarItemIdentifier label: LOCALSTR(@"zoom in", @"Zoom In") imageNamed: @"zoomIn" toolTip: LOCALSTR(@"zoom in tooltip", @"Zoom in on the current view") target: [document docView] selector: @selector(zoomIn:)];
 	} else if ([itemIdent isEqual: ZoomOutToolbarItemIdentifier]) {
