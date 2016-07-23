@@ -9,6 +9,7 @@
 #import "SeaView.h"
 
 @implementation PositionOptions
+@synthesize toolFunction = function;
 
 - (void)awakeFromNib
 {
@@ -24,13 +25,9 @@
 
 - (BOOL)canAnchor
 {
-	return [canAnchorCheckbox state];
+	return [canAnchorCheckbox state] == NSOnState;
 }
 
-- (int)toolFunction
-{
-	return function;
-}
 - (void)setFunctionFromIndex:(AbstractModifiers)index
 {
 	switch (index) {

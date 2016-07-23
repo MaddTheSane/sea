@@ -20,11 +20,11 @@
 @property (readonly) BOOL pencilIsErasing;
 
 /*!
-	@method		pencilSize
+	@property	pencilSize
 	@discussion	Returns the current pencil size.
 	@result		Returns an integer representing the current pencil size.
 */
-- (int)pencilSize;
+@property (readonly) int pencilSize;
 
 /*!
 	@method		useTextures

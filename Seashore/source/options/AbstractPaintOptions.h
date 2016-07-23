@@ -11,9 +11,7 @@
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface AbstractPaintOptions : AbstractOptions {
-
-}
+@interface AbstractPaintOptions : AbstractOptions
 
 /*!
 	@method		toggleTextures:

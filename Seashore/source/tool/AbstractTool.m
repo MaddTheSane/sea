@@ -11,6 +11,7 @@
 
 @implementation AbstractTool
 @synthesize intermediate;
+@synthesize options;
 
 - (SeaToolsDefines)toolId
 {
@@ -24,12 +25,6 @@
 		intermediate = NO;
 	}
 	return self;
-}
-
-
-- (void)setOptions:(id)newOptions
-{
-	options = newOptions;
 }
 
 - (BOOL)acceptsLineDraws

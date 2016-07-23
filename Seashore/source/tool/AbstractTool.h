@@ -2,6 +2,7 @@
 #import "SeaTools.h"
 
 @class SeaDocument;
+@class AbstractOptions;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,20 +20,23 @@ NS_ASSUME_NONNULL_BEGIN
 	IBOutlet SeaDocument *document;
 	
 	// The options associated with this tool
-	__unsafe_unretained id options;
+	__unsafe_unretained __kindof AbstractOptions *options;
 	
 	// Is the selection being made
 	BOOL intermediate;
 	
 }
 
+/// The options associated with this tool
+@property (unsafe_unretained) __kindof AbstractOptions *options;
+
 /*!
-	@method		toolId
+	@property	toolId
 	@discussion	For determining the type of a tool based on the object.
 				This method must be defined by subclasses.
 	@result		Returns an element of the k...Tool enum
 */
-- (SeaToolsDefines)toolId;
+@property (readonly) SeaToolsDefines toolId;
 
 /*!
 	@method		setOptions:
@@ -40,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		newOptions
 				The options to set.
 */
-- (void)setOptions:(id)newOptions;
+- (void)setOptions:(__kindof AbstractOptions*)newOptions;
 
 /*!
 	@property	acceptsLineDraws

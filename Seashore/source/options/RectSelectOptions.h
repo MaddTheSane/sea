@@ -21,7 +21,6 @@
 
 	// The AspectRatio instance linked to this options panel
 	IBOutlet AspectRatio *aspectRatio;
-		
 }
 
 /*!
@@ -31,12 +30,12 @@
 - (void)awakeFromNib;
 
 /*!
-	@method		radius
+	@property	radius
 	@discussion	Returns the curve rdius to be used with the rounded rectangle.
 	@result		Returns an integer indicating the curve radius to be used with
 				the rounded rectangle.
 */
-- (int)radius;
+@property (readonly) int radius;
 
 /*!
 	@method		update:

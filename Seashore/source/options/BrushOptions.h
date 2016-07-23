@@ -9,23 +9,21 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface BrushOptions : AbstractPaintOptions {
-	
 	// A checkbox indicating whether to fade
-	IBOutlet id fadeCheckbox;
+	IBOutlet NSButton *fadeCheckbox;
 	
 	// A slider indicating the rate of fading
-	IBOutlet id fadeSlider;
+	IBOutlet NSSlider *fadeSlider;
 	
 	// A checkbox indicating whether to listen to pressure information
-	IBOutlet id pressureCheckbox;
+	IBOutlet NSButton *pressureCheckbox;
 	
 	// A popup menu indicating pressure style
-	IBOutlet id pressurePopup;
+	IBOutlet NSPopUpButton *pressurePopup;
 	
 	// A checkbox indicating whether to scale
-	IBOutlet id scaleCheckbox;
+	IBOutlet NSButton *scaleCheckbox;
 	
 	// A boolean indicating if the user has been warned about the Mac OS 10.4 bug
 	BOOL warnedUser;
@@ -49,25 +47,25 @@
 - (IBAction)update:(id)sender;
 
 /*!
-	@method		fade
+	@property	fade
 	@discussion	Returns whether the brush should fade with use.
 	@result		Returns YES if the brush should fade with use, NO otherwise.
 */
-- (BOOL)fade;
+@property (readonly) BOOL fade;
 
 /*!
-	@method		fadeValue
+	@property	fadeValue
 	@discussion	Returns the rate of fading.
 	@result		Returns an integer representing the rate of fading.
 */
-- (int)fadeValue;
+@property (readonly) int fadeValue;
 
 /*!
-	@method		fade
+	@property	pressureSensitive
 	@discussion	Returns whether the brush is pressure sensitive.
 	@result		Returns YES if the brush is pressure sensitive, NO otherwise.
 */
-- (BOOL)pressureSensitive;
+@property (readonly) BOOL pressureSensitive;
 
 /*!
 	@method		pressureValue
@@ -80,27 +78,27 @@
 - (int)pressureValue:(NSEvent *)event;
 
 /*!
-	@method		scale
+	@property	scale
 	@discussion	Returns whether the brush should be scaled with pressure.
 	@result		Returns YES if the brush should scaled, NO otherwise.
 */
-- (BOOL)scale;
+@property (readonly) BOOL scale;
 
 /*!
-	@method		useTextures
+	@property	useTextures
 	@discussion	Returns whether or not the tool should use textures.
 	@result		Returns YES if the tool should use textures, NO if the tool
 				should use the foreground colour.
 */
-- (BOOL)useTextures;
+@property (readonly) BOOL useTextures;
 
 /*!
-	@method		brushIsErasing
+	@property	brushIsErasing
 	@discussion	Returns whether or not the brush is erasing.
 	@result		Returns YES if the brush is erasing, NO if the brush is using
 				its normal operation.
 */
-- (BOOL)brushIsErasing;
+@property (readonly) BOOL brushIsErasing;
 
 /*!
 	@method		updateModifiers:

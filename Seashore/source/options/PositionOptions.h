@@ -13,11 +13,16 @@
 				The tool anchors the floating layer.
 */
 
-enum {
-	kMovingLayer = 0,
-	kScalingLayer = 1,
-	kRotatingLayer = 2,
-	kAnchoringLayer = 3
+typedef NS_ENUM(int, SeaPositionOptions) {
+	SeaPositionOptionMoving = 0,
+	SeaPositionOptionScaling = 1,
+	SeaPositionOptionRotating = 2,
+	SeaPositionOptionAnchoring = 3,
+	
+	kMovingLayer = SeaPositionOptionMoving,
+	kScalingLayer = SeaPositionOptionScaling,
+	kRotatingLayer = SeaPositionOptionRotating,
+	kAnchoringLayer = SeaPositionOptionAnchoring
 };
 
 
@@ -29,14 +34,13 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface PositionOptions : AbstractScaleOptions {
 
 	// Checkbox specifying whether the position tool can anchor floating selections
-	IBOutlet id canAnchorCheckbox;
+	IBOutlet NSButton *canAnchorCheckbox;
 	
 	// Function of the tool
-	int function;
+	SeaPositionOptions function;
 }
 
 /*!
@@ -46,12 +50,12 @@ enum {
 - (void)awakeFromNib;
 
 /*!
-	@method		canAnchor
+	@property	canAnchor
 	@discussion	Returns whether the position tool can anchor floating selections.
 	@result		Returns YES if the position tool can anchor floating selections,
 				NO otherwise.
 */
-- (BOOL)canAnchor;
+@property (readonly) BOOL canAnchor;
 
 /*!
 	@method		setFunctionFromIndex:
@@ -62,11 +66,11 @@ enum {
 - (void)setFunctionFromIndex:(AbstractModifiers)index;
 
 /*!
-	@method		toolFunction
+	@property	toolFunction
 	@discussion	For figuring out what the tool actually does. It changes depending on the appropriate modifiers or the popup menu.
 	@result		One of the elements from the k...Layer enum.
 */
-- (int)toolFunction;
+@property (readonly) SeaPositionOptions toolFunction;
 
 /*!
 	@method		shutdown

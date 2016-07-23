@@ -13,13 +13,13 @@
 @interface BucketOptions : AbstractPaintOptions {
 	
 	// A slider indicating the tolerance of the bucket
-	IBOutlet id toleranceSlider;
+	IBOutlet NSSlider *toleranceSlider;
 	
 	// A label displaying the tolerance of the bucket
-	IBOutlet id toleranceLabel;
+	IBOutlet NSTextField *toleranceLabel;
 
 	// A slider for the density of the wand sampling
-	IBOutlet id intervalsSlider;
+	IBOutlet NSSlider *intervalsSlider;
 }
 
 /*!

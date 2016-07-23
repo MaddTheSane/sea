@@ -10,7 +10,6 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface PolygonLassoOptions : AbstractSelectOptions {
-}
+@interface PolygonLassoOptions : AbstractSelectOptions
 
 @end

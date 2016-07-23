@@ -10,7 +10,6 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface LassoOptions : AbstractSelectOptions {
-}
+@interface LassoOptions : AbstractSelectOptions
 
 @end

@@ -16,6 +16,7 @@ enum {
 };
 
 @implementation BrushOptions
+@synthesize brushIsErasing = isErasing;
 
 - (void)awakeFromNib
 {
@@ -125,17 +126,12 @@ enum {
 
 - (BOOL)scale
 {
-	return [scaleCheckbox state];
+	return [scaleCheckbox state] == NSOnState;
 }
 
 - (BOOL)useTextures
 {
 	return [[SeaController seaPrefs] useTextures];
-}
-
-- (BOOL)brushIsErasing
-{
-	return isErasing;
 }
 
 - (void)updateModifiers:(NSEventModifierFlags)modifiers
