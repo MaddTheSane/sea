@@ -11,7 +11,7 @@
 
 @interface AbstractPanelUtility : NSObject {
 	// The window associated with this utility
-    IBOutlet id window;
+    IBOutlet NSWindow *window;
 	// The parent this is associated with
 	NSWindow *parentWin;
 }

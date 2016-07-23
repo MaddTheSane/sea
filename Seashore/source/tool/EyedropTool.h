@@ -12,17 +12,15 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface EyedropTool : AbstractTool {
-
-}
+@interface EyedropTool : AbstractTool
 
 /*!
-	@method		sampleSize
+	@property	sampleSize
 	@discussion	Returns the size of the sample square.
 	@result		Returns an integer indicating the size (in pixels) of the sample
 				square.
 */
-- (int)sampleSize;
+@property (readonly) int sampleSize;
 
 
 /*!
@@ -34,7 +32,7 @@
 	@param		event
 				The mouse up event.
 */
-- (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event;
+- (void)mouseUpAt:(IntPoint)where withEvent:(nonnull NSEvent *)event;
 
 /*!
 	@method		getColor
@@ -44,6 +42,6 @@
 				be used if the colour sampling tool was at the current mouse
 				location.
 */
-- (NSColor *)getColor;
+- (nullable NSColor *)getColor;
 
 @end

@@ -15,6 +15,9 @@ enum {
 	kMeasureMillimeters = 2
 };
 
+@class SeaDocument;
+@class LayerControlView;
+
 /*!
 	@class		InfoUtility
 	@abstract	Displays information about the cursor position and the pixel
@@ -28,31 +31,31 @@ enum {
 @interface InfoUtility : NSObject {
 	
 	// The document which is the focus of this utility
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// Displays the red, green, blue and alpha value of the focused pixel
-	IBOutlet id redValue;
-    IBOutlet id greenValue;
-    IBOutlet id blueValue;
-    IBOutlet id alphaValue;
-	IBOutlet id colorWell;
+	IBOutlet NSTextField *redValue;
+    IBOutlet NSTextField *greenValue;
+    IBOutlet NSTextField *blueValue;
+    IBOutlet NSTextField *alphaValue;
+	IBOutlet NSColorWell *colorWell;
 	
 	// Displays the x and y co-ordinates of the cursor
-    IBOutlet id xValue;
-    IBOutlet id yValue;
-	IBOutlet id widthValue;
-    IBOutlet id heightValue;
-	IBOutlet id deltaX;
-	IBOutlet id deltaY;
-	IBOutlet id radiusValue;
+    IBOutlet NSTextField *xValue;
+    IBOutlet NSTextField *yValue;
+	IBOutlet NSTextField *widthValue;
+    IBOutlet NSTextField *heightValue;
+	IBOutlet NSTextField *deltaX;
+	IBOutlet NSTextField *deltaY;
+	IBOutlet NSTextField *radiusValue;
 
 	// The active measuring style
 	int measureStyle;
 
 	// The approprate views
-	IBOutlet id view;
-	IBOutlet id controlView;
-	IBOutlet id toggleButton;
+	IBOutlet NSView *view;
+	IBOutlet LayerControlView *controlView;
+	IBOutlet NSButton *toggleButton;
 
 }
 

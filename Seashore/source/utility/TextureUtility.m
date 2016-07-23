@@ -11,9 +11,7 @@
 #import "SeaDocument.h"
 #import "SeaTools.h"
 
-#ifdef TODO
-#warning Make textures lazy, that is if they are not in the active group they are not memory
-#endif
+//TODO: Make textures lazy, that is if they are not in the active group they are not memory
 
 @implementation TextureUtility
 @synthesize activeTextureIndex;

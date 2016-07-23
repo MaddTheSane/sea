@@ -14,6 +14,8 @@
 
 #define kTexturesPerRow 5
 
+@class TextureUtility;
+
 /*!
 	@class		TextureView
 	@abstract	Displays all available textures for easy selection by the user.
@@ -22,11 +24,10 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
 @interface TextureView : NSView {
 	
 	// The TextureUtility controlling this view
-	__weak id master;
+	__weak TextureUtility *master;
 	
 }
 
@@ -37,7 +38,7 @@
 				The texture utility that will control the contents of this view.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithMaster:(id)sender;
+- (instancetype)initWithMaster:(TextureUtility*)sender;
 
 /*!
 	@method		acceptsFirstMouse:

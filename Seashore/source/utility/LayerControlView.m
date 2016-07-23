@@ -2,6 +2,7 @@
 #import "StatusUtility.h"
 
 @implementation LayerControlView
+@synthesize hasResizeThumb = drawThumb;
 
 - (void)resetCursorRects
 {
@@ -96,11 +97,6 @@
 - (void)mouseUp:(NSEvent *)theEvent
 {
 	intermediate = NO;
-}
-
-- (void)setHasResizeThumb:(BOOL)hasThumb
-{
-	drawThumb = hasThumb;
 }
 
 @end

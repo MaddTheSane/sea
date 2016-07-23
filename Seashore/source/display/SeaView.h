@@ -29,6 +29,7 @@ enum {
 };
 
 @class SeaDocument;
+@class SeaCursors;
 
 /*!
 	@class		SeaView
@@ -44,10 +45,10 @@ enum {
 	SeaDocument *document;
 	
 	// The cursors manager for this view
-	id cursorsManager;
+	SeaCursors *cursorsManager;
 	
 	// The current zoom of the view
-	float zoom;
+	CGFloat zoom;
 
 	// Is this a line draw? (sent to mouseDragged methods)
 	BOOL lineDraw;
@@ -128,7 +129,7 @@ enum {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc;
+- (instancetype)initWithDocument:(SeaDocument*)doc;
 
 /*!
 	@method		changeSpecialFont:
@@ -215,12 +216,12 @@ enum {
 - (void)zoomOutFromPoint:(NSPoint)point;
 
 /*!
-	@method		zoom
+	@property	zoom
 	@discussion	Returns the current zoom level of the view.
 	@result		Returns a floating-point number representing the current zoom
 				level (1.0 = 100%).
 */
-- (float)zoom;
+@property (readonly) CGFloat zoom;
 
 /*!
 	@method		drawRect:

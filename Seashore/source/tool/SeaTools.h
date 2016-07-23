@@ -70,6 +70,23 @@ typedef NS_ENUM(int, SeaToolsDefines) {
 };
 
 @class AbstractTool;
+@class RectSelectTool;
+@class EllipseSelectTool;
+@class LassoTool;
+@class PolygonLassoTool;
+@class WandTool;
+@class PencilTool;
+@class BrushTool;
+@class BucketTool;
+@class TextTool;
+@class EyedropTool;
+@class EraserTool;
+@class PositionTool;
+@class GradientTool;
+@class SmudgeTool;
+@class CloneTool;
+@class CropTool;
+@class EffectTool;
 
 /*!
 	@class		SeaTools
@@ -83,23 +100,23 @@ typedef NS_ENUM(int, SeaToolsDefines) {
 @interface SeaTools : NSObject {
 
 	// Various objects representing various tools
-	IBOutlet id rectSelectTool;
-	IBOutlet id ellipseSelectTool;	
-	IBOutlet id lassoTool;
-	IBOutlet id polygonLassoTool;
-	IBOutlet id wandTool;
-	IBOutlet id pencilTool;
-	IBOutlet id brushTool;
-	IBOutlet id bucketTool;
-	IBOutlet id textTool;
-	IBOutlet id eyedropTool;
-	IBOutlet id eraserTool;
-    IBOutlet id positionTool;
-	IBOutlet id gradientTool;
-	IBOutlet id smudgeTool;
-	IBOutlet id cloneTool;
-	IBOutlet id cropTool;
-	IBOutlet id effectTool;
+	IBOutlet RectSelectTool *rectSelectTool;
+	IBOutlet EllipseSelectTool *ellipseSelectTool;
+	IBOutlet LassoTool *lassoTool;
+	IBOutlet PolygonLassoTool *polygonLassoTool;
+	IBOutlet WandTool *wandTool;
+	IBOutlet PencilTool *pencilTool;
+	IBOutlet BrushTool *brushTool;
+	IBOutlet BucketTool *bucketTool;
+	IBOutlet TextTool *textTool;
+	IBOutlet EyedropTool *eyedropTool;
+	IBOutlet EraserTool *eraserTool;
+    IBOutlet PositionTool *positionTool;
+	IBOutlet GradientTool *gradientTool;
+	IBOutlet SmudgeTool *smudgeTool;
+	IBOutlet CloneTool *cloneTool;
+	IBOutlet CropTool *cropTool;
+	IBOutlet EffectTool *effectTool;
 	//IBOutlet AbstractTool *zoomTool;
 	
 }
@@ -110,22 +127,22 @@ typedef NS_ENUM(int, SeaToolsDefines) {
 				utility.
 	@result		Returns an object that is a subclass of AbstractTool.
 */
-- (__kindof AbstractTool*)currentTool;
+- (nullable __kindof AbstractTool*)currentTool;
 
 /*!
 	@method		getTool:
 	@discussion	Given a tool type returns the corresponding tool.
 	@param		whichOne
 				The tool type for the tool you are seeking.
-	@result		Returns an object that is a subclass of AbstractTool.
+	@result		Returns an object that is a subclass of <code>AbstractTool</code>.
 */
-- (__kindof AbstractTool*)getTool:(SeaToolsDefines)whichOne;
+- (nullable __kindof AbstractTool*)getTool:(SeaToolsDefines)whichOne;
 
 /*!
 	@method		allTools
 	@discussion	This is purely for initialization to connect the options to the tools.
 	@result		Returns an array of AbstractTools.
 */
-- (NSArray<__kindof AbstractTool*> *)allTools;
+- (nonnull NSArray<__kindof AbstractTool*> *)allTools;
 
 @end

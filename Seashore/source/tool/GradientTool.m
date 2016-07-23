@@ -12,6 +12,8 @@
 #import "SeaView.h"
 
 @implementation GradientTool
+@synthesize start = startNSPoint;
+@synthesize current = tempNSPoint;
 
 - (SeaToolsDefines)toolId
 {
@@ -23,7 +25,6 @@
 	startPoint = where;
 	intermediate = YES;
 	startNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
-
 }
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
@@ -107,17 +108,6 @@
 {
 	tempNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 	[[document docView] setNeedsDisplay: YES];
-}
-
-
-- (NSPoint)start
-{
-	return startNSPoint;
-}
-
-- (NSPoint)current
-{
-	return tempNSPoint;
 }
 
 @end

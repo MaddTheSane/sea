@@ -20,7 +20,7 @@
 #import "WarningsUtility.h"
 #import "SeashoreKit.h"
 
-@interface ToolboxUtility () <NSFileManagerDelegate>
+@interface ToolboxUtility () <NSFileManagerDelegate, NSToolbarDelegate>
 
 @end
 
@@ -58,6 +58,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 @implementation ToolboxUtility
 @synthesize background;
+@synthesize foreground;
 
 - (instancetype)init
 {
@@ -246,10 +247,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[(StatusUtility *)[[SeaController utilitiesManager] statusUtilityFor:document] updateQuickColor];
 }
 
-- (id)colorView
-{
-	return colorSelectView;
-}
+@synthesize colorView = colorSelectView;
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
 {

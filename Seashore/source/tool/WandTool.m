@@ -10,6 +10,8 @@
 #import "SeaView.h"
 
 @implementation WandTool
+@synthesize start = startNSPoint;
+@synthesize current = currentNSPoint;
 
 - (SeaToolsDefines)toolId
 {
@@ -87,16 +89,6 @@
 
 	translating = NO;
 	scalingDir = kNoDir;
-}
-
-- (NSPoint)start
-{
-	return startNSPoint;
-}
-
--(NSPoint)current
-{
-	return currentNSPoint;
 }
 
 @end

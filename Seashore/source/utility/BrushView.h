@@ -12,6 +12,8 @@
 */
 #define kBrushesPerRow 5
 
+@class BrushUtility;
+
 /*!
 	@class		BrushView
 	@abstract	Displays all available brushes for easy selection by the user.
@@ -24,7 +26,7 @@
 @interface BrushView : NSView {
 	
 	// The BrushUtility controlling this view
-	id master;
+	__weak BrushUtility *master;
 	
 }
 
@@ -35,7 +37,7 @@
 				The brush utility that will control the contents of this view.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithMaster:(id)sender;
+- (instancetype)initWithMaster:(BrushUtility*)sender;
 
 /*!
 	@method		mouseDown:

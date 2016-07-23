@@ -12,10 +12,11 @@
 
 @class BannerView;
 @class SeaWindowContent;
+@class SeaDocument;
 
 @interface WarningsUtility : NSObject {
 	// The host for the utility
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// We need the content to show or hide the banner
 	IBOutlet SeaWindowContent *windowContent;
@@ -73,9 +74,9 @@
 - (void)keyTriggered;
 
 /*!
-	@method		activeWarningImportance
+	@property	activeWarningImportance
 	@discussion	This is used to figure out how important the current warning is.
 	@result		The importance of the current warning (an int).
 */
-- (int)activeWarningImportance;
+@property (readonly) int activeWarningImportance;
 @end

@@ -89,24 +89,24 @@
 - (IBAction)changeGroup:(id)sender;
 
 /*!
-	@method		spacing
+	@property	spacing
 	@discussion	Returns the spacing associated with the current brush.
 	@result		Returns an integer indicating the spacing associated with the
 				current brush.
 */
-- (int)spacing;
+@property (readonly) int spacing;
 
 /*!
-	@method		activeBrush
+	@property	activeBrush
 	@discussion	Returns the currently active brush.
 	@result		Returns an instance of SeaBrush representing the currently
 				active brush.
 */
-- (id)activeBrush;
+@property (readonly, retain) SeaBrush *activeBrush;
 
 /*!
 	@property	activeBrushIndex
-	@discussion	Returns the index of the currently active brush.
+	@discussion	The index of the currently active brush.
 	@result		Returns an integer representing the index of the currently
 				active brush.
 */

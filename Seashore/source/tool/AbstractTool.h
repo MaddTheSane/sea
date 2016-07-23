@@ -3,6 +3,8 @@
 
 @class SeaDocument;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
 	@class		AbstractTool
 	@abstract	Acts as a base class for all tools.
@@ -11,14 +13,13 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface AbstractTool : NSObject {
 
 	// The document associated with this tool
 	IBOutlet SeaDocument *document;
 	
 	// The options associated with this tool
-	id options;
+	__unsafe_unretained id options;
 	
 	// Is the selection being made
 	BOOL intermediate;
@@ -42,29 +43,29 @@
 - (void)setOptions:(id)newOptions;
 
 /*!
-	@method		acceptsLineDraws
+	@property	acceptsLineDraws
 	@discussion	Returns whether or not this tool wants to allow line draws.
 	@result		Returns YES if the tool does want to allow line draws, NO
 				otherwise. The implementation in this class always returns NO.
 */
-- (BOOL)acceptsLineDraws;
+@property (readonly) BOOL acceptsLineDraws;
 
 /*!
-	@method		useMouseCoalescing
+	@property	useMouseCoalescing
 	@discussion	Returns whether or not this tool should use mouse coalescing.
 	@result		Returns YES if this tool should use mouse coalescing, NO
 				otherwise. The implementation in this class always returns YES.
 */
-- (BOOL)useMouseCoalescing;
+@property (readonly) BOOL useMouseCoalescing;
 
 /*!
-	@method		foregroundIsTexture
+	@property	foregroundIsTexture
 	@discussion	Returns whether the foreground colour should is the active
 				texture.
 	@result		Returns YES if the foreground colour is the active texture, NO
 				otherwise. The implementation in this class always returns NO.
 */
-- (BOOL)foregroundIsTexture;
+@property (readonly) BOOL foregroundIsTexture;
 
 /*!
 	@method		mouseDownAt:withEvent:
@@ -149,3 +150,5 @@
 @property (readonly, getter=isFineTool) BOOL fineTool;
 
 @end
+
+NS_ASSUME_NONNULL_END

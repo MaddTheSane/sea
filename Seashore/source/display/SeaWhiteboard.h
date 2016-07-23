@@ -135,7 +135,7 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc;
+- (instancetype)initWithDocument:(SeaDocument*)doc;
 #else
 /*!
 	@method		initWithDocument:
@@ -201,12 +201,13 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 // READJUSTING METHODS
 
 /*!
-	@method		whiteboardIsLayerSpecific
+	@property	whiteboardIsLayerSpecific
 	@discussion	Returns whether after the active layer is changed the alternate
 				data must be readjusted.
 	@result		YES if the alternate data must be readjusted after the active
 				layer is changed, NO otherwise.
 */
+@property (readonly) BOOL whiteboardIsLayerSpecific;
 - (BOOL)whiteboardIsLayerSpecific;
 
 /*!

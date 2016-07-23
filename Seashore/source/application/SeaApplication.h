@@ -20,6 +20,6 @@
 				The font panel in question.
 	@result		Returns a 32-bit string indicating the valid modes for the font panel.
 */
-- (unsigned int)validModesForFontPanel:(NSFontPanel *)fontPanel;
+- (NSUInteger)validModesForFontPanel:(NSFontPanel *)fontPanel;
 
 @end

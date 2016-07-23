@@ -1,5 +1,6 @@
 #import "Globals.h"
 #import "AbstractTool.h"
+#import "SeaPlugins.h"
 
 /*!
 	@defined	kMaxEffectToolPoints
@@ -16,11 +17,10 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2007 Mark Pazolli
 */
-
 @interface EffectTool : AbstractTool {
 
 	// The instance of the SeaPlugins class
-	id seaPlugins;
+	SeaPlugins *seaPlugins;
 
 	// The points so far registered
 	IntPoint points[kMaxEffectToolPoints];

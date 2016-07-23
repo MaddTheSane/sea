@@ -1,5 +1,7 @@
 #import "Globals.h"
 
+@class SeaDocument;
+
 /*!
 	@protocol	AbstractExporter
 	@abstract	Acts as a base class for all exporters.
@@ -8,7 +10,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @protocol AbstractExporter <NSObject>
 
 /*!
@@ -69,6 +70,6 @@
 				The path at which to write the document.
 	@result		Returns YES if the operation was successful, NO otherwise.
 */
-- (BOOL)writeDocument:(id)document toFile:(NSString *)path;
+- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path;
 
 @end

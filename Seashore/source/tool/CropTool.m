@@ -28,7 +28,7 @@
 		NSSize ratio;
 		double xres, yres;
 		int modifier = [options modifier];
-		id activeLayer;
+		SeaLayer *activeLayer;
 		
 		// Make where appropriate
 		activeLayer = [[document contents] activeLayer];
@@ -45,8 +45,7 @@
 			cropRect.origin.y = startPoint.y;
 			cropRect.size.width = 0;
 			cropRect.size.height = 0;
-		}
-		else {
+		} else {
 			ratio = [options ratio];
 			cropRect.origin.x = startPoint.x;
 			cropRect.origin.y = startPoint.y;

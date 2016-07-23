@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "CloneTool.h"
 #import "SeaDocument.h"
 #import "SeaContent.h"
@@ -23,6 +25,8 @@
 #define EPSILON 0.0001
 
 @implementation CloneTool
+@synthesize sourceSet;
+@synthesize sourceSetting;
 
 - (SeaToolsDefines)toolId
 {
@@ -39,17 +43,16 @@
 	return NO;
 }
 
-- (void)plotBrush:(id)brush at:(NSPoint)point pressure:(int)pressure
+- (void)plotBrush:(SeaBrush*)brush at:(NSPoint)point pressure:(int)pressure
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	unsigned char *overlay = [[document whiteboard] overlay], *brushData;
-	int brushWidth = [(SeaBrush *)brush fakeWidth], brushHeight = [(SeaBrush *)brush fakeHeight];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
-	int i, j, spp = [[document contents] spp], overlayPos;
+	int brushWidth = [brush fakeWidth], brushHeight = [brush fakeHeight];
+	int width = [layer width], height = [layer height];
+	int spp = [[document contents] spp], overlayPos;
 	IntPoint ipoint = NSPointMakeIntPoint(point);
 	
 	if ([brush usePixmap]) {
-	
 		// We can't handle this for anything but 4 samples per pixel
 		if (spp != 4)
 			return;
@@ -58,8 +61,8 @@
 		brushData = [brush pixmapForPoint:point];
 		
 		// Go through all valid points
-		for (j = 0; j < brushHeight; j++) {
-			for (i = 0; i < brushWidth; i++) {
+		for (int j = 0; j < brushHeight; j++) {
+			for (int i = 0; i < brushWidth; i++) {
 				if (ipoint.x + i >= 0 && ipoint.y + j >= 0 && ipoint.x + i < width && ipoint.y + j < height) {
 					
 					// Change the pixel colour appropriately
@@ -69,15 +72,13 @@
 				}
 			}
 		}
-	}
-	else {
-		
+	} else {
 		// Get the approrpiate brush data for the point
 		brushData = [brush maskForPoint:point pressure:255];
 	
 		// Go through all valid points
-		for (j = 0; j < brushHeight; j++) {
-			for (i = 0; i < brushWidth; i++) {
+		for (int j = 0; j < brushHeight; j++) {
+			for (int i = 0; i < brushWidth; i++) {
 				if (ipoint.x + i >= 0 && ipoint.y + j >= 0 && ipoint.x + i < width && ipoint.y + j < height) {
 					
 					// Change the pixel colour appropriately
@@ -88,21 +89,10 @@
 				}
 			}
 		}
-		
 	}
 	
 	// Set the last plot point appropriately
 	lastPlotPoint = point;
-}
-
-- (BOOL)sourceSet
-{
-	return sourceSet;
-}
-
-- (int)sourceSetting
-{
-	return sourceSetting;
 }
 
 - (IntPoint)sourcePoint:(BOOL)local
@@ -112,8 +102,7 @@
 	if (local) {
 		outPoint.x = sourcePoint.x;
 		outPoint.y = sourcePoint.y;
-	}
-	else {
+	} else {
 		outPoint.x = sourcePoint.x + layerOff.x;
 		outPoint.y = sourcePoint.y + layerOff.y;
 	}
@@ -124,15 +113,15 @@
 - (NSString *)sourceName
 {
 	if (sourceMerged == NO)
-		return [(SeaLayer *)sourceLayer name];
+		return [sourceLayer name];
 	else
 		return NULL;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
-	id curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	SeaLayer *layer = [[document contents] activeLayer];
+	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
 	NSPoint curPoint = IntPointMakeNSPoint(where), temp;
 	IntRect rect;
 	int spp = [[document contents] spp];
@@ -141,7 +130,7 @@
 	unsigned char *sourceData;
 	int sourceWidth, sourceHeight;
 	IntPoint spt;
-	float xScale, yScale;
+	CGFloat xScale, yScale;
 	int modifier = [options modifier];
 	
 	if (modifier == kAltModifier) {
@@ -201,8 +190,7 @@
 		if (ignoreFirstTouch && ([event type] == NSLeftMouseDown || [event type] == NSRightMouseDown) /* && [options pressureSensitive] */ && !(modifier == kAltModifier)) { 
 			firstTouchDone = NO;
 			return;
-		}
-		else {
+		} else {
 			firstTouchDone = YES;
 		}
 		
@@ -529,10 +517,9 @@
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	float xScale, yScale;
+	CGFloat xScale, yScale;
 	
 	if (sourceSetting) {
-		
 		// Start the source setting
 		fadingTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(fade:) userInfo:NULL repeats:NO];
 		sourceSet = YES;
@@ -540,10 +527,7 @@
 		yScale = [[document contents] yscale];
 		[[document docView] setNeedsDisplayInRect:NSMakeRect((sourcePoint.x + layerOff.x) * xScale - 12, (sourcePoint.y + layerOff.y) * yScale - 10, 25, 26)];
 		[options update];
-	
-	}
-	else if (sourceSet) {
-		
+	} else if (sourceSet) {
 		// Apply the changes
 		[self endLineDrawing];
 		[(SeaHelpers *)[document helpers] applyOverlay];

@@ -1,5 +1,8 @@
 #import "Globals.h"
 
+@class SeaDocument;
+@class TextureUtility;
+
 /*!
 	@class		ColorSelectView
 	@abstract	Represents the current colour selection to the user.
@@ -8,19 +11,16 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface ColorSelectView : NSView {
-
-	// The document associated with this colour selection view
-	id document;
-
 	// YES if the mouse is down on the swap button
 	BOOL mouseDownOnSwap;
 
 	// The texture utility
-	IBOutlet id textureUtility;
-	
+	IBOutlet TextureUtility *textureUtility;
 }
+
+/// The document associated with this colour selection view
+@property (nonatomic, weak) SeaDocument *document;
 
 /*!
 	@method		initWithFrame:
@@ -38,7 +38,7 @@
 	@param		doc
 				The document whose colours should be reflected.
 */
-- (void)setDocument:(id)doc;
+- (void)setDocument:(SeaDocument*)doc;
 
 /*!
 	@method		acceptsFirstMouse:

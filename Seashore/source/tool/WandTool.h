@@ -35,16 +35,16 @@
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event;
 
 /*!
-	@method		startPoint
+	@property	startPoint
 	@discussion	For figuring out where to draw the center
 	@result		Returns an NSPoint
 */
-- (NSPoint)start;
+@property (readonly) NSPoint start;
 
 /*!
-	@method		currentPoint
+	@property	currentPoint
 	@discussion	For figuring out where to draw the outside
 	@result		Returns an NSPoint
 */
-- (NSPoint)current;
+@property (readonly) NSPoint current;
 @end

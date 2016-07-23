@@ -7,6 +7,7 @@
 #import "SeaDocument.h"
 
 @implementation WarningsUtility
+@synthesize activeWarningImportance = mostRecentImportance;
 
 - (instancetype)init
 {
@@ -65,11 +66,6 @@
 		[windowContent setVisibility:NO forRegion:kWarningsBar];	
 		[[document contents] addLayer:kActiveLayer];
 	}
-}
-
-- (int)activeWarningImportance
-{
-	return mostRecentImportance;
 }
 
 @end

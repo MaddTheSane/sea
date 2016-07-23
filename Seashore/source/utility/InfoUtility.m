@@ -74,7 +74,7 @@
 	IntPoint point, delta;
 	IntSize size;
 	NSColor *color;
-	int xres, yres, units;
+	int xres, yres;
 	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	
 	// Show no values
@@ -104,17 +104,15 @@
 	// Get the selection
 	if (curToolIndex == kCropTool) {
 		size = [[[document tools] currentTool] cropRect].size;
-	}
-	else if ([[document selection] active]) {
+	} else if ([[document selection] active]) {
 		size = [[document selection] globalRect].size;
-	}
-	else {
+	} else {
 		size.height = size.width = 0;
 	}
 
 	point = [[document docView] getMousePosition:YES];
 	delta = [[document docView] delta];
-	units = [document measureStyle];
+	SeaUnits units = [document measureStyle];
 
 	NSString *label = UnitsString(units);
 	[widthValue setStringValue:[StringFromPixels(size.width, units, xres) stringByAppendingFormat:@" %@", label]];

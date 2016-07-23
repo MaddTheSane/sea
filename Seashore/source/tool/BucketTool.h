@@ -68,17 +68,17 @@
 - (void)fillAtPoint:(IntPoint)point useTolerance:(BOOL)useTolerance delay:(BOOL)delay;
 
 /*!
-	@method		startPoint
+	@property	start
 	@discussion	For figuring out where to draw the center
 	@result		Returns an NSPoint
 */
-- (NSPoint)start;
+@property (readonly) NSPoint start;
 
 /*!
-	@method		currentPoint
+	@property	current
 	@discussion	For figuring out where to draw the outside
 	@result		Returns an NSPoint
 */
-- (NSPoint)current;
+@property (readonly) NSPoint current;
 
 @end

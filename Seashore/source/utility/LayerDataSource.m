@@ -22,6 +22,8 @@
 @end
 
 @implementation LayerDataSource
+@synthesize draggedNodes;
+
 - (void)awakeFromNib
 {
 	// Register to get our custom type, strings, and filenames. Try dragging each into the view!
@@ -34,7 +36,6 @@
 	draggedNodes = nil;
 }
 
-- (NSArray *)draggedNodes { return draggedNodes; }
 - (NSArray *)selectedNodes { return [outlineView allSelectedItems]; }
 
 // ================================================================

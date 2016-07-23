@@ -1,4 +1,7 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+
+@class SeaPrefs;
 
 /*!
 	@class		SeaDocumentController
@@ -8,38 +11,37 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2006 Mark Pazolli
 */
-
 @interface SeaDocumentController : NSDocumentController {
 
 	// An outlet to the preferences manager of the application
-	IBOutlet id seaPrefs;
+	IBOutlet SeaPrefs *seaPrefs;
 	
 	// A panel through which a new image can be configured
-	IBOutlet id newPanel; 
+	IBOutlet NSPanel *newPanel;
 	
 	// The various text boxes from the New Image Settings panel
-	IBOutlet id widthInput, heightInput;
+	IBOutlet NSTextField *widthInput, *heightInput;
 	
 	// The various buttons for changing units
 	IBOutlet id widthUnits, heightUnits;
 	
 	// The resolution menu from the New Image Settings panel
-	IBOutlet id resMenu;
+	IBOutlet NSPopUpButton *resMenu;
 	
 	// The mode menu from the New Image Settings panel
-	IBOutlet id modeMenu;
+	IBOutlet NSPopUpButton *modeMenu;
 	
 	// The units menu for the New Image Settings panel
-	IBOutlet id unitsMenu;
+	IBOutlet NSPopUpButton *unitsMenu;
 	
 	// The templates menu from the New Image Settings panel
-	IBOutlet id templatesMenu;	
+	IBOutlet NSPopUpButton *templatesMenu;
 	
 	// The transparency checkbox for the New Image settings panel
-	IBOutlet id backgroundCheckbox;
+	IBOutlet NSButton *backgroundCheckbox;
 	
 	// The dropdown for the recent documents.
-	IBOutlet id recentMenu;
+	IBOutlet NSPopUpButton *recentMenu;
 	
 	// The units for the New Image Settings panel
 	int units;
@@ -185,12 +187,11 @@
 @property (readonly) int resolution;
 
 /*!
-	@method		opaque
+	@property	opaque
 	@discussion	Returns the instance variable of the same name.
 	@result		Returns the instance variable of the same name.
 */
-- (int)opaque;
-@property (readonly) int opaque;
+@property (readonly) BOOL opaque;
 
 /*!
 	@method		units

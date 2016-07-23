@@ -57,11 +57,11 @@
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event;
 
 /*!
-	@method		cropRect
+	@property	cropRect
 	@discussion	Returns the cropping rectangle.
 	@result		Returns an IntRect representing the cropping rectangle.
 */
-- (IntRect)cropRect;
+@property (readonly) IntRect cropRect;
 
 /*!
 	@method		clearCrop

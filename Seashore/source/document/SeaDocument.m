@@ -118,6 +118,41 @@ enum {
 	return self;
 }
 
+- (instancetype)initWithContentsOfURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
+{
+	if (self = [super init]) {
+		// Reset uniqueLayerID
+		uniqueLayerID = -1;
+		uniqueFloatingLayerID = 4999;
+		
+		// Get a unique ID for this document
+		uniqueDocID = globalUniqueDocID;
+		globalUniqueDocID++;
+		
+		// Set data members appropriately
+		whiteboard = NULL;
+		restoreOldType = NO;
+		current = YES;
+		specialStart = kOpenStart;
+		
+		// Set the measure style
+		measureStyle = [[SeaController seaPrefs] newUnits];
+		
+		// Do required work
+		if ([self readFromFile:url.path ofType:typeName]) {
+			self.fileURL = url;
+			[self setFileType:typeName];
+		} else {
+			if (outError) {
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:nil];
+			}
+			return nil;
+		}
+
+	}
+	return self;
+}
+
 - (instancetype)initWithContentsOfFile:(NSString *)path ofType:(NSString *)type
 {
 	// Initialize superclass first
@@ -153,7 +188,7 @@ enum {
 	return self;
 }
 
-- (instancetype)initWithData:(unsigned char *)data type:(int)type width:(int)width height:(int)height
+- (instancetype)initWithData:(unsigned char *)data type:(XcfImageType)type width:(int)width height:(int)height
 {
 	// Initialize superclass first
 	if (!(self = [super init]))
@@ -341,6 +376,29 @@ enum {
 	}
 	
 	return YES;
+}
+
+- (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
+{
+	BOOL result = NO;
+	
+	for (id<AbstractExporter> exporter in exporters) {
+		if ([[SeaDocumentController sharedDocumentController]
+			 type: typeName
+			 isContainedInDocType:[exporter title]
+			 ]) {
+			[exporter writeDocument:self toFile:[url path]];
+			result = YES;
+		}
+	}
+	
+	if (!result){
+		NSLog(@"Unknown type passed to writeToFile:<%@>ofType:<%@>", [url path], typeName);
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:@{NSLocalizedFailureReasonErrorKey:  [NSString stringWithFormat:@"Unknown type passed to writeToFile:<%@>ofType:<%@>", [url path], typeName]}];
+		}
+	}
+	return result;
 }
 
 - (BOOL)writeToFile:(NSString *)path ofType:(NSString *)type

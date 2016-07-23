@@ -13,6 +13,7 @@
 	IBOutlet id scrollView;
 	BOOL areRulersVisible;
 }
+@property (nonatomic, getter=areRulersVisible) BOOL rulersVisible;
 
 /*!
 	@method		setRulersVisible:
@@ -21,4 +22,5 @@
 				Whether or not they now are visible.
 */
 - (void)setRulersVisible:(BOOL)isVisible;
+
 @end

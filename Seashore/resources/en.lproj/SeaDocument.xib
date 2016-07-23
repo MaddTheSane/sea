@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <development version="7000" identifier="xcode"/>
@@ -2486,7 +2486,6 @@ Gw
                 <outlet property="redValue" destination="2668" id="2725"/>
                 <outlet property="toggleButton" destination="3577" id="4923"/>
                 <outlet property="view" destination="2666" id="4562"/>
-                <outlet property="viewAbove" destination="7808" id="13709"/>
                 <outlet property="widthValue" destination="2675" id="2726"/>
                 <outlet property="xValue" destination="2679" id="2727"/>
                 <outlet property="yValue" destination="2680" id="2728"/>
@@ -5115,7 +5114,7 @@ DQ
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="14" id="11980">
-                                    <rect key="frame" x="0.0" y="0.0" width="197" height="16"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="214" height="160"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>

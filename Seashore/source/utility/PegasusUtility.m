@@ -10,8 +10,11 @@
 #import "UtilitiesManager.h"
 #import "SeaProxy.h"
 #import "SeaWindowContent.h"
+#import "LayerDataSource.h"
 
 @implementation PegasusUtility
+@synthesize layerSettings;
+@synthesize enabled;
 
 - (void)awakeFromNib
 {
@@ -24,7 +27,7 @@
 - (void)activate
 {
 	// Get the LayersView and LayerSettings to activate
-	[(LayerSettings *)layerSettings activate];
+	[layerSettings activate];
 	[self update:kPegasusUpdateAll];
 }
 
@@ -37,7 +40,7 @@
 
 - (void)update:(int)updateCode
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	
 	switch (updateCode) {
 		case kPegasusUpdateAll:
@@ -60,11 +63,6 @@
 		break;
 	}
 	[dataSource update];
-}
-
-- (id)layerSettings
-{
-	return layerSettings;
 }
 
 - (IBAction)show:(id)sender

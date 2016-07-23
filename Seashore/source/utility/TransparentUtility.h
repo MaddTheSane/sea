@@ -42,10 +42,10 @@
 - (void)changeColor:(id)sender;
 
 /*!
-	@method		color
+	@property	color
 	@discussion	Returns the current transparency colour.
 	@result		Returns the current transparency colour.
 */
-- (NSColor*)color;
+@property (readonly, copy) NSColor *color;
 
 @end

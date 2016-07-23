@@ -159,7 +159,7 @@
 				The height of the data with which this class is being initialized.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithData:(unsigned char *)data type:(int)type width:(int)width height:(int)height;
+- (instancetype)initWithData:(unsigned char *)data type:(XcfImageType)type width:(int)width height:(int)height;
 
 /*!
 	@method		saveDocument:

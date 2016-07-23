@@ -61,7 +61,7 @@ extern id gNewFont;
 	NSString *text;
 	IntPoint pos, off;
 	SeaLayer *layer;
-	id activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	SeaTexture *activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
 	NSBitmapImageRep *initRep, *initRep2 = NULL, *imageRep, *imageRep2 = NULL;
 	NSImage *image, *image2 = NULL;
 	NSMutableParagraphStyle *paraStyle;
@@ -94,9 +94,9 @@ extern id gNewFont;
 	overlay = [[document whiteboard] overlay];
 	replace = [[document whiteboard] replace];
 	layer = [[document contents] activeLayer];
-	data = [(SeaLayer *)layer data];
-	width = [(SeaLayer *)layer width];
-	height = [(SeaLayer *)layer height];
+	data = [layer data];
+	width = [layer width];
+	height = [layer height];
 	
 	// Determine the position
 	switch([options alignment]){

@@ -3,6 +3,7 @@
 
 @class SeaTexture;
 @class SeaDocument;
+@class SeaProxy;
 
 /*!
 	@class		TextureUtility
@@ -14,7 +15,7 @@
 */
 @interface TextureUtility : AbstractPanelUtility {
 	// The proxy object
-	IBOutlet id seaProxy;
+	IBOutlet SeaProxy *seaProxy;
 	
 	// The texture grouping pop-up
     IBOutlet NSPopUpButton *textureGroupPopUp;
@@ -112,13 +113,13 @@
 - (IBAction)changeGroup:(id)sender;
 
 /*!
-	@method		opacity
+	@property	opacity
 	@discussion	Returns the opacity to be used by the active texture.
 	@result		Reutrns an integer from 0 to 255 indicating the opacity to be
 				used by the active texture. The texture is fully opaque if the
 				opacity is 255.
 */
-- (int)opacity;
+@property (readonly) int opacity;
 
 /*!
 	@method		activeTexture
@@ -126,7 +127,7 @@
 	@result		Returns an instance of SeaTexture representing the currently
 				active texture.
 */
-- (id)activeTexture;
+- (SeaTexture*)activeTexture;
 
 /*!
 	@property	activeTextureIndex

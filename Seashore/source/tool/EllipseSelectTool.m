@@ -11,16 +11,11 @@
 #import "AspectRatio.h"
 
 @implementation EllipseSelectTool
+@synthesize selectionRect;
 
 - (SeaToolsDefines)toolId
 {
 	return kEllipseSelectTool;
-}
-
-
-- (IntRect) selectionRect
-{
-	return selectionRect;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
@@ -159,4 +154,5 @@
 	selectionRect = IntMakeRect(0,0,0,0);
 	[super cancelSelection];
 }
+
 @end

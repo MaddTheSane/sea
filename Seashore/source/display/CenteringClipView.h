@@ -29,9 +29,11 @@
 	// Does the view have a vertical scrollbar?
 	BOOL hasVerticalScrollbar;
 	
-	// We nede to prevent an infinate loop in scroll events...
+	// We nede to prevent an infinite loop in scroll events...
 	NSEvent *mostRecentScrollEvent;
 }
+
+@property (nonatomic) NSPoint centerPoint;
 
 /*!
 	@method		centerPoint:

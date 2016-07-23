@@ -179,7 +179,7 @@
 }
 
 
-- (int)point:(NSPoint) point isInHandleFor:(IntRect)rect
+- (SeaScaleDirection)point:(NSPoint) point isInHandleFor:(IntRect)rect
 {
 	
 	float xScale = [[document contents] xscale];

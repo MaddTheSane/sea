@@ -39,11 +39,9 @@
 - (NSSize)cellSize;
 
 /*
-	@method		setSelected:
-	@discussion	Sets whether or not we need the selection highlight.
-	@param		isSelected
-				A BOOL.
+	@property	selected
+	@discussion	Indicates whether or not we need the selection highlight.
 */
-- (void) setSelected:(BOOL)isSelected;
+@property (getter=isSelected) BOOL selected;
 
 @end

@@ -12,7 +12,7 @@
  @constant	kDLDir
  @constant	kLDir 
  */
-enum {
+typedef NS_ENUM(int, SeaScaleDirection) {
 	kNoDir = -1,
 	kULDir,
 	kUDir,
@@ -49,7 +49,7 @@ enum {
 	IntPoint oldOrigin;
 	
 	// The direction of currently scaling (if any)
-	int scalingDir;
+	SeaScaleDirection scalingDir;
 	
 	// The mask of the selection before it was scaled
 	unsigned char * preScaledMask;
@@ -63,11 +63,11 @@ enum {
 }
 
 /*!
-	@method		isMovingOrScaling
+	@property	movingOrScaling
 	@discussion	If the thing is being translated or transformed
 	@result		Returns a BOOL: YES of it is moving / scaling
 */
-- (BOOL) isMovingOrScaling;
+@property (readonly, getter=isMovingOrScaling) BOOL movingOrScaling;
 
 /*!
 	@method		mouseDownAt:forRect:andMask:
@@ -117,7 +117,7 @@ enum {
 	@param		rect
 				The specified rectangle to check for handles.
 */
-- (int)point:(NSPoint) point isInHandleFor:(IntRect)rect;
+- (SeaScaleDirection)point:(NSPoint) point isInHandleFor:(IntRect)rect;
 
 /*!
 	@method		preScaledRect

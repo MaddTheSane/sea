@@ -1,5 +1,7 @@
 #import "Globals.h"
 
+@class SeaDocument;
+
 /*!
 	@class		TextureExporter
 	@abstract	Exports a Seashore document as a texture.
@@ -8,11 +10,10 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface TextureExporter : NSObject <NSTableViewDataSource>
 {
 	// The document associated with this object
-    IBOutlet id document;
+    IBOutlet SeaDocument *document;
 
 	// The exporting panel
 	IBOutlet id sheet;

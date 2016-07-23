@@ -79,7 +79,7 @@ typedef struct {
 				The path of the XCF file with which to initalize this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
+- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path;
 #else
 /*!
 	@method		initWithDocument:contentsOfFile:

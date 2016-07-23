@@ -13,7 +13,7 @@
 - (void)awakeFromNib
 {
 	settingsLayer = nil;
-	[(InfoPanel *)panel setPanelStyle:kHorizontalPanelStyle];	
+	[panel setPanelStyle:kHorizontalPanelStyle];	
 }
 
 - (void)activate
@@ -58,7 +58,7 @@
 	if([layer hasAlpha]){
 		[[channelEditingMatrix cellAtRow:1 column:0] setEnabled:YES];
 		[[channelEditingMatrix cellAtRow:2 column:0] setEnabled:YES];
-	}else {
+	} else {
 		[[channelEditingMatrix cellAtRow:1 column:0] setEnabled:NO];
 		[[channelEditingMatrix cellAtRow:2 column:0] setEnabled:NO];
 	}

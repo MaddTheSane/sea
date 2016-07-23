@@ -1,5 +1,6 @@
 #import "Globals.h"
 #import "AbstractScaleOptions.h"
+#import "SeaSelection.h"
 
 /*		
 	@class		AbstractSelectOptions
@@ -13,15 +14,18 @@
 
 @interface AbstractSelectOptions : AbstractScaleOptions {
 	// The Selection mode
-	int mode;
+	SeaSelectMode mode;
 }
+
+/// The Selection mode
+@property (nonatomic) SeaSelectMode selectionMode;
 
 /*!
 	@method		selectionMode
 	@discussion	Returns the mode to be used for the selection.
 	@result		Returns an integer indicating the mode (see SeaSelection).
 */
-- (int)selectionMode;
+- (SeaSelectMode)selectionMode;
 
 /*!
 	@method		setSelectionMode
@@ -29,7 +33,7 @@
 	@param		newMode
 				The new mode to be set, from the k...Mode enum.
 */
-- (void)setSelectionMode:(int)newMode;
+- (void)setSelectionMode:(SeaSelectMode)newMode;
 
 /*!
 	@method		setModeFromModifier:

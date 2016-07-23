@@ -13,7 +13,7 @@
 @interface SeaUtilityPanel : NSPanel <NSWindowDelegate> {
 
 	// Used for window shading
-	float priorShadeHeight;
+	CGFloat priorShadeHeight;
 	
 	// Used for window shading
 	id priorContentView;

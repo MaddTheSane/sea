@@ -17,6 +17,8 @@
 #import "SeaView.h"
 
 @implementation BucketTool
+@synthesize start = startNSPoint;
+@synthesize current = currentNSPoint;
 
 - (SeaToolsDefines)toolId
 {
@@ -159,16 +161,6 @@
 		[[document helpers] overlayChanged:rect inThread:NO];
 	else
 		[(SeaHelpers *)[document helpers] applyOverlay];
-}
-
-- (NSPoint)start
-{
-	return startNSPoint;
-}
-
--(NSPoint)current
-{
-	return currentNSPoint;
 }
 
 @end

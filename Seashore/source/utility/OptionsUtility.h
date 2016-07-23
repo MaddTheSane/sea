@@ -1,5 +1,9 @@
 #import "Globals.h"
 
+@class SeaDocument;
+@class ToolboxUtility;
+@class AbstractOptions;
+
 /*!
 	@class		OptionsUtility
 	@abstract	Displays the options for the current tool.
@@ -8,19 +12,18 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
 @interface OptionsUtility : NSObject {
 	// The options view
-    IBOutlet id view;
+    IBOutlet NSView *view;
 		
 	// The last options view set 
-	id lastView;
+	__unsafe_unretained __kindof NSView *lastView;
 
 	// The document which is the focus of this utility
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// The view to show when no document is active
-	IBOutlet id blankView;
+	IBOutlet NSView *blankView;
 	
 	// The various options objects
 	IBOutlet id lassoOptions;
@@ -43,7 +46,7 @@
 	IBOutlet id effectOptions;
 	
 	// The toolbox utility object
-	IBOutlet id toolboxUtility;
+	IBOutlet ToolboxUtility *toolboxUtility;
 	
 	// The currently active tool - not a reliable indication (see code)
 	int currentTool;
@@ -79,7 +82,7 @@
 	@discussion	Returns the currently active options object.
 	@result		Returns the currently active options object (NULL if none).
 */
-- (id)currentOptions;
+- (__kindof AbstractOptions*)currentOptions;
 
 /*!
 	@method		getOptions:
@@ -89,7 +92,7 @@
 				SeaTools).
 	@result		Returns the options object associated with the given index.
 */
-- (id)getOptions:(int)whichTool;
+- (__kindof AbstractOptions*)getOptions:(int)whichTool;
 
 /*!
 	@method		update

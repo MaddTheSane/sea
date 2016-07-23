@@ -1,3 +1,4 @@
+#import <AppKit/AppKit.h>
 #import "Globals.h"
 
 /*!
@@ -15,14 +16,23 @@
 	@constant	kForceNewMode
 				For a new selection
 */
-enum {
-	kDefaultMode,
-	kAddMode,
-	kSubtractMode,
-	kMultiplyMode,
-	kSubtractProductMode,
-	kForceNewMode
+typedef NS_ENUM(int, SeaSelectMode) {
+	SeaSelectDefault,
+	SeaSelectAdd,
+	SeaSelectSubtract,
+	SeaSelectMultiply,
+	SeaSelectSubtractProduct,
+	SeaSelectForceNew,
+	
+	kDefaultMode = SeaSelectDefault,
+	kAddMode = SeaSelectAdd,
+	kSubtractMode = SeaSelectSubtract,
+	kMultiplyMode = SeaSelectMultiply,
+	kSubtractProductMode = SeaSelectSubtractProduct,
+	kForceNewMode = SeaSelectForceNew
 };
+
+@class SeaDocument;
 
 /*!
 	@class		SeaSelection
@@ -36,7 +46,7 @@ enum {
 @interface SeaSelection : NSObject {
 
 	// The document associated with this object
-	id document;
+	SeaDocument *document;
 
 	// The current selection rectangle
 	IntRect rect, globalRect;
@@ -66,7 +76,7 @@ enum {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc;
+- (instancetype)initWithDocument:(SeaDocument*)doc;
 
 /*!
 	@method		active
@@ -76,69 +86,69 @@ enum {
 - (BOOL)active;
 
 /*!
-	@method		floating
+	@property	floating
 	@discussion	Returns whether the current selection is floating or not.
 				Floating implies that the selection's bitmap data is a detached
 				from the layer.
 	@result		Returns YES if the selection is floating, NO otherwise.
 */
-- (BOOL)floating;
+@property (readonly) BOOL floating;
 
 /*!
-	@method		mask
+	@property	mask
 	@discussion	Returns a mask indicating the opacity of the selection, if NULL
 				is returned the selection rectangle should be assumed to be
 				entirely opaque.
 	@result		Returns a reference to an 8-bit single-channel bitmap or NULL.
 */
-- (unsigned char *)mask;
+@property (readonly) unsigned char *mask NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		maskImage
+	@property	maskImage
 	@discussion	Returns an image of the mask in the current selection colour.
 				This is used so the selection can be represented to users.
 */
-- (NSImage *)maskImage;
+@property (readonly, strong) NSImage *maskImage;
 
 /*!
-	@method		maskOffset
+	@property	maskOffset
 	@discussion	Returns the offset of the mask.
 	@result		Returns an IntPoint indicating the point in the mask that
 				corresponds to the top-left corner of localRect.
 */
-- (IntPoint)maskOffset;
+@property (readonly) IntPoint maskOffset;
 
 /*!
-	@method		maskSize
+	@property	maskSize
 	@discussion	Returns the size of the mask.
 	@result		Returns an IntSize indicating the size of the mask.
 */
-- (IntSize)maskSize;
+@property (readonly) IntSize maskSize;
 
 /*!
-	@method		trueLocalRect
+	@property	trueLocalRect
 	@discussion	Returns the selection's true rectangle (this rectangle may
 				be larger than the active layer and should rarely be required).
 	@result		Returns an IntRect reprensenting the rectangle selection's true
 				rectangle in the overlay's co-ordinates.
 */
-- (IntRect)trueLocalRect;
+@property (readonly) IntRect trueLocalRect;
 
 /*!
-	@method		globalRect
+	@property	globalRect
 	@discussion	Returns a rectangle enclosing the current selection.
 	@result		Returns an IntRect reprensenting the rectangle that encloses the
 				current selection in the document's co-ordinates.
 */
-- (IntRect)globalRect;
+@property (readonly) IntRect globalRect;
 
 /*!
-	@method		localRect
+	@property	localRect
 	@discussion	Returns a rectangle enclosing the current selection.
 	@result		Returns an IntRect reprensenting the rectangle that encloses the
 				current selection in the overlay's co-ordinates.
 */
-- (IntRect)localRect;
+@property (readonly) IntRect localRect;
 
 /*!
 	@method		selectRect:
@@ -149,7 +159,7 @@ enum {
 	@param		mode
 				The mode of the selection (see above).
 */
-- (void)selectRect:(IntRect)selectionRect mode:(int)mode;
+- (void)selectRect:(IntRect)selectionRect mode:(SeaSelectMode)mode;
 
 /*!
 	@method		selectEllipse:intermediate:
@@ -160,7 +170,7 @@ enum {
 	@param		mode
 				The mode of the selection (see above).
 */
-- (void)selectEllipse:(IntRect)selectionRect mode:(int)mode;
+- (void)selectEllipse:(IntRect)selectionRect mode:(SeaSelectMode)mode;
 
 /*!
 	@method		selectRoundedRect:intermediate:
@@ -173,7 +183,7 @@ enum {
 	@param		mode
 				The mode of the selection (see above).
 */
-- (void)selectRoundedRect:(IntRect)selectionRect radius:(int)radius mode:(int)mode;
+- (void)selectRoundedRect:(IntRect)selectionRect radius:(int)radius mode:(SeaSelectMode)mode;
 
 /*!
 	@method		selectOverlay:inRect:mode:
@@ -187,7 +197,7 @@ enum {
 	@param		mode
 				The mode of the selection (see above).
 */
-- (void)selectOverlay:(BOOL)destructively inRect:(IntRect)selectionRect mode:(int)mode;
+- (void)selectOverlay:(BOOL)destructively inRect:(IntRect)selectionRect mode:(SeaSelectMode)mode;
 
 /*!
 	@method		selectOpaque

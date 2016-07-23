@@ -23,6 +23,8 @@ typedef struct {
 */
 #define kMaxBTPoints 16384
 
+@class SeaLayer;
+
 /*!
 	@class		CloneTool
 	@abstract	The paintbrush's role in Seashore is much the same as that in
@@ -34,7 +36,6 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface CloneTool : AbstractTool {
 
 	// The last point we've been and the last point a brush was plotted (there is a difference)
@@ -89,10 +90,10 @@ typedef struct {
 	int sourceSetting;
 	
 	// A timer to allow the source to set
-	id fadingTimer;
+	NSTimer *fadingTimer;
 	
 	// The index of the layer from which the source is drawn
-	id sourceLayer;
+	SeaLayer *sourceLayer;
 	
 	// YES if the merged data should be used, NO otherwise
 	BOOL sourceMerged;
@@ -119,19 +120,19 @@ typedef struct {
 - (BOOL)useMouseCoalescing;
 
 /*!
-	@method		sourceSet
+	@property	sourceSet
 	@discussion	Returns whether the source point has been set.
 	@result		Returns YES if the source point is set, NO otherwise.
 */
-- (BOOL)sourceSet;
+@property (readonly) BOOL sourceSet;
 
 /*!
-	@method		sourceSetting
+	@property	sourceSetting
 	@discussion	Is the source point setting?
 	@result		Returns an integer between 0 and 100 (gradually decreasing with
 				fading).
 */
-- (int)sourceSetting;
+@property (readonly) int sourceSetting;
 
 /*!
 	@method		sourcePoint
@@ -144,12 +145,12 @@ typedef struct {
 - (IntPoint)sourcePoint:(BOOL)local;
 
 /*!
-	@method		sourceName
+	@property	sourceName
 	@discussion	Returns the name of the source.
 	@result		Returns a string indicating the source's name (e.g. the name of
 				the source layer)
 */
-- (NSString *)sourceName;
+@property (readonly, copy) NSString *sourceName;
 
 /*!
 	@method		mouseDownAt:withEvent:

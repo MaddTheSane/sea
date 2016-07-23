@@ -230,35 +230,12 @@
 	[super removeDocument:document];
 }
 
-- (int)type
-{
-	return type;
-}
-
-- (int)height
-{
-	return height;
-}
-
-- (int)width
-{
-	return width;
-}
-
-- (int)resolution
-{
-	return resolution;
-}
-
-- (int)opaque
-{
-	return opaque;
-}
-
-- (int)units
-{
-	return units;
-}
+@synthesize type;
+@synthesize height;
+@synthesize width;
+@synthesize resolution;
+@synthesize opaque;
+@synthesize units;
 
 - (NSMutableDictionary*)editableTypes
 {

@@ -13,6 +13,7 @@
 #import "ToolboxUtility.h"
 
 @implementation ColorSelectView
+@synthesize document;
 
 - (instancetype)initWithFrame:(NSRect)frame
 {

@@ -39,7 +39,9 @@
 	[shadow set];
 	
 	NSDictionary *attrs;
-	attrs = @{NSFontAttributeName: [NSFont systemFontOfSize:12], NSForegroundColorAttributeName: [NSColor whiteColor], NSShadowAttributeName: shadow};
+	attrs = @{NSFontAttributeName: [NSFont systemFontOfSize:[NSFont systemFontSize]],
+			  NSForegroundColorAttributeName: [NSColor whiteColor],
+			  NSShadowAttributeName: shadow};
 	
 	// We need to calculate the width of the text box
 	NSRect drawRect = NSMakeRect(10, 8, [self frame].size.width, 18);
@@ -50,7 +52,7 @@
 	}
 	
 	if(drawRect.size.width < [bannerText sizeWithAttributes:attrs].width){
-		[@"..." drawInRect:NSMakeRect(drawRect.size.width + 8, 8, 18, 18) withAttributes:attrs];
+		[@"…" drawInRect:NSMakeRect(drawRect.size.width + 8, 8, 18, 18) withAttributes:attrs];
 	}
 	[bannerText drawInRect: drawRect withAttributes:attrs];
 	[NSGraphicsContext restoreGraphicsState];
@@ -58,26 +60,26 @@
 
 - (void)setBannerText:(NSString *)text defaultButtonText:(NSString *)dText alternateButtonText:(NSString *)aText andImportance:(int)importance
 {
-	bannerText = text;
+	bannerText = [text copy];
 	bannerImportance = importance;
 	
-	if(dText){
+	if (dText) {
 		[defaultButton setTitle:dText];
 		NSRect frame = [defaultButton frame];
 		frame.origin.x = [self frame].size.width - 108;
 		[defaultButton setFrame:frame];
-	}else{
+	} else {
 		NSRect frame = [defaultButton frame];
 		frame.origin.x = [self frame].size.width;
 		[defaultButton setFrame:frame];
 	}
 		
-	if(aText && dText){
+	if (aText && dText) {
 		[alternateButton setTitle:aText];
 		NSRect frame = [alternateButton frame];
 		frame.origin.x = [self frame].size.width - 216;
 		[alternateButton setFrame:frame];
-	}else {
+	} else {
 		NSRect frame = [alternateButton frame];
 		frame.origin.x = [self frame].size.width;
 		[alternateButton setFrame:frame];

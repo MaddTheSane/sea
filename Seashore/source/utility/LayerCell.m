@@ -3,6 +3,7 @@
 
 @implementation LayerCell
 @synthesize image;
+@synthesize selected;
 
 - (instancetype)init
 {
@@ -116,11 +117,6 @@
     NSSize cellSize = [super cellSize];
     cellSize.width += (image ? [image size].width : 0) + 3;
     return cellSize;
-}
-
-- (void) setSelected:(BOOL)isSelected
-{
-	selected = isSelected;
 }
 
 @end

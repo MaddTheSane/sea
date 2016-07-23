@@ -92,7 +92,7 @@ typedef struct {
 	@discussion	Shows whether TIFF files should be saved using the CMYK colour
  space.
  */
-@property (setter = setCMYKSave:) BOOL cmykSave;
+@property (setter=setCMYKSave:) BOOL cmykSave;
 
 /*!
 	@property	trueView
@@ -107,6 +107,7 @@ typedef struct {
  */
 @property NSInteger activeLayerIndex;
 
+/// The currently selected channel (see constants)
 @property int selectedChannel;
 
 // CREATION METHODS
@@ -176,7 +177,7 @@ typedef struct {
 				accepts square resolutions).
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc data:(unsigned char *)ddata type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
+- (instancetype)initWithDocument:(id)doc data:(unsigned char *)ddata type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
 #endif
 
 #pragma mark PROPERTY METHODS
@@ -187,7 +188,7 @@ typedef struct {
 	@result		Returns an integer representing the document type (see Constants
 				documentation).
 */
-@property (readonly) int type;
+@property (readonly) XcfImageType type;
 
 /*!
 	@property	spp
@@ -195,7 +196,7 @@ typedef struct {
 	@result		Returns an integer indicating the samples per pixel of the
 				document.
 */
-@property (readonly) int spp;
+@property (readonly, getter=spp) int samplesPerPixel;
 
 /*!
 	@property	xres
@@ -203,14 +204,14 @@ typedef struct {
 	@result		Returns the horizontal resolution as an integer in
 				dots-per-inch.
 */
-@property (readonly) int xres;
+@property (readonly, getter=xres) int horizontalResolution;
 
 /*!
 	@property	yres
 	@discussion	Returns the vertical resolution of the document.
 	@result		Returns the vertical resolution as an integer in dots-per-inch.
 */
-@property (readonly) int yres;
+@property (readonly, getter=yres) int verticalResolution;
 
 /*!
 	@property	xscale
@@ -219,7 +220,7 @@ typedef struct {
 	@result		A floating-point number indicating how much the image should be scaled
 				by horizontally given the current zoom and resolution.
 */
-@property (readonly) float xscale;
+@property (readonly) CGFloat xscale;
 
 /*!
 	@property	yscale
@@ -228,7 +229,7 @@ typedef struct {
 	@result		A floating-point number indicating how much the image should be scaled
 				by vertically given the current zoom and resolution.
 */
-@property (readonly) float yscale;
+@property (readonly) CGFloat yscale;
 
 #if MAIN_COMPILE
 /*!

@@ -1,5 +1,10 @@
 #import "Globals.h"
 
+@class SeaDocument;
+@class SeaProxy;
+@class OptionsUtility;
+@class ColorSelectView;
+
 /*!
 	@class		ToolboxUtility
 	@abstract	Allows the user to select a range of tools for image
@@ -9,28 +14,25 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@class SeaDocument;
-
 @interface ToolboxUtility : NSObject {
 
 	// The document which is the focus of this utility
 	IBOutlet SeaDocument *document;
 
 	// The proxy object
-	IBOutlet id seaProxy;
+	IBOutlet SeaProxy *seaProxy;
 	
 	// The current foreground and background colour
-	id foreground, background;
+	NSColor *foreground, *background;
 	
 	// The colorSelectView associated with this utility
-	IBOutlet id colorSelectView;
+	IBOutlet __weak ColorSelectView *colorSelectView;
 	
 	// The toolbox
 	IBOutlet id toolbox;
 	
 	// The options utility object
-	IBOutlet id optionsUtility;
+	IBOutlet OptionsUtility *optionsUtility;
 	
 	// The tag of the currently selected tool
 	int tool;
@@ -39,29 +41,30 @@
 	int oldTool;
 
 	// The toolbar
-	id toolbar;
+	NSToolbar *toolbar;
 
 	IBOutlet NSSegmentedControl *selectionTBView;
 	IBOutlet NSSegmentedControl *drawTBView;
 	IBOutlet NSSegmentedControl *effectTBView;
 	IBOutlet NSSegmentedControl *transformTBView;
 	
-	IBOutlet id selectionMenu;
-	IBOutlet id drawMenu;
-	IBOutlet id effectMenu;
-	IBOutlet id transformMenu;
-	IBOutlet id colorsMenu;
+	IBOutlet NSMenuItem *selectionMenu;
+	IBOutlet NSMenuItem *drawMenu;
+	IBOutlet NSMenuItem *effectMenu;
+	IBOutlet NSMenuItem *transformMenu;
+	IBOutlet NSMenuItem *colorsMenu;
 	
-	NSArray *selectionTools;
-	NSArray *drawTools;
-	NSArray *effectTools;
-	NSArray *transformTools;
+	NSArray<NSNumber*> *selectionTools;
+	NSArray<NSNumber*> *drawTools;
+	NSArray<NSNumber*> *effectTools;
+	NSArray<NSNumber*> *transformTools;
 	
 	// A timer that delays colour changes
-	id delay_timer;
+	NSTimer *delay_timer;
 }
 
 @property (strong) NSColor *background;
+@property (strong) NSColor *foreground;
 
 /*!
 	@method		init
@@ -105,12 +108,11 @@
 - (void)setBackground:(NSColor *)color;
 
 /*!
-	@method		colorView
+	@property	colorView
 	@discussion	Returns the color view for actions
 	@result		A ColorSelectView pointer.
 */
-
-- (id)colorView;
+@property (readonly, weak) ColorSelectView *colorView;
 
 /*!
 	@method		acceptsFirstMouse:

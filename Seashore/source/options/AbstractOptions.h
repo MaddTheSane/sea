@@ -30,6 +30,8 @@ typedef NS_ENUM(NSInteger, AbstractModifiers) {
 	kReservedModifier2 = 21
 };
 
+@class SeaDocument;
+
 /*		
 	@class		AbstractOptions
 	@abstract	Acts as a base class for the options panes of all tools.
@@ -38,7 +40,6 @@ typedef NS_ENUM(NSInteger, AbstractModifiers) {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface AbstractOptions : NSObject {
 	
 	// The options view associated with this tool
@@ -48,7 +49,7 @@ typedef NS_ENUM(NSInteger, AbstractModifiers) {
 	IBOutlet id modifierPopup;
 	
 	// The document associated
-	id document;
+	SeaDocument *document;
 	
 }
 

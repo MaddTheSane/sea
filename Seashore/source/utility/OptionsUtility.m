@@ -28,9 +28,7 @@
 	lastView = blankView;
 	
 	NSArray *allTools = [[document tools] allTools];
-	NSEnumerator *e = [allTools objectEnumerator];
-	AbstractTool *tool;
-	while(tool = [e nextObject]){
+	for (AbstractTool *tool in allTools){
 		[tool setOptions: [self getOptions:[tool toolId]]];
 	}
 	
@@ -59,7 +57,7 @@
 	} while (options != NULL);
 }
 
-- (id)currentOptions
+- (__kindof AbstractOptions*)currentOptions
 {
 	if (document == NULL)
 		return NULL;
@@ -67,7 +65,7 @@
 		return [self getOptions:[toolboxUtility tool]];
 }
 
-- (id)getOptions:(int)whichTool
+- (__kindof AbstractOptions*)getOptions:(int)whichTool
 {
 	switch (whichTool) {
 		case kRectSelectTool:
@@ -131,7 +129,7 @@
 
 - (void)update
 {
-	id currentOptions = [self currentOptions];
+	AbstractOptions *currentOptions = [self currentOptions];
 	
 	// If there are no current options put up a blank view
 	if (currentOptions == NULL) {
@@ -143,13 +141,13 @@
 	
 	// Otherwise select the current options are up-to-date with the current tool
 	if (currentTool != [toolboxUtility tool]) {
-		[view replaceSubview:lastView with:[(AbstractOptions *)currentOptions view]];
-		lastView = [(AbstractOptions *)currentOptions view];
+		[view replaceSubview:lastView with:[currentOptions view]];
+		lastView = [currentOptions view];
 		currentTool = [toolboxUtility tool];
 	}
 	
 	// Update the options
-	[(AbstractOptions *)currentOptions activate:document];
+	[currentOptions activate:document];
 	[currentOptions update];
 }
 

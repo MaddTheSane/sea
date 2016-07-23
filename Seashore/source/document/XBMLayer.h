@@ -32,6 +32,6 @@
 				information).
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithFile:(FILE *)file offset:(long)offset document:(id)doc sharedInfo:(SharedXBMInfo *)info;
+- (instancetype)initWithFile:(FILE *)file offset:(long)offset document:(SeaDocument*)doc sharedInfo:(SharedXBMInfo *)info;
 
 @end

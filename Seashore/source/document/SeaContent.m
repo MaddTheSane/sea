@@ -50,6 +50,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 @synthesize cmykSave;
 @synthesize trueView;
 @synthesize activeLayerIndex;
+@synthesize type;
+@synthesize verticalResolution=yres;
+@synthesize horizontalResolution=xres;
+@synthesize height;
+@synthesize width;
 
 #if MAIN_COMPILE
 - (instancetype)initWithDocument:(id)doc
@@ -179,7 +184,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return self;
 }
 
-- (instancetype)initWithDocument:(id)doc data:(unsigned char *)ddata type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres
+- (instancetype)initWithDocument:(id)doc data:(unsigned char *)ddata type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])
@@ -257,11 +262,6 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 }
 #endif
 
-- (int)type
-{
-	return type;
-}
-
 - (int)spp
 {
 	int result = 0;
@@ -281,17 +281,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return result;
 }
 
-- (int)xres
-{
-	return xres;
-}
-
-- (int)yres
-{
-	return yres;
-}
-
-- (float)xscale
+- (CGFloat)xscale
 {
 	float xscale =
 #if MAIN_COMPILE
@@ -301,12 +291,12 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 #endif
 	
 	if (gScreenResolution.x != 0 && xres != gScreenResolution.x)
-		xscale /= ((float)xres / (float)gScreenResolution.x);
+		xscale /= ((CGFloat)xres / (CGFloat)gScreenResolution.x);
 	
 	return xscale;
 }
 
-- (float)yscale
+- (CGFloat)yscale
 {
 	float yscale =
 #if MAIN_COMPILE
@@ -315,7 +305,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	1;
 #endif
 	if (gScreenResolution.y != 0 && yres != gScreenResolution.y)
-		yscale /= ((float)yres / (float)gScreenResolution.y);
+		yscale /= ((CGFloat)yres / (CGFloat)gScreenResolution.y);
 	
 	return yscale;
 }
@@ -326,19 +316,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	xres = newRes.x;
 	yres = newRes.y;
 }
-#endif
 
-- (int)height
-{
-	return height;
-}
-
-- (int)width
-{
-	return width;
-}
-
-#if MAIN_COMPILE
 - (void)setWidth:(int)newWidth height:(int)newHeight
 {
 	width = newWidth;
@@ -450,16 +428,6 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		return [[background colorUsingColorSpaceName:NSDeviceWhiteColorSpace] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 }
 #endif
-
-- (void)setCMYKSave:(BOOL)value
-{
-	cmykSave = value;
-}
-
-- (BOOL)cmykSave
-{
-	return cmykSave;
-}
 
 - (NSDictionary *)exifData
 {

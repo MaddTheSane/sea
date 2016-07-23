@@ -2,6 +2,7 @@
 #import "SeaController.h"
 #import "UtilitiesManager.h"
 #import "TextureUtility.h"
+#import "SeaDocument.h"
 
 enum {
 	kExistingCategoryButton,
@@ -36,12 +37,16 @@ enum {
 	}
 	else {
 		path = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"textures"] stringByAppendingPathComponent:[categoryTextbox stringValue]];
-		[gFileManager createDirectoryAtPath:path attributes:nil];
+		[gFileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
-	path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [nameTextbox stringValue]]];
+	path = [[path stringByAppendingPathComponent:[nameTextbox stringValue]] stringByAppendingPathExtension:@"png"];
 	
 	// Write document
-	[document writeToFile:path ofType:@"Portable Network Graphics Image"];
+	NSError *err = nil;
+	if (![document writeToURL:[NSURL fileURLWithPath:path] ofType:(NSString*)kUTTypePNG error:&err]) {
+		[[NSAlert alertWithError:err] runModal];
+	}
+	//[document writeToFile:path ofType:@"Portable Network Graphics Image"];
 	
 	// Refresh textures
 	[[[SeaController utilitiesManager] textureUtilityFor:document] addTextureFromPath:path];

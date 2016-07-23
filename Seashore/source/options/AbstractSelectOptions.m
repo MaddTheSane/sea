@@ -4,6 +4,7 @@
 #import "SeaView.h"
 
 @implementation AbstractSelectOptions
+@synthesize selectionMode = mode;
 
 - (instancetype)init
 {
@@ -14,12 +15,7 @@
 	return self;
 }
 
-- (int)selectionMode
-{
-	return mode;
-}
-
-- (void)setSelectionMode:(int)newMode
+- (void)setSelectionMode:(SeaSelectMode)newMode
 {
 	mode = newMode;
 	if(mode == kDefaultMode){

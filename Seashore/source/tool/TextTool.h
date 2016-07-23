@@ -13,16 +13,16 @@
 @interface TextTool : AbstractTool {
 
 	// The preview panel
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// The move panel
-	IBOutlet id movePanel;
+	IBOutlet NSWindow *movePanel;
 	
 	// The preview text box
-	IBOutlet id textbox;
+	IBOutlet NSTextView *textbox;
 	
 	// The font manager associated with the text tool
-	id fontManager;
+	NSFontManager *fontManager;
 
 	// The point where the mouse was released
 	IntPoint where;

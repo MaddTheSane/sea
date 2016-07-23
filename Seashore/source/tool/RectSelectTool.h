@@ -24,11 +24,11 @@
 }
 
 /*!
-	@method		selectionRect
+	@property	selectionRect
 	@discussion	The rectangle of the current selection.
 	@result		Returns the rectangle in the overlay's coordinates.
 */
-- (IntRect) selectionRect;
+@property (readonly) IntRect selectionRect;
 
 /*!
 	@method		mouseDownAt:withEvent:

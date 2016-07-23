@@ -56,17 +56,17 @@
 - (void)mouseDraggedTo:(NSPoint)where withEvent:(NSEvent *)event;
 
 /*!
-	@method		start
+	@property	start
 	@discussion	Returns the start point.
 	@result		Returns an NSPoint of the start of the tool.
 */
-- (NSPoint)start;
+@property (readonly) NSPoint start;
 
 /*!
-	@method		current
+	@property	current
 	@discussion	Returns the current point.
 	@result		Returns the NSPoint of where the mouse is currently dragged to.
 */
-- (NSPoint)current;
+@property (readonly) NSPoint current;
 
 @end

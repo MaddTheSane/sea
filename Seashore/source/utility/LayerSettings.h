@@ -3,6 +3,7 @@
 @class SeaLayer;
 @class SeaDocument;
 @class PegasusUtility;
+@class InfoPanel;
 
 /*!
 	@class		LayerSettings
@@ -22,22 +23,22 @@
 	IBOutlet PegasusUtility *pegasusUtility;
 
 	// The settings panel
-    IBOutlet id panel;
+    IBOutlet InfoPanel *panel;
 	
 	// The text box for entering the layer's title
-    IBOutlet id layerTitle;
+    IBOutlet NSTextField *layerTitle;
 	
 	// The various values
-    IBOutlet id leftValue;
-    IBOutlet id topValue;
-    IBOutlet id widthValue;
-    IBOutlet id heightValue;
+    IBOutlet NSTextField *leftValue;
+    IBOutlet NSTextField *topValue;
+    IBOutlet NSTextField *widthValue;
+    IBOutlet NSTextField *heightValue;
 	
 	// The various units
-	IBOutlet id leftUnits;
-	IBOutlet id topUnits;
-	IBOutlet id widthUnits;
-	IBOutlet id heightUnits;
+	IBOutlet NSButton *leftUnits;
+	IBOutlet NSButton *topUnits;
+	IBOutlet NSButton *widthUnits;
+	IBOutlet NSButton *heightUnits;
 
 	// The units for the panel
 	int units;

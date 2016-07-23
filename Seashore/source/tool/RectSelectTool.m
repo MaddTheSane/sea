@@ -8,15 +8,11 @@
 #import "AspectRatio.h"
 
 @implementation RectSelectTool
+@synthesize selectionRect;
 
 - (SeaToolsDefines)toolId
 {
 	return kRectSelectTool;
-}
-
-- (IntRect) selectionRect
-{
-	return selectionRect;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event

@@ -16,7 +16,7 @@
 {
 	[[SeaController utilitiesManager] setStatusUtility: self for:document];
 	
-	[(LayerControlView *)view setHasResizeThumb: NO];
+	[view setHasResizeThumb: NO];
 	
 	// This is how you're SUPPOSED to change these things
 	[[channelSelectionPopup itemAtIndex: 0] setTitle: @""];
@@ -72,11 +72,10 @@
 		SeaContent *contents = [document contents];
 
 		// Set the channel selections correction
-		int i;
-		for(i = 0; i < 3; i++){
+		for (int i = 0; i < 3; i++) {
 			if([contents selectedChannel] == i){
 				[[channelSelectionPopup itemAtIndex: i + 1] setState: YES];
-			}else{
+			} else {
 				[[channelSelectionPopup itemAtIndex: i + 1] setState: NO];
 			}
 		}
@@ -150,12 +149,10 @@
 		[alphaSlider setNeedsDisplay:YES];*/
 		
 	}else{
-		
 		[redBox setIntValue: 0];
 		[blueBox setIntValue: 0];
 		[greenBox setIntValue: 0];
 		[alphaBox setIntValue: 0];
-		
 	}
 }
 
@@ -192,22 +189,22 @@
 
 - (IBAction)changeZoom:(id)sender
 {
-	[(SeaView *)[document docView] zoomTo: [sender intValue]];
+	[[document docView] zoomTo: [sender intValue]];
 }
 
 - (IBAction)zoomIn:(id)sender
 {
-	[(SeaView *)[document docView] zoomIn: self];
+	[[document docView] zoomIn: self];
 }
 
 - (IBAction)zoomOut:(id)sender
 {
-	[(SeaView *)[document docView] zoomOut: self];
+	[[document docView] zoomOut: self];
 }
 
 - (IBAction)zoomNormal:(id)sender
 {
-	[(SeaView *)[document docView] zoomNormal: self];
+	[[document docView] zoomNormal: self];
 }
 
 - (id)view

@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "SeaSelection.h"
 #import "SeaView.h"
 #import "SeaDocument.h"
@@ -14,6 +15,8 @@
 #import <GIMPCore/GIMPCore.h>
 
 @implementation SeaSelection
+@synthesize globalRect;
+@synthesize mask;
 
 - (instancetype)initWithDocument:(id)doc
 {
@@ -45,16 +48,11 @@
 	return [[[document contents] activeLayer] floating];
 }
 
-- (unsigned char *)mask
-{
-	return mask;
-}
-
 - (NSImage *)maskImage
 {
 	int i;
 	unsigned char basePixel[3];
-	id selectionColor;
+	NSColor *selectionColor;
 	
 	if (maskImage && selectionColorIndex != [[SeaController seaPrefs] selectionColorIndex]) {
 		selectionColor = [[SeaController seaPrefs] selectionColor:0.4];
@@ -95,11 +93,6 @@
 	return localRect;
 }
 
-- (IntRect)globalRect
-{
-	return globalRect;
-}
-
 - (IntRect)localRect
 {	
 	id layer = [[document contents] activeLayer];
@@ -137,7 +130,7 @@
 	}
 }
 
-- (void)selectRect:(IntRect)selectionRect mode:(int)mode
+- (void)selectRect:(IntRect)selectionRect mode:(SeaSelectMode)mode
 {
 	id layer = [[document contents] activeLayer];
 	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
@@ -248,7 +241,7 @@
 	[[document helpers] selectionChanged];
 }
 
-- (void)selectEllipse:(IntRect)selectionRect mode:(int)mode
+- (void)selectEllipse:(IntRect)selectionRect mode:(SeaSelectMode)mode
 {
 	id layer = [[document contents] activeLayer];
 	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
@@ -370,7 +363,7 @@
 	[[document helpers] selectionChanged];
 }
 
-- (void)selectRoundedRect:(IntRect)selectionRect radius:(int)radius mode:(int)mode
+- (void)selectRoundedRect:(IntRect)selectionRect radius:(int)radius mode:(SeaSelectMode)mode
 {
 	id layer = [[document contents] activeLayer];
 	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
@@ -524,7 +517,7 @@
 	[[document helpers] selectionChanged];
 }
 
-- (void)selectOverlay:(BOOL)destructively inRect:(IntRect)selectionRect mode:(int)mode
+- (void)selectOverlay:(BOOL)destructively inRect:(IntRect)selectionRect mode:(SeaSelectMode)mode
 {
 	id layer = [[document contents] activeLayer];
 	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];

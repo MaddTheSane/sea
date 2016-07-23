@@ -45,7 +45,7 @@
 	@param			newView
 				The SeaView that uses these cursors
 */
-- (instancetype)initWithDocument:(id)newDocument andView:(id)newView;
+- (instancetype)initWithDocument:(SeaDocument*)newDocument andView:(SeaView*)newView;
 
 /*!
 	@method		resetCursorRects
@@ -67,9 +67,10 @@
 - (void)addCursorRect:(NSRect)rect cursor:(NSCursor *)cursor;
 
 /*!
-	@method		handleRectsPointer
+	@property	handleRectsPointer
 	@discussion	Returns a pointer to the rectangles used for the handles.
 */
+@property (readonly) NSRect *handleRectsPointer NS_RETURNS_INNER_POINTER;
 - (NSRect *)handleRectsPointer;
 
 /*!

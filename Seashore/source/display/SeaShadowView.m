@@ -5,6 +5,7 @@
 #import "Globals.h"
 
 @implementation SeaShadowView
+@synthesize rulersVisible = areRulersVisible;
 
 - (instancetype)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];

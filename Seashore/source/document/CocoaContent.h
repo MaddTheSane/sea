@@ -17,7 +17,7 @@
 	IBOutlet id pdfPanel;
 	IBOutlet id pageLabel;
 	IBOutlet id pageInput;
-	IBOutlet id resMenu;
+	IBOutlet NSPopUpButton *resMenu;
 
 }
 

@@ -60,7 +60,7 @@
 			[items addObject: [self itemAtRow: i]];
 		}
 	}
-    return items;
+    return [items copy];
 }
 
 - (void)selectItems:(NSArray *)items byExtendingSelection:(BOOL)extend

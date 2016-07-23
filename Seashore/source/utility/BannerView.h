@@ -1,5 +1,7 @@
 #import "Globals.h"
 
+@class SeaDocument;
+
 /*!
 	@class		BannerView
 	@abstract	A view for an informative Banner
@@ -8,10 +10,9 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface BannerView : NSView {
 	// Reference to the document this banner is in
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// The text to display
 	NSString *bannerText;
@@ -20,10 +21,10 @@
 	int bannerImportance;
 	
 	// The default button for the banner
-	IBOutlet id defaultButton;
+	IBOutlet NSButton *defaultButton;
 	
 	// The alternate button (optional)
-	IBOutlet id alternateButton;
+	IBOutlet NSButton *alternateButton;
 }
 
 /*!

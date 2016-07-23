@@ -20,14 +20,14 @@
 }
 
 /*!
-	@method		ratio
+	@property	ratio
 	@discussion	Returns the ratio/size for the rect.
 				If tool does not have a rect, this method is not needed.
 	@result		Returns a NSSize for the crop in the aspect type's
 				units. If it is a ratio the width = X / Y and the 
 				height = Y / X.
 */
-- (NSSize)ratio;
+@property (readonly) NSSize ratio;
 
 /*!
 	@property	aspectType

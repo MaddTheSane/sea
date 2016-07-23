@@ -53,6 +53,7 @@ static NSString*	SelectInverseToolbarItemIdentifier = @"Select Inverse Toolbar I
 static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item Identifier";
 
 @implementation SeaView
+@synthesize zoom;
 
 - (instancetype)initWithDocument:(id)doc 
 {	
@@ -273,11 +274,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	#endif
 	[self setNeedsDisplay:YES];
 	[[document helpers] zoomChanged];
-}
-
-- (float)zoom
-{
-	return zoom;
 }
 
 - (void)drawRect:(NSRect)rect

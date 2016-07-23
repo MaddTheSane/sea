@@ -9,6 +9,7 @@
 #import "InfoUtility.h"
 #import "StatusUtility.h"
 
+@class SeaDocument;
 
 /*!
 	@class		UtilitiesManager
@@ -60,7 +61,7 @@
 	@param		doc
 				The document that is now closing.
 */
-- (void)shutdownFor:(id)doc;
+- (void)shutdownFor:(SeaDocument*)doc;
 
 /*!
 	@method		activate
@@ -68,7 +69,7 @@
 	@param		sender
 				The document to activate the utilities with.
 */
-- (void)activate:(id)sender;
+- (void)activate:(SeaDocument*)sender;
 
 /*!
 	@method		pegasusUtilityFor:
@@ -77,8 +78,8 @@
 				The document that the utility is requested for.
 	@result		Returns an instance of PegasusUtility.
 */
-- (PegasusUtility*)pegasusUtilityFor:(id)doc;
-- (void)setPegasusUtility:(PegasusUtility*)util for:(id)doc;
+- (PegasusUtility*)pegasusUtilityFor:(SeaDocument*)doc;
+- (void)setPegasusUtility:(PegasusUtility*)util for:(SeaDocument*)doc;
 
 /*!
 	@method		transparentUtilityFor:
@@ -94,8 +95,8 @@
 				The document that the utility is requested for.
 	@result		Returns an instance of ToolboxUtility.
 */
-- (ToolboxUtility*)toolboxUtilityFor:(id)doc;
-- (void)setToolboxUtility:(ToolboxUtility*)util for:(id)doc;
+- (ToolboxUtility*)toolboxUtilityFor:(SeaDocument*)doc;
+- (void)setToolboxUtility:(ToolboxUtility*)util for:(SeaDocument*)doc;
 
 /*!
 	@method		brushUtilityFor:
@@ -104,8 +105,8 @@
 				The document that the utility is requested for.
 	@result		Returns an instance of BrushUtility.
 */
-- (BrushUtility*)brushUtilityFor:(id)doc;
-- (void)setBrushUtility:(BrushUtility*)util for:(id)doc;
+- (BrushUtility*)brushUtilityFor:(SeaDocument*)doc;
+- (void)setBrushUtility:(BrushUtility*)util for:(SeaDocument*)doc;
 
 
 /*!
@@ -115,8 +116,8 @@
 				The document that the utility is requested for.
 	@result		Returns an instance of TextureUtility.
 */
-- (TextureUtility*)textureUtilityFor:(id)doc;
-- (void)setTextureUtility:(TextureUtility*)util for:(id)doc;
+- (TextureUtility*)textureUtilityFor:(SeaDocument*)doc;
+- (void)setTextureUtility:(TextureUtility*)util for:(SeaDocument*)doc;
 
 /*!
 	@method		optionsUtilityFor:
@@ -125,8 +126,8 @@
 				The document that the utility is requested for.
 	@result		Returns an instance of OptionsUtility.
 */
-- (OptionsUtility*)optionsUtilityFor:(id)doc;
-- (void)setOptionsUtility:(OptionsUtility*)util for:(id)doc;
+- (OptionsUtility*)optionsUtilityFor:(SeaDocument*)doc;
+- (void)setOptionsUtility:(OptionsUtility*)util for:(SeaDocument*)doc;
 
 /*!
 	@method		infoUtilityFor:
@@ -135,8 +136,8 @@
 				The document that the utility is requested for.	
 	@result		Returns an instance of InfoUtility.
 */
-- (InfoUtility*)infoUtilityFor:(id)doc;
-- (void)setInfoUtility:(InfoUtility*)util for:(id)doc;
+- (InfoUtility*)infoUtilityFor:(SeaDocument*)doc;
+- (void)setInfoUtility:(InfoUtility*)util for:(SeaDocument*)doc;
 
 /*!
 	@method		statusUtilityFor:
@@ -145,8 +146,8 @@
 				The document that the utility is requested for.	
 	@result		Returns an instance of StatusUtility.
 */
-- (StatusUtility*)statusUtilityFor:(id)doc;
-- (void)setStatusUtility:(StatusUtility*)util for:(id)doc;
+- (StatusUtility*)statusUtilityFor:(SeaDocument*)doc NS_SWIFT_NAME(statusUtility(for:));
+- (void)setStatusUtility:(StatusUtility*)util for:(SeaDocument*)doc;
 
 
 @end

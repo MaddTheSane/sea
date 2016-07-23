@@ -6,6 +6,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class SeaDocument;
+
 @interface NSOutlineView(MyExtensions)
 
 - (NSArray *)allSelectedItems;
@@ -16,7 +18,7 @@
 @interface SeaOutlineView : NSOutlineView
 {
 	// The document the outline view is in
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// Whether or not the view is the first responder
 	BOOL isFirst;

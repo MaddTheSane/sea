@@ -6,6 +6,7 @@
 #import "SeaView.h"
 
 @implementation TransparentUtility
+@synthesize color;
 
 - (instancetype)init
 {
@@ -64,11 +65,6 @@
 
 	[defaults setObject:[NSArchiver archivedDataWithRootObject:color] forKey:@"transparency color data"];
 
-}
-
-- (id)color
-{		
-	return color;
 }
 
 @end

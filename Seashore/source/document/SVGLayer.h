@@ -1,6 +1,8 @@
 #import "Globals.h"
 #import "SeaLayer.h"
 
+@class SeaDocument;
+
 /*!
 	@class		SVGLayer
 	@abstract	Make a layer from an image representation.
@@ -30,6 +32,6 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithImageRep:(id)imageRep document:(id)doc spp:(int)lspp;
+- (instancetype)initWithImageRep:(id)imageRep document:(SeaDocument*)doc spp:(int)lspp;
 
 @end
