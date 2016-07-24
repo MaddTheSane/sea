@@ -1,3 +1,4 @@
+#include <CoreFoundation/CFBase.h>
 #import <Foundation/Foundation.h>
 #import "Globals.h"
 #import "SeaCompositor.h"
@@ -18,9 +19,25 @@
 				Indicates that all channels are being viewed in CMYK previewing mode.
 */
 typedef NS_ENUM(int, SeaChannelsView) {
+	/*!
+	 @constant	kAllChannelsView
+				Indicates that all channels are being viewed.
+	 */
 	kAllChannelsView,
+	/*!
+	 @constant	kPrimaryChannelsView
+				Indicates that just the primary channel(s) are being viewed.
+	 */
 	kPrimaryChannelsView,
+	/*!
+	 @constant	kAlphaChannelView
+				Indicates that just the alpha channel is being viewed.
+	 */
 	kAlphaChannelView,
+	/*!
+	 @constant	kCMYKPreviewView
+				Indicates that all channels are being viewed in CMYK previewing mode.
+	 */
 	kCMYKPreviewView
 };
 
@@ -44,6 +61,10 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 	kMaskingBehaviour
 };
 
+#if !MAIN_COMPILE
+@class SeaContent;
+@class SeaCompositor;
+#endif
 
 /*!
 	@class		SeaWhiteboard
@@ -55,12 +76,6 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 				Copyright (c) 2005 Daniel Jalkut
 */
-
-#if !MAIN_COMPILE
-@class SeaContent;
-@class SeaCompositor;
-#endif
-
 @interface SeaWhiteboard : NSObject {
 #if MAIN_COMPILE
 	// The document associated with this whiteboard
@@ -184,19 +199,19 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 - (void)clearOverlay;
 
 /*!
-	@method		overlay
+	@property	overlay
 	@discussion	Returns the bitmap data of the overlay.
 	@result		Returns a pointer to the bitmap data of the overlay.
 */
-- (unsigned char *)overlay NS_RETURNS_INNER_POINTER;
+@property (readonly) unsigned char *overlay NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		replace
+	@property	replace
 	@discussion	Returns the replace mask of the overlay.
 	@result		Returns a pointer to the 8 bits per pixel replace mask of the
 				overlay.
 */
-- (unsigned char *)replace NS_RETURNS_INNER_POINTER;
+@property (readonly) unsigned char *replace NS_RETURNS_INNER_POINTER;
 
 // READJUSTING METHODS
 
@@ -245,12 +260,12 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 
 
 /*!
-	@method		canToggleCMYKPreview
+	@property	canToggleCMYKPreview
 	@discussion	Returns whether or not CMYK previewing can be toggled for this
 				document.
 	@result		Returns YES if CMYK previewing can be toggled, NO otherwise.
 */
-- (BOOL)canToggleCMYKPreview;
+@property (readonly) BOOL canToggleCMYKPreview;
 
 /*!
 	@method		toggleCMYKPreview
@@ -326,26 +341,26 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 - (NSImage *)printableImage;
 
 /*!
-	@method		data
+	@property	data
 	@discussion	Returns the bitmap data for the whiteboard.
 	@result		Returns a pointer to the bitmap data for the whiteboard.
 */
-- (unsigned char *)data NS_RETURNS_INNER_POINTER;
+@property (readonly) unsigned char *data NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		altData
+	@property	altData
 	@discussion	Returns the alternate bitmap data for the whiteboard.
 	@result		Returns a pointer to the alternate bitmap data for the
 				whiteboard.
 */
-- (unsigned char *)altData NS_RETURNS_INNER_POINTER;
+@property (readonly) unsigned char *altData NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		displayProf
+	@property	displayProf
 	@discussion	Returns the current display profile.
 	@result		Returns a CMProfileRef representing the ColorSync display profile
 				Seashore is using.
 */
-- (CGColorSpaceRef)displayProf;
+@property (readonly) CGColorSpaceRef displayProf CF_RETURNS_NOT_RETAINED;
 
 @end

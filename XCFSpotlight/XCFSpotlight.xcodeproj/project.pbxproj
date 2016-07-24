@@ -270,7 +270,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Spotlight;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.apple.${PRODUCT_NAME:identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = XCFSpotlight;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -286,7 +286,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Spotlight;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.apple.${PRODUCT_NAME:identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = XCFSpotlight;
 				WRAPPER_EXTENSION = mdimporter;
 			};

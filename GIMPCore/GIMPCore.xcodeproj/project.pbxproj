@@ -40,7 +40,7 @@
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		A80162E10D17F4BB00C4A2BE /* GIMPRotating.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = GIMPRotating.c; path = source/GIMPRotating.c; sourceTree = "<group>"; };
+		A80162E10D17F4BB00C4A2BE /* GIMPRotating.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GIMPRotating.c; path = source/GIMPRotating.c; sourceTree = "<group>"; };
 		A80162EC0D17F5B800C4A2BE /* gimpmatrix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = gimpmatrix.h; path = source/gimpmatrix.h; sourceTree = "<group>"; };
 		A80162ED0D17F5B800C4A2BE /* gimpmatrix.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = gimpmatrix.c; path = source/gimpmatrix.c; sourceTree = "<group>"; };
 		A829A54F06A181FF006CD6F9 /* Gradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gradient.h; path = source/Gradient.h; sourceTree = "<group>"; };
@@ -54,8 +54,8 @@
 		A87138D6069C393900A80207 /* gimprgb.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = gimprgb.h; path = source/gimprgb.h; sourceTree = "<group>"; };
 		A8A7BDE207C1E06C006AB467 /* GIMPCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GIMPCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8BEC8DE05018CCC00A80207 /* GIMPCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GIMPCore.h; path = public/GIMPCore.h; sourceTree = "<group>"; };
-		A8BEC8E2050190CA00A80207 /* GIMPBridge.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = GIMPBridge.h; path = source/GIMPBridge.h; sourceTree = "<group>"; };
-		A8BEC8F105019EC900A80207 /* GIMPScaling.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = GIMPScaling.c; path = source/GIMPScaling.c; sourceTree = "<group>"; };
+		A8BEC8E2050190CA00A80207 /* GIMPBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GIMPBridge.h; path = source/GIMPBridge.h; sourceTree = "<group>"; };
+		A8BEC8F105019EC900A80207 /* GIMPScaling.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GIMPScaling.c; path = source/GIMPScaling.c; sourceTree = "<group>"; };
 		DCA784CD0A6E89F80058681A /* GIMPPolygon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GIMPPolygon.c; path = source/Polygon/GIMPPolygon.c; sourceTree = "<group>"; };
 		DCA784D00A6E8E930058681A /* gimpscanconvert.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = gimpscanconvert.c; path = source/Polygon/gimpscanconvert.c; sourceTree = "<group>"; };
 		DCA784D10A6E8E930058681A /* gimpscanconvert.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = gimpscanconvert.h; path = source/Polygon/gimpscanconvert.h; sourceTree = "<group>"; };
@@ -359,6 +359,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
@@ -372,6 +373,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEFINES_MODULE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;

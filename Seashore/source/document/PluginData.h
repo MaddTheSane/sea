@@ -14,7 +14,7 @@
 @class SeaDocument;
 
 @interface PluginData : NSObject
-// The document associated with this object
+//! The document associated with this object
 @property (weak) IBOutlet SeaDocument *document;
 
 /*!
@@ -127,7 +127,7 @@
 	@result		Returns a CGColorSpaceRef representing the ColorSync display profile
 				Seashore is using.
 */
-@property (readonly) CGColorSpaceRef displayProf;
+@property (readonly) CGColorSpaceRef displayProf CF_RETURNS_NOT_RETAINED;
 
 /*!
 	@method		window
@@ -136,6 +136,7 @@
 */
 - (NSWindow *)window;
 
+//! The overlay behaviour
 @property SeaOverlayBehaviour overlayBehaviour;
 
 /*!
@@ -146,6 +147,7 @@
 */
 - (void)setOverlayBehaviour:(SeaOverlayBehaviour)value;
 
+//! The opacity of the overlay
 @property int overlayOpacity;
 
 /*!

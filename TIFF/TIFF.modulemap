@@ -1,4 +1,4 @@
-framework module TIFF {
+framework module TIFF [extern_c] {
 	umbrella header "tiff.h"
 
 	export *

@@ -14,7 +14,7 @@
 #import "SSKCIPlugin.h"
 
 @interface GaussianClass : SSKVisualPlugin
-// The number of applications
+//! The number of applications
 @property NSInteger radius;
 
 /*!

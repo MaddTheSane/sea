@@ -80,7 +80,7 @@ struct _GimpVector2
 
 typedef void (* ProgressFunction) (int max, int current);
 
-/*
+/*!
 	GCScalePixels()
 	
 	Scales the pixels of the source bitmap so that they fill the destination
@@ -88,28 +88,28 @@ typedef void (* ProgressFunction) (int max, int current);
 */
 void GCScalePixels(unsigned char *dest, int destWidth, int destHeight, unsigned char *src, int srcWidth, int srcHeight, GimpInterpolationType interpolation, int spp);
 
-/*
+/*!
 	GCDrawEllipse()
 	
 	Fills the given bitmap with an ellipse of the specified dimensions.
 */
 void GCDrawEllipse(unsigned char *dest, int destWidth, int destHeight, IntRect rect, unsigned int antialiased);
 
-/*
+/*!
 	GCFillGradient
 	
 	Fills a rectangle of the given bitmap with the given gradient.
 */
 void GCFillGradient(unsigned char *dest, int destWidth, int destHeight, IntRect rect, int spp, GimpGradientInfo info, ProgressFunction progress_callback);
 
-/*
+/*!
 	GCDrawPolygon
 	
 	Fills the given bitmap with a polygon using the provided points.
 */
 void GCDrawPolygon(unsigned char *dest, int destWidth, int destHeight, GimpVector2 *points, int n, int spp);
 
-/*
+/*!
 	GCRotateImage
 	
 	Rotates the given bitmap through the specified angle (in radians).

@@ -12,7 +12,7 @@
 #import "SSKCIPlugin.h"
 
 @interface PosterizeClass : SSKVisualPlugin
-// The posterize value
+//! The posterize value
 @property NSInteger posterizeValue;
 
 /*!

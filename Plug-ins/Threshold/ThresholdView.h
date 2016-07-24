@@ -8,7 +8,7 @@
 */
 
 #import <Cocoa/Cocoa.h>
-#import "PluginData.h"
+#import <SeashoreKit/PluginData.h>
 
 @class ThresholdClass;
 
@@ -16,7 +16,7 @@
 {
 	int histogram[256];
 	
-	IBOutlet ThresholdClass *thresholdClass;
+	IBOutlet __weak ThresholdClass *thresholdClass;
 }
 
 - (void)calculateHistogram:(PluginData *)pluginData; 

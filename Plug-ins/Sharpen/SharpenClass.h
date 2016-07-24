@@ -13,7 +13,7 @@
 #import "SSKCIPlugin.h"
 
 @interface SharpenClass : SSKVisualPlugin
-// The number of extent
+//! The number of extent
 @property NSInteger extent;
 
 /*!

@@ -13,10 +13,10 @@
 #import "SSKCIPlugin.h"
 
 @interface BrightnessClass : SSKVisualPlugin
-// The brightness
+//! The brightness
 @property CGFloat brightness;
 
-// The contrast
+//! The contrast
 @property CGFloat contrast;
 
 /*!

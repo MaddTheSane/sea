@@ -18,6 +18,16 @@ private func specmod<A where A: SignedIntegerType>(a: A, _ b: A) -> A {
 	}
 }
 
+///Clamps a variable between `minimum` and `maximum`.
+///
+///If `minimum` is greater than `maximum`, the original value is returned.
+private func clamp<X: Comparable>(value: X, minimum: X, maximum: X) -> X {
+	if minimum > maximum {
+		return value
+	}
+	return max(min(value, maximum), minimum)
+}
+
 public final class SwiftHorizStripes: SSKPlugin {
 	public override func type() -> Int32 {
 		return 1
@@ -63,26 +73,26 @@ public final class SwiftHorizStripes: SSKPlugin {
 		
 		// Get colors
 		if spp == 4 {
-			foreColorAlpha[0] = UInt8(pluginData.foreColor(true).redComponent * 255)
-			foreColorAlpha[1] = UInt8(pluginData.foreColor(true).greenComponent * 255)
-			foreColorAlpha[2] = UInt8(pluginData.foreColor(true).blueComponent * 255)
-			foreColorAlpha[3] = UInt8(pluginData.foreColor(true).alphaComponent * 255)
-			backColorAlpha[0] = UInt8(pluginData.backColor(true).redComponent * 255)
-			backColorAlpha[1] = UInt8(pluginData.backColor(true).greenComponent * 255)
-			backColorAlpha[2] = UInt8(pluginData.backColor(true).blueComponent * 255)
-			backColorAlpha[3] = UInt8(pluginData.backColor(true).alphaComponent * 255)
-		} else {
-			foreColorAlpha[0] = UInt8(pluginData.foreColor(true).whiteComponent * 255)
-			foreColorAlpha[1] = UInt8(pluginData.foreColor(true).alphaComponent * 255)
+			foreColorAlpha[0] = UInt8(clamp(pluginData.foreColor(true).redComponent * 255, minimum: 0, maximum: 255))
+			foreColorAlpha[1] = UInt8(clamp(pluginData.foreColor(true).greenComponent * 255, minimum: 0, maximum: 255))
+			foreColorAlpha[2] = UInt8(clamp(pluginData.foreColor(true).blueComponent * 255, minimum: 0, maximum: 255))
+			foreColorAlpha[3] = UInt8(clamp(pluginData.foreColor(true).alphaComponent * 255, minimum: 0, maximum: 255))
 			
-			backColorAlpha[0] = UInt8(pluginData.backColor(true).whiteComponent * 255)
-			backColorAlpha[1] = UInt8(pluginData.backColor(true).alphaComponent * 255)
+			backColorAlpha[0] = UInt8(clamp(pluginData.backColor(true).redComponent * 255, minimum: 0, maximum: 255))
+			backColorAlpha[1] = UInt8(clamp(pluginData.backColor(true).greenComponent * 255, minimum: 0, maximum: 255))
+			backColorAlpha[2] = UInt8(clamp(pluginData.backColor(true).blueComponent * 255, minimum: 0, maximum: 255))
+			backColorAlpha[3] = UInt8(clamp(pluginData.backColor(true).alphaComponent * 255, minimum: 0, maximum: 255))
+		} else {
+			foreColorAlpha[0] = UInt8(clamp(pluginData.foreColor(true).whiteComponent * 255, minimum: 0, maximum: 255))
+			foreColorAlpha[1] = UInt8(clamp(pluginData.foreColor(true).alphaComponent * 255, minimum: 0, maximum: 255))
+			
+			backColorAlpha[0] = UInt8(clamp(pluginData.backColor(true).whiteComponent * 255, minimum: 0, maximum: 255))
+			backColorAlpha[1] = UInt8(clamp(pluginData.backColor(true).alphaComponent * 255, minimum: 0, maximum: 255))
 		}
 		
 		// Run checkboard
 		for j in selection.origin.y..<(selection.origin.y + selection.size.height) {
 			for i in selection.origin.x..<(selection.origin.x + selection.size.width) {
-				
 				let pos = j * width + i;
 				
 				let black: Bool = (specmod(j - point.y, amount * 2) < amount);

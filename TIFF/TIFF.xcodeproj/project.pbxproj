@@ -135,17 +135,17 @@
 				A854AD3609BC13B0004AD947 /* Private Headers */,
 				32C88DFF0371C24200C91783 /* Source */,
 				089C1665FE841158C02AAC07 /* Resources */,
-				0867D69AFE84028FC02AAC07 /* External Libraries */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
 			name = TIFF;
 			sourceTree = "<group>";
 		};
-		0867D69AFE84028FC02AAC07 /* External Libraries */ = {
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "External Libraries";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		089C1665FE841158C02AAC07 /* Resources */ = {

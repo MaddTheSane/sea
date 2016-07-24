@@ -8,15 +8,15 @@
 */
 
 #import <Cocoa/Cocoa.h>
-#import "SeaPlugins.h"
+#import <SeashoreKit/SeaPlugins.h>
 #import "ThresholdView.h"
-#import "SSKCIPlugin.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
 @interface ThresholdClass : SSKVisualPlugin
-// The threshold range
+//! The threshold range
 @property (weak) IBOutlet NSTextField *rangeLabel;
 
-// The view associated with this panel
+//! The view associated with this panel
 @property (weak) IBOutlet ThresholdView *view;
 
 /*!

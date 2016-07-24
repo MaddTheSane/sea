@@ -13,11 +13,11 @@
 #import "SSKCIPlugin.h"
 
 @interface HSVClass : SSKVisualPlugin
-// The hue
+//! The hue
 @property CGFloat hue;
-// The saturation
+//! The saturation
 @property CGFloat saturation;
-// The value
+//! The value
 @property CGFloat value;
 
 /*!

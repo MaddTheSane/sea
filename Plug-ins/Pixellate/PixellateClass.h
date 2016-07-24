@@ -12,7 +12,7 @@
 #import "SSKCIPlugin.h"
 
 @interface PixellateClass : SSKVisualPlugin
-// The number of scale
+//! The number of scale
 @property NSInteger scale;
 
 /*!
