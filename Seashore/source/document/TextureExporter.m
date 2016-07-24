@@ -4,7 +4,7 @@
 #import "TextureUtility.h"
 #import "SeaDocument.h"
 
-enum {
+NS_ENUM(int) {
 	kExistingCategoryButton,
 	kNewCategoryButton
 };

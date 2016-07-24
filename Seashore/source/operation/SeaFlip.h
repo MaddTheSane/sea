@@ -12,6 +12,8 @@ enum {
 	kVerticalFlip
 };
 
+@class SeaDocument;
+
 /*!
 	@class		SeaFlip
 	@abstract	Handles the flipping of selections for Seashore.
@@ -20,12 +22,11 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaFlip : NSObject
 {
 
 	// The document associated with this object
-    IBOutlet id document;
+    IBOutlet SeaDocument *document;
 	
 }
 

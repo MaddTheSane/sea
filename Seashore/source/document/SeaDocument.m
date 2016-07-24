@@ -34,7 +34,7 @@ extern IntPoint gScreenResolution;
 extern BOOL globalReadOnlyWarning;
 BOOL globalReadOnlyWarning;
 
-enum {
+typedef NS_ENUM(int, SeaSpecialStart) {
 	kNoStart = 0,
 	kNormalStart = 1,
 	kOpenStart = 2,

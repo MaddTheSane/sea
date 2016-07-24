@@ -7,7 +7,7 @@
 #import <TIFF/tiff.h>
 #import <TIFF/tiffio.h>
 
-enum {
+CF_ENUM(int) {
    openReadSpool = 1,	/* start read data process */
    openWriteSpool= 2,	/* start write data process */
    readSpool   = 3,		/* read specified number of bytes */

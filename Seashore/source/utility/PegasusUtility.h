@@ -7,7 +7,7 @@
 	@constant	kPegasusUpdateLayerView
 				Indicates that only the layer view of the Pegasus utility should be updated.
 */
-enum {
+NS_ENUM(int) {
 	kPegasusUpdateAll,
 	kPegasusUpdateLayerView
 };

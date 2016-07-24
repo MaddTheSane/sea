@@ -9,7 +9,7 @@
 	@constant	kMeasureMillimeters
 				Measure using millimetres.
 */
-enum {
+NS_ENUM(int) {
 	kMeasurePixels = 0,
 	kMeasureInches = 1,
 	kMeasureMillimeters = 2

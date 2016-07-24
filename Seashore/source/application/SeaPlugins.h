@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
 				Specifies a basic effect plug-in that acts on one or
 				more given to it by the effects tool.
 */
-enum {
+NS_ENUM(int) {
 	kBasicPlugin = 0,
 	kPointPlugin = 1
 };
