@@ -11,8 +11,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(int, PropType)
-{
+typedef NS_ENUM(int, XcfPropType) {
 	PROP_END                   =  0,
 	PROP_COLORMAP              =  1,
 	PROP_ACTIVE_LAYER          =  2,
@@ -47,9 +46,10 @@ typedef NS_ENUM(int, PropType)
 	@constant	COMPRESS_RLE
 				Indicates compression through run-length encoding is used.
 */
-typedef NS_ENUM(int, XcfCompressionType)
-{
+typedef NS_ENUM(int, XcfCompressionType) {
+	//! Indicates no compression is used.
 	COMPRESS_NONE              =  0,
+	//! Indicates compression through run-length encoding is used.
 	COMPRESS_RLE               =  1,
 	COMPRESS_ZLIB              =  2,  /* unused */
 	COMPRESS_FRACTAL           =  3   /* unused */
@@ -147,10 +147,17 @@ typedef NS_ENUM(int, XcfLayerMode)
 				loading, as such elsewhere you do not need to account for
 				this document type).
 */
-typedef NS_ENUM(int, XcfImageType)
-{
+typedef NS_ENUM(int, XcfImageType) {
+	//! A document with three colour channels (red, green and blue).
 	XCF_RGB_IMAGE,
+	//! A document with a single colour channel (white).
 	XCF_GRAY_IMAGE,
+	/*!
+	 A document with an indexed colour channel (all such
+	 documents are converted to one of the above types after
+	 loading, as such elsewhere you do not need to account for
+	 this document type).
+	 */
 	XCF_INDEXED_IMAGE
 };
 
@@ -169,14 +176,19 @@ typedef NS_ENUM(int, XcfImageType)
 	@constant   GIMP_INDEXEDA_IMAGE
 				Specifies the layer's data is in the INDEXEDA format.
 */
-typedef NS_ENUM(int, GimpImageType)
-{
-  GIMP_RGB_IMAGE,
-  GIMP_RGBA_IMAGE,
-  GIMP_GRAY_IMAGE,
-  GIMP_GRAYA_IMAGE,
-  GIMP_INDEXED_IMAGE,
-  GIMP_INDEXEDA_IMAGE
+typedef NS_ENUM(int, GimpImageType) {
+	//! Specifies the layer's data is in the RGB format.
+	GIMP_RGB_IMAGE,
+	//! Specifies the layer's data is in the RGBA format.
+	GIMP_RGBA_IMAGE,
+	//! Specifies the layer's data is in the GRAY format.
+	GIMP_GRAY_IMAGE,
+	//! Specifies the layer's data is in the GRAYA format.
+	GIMP_GRAYA_IMAGE,
+	//! Specifies the layer's data is in the INDEXED format.
+	GIMP_INDEXED_IMAGE,
+	//! Specifies the layer's data is in the INDEXEDA format.
+	GIMP_INDEXEDA_IMAGE
 };
 
 
@@ -190,9 +202,13 @@ typedef NS_ENUM(int, GimpImageType)
 	@constant	kAlphaChannel
 				Specifies the alpha channel.
 */
-enum {
+NS_ENUM(int) {
+	//! Specifies all channels.
 	kAllChannels,
+	//! Specifies the primary RGB channels in a colour image or the
+	//! primary white channel in a greyscale image.
 	kPrimaryChannels,
+	//! Specifies the alpha channel.
 	kAlphaChannel
 };
 
@@ -206,8 +222,11 @@ enum {
 				Specifies all linked layers.
 */
 NS_ENUM(NSInteger) {
+	//! Specifies the active layer.
 	kActiveLayer = -1,
+	//! Specifies all layers.
 	kAllLayers = -2,
+	//! Specifies all linked layers.
 	kLinkedLayers = -3
 };
 
@@ -221,8 +240,11 @@ NS_ENUM(NSInteger) {
 				Specifies the colour components are specified as floating point values.
 */
 typedef NS_OPTIONS(unsigned int, GIMPBitmapFormat) {
+	//! Specifies the alpha channel is first.
 	kAlphaFirstFormat = 1 << 0,
+	//! Specifies the alpha is not premultiplied.
 	kAlphaNonPremultipliedFormat = 1 << 1,
+	//! Specifies the colour components are specified as floating point values.
 	kFloatingFormat = 1 << 2
 };
 

@@ -164,7 +164,7 @@ static inline void fix_endian_read(int *input, size_t size)
 
 - (BOOL)skipMaskHeader:(FILE *)file
 {
-	int propType, propSize;
+	int propSize;
 	BOOL finished;
 	
 	// Skip width, height and name
@@ -182,7 +182,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	while (!finished && !ferror(file)) {
 		fread(tempIntString, sizeof(int), 2, file);
 		fix_endian_read(tempIntString, 2);
-		propType = tempIntString[0];
+		XcfPropType propType = tempIntString[0];
 		propSize = tempIntString[1];
 		switch (propType) {
 			case PROP_END:

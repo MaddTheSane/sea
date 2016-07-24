@@ -44,9 +44,9 @@
 
 - (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path
 {
-	NSImageRep *imageRep;
+	__kindof NSImageRep *imageRep;
 	NSImage *image;
-	id layer;
+	CocoaLayer *layer;
 	BOOL test, res_set = NO;
 	NSInteger value;
 	
@@ -76,8 +76,8 @@
 				[pdfPanel orderOut:self];
 
 				value = [pageInput intValue];
-				if (value > 0 && value <= [(NSPDFImageRep*)imageRep pageCount]){
-					[(NSPDFImageRep*)imageRep setCurrentPage:value - 1];
+				if (value > 0 && value <= [imageRep pageCount]){
+					[imageRep setCurrentPage:value - 1];
 				}
 
 				NSSize sourceSize = [image size];
@@ -122,19 +122,19 @@
 				}
 				[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
 				[image setSize:size];
-				NSRect destinationRect = NSMakeRect( 0, 0, size.width, size.height );
+				NSRect destinationRect = NSMakeRect(0, 0, size.width, size.height);
 				NSImage* dest = [[NSImage alloc] initWithSize:size];
 				[dest lockFocus];
-				NSRectFillUsingOperation( destinationRect, NSCompositeClear );
+				NSRectFillUsingOperation(destinationRect, NSCompositeClear);
 				[image drawInRect: destinationRect
-						  fromRect: destinationRect
-						 operation: NSCompositeCopy fraction: 1.0];
+						 fromRect: destinationRect
+						operation: NSCompositeCopy fraction: 1.0];
 				
 				NSBitmapImageRep* newRep = [[NSBitmapImageRep alloc]
 											initWithFocusedViewRect: destinationRect];
 				[dest unlockFocus];
 				imageRep = newRep;
-			}else {
+			} else {
 				imageRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
 			}
 		}
@@ -145,12 +145,12 @@
 	
 	// Warn if 16-bit image
 	if ([imageRep bitsPerSample] == 16) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"16-bit message", @"Seashore does not support the editing of 16-bit images. This image has been resampled at 8-bits to be imported.") forDocument:doc level:kHighImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"16-bit message", @"Seashore does not currently support the editing of 16-bit images. This image has been resampled at 8 bits to be imported.") forDocument:doc level:kHighImportance];
 	}
 	
 	// Determine the height and width of the image
-	height = (int)[imageRep pixelsHigh];
-	width = (int)[imageRep pixelsWide];
+	height = (int)[(NSImageRep*)imageRep pixelsHigh];
+	width = (int)[(NSImageRep*)imageRep pixelsWide];
 	
 	// Determine the resolution of the image
 	if (!res_set) {

@@ -90,14 +90,14 @@ typedef struct {
 /*!
 	@property	cmykSave
 	@discussion	Shows whether TIFF files should be saved using the CMYK colour
- space.
+				space.
  */
 @property (setter=setCMYKSave:) BOOL cmykSave;
 
 /*!
 	@property	trueView
 	@discussion	Shows whether the document view should be showing all channels
- or just the channel being edited.
+				or just the channel being edited.
  */
 @property BOOL trueView;
 

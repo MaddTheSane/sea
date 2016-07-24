@@ -53,7 +53,7 @@
 		A87138D5069C393900A80207 /* gimprgb.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = gimprgb.c; path = source/gimprgb.c; sourceTree = "<group>"; };
 		A87138D6069C393900A80207 /* gimprgb.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = gimprgb.h; path = source/gimprgb.h; sourceTree = "<group>"; };
 		A8A7BDE207C1E06C006AB467 /* GIMPCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GIMPCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8BEC8DE05018CCC00A80207 /* GIMPCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GIMPCore.h; path = public/GIMPCore.h; sourceTree = "<group>"; };
+		A8BEC8DE05018CCC00A80207 /* GIMPCore.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = GIMPCore.h; path = public/GIMPCore.h; sourceTree = "<group>"; usesTabs = 0; };
 		A8BEC8E2050190CA00A80207 /* GIMPBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GIMPBridge.h; path = source/GIMPBridge.h; sourceTree = "<group>"; };
 		A8BEC8F105019EC900A80207 /* GIMPScaling.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GIMPScaling.c; path = source/GIMPScaling.c; sourceTree = "<group>"; };
 		DCA784CD0A6E89F80058681A /* GIMPPolygon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GIMPPolygon.c; path = source/Polygon/GIMPPolygon.c; sourceTree = "<group>"; };

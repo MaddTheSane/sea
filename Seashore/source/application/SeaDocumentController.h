@@ -56,10 +56,10 @@
 	BOOL stopNotingRecentDocuments;
 	
 	// A long list of the possible things we can write
-	NSMutableDictionary *editableTypes;
+	NSMutableDictionary<NSString*,NSSet<NSString*>*> *editableTypes;
 	
 	// A long list of the possible things we can read
-	NSMutableDictionary *viewableTypes;
+	NSMutableDictionary<NSString*,NSSet<NSString*>*> *viewableTypes;
 	
 }
 
@@ -163,27 +163,24 @@
 @property (readonly) int type;
 
 /*!
-	@method		width
+	@property	width
 	@discussion	Returns the instance variable of the same name.
 	@result		Returns the instance variable of the same name.
 */
-- (int)width;
 @property (readonly) int width;
 
 /*!
-	@method		height
+	@property	height
 	@discussion	Returns the instance variable of the same name.
 	@result		Returns the instance variable of the same name.
 */
-- (int)height;
 @property (readonly) int height;
 
 /*!
-	@method		resolution
+	@property	resolution
 	@discussion	Returns the instance variable of the same name.
 	@result		Returns the instance variable of the same name.
 */
-- (int)resolution;
 @property (readonly) int resolution;
 
 /*!
@@ -194,26 +191,25 @@
 @property (readonly) BOOL opaque;
 
 /*!
-	@method		units
+	@property	units
 	@discussion	Returns the instance variable of the same name.
 	@result		Returns the instance variable of the same name.
 */
-- (int)units;
 @property (readonly) int units;
 
 /*!
-	@method		editableTypes
+	@property	editableTypes
 	@discussion	The file types this document controller can open and save to.
 	@result		A dict of file extensions, UTI's, and document type strings.
 */
-- (NSMutableDictionary*)editableTypes;
+@property (readonly, copy) NSMutableDictionary<NSString*,NSSet<NSString*>*>* editableTypes;
 
 /*!
-	@method		viewableTypes
+	@property	viewableTypes
 	@discussion	The file types this document controller can open.
 	@result		A dict of file extensions, UTI's, and document type strings.
 */
-- (NSMutableDictionary*)viewableTypes;
+@property (readonly, copy) NSMutableDictionary<NSString*,NSSet<NSString*>*>* viewableTypes;
 
 /*!
 	@method		readableTypes

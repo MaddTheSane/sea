@@ -50,7 +50,7 @@ static inline void fix_endian_read(int *input, size_t size)
 
 - (BOOL)readProperties:(FILE *)file sharedInfo:(SharedXCFInfo *)info
 {
-	int propType, propSize;
+	int propSize;
 	BOOL finished = NO;
 	
 	// Keep reading until we're finished or hit an error
@@ -59,7 +59,7 @@ static inline void fix_endian_read(int *input, size_t size)
 		// Read the property information
 		fread(tempIntString, sizeof(int), 2, file);
 		fix_endian_read(tempIntString, 2);
-		propType = tempIntString[0];
+		XcfPropType propType = tempIntString[0];
 		propSize = tempIntString[1];
 		
 		// Act appropriately on the property type

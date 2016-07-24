@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (int)type;
 @property (readonly) int type;
 
+@optional
 /*!
 	@property	points
 	@discussion	Returns the number of points that the plug-in requires from the
@@ -47,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @property (readonly) int points;
 
+@required
 /*!
 	@property	name
 	@discussion	Returns the plug-in's name.
@@ -71,7 +73,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, copy) NSString *instruction;
 
 @required
-
 /*!
 	@method		run
 	@discussion	Runs the plug-in.
@@ -93,7 +94,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)validateMenuItem:(nullable NSMenuItem*)menuItem;
 
-
 @optional
 
 /*!
@@ -111,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
 				Specifies a basic effects plug-in.
 	@constant	kPointPlugin
 				Specifies a basic effect plug-in that acts on one or
-				more given to it by the effects tool.
+				more point given to it by the effects tool.
 */
 NS_ENUM(int) {
 	kBasicPlugin = 0,
@@ -243,7 +243,7 @@ NS_ENUM(int) {
 				The menu item to be validated.
 	@result		YES if the menu item should be enabled, NO otherwise.
 */
-- (BOOL)validateMenuItem:(nullable id)menuItem;
+- (BOOL)validateMenuItem:(nullable NSMenuItem*)menuItem;
 
 @end
 

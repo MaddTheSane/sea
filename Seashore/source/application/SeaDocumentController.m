@@ -111,7 +111,9 @@
 
 - (IBAction)openRecent:(id)sender
 {
-	[[NSDocumentController sharedDocumentController] openDocumentWithContentsOfFile:[[sender selectedItem] representedObject] display:YES];
+	[[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:[NSURL fileURLWithPath:[[sender selectedItem] representedObject]] display:YES completionHandler:^(NSDocument * _Nullable document, BOOL documentWasAlreadyOpen, NSError * _Nullable error) {
+		//do nothing
+	}];
 }
 
 - (void)noteNewRecentDocument:(NSDocument *)aDocument

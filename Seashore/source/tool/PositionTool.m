@@ -123,7 +123,7 @@
 	
 	// Vary behaviour based on function
 	switch ([options  toolFunction]) {
-		case kMovingLayer:
+		case SeaPositionOptionMoving:
 			
 			// If the active layer is linked we have to move all associated layers
 			if ([activeLayer linked]) {
@@ -149,7 +149,7 @@
 			}
 			
 		break;
-		case kRotatingLayer:
+		case SeaPositionOptionRotating:
 		
 			// Continue rotating layer
 			original = atan((initialPoint.y - activeCenter.y) / (initialPoint.x - activeCenter.x));
@@ -158,7 +158,7 @@
 			
 		
 		break;
-		case kScalingLayer:
+		case SeaPositionOptionScaling:
 	
 			// Continue scaling layer
 			original = sqrt(sqr(initialPoint.x - activeCenter.x) + sqr(initialPoint.y - activeCenter.y));
@@ -166,13 +166,16 @@
 			scale = current / original;
 		
 		break;
+			
+		case SeaPositionOptionAnchoring:
+			break;
 	}
 	[[document docView] setNeedsDisplay:YES];
 }
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer;
+	SeaLayer *layer;
 	int deltax;
 	int newWidth, newHeight;
 	
@@ -184,14 +187,18 @@
 		case kRotatingLayer:
 			// Finish rotating layer
 			[[seaOperations seaRotation] rotate:rotation * 180.0 / 3.1415 withTrim:YES];
-		break;
+			break;
+			
 		case kScalingLayer:
 			// Finish scaling layer
 			layer = [[document contents] activeLayer];
-			newWidth = scale *  [(SeaLayer *)layer width];
-			newHeight = scale * [(SeaLayer *)layer height];
+			newWidth = scale *  [layer width];
+			newHeight = scale * [layer height];
 			[[seaOperations seaScale] scaleToWidth:newWidth height:newHeight interpolation:GIMP_INTERPOLATION_CUBIC index:kActiveLayer];
-		break;
+			break;
+			
+		default:
+			break;
 	}
 	
 	// Cancel the previewing

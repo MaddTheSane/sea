@@ -46,7 +46,7 @@
 @property (readonly) int tolerance;
 
 /*!
-	@method		numIntervals
+	@property	numIntervals
 	@discussion	Returns the number of intervals for the wand sampling
 	@result		Returns an integer.
 */
