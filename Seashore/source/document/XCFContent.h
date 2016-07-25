@@ -29,8 +29,8 @@
 typedef struct {
 	unsigned char *cmap;
 	int cmap_len;
-	int compression;
-	int type;
+	XcfCompressionType compression;
+	XcfImageType type;
 	BOOL active;
 	BOOL floating;
 	BOOL maskToAlpha;
@@ -90,7 +90,7 @@ typedef struct {
 				The URL of the XCF file with which to initalize this class.
 	@result		Returns instance upon success (or NULL otherwise).
  */
-- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfURL:(NSURL *)path;
+- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfURL:(NSURL *)path error:(NSError**)outError;
 #else
 /*!
 	@method		initWithDocument:contentsOfFile:

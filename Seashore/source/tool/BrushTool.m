@@ -106,7 +106,7 @@
 	NSPoint curPoint = IntPointMakeNSPoint(where), temp;
 	IntRect rect;
 	NSColor *color = NULL;
-	int spp = [[document contents] spp], k;
+	int spp = [[document contents] spp];
 	int pressure = [options pressureValue:event];
 	BOOL ignoreFirstTouch;
 	int modifier = [options modifier];

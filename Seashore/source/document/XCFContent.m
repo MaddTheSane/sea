@@ -22,7 +22,7 @@ static inline void fix_endian_read(int *input, size_t size)
 #if MAIN_COMPILE
 + (BOOL)typeIsEditable:(NSString *)aType
 {
-	return [[SeaDocumentController sharedDocumentController] type: aType isContainedInDocType: @"org.gimp.xcf"];
+	return [[SeaDocumentController sharedDocumentController] type: aType isContainedInDocType: @"GIMP image"];
 }
 #endif
 
@@ -191,7 +191,7 @@ static inline void fix_endian_read(int *input, size_t size)
 }
 
 #if MAIN_COMPILE
-- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfURL:(NSURL *)path;
+- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfURL:(NSURL *)path error:(NSError**)outError;
 {
 	//NSFileHandle *file = [NSFileHandle fileHandleForReadingFromURL:path error:NULL];
 	SharedXCFInfo info;
@@ -211,23 +211,33 @@ static inline void fix_endian_read(int *input, size_t size)
 	// Open the file
 	file = fopen([path fileSystemRepresentation], "rb");
 	if (file == NULL) {
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:nil];
+		}
 		return nil;
 	}
 	
 	// Read the header
 	if ([self readHeader:file] == NO) {
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Invalid header in GIMP file"}];
+		}
 		fclose(file);
 		return nil;
 	}
 	
 	// Express warning if necessary
-	if (version > 2)
+	if (version > 2) {
 		NSRunAlertPanel(LOCALSTR(@"xcf version title", @"XCF version not supported"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"xcf version body", @"The version of the XCF file you are trying to load is not supported by this program, loading may fail."));
+	}
 	
 	// NSLog(@"Properties begin: %d", ftell(file));
 	
 	// Read properties
 	if ([self readProperties:file sharedInfo:&info] == NO) {
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load GIMP properties"}];
+		}
 		fclose(file);
 		return nil;
 	}
@@ -252,6 +262,9 @@ static inline void fix_endian_read(int *input, size_t size)
 		if (offset != 0) {
 			layer = [[XCFLayer alloc] initWithFile:file offset:offset document:doc sharedInfo:&info];
 			if (layer == NULL) {
+				if (outError) {
+					*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load layer in GIMP file"}];
+				}
 				fclose(file);
 				return NULL;
 			}
@@ -279,6 +292,9 @@ static inline void fix_endian_read(int *input, size_t size)
 	if ( xres < kMinResolution || yres < kMinResolution || xres > kMaxResolution || yres > kMaxResolution)
 		xres = yres = 72;
 	if (width < kMinImageSize || height < kMinImageSize || width > kMaxImageSize || height > kMaxImageSize) {
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"File width/height is incompatible with Seashore"}];
+		}
 		return nil;
 	}
 	
@@ -306,7 +322,7 @@ static inline void fix_endian_read(int *input, size_t size)
 
 - (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
 {
-	return [self initWithDocument:doc contentsOfURL:[NSURL fileURLWithPath:path]];
+	return [self initWithDocument:doc contentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
 }
 #else
 - (instancetype)initWithContentsOfFile:(NSString *)path;

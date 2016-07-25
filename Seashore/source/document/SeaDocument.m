@@ -257,16 +257,12 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 - (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)type error:(NSError * _Nullable __autoreleasing *)outError
 {
 	BOOL readOnly = NO;
-
 	
 	// Determine which document we have and act appropriately
 	if ([XCFContent typeIsEditable: type]) {
 		// Load a GIMP or XCF document
-		contents = [[XCFContent alloc] initWithDocument:self contentsOfURL:url];
+		contents = [[XCFContent alloc] initWithDocument:self contentsOfURL:url error:outError];
 		if (contents == NULL) {
-			if (outError) {
-				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load GIMP file"}];
-			}
 			return NO;
 		}
 	} else if ([CocoaContent typeIsEditable: type forDoc: self]) {

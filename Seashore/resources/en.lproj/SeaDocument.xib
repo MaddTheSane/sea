@@ -249,8 +249,8 @@ DQ
                                             <button toolTip="Display all channels when editing the document" id="14779">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="trueview-not" imagePosition="left" alignment="left" inset="2" id="16784">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="trueview-sel" imagePosition="only" alignment="left" alternateImage="trueview-not" imageScaling="proportionallyDown" inset="2" id="16784">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                     <font key="font" metaFont="system" size="17"/>
                                                 </buttonCell>
                                                 <connections>
@@ -5114,7 +5114,7 @@ DQ
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="14" id="11980">
-                                    <rect key="frame" x="0.0" y="0.0" width="214" height="160"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="197" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -5336,6 +5336,7 @@ DQ
         <image name="smudge" width="22" height="22"/>
         <image name="text" width="22" height="22"/>
         <image name="trueview-not" width="32" height="23"/>
+        <image name="trueview-sel" width="32" height="23"/>
         <image name="wand" width="22" height="22"/>
         <image name="zoom" width="22" height="22"/>
     </resources>

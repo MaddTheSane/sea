@@ -68,12 +68,12 @@
 
 - (void)update
 {
-	if(document){
+	if (document) {
 		SeaContent *contents = [document contents];
 
 		// Set the channel selections correction
 		for (int i = 0; i < 3; i++) {
-			if([contents selectedChannel] == i){
+			if ([contents selectedChannel] == i) {
 				[[channelSelectionPopup itemAtIndex: i + 1] setState: YES];
 			} else {
 				[[channelSelectionPopup itemAtIndex: i + 1] setState: NO];
@@ -82,24 +82,25 @@
 		
 		[channelSelectionPopup selectItemAtIndex:([contents selectedChannel] + 1)];
 		[channelSelectionPopup setEnabled:YES];
+		//trueViewCheckbox.state = [contents trueView] ? NSOnState : NSOffState;
 		[trueViewCheckbox setImage:[NSImage imageNamed:([contents trueView] ? @"trueview-sel" : @"trueview-not" )]];
 		[trueViewCheckbox setEnabled:YES];
 		
 		int newUnits = [document measureStyle];
-		NSString *statusString = @"";
-		unichar ch = 0x00B7; // replace this with your code pointNSString
-		NSString *divider = [NSString stringWithCharacters:&ch length:1];
-		if([view frame].size.width > 445){
-			statusString = [statusString stringByAppendingFormat: @"%@ %C %@ %@", SeaStringFromPixels([contents width] , newUnits, [contents xres]), 0x00D7, SeaStringFromPixels([contents height], newUnits, [contents yres]), SeaUnitsString(newUnits)];
+		NSMutableString *statusString = [NSMutableString string];
+		//unichar ch = 0x00B7; // replace this with your code pointNSString
+		//NSString *divider = [NSString stringWithCharacters:&ch length:1];
+		if ([view frame].size.width > 445) {
+			[statusString appendFormat: @"%@ × %@ %@", SeaStringFromPixels([contents width] , newUnits, [contents xres]), SeaStringFromPixels([contents height], newUnits, [contents yres]), SeaUnitsString(newUnits)];
 		}
-		if([view frame].size.width > 480){
-			statusString = [[NSString stringWithFormat:@"%.0f%% %@ ", [contents xscale] * 100, divider] stringByAppendingString: statusString];
+		if ([view frame].size.width > 480) {
+			[statusString insertString:[NSString stringWithFormat:@"%.0f%% · ", [contents xscale] * 100] atIndex:0];
 		}
-		if([view frame].size.width > 525){
-			statusString = [statusString stringByAppendingFormat: @" %@ %d dpi", divider, [contents xres]];
+		if ([view frame].size.width > 525) {
+			[statusString appendFormat: @" · %d dpi", [contents xres]];
 		}
-		if([view frame].size.width > 575){
-			statusString = [statusString stringByAppendingFormat: @" %@ %@", divider, [contents type] ? @"Grayscale" : @"Full Color"];
+		if ([view frame].size.width > 575) {
+			[statusString appendFormat: @" · %@", [contents type] ? @"Grayscale" : @"Full Color"];
 		}
 		
 		[dimensionLabel setStringValue: statusString];		
@@ -110,6 +111,7 @@
 		[channelSelectionPopup setEnabled:NO];
 		[channelSelectionPopup selectItemAtIndex:0];
 		[trueViewCheckbox setEnabled:NO];
+		//trueViewCheckbox.state = NSOffState;
 		[trueViewCheckbox setImage:[NSImage imageNamed:@"trueview-not"]];
 		
 		[dimensionLabel setStringValue:@""];		
