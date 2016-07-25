@@ -109,7 +109,7 @@ enum {
 	NSInteger undoMax, undoCount;
 	
 	// A label specifying what margins will be changed
-    IBOutlet id selectionLabel;
+    IBOutlet NSTextField *selectionLabel;
 	
 	// The presets menu
 	IBOutlet NSPopUpButton *presetsMenu;

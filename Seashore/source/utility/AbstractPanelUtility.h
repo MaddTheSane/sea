@@ -1,5 +1,7 @@
 #import "Globals.h"
 
+@class InfoPanel;
+
 /*		
 	@class		AbstractPanelUtility
 	@abstract	Acts as a base class for the utilites that use info panels.
@@ -8,10 +10,9 @@
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface AbstractPanelUtility : NSObject {
 	// The window associated with this utility
-    IBOutlet NSWindow *window;
+    IBOutlet InfoPanel *window;
 	// The parent this is associated with
 	NSWindow *parentWin;
 }

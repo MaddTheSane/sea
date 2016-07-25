@@ -13,13 +13,12 @@ typedef struct {
 
 #define GBRUSH_MAGIC    (('G' << 24) + ('I' << 16) + ('M' << 8) + ('P' << 0))
 
-#ifdef TODO
-#warning Anti-aliasing for pixmap brushes?
-#endif
+//TODO: Anti-aliasing for pixmap brushes?
 
 extern void determineBrushMask(unsigned char *input, unsigned char *output, int width, int height, int index1, int index2);
 
 @implementation SeaBrush
+@synthesize usePixmap;
 
 - (instancetype)initWithContentsOfFile:(NSString *)path
 {
@@ -42,13 +41,13 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	
 	// Convert brush header to proper endianess
 #ifdef __LITTLE_ENDIAN__
-	header.header_size = ntohl(header.header_size);
-	header.version = ntohl(header.version);
-	header.width = ntohl(header.width);
-	header.height = ntohl(header.height);
-	header.bytes = ntohl(header.bytes);
-	header.magic_number = ntohl(header.magic_number);
-	header.spacing = ntohl(header.spacing);
+	header.header_size = CFSwapInt32BigToHost(header.header_size);
+	header.version = CFSwapInt32BigToHost(header.version);
+	header.width = CFSwapInt32BigToHost(header.width);
+	header.height = CFSwapInt32BigToHost(header.height);
+	header.bytes = CFSwapInt32BigToHost(header.bytes);
+	header.magic_number = CFSwapInt32BigToHost(header.magic_number);
+	header.spacing = CFSwapInt32BigToHost(header.spacing);
 #endif
 
 	// Check version compatibility
@@ -139,15 +138,13 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 
 - (void)activate
 {
-	int i;
-	
 	// Deactivate ourselves first (just in case)
 	[self deactivate];
 	
 	// Reset the cache
 	checkCount = 0;
 	maskCache = malloc(sizeof(CachedMask) * kBrushCacheSize);
-	for (i = 0; i < kBrushCacheSize; i++) {
+	for (int i = 0; i < kBrushCacheSize; i++) {
 		maskCache[i].cache = malloc(make_128((width + 2) * (height + 2)));
 		maskCache[i].index1 = maskCache[i].index2 = maskCache[i].scale = -1;
 		maskCache[i].lastCheck = 0;
@@ -158,11 +155,9 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 
 - (void)deactivate
 {
-	int i;
-	
 	// Free the cache
 	if (maskCache) {
-		for (i = 0; i < kBrushCacheSize; i++) {
+		for (int i = 0; i < kBrushCacheSize; i++) {
 			if (maskCache[i].cache) free(maskCache[i].cache);
 			maskCache[i].cache = NULL;
 		}
@@ -214,11 +209,11 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	thumbHeight = height;
 	if (width > 40 || height > 40) {
 		if (width > height) {
-			thumbHeight = (int)((float)height * (40.0 / (float)width));
+			thumbHeight = (int)((CGFloat)height * (40.0 / (CGFloat)width));
 			thumbWidth = 40;
 		}
 		else {
-			thumbWidth = (int)((float)width * (40.0 / (float)height));
+			thumbWidth = (int)((CGFloat)width * (40.0 / (CGFloat)height));
 			thumbHeight = 40;
 		}
 	}
@@ -345,12 +340,7 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	return pixmap;
 }
 
-- (BOOL)usePixmap
-{
-	return usePixmap;
-}
-
-- (NSComparisonResult)compare:(id)other
+- (NSComparisonResult)compare:(SeaBrush*)other
 {
 	return [[self name] caseInsensitiveCompare:[other name]];
 }

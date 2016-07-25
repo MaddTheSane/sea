@@ -1,5 +1,8 @@
 #import "Globals.h"
 
+@class SeaAlignment, SeaMargins, SeaResolution, SeaScale, SeaDocRotation;
+@class SeaRotation, SeaFlip;
+
 /*!
 	@class		SeaOperations
 	@abstract	Acts as a gateway to the various operations of Seashore.
@@ -8,10 +11,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@class SeaAlignment, SeaMargins, SeaResolution, SeaScale, SeaDocRotation;
-@class SeaRotation, SeaFlip;
-
 @interface SeaOperations : NSObject
 
 /*!
@@ -19,7 +18,6 @@
 	@discussion	Returns the instance of the same name.
 	@result		Returns an instance of the SeaAlignment class.
 */
-
 @property (weak) IBOutlet SeaAlignment *seaAlignment;
 
 /*!

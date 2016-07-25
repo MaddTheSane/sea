@@ -48,7 +48,9 @@
 	bipp = [imageRep bitsPerPixel];
 	bypr = [imageRep bytesPerRow];
 	data = convertBitmapColorSync(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
-	CFRelease(cmProfileLoc);
+	if (cmProfileLoc) {
+		CFRelease(cmProfileLoc);
+	}
 	if (!data) {
 		NSLog(@"Required conversion not supported.");
 		return NULL;

@@ -1,7 +1,7 @@
 #import "Globals.h"
 
 /*!
-	@enum		k...AspectType
+	@enum		SeaAspectType
 	@constant	kNoAspectType
 				Indicates no specification.
 	@constant	kRatioAspectType
@@ -14,10 +14,15 @@
 				Indicates exact specification in millimetres.
 */
 typedef NS_ENUM(NSInteger, SeaAspectType) {
+	//! Indicates no specification.
 	kNoAspectType = -2,
+	//! Indicates ratio specification.
 	kRatioAspectType = -1,
+	//! Indicates exact specification in pixels.
 	kExactPixelAspectType = 0,
+	//! Indicates exact specification in inches.
 	kExactInchAspectType = 1,
+	//! Indicates exact specification in millimetres.
 	kExactMillimeterAspectType = 2
 };
 
@@ -36,7 +41,7 @@ typedef NS_ENUM(NSInteger, SeaAspectType) {
 	IBOutlet SeaDocument *document;
 
 	// The controlling object
-	id master;
+	__weak id master;
 
 	// The controlling object's identifier (used for preferences)
 	NSString *prefString;
@@ -55,8 +60,8 @@ typedef NS_ENUM(NSInteger, SeaAspectType) {
     IBOutlet NSTextField *yRatioValue;
 	
 	// Various items associated with the aspect type
-	IBOutlet id toLabel;
-	IBOutlet id aspectTypePopup;
+	IBOutlet NSTextField *toLabel;
+	IBOutlet NSPopUpButton *aspectTypePopup;
 	
 	// Custom ratio values
 	CGFloat ratioX, ratioY;
@@ -69,7 +74,7 @@ typedef NS_ENUM(NSInteger, SeaAspectType) {
 	
 }
 
-- (void)awakeWithMaster:(id)imaster andString:(id)iprefString;
+- (void)awakeWithMaster:(id)imaster andString:(NSString*)iprefString;
 
 /*!
 	@method		setCustomItem:

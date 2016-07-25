@@ -13,10 +13,10 @@
 @interface SmudgeOptions : AbstractPaintOptions {
 
 	// A slider indicating the opacity of the bucket
-	IBOutlet id rateSlider;
+	IBOutlet NSSlider *rateSlider;
 	
 	// A label displaying the opacity of the bucket
-	IBOutlet id rateLabel;
+	IBOutlet NSTextField *rateLabel;
 	
 	// A checkbox that when checked implies that the tool should consider all pixels not those just in the current layer
 	//IBOutlet id mergedCheckbox;

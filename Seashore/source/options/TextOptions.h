@@ -31,7 +31,7 @@
 	IBOutlet NSButton *fringeCheckbox;
 	
 	// The font manager associated with the text tool
-	id fontManager;
+	NSFontManager *fontManager;
 	
 }
 
@@ -59,44 +59,44 @@
 - (IBAction)changeFont:(id)sender;
 
 /*!
-	@method		alignment
+	@property	alignment
 	@discussion	Returns the alignment to be used with the text tool.
-	@result		Returns an NSTextAlignment representing an alignment type.
+	@result		Returns an \c NSTextAlignment representing an alignment type.
 */
-- (NSTextAlignment)alignment;
+@property (readonly) NSTextAlignment alignment;
 
 /*!
-	@method		useSubpixel
+	@property	useSubpixel
 	@discussion	Returns whether subpxiel rendering should be used.
-	@result		Returns YES if subpixel rendering should be used, NO otherwise.
+	@result		Returns \c YES if subpixel rendering should be used, \c NO otherwise.
 */
-- (BOOL)useSubpixel;
+@property (readonly) BOOL useSubpixel;
 
 /*!
-	@method		outline
+	@property	outline
 	@discussion	Returns the number of points the outline should be.
 	@result		Returns an integer indicating the number of points the outline should be
 				or zero if outline is disabled.
 */
-- (int)outline;
+@property (readonly) int outline;
 
 /*!
-	@method		useTextures
+	@property	useTextures
 	@discussion	Returns whether or not the tool should use textures.
 	@result		Returns YES if the tool should use textures, NO if the tool
 				should use the foreground colour.
 */
-- (BOOL)useTextures;
+@property (readonly) BOOL useTextures;
 
 /*!
-	@method		allowFringe
+	@property	allowFringe
 	@discussion	Returns whether a fringe is allowed, the fringe is determined using
 				the background layers and will look out of place if the background
 				changes. On the other hand, the fringe will look better if the
 				background does not change.
 	@result		Returns YES if the fringe should be allowed, NO otherwise.
 */
-- (BOOL)allowFringe;
+@property (readonly) BOOL allowFringe;
 
 /*!
 	@method		update

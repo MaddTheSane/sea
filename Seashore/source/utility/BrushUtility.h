@@ -35,7 +35,7 @@
 	NSDictionary<NSString*, SeaBrush*> *brushes;
 	
 	// An array of all groups (an array of an array SeaBrush's) and group names (an array of NSString's)
-	NSArray *groups;
+	NSArray<NSArray<SeaBrush*>*> *groups;
 	NSArray<NSString*> *groupNames;
 	
 	// The index of the currently active group
@@ -46,7 +46,6 @@
 	
 	// The number of custom groups
 	NSInteger customGroups;
-	
 }
 
 /*!
@@ -67,8 +66,8 @@
 	@discussion	Frees (if necessary) and then reloads all the brushes from
 				Seashore's brushes directory.
 	@param		update
-				YES if the brush utility should be updated after reloading all
-				the brushes (typical case), NO otherwise.
+				\c YES if the brush utility should be updated after reloading all
+				the brushes (typical case), \c NO otherwise.
 */
 - (void)loadBrushes:(BOOL)update;
 

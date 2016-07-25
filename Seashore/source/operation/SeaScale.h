@@ -7,6 +7,8 @@
 */
 #define kNumberOfScaleRecordsPerMalloc 10
 
+@class SeaDocument;
+
 /*!
 	@struct		ScaleUndoRecord
 	@discussion	Specifies how scaling of the document should be undone.
@@ -63,11 +65,10 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaScale : NSObject {
 
 	// The document and sheet associated with this object
-    IBOutlet id document;
+    IBOutlet SeaDocument *document;
 	IBOutlet id sheet;
 	
 	// The working index associated with this object
@@ -89,14 +90,14 @@ typedef struct {
     IBOutlet id keepProportions;
 	
 	// The interpolation style to be used for scaling
-	IBOutlet id interpolationPopup;
+	IBOutlet NSPopUpButton *interpolationPopup;
 	
 	// A list of various undo records required for undoing
 	ScaleUndoRecord *undoRecords;
-	int undoMax, undoCount; 
+	NSInteger undoMax, undoCount;
 	
 	// A label specifying the layer or document being scaled
-    IBOutlet id selectionLabel;
+    IBOutlet NSTextField *selectionLabel;
 	
 	// The presets menu
 	IBOutlet id presetsMenu;

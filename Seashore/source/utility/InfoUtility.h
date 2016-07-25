@@ -9,9 +9,12 @@
 	@constant	kMeasureMillimeters
 				Measure using millimetres.
 */
-NS_ENUM(int) {
+typedef NS_ENUM(int, SeaMeasure) {
+	//! Measure using pixels.
 	kMeasurePixels = 0,
+	//! Measure using inches.
 	kMeasureInches = 1,
+	//! Measure using millimetres.
 	kMeasureMillimeters = 2
 };
 
@@ -27,7 +30,6 @@ NS_ENUM(int) {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface InfoUtility : NSObject {
 	
 	// The document which is the focus of this utility
@@ -50,7 +52,7 @@ NS_ENUM(int) {
 	IBOutlet NSTextField *radiusValue;
 
 	// The active measuring style
-	int measureStyle;
+	SeaMeasure measureStyle;
 
 	// The approprate views
 	IBOutlet NSView *view;
@@ -115,10 +117,10 @@ NS_ENUM(int) {
 - (void)update;
 
 /*!
-	@method		visible
+	@property	visible
 	@discussion	Returns whether or not the utility's window is visible.
-	@result		Returns YES if the utility's window is visible, NO otherwise.
+	@result		Returns \c YES if the utility's window is visible, \c NO otherwise.
 */
-- (BOOL)visible;
+@property (readonly) BOOL visible;
 
 @end

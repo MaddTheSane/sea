@@ -90,12 +90,12 @@ typedef struct {
 - (void)deactivate;
 
 /*!
-	@method		pixelTag
+	@property	pixelTag
 	@discussion	Returns a string indicating the size of oversize brushes.
 	@result		Returns a string indicating the size of oversize brushes or NULL
 				if such a string is not required.
 */
-- (NSString *)pixelTag;
+@property (readonly, copy) NSString *pixelTag;
 
 /*!
 	@method		thumbnail
@@ -106,11 +106,11 @@ typedef struct {
 - (NSImage *)thumbnail;
 
 /*!
-	@method		name
+	@property	name
 	@discussion	Returns the name of the brush.
 	@result		Returns an NSString representing the name of the brush.
 */
-- (NSString *)name;
+@property (readonly, copy) NSString *name;
 
 /*!
 	@method		spacing
@@ -189,14 +189,14 @@ typedef struct {
 - (unsigned char *)pixmapForPoint:(NSPoint)point;
 
 /*!
-	@method		usePixmap
+	@property	usePixmap
 	@discussion	Returns whether the brush uses a pixmap or an alpha mask. A
 				brush either uses one or the other, calls to mask or
-				maskForPoint: are invalid if the brush uses a pixmap and
+				\c maskForPoint: are invalid if the brush uses a pixmap and
 				vice-versa.
-	@result		Returns YES if the brush uses a pixmap, NO otherwise.
+	@result		Returns \c YES if the brush uses a pixmap, \c NO otherwise.
 */
-- (BOOL)usePixmap;
+@property (readonly) BOOL usePixmap;
 
 /*!
 	@method		compare:
@@ -206,6 +206,6 @@ typedef struct {
 				The other brush with which to compare this brush.
 	@result		Returns an NSComparisonResult.
 */
-- (NSComparisonResult)compare:(id)other;
+- (NSComparisonResult)compare:(SeaBrush*)other;
 
 @end

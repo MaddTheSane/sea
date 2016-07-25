@@ -1,6 +1,9 @@
 #import "SeaTexture.h"
 
 @implementation SeaTexture
+@synthesize name;
+@synthesize width;
+@synthesize height;
 
 - (instancetype)initWithContentsOfFile:(NSString *)path
 {
@@ -128,21 +131,6 @@
 	return thumbnail;
 }
 
-- (NSString *)name
-{
-	return name;
-}
-
-- (int)width
-{
-	return width;
-}
-
-- (int)height
-{
-	return height;
-}
-
 - (unsigned char *)texture:(BOOL)color
 {
 	return (color) ? colorTexture : greyTexture;
@@ -168,7 +156,7 @@
 	return nsColor;
 }
 
-- (NSComparisonResult)compare:(id)other
+- (NSComparisonResult)compare:(SeaTexture*)other
 {
 	return [[self name] caseInsensitiveCompare:[other name]];
 }

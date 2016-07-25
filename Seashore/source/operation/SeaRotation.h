@@ -54,7 +54,7 @@ typedef struct {
 	IBOutlet id sheet;
 	
 	// A label specifying the layer being rotated
-    IBOutlet id selectionLabel;
+    IBOutlet NSTextField *selectionLabel;
 	
 	// The rotation value (in degrees)
 	IBOutlet id rotateValue;

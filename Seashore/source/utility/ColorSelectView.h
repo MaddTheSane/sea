@@ -136,7 +136,7 @@
 	@method		isFlipped
 	@discussion	Returns whether or not the view uses a flipped co-ordinate
 				system.
-	@result		Returns YES indicating that the view does use a flipped
+	@result		Returns \c YES indicating that the view does use a flipped
 				co-ordinate system.
 */
 - (BOOL)isFlipped;
@@ -144,7 +144,7 @@
 /*!
 	@method		isOpaque
 	@discussion	Returns whether or not the view is opaque.
-	@result		Returns NO indicating that the view is opaque.
+	@result		Returns \c NO indicating that the view is opaque.
 */
 - (BOOL)isOpaque;
 

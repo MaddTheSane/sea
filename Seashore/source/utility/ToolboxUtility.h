@@ -29,7 +29,7 @@
 	IBOutlet __weak ColorSelectView *colorSelectView;
 	
 	// The toolbox
-	IBOutlet id toolbox;
+	IBOutlet NSMatrix *toolbox;
 	
 	// The options utility object
 	IBOutlet OptionsUtility *optionsUtility;
@@ -63,8 +63,10 @@
 	NSTimer *delay_timer;
 }
 
-@property (strong) NSColor *background;
-@property (strong) NSColor *foreground;
+//! The background colour.
+@property (copy) NSColor *background;
+//! The foreground colour.
+@property (copy) NSColor *foreground;
 
 /*!
 	@method		init

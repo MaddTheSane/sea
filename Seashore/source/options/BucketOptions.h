@@ -37,28 +37,28 @@
 - (IBAction)toleranceSliderChanged:(id)sender;
 
 /*!
-	@method		tolerance
+	@property	tolerance
 	@discussion	Returns the tolerance to be used with the paint bucket tool.
 	@result		Returns an integer indicating the tolerance to be used with the
 				bucket tool.
 */
-- (int)tolerance;
+@property (readonly) int tolerance;
 
 
 /*!
-	@method		numIntervals
+	@property	numIntervals
 	@discussion	Returns the number of intervals for the wand sampling
 	@result		Returns an integer.
 */
-- (int)numIntervals;
+@property (readonly) int numIntervals;
 
 /*!
-	@method		useTextures
+	@property	useTextures
 	@discussion	Returns whether or not the tool should use textures.
-	@result		Returns YES if the tool should use textures, NO if the tool
+	@result		Returns \c YES if the tool should use textures, \c NO if the tool
 				should use the foreground colour.
 */
-- (BOOL)useTextures;
+@property (readonly) BOOL useTextures;
 
 /*!
 	@method		shutdown

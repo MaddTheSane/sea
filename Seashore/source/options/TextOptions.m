@@ -139,7 +139,7 @@ id gNewFont;
 
 - (BOOL)allowFringe
 {
-	return [fringeCheckbox state];
+	return [fringeCheckbox state] == NSOnState;
 }
 
 - (IBAction)update:(id)sender

@@ -14,7 +14,7 @@ extern IntPoint gScreenResolution;
 
 - (void)run
 {
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 	
 	// Set the text fields correctly
 	[xValue setIntValue:(int)[contents xres]];
@@ -22,8 +22,7 @@ extern IntPoint gScreenResolution;
 	if ([contents xres] == [contents yres]) {
 		[yValue setEnabled:NO];
 		[forceSquare setState:NSOnState];
-	}
-	else {
+	} else {
 		[yValue setEnabled:YES];
 		[forceSquare setState:NSOffState];
 	}
@@ -37,7 +36,7 @@ extern IntPoint gScreenResolution;
 
 - (IBAction)apply:(id)sender
 {
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 	IntResolution newRes;
 	
 	// Get the values

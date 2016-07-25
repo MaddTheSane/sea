@@ -19,21 +19,20 @@
 
 - (IBAction)shade:(id)sender
 {
-	NSRect frame;
+	NSRect frame = [self frame];
 	
-	frame = [self frame];
 	if (frame.size.height == 16) {
 		frame.origin.y -= priorShadeHeight - 16;
 		frame.size.height = priorShadeHeight;
 		[self setFrame:frame display:YES animate:YES];
 		[self setContentView:priorContentView];
-	}
-	else {
+	} else {
 		priorShadeHeight = frame.size.height;
 		frame.origin.y += frame.size.height - 16;
 		frame.size.height = 16;
 		priorContentView = [self contentView];
-		if (nullView) [self setContentView:nullView];
+		if (nullView)
+			[self setContentView:nullView];
 		[self setFrame:frame display:YES animate:NO];
 	}
 }
@@ -45,9 +44,8 @@
 
 - (void)saveFrameUsingName:(NSString *)name
 {
-	NSRect frame;
+	NSRect frame = [self frame];
 	
-	frame = [self frame];
 	if (frame.size.height != 16) {
 		[super saveFrameUsingName:name];
 	}

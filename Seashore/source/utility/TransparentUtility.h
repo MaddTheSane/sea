@@ -11,10 +11,8 @@
 */
 
 @interface TransparentUtility : NSObject {
-
-	// The current transparent color 
+	/// The current transparent color 
 	NSColor *color;
-	
 }
 
 /*!

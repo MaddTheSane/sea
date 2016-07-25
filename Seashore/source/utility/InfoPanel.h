@@ -13,8 +13,18 @@
 				This would be for a vertical list of elements.
 */
 typedef NS_ENUM(NSInteger, SeaPanelStyle) {
+	//! A basic floating panel unattached to any window elements
 	kFloatingPanelStyle,
+	/*!
+	 A panel with an arrow on the top.
+	 Generally, comes from elements in a horizontal list
+	 (so a vertical panel will not obscure too many elements).
+	 */
 	kVerticalPanelStyle,
+	/*!
+	 A panel with an arrow on the left side.
+	 This would be for a vertical list of elements.
+	 */
 	kHorizontalPanelStyle
 };
 
@@ -31,8 +41,8 @@ typedef NS_ENUM(NSInteger, SeaPanelStyle) {
 */
 @interface InfoPanel : NSPanel <NSWindowDelegate>
 {
-	// Sometimes the panel is too close to the edge of the screen
-	// to fit, so it has to be flipped
+	//! Sometimes the panel is too close to the edge of the screen
+	//! to fit, so it has to be flipped
 	BOOL panelFilpped;
 }
 

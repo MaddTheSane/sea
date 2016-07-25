@@ -1025,15 +1025,13 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 - (void)makePasteboardFloat
 {
 	NSArray *tempArray = @[];
-	NSString *imageRepDataType;
 	NSData *imageRepData;
 	NSBitmapImageRep *imageRep;
 	IntRect rect;
 	NSPasteboard *pboard = [NSPasteboard generalPasteboard];
-	id layer;
+	SeaLayer *layer;
 	unsigned char *data, *tdata;
 	NSInteger i, spp = [[document contents] spp], sspp, dspp;
-	BMPColorSpace space;
 	ColorSyncProfileRef cmProfileLoc = NULL;
 	NSInteger bipp, bypr, bps;
 	//NSData *profile = nil;
@@ -1046,7 +1044,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		return;
 	
 	// Get the data from the pasteboard
-	imageRepDataType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
+	NSString *imageRepDataType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 	//if (imageRepDataType == NULL) {
 	//	imageRepDataType = [pboard availableTypeFromArray:@[NSPICTPboardType]];
 	//	imageRepData = [pboard dataForType:imageRepDataType];
@@ -1059,7 +1057,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	//}
 	
 	// Determine the color space of pasteboard image
-	space = -1;
+	BMPColorSpace space = -1;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace])
 		space = kGrayColorSpace;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedBlackColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceBlackColorSpace])
@@ -1093,11 +1091,9 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	if ([[document selection] selectionSizeMatch:sel_size]) {
 		sel_point = [[document selection] selectionPoint];
 		rect = IntMakeRect(sel_point.x, sel_point.y, sel_size.width, sel_size.height);
-	}
-	else if ((height > 64 && width > 64 && sel_size.height > height - 12 &&  sel_size.width > width - 12) || (sel_size.height >= height &&  sel_size.width >= width)) { 
+	} else if ((height > 64 && width > 64 && sel_size.height > height - 12 &&  sel_size.width > width - 12) || (sel_size.height >= height &&  sel_size.width >= width)) {
 		rect = IntMakeRect(width / 2 - sel_size.width / 2, height / 2 - sel_size.height / 2, sel_size.width, sel_size.height);
-	}
-	else {
+	} else {
 		centerPoint = [(CenteringClipView *)[[document docView] superview] centerPoint];
 		centerPoint.x /= [[document docView] zoom];
 		centerPoint.y /= [[document docView] zoom];

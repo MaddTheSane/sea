@@ -13,7 +13,7 @@
 @interface CloneOptions : AbstractPaintOptions {
 
 	// A checkbox that when checked implies that the tool should consider all pixels not those just in the current layer
-	IBOutlet id mergedCheckbox;
+	IBOutlet NSButton *mergedCheckbox;
 	
 	// A label indicating the source of the clone
 	IBOutlet id sourceLabel;

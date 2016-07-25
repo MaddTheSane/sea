@@ -13,52 +13,52 @@
 */
 @interface SeaDocumentController : NSDocumentController {
 
-	// An outlet to the preferences manager of the application
+	/// An outlet to the preferences manager of the application
 	IBOutlet SeaPrefs *seaPrefs;
 	
-	// A panel through which a new image can be configured
+	/// A panel through which a new image can be configured
 	IBOutlet NSPanel *newPanel;
 	
-	// The various text boxes from the New Image Settings panel
+	/// The various text boxes from the New Image Settings panel
 	IBOutlet NSTextField *widthInput, *heightInput;
 	
-	// The various buttons for changing units
+	/// The various buttons for changing units
 	IBOutlet id widthUnits, heightUnits;
 	
-	// The resolution menu from the New Image Settings panel
+	/// The resolution menu from the New Image Settings panel
 	IBOutlet NSPopUpButton *resMenu;
 	
-	// The mode menu from the New Image Settings panel
+	/// The mode menu from the New Image Settings panel
 	IBOutlet NSPopUpButton *modeMenu;
 	
-	// The units menu for the New Image Settings panel
+	/// The units menu for the New Image Settings panel
 	IBOutlet NSPopUpButton *unitsMenu;
 	
-	// The templates menu from the New Image Settings panel
+	/// The templates menu from the New Image Settings panel
 	IBOutlet NSPopUpButton *templatesMenu;
 	
-	// The transparency checkbox for the New Image settings panel
+	/// The transparency checkbox for the New Image settings panel
 	IBOutlet NSButton *backgroundCheckbox;
 	
-	// The dropdown for the recent documents.
+	/// The dropdown for the recent documents.
 	IBOutlet NSPopUpButton *recentMenu;
 	
-	// The units for the New Image Settings panel
+	/// The units for the New Image Settings panel
 	int units;
 	
-	// The variables stored for retrieval by the new document 
+	/// The variables stored for retrieval by the new document
 	int type, width, height, resolution;
 	
-	// The variables stored for retrieval by the new document
+	/// The variables stored for retrieval by the new document
 	BOOL opaque;
 	
-	// If YES prevents new documents being recorded as recently opened
+	/// If YES prevents new documents being recorded as recently opened
 	BOOL stopNotingRecentDocuments;
 	
-	// A long list of the possible things we can write
+	/// A long list of the possible things we can write
 	NSMutableDictionary<NSString*,NSSet<NSString*>*> *editableTypes;
 	
-	// A long list of the possible things we can read
+	/// A long list of the possible things we can read
 	NSMutableDictionary<NSString*,NSSet<NSString*>*> *viewableTypes;
 	
 }
@@ -212,11 +212,11 @@
 @property (readonly, copy) NSMutableDictionary<NSString*,NSSet<NSString*>*>* viewableTypes;
 
 /*!
-	@method		readableTypes
+	@property	readableTypes
 	@discussion	All of the kinds of type strings we can read in.
 	@result		Flat list of all of the types.
 */
-- (NSArray<NSString*>*)readableTypes;
+@property (readonly, copy) NSArray<NSString*> *readableTypes;
 
 /*!
 	@method		type:isContainedInDocType:

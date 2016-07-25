@@ -12,12 +12,11 @@
 
 @interface EyedropOptions : AbstractOptions {
 
-	// A slider indicating the size of the sample block
-	IBOutlet id sizeSlider;
+	/// A slider indicating the size of the sample block
+	IBOutlet NSSlider *sizeSlider;
 	
-	// A checkbox that when checked implies that the tool should consider all pixels not those just in the current layer
-	IBOutlet id mergedCheckbox;
-	
+	/// A checkbox that when checked implies that the tool should consider all pixels not those just in the current layer
+	IBOutlet NSButton *mergedCheckbox;
 }
 
 /*!
@@ -27,21 +26,21 @@
 - (void)awakeFromNib;
 
 /*!
-	@method		sampleSize
+	@property	sampleSize
 	@discussion	Returns the size of the sample square.
 	@result		Returns an integer indicating the size (in pixels) of the sample
 				square.
 */
-- (int)sampleSize;
+@property (readonly) int sampleSize;
 
 /*!
-	@method		mergedSample
+	@property	mergedSample
 	@discussion	Returns whether all layers should be considered in sampling or
 				just the active layer.
-	@result		Returns YES if all layers should be considered in sampling, NO 
+	@result		Returns \c YES if all layers should be considered in sampling, \c NO
 				if only the active layer should be considered.
 */
-- (BOOL)mergedSample;
+@property (readonly) BOOL mergedSample;
 
 /*!
 	@method		shutdown

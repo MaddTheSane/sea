@@ -1,5 +1,7 @@
 #import "Globals.h"
 
+@class SeaDocument;
+
 /*!
 	@class		SeaDocRotation
 	@abstract	Rotates documents.
@@ -8,13 +10,10 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaDocRotation : NSObject
 {
-
 	// The document and sheet associated with this object
-    IBOutlet id document;
-	
+    IBOutlet SeaDocument *document;
 }
 
 /*!

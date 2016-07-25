@@ -50,33 +50,33 @@
 - (void)deactivate;
 
 /*!
-	@method		thumbnail
+	@property	thumbnail
 	@discussion	Returns a thumbnail of the texture.
 	@result		Returns an NSImage that is no greater in size than 44 by 44
 				pixels.
 */
-- (NSImage *)thumbnail;
+@property (readonly, copy) NSImage *thumbnail;
 
 /*!
-	@method		name
+	@property	name
 	@discussion	Returns the name of the texture.
 	@result		Returns an NSString representing the name of the texture.
 */
-- (NSString *)name;
+@property (readonly, copy) NSString *name;
 
 /*!
-	@method		width
+	@property	width
 	@discussion	Returns the width of the texture.
 	@result		Returns the width of the texture in pixels.
 */
-- (int)width;
+@property (readonly) int width;
 
 /*!
-	@method		height
+	@property	height
 	@discussion	Returns the height of the texture.
 	@result		Returns the height of the texture in pixels.
 */
-- (int)height;
+@property (readonly) int height;
 
 /*!
 	@method		texture:
@@ -93,11 +93,11 @@
 
 /*!
 	@method		textureAsNSColor:
-	@discussion	Returns a NSColor representation of the texture. The NSColor
+	@discussion	Returns a NSColor representation of the texture. The \c NSColor
 				representation can be requested in colour or greyscale versions
 				and is always without an alpha channel.
 	@param		color
-				A boolean specifying whether the returned NSColor should be
+				A boolean specifying whether the returned \c NSColor should be
 				colour or greyscale.
 	@result		Returns a reference to either a NSColor.
 */
@@ -110,8 +110,8 @@
 				texture's name).
 	@param		other
 				The other texture with which to compare this texture.
-	@result		Returns an NSComparisonResult.
+	@result		Returns an <code>NSComparisonResult</code>.
 */
-- (NSComparisonResult)compare:(id)other;
+- (NSComparisonResult)compare:(SeaTexture*)other;
 
 @end

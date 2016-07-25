@@ -12,10 +12,8 @@
 */
 @interface SeaAlignment : NSObject
 {
-
 	// The document associated with this object
 	IBOutlet SeaDocument *document;
-
 }
 
 /*!

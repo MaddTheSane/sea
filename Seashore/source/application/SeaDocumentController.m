@@ -5,6 +5,12 @@
 #import "Units.h"
 
 @implementation SeaDocumentController
+@synthesize type;
+@synthesize height;
+@synthesize width;
+@synthesize resolution;
+@synthesize opaque;
+@synthesize units;
 
 - (instancetype)init
 {
@@ -151,17 +157,17 @@
 	NSImage *image;
 	NSSize paperSize;
 	IntSize size = IntMakeSize(0, 0);
-	float res;
+	CGFloat res;
 	NSInteger selectedTag;
 	
 	selectedTag = [[templatesMenu selectedItem] tag];
 	res = [[resMenu selectedItem] tag];
 	switch (selectedTag) {
 		case 1:
-			size = [(SeaPrefs *)[SeaController seaPrefs] size];
-			units = [(SeaPrefs *)[SeaController seaPrefs] newUnits];
+			size = [[SeaController seaPrefs] size];
+			units = [[SeaController seaPrefs] newUnits];
 			[unitsMenu selectItemAtIndex: units];
-			res = [(SeaPrefs *)[SeaController seaPrefs] resolution];
+			res = [[SeaController seaPrefs] resolution];
 			[resMenu selectItemAtIndex:res];
 		break;
 		case 2:
@@ -170,8 +176,7 @@
 			if (availableType) {
 				image = [[NSImage alloc] initWithData:[pboard dataForType:availableType]];
 				size = NSSizeMakeIntSize([image size]);
-			}
-			else {
+			} else {
 				NSBeep();
 				return;
 			}
@@ -232,13 +237,6 @@
 	[super removeDocument:document];
 }
 
-@synthesize type;
-@synthesize height;
-@synthesize width;
-@synthesize resolution;
-@synthesize opaque;
-@synthesize units;
-
 - (NSMutableDictionary*)editableTypes
 {
 	return editableTypes;
@@ -251,16 +249,13 @@
 
 - (NSArray*)readableTypes
 {
-	NSMutableArray *array = [NSMutableArray array];
-	NSEnumerator *e = [editableTypes keyEnumerator];
-	NSString *key;
-	while (key = [e nextObject]) {
-		[array addObjectsFromArray:[editableTypes[key] allObjects]];
+	NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:editableTypes.count + viewableTypes.count];
+	for (NSSet *obj in editableTypes.objectEnumerator){
+		[array addObjectsFromArray:[obj allObjects]];
 	}
 	
-	e = [viewableTypes keyEnumerator];
-	while(key = [e nextObject]){
-		[array addObjectsFromArray:[viewableTypes[key] allObjects]];
+	for (NSSet *obj in viewableTypes.objectEnumerator){
+		[array addObjectsFromArray:[obj allObjects]];
 	}
 	return array;
 }
@@ -280,7 +275,7 @@
 	//	return YES;
 	//}
 	
-	NSMutableSet<NSString*> *set = editableTypes[key];
+	NSSet<NSString*> *set = editableTypes[key];
 	if(!set){
 		set = viewableTypes[key];
 		// That's wierd, someone has passed in an invalid type

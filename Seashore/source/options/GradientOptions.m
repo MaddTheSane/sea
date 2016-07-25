@@ -33,14 +33,14 @@
 	}
 }
 
-- (NSInteger)type
+- (GimpGradientType)type
 {
-	return [[typePopup selectedItem] tag];
+	return (GimpGradientType)[[typePopup selectedItem] tag];
 }
 
-- (NSInteger)repeat
+- (GimpRepeatMode)repeat
 {
-	return [[repeatPopup selectedItem] tag];
+	return (GimpRepeatMode)[[repeatPopup selectedItem] tag];
 }
 
 - (BOOL)supersample

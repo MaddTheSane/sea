@@ -49,7 +49,7 @@
 /*!
 	@property	fade
 	@discussion	Returns whether the brush should fade with use.
-	@result		Returns YES if the brush should fade with use, NO otherwise.
+	@result		Returns \c YES if the brush should fade with use, \c NO otherwise.
 */
 @property (readonly) BOOL fade;
 
@@ -63,7 +63,7 @@
 /*!
 	@property	pressureSensitive
 	@discussion	Returns whether the brush is pressure sensitive.
-	@result		Returns YES if the brush is pressure sensitive, NO otherwise.
+	@result		Returns \c YES if the brush is pressure sensitive, \c NO otherwise.
 */
 @property (readonly) BOOL pressureSensitive;
 
@@ -80,14 +80,14 @@
 /*!
 	@property	scale
 	@discussion	Returns whether the brush should be scaled with pressure.
-	@result		Returns YES if the brush should scaled, NO otherwise.
+	@result		Returns \c YES if the brush should scaled, \c NO otherwise.
 */
 @property (readonly) BOOL scale;
 
 /*!
 	@property	useTextures
 	@discussion	Returns whether or not the tool should use textures.
-	@result		Returns YES if the tool should use textures, NO if the tool
+	@result		Returns \c YES if the tool should use textures, \c NO if the tool
 				should use the foreground colour.
 */
 @property (readonly) BOOL useTextures;
@@ -95,7 +95,7 @@
 /*!
 	@property	brushIsErasing
 	@discussion	Returns whether or not the brush is erasing.
-	@result		Returns YES if the brush is erasing, NO if the brush is using
+	@result		Returns \c YES if the brush is erasing, \c NO if the brush is using
 				its normal operation.
 */
 @property (readonly) BOOL brushIsErasing;

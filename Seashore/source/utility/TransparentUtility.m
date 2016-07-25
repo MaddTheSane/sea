@@ -19,8 +19,7 @@
 	if ([defaults objectForKey:@"transparency color data"] == NULL) {
 		values[0] = values[1] = values[2] = values[3] = 1.0;
 		color = [NSColor colorWithCalibratedRed:values[0] green:values[1] blue:values[2] alpha:values[3]];
-	}
-	else {
+	} else {
 		tempData = [defaults dataForKey:@"transparency color data"];
 		if (tempData != nil)
 			color = (NSColor *)[NSUnarchiver unarchiveObjectWithData:tempData];
@@ -44,8 +43,9 @@
 		[gColorPanel setContinuous:NO];
 		[gColorPanel setAction:@selector(changeColor:)];
 		[gColorPanel setTarget:self];
-	} else
+	} else {
 		[gColorPanel orderOut:self];
+	}
 }
 
 - (void)changeColor:(id)sender
@@ -56,7 +56,7 @@
 	// Change the colour
 	color = [sender color];
 	if (![[color colorSpaceName] isEqualToString:NSNamedColorSpace])
-		[[sender color] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+		color = [[sender color] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	
 	// Call for all documents' views to respond to the change
 	for (SeaDocument *doc in documents) {
@@ -64,7 +64,6 @@
 	}
 
 	[defaults setObject:[NSArchiver archivedDataWithRootObject:color] forKey:@"transparency color data"];
-
 }
 
 @end

@@ -15,16 +15,16 @@
 	IBOutlet NSTableView *effectTable;
 	
 	// The instruction for those effects
-	IBOutlet id effectTableInstruction;
+	IBOutlet NSTextField *effectTableInstruction;
 	
 	// The label showing the number of clicks remaining
-	IBOutlet id clickCountLabel;
+	IBOutlet NSTextField *clickCountLabel;
 	
 	// The panel of the effect options
 	IBOutlet id panel;
 
 	// The parent window for the effects options
-	id parentWin;
+	__weak id parentWin;
 }
 
 /*!

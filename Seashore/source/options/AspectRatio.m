@@ -7,14 +7,14 @@
 
 @implementation AspectRatio
 
-- (void)awakeWithMaster:(id)imaster andString:(id)iprefString
+- (void)awakeWithMaster:(id)imaster andString:(NSString*)iprefString
 {
 	NSInteger ratioIndex;
 	id customItem;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	master = imaster;
-	prefString = iprefString;
+	prefString = [iprefString copy];
 
 	[ratioCheckbox setState:NSOffState];
 	[ratioPopup setEnabled:[ratioCheckbox state]];

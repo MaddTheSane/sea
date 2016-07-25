@@ -157,19 +157,18 @@
 
 - (IBAction)swapColors:(id)sender
 {
-	NSColor *tempColor;
 	[self setNeedsDisplay:YES];
-	tempColor = [[document contents] foreground];
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] setForeground:[[document contents] background]];
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] setBackground:tempColor];
+	NSColor *tempColor = [[document contents] foreground];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:document] setForeground:[[document contents] background]];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:document] setBackground:tempColor];
 	[self update];
 }
 
 - (IBAction)defaultColors:(id)sender
 {
 	[self setNeedsDisplay:YES];
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] setForeground:[NSColor blackColor]];
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] setBackground:[NSColor whiteColor]];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:document] setForeground:[NSColor blackColor]];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:document] setBackground:[NSColor whiteColor]];
 	[self update];
 }
 
@@ -215,7 +214,7 @@
 
 - (void)changeForegroundColor:(id)sender
 {
-	id toolboxUtility = (ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document];
+	ToolboxUtility *toolboxUtility = [[SeaController utilitiesManager] toolboxUtilityFor:document];
 	
 	[toolboxUtility setForeground:[sender color]];
 	[textureUtility setActiveTextureIndex:-1];
@@ -224,7 +223,7 @@
 
 - (void)changeBackgroundColor:(id)sender
 {
-	id toolboxUtility = (ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document];
+	ToolboxUtility *toolboxUtility = [[SeaController utilitiesManager] toolboxUtilityFor:document];
 	
 	[toolboxUtility setBackground:[sender color]];
 	[self setNeedsDisplay:YES];
