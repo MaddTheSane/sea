@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, SeaUnits) {
 };
 
 /*!
-	@function	StringFromPixels
+	@function	SeaStringFromPixels
 	@discussion	Converts a number of pixels to a string represeting the given units.
 	@param		pixels
 				The number of pixels.
@@ -37,10 +37,10 @@ typedef NS_ENUM(NSInteger, SeaUnits) {
 				The resolution being used.
 	@result		Returns an NSString that is good for displaying the units.
 */
-NSString *StringFromPixels(int pixels, SeaUnits units, int resolution);
+NSString *SeaStringFromPixels(int pixels, SeaUnits units, int resolution);
 
 /*!
-	@function	PixelsfromFloat
+	@function	SeaPixelsfromFloat
 	@discussion	Converts a float represeting the given units into a number of pixels.
 	@param		measure
 				The measure being converted.
@@ -50,15 +50,15 @@ NSString *StringFromPixels(int pixels, SeaUnits units, int resolution);
 				The resolution being used.
 	@result		Returns an int that is the exact number of pixels.
 */
-int PixelsFromFloat(CGFloat measure, SeaUnits units, int resolution);
+int SeaPixelsFromFloat(CGFloat measure, SeaUnits units, int resolution);
 
 /*!
-	@function	UnitsString
+	@function	SeaUnitsString
 	@discussion	Gives a label to different unit types.
 	@param		units
 				The units to display.
 	@result		Returns an NSString that is the label for the units.
 */
-NSString *UnitsString(SeaUnits units);
+NSString *SeaUnitsString(SeaUnits units);
 
 NS_ASSUME_NONNULL_END

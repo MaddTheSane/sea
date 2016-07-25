@@ -90,7 +90,7 @@
 		unichar ch = 0x00B7; // replace this with your code pointNSString
 		NSString *divider = [NSString stringWithCharacters:&ch length:1];
 		if([view frame].size.width > 445){
-			statusString = [statusString stringByAppendingFormat: @"%@ %C %@ %@", StringFromPixels([contents width] , newUnits, [contents xres]), 0x00D7, StringFromPixels([contents height], newUnits, [contents yres]), UnitsString(newUnits)];
+			statusString = [statusString stringByAppendingFormat: @"%@ %C %@ %@", SeaStringFromPixels([contents width] , newUnits, [contents xres]), 0x00D7, SeaStringFromPixels([contents height], newUnits, [contents yres]), SeaUnitsString(newUnits)];
 		}
 		if([view frame].size.width > 480){
 			statusString = [[NSString stringWithFormat:@"%.0f%% %@ ", [contents xscale] * 100, divider] stringByAppendingString: statusString];

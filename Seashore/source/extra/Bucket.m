@@ -2,7 +2,7 @@
 
 #define kStackSizeIncrement 2500
 
-BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint seeds[], int numSeeds, IntPoint point, int width, int spp, int tolerance, int channel)
+static BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint seeds[], int numSeeds, IntPoint point, int width, int spp, int tolerance, int channel)
 {
 	int seedIndex;
 	
@@ -10,7 +10,7 @@ BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint seeds[], i
 		
 		IntPoint seed = seeds[seedIndex];
 		BOOL outsideTolerance = NO;
-		int i, j, k, temp;
+		int i, j, temp;
 		
 		i = point.x;
 		j = point.y;
@@ -21,8 +21,7 @@ BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint seeds[], i
 		}
 		
 		if (channel == kAllChannels) {
-			
-			for (k = spp - 1; k >= 0; k--) {
+			for (int k = spp - 1; k >= 0; k--) {
 				temp = abs((int)data[(width * j + i) * spp + k] - (int)data[(width * seed.y + seed.x) * spp + k]);
 				if (temp > tolerance){
 					outsideTolerance = YES;
@@ -31,19 +30,15 @@ BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint seeds[], i
 				if (k == spp - 1 && data[(width * j + i) * spp + k] == 0)
 					return YES;
 			}
-		
 		} else if (channel == kPrimaryChannels) {
-		
-			for (k = 0; k < spp - 1; k++) {
+			for (int k = 0; k < spp - 1; k++) {
 				temp = abs((int)data[(width * j + i) * spp + k] - (int)data[(width * seed.y + seed.x) * spp + k]);
 				if (temp > tolerance){
 					outsideTolerance = YES;
 					break;
 				}
 			}
-		
 		} else if (channel == kAlphaChannel) {
-		
 			temp = abs((int)data[(width * j + i + 1) * spp - 1] - (int)data[(width * seed.y + seed.x + 1) * spp - 1]);
 			if (temp > tolerance){
 				outsideTolerance = YES;
@@ -51,7 +46,7 @@ BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint seeds[], i
 		
 		}
 		
-		if(!outsideTolerance){
+		if (!outsideTolerance) {
 			return YES;
 		}
 	}
@@ -59,13 +54,12 @@ BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint seeds[], i
 	return NO;
 }
 
-IntRect bucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char *data, int width, int height, IntPoint seeds[], int numSeeds, unsigned char *fillColor, int tolerance, int channel)
+IntRect SeaBucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char *data, int width, int height, IntPoint seeds[], int numSeeds, unsigned char *fillColor, int tolerance, int channel)
 {
-	int seedIndex;
 	// We know at the very least that this point is in the rect
 	IntRect result = IntMakeRect(seeds[0].x, seeds[0].y, 1, 1);
 
-	for(seedIndex = 0; seedIndex < numSeeds; seedIndex++){
+	for(int seedIndex = 0; seedIndex < numSeeds; seedIndex++){
 		IntPoint point, newPoint, seed = seeds[seedIndex];
 		IntPoint *stack;
 		int stackSize, stackPos, k;
@@ -76,13 +70,13 @@ IntRect bucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char 
 
 		// If the overlay alread contains this point, then our work is already done
 		BOOL visited = YES;
-		for (k = 0; k < spp; k++){
+		for (int k = 0; k < spp; k++){
 			// Compare to see if the fill exists at this point in the overlay
 			if(overlay[(seed.y * width + seed.x) * spp + k] != fillColor[k]){
 				visited = NO;
 			}
 		}
-		if(visited){
+		if (visited) {
 			// We have in fact already filled this point so there's no reason 
 			// to do another bucket fill from this point
 			continue;
@@ -106,8 +100,7 @@ IntRect bucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char 
 		
 		if (tolerance < 0) {
 			result = IntMakeRect(0, 0, 0, 0);
-		}
-		else if (tolerance >= 255) {
+		} else if (tolerance >= 255) {
 			for (j = rect.origin.y; j < rect.origin.y + rect.size.height; j++) {
 				for	(i = rect.origin.x; i < rect.origin.x + rect.size.width; i++) {
 					memcpy(&(overlay[(j * width + i) * spp]), fillColor, spp);
@@ -115,14 +108,12 @@ IntRect bucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char 
 			}
 			
 			result = rect;
-		}
-		else {
+		} else {
 			stack = malloc(sizeof(IntPoint) * kStackSizeIncrement);
 			stackSize = kStackSizeIncrement;
 			stackPos = 0;
 			point = seed;
 			do {
-				
 				if (stackPos == stackSize) {
 					stackSize += kStackSizeIncrement;
 					stack = realloc(stack, sizeof(IntPoint) * stackSize);
@@ -140,9 +131,7 @@ IntRect bucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char 
 					stackPos++;
 					point = newPoint;
 					if (point.y > maxBottom) maxBottom = point.y;
-				}
-				else {
-				
+				} else {
 					newPoint = point;
 					newPoint.y--;
 					if (IntPointInRect(newPoint, rect) && shouldFill(overlay, data, seeds, numSeeds, newPoint, width, spp, tolerance, channel)) {
@@ -150,19 +139,16 @@ IntRect bucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char 
 						stackPos++;
 						point = newPoint;
 						if (point.y < minTop) minTop = point.y;
-					}
-					else {
-					
+					} else {
 						newPoint = point;
 						newPoint.x++;
 						if (IntPointInRect(newPoint, rect) && shouldFill(overlay, data, seeds, numSeeds, newPoint, width, spp, tolerance, channel)) {
 							stack[stackPos] = point;
 							stackPos++;
 							point = newPoint;
-							if (point.x > maxRight) maxRight = point.x;
-						}
-						else {
-							
+							if (point.x > maxRight)
+								maxRight = point.x;
+						} else {
 							newPoint = point;
 							newPoint.x--;
 							if (IntPointInRect(newPoint, rect) && shouldFill(overlay, data, seeds, numSeeds, newPoint, width, spp, tolerance, channel)) {
@@ -170,19 +156,14 @@ IntRect bucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char 
 								stackPos++;
 								point = newPoint;
 								if (point.x < minLeft) minLeft = point.x;
-							}
-							else {
+							} else {
 								stackPos--;
 								if (stackPos > -1)
 									point = stack[stackPos];
 							}
-				
 						}
-						
 					}
-					
 				}
-				
 			} while (stackPos > -1);
 			
 			free(stack);
@@ -193,14 +174,12 @@ IntRect bucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char 
 	return result;
 }
 
-void textureFill(int spp, IntRect rect, unsigned char *data, int width, int height, unsigned char *texture, int textureWidth, int textureHeight)
+void SeaTextureFill(int spp, IntRect rect, unsigned char *data, int width, int height, unsigned char *texture, int textureWidth, int textureHeight)
 {
-	int i, j, k;
-	
-	for (j = rect.origin.y; j < rect.size.height + rect.origin.y; j++) {
-		for (i = rect.origin.x; i < rect.size.width + rect.origin.x; i++) {
+	for (int j = rect.origin.y; j < rect.size.height + rect.origin.y; j++) {
+		for (int i = rect.origin.x; i < rect.size.width + rect.origin.x; i++) {
 			if (data[(j * width + i + 1) * spp - 1] != 0x00) {
-				for (k = 0; k < spp - 1; k++) {
+				for (int k = 0; k < spp - 1; k++) {
 					data[(j * width + i) * spp + k] = texture[((j % textureHeight) * textureWidth + (i % textureWidth)) * (spp - 1) + k];
 				}
 			}
@@ -208,18 +187,18 @@ void textureFill(int spp, IntRect rect, unsigned char *data, int width, int heig
 	}
 }
 
-void cloneFill(int spp, IntRect rect, unsigned char *data, unsigned char *replace, int width, int height, unsigned char *source, int sourceWidth, int sourceHeight, IntPoint spt)
+void SeaCloneFill(int spp, IntRect rect, unsigned char *data, unsigned char *replace, int width, int height, unsigned char *source, int sourceWidth, int sourceHeight, IntPoint spt)
 {
-	int i, ai, j, aj, sai, saj, k;
+	int ai, aj, sai, saj;
 	
-	for (j = rect.origin.y; j < rect.size.height + rect.origin.y; j++) {
-		for (i = rect.origin.x; i < rect.size.width + rect.origin.x; i++) {
+	for (int j = rect.origin.y; j < rect.size.height + rect.origin.y; j++) {
+		for (int i = rect.origin.x; i < rect.size.width + rect.origin.x; i++) {
 			ai = i - rect.origin.x;
 			aj = j - rect.origin.y;
 			sai = ai + spt.x;
 			saj = aj + spt.y;
 			if (data[(j * width + i + 1) * spp - 1] != 0x00 && saj >= 0 && saj < sourceHeight && sai >= 0 && sai < sourceWidth) {
-				for (k = 0; k < spp - 1; k++) {
+				for (int k = 0; k < spp - 1; k++) {
 					data[(j * width + i) * spp + k] = source[(saj * sourceWidth + sai) * spp + k];
 				}
 				replace[j * width + i] = source[(saj * sourceWidth + sai + 1) * spp - 1];

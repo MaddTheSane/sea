@@ -11,7 +11,7 @@
 #import "Globals.h"
 
 /*!
-	@function	bucketFill
+	@function	SeaBucketFill
 	@discussion	Given a seed point replaces all neighbouring pixels of similar
 				colours with a single given colour. The function does not work
 				on the bitmap directly but instead on an overlay which can later
@@ -48,10 +48,10 @@
 	@result		Returns the smallest possible IntRect including all affected
 				pixels.
 */
-IntRect bucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char *data, int width, int height, IntPoint seeds[], int numSeeds, unsigned char *fillColor, int tolerance, int channel);
+IntRect SeaBucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char *data, int width, int height, IntPoint seeds[], int numSeeds, unsigned char *fillColor, int tolerance, int channel);
 
 /*!
-	@function	textureFill
+	@function	SeaTextureFill
 	@discussion	Given a bitmap, this function fills the bitmap with the given
 				texture replacing the bitmap's colour but preserving the
 				bitmap's transparency. It is often applied to the overlay.
@@ -73,10 +73,10 @@ IntRect bucketFill(int spp, IntRect rect, unsigned char *overlay, unsigned char 
 	@param		textureHeight
 				The height of the texture bitmap.
 */
-void textureFill(int spp, IntRect rect, unsigned char *data, int width, int height, unsigned char *texture, int textureWidth, int textureHeight);
+void SeaTextureFill(int spp, IntRect rect, unsigned char *data, int width, int height, unsigned char *texture, int textureWidth, int textureHeight);
 
 /*!
-	@function	cloneFill
+	@function	SeaCloneFill
 	@discussion	Given a bitmap, this function fills the bitmap with the provided
 				data.
 	@param		spp
@@ -101,5 +101,5 @@ void textureFill(int spp, IntRect rect, unsigned char *data, int width, int heig
 	@param		spt
 				The point where the rectangle is taken from in the source data.
 */
-void cloneFill(int spp, IntRect rect, unsigned char *data, unsigned char *replace, int width, int height, unsigned char *source, int sourceWidth, int sourceHeight, IntPoint spt);
+void SeaCloneFill(int spp, IntRect rect, unsigned char *data, unsigned char *replace, int width, int height, unsigned char *source, int sourceWidth, int sourceHeight, IntPoint spt);
 

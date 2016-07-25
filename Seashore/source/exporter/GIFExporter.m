@@ -46,7 +46,7 @@
 	
 	// Strip the alpha channel (there is no alpha in then GIF format)
 	unsigned char* destData = malloc(width * height * (spp - 1));
-	stripAlphaToWhite(spp, destData, srcData, width * height);
+	SeaStripAlphaToWhite(spp, destData, srcData, width * height);
 	spp--;
 	
 	// Make an image representation from the data

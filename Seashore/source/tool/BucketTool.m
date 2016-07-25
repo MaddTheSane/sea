@@ -146,14 +146,14 @@
 	else
 		channel = [[document contents] selectedChannel];
 	if ([[document selection] active])
-		rect = bucketFill(spp, [[document selection] localRect], overlay, data, width, height, seeds, intervals, basePixel, tolerance, channel);
+		rect = SeaBucketFill(spp, [[document selection] localRect], overlay, data, width, height, seeds, intervals, basePixel, tolerance, channel);
 	else
-		rect = bucketFill(spp, IntMakeRect(0, 0, width, height), overlay, data, width, height, seeds, intervals, basePixel, tolerance, channel);
+		rect = SeaBucketFill(spp, IntMakeRect(0, 0, width, height), overlay, data, width, height, seeds, intervals, basePixel, tolerance, channel);
 	if ([options useTextures] && IntContainsRect(IntMakeRect(0, 0, width, height), rect)) {
 		if ([[document selection] active])
-			textureFill(spp, rect, overlay, width, height, texture, textureWidth, textureHeight);
+			SeaTextureFill(spp, rect, overlay, width, height, texture, textureWidth, textureHeight);
 		else
-			textureFill(spp, rect, overlay, width, height, texture, textureWidth, textureHeight);
+			SeaTextureFill(spp, rect, overlay, width, height, texture, textureWidth, textureHeight);
 	}
 	
 	// Do the update

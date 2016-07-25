@@ -77,7 +77,7 @@
 				seeds[seedIndex] = IntMakePoint(x, y);				
 			}
 				
-			rect = bucketFill(spp, IntMakeRect(0, 0, width, height), overlay, data, width, height, seeds, intervals + 1, basePixel, tolerance, [[document contents] selectedChannel]);
+			rect = SeaBucketFill(spp, IntMakeRect(0, 0, width, height), overlay, data, width, height, seeds, intervals + 1, basePixel, tolerance, [[document contents] selectedChannel]);
 			free(seeds);
 			
 			// Then select it

@@ -22,7 +22,7 @@
 
 extern BOOL useAltiVec;
 
-extern IntPoint gScreenResolution;
+extern IntPoint SeaScreenResolution;
 
 @implementation SeaWhiteboard
 @synthesize overlayBehaviour;
@@ -114,7 +114,7 @@ extern IntPoint gScreenResolution;
 		ColorSyncProfileRef destProf;
 		int layerWidth, layerHeight;
 		
-		gScreenResolution = IntMakePoint(1024, 768);
+		SeaScreenResolution = IntMakePoint(1024, 768);
 		// Remember the document we are representing
 		contents = cont;
 		
@@ -761,7 +761,7 @@ extern IntPoint gScreenResolution;
 		
 			// Define the source
 			tempData = malloc(majorUpdateRect.size.width * 3);
-			stripAlphaToWhite(4, tempData, data + ((majorUpdateRect.origin.y + i) * width + majorUpdateRect.origin.x) * 4, majorUpdateRect.size.width);
+			SeaStripAlphaToWhite(4, tempData, data + ((majorUpdateRect.origin.y + i) * width + majorUpdateRect.origin.x) * 4, majorUpdateRect.size.width);
 			
 			// Execute the conversion
 			ColorSyncTransformConvert(cw, majorUpdateRect.size.width, 1, (char *)altData + ((majorUpdateRect.origin.y + i) * width + majorUpdateRect.origin.x) * 4, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, majorUpdateRect.size.width * 4, tempData, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, majorUpdateRect.size.width * 3, NULL);
@@ -775,7 +775,7 @@ extern IntPoint gScreenResolution;
 	
 		// Define the source
 		tempData = malloc(width * height * 3);
-		stripAlphaToWhite(4, tempData, data, width * height);
+		SeaStripAlphaToWhite(4, tempData, data, width * height);
 		
 		// Execute the conversion
 		ColorSyncTransformConvert(cw, width, height, altData, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, width * 4, tempData, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, width * 3, NULL);
@@ -910,13 +910,13 @@ extern IntPoint gScreenResolution;
 	int xres = [contents xres], yres = [contents yres];
 #endif
 	
-	if (gScreenResolution.x != 0 && xres != gScreenResolution.x) {
-		displayUpdateRect.origin.x /= ((CGFloat)xres / gScreenResolution.x);
-		displayUpdateRect.size.width /= ((CGFloat)xres / gScreenResolution.x);
+	if (SeaScreenResolution.x != 0 && xres != SeaScreenResolution.x) {
+		displayUpdateRect.origin.x /= ((CGFloat)xres / SeaScreenResolution.x);
+		displayUpdateRect.size.width /= ((CGFloat)xres / SeaScreenResolution.x);
 	}
-	if (gScreenResolution.y != 0 && yres != gScreenResolution.y) {
-		displayUpdateRect.origin.y /= ((CGFloat)yres / gScreenResolution.y);
-		displayUpdateRect.size.height /= ((CGFloat)yres / gScreenResolution.y);
+	if (SeaScreenResolution.y != 0 && yres != SeaScreenResolution.y) {
+		displayUpdateRect.origin.y /= ((CGFloat)yres / SeaScreenResolution.y);
+		displayUpdateRect.size.height /= ((CGFloat)yres / SeaScreenResolution.y);
 	}
 	displayUpdateRect.origin.x *= zoom;
 	displayUpdateRect.size.width *= zoom;

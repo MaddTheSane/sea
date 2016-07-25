@@ -40,7 +40,7 @@ static inline void premultiplyAlpha(int spp, unsigned char *destPtr, unsigned ch
 
 // Unpremultiplies the alpha channel of an image - destPtr's memory may intersect srcPtr's
 
-static inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
+static inline void SeaUnpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
 {
 	int i, j, alphaPos, newValue;
 	double alphaRatio;

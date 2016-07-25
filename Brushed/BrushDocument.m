@@ -400,7 +400,7 @@ typedef struct _BrushHeader {
 	
 	// And then write down the meat of the brush
 	if (usePixmap) {
-		unpremultiplyBitmap(4, pixmap, pixmap, width * height);
+		SeaUnpremultiplyBitmap(4, pixmap, pixmap, width * height);
 		fwrite(pixmap, sizeof(char), width * height * 4, file);
 	}
 	else {
@@ -430,7 +430,6 @@ typedef struct _BrushHeader {
 		if (!success) {
 			NSRunAlertPanel(@"Cannot Import", @"Brushed can only import JPEG, PNG and TIFF files with 8-bit RGB channels or an 8-bit Grays channel and optionally an additional alpha channel.", @"Ok", NULL, NULL);
 		}
-
 	}];
 }
 

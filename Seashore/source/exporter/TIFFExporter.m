@@ -108,7 +108,7 @@ CF_ENUM(int) {
 	
 		// Strip the alpha channel
 		tempData = malloc(width * height * 3);
-		stripAlphaToWhite(spp, tempData, srcData, width * height);
+		SeaStripAlphaToWhite(spp, tempData, srcData, width * height);
 		spp--;
 		
 		// Establish the color world
@@ -199,7 +199,7 @@ CF_ENUM(int) {
 		}
 		else {
 			destData = malloc(width * height * spp);
-			unpremultiplyBitmap(spp, destData, srcData, width * height);
+			SeaUnpremultiplyBitmap(spp, destData, srcData, width * height);
 		}
 		
 		// Get embedded ColorSync profile

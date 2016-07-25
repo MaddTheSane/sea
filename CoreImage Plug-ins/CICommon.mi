@@ -96,7 +96,7 @@
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
 #ifndef NO_PREMULTIPLY
-	premultiplyBitmap(4, newdata, data, width * height);
+	SeaPremultiplyBitmap(4, newdata, data, width * height);
 	// Convert from RGBA to ARGB
 	vdata = (__m128i *)newdata;
 #else
@@ -127,9 +127,9 @@
 	}
 #ifndef NO_PREMULTIPLY
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		unpremultiplyBitmap(4, resdata, resdata, selection.size.width * selection.size.height);
+		SeaUnpremultiplyBitmap(4, resdata, resdata, selection.size.width * selection.size.height);
 	} else {
-		unpremultiplyBitmap(4, resdata, resdata, width * height);
+		SeaUnpremultiplyBitmap(4, resdata, resdata, width * height);
 	}
 #endif
 	// Convert from ARGB to RGBA

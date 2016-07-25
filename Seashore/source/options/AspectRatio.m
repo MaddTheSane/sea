@@ -157,8 +157,8 @@
 	oldType = aspectType;
 	aspectType = [aspectTypePopup indexOfSelectedItem] - 1;
 	if (oldType != kRatioAspectType) {
-		forgotX = PixelsFromFloat([xRatioValue doubleValue], (SeaUnits)oldType, xres);
-		forgotY = PixelsFromFloat([yRatioValue doubleValue], (SeaUnits)oldType, yres);
+		forgotX = SeaPixelsFromFloat([xRatioValue doubleValue], (SeaUnits)oldType, xres);
+		forgotY = SeaPixelsFromFloat([yRatioValue doubleValue], (SeaUnits)oldType, yres);
 	}
 	switch (aspectType) {
 		case kRatioAspectType:
@@ -170,24 +170,24 @@
 			[aspectTypePopup setTitle:@"ratio"];
 			break;
 		case kExactPixelAspectType:
-			[xRatioValue setStringValue:StringFromPixels(forgotX, (SeaUnits)aspectType, xres)];
-			[yRatioValue setStringValue:StringFromPixels(forgotY, (SeaUnits)aspectType, yres)];
+			[xRatioValue setStringValue:SeaStringFromPixels(forgotX, (SeaUnits)aspectType, xres)];
+			[yRatioValue setStringValue:SeaStringFromPixels(forgotY, (SeaUnits)aspectType, yres)];
 			ratioX = [xRatioValue floatValue];
 			ratioY = [yRatioValue floatValue];
 			[toLabel setStringValue:@"by"];
 			[aspectTypePopup setTitle:@"px"];
 			break;
 		case kExactInchAspectType:
-			[xRatioValue setStringValue:StringFromPixels(forgotX, (SeaUnits)aspectType, xres)];
-			[yRatioValue setStringValue:StringFromPixels(forgotY, (SeaUnits)aspectType, yres)];
+			[xRatioValue setStringValue:SeaStringFromPixels(forgotX, (SeaUnits)aspectType, xres)];
+			[yRatioValue setStringValue:SeaStringFromPixels(forgotY, (SeaUnits)aspectType, yres)];
 			ratioX = [xRatioValue floatValue];
 			ratioY = [yRatioValue floatValue];
 			[toLabel setStringValue:@"by"];
 			[aspectTypePopup setTitle:@"in"];
 			break;
 		case kExactMillimeterAspectType:
-			[xRatioValue setStringValue:StringFromPixels(forgotX, (SeaUnits)aspectType, xres)];
-			[yRatioValue setStringValue:StringFromPixels(forgotY, (SeaUnits)aspectType, yres)];
+			[xRatioValue setStringValue:SeaStringFromPixels(forgotX, (SeaUnits)aspectType, xres)];
+			[yRatioValue setStringValue:SeaStringFromPixels(forgotY, (SeaUnits)aspectType, yres)];
 			ratioX = [xRatioValue floatValue];
 			ratioY = [yRatioValue floatValue];
 			[toLabel setStringValue:@"by"];

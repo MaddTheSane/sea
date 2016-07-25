@@ -65,7 +65,7 @@
 			maskBitmap[i * 4 + 1] = basePixel[1];
 			maskBitmap[i * 4 + 2] = basePixel[2];
 		}
-		premultiplyBitmap(4, maskBitmap, maskBitmap, rect.size.width * rect.size.height);
+		SeaPremultiplyBitmap(4, maskBitmap, maskBitmap, rect.size.width * rect.size.height);
 		selectionColorIndex = [[SeaController seaPrefs] selectionColorIndex];
 	}
 	[maskImage setFlipped:YES];
@@ -123,7 +123,7 @@
 			maskBitmap[i * 4 + 2] = basePixel[2];
 			maskBitmap[i * 4 + 3] = 0xFF - mask[i];
 		}
-		premultiplyBitmap(4, maskBitmap, maskBitmap, rect.size.width * rect.size.height);
+		SeaPremultiplyBitmap(4, maskBitmap, maskBitmap, rect.size.width * rect.size.height);
 		maskBitmapRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&maskBitmap pixelsWide:rect.size.width pixelsHigh:rect.size.height bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bytesPerRow:rect.size.width * 4 bitsPerPixel:8 * 4];
 		maskImage = [[NSImage alloc] init];
 		[maskImage addRepresentation:maskBitmapRep];
@@ -855,7 +855,7 @@
 	
 	// If we need to premultiply
 	if (premultiplied)
-		premultiplyBitmap(spp, destPtr, destPtr, globalRect.size.width * globalRect.size.height);
+		SeaPremultiplyBitmap(spp, destPtr, destPtr, globalRect.size.width * globalRect.size.height);
 	
 	return destPtr;
 }

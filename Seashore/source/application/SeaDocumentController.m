@@ -78,9 +78,9 @@
 	[modeMenu selectItemAtIndex:[(SeaPrefs *)[SeaController seaPrefs] mode]];
 	resolution = (int)[[resMenu selectedItem] tag];
 	IntSize size = [[SeaController seaPrefs] size];
-	[widthInput setStringValue:StringFromPixels(size.width, units, resolution)];
-	[heightInput setStringValue:StringFromPixels(size.height, units, resolution)];
-	[heightUnits setStringValue:UnitsString(units)];
+	[widthInput setStringValue:SeaStringFromPixels(size.width, units, resolution)];
+	[heightInput setStringValue:SeaStringFromPixels(size.height, units, resolution)];
+	[heightUnits setStringValue:SeaUnitsString(units)];
 	[backgroundCheckbox setState:[(SeaPrefs *)[SeaController seaPrefs] transparentBackground]];
 	
 	// Set up the recents menu
@@ -142,8 +142,8 @@
 	resolution = (int)[[resMenu selectedItem] tag];
 
 	// Parse width and height	
-	width = PixelsFromFloat([widthInput floatValue], units, resolution); 
-	height = PixelsFromFloat([heightInput floatValue], units, resolution); 
+	width = SeaPixelsFromFloat([widthInput floatValue], units, resolution); 
+	height = SeaPixelsFromFloat([heightInput floatValue], units, resolution); 
 			
 	// Don't accept rediculous heights or widths
 	if (width < kMinImageSize || width > kMaxImageSize) { NSBeep(); return; }
@@ -215,9 +215,9 @@
 	}
 	
 	if (selectedTag != 1000 && selectedTag != 1001) {
-		[widthInput setStringValue:StringFromPixels(size.width, units, (int)res)];
-		[heightInput setStringValue:StringFromPixels(size.height, units, (int)res)];
-		[heightUnits setStringValue:UnitsString(units)];
+		[widthInput setStringValue:SeaStringFromPixels(size.width, units, (int)res)];
+		[heightInput setStringValue:SeaStringFromPixels(size.height, units, (int)res)];
+		[heightUnits setStringValue:SeaUnitsString(units)];
 	}
 }
 
@@ -226,13 +226,13 @@
 	IntSize size = IntMakeSize(0, 0);
 	int res = (int)[[resMenu selectedItem] tag];
 
-	size.height =  PixelsFromFloat([heightInput floatValue],units,res);
-	size.width =  PixelsFromFloat([widthInput floatValue],units,res);
+	size.height =  SeaPixelsFromFloat([heightInput floatValue],units,res);
+	size.width =  SeaPixelsFromFloat([widthInput floatValue],units,res);
 
 	units = (int)[[unitsMenu selectedItem] tag];
-	[widthInput setStringValue:StringFromPixels(size.width, units, res)];
-	[heightInput setStringValue:StringFromPixels(size.height, units, res)];
-	[heightUnits setStringValue:UnitsString(units)];
+	[widthInput setStringValue:SeaStringFromPixels(size.width, units, res)];
+	[heightInput setStringValue:SeaStringFromPixels(size.height, units, res)];
+	[heightUnits setStringValue:SeaUnitsString(units)];
 }
 
 - (void)addDocument:(NSDocument *)document

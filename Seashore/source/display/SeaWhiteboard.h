@@ -89,7 +89,7 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 	// The document associated with this whiteboard
 	SeaContent *contents;
 	
-	IntPoint gScreenResolution;
+	IntPoint SeaScreenResolution;
 #endif
 	
 	// The width and height of the whitebaord

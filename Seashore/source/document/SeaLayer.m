@@ -427,7 +427,7 @@
 	[at rotateByDegrees:degrees];
 	
 	// Determine the input image
-	premultiplyBitmap(spp, data, data, width * height);
+	SeaPremultiplyBitmap(spp, data, data, width * height);
 	in_rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&data pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:width * spp bitsPerPixel:8 * spp];
 
 	// Determine the output size
@@ -487,10 +487,10 @@
 	bypr = [final_rep bytesPerRow];
 	BMPColorSpace ispace = (ispp > 2) ? kRGBColorSpace : kGrayColorSpace;
 	ibps = [final_rep bitsPerPixel] / [final_rep samplesPerPixel];
-	data = convertBitmapColorSync(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcData, width, height, ispp, bipp, bypr, ispace, NULL, ibps, 0);
+	data = SeaConvertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcData, width, height, ispp, bipp, bypr, ispace, NULL, ibps, 0);
 	
 	// Clean up
-	unpremultiplyBitmap(spp, data, data, width * height);
+	SeaUnpremultiplyBitmap(spp, data, data, width * height);
 		
 	// Make margin changes
 	if (trim) [self trimLayer];
@@ -755,7 +755,7 @@
 	if (hasAlpha) {
 		
 		// Formulate the premultiplied data from the data
-		premultiplyBitmap(spp, pmImageData, data, width * height);
+		SeaPremultiplyBitmap(spp, pmImageData, data, width * height);
 	
 	} else {
 	

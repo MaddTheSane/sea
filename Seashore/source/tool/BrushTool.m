@@ -99,10 +99,10 @@
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	BOOL hasAlpha = [layer hasAlpha];
-	id curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
-	id activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	SeaTexture *activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
 	NSPoint curPoint = IntPointMakeNSPoint(where), temp;
 	IntRect rect;
 	NSColor *color = NULL;
@@ -119,8 +119,7 @@
 	if (ignoreFirstTouch && ([event type] == NSLeftMouseDown || [event type] == NSRightMouseDown) && [options pressureSensitive] && (modifier != kShiftModifier && modifier != kShiftControlModifier)) { 
 		firstTouchDone = NO;
 		return;
-	}
-	else {
+	} else {
 		firstTouchDone = YES;
 	}
 	
@@ -132,25 +131,21 @@
 			basePixel[1] = (unsigned char)([color greenComponent] * 255.0);
 			basePixel[2] = (unsigned char)([color blueComponent] * 255.0);
 			basePixel[3] = 255;
-		}
-		else {
+		} else {
 			basePixel[0] = (unsigned char)([color whiteComponent] * 255.0);
 			basePixel[1] = 255;
 		}
-	}
-	else if ([options useTextures]) {
-		for (k = 0; k < spp - 1; k++)
+	} else if ([options useTextures]) {
+		for (int k = 0; k < spp - 1; k++)
 			basePixel[k] = 0;
 		basePixel[spp - 1] = [[[SeaController utilitiesManager] textureUtilityFor:document] opacity];
-	}
-	else if (spp == 4) {
+	} else if (spp == 4) {
 		color = [[document contents] foreground];
 		basePixel[0] = (unsigned char)([color redComponent] * 255.0);
 		basePixel[1] = (unsigned char)([color greenComponent] * 255.0);
 		basePixel[2] = (unsigned char)([color blueComponent] * 255.0);
 		basePixel[3] = (unsigned char)([color alphaComponent] * 255.0);
-	}
-	else {
+	} else {
 		color = [[document contents] foreground];
 		basePixel[0] = (unsigned char)([color whiteComponent] * 255.0);
 		basePixel[1] = (unsigned char)([color alphaComponent] * 255.0);
@@ -161,8 +156,7 @@
 		if (hasAlpha)
 			[[document whiteboard] setOverlayBehaviour:SeaOverlayBehaviourErasing];
 		[[document whiteboard] setOverlayOpacity:255];
-	}
-	else {
+	} else {
 		if ([options useTextures])
 			[[document whiteboard] setOverlayOpacity:[[[SeaController utilitiesManager] textureUtilityFor:document] opacity]];
 		else
@@ -170,16 +164,16 @@
 	}
 	
 	// Plot the initial point
-	rect.size.width = [(SeaBrush *)curBrush fakeWidth] + 1;
-	rect.size.height = [(SeaBrush *)curBrush fakeHeight] + 1;
-	temp = NSMakePoint(curPoint.x - (float)([(SeaBrush *)curBrush width] / 2) - 1.0, curPoint.y - (float)([(SeaBrush *)curBrush height] / 2) - 1.0);
+	rect.size.width = [curBrush fakeWidth] + 1;
+	rect.size.height = [curBrush fakeHeight] + 1;
+	temp = NSMakePoint(curPoint.x - (CGFloat)([curBrush width] / 2) - 1.0, curPoint.y - (CGFloat)([curBrush height] / 2) - 1.0);
 	rect.origin = NSPointMakeIntPoint(temp);
 	rect.origin.x--; rect.origin.y--;
-	rect = IntConstrainRect(rect, IntMakeRect(0, 0, [(SeaLayer *)layer width], [(SeaLayer *)layer height]));
+	rect = IntConstrainRect(rect, IntMakeRect(0, 0, [layer width], [layer height]));
 	if (rect.size.width > 0 && rect.size.height > 0) {
 		[self plotBrush:curBrush at:temp pressure:pressure];
 		if ([options useTextures] && ![options brushIsErasing] && ![curBrush usePixmap])
-			textureFill(spp, rect, [[document whiteboard] overlay], [(SeaLayer *)layer width], [(SeaLayer *)layer height], [activeTexture texture:(spp == 4)], [(SeaTexture *)activeTexture width], [(SeaTexture *)activeTexture height]);
+			SeaTextureFill(spp, rect, [[document whiteboard] overlay], [layer width], [layer height], [activeTexture texture:(spp == 4)], [activeTexture width], [activeTexture height]);
 		[[document helpers] overlayChanged:rect inThread:YES];
 	}
 	
@@ -366,7 +360,7 @@
 					if (rect.size.width > 0 && rect.size.height > 0 && pressure > 0) {
 						[self plotBrush:curBrush at:temp pressure:pressure];
 						if ([options useTextures] && ![options brushIsErasing] && ![curBrush usePixmap])
-							textureFill(spp, rect, [[document whiteboard] overlay], layerWidth, layerHeight, [activeTexture texture:(spp == 4)], [(SeaTexture *)activeTexture width], [(SeaTexture *)activeTexture height]);
+							SeaTextureFill(spp, rect, [[document whiteboard] overlay], layerWidth, layerHeight, [activeTexture texture:(spp == 4)], [(SeaTexture *)activeTexture width], [(SeaTexture *)activeTexture height]);
 						if (bigRect.size.width == 0) {
 							bigRect = rect;
 						}

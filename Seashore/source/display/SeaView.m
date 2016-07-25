@@ -45,7 +45,7 @@
 #import "SeaScale.h"
 #include <Carbon/Carbon.h>
 
-extern IntPoint gScreenResolution;
+extern IntPoint SeaScreenResolution;
 
 static NSString*	SelectNoneToolbarItemIdentifier = @"Select None Toolbar Item Identifier";
 static NSString*	SelectAllToolbarItemIdentifier = @"Select All Toolbar Item Identifier";
@@ -73,12 +73,12 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Adjust frame for non 72 dpi resolutions
 	xres = [[document contents] xres];
 	yres = [[document contents] yres];
-	if (gScreenResolution.x != 0 && xres != gScreenResolution.x){
-		frame.size.width /= ((float)xres / gScreenResolution.x);
+	if (SeaScreenResolution.x != 0 && xres != SeaScreenResolution.x){
+		frame.size.width /= ((float)xres / SeaScreenResolution.x);
 	}
 	
-	if (gScreenResolution.y != 0 && yres != gScreenResolution.y) {
-		frame.size.height /= ((float)yres / gScreenResolution.y);
+	if (SeaScreenResolution.y != 0 && yres != SeaScreenResolution.y) {
+		frame.size.height /= ((float)yres / SeaScreenResolution.y);
 	}
 
 	// Initialize superclass
@@ -181,8 +181,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	zoom = 1.0;
 	[self updateRulers];
 	frame = NSMakeRect(0, 0, [(SeaContent *)[document contents] width], [(SeaContent *)[document contents] height]);
-	if (gScreenResolution.x != 0 && [[document contents] xres] != gScreenResolution.x) frame.size.width /= ((float)[[document contents] xres] / gScreenResolution.x);
-	if (gScreenResolution.y != 0 && [[document contents] yres] != gScreenResolution.y) frame.size.height /= ((float)[[document contents] yres] / gScreenResolution.y);
+	if (SeaScreenResolution.x != 0 && [[document contents] xres] != SeaScreenResolution.x) frame.size.width /= ((float)[[document contents] xres] / SeaScreenResolution.x);
+	if (SeaScreenResolution.y != 0 && [[document contents] yres] != SeaScreenResolution.y) frame.size.height /= ((float)[[document contents] yres] / SeaScreenResolution.y);
 	[(NSClipView *)[self superview] scrollToPoint:NSMakePoint(0, 0)];
 	[self setFrame:frame];
 	#ifdef USE_CENTERING_CLIPVIEW
@@ -232,8 +232,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	zoom *= 2.0; point.x *= 2.0; point.y *= 2.0;
 	[self updateRulers];
 	frame = NSMakeRect(0, 0, [(SeaContent *)[document contents] width], [(SeaContent *)[document contents] height]);
-	if (gScreenResolution.x != 0 && [[document contents] xres] != gScreenResolution.x) frame.size.width /= ((float)[[document contents] xres] / gScreenResolution.x);
-	if (gScreenResolution.y != 0 && [[document contents] yres] != gScreenResolution.y) frame.size.height /= ((float)[[document contents] yres] / gScreenResolution.y);
+	if (SeaScreenResolution.x != 0 && [[document contents] xres] != SeaScreenResolution.x) frame.size.width /= ((float)[[document contents] xres] / SeaScreenResolution.x);
+	if (SeaScreenResolution.y != 0 && [[document contents] yres] != SeaScreenResolution.y) frame.size.height /= ((float)[[document contents] yres] / SeaScreenResolution.y);
 	frame.size.height *= zoom; frame.size.width *= zoom;
 	[self setFrame:frame];
 	#ifdef USE_CENTERING_CLIPVIEW
@@ -263,8 +263,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	zoom /= 2.0; point.x = roundf(point.x / 2.0); point.y = roundf(point.y / 2.0);
 	[self updateRulers];
 	frame = NSMakeRect(0, 0, [(SeaContent *)[document contents] width], [(SeaContent *)[document contents] height]);
-	if (gScreenResolution.x != 0 && [[document contents] xres] != gScreenResolution.x) frame.size.width /= ((float)[[document contents] xres] / gScreenResolution.x);
-	if (gScreenResolution.y != 0 && [[document contents] yres] != gScreenResolution.y) frame.size.height /= ((float)[[document contents] yres] / gScreenResolution.y);
+	if (SeaScreenResolution.x != 0 && [[document contents] xres] != SeaScreenResolution.x) frame.size.width /= ((float)[[document contents] xres] / SeaScreenResolution.x);
+	if (SeaScreenResolution.y != 0 && [[document contents] yres] != SeaScreenResolution.y) frame.size.height /= ((float)[[document contents] yres] / SeaScreenResolution.y);
 	frame.size.height *= zoom; frame.size.width *= zoom;
 	[self setFrame:frame];
 	#ifdef USE_CENTERING_CLIPVIEW
@@ -309,12 +309,12 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// For non 72 dpi resolutions we must scale here
 	xResScale = yResScale = 1.0;
-	if (gScreenResolution.x != 0 && gScreenResolution.y != 0) {
-		if (xres != gScreenResolution.x) {
-			xResScale = ((float)xres / gScreenResolution.x);
+	if (SeaScreenResolution.x != 0 && SeaScreenResolution.y != 0) {
+		if (xres != SeaScreenResolution.x) {
+			xResScale = ((float)xres / SeaScreenResolution.x);
 		}
-		if (yres != gScreenResolution.y) {
-			yResScale = ((float)yres / gScreenResolution.y);
+		if (yres != SeaScreenResolution.y) {
+			yResScale = ((float)yres / SeaScreenResolution.y);
 		}
 	}
 	srcRect.origin.x *= xResScale;
@@ -334,7 +334,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Set interpolation (image smoothing) appropriately
 	if ([[SeaController seaPrefs] smartInterpolation]) {
-		if (srcRect.size.width > destRect.size.width || (gScreenResolution.x > 72 && (xres / 72.0) * zoom <= 4))
+		if (srcRect.size.width > destRect.size.width || (SeaScreenResolution.x > 72 && (xres / 72.0) * zoom <= 4))
 			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
 		else
 			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
@@ -967,8 +967,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Readjust the frame
 	frame = NSMakeRect(0, 0, [(SeaContent *)[document contents] width], [(SeaContent *)[document contents] height]);
-	if (gScreenResolution.x != 0 && [[document contents] xres] != gScreenResolution.x) frame.size.width /= ((float)[[document contents] xres] / gScreenResolution.x);
-	if (gScreenResolution.y != 0 && [[document contents] yres] != gScreenResolution.y) frame.size.height /= ((float)[[document contents] yres] / gScreenResolution.y);
+	if (SeaScreenResolution.x != 0 && [[document contents] xres] != SeaScreenResolution.x) frame.size.width /= ((float)[[document contents] xres] / SeaScreenResolution.x);
+	if (SeaScreenResolution.y != 0 && [[document contents] yres] != SeaScreenResolution.y) frame.size.height /= ((float)[[document contents] yres] / SeaScreenResolution.y);
 	frame.size.height *= zoom; frame.size.width *= zoom;
 	if (scaling) {
 		point.x *= frame.size.width / [self frame].size.width;

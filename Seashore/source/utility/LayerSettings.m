@@ -44,14 +44,14 @@
 		[layerTitle setEnabled:NO];
 	}
 	
-	[leftValue setStringValue:StringFromPixels([layer xoff],units,xres)];
-	[topValue setStringValue:StringFromPixels([layer yoff], units, yres)];
-	[widthValue setStringValue:StringFromPixels([layer width],units,xres)];
-	[heightValue setStringValue:StringFromPixels([layer height],units, yres)];	
-	[leftUnits setTitle:UnitsString(units)];
-	[topUnits setTitle:UnitsString(units)];	
-	[widthUnits setTitle:UnitsString(units)];
-	[heightUnits setTitle:UnitsString(units)];
+	[leftValue setStringValue:SeaStringFromPixels([layer xoff],units,xres)];
+	[topValue setStringValue:SeaStringFromPixels([layer yoff], units, yres)];
+	[widthValue setStringValue:SeaStringFromPixels([layer width],units,xres)];
+	[heightValue setStringValue:SeaStringFromPixels([layer height],units, yres)];	
+	[leftUnits setTitle:SeaUnitsString(units)];
+	[topUnits setTitle:SeaUnitsString(units)];	
+	[widthUnits setTitle:SeaUnitsString(units)];
+	[heightUnits setTitle:SeaUnitsString(units)];
 	
 	[channelEditingMatrix selectCellAtRow:[[document contents] selectedChannel] column:0];
 
@@ -126,8 +126,8 @@
 	yres = [contents yres];
 
 	// Parse width and height	
-	newLeftValue = PixelsFromFloat([leftValue floatValue],units, xres);
-	newTopValue = PixelsFromFloat([topValue floatValue],units,yres);
+	newLeftValue = SeaPixelsFromFloat([leftValue floatValue],units, xres);
+	newTopValue = SeaPixelsFromFloat([topValue floatValue],units,yres);
 	
 	if ([layer xoff] != newLeftValue || [layer yoff] != newTopValue)
 		[self setOffsetsLeft:newLeftValue top:newTopValue index:[layer index]];

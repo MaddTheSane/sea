@@ -265,7 +265,7 @@ void covertBitmapNoColorSync(unsigned char *dbitmap, NSInteger dspp, BMPColorSpa
 	
 }
 
-unsigned char *convertBitmapColorSync(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger ibipp, NSInteger ibypr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, NSBitmapFormat iformat)
+unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger ibipp, NSInteger ibypr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, NSBitmapFormat iformat)
 {
 	PtrRecord ptrs;
 	unsigned char *bitmap, *pbitmap;
@@ -411,7 +411,7 @@ unsigned char *convertBitmapColorSync(NSInteger dspp, BMPColorSpace dspace, NSIn
 	return getFinalPtr(ptrs);
 }
 
-void stripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
+void SeaStripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
 {
 	const NSInteger alphaPos = spp - 1;
 	const NSInteger outputSPP = spp - 1;
@@ -444,7 +444,7 @@ void stripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned char *inpu
 	} 
 }
 
-void premultiplyBitmap(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
+void SeaPremultiplyBitmap(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
 {
 	NSInteger alphaPos, temp;
 	
@@ -468,7 +468,7 @@ void premultiplyBitmap(NSInteger spp, unsigned char *output, unsigned char *inpu
 	}
 }
 
-void unpremultiplyBitmap(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
+void SeaUnpremultiplyBitmap(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
 {
 	NSInteger i, j, alphaPos, newValue;
 	double alphaRatio;
@@ -495,7 +495,7 @@ void unpremultiplyBitmap(NSInteger spp, unsigned char *output, unsigned char *in
 	}
 }
 
-unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where)
+unsigned char SeaAveragedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where)
 {
 	int total, count;
 	int i, j;

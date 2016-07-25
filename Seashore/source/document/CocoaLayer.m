@@ -49,7 +49,7 @@
 	// Convert data to what we want
 	NSInteger bipp = [imageRep bitsPerPixel];
 	NSInteger bypr = [imageRep bytesPerRow];
-	data = convertBitmapColorSync(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, format);
+	data = SeaConvertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, format);
 	if (cmProfileLoc) {
 		CFRelease(cmProfileLoc);
 	}
@@ -67,7 +67,7 @@
 	
 	// Unpremultiply the image if required
 	if (hasAlpha && !((format & NSAlphaNonpremultipliedBitmapFormat) >> 1)) {
-		unpremultiplyBitmap(spp, data, data, width * height);
+		SeaUnpremultiplyBitmap(spp, data, data, width * height);
 	}
 		
 	return self;

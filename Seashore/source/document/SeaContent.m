@@ -33,7 +33,7 @@
 #import "CenteringClipView.h"
 #import "IndiciesKeeper.h"
 
-extern IntPoint gScreenResolution;
+extern IntPoint SeaScreenResolution;
 static NSString*	FloatAnchorToolbarItemIdentifier = @"Float/Anchor Toolbar Item Identifier";
 static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection Toolbar Item Identifier";
 #endif
@@ -43,7 +43,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// The keeper we use to keep IndiciesRecords in memory
 	IndiciesKeeper keeper;
 #else
-	IntPoint gScreenResolution;
+	IntPoint SeaScreenResolution;
 #endif
 }
 @synthesize selectedChannel;
@@ -149,7 +149,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		dspp = 4;
 	else
 		dspp = 2;
-	data = convertBitmapColorSync(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
+	data = SeaConvertBitmap(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
 	if (cmProfileLoc) {
 		CFRelease(cmProfileLoc);
 	}
@@ -158,7 +158,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		NSLog(@"Required conversion not supported.");
 		return NULL;
 	}
-	unpremultiplyBitmap(dspp, data, data, width * height);
+	SeaUnpremultiplyBitmap(dspp, data, data, width * height);
 	
 	// Add layer
 	layers = @[[[SeaLayer alloc] initWithDocument:doc rect:IntMakeRect(0, 0, width, height) data:data spp:(int)dspp]];
@@ -219,7 +219,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		deletedLayers = [[NSArray alloc] init];
 		selectedChannel = kAllChannels; trueView = NO;
 		cmykSave = NO;
-		gScreenResolution = IntMakePoint(1024, 768);
+		SeaScreenResolution = IntMakePoint(1024, 768);
 	}
 	
 	return self;
@@ -290,8 +290,8 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	1.0;
 #endif
 	
-	if (gScreenResolution.x != 0 && xres != gScreenResolution.x)
-		xscale /= ((CGFloat)xres / (CGFloat)gScreenResolution.x);
+	if (SeaScreenResolution.x != 0 && xres != SeaScreenResolution.x)
+		xscale /= ((CGFloat)xres / (CGFloat)SeaScreenResolution.x);
 	
 	return xscale;
 }
@@ -304,8 +304,8 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 #else
 	1;
 #endif
-	if (gScreenResolution.y != 0 && yres != gScreenResolution.y)
-		yscale /= ((CGFloat)yres / (CGFloat)gScreenResolution.y);
+	if (SeaScreenResolution.y != 0 && yres != SeaScreenResolution.y)
+		yscale /= ((CGFloat)yres / (CGFloat)SeaScreenResolution.y);
 	
 	return yscale;
 }
@@ -726,7 +726,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	if (spp == 4 && selectedChannel == kAlphaChannel) {
 		dspp = 2;
 	}
-	data = convertBitmapColorSync(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
+	data = SeaConvertBitmap(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
 	if (cmProfileLoc) {
 		CFRelease(cmProfileLoc);
 	}
@@ -734,7 +734,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		NSLog(@"Required conversion not supported.");
 		return;
 	}
-	unpremultiplyBitmap(dspp, data, data, rect.size.width * rect.size.height);
+	SeaUnpremultiplyBitmap(dspp, data, data, rect.size.width * rect.size.height);
 	
 	// Handle the special case where a GGGA graphic is wanted
 	if (spp == 4 && dspp == 2) {
@@ -1109,12 +1109,12 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	if (spp == 4 && selectedChannel == kAlphaChannel) {
 		dspp = 2;
 	}
-	data = convertBitmapColorSync(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
+	data = SeaConvertBitmap(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
 	if (!data) {
 		NSLog(@"Required conversion not supported.");
 		return;
 	}
-	unpremultiplyBitmap(dspp, data, data, rect.size.width * rect.size.height);
+	SeaUnpremultiplyBitmap(dspp, data, data, rect.size.width * rect.size.height);
 	
 	// Handle the special case where a GGGA graphic is wanted
 	if (spp == 4 && dspp == 2) {
@@ -1576,7 +1576,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		while(layer = [f nextObject])
 			[[[document whiteboard] compositor] compositeLayer:layer withOptions:options andData: data];
 	}
-	unpremultiplyBitmap(spp, data, data, rect.size.width * rect.size.height);
+	SeaUnpremultiplyBitmap(spp, data, data, rect.size.width * rect.size.height);
 	layer = [[SeaLayer alloc] initWithDocument:document rect:rect data:data spp:spp];
 	[layer setName:[[NSString alloc] initWithString:newName]];
 

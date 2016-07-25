@@ -73,7 +73,7 @@
 	yres = [contents yres];
 	units = [document measureStyle];
 	[widthPopdown selectItemAtIndex:units];
-	[heightUnits setTitle:UnitsString(units)];
+	[heightUnits setTitle:SeaUnitsString(units)];
 	
 	// Set the initial scale values
 	[xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", 100.0]];
@@ -81,12 +81,12 @@
 	
 	// Set the initial width and height values
 	if (workingIndex == kAllLayers) {
-		[widthValue setStringValue:StringFromPixels([(SeaContent *)contents width], units, xres)];
-		[heightValue setStringValue:StringFromPixels([(SeaContent *)contents height], units, yres)];
+		[widthValue setStringValue:SeaStringFromPixels([(SeaContent *)contents width], units, xres)];
+		[heightValue setStringValue:SeaStringFromPixels([(SeaContent *)contents height], units, yres)];
 	}
 	else {
-		[widthValue setStringValue:StringFromPixels([(SeaLayer *)layer width], units, xres)];
-		[heightValue setStringValue:StringFromPixels([(SeaLayer *)layer height], units, yres)];
+		[widthValue setStringValue:SeaStringFromPixels([(SeaLayer *)layer width], units, xres)];
+		[heightValue setStringValue:SeaStringFromPixels([(SeaLayer *)layer height], units, yres)];
 	}
 	
 	// Set the options appropriately
@@ -126,8 +126,8 @@
 	[defaults setInteger:[interpolationPopup indexOfSelectedItem] forKey:@"interpolation"];
 
 	// Parse width and height	
-	newWidth = PixelsFromFloat([widthValue floatValue],units,xres);
-	newHeight = PixelsFromFloat([heightValue floatValue],units,yres);
+	newWidth = SeaPixelsFromFloat([widthValue floatValue],units,xres);
+	newHeight = SeaPixelsFromFloat([heightValue floatValue],units,yres);
 	
 	// Don't do if values are unreasonable or unchanged
 	if (newWidth < kMinImageSize || newWidth > kMaxImageSize) { NSBeep(); return; }
@@ -434,8 +434,8 @@
 	if ([sender tag] == 0) {
 		[xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [xScaleValue floatValue]]];
 		if (keepProp) [yScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [xScaleValue floatValue]]];
-		[widthValue setStringValue:StringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
-		if (keepProp) [heightValue setStringValue:StringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
+		[widthValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
+		if (keepProp) [heightValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
 		return;
 	}
 	
@@ -443,28 +443,28 @@
 	if ([sender tag] == 1) {
 		[yScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [yScaleValue floatValue]]];
 		if (keepProp) [xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [yScaleValue floatValue]]];
-		[heightValue setStringValue:StringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
-		if (keepProp) [widthValue setStringValue:StringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
+		[heightValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
+		if (keepProp) [widthValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
 		return;
 	}
 	
 	
 	// Handle a width change
 	if ([sender tag] == 2) {
-		[xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", PixelsFromFloat([widthValue floatValue],units, xres) / (float)[(SeaContent *)focusObject width] * 100.0]];
+		[xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", SeaPixelsFromFloat([widthValue floatValue],units, xres) / (float)[(SeaContent *)focusObject width] * 100.0]];
 		if (keepProp) {
 			[yScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [xScaleValue floatValue]]];
-			[heightValue setStringValue:StringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0),units, yres)];
+			[heightValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0),units, yres)];
 		}
 		return;
 	}
 	
 	// Handle a height change
 	if ([sender tag] == 3) {
-		[yScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", PixelsFromFloat([heightValue floatValue],units, yres) / (float)[(SeaContent *)focusObject height] * 100.0]];
+		[yScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", SeaPixelsFromFloat([heightValue floatValue],units, yres) / (float)[(SeaContent *)focusObject height] * 100.0]];
 		if (keepProp) {
 			[xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [yScaleValue floatValue]]];
-			[widthValue setStringValue:StringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0),units, xres)];
+			[widthValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0),units, xres)];
 		}
 		return;
 	}
@@ -489,9 +489,9 @@
 	
 	// Handle a unit change
 	units = (int)[sender indexOfSelectedItem];
-	[widthValue setStringValue:StringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
-	[heightValue setStringValue:StringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
-	[heightUnits setTitle:UnitsString(units)];
+	[widthValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
+	[heightValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
+	[heightUnits setTitle:SeaUnitsString(units)];
 }
 
 - (IBAction)changeToPreset:(id)sender

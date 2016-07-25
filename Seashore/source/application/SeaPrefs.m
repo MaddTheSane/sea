@@ -20,7 +20,7 @@ enum {
 
 int memoryCacheSize;
 
-IntPoint gScreenResolution;
+IntPoint SeaScreenResolution;
 
 static NSString*	PrefsToolbarIdentifier 	= @"Preferences Toolbar Instance Identifier";
 
@@ -287,7 +287,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 #ifdef DEBUG
 	// NSLog(@"Screen resolution (dpi): %d x %d", mainScreenResolution.x, mainScreenResolution.y);
 #endif
-	gScreenResolution = [self screenResolution];
+	SeaScreenResolution = [self screenResolution];
 	}
 
 	return self;
@@ -414,9 +414,9 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 {
 	// Set the existing settings
 	[newUnitsMenu selectItemAtIndex: newUnits];
-	[heightValue setStringValue:StringFromPixels(height, newUnits, resolution)];
-	[widthValue setStringValue:StringFromPixels(width, newUnits, resolution)];
-	[heightUnits setStringValue:UnitsString(newUnits)];
+	[heightValue setStringValue:SeaStringFromPixels(height, newUnits, resolution)];
+	[widthValue setStringValue:SeaStringFromPixels(width, newUnits, resolution)];
+	[heightUnits setStringValue:SeaUnitsString(newUnits)];
 	[resolutionMenu selectItemAtIndex:[resolutionMenu indexOfItemWithTag:resolution]];
 	[modeMenu selectItemAtIndex: mode];
 	[checkerboardMatrix	selectCellAtRow: useCheckerboard column: 0];
@@ -452,12 +452,12 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 
 -(IBAction)setWidth:(id)sender
 {
-	int newWidth = PixelsFromFloat([widthValue floatValue],newUnits,resolution);
+	int newWidth = SeaPixelsFromFloat([widthValue floatValue],newUnits,resolution);
 	
 	// Don't accept rediculous widths
 	if (newWidth < kMinImageSize || newWidth > kMaxImageSize) { 
 		NSBeep(); 
-		[widthValue setStringValue:StringFromPixels(width, newUnits, resolution)];
+		[widthValue setStringValue:SeaStringFromPixels(width, newUnits, resolution)];
 	}
 	else {
 		width = newWidth;
@@ -468,12 +468,12 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 
 -(IBAction)setHeight:(id)sender
 {
-	int newHeight =  PixelsFromFloat([heightValue floatValue],newUnits,resolution);
+	int newHeight =  SeaPixelsFromFloat([heightValue floatValue],newUnits,resolution);
 
 	// Don't accept rediculous heights
 	if (newHeight < kMinImageSize || newHeight > kMaxImageSize) { 
 		NSBeep(); 
-		[heightValue setStringValue:StringFromPixels(height, newUnits, resolution)];
+		[heightValue setStringValue:SeaStringFromPixels(height, newUnits, resolution)];
 	}
 	else {
 		height = newHeight;
@@ -485,9 +485,9 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 -(IBAction)setNewUnits:(id)sender
 {
 	newUnits = [sender tag] % 10;
-	[heightValue setStringValue:StringFromPixels(height, newUnits, resolution)];
-	[widthValue setStringValue:StringFromPixels(width, newUnits, resolution)];	
-	[heightUnits setStringValue:UnitsString(newUnits)];
+	[heightValue setStringValue:SeaStringFromPixels(height, newUnits, resolution)];
+	[widthValue setStringValue:SeaStringFromPixels(width, newUnits, resolution)];	
+	[heightUnits setStringValue:SeaUnitsString(newUnits)];
 	[self apply: self];
 }
 
@@ -503,8 +503,8 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 -(IBAction)setResolution:(id)sender
 {
 	resolution = (int)[[resolutionMenu selectedItem] tag];
-	width =  PixelsFromFloat([widthValue floatValue],newUnits,resolution);
-	height =  PixelsFromFloat([heightValue floatValue],newUnits,resolution);
+	width =  SeaPixelsFromFloat([widthValue floatValue],newUnits,resolution);
+	height =  SeaPixelsFromFloat([heightValue floatValue],newUnits,resolution);
 	[self apply: self];
 }
 
@@ -587,7 +587,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	int i;
 
 	resolutionHandling = [[resolutionHandlingMenu selectedItem] tag];
-	gScreenResolution = [self screenResolution];
+	SeaScreenResolution = [self screenResolution];
 	for (i = 0; i < [documents count]; i++) {
 		[[documents[i] helpers] resolutionChanged];
 	}

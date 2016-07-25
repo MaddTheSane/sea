@@ -114,13 +114,13 @@
 	delta = [[document docView] delta];
 	SeaUnits units = [document measureStyle];
 
-	NSString *label = UnitsString(units);
-	[widthValue setStringValue:[StringFromPixels(size.width, units, xres) stringByAppendingFormat:@" %@", label]];
-	[heightValue setStringValue:[StringFromPixels(size.height, units, yres) stringByAppendingFormat:@" %@", label]];
-	[deltaX setStringValue:[StringFromPixels(delta.x, units, xres) stringByAppendingFormat:@" %@", label]];
-	[deltaY setStringValue:[StringFromPixels(delta.y, units, yres) stringByAppendingFormat:@" %@", label]];
-	[xValue setStringValue:[StringFromPixels(point.x, units, xres) stringByAppendingFormat:@" %@", label]];
-	[yValue setStringValue:[StringFromPixels(point.y, units, yres) stringByAppendingFormat:@" %@", label]];
+	NSString *label = SeaUnitsString(units);
+	[widthValue setStringValue:[SeaStringFromPixels(size.width, units, xres) stringByAppendingFormat:@" %@", label]];
+	[heightValue setStringValue:[SeaStringFromPixels(size.height, units, yres) stringByAppendingFormat:@" %@", label]];
+	[deltaX setStringValue:[SeaStringFromPixels(delta.x, units, xres) stringByAppendingFormat:@" %@", label]];
+	[deltaY setStringValue:[SeaStringFromPixels(delta.y, units, yres) stringByAppendingFormat:@" %@", label]];
+	[xValue setStringValue:[SeaStringFromPixels(point.x, units, xres) stringByAppendingFormat:@" %@", label]];
+	[yValue setStringValue:[SeaStringFromPixels(point.y, units, yres) stringByAppendingFormat:@" %@", label]];
 
 	// Update the RGBA values
 	color = [[[document tools] getTool:kEyedropTool] getColor];

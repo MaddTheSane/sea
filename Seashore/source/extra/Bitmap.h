@@ -67,7 +67,7 @@ typedef NS_ENUM(int, BMPColorSpace) {
 extern unsigned char *convertBitmap(int dspp, BMPColorSpace dspace, int dbps, unsigned char *ibitmap, int width, int height, BMPColorSpace ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat) DEPRECATED_ATTRIBUTE UNAVAILABLE_ATTRIBUTE;
 
 /*!
-	@function	convertBitmap
+	@function	SeaConvertBitmap
 	@discussion	Given a bitmap converts the bitmap to the given type. The
  conversion will not affect the premultiplication of the data.
 	@param		dspp
@@ -102,11 +102,11 @@ extern unsigned char *convertBitmap(int dspp, BMPColorSpace dspace, int dbps, un
  possible. You should always check for failed conversions. The
  block of memory is safe for use with AltiVec.
  */
-extern unsigned char *convertBitmapColorSync(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger iebpp, NSInteger iebpr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, NSBitmapFormat iformat);
+extern unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger iebpp, NSInteger iebpr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, NSBitmapFormat iformat);
 
 
 /*!
-	@function	stripAlphaToWhite
+	@function	SeaStripAlphaToWhite
 	@discussion	Given a bitmap this function strips the alpha channel making it
 				appear as though the image is on a white background and places
 				the result in the output. The output and input can both point to
@@ -121,10 +121,10 @@ extern unsigned char *convertBitmapColorSync(NSInteger dspp, BMPColorSpace dspac
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern void stripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length);
+extern void SeaStripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length);
 
 /*!
-	@function	premultiplyBitmap
+	@function	SeaPremultiplyBitmap
 	@discussion	Given a bitmap this function premultiplies the primary channels
 				and places the result in the output. The output and input can 
 				both point to the same block of memory.
@@ -137,10 +137,10 @@ extern void stripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned cha
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern void premultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length);
+extern void SeaPremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length);
 
 /*!
-	@function	unpremultiplyBitmap
+	@function	SeaUnpremultiplyBitmap
 	@discussion	Given a bitmap this function tries to reverse the
 				premultiplication of the primary channels and places the result
 				in the output. The output and input can  both point to the same
@@ -154,10 +154,10 @@ extern void premultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned ch
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern void unpremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length);
+extern void SeaUnpremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length);
 
 /*!
-	@function	averagedComponentValue
+	@function	SeaAveragedComponentValue
 	@discussion	Given a point on the bitmap this function finds the average
 				value of particular component inside a box about that point.
 	@param		spp
@@ -177,7 +177,7 @@ extern void unpremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned 
 	@param		where
 				The point at which to centre the box.
 */
-extern unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where);
+extern unsigned char SeaAveragedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where);
 
 
 /*!

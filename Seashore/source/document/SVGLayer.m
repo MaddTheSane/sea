@@ -47,7 +47,7 @@
 	// Convert data to what we want
 	bipp = [imageRep bitsPerPixel];
 	bypr = [imageRep bytesPerRow];
-	data = convertBitmapColorSync(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
+	data = SeaConvertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
 	if (cmProfileLoc) {
 		CFRelease(cmProfileLoc);
 	}
@@ -65,7 +65,7 @@
 	
 	// Unpremultiply the image
 	if (hasAlpha)
-		unpremultiplyBitmap(spp, data, data, width * height);
+		SeaUnpremultiplyBitmap(spp, data, data, width * height);
 
 	return self;
 }

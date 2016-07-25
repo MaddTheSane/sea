@@ -110,7 +110,7 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 				return nil;
 			}
 			prePixmap = malloc(tempSize);
-			premultiplyBitmap(4, prePixmap, pixmap, width * height);
+			SeaPremultiplyBitmap(4, prePixmap, pixmap, width * height);
 			break;
 			
 		default:

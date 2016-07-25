@@ -2,7 +2,7 @@
 #include <tgmath.h>
 #import "Units.h"
 
-NSString *StringFromPixels(int pixels, SeaUnits units, int resolution)
+NSString *SeaStringFromPixels(int pixels, SeaUnits units, int resolution)
 {
 	NSString *result;
 	
@@ -22,7 +22,7 @@ NSString *StringFromPixels(int pixels, SeaUnits units, int resolution)
 	return result;
 }
 
-int PixelsFromFloat(CGFloat measure, SeaUnits units, int resolution)
+int SeaPixelsFromFloat(CGFloat measure, SeaUnits units, int resolution)
 {
 	int result;
 	
@@ -43,7 +43,7 @@ int PixelsFromFloat(CGFloat measure, SeaUnits units, int resolution)
 	return result;
 }
 
-NSString *UnitsString(SeaUnits units)
+NSString *SeaUnitsString(SeaUnits units)
 {
 	switch (units) {
 		case kPixelUnits:

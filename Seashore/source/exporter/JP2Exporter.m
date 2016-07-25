@@ -143,7 +143,7 @@
 			}
 		}
 	}
-	premultiplyBitmap(4, sampleData, sampleData, 40 * 40);
+	SeaPremultiplyBitmap(4, sampleData, sampleData, 40 * 40);
 	
 	// Now make an image for the view
 	realImageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&sampleData pixelsWide:40 pixelsHigh:40 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bytesPerRow:40 * 4 bitsPerPixel:8 * 4];

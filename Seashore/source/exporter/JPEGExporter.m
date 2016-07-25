@@ -157,7 +157,7 @@ static BOOL JPEGReviseResolution(unsigned char *input, size_t len, int xres, int
 			}
 		}
 	}
-	stripAlphaToWhite(4, sampleData, temp, 40 * 40);
+	SeaStripAlphaToWhite(4, sampleData, temp, 40 * 40);
 	free(temp);
 	
 	// Now make an image for the view
@@ -268,7 +268,7 @@ static BOOL JPEGReviseResolution(unsigned char *input, size_t len, int xres, int
 	
 	// Strip the alpha channel if necessary
 	destData = malloc(width * height * (spp - 1));
-	stripAlphaToWhite(spp, destData, srcData, width * height);
+	SeaStripAlphaToWhite(spp, destData, srcData, width * height);
 	spp--;
 	
 	// Make an image representation from the data

@@ -211,7 +211,7 @@
 			if (!isErasing) {
 				spt.x = sourcePoint.x + (rect.origin.x - startPoint.x) - 1;
 				spt.y = sourcePoint.y + (rect.origin.y - startPoint.y) - 1;
-				cloneFill(spp, rect, [[document whiteboard] overlay], [[document whiteboard] replace], [(SeaLayer *)layer width], [(SeaLayer *)layer height], sourceData, sourceWidth, sourceHeight, spt);
+				SeaCloneFill(spp, rect, [[document whiteboard] overlay], [[document whiteboard] replace], [(SeaLayer *)layer width], [(SeaLayer *)layer height], sourceData, sourceWidth, sourceHeight, spt);
 			}
 			[[document helpers] overlayChanged:rect inThread:YES];
 		}
@@ -404,7 +404,7 @@
 						if (!isErasing) {
 							spt.x = sourcePoint.x + (rect.origin.x - startPoint.x) - 1;
 							spt.y = sourcePoint.y + (rect.origin.y - startPoint.y) - 1;
-							cloneFill(spp, rect, [[document whiteboard] overlay], [[document whiteboard] replace], [(SeaLayer *)layer width], [(SeaLayer *)layer height], sourceData, sourceWidth, sourceHeight, spt);
+							SeaCloneFill(spp, rect, [[document whiteboard] overlay], [[document whiteboard] replace], [(SeaLayer *)layer width], [(SeaLayer *)layer height], sourceData, sourceWidth, sourceHeight, spt);
 						}
 						if (bigRect.size.width == 0) {
 							bigRect = rect;

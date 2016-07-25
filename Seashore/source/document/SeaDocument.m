@@ -29,7 +29,7 @@
 extern int globalUniqueDocID;
 int globalUniqueDocID;
 
-extern IntPoint gScreenResolution;
+extern IntPoint SeaScreenResolution;
 
 extern BOOL globalReadOnlyWarning;
 BOOL globalReadOnlyWarning;

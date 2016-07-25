@@ -136,7 +136,7 @@ extern id gNewFont;
 	}
 	
 	// Draw the text
-	if (![options allowFringe]) premultiplyBitmap(spp, initData, initData, fontSize.height * fontSize.width);
+	if (![options allowFringe]) SeaPremultiplyBitmap(spp, initData, initData, fontSize.height * fontSize.width);
 	initRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&initData pixelsWide:fontSize.width pixelsHigh:fontSize.height bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:fontSize.width * spp bitsPerPixel:8 * spp];
 	image = [[NSImage alloc] initWithSize:IntSizeMakeNSSize(fontSize)];
 	[image addRepresentation:initRep];
@@ -146,8 +146,8 @@ extern id gNewFont;
 	[image unlockFocus];
 	ispp = [imageRep samplesPerPixel];
 	bitmapData = [imageRep bitmapData];
-	if (ispp == 4) unpremultiplyBitmap(ispp, bitmapData, bitmapData, fontSize.height * fontSize.width);
-	if ([options allowFringe]) unpremultiplyBitmap(spp, initData, initData, fontSize.height * fontSize.width);
+	if (ispp == 4) SeaUnpremultiplyBitmap(ispp, bitmapData, bitmapData, fontSize.height * fontSize.width);
+	if ([options allowFringe]) SeaUnpremultiplyBitmap(spp, initData, initData, fontSize.height * fontSize.width);
 	
 	// Calculate fringe mask
 	if ([options allowFringe]) {
@@ -160,7 +160,7 @@ extern id gNewFont;
 		[image2 unlockFocus];
 		ispp2 = [imageRep2 samplesPerPixel];
 		bitmapData2 = [imageRep2 bitmapData];
-		if (ispp2 == 4) unpremultiplyBitmap(ispp2, bitmapData2, bitmapData2, fontSize.height * fontSize.width);
+		if (ispp2 == 4) SeaUnpremultiplyBitmap(ispp2, bitmapData2, bitmapData2, fontSize.height * fontSize.width);
 	}
 	
 	// Go through all pixels and change them

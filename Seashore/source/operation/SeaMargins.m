@@ -141,22 +141,22 @@
 	yres = [contents yres];
 	
 	// Set the values properly
-	[widthLabel setTitle:UnitsString(units)];
-	[heightLabel setTitle:UnitsString(units)];
+	[widthLabel setTitle:SeaUnitsString(units)];
+	[heightLabel setTitle:SeaUnitsString(units)];
 	[topPopdown selectItemAtIndex:units];
-	[bottomLabel setTitle:UnitsString(units)];
-	[leftLabel setTitle:UnitsString(units)];
-	[rightLabel setTitle:UnitsString(units)];
+	[bottomLabel setTitle:SeaUnitsString(units)];
+	[leftLabel setTitle:SeaUnitsString(units)];
+	[rightLabel setTitle:SeaUnitsString(units)];
 
-	[topValue setStringValue:StringFromPixels(0, units, yres)]; [bottomValue setStringValue:StringFromPixels(0, units, yres)];
-	[leftValue setStringValue:StringFromPixels(0, units, xres)]; [rightValue setStringValue:StringFromPixels(0, units, xres)];
+	[topValue setStringValue:SeaStringFromPixels(0, units, yres)]; [bottomValue setStringValue:SeaStringFromPixels(0, units, yres)];
+	[leftValue setStringValue:SeaStringFromPixels(0, units, xres)]; [rightValue setStringValue:SeaStringFromPixels(0, units, xres)];
 	if (workingIndex == kAllLayers) {
-		[widthValue setStringValue:StringFromPixels([(SeaContent *)contents width], units, xres)];
-		[heightValue setStringValue:StringFromPixels([(SeaContent *)contents height],units, yres)];
+		[widthValue setStringValue:SeaStringFromPixels([(SeaContent *)contents width], units, xres)];
+		[heightValue setStringValue:SeaStringFromPixels([(SeaContent *)contents height],units, yres)];
 	}
 	else {
-		[widthValue setStringValue:StringFromPixels([(SeaLayer *)layer width], units, xres)];
-		[heightValue setStringValue:StringFromPixels([(SeaLayer *)layer height], units, yres)];
+		[widthValue setStringValue:SeaStringFromPixels([(SeaLayer *)layer width], units, xres)];
+		[heightValue setStringValue:SeaStringFromPixels([(SeaLayer *)layer height], units, yres)];
 	}
 	
 	// Determine the content borders
@@ -208,10 +208,10 @@
 	yres = [[document contents] yres];
 	
 	// Calculate the margin changes in pixels
-	trueLeft = PixelsFromFloat([leftValue floatValue], units, xres);
-	trueRight = PixelsFromFloat([rightValue floatValue], units, xres);
-	trueTop = PixelsFromFloat([topValue floatValue], units, yres);
-	trueBottom = PixelsFromFloat([bottomValue floatValue], units, yres);
+	trueLeft = SeaPixelsFromFloat([leftValue floatValue], units, xres);
+	trueRight = SeaPixelsFromFloat([rightValue floatValue], units, xres);
+	trueTop = SeaPixelsFromFloat([topValue floatValue], units, yres);
+	trueBottom = SeaPixelsFromFloat([bottomValue floatValue], units, yres);
 	
 	// Make changes if values are content relative 
 	if ([contentRelative state]) {
@@ -433,10 +433,10 @@
 	yres = [[document contents] yres];
 	
 	// Calculate the margin changes in pixels
-	trueLeft = PixelsFromFloat([leftValue floatValue], units, xres);
-	trueRight = PixelsFromFloat([rightValue floatValue], units, xres);
-	trueTop = PixelsFromFloat([topValue floatValue], units, yres);
-	trueBottom = PixelsFromFloat([bottomValue floatValue], units, yres);
+	trueLeft = SeaPixelsFromFloat([leftValue floatValue], units, xres);
+	trueRight = SeaPixelsFromFloat([rightValue floatValue], units, xres);
+	trueTop = SeaPixelsFromFloat([topValue floatValue], units, yres);
+	trueBottom = SeaPixelsFromFloat([bottomValue floatValue], units, yres);
 	
 	// Make changes if values are content relative
 	if ([contentRelative state]) {
@@ -455,8 +455,8 @@
 	}
 
 	// Finally display the changes
-	[widthValue setStringValue:StringFromPixels(width, units, xres)];
-	[heightValue setStringValue:StringFromPixels(height, units, yres)];
+	[widthValue setStringValue:SeaStringFromPixels(width, units, xres)];
+	[heightValue setStringValue:SeaStringFromPixels(height, units, yres)];
 }
 
 - (IBAction)dimensionsChanged:(id)sender
@@ -469,8 +469,8 @@
 	yres = [[document contents] yres];
 	
 	// Determine the new width and height
-	width = PixelsFromFloat([widthValue floatValue], units, xres);
-	height = PixelsFromFloat([heightValue floatValue], units, yres);
+	width = SeaPixelsFromFloat([widthValue floatValue], units, xres);
+	height = SeaPixelsFromFloat([heightValue floatValue], units, yres);
 
 	IntSize delta = IntMakeSize(0,0);
 	// Work out the margin adjustment needed
@@ -493,18 +493,18 @@
 	}
 	
 	// Calculate how this affects the current margins
-	curLeft = PixelsFromFloat([leftValue floatValue], units, xres);
-	curRight = PixelsFromFloat([rightValue floatValue], units, xres);
-	curTop = PixelsFromFloat([topValue floatValue], units, yres);
-	curBottom = PixelsFromFloat([bottomValue floatValue], units, yres);
+	curLeft = SeaPixelsFromFloat([leftValue floatValue], units, xres);
+	curRight = SeaPixelsFromFloat([rightValue floatValue], units, xres);
+	curTop = SeaPixelsFromFloat([topValue floatValue], units, yres);
+	curBottom = SeaPixelsFromFloat([bottomValue floatValue], units, yres);
 	delta.width -= (curLeft + curRight);
 	delta.height -= (curTop + curBottom);
 
 	// Finally display the changes
-	[leftValue setStringValue:StringFromPixels(delta.width / 2 + curLeft, units, xres)];
-	[rightValue setStringValue:StringFromPixels(delta.width / 2 + delta.width % 2 + curRight , units, xres)];
-	[topValue setStringValue:StringFromPixels(delta.height / 2 + curTop, units, yres)];
-	[bottomValue setStringValue:StringFromPixels(delta.height / 2 + delta.height % 2 + curBottom, units, yres)];
+	[leftValue setStringValue:SeaStringFromPixels(delta.width / 2 + curLeft, units, xres)];
+	[rightValue setStringValue:SeaStringFromPixels(delta.width / 2 + delta.width % 2 + curRight , units, xres)];
+	[topValue setStringValue:SeaStringFromPixels(delta.height / 2 + curTop, units, yres)];
+	[bottomValue setStringValue:SeaStringFromPixels(delta.height / 2 + delta.height % 2 + curBottom, units, yres)];
 }
 
 - (IBAction)unitsChanged:(id)sender
@@ -518,27 +518,27 @@
 	yres = [contents yres];
 	
 	// Remember the old values
-	oldTopValue = PixelsFromFloat([topValue floatValue], units, yres);
-	oldBottomValue = PixelsFromFloat([bottomValue floatValue], units, yres);
-	oldLeftValue = PixelsFromFloat([leftValue floatValue], units, xres);
-	oldRightValue = PixelsFromFloat([rightValue floatValue], units, xres);
+	oldTopValue = SeaPixelsFromFloat([topValue floatValue], units, yres);
+	oldBottomValue = SeaPixelsFromFloat([bottomValue floatValue], units, yres);
+	oldLeftValue = SeaPixelsFromFloat([leftValue floatValue], units, xres);
+	oldRightValue = SeaPixelsFromFloat([rightValue floatValue], units, xres);
 				
 	// Set units
 	units = (SeaUnits)[sender indexOfSelectedItem];
 	
 	// Set the new labels
-	[widthLabel setTitle:UnitsString(units)];
-	[heightLabel setTitle:UnitsString(units)];
+	[widthLabel setTitle:SeaUnitsString(units)];
+	[heightLabel setTitle:SeaUnitsString(units)];
 	[topPopdown selectItemAtIndex:units];
-	[bottomLabel setTitle:UnitsString(units)];
-	[leftLabel setTitle:UnitsString(units)];
-	[rightLabel setTitle:UnitsString(units)];
+	[bottomLabel setTitle:SeaUnitsString(units)];
+	[leftLabel setTitle:SeaUnitsString(units)];
+	[rightLabel setTitle:SeaUnitsString(units)];
 
 	// Set the new margins
-	[topValue setStringValue:StringFromPixels(oldTopValue, units, yres)];
-	[bottomValue setStringValue:StringFromPixels(oldBottomValue, units, yres)];
-	[leftValue setStringValue:StringFromPixels(oldLeftValue, units, xres)];
-	[rightValue setStringValue:StringFromPixels(oldRightValue, units, xres)];
+	[topValue setStringValue:SeaStringFromPixels(oldTopValue, units, yres)];
+	[bottomValue setStringValue:SeaStringFromPixels(oldBottomValue, units, yres)];
+	[leftValue setStringValue:SeaStringFromPixels(oldLeftValue, units, xres)];
+	[rightValue setStringValue:SeaStringFromPixels(oldRightValue, units, xres)];
 	
 	// Update the rest
 	[self marginsChanged:NULL];
@@ -603,15 +603,15 @@
 		IntPoint origin;
 		if(workingIndex == kAllLayers){
 			origin = [[document selection] globalRect].origin;
-			[rightValue setStringValue:StringFromPixels( origin.x + size.width - [(SeaContent *)[document contents] width], units, xres)];
-			[bottomValue setStringValue:StringFromPixels(origin.y + size.height - [(SeaContent *)[document contents] height] , units, yres)];
+			[rightValue setStringValue:SeaStringFromPixels( origin.x + size.width - [(SeaContent *)[document contents] width], units, xres)];
+			[bottomValue setStringValue:SeaStringFromPixels(origin.y + size.height - [(SeaContent *)[document contents] height] , units, yres)];
 		} else {
 			origin = [[document selection] localRect].origin;
-			[rightValue setStringValue:StringFromPixels(origin.x + size.width - [(SeaLayer *)[[document contents] layer:workingIndex] width] , units, xres)];
-			[bottomValue setStringValue:StringFromPixels(origin.y + size.height  - [(SeaLayer *)[[document contents] layer:workingIndex] height], units, yres)];
+			[rightValue setStringValue:SeaStringFromPixels(origin.x + size.width - [(SeaLayer *)[[document contents] layer:workingIndex] width] , units, xres)];
+			[bottomValue setStringValue:SeaStringFromPixels(origin.y + size.height  - [(SeaLayer *)[[document contents] layer:workingIndex] height], units, yres)];
 		}
-		[leftValue setStringValue:StringFromPixels(-1 * origin.x, units, xres)];
-		[topValue setStringValue:StringFromPixels(-1 * origin.y, units, yres)];
+		[leftValue setStringValue:SeaStringFromPixels(-1 * origin.x, units, xres)];
+		[topValue setStringValue:SeaStringFromPixels(-1 * origin.y, units, yres)];
 	} else {
 		if ([contentRelative state]) {
 			if (workingIndex == kAllLayers) {
@@ -632,10 +632,10 @@
 		}
 		
 		// Fill out the panel correctly
-		[leftValue setStringValue:StringFromPixels(size.width / 2, units, xres)];
-		[rightValue setStringValue:StringFromPixels(size.width / 2 + size.width % 2, units, xres)];
-		[topValue setStringValue:StringFromPixels(size.height / 2, units, yres)];
-		[bottomValue setStringValue:StringFromPixels(size.height / 2 + size.height % 2, units, yres)];
+		[leftValue setStringValue:SeaStringFromPixels(size.width / 2, units, xres)];
+		[rightValue setStringValue:SeaStringFromPixels(size.width / 2 + size.width % 2, units, xres)];
+		[topValue setStringValue:SeaStringFromPixels(size.height / 2, units, yres)];
+		[bottomValue setStringValue:SeaStringFromPixels(size.height / 2 + size.height % 2, units, yres)];
 	}
 	
 	[self marginsChanged:NULL];
