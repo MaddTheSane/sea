@@ -130,6 +130,7 @@
 /* Begin PBXBuildFile section */
 		550AEAF618CFC5DE008918BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		550AEB0418CFC5E1008918BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
+		55115C041D46AC2700E76B5B /* SSKTerminatable.h in Headers */ = {isa = PBXBuildFile; fileRef = 55115C031D46AC2700E76B5B /* SSKTerminatable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		551E568518D0131D00E4CDAF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E568418D0131D00E4CDAF /* libz.dylib */; };
 		551E568C18D0132900E4CDAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		551E569B18D0132B00E4CDAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
@@ -1803,6 +1804,7 @@
 		35B1586B0A2C08A4005B688F /* Pat2PNG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pat2PNG.xcodeproj; path = ../Pat2PNG/Pat2PNG.xcodeproj; sourceTree = SOURCE_ROOT; };
 		550AEAFC18CFC5DE008918BA /* Brightness+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Brightness+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		550AEB0A18CFC5E1008918BA /* Bump+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bump+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55115C031D46AC2700E76B5B /* SSKTerminatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKTerminatable.h; sourceTree = "<group>"; };
 		551E568418D0131D00E4CDAF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		551E569318D0132900E4CDAF /* Edges+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Edges+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E56A218D0132B00E4CDAF /* Edge Work+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Edge Work+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3666,6 +3668,7 @@
 				5593808918F465E60022C282 /* SSKVisualPlugin.m */,
 				5575354E18DB59A600AC0FBC /* SSKCIPlugin.h */,
 				5575354F18DB59A600AC0FBC /* SSKCIPlugin.m */,
+				55115C031D46AC2700E76B5B /* SSKTerminatable.h */,
 				5575352718DB56CB00AC0FBC /* Supporting Files */,
 			);
 			path = SeashoreKit;
@@ -4947,6 +4950,7 @@
 				55472BAC1C6EE1530065A852 /* ImageToolbarItem.h in Headers */,
 				55472BE41C6EE6730065A852 /* SeaMain.h in Headers */,
 				55472B8E1C6EDDD50065A852 /* SeashoreKit.h in Headers */,
+				55115C041D46AC2700E76B5B /* SSKTerminatable.h in Headers */,
 				55472BA81C6EE1530065A852 /* SeaWarning.h in Headers */,
 				55472B961C6EDDF80065A852 /* SSKVisualPlugin.h in Headers */,
 				55472BC21C6EE4220065A852 /* Bitmap.h in Headers */,

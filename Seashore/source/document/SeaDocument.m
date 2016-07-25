@@ -54,6 +54,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 @synthesize pluginData;
 @synthesize textureExporter;
 @synthesize uniqueDocID;
+@synthesize selection;
 
 - (instancetype)init
 {
@@ -113,7 +114,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	specialStart = kPasteboardStart;
 	
 	// Set the measure style
-	measureStyle = [(SeaPrefs *)[SeaController seaPrefs] newUnits];
+	measureStyle = [[SeaController seaPrefs] newUnits];
 	
 	// Create contents
 	contents = [[SeaContent alloc] initFromPasteboardWithDocument:self];
@@ -145,51 +146,14 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 		measureStyle = [[SeaController seaPrefs] newUnits];
 		
 		// Do required work
-		if ([self readFromFile:url.path ofType:typeName]) {
+		if ([self readFromURL:url ofType:typeName error:outError]) {
 			self.fileURL = url;
 			[self setFileType:typeName];
 		} else {
-			if (outError) {
-				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:nil];
-			}
 			return nil;
 		}
 
 	}
-	return self;
-}
-
-- (instancetype)initWithContentsOfFile:(NSString *)path ofType:(NSString *)type
-{
-	// Initialize superclass first
-	if (!(self = [super init]))
-		return NULL;
-	
-	// Reset uniqueLayerID
-	uniqueLayerID = -1;
-	uniqueFloatingLayerID = 4999;
-	
-	// Get a unique ID for this document
-	uniqueDocID = globalUniqueDocID;
-	globalUniqueDocID++;
-	
-	// Set data members appropriately
-	whiteboard = NULL;
-	restoreOldType = NO;
-	current = YES;
-	specialStart = kOpenStart;
-	
-	// Set the measure style
-	measureStyle = [[SeaController seaPrefs] newUnits];
-	
-	// Do required work
-	if ([self readFromFile:path ofType:type]) {
-		[self setFileName:path];
-		[self setFileType:type];
-	} else {
-		return nil;
-	}
-	
 	return self;
 }
 
@@ -275,11 +239,6 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	[super saveDocumentAs:sender];
 }
 
-- (SeaSelection*)selection
-{
-	return selection;
-}
-
 - (id)docView
 {
 	return [view documentView];
@@ -295,58 +254,67 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	[view setBackgroundColor:[[SeaController seaPrefs] windowBack]];
 }
 
-- (BOOL)readFromFile:(NSString *)path ofType:(NSString *)type
-{	
+- (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)type error:(NSError * _Nullable __autoreleasing *)outError
+{
 	BOOL readOnly = NO;
+
 	
 	// Determine which document we have and act appropriately
 	if ([XCFContent typeIsEditable: type]) {
-		
 		// Load a GIMP or XCF document
-		contents = [[XCFContent alloc] initWithDocument:self contentsOfFile:path];
+		contents = [[XCFContent alloc] initWithDocument:self contentsOfURL:url];
 		if (contents == NULL) {
+			if (outError) {
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load GIMP file"}];
+			}
 			return NO;
 		}
-		
 	} else if ([CocoaContent typeIsEditable: type forDoc: self]) {
-		
 		// Load a PNG, TIFF, JPEG document
 		// Or a GIF or JP2 document
-		contents = [[CocoaContent alloc] initWithDocument:self contentsOfFile:path];
+		contents = [[CocoaContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
+			if (outError) {
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load editable Cocoa file"}];
+			}
 			return NO;
 		}
-		
 	} else if ([CocoaContent typeIsViewable: type forDoc: self]) {
-	
 		// Load a PDF, PCT, BMP document
-		contents = [[CocoaContent alloc] initWithDocument:self contentsOfFile:path];
+		contents = [[CocoaContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
+			if (outError) {
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load viewable Cocoa file"}];
+			}
 			return NO;
 		}
 		readOnly = YES;
-			
 	} else if ([XBMContent typeIsEditable: type]) {
-	
 		// Load a X bitmap document
-		contents = [[XBMContent alloc] initWithDocument:self contentsOfFile:path];
+		contents = [[XBMContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
+			if (outError) {
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load X11 bitmap"}];
+			}
 			return NO;
 		}
 		readOnly = YES;
-		
 	} else if ([SVGContent typeIsViewable: type]) {
-	
 		// Load a SVG document
-		contents = [[SVGContent alloc] initWithDocument:self contentsOfFile:path];
+		contents = [[SVGContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
+			if (outError) {
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load SVG"}];
+			}
 			return NO;
 		}
 		readOnly = YES;
-		
 	} else {
 		// Handle an unknown document type
-		NSLog(@"Unknown type passed to readFromFile:<%@>ofType:<%@>", path, type);
+		NSLog(@"Unknown type passed to readFromURL:<%@>ofType:<%@>error:", url.path, type);
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Unknown type %@", type]}];
+		}
 		return NO;
 	}
 	
@@ -354,6 +322,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 		[[SeaController seaWarning] addMessage:LOCALSTR(@"read only message", @"This file is in a read-only format, as such you cannot save this file. This warning will not be displayed for subsequent files in a read-only format.") forDocument: self level:kLowImportance];
 		globalReadOnlyWarning = YES;
 	}
+
 	
 	return YES;
 }
@@ -372,31 +341,11 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 		}
 	}
 	
-	if (!result){
-		NSLog(@"Unknown type passed to writeToFile:<%@>ofType:<%@>", [url path], typeName);
+	if (!result) {
+		NSLog(@"Unknown type passed to writeToURL:<%@>ofType:<%@>error:", url, typeName);
 		if (outError) {
-			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:@{NSLocalizedFailureReasonErrorKey:  [NSString stringWithFormat:@"Unknown type passed to writeToFile:<%@>ofType:<%@>", [url path], typeName]}];
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:@{NSLocalizedFailureReasonErrorKey:  [NSString stringWithFormat:@"Unknown type passed to writeToURL:<%@>ofType:<%@>error:", url, typeName]}];
 		}
-	}
-	return result;
-}
-
-- (BOOL)writeToFile:(NSString *)path ofType:(NSString *)type
-{
-	BOOL result = NO;
-	
-	for (id<AbstractExporter> exporter in exporters) {
-		if ([[SeaDocumentController sharedDocumentController]
-			 type: type
-			 isContainedInDocType:[exporter title]
-			 ]) {
-			[exporter writeDocument:self toFile:path];
-			result = YES;
-		}
-	}
-	
-	if (!result){
-		NSLog(@"Unknown type passed to writeToFile:<%@>ofType:<%@>", path, type);
 	}
 	return result;
 }

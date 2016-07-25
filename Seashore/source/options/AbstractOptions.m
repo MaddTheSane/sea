@@ -51,25 +51,25 @@ static BOOL forceAlt = NO;
 	
 		if ((modifiers & NSAlternateKeyMask) >> 19 && (modifiers & NSControlKeyMask) >> 18) {
 			index = [modifierPopup indexOfItemWithTag:kAltControlModifier];
-			if (index > 0) [modifierPopup selectItemAtIndex:index];
-		}
-		else if ((modifiers & NSShiftKeyMask) >> 17 && (modifiers & NSControlKeyMask) >> 18) {
+			if (index > 0)
+				[modifierPopup selectItemAtIndex:index];
+		} else if ((modifiers & NSShiftKeyMask) >> 17 && (modifiers & NSControlKeyMask) >> 18) {
 			index = [modifierPopup indexOfItemWithTag:kShiftControlModifier];
-			if (index > 0) [modifierPopup selectItemAtIndex:index];
-		}
-		else if ((modifiers & NSControlKeyMask) >> 18) {
+			if (index > 0)
+				[modifierPopup selectItemAtIndex:index];
+		} else if ((modifiers & NSControlKeyMask) >> 18) {
 			index = [modifierPopup indexOfItemWithTag:kControlModifier];
-			if (index > 0) [modifierPopup selectItemAtIndex:index];
-		}
-		else if ((modifiers & NSShiftKeyMask) >> 17) {
+			if (index > 0)
+				[modifierPopup selectItemAtIndex:index];
+		} else if ((modifiers & NSShiftKeyMask) >> 17) {
 			index = [modifierPopup indexOfItemWithTag:kShiftModifier];
-			if (index > 0) [modifierPopup selectItemAtIndex:index];
-		}
-		else if ((modifiers & NSAlternateKeyMask) >> 19) {
+			if (index > 0)
+				[modifierPopup selectItemAtIndex:index];
+		} else if ((modifiers & NSAlternateKeyMask) >> 19) {
 			index = [modifierPopup indexOfItemWithTag:kAltModifier];
-			if (index > 0) [modifierPopup selectItemAtIndex:index];
-		}
-		else {
+			if (index > 0)
+				[modifierPopup selectItemAtIndex:index];
+		} else {
 			[modifierPopup selectItemAtIndex:kNoModifier];
 		}
 	}

@@ -43,32 +43,32 @@
 	[defaults synchronize];
 }
 
-- (void)shutdownFor:(id)doc
+- (void)shutdownFor:(SeaDocument*)doc
 {
 	NSNumber *key = @((size_t)doc);
 
 	[pegasusUtilities removeObjectForKey:key];
-	[toolboxUtilities  removeObjectForKey:key];
+	[toolboxUtilities removeObjectForKey:key];
 	
 	[[self brushUtilityFor:doc] shutdown];
-	[brushUtilities  removeObjectForKey:key];
+	[brushUtilities removeObjectForKey:key];
 	
 	[[self optionsUtilityFor:doc] shutdown];
-	[optionsUtilities  removeObjectForKey:key];
+	[optionsUtilities removeObjectForKey:key];
 	
 	[[self textureUtilityFor:doc] shutdown];
-	[textureUtilities  removeObjectForKey:key];
+	[textureUtilities removeObjectForKey:key];
 	
 	[[self infoUtilityFor:doc] shutdown];
-	[infoUtilities  removeObjectForKey:key];
+	[infoUtilities removeObjectForKey:key];
 }
 
-- (void)activate:(id)sender
+- (void)activate:(SeaDocument*)sender
 {
-	[(PegasusUtility *)[self pegasusUtilityFor:sender] activate];
-	[(ToolboxUtility *)[self toolboxUtilityFor:sender] activate];
-	[(OptionsUtility *)[self optionsUtilityFor:sender] activate];
-	[(InfoUtility *)[self infoUtilityFor:sender] activate];
+	[[self pegasusUtilityFor:sender] activate];
+	[[self toolboxUtilityFor:sender] activate];
+	[[self optionsUtilityFor:sender] activate];
+	[[self infoUtilityFor:sender] activate];
 }
 
 - (id)pegasusUtilityFor:(id)doc

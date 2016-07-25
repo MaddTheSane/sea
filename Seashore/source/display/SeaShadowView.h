@@ -13,6 +13,8 @@
 	IBOutlet id scrollView;
 	BOOL areRulersVisible;
 }
+
+//! The visibility of the rulers.
 @property (nonatomic, getter=areRulersVisible) BOOL rulersVisible;
 
 /*!

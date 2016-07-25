@@ -1,3 +1,4 @@
+#import "SSKTerminatable.h"
 #import "Globals.h"
 
 /*!
@@ -17,28 +18,29 @@
 
 @interface SeaController : NSObject <NSApplicationDelegate>
 {
-	// An array of objects wishing to recieve the terminate message
-	NSArray *terminationObjects;
+	//! An array of objects wishing to recieve the terminate message
+	NSMutableArray<id<SSKTerminatable>> *terminationObjects;
 }
-	// An outlet to the utilities manager of the application
+
+//! An outlet to the utilities manager of the application
 @property (weak) IBOutlet UtilitiesManager *utilitiesManager;
 
-// An outlet to the plug-ins manager of the application
+//! An outlet to the plug-ins manager of the application
 @property (weak) IBOutlet SeaPlugins *seaPlugins;
 
-// An outlet to the preferences manager of the application
+//! An outlet to the preferences manager of the application
 @property (weak) IBOutlet SeaPrefs *seaPrefs;
 
-// An outlet to the proxy object of the application
+//! An outlet to the proxy object of the application
 @property (weak) IBOutlet SeaProxy *seaProxy;
 	
-// An outlet to the help manager of the application
+//! An outlet to the help manager of the application
 @property (weak) IBOutlet SeaHelp *seaHelp;
 
-// An outlet to the warning manager of the application
+//! An outlet to the warning manager of the application
 @property (weak) IBOutlet SeaWarning *seaWarning;
 
-// The window containing the GNU General Public License
+//! The window containing the GNU General Public License
 @property (weak) IBOutlet NSWindow *licenseWindow;
 
 /*!
@@ -156,7 +158,7 @@
 				The object that wishes to recieve a termination message (the
 				object is not retained).
 */
-- (void)registerForTermination:(id)object;
+- (void)registerForTermination:(id<SSKTerminatable>)object;
 
 /*!
 	@method		applicationWillTerminate:
@@ -196,6 +198,6 @@
 				The menu item to be validated.
 	@result		YES if the menu item should be enabled, NO otherwise.
 */
-- (BOOL)validateMenuItem:(id)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end

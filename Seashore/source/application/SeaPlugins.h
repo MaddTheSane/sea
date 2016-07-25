@@ -3,9 +3,11 @@
 #import "SeaDocument.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
+#import "SSKTerminatable.h"
 
 @class SeaPlugins;
 @class PluginData;
+@class SeaController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -126,10 +128,10 @@ NS_ENUM(int) {
 				<b>License:</b> Public Domain<br>
 				<b>Copyright:</b> N/A
 */
-@interface SeaPlugins : NSObject {
+@interface SeaPlugins : NSObject <SSKTerminatable> {
 
 	// The SeaController object
-	IBOutlet id controller;
+	IBOutlet SeaController *controller;
 
 	// An array of all Seahore's plug-ins
 	NSMutableArray<id<SeaPluginClass>> *plugins;

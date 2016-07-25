@@ -121,7 +121,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc;
+- (instancetype)initWithDocument:(SeaDocument*)doc;
 
 /*!
 	@method		initForPasteboardWithDocument:
@@ -131,7 +131,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initFromPasteboardWithDocument:(id)doc;
+- (instancetype)initFromPasteboardWithDocument:(SeaDocument*)doc;
 
 /*!
 	@method		initWithDocument:type:width:height:res:opaque:
@@ -154,7 +154,7 @@ typedef struct {
 				YES if the background layer should be opaque, NO otherwise.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque;
+- (instancetype)initWithDocument:(SeaDocument*)doc type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque;
 
 /*!
 	@method		initWithDocument:data:type:width:height:res:
@@ -177,7 +177,7 @@ typedef struct {
 				accepts square resolutions).
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc data:(unsigned char *)ddata type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
+- (instancetype)initWithDocument:(SeaDocument*)doc data:(unsigned char *)ddata type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
 #endif
 
 #pragma mark PROPERTY METHODS

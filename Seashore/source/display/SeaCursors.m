@@ -18,6 +18,7 @@
 #import "PositionOptions.h"
 
 @implementation SeaCursors
+@synthesize closeRect;
 
 - (instancetype)initWithDocument:(id)newDocument andView:(id)newView
 {
@@ -291,11 +292,6 @@
 - (NSRect *)handleRectsPointer
 {
 	return handleRects;
-}
-
-- (void)setCloseRect:(NSRect)rect
-{
-	closeRect = rect;
 }
 
 - (void)setScrollingMode:(BOOL)inMode mouseDown:(BOOL)mouseDown

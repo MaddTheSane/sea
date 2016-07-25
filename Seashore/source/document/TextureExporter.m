@@ -46,7 +46,7 @@ NS_ENUM(int) {
 	if (![document writeToURL:[NSURL fileURLWithPath:path] ofType:(NSString*)kUTTypePNG error:&err]) {
 		[[NSAlert alertWithError:err] runModal];
 	}
-	//[document writeToFile:path ofType:@"Portable Network Graphics Image"];
+	//[document writeToFile:path ofType:@"Portable Network Graphics image"];
 	
 	// Refresh textures
 	[[[SeaController utilitiesManager] textureUtilityFor:document] addTextureFromPath:path];

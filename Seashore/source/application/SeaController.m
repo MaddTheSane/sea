@@ -28,7 +28,7 @@ static SeaController *seaController;
 	seaController = self;
 	
 	// Creates an array which can store objects that wish to recieve the terminate: message
-	terminationObjects = [[NSArray alloc] init];
+	terminationObjects = [[NSMutableArray alloc] init];
 	
 	// Specify ourselves as NSApp's delegate
 	[NSApp setDelegate:self];
@@ -41,12 +41,12 @@ static SeaController *seaController;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	NSString *crashReport = [NSString stringWithFormat:@"%@/Library/Logs/CrashReporter/Seashore.crash.log", NSHomeDirectory()];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSURL *crashReport = [[[[fileManager URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:NULL] URLByAppendingPathComponent:@"Logs"] URLByAppendingPathComponent:@"CrashReporter"] URLByAppendingPathComponent:@"Seashore.crash.log" isDirectory:NO];
 
 	// Run initial tests
-	if ([seaPrefs firstRun] && [fileManager fileExistsAtPath:crashReport]) {
-		if ([fileManager trashItemAtURL:[NSURL fileURLWithPath:crashReport] resultingItemURL:NULL error:NULL]) {
+	if ([seaPrefs firstRun] && [crashReport checkResourceIsReachableAndReturnError:NULL]) {
+		if ([fileManager trashItemAtURL:crashReport resultingItemURL:NULL error:NULL]) {
 			[seaWarning addMessage:LOCALSTR(@"old crash report message", @"Seashore has moved its old crash report to the Trash so that it will be deleted next time you empty the trash.") level:kModerateImportance];
 		}
 	}
@@ -120,7 +120,7 @@ static SeaController *seaController;
 - (IBAction)editLastSaved:(id)sender
 {
 	NSFileManager *fm = [NSFileManager defaultManager];
-	id originalDocument, currentDocument = gCurrentDocument;
+	SeaDocument *originalDocument, *currentDocument = gCurrentDocument;
 	NSString *old_path = [[currentDocument fileURL] path], *new_path = NULL;
 	int i;
 	BOOL done;
@@ -149,8 +149,7 @@ static SeaController *seaController;
 	// Copy the contents on disk and open so the last saved version can be edited
 	if ([fm copyItemAtPath:old_path toPath:new_path error:NULL]) {
 		originalDocument = [[SeaDocumentController sharedDocumentController] openNonCurrentFile:new_path];
-	}
-	else {
+	} else {
 		NSRunAlertPanel(LOCALSTR(@"locked title", @"Operation Failed"), LOCALSTR(@"locked body", @"The \"Compare to Last Saved\" operation failed. The most likely cause for this is that the disk the original is kept on is full or read-only."), LOCALSTR(@"ok", @"OK"), NULL, NULL, [gCurrentDocument displayName]);
 		return;
 	}
@@ -192,16 +191,16 @@ static SeaController *seaController;
 	[document showWindows];
 }
 
-- (void)registerForTermination:(id)object
+- (void)registerForTermination:(id<SSKTerminatable>)object
 {
-	terminationObjects = [terminationObjects arrayByAddingObject:object];
+	[terminationObjects addObject:object];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Inform those that wish to know
-	for (SeaPrefs *thePrefs in terminationObjects) {
+	for (id<SSKTerminatable> thePrefs in terminationObjects) {
 		[thePrefs terminate];
 	}
 	
@@ -221,29 +220,31 @@ static SeaController *seaController;
 
 - (BOOL)applicationOpenUntitledFile:(NSApplication *)app
 {
-	[[NSDocumentController sharedDocumentController] newDocument:self];
+	[[SeaDocumentController sharedDocumentController] newDocument:self];
 	
 	return YES;
 }
 
-- (BOOL)validateMenuItem:(id)menuItem
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem
 {
 	id availableType;
 	
 	switch ([menuItem tag]) {
 		case 175:
 			return gCurrentDocument && [gCurrentDocument fileURL] && [gCurrentDocument isDocumentEdited] && [gCurrentDocument current];
-		break;
+			break;
+			
 		case 176:
 			return gCurrentDocument && [gCurrentDocument fileURL] && [gCurrentDocument current];
-		break;
+			break;
+			
 		case 400:
 			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 			if (availableType)
 				return YES;
 			else
 				return NO;
-		break;
+			break;
 	}
 	
 	return YES;

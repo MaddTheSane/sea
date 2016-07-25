@@ -22,7 +22,7 @@ static inline void fix_endian_read(int *input, size_t size)
 #if MAIN_COMPILE
 + (BOOL)typeIsEditable:(NSString *)aType
 {
-	return [[SeaDocumentController sharedDocumentController] type: aType isContainedInDocType: @"GIMP image"];
+	return [[SeaDocumentController sharedDocumentController] type: aType isContainedInDocType: @"org.gimp.xcf"];
 }
 #endif
 
@@ -191,8 +191,9 @@ static inline void fix_endian_read(int *input, size_t size)
 }
 
 #if MAIN_COMPILE
-- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
+- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfURL:(NSURL *)path;
 {
+	//NSFileHandle *file = [NSFileHandle fileHandleForReadingFromURL:path error:NULL];
 	SharedXCFInfo info;
 	size_t layerOffsets, offset;
 	FILE *file;
@@ -301,6 +302,11 @@ static inline void fix_endian_read(int *input, size_t size)
 	[self deleteParasiteWithName:@"exif-plist"];
 	
 	return self;
+}
+
+- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
+{
+	return [self initWithDocument:doc contentsOfURL:[NSURL fileURLWithPath:path]];
 }
 #else
 - (instancetype)initWithContentsOfFile:(NSString *)path;

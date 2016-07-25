@@ -17,7 +17,7 @@
 
 - (void)drawRect:(NSRect)rect {
     // Drawing code here.
-	[[(SeaPrefs *)[SeaController seaPrefs] windowBack] set];
+	[[[SeaController seaPrefs] windowBack] set];
 	[[NSBezierPath bezierPathWithRect:rect] fill];
 
 	NSRect scrollRect = [[scrollView contentView] bounds];

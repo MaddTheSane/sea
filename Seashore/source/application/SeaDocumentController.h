@@ -1,5 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "Units.h"
 
 @class SeaPrefs;
 
@@ -44,7 +45,7 @@
 	IBOutlet NSPopUpButton *recentMenu;
 	
 	/// The units for the New Image Settings panel
-	int units;
+	SeaUnits units;
 	
 	/// The variables stored for retrieval by the new document
 	int type, width, height, resolution;
@@ -52,7 +53,7 @@
 	/// The variables stored for retrieval by the new document
 	BOOL opaque;
 	
-	/// If YES prevents new documents being recorded as recently opened
+	/// If \c YES prevents new documents being recorded as recently opened
 	BOOL stopNotingRecentDocuments;
 	
 	/// A long list of the possible things we can write
@@ -195,7 +196,7 @@
 	@discussion	Returns the instance variable of the same name.
 	@result		Returns the instance variable of the same name.
 */
-@property (readonly) int units;
+@property (readonly) SeaUnits units;
 
 /*!
 	@property	editableTypes

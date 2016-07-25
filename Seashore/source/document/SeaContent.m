@@ -167,7 +167,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return self;
 }
 
-- (instancetype)initWithDocument:(id)doc type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque
+- (instancetype)initWithDocument:(SeaDocument*)doc type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque
 {	
 	// Call the core initializer
 	if (![self initWithDocument:doc])
@@ -184,7 +184,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return self;
 }
 
-- (instancetype)initWithDocument:(id)doc data:(unsigned char *)ddata type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres
+- (instancetype)initWithDocument:(SeaDocument*)doc data:(unsigned char *)ddata type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])

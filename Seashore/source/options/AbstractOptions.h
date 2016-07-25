@@ -60,10 +60,10 @@ typedef NS_ENUM(NSInteger, AbstractModifiers) {
 @interface AbstractOptions : NSObject {
 	
 	// The options view associated with this tool
-    IBOutlet id view;
+    IBOutlet NSView *view;
 	
 	// The modifier options associated with this tool
-	IBOutlet id modifierPopup;
+	IBOutlet NSPopUpButton *modifierPopup;
 	
 	// The document associated
 	SeaDocument *document;
@@ -139,6 +139,6 @@ typedef NS_ENUM(NSInteger, AbstractModifiers) {
 	@discussion	Returns the option's view
 	@result		Returns the option's view
 */
-- (id)view;
+- (NSView *)view;
 
 @end

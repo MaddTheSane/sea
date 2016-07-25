@@ -71,7 +71,6 @@
 	@discussion	Returns a pointer to the rectangles used for the handles.
 */
 @property (readonly) NSRect *handleRectsPointer NS_RETURNS_INNER_POINTER;
-- (NSRect *)handleRectsPointer;
 
 /*!
 	@method		setCloseRect:
@@ -80,6 +79,9 @@
 				A NSRect containing the rectangle of the handle.
 */
 - (void)setCloseRect:(NSRect)rect;
+
+//! The rectangle used for the close cursor for the polygon lasso tool.
+@property NSRect closeRect;
 
 /*!
 	@method		setScrollingMode:mouseDown:

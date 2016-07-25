@@ -80,6 +80,17 @@ typedef struct {
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (instancetype)initWithDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path;
+
+/*!
+	@method		initWithDocument:contentsOfURL:
+	@discussion	Initializes an instance of this class with the given XCF file.
+	@param		doc
+				The document with which to initialize the instance.
+	@param		path
+				The URL of the XCF file with which to initalize this class.
+	@result		Returns instance upon success (or NULL otherwise).
+ */
+- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfURL:(NSURL *)path;
 #else
 /*!
 	@method		initWithDocument:contentsOfFile:

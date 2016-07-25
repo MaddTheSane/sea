@@ -122,17 +122,6 @@
 - (instancetype)initWithPasteboard;
 
 /*!
-	@method		initWithContentsOfFile:ofType:
-	@discussion	Initializes an instance of this class with the given image file.
-	@param		path
-				The path of the file with which to initalize this class.
-	@param		type
-				The type of file with which this class is being initialized.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (instancetype)initWithContentsOfFile:(NSString *)path ofType:(NSString *)type;
-
-/*!
 	@method		initWithData:type:width:height:
 	@discussion	Initializes an instance of this class with the given data.
 	@param		data
@@ -249,26 +238,26 @@
 // DOCUMENT METHODS
 
 /*!
-	@method		readFromFile:ofType:
+	@method		readFromURL:ofType:error:
 	@discussion	Reads a given file from disk.
 	@param		path
-				The path of the file to be read.
+				The file URL to be read.
 	@param		type
 				The type of the file to be read.
-	@result		Returns YES if the file is successfully read, NO otherwise.
+	@result		Returns \c YES if the file is successfully read, \c NO otherwise.
 */
-- (BOOL)readFromFile:(NSString *)path ofType:(NSString *)type;
+- (BOOL)readFromURL:(NSURL *)path ofType:(NSString *)type error:(NSError * __autoreleasing *)outError;
 
 /*!
-	@method		writeToFile:ofType:
+	@method		writeToURL:ofType:error:
 	@discussion	Writes the document's data to disk.
 	@param		filename
-				The path of the file that the data should be written to.
+				The file URL that the data should be written to.
 	@param		ignore
 				The type of the file that the data that should be written to.
-	@result		Returns YES if the file is successfully written, NO otherwise.
+	@result		Returns \c YES if the file is successfully written, \c NO otherwise.
 */
-- (BOOL)writeToFile:(NSString *)filename ofType:(NSString *)ignore;
+- (BOOL)writeToURL:(NSURL *)filename ofType:(NSString *)ignore error:(NSError * __autoreleasing *)outError;
 
 /*!
 	@method		printShowingPrintPanel:

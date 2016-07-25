@@ -25,7 +25,6 @@ typedef NS_ENUM(NSInteger, SeaAspectType) {
 	//! Indicates exact specification in millimetres.
 	SeaAspectTypeExactMillimeter = 2,
 	
-	//NS_SWIFT_UNAVAILABLE("Use .None instead")
 	kNoAspectType NS_SWIFT_UNAVAILABLE("Use .None instead") = SeaAspectTypeNone,
 	kRatioAspectType NS_SWIFT_UNAVAILABLE("Use .Ratio instead") = SeaAspectTypeRatio,
 	kExactPixelAspectType NS_SWIFT_UNAVAILABLE("Use .ExactPixel instead") = SeaAspectTypeExactPixel,

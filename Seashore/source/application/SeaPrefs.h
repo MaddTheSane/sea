@@ -1,4 +1,5 @@
 #import <Cocoa/Cocoa.h>
+#import "SSKTerminatable.h"
 #import "Globals.h"
 #import "SeaWarning.h"
 #import "Units.h"
@@ -35,7 +36,7 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-@interface SeaPrefs : NSObject {
+@interface SeaPrefs : NSObject <SSKTerminatable> {
 	
 	// The SeaController object
 	IBOutlet SeaController *controller;

@@ -1,7 +1,6 @@
 #import "Globals.h"
 
-enum
-{
+typedef NS_ENUM(int, SeaWindowRegion) {
 	kOptionsBar,
 	kSidebar,
 	kPointInformation,
@@ -41,10 +40,10 @@ enum
 	IBOutlet LayerControlView *statusBar;
 	
 	// Dictionary for all properties
-	NSDictionary *dict;
+	NSDictionary<NSNumber*,NSMutableDictionary<NSString*,id>*> *dict;
 }
 
-- (BOOL)visibilityForRegion:(NSInteger)region;
-- (void)setVisibility:(BOOL)visibility forRegion:(NSInteger)region;
-- (CGFloat)sizeForRegion:(NSInteger)region;
+- (BOOL)visibilityForRegion:(SeaWindowRegion)region;
+- (void)setVisibility:(BOOL)visibility forRegion:(SeaWindowRegion)region;
+- (CGFloat)sizeForRegion:(SeaWindowRegion)region;
 @end

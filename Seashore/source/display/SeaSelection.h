@@ -44,7 +44,6 @@ typedef NS_ENUM(int, SeaSelectMode) {
 */
 
 @interface SeaSelection : NSObject {
-
 	// The document associated with this object
 	SeaDocument *document;
 
@@ -66,7 +65,6 @@ typedef NS_ENUM(int, SeaSelectMode) {
 	// The point of the last copied selection and its size
 	IntPoint sel_point;
 	IntSize sel_size;
-	
 }
 
 /*!
@@ -79,11 +77,11 @@ typedef NS_ENUM(int, SeaSelectMode) {
 - (instancetype)initWithDocument:(SeaDocument*)doc;
 
 /*!
-	@method		active
+	@property	active
 	@discussion	Returns whether the current selection is active or not.
 	@result		Returns YES if the selection is active, NO otherwise.
 */
-- (BOOL)active;
+@property (readonly) BOOL active;
 
 /*!
 	@property	floating
@@ -267,12 +265,12 @@ typedef NS_ENUM(int, SeaSelectMode) {
 - (BOOL)selectionSizeMatch:(IntSize)inp_size;
 
 /*!
-	@method		selectionPoint
+	@property	selectionPoint
 	@discussion	Returns the point from which the last selection was copied.
-	@result		Returns an IntPoint indicating the point from which the last
+	@result		Returns an \c IntPoint indicating the point from which the last
 				selection was copied.
 */
-- (IntPoint)selectionPoint;
+@property (readonly) IntPoint selectionPoint;
 
 /*!
 	@method		cutSelection

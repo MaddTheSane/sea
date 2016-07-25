@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "CocoaContent.h"
 #import "CocoaLayer.h"
 #import "SeaController.h"
@@ -42,7 +44,7 @@
 }
 
 
-- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path
+- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
 {
 	__kindof NSImageRep *imageRep;
 	NSImage *image;
@@ -154,8 +156,8 @@
 	
 	// Determine the resolution of the image
 	if (!res_set) {
-		xres = roundf(((float)width / [image size].width) * 72);
-		yres = roundf(((float)height / [image size].height) * 72);
+		xres = round(((CGFloat)width / [image size].width) * 72);
+		yres = round(((CGFloat)height / [image size].height) * 72);
 	}
 	
 	// Determine the image type

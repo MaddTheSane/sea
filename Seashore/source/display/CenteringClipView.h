@@ -33,12 +33,13 @@
 	NSEvent *mostRecentScrollEvent;
 }
 
+//! the point at the center of the clip view.
 @property (nonatomic) NSPoint centerPoint;
 
 /*!
 	@method		centerPoint:
 	@discussion	Returns the point at the centre of the clip view.
-	@result		Returns a NSPoint indicating the point relative to the document
+	@result		Returns an \c NSPoint indicating the point relative to the document
 				contents at the centre of the clip view.
 */
 - (NSPoint)centerPoint;

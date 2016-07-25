@@ -14,10 +14,9 @@
 
 - (instancetype)init
 {
-	if (!(self = [super init]))
-		return nil;
-		
-	stopNotingRecentDocuments = NO;
+	if (self = [super init]) {
+		stopNotingRecentDocuments = NO;
+	}
 	
 	return self;
 }
@@ -32,10 +31,23 @@
 	NSArray *allDocumentTypes = [[[NSBundle mainBundle] infoDictionary]
 							  valueForKey:@"CFBundleDocumentTypes"];
 	for (NSDictionary *typeDict in allDocumentTypes) {
-		NSMutableSet *assembly = [NSMutableSet set];
+		NSMutableSet<NSString*> *assembly = [NSMutableSet set];
 
 		[assembly addObjectsFromArray:typeDict[@"CFBundleTypeExtensions"]];
-		[assembly addObjectsFromArray:typeDict[@"CFBundleTypeOSTypes"]];
+		{
+			NSArray *infoPlistOSType = typeDict[@"CFBundleTypeOSTypes"];
+			NSMutableArray<NSString*> *osTypeArr = [[NSMutableArray alloc] initWithCapacity:infoPlistOSType.count];
+			for (id osTyp in infoPlistOSType) {
+				if ([osTyp isKindOfClass:[NSNumber class]]) {
+					NSString *newType = NSFileTypeForHFSTypeCode([(NSNumber*)osTyp unsignedIntValue]);
+					[osTypeArr addObject:newType];
+				} else if ([osTyp isKindOfClass:[NSString class]]) {
+					NSString *newType = NSFileTypeForHFSTypeCode(UTGetOSTypeFromString((__bridge CFStringRef _Nonnull)(osTyp)));
+					[osTypeArr addObject:newType];
+				}
+			}
+			[assembly addObjectsFromArray:osTypeArr];
+		}
 		[assembly addObjectsFromArray:typeDict[@"LSItemContentTypes"]];
 		
 		NSString* key = typeDict[@"CFBundleTypeName"];
@@ -52,43 +64,38 @@
 
 - (IBAction)newDocument:(id)sender
 {		
-	NSString *string;
-	id menuItem;
-	IntSize size;
-	
 	// Set paper name
 	if ([[NSPrintInfo sharedPrintInfo] respondsToSelector:@selector(localizedPaperName)]) {
-		menuItem = [templatesMenu itemAtIndex:[templatesMenu indexOfItemWithTag:4]];
-		string = [NSString stringWithFormat:@"%@ (%@)", LOCALSTR(@"paper size", @"Paper size"), [[NSPrintInfo sharedPrintInfo] localizedPaperName]];
+		NSMenuItem *menuItem = [templatesMenu itemAtIndex:[templatesMenu indexOfItemWithTag:4]];
+		NSString *string = [NSString stringWithFormat:@"%@ (%@)", LOCALSTR(@"paper size", @"Paper size"), [[NSPrintInfo sharedPrintInfo] localizedPaperName]];
 		[menuItem setTitle:string];
 	}
 
 	// Display the panel for configuring
-	units = [(SeaPrefs *)[SeaController seaPrefs] newUnits];
+	units = [[SeaController seaPrefs] newUnits];
 	[unitsMenu selectItemAtIndex: units];
 	[resMenu selectItemAtIndex:[(SeaPrefs *)[SeaController seaPrefs] resolution]];
 	[modeMenu selectItemAtIndex:[(SeaPrefs *)[SeaController seaPrefs] mode]];
 	resolution = (int)[[resMenu selectedItem] tag];
-	size = [(SeaPrefs *)[SeaController seaPrefs] size];
+	IntSize size = [[SeaController seaPrefs] size];
 	[widthInput setStringValue:StringFromPixels(size.width, units, resolution)];
 	[heightInput setStringValue:StringFromPixels(size.height, units, resolution)];
 	[heightUnits setStringValue:UnitsString(units)];
 	[backgroundCheckbox setState:[(SeaPrefs *)[SeaController seaPrefs] transparentBackground]];
 	
 	// Set up the recents menu
-	int i;
 	NSArray *recentDocs = [super recentDocumentURLs];
-	if([recentDocs count]){
+	if ([recentDocs count]) {
 		[recentMenu setEnabled:YES];
-		for(i = 0; i < [recentDocs count]; i++){
-			NSString *path = [recentDocs[i] path];
-			NSString *filename = [path pathComponents][[[path pathComponents] count] -1];
+		for (NSURL *docURL in recentDocs) {
+			NSString *path = [docURL path];
+			NSString *filename = docURL.lastPathComponent;
 			NSImage *image = [[NSWorkspace sharedWorkspace] iconForFile: path];
 			[recentMenu addItemWithTitle: filename];
 			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setRepresentedObject:path];
-			[[(NSMenu*)recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setImage: image];
+			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setImage: image];
 		}
-	}else {
+	} else {
 		[recentMenu setEnabled:NO];
 	}
 
@@ -157,11 +164,9 @@
 	NSImage *image;
 	NSSize paperSize;
 	IntSize size = IntMakeSize(0, 0);
-	CGFloat res;
-	NSInteger selectedTag;
 	
-	selectedTag = [[templatesMenu selectedItem] tag];
-	res = [[resMenu selectedItem] tag];
+	NSInteger selectedTag = [[templatesMenu selectedItem] tag];
+	NSInteger res = [[resMenu selectedItem] tag];
 	switch (selectedTag) {
 		case 1:
 			size = [[SeaController seaPrefs] size];
@@ -169,7 +174,8 @@
 			[unitsMenu selectItemAtIndex: units];
 			res = [[SeaController seaPrefs] resolution];
 			[resMenu selectItemAtIndex:res];
-		break;
+			break;
+			
 		case 2:
 			pboard = [NSPasteboard generalPasteboard];
 			availableType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
@@ -181,12 +187,14 @@
 				return;
 			}
 			
-		break;
+			break;
+			
 		case 3:
 			size = NSSizeMakeIntSize([[NSScreen mainScreen] frame].size);
 			units = kPixelUnits;
 			[unitsMenu selectItemAtIndex: kPixelUnits];
-		break;
+			break;
+			
 		case 4:
 			paperSize = [[NSPrintInfo sharedPrintInfo] paperSize];
 			paperSize.height -= [[NSPrintInfo sharedPrintInfo] topMargin] + [[NSPrintInfo sharedPrintInfo] bottomMargin];
@@ -196,18 +204,19 @@
 			[unitsMenu selectItemAtIndex: kInchUnits];
 			size.width = (float)size.width * (res / 72.0);
 			size.height = (float)size.height * (res / 72.0);
-		break;
+			break;
 		case 1000:
 			/* Henry, add "Add..." item functionality here. */
-		break;
+			break;
+			
 		case 1001:
 			/* Henry, add "Editor..." item functionality here. */
-		break;
+			break;
 	}
 	
 	if (selectedTag != 1000 && selectedTag != 1001) {
-		[widthInput setStringValue:StringFromPixels(size.width, units, res)];
-		[heightInput setStringValue:StringFromPixels(size.height, units, res)];
+		[widthInput setStringValue:StringFromPixels(size.width, units, (int)res)];
+		[heightInput setStringValue:StringFromPixels(size.height, units, (int)res)];
 		[heightUnits setStringValue:UnitsString(units)];
 	}
 }
@@ -257,7 +266,7 @@
 	for (NSSet *obj in viewableTypes.objectEnumerator){
 		[array addObjectsFromArray:[obj allObjects]];
 	}
-	return array;
+	return [array copy];
 }
 
 //- (NSArray *)fileExtensionsFromType:(NSString *)typeName
@@ -287,7 +296,7 @@
 	
 	for (NSString *candidate in set) {
 		// I think we don't care about case in types
-		if(![aType caseInsensitiveCompare:candidate]){
+		if ([aType caseInsensitiveCompare:candidate] == NSOrderedSame) {
 			return YES;
 		}
 	}

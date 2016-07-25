@@ -14,6 +14,7 @@ FOUNDATION_EXPORT double SeashoreKitVersionNumber;
 //! Project version string for SeashoreKit.
 FOUNDATION_EXPORT const unsigned char SeashoreKitVersionString[];
 
+#import <SeashoreKit/SSKTerminatable.h>
 #import <SeashoreKit/Rects.h>
 #import <SeashoreKit/SSKPlugin.h>
 #import <SeashoreKit/SSKVisualPlugin.h>

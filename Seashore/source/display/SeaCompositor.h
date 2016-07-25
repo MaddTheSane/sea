@@ -40,15 +40,6 @@ typedef struct {
 	int spp;
 } CompositorOptions;
 
-/*!
-	@class		SeaCompositor
-	@abstract	Handles layer compositing for SeaWhitebaord.
-	@discussion	N/A
-				<br><br>
-				<b>License:</b> GNU General Public License<br>
-				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
-*/
-
 @class SeaLayer;
 #if MAIN_COMPILE
 @class SeaDocument;
@@ -57,7 +48,30 @@ typedef struct {
 @class SeaWhiteboard;
 #endif
 
-@interface SeaCompositor : NSObject {
+NS_SWIFT_NAME(SeaCompositorProtocol)
+@protocol SeaCompositor <NSObject>
+
+#if MAIN_COMPILE
+- (instancetype)initWithDocument:(SeaDocument*)doc;
+#else
+- (instancetype)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board;
+#endif
+
+- (void)compositeLayer:(SeaLayer *)layer withOptions:(CompositorOptions)options;
+- (void)compositeLayer:(SeaLayer *)layer withOptions:(CompositorOptions)options andData:(unsigned char *)destPtr;
+- (void)compositeLayer:(SeaLayer *)layer withFloat:(SeaLayer *)floatingLayer andOptions:(CompositorOptions)options;
+
+@end
+
+/*!
+	@class		SeaCompositor
+	@abstract	Handles layer compositing for SeaWhitebaord.
+	@discussion	N/A
+				<br><br>
+				<b>License:</b> GNU General Public License<br>
+				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
+*/
+@interface SeaCompositor : NSObject <SeaCompositor> {
 #if MAIN_COMPILE
 	// The document associated with this compositor
 	SeaDocument *document;
@@ -69,7 +83,6 @@ typedef struct {
 	
 	// The random table
 	int randomTable[RANDOM_TABLE_SIZE];
-	
 }
 
 #if MAIN_COMPILE

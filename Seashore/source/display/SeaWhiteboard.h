@@ -28,7 +28,6 @@ typedef NS_ENUM(int, SeaChannelsView) {
 	//! Indicates that all channels are being viewed in CMYK previewing mode.
 	SeaChannelsCMYKPreview,
 	
-	//NS_SWIFT_UNAVAILABLE("Use .Normal instead")
 	kAllChannelsView NS_SWIFT_UNAVAILABLE("Use .All instead") = SeaChannelsAll,
 	kPrimaryChannelsView NS_SWIFT_UNAVAILABLE("Use .Primary instead") = SeaChannelsPrimary,
 	kAlphaChannelView NS_SWIFT_UNAVAILABLE("Use .Alpha instead") = SeaChannelsAlpha,
@@ -140,11 +139,10 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 	// The display profile
 	ColorSyncProfileRef displayProf;
 	CGColorSpaceRef cgDisplayProf;
-	
 }
 
 /// The compositor for this whiteboard
-@property (strong) SeaCompositor *compositor;
+@property (strong) id<SeaCompositor> compositor;
 
 // CREATION METHODS
 
@@ -229,7 +227,6 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 				layer is changed, NO otherwise.
 */
 @property (readonly) BOOL whiteboardIsLayerSpecific;
-- (BOOL)whiteboardIsLayerSpecific;
 
 /*!
 	@method		readjust

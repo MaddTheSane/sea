@@ -241,7 +241,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 	// Finish off
 	
 	// Correct effect tool
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] setEffectEnabled:([pointPluginsNames count] != 0)];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] setEffectEnabled:([pointPluginsNames count] != 0)];
 
 	// Register to recieve the terminate message when Seashore quits
 	[controller registerForTermination:self];

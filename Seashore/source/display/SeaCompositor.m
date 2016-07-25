@@ -70,7 +70,7 @@
 #endif
 	unsigned char *srcPtr, *overlay, *replace;
 	int startX, startY, endX, endY;
-	int i, j, k, srcLoc, destLoc;
+	int srcLoc, destLoc;
 	unsigned char tempSpace[4], tempSpace2[4];
 	BOOL insertOverlay, overlayOkay;
 	BOOL floating;
@@ -132,24 +132,23 @@
 	if (endY - startY <= 0) return;
 	
 	// Go through each row
-	for (j = startY; j < endY; j++) {
+	for (int j = startY; j < endY; j++) {
 	
 		// Disolving requires us to play with the random number generator
 		if (mode == XCF_DISSOLVE_MODE) {
 			srandom(randomTable[(j + yoff) % 4096]);
-			for (k = 0; k < xoff; k++)
+			for (int k = 0; k < xoff; k++)
 				random();
 		}
 		
 		// Go through each column
-		for (i = startX; i < endX; i++) {
-		
+		for (int i = startX; i < endX; i++) {
 			// Determine the location in memory of the pixel we are copying from and to
 			srcLoc = (j * lwidth + i) * options.spp;
 			destLoc = ((j + yoff - options.destRect.origin.y) * options.destRect.size.width + (i + xoff - options.destRect.origin.x)) * options.spp;
 			
 			// Prepare for overlay application
-			for (k = 0; k < options.spp; k++)
+			for (int k = 0; k < options.spp; k++)
 				tempSpace2[k] = srcPtr[srcLoc + k];
 			if (insertOverlay) {
 				
@@ -159,10 +158,11 @@
 					case SeaOverlayBehaviourReplacing:
 					case SeaOverlayBehaviourMasking:
 						selectOpacity = replace[j * lwidth + i];
-					break;
+						break;
+						
 					default:
 						selectOpacity = options.overlayOpacity;
-					break;
+						break;
 				}
 #if MAIN_COMPILE
 				if (options.useSelection) {
@@ -173,8 +173,7 @@
 						if (mask && !floating)
 							selectOpacity = int_mult(selectOpacity, mask[(trueMaskOffset.y + point.y) * maskSize.width + (trueMaskOffset.x + point.x)], t1);
 					}
-				}
-				else {
+				} else {
 					overlayOkay = YES;
 				}
 #else
@@ -191,36 +190,38 @@
 						switch (options.overlayBehaviour) {
 							case SeaOverlayBehaviourErasing:
 								eraseMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
-							break;
+								break;
+								
 							case SeaOverlayBehaviourReplacing:
 								replaceMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
-							break;
+								break;
+								
 							default:
 								specialMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
-							break;
+								break;
 						}
-					}
-					else if (selectedChannel == kPrimaryChannels || floating) {
+					} else if (selectedChannel == kPrimaryChannels || floating) {
 						if (selectOpacity > 0) {
 							switch (options.overlayBehaviour) {							
 								case SeaOverlayBehaviourReplacing:
 									replacePrimaryMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
-								break;
+									break;
+									
 								default:
 									primaryMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity, YES);
-								break;
+									break;
 							}
 						}
-					}
-					else if (selectedChannel == kAlphaChannel) {
+					} else if (selectedChannel == kAlphaChannel) {
 						if (selectOpacity > 0) {
 							switch (options.overlayBehaviour) {							
 								case SeaOverlayBehaviourReplacing:
 									replaceAlphaMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
-								break;
+									break;
+									
 								default:
 									alphaMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
-								break;
+									break;
 							}
 						}
 					}
@@ -230,9 +231,8 @@
 			
 			// If the layer is going to use a compositing effect...
 			if (normal == NO && mode != XCF_NORMAL_MODE && options.forceNormal == NO) {
-
 				// Copy pixel from destination in to temporary memory
-				for (k = 0; k < options.spp; k++)
+				for (int k = 0; k < options.spp; k++)
 					tempSpace[k] = destPtr[destLoc + k];
 				
 				// Apply the appropriate effect using the source pixel
@@ -240,15 +240,10 @@
 				
 				// Then merge the pixel in temporary memory with the destination pixel
 				normalMerge(options.spp, destPtr, destLoc, tempSpace, 0, opacity);
-			
-			}
-			else {
-				
+			} else {
 				// Then merge the pixel in temporary memory with the destination pixel
 				normalMerge(options.spp, destPtr, destLoc, tempSpace2, 0, opacity);
-			
 			}
-			
 		}
 	}
 }
@@ -269,7 +264,7 @@
 	int xoff = [layer xoff], yoff = [layer yoff], selectOpacity;
 	int xfoff = [floatingLayer xoff], yfoff = [floatingLayer yoff];
 	int startX, startY, endX, endY;
-	int i, j, k, srcLoc, destLoc, floatLoc, tx, ty;
+	int srcLoc, destLoc, floatLoc, tx, ty;
 	unsigned char tempSpace[4], tempSpace2[4], tempSpace3[4];
 	BOOL insertOverlay;
 #if MAIN_COMPILE
@@ -338,24 +333,22 @@
 	if (endY - startY <= 0) return;
 	
 	// Go through each row
-	for (j = startY; j < endY; j++) {
-	
+	for (int j = startY; j < endY; j++) {
 		// Disolving requires us to play with the random number generator
 		if (mode == XCF_DISSOLVE_MODE) {
 			srandom(randomTable[(j + yoff) % 4096]);
-			for (k = 0; k < xoff; k++)
+			for (int k = 0; k < xoff; k++)
 				random();
 		}
 		
 		// Go through each column
-		for (i = startX; i < endX; i++) {
-		
+		for (int i = startX; i < endX; i++) {
 			// Determine the location in memory of the pixel we are copying from and to
 			srcLoc = (j * lwidth + i) * options.spp;
 			destLoc = ((j + yoff - options.destRect.origin.y) * options.destRect.size.width + (i + xoff - options.destRect.origin.x)) * options.spp;
 			
 			// Prepare for overlay application
-			for (k = 0; k < options.spp; k++)
+			for (int k = 0; k < options.spp; k++)
 				tempSpace2[k] = srcPtr[srcLoc + k];
 				
 			// Insert floating layer
@@ -364,17 +357,18 @@
 			if (ty >= 0 && ty < lfheight) {
 				if (tx >= 0 && tx < lfwidth) {
 					floatLoc = (ty * lfwidth + tx) * options.spp;
-					for (k = 0; k < options.spp; k++)
+					for (int k = 0; k < options.spp; k++)
 						tempSpace3[k] = floatPtr[floatLoc + k];
 					if (insertOverlay) {
 						switch (options.overlayBehaviour) {
 							case SeaOverlayBehaviourReplacing:
 							case SeaOverlayBehaviourMasking:
 								selectOpacity = replace[ty * lfwidth + tx];
-							break;
+								break;
+								
 							default:
 								selectOpacity = options.overlayOpacity;
-							break;
+								break;
 						}
 						if (selectOpacity > 0) {
 							primaryMerge(options.spp, tempSpace3, 0, overlay, floatLoc, selectOpacity, YES);
@@ -382,11 +376,9 @@
 					}
 					if (selectedChannel == kAllChannels) {
 						normalMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255);
-					}
-					else if (selectedChannel == kPrimaryChannels) {
+					} else if (selectedChannel == kPrimaryChannels) {
 						primaryMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255, YES);
-					}
-					else if (selectedChannel == kAlphaChannel) {
+					} else if (selectedChannel == kAlphaChannel) {
 						alphaMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255);
 					}
 				}
@@ -394,9 +386,8 @@
 			
 			// If the layer is going to use a compositing effect...
 			if (normal == NO && mode != XCF_NORMAL_MODE && options.forceNormal == NO) {
-
 				// Copy pixel from destination in to temporary memory
-				for (k = 0; k < options.spp; k++)
+				for (int k = 0; k < options.spp; k++)
 					tempSpace[k] = destPtr[destLoc + k];
 				
 				// Apply the appropriate effect using the source pixel
@@ -404,10 +395,7 @@
 				
 				// Then merge the pixel in temporary memory with the destination pixel
 				normalMerge(options.spp, destPtr, destLoc, tempSpace, 0, opacity);
-			
-			}
-			else {
-				
+			} else {
 				// Then merge the pixel in temporary memory with the destination pixel
 				normalMerge(options.spp, destPtr, destLoc, tempSpace2, 0, opacity);
 			

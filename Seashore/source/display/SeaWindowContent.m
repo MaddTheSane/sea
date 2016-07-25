@@ -12,7 +12,7 @@
 			 @(kWarningsBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", warningsBar, @"view", mainDocumentView, @"nonView", @"above", @"side", @0.0f, @"oldValue", nil],
 			 @(kStatusBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", statusBar, @"view", mainDocumentView, @"nonView", @"below", @"side", @0.0f, @"oldValue", nil]};
 	
-	NSInteger i;
+	int i;
 	for(i = kOptionsBar; i <= kStatusBar; i++){
 		NSString *key = [NSString stringWithFormat:@"region%ldvisibility", (long)i];
 		if([defaults objectForKey: key] && ![defaults boolForKey:key]){
@@ -25,15 +25,15 @@
 	[self setVisibility:NO forRegion:kWarningsBar];
 }
 
--(BOOL)visibilityForRegion:(NSInteger)region
+-(BOOL)visibilityForRegion:(SeaWindowRegion)region
 {
 	return [dict[@(region)][@"visibility"] boolValue];
 }
 
--(void)setVisibility:(BOOL)visibility forRegion:(NSInteger)region
+-(void)setVisibility:(BOOL)visibility forRegion:(SeaWindowRegion)region
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSMutableDictionary *thisDict = dict[@(region)];
+	NSMutableDictionary<NSString*,id> *thisDict = dict[@(region)];
 	BOOL currentVisibility = [thisDict[@"visibility"] boolValue];
 	
 	// Check to see if we are already in the proper state
@@ -41,11 +41,11 @@
 		return;
 	}
 	
-	float oldValue = [thisDict[@"oldValue"] floatValue];
+	CGFloat oldValue = [thisDict[@"oldValue"] doubleValue];
 	NSView *view = thisDict[@"view"];
 	NSView *nonView = thisDict[@"nonView"];
 	NSString *side = thisDict[@"side"];
-	if(!visibility){
+	if (!visibility) {
 		
 		if([side isEqual:@"above"] || [side isEqual:@"below"]){
 			oldValue = [view frame].size.height;
@@ -84,7 +84,7 @@
 		
 		thisDict[@"oldValue"] = @(oldValue);
 		[defaults setObject: @"NO" forKey:[NSString stringWithFormat:@"region%ldvisibility", (long)region]];		
-	}else{
+	} else {
 		NSRect newRect = [view frame];
 		if([side isEqual:@"above"] || [side isEqual:@"below"]){
 			newRect.size.height = oldValue;
@@ -117,9 +117,9 @@
 	thisDict[@"visibility"] = @(visibility);
 }
 
--(CGFloat)sizeForRegion:(NSInteger)region
+-(CGFloat)sizeForRegion:(SeaWindowRegion)region
 {
-	if([self visibilityForRegion:region]){
+	if ([self visibilityForRegion:region]) {
 		NSMutableDictionary *thisDict = dict[@(region)];
 		NSString *side = thisDict[@"side"];
 		NSView *view = thisDict[@"view"];
