@@ -243,7 +243,7 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 	int r, g, b;
 	
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	selection = [pluginData selection];
 	//channel = [pluginData channel];
 	spp = [pluginData spp];

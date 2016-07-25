@@ -146,7 +146,7 @@
 	
 	// Apply the changes
 	[[document whiteboard] setOverlayOpacity:255];
-	[[document whiteboard] setOverlayBehaviour:kReplacingBehaviour];
+	[[document whiteboard] setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	[(SeaHelpers *)[document helpers] applyOverlay];	
 }
 

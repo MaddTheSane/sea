@@ -5,23 +5,23 @@
 
 /*!
 	@enum		k...Color
-	@constant	kCyanColor
+	@constant	SeaGuideColorCyan
 				The colour cyan.
-	@constant	kMagentaColor
+	@constant	SeaGuideColorMagenta
 				The colour magenta.
-	@constant	kYellowColor
+	@constant	SeaGuideColorYellow
 				The colour yellow.
-	@constant	kBlackColor
+	@constant	SeaGuideColorBlack
 				The colour black.
-	@constant	kMaxColor
+	@constant	SeaGuideColorMax
 				A marker indicating the last possible colour plus one.
 */
 typedef NS_ENUM(NSInteger, SeaGuideColor) {
-	kCyanColor,
-	kMagentaColor,
-	kYellowColor,
-	kBlackColor,
-	kMaxColor
+	SeaGuideColorCyan,
+	SeaGuideColorMagenta,
+	SeaGuideColorYellow,
+	SeaGuideColorBlack,
+	SeaGuideColorMax,
 };
 
 @class SeaController;

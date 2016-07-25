@@ -13,13 +13,13 @@
 @protocol AbstractExporter <NSObject>
 
 /*!
-	@method		hasOptions
+	@property	hasOptions
 	@discussion	Returns whether or not the exporter offers additional options.
-	@result		Returns YES if the exporter offers additional options through
-				the showOptions: method, NO otherwise.  The implementation in
-				this class always returns NO.
+	@result		Returns \c YES if the exporter offers additional options through
+				the \c showOptions: method, \c NO otherwise.  The implementation in
+				this class always returns \c NO.
 */
-- (BOOL)hasOptions;
+@property (readonly) BOOL hasOptions;
 
 /*!
 	@method		showOptions:
@@ -33,30 +33,34 @@
 /*!
 	@property	title
 	@discussion	Returns the title of the exporter (as will be displayed in the
- save panel). This must be equal to the CFBundleTypeName in the
- CFBundleDocumentTypes array.
-	@result		Returns an NSString representing the title of the exporter.
+				save panel). This must be equal to the \c CFBundleTypeName in the
+				\c CFBundleDocumentTypes array.
+	@result		Returns an \c NSString representing the title of the exporter.
 */
 @property (readonly, copy) NSString *title;
-- (NSString *)title;
 
 /*!
 	@property	extension
 	@discussion	Returns the FIRST extension of the file format associated with this
 				exporter.
-	@result		Returns a NSString representing the extension of the file format
+	@result		Returns an \c NSString representing the extension of the file format
 				associated with this exporter.
 */
 @property (readonly, copy) NSString *extension;
-- (NSString *)extension;
 
+/*!
+	@property	fileType
+	@discussion	Returns the Uniform Type Identifier (UTI) of the file format associated with this
+				exporter.
+	@result		Returns an \c NSString representing the UTI of the file format
+				associated with this exporter.
+ */
 @property (readonly, copy) NSString *fileType;
-- (NSString *)fileType;
 
 /*!
 	@method		optionsString
 	@discussion	Returns a brief statement summarizing the current options.
-	@result		Returns an NSString summarizing the current options.
+	@result		Returns an \c NSString summarizing the current options.
 */
 - (NSString *)optionsString;
 
@@ -68,7 +72,7 @@
 				The document to write to disk.
 	@param		path
 				The path at which to write the document.
-	@result		Returns YES if the operation was successful, NO otherwise.
+	@result		Returns \c YES if the operation was successful, \c NO otherwise.
 */
 - (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path;
 

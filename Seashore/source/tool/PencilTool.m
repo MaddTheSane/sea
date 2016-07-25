@@ -83,7 +83,7 @@
 	// Set the appropriate overlay opacity
 	if ([options pencilIsErasing]) {
 		if (hasAlpha)
-			[[document whiteboard] setOverlayBehaviour:kErasingBehaviour];
+			[[document whiteboard] setOverlayBehaviour:SeaOverlayBehaviourErasing];
 		[[document whiteboard] setOverlayOpacity:255];
 	}
 	else {

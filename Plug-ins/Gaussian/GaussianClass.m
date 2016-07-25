@@ -145,7 +145,7 @@
 	int initial_pp, initial_mm;
 	
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	selection = [pluginData selection];
 	fspp = spp = [pluginData spp];
 	fwidth = [pluginData width];

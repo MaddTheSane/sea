@@ -76,7 +76,7 @@ CF_ENUM(int) {
 		return @"RGB/RGBA";
 }
 
-- (BOOL)writeDocument:(id)document toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path
 {
 	int i, j, width, height, spp, xres, yres, linebytes;
 	unsigned char *srcData, *tempData, *destData, *buf;
@@ -90,7 +90,7 @@ CF_ENUM(int) {
 	TIFF *tiff;
 
 	// Get the data to write
-	srcData = [(SeaWhiteboard *)[document whiteboard] data];
+	srcData = [[document whiteboard] data];
 	width = [(SeaContent *)[document contents] width];
 	height = [(SeaContent *)[document contents] height];
 	spp = [(SeaContent *)[document contents] spp];

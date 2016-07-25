@@ -19,26 +19,20 @@
 				Indicates that all channels are being viewed in CMYK previewing mode.
 */
 typedef NS_ENUM(int, SeaChannelsView) {
-	/*!
-	 @constant	kAllChannelsView
-				Indicates that all channels are being viewed.
-	 */
-	kAllChannelsView,
-	/*!
-	 @constant	kPrimaryChannelsView
-				Indicates that just the primary channel(s) are being viewed.
-	 */
-	kPrimaryChannelsView,
-	/*!
-	 @constant	kAlphaChannelView
-				Indicates that just the alpha channel is being viewed.
-	 */
-	kAlphaChannelView,
-	/*!
-	 @constant	kCMYKPreviewView
-				Indicates that all channels are being viewed in CMYK previewing mode.
-	 */
-	kCMYKPreviewView
+	//! Indicates that all channels are being viewed.
+	SeaChannelsAll,
+	//! Indicates that just the primary channel(s) are being viewed.
+	SeaChannelsPrimary,
+	//! Indicates that just the alpha channel is being viewed.
+	SeaChannelsAlpha,
+	//! Indicates that all channels are being viewed in CMYK previewing mode.
+	SeaChannelsCMYKPreview,
+	
+	//NS_SWIFT_UNAVAILABLE("Use .Normal instead")
+	kAllChannelsView NS_SWIFT_UNAVAILABLE("Use .All instead") = SeaChannelsAll,
+	kPrimaryChannelsView NS_SWIFT_UNAVAILABLE("Use .Primary instead") = SeaChannelsPrimary,
+	kAlphaChannelView NS_SWIFT_UNAVAILABLE("Use .Alpha instead") = SeaChannelsAlpha,
+	kCMYKPreviewView NS_SWIFT_UNAVAILABLE("Use .CMYKPreview instead") = SeaChannelsCMYKPreview,
 };
 
 
@@ -55,10 +49,22 @@ typedef NS_ENUM(int, SeaChannelsView) {
 				replace data being used as a mask.
 */
 typedef NS_ENUM(int, SeaOverlayBehaviour) {
-	kNormalBehaviour,
-	kErasingBehaviour,
-	kReplacingBehaviour,
-	kMaskingBehaviour
+	//! Indicates the overlay is to be composited on to the underlying layer.
+	SeaOverlayBehaviourNormal,
+	//! Indicates the overlay is to erase the underlying layer.
+	SeaOverlayBehaviourErasing,
+	//! Indicates the overlay is to replace the underling layer where specified.
+	SeaOverlayBehaviourReplacing,
+	/*!
+	 Indicates the overlay is to be composited on to the underlying layer with the
+	 replace data being used as a mask.
+	 */
+	SeaOverlayBehaviourMasking,
+	
+	kNormalBehaviour NS_SWIFT_UNAVAILABLE("Use .Normal instead") = SeaOverlayBehaviourNormal,
+	kErasingBehaviour NS_SWIFT_UNAVAILABLE("Use .Erasing instead") = SeaOverlayBehaviourErasing,
+	kReplacingBehaviour NS_SWIFT_UNAVAILABLE("Use .Replacing instead") = SeaOverlayBehaviourReplacing,
+	kMaskingBehaviour NS_SWIFT_UNAVAILABLE("Use .Masking instead") = SeaOverlayBehaviourMasking
 };
 
 #if !MAIN_COMPILE

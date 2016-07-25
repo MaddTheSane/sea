@@ -1,3 +1,4 @@
+#import <Foundation/Foundation.h>
 #import "Globals.h"
 #import "AbstractScaleOptions.h"
 
@@ -19,10 +20,10 @@ typedef NS_ENUM(int, SeaPositionOptions) {
 	SeaPositionOptionRotating = 2,
 	SeaPositionOptionAnchoring = 3,
 	
-	kMovingLayer = SeaPositionOptionMoving,
-	kScalingLayer = SeaPositionOptionScaling,
-	kRotatingLayer = SeaPositionOptionRotating,
-	kAnchoringLayer = SeaPositionOptionAnchoring
+	kMovingLayer NS_SWIFT_UNAVAILABLE("Use .Moving instead") = SeaPositionOptionMoving,
+	kScalingLayer NS_SWIFT_UNAVAILABLE("Use .Scaling instead") = SeaPositionOptionScaling,
+	kRotatingLayer NS_SWIFT_UNAVAILABLE("Use .Rotating instead") = SeaPositionOptionRotating,
+	kAnchoringLayer NS_SWIFT_UNAVAILABLE("Use .Anchoring instead") = SeaPositionOptionAnchoring
 };
 
 

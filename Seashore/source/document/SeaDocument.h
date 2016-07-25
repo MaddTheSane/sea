@@ -30,18 +30,6 @@
 	// The selection manager for this document
 	SeaSelection *selection;
 	
-	// The tools for this document
-	IBOutlet SeaTools *tools;
-	
-	// An outlet to the helpers of this document
-	IBOutlet SeaHelpers *helpers;
-	
-	// An outlet to the warnings utility for this document
-	IBOutlet SeaWarning *warnings;
-	
-	// The plug-in data used by this document
-	IBOutlet PluginData *pluginData;
-	
 	// An outlet to the view associated with this document
 	IBOutlet NSScrollView *view;
 	
@@ -55,9 +43,6 @@
 	IBOutlet PNGExporter *pngExporter;
 	IBOutlet TIFFExporter *tiffExporter;
 	IBOutlet XCFExporter *xcfExporter;
-	
-	// The special texture exporter
-	IBOutlet TextureExporter *textureExporter;
 	
 	// An array of all possible exporters
 	NSArray<id<AbstractExporter>> *exporters;
@@ -106,7 +91,7 @@
 
 /*!
 	@property	contents
-	@discussion	The contents of the document (a subclass of SeaContent)
+	@discussion	The contents of the document (a subclass of <code>SeaContent</code>)
  */
 @property (strong, readonly) __kindof SeaContent *contents;
 
@@ -118,6 +103,7 @@
 
 /// The whiteboard that represents this document
 @property (strong) SeaWhiteboard *whiteboard;
+
 // CREATION METHODS
 
 /*!
@@ -182,16 +168,16 @@
 /*!
 	@method		contents
 	@discussion	Returns the contents of the document.
-	@result		Returns an instance of SeaContent.
+	@result		Returns an instance of <code>SeaContent</code>.
 */
 - (__kindof SeaContent*)contents;
 
 /*!
-	@method		selection
+	@property	selection
 	@discussion	Returns the selection manager of the document.
-	@result		Returns an instance of SeaSelection.
+	@result		Returns an instance of <code>SeaSelection</code>.
 */
-- (SeaSelection*)selection;
+@property (readonly, strong) SeaSelection *selection;
 
 /*!
 	@property	operations
@@ -200,33 +186,37 @@
 @property (weak) IBOutlet SeaOperations *operations;
 
 /*!
-	@method		tools
+	@property	tools
+	@brief		The tools for this document.
 	@discussion	Returns the tools manager of the document.
-	@result		Returns an instance of SeaTools.
+	@result		Returns an instance of <code>SeaTools</code>.
 */
-- (SeaTools*)tools;
+@property (weak) IBOutlet SeaTools *tools;
 
 /*!
-	@method		helpers
+	@property	helpers
+	@brief		An outlet to the helpers of this document
 	@discussion	Returns an object containing various helper methods for the
 				document.
-	@result		Returns an instance of SeaHelpers.
+	@result		Returns an instance of <code>SeaHelpers</code<.
 */
-- (SeaHelpers*)helpers;
+@property (weak) IBOutlet SeaHelpers *helpers;
 
 /*!
-	@method		warnings
+	@property	warnings
+	@brief		An outlet to the warnings utility for this document
 	@discussion	Returns an object contaning the warning related methods.
-	@result		Returns an instance of WarningsUtility.
+	@result		Returns an instance of <code>WarningsUtility</code>.
 */
-- (WarningsUtility*)warnings;
+@property (weak) IBOutlet WarningsUtility *warnings;
 
 /*!
-	@method		pluginData
+	@property	pluginData
+	@brief		The plug-in data used by this document
 	@discussion	Returns the object shared between Seashore and most plug-ins.
-	@result		Returns an instance of PluginData.
+	@result		Returns an instance of <code>PluginData</code>.
 */
-- (PluginData*)pluginData;
+@property (weak) IBOutlet PluginData *pluginData;
 
 /*!
 	@method		docView
@@ -249,11 +239,12 @@
 - (void)updateWindowColor;
 
 /*!
-	@method		textureExporter
+	@property	textureExporter
+	@brief		The special texture exporter
 	@discussion	Returns the texture exporter.
-	@result		Returns an instance of TextureExporter.
+	@result		Returns an instance of <code>TextureExporter</code>.
 */
-- (TextureExporter*)textureExporter;
+@property (weak) IBOutlet TextureExporter *textureExporter;
 
 // DOCUMENT METHODS
 
@@ -408,7 +399,7 @@
 @property BOOL current;
 
 /*!
-	@method		uniqueLayerID
+	@property	uniqueLayerID
 	@discussion	Returns a unique ID for a given layer and then increments the
 				uniqueLayerID instance variable so the next layer will recieve a
 				unique ID. To ensure sequential numbering this method should
@@ -417,10 +408,10 @@
 	@result		Returns an integer representing a new layer may assign to
 				itself.
 */
-- (int)uniqueLayerID;
+@property (readonly) int uniqueLayerID;
 
 /*!
-	@method		uniqueFloatingLayerID
+	@property	uniqueFloatingLayerID
 	@discussion	Returns a unique ID for a given floating layer and then
 				increments the uniqueFloatingLayerID instance variable so the
 				next floating layer will recieve a unique ID. To ensure
@@ -429,14 +420,14 @@
 	@result		Returns an integer representing a new layer may assign to
 				itself.
 */
-- (int)uniqueFloatingLayerID;
+@property (readonly) int uniqueFloatingLayerID;
 
 /*!
-	@method		uniqueDocID
+	@property	uniqueDocID
 	@discussion	Returns the unique ID of the document.
 	@result		Returns an integer representing a unique ID for the document.
 */
-- (int)uniqueDocID;
+@property (readonly) int uniqueDocID;
 
 /*!
 	@method		windowNibName

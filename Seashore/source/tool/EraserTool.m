@@ -145,7 +145,7 @@
 	
 	// Set the appropriate overlay opacity
 	if (hasAlpha)
-		[[document whiteboard] setOverlayBehaviour:kErasingBehaviour];
+		[[document whiteboard] setOverlayBehaviour:SeaOverlayBehaviourErasing];
 	[[document whiteboard] setOverlayOpacity:[(EraserOptions*)options opacity]];
 	
 	// Plot the initial point

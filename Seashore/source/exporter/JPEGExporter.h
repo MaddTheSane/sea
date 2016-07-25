@@ -28,22 +28,22 @@
 	BOOL targetWeb;
 
 	// The panel allowing compression options to be set
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// The compressed preview
-	IBOutlet id compressImageView;
+	IBOutlet NSImageView *compressImageView;
 	
 	// The uncompressed preview
-	IBOutlet id realImageView;
+	IBOutlet NSImageView *realImageView;
 	
 	// The label specifying the compression level
-	IBOutlet id compressLabel;
+	IBOutlet NSTextField *compressLabel;
 	
 	// The slider allowing compression to be adjusted
-	IBOutlet id compressSlider;
+	IBOutlet NSSlider *compressSlider;
 	
 	// The radio buttons specifying the target
-	IBOutlet id targetRadios;
+	IBOutlet NSMatrix *targetRadios;
 	
 	// The sample data we are previewing
 	unsigned char *sampleData;

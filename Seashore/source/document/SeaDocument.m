@@ -48,6 +48,12 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 @synthesize whiteboard;
 @synthesize operations;
 @synthesize current;
+@synthesize tools;
+@synthesize helpers;
+@synthesize warnings;
+@synthesize pluginData;
+@synthesize textureExporter;
+@synthesize uniqueDocID;
 
 - (instancetype)init
 {
@@ -180,8 +186,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	if ([self readFromFile:path ofType:type]) {
 		[self setFileName:path];
 		[self setFileType:type];
-	}
-	else {
+	} else {
 		return nil;
 	}
 	
@@ -275,26 +280,6 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	return selection;
 }
 
-- (id)tools
-{
-	return tools;
-}
-
-- (id)helpers
-{
-	return helpers;
-}
-
-- (id)warnings
-{
-	return warnings;
-}
-
-- (id)pluginData
-{
-	return pluginData;
-}
-
 - (id)docView
 {
 	return [view documentView];
@@ -308,11 +293,6 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 - (void)updateWindowColor
 {
 	[view setBackgroundColor:[[SeaController seaPrefs] windowBack]];
-}
-
-- (id)textureExporter
-{
-	return textureExporter;
 }
 
 - (BOOL)readFromFile:(NSString *)path ofType:(NSString *)type
@@ -615,11 +595,6 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 {
 	uniqueFloatingLayerID++;
 	return uniqueFloatingLayerID;
-}
-
-- (int)uniqueDocID
-{
-	return uniqueDocID;
 }
 
 - (NSString *)windowNibName

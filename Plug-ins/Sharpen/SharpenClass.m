@@ -162,7 +162,7 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 	int y1, y2, x1, width;
 	
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	selection = [pluginData selection];
 	y1 = selection.origin.y;
 	y2 = selection.origin.y + selection.size.height;

@@ -70,7 +70,7 @@ static inline int specmod(int a, int b)
 	
 	// Prepare for drawing
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kNormalBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourNormal];
 	
 	// Get colors
 	if (spp == 4) {

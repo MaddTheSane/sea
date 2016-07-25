@@ -131,7 +131,7 @@
 	unsigned char *data, *overlay, *replace;
 	
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	
 	selection = [pluginData selection];
 	spp = [pluginData spp];

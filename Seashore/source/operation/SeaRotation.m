@@ -30,8 +30,8 @@
 
 - (void)run
 {
-	id contents = [document contents];
-	id layer = NULL;
+	SeaContent *contents = [document contents];
+	SeaLayer *layer = NULL;
 
 	// Fill out the selection label
 	layer = [contents layer:[contents activeLayerIndex]];
@@ -49,8 +49,7 @@
 
 - (IBAction)apply:(id)sender
 {
-	id contents = [document contents];
-	id layer = NULL;
+	SeaContent *contents = [document contents];
 	
 	// End the sheet
 	[NSApp stopModal];
@@ -59,7 +58,7 @@
 
 	// Rotate the image
 	if ([rotateValue floatValue] != 0) {
-		layer = [contents layer:[contents activeLayerIndex]];
+		SeaLayer *layer = [contents layer:[contents activeLayerIndex]];
 		[self rotate:[rotateValue floatValue] withTrim:[layer floating]];
 	}
 }

@@ -173,11 +173,11 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 		openUntitled = YES;
 		
 	// Get the selection colour
-	selectionColor = kBlackColor;
+	selectionColor = SeaGuideColorBlack;
 	if ([defaults objectForKey:@"selectionColor"])
 		selectionColor = [defaults integerForKey:@"selectionColor"];
-	if (selectionColor < 0 || selectionColor >= kMaxColor)
-		selectionColor = kBlackColor;
+	if (selectionColor < 0 || selectionColor >= SeaGuideColorMax)
+		selectionColor = SeaGuideColorBlack;
 	
 	// If the layer bounds are white (the alternative is the selection color)
 	whiteLayerBounds = YES;
@@ -185,11 +185,11 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 		whiteLayerBounds = [defaults boolForKey:@"whiteLayerBounds"];
 
 	// Get the guide colour
-	guideColor = kYellowColor;
+	guideColor = SeaGuideColorYellow;
 	if ([defaults objectForKey:@"guideColor"])
 		guideColor = [defaults integerForKey:@"guideColor"];
-	if (guideColor < 0 || guideColor >= kMaxColor)
-		guideColor = kYellowColor;
+	if (guideColor < 0 || guideColor >= SeaGuideColorMax)
+		guideColor = SeaGuideColorYellow;
 	
 	// Determine the initial color (from preferences if possible)
 	if ([defaults objectForKey:@"windowBackColor"] == NULL) {
@@ -733,13 +733,13 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	//float alpha = light ? 0.20 : 0.40;
 	
 	switch (selectionColor) {
-		case kCyanColor:
+		case SeaGuideColorCyan:
 			result = [NSColor colorWithDeviceCyan:1.0 magenta:0.0 yellow:0.0 black:0.0 alpha:alpha];
 		break;
-		case kMagentaColor:
+		case SeaGuideColorMagenta:
 			result = [NSColor colorWithDeviceCyan:0.0 magenta:1.0 yellow:0.0 black:0.0 alpha:alpha];
 		break;
-		case kYellowColor:
+		case SeaGuideColorYellow:
 			result = [NSColor colorWithDeviceCyan:0.0 magenta:0.0 yellow:1.0 black:0.0 alpha:alpha];
 		break;
 		default:
@@ -784,13 +784,13 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	//float alpha = light ? 0.20 : 0.40;
 	
 	switch (guideColor) {
-		case kCyanColor:
+		case SeaGuideColorCyan:
 			result = [NSColor colorWithDeviceCyan:1.0 magenta:0.0 yellow:0.0 black:0.0 alpha:alpha];
 			break;
-		case kMagentaColor:
+		case SeaGuideColorMagenta:
 			result = [NSColor colorWithDeviceCyan:0.0 magenta:1.0 yellow:0.0 black:0.0 alpha:alpha];
 			break;
-		case kYellowColor:
+		case SeaGuideColorYellow:
 			result = [NSColor colorWithDeviceCyan:0.0 magenta:0.0 yellow:1.0 black:0.0 alpha:alpha];
 			break;
 		default:
@@ -818,7 +818,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
 	int i;
 	
-	selectionColor = (selectionColor + 1) % kMaxColor;
+	selectionColor = (selectionColor + 1) % SeaGuideColorMax;
 	for (i = 0; i < [documents count]; i++) {
 		[[documents[i] docView] setNeedsDisplay:YES];
 	}

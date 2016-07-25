@@ -33,7 +33,7 @@
 	int pos, i, j, k, width, spp, channel;
 	
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	selection = [pluginData selection];
 	spp = [pluginData spp];
 	width = [pluginData width];

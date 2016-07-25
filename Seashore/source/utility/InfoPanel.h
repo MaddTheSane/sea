@@ -14,18 +14,22 @@
 */
 typedef NS_ENUM(NSInteger, SeaPanelStyle) {
 	//! A basic floating panel unattached to any window elements
-	kFloatingPanelStyle,
+	SeaPanelStyleFloating,
 	/*!
 	 A panel with an arrow on the top.
 	 Generally, comes from elements in a horizontal list
 	 (so a vertical panel will not obscure too many elements).
 	 */
-	kVerticalPanelStyle,
+	SeaPanelStyleVertical,
 	/*!
 	 A panel with an arrow on the left side.
 	 This would be for a vertical list of elements.
 	 */
-	kHorizontalPanelStyle
+	SeaPanelStyleHorizontal,
+	
+	kFloatingPanelStyle NS_SWIFT_UNAVAILABLE("Use .Floating instead") = SeaPanelStyleFloating,
+	kVerticalPanelStyle NS_SWIFT_UNAVAILABLE("Use .Vertical instead") = SeaPanelStyleVertical,
+	kHorizontalPanelStyle NS_SWIFT_UNAVAILABLE("Use .Horizontal instead") = SeaPanelStyleHorizontal,
 };
 
 /*!

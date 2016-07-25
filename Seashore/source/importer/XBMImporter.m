@@ -34,7 +34,7 @@ inline static int parse_value(char *input, char *value)
 	return -1;
 }
 
-- (BOOL)addToDocument:(id)doc contentsOfFile:(NSString *)path
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
 {
 	FILE *file;
 	char buffer[4096], temp;

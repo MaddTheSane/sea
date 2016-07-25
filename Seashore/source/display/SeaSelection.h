@@ -24,12 +24,12 @@ typedef NS_ENUM(int, SeaSelectMode) {
 	SeaSelectSubtractProduct,
 	SeaSelectForceNew,
 	
-	kDefaultMode = SeaSelectDefault,
-	kAddMode = SeaSelectAdd,
-	kSubtractMode = SeaSelectSubtract,
-	kMultiplyMode = SeaSelectMultiply,
-	kSubtractProductMode = SeaSelectSubtractProduct,
-	kForceNewMode = SeaSelectForceNew
+	kDefaultMode NS_SWIFT_UNAVAILABLE("Use .Default instead") = SeaSelectDefault,
+	kAddMode NS_SWIFT_UNAVAILABLE("Use .Add instead") = SeaSelectAdd,
+	kSubtractMode NS_SWIFT_UNAVAILABLE("Use .Subtract instead") = SeaSelectSubtract,
+	kMultiplyMode NS_SWIFT_UNAVAILABLE("Use .Multiply instead") = SeaSelectMultiply,
+	kSubtractProductMode NS_SWIFT_UNAVAILABLE("Use .SubtractProduct instead") = SeaSelectSubtractProduct,
+	kForceNewMode NS_SWIFT_UNAVAILABLE("Use .ForceNew instead") = SeaSelectForceNew
 };
 
 @class SeaDocument;

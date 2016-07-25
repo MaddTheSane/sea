@@ -108,7 +108,7 @@
 	
 	pluginData = [self.seaPlugins data];
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	selection = [pluginData selection];
 	channel = [pluginData channel];
 	spp = [pluginData spp];

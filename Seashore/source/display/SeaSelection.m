@@ -935,7 +935,7 @@
 	
 	// Set the overlay to erasing
 	if ([layer hasAlpha])
-		[[document whiteboard] setOverlayBehaviour:kErasingBehaviour];
+		[[document whiteboard] setOverlayBehaviour:SeaOverlayBehaviourErasing];
 	[[document whiteboard] setOverlayOpacity:255];
 		
 	// Fill the overlay with the base pixel

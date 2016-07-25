@@ -11,7 +11,5 @@
 */
 
 @interface GIFExporter : NSObject <AbstractExporter>
-{
-}
 
 @end

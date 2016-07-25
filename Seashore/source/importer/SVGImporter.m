@@ -13,7 +13,7 @@ extern IntSize getDocumentSize(char *path);
 
 @implementation SVGImporter
 
-- (BOOL)addToDocument:(id)doc contentsOfFile:(NSString *)path
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
 {
 	id imageRep, layer;
 	NSFileManager *fm = [NSFileManager defaultManager];

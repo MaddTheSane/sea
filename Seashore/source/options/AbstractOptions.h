@@ -20,14 +20,31 @@
 				Indicates a reserved modifier (no shortcut key).
 */
 typedef NS_ENUM(NSInteger, AbstractModifiers) {
-	kNoModifier = 0,
-	kAltModifier = 1,
-	kShiftModifier = 2,
-	kControlModifier = 3,
-	kShiftControlModifier = 4,
-	kAltControlModifier = 5,
-	kReservedModifier1 = 20,
-	kReservedModifier2 = 21
+	//! Indicates no modifier.
+	AbstractModifierNone = 0,
+	//! Indicates an option key modifier.
+	AbstractModifierAlt = 1,
+	//! Indicates a shift key modifier.
+	AbstractModifierShift = 2,
+	//! Indicates a control key modifier.
+	AbstractModifierControl = 3,
+	//! Indicates a shift-control key modifier.
+	AbstractModifierShiftControl = 4,
+	//! Indicates a option-control key modifier.
+	AbstractModifierAltControl = 5,
+	//! Indicates a reserved modifier (no shortcut key).
+	AbstractModifierReserved1 = 20,
+	//! Indicates a reserved modifier (no shortcut key).
+	AbstractModifierReserved2 = 21,
+	
+	kNoModifier NS_SWIFT_UNAVAILABLE("Use .None instead") = AbstractModifierNone,
+	kAltModifier NS_SWIFT_UNAVAILABLE("Use .Alt instead") = AbstractModifierAlt,
+	kShiftModifier NS_SWIFT_UNAVAILABLE("Use .Shift instead") = AbstractModifierShift,
+	kControlModifier NS_SWIFT_UNAVAILABLE("Use .Control instead") = AbstractModifierControl,
+	kShiftControlModifier NS_SWIFT_UNAVAILABLE("Use .ShiftControl instead") = AbstractModifierShiftControl,
+	kAltControlModifier NS_SWIFT_UNAVAILABLE("Use .AltControl instead") = AbstractModifierAltControl,
+	kReservedModifier1 NS_SWIFT_UNAVAILABLE("Use .Reserved1 instead") = AbstractModifierReserved1,
+	kReservedModifier2 NS_SWIFT_UNAVAILABLE("Use .Reserved2 instead") = AbstractModifierReserved2,
 };
 
 @class SeaDocument;

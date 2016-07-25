@@ -405,7 +405,7 @@ static inline void fix_endian_write(int *input, int size)
 	return YES;
 }
 
-- (BOOL)writeDocument:(id)doc toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)doc toFile:(NSString *)path
 {
 	FILE *file;
 	NSInteger i, offsetPos, oldPos, layerCount;

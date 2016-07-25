@@ -146,7 +146,7 @@
 		
 	// Make the overlay opaque
 	[[document whiteboard] setOverlayOpacity:255];
-	[[document whiteboard] setOverlayBehaviour:kReplacingBehaviour];
+	[[document whiteboard] setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	
 	// Plot the intial point
 	rect.size.width = [(SeaBrush *)curBrush fakeWidth] + 1;

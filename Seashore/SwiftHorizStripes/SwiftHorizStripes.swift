@@ -69,7 +69,7 @@ public final class SwiftHorizStripes: SSKPlugin {
 		
 		// Prepare for drawing
 		pluginData.overlayOpacity = 255
-		pluginData.overlayBehaviour = .NormalBehaviour
+		pluginData.overlayBehaviour = .Normal
 		
 		// Get colors
 		if spp == 4 {

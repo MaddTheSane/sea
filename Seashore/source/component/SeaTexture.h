@@ -87,7 +87,7 @@
 				A boolean specifying whether the returned bitmap should be
 				colour or greyscale.
 	@result		Returns a reference to a 8-bit bitmap with 3 channels (RGB) if
-				color is YES or 1 channel (W) if color is NO.
+				\c color is \c YES or 1 channel (W) if \c color is <code>NO</code>.
 */
 - (unsigned char *)texture:(BOOL)color;
 

@@ -36,7 +36,7 @@
 	return @"gif";
 }
 
-- (BOOL) writeDocument: (id) document toFile: (NSString *) path
+- (BOOL) writeDocument: (SeaDocument*) document toFile: (NSString *) path
 {
 	// Get the image data
 	unsigned char* srcData = [(SeaWhiteboard *)[document whiteboard] data];

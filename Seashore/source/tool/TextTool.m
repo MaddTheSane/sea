@@ -73,7 +73,7 @@ extern id gNewFont;
 		color = [activeTexture textureAsNSColor:(spp == 4)];
 	else
 		color = [[document contents] foreground];
-	[[document whiteboard] setOverlayBehaviour:kReplacingBehaviour];
+	[[document whiteboard] setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	[[document whiteboard] setOverlayOpacity:255];
 	
 	// Get the font

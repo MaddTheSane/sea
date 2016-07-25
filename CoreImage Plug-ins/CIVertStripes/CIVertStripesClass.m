@@ -73,7 +73,7 @@
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kNormalBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourNormal];
 	selection = [pluginData selection];
 	
 	// Get plug-in data
@@ -109,7 +109,7 @@
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kNormalBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourNormal];
 	selection = [pluginData selection];
 	
 	// Get plug-in data

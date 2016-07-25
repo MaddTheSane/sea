@@ -48,21 +48,19 @@ typedef struct {
 */
 @interface SeaRotation : NSObject
 {
-
 	// The document and sheet associated with this object
     IBOutlet SeaDocument *document;
-	IBOutlet id sheet;
+	IBOutlet NSWindow *sheet;
 	
 	// A label specifying the layer being rotated
     IBOutlet NSTextField *selectionLabel;
 	
 	// The rotation value (in degrees)
-	IBOutlet id rotateValue;
+	IBOutlet NSTextField *rotateValue;
 
 	// A list of rotation undo records required for undoing
 	RotationUndoRecord *undoRecords;
-	int undoMax, undoCount; 
-	
+	NSInteger undoMax, undoCount;
 }
 
 /*!

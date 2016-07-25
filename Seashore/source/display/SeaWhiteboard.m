@@ -221,7 +221,7 @@ extern IntPoint gScreenResolution;
 #if MAIN_COMPILE
 	maskSize = [[document selection] maskSize];
 #endif
-	overlayReplacing = (overlayBehaviour == kReplacingBehaviour);
+	overlayReplacing = (overlayBehaviour == SeaOverlayBehaviourReplacing);
 	
 	// Calculate offsets
 	leftOffset = lwidth + 1;
@@ -274,8 +274,8 @@ extern IntPoint gScreenResolution;
 			// Check if we should apply the overlay for this pixel
 			overlayOkay = NO;
 			switch (overlayBehaviour) {
-				case kReplacingBehaviour:
-				case kMaskingBehaviour:
+				case SeaOverlayBehaviourReplacing:
+				case SeaOverlayBehaviourMasking:
 					selectOpacity = replace[j * lwidth + i];
 				break;
 				default:
@@ -309,10 +309,10 @@ extern IntPoint gScreenResolution;
 					
 					// For the general case
 					switch (overlayBehaviour) {
-						case kErasingBehaviour:
+						case SeaOverlayBehaviourErasing:
 							eraseMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
 						break;
-						case kReplacingBehaviour:
+						case SeaOverlayBehaviourReplacing:
 							replaceMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
 						break;
 						default:
@@ -325,7 +325,7 @@ extern IntPoint gScreenResolution;
 				
 					// For the primary channels
 					switch (overlayBehaviour) {
-						case kReplacingBehaviour:
+						case SeaOverlayBehaviourReplacing:
 							replacePrimaryMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
 						break;
 						default:
@@ -338,7 +338,7 @@ extern IntPoint gScreenResolution;
 					
 					// For the alpha channels
 					switch (overlayBehaviour) {
-						case kReplacingBehaviour:
+						case SeaOverlayBehaviourReplacing:
 							replaceAlphaMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
 						break;
 						default:
@@ -363,7 +363,7 @@ extern IntPoint gScreenResolution;
 	
 	// Reset the overlay's opacity and behaviour
 	overlayOpacity = 0;
-	overlayBehaviour = kNormalBehaviour;
+	overlayBehaviour = SeaOverlayBehaviourNormal;
 	
 	return rect;
 }
@@ -380,7 +380,7 @@ extern IntPoint gScreenResolution;
 	memset(overlay, 0, [layer width] * [layer height] * spp);
 	memset(replace, 0, [layer width] * [layer height]);
 	overlayOpacity = 0;
-	overlayBehaviour = kNormalBehaviour;
+	overlayBehaviour = SeaOverlayBehaviourNormal;
 }
 
 - (unsigned char *)overlay
@@ -694,11 +694,11 @@ extern IntPoint gScreenResolution;
 							else
 								tempSpace2[1] = int_mult(overlay[(ty * selectRect.size.width + tx + 1) * spp - 1], overlayOpacity, t);
 						}
-						if (overlayBehaviour == kReplacingBehaviour) {
+						if (overlayBehaviour == SeaOverlayBehaviourReplacing) {
 							nextOpacity = int_mult(replace[ty * selectRect.size.width + tx], selectOpacity, t); 
 							replaceMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}
-						else if (overlayBehaviour ==  kMaskingBehaviour) {
+						else if (overlayBehaviour ==  SeaOverlayBehaviourMasking) {
 							nextOpacity = int_mult(replace[ty * selectRect.size.width + tx], selectOpacity, t); 
 							normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}
@@ -728,11 +728,11 @@ extern IntPoint gScreenResolution;
 							else
 								tempSpace2[1] = int_mult(overlay[(temp + 1) * spp - 1], overlayOpacity, t);
 						}
-						if (overlayBehaviour == kReplacingBehaviour) {
+						if (overlayBehaviour == SeaOverlayBehaviourReplacing) {
 							nextOpacity = int_mult(replace[temp], selectOpacity, t); 
 							replaceMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}
-						else if (overlayBehaviour ==  kMaskingBehaviour) {
+						else if (overlayBehaviour ==  SeaOverlayBehaviourMasking) {
 							nextOpacity = int_mult(replace[temp], selectOpacity, t); 
 							normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}

@@ -28,7 +28,7 @@
 {
 	PluginData *pluginData = [self.seaPlugins data];
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	IntRect selection = [pluginData selection];
 	int width = [pluginData width];
 	unsigned char *data = [pluginData data];

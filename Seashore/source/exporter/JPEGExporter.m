@@ -250,7 +250,7 @@ static BOOL JPEGReviseResolution(unsigned char *input, size_t len, int xres, int
 		return [NSString stringWithFormat:@"Print %.0f%%", [self reviseCompression] * 100.0];
 }
 
-- (BOOL)writeDocument:(id)document toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path
 {
 	int width, height, xres, yres, spp;
 	unsigned char *srcData, *destData;

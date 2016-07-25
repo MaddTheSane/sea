@@ -35,7 +35,7 @@
 	return @"png";
 }
 
-- (BOOL)writeDocument:(id)document toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path
 {
 	int i, j, width, height, spp;
 	unsigned char *srcData, *destData;
@@ -44,7 +44,7 @@
 	BOOL hasAlpha = NO;
 	
 	// Get the data to write
-	srcData = [(SeaWhiteboard *)[document whiteboard] data];
+	srcData = [[document whiteboard] data];
 	width = [(SeaContent *)[document contents] width];
 	height = [(SeaContent *)[document contents] height];
 	spp = [(SeaContent *)[document contents] spp];

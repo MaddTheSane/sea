@@ -1568,7 +1568,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		options.insertOverlay = NO;
 		options.useSelection = NO;
 		options.overlayOpacity = 255;
-		options.overlayBehaviour = kNormalBehaviour;
+		options.overlayBehaviour = SeaOverlayBehaviourNormal;
 		options.spp = spp;
 
 		// Composite the linked layers
@@ -1671,7 +1671,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	options.insertOverlay = NO;
 	options.useSelection = NO;
 	options.overlayOpacity = 255;
-	options.overlayBehaviour = kNormalBehaviour;
+	options.overlayBehaviour = SeaOverlayBehaviourNormal;
 	options.spp = spp;
 
 	// Composite the layers underneath

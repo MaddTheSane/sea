@@ -1,5 +1,7 @@
 #import "Globals.h"
 
+@class SeaDocument;
+
 /*!
 	@class		SVGImporter
 	@abstract	Imports an SVG document as a layer.
@@ -8,7 +10,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SVGImporter : NSObject {
 
 	// The length warning panel
@@ -38,9 +39,9 @@
 				The document to add to.
 	@param		path
 				The path to the image file.
-	@result		YES if the operation was successful, NO otherwise.
+	@result		\c YES if the operation was successful, \c NO otherwise.
 */
-- (BOOL)addToDocument:(id)doc contentsOfFile:(NSString *)path;
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path;
 
 /*!
 	@method		endPanel:

@@ -107,7 +107,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	return YES;
 }
 
-- (BOOL)addToDocument:(id)doc contentsOfFile:(NSString *)path
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
 {
 	SharedXCFInfo info;
 	NSInteger layerOffsets, offset;
@@ -186,8 +186,8 @@ static inline void fix_endian_read(int *input, size_t size)
 	}
 	
 	// Position the new layer correctly
-	[[(SeaOperations *)[doc operations] seaAlignment] centerLayerHorizontally:NULL];
-	[[(SeaOperations *)[doc operations] seaAlignment] centerLayerVertically:NULL];
+	[[[doc operations] seaAlignment] centerLayerHorizontally:NULL];
+	[[[doc operations] seaAlignment] centerLayerVertically:NULL];
 	
 	return YES;
 }

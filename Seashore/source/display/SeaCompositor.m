@@ -156,8 +156,8 @@
 				// Check if we should apply the overlay for this pixel
 				overlayOkay = NO;
 				switch (options.overlayBehaviour) {
-					case kReplacingBehaviour:
-					case kMaskingBehaviour:
+					case SeaOverlayBehaviourReplacing:
+					case SeaOverlayBehaviourMasking:
 						selectOpacity = replace[j * lwidth + i];
 					break;
 					default:
@@ -189,10 +189,10 @@
 				if (overlayOkay) {
 					if (selectedChannel == kAllChannels && !floating) {
 						switch (options.overlayBehaviour) {
-							case kErasingBehaviour:
+							case SeaOverlayBehaviourErasing:
 								eraseMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
 							break;
-							case kReplacingBehaviour:
+							case SeaOverlayBehaviourReplacing:
 								replaceMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
 							break;
 							default:
@@ -203,7 +203,7 @@
 					else if (selectedChannel == kPrimaryChannels || floating) {
 						if (selectOpacity > 0) {
 							switch (options.overlayBehaviour) {							
-								case kReplacingBehaviour:
+								case SeaOverlayBehaviourReplacing:
 									replacePrimaryMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
 								break;
 								default:
@@ -215,7 +215,7 @@
 					else if (selectedChannel == kAlphaChannel) {
 						if (selectOpacity > 0) {
 							switch (options.overlayBehaviour) {							
-								case kReplacingBehaviour:
+								case SeaOverlayBehaviourReplacing:
 									replaceAlphaMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
 								break;
 								default:
@@ -368,8 +368,8 @@
 						tempSpace3[k] = floatPtr[floatLoc + k];
 					if (insertOverlay) {
 						switch (options.overlayBehaviour) {
-							case kReplacingBehaviour:
-							case kMaskingBehaviour:
+							case SeaOverlayBehaviourReplacing:
+							case SeaOverlayBehaviourMasking:
 								selectOpacity = replace[ty * lfwidth + tx];
 							break;
 							default:

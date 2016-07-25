@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractExporter.h"
 
@@ -43,7 +44,7 @@
 	IBOutlet NSSlider *compressSlider;
 	
 	// The radio buttons specifying the target
-	IBOutlet id targetRadios;
+	IBOutlet NSMatrix *targetRadios;
 	
 	// The sample data we are previewing
 	unsigned char *sampleData;

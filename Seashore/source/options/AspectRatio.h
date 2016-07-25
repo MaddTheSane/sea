@@ -15,15 +15,22 @@
 */
 typedef NS_ENUM(NSInteger, SeaAspectType) {
 	//! Indicates no specification.
-	kNoAspectType = -2,
+	SeaAspectTypeNone = -2,
 	//! Indicates ratio specification.
-	kRatioAspectType = -1,
+	SeaAspectTypeRatio = -1,
 	//! Indicates exact specification in pixels.
-	kExactPixelAspectType = 0,
+	SeaAspectTypeExactPixel = 0,
 	//! Indicates exact specification in inches.
-	kExactInchAspectType = 1,
+	SeaAspectTypeExactInch = 1,
 	//! Indicates exact specification in millimetres.
-	kExactMillimeterAspectType = 2
+	SeaAspectTypeExactMillimeter = 2,
+	
+	//NS_SWIFT_UNAVAILABLE("Use .None instead")
+	kNoAspectType NS_SWIFT_UNAVAILABLE("Use .None instead") = SeaAspectTypeNone,
+	kRatioAspectType NS_SWIFT_UNAVAILABLE("Use .Ratio instead") = SeaAspectTypeRatio,
+	kExactPixelAspectType NS_SWIFT_UNAVAILABLE("Use .ExactPixel instead") = SeaAspectTypeExactPixel,
+	kExactInchAspectType NS_SWIFT_UNAVAILABLE("Use .ExactInch instead") = SeaAspectTypeExactInch,
+	kExactMillimeterAspectType NS_SWIFT_UNAVAILABLE("Use .ExactMillimeter instead") = SeaAspectTypeExactMillimeter,
 };
 
 @class SeaDocument;

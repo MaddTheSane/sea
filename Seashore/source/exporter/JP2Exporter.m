@@ -235,7 +235,7 @@
 		return [NSString stringWithFormat:@"Print %.0f%%", [self reviseCompression] * 100.0];
 }
 
-- (BOOL)writeDocument:(id)document toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path
 {
 	int width, height, spp;
 	unsigned char *srcData, *destData;

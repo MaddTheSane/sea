@@ -140,7 +140,7 @@
 	int total[4], n = 1, x_stblk, x_endblk, y_stblk, y_endblk;
 	
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	selection = [pluginData selection];
 	spp = [pluginData spp];
 	width = [pluginData width];
