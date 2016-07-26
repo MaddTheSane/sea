@@ -494,7 +494,7 @@ extern IntPoint SeaScreenResolution;
 	// Change layer if appropriate
 #if MAIN_COMPILE
 	if ([[document selection] floating]) {
-		layer = [contents layer:[contents activeLayerIndex] + 1];
+		layer = [contents layerAtIndex:[contents activeLayerIndex] + 1];
 	} else {
 		layer = [contents activeLayer];
 	}
@@ -590,7 +590,7 @@ extern IntPoint SeaScreenResolution;
 	floating = [[document selection] floating];
 	floatingData = [(SeaLayer *)[[document contents] activeLayer] data];
 	if (useSelection && floating) {
-		layer = [[document contents] layer:[[document contents] activeLayerIndex] + 1];
+		layer = [[document contents] layerAtIndex:[[document contents] activeLayerIndex] + 1];
 	}
 	else {
 		layer = [[document contents] activeLayer];
@@ -818,10 +818,10 @@ extern IntPoint SeaScreenResolution;
 		// Determine how many layers are visible
 		for (i = 0; count < 2 && i < layerCount; i++) {
 #if MAIN_COMPILE
-			if ([[[document contents] layer:i] visible])
+			if ([[[document contents] layerAtIndex:i] visible])
 				count++;
 #else
-			if ([[contents layer:i] visible])
+			if ([[contents layerAtIndex:i] visible])
 				count++;
 #endif
 		}
@@ -840,14 +840,14 @@ extern IntPoint SeaScreenResolution;
 	
 			// Go through compositing each visible layer
 			for (i = layerCount - 1; i >= 0; i--) {
-				if (i >= 1) floating = [[[document contents] layer:i - 1] floating];
+				if (i >= 1) floating = [[[document contents] layerAtIndex:i - 1] floating];
 				else floating = NO;
-				if ([[[document contents] layer:i] visible]) {
+				if ([[[document contents] layerAtIndex:i] visible]) {
 					options.insertOverlay = floating;
 					if (floating)
-						[compositor compositeLayer:[[document contents] layer:i] withFloat:[[document contents] layer:i - 1] andOptions:options];
+						[compositor compositeLayer:[[document contents] layerAtIndex:i] withFloat:[[document contents] layerAtIndex:i - 1] andOptions:options];
 					else
-						[compositor compositeLayer:[[document contents] layer:i] withOptions:options];
+						[compositor compositeLayer:[[document contents] layerAtIndex:i] withOptions:options];
 				}
 				if (floating) i--;
 			}
@@ -857,10 +857,10 @@ extern IntPoint SeaScreenResolution;
 
 			// Go through compositing each visible layer
 			for (i = layerCount - 1; i >= 0; i--) {
-				if ([[[document contents] layer:i] visible]) {
+				if ([[[document contents] layerAtIndex:i] visible]) {
 					options.insertOverlay = (i == [[document contents] activeLayerIndex]);
 					options.useSelection = (i == [[document contents] activeLayerIndex]) && [[document selection] active];
-					[compositor compositeLayer:[[document contents] layer:i] withOptions:options];
+					[compositor compositeLayer:[[document contents] layerAtIndex:i] withOptions:options];
 				}
 			}
 			
@@ -868,10 +868,10 @@ extern IntPoint SeaScreenResolution;
 #else
 		// Go through compositing each visible layer
 		for (i = layerCount - 1; i >= 0; i--) {
-			if ([[contents layer:i] visible]) {
+			if ([[contents layerAtIndex:i] visible]) {
 				options.insertOverlay = (i == [contents activeLayerIndex]);
 				options.useSelection = NO;
-				[compositor compositeLayer:[contents layer:i] withOptions:options];
+				[compositor compositeLayer:[contents layerAtIndex:i] withOptions:options];
 			}
 		}
 	
@@ -986,7 +986,7 @@ extern IntPoint SeaScreenResolution;
 	if (viewType == kPrimaryChannelsView || viewType == kAlphaChannelView) {
 #if MAIN_COMPILE
 		if ([[document selection] floating])
-			layer = [[document contents] layer:[[document contents] activeLayerIndex] + 1];
+			layer = [[document contents] layerAtIndex:[[document contents] activeLayerIndex] + 1];
 		else
 			layer = [[document contents] activeLayer];
 #else
@@ -1011,7 +1011,7 @@ extern IntPoint SeaScreenResolution;
 	
 	if (altData) {
 		if ([[document selection] floating]) {
-			layer = [contents layer:[contents activeLayerIndex] + 1];
+			layer = [contents layerAtIndex:[contents activeLayerIndex] + 1];
 		} else {
 			layer = [contents activeLayer];
 		}

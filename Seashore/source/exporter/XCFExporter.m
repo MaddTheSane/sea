@@ -59,7 +59,7 @@ static inline void fix_endian_write(int *input, int size)
 		
 	// Determine if file must be version 2 - we don't match exactly with 1.3.x but I think we have it correct
 	for (i = 0; i < [contents layerCount]; i++) {
-		switch ([(SeaLayer *)[contents layer:i] mode]) {
+		switch ([(SeaLayer *)[contents layerAtIndex:i] mode]) {
 			case XCF_DODGE_MODE:
 			case XCF_BURN_MODE:
 			case XCF_HARDLIGHT_MODE:
@@ -123,7 +123,7 @@ static inline void fix_endian_write(int *input, int size)
 	fwrite(tempString, sizeof(float), 2, file);
 	
 	// Write parasites
-	count = [contents parasites_count];
+	count = [contents countOfParasites];
 	if (count > 0) {
 		tempIntString[0] = PROP_PARASITES;
 		tempIntString[1] = 0;
@@ -156,7 +156,7 @@ static inline void fix_endian_write(int *input, int size)
 	
 	// Write the lost properties
 	if ([contents lostprops])
-		fwrite([contents lostprops], sizeof(char), [contents lostprops_len], file);
+		fwrite([contents lostprops], sizeof(char), [contents lengthOfLostprops], file);
 	
 	// Write that the properties have finished
 	tempIntString[0] = PROP_END;
@@ -174,7 +174,7 @@ static inline void fix_endian_write(int *input, int size)
 - (BOOL)writeLayerHeader:(NSInteger)index file:(FILE *)file
 {
 	SeaContent *contents = [document contents];
-	SeaLayer *layer = [contents layer:index];
+	SeaLayer *layer = [contents layerAtIndex:index];
 
 	// Write the width, height and type of the layer
 	tempIntString[0] = [(SeaLayer *)layer width];
@@ -204,7 +204,7 @@ static inline void fix_endian_write(int *input, int size)
 
 - (BOOL)writeLayerProperties:(NSInteger)index file:(FILE *)file
 {
-	SeaLayer *layer = [[document contents] layer:index];
+	SeaLayer *layer = [[document contents] layerAtIndex:index];
 	
 	// Write if the layer is the acitve layer
 	if ([[document contents] activeLayerIndex] == index) {
@@ -279,7 +279,7 @@ static inline void fix_endian_write(int *input, int size)
 
 - (BOOL)writeLayerPixels:(NSInteger)index file:(FILE *)file
 {
-	SeaLayer *layer = [[document contents] layer:index];
+	SeaLayer *layer = [[document contents] layerAtIndex:index];
 	int width = [layer width], height = [layer height], spp = [[document contents] spp];
 	int tilesPerRow = (width % XCF_TILE_WIDTH) ? (width / XCF_TILE_WIDTH + 1) : (width / XCF_TILE_WIDTH);
 	int tilesPerColumn = (height % XCF_TILE_HEIGHT) ? (height / XCF_TILE_HEIGHT + 1) : (height / XCF_TILE_HEIGHT);

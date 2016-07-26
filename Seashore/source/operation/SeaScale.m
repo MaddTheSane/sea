@@ -54,7 +54,7 @@
 		[selectionLabel setStringValue:LOCALSTR(@"whole document", @"Whole Document")];
 	}
 	else {
-		layer = [contents layer:workingIndex];
+		layer = [contents layerAtIndex:workingIndex];
 		if ([layer floating])
 			[selectionLabel setStringValue:LOCALSTR(@"floating", @"Floating Selection")];
 		else
@@ -165,12 +165,11 @@
 	
 	// Work out the old height and width
 	if (index == kAllLayers) {
-		oldWidth = [(SeaContent *)contents width];
-		oldHeight = [(SeaContent *)contents height];
-	}
-	else {
-		oldWidth = [(SeaLayer *)[contents layer:index] width];
-		oldHeight = [(SeaLayer *)[contents layer:index] height];
+		oldWidth = [contents width];
+		oldHeight = [contents height];
+	} else {
+		oldWidth = [[contents layerAtIndex:index] width];
+		oldHeight = [[contents layerAtIndex:index] height];
 	}
 	
 	// Prepare an undo record
@@ -216,7 +215,7 @@
 		if (index == kAllLayers || index == whichLayer) {
 			
 			// Get the layer
-			curLayer = [[document contents] layer:whichLayer];
+			curLayer = [[document contents] layerAtIndex:whichLayer];
 			
 			// Take a manual snapshot (recording the snapshot index)
 			if (undoRecord) {
@@ -244,7 +243,7 @@
 	
 	// Adjust for floating selections
 	if (index != kAllLayers) {
-		curLayer = [[document contents] layer:index];
+		curLayer = [[document contents] layerAtIndex:index];
 		if ([curLayer floating]) {
 			[[document selection] selectOpaque];
 		}
@@ -329,7 +328,7 @@
 			for (whichLayer = 0; whichLayer < layerCount; whichLayer++) {
 			
 				// Determine the current layer
-				curLayer = [[document contents] layer:whichLayer];
+				curLayer = [[document contents] layerAtIndex:whichLayer];
 				
 				// Change the layer's size
 				changeX = undoRecord.rects[whichLayer].size.width - [(SeaLayer *)curLayer width];
@@ -346,7 +345,7 @@
 		} else {
 		
 			// Determine the current layer
-			curLayer = [[document contents] layer:undoRecord.index];
+			curLayer = [[document contents] layerAtIndex:undoRecord.index];
 			
 			// Change the layer's size
 			changeX = undoRecord.rects[0].size.width - [(SeaLayer *)curLayer width];
@@ -382,7 +381,7 @@
 	
 	// Adjust for floating selections
 	if (undoRecord.index != kAllLayers) {
-		curLayer = [[document contents] layer:undoRecord.index];
+		curLayer = [[document contents] layerAtIndex:undoRecord.index];
 		if ([curLayer floating]) {
 			[[document selection] selectOpaque];
 		}
@@ -406,7 +405,7 @@
 			[heightValue setIntValue:[(SeaContent *)contents height] * (scaleValue / 100.0)];
 		}
 		else {
-			layer = [contents layer:workingIndex];
+			layer = [contents layerAtIndex:workingIndex];
 			[widthValue setIntValue:[(SeaLayer *)layer width] * (scaleValue / 100.0)];
 			[heightValue setIntValue:[(SeaContent *)layer height] * (scaleValue / 100.0)];
 		}
@@ -428,7 +427,7 @@
 	if (workingIndex == kAllLayers)
 		focusObject = contents;
 	else
-		focusObject = [contents layer:workingIndex];
+		focusObject = [contents layerAtIndex:workingIndex];
 	
 	// Handle a horizontal scale change
 	if ([sender tag] == 0) {
@@ -485,7 +484,7 @@
 	if (workingIndex == kAllLayers)
 		focusObject = contents;
 	else
-		focusObject = [contents layer:workingIndex];
+		focusObject = [contents layerAtIndex:workingIndex];
 	
 	// Handle a unit change
 	units = (int)[sender indexOfSelectedItem];
@@ -510,7 +509,7 @@
 	if (workingIndex == kAllLayers)
 		focusObject = contents;
 	else
-		focusObject = [contents layer:workingIndex];
+		focusObject = [contents layerAtIndex:workingIndex];
 	xres = [contents xres];
 	yres = [contents yres];
 	switch ([[presetsMenu selectedItem] tag]) {

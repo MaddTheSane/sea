@@ -34,7 +34,7 @@
 	SeaLayer *layer = NULL;
 
 	// Fill out the selection label
-	layer = [contents layer:[contents activeLayerIndex]];
+	layer = [contents layerAtIndex:[contents activeLayerIndex]];
 	if ([layer floating])
 		[selectionLabel setStringValue:LOCALSTR(@"floating", @"Floating Selection")];
 	else
@@ -58,7 +58,7 @@
 
 	// Rotate the image
 	if ([rotateValue floatValue] != 0) {
-		SeaLayer *layer = [contents layer:[contents activeLayerIndex]];
+		SeaLayer *layer = [contents layerAtIndex:[contents activeLayerIndex]];
 		[self rotate:[rotateValue floatValue] withTrim:[layer floating]];
 	}
 }
@@ -146,7 +146,7 @@ static inline CGFloat mod_float(CGFloat value, CGFloat divisor)
 	// Behave differently depending on whether things are already rotated
 	if (undoRecord.isRotated) {
 		// If already rotated...
-		layer = [contents layer:undoRecord.index];
+		layer = [contents layerAtIndex:undoRecord.index];
 		[layer setOffsets:IntMakePoint(undoRecord.rect.origin.x, undoRecord.rect.origin.y)];
 		[layer setMarginLeft:0 top:0 right:undoRecord.rect.size.width - [layer width] bottom:undoRecord.rect.size.height - [layer height]];
 		[[layer seaLayerUndo] restoreSnapshot:undoRecord.undoIndex automatic:NO];
@@ -160,7 +160,7 @@ static inline CGFloat mod_float(CGFloat value, CGFloat divisor)
 		undoRecords[undoIndex].isRotated = NO;
 	} else {
 		// If not rotated...
-		layer = [contents layer:undoRecord.index];
+		layer = [contents layerAtIndex:undoRecord.index];
 		[layer setRotation:undoRecord.rotation interpolation:NSImageInterpolationHigh withTrim:undoRecord.withTrim];
 		if (undoRecord.withTrim)
 			[[document selection] selectOpaque];

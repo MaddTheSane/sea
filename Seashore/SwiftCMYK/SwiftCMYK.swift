@@ -70,7 +70,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 			var srcBytes: UnsafeMutablePointer<Void> = nil
 			let dstBytes = UnsafeMutablePointer<Void>(overlay.advancedBy(Int(pos) * 4))
 			
-			if channel == kPrimaryChannels {
+			if channel == .Primary {
 				srcBytes = UnsafeMutablePointer<Void>(data.advancedBy(Int(pos) * 3))
 				srcRowBytes = Int(selection.size.width) * 3;
 				srcLayout |= kColorSyncAlphaNone.rawValue;
@@ -83,7 +83,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 			ColorSyncTransformConvert(cw, Int(selection.size.width), 1, dstBytes, kColorSync8BitInteger, srcLayout, srcRowBytes, srcBytes, srcDepth, srcLayout, srcRowBytes, nil);
 			
 			for i in (0..<selection.size.width).reverse() {
-				if (channel == kPrimaryChannels) {
+				if channel == .Primary {
 					overlay[Int(pos + i) * 4 + 3] = 255;
 				} else {
 					overlay[Int(pos + i) * 4 + 3] = data[Int(pos + i) * 4 + 3];
@@ -101,7 +101,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 
 	public override func validateMenuItem(menuItem: NSMenuItem?) -> Bool {
 		if let pluginData = seaPlugins?.data {
-			if pluginData.channel == kAlphaChannel {
+			if pluginData.channel == .Alpha {
 				return false
 			}
 			

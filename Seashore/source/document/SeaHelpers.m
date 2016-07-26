@@ -83,7 +83,7 @@
 	[[document whiteboard] readjust];
 	[[document docView] readjust:scaling];
 	for (i = 0; i < [contents layerCount]; i++) {
-		[[contents layer:i] updateThumbnail];
+		[[contents layerAtIndex:i] updateThumbnail];
 	}
 	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
 	[[[SeaController utilitiesManager] statusUtilityFor:document] update];
@@ -183,9 +183,9 @@
 			[[document whiteboard] update];
 		break;
 		default:
-			layer = [contents layer:index];
-			rect = IntMakeRect([layer xoff], [layer yoff], [(SeaLayer *)layer width], [(SeaLayer *)layer height]);
-			[(SeaWhiteboard *)[document whiteboard] update:rect inThread:NO];
+			layer = [contents layerAtIndex:index];
+			rect = IntMakeRect([layer xoff], [layer yoff], [layer width], [layer height]);
+			[[document whiteboard] update:rect inThread:NO];
 		break;
 	}
 	
@@ -206,17 +206,17 @@
 	switch (index) {
 		case kAllLayers:
 			for (i = 0; i < [contents layerCount]; i++) {
-				[[contents layer:i] updateThumbnail];
+				[[contents layerAtIndex:i] updateThumbnail];
 			}
 		break;
 		case kLinkedLayers:
 			for (i = 0; i < [contents layerCount]; i++) {
-				if ([[contents layer:i] linked])
-					[[contents layer:i] updateThumbnail];
+				if ([[contents layerAtIndex:i] linked])
+					[[contents layerAtIndex:i] updateThumbnail];
 			}
 		break;
 		default:
-			layer = [contents layer:index];
+			layer = [contents layerAtIndex:index];
 			rect = IntMakeRect([layer xoff], [layer yoff], [(SeaLayer *)layer width], [(SeaLayer *)layer height]);
 			[layer updateThumbnail];
 		break;
@@ -242,20 +242,20 @@
 	switch (index) {
 		case kAllLayers:
 			for (i = 0; i < [contents layerCount]; i++) {
-				[[contents layer:i] updateThumbnail];
+				[[contents layerAtIndex:i] updateThumbnail];
 			}
 			[[document whiteboard] update];
 		break;
 		case kLinkedLayers:
 			for (i = 0; i < [contents layerCount]; i++) {
-				if ([[contents layer:i] linked])
-					[[contents layer:i] updateThumbnail];
+				if ([[contents layerAtIndex:i] linked])
+					[[contents layerAtIndex:i] updateThumbnail];
 			}
 			[[document whiteboard] update];
 		break;
 		default:
-			layer = [contents layer:index];
-			rect = IntMakeRect([layer xoff], [layer yoff], [(SeaLayer *)layer width], [(SeaLayer *)layer height]);
+			layer = [contents layerAtIndex:index];
+			rect = IntMakeRect([layer xoff], [layer yoff], [layer width], [layer height]);
 			[layer updateThumbnail];
 			[[document whiteboard] update:rect inThread:NO];
 		break;
@@ -283,7 +283,7 @@
 			yoff = [layer yoff];
 		break;
 		default:
-			layer = [contents layer:index];
+			layer = [contents layerAtIndex:index];
 			xoff = [layer xoff];
 			yoff = [layer yoff];
 			rectA.origin.x = MIN(xoff, oldOffsets.x);
@@ -322,7 +322,7 @@
 			[[document whiteboard] update];
 		break;
 		default:
-			layer = [contents layer:index];
+			layer = [contents layerAtIndex:index];
 			rect = IntMakeRect([layer xoff], [layer yoff], [(SeaLayer *)layer width], [(SeaLayer *)layer height]);
 			[(SeaWhiteboard *)[document whiteboard] update:rect inThread:NO];
 		break;
@@ -335,7 +335,7 @@
 {
 	SeaLayer *layer;
 	
-	layer = [[document contents] layer:index];
+	layer = [[document contents] layerAtIndex:index];
 	rect.origin.x += [layer xoff];
 	rect.origin.y += [layer yoff];
 	[(SeaWhiteboard *)[document whiteboard] update:rect inThread:NO];

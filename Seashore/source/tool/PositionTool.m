@@ -71,8 +71,8 @@
 			
 				// Go through all linked layers allowing a satisfactory undo
 				for (whichLayer = 0; whichLayer < [contents layerCount]; whichLayer++) {
-					if ([[contents layer:whichLayer] linked]) {
-						oldOffsets.x = [[contents layer:whichLayer] xoff]; oldOffsets.y = [[contents layer:whichLayer] yoff];
+					if ([[contents layerAtIndex:whichLayer] linked]) {
+						oldOffsets.x = [[contents layerAtIndex:whichLayer] xoff]; oldOffsets.y = [[contents layerAtIndex:whichLayer] yoff];
 						[[[document undoManager] prepareWithInvocationTarget:self] undoToOrigin:oldOffsets forLayer:whichLayer];			
 					}
 				}
@@ -130,9 +130,9 @@
 			
 				// Move all of the linked layers
 				for (whichLayer = 0; whichLayer < [contents layerCount]; whichLayer++) {
-					if ([[contents layer:whichLayer] linked]) {
-						xoff = [[contents layer:whichLayer] xoff]; yoff = [[contents layer:whichLayer] yoff];
-						[[contents layer:whichLayer] setOffsets:IntMakePoint(xoff + deltax, yoff + deltay)];
+					if ([[contents layerAtIndex:whichLayer] linked]) {
+						xoff = [[contents layerAtIndex:whichLayer] xoff]; yoff = [[contents layerAtIndex:whichLayer] yoff];
+						[[contents layerAtIndex:whichLayer] setOffsets:IntMakePoint(xoff + deltax, yoff + deltay)];
 					}
 				}
 				[[document helpers] layerOffsetsChanged:kLinkedLayers from:oldOffsets];
@@ -209,7 +209,7 @@
 - (void)undoToOrigin:(IntPoint)origin forLayer:(NSInteger)index
 {
 	IntPoint oldOffsets;
-	id layer = [[document contents] layer:index];
+	id layer = [[document contents] layerAtIndex:index];
 	
 	oldOffsets.x = [layer xoff]; oldOffsets.y = [layer yoff];
 	[[[document undoManager] prepareWithInvocationTarget:self] undoToOrigin:oldOffsets forLayer:index];

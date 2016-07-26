@@ -55,6 +55,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 @synthesize horizontalResolution=xres;
 @synthesize height;
 @synthesize width;
+@synthesize layers;
+@synthesize countOfParasites = parasites_count;
+@synthesize lengthOfLostprops = lostprops_len;
+@synthesize lostprops;
+@synthesize parasites;
 
 #if MAIN_COMPILE
 - (instancetype)initWithDocument:(id)doc
@@ -404,7 +409,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 #if MAIN_COMPILE
 - (NSColor *)foreground
 {
-	id foreground;
+	NSColor *foreground;
 	
 	foreground = [[[SeaController utilitiesManager] toolboxUtilityFor:document] foreground];
 	if (type == XCF_RGB_IMAGE && selectedChannel != kAlphaChannel)
@@ -417,7 +422,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (NSColor *)background
 {
-	id background;
+	NSColor *background;
 	
 	background = [[[SeaController utilitiesManager] toolboxUtilityFor:document] background];
 	if (type == XCF_RGB_IMAGE && selectedChannel != kAlphaChannel)
@@ -434,7 +439,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return exifData;
 }
 
-- (id)layer:(NSInteger)index
+- (id)layerAtIndex:(NSInteger)index
 {
 	return layers[index];
 }
@@ -1735,7 +1740,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[orderings addObject:oldOrdering];
 }
 
-- (void)convertToType:(int)newType
+- (void)convertToType:(XcfImageType)newType
 {
 	IndiciesRecord record;
 	id layer;
@@ -1766,7 +1771,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[document helpers] typeChanged]; 
 }
 
-- (void)revertToType:(int)newType withRecord:(IndiciesRecord)record
+- (void)revertToType:(XcfImageType)newType withRecord:(IndiciesRecord)record
 {
 	NSInteger i;
 	

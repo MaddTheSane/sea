@@ -71,7 +71,7 @@ typedef struct {
 	NSInteger activeLayerIndex;
 	
 	// The currently selected channel (see constants)
-	int selectedChannel;
+	SeaSelectedChannel selectedChannel;
 	
 	//  If YES the user wants the typical view otherwise the user wants the channel-specific view
 	BOOL trueView;
@@ -108,7 +108,7 @@ typedef struct {
 @property NSInteger activeLayerIndex;
 
 /// The currently selected channel (see constants)
-@property int selectedChannel;
+@property SeaSelectedChannel selectedChannel;
 
 // CREATION METHODS
 
@@ -281,7 +281,7 @@ typedef struct {
 	@param		bottom
 				The adjustment to be made to the bottom margin (in pixels).
 */
-- (void)setMarginLeft:(int)left top:(int)top right:(int)right bottom:(int)bottom;
+- (void)setMarginLeft:(int)left top:(int)top right:(int)right bottom:(int)bottom NS_SWIFT_NAME(setMargin(left:top:right:bottom:));
 #endif
 
 /*!
@@ -290,7 +290,7 @@ typedef struct {
 	@result		Returns an integer representing the currently selected group of
 				channels (see Constants documentation).
 */
-- (int)selectedChannel;
+- (SeaSelectedChannel)selectedChannel;
 
 /*!
 	@method		setSelectedChannel:
@@ -298,45 +298,45 @@ typedef struct {
 	@param		value
 				The revised group of channels (see Constants documentation)
 */
-- (void)setSelectedChannel:(int)value;
+- (void)setSelectedChannel:(SeaSelectedChannel)value;
 
 /*!
-	@method		lostprops
+	@property	lostprops
 	@discussion	Returns the lost properties of the document. Lost properties are
-				those saved by the GIMP that Seashore cannot interpret.
+				those saved by GIMP that Seashore cannot interpret.
 	@result		Returns a pointer to the block of memory containing the lost
 				properties of the document.
 */
-- (char *)lostprops NS_RETURNS_INNER_POINTER;
+@property (readonly) char *lostprops NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		lostprops_len
+	@property	lengthOfLostprops
 	@discussion	Returns the size of the lost properties of the document. Lost
 				properties are those saved by the GIMP that Seashore cannot
 				interpret.
 	@result		Returns an integer indicating the size in bytes of the block of
 				memory containing the lost properties of the document.
 */
-- (int)lostprops_len;
+@property (readonly) int lengthOfLostprops;
 
 /*!
-	@method		parasites
+	@property	parasites
 	@discussion	Returns the parasistes of the document. Parasites are arbitrary
 				pieces of data that are saved by the GIMP and Seashore in XCF
 				documents.
 	@result		Returns an array of ParasiteData records of length given by the
 				parasites_count method.
 */
-- (ParasiteData *)parasites NS_RETURNS_INNER_POINTER;
+@property (readonly) ParasiteData *parasites NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		parasites_count
+	@parameter	countOfParasites
 	@discussion	Returns the number of parasites in the document's parasite
 				array.
 	@result		Returns an integer representing the number of parasites in the
 				document's parasite array.
 */
-- (int)parasites_count;
+@property (readonly) int countOfParasites;
 
 /*!
 	@method		parasiteWithName:
@@ -388,22 +388,22 @@ typedef struct {
 
 #if MAIN_COMPILE
 /*!
-	@method		foreground
+	@property	foreground
 	@discussion	Returns the foreground colour, converting it to the same colour
 				space as the document and stripping any colour from it if the
 				alpha channel is selected.
 	@result		Returns a NSColor representing the foreground colour.
 */
-- (NSColor *)foreground;
+@property (readonly, copy) NSColor *foreground;
 
 /*!
-	@method		background
+	@property	background
 	@discussion	Returns the background colour, converting it to the same colour
 				space as the document and stripping any colour from it if the
 				alpha channel is selected.
 	@result		Returns a NSColor representing the background colour.
 */
-- (NSColor *)background;
+@property (readonly, copy) NSColor *background;
 #endif
 
 /*!
@@ -442,29 +442,32 @@ typedef struct {
 				The index of the desired layer.
 	@result		An instance of SeaLayer corresponding to the specified index.
 */
-- (id)layer:(NSInteger)index;
+- (SeaLayer*)layerAtIndex:(NSInteger)index;
 
 /*!
-	@method		layerCount
+	@property	layerCount
 	@discussion	Returns the total number of layers in the document.
 	@result		Returns an integer indicating the total number of layers in the
 				document.
 */
-- (NSInteger)layerCount;
+@property (readonly) NSInteger layerCount;
 
 /*!
-	@method		activeLayer
+	@property	activeLayer
 	@discussion	Returns the currently active layer.
 	@result		An instance of SeaLayer representing the active layer.
 */
-- (SeaLayer*)activeLayer;
+@property (readonly, weak) SeaLayer *activeLayer;
 
 /*!
-	@method		activeLayerIndex
+	@property	activeLayerIndex
 	@discussion	Returns the index of the currently active layer.
 	@result		Returns an integer representing the index of the active layer.
 */
 - (NSInteger)activeLayerIndex;
+
+//! The layers in the document
+@property (readonly, copy) NSArray<SeaLayer*> *layers;
 
 #if MAIN_COMPILE
 /*!
@@ -787,7 +790,7 @@ typedef struct {
 				The new type to convert the document to (see Constants
 				documentation)
 */
-- (void)convertToType:(int)newType;
+- (void)convertToType:(XcfImageType)newType;
 
 /*!
 	@method		revertToType:withRecord:
@@ -801,7 +804,7 @@ typedef struct {
 				The record containing all the indicizes of the snapshots taken
 				before the conversion.
 */
-- (void)revertToType:(int)newType withRecord:(IndiciesRecord)record;
+- (void)revertToType:(XcfImageType)newType withRecord:(IndiciesRecord)record;
 #endif
 
 @end

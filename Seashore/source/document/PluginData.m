@@ -46,7 +46,7 @@
 	return [[document contents] spp];
 }
 
-- (int)channel
+- (SeaSelectedChannel)channel
 {
 	if ([[(SeaDocument *)document selection] floating])
 		return kAllChannels;

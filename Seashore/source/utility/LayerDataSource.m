@@ -77,7 +77,7 @@
 		return 0;
 	if(item != nil)
 		NSLog(@"%@ says olv %@ requested a child at %ld for %@ erroniously", self, olv, (long)index, item);
-	return [[document contents] layer:index];
+	return [[document contents] layerAtIndex:index];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)olv isItemExpandable:(id)item

@@ -14,6 +14,7 @@
 @class SeaDocument;
 
 @interface PluginData : NSObject
+
 //! The document associated with this object
 @property (weak) IBOutlet SeaDocument *document;
 
@@ -66,7 +67,7 @@
 	@discussion	Returns the currently selected channel.
 	@result		Returns an integer representing the currently selected channel.
 */
-@property (readonly) int channel;
+@property (readonly) SeaSelectedChannel channel;
 
 /*!
 	@property	width

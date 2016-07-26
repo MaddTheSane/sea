@@ -19,7 +19,7 @@
 	// Make the changes
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
-		layer = [contents layer:i];
+		layer = [contents layerAtIndex:i];
 		if ([layer linked]) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
@@ -42,7 +42,7 @@
 	// Make the changes
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
-		layer = [contents layer:i];
+		layer = [contents layerAtIndex:i];
 		if ([layer linked]) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
@@ -65,7 +65,7 @@
 	// Make the changes
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
-		layer = [contents layer:i];
+		layer = [contents layerAtIndex:i];
 		if ([layer linked]) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
@@ -89,7 +89,7 @@
 	// Make the changes
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
-		layer = [contents layer:i];
+		layer = [contents layerAtIndex:i];
 		if ([layer linked]) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
@@ -112,7 +112,7 @@
 	// Make the changes
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
-		layer = [contents layer:i];
+		layer = [contents layerAtIndex:i];
 		if ([layer linked]) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
@@ -135,7 +135,7 @@
 	// Make the changes
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
-		layer = [contents layer:i];
+		layer = [contents layerAtIndex:i];
 		if ([layer linked]) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
@@ -175,7 +175,7 @@
 		// Determine the bounding rectangle
 		layerCount = [contents layerCount];
 		for (i = 0; i < layerCount; i++) {
-			layer = [contents layer:i];
+			layer = [contents layerAtIndex:i];
 			if ([layer linked]) {
 				rect.origin.x = MIN([layer xoff], rect.origin.x);
 				rect.origin.y = MIN([layer yoff], rect.origin.y);
@@ -190,7 +190,7 @@
 		// Make the changes
 		layerCount = [contents layerCount];
 		for (i = 0; i < layerCount; i++) {
-			layer = [contents layer:i];
+			layer = [contents layerAtIndex:i];
 			if ([layer linked]) {
 				oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 				[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
@@ -235,7 +235,7 @@
 		// Determine the bounding rectangle
 		layerCount = [contents layerCount];
 		for (i = 0; i < layerCount; i++) {
-			layer = [contents layer:i];
+			layer = [contents layerAtIndex:i];
 			if ([layer linked]) {
 				rect.origin.x = MIN([layer xoff], rect.origin.x);
 				rect.origin.y = MIN([layer yoff], rect.origin.y);
@@ -250,7 +250,7 @@
 		// Make the changes
 		layerCount = [contents layerCount];
 		for (i = 0; i < layerCount; i++) {
-			layer = [contents layer:i];
+			layer = [contents layerAtIndex:i];
 			if ([layer linked]) {
 				oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 				[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];

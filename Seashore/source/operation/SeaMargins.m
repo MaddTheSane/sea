@@ -47,7 +47,7 @@
 		height = [(SeaContent *)[document contents] height];
 	}
 	else {
-		layer = [[document contents] layer:workingIndex];
+		layer = [[document contents] layerAtIndex:workingIndex];
 		data = [(SeaLayer *)layer data];
 		width = [(SeaLayer *)layer width];
 		height = [(SeaLayer *)layer height];
@@ -121,7 +121,7 @@
 		[selectionLabel setStringValue:LOCALSTR(@"whole document", @"Whole Document")];
 	}
 	else {
-		layer = [contents layer:workingIndex];
+		layer = [contents layerAtIndex:workingIndex];
 		[selectionLabel setStringValue:[layer name]];
 		
 	}
@@ -225,8 +225,8 @@
 		oldHeight = [(SeaContent *)[document contents] height];
 	}
 	else {
-		oldWidth = [(SeaLayer *)[[document contents] layer:workingIndex] width];
-		oldHeight = [(SeaLayer *)[[document contents] layer:workingIndex] height];
+		oldWidth = [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] width];
+		oldHeight = [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] height];
 	}
 	
 	// Don't continue if values are unreasonable or unchanged
@@ -239,7 +239,7 @@
 	// Make the margin changes
 	if (workingIndex == kAllLayers && [clippingMatrix selectedRow] > kNoClipMode) {
 		for (i = 0; i < [[document contents] layerCount]; i++) {
-			layer = [[document contents] layer:i];
+			layer = [[document contents] layerAtIndex:i];
 			if ([layer width] == oldWidth && [layer height] == oldHeight && [layer xoff] == 0 && [layer yoff] == 0){
 				[self setMarginLeft:trueLeft top:trueTop right:trueRight bottom:trueBottom index:i];
 			}else if([clippingMatrix selectedRow] == kAllClipMode){
@@ -319,7 +319,7 @@
 		
 	// Get the layer if appropriate
 	if (index != kAllLayers)
-		layer = [contents layer:index];
+		layer = [contents layerAtIndex:index];
 	
 	// Take the snapshots if necessary
 	if (undoRecord) {
@@ -397,7 +397,7 @@
 		if (undoRecord.index == kAllLayers) {
 			[contents setMarginLeft:-undoRecord.left top:-undoRecord.top right:-undoRecord.right bottom:-undoRecord.bottom];
 		} else {
-			layer = [contents layer:undoRecord.index];
+			layer = [contents layerAtIndex:undoRecord.index];
 			[layer setMarginLeft:-undoRecord.left top:-undoRecord.top right:-undoRecord.right bottom:-undoRecord.bottom];
 			for (i = 0; i < 4; i++) {
 				if (undoRecord.indicies[i] != -1) {
@@ -450,8 +450,8 @@
 		height = [(SeaContent *)[document contents] height] + trueTop + trueBottom;
 	}
 	else {
-		width = [(SeaLayer *)[[document contents] layer:workingIndex] width] + trueLeft + trueRight;
-		height = [(SeaLayer *)[[document contents] layer:workingIndex] height] + trueTop + trueBottom;
+		width = [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] width] + trueLeft + trueRight;
+		height = [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] height] + trueTop + trueBottom;
 	}
 
 	// Finally display the changes
@@ -479,16 +479,16 @@
 			delta.width = (width + contentLeft + contentRight) - [(SeaContent *)[document contents] width];
 			delta.height = (height + contentTop + contentBottom) - [(SeaContent *)[document contents] height];
 		} else {
-			delta.width = (width + contentLeft + contentRight) - [(SeaLayer *)[[document contents] layer:workingIndex] width];
-			delta.height = (height + contentTop + contentBottom) - [(SeaLayer *)[[document contents] layer:workingIndex] height];
+			delta.width = (width + contentLeft + contentRight) - [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] width];
+			delta.height = (height + contentTop + contentBottom) - [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] height];
 		}
 	} else {
 		if (workingIndex == kAllLayers) {
 			delta.width = width - [(SeaContent *)[document contents] width];
 			delta.height = height - [(SeaContent *)[document contents] height];
 		} else {
-			delta.width = width - [(SeaLayer *)[[document contents] layer:workingIndex] width];
-			delta.height = height - [(SeaLayer *)[[document contents] layer:workingIndex] height];
+			delta.width = width - [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] width];
+			delta.height = height - [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] height];
 		}
 	}
 	
@@ -560,7 +560,7 @@
 	if (workingIndex == kAllLayers)
 		focusObject = contents;
 	else
-		focusObject = [contents layer:workingIndex];
+		focusObject = [contents layerAtIndex:workingIndex];
 	xres = [contents xres];
 	yres = [contents yres];
 	switch ([[presetsMenu selectedItem] tag]) {
@@ -607,8 +607,8 @@
 			[bottomValue setStringValue:SeaStringFromPixels(origin.y + size.height - [(SeaContent *)[document contents] height] , units, yres)];
 		} else {
 			origin = [[document selection] localRect].origin;
-			[rightValue setStringValue:SeaStringFromPixels(origin.x + size.width - [(SeaLayer *)[[document contents] layer:workingIndex] width] , units, xres)];
-			[bottomValue setStringValue:SeaStringFromPixels(origin.y + size.height  - [(SeaLayer *)[[document contents] layer:workingIndex] height], units, yres)];
+			[rightValue setStringValue:SeaStringFromPixels(origin.x + size.width - [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] width] , units, xres)];
+			[bottomValue setStringValue:SeaStringFromPixels(origin.y + size.height  - [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] height], units, yres)];
 		}
 		[leftValue setStringValue:SeaStringFromPixels(-1 * origin.x, units, xres)];
 		[topValue setStringValue:SeaStringFromPixels(-1 * origin.y, units, yres)];
@@ -618,16 +618,16 @@
 				size.width = (size.width + contentLeft + contentRight) - [(SeaContent *)[document contents] width];
 				size.height = (size.height + contentTop + contentBottom) - [(SeaContent *)[document contents] height];
 			} else {
-				size.width = (size.width + contentLeft + contentRight) - [(SeaLayer *)[[document contents] layer:workingIndex] width];
-				size.height = (size.height + contentTop + contentBottom) - [(SeaLayer *)[[document contents] layer:workingIndex] height];
+				size.width = (size.width + contentLeft + contentRight) - [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] width];
+				size.height = (size.height + contentTop + contentBottom) - [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] height];
 			}
 		} else {
 			if (workingIndex == kAllLayers) {
 				size.width = size.width - [(SeaContent *)[document contents] width];
 				size.height = size.height - [(SeaContent *)[document contents] height];
 			} else {
-				size.width = size.width - [(SeaLayer *)[[document contents] layer:workingIndex] width];
-				size.height = size.height - [(SeaLayer *)[[document contents] layer:workingIndex] height];
+				size.width = size.width - [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] width];
+				size.height = size.height - [(SeaLayer *)[[document contents] layerAtIndex:workingIndex] height];
 			}
 		}
 		

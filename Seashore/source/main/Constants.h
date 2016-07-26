@@ -101,8 +101,7 @@ typedef NS_ENUM(int, XcfCompressionType) {
 	@constant	XCF_GRAIN_MERGE_MODE
 				The grain merge merge technique.
 */	
-typedef NS_ENUM(int, XcfLayerMode)
-{
+typedef NS_ENUM(int, XcfLayerMode) {
 	XCF_NORMAL_MODE,			/* 0 */
 	XCF_DISSOLVE_MODE,			/* 1 */
 	XCF_BEHIND_MODE,			/* 2 */
@@ -202,14 +201,19 @@ typedef NS_ENUM(int, GimpImageType) {
 	@constant	kAlphaChannel
 				Specifies the alpha channel.
 */
-NS_ENUM(int) {
+typedef NS_ENUM(int, SeaSelectedChannel) {
 	//! Specifies all channels.
-	kAllChannels,
+	SeaSelectedChannelAll,
 	//! Specifies the primary RGB channels in a colour image or the
 	//! primary white channel in a greyscale image.
-	kPrimaryChannels,
+	SeaSelectedChannelPrimary,
 	//! Specifies the alpha channel.
-	kAlphaChannel
+	SeaSelectedChannelAlpha,
+	
+	kAllChannels NS_SWIFT_UNAVAILABLE("Use .All instead") = SeaSelectedChannelAll,
+	kPrimaryChannels NS_SWIFT_UNAVAILABLE("Use .Primary instead")  = SeaSelectedChannelPrimary,
+	kAlphaChannel NS_SWIFT_UNAVAILABLE("Use .Alpha instead")  = SeaSelectedChannelAlpha,
+
 };
 
 /*!
@@ -241,11 +245,19 @@ NS_ENUM(NSInteger) {
 */
 typedef NS_OPTIONS(unsigned int, GIMPBitmapFormat) {
 	//! Specifies the alpha channel is first.
-	kAlphaFirstFormat = 1 << 0,
+	GIMPBitmapFormatAlphaFirst = 1 << 0,
 	//! Specifies the alpha is not premultiplied.
-	kAlphaNonPremultipliedFormat = 1 << 1,
+	GIMPBitmapFormatAlphaNonPremultiplied = 1 << 1,
 	//! Specifies the colour components are specified as floating point values.
-	kFloatingFormat = 1 << 2
+	GIMPBitmapFormatFloatingPoint = 1 << 2,
+	
+	//! Specifies the alpha channel is first.
+	kAlphaFirstFormat NS_SWIFT_UNAVAILABLE("Use .AlphaFirst instead") = GIMPBitmapFormatAlphaFirst,
+	//! Specifies the alpha is not premultiplied.
+	kAlphaNonPremultipliedFormat NS_SWIFT_UNAVAILABLE("Use .AlphaNonPremultiplied instead") = GIMPBitmapFormatAlphaNonPremultiplied,
+	//! Specifies the colour components are specified as floating point values.
+	kFloatingFormat NS_SWIFT_UNAVAILABLE("Use .FloatingPoint instead") = GIMPBitmapFormatFloatingPoint
+
 };
 
 /*!

@@ -93,9 +93,8 @@ Boolean GetMetadataForFile(void* thisInterface,
 			
 			NSMutableArray *names = [NSMutableArray arrayWithCapacity:[contents layerCount]];
 			BOOL hasAlpha = NO;
-			int i;
-			for(i = 0; i < [contents layerCount]; i++){
-				XCFLayer *layer = [contents layer:i];
+			for (NSInteger i = 0; i < [contents layerCount]; i++) {
+				XCFLayer *layer = (XCFLayer*)[contents layerAtIndex:i];
 				[names addObject:[layer name]];
 				if([layer hasAlpha]) {
 					hasAlpha = YES;

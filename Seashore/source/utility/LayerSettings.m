@@ -162,7 +162,7 @@
 	// Correct the index
 	if (index == kActiveLayer)
 		index = [[document contents] activeLayerIndex];
-	layer = [[document contents] layer:index];
+	layer = [[document contents] layerAtIndex:index];
 	
 	// Allow the undo/redo
 	oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
@@ -182,7 +182,7 @@
 	// Correct the index
 	if (index == kActiveLayer)
 		index = [[document contents] activeLayerIndex];
-	layer = [[document contents] layer:index];
+	layer = [[document contents] layerAtIndex:index];
 	
 	// Allow the undo/redo
 	[[[document undoManager] prepareWithInvocationTarget:self] setName:[layer name] index:index];
@@ -205,7 +205,7 @@
 
 - (void)undoMode:(NSInteger)index to:(int)value
 {
-	SeaLayer* layer = [[document contents] layer:index];
+	SeaLayer* layer = [[document contents] layerAtIndex:index];
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] undoMode:index to:[layer mode]];
 	[layer setMode:value];
@@ -228,7 +228,7 @@
 
 - (void)undoOpacity:(NSInteger)index to:(int)value
 {
-	SeaLayer* layer = [[document contents] layer:index];
+	SeaLayer* layer = [[document contents] layerAtIndex:index];
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] undoOpacity:index to:[layer opacity]];
 	[layer setOpacity:value];

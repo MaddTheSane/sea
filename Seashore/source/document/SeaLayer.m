@@ -641,7 +641,7 @@
 	int i;
 	
 	for (i = 0; i < [[document contents] layerCount]; i++) {
-		if ([[document contents] layer:i] == self)
+		if ([[document contents] layerAtIndex:i] == self)
 			return i;
 	}
 	

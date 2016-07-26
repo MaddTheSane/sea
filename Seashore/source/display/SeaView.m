@@ -1379,7 +1379,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 				
 					// Go through all linked layers allowing a satisfactory undo
 					for (whichLayer = 0; whichLayer < [[document contents] layerCount]; whichLayer++) {
-						curLayer = [[document contents] layer:whichLayer];
+						curLayer = [[document contents] layerAtIndex:whichLayer];
 						if ([curLayer linked]) {
 							oldOffsets.x = [curLayer xoff]; oldOffsets.y = [curLayer yoff];
 							[[[document undoManager] prepareWithInvocationTarget:[[document tools] getTool:kPositionTool]] undoToOrigin:oldOffsets forLayer:whichLayer];			
@@ -1445,7 +1445,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 				
 					// Move all of the linked layers
 					for (whichLayer = 0; whichLayer < [[document contents] layerCount]; whichLayer++) {
-						curLayer = [[document contents] layer:whichLayer];
+						curLayer = [[document contents] layerAtIndex:whichLayer];
 						if ([curLayer linked]) {
 						
 							// Get the old position

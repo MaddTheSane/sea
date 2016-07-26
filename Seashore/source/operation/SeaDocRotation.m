@@ -16,7 +16,7 @@
 	[[document selection] clearSelection];
 	layerCount = [[document contents] layerCount];
 	for (i = 0; i < layerCount; i++) {
-		[[[document contents] layer:i] flipHorizontally];
+		[[[document contents] layerAtIndex:i] flipHorizontally];
 	}
 	[[document helpers] boundariesAndContentChanged:NO];
 }
@@ -29,7 +29,7 @@
 	[[document selection] clearSelection];
 	layerCount = [[document contents] layerCount];
 	for (i = 0; i < layerCount; i++) {
-		[[[document contents] layer:i] flipVertically];
+		[[[document contents] layerAtIndex:i] flipVertically];
 	}
 	[[document helpers] boundariesAndContentChanged:NO];
 }
@@ -43,7 +43,7 @@
 	[[document selection] clearSelection];
 	layerCount = [[document contents] layerCount];
 	for (i = 0; i < layerCount; i++) {
-		[[[document contents] layer:i] rotateLeft];
+		[[[document contents] layerAtIndex:i] rotateLeft];
 	}
 	width = [(SeaContent *)[document contents] width];
 	height = [(SeaContent *)[document contents] height];
@@ -60,7 +60,7 @@
 	[[document selection] clearSelection];
 	layerCount = [[document contents] layerCount];
 	for (i = 0; i < layerCount; i++) {
-		[[[document contents] layer:i] rotateRight];
+		[[[document contents] layerAtIndex:i] rotateRight];
 	}
 	width = [(SeaContent *)[document contents] width];
 	height = [(SeaContent *)[document contents] height];
