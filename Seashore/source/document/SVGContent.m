@@ -4,52 +4,45 @@
 #import "SeaDocumentController.h"
 #import "SeaWarning.h"
 
-IntSize getDocumentSize(char *path)
+IntSize getDocumentSize(const char *path)
 {
 	FILE *file;
 	char header[2056], dstr[128];
 	IntSize result = IntMakeSize(0, 0);
 	int ivalue;
 	char *pos, *value = NULL;
-	BOOL quote;
-	int tagID;
+	BOOL quote = NO;
+	int tagID = 0;
 	size_t size;
 		
 	file = fopen(path, "rb");
 	fread(header, sizeof(char), 2048, file);
 	pos = header;
-	quote = NO;
-	tagID = 0;
 	
 	while (pos - header < 2048 && (result.width == 0 || result.height == 0)) {
-
 		if (quote) {
 			if (tagID == 1 || tagID == 2) {
-				
 				ivalue = -1;
 				size = pos - value;
-				if (size > 127) size = 127;
+				if (size > 127)
+					size = 127;
 				if (strncmp(pos, "pt", 2) == 0 || pos[0] == '"') {
 					strncpy(dstr, value, size);
 					dstr[size] = 0x00;
 					ivalue = (int)strtod(dstr, NULL) * 1.25;
-				}
-				else if (strncmp(pos, "pc", 2) == 0) {
+				} else if (strncmp(pos, "pc", 2) == 0) {
 					strncpy(dstr, value, size);
 					dstr[size] = 0x00;
 					ivalue = (int)strtod(dstr, NULL) * 15.0;
-				}
-				else if (strncmp(pos, "mm", 2) == 0) {
+				} else if (strncmp(pos, "mm", 2) == 0) {
 					strncpy(dstr, value, size);
 					dstr[size] = 0x00;
 					ivalue = (int)strtod(dstr, NULL) * 3.543307;
-				}
-				else if (strncmp(pos, "cm", 2) == 0) {
+				} else if (strncmp(pos, "cm", 2) == 0) {
 					strncpy(dstr, value, size);
 					dstr[size] = 0x00;
 					ivalue = (int)strtod(dstr, NULL) * 35.43307;
-				}
-				else if (strncmp(pos, "in", 2) == 0) {
+				} else if (strncmp(pos, "in", 2) == 0) {
 					strncpy(dstr, value, size);
 					dstr[size] = 0x00;
 					ivalue = (int)strtod(dstr, NULL) * 90.0;
@@ -61,22 +54,18 @@ IntSize getDocumentSize(char *path)
 						result.height = ivalue;
 					tagID = 0;
 				}
-			
 			}				
 		}
 			
 	
 		if (pos[0] == '"') {
-			
 			if (quote) {
 				quote = NO;
 				tagID = 0;
-			}
-			else {
+			} else {
 				quote = YES;
 				value = pos + 1;
 			}
-		
 		}
 		
 		if (!quote) {
@@ -89,7 +78,6 @@ IntSize getDocumentSize(char *path)
 		}
 		
 		pos++;
-	
 	}
 	
 	fclose(file);

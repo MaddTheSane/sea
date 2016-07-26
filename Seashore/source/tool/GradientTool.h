@@ -13,14 +13,12 @@
 
 @interface GradientTool : AbstractTool
 {
-	
 	// The point where to start the gradient
 	IntPoint startPoint;
 	NSPoint startNSPoint;
 	
 	// The temporary point we've dragged to
 	NSPoint tempNSPoint;
-	
 }
 
 /*!

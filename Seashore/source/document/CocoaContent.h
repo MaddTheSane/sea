@@ -1,6 +1,8 @@
 #import "Globals.h"
 #import "SeaContent.h"
 
+@class SeaDocument;
+
 /*!
 	@class		CocoaContent
 	@abstract	Loads the contents of the document from a given Cocoa-compatible
@@ -11,14 +13,11 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface CocoaContent : SeaContent {
-
-	IBOutlet id pdfPanel;
-	IBOutlet id pageLabel;
-	IBOutlet id pageInput;
+	IBOutlet NSPanel *pdfPanel;
+	IBOutlet NSTextField *pageLabel;
+	IBOutlet NSTextField *pageInput;
 	IBOutlet NSPopUpButton *resMenu;
-
 }
 
 /*!
@@ -31,7 +30,7 @@
 	@result		A boolean indicating acceptance.
 
 */
-+ (BOOL)typeIsEditable:(NSString *)type forDoc:(id)doc;
++ (BOOL)typeIsEditable:(NSString *)type forDoc:(SeaDocument*)doc;
 
 /*!
 	@method		typeIsViewable:
@@ -42,7 +41,7 @@
 				Somewhere to put errors (if any)
 	@result		A boolean indicating acceptance.
 */
-+ (BOOL)typeIsViewable:(NSString *)type forDoc:(id)doc;
++ (BOOL)typeIsViewable:(NSString *)type forDoc:(SeaDocument*)doc;
 
 /*!
 	@method		initWithDocument:contentsOfFile:
@@ -53,7 +52,7 @@
 				The path of the image file with which to initalize this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
+- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path;
 
 /*!
 	@method		endPanel:

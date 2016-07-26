@@ -62,7 +62,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 @synthesize parasites;
 
 #if MAIN_COMPILE
-- (instancetype)initWithDocument:(id)doc
+- (instancetype)initWithDocument:(SeaDocument*)doc
 {
 	if (self = [super init]) {
 	// Set the data members to reasonable values
@@ -85,7 +85,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	return self;
 }
 
-- (instancetype)initFromPasteboardWithDocument:(id)doc
+- (instancetype)initFromPasteboardWithDocument:(SeaDocument*)doc
 {
 	NSPasteboard *pboard = [NSPasteboard generalPasteboard];
 	NSData *imageRepData;

@@ -1,4 +1,4 @@
-#import "Globals.h"
+#import <SeashoreKit/Globals.h>
 
 @class SeaDocument;
 

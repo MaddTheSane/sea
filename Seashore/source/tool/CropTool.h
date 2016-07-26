@@ -11,7 +11,6 @@
 */
 
 @interface CropTool : AbstractScaleTool {
-
 	// The point where the selection begun
 	IntPoint startPoint;
 		
@@ -20,7 +19,6 @@
 	
 	// Are we using the one-to-one ratio?
 	BOOL oneToOne;
-
 }
 
 /*!
@@ -85,6 +83,5 @@
 				An IntRect representing the new rectangle.
 */
 - (void)setCropRect:(IntRect)newCropRect;
-
 
 @end

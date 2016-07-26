@@ -70,7 +70,7 @@
 - (IBAction)closeEffects:(id)sender
 {
 	[NSApp stopModal];
-	if (parentWin){
+	if (parentWin) {
 		[parentWin removeChildWindow:panel];
 		parentWin = NULL;
 	}

@@ -257,7 +257,19 @@ typedef NS_OPTIONS(unsigned int, GIMPBitmapFormat) {
 	kAlphaNonPremultipliedFormat NS_SWIFT_UNAVAILABLE("Use .AlphaNonPremultiplied instead") = GIMPBitmapFormatAlphaNonPremultiplied,
 	//! Specifies the colour components are specified as floating point values.
 	kFloatingFormat NS_SWIFT_UNAVAILABLE("Use .FloatingPoint instead") = GIMPBitmapFormatFloatingPoint
+};
 
+
+/*!
+	@enum		k...Flip
+	@constant	kHorizontalFlip
+				Specifies a horizontal flip.
+	@constant	kVerticalFlip
+				Specifies a vertical flip.
+ */
+typedef NS_ENUM(int, SeaFlipType) {
+	kHorizontalFlip,
+	kVerticalFlip
 };
 
 /*!

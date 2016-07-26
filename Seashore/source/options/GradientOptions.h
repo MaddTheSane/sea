@@ -10,16 +10,13 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface GradientOptions : AbstractOptions
 {
-
 	// The pop-up menu indicating the gradient's type
 	IBOutlet NSPopUpButton *typePopup;
 	
 	// The pop-up menu indicating the repeating style for the gradient
 	IBOutlet NSPopUpButton *repeatPopup;
-	
 }
 
 /*!

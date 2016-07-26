@@ -11,7 +11,6 @@
 */
 
 @interface SmudgeOptions : AbstractPaintOptions {
-
 	// A slider indicating the opacity of the bucket
 	IBOutlet NSSlider *rateSlider;
 	
@@ -20,7 +19,6 @@
 	
 	// A checkbox that when checked implies that the tool should consider all pixels not those just in the current layer
 	//IBOutlet id mergedCheckbox;
-	
 }
 
 /*!
@@ -47,12 +45,12 @@
 - (IBAction)rateChanged:(id)sender;
 
 /*!
-	@method		rate
+	@property	rate
 	@discussion	Returns the rate of smudging. Higher values imply more smudging.
 	@result		Returns an integer (between 0 and 255) representing the rate of
 				smudging.
 */
-- (int)rate;
+@property (readonly) int rate;
 
 /*!
 	@method		shutdown

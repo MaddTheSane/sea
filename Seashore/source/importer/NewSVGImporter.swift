@@ -1,19 +1,41 @@
-#import "SVGImporter.h"
-#import "CocoaLayer.h"
-#import "SeaDocument.h"
-#import "SeaContent.h"
-#import "SeaView.h"
-#import "CenteringClipView.h"
-#import "SeaOperations.h"
-#import "SeaAlignment.h"
-#import "SeaController.h"
-#import "SeaWarning.h"
-#import "SVGContent.h"
+//
+//  NewSVGImporter.swift
+//  Seashore
+//
+//  Created by C.W. Betts on 7/26/16.
+//
+//
 
-@implementation SVGImporter
+import Cocoa
+import SeashoreKit
 
-- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
-{
+final class NewSVGImporter: NSObject {
+	/// The length warning panel
+	@IBOutlet weak var waitPanel: NSPanel!
+
+	/// The spinner to update
+	@IBOutlet weak var spinner: NSProgressIndicator!
+
+	/// The scaling panel
+	@IBOutlet weak var scalePanel: NSPanel!
+
+	/// The slider indicating the extent of scaling
+	@IBOutlet weak var scaleSlider: NSSlider!
+
+	/// A label indicating the document's expected size
+	@IBOutlet weak var sizeLabel: NSTextField!
+
+	/// The document's actual size
+	var trueSize = IntSize()
+	/// The document's scaled size
+	var size = IntSize()
+	
+	@objc(addToDocument:contentsOfURL:error:) func add(to doc: SeaDocument, contentsOf path: NSURL) throws {
+		trueSize = getDocumentSize(path.fileSystemRepresentation)
+		size = trueSize
+		let fm = NSFileManager.defaultManager()
+
+		/*
 	id imageRep;
 	SeaLayer *layer;
 	NSFileManager *fm = [NSFileManager defaultManager];
@@ -101,61 +123,18 @@
 	[[[doc operations] seaAlignment] centerLayerVertically:NULL];
 	
 	return YES;
-}
 
-
-- (IBAction)endPanel:(id)sender
-{
-	[NSApp stopModal];
-}
-
-- (IBAction)update:(id)sender
-{
-	double factor;
-	
-	switch ([scaleSlider intValue]) {
-		case 0:
-			factor = 0.5;
-		break;
-		case 1:
-			factor = 0.75;
-		break;
-		case 2:
-			factor = 1.0;
-		break;
-		case 3:
-			factor = 1.5;
-		break;
-		case 4:
-			factor = 2.0;
-		break;
-		case 5:
-			factor = 3.75;
-		break;
-		case 6:
-			factor = 5.0;
-		break;
-		case 7:
-			factor = 7.5;
-		break;
-		case 8:
-			factor = 10.0;
-		break;
-		case 9:
-			factor = 25.0;
-		break;
-		case 10:
-			factor = 50.0;
-		break;
-		default:
-			factor = 1.0;
-		break;
+		*/
 	}
 	
-	size.width = trueSize.width * factor;
-	size.height = trueSize.height * factor;
+	/// Closes the current modal dialog.
+	@IBAction func endPanel(sender: AnyObject!) {
+		
+	}
 	
-	[sizeLabel setStringValue:[NSString stringWithFormat:@"%d x %d", size.width, size.height]];
-}
+	/// Updates the document's expected size.
+	@IBAction func update(sender: AnyObject!) {
+		
+	}
 
-@end
+}

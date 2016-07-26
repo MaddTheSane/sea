@@ -36,7 +36,6 @@ typedef NS_ENUM(int, SeaPositionOptions) {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface PositionOptions : AbstractScaleOptions {
-
 	// Checkbox specifying whether the position tool can anchor floating selections
 	IBOutlet NSButton *canAnchorCheckbox;
 	

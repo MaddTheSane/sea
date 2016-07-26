@@ -232,9 +232,9 @@ typedef NS_ENUM(int, SeaSelectMode) {
 	@discussion	Flips the current selection's mask in the desired manner (does
 				not affect content).
 	@param		type
-				The type of flip (see SeaFlip).
+				The type of flip (see <code>SeaFlipType</code>).
 */
-- (void)flipSelection:(int)type;
+- (void)flipSelection:(SeaFlipType)type;
 
 /*!
 	@method		invertSelection

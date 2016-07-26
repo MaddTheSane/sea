@@ -58,7 +58,6 @@ typedef NS_ENUM(NSInteger, AbstractModifiers) {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface AbstractOptions : NSObject {
-	
 	// The options view associated with this tool
     IBOutlet NSView *view;
 	
@@ -67,7 +66,6 @@ typedef NS_ENUM(NSInteger, AbstractModifiers) {
 	
 	// The document associated
 	SeaDocument *document;
-	
 }
 
 /*!

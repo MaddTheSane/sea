@@ -1,6 +1,9 @@
 #import "Globals.h"
 #import "SeaContent.h"
 
+
+extern IntSize getDocumentSize(const char *path);
+
 /*!
 	@class		SVGContent
 	@abstract	Loads the contents of an SVG file using Apache's Batik.
@@ -9,9 +12,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2005 Mark Pazolli
 */
-
 @interface SVGContent : SeaContent {
-
 	// The length warning panel
 	IBOutlet NSPanel *waitPanel;
 	
@@ -29,7 +30,6 @@
 	
 	// The document's actual and scaled size
 	IntSize trueSize, size;
-	
 }
 
 /*!

@@ -85,8 +85,8 @@ typedef struct {
 	
 	// The EXIF data associated with this image
 	NSDictionary *exifData;
-	
 }
+
 /*!
 	@property	cmykSave
 	@discussion	Shows whether TIFF files should be saved using the CMYK colour
@@ -121,7 +121,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(SeaDocument*)doc;
+- (instancetype)initWithDocument:(SeaDocument*)doc NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@method		initForPasteboardWithDocument:
@@ -715,12 +715,12 @@ typedef struct {
 - (void)copyMerged;
 
 /*!
-	@method		canFlatten
+	@property	canFlatten
 	@discussion	Returns whether or not the document can be flattened, documents
 				for which flattening would have no effect cannot be flattened.
 	@result		Returns YES if the document can be flattened, NO otherwise.
 */
-- (BOOL)canFlatten;
+@property (readonly) BOOL canFlatten;
 
 /*!
 	@method		flatten

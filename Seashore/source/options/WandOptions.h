@@ -11,7 +11,6 @@
 */
 
 @interface WandOptions : AbstractSelectOptions {
-	
 	// A slider indicating the tolerance of the wand
 	IBOutlet NSSlider *toleranceSlider;
 	
@@ -20,7 +19,6 @@
 	
 	// A slider for the density of the wand sampling
 	IBOutlet NSSlider *intervalsSlider;
-	
 }
 
 /*!

@@ -37,7 +37,6 @@ typedef struct {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface CloneTool : AbstractTool {
-
 	// The last point we've been and the last point a brush was plotted (there is a difference)
 	NSPoint lastPoint, lastPlotPoint;
 	
@@ -100,7 +99,6 @@ typedef struct {
 	
 	// The merged data from which the clone tool is working (only allocated between mouse clicks)
 	unsigned char *mergedData;
-	
 }
 
 /*!

@@ -11,10 +11,8 @@
 */
 
 @interface ZoomOptions : AbstractOptions {
-
 	// A label specifying the current zoom
     IBOutlet NSTextField *zoomLabel;
-	
 }
 
 /*!

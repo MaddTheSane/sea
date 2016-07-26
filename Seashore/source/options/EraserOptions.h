@@ -10,7 +10,6 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface EraserOptions : AbstractPaintOptions {
-	
 	// A slider indicating the opacity of the bucket
 	IBOutlet NSSlider *opacitySlider;
 	
@@ -19,9 +18,7 @@
 	
 	// A checkbox indicating whether to fade in the same style as the paintbrush
 	IBOutlet NSButton *mimicBrushCheckbox;
-	
 }
-
 
 /*!
 	@method		awakeFromNib

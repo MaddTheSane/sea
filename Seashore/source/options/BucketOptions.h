@@ -11,7 +11,6 @@
 */
 
 @interface BucketOptions : AbstractPaintOptions {
-	
 	// A slider indicating the tolerance of the bucket
 	IBOutlet NSSlider *toleranceSlider;
 	

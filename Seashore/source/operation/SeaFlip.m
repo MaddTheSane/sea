@@ -9,10 +9,10 @@
 
 @implementation SeaFlip
 
-- (void)floatingFlip:(int)type
+- (void)floatingFlip:(SeaFlipType)type
 {	
 	// Fill out variables
-	[self simpleFlipOf:[(SeaLayer *)[[document contents] activeLayer] data] width: [(SeaLayer *)[[document contents] activeLayer] width] height: [(SeaLayer *)[[document contents] activeLayer] height] spp: [[document contents] spp] type: type];
+	[self simpleFlipOf:[[[document contents] activeLayer] data] width: [[[document contents] activeLayer] width] height: [[[document contents] activeLayer] height] spp: [[document contents] spp] type: type];
 	
 	
 	// Reflect the changes
@@ -28,28 +28,24 @@
 		[[[document undoManager] prepareWithInvocationTarget:self] floatingVerticalFlip];
 }
 
-- (void)simpleFlipOf:(unsigned char*)data width:(int)width height:(int)height spp:(int)spp type:(int)type
+- (void)simpleFlipOf:(unsigned char*)data width:(int)width height:(int)height spp:(int)spp type:(SeaFlipType)type
 {
-	unsigned char temp;
-	int i, j, k;
-	
 	// Do the correct flip
 	if (type == kHorizontalFlip) {
-		for (i = 0; i < width / 2; i++) {
-			for (j = 0; j < height; j++) {
-				for (k = 0; k < spp; k++) {
-					temp = data[(j * width + i) * spp + k];
+		for (int i = 0; i < width / 2; i++) {
+			for (int j = 0; j < height; j++) {
+				for (int k = 0; k < spp; k++) {
+					unsigned char temp = data[(j * width + i) * spp + k];
 					data[(j * width + i) * spp + k] = data[(j * width + (width - i - 1)) * spp + k];
 					data[(j * width + (width - i - 1)) * spp + k] = temp;
 				}
 			}
 		}
-	}
-	else {
-		for (i = 0; i < width; i++) {
-			for (j = 0; j < height / 2; j++) {
-				for (k = 0; k < spp; k++) {
-					temp = data[(j * width + i) * spp + k];
+	} else {
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height / 2; j++) {
+				for (int k = 0; k < spp; k++) {
+					unsigned char temp = data[(j * width + i) * spp + k];
 					data[(j * width + i) * spp + k] = data[((height - j - 1) * width + i) * spp + k];
 					data[((height - j - 1) * width + i) * spp + k] = temp;
 				}
@@ -68,7 +64,7 @@
 	[self floatingFlip:kVerticalFlip];
 }
 
-- (void)standardFlip:(int)type
+- (void)standardFlip:(SeaFlipType)type
 {
 	unsigned char *overlay, *data, *replace, *edata = NULL;
 	int i, j, k, width, height, spp;
@@ -78,10 +74,10 @@
 	
 	// Fill out variables
 	overlay = [[document whiteboard] overlay];
-	data = [(SeaLayer *)[[document contents] activeLayer] data];
+	data = [[[document contents] activeLayer] data];
 	replace = [[document whiteboard] replace];
-	width = [(SeaLayer *)[[document contents] activeLayer] width];
-	height = [(SeaLayer *)[[document contents] activeLayer] height];
+	width = [[[document contents] activeLayer] width];
+	height = [[[document contents] activeLayer] height];
 	spp = [[document contents] spp];
 	if ([[document selection] active])
 		rect = [[document selection] localRect];
@@ -118,8 +114,7 @@
 				}
 			}
 		}
-	}
-	else {
+	} else {
 		for (i = 0; i < rect.size.width; i++) {
 			for (j = 0; j < rect.size.height; j++) {
 				replace[(j + rect.origin.y) * width + (i + rect.origin.x)] = 255;
@@ -150,9 +145,9 @@
 	[(SeaHelpers *)[document helpers] applyOverlay];	
 }
 
-- (void)run:(int)type
+- (void)run:(SeaFlipType)type
 {
-	if ([(SeaLayer *)[[document contents] activeLayer] floating])
+	if ([[[document contents] activeLayer] floating])
 		[self floatingFlip:type];
 	else
 		[self standardFlip:type];	

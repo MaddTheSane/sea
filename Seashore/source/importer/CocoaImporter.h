@@ -12,12 +12,10 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface CocoaImporter : NSObject {
-
-	IBOutlet id pdfPanel;
-	IBOutlet id pageLabel;
-	IBOutlet id pageInput;
-	IBOutlet id resMenu;
-
+	IBOutlet NSPanel *pdfPanel;
+	IBOutlet NSTextField *pageLabel;
+	IBOutlet NSTextField *pageInput;
+	IBOutlet NSPopUpButton *resMenu;
 }
 
 /*!

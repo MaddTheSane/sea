@@ -775,7 +775,7 @@
 	[[document helpers] selectionChanged];
 }
 
-- (void)flipSelection:(int)type
+- (void)flipSelection:(SeaFlipType)type
 {
 	unsigned char tmp;
 	int src, dest;

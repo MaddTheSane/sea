@@ -11,7 +11,6 @@
 */
 
 @interface TextTool : AbstractTool {
-
 	// The preview panel
 	IBOutlet NSPanel *panel;
 	
@@ -32,7 +31,6 @@
 	
 	// Is the tool running?
 	BOOL running;
-	
 }
 
 /*!

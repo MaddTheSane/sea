@@ -12,7 +12,6 @@
 */
 
 @interface SmudgeTool : AbstractTool {
-	
 	// The accumulated data
 	unsigned char *accumData;
 	
@@ -24,7 +23,6 @@
 	
 	// The last where recorded
 	IntPoint lastWhere;
-	
 }
 
 /*!

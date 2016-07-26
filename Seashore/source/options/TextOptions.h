@@ -1,6 +1,8 @@
 #import "Globals.h"
 #import "AbstractPaintOptions.h"
 
+@class SeaProxy;
+
 /*!
 	@class		TextOptions
 	@abstract	Handles the options pane for the text tool.
@@ -9,11 +11,9 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface TextOptions : AbstractPaintOptions {
-
 	// The proxy object
-	IBOutlet id seaProxy;
+	IBOutlet SeaProxy *seaProxy;
 
 	// The pop-up menu specifying the alignment to be used
 	IBOutlet NSSegmentedControl *alignmentControl;
@@ -32,7 +32,6 @@
 	
 	// The font manager associated with the text tool
 	NSFontManager *fontManager;
-	
 }
 
 /*!

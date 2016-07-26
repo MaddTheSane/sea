@@ -1,4 +1,4 @@
-#import "Globals.h"
+#import <SeashoreKit/Globals.h>
 
 @class SeaAlignment, SeaMargins, SeaResolution, SeaScale, SeaDocRotation;
 @class SeaRotation, SeaFlip;

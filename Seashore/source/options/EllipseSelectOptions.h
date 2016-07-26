@@ -12,10 +12,8 @@
 */
 
 @interface EllipseSelectOptions : AbstractSelectOptions {
-	
 	// The AspectRatio instance linked to this options panel
 	IBOutlet AspectRatio *aspectRatio;
-	
 }
 
 /*!

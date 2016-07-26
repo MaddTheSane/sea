@@ -18,7 +18,6 @@
 				<b>Copyright:</b> Copyright (c) 2007 Mark Pazolli
 */
 @interface EffectTool : AbstractTool {
-
 	// The instance of the SeaPlugins class
 	SeaPlugins *seaPlugins;
 
@@ -27,7 +26,6 @@
 
 	// A count of the points so far registered
 	NSInteger count;
-
 }
 
 /*!

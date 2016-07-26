@@ -1,6 +1,8 @@
 #import "Globals.h"
 #import "AbstractOptions.h"
 
+@class InfoPanel;
+
 /*!
 	@class		EffectOptions
 	@abstract	Handles the options pane for the effects tool.
@@ -9,8 +11,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2007 Mark Pazolli
 */
-
-@interface EffectOptions : AbstractOptions <NSTableViewDataSource> {
+@interface EffectOptions : AbstractOptions <NSTableViewDataSource, NSTableViewDelegate> {
 	// The table listing all effects
 	IBOutlet NSTableView *effectTable;
 	
@@ -21,7 +22,7 @@
 	IBOutlet NSTextField *clickCountLabel;
 	
 	// The panel of the effect options
-	IBOutlet id panel;
+	IBOutlet InfoPanel *panel;
 
 	// The parent window for the effects options
 	__weak id parentWin;
@@ -36,11 +37,11 @@
 - (void)tableViewSelectionDidChange:(NSNotification *)notification;
 
 /*!
-	@method		selectedRow
+	@property	selectedRow
 	@discussion	The row currently selected by the options.
 	@result		An integer.
 */
-- (NSInteger)selectedRow;
+@property (readonly) NSInteger selectedRow;
 
 /*!
 	@method		updateClickCount:

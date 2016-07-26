@@ -12,7 +12,6 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface RectSelectOptions : AbstractSelectOptions {
-
 	// The slider to select the radius for the rounded rectangle
 	IBOutlet NSSlider *radiusSlider;
 	

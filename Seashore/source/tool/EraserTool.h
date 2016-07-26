@@ -36,7 +36,6 @@ typedef struct {
 
 @interface EraserTool : AbstractTool
 {
-
 	// The last point we've been and the last point a brush was plotted (there is a difference)
 	NSPoint lastPoint, lastPlotPoint;
 	
@@ -66,7 +65,6 @@ typedef struct {
 
 	// The last where recorded
 	IntPoint lastWhere;
-	
 }
 
 /*!
