@@ -8,8 +8,6 @@
 #import "TextTool.h"
 #import "SeaDocument.h"
 
-id gNewFont;
-
 @interface NSObject (changeFont)
 - (IBAction)changeSpecialFont:(id)sender;
 @end

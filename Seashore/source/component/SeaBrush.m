@@ -1,5 +1,6 @@
 #import "SeaBrush.h"
 #import "Bitmap.h"
+#import "SeaBrushFuncs.h"
 
 typedef struct {
   unsigned int   header_size;  /*  header_size = sizeof (BrushHeader) + brush name  */
@@ -15,7 +16,6 @@ typedef struct {
 
 //TODO: Anti-aliasing for pixmap brushes?
 
-extern void determineBrushMask(unsigned char *input, unsigned char *output, int width, int height, int index1, int index2);
 
 @implementation SeaBrush
 @synthesize usePixmap;
@@ -312,8 +312,7 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 		GCScalePixels(scaled, scalew, scaleh,  mask, width, height, GIMP_INTERPOLATION_LINEAR, 1);
 		arrangePixels(positioned, width, height, scaled, scalew, scaleh);
 		determineBrushMask(positioned, maskCache[minCheckPos].cache, width, height, index1, index2);
-	}
-	else {
+	} else {
 		determineBrushMask(mask, maskCache[minCheckPos].cache, width, height, index1, index2);
 	}
 	maskCache[minCheckPos].index1 = index1;

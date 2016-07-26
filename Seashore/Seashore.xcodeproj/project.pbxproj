@@ -692,7 +692,6 @@
 		55BD2E8A18D103CE00C4EE1B /* Vortex+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D8518D0D0B900C4EE1B /* Vortex+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55BD2E8B18D103CE00C4EE1B /* White Point Adjust+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55BD2E8C18D103CE00C4EE1B /* Zoom Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		55D0662D1C6EEA7A00BEDAE9 /* StandardMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC14FF04C0F1A700A80207 /* StandardMerge.m */; };
 		55D0662E1C6EEAA100BEDAE9 /* ColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC150304C0F2FD00A80207 /* ColorConversion.m */; };
 		55D066301C6EEAF200BEDAE9 /* Graphics.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55D0662F1C6EEAF200BEDAE9 /* Graphics.xcassets */; };
 		55DA7C7B1926C26C002F6A3A /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
@@ -752,7 +751,6 @@
 		55E5E4C618D273DB0082E60F /* ThresholdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5E35518D26A300082E60F /* ThresholdView.m */; };
 		55E5E4C718D273DF0082E60F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E5E35718D26A300082E60F /* Localizable.strings */; };
 		55E5E4C818D273E40082E60F /* VertStripesClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5E35F18D26A300082E60F /* VertStripesClass.m */; };
-		55E5E4C918D277530082E60F /* StandardMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC14FF04C0F1A700A80207 /* StandardMerge.m */; };
 		55E5E4CA18D277D90082E60F /* ColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC150304C0F2FD00A80207 /* ColorConversion.m */; };
 		55E5E4CD18D27A370082E60F /* Brightness.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3A518D26A8F0082E60F /* Brightness.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4CE18D27A370082E60F /* Checkerboard.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3B518D26A950082E60F /* Checkerboard.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -7878,7 +7876,6 @@
 			files = (
 				55E5E4CA18D277D90082E60F /* ColorConversion.m in Sources */,
 				55E5E4BD18D273B80082E60F /* RandomClass.m in Sources */,
-				55E5E4C918D277530082E60F /* StandardMerge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8000,7 +7997,6 @@
 				DC5ED8FB0FF2E3A900DB0897 /* InfoPanelBacking.m in Sources */,
 				DC9C46220FFC1F4400C44AA4 /* AbstractPaintOptions.m in Sources */,
 				DC9C467A0FFC2CCF00C44AA4 /* AbstractPanelUtility.m in Sources */,
-				55D0662D1C6EEA7A00BEDAE9 /* StandardMerge.m in Sources */,
 				DC414BAA102F54FD00B66F04 /* StatusUtility.m in Sources */,
 				DC56186810CC73CF009CF792 /* BannerView.m in Sources */,
 				DCD6A5A5114DA294002A4CFD /* WarningsUtility.m in Sources */,
@@ -9655,25 +9651,16 @@
 		55115C211D46D65100E76B5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = SwiftCMYK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.SwiftCMYK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -9681,17 +9668,14 @@
 		55115C221D46D65100E76B5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = SwiftCMYK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.SwiftCMYK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9939,20 +9923,12 @@
 		555F59901D373CEC0085AC96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHorizStripes/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.SwiftHorizStripes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9963,16 +9939,13 @@
 		555F59911D373CEC0085AC96 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
 				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = SwiftHorizStripes/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.SwiftHorizStripes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -12535,6 +12508,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -12554,8 +12528,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -12570,6 +12547,7 @@
 					SeashoreKit,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -12582,6 +12560,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -12602,7 +12581,9 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -12616,6 +12597,7 @@
 					SeashoreKit,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;

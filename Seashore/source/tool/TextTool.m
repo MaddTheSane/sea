@@ -16,7 +16,7 @@
 #import "Bitmap.h"
 #import "OptionsUtility.h"
 
-extern id gNewFont;
+id gNewFont;
 
 @implementation TextTool
 
