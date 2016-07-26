@@ -80,25 +80,21 @@ Boolean GetMetadataForFile(void* thisInterface,
 			
 
 			nsAttribs[(NSString *)kMDItemBitsPerSample] = @([contents spp] * 8);
-			
 			nsAttribs[(NSString *)kMDItemResolutionWidthDPI] = @([contents xres]);
-			
 			nsAttribs[(NSString *)kMDItemResolutionHeightDPI] = @([contents yres]);
 			
-			if([contents type] == XCF_RGB_IMAGE){
+			if ([contents type] == XCF_RGB_IMAGE) {
 				nsAttribs[(NSString *)kMDItemColorSpace] = @"RGB";
-			}else if([contents type] == XCF_GRAY_IMAGE){
+			} else if([contents type] == XCF_GRAY_IMAGE) {
 				nsAttribs[(NSString *)kMDItemColorSpace] = @"Gray";
 			}
 			
 			NSMutableArray *names = [NSMutableArray arrayWithCapacity:[contents layerCount]];
 			BOOL hasAlpha = NO;
-			for (NSInteger i = 0; i < [contents layerCount]; i++) {
-				XCFLayer *layer = (XCFLayer*)[contents layerAtIndex:i];
+			for (XCFLayer *layer in contents.layers) {
 				[names addObject:[layer name]];
-				if([layer hasAlpha]) {
+				if ([layer hasAlpha]) {
 					hasAlpha = YES;
-					break;
 				}
 			}
 

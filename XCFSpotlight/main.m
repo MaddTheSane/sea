@@ -8,10 +8,6 @@
 //==============================================================================
 
 
-
-
-
-
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/CFPlugInCOM.h>
 #include <CoreServices/CoreServices.h>
@@ -122,9 +118,7 @@ void DeallocMetadataImporterPluginType(MDImportPlugType *thisInstance)
 //
 HRESULT MetadataImporterQueryInterface(void *thisInstance, REFIID iid, LPVOID *ppv)
 {
-	CFUUIDRef interfaceID;
-	
-	interfaceID = CFUUIDCreateFromUUIDBytes(kCFAllocatorDefault, iid);
+	CFUUIDRef interfaceID = CFUUIDCreateFromUUIDBytes(kCFAllocatorDefault, iid);
 	
 	if (CFEqual(interfaceID,kMDImporterInterfaceID)) {
 		/* If the Right interface was requested, bump the ref count,
@@ -191,7 +185,7 @@ void *MetadataImporterPluginFactory(CFAllocatorRef allocator, CFUUIDRef typeID)
 	/* If correct type is being requested, allocate an
 	 * instance of TestType and return the IUnknown interface.
 	 */
-    if (CFEqual(typeID, kMDImporterTypeID)){
+    if (CFEqual(typeID, kMDImporterTypeID)) {
         uuid = CFUUIDCreateFromString(kCFAllocatorDefault, CFSTR(PLUGIN_ID));
         result = AllocMetadataImporterPluginType(uuid);
         CFRelease(uuid);

@@ -125,9 +125,9 @@
 
 - (IBAction)deleteLayer:(id)sender
 {
-	if ([[document contents] layerCount] > 1){
+	if ([[document contents] layerCount] > 1) {
 		[(SeaContent *)[document contents] deleteLayer:kActiveLayer];
-	}else{
+	} else {
 		NSBeep();
 	}
 }
