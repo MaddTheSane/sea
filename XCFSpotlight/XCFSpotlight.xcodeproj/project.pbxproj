@@ -35,7 +35,7 @@
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		55909E9C18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/schema.strings"; sourceTree = "<group>"; };
 		55909E9D18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		55AAF2A61D36D97900E2ADF9 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bitmap.h; path = ../Seashore/source/extra/Bitmap.h; sourceTree = "<group>"; };
+		55AAF2A61D36D97900E2ADF9 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bitmap.h; path = extra/Bitmap.h; sourceTree = "<group>"; };
 		55B95A961C6FB71700E37A8C /* GetMetadataForFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetMetadataForFile.h; sourceTree = "<group>"; };
 		8D576316048677EA00EA77CD /* XCFSpotlight.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCFSpotlight.mdimporter; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -44,20 +44,20 @@
 		C88FB7DB0674470F006EBB30 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/schema.strings; sourceTree = "<group>"; };
 		DC0D53A41041FFB30037378A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DC0D53A51041FFB30037378A /* GetMetadataForFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMetadataForFile.m; sourceTree = "<group>"; };
-		DC0D53A61041FFB30037378A /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = ../Seashore/source/main/Globals.h; sourceTree = "<group>"; };
-		DC0D53A71041FFB30037378A /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Seashore/source/main/Constants.h; sourceTree = "<group>"; };
-		DC0D53A81041FFB30037378A /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rects.m; path = ../Seashore/source/extra/Rects.m; sourceTree = "<group>"; };
-		DC0D53A91041FFB30037378A /* Rects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rects.h; path = ../Seashore/source/extra/Rects.h; sourceTree = "<group>"; };
-		DC0D53AA1041FFB30037378A /* RLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RLE.m; path = ../Seashore/source/extra/RLE.m; sourceTree = "<group>"; };
-		DC0D53AB1041FFB30037378A /* RLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RLE.h; path = ../Seashore/source/extra/RLE.h; sourceTree = "<group>"; };
-		DC0D53AC1041FFB30037378A /* SeaContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeaContent.h; path = ../Seashore/source/document/SeaContent.h; sourceTree = "<group>"; };
-		DC0D53AD1041FFB30037378A /* SeaContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeaContent.m; path = ../Seashore/source/document/SeaContent.m; sourceTree = "<group>"; };
-		DC0D53AE1041FFB30037378A /* XCFContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCFContent.h; path = ../Seashore/source/document/XCFContent.h; sourceTree = "<group>"; };
-		DC0D53AF1041FFB30037378A /* XCFContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCFContent.m; path = ../Seashore/source/document/XCFContent.m; sourceTree = "<group>"; };
-		DC0D53B01041FFB30037378A /* SeaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeaLayer.h; path = ../Seashore/source/document/SeaLayer.h; sourceTree = "<group>"; };
-		DC0D53B11041FFB30037378A /* SeaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeaLayer.m; path = ../Seashore/source/document/SeaLayer.m; sourceTree = "<group>"; };
-		DC0D53B21041FFB30037378A /* XCFLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCFLayer.h; path = ../Seashore/source/document/XCFLayer.h; sourceTree = "<group>"; };
-		DC0D53B31041FFB30037378A /* XCFLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCFLayer.m; path = ../Seashore/source/document/XCFLayer.m; sourceTree = "<group>"; };
+		DC0D53A61041FFB30037378A /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = main/Globals.h; sourceTree = "<group>"; };
+		DC0D53A71041FFB30037378A /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = main/Constants.h; sourceTree = "<group>"; };
+		DC0D53A81041FFB30037378A /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rects.m; path = extra/Rects.m; sourceTree = "<group>"; };
+		DC0D53A91041FFB30037378A /* Rects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rects.h; path = extra/Rects.h; sourceTree = "<group>"; };
+		DC0D53AA1041FFB30037378A /* RLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RLE.m; path = extra/RLE.m; sourceTree = "<group>"; };
+		DC0D53AB1041FFB30037378A /* RLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RLE.h; path = extra/RLE.h; sourceTree = "<group>"; };
+		DC0D53AC1041FFB30037378A /* SeaContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeaContent.h; path = document/SeaContent.h; sourceTree = "<group>"; };
+		DC0D53AD1041FFB30037378A /* SeaContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeaContent.m; path = document/SeaContent.m; sourceTree = "<group>"; };
+		DC0D53AE1041FFB30037378A /* XCFContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCFContent.h; path = document/XCFContent.h; sourceTree = "<group>"; };
+		DC0D53AF1041FFB30037378A /* XCFContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCFContent.m; path = document/XCFContent.m; sourceTree = "<group>"; };
+		DC0D53B01041FFB30037378A /* SeaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeaLayer.h; path = document/SeaLayer.h; sourceTree = "<group>"; };
+		DC0D53B11041FFB30037378A /* SeaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeaLayer.m; path = document/SeaLayer.m; sourceTree = "<group>"; };
+		DC0D53B21041FFB30037378A /* XCFLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCFLayer.h; path = document/XCFLayer.h; sourceTree = "<group>"; };
+		DC0D53B31041FFB30037378A /* XCFLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCFLayer.m; path = document/XCFLayer.m; sourceTree = "<group>"; };
 		DC0D54CA104200B40037378A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -110,24 +110,10 @@
 		08FB77AFFE84173DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				55AAF2A61D36D97900E2ADF9 /* Bitmap.h */,
+				558AB7D21D46FDDE00EF422C /* Shared with Seashore */,
 				DC0D53A41041FFB30037378A /* main.m */,
 				DC0D53A51041FFB30037378A /* GetMetadataForFile.m */,
 				55B95A961C6FB71700E37A8C /* GetMetadataForFile.h */,
-				DC0D53A61041FFB30037378A /* Globals.h */,
-				DC0D53A71041FFB30037378A /* Constants.h */,
-				DC0D53A81041FFB30037378A /* Rects.m */,
-				DC0D53A91041FFB30037378A /* Rects.h */,
-				DC0D53AA1041FFB30037378A /* RLE.m */,
-				DC0D53AB1041FFB30037378A /* RLE.h */,
-				DC0D53AC1041FFB30037378A /* SeaContent.h */,
-				DC0D53AD1041FFB30037378A /* SeaContent.m */,
-				DC0D53AE1041FFB30037378A /* XCFContent.h */,
-				DC0D53AF1041FFB30037378A /* XCFContent.m */,
-				DC0D53B01041FFB30037378A /* SeaLayer.h */,
-				DC0D53B11041FFB30037378A /* SeaLayer.m */,
-				DC0D53B21041FFB30037378A /* XCFLayer.h */,
-				DC0D53B31041FFB30037378A /* XCFLayer.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -138,6 +124,29 @@
 				8D576316048677EA00EA77CD /* XCFSpotlight.mdimporter */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		558AB7D21D46FDDE00EF422C /* Shared with Seashore */ = {
+			isa = PBXGroup;
+			children = (
+				55AAF2A61D36D97900E2ADF9 /* Bitmap.h */,
+				DC0D53A71041FFB30037378A /* Constants.h */,
+				DC0D53A61041FFB30037378A /* Globals.h */,
+				DC0D53A91041FFB30037378A /* Rects.h */,
+				DC0D53A81041FFB30037378A /* Rects.m */,
+				DC0D53AB1041FFB30037378A /* RLE.h */,
+				DC0D53AA1041FFB30037378A /* RLE.m */,
+				DC0D53AC1041FFB30037378A /* SeaContent.h */,
+				DC0D53AD1041FFB30037378A /* SeaContent.m */,
+				DC0D53B01041FFB30037378A /* SeaLayer.h */,
+				DC0D53B11041FFB30037378A /* SeaLayer.m */,
+				DC0D53AE1041FFB30037378A /* XCFContent.h */,
+				DC0D53AF1041FFB30037378A /* XCFContent.m */,
+				DC0D53B21041FFB30037378A /* XCFLayer.h */,
+				DC0D53B31041FFB30037378A /* XCFLayer.m */,
+			);
+			name = "Shared with Seashore";
+			path = ../Seashore/source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

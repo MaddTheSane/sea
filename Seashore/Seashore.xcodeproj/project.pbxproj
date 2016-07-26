@@ -12650,6 +12650,7 @@
 				55115C221D46D65100E76B5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		551E569018D0132900E4CDAF /* Build configuration list for PBXNativeTarget "Edges+" */ = {
 			isa = XCConfigurationList;

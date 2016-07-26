@@ -77,7 +77,7 @@
 						basePixel[k] = basePixel[spp - 1];
 					basePixel[spp - 1] = 255;
 				}
-				blendPixel(spp, accumData, (j * brushWidth + i) * spp, basePixel, 0, rate);
+				SeaBlendPixel(spp, accumData, (j * brushWidth + i) * spp, basePixel, 0, rate);
 				replace[pos] = brushData[j * brushWidth + i] + int_mult((255 - brushData[j * brushWidth + i]), replace[pos], t1);
 				memcpy(&(overlay[pos * spp]), &(accumData[(j * brushWidth + i) * spp]), spp);
 				

@@ -77,7 +77,7 @@
 
 - (void)boundariesAndContentChanged:(BOOL)scaling
 {
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 	int i;
 	
 	[[document whiteboard] readjust];
@@ -85,8 +85,8 @@
 	for (i = 0; i < [contents layerCount]; i++) {
 		[[contents layer:i] updateThumbnail];
 	}
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
-	[(StatusUtility *)[[SeaController utilitiesManager] statusUtilityFor:document] update];
+	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
+	[[[SeaController utilitiesManager] statusUtilityFor:document] update];
 	[[document docView] setNeedsDisplay:YES]; 
 
 }
@@ -98,7 +98,7 @@
 
 - (void)activeLayerChanged:(int)eventType rect:(IntRect *)rect
 {
-	id whiteboard = [document whiteboard];
+	SeaWhiteboard *whiteboard = [document whiteboard];
 	id docView = [document docView];
 	
 	[[document selection] readjustSelection];
@@ -123,8 +123,8 @@
 			[whiteboard readjustAltData:YES];
 		break;
 	}
-	[(LayerDataSource *)[document dataSource] update];
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
+	[[document dataSource] update];
+	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
 }
 
 - (void)documentWillFlatten
@@ -139,7 +139,7 @@
 
 - (void)typeChanged
 {
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
 	[[document whiteboard] readjust];
 	[self layerContentsChanged:kAllLayers];
 	[[[SeaController utilitiesManager] statusUtilityFor:document] update];
@@ -148,28 +148,30 @@
 
 - (void)applyOverlay
 {
-	id contents = [document contents], layer;
+	SeaContent *contents = [document contents];
+	SeaLayer *layer;
 	IntRect rect;
 	
-	rect = [(SeaWhiteboard *)[document whiteboard] applyOverlay];
+	rect = [[document whiteboard] applyOverlay];
 	layer = [contents activeLayer];
 	[layer updateThumbnail];
-	[(SeaWhiteboard *)[document whiteboard] update:rect inThread:NO];
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
+	[[document whiteboard] update:rect inThread:NO];
+	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
 }
 
 - (void)overlayChanged:(IntRect)rect inThread:(BOOL)thread
 {
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 	
 	rect.origin.x += [[contents activeLayer] xoff];
 	rect.origin.y += [[contents activeLayer] yoff];
-	[(SeaWhiteboard *)[document whiteboard] update:rect inThread:thread];
+	[[document whiteboard] update:rect inThread:thread];
 }
 
 - (void)layerAttributesChanged:(NSInteger)index hold:(BOOL)hold
 {
-	id contents = [document contents], layer;
+	SeaContent *contents = [document contents];
+	SeaLayer *layer;
 	IntRect rect;
 	
 	if (index == kActiveLayer)
@@ -188,12 +190,13 @@
 	}
 	
 	if (!hold)
-		[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
+		[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
 }
 
 - (void)layerBoundariesChanged:(NSInteger)index
 {
-	id contents = [document contents], layer;
+	SeaContent *contents = [document contents];
+	SeaLayer *layer;
 	IntRect rect;
 	int i;
 	
@@ -221,14 +224,15 @@
 	
 	[[document selection] readjustSelection];
 	[[document whiteboard] readjustLayer];
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
+	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
 	[[document docView] setNeedsDisplay:YES]; 
 
 }
 
 - (void)layerContentsChanged:(NSInteger)index
 {
-	id contents = [document contents], layer;
+	SeaContent *contents = [document contents];
+	SeaLayer *layer;
 	IntRect rect;
 	int i;
 	
@@ -253,16 +257,17 @@
 			layer = [contents layer:index];
 			rect = IntMakeRect([layer xoff], [layer yoff], [(SeaLayer *)layer width], [(SeaLayer *)layer height]);
 			[layer updateThumbnail];
-			[(SeaWhiteboard *)[document whiteboard] update:rect inThread:NO];
+			[[document whiteboard] update:rect inThread:NO];
 		break;
 	}
 	
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
+	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
 }
 
 - (void)layerOffsetsChanged:(NSInteger)index from:(IntPoint)oldOffsets
 {
-	id contents = [document contents], layer;
+	SeaContent *contents = [document contents];
+	SeaLayer *layer;
 	IntRect rectA, rectB, rectC;
 	int xoff, yoff;
 
@@ -283,16 +288,16 @@
 			yoff = [layer yoff];
 			rectA.origin.x = MIN(xoff, oldOffsets.x);
 			rectA.origin.y = MIN(yoff, oldOffsets.y);
-			rectA.size.width = MAX(xoff, oldOffsets.x) - MIN(xoff, oldOffsets.x) + [(SeaLayer *)layer width];
-			rectA.size.height = MAX(yoff, oldOffsets.y) - MIN(yoff, oldOffsets.y) + [(SeaLayer *)layer height];
-			rectB = IntMakeRect(oldOffsets.x, oldOffsets.y, [(SeaLayer *)layer width], [(SeaLayer *)layer height]);
-			rectC = IntMakeRect(xoff, yoff, [(SeaLayer *)layer width], [(SeaLayer *)layer height]);
+			rectA.size.width = MAX(xoff, oldOffsets.x) - MIN(xoff, oldOffsets.x) + [layer width];
+			rectA.size.height = MAX(yoff, oldOffsets.y) - MIN(yoff, oldOffsets.y) + [layer height];
+			rectB = IntMakeRect(oldOffsets.x, oldOffsets.y, [layer width], [layer height]);
+			rectC = IntMakeRect(xoff, yoff, [layer width], [layer height]);
 			if (rectA.size.width * rectA.size.height < rectB.size.width * rectB.size.height + rectC.size.width * rectC.size.height) {
-				[(SeaWhiteboard *)[document whiteboard] update:rectA inThread:NO];
+				[[document whiteboard] update:rectA inThread:NO];
 			}
 			else {
-				[(SeaWhiteboard *)[document whiteboard] update:rectB inThread:NO];
-				[(SeaWhiteboard *)[document whiteboard] update:rectC inThread:NO];
+				[[document whiteboard] update:rectB inThread:NO];
+				[[document whiteboard] update:rectC inThread:NO];
 			}
 		break;
 	}
@@ -304,7 +309,8 @@
 
 - (void)layerLevelChanged:(NSInteger)index
 {
-	id contents = [document contents], layer;
+	SeaContent *contents = [document contents];
+	SeaLayer *layer;
 	IntRect rect;
 	
 	if (index == kActiveLayer)
@@ -321,26 +327,26 @@
 			[(SeaWhiteboard *)[document whiteboard] update:rect inThread:NO];
 		break;
 	}
-	[(LayerDataSource *)[document dataSource] update];
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
+	[[document dataSource] update];
+	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
 }
 
 - (void)layerSnapshotRestored:(int)index rect:(IntRect)rect
 {
-	id layer;
+	SeaLayer *layer;
 	
 	layer = [[document contents] layer:index];
 	rect.origin.x += [layer xoff];
 	rect.origin.y += [layer yoff];
 	[(SeaWhiteboard *)[document whiteboard] update:rect inThread:NO];
 	[layer updateThumbnail];
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
+	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
 }
 
 - (void)layerTitleChanged
 {
-	[(LayerDataSource *)[document dataSource] update];
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
+	[[document dataSource] update];
+	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
 }
 
 @end

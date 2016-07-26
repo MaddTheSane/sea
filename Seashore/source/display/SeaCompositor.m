@@ -189,26 +189,26 @@
 					if (selectedChannel == kAllChannels && !floating) {
 						switch (options.overlayBehaviour) {
 							case SeaOverlayBehaviourErasing:
-								eraseMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
+								SeaEraseMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
 								break;
 								
 							case SeaOverlayBehaviourReplacing:
-								replaceMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
+								SeaReplaceMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
 								break;
 								
 							default:
-								specialMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
+								SeaSpecialMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
 								break;
 						}
 					} else if (selectedChannel == kPrimaryChannels || floating) {
 						if (selectOpacity > 0) {
 							switch (options.overlayBehaviour) {							
 								case SeaOverlayBehaviourReplacing:
-									replacePrimaryMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
+									SeaReplacePrimaryMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
 									break;
 									
 								default:
-									primaryMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity, YES);
+									SeaPrimaryMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity, YES);
 									break;
 							}
 						}
@@ -216,11 +216,11 @@
 						if (selectOpacity > 0) {
 							switch (options.overlayBehaviour) {							
 								case SeaOverlayBehaviourReplacing:
-									replaceAlphaMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
+									SeaReplaceAlphaMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
 									break;
 									
 								default:
-									alphaMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
+									SeaAlphaMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
 									break;
 							}
 						}
@@ -236,13 +236,13 @@
 					tempSpace[k] = destPtr[destLoc + k];
 				
 				// Apply the appropriate effect using the source pixel
-				selectMerge(mode, options.spp, tempSpace, 0, tempSpace2, 0);
+				SeaSelectMerge(mode, options.spp, tempSpace, 0, tempSpace2, 0);
 				
 				// Then merge the pixel in temporary memory with the destination pixel
-				normalMerge(options.spp, destPtr, destLoc, tempSpace, 0, opacity);
+				SeaNormalMerge(options.spp, destPtr, destLoc, tempSpace, 0, opacity);
 			} else {
 				// Then merge the pixel in temporary memory with the destination pixel
-				normalMerge(options.spp, destPtr, destLoc, tempSpace2, 0, opacity);
+				SeaNormalMerge(options.spp, destPtr, destLoc, tempSpace2, 0, opacity);
 			}
 		}
 	}
@@ -371,15 +371,15 @@
 								break;
 						}
 						if (selectOpacity > 0) {
-							primaryMerge(options.spp, tempSpace3, 0, overlay, floatLoc, selectOpacity, YES);
+							SeaPrimaryMerge(options.spp, tempSpace3, 0, overlay, floatLoc, selectOpacity, YES);
 						}
 					}
 					if (selectedChannel == kAllChannels) {
-						normalMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255);
+						SeaNormalMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255);
 					} else if (selectedChannel == kPrimaryChannels) {
-						primaryMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255, YES);
+						SeaPrimaryMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255, YES);
 					} else if (selectedChannel == kAlphaChannel) {
-						alphaMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255);
+						SeaAlphaMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255);
 					}
 				}
 			}
@@ -391,13 +391,13 @@
 					tempSpace[k] = destPtr[destLoc + k];
 				
 				// Apply the appropriate effect using the source pixel
-				selectMerge(mode, options.spp, tempSpace, 0, tempSpace2, 0);
+				SeaSelectMerge(mode, options.spp, tempSpace, 0, tempSpace2, 0);
 				
 				// Then merge the pixel in temporary memory with the destination pixel
-				normalMerge(options.spp, destPtr, destLoc, tempSpace, 0, opacity);
+				SeaNormalMerge(options.spp, destPtr, destLoc, tempSpace, 0, opacity);
 			} else {
 				// Then merge the pixel in temporary memory with the destination pixel
-				normalMerge(options.spp, destPtr, destLoc, tempSpace2, 0, opacity);
+				SeaNormalMerge(options.spp, destPtr, destLoc, tempSpace2, 0, opacity);
 			
 			}
 			

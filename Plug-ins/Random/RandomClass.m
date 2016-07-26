@@ -66,7 +66,7 @@
 				memcpy(&overlay[pos * spp], background, spp);
 				for (k = 0; k < spp; k++)
 					random[k] = (rand() << 8) >> 20;
-				specialMerge(spp, overlay, pos * spp, random, 0, 255);
+				SeaSpecialMerge(spp, overlay, pos * spp, random, 0, 255);
 			}
 			else {
 				for (k = 0; k < spp; k++)

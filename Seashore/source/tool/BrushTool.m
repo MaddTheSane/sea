@@ -63,7 +63,7 @@
 					
 					// Change the pixel colour appropriately
 					overlayPos = (width * (ipoint.y + j) + ipoint.x + i) * 4;
-					specialMerge(4, overlay, overlayPos, brushData, (j * brushWidth + i) * 4, pressure);
+					SeaSpecialMerge(4, overlay, overlayPos, brushData, (j * brushWidth + i) * 4, pressure);
 					
 				}
 			}
@@ -85,7 +85,7 @@
 					// Change the pixel colour appropriately
 					overlayPos = (width * (ipoint.y + j) + ipoint.x + i) * spp;
 					basePixel[spp - 1] = brushData[j * brushWidth + i];
-					specialMerge(spp, overlay, overlayPos, basePixel, 0, pressure);
+					SeaSpecialMerge(spp, overlay, overlayPos, basePixel, 0, pressure);
 					
 				}
 			}

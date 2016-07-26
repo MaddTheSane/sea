@@ -63,10 +63,9 @@ Boolean GetMetadataForFile(void* thisInterface,
     // Don't assume that there is an autorelease pool around the calling of this function.
     @autoreleasepool {
 		NSMutableDictionary *nsAttribs = (__bridge NSMutableDictionary*)attributes;
-    // load the document at the specified location
+		// load the document at the specified location
 		XCFContent *contents = [[XCFContent alloc] initWithContentsOfFile: (__bridge NSString *)pathToFile];
-		if(contents)
-		{
+		if (contents) {
 			int width = [contents width];
 			int height = [contents height];
 			nsAttribs[(NSString *)kMDItemPixelWidth] = @(width);
@@ -107,7 +106,7 @@ Boolean GetMetadataForFile(void* thisInterface,
 			nsAttribs[(NSString *)kMDItemHasAlphaChannel] = @(hasAlpha);
 			nsAttribs[(NSString *)kMDItemLayerNames] = names;
 
-			if([contents exifData]){
+			if ([contents exifData]) {
 				NSDictionary *data = [contents exifData];
 				if(data[@"FNumber"]){
 					nsAttribs[(NSString *)kMDItemFNumber] = data[@"FNumber"];

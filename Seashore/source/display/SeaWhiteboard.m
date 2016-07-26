@@ -314,15 +314,15 @@ extern IntPoint SeaScreenResolution;
 					// For the general case
 					switch (overlayBehaviour) {
 						case SeaOverlayBehaviourErasing:
-							eraseMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							SeaEraseMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
 							break;
 							
 						case SeaOverlayBehaviourReplacing:
-							replaceMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							SeaReplaceMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
 							break;
 							
 						default:
-							specialMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							SeaSpecialMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
 							break;
 					}
 					
@@ -331,22 +331,22 @@ extern IntPoint SeaScreenResolution;
 					// For the primary channels
 					switch (overlayBehaviour) {
 						case SeaOverlayBehaviourReplacing:
-							replacePrimaryMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							SeaReplacePrimaryMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
 							break;
 							
 						default:
-							primaryMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity, NO);
+							SeaPrimaryMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity, NO);
 							break;
 					}
 				} else if (selectedChannel == kAlphaChannel) {
 					// For the alpha channels
 					switch (overlayBehaviour) {
 						case SeaOverlayBehaviourReplacing:
-							replaceAlphaMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							SeaReplaceAlphaMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
 							break;
 							
 						default:
-							alphaMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							SeaAlphaMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
 							break;
 					}
 				}
@@ -659,7 +659,7 @@ extern IntPoint SeaScreenResolution;
 							tempSpace2[0] = floatingData[(ty * selectRect.size.width + tx) * spp];
 							tempSpace2[1] = floatingData[(ty * selectRect.size.width + tx + 1) * spp - 1];
 						}
-						normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, 255);
+						SeaNormalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, 255);
 					}
 					if (mask)
 						selectOpacity = mask[(point.y - selectRect.origin.y - maskOffset.y) * maskSize.width + (point.x - selectRect.origin.x - maskOffset.x)];
@@ -690,14 +690,14 @@ extern IntPoint SeaScreenResolution;
 						}
 						if (overlayBehaviour == SeaOverlayBehaviourReplacing) {
 							nextOpacity = int_mult(replace[ty * selectRect.size.width + tx], selectOpacity, t); 
-							replaceMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
+							SeaReplaceMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}
 						else if (overlayBehaviour ==  SeaOverlayBehaviourMasking) {
 							nextOpacity = int_mult(replace[ty * selectRect.size.width + tx], selectOpacity, t); 
-							normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
+							SeaNormalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}
 						else {							
-							normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, selectOpacity);
+							SeaNormalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, selectOpacity);
 						}
 					}
 				}
@@ -724,14 +724,14 @@ extern IntPoint SeaScreenResolution;
 						}
 						if (overlayBehaviour == SeaOverlayBehaviourReplacing) {
 							nextOpacity = int_mult(replace[temp], selectOpacity, t); 
-							replaceMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
+							SeaReplaceMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}
 						else if (overlayBehaviour ==  SeaOverlayBehaviourMasking) {
 							nextOpacity = int_mult(replace[temp], selectOpacity, t); 
-							normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
+							SeaNormalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}
 						else
-							normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, selectOpacity);
+							SeaNormalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, selectOpacity);
 					}
 				}
 				

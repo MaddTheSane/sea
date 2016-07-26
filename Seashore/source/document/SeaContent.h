@@ -527,7 +527,7 @@ typedef struct {
 	@param		layer
 				The layer to add.
 */
-- (void)addLayerObject:(id)layer;
+- (void)addLayerObject:(SeaLayer*)layer;
 
 /*!
 	@method		addLayerFromPasteboard:
@@ -537,7 +537,7 @@ typedef struct {
 				The pasteboard
 				
 */
-- (void)addLayerFromPasteboard:(id)pboard;
+- (void)addLayerFromPasteboard:(NSPasteboard*)pboard;
 
 /*!
 	@method		copyLayer:
@@ -546,7 +546,7 @@ typedef struct {
 	@param		layer
 				The layer upon which to base the new layer.
 */
-- (void)copyLayer:(id)layer;
+- (void)copyLayer:(SeaLayer*)layer;
 
 /*!
 	@method		duplicateLayer:
@@ -642,7 +642,7 @@ typedef struct {
 				index
 				The new index of the moved layer.
 */
-- (void)moveLayer:(id)layer toIndex:(NSInteger)index;
+- (void)moveLayer:(SeaLayer*)layer toIndex:(NSInteger)index;
 
 /*!
 	@method		moveLayerOfIndex:toIndex:
@@ -747,7 +747,7 @@ typedef struct {
 	@param		newName
 				The name of the new layer that will be output
 */
-- (void)merge:(NSArray *)mergingLayers useRepresentation: (BOOL)useRepresenation withName:(NSString *)newName;
+- (void)merge:(NSArray<SeaLayer*> *)mergingLayers useRepresentation: (BOOL)useRepresenation withName:(NSString *)newName;
 
 /*!
 	@method		undoMergeWith:andOrdering:
