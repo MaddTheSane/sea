@@ -1,3 +1,6 @@
+#include <GIMPCore/GIMPCore.h>
+#include <math.h>
+#include <tgmath.h>
 #import "ThresholdView.h"
 #import "ThresholdClass.h"
 

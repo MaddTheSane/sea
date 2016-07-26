@@ -392,11 +392,11 @@ enum {
 - (void)mouseUp:(NSEvent *)theEvent;
 
 /*!
-	@method		delta
+	@property	delta
 	@discussion	A measure of how far the mouse has been dragged.
 	@result		An IntPoint that represents the change in position.
 */
-- (IntPoint) delta;
+@property (readonly) IntPoint delta;
 
 /*!
 	@method		flagsChanged:

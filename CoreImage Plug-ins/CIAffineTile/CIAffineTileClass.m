@@ -1,7 +1,8 @@
-#import "Bitmap.h"
-#import "CIAffineTileClass.h"
+#include <GIMPCore/GIMPCore.h>
 #include <math.h>
 #include <tgmath.h>
+#import "Bitmap.h"
+#import "CIAffineTileClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 #define make_128(x) (x + 16 - (x % 16))

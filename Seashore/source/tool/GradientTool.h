@@ -53,7 +53,7 @@
 	@param		event
 				The mouse dragged event.
 */
-- (void)mouseDraggedTo:(NSPoint)where withEvent:(NSEvent *)event;
+- (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event;
 
 /*!
 	@property	start

@@ -1,6 +1,7 @@
+#include <GIMPCore/GIMPCore.h>
 #include <math.h>
 #include <tgmath.h>
-#import "Bitmap.h"
+#import <SeashoreKit/Bitmap.h>
 #import "CILenticularHaloClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]

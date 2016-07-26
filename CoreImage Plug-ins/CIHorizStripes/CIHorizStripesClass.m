@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #import "CIHorizStripesClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]

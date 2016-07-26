@@ -236,14 +236,13 @@ static void covertBitmapNoColorSync(unsigned char *dbitmap, NSInteger dspp, BMPC
 	}
 }
 
-unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger ibipp, NSInteger ibypr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, NSBitmapFormat iformat)
+unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger ibipp, NSInteger ibypr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, GIMPBitmapFormat iformat)
 {
 	PtrRecord ptrs;
 	unsigned char *bitmap, *pbitmap;
 	NSInteger pos;
 	BOOL s_hasalpha;
 	NSString *fail;
-	NSInteger i, j, k, l;
 	
 #ifdef DEBUG
 	if (!iprofile) {
@@ -267,12 +266,12 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 	if (ibps < 8) {
 		pbitmap = getPtr(ptrs);
 		bitmap = mallocPtr(&ptrs, width * height * ispp);
-		for (j = 0; j < height; j++) {
-			for (i = 0; i < width; i++) {
-				for (k = 0; k < ispp; k++) {
+		for (int j = 0; j < height; j++) {
+			for (int i = 0; i < width; i++) {
+				for (int k = 0; k < ispp; k++) {
 					pos = (j * width + i) * ispp + k;
 					bitmap[pos] = 0;
-					for (l = 0; l < ibps; l++) {
+					for (int l = 0; l < ibps; l++) {
 						if (bit_test(&pbitmap[j * ibypr + (i * ibipp + l) / 8], 7 - ((i * ibipp + l) % 8))) {
 							bit_set(&bitmap[pos], l);
 						}
@@ -292,9 +291,9 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 		if (ibipp != ispp * 8 || ibypr != width * ispp) {
 			pbitmap = getPtr(ptrs);
 			bitmap = mallocPtr(&ptrs, width * height * ispp);
-			for (j = 0; j < height; j++) {
-				for (i = 0; i < width; i++) {
-					for (k = 0; k < ispp; k++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					for (int k = 0; k < ispp; k++) {
 						bitmap[(j * width + i) * ispp + k] = pbitmap[j * ibypr + i * (ibipp / 8) + k];
 					}
 				}
@@ -302,14 +301,13 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 			ibipp = ispp * 8;
 			ibypr = width * ispp;
 		}
-	}
-	else if (ibps == 16) {
+	} else if (ibps == 16) {
 		if (ibipp != ispp * 16 || ibypr != width * ispp * 2) {
 			pbitmap = getPtr(ptrs);
 			bitmap = mallocPtr(&ptrs, width * height * ispp * 2);
-			for (j = 0; j < height; j++) {
-				for (i = 0; i < width; i++) {
-					for (k = 0; k < ispp; k++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					for (int k = 0; k < ispp; k++) {
 						bitmap[((j * width + i) * ispp + k) * 2] = pbitmap[j * ibypr + i * (ibipp / 8) + k * 2];
 						bitmap[((j * width + i) * ispp + k) * 2 + 1] = pbitmap[j * ibypr + i * (ibipp / 8) + k * 2 + 1];
 					}
@@ -324,13 +322,12 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 	if (iformat & kAlphaFirstFormat) {
 		pbitmap = getPtr(ptrs); /* Note: transform is destructive (other destructive transforms follow) */
 		if (ibps == 8) {
-			for (i = 0; i < width * height; i++) {
+			for (int i = 0; i < width * height; i++) {
 				rotate_bytes(pbitmap, i * ispp, (i + 1) * ispp - 1);
 			}
-		}
-		else if (ibps == 16) {
+		} else if (ibps == 16) {
 			pbitmap = getPtr(ptrs);
-			for (i = 0; i < width * height; i++) {
+			for (int i = 0; i < width * height; i++) {
 				rotate_bytes(pbitmap, i * ispp * 2, i * ispp * 2 - 1);
 				rotate_bytes(pbitmap, i * ispp * 2, i * ispp * 2 - 1);
 			}
@@ -342,12 +339,11 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 	if (ispace == kInvertedGrayColorSpace) {
 		pbitmap = getPtr(ptrs);
 		if (ibps == 8) {
-			for (i = 0; i < width * height; i++) {
+			for (int i = 0; i < width * height; i++) {
 				pbitmap[i * ispp] = ~pbitmap[i * ispp];
 			}
-		}
-		else if (ibps == 16) {
-			for (i = 0; i < width * height; i++) {
+		} else if (ibps == 16) {
+			for (int i = 0; i < width * height; i++) {
 				pbitmap[i * ispp * 2] = ~pbitmap[i * ispp * 2];
 				pbitmap[i * ispp * 2 + 1] = ~pbitmap[i * ispp * 2 + 1];
 			}
@@ -360,8 +356,7 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 		pbitmap = getPtr(ptrs);
 		bitmap = mallocPtr(&ptrs, width * height * dspp);
 		covertBitmapColorSyncProfile(bitmap, dspp, dspace, pbitmap, width, height, ispp, ispace, ibps, iprofile);
-	}
-	else {
+	} else {
 		pbitmap = getPtr(ptrs);
 		bitmap = mallocPtr(&ptrs, width * height * dspp);
 		covertBitmapNoColorSync(bitmap, dspp, dspace, pbitmap, width, height, ispp, ispace, ibps);
@@ -370,7 +365,7 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 	// Add in alpha (not 16-bit friendly)
 	s_hasalpha = (ispace == kRGBColorSpace && ispp == 4) || (ispace == kGrayColorSpace && ispp == 2);
 	if (!s_hasalpha) {
-		for (i = 0; i < width * height; i++) {
+		for (int i = 0; i < width * height; i++) {
 			pbitmap = getPtr(ptrs);
 			pbitmap[(i + 1) * dspp - 1] = 255;
 		}

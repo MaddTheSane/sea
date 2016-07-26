@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #import "PixellateClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]

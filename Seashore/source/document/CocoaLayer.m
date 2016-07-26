@@ -49,7 +49,7 @@
 	// Convert data to what we want
 	NSInteger bipp = [imageRep bitsPerPixel];
 	NSInteger bypr = [imageRep bytesPerRow];
-	data = SeaConvertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, format);
+	data = SeaConvertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, (GIMPBitmapFormat)format);
 	if (cmProfileLoc) {
 		CFRelease(cmProfileLoc);
 	}

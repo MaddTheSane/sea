@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #import "InvertClass.h"
 #import "PluginData.h"
 

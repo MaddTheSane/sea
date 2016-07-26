@@ -1,3 +1,6 @@
+#include <GIMPCore/GIMPCore.h>
+#include <math.h>
+#include <tgmath.h>
 #import "CISharpenClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]

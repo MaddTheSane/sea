@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #include <ApplicationServices/ApplicationServices.h>
 #import "GreyscaleClass.h"
 #import "PluginData.h"

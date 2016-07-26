@@ -497,7 +497,7 @@ scale_region (PixelRegion           *srcPR,
   g_free (row);
 }
 
-void GCScalePixels(unsigned char *dest, int destWidth, int destHeight, unsigned char *src, int srcWidth, int srcHeight, int interpolation, int spp)
+void GCScalePixels(unsigned char *dest, int destWidth, int destHeight, unsigned char *src, int srcWidth, int srcHeight, GimpInterpolationType interpolation, int spp)
 {
 	PixelRegion srcPR = pixel_region_make(src, srcWidth, srcHeight, spp);
 	PixelRegion destPR = pixel_region_make(dest, destWidth, destHeight, spp); 

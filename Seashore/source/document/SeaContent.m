@@ -141,7 +141,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	
 	// Extract color profile
 	profile = [imageRep valueForProperty:NSImageColorSyncProfileData];
-	if (profile) {
+	if (profile && [profile isKindOfClass:[NSData class]]) {
 		cmProfileLoc = ColorSyncProfileCreate((__bridge CFDataRef)(profile), NULL);
 	}
 	
@@ -707,7 +707,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	
 	// Extract color profile
 	NSData *profile = [imageRep valueForProperty:NSImageColorSyncProfileData];
-	if (profile) {
+	if (profile && [profile isKindOfClass:[NSData class]]) {
 		cmProfileLoc = ColorSyncProfileCreate((__bridge CFDataRef)(profile), NULL);
 	}
 	

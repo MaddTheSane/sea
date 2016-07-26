@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #import "MedianClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]

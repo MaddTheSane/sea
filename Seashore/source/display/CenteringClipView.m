@@ -14,15 +14,15 @@
 	
 	// Work out the x co-ordinate that is at the center of the NSScrollView
 	if (docRect.size.width > clipRect.size.width)
-		point.x = roundf(clipRect.size.width / 2.0 + clipRect.origin.x);
+		point.x = round(clipRect.size.width / 2.0 + clipRect.origin.x);
 	else
-		point.x = roundf(docRect.size.width / 2.0);
+		point.x = round(docRect.size.width / 2.0);
 	
 	// Work out the y co-ordinate that is at the center of the NSScrollView
 	if (docRect.size.height > clipRect.size.height)
-		point.y = roundf(clipRect.size.height / 2.0 + clipRect.origin.y);
+		point.y = round(clipRect.size.height / 2.0 + clipRect.origin.y);
 	else
-		point.y = roundf(docRect.size.height / 2.0);
+		point.y = round(docRect.size.height / 2.0);
 
 	return point;
 }
@@ -70,10 +70,8 @@
 	
 	// If the document is horizontally larger than the scroll view...
 	if (docRect.size.width > frameRect.size.width) {
-		
 		// Request the horizontal scroll bar be shown
 		shouldHaveHorizontalScrollbar = YES;
-	
 	}
 	
 	// If the document is vertically larger than the scroll view...
@@ -94,7 +92,7 @@
 {
 	NSRect docRect, frameRect;
 	NSPoint point = proposedNewOrigin;
-	float maxX, maxY;
+	CGFloat maxX, maxY;
 	
 	// Get the document rectangle
 	docRect = [[self documentView] frame];
@@ -106,15 +104,15 @@
 	
 	// Don't let the x co-ordinate of the new origin go out of bounds (or if this view is centering off center)
 	if (docRect.size.width > frameRect.size.width)
-		point.x = roundf(MAX(0, MIN(point.x, maxX)));
+		point.x = round(MAX(0, MIN(point.x, maxX)));
 	else
-		point.x = roundf(maxX / 2.0);
+		point.x = round(maxX / 2.0);
 	
 	// Don't let the y co-ordinate of the new origin go out of bounds (or if this view is centering off center)
 	if(docRect.size.height > frameRect.size.height)
-		point.y = roundf(MAX(0, MIN(point.y, maxY)));
+		point.y = round(MAX(0, MIN(point.y, maxY)));
 	else
-		point.y = roundf(maxY / 2.0);
+		point.y = round(maxY / 2.0);
 		
 	return point;
 }
@@ -127,10 +125,9 @@ static BOOL preventRecurse = NO;
 	BOOL shouldHaveVerticalScrollbar;
 	BOOL shouldHaveHorizontalScrollbar;
 	NSPoint scrollPoint;
-	float dw, dh, fw, fh, fwo, fho;
+	CGFloat dw, dh, fw, fh, fwo, fho;
 	
 	if (!preventRecurse) {
-		
 		// Get the document rectangle
 		docRect = [[self documentView] frame];
 		scrollPoint = [self bounds].origin;
@@ -168,12 +165,12 @@ static BOOL preventRecurse = NO;
 
 		// Find the new center(s)
 		if (shouldHaveHorizontalScrollbar && !shouldHaveVerticalScrollbar) {
-			scrollPoint.y = roundf((dh - fh + 15 * !hasHorizontalScrollbar) / 2.0);
+			scrollPoint.y = round((dh - fh + 15 * !hasHorizontalScrollbar) / 2.0);
 		} else if (!shouldHaveHorizontalScrollbar && shouldHaveVerticalScrollbar) {
-			scrollPoint.x = roundf((dw - fw + 15 * !hasVerticalScrollbar) / 2.0);
+			scrollPoint.x = round((dw - fw + 15 * !hasVerticalScrollbar) / 2.0);
 		} else if (!shouldHaveHorizontalScrollbar && !shouldHaveVerticalScrollbar) {
-			scrollPoint.x = roundf((dw - fwo) / 2.0);
-			scrollPoint.y = roundf((dh - fho) / 2.0);
+			scrollPoint.x = round((dw - fwo) / 2.0);
+			scrollPoint.y = round((dh - fho) / 2.0);
 		}
 			
 		// Show/hide scrollbars
@@ -193,7 +190,6 @@ static BOOL preventRecurse = NO;
 
 		// Move in to position
 		[self scrollToPoint:scrollPoint];
-		
 	}
 }
 
@@ -219,8 +215,7 @@ static BOOL preventRecurse = NO;
 
 - (void)scrollWheel:(NSEvent *)theEvent
 {
-	if(mostRecentScrollEvent==theEvent)
-	{
+	if (mostRecentScrollEvent==theEvent) {
 		[super scrollWheel:theEvent];
 		return;
 	}

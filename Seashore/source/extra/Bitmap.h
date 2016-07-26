@@ -108,7 +108,7 @@ extern unsigned char *convertBitmap(int dspp, BMPColorSpace dspace, int dbps, un
 				possible. You should <i>always</i> check for failed conversions. The
 				block of memory is safe for use with AltiVec.
  */
-extern unsigned char *__nullable SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger iebpp, NSInteger iebpr, BMPColorSpace ispace, ColorSyncProfileRef __nullable iprofile, NSInteger ibps, NSBitmapFormat iformat);
+extern unsigned char *__nullable SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger iebpp, NSInteger iebpr, BMPColorSpace ispace, ColorSyncProfileRef __nullable iprofile, NSInteger ibps, GIMPBitmapFormat iformat);
 
 
 /*!

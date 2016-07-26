@@ -1,5 +1,7 @@
-#import "CICircularWrapClass.h"
+#include <GIMPCore/GIMPCore.h>
 #include <math.h>
+#include <tgmath.h>
+#import "CICircularWrapClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 #define make_128(x) (x + 16 - (x % 16))

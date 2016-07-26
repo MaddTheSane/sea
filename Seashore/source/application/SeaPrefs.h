@@ -498,6 +498,9 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 */
 - (void)setUseTextures:(BOOL)value;
 
+//! Returns whether textures should be used where possible.
+@property BOOL useTextures;
+
 /*!
 	@method		toggleBoundaries:
 	@discussion	Toggles whether or not the layer boundaries are visible.
@@ -720,7 +723,7 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 	@discussion Returns the units used for new images.
 	@result		Returns an int that represents the units (see SeaDocument).
 */
-- (int)newUnits;
+- (SeaUnits)newUnits;
 
 /*!
 	@property	runCount

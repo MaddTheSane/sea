@@ -57,28 +57,21 @@
 	if (targetWeb) {
 		if (webCompression < 5) {
 			result = 0.1 + 0.08 * (float)webCompression;
-		}
-		else if (webCompression < 10) {
+		} else if (webCompression < 10) {
 			result = 0.3 + 0.04 * (float)webCompression;
-		}
-		else if (webCompression < 20) {
+		} else if (webCompression < 20) {
 			result = 0.5 + 0.02 * (float)webCompression;
-		}
-		else {
+		} else {
 			result = 0.7 + 0.01 * (float)webCompression;
 		}
-	}
-	else {
+	} else {
 		if (printCompression < 5) {
 			result = 0.1 + 0.08 * (float)printCompression;
-		}
-		else if (printCompression < 10) {
+		} else if (printCompression < 10) {
 			result = 0.3 + 0.04 * (float)printCompression;
-		}
-		else if (printCompression < 20) {
+		} else if (printCompression < 20) {
 			result = 0.5 + 0.02 * (float)printCompression;
-		}
-		else {
+		} else {
 			result = 0.7 + 0.01 * (float)printCompression;
 		}
 	}

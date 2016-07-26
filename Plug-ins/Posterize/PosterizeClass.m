@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #import "PosterizeClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]

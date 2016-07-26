@@ -1,8 +1,9 @@
+#include <GIMPCore/GIMPCore.h>
+#include <math.h>
+#include <tgmath.h>
 #import "GaussianClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
-
 
 @implementation GaussianClass
 @synthesize radius;

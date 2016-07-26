@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #import "Bitmap.h"
 #import "CICMYKHalftoneClass.h"
 

@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "SeaPrefs.h"
 #import "SeaDocument.h"
 #import "SeaController.h"
@@ -50,11 +52,10 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	
     // Grab a connection to IOKit for the requested display
     io_connect_t displayPort = CGDisplayIOServicePort( displayID );
-    if ( displayPort != MACH_PORT_NULL ) {
-	
+    if (displayPort != MACH_PORT_NULL) {
         // Find out what IOKit knows about this display
         NSDictionary *displayDict = CFBridgingRelease(IODisplayCreateInfoDictionary(displayPort, 0));
-        if ( displayDict != NULL ) {
+        if (displayDict != NULL) {
             static const double mmPerInch = 25.4;
             double horizontalSizeInInches = (double)GetIntFromDictionaryForKey(displayDict, @kDisplayHorizontalImageSize) / mmPerInch;
             double verticalSizeInInches = (double)GetIntFromDictionaryForKey(displayDict, @kDisplayVerticalImageSize) / mmPerInch;
@@ -83,6 +84,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 //@synthesize mode;
 @synthesize guideColorIndex = guideColor;
 @synthesize selectionColorIndex = selectionColor;
+@synthesize useTextures;
 
 - (instancetype)init
 {
@@ -113,8 +115,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	if ([defaults objectForKey:@"version"] == NULL)  {
 		firstRun = YES;
 		[defaults setObject:@"0.1.9" forKey:@"version"];
-	}
-	else {
+	} else {
 		if ([[defaults stringForKey:@"version"] isEqualToString:@"0.1.9"]) {
 			firstRun = NO;
 		}
@@ -127,8 +128,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	// Get run count
 	if (firstRun) {
 		runCount = 1;
-	}
-	else {
+	} else {
 		if ([defaults objectForKey:@"runCount"])
 			runCount =  [defaults integerForKey:@"runCount"] + 1;
 		else
@@ -194,8 +194,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	// Determine the initial color (from preferences if possible)
 	if ([defaults objectForKey:@"windowBackColor"] == NULL) {
 		windowBackColor = [NSColor colorWithCalibratedRed:0.6667 green:0.6667 blue:0.6667 alpha:1.0];
-	}
-	else {
+	} else {
 		tempData = [defaults dataForKey:@"windowBackColor"];
 		if (tempData != nil)
 			windowBackColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:tempData];
@@ -259,8 +258,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	if ([defaults objectForKey:@"checkForUpdates"]) {
 		checkForUpdates = [defaults boolForKey:@"checkForUpdates"];
 		lastCheck = [[defaults objectForKey:@"lastCheck"] doubleValue];
-	}
-	else {
+	} else {
 		checkForUpdates = YES;
 		lastCheck = [[NSDate date] timeIntervalSinceReferenceDate];
 	}
@@ -282,8 +280,8 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 		xdpi = ydpi = 72.0;
 		NSLog(@"Error finding screen resolution.");
 	}
-	mainScreenResolution.x = (int)roundf(xdpi);
-	mainScreenResolution.y = (int)roundf(ydpi);
+	mainScreenResolution.x = (int)round(xdpi);
+	mainScreenResolution.y = (int)round(ydpi);
 #ifdef DEBUG
 	// NSLog(@"Screen resolution (dpi): %d x %d", mainScreenResolution.x, mainScreenResolution.y);
 #endif
@@ -296,16 +294,15 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 - (void)awakeFromNib
 {
 	NSString *fontName;
-	float fontSize;
+	CGFloat fontSize;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Get the font name and size
 	if ([defaults objectForKey:@"fontName"] && [defaults objectForKey:@"fontSize"]) {
 		fontName = [defaults objectForKey:@"fontName"];
-		fontSize = [defaults floatForKey:@"fontSize"];
+		fontSize = [defaults doubleForKey:@"fontSize"];
 		[[NSFontManager sharedFontManager] setSelectedFont:[NSFont fontWithName:fontName size:fontSize] isMultiple:NO];
-	}
-	else {
+	} else {
 		[[NSFontManager sharedFontManager] setSelectedFont:[NSFont messageFontOfSize:0] isMultiple:NO];
 	}
 
@@ -322,7 +319,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
     // Attach the toolbar to the document window 
     [panel setToolbar: toolbar];
 	[toolbar setSelectedItemIdentifier:GeneralPrefsIdentifier];
-	[(NSPanel *)panel setContentView: generalPrefsView];
+	[panel setContentView: generalPrefsView];
 
 	// Register to recieve the terminate message when Seashore quits
 	[controller registerForTermination:self];
@@ -341,20 +338,20 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	
 	[defaults setBool:guides forKey:@"guides"];
 	[defaults setBool:layerBounds forKey:@"boundaries"];
-	[defaults setObject:(rulers ? @"YES" : @"NO") forKey:@"rulers"];
+	[defaults setBool:rulers forKey:@"rulers"];
 	[defaults setInteger:memoryCacheSize forKey:@"memoryCacheSize"];
-	[defaults setObject:(fewerWarnings ? @"YES" : @"NO") forKey:@"fewerWarnings"];
-	[defaults setObject:(effectsPanel ? @"YES" : @"NO") forKey:@"effectsPanel"];
-	[defaults setObject:(smartInterpolation ? @"YES" : @"NO") forKey:@"smartInterpolation"];
-	[defaults setObject:(openUntitled ? @"YES" : @"NO") forKey:@"openUntitled"];
-	[defaults setObject:(multithreaded ? @"YES" : @"NO") forKey:@"multithreaded"];
-	[defaults setObject:(ignoreFirstTouch ? @"YES" : @"NO") forKey:@"ignoreFirstTouch"];
-	[defaults setObject:(mouseCoalescing ? @"YES" : @"NO") forKey:@"newMouseCoalescing"];
-	[defaults setObject:(checkForUpdates ? @"YES" : @"NO") forKey:@"checkForUpdates"];
-	[defaults setObject:(preciseCursor ? @"YES" : @"NO") forKey:@"preciseCursor"];
-	[defaults setObject:(useCoreImage ? @"YES" : @"NO") forKey:@"useCoreImage"];
-	[defaults setObject:(transparentBackground ? @"YES" : @"NO") forKey:@"transparentBackground"];
-	[defaults setObject:(useCheckerboard ? @"YES" : @"NO") forKey:@"useCheckerboard"];
+	[defaults setBool:fewerWarnings forKey:@"fewerWarnings"];
+	[defaults setBool:effectsPanel forKey:@"effectsPanel"];
+	[defaults setBool:smartInterpolation forKey:@"smartInterpolation"];
+	[defaults setBool:openUntitled forKey:@"openUntitled"];
+	[defaults setBool:multithreaded forKey:@"multithreaded"];
+	[defaults setBool:ignoreFirstTouch forKey:@"ignoreFirstTouch"];
+	[defaults setBool:mouseCoalescing forKey:@"newMouseCoalescing"];
+	[defaults setBool:checkForUpdates forKey:@"checkForUpdates"];
+	[defaults setBool:preciseCursor forKey:@"preciseCursor"];
+	[defaults setBool:useCoreImage forKey:@"useCoreImage"];
+	[defaults setBool:transparentBackground forKey:@"transparentBackground"];
+	[defaults setBool:useCheckerboard forKey:@"useCheckerboard"];
 	[defaults setObject:[NSArchiver archivedDataWithRootObject:windowBackColor] forKey:@"windowBackColor"];
 	[defaults setInteger:selectionColor forKey:@"selectionColor"];
 	[defaults setBool:whiteLayerBounds forKey:@"whiteLayerBounds"];
@@ -367,7 +364,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	[defaults setInteger:resolutionHandling forKey:@"resolutionHandling"];
 	[defaults setInteger:runCount forKey:@"runCount"];
 	[defaults setObject:[font fontName] forKey:@"fontName"];
-	[defaults setFloat:[font pointSize] forKey:@"fontSize"];
+	[defaults setDouble:[font pointSize] forKey:@"fontSize"];
 	[defaults setDouble:lastCheck forKey:@"lastCheck"];
 }
 
@@ -399,15 +396,15 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 }
 
 - (void) generalPrefs {
-	[(NSPanel *)panel setContentView: generalPrefsView];
+	[panel setContentView: generalPrefsView];
 }
 
 - (void) newPrefs {
-	[(NSPanel *)panel setContentView: newPrefsView];
+	[panel setContentView: newPrefsView];
 }
 
 - (void) colorPrefs {
-    [(NSPanel *)panel setContentView: colorPrefsView];
+    [panel setContentView: colorPrefsView];
 }
 
 - (IBAction)show:(id)sender
@@ -433,14 +430,6 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	[checkForUpdatesCheckbox setState:checkForUpdates];
 	[preciseCursorCheckbox setState:preciseCursor];	
 	[useCoreImageCheckbox setState:useCoreImage];
-	if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_3) {
-		[useCoreImageCheckbox setState:NO];
-		[useCoreImageCheckbox setEnabled:NO];
-	}
-	if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_2) {
-		[multithreadedCheckbox setState:NO];
-		[multithreadedCheckbox setEnabled:NO];
-	}
 	[selectionColorMenu selectItemAtIndex:[selectionColorMenu indexOfItemWithTag:selectionColor + 280]];
 	[guideColorMenu selectItemAtIndex:[guideColorMenu indexOfItemWithTag:guideColor + 290]];
 	[resolutionHandlingMenu selectItemAtIndex:[resolutionHandlingMenu indexOfItemWithTag:resolutionHandling]];
@@ -458,8 +447,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	if (newWidth < kMinImageSize || newWidth > kMaxImageSize) { 
 		NSBeep(); 
 		[widthValue setStringValue:SeaStringFromPixels(width, newUnits, resolution)];
-	}
-	else {
+	} else {
 		width = newWidth;
 	}
 	
@@ -474,8 +462,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	if (newHeight < kMinImageSize || newHeight > kMaxImageSize) { 
 		NSBeep(); 
 		[heightValue setStringValue:SeaStringFromPixels(height, newUnits, resolution)];
-	}
-	else {
+	} else {
 		height = newHeight;
 	}
 	
@@ -584,23 +571,21 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 -(IBAction)setResolutionHandling:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 
 	resolutionHandling = [[resolutionHandlingMenu selectedItem] tag];
 	SeaScreenResolution = [self screenResolution];
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] helpers] resolutionChanged];
+	for (SeaDocument *document in documents) {
+		[[document helpers] resolutionChanged];
 	}
 }
 
 - (IBAction)apply:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 	
 	// Call for all documents' views to respond to the change
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *document in documents) {
+		[[document docView] setNeedsDisplay:YES];
 	}
 }
 
@@ -642,46 +627,33 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	return smartInterpolation;
 }
 
-- (BOOL)useTextures
-{
-	return useTextures;
-}
-
-- (void)setUseTextures:(BOOL)value
-{
-	useTextures = value;
-}
-
 - (IBAction)toggleBoundaries:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 	
 	layerBounds = !layerBounds;
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *document in documents) {
+		[[document docView] setNeedsDisplay:YES];
 	}
 }
 
 - (IBAction)toggleGuides:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 	
 	guides = !guides;
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *document in documents) {
+		[[document docView] setNeedsDisplay:YES];
 	}
 }
 		
 - (IBAction)toggleRulers:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 	
 	rulers = !rulers;
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] docView] updateRulersVisiblity];
+	for (SeaDocument *document in documents) {
+		[[document docView] updateRulersVisiblity];
 	}
 	[[gCurrentDocument docView] checkMouseTracking];
 }
@@ -689,36 +661,33 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 - (IBAction)checkerboardChanged:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 
 	useCheckerboard = [sender selectedRow];
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *document in documents) {
+		[[document docView] setNeedsDisplay:YES];
 	}
 }
 
 - (IBAction)defaultWindowBack:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 
 	windowBackColor = [NSColor colorWithCalibratedRed:0.6667 green:0.6667 blue:0.6667 alpha:1.0];
 	[windowBackWell setInitialColor:windowBackColor];
-	for (i = 0; i < [documents count]; i++) {
-		[documents[i] updateWindowColor];
-		[[[documents[i] docView] superview] setNeedsDisplay:YES];
+	for (SeaDocument *document in documents) {
+		[document updateWindowColor];
+		[[[document docView] superview] setNeedsDisplay:YES];
 	}
 }
 
 - (IBAction)windowBackChanged:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 
 	windowBackColor = [windowBackWell color];
-	for (i = 0; i < [documents count]; i++) {
-		[documents[i] updateWindowColor];
-		[[[documents[i] docView] superview] setNeedsDisplay:YES];
+	for (SeaDocument *document in documents) {
+		[document updateWindowColor];
+		[[[document docView] superview] setNeedsDisplay:YES];
 	}
 }
 
@@ -754,11 +723,10 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 - (IBAction)selectionColorChanged:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 	
 	selectionColor = [sender tag] - 280;
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *document in documents) {
+		[[document docView] setNeedsDisplay:YES];
 	}
 }
 
@@ -770,11 +738,10 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 - (IBAction)layerBoundsColorChanged:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 
 	whiteLayerBounds = [sender selectedRow];
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *document in documents) {
+		[[document docView] setNeedsDisplay:YES];
 	}
 }
 
@@ -805,22 +772,20 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 - (IBAction)guideColorChanged:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 	
 	guideColor = [sender tag] - 290;
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *document in documents) {
+		[[document docView] setNeedsDisplay:YES];
 	}
 }
 
 - (IBAction)rotateSelectionColor:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 	
 	selectionColor = (selectionColor + 1) % SeaGuideColorMax;
-	for (i = 0; i < [documents count]; i++) {
-		[[documents[i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *document in documents) {
+		[[document docView] setNeedsDisplay:YES];
 	}
 	
 	// Set the selection colour correctly
@@ -836,7 +801,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 
 	return multithreaded && good_os;
 */
-	return NO;
+	return multithreaded;
 }
 
 - (BOOL)ignoreFirstTouch
@@ -902,7 +867,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	}
 }
 
-- (int) newUnits
+- (SeaUnits) newUnits
 {
 	return newUnits;
 }

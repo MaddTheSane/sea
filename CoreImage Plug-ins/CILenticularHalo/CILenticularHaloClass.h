@@ -10,10 +10,10 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
-#import "SeaPlugins.h"
-#import "PluginData.h"
-#import "SeaWhiteboard.h"
-#import "SSKCIPlugin.h"
+#import <SeashoreKit/SeaPlugins.h>
+#import <SeashoreKit/PluginData.h>
+#import <SeashoreKit/SeaWhiteboard.h>
+#import <SeashoreKit/SSKCIPlugin.h>
 
 #define gColorPanel [NSColorPanel sharedColorPanel]
 
@@ -23,7 +23,7 @@
 	BOOL running;
 }
 // The color to be used
-@property (strong) NSColor *mainColor;
+@property (copy) NSColor *mainColor;
 
 // The new overlap
 @property CGFloat overlap;

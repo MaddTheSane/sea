@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "SeaView.h"
 #import "SeaDocument.h"
 #import "SeaContent.h"
@@ -54,6 +56,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 @implementation SeaView
 @synthesize zoom;
+@synthesize delta;
 
 - (instancetype)initWithDocument:(id)doc 
 {	
@@ -74,11 +77,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	xres = [[document contents] xres];
 	yres = [[document contents] yres];
 	if (SeaScreenResolution.x != 0 && xres != SeaScreenResolution.x){
-		frame.size.width /= ((float)xres / SeaScreenResolution.x);
+		frame.size.width /= ((CGFloat)xres / SeaScreenResolution.x);
 	}
 	
 	if (SeaScreenResolution.y != 0 && yres != SeaScreenResolution.y) {
-		frame.size.height /= ((float)yres / SeaScreenResolution.y);
+		frame.size.height /= ((CGFloat)yres / SeaScreenResolution.y);
 	}
 
 	// Initialize superclass
@@ -137,8 +140,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Warn if bad resolution
 	if (xres != yres || (xres < 72)) {
 		[[SeaController seaWarning] addMessage:LOCALSTR(@"strange res message", @"This image has an unusual resolution. As such, it may look different to what is expected at 100% zoom. To fix this use \"Image > Resolution...\" and set to 72 x 72 dpi.") forDocument: document level:kLowImportance];
-	}
-	else if (xres > 300) {
+	} else if (xres > 300) {
 		[[SeaController seaWarning] addMessage:LOCALSTR(@"high res message", @"This image has a high resolution. Seashore's performance may therefore be reduced. You can reduce the resolution using \"Image > Resolution...\" (with \"Preserve size\" checked). This will result in a lower-quality image.") forDocument: document level:kLowImportance];
 	}
 	}
@@ -214,12 +216,12 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	point = NSMakePoint(0, 0);
 	#endif
 	
-	if(zoom > pow(2, power)){
-		while(zoom > pow(2, power)){
+	if (zoom > pow(2, power)) {
+		while (zoom > pow(2, power)) {
 			[self zoomOutFromPoint:point];
 		}
-	}else if(zoom < pow(2, power)){
-		while(zoom < pow(2, power)){
+	} else if(zoom < pow(2, power)) {
+		while (zoom < pow(2, power)) {
 			[self zoomInToPoint:point];
 		}
 	}
@@ -260,11 +262,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 {
 	NSRect frame;
 	
-	zoom /= 2.0; point.x = roundf(point.x / 2.0); point.y = roundf(point.y / 2.0);
+	zoom /= 2.0; point.x = round(point.x / 2.0); point.y = round(point.y / 2.0);
 	[self updateRulers];
 	frame = NSMakeRect(0, 0, [(SeaContent *)[document contents] width], [(SeaContent *)[document contents] height]);
-	if (SeaScreenResolution.x != 0 && [[document contents] xres] != SeaScreenResolution.x) frame.size.width /= ((float)[[document contents] xres] / SeaScreenResolution.x);
-	if (SeaScreenResolution.y != 0 && [[document contents] yres] != SeaScreenResolution.y) frame.size.height /= ((float)[[document contents] yres] / SeaScreenResolution.y);
+	if (SeaScreenResolution.x != 0 && [[document contents] xres] != SeaScreenResolution.x) frame.size.width /= ((CGFloat)[[document contents] xres] / SeaScreenResolution.x);
+	if (SeaScreenResolution.y != 0 && [[document contents] yres] != SeaScreenResolution.y) frame.size.height /= ((CGFloat)[[document contents] yres] / SeaScreenResolution.y);
 	frame.size.height *= zoom; frame.size.width *= zoom;
 	[self setFrame:frame];
 	#ifdef USE_CENTERING_CLIPVIEW
@@ -280,11 +282,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 {
 	NSRect srcRect, destRect;
 	NSImage *image = NULL;
-	id tUtil = [[SeaController utilitiesManager] toolboxUtilityFor:document];
+	ToolboxUtility *tUtil = [[SeaController utilitiesManager] toolboxUtilityFor:document];
 	int curToolIndex = [tUtil tool];
 	IntRect imageRect = [[document whiteboard] imageRect];
 	int xres = [[document contents] xres], yres = [[document contents] yres];
-	float xResScale, yResScale;
+	CGFloat xResScale, yResScale;
 
 	// Get the correct image for displaying
 	image = [[document whiteboard] image];
@@ -381,7 +383,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	NSRect tempRect;
 	IntRect cropRect;
 	NSBezierPath *tempPath;
-	float xScale, yScale;
+	CGFloat xScale, yScale;
 	int width, height;
 	
 	xScale = [[document contents] xscale];
@@ -407,7 +409,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)drawSelectBoundaries
 {
-	float xScale, yScale;
+	CGFloat xScale, yScale;
 	NSRect tempRect, srcRect;
 	IntRect selectRect, tempSelectRect;
 	int xoff, yoff, width, height, lwidth, lheight;
@@ -416,7 +418,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	NSBezierPath *tempPath;
 	NSImage *maskImage;
 	int radius = 0;
-	float revCurveRadius, f;
+	CGFloat revCurveRadius, f;
 
 	selectRect = [[document selection] globalRect];
 	useSelection = [[document selection] active];
@@ -424,8 +426,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	yoff = [[[document contents] activeLayer] yoff];
 	width = [(SeaContent *)[document contents] width];
 	height = [(SeaContent *)[document contents] height];
-	lwidth = [(SeaLayer *)[[document contents] activeLayer] width];
-	lheight = [(SeaLayer *)[[document contents] activeLayer] height];
+	lwidth = [[[document contents] activeLayer] width];
+	lheight = [[[document contents] activeLayer] height];
 	xScale = [[document contents] xscale];
 	yScale = [[document contents] yscale];
 
@@ -441,10 +443,10 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[tempPath appendBezierPathWithRect:tempRect];
 	[tempPath setWindingRule:NSEvenOddWindingRule];
 
-	if([[SeaController seaPrefs] layerBounds] && [[SeaController seaPrefs] whiteLayerBounds]){
+	if ([[SeaController seaPrefs] layerBounds] && [[SeaController seaPrefs] whiteLayerBounds]) {
 		[[NSColor colorWithDeviceWhite:1.0 alpha:0.4] set];
 		[tempPath fill];		
-	}else if(useSelection || [[SeaController seaPrefs] layerBounds]){
+	} else if (useSelection || [[SeaController seaPrefs] layerBounds]) {
 		// If we are not drawing the layer bounds we should still draw the full selection boundaries
 		[[[SeaController seaPrefs] selectionColor:0.4] set];
 		[tempPath fill];
@@ -492,7 +494,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Check to see if the user is currently dragging a selection
 	intermediate = NO;
-	if(curToolIndex >= kFirstSelectionTool && curToolIndex <= kLastSelectionTool){
+	if (curToolIndex >= kFirstSelectionTool && curToolIndex <= kLastSelectionTool) {
 		intermediate =  [(AbstractScaleTool *)[[document tools] getTool: curToolIndex] intermediate] && ! [(AbstractScaleTool *)[[document tools] getTool: curToolIndex] isMovingOrScaling];
 	}
 	
@@ -512,8 +514,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[[NSColor whiteColor] set];
 		[tempPath setLineDash: white count: 4 phase: 0.0];
 		[tempPath stroke];
-	}
-	else if (curToolIndex == kRectSelectTool && intermediate) {
+	} else if (curToolIndex == kRectSelectTool && intermediate) {
 		// The rectangle tool is being dragged, so draw its marching ants
 		tempSelectRect = [(RectSelectTool *)[[document tools] currentTool] selectionRect];
 		tempRect = IntRectMakeNSRect(tempSelectRect);
@@ -537,8 +538,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			[tempPath lineToPoint:NSMakePoint(tempRect.origin.x + revCurveRadius * xScale, tempRect.origin.y + tempRect.size.height)];
 			[tempPath curveToPoint:NSMakePoint(tempRect.origin.x, tempRect.origin.y + tempRect.size.height - revCurveRadius * yScale) controlPoint1:NSMakePoint(tempRect.origin.x + (1.0 - f) * revCurveRadius * xScale, tempRect.origin.y + tempRect.size.height) controlPoint2:NSMakePoint(tempRect.origin.x, tempRect.origin.y + tempRect.size.height - (1.0 - f) * revCurveRadius * yScale)];
 			[tempPath lineToPoint:NSMakePoint(tempRect.origin.x, tempRect.origin.y + revCurveRadius * yScale)];
-		}
-		else {
+		} else {
 			// There are no rounded corners
 			tempRect.origin.x += .5;
 			tempRect.origin.y += .5;
@@ -569,15 +569,14 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		// Create a special start point for the polygonal lasso tool
 		// This allows the user to close the polygon by just clicking 
 		// near the first point in the polygon.
-		if(curToolIndex == kPolygonLassoTool){
+		if (curToolIndex == kPolygonLassoTool) {
 			[self drawHandle: start type:kPolygonalLassoType index: -1];
 		}
 		
 		// It is now the job of the SeaView instead of the tool itself to draw the edges because
 		// this way, the polygon can be persistent across view changes such as scrolling or resizing
 		[tempPath moveToPoint:start];
-		int i;
-		for(i = 1; i <= lassoPoints.pos; i++){
+		for (int i = 1; i <= lassoPoints.pos; i++) {
 			IntPoint thisPoint = lassoPoints.points[i];
 			[tempPath lineToPoint:NSMakePoint((thisPoint.x + xoff) * xScale , (thisPoint.y + yoff) * yScale )];
 		}
@@ -621,7 +620,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// The rectangles must be persistent because in the event loop, each view
 	// has its cursor rects reset AFTER the view is drawn, so setting the rects
 	// here would just have them immediately invalidated.
-	NSRect *handleRects = [(SeaCursors *) cursorsManager handleRectsPointer];
+	NSRect *handleRects = [cursorsManager handleRectsPointer];
 	if(index >= 0)
 		handleRects[index] = outside;
 	
@@ -663,10 +662,10 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[shadow setShadowOffset: NSMakeSize(0, 0)];
 	[shadow setShadowBlurRadius: 1];
 	
-	if(type == kPolygonalLassoType){
+	if (type == kPolygonalLassoType) {
 		// This handle has inverted colors to make it obvious
 		[shadow setShadowColor:[NSColor whiteColor]];
-	}else{
+	} else {
 		[shadow setShadowColor:[NSColor blackColor]];
 	}
 	[shadow set];
@@ -708,17 +707,17 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			break;
 	}
 	[path fill];
-	[[(SeaPrefs *)[SeaController seaPrefs] guideColor: 1.0] set];
+	[[[SeaController seaPrefs] guideColor: 1.0] set];
 }
 
 - (void)drawExtras
 {	
 	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
-	id cloneTool = [[document tools] getTool:kCloneTool];
-	id effectTool = [[document tools] getTool:kEffectTool];
+	CloneTool *cloneTool = [[document tools] getTool:kCloneTool];
+	EffectTool *effectTool = [[document tools] getTool:kEffectTool];
 	NSPoint outPoint, hilightPoint;
-	float xScale, yScale;
-	int xoff, yoff, lwidth, lheight, i;
+	CGFloat xScale, yScale;
+	int xoff, yoff, lwidth, lheight;
 	NSBezierPath *tempPath;
 	IntPoint sourcePoint;
 	NSImage *crossImage;
@@ -736,28 +735,27 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[tempPath setLineWidth:1.0];
 	
 	
-	if([(SeaPrefs *)[SeaController seaPrefs] guides] && xScale > 2 && yScale > 2){
+	if([[SeaController seaPrefs] guides] && xScale > 2 && yScale > 2){
 		[[NSColor colorWithCalibratedWhite:0.9 alpha:0.25] set];
-		int i, j;
 		
-		for(i = 0; i < [self frame].size.width / xScale; i++){
+		for (int i = 0; i < [self frame].size.width / xScale; i++) {
 			[tempPath moveToPoint:NSMakePoint(xScale * i - 0.5, 0)];
 			[tempPath lineToPoint:NSMakePoint(xScale * i - 0.5, [self frame].size.height)];
 		}
 		
-		for(j = 0; j < [self frame].size.height / yScale; j++){
+		for (int j = 0; j < [self frame].size.height / yScale; j++) {
 			[tempPath moveToPoint:NSMakePoint(0, yScale * j - 0.5)];
 			[tempPath lineToPoint:NSMakePoint([self frame].size.width, yScale *j - 0.5)];
 		}		
 		[tempPath stroke];
 		[[NSColor colorWithCalibratedWhite:0.5 alpha:0.25] set];
 
-		for(i = 0; i < [self frame].size.width / xScale; i++){
+		for (int i = 0; i < [self frame].size.width / xScale; i++){
 			[tempPath moveToPoint:NSMakePoint(xScale * i + 0.5, 0)];
 			[tempPath lineToPoint:NSMakePoint(xScale * i + 0.5, [self frame].size.height)];
 		}
 		
-		for(j = 0; j < [self frame].size.height / yScale; j++){
+		for (int j = 0; j < [self frame].size.height / yScale; j++) {
 			[tempPath moveToPoint:NSMakePoint(0, yScale * j + 0.5)];
 			[tempPath lineToPoint:NSMakePoint([self frame].size.width, yScale *j + 0.5)];
 		}		
@@ -766,9 +764,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	}
 	
-	if(curToolIndex == kPositionTool && [(SeaPrefs *)[SeaController seaPrefs] guides]){
-		float radians = 0.0;
-		id positionTool = [[document tools] getTool:kPositionTool];
+	if(curToolIndex == kPositionTool && [[SeaController seaPrefs] guides]){
+		CGFloat radians = 0.0;
+		PositionTool *positionTool = [[document tools] getTool:kPositionTool];
 
 		// The position tool now has guides (which the user can turn on or off)
 		// This makes it easy to see the dimensions and the boundaries of the moved layer
@@ -778,10 +776,10 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		yoff *= yScale;
 		lheight *= yScale;
 		
-		[[(SeaPrefs *)[SeaController seaPrefs] guideColor: 1.0] set];
+		[[[SeaController seaPrefs] guideColor: 1.0] set];
 		
-		if([positionTool intermediate]){
-			IntRect postScaledRect = [positionTool postScaledRect];
+		if ([positionTool intermediate]) {
+			IntRect postScaledRect = [(id)positionTool postScaledRect];
 			xoff = postScaledRect.origin.x;
 			yoff = postScaledRect.origin.y;
 			lwidth = postScaledRect.size.width;
@@ -793,14 +791,14 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		NSPoint centerPoint = NSMakePoint(xoff + lwidth / 2, yoff + lheight / 2);
 		// Additionally, the new guides are directly proportional to the amount of rotation or 
 		// of scaling done by the layer if these modifiers are used.
-		if ([(PositionTool *)positionTool scale] != -1) {
-			float scale = [(PositionTool *)positionTool scale];
+		if ([positionTool scale] != -1) {
+			CGFloat scale = [positionTool scale];
 			lwidth *= scale;
 			lheight *= scale;
 			xoff = centerPoint.x - lwidth / 2;
 			yoff = centerPoint.y - lheight / 2;
-		}else if([(PositionTool *)positionTool rotationDefined]){
-			radians = [(PositionTool *)positionTool rotation];
+		}else if([positionTool rotationDefined]){
+			radians = [positionTool rotation];
 		}
 		
 		// All of the silliness with the 0.5's is because when drawing with Bezier paths
@@ -840,7 +838,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		}
 	}else if (curToolIndex == kEffectTool){
 		// Draw effect tool dots
-		for (i = 0; i < [effectTool clickCount]; i++) {
+		for (int i = 0; i < [effectTool clickCount]; i++) {
 			[[[SeaController seaPrefs] selectionColor:0.6] set];
 			hilightPoint = IntPointMakeNSPoint([effectTool point:i]);
 			tempPath = [NSBezierPath bezierPath];
@@ -856,7 +854,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		
 		if([tool intermediate]){
 			// Draw the connecting line
-			[[(SeaPrefs *)[SeaController seaPrefs] guideColor: 1.0] set];
+			[[[SeaController seaPrefs] guideColor: 1.0] set];
 
 			tempPath = [NSBezierPath bezierPath];
 			[tempPath setLineWidth:1.0];
@@ -868,11 +866,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			[self drawHandle:[tool start] type:kGradientStartType index: -1];
 			[self drawHandle:[tool current] type:kGradientEndType index: -1];
 		}
-	}else if (curToolIndex == kWandTool || curToolIndex == kBucketTool){
+	} else if (curToolIndex == kWandTool || curToolIndex == kBucketTool) {
 		WandTool *tool = [[document tools] getTool: curToolIndex];
-		if([tool intermediate] && (curToolIndex == kBucketTool || ![tool isMovingOrScaling])){
+		if ([tool intermediate] && (curToolIndex == kBucketTool || ![tool isMovingOrScaling])) {
 			// Draw the connecting line
-			[[(SeaPrefs *)[SeaController seaPrefs] guideColor: 1.0] set];
+			[[[SeaController seaPrefs] guideColor: 1.0] set];
 
 			tempPath = [NSBezierPath bezierPath];
 			[tempPath setLineWidth:1.0];
@@ -882,7 +880,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			
 			[[NSBezierPath bezierPathWithOvalInRect:NSMakeRect([tool start].x - 3, [tool start].y-3, 6,6)] fill];
 			[[NSBezierPath bezierPathWithOvalInRect:NSMakeRect([tool current].x - 3, [tool current].y-3, 6,6)] fill];
-			 
 		}
 	}
 }
@@ -903,7 +900,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Only make a change if it has been more than 0.03 seconds
 	if ([[NSDate date] timeIntervalSinceDate:lastRulerUpdate] > 0.03) {
-	
 		// Record this as the new time of the last update
 		lastRulerUpdate = [NSDate date];
 	
@@ -922,7 +918,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[vMarker setMarkerLocation:markersLocation.y];
 		[vStatMarker setMarkerLocation:statMarkersLocation.y];
 		[verticalRuler setNeedsDisplay:YES];
-	
 	}
 }
 
@@ -934,24 +929,21 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)scrollWheel:(NSEvent *)theEvent
 {
-	NSUInteger mods;
 	NSPoint globalPoint;
 	
 	// Check for zoom-in or zoom-out
-	mods = [theEvent modifierFlags];
-	if ((mods & NSAlternateKeyMask) >> 19) {
+	NSEventModifierFlags mods = [theEvent modifierFlags];
+	if (mods & NSAlternateKeyMask) {
 		globalPoint = [self convertPoint:[theEvent locationInWindow] fromView:NULL];
 		if (scrollZoom - lastTrigger > 10.0) {
 			lastTrigger = scrollZoom;
 			[self zoomInToPoint:globalPoint];
-		}
-		else if (scrollZoom - lastTrigger < -10.0) {
+		} else if (scrollZoom - lastTrigger < -10.0) {
 			lastTrigger = scrollZoom;
 			[self zoomOutFromPoint:globalPoint];
 		}
 		scrollZoom += ([theEvent deltaY] > 0.0) ? 1.0 : -1.0;
-	}
-	else {
+	} else {
 		[super scrollWheel:theEvent];
 	}
 }
@@ -1002,12 +994,12 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-	float xScale, yScale;
-	id curTool;
+	CGFloat xScale, yScale;
+	__kindof AbstractTool *curTool;
 	IntPoint localActiveLayerPoint;
 	NSPoint localPoint, globalPoint;
 	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
-	id options = [[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions];
+	__kindof AbstractOptions *options = [[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions];
 	
 	// Get xScale, yScale	
 	xScale = [[document contents] xscale];
@@ -1074,13 +1066,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Check for tablet events
 
-	if (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_3) {
-		if (tabletEraser < 2) {
-			tabletEraser = 0;
-			if ([theEvent subtype] == NSTabletProximityEventSubtype) {
-				if ([theEvent pointingDeviceType] == NSEraserPointingDevice) {
-					tabletEraser = 1;
-				}
+	if (tabletEraser < 2) {
+		tabletEraser = 0;
+		if ([theEvent subtype] == NSTabletProximityEventSubtype) {
+			if ([theEvent pointingDeviceType] == NSEraserPointingDevice) {
+				tabletEraser = 1;
 			}
 		}
 	}
@@ -1102,18 +1092,15 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 				[self zoomOutFromPoint:globalPoint];
 			else
 				NSBeep();
-		}
-		else {
+		} else {
 			if ([self canZoomIn])
 				[self zoomInToPoint:globalPoint];
 			else
 				NSBeep();
 		}
-	}
-	else if ([curTool isFineTool]) {
+	} else if ([curTool isFineTool]) {
 		[curTool fineMouseDownAt:localPoint withEvent:theEvent];
-	}
-	else {
+	} else {
 		[curTool mouseDownAt:localActiveLayerPoint withEvent:theEvent];
 	}
 	lastActiveLayerPoint = localActiveLayerPoint;
@@ -1126,8 +1113,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-	float xScale, yScale;
-	id curTool;
+	CGFloat xScale, yScale;
+	__kindof AbstractTool *curTool;
 	IntPoint localActiveLayerPoint;
 	NSPoint localPoint;
 	int curToolIndex, deltaX, deltaY;
@@ -1149,16 +1136,16 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		scrollTimer = NULL;
 	}
 	
-	float horzScroll = 0;
-	float rightVis = visRect.origin.x + visRect.size.width;
-	float rightAct = [(SeaContent *)[document contents] width] * [[document contents] xscale];
-	if(localPoint.x < visRect.origin.x){
+	CGFloat horzScroll = 0;
+	CGFloat rightVis = visRect.origin.x + visRect.size.width;
+	CGFloat rightAct = [(SeaContent *)[document contents] width] * [[document contents] xscale];
+	if (localPoint.x < visRect.origin.x) {
 		horzScroll = localPoint.x - visRect.origin.x;
 		// This is so users don't scroll past the beginning
 		if(-1 * horzScroll > visRect.origin.x){
 			horzScroll = visRect.origin.x < 0 ? 0 : -1 * visRect.origin.x;
 		}
-	}else if(localPoint.x > rightVis){
+	} else if(localPoint.x > rightVis) {
 		horzScroll = localPoint.x - rightVis;
 		// And this is so users don't scroll past the end
 		if(horzScroll > rightAct - rightVis){
@@ -1167,16 +1154,16 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	}
 	
 	
-	float vertScroll = 0;
-	float botVis = visRect.origin.y + visRect.size.height;
-	float botAct = [(SeaContent *)[document contents] height] * [[document contents] yscale];
-	if(localPoint.y < visRect.origin.y){
+	CGFloat vertScroll = 0;
+	CGFloat botVis = visRect.origin.y + visRect.size.height;
+	CGFloat botAct = [[document contents] height] * [[document contents] yscale];
+	if (localPoint.y < visRect.origin.y) {
 		vertScroll = localPoint.y - visRect.origin.y;
 		// This is so users don't scroll past the beginning
 		if(-1 *vertScroll > visRect.origin.y){
 			vertScroll = visRect.origin.y < 0 ? 0 : -1 * visRect.origin.y;
 		}
-	}else if(localPoint.y > botVis){
+	} else if(localPoint.y > botVis) {
 		vertScroll = localPoint.y - botVis;
 		// And this is so users don't scroll past the end
 		if(vertScroll > botAct - botVis){
@@ -1186,7 +1173,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// We will want the document to continue to scroll even if the user isn't sending mouse events
 	// This means there needs to be some sort of timer to call the method automatically
-	if(horzScroll != 0 || vertScroll != 0){
+	if (horzScroll != 0 || vertScroll != 0) {
 		//NSDictionary *uInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:horzScroll], @"x", [NSNumber numberWithFloat:vertScroll], @"y", nil];
 		NSClipView *view = (NSClipView *)[self superview];
 		NSPoint origin =  [view documentVisibleRect].origin;
@@ -1227,7 +1214,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	deltaX = localActiveLayerPoint.x - lastActiveLayerPoint.x;
 	deltaY = localActiveLayerPoint.y - lastActiveLayerPoint.y;
 	if (lineDraw && ([options modifier] == kShiftControlModifier) && deltaX != 0) {
-		angle = atan((double)deltaY / (double)abs(deltaX));
+		angle = atan((CGFloat)deltaY / (CGFloat)abs(deltaX));
 		if (angle > -0.3927 && angle < 0.3927)
 			localActiveLayerPoint.y = lastActiveLayerPoint.y;
 		else if (angle > 1.1781 || angle < -1.1781)
@@ -1244,10 +1231,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 	// Behave differently depending on current tool
 	if ([curTool isFineTool]) {
-		[(AbstractTool *)curTool fineMouseDraggedTo:localPoint withEvent:theEvent];
-	}
-	else {
-		[(AbstractTool *)curTool mouseDraggedTo:localActiveLayerPoint withEvent:theEvent];
+		[curTool fineMouseDraggedTo:localPoint withEvent:theEvent];
+	} else {
+		[curTool mouseDraggedTo:localActiveLayerPoint withEvent:theEvent];
 	}
 	lastActiveLayerPoint = localActiveLayerPoint;
 	lineDraw = NO;
@@ -1265,8 +1251,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-	float xScale, yScale;
-	id curTool = [[document tools] currentTool];
+	CGFloat xScale, yScale;
+	__kindof AbstractTool *curTool = [[document tools] currentTool];
 	NSPoint localPoint;
 	IntPoint localActiveLayerPoint;
 	AbstractOptions *options = [[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions];
@@ -1309,8 +1295,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[document unlock];
 	if ([curTool isFineTool]) {
 		[curTool fineMouseUpAt:localPoint withEvent:theEvent];
-	}
-	else {
+	} else {
 		[curTool mouseUpAt:localActiveLayerPoint withEvent:theEvent];
 	}
 	
@@ -1318,14 +1303,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[options unforceAlt];
 }
 
-- (IntPoint)delta
-{
-	return delta;
-}
-
 - (void)flagsChanged:(NSEvent *)theEvent
 {
-	[(AbstractOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions] updateModifiers:[theEvent modifierFlags]];
+	[[[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions] updateModifiers:[theEvent modifierFlags]];
 	[[document helpers] endLineDrawing];
 }
 
@@ -1335,7 +1315,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	id curLayer, activeLayer;
 	IntPoint oldOffsets;
 	unichar key;
-	NSUInteger mods;
 	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	BOOL floating = [[document selection] floating];
 	
@@ -1343,8 +1322,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[[document helpers] endLineDrawing];
 	
 	// Check for zoom-in or zoom-out
-	mods = [theEvent modifierFlags];
-	if ((mods & NSCommandKeyMask) >> 20) {
+	NSEventModifierFlags mods = [theEvent modifierFlags];
+	if (mods & NSCommandKeyMask) {
 		for (whichKey = 0; whichKey < [[theEvent characters] length]; whichKey++) {
 			key = [[theEvent charactersIgnoringModifiers] characterAtIndex:whichKey];
 			if (key == NSUpArrowFunctionKey)
@@ -1506,12 +1485,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		
 		// No repeat keys
 		if (![theEvent isARepeat]) {
-			
 			// For window configurations and keyboard shortcuts
 			switch (key) {
 				case kDeleteCharCode:
 					[self delete:NULL];
-				break;
+					break;
 				case kEscapeCharCode:
 					if(curToolIndex >= kFirstSelectionTool && curToolIndex <= kLastSelectionTool && [[[document tools] currentTool] intermediate])
 						[[[document tools] currentTool] cancelSelection];
@@ -1618,7 +1596,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Go through all keys
 	for (whichKey = 0; whichKey < [[theEvent characters] length]; whichKey++) {
-	
 		// Find the key
 		key = [[theEvent charactersIgnoringModifiers] characterAtIndex:whichKey];
 			
@@ -1628,10 +1605,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 				scrollingMode = NO;
 				[cursorsManager setScrollingMode: NO mouseDown: NO];
 				[self needsCursorsReset];
-			break;
+				break;
+				
 			case '\t':
 				[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:eyedropToolMemory];
-			break;
+				break;
 		}
 	
 	}
@@ -1656,12 +1634,12 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)magnifyWithEvent:(NSEvent *)event
 {
-	if(magnifyTimer){
+	if (magnifyTimer) {
 		[magnifyTimer invalidate];
 		magnifyTimer = NULL;
 	}
 	
-	float factor = ((float)[event magnification] + 1.0);
+	CGFloat factor = [event magnification] + 1.0;
 	magnifyFactor = factor * magnifyFactor;
 	magnifyTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
 												   target: self
@@ -1671,17 +1649,17 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 }
 
 - (void)swipeWithEvent:(NSEvent *)event {
-    float x = [event deltaX];
-    float y = [event deltaY];
+    CGFloat x = [event deltaX];
+    CGFloat y = [event deltaY];
     if (x > 0) {
 		[[document contents] layerBelow];
-	}else if (x < 0) {
+	} else if (x < 0) {
 		[[document contents] layerAbove];
-	}else if (y < 0) {
+	} else if (y < 0) {
 		[[document contents] anchorSelection];
-	}else if (y > 0) {
-		NSUInteger mods = [event modifierFlags];
-		[[document contents] makeSelectionFloat:(mods & NSAlternateKeyMask) >> 19];
+	} else if (y > 0) {
+		NSEventModifierFlags mods = [event modifierFlags];
+		[[document contents] makeSelectionFloat:!!(mods & NSAlternateKeyMask)];
     }
 }
 
@@ -1692,9 +1670,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		magnifyTimer = NULL;
 	}
 	
-	if(magnifyFactor >= 2){
+	if (magnifyFactor >= 2) {
 		[self zoomIn:self];
-	}else if (magnifyFactor <= 0.5) {
+	} else if (magnifyFactor <= 0.5) {
 		[self zoomOut:self];
 	}
 	
@@ -1764,7 +1742,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	NSPoint tempPoint;
 	IntPoint localPoint;
 	float xScale, yScale;
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 	
 	xScale = [[document contents] xscale];
 	yScale = [[document contents] yscale];
@@ -1778,10 +1756,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	if ([[document whiteboard] whiteboardIsLayerSpecific] && compensation) {
 		localPoint.x -= [[contents activeLayer] xoff];
 		localPoint.y -= [[contents activeLayer] yoff];
-		if (localPoint.x < 0 || localPoint.x >= [(SeaLayer *)[contents activeLayer] width] || localPoint.y < 0 || localPoint.y >= [(SeaLayer *)[contents activeLayer] height])
+		if (localPoint.x < 0 || localPoint.x >= [[contents activeLayer] width] || localPoint.y < 0 || localPoint.y >= [[contents activeLayer] height])
 			localPoint.x = localPoint.y = -1;		
-	}
-	else {
+	} else {
 		if (localPoint.x < 0 || localPoint.x >= [(SeaContent *)[document contents] width] || localPoint.y < 0 || localPoint.y >= [(SeaContent *)[document contents] height])
 			localPoint.x = localPoint.y = -1;
 	}
@@ -1791,16 +1768,12 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (NSDragOperation)draggingEntered:(id)sender
 {
-    NSPasteboard *pboard;
-    NSDragOperation sourceDragMask;
 	NSArray *files;
 	id layer;
-	int i;
-	BOOL success;
 	
 	// Determine the pasteboard and acceptable dragging operations
-    sourceDragMask = [sender draggingSourceOperationMask];
-    pboard = [sender draggingPasteboard];
+    NSDragOperation sourceDragMask = [sender draggingSourceOperationMask];
+    NSPasteboard *pboard = [sender draggingPasteboard];
 	if ([sender draggingSource] && [[sender draggingSource] respondsToSelector:@selector(source)])
 		layer = [[sender draggingSource] source];
 	else
@@ -1816,9 +1789,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		if ([[pboard types] containsObject:NSFilenamesPboardType]) {
 			if (layer != [[document contents] activeLayer] && ![document locked] && ![[document selection] floating]) {
 				files = [pboard propertyListForType:NSFilenamesPboardType];
-				success = YES;
-				for (i = 0; i < [files count]; i++)
-					success = success && [[document contents] canImportLayerFromFile:files[i]];
+				BOOL success = YES;
+				for (NSString *file in files)
+					success = success && [[document contents] canImportLayerFromFile:file];
 				if (success) {
 					return NSDragOperationCopy;
 				}
@@ -1831,16 +1804,13 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (BOOL)performDragOperation:(id)sender
 {
-    NSPasteboard *pboard;
-    NSDragOperation sourceDragMask;
 	NSArray *files;
 	BOOL success;
 	id layer;
-	int i;
 	
 	// Determine the pasteboard and acceptable dragging operations
-    sourceDragMask = [sender draggingSourceOperationMask];
-    pboard = [sender draggingPasteboard];
+    NSDragOperation sourceDragMask = [sender draggingSourceOperationMask];
+    NSPasteboard *pboard = [sender draggingPasteboard];
 	if ([sender draggingSource] && [[sender draggingSource] respondsToSelector:@selector(source)])
 		layer = [[sender draggingSource] source];
 	else
@@ -1853,8 +1823,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			if (layer != NULL) {
 				[[document contents] copyLayer:layer];
 				return YES;
-			}
-			else {
+			} else {
 				[[document contents] addLayerFromPasteboard:pboard];
 				return YES;
 			}
@@ -1870,8 +1839,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		if ([[pboard types] containsObject:NSFilenamesPboardType]) {
 			files = [pboard propertyListForType:NSFilenamesPboardType];
 			success = YES;
-			for (i = 0; i < [files count]; i++)
-				success = success && [[document contents] importLayerFromFile:files[i]];
+			for (NSString *file in files)
+				success = success && [[document contents] importLayerFromFile:file];
 			return success;
 		}
 
@@ -1883,10 +1852,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 - (void)updateRulersVisiblity
 {
 	NSView *superview = [[document scrollView] superview];
-	int i;
 	// This assumes that all of the subviews will actually respond to setRulersVisible
-	for(i = 0; i < [[superview subviews] count]; i++){
-		[[superview subviews][i] setRulersVisible:[[SeaController seaPrefs] rulers]];
+	for (__kindof NSView *subview in [superview subviews]) {
+		[subview setRulersVisible:[[SeaController seaPrefs] rulers]];
 	}
 	
 	[self checkMouseTracking];
@@ -1941,7 +1909,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	id availableType;
+	NSString *availableType;
 	
 	[[document helpers] endLineDrawing];
 	switch ([menuItem tag]) {

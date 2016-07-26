@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #import "HorizStripesClass.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"

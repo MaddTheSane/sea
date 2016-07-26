@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #import "HSVClass.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"

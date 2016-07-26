@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #include <math.h>
 #include <tgmath.h>
 #import "Bitmap.h"

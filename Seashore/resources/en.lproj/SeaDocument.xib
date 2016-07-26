@@ -2399,9 +2399,8 @@ Gw
                 <outlet property="document" destination="-2" id="1608"/>
                 <outlet property="duplicateButton" destination="1614" id="1673"/>
                 <outlet property="layerSettings" destination="2891" id="2892"/>
-                <outlet property="leftPane" destination="2729" id="4926"/>
+                <outlet property="layersView" destination="7811" id="VzE-EU-q8V"/>
                 <outlet property="newButton" destination="1611" id="1672"/>
-                <outlet property="rightPane" destination="2730" id="4925"/>
             </connections>
         </customObject>
         <customObject id="1596" userLabel="TransparentUtility" customClass="TransparentUtility"/>
@@ -2446,12 +2445,10 @@ Gw
                 <outlet property="eyedropOptions" destination="1880" id="2798"/>
                 <outlet property="gradientOptions" destination="1873" id="2795"/>
                 <outlet property="lassoOptions" destination="1876" id="2785"/>
-                <outlet property="leftPane" destination="2729" id="7000"/>
                 <outlet property="pencilOptions" destination="1870" id="2788"/>
                 <outlet property="polygonLassoOptions" destination="1884" id="2792"/>
                 <outlet property="positionOptions" destination="1868" id="2787"/>
                 <outlet property="rectSelectOptions" destination="1875" id="2782"/>
-                <outlet property="rightPane" destination="2730" id="7001"/>
                 <outlet property="smudgeOptions" destination="1872" id="2790"/>
                 <outlet property="textOptions" destination="1882" id="2797"/>
                 <outlet property="toolboxUtility" destination="1598" id="2800"/>
@@ -5178,7 +5175,6 @@ DQ
                 <outlet property="redBox" destination="14795" id="15204"/>
                 <outlet property="trueViewCheckbox" destination="14779" id="15191"/>
                 <outlet property="view" destination="14768" id="14771"/>
-                <outlet property="viewAbove" destination="14765" id="14770"/>
                 <outlet property="zoomSlider" destination="15205" id="15218"/>
             </connections>
         </customObject>

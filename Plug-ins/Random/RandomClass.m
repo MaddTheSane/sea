@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #import "RandomClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]

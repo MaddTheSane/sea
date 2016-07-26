@@ -1,3 +1,6 @@
+#include <GIMPCore/GIMPCore.h>
+#include <math.h>
+#include <tgmath.h>
 #import "CheckerboardClass.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"

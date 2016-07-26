@@ -114,9 +114,9 @@
 		selectionColorIndex = [[SeaController seaPrefs] selectionColorIndex];
 		selectionColor = [[SeaController seaPrefs] selectionColor:0.4];
 		maskBitmap = malloc(rect.size.width * rect.size.height * 4);
-		basePixel[0] = roundf([selectionColor redComponent] * 255.0);
-		basePixel[1] = roundf([selectionColor greenComponent] * 255.0);
-		basePixel[2] = roundf([selectionColor blueComponent] * 255.0);
+		basePixel[0] = round([selectionColor redComponent] * 255.0);
+		basePixel[1] = round([selectionColor greenComponent] * 255.0);
+		basePixel[2] = round([selectionColor blueComponent] * 255.0);
 		for (int i = 0; i < rect.size.width * rect.size.height; i++) {
 			maskBitmap[i * 4] = basePixel[0];
 			maskBitmap[i * 4 + 1] = basePixel[1];
@@ -969,7 +969,7 @@
 	}
 }
 
-- (void)scaleSelectionTo:(IntRect)newRect from: (IntRect)oldRect interpolation:(int)interpolation usingMask: (unsigned char*)oldMask
+- (void)scaleSelectionTo:(IntRect)newRect from: (IntRect)oldRect interpolation:(GimpInterpolationType)interpolation usingMask: (unsigned char*)oldMask
 {
 	BOOL hFlip = NO;
 	BOOL vFlip = NO;

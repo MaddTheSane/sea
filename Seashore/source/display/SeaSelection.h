@@ -1,3 +1,4 @@
+#include <GIMPCore/GIMPCore.h>
 #import <AppKit/AppKit.h>
 #import "Globals.h"
 
@@ -324,7 +325,7 @@ typedef NS_ENUM(int, SeaSelectMode) {
 	@param		oldMask
 				The mask that should be scaled to the newRect.
 */
-- (void)scaleSelectionTo:(IntRect)newRect from:(IntRect)oldRect interpolation:(int)interpolation usingMask:(unsigned char*)oldMask;
+- (void)scaleSelectionTo:(IntRect)newRect from:(IntRect)oldRect interpolation:(GimpInterpolationType)interpolation usingMask:(unsigned char*)oldMask NS_SWIFT_NAME(scaleSelection(to:from:interpolation:usingMask:));
 
 /*!
 	@method		trimSelection
