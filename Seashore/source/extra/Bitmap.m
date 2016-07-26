@@ -77,7 +77,7 @@ static inline void rotate_bytes(unsigned char *data, size_t pos1, size_t pos2)
 	data[pos2] = tmp;
 }
 
-void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp, BMPColorSpace dspace, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, BMPColorSpace ispace, NSInteger ibps, ColorSyncProfileRef iprofile)
+static void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp, BMPColorSpace dspace, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, BMPColorSpace ispace, NSInteger ibps, ColorSyncProfileRef iprofile)
 {
 	ColorSyncDataDepth srcDepth = 0;
 	ColorSyncDataDepth dstDepth = kColorSync8BitInteger;
@@ -148,15 +148,6 @@ void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp, BMPCol
 			break;
 	}
 	
-	
-	// Define the source
-	//ColorSyncDataDepth dstDepth = kColorSync8BitInteger;
-	//ColorSyncDataLayout dstLayout = kColorSyncAlphaLast | kColorSyncByteOrderDefault;
-	//size_t srcBytesPerRow = width * ispp * (ibps / 8);
-	//size_t dstBytesPerRow = width * 2;
-	
-	
-	
 	// Execute the conversion
 	NSArray<NSDictionary<NSString*,id>*>*
 	profSeq = @[
@@ -184,85 +175,65 @@ void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp, BMPCol
 	RGB -> Gray
 */
 
-void covertBitmapNoColorSync(unsigned char *dbitmap, NSInteger dspp, BMPColorSpace dspace, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, BMPColorSpace ispace, NSInteger ibps)
+static void covertBitmapNoColorSync(unsigned char *dbitmap, NSInteger dspp, BMPColorSpace dspace, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, BMPColorSpace ispace, NSInteger ibps)
 {
-	NSInteger i, j;
-	
 	if (ispace == kGrayColorSpace && dspace == kGrayColorSpace) {
-		
 		if (ibps == 8) {
 			if (ispp == 2) {
 				memcpy(dbitmap, ibitmap, width * height * 2);
-			}
-			else {
-				for (i = 0; i < width * height; i++) {
+			} else {
+				for (int i = 0; i < width * height; i++) {
 					dbitmap[i * 2] = ibitmap[i * 1];
 				}
 			}
-		}
-		else if (ibps == 16) {
-			for (i = 0; i < width * height; i++) {
-				for (j = 0; j < ispp; j++) {
+		} else if (ibps == 16) {
+			for (int i = 0; i < width * height; i++) {
+				for (int j = 0; j < ispp; j++) {
 					dbitmap[i * 2 + j] = ibitmap[i * ispp * 2 + j * 2 + MSB];
 				}
 			}
 		}
-	
-	}
-	else if (ispace == kRGBColorSpace && dspace == kRGBColorSpace) {
-	
+	} else if (ispace == kRGBColorSpace && dspace == kRGBColorSpace) {
 		if (ibps == 8) {
 			if (ispp == 4) {
 				memcpy(dbitmap, ibitmap, width * height * 4);
-			}
-			else {
-				for (i = 0; i < width * height; i++) {
+			} else {
+				for (int i = 0; i < width * height; i++) {
 					memcpy(&(dbitmap[i * 4]), &(ibitmap[i * 3]), 3);
 				}
 			}
-		}
-		else if (ibps == 16) {
-			for (i = 0; i < width * height; i++) {
-				for (j = 0; j < ispp; j++) {
+		} else if (ibps == 16) {
+			for (int i = 0; i < width * height; i++) {
+				for (int j = 0; j < ispp; j++) {
 					dbitmap[i * 4 + j] = ibitmap[i * ispp * 2 + j * 2 + MSB];
 				}
 			}
 		}
-				
-	}
-	else if (ispace == kGrayColorSpace && dspace == kRGBColorSpace) {
-		
+	} else if (ispace == kGrayColorSpace && dspace == kRGBColorSpace) {
 		if (ibps == 8) {
-			for (i = 0; i < width * height; i++) {
+			for (int i = 0; i < width * height; i++) {
 				dbitmap[i * 4] = dbitmap[i * 4 + 1] = dbitmap[i * 4 + 2] = ibitmap[i * ispp];
 				if (ispp == 2) dbitmap[i * 4 + 3] = ibitmap[i * ispp + 1];
 			}
-		}
-		else if (ibps == 16) {
-			for (i = 0; i < width * height; i++) {
+		} else if (ibps == 16) {
+			for (int i = 0; i < width * height; i++) {
 				dbitmap[i * 4] = dbitmap[i * 4 + 1] = dbitmap[i * 4 + 2] = ibitmap[i * ispp * 2 + MSB];
 				if (ispp == 2) dbitmap[i * 4 + 3] = ibitmap[i * 4 + 2 + MSB];
 			}
 		}
-				
-	}
-	else if (ispace == kRGBColorSpace && dspace == kGrayColorSpace) {
-	
+	} else if (ispace == kRGBColorSpace && dspace == kGrayColorSpace) {
 		if (ibps == 8) {
-			for (i = 0; i < width * height; i++) {
+			for (int i = 0; i < width * height; i++) {
 				dbitmap[i * 2] = ((int)ibitmap[i * ispp] + (int)ibitmap[i * ispp + 1] + (int)ibitmap[i * ispp + 2]) / 3;
 				if (ispp == 4) dbitmap[i * 2 + 1] = ibitmap[i * 4 + 3];
 			}
-		}
-		else if (ibps == 16) {
-			for (i = 0; i < width * height; i++) {
+		} else if (ibps == 16) {
+			for (int i = 0; i < width * height; i++) {
 				dbitmap[i * 2] = ((int)ibitmap[i * ispp * 2 + MSB] + (int)ibitmap[i * ispp * 2 + 2 + MSB] + (int)ibitmap[i * ispp * 2 + 4 + MSB]) / 3;
 				if (ispp == 4) dbitmap[i * 2 + 1] = ibitmap[i * 8 + 6 + MSB];
 			}
 		}
-				
 	}
-	
 }
 
 unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger ibipp, NSInteger ibypr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, NSBitmapFormat iformat)

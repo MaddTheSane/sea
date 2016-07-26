@@ -9,6 +9,8 @@
 
 #import "Globals.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
 	@enum		k...ColorSpace
 	@constant	kGrayColorSpace
@@ -21,9 +23,13 @@
 				Indicates the CMYK colour space
 */
 typedef NS_ENUM(int, BMPColorSpace) {
+	//! Indicates the gray/white colour space.
 	kGrayColorSpace,
+	//! Indicates the gray/black colour space.
 	kInvertedGrayColorSpace,
+	//! Indicates the RGB colour space.
 	kRGBColorSpace,
+	//! Indicates the CMYK colour space.
 	kCMYKColorSpace,
 	BMPColorSpaceInvalid = -1,
 };
@@ -69,40 +75,40 @@ extern unsigned char *convertBitmap(int dspp, BMPColorSpace dspace, int dbps, un
 /*!
 	@function	SeaConvertBitmap
 	@discussion	Given a bitmap converts the bitmap to the given type. The
- conversion will not affect the premultiplication of the data.
+				conversion will not affect the premultiplication of the data.
 	@param		dspp
- The samples per pixel of the desired bitmap.
+				The samples per pixel of the desired bitmap.
 	@param		dspace
- The colour space of the desired bitmap.
+				The colour space of the desired bitmap.
 	@param		dbps
- The bits per sample of the desired bitmap.
+				The bits per sample of the desired bitmap.
 	@param		ibitmap
- The original bitmap.
+				The original bitmap.
 	@param		width
- The width of the bitmap.
+				The width of the bitmap.
 	@param		height
- The height of the bitmap.
+				The height of the bitmap.
 	@param		ispp
- The samples per pixel of the original bitmap.
+				The samples per pixel of the original bitmap.
 	@param		iebpp
- The number of extra bytes per pixel of the original bitmap.
+				The number of extra bytes per pixel of the original bitmap.
 	@param		iebpr
- The number of extra bytes per row of the original bitmap.
+				The number of extra bytes per row of the original bitmap.
 	@param		ispace
- The colour space of the original bitmap.
+				The colour space of the original bitmap.
 	@param		iprofile
- The ColorSync profile of the original bitmap or
- NULL if none exists.
+				The ColorSync profile of the original bitmap or
+				\c NULL if none exists.
 	@param		ibps
- The bits per sample of the original bitmap.
+				The bits per sample of the original bitmap.
 	@param		iformat
- The format of the original bitmap.
+				The format of the original bitmap.
 	@result		Returns a block of memory containing the desired bitmap which
- must be freed after use or NULL if the conversion was not
- possible. You should always check for failed conversions. The
- block of memory is safe for use with AltiVec.
+				must be freed after use or \c NULL if the conversion was not
+				possible. You should <i>always</i> check for failed conversions. The
+				block of memory is safe for use with AltiVec.
  */
-extern unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger iebpp, NSInteger iebpr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, NSBitmapFormat iformat);
+extern unsigned char *__nullable SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger iebpp, NSInteger iebpr, BMPColorSpace ispace, ColorSyncProfileRef __nullable iprofile, NSInteger ibps, NSBitmapFormat iformat);
 
 
 /*!
@@ -186,7 +192,7 @@ extern unsigned char SeaAveragedComponentValue(int spp, unsigned char *data, int
 	@param		profile
 				The profile to make the default display's profile.
 */
-extern void OpenDisplayProfile(CMProfileRef *profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
+extern void OpenDisplayProfile(CMProfileRef __nonnull*__nullable profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
 
 /*!
 	@function	CloseDisplayProfile
@@ -195,3 +201,5 @@ extern void OpenDisplayProfile(CMProfileRef *profile) DEPRECATED_IN_MAC_OS_X_VER
 				The profile to make the default display's profile.
 */
 extern void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
+
+NS_ASSUME_NONNULL_END

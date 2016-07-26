@@ -226,7 +226,6 @@
 						}
 					}
 				}
-				
 			}
 			
 			// If the layer is going to use a compositing effect...

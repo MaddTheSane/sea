@@ -10,10 +10,10 @@
 #import "Globals.h"
 #import <sys/sysctl.h>
 
-int randomTable[4096];
+//int randomTable[4096];
 extern int globalUniqueDocID;
 int tempFileCount;
-int diskWarningLevel;
+//int diskWarningLevel;
 BOOL useAltiVec;
 BOOL userWarnedOnDiskSpace;
 extern BOOL globalReadOnlyWarning;
@@ -27,6 +27,8 @@ BOOL isAltiVecAvailable()
 	int error = sysctl(selectors, 2, &hasVectorUnit, &length, NULL, 0);
 	
 	if	(error == 0) return (hasVectorUnit != 0);
+#elif __ppc64__
+	return YES;
 #endif
 	return NO;
 }
