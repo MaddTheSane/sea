@@ -6,7 +6,7 @@
 
 @implementation CocoaLayer
 
-- (instancetype)initWithImageRep:(NSBitmapImageRep *)imageRep document:(id)doc spp:(int)lspp
+- (instancetype)initWithImageRep:(NSBitmapImageRep *)imageRep document:(SeaDocument*)doc spp:(int)lspp
 {
 	ColorSyncProfileRef cmProfileLoc = NULL;
 	

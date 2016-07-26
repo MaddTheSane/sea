@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
@@ -13,7 +14,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface BucketTool : AbstractTool {
 	// The point where to start the selection
 	IntPoint startPoint;

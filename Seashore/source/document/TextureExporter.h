@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 @class SeaDocument;
@@ -16,7 +17,7 @@
     IBOutlet SeaDocument *document;
 
 	// The exporting panel
-	IBOutlet id sheet;
+	IBOutlet NSPanel *sheet;
 
 	IBOutlet id categoryTable;
 	

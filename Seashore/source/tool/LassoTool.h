@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractSelectTool.h"
 
@@ -30,16 +31,14 @@ typedef struct {
 */
 
 @interface LassoTool : AbstractSelectTool {
-
-	// The list of points
+	/// The list of points
 	IntPoint *points;
 	
-	// The last point
+	/// The last point
 	NSPoint lastPoint;
 	
-	// The current position in the list
+	/// The current position in the list
 	int pos;
-
 }
 
 /*!

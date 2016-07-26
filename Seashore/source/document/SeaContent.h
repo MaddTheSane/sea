@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #if MAIN_COMPILE
 #import "IndiciesKeeper.h"

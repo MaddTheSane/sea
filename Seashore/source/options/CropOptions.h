@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractScaleOptions.h"
 
@@ -12,7 +13,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface CropOptions : AbstractScaleOptions {
-	// The AspectRatio instance linked to this options panel
+	/// The AspectRatio instance linked to this options panel
 	IBOutlet AspectRatio *aspectRatio;
 }
 

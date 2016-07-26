@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 typedef NS_ENUM(int, SeaWindowRegion) {

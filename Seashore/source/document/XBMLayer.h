@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "SeaLayer.h"
 #import "XBMContent.h"
@@ -11,10 +12,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface XBMLayer : SeaLayer {
-
-}
+@interface XBMLayer : SeaLayer
 
 /*!
 	@method		initWithFile:document:shareInfo:

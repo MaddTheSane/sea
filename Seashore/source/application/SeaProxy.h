@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -11,9 +12,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface SeaProxy : NSObject {
-}
+@interface SeaProxy : NSObject
 
 // To methods in TextureExporter...
 - (IBAction)exportAsTexture:(id)sender;

@@ -1,5 +1,6 @@
 #ifdef USE_CENTERING_CLIPVIEW
 
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!

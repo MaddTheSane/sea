@@ -1,4 +1,5 @@
 #include <GIMPCore/GIMPCore.h>
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractOptions.h"
 
@@ -12,10 +13,10 @@
 */
 @interface GradientOptions : AbstractOptions
 {
-	// The pop-up menu indicating the gradient's type
+	/// The pop-up menu indicating the gradient's type
 	IBOutlet NSPopUpButton *typePopup;
 	
-	// The pop-up menu indicating the repeating style for the gradient
+	/// The pop-up menu indicating the repeating style for the gradient
 	IBOutlet NSPopUpButton *repeatPopup;
 }
 

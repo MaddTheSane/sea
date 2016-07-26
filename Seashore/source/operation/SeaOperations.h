@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import <SeashoreKit/Globals.h>
 
 @class SeaAlignment, SeaMargins, SeaResolution, SeaScale, SeaDocRotation;

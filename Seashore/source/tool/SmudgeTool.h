@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
@@ -12,16 +13,16 @@
 */
 
 @interface SmudgeTool : AbstractTool {
-	// The accumulated data
+	/// The accumulated data
 	unsigned char *accumData;
 	
-	// The last point we've been and the last point a brush was plotted (there is a difference)
+	/// The last point we've been and the last point a brush was plotted (there is a difference)
 	NSPoint lastPoint, lastPlotPoint;
 	
-	// The distance travelled by the brush so far
+	/// The distance travelled by the brush so far
 	double distance;
 	
-	// The last where recorded
+	/// The last where recorded
 	IntPoint lastWhere;
 }
 

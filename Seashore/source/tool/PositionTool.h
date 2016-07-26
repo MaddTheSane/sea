@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
@@ -12,21 +13,19 @@
 */
 
 @interface PositionTool : AbstractTool {
-
-	// The point from which the drag started
+	/// The point from which the drag started
 	IntPoint initialPoint;
 	
-	// The mode of positioning
+	/// The mode of positioning
 	int mode;
 
-	// An outlet to an instance of a class with the same name
+	/// An outlet to an instance of a class with the same name
 	IBOutlet id seaOperations;
 	
 	// The scale and rotation values
 	CGFloat scale;
 	CGFloat rotation;
 	BOOL rotationDefined;
-
 }
 
 /*!

@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractSelectOptions.h"
 
@@ -9,15 +10,14 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface WandOptions : AbstractSelectOptions {
-	// A slider indicating the tolerance of the wand
+	/// A slider indicating the tolerance of the wand
 	IBOutlet NSSlider *toleranceSlider;
 	
-	// A label displaying the tolerance of the wand
+	/// A label displaying the tolerance of the wand
 	IBOutlet NSTextField *toleranceLabel;
 	
-	// A slider for the density of the wand sampling
+	/// A slider for the density of the wand sampling
 	IBOutlet NSSlider *intervalsSlider;
 }
 

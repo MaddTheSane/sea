@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractPaintOptions.h"
 
@@ -9,7 +10,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface BucketOptions : AbstractPaintOptions {
 	// A slider indicating the tolerance of the bucket
 	IBOutlet NSSlider *toleranceSlider;

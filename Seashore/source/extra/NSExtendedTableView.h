@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -13,13 +14,10 @@
 				http://www.pnelsoncomposer.com/writings/NewbieFAQ.html</a>
 				for the document from which this code came.</i>
 */
-
 @interface NSExtendedTableView : NSTableView {
-
   NSMutableArray *saveTextColors;
   NSMutableArray *saveBackgroundColors;
   BOOL saveVerticalScrollerEnabled, saveHorizontalScrollerEnabled;
-
 }
 
 @end

@@ -6,7 +6,7 @@
 				<b>License:</b> GNU General Public License<br>
 */
 
-#import <Foundation/NSObjCRuntime.h>
+#import <Foundation/Foundation.h>
 #import "Globals.h"
 
 NS_ASSUME_NONNULL_BEGIN

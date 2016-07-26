@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractPaintOptions.h"
 
@@ -9,12 +10,11 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SmudgeOptions : AbstractPaintOptions {
-	// A slider indicating the opacity of the bucket
+	/// A slider indicating the opacity of the bucket
 	IBOutlet NSSlider *rateSlider;
 	
-	// A label displaying the opacity of the bucket
+	/// A label displaying the opacity of the bucket
 	IBOutlet NSTextField *rateLabel;
 	
 	// A checkbox that when checked implies that the tool should consider all pixels not those just in the current layer

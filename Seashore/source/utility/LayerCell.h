@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -10,8 +11,8 @@
 */
 
 @interface LayerCell : NSTextFieldCell {
-	// We need to know if the cell is selected because
-	// we do some drawing.
+	/// We need to know if the cell is selected because
+	/// we do some drawing.
 	BOOL selected;
 }
 
@@ -32,11 +33,11 @@
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 
 /*!
-	@method		cellSize
+	@property	cellSize
 	@discussion	Returns the dimensions of the cell
 	@result		An NSSize.
 */
-- (NSSize)cellSize;
+@property (readonly) NSSize cellSize;
 
 /*
 	@property	selected

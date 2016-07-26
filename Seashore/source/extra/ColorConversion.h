@@ -11,6 +11,7 @@
 				Copyright (c) 1995 Spencer Kimball and Peter Mattis
 */
 
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 #ifndef __private_extern

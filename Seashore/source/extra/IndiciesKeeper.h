@@ -7,6 +7,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!

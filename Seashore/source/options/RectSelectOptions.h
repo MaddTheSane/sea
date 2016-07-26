@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractSelectOptions.h"
 
@@ -12,13 +13,13 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface RectSelectOptions : AbstractSelectOptions {
-	// The slider to select the radius for the rounded rectangle
+	/// The slider to select the radius for the rounded rectangle
 	IBOutlet NSSlider *radiusSlider;
 	
-	// When checked indicates the rectangle should be rounded
+	/// When checked indicates the rectangle should be rounded
 	IBOutlet NSButton *radiusCheckbox;
 
-	// The AspectRatio instance linked to this options panel
+	/// The AspectRatio instance linked to this options panel
 	IBOutlet AspectRatio *aspectRatio;
 }
 

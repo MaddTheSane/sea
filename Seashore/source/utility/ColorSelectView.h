@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 @class SeaDocument;
@@ -12,10 +13,10 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface ColorSelectView : NSView {
-	// YES if the mouse is down on the swap button
+	/// YES if the mouse is down on the swap button
 	BOOL mouseDownOnSwap;
 
-	// The texture utility
+	/// The texture utility
 	IBOutlet TextureUtility *textureUtility;
 }
 

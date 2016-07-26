@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -10,7 +11,6 @@
 */
 
 @interface SeaHelp : NSObject {
-	
 	// The bugs and suggestions window
     IBOutlet id bugsWindow;
 	
@@ -22,7 +22,6 @@
 	
 	// Should the user be advised if the download fails?
 	BOOL adviseFailure;
-	
 }
 
 /*!

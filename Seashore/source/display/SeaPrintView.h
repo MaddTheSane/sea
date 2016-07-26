@@ -1,4 +1,7 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+
+@class SeaDocument;
 
 /*!
 	@class		SeaView
@@ -8,14 +11,9 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli		
 */
-
-@class SeaDocument;
-
 @interface SeaPrintView : NSView {
-
 	// The document associated with this view
 	SeaDocument *document;
-	
 }
 
 /*!
@@ -25,7 +23,7 @@
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(id)doc;
+- (instancetype)initWithDocument:(SeaDocument*)doc;
 
 /*!
 	@method		drawRect:

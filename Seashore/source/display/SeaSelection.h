@@ -1,5 +1,5 @@
 #include <GIMPCore/GIMPCore.h>
-#import <AppKit/AppKit.h>
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!

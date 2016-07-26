@@ -8,6 +8,7 @@
 				Copyright (c) 2005 Daniel Jalkut
 */
 
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!

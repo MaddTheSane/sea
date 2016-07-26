@@ -10,6 +10,7 @@
 				Copyright (c) 1995 Spencer Kimball and Peter Mattis
 */
 
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!

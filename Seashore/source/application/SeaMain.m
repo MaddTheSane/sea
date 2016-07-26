@@ -13,7 +13,7 @@
 //int randomTable[4096];
 extern int globalUniqueDocID;
 int tempFileCount;
-//int diskWarningLevel;
+int diskWarningLevel;
 BOOL useAltiVec;
 BOOL userWarnedOnDiskSpace;
 extern BOOL globalReadOnlyWarning;

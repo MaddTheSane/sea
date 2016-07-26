@@ -299,10 +299,10 @@ extern IntRect NSRectMakeIntRect(NSRect rect);
 
 /*!
 	@function	IntRectMakeNSRect
-	@discussion	Given an IntRect makes an NSRect with similar values.
+	@discussion	Given an \c IntRect makes an \c NSRect with similar values.
 	@param		rect
-				The IntRect to convert.
-	@result		Returns an NSRect with similar values to the NSRect.
+				The I\c ntRect to convert.
+	@result		Returns an \c NSRect with similar values to the IntRect.
 */
 extern NSRect IntRectMakeNSRect(IntRect rect);
 

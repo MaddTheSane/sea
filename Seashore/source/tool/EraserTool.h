@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
@@ -33,7 +34,6 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface EraserTool : AbstractTool
 {
 	// The last point we've been and the last point a brush was plotted (there is a difference)

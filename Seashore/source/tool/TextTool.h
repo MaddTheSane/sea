@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
@@ -11,25 +12,25 @@
 */
 
 @interface TextTool : AbstractTool {
-	// The preview panel
+	/// The preview panel
 	IBOutlet NSPanel *panel;
 	
-	// The move panel
+	/// The move panel
 	IBOutlet NSWindow *movePanel;
 	
-	// The preview text box
+	/// The preview text box
 	IBOutlet NSTextView *textbox;
 	
-	// The font manager associated with the text tool
+	/// The font manager associated with the text tool
 	NSFontManager *fontManager;
 
-	// The point where the mouse was released
+	/// The point where the mouse was released
 	IntPoint where;
 	
-	// The rect containing the preview
+	/// The rect containing the preview
 	IntRect previewRect;
 	
-	// Is the tool running?
+	/// Is the tool running?
 	BOOL running;
 }
 

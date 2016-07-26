@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractScaleOptions.h"
 #import "SeaSelection.h"
@@ -13,7 +14,7 @@
 */
 
 @interface AbstractSelectOptions : AbstractScaleOptions {
-	// The Selection mode
+	/// The Selection mode
 	SeaSelectMode mode;
 }
 

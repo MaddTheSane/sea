@@ -352,6 +352,7 @@
 		55909F1E18D0082800F43F90 /* Displacement Distortion+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909E2418CFD6DD00F43F90 /* Displacement Distortion+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55909F1F18D0082800F43F90 /* Dot Screen+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55909E4818CFDA6900F43F90 /* Dot Screen+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5594803B1D47D70F0065E83B /* NewSVGImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5594803A1D47D70F0065E83B /* NewSVGImporter.swift */; };
+		5594803D1D47E5990065E83B /* IntRectAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5594803C1D47E5990065E83B /* IntRectAdditions.swift */; };
 		5599388418CFC69700E92088 /* CIBrightnessClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D506718CF9FBA005809E3 /* CIBrightnessClass.m */; };
 		5599388618CFC6A600E92088 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D506A18CF9FBA005809E3 /* Localizable.strings */; };
 		5599388818CFC6F100E92088 /* CIBumpClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D507218CF9FBA005809E3 /* CIBumpClass.m */; };
@@ -2141,6 +2142,7 @@
 		5593808918F465E60022C282 /* SSKVisualPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKVisualPlugin.m; sourceTree = "<group>"; };
 		559480371D47D6D90065E83B /* Seashore-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Seashore-Bridging-Header.h"; sourceTree = "<group>"; };
 		5594803A1D47D70F0065E83B /* NewSVGImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSVGImporter.swift; sourceTree = "<group>"; };
+		5594803C1D47E5990065E83B /* IntRectAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntRectAdditions.swift; sourceTree = "<group>"; };
 		55969703194F755D0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		55969704194F75680068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SeaDocument.xib; sourceTree = "<group>"; };
 		55969705194F75710068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CocoaContent.xib; sourceTree = "<group>"; };
@@ -3505,6 +3507,7 @@
 				F50687FB039B950A016F7F19 /* Globals.h */,
 				2A37F4B0FDCFA73011CA2CEA /* main.m */,
 				559480371D47D6D90065E83B /* Seashore-Bridging-Header.h */,
+				5594803C1D47E5990065E83B /* IntRectAdditions.swift */,
 			);
 			name = "Main Sources";
 			path = source/main;
@@ -7988,6 +7991,7 @@
 				DC74747A0A43AAA400CB1C1D /* EllipseSelectOptions.m in Sources */,
 				DC7474840A43AC5100CB1C1D /* PolygonLassoOptions.m in Sources */,
 				DC7474960A43AFEE00CB1C1D /* EllipseSelectTool.m in Sources */,
+				5594803D1D47E5990065E83B /* IntRectAdditions.swift in Sources */,
 				DC7476B00A43B0F600CB1C1D /* PolygonLassoTool.m in Sources */,
 				A8D52D2F0A8C26A100927657 /* AbstractSelectOptions.m in Sources */,
 				A8A948C50B8AAFE300BBD71C /* CropTool.m in Sources */,

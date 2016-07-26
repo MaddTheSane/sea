@@ -8,14 +8,15 @@
 				<b>Copyright:</b> N/A
 */
 
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+
+@class SeaPrefs;
 
 @interface WindowBackColorWell : NSColorWell
 {
-
-	// An instance of the class of the same name
-	IBOutlet id seaPrefs;
-
+	/// An instance of the class of the same name
+	IBOutlet SeaPrefs *seaPrefs;
 }
 
 /*!

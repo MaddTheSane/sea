@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 @class SeaDocument;
@@ -11,19 +12,19 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface BannerView : NSView {
-	// Reference to the document this banner is in
+	/// Reference to the document this banner is in
 	IBOutlet SeaDocument *document;
 	
-	// The text to display
+	/// The text to display
 	NSString *bannerText;
 	
-	// The importance of the banner (this defines the color)
+	/// The importance of the banner (this defines the color)
 	int bannerImportance;
 	
-	// The default button for the banner
+	/// The default button for the banner
 	IBOutlet NSButton *defaultButton;
 	
-	// The alternate button (optional)
+	/// The alternate button (optional)
 	IBOutlet NSButton *alternateButton;
 }
 

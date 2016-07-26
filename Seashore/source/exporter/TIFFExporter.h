@@ -1,5 +1,8 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractExporter.h"
+
+@class SeaDocument;
 
 /*!
 	@class		TIFFExporter
@@ -9,9 +12,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@class SeaDocument;
-
 @interface TIFFExporter : NSObject <AbstractExporter> {
 	
 	// The associated document

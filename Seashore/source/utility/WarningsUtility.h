@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+
+@class BannerView;
+@class SeaWindowContent;
+@class SeaDocument;
 
 /*!
 	@class		WarnigsUtility
@@ -8,12 +13,6 @@
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-#import <Cocoa/Cocoa.h>
-
-@class BannerView;
-@class SeaWindowContent;
-@class SeaDocument;
-
 @interface WarningsUtility : NSObject {
 	// The host for the utility
 	IBOutlet SeaDocument *document;

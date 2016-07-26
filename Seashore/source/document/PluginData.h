@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "Constants.h"
 #import "SeaWhiteboard.h"

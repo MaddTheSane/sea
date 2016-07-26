@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractPaintOptions.h"
 
@@ -10,13 +11,13 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface EraserOptions : AbstractPaintOptions {
-	// A slider indicating the opacity of the bucket
+	/// A slider indicating the opacity of the bucket
 	IBOutlet NSSlider *opacitySlider;
 	
-	// A label displaying the opacity of the bucket
+	/// A label displaying the opacity of the bucket
 	IBOutlet NSTextField *opacityLabel;
 	
-	// A checkbox indicating whether to fade in the same style as the paintbrush
+	/// A checkbox indicating whether to fade in the same style as the paintbrush
 	IBOutlet NSButton *mimicBrushCheckbox;
 }
 

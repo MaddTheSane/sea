@@ -26,6 +26,7 @@
 @synthesize yOffset = yoff;
 @synthesize width;
 @synthesize height;
+@synthesize uniqueLayerID;
 
 #if MAIN_COMPILE
 - (instancetype)initWithDocument:(SeaDocument *)doc
@@ -128,6 +129,7 @@
 
 - (instancetype)initFloatingWithDocument:(SeaDocument*)doc rect:(IntRect)lrect data:(unsigned char *)ldata
 {
+	if (self = [self initWithDocument:doc]) {
 	// Set the offsets, height and width
 	xoff = lrect.origin.x;
 	yoff = lrect.origin.y;
@@ -153,8 +155,9 @@
 	seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
 	uniqueLayerID = [(SeaDocument *)doc uniqueFloatingLayerID];
 	name = NULL; oldNames = NULL;
-	undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%d-l%d", [self uniqueLayerID], [document uniqueDocID]];
-	
+		NSTemporaryDirectory();
+	undoFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"seaundo-d%d-l%d", [self uniqueLayerID], [document uniqueDocID]]];
+	}
 	return self;
 }
 
@@ -630,10 +633,6 @@
 	return lostprops_len;
 }
 
-- (int)uniqueLayerID
-{
-	return uniqueLayerID;
-}
 
 #if MAIN_COMPILE
 - (int)index

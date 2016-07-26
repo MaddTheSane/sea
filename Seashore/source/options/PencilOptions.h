@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractPaintOptions.h"
 
@@ -9,10 +10,9 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface PencilOptions : AbstractPaintOptions
 {	
-	// A slider indicating the size of the pencil block
+	/// A slider indicating the size of the pencil block
 	IBOutlet NSSlider *sizeSlider;
 }
 

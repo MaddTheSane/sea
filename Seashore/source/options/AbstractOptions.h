@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -58,13 +59,13 @@ typedef NS_ENUM(NSInteger, AbstractModifiers) {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface AbstractOptions : NSObject {
-	// The options view associated with this tool
+	/// The options view associated with this tool
     IBOutlet NSView *view;
 	
-	// The modifier options associated with this tool
+	/// The modifier options associated with this tool
 	IBOutlet NSPopUpButton *modifierPopup;
 	
-	// The document associated
+	/// The document associated
 	SeaDocument *document;
 }
 

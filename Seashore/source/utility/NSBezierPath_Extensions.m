@@ -1,5 +1,6 @@
 #import "NSBezierPath_Extensions.h"
 #include <math.h>
+#include <tgmath.h>
 
 @implementation NSBezierPath (MyExtensions)
 

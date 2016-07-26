@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -8,9 +9,7 @@
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> N/A
 */
-
-@interface SeaToolbarItem : NSToolbarItem {	
-}
+@interface SeaToolbarItem : NSToolbarItem
 
 /*!
 	@method		validate

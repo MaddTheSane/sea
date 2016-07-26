@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 #import "SeaPlugins.h"
@@ -18,13 +19,13 @@
 				<b>Copyright:</b> Copyright (c) 2007 Mark Pazolli
 */
 @interface EffectTool : AbstractTool {
-	// The instance of the SeaPlugins class
+	/// The instance of the SeaPlugins class
 	SeaPlugins *seaPlugins;
 
-	// The points so far registered
+	/// The points so far registered
 	IntPoint points[kMaxEffectToolPoints];
 
-	// A count of the points so far registered
+	/// A count of the points so far registered
 	NSInteger count;
 }
 

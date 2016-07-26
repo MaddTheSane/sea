@@ -4,6 +4,8 @@
 
 @class SeaDocument;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
 	@class		CocoaLayer
 	@abstract	Make a layer from an image representation.
@@ -30,6 +32,8 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithImageRep:(NSBitmapImageRep *)imageRep document:(SeaDocument*)doc spp:(int)lspp;
+- (nullable instancetype)initWithImageRep:(NSBitmapImageRep *)imageRep document:(SeaDocument*)doc spp:(int)lspp;
 
 @end
+
+NS_ASSUME_NONNULL_END

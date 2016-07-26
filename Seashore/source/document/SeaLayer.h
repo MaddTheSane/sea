@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -161,6 +162,7 @@
 				of the format prescibed by the document.
 */
 - (instancetype)initFloatingWithDocument:(SeaDocument *)doc rect:(IntRect)lrect data:(unsigned char *)ldata;
+
 #else
 - (instancetype)init;
 #endif
