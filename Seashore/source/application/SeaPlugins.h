@@ -116,7 +116,10 @@ NS_ASSUME_NONNULL_BEGIN
 				more point given to it by the effects tool.
 */
 NS_ENUM(int) {
+	//! Specifies a basic effects plug-in.
 	kBasicPlugin = 0,
+	//! Specifies a basic effect plug-in that acts on one or
+	//! more point given to it by the effects tool.
 	kPointPlugin = 1
 };
 

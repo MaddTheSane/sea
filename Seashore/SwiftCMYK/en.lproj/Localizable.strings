@@ -1,0 +1,6 @@
+author = "C.W. Betts";
+copyright = "Public Domain 2016";
+groupName = "Color Effect";
+description = "Converts the selection to CMYK using ColorSync.";
+license = "Public Domain";
+name = "Convert to CMYK";

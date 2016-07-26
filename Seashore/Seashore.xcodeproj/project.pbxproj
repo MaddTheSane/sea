@@ -131,6 +131,8 @@
 		550AEAF618CFC5DE008918BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		550AEB0418CFC5E1008918BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		55115C041D46AC2700E76B5B /* SSKTerminatable.h in Headers */ = {isa = PBXBuildFile; fileRef = 55115C031D46AC2700E76B5B /* SSKTerminatable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55115C241D46D68E00E76B5B /* SwiftCMYK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55115C231D46D68D00E76B5B /* SwiftCMYK.swift */; };
+		55115C271D46D71200E76B5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55115C291D46D71200E76B5B /* Localizable.strings */; };
 		551E568518D0131D00E4CDAF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E568418D0131D00E4CDAF /* libz.dylib */; };
 		551E568C18D0132900E4CDAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		551E569B18D0132B00E4CDAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
@@ -915,6 +917,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = A8F100DC09C126A6003F15A3;
 			remoteInfo = Pat2PNG;
+		};
+		55115C2A1D46D81700E76B5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55472B7D1C6EDCCA0065A852;
+			remoteInfo = SeashoreKit;
 		};
 		551E56CA18D0161200E4CDAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1805,6 +1814,10 @@
 		550AEAFC18CFC5DE008918BA /* Brightness+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Brightness+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		550AEB0A18CFC5E1008918BA /* Bump+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bump+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55115C031D46AC2700E76B5B /* SSKTerminatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKTerminatable.h; sourceTree = "<group>"; };
+		55115C1D1D46D65000E76B5B /* SwiftCMYK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCMYK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		55115C1F1D46D65100E76B5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55115C231D46D68D00E76B5B /* SwiftCMYK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCMYK.swift; sourceTree = "<group>"; };
+		55115C281D46D71200E76B5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		551E568418D0131D00E4CDAF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		551E569318D0132900E4CDAF /* Edges+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Edges+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E56A218D0132B00E4CDAF /* Edge Work+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Edge Work+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2569,6 +2582,13 @@
 				550AEB0418CFC5E1008918BA /* Cocoa.framework in Frameworks */,
 				551E56B018D0139A00E4CDAF /* Quartz.framework in Frameworks */,
 				551E56B118D0139A00E4CDAF /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55115C1A1D46D65000E76B5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3423,6 +3443,7 @@
 				55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */,
 				55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */,
 				555F598D1D373CEC0085AC96 /* SwiftHorizStripes.bundle */,
+				55115C1D1D46D65000E76B5B /* SwiftCMYK.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3437,6 +3458,7 @@
 				35B156C70A2C0092005B688F /* Projects */,
 				5575352618DB56CB00AC0FBC /* SeashoreKit */,
 				555F598E1D373CEC0085AC96 /* SwiftHorizStripes */,
+				55115C1E1D46D65100E76B5B /* SwiftCMYK */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				A89B83D30A426D4C00AD6941 /* Disk Image Items */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
@@ -3618,6 +3640,16 @@
 				35B158720A2C08A4005B688F /* Pat2PNG.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		55115C1E1D46D65100E76B5B /* SwiftCMYK */ = {
+			isa = PBXGroup;
+			children = (
+				55115C291D46D71200E76B5B /* Localizable.strings */,
+				55115C231D46D68D00E76B5B /* SwiftCMYK.swift */,
+				55115C1F1D46D65100E76B5B /* Info.plist */,
+			);
+			path = SwiftCMYK;
 			sourceTree = "<group>";
 		};
 		5528597E13D62FAB001564E5 /* Products */ = {
@@ -5020,6 +5052,24 @@
 			productReference = 550AEB0A18CFC5E1008918BA /* Bump+.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		55115C1C1D46D65000E76B5B /* SwiftCMYK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55115C201D46D65100E76B5B /* Build configuration list for PBXNativeTarget "SwiftCMYK" */;
+			buildPhases = (
+				55115C191D46D65000E76B5B /* Sources */,
+				55115C1A1D46D65000E76B5B /* Frameworks */,
+				55115C1B1D46D65000E76B5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55115C2B1D46D81700E76B5B /* PBXTargetDependency */,
+			);
+			name = SwiftCMYK;
+			productName = SwiftCMYK;
+			productReference = 55115C1D1D46D65000E76B5B /* SwiftCMYK.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		551E568618D0132900E4CDAF /* Edges+ */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 551E569018D0132900E4CDAF /* Build configuration list for PBXNativeTarget "Edges+" */;
@@ -6275,6 +6325,9 @@
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				TargetAttributes = {
+					55115C1C1D46D65000E76B5B = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					55472B7D1C6EDCCA0065A852 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
@@ -6407,6 +6460,7 @@
 				5554404F194F969A006CC667 /* Other Applications */,
 				55472B7D1C6EDCCA0065A852 /* SeashoreKit */,
 				555F598C1D373CEC0085AC96 /* SwiftHorizStripes */,
+				55115C1C1D46D65000E76B5B /* SwiftCMYK */,
 			);
 		};
 /* End PBXProject section */
@@ -6549,6 +6603,14 @@
 			files = (
 				5599388918CFC6F500E92088 /* Localizable.strings in Resources */,
 				55909DE218CFCFEF00F43F90 /* CIBump.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55115C1B1D46D65000E76B5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55115C271D46D71200E76B5B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7214,6 +7276,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5599388818CFC6F100E92088 /* CIBumpClass.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55115C191D46D65000E76B5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55115C241D46D68E00E76B5B /* SwiftCMYK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7952,6 +8022,11 @@
 			name = TIFF;
 			targetProxy = 35B157390A2C015E005B688F /* PBXContainerItemProxy */;
 		};
+		55115C2B1D46D81700E76B5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55472B7D1C6EDCCA0065A852 /* SeashoreKit */;
+			targetProxy = 55115C2A1D46D81700E76B5B /* PBXContainerItemProxy */;
+		};
 		551E56CB18D0161200E4CDAF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 551E568618D0132900E4CDAF /* Edges+ */;
@@ -8410,6 +8485,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		55115C291D46D71200E76B5B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55115C281D46D71200E76B5B /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		551E56D218D01A7500E4CDAF /* SeaDocument.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -9565,6 +9648,53 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		55115C211D46D65100E76B5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SwiftCMYK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.SwiftCMYK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		55115C221D46D65100E76B5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = SwiftCMYK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.SwiftCMYK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -12512,6 +12642,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		55115C201D46D65100E76B5B /* Build configuration list for PBXNativeTarget "SwiftCMYK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55115C211D46D65100E76B5B /* Debug */,
+				55115C221D46D65100E76B5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		551E569018D0132900E4CDAF /* Build configuration list for PBXNativeTarget "Edges+" */ = {
 			isa = XCConfigurationList;
