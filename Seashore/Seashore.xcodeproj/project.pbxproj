@@ -366,6 +366,8 @@
 		559938AB18CFCCCA00E92088 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		559938BA18CFCCCC00E92088 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		559A635318D8B5E700FD74A2 /* default-distort.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 557D511318CF9FBC005809E3 /* default-distort.tiff */; };
+		55AF35771D4A865E00A0EA26 /* NSBezierPath_Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DC5ED9010FF2FAE500DB0897 /* NSBezierPath_Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55AF35781D4A866500A0EA26 /* NSOutlineView_Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DCA8928C0FD4AAA3002BEC8A /* NSOutlineView_Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55B95A411C6F21B500E37A8C /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; };
 		55B95A441C6F21FA00E37A8C /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; };
 		55B95A491C6FAF4E00E37A8C /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; };
@@ -4981,6 +4983,7 @@
 				55472B9E1C6EDFDE0065A852 /* Globals.h in Headers */,
 				55472BD31C6EE4EC0065A852 /* SeaShadowView.h in Headers */,
 				55472BBF1C6EE23B0065A852 /* CenteringClipView.h in Headers */,
+				55AF35781D4A866500A0EA26 /* NSOutlineView_Extensions.h in Headers */,
 				55472B991C6EDEA10065A852 /* PluginData.h in Headers */,
 				55472BEA1C6EE7F20065A852 /* RLE.h in Headers */,
 				556D43CF1D41677900BECFB2 /* SVGImporter.h in Headers */,
@@ -4992,6 +4995,7 @@
 				55472BA81C6EE1530065A852 /* SeaWarning.h in Headers */,
 				55472B961C6EDDF80065A852 /* SSKVisualPlugin.h in Headers */,
 				55472BC21C6EE4220065A852 /* Bitmap.h in Headers */,
+				55AF35771D4A865E00A0EA26 /* NSBezierPath_Extensions.h in Headers */,
 				55472B951C6EDDF80065A852 /* SSKPlugin.h in Headers */,
 				55472BB81C6EE2010065A852 /* SeaHelpers.h in Headers */,
 				55472BB31C6EE2010065A852 /* SeaDocument.h in Headers */,

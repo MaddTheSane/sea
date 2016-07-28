@@ -41,7 +41,6 @@
 
 #import "NSOutlineView_Extensions.h"
 #import "LayerDataSource.h"
-
 #import "SeaDocument.h"
 #import "SeaView.h"
 
@@ -55,8 +54,8 @@
 {
     NSMutableArray *items = [NSMutableArray array];
     NSIndexSet *selectedIndexes = [self selectedRowIndexes];
-	for(NSInteger i = 0; i < [self numberOfRows]; i++){
-		if([selectedIndexes containsIndex:i]){
+	for (NSInteger i = 0; i < [self numberOfRows]; i++) {
+		if ([selectedIndexes containsIndex:i]) {
 			[items addObject: [self itemAtRow: i]];
 		}
 	}
@@ -65,17 +64,14 @@
 
 - (void)selectItems:(NSArray *)items byExtendingSelection:(BOOL)extend
 {
-    NSInteger i, totalCount = [items count];
 	NSMutableIndexSet *idxSet = [[NSMutableIndexSet alloc] init];
-    if (extend==NO)
-		[self deselectAll:nil];
-    for (i = 0; i < totalCount; i++) {
-        NSInteger row = [self rowForItem:items[i]];
-		if(row>=0)
+    for (id item in items) {
+        NSInteger row = [self rowForItem:item];
+		if (row >= 0)
 			[idxSet addIndex:row];
     }
 	
-	[self selectRowIndexes: idxSet byExtendingSelection:YES];
+	[self selectRowIndexes: idxSet byExtendingSelection: extend];
 }
 
 @end
@@ -105,11 +101,10 @@
 {
 	[[NSBezierPath bezierPathWithRect:theClipRect] fill];
 	NSIndexSet *indecies = [self selectedRowIndexes];
-	int i;
-	for(i = 0; i < [self numberOfRows]; i++){
-		if([indecies containsIndex: i]){
+	for (NSInteger i = 0; i < [self numberOfRows]; i++) {
+		if ([indecies containsIndex: i]) {
 			[[NSImage imageNamed:((isFirst && [[self window] isMainWindow]) ?@"sel-gradient" :@"bg-gradient")] drawInRect:[self rectOfRow: i] fromRect:NSZeroRect operation: NSCompositeSourceOver fraction: 1.0];	
-		}else{
+		} else {
 			[[NSColor colorWithCalibratedRed:228.0/255 green:234.0/255 blue:241.0/255 alpha:1.0] set];
 			[[NSBezierPath bezierPathWithRect: [self rectOfRow: i]] fill];
 		}

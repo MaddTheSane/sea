@@ -5,4 +5,4 @@
 + (NSBezierPath *)bezierPathWithRect:(NSRect)rect andRadius:(CGFloat) radius;
 @end
 
-void NSLogRect(NSRect rect);
+extern void NSLogRect(NSRect rect);

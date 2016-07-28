@@ -48,3 +48,7 @@ FOUNDATION_EXPORT const unsigned char SeashoreKitVersionString[];
 #import "SeaWarning.h"
 #import "SeaWindowContent.h"
 #import "TextureExporter.h"
+
+//Cocoa extensions:
+#import "NSOutlineView_Extensions.h"
+#import "NSBezierPath_Extensions.h"
