@@ -28,9 +28,50 @@
 
 #ifndef INTRECT_T
 #define INTRECT_T
-typedef struct { int x; int y; } IntPoint;
-typedef struct { int width; int height; } IntSize;
-typedef struct { IntPoint origin; IntSize size; } IntRect;
+/*!
+	@typedef	IntPoint
+	@discussion	Similar to \c NSPoint except with integer fields.
+	@field		x
+				The x co-ordinate of the point.
+	@field		y
+				The y co-ordinate of the point.
+ */
+typedef struct {
+  /*! The x co-ordinate of the point. */
+  int x;
+  /*! The y co-ordinate of the point. */
+  int y;
+} IntPoint;
+
+/*!
+	@typedef	IntSize
+	@discussion	Similar to \c NSSize except with integer fields.
+	@field		width
+				The width of the size.
+	@field		height
+				The height of the size.
+ */
+typedef struct {
+  /*! The width of the size. */
+  int width;
+  /*! The height of the size. */
+  int height;
+} IntSize;
+
+/*!
+	@typedef	IntRect
+	@discussion	Similar to \c NSRect except with integer fields.
+	@field		origin
+				An IntPoint representing the origin of the rectangle.
+	@field		size
+				An IntSize representing the size of the rectangle.
+ */
+typedef struct {
+  /*! An \c IntPoint representing the origin of the rectangle. */
+  IntPoint origin;
+  /*! An \c IntSize representing the size of the rectangle. */
+  IntSize size;
+} IntRect;
 #endif /* INTRECT_T */
 
 typedef CF_ENUM(int, GimpInterpolationType) {
@@ -107,33 +148,33 @@ struct _GimpVector2
 typedef void (* ProgressFunction) (int max, int current);
 
 /*!
-	@function	GCScalePixels()
-	@brief		Scales the pixels of the source bitmap so that they fill the destination
+	@function	GCScalePixels
+	@discussion	Scales the pixels of the source bitmap so that they fill the destination
 				bitmap using the specified interpolation style (see GCConstants).
  */
 void GCScalePixels(unsigned char *dest, int destWidth, int destHeight, unsigned char *src, int srcWidth, int srcHeight, GimpInterpolationType interpolation, int spp);
 
 /*!
-	@function	GCDrawEllipse()
-	@brief		Fills the given bitmap with an ellipse of the specified dimensions.
+	@function	GCDrawEllipse
+	@discussion	Fills the given bitmap with an ellipse of the specified dimensions.
  */
 void GCDrawEllipse(unsigned char *dest, int destWidth, int destHeight, IntRect rect, unsigned int antialiased);
 
 /*!
 	@function	GCFillGradient
-	@brief		Fills a rectangle of the given bitmap with the given gradient.
+	@discussion	Fills a rectangle of the given bitmap with the given gradient.
  */
 void GCFillGradient(unsigned char *dest, int destWidth, int destHeight, IntRect rect, int spp, GimpGradientInfo info, ProgressFunction progress_callback);
 
 /*!
 	@function	GCDrawPolygon
-	@brief		Fills the given bitmap with a polygon using the provided points.
+	@discussion	Fills the given bitmap with a polygon using the provided points.
  */
 void GCDrawPolygon(unsigned char *dest, int destWidth, int destHeight, GimpVector2 *points, int n, int spp);
 
 /*!
 	@function	GCRotateImage
-	@brief		Rotates the given bitmap through the specified angle (in radians).
+	@discussion	Rotates the given bitmap through the specified angle (in radians).
  */
 void GCRotateImage(unsigned char **dest, int *destWidth, int *destHeight, int *destX, int *destY, unsigned char *src, int srcWidth, int srcHeight, float angle, GimpInterpolationType interpolation_type, int spp, ProgressFunction progress_callback);
 

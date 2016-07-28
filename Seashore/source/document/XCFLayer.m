@@ -268,7 +268,6 @@ static inline void fix_endian_read(int *input, size_t size)
 			fseek(file, tileOffset, SEEK_SET);
 			switch (info->compression) {
 				case COMPRESS_NONE:
-				
 					// In case of no compression...
 					srcData = malloc(expectedSize);
 					if (fread(srcData, sizeof(char), expectedSize, file) != expectedSize) {
@@ -282,10 +281,9 @@ static inline void fix_endian_read(int *input, size_t size)
 							tileData[i + j * srcSPP] = srcData[i * width * height + j];
 					}
 					free(srcData);
+					break;
 					
-				break;
 				case COMPRESS_RLE:
-				
 					// In case of RLE compression (typical case)...
 					// NSLog(@"Tile begins at: %d", ftell(file));
 					srcData = malloc(expectedSize * 1.3 + 1);
@@ -297,8 +295,25 @@ static inline void fix_endian_read(int *input, size_t size)
 						return NULL;
 					}
 					free(srcData);
+					break;
 					
-				break;
+				case COMPRESS_ZLIB:
+					NSLog(@"xcf: zlib compression unimplemented");
+					free(tileData); free(totalData);
+					return NULL;
+					break;
+					
+				case COMPRESS_FRACTAL:
+					NSLog (@"xcf: fractal compression unimplemented");
+					free(tileData); free(totalData);
+					return NULL;
+					break;
+					
+				default:
+					NSLog (@"xcf: unknown compression format %i", info->compression);
+					free(tileData); free(totalData);
+					return NULL;
+					break;
 			}
 		
 			// Now transfer that data to the big picture
@@ -363,7 +378,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	size_t srcSize;
 	long oldOffset;
 	unsigned char *srcData, *tileData;
-	int whichTile = 0, i, j;
+	int whichTile = 0;
 	BOOL finished;
 
 	// We have no use for the mask's header information (we assume its reasonable)
@@ -396,7 +411,6 @@ static inline void fix_endian_read(int *input, size_t size)
 			fseek(file, tileOffset, SEEK_SET);
 			switch (info->compression) {
 				case COMPRESS_NONE:
-					
 					// In case of no compression...
 					srcData = malloc(expectedSize);
 					if (fread(srcData, sizeof(char), expectedSize, file) != expectedSize) {
@@ -405,13 +419,12 @@ static inline void fix_endian_read(int *input, size_t size)
 						free(srcData); free(tileData); free(totalData);
 						return NO;
 					}
-					for (i = 0; i < expectedSize; i++)
+					for (int i = 0; i < expectedSize; i++)
 						tileData[i] = srcData[i];
 					free(srcData);
-				
-				break;
-				case COMPRESS_RLE:
+					break;
 					
+				case COMPRESS_RLE:
 					// In case of RLE compression (typical case)...
 					srcData = malloc(expectedSize * 1.3 + 1);
 					srcSize = fread(srcData, sizeof(char), expectedSize * 1.3 + 1, file);
@@ -422,13 +435,30 @@ static inline void fix_endian_read(int *input, size_t size)
 						return NO;
 					}
 					free(srcData);
-				
-				break;
+					break;
+					
+				case COMPRESS_ZLIB:
+					NSLog(@"xcf: zlib compression unimplemented");
+					free(tileData); free(totalData);
+					return NO;
+					break;
+					
+				case COMPRESS_FRACTAL:
+					NSLog (@"xcf: fractal compression unimplemented");
+					free(tileData); free(totalData);
+					return NO;
+					break;
+					
+				default:
+					NSLog (@"xcf: unknown compression format %i", info->compression);
+					free(tileData); free(totalData);
+					return NO;
+					break;
 			}
 		
 			// Now transfer that data to the big picture overwriting any existing alpha channel
-			for (j = 0; j < tileHeight; j++) {
-				for (i = 0; i < tileWidth; i++) {
+			for (int j = 0; j < tileHeight; j++) {
+				for (int i = 0; i < tileWidth; i++) {
 					srcLoc = (i + j * tileWidth);
 					destLoc = (((whichTile % tilesPerRow) * XCF_TILE_WIDTH) + i) * spp + ((whichTile /  tilesPerRow) * XCF_TILE_HEIGHT + j) * width * spp;
 					totalData[destLoc + (spp - 1)] = tileData[srcLoc];				
