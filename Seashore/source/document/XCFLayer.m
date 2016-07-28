@@ -1,5 +1,6 @@
 #import "XCFLayer.h"
 #import "RLE.h"
+#include <zlib.h>
 
 @implementation XCFLayer
 
@@ -15,7 +16,6 @@ static inline void fix_endian_read(int *input, size_t size)
 - (BOOL)readHeader:(FILE *)file
 {
 	char nameString[256];
-	int i;
 	
 	// Read the width and height
 	fread(tempIntString, sizeof(int), 3, file);
@@ -27,7 +27,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	fread(tempIntString, sizeof(int), 1, file);
 	fix_endian_read(tempIntString, 1);
 	if (tempIntString[0] > 0) {
-		i = 0;
+		int i = 0;
 		nameString[255] = 0;
 		do {
 			if (i < 255) {
@@ -35,9 +35,9 @@ static inline void fix_endian_read(int *input, size_t size)
 				i++;
 			}
 		} while (nameString[i - 1] != 0 && !ferror(file));
-		name = [[NSString alloc] initWithUTF8String:nameString];
+		name = @(nameString);
 	} else {
-		name = [[NSString alloc] initWithString:LOCALSTR(@"untitled", @"Untitled")];
+		name = [LOCALSTR(@"untitled", @"Untitled") copy];
 	}
 	
 	// NSLog(@"Layer's name: %@", name);

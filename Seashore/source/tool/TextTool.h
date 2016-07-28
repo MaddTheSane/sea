@@ -130,4 +130,4 @@
 #define __private_extern __attribute__((visibility("hidden")))
 #endif
 
-extern id gNewFont __private_extern;
+extern NSFont *gNewFont __private_extern;

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#include <GIMPCore/GIMPCore.h>
 
 //! Project version number for SeashoreKit.
 FOUNDATION_EXPORT double SeashoreKitVersionNumber;
@@ -14,9 +15,10 @@ FOUNDATION_EXPORT double SeashoreKitVersionNumber;
 //! Project version string for SeashoreKit.
 FOUNDATION_EXPORT const unsigned char SeashoreKitVersionString[];
 
+#import "Rects.h"
+#import "Constants.h"
 #import "Globals.h"
 #import "SSKTerminatable.h"
-#import "Rects.h"
 #import "SSKPlugin.h"
 #import "SSKVisualPlugin.h"
 #import "SSKCIPlugin.h"
