@@ -308,8 +308,8 @@
 		557D537018CFABAB005809E3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D504B18CF9FBA005809E3 /* Localizable.strings */; };
 		557D537518CFAD2F005809E3 /* Affine Tile+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 557D533318CF9FEC005809E3 /* Affine Tile+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		557D537618CFAD2F005809E3 /* Affine Transform+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 557D536C18CFAAF6005809E3 /* Affine Transform+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		55850B3713D63BA100C3B2CB /* GIMPCore.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E20A2C00D0005B688F /* GIMPCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		55850B3813D63BA100C3B2CB /* TIFF.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E90A2C00E0005B688F /* TIFF.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55850B3713D63BA100C3B2CB /* GIMPCore.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E20A2C00D0005B688F /* GIMPCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		55850B3813D63BA100C3B2CB /* TIFF.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E90A2C00E0005B688F /* TIFF.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55850B3E13D63BC500C3B2CB /* GIMPCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E20A2C00D0005B688F /* GIMPCore.framework */; };
 		55850B3F13D63BC500C3B2CB /* TIFF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E90A2C00E0005B688F /* TIFF.framework */; };
 		55909D9E18CFCCF400F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
@@ -3371,6 +3371,7 @@
 			isa = PBXGroup;
 			children = (
 				A8EDF154078959C80022BB31 /* Seashore.app */,
+				55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */,
 				557D533318CF9FEC005809E3 /* Affine Tile+.bundle */,
 				557D536C18CFAAF6005809E3 /* Affine Transform+.bundle */,
 				550AEAFC18CFC5DE008918BA /* Brightness+.bundle */,
@@ -3442,7 +3443,6 @@
 				55E5E47818D26FC50082E60F /* Sharpen.bundle */,
 				55E5E48418D26FC70082E60F /* Threshold.bundle */,
 				55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */,
-				55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */,
 				555F598D1D373CEC0085AC96 /* SwiftHorizStripes.bundle */,
 				55115C1D1D46D65000E76B5B /* SwiftCMYK.bundle */,
 			);
@@ -6389,6 +6389,7 @@
 			projectRoot = "";
 			targets = (
 				A8EDF05C078959C80022BB31 /* Seashore */,
+				55472B7D1C6EDCCA0065A852 /* SeashoreKit */,
 				A89B83C60A426D3B00AD6941 /* Seashore Disk Image */,
 				55909DFD18CFD59A00F43F90 /* CoreImage-based Plug-ins */,
 				557D533218CF9FEC005809E3 /* Affine Tile+ */,
@@ -6464,7 +6465,6 @@
 				55E5E47A18D26FC70082E60F /* Threshold */,
 				55E5E48618D26FD70082E60F /* Vertical Stripes */,
 				5554404F194F969A006CC667 /* Other Applications */,
-				55472B7D1C6EDCCA0065A852 /* SeashoreKit */,
 				555F598C1D373CEC0085AC96 /* SwiftHorizStripes */,
 				55115C1C1D46D65000E76B5B /* SwiftCMYK */,
 			);
