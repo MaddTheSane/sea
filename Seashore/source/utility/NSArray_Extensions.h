@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
-@interface NSArray(MyExtensions)
-- (BOOL)containsObjectIdenticalTo:(id)object;
+@interface NSArray<ObjectType> (MyExtensions)
+- (BOOL)containsObjectIdenticalTo:(ObjectType)object;
 @end
 
 @interface NSMutableArray<ObjectType> (MyExtensions)

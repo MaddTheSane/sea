@@ -1,6 +1,8 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
+@class TextTool;
+
 /*!
 	@class		MovePanel
 	@abstract	Forwards change font message to the text tool.
@@ -11,7 +13,7 @@
 */
 @interface MovePanel : NSPanel {
 	// The associated text tool
-	IBOutlet id textTool;
+	IBOutlet TextTool *textTool;
 }
 
 /*!
