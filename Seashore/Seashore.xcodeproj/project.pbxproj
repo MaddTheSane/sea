@@ -272,7 +272,7 @@
 		55472BDC1C6EE5730065A852 /* IndiciesKeeper.h in Headers */ = {isa = PBXBuildFile; fileRef = A835EAB405355C3800A80207 /* IndiciesKeeper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55472BDD1C6EE58D0065A852 /* StandardMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC14FF04C0F1A700A80207 /* StandardMerge.m */; };
 		55472BDE1C6EE5910065A852 /* StandardMerge.h in Headers */ = {isa = PBXBuildFile; fileRef = A8BC14FE04C0F1A700A80207 /* StandardMerge.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55472BDF1C6EE5FC0065A852 /* ColorConversion.h in Headers */ = {isa = PBXBuildFile; fileRef = A8BC150204C0F2FD00A80207 /* ColorConversion.h */; };
+		55472BDF1C6EE5FC0065A852 /* ColorConversion.h in Headers */ = {isa = PBXBuildFile; fileRef = A8BC150204C0F2FD00A80207 /* ColorConversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55472BE01C6EE6020065A852 /* ColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC150304C0F2FD00A80207 /* ColorConversion.m */; };
 		55472BE41C6EE6730065A852 /* SeaMain.h in Headers */ = {isa = PBXBuildFile; fileRef = 55472BE31C6EE6730065A852 /* SeaMain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55472BE51C6EE67B0065A852 /* SeaMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 55472BE11C6EE6620065A852 /* SeaMain.m */; };
@@ -694,7 +694,6 @@
 		55BD2E8A18D103CE00C4EE1B /* Vortex+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D8518D0D0B900C4EE1B /* Vortex+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55BD2E8B18D103CE00C4EE1B /* White Point Adjust+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55BD2E8C18D103CE00C4EE1B /* Zoom Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		55D0662E1C6EEAA100BEDAE9 /* ColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC150304C0F2FD00A80207 /* ColorConversion.m */; };
 		55D066301C6EEAF200BEDAE9 /* Graphics.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55D0662F1C6EEAF200BEDAE9 /* Graphics.xcassets */; };
 		55DA7C7B1926C26C002F6A3A /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
 		55DA7C7C1926C26C002F6A3A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A518D0138C00E4CDAF /* QuartzCore.framework */; };
@@ -753,7 +752,6 @@
 		55E5E4C618D273DB0082E60F /* ThresholdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5E35518D26A300082E60F /* ThresholdView.m */; };
 		55E5E4C718D273DF0082E60F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E5E35718D26A300082E60F /* Localizable.strings */; };
 		55E5E4C818D273E40082E60F /* VertStripesClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E5E35F18D26A300082E60F /* VertStripesClass.m */; };
-		55E5E4CA18D277D90082E60F /* ColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BC150304C0F2FD00A80207 /* ColorConversion.m */; };
 		55E5E4CD18D27A370082E60F /* Brightness.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3A518D26A8F0082E60F /* Brightness.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4CE18D27A370082E60F /* Checkerboard.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3B518D26A950082E60F /* Checkerboard.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4CF18D27A370082E60F /* CMYK.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3CA18D26D0D0082E60F /* CMYK.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -7884,7 +7882,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55E5E4CA18D277D90082E60F /* ColorConversion.m in Sources */,
 				55E5E4BD18D273B80082E60F /* RandomClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7940,7 +7937,6 @@
 				A8EDF10E078959C80022BB31 /* SeaUtilityPanel.m in Sources */,
 				A8EDF10F078959C80022BB31 /* ColorSelectView.m in Sources */,
 				A8EDF110078959C80022BB31 /* SeaBrush.m in Sources */,
-				55D0662E1C6EEAA100BEDAE9 /* ColorConversion.m in Sources */,
 				A8EDF111078959C80022BB31 /* BrushUtility.m in Sources */,
 				A8EDF112078959C80022BB31 /* BrushView.m in Sources */,
 				A8EDF113078959C80022BB31 /* TransparentUtility.m in Sources */,

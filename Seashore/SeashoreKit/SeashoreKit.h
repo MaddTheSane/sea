@@ -18,6 +18,7 @@ FOUNDATION_EXPORT const unsigned char SeashoreKitVersionString[];
 #import "Rects.h"
 #import "Constants.h"
 #import "Globals.h"
+#import "ColorConversion.h"
 #import "SSKTerminatable.h"
 #import "SSKPlugin.h"
 #import "SSKVisualPlugin.h"

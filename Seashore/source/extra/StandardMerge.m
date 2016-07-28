@@ -292,10 +292,9 @@ static void divideMerge(int spp, unsigned char *destPtr, int destLoc, unsigned c
 static void hueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int r1, g1, b1, r2, g2, b2;
-	int alpha;
 
 	if (spp > 2) {
-		alpha = srcPtr[srcLoc + alphaPos];
+		int alpha = srcPtr[srcLoc + alphaPos];
 	
 		r1 = destPtr[destLoc]; g1 = destPtr[destLoc + 1]; b1 = destPtr[destLoc + 2];
 		r2 = srcPtr[srcLoc]; g2 = srcPtr[srcLoc + 1]; b2 = srcPtr[srcLoc + 2];
@@ -317,14 +316,11 @@ static void hueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char
 
 static void saturationMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
-	int r1, g1, b1, r2, g2, b2;
-	int alpha;
-
 	if (spp > 2) {
-		alpha = srcPtr[srcLoc + alphaPos];
+		int alpha = srcPtr[srcLoc + alphaPos];
 		
-		r1 = destPtr[destLoc]; g1 = destPtr[destLoc + 1]; b1 = destPtr[destLoc + 2];
-		r2 = srcPtr[srcLoc]; g2 = srcPtr[srcLoc + 1]; b2 = srcPtr[srcLoc + 2];
+		int r1 = destPtr[destLoc], g1 = destPtr[destLoc + 1], b1 = destPtr[destLoc + 2];
+		int r2 = srcPtr[srcLoc], g2 = srcPtr[srcLoc + 1], b2 = srcPtr[srcLoc + 2];
 		
 		RGBtoHSV(&r1, &g1, &b1);
 		RGBtoHSV(&r2, &g2, &b2);
@@ -344,10 +340,9 @@ static void saturationMerge(int spp, unsigned char *destPtr, int destLoc, unsign
 static void valueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
 	int r1, g1, b1, r2, g2, b2;
-	int alpha;
 
 	if (spp > 2) {
-		alpha = srcPtr[srcLoc + alphaPos];
+		int alpha = srcPtr[srcLoc + alphaPos];
 	
 		r1 = destPtr[destLoc]; g1 = destPtr[destLoc + 1]; b1 = destPtr[destLoc + 2];
 		r2 = srcPtr[srcLoc]; g2 = srcPtr[srcLoc + 1]; b2 = srcPtr[srcLoc + 2];
@@ -362,21 +357,18 @@ static void valueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 		destPtr[destLoc] = r1; destPtr[destLoc + 1] = g1; destPtr[destLoc + 2] = b1;
 		
 		destPtr[destLoc + alphaPos] = MIN(alpha, destPtr[destLoc + alphaPos]);
-	
-	} else
+	} else {
 		SeaNormalMerge(spp, destPtr, destLoc, srcPtr, srcLoc, 255);
+	}
 }
 
 static void colorMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
 {
-	int r1, g1, b1, r2, g2, b2;
-	int alpha;
-
 	if (spp > 2) {
-		alpha = srcPtr[srcLoc + alphaPos];
+		int alpha = srcPtr[srcLoc + alphaPos];
 			
-		r1 = destPtr[destLoc]; g1 = destPtr[destLoc + 1]; b1 = destPtr[destLoc + 2];
-		r2 = srcPtr[srcLoc]; g2 = srcPtr[srcLoc + 1]; b2 = srcPtr[srcLoc + 2];
+		int r1 = destPtr[destLoc], g1 = destPtr[destLoc + 1], b1 = destPtr[destLoc + 2];
+		int r2 = srcPtr[srcLoc], g2 = srcPtr[srcLoc + 1], b2 = srcPtr[srcLoc + 2];
 		
 		RGBtoHLS(&r1, &g1, &b1);
 		RGBtoHLS(&r2, &g2, &b2);

@@ -14,10 +14,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
-#ifndef __private_extern
-#define __private_extern __attribute__((visibility("hidden")))
-#endif
-
 /*!
 	@function	RGBtoHSV
 	@discussion	Converts a set of RGB (red, green, blue) values to HSV hue
@@ -32,7 +28,7 @@
 				The blue component's value, upon return will be equal to the
 				value component's value.
 */
-__private_extern void RGBtoHSV(int *red, int *green, int *blue);
+extern void RGBtoHSV(int *red, int *green, int *blue);
 
 /*!
 	@function	HSVtoRGB
@@ -48,7 +44,7 @@ __private_extern void RGBtoHSV(int *red, int *green, int *blue);
 				The value component's value, upon return will be equal to the
 				blue component's value.
 */
-__private_extern void HSVtoRGB(int *hue, int *saturation, int *value);
+extern void HSVtoRGB(int *hue, int *saturation, int *value);
 
 /*!
 	@function	RGBtoHLS
@@ -64,7 +60,7 @@ __private_extern void HSVtoRGB(int *hue, int *saturation, int *value);
 				The blue component's value, upon return will be equal to the
 				saturation component's value.
 */
-__private_extern void RGBtoHLS (int *red, int *green, int *blue);
+extern void RGBtoHLS (int *red, int *green, int *blue);
 
 /*!
 	@function	HLStoRGB
@@ -80,5 +76,5 @@ __private_extern void RGBtoHLS (int *red, int *green, int *blue);
 				The saturation component's value, upon return will be equal to
 				the blue component's value.
 */
-__private_extern void HLStoRGB(int *hue, int *lightness, int *saturation);
+extern void HLStoRGB(int *hue, int *lightness, int *saturation);
 

@@ -1,6 +1,6 @@
 #import "ColorConversion.h"
 
-int HLSValue(double n1, double n2, double hue)
+static int HLSValue(double n1, double n2, double hue)
 {
 	double value;
 
@@ -36,8 +36,7 @@ void RGBtoHSV(int *red, int *green, int *blue)
 	if (r > g) {
 		max = MAX (r, b);
 		min = MIN (g, b);
-	}
-	else {
+	} else {
 		max = MAX (g, b);
 		min = MIN (r, b);
     }
@@ -74,87 +73,84 @@ void RGBtoHSV(int *red, int *green, int *blue)
 
 void HSVtoRGB(int *hue, int *saturation, int *value)
 {
-	double h, s, v;
-	double f, p, q, t;
-
 	if (*saturation == 0) {
 		*hue = *value;
 		*saturation = *value;
 		*value = *value;
-    }
-	else {
-		h = *hue * 6.0 / 255.0;
-		s = *saturation / 255.0;
-		v = *value / 255.0;
+    } else {
+		double h = *hue * 6.0 / 255.0;
+		double s = *saturation / 255.0;
+		double v = *value / 255.0;
 
-		f = h - (int) h;
-		p = v * (1.0 - s);
-		q = v * (1.0 - (s * f));
-		t = v * (1.0 - (s * (1.0 - f)));
+		double f = h - (int) h;
+		double p = v * (1.0 - s);
+		double q = v * (1.0 - (s * f));
+		double t = v * (1.0 - (s * (1.0 - f)));
 
 		switch ((int)h) {
 			case 0:
 				*hue = v * 255;
 				*saturation = t * 255;
 				*value = p * 255;
-			break;
+				break;
+				
 			case 1:
 				*hue = q * 255;
 				*saturation = v * 255;
 				*value = p * 255;
-			break;
+				break;
+				
 			case 2:
 				*hue = p * 255;
 				*saturation = v * 255;
 				*value = t * 255;
-			break;
+				break;
+				
 			case 3:
 				*hue = p * 255;
 				*saturation = q * 255;
 				*value = v * 255;
-			break;
+				break;
+				
 			case 4:
 				*hue = t * 255;
 				*saturation = p * 255;
 				*value = v * 255;
-			break;
+				break;
+				
 			case 5:
 				*hue = v * 255;
 				*saturation = p * 255;
 				*value = q * 255;
-			break;
+				break;
 		}
 	}
 }
 
 void RGBtoHLS (int *red, int *green, int *blue)
 {
-	int r, g, b;
-	double h, l, s;
+	double h, s;
 	int min, max;
-	int delta;
 	
-	r = *red;
-	g = *green;
-	b = *blue;
+	int r = *red;
+	int g = *green;
+	int b = *blue;
 	
 	if (r > g) {
 		max = MAX (r, b);
 		min = MIN (g, b);
-	}
-	else {
+	} else {
 		max = MAX (g, b);
 		min = MIN (r, b);
 	}
 	
-	l = (max + min) / 2.0;
+	double l = (max + min) / 2.0;
 
 	if (max == min) {
 		s = 0.0;
 		h = 0.0;
-	}
-	else {
-		delta = (max - min);
+	} else {
+		int delta = (max - min);
 
 		if (l < 128)
 			s = 255 * (double)delta / (double)(max + min);
@@ -183,20 +179,18 @@ void RGBtoHLS (int *red, int *green, int *blue)
 
 void HLStoRGB(int *hue, int *lightness, int *saturation)
 {
-	double h, l, s;
 	double m1, m2;
 	
-	h = *hue;
-	l = *lightness;
-	s = *saturation;
+	double h = *hue;
+	double l = *lightness;
+	double s = *saturation;
 	
 	if (s == 0) {
 		/*  achromatic case  */
 		*hue = l;
 		*lightness = l;
 		*saturation = l;
-	}
-	else {
+	} else {
 		if (l < 128)
 			m2 = (l * (255 + s)) / 65025.0;
 		else
