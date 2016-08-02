@@ -125,13 +125,13 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[document scrollView];
 	
 	// Add the markers
-	vMarker = [[NSRulerMarker alloc]initWithRulerView:verticalRuler markerLocation:0 image:[NSImage imageNamed:@"vMarker"] imageOrigin:NSMakePoint(4.0,4.0)];
+	vMarker = [[NSRulerMarker alloc] initWithRulerView:verticalRuler markerLocation:0 image:[NSImage imageNamed:@"vMarker"] imageOrigin:NSMakePoint(4.0,4.0)];
 	[verticalRuler addMarker:vMarker];
-	hMarker = [[NSRulerMarker alloc]initWithRulerView:horizontalRuler markerLocation:0 image:[NSImage imageNamed:@"hMarker"] imageOrigin:NSMakePoint(4.0,0.0)];
+	hMarker = [[NSRulerMarker alloc] initWithRulerView:horizontalRuler markerLocation:0 image:[NSImage imageNamed:@"hMarker"] imageOrigin:NSMakePoint(4.0,0.0)];
 	[horizontalRuler addMarker:hMarker];
-	vStatMarker = [[NSRulerMarker alloc]initWithRulerView:verticalRuler markerLocation:-256e6 image:[NSImage imageNamed:@"vStatMarker"] imageOrigin:NSMakePoint(4.0,4.0)];
+	vStatMarker = [[NSRulerMarker alloc] initWithRulerView:verticalRuler markerLocation:-256e6 image:[NSImage imageNamed:@"vStatMarker"] imageOrigin:NSMakePoint(4.0,4.0)];
 	[verticalRuler addMarker:vStatMarker];
-	hStatMarker = [[NSRulerMarker alloc]initWithRulerView:horizontalRuler markerLocation:-256e6 image:[NSImage imageNamed:@"hStatMarker"] imageOrigin:NSMakePoint(4.0,0.0)];
+	hStatMarker = [[NSRulerMarker alloc] initWithRulerView:horizontalRuler markerLocation:-256e6 image:[NSImage imageNamed:@"hStatMarker"] imageOrigin:NSMakePoint(4.0,0.0)];
 	[horizontalRuler addMarker:hStatMarker];
 	
 	// Make the rulers visible/invsible
