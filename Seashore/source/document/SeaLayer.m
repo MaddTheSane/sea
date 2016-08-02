@@ -130,32 +130,32 @@
 - (instancetype)initFloatingWithDocument:(SeaDocument*)doc rect:(IntRect)lrect data:(unsigned char *)ldata
 {
 	if (self = [self initWithDocument:doc]) {
-	// Set the offsets, height and width
-	xoff = lrect.origin.x;
-	yoff = lrect.origin.y;
-	width = lrect.size.width;
-	height = lrect.size.height;
-	
-	// Set the other variables according to the arguments
-	document = doc;
-	data = ldata;
-	
-	// And then make some sensible choices for the other variables
-	mode = 0;
-	opacity = 255;
-	spp = [[document contents] spp];
-	visible = YES;
-	hasAlpha = YES;
-	compressed = NO;
-	thumbnail = NULL; thumbData = NULL;
-	floating = YES;
-	affinePlugin = [[SeaController seaPlugins] affinePlugin];
-	
-	// Setup for undoing
-	seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
-	uniqueLayerID = [(SeaDocument *)doc uniqueFloatingLayerID];
-	name = NULL; oldNames = NULL;
-	undoFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"seaundo-d%d-l%d", [self uniqueLayerID], [document uniqueDocID]]];
+		// Set the offsets, height and width
+		xoff = lrect.origin.x;
+		yoff = lrect.origin.y;
+		width = lrect.size.width;
+		height = lrect.size.height;
+		
+		// Set the other variables according to the arguments
+		document = doc;
+		data = ldata;
+		
+		// And then make some sensible choices for the other variables
+		mode = 0;
+		opacity = 255;
+		spp = [[document contents] spp];
+		visible = YES;
+		hasAlpha = YES;
+		compressed = NO;
+		thumbnail = NULL; thumbData = NULL;
+		floating = YES;
+		affinePlugin = [[SeaController seaPlugins] affinePlugin];
+		
+		// Setup for undoing
+		seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
+		uniqueLayerID = [(SeaDocument *)doc uniqueFloatingLayerID];
+		name = NULL; oldNames = NULL;
+		undoFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"seaundo-d%d-l%d", [self uniqueLayerID], [document uniqueDocID]]];
 	}
 	return self;
 }
@@ -230,9 +230,7 @@
 			// Get rid of the thumbnail
 			if (thumbData) free(thumbData);
 			thumbnail = NULL; thumbData = NULL;
-
 		}
-		
 	}
 }
 
@@ -260,9 +258,7 @@
 			
 			// Delete the file (we have its contents in memory now)
 			unlink([undoFilePath fileSystemRepresentation]);
-			
 		}
-	
 	}
 }
 
