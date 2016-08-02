@@ -155,7 +155,6 @@
 	seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
 	uniqueLayerID = [(SeaDocument *)doc uniqueFloatingLayerID];
 	name = NULL; oldNames = NULL;
-		NSTemporaryDirectory();
 	undoFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"seaundo-d%d-l%d", [self uniqueLayerID], [document uniqueDocID]]];
 	}
 	return self;
