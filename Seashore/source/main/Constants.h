@@ -51,8 +51,8 @@ typedef NS_ENUM(int, XcfCompressionType) {
 	COMPRESS_NONE              =  0,
 	//! Indicates compression through run-length encoding is used.
 	COMPRESS_RLE               =  1,
-	COMPRESS_ZLIB              =  2,  /* unused */
-	COMPRESS_FRACTAL           =  3   /* unused */
+	COMPRESS_ZLIB              =  2,  /**< unused */
+	COMPRESS_FRACTAL           =  3   /**< unused */
 };
 
 

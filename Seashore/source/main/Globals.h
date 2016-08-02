@@ -50,12 +50,6 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 /*!
-	@defined	defaults
-	@discussion	Allows quick reference to the standard user defaults manager.
-*/
-
-
-/*!
 	@defined	gColorPanel
 	@discussion	Allows quick reference to the shared colour panel.
 */
