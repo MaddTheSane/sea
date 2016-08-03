@@ -1,7 +1,12 @@
 #include <CoreFoundation/CFBase.h>
 #import <Foundation/Foundation.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
 #import "SeaCompositor.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaCompositor.h>
+#endif
 
 #if MAIN_COMPILE
 @class SeaDocument;

@@ -1,6 +1,6 @@
 #import <Cocoa/Cocoa.h>
-#import "Globals.h"
-#import "SeaContent.h"
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaContent.h>
 
 
 extern IntSize getDocumentSize(const char *path);

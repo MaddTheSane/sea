@@ -1,6 +1,12 @@
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "SSKTerminatable.h"
 #import "Globals.h"
+#else
+#import <SeashoreKit/SSKTerminatable.h>
+#import <SeashoreKit/Globals.h>
+#endif
+
 
 /*!
 	@class		SeaController

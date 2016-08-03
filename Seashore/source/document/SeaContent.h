@@ -1,7 +1,9 @@
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
-#if MAIN_COMPILE
-#import "IndiciesKeeper.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/IndiciesKeeper.h>
 #endif
 
 #if MAIN_COMPILE
@@ -603,6 +605,12 @@ typedef struct {
 	@discussion	Toggles between making the selection float or not
 */
 - (void)toggleFloatingSelection;
+
+/*!
+	@method		toggleFloatingSelection:
+	@discussion	Toggles between making the selection float or not
+ */
+- (void)toggleFloatingSelection:(id)sender;
 
 /*!
 	@method		makePasteboardFloat

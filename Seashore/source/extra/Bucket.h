@@ -9,7 +9,11 @@
 */
 
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@function	SeaBucketFill

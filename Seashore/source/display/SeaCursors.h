@@ -1,5 +1,9 @@
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@class		SeaCursors
@@ -12,7 +16,7 @@
 */
 
 @class SeaDocument;
-@class	SeaView;
+@class SeaView;
 
 @interface SeaCursors : NSObject {
 	// Other Important Objects

@@ -2,14 +2,37 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-#import <SeashoreKit/Globals.h>
-#import "CocoaLayer.h"
-#import <SeashoreKit/SeaDocument.h>
-#import <SeashoreKit/SeaContent.h>
-#import <SeashoreKit/SeaView.h>
-#import <SeashoreKit/CenteringClipView.h>
+#import <SeashoreKit/SeashoreKit.h>
 #import "SeaOperations.h"
 #import "SeaAlignment.h"
-#import <SeashoreKit/SeaController.h>
-#import <SeashoreKit/SeaWarning.h>
 #import "SVGContent.h"
+#import "OptionsUtility.h"
+#import "ColorSelectView.h"
+#import "UtilitiesManager.h"
+#import "InfoUtility.h"
+#import "AbstractOptions.h"
+#import "StatusUtility.h"
+#import "WarningsUtility.h"
+#import "SeaTools.h"
+
+#import "ToolboxUtility.h"
+#import "SeaController.h"
+#import "UtilitiesManager.h"
+#import "AbstractTool.h"
+#import "RectSelectTool.h"
+#import "EllipseSelectTool.h"
+#import "LassoTool.h"
+#import "PolygonLassoTool.h"
+#import "WandTool.h"
+#import "PencilTool.h"
+#import "BrushTool.h"
+#import "BucketTool.h"
+#import "TextTool.h"
+#import "EyedropTool.h"
+#import "EraserTool.h"
+#import "PositionTool.h"
+#import "GradientTool.h"
+#import "SmudgeTool.h"
+#import "CloneTool.h"
+#import "CropTool.h"
+#import "EffectTool.h"

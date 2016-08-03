@@ -1,7 +1,11 @@
 #ifdef USE_CENTERING_CLIPVIEW
 
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@class		CenteringClipView

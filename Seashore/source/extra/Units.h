@@ -7,7 +7,11 @@
 */
 
 #import <Foundation/Foundation.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

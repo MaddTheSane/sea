@@ -15,11 +15,8 @@
 */
 
 #import <Cocoa/Cocoa.h>
-#ifdef MAIN_COMPILE
+#ifndef SEASYSPLUGIN
 #include <GIMPCore/GIMPCore.h>
-//#include <zlib.h>
-#include <unistd.h>
-#include <sys/time.h>
 #endif
 
 #ifndef INTRECT_T

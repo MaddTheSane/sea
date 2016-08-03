@@ -24,6 +24,7 @@ NS_ENUM(int) {
 @class SeaDocument;
 @class LayerDataSource;
 @class ColorSelectView;
+@class LayersView;
 
 /*!
 	@class		PegasusUtility
@@ -36,7 +37,7 @@ NS_ENUM(int) {
 @interface PegasusUtility : NSObject {
 	
 	// The LayersView which appears in this utility
-	IBOutlet id layersView;
+	IBOutlet LayersView *layersView;
 	
 	// The panel responsible for layer settings
 	IBOutlet id layerSettingsPanel;
@@ -171,5 +172,8 @@ NS_ENUM(int) {
 				Ignored
  */
 - (IBAction)deleteLayer:(id)sender;
+
+- (IBAction)forward:(id)sender;
+- (IBAction)backward:(id)sender;
 
 @end

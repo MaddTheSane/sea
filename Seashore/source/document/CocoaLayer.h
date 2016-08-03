@@ -1,6 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import <SeashoreKit/Globals.h>
-#import "SeaLayer.h"
+#import <SeashoreKit/SeaLayer.h>
 
 @class SeaDocument;
 

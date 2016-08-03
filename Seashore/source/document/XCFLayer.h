@@ -1,7 +1,13 @@
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
 #import "SeaLayer.h"
 #import "XCFContent.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaLayer.h>
+#import <SeashoreKit/XCFContent.h>
+#endif
 
 /*!
 	@class		XCFLayer

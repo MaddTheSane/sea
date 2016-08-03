@@ -1816,6 +1816,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	
 	return YES;
 }
+
+- (void)toggleFloatingSelection:(id)sender
+{
+	[self toggleFloatingSelection];
+}
 #endif
 
 @end

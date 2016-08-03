@@ -7,7 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "SSKVisualPlugin.h"
+#import <SeashoreKit/SSKVisualPlugin.h>
 
 @interface SSKCIPlugin : SSKVisualPlugin
 {

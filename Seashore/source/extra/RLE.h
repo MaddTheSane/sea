@@ -7,7 +7,11 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@function	RLEDecompress

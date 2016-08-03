@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "Globals.h"
+#import <SeashoreKit/Globals.h>
 
 /*!
 	@enum		k...Tool
@@ -139,10 +139,10 @@ typedef NS_ENUM(int, SeaToolsDefines) {
 - (nullable __kindof AbstractTool*)getTool:(SeaToolsDefines)whichOne;
 
 /*!
-	@method		allTools
+	@property	allTools
 	@discussion	This is purely for initialization to connect the options to the tools.
 	@result		Returns an array of AbstractTools.
 */
-- (nonnull NSArray<__kindof AbstractTool*> *)allTools;
+@property (readonly, copy, nonnull) NSArray<__kindof AbstractTool*> *allTools;
 
 @end

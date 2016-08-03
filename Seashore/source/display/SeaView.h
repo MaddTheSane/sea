@@ -1,5 +1,9 @@
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@enum		k...HandleType
@@ -595,5 +599,8 @@ enum {
 	@result		YES if the menu item should be enabled, NO otherwise.
 */
 - (BOOL)validateMenuItem:(id)menuItem;
+
+
+- (IBAction)selectOpaque:(id)sender;
 
 @end

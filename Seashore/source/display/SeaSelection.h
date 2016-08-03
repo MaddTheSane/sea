@@ -1,6 +1,10 @@
 #include <GIMPCore/GIMPCore.h>
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@enum		k...Mode

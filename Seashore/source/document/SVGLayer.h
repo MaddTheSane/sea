@@ -1,6 +1,6 @@
 #import <Cocoa/Cocoa.h>
-#import "Globals.h"
-#import "SeaLayer.h"
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaLayer.h>
 
 @class SeaDocument;
 
@@ -12,10 +12,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2005 Mark Pazolli
 */
-
-@interface SVGLayer : SeaLayer {
-
-}
+@interface SVGLayer : SeaLayer
 
 /*!
 	@method		initWithImageRep:document:spp:

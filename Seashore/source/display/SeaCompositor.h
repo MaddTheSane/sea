@@ -1,6 +1,11 @@
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
 #import "StandardMerge.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/StandardMerge.h>
+#endif
 
 /*!
 	@struct		CompositorOptions

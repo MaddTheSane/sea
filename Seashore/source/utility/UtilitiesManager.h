@@ -1,6 +1,6 @@
 #import <Cocoa/Cocoa.h>
-#import "SSKTerminatable.h"
-#import "Globals.h"
+#import <SeashoreKit/SSKTerminatable.h>
+#import <SeashoreKit/Globals.h>
 #import "PegasusUtility.h"
 #import "TransparentUtility.h"
 #import "ToolboxUtility.h"

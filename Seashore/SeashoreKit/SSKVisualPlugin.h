@@ -6,7 +6,7 @@
 //
 //
 
-#import "SSKPlugin.h"
+#import <SeashoreKit/SSKPlugin.h>
 
 @interface SSKVisualPlugin : SSKPlugin
 {

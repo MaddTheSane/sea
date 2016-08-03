@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SeaPlugins.h"
-#import "PluginClass.h"
+#import <SeashoreKit/SeaPlugins.h>
+#import <SeashoreKit/PluginClass.h>
 
 @interface SSKPlugin : NSObject <SeaPluginClass>
 {

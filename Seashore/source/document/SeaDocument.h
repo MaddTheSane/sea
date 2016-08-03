@@ -1,6 +1,11 @@
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
 #import "AbstractExporter.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/AbstractExporter.h>
+#endif
 
 @class SeaSelection, SeaWhiteboard;
 
@@ -208,11 +213,11 @@
 @property (weak) IBOutlet PluginData *pluginData;
 
 /*!
-	@method		docView
+	@property	docView
 	@discussion	Returns the document view of the document.
 	@result		Returns an instance of SeaView.
 */
-- (SeaView*)docView;
+@property (readonly, retain) SeaView *docView;
 
 /*!
 	@method		window

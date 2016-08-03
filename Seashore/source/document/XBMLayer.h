@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
-#import "Globals.h"
-#import "SeaLayer.h"
-#import "XBMContent.h"
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaLayer.h>
+#import <SeashoreKit/XBMContent.h>
 
 /*!
 	@class		XBMLayer

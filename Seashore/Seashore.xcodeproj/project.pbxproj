@@ -285,11 +285,6 @@
 		55472BED1C6EE8250065A852 /* NSOutlineView_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA8928D0FD4AAA3002BEC8A /* NSOutlineView_Extensions.m */; };
 		55472BEE1C6EE8250065A852 /* NSBezierPath_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5ED9020FF2FAE500DB0897 /* NSBezierPath_Extensions.m */; };
 		55472BEF1C6EE8960065A852 /* Bucket.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AC9FD304C2900600A80207 /* Bucket.m */; };
-		55472BF01C6EE8960065A852 /* MovePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F984D60BEEB83600375C73 /* MovePanel.m */; };
-		55472BF11C6EE8960065A852 /* NSTextViewRedirect.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D6DDD50BEE08EF0092F477 /* NSTextViewRedirect.m */; };
-		55472BF21C6EE8960065A852 /* NSPreciseImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A881BF3B053C498800A80207 /* NSPreciseImageView.m */; };
-		55472BF31C6EE8960065A852 /* NSExtendedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A849725A07C4BE750033BE1B /* NSExtendedTableView.m */; };
-		55472BF41C6EE8960065A852 /* WindowBackColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C207400CD46C2C00F91B3C /* WindowBackColorWell.m */; };
 		55472BF71C6EE8BF0065A852 /* XBMImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A81F6EB107C2EE35005C2DBD /* XBMImporter.m */; };
 		55472BF81C6EE8BF0065A852 /* XCFImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D6C11B07C2323200B91A1D /* XCFImporter.m */; };
 		555F59941D373D060085AC96 /* SwiftHorizStripes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555F59931D373D060085AC96 /* SwiftHorizStripes.swift */; };
@@ -297,8 +292,8 @@
 		555F599A1D3748140085AC96 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 555F599C1D3748140085AC96 /* Localizable.strings */; };
 		556D43CE1D415E2700BECFB2 /* SVGImageRep.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 556D43B71D415E0C00BECFB2 /* SVGImageRep.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		556D43CF1D41677900BECFB2 /* SVGImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F22EDA07EA9871005AD30E /* SVGImporter.h */; };
-		556D43D01D41677F00BECFB2 /* SVGLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A8721E2907DAF1FA00995290 /* SVGLayer.h */; };
-		556D43D11D41678300BECFB2 /* SVGContent.h in Headers */ = {isa = PBXBuildFile; fileRef = A8721E2507DAF1F000995290 /* SVGContent.h */; };
+		556D43D01D41677F00BECFB2 /* SVGLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A8721E2907DAF1FA00995290 /* SVGLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		556D43D11D41678300BECFB2 /* SVGContent.h in Headers */ = {isa = PBXBuildFile; fileRef = A8721E2507DAF1F000995290 /* SVGContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		557D533518CF9FEC005809E3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
 		557D534118CFA016005809E3 /* CIAffineTileClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D504A18CF9FBA005809E3 /* CIAffineTileClass.m */; };
 		557D536718CFAAF6005809E3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
@@ -696,6 +691,18 @@
 		55BD2E8B18D103CE00C4EE1B /* White Point Adjust+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55BD2E8C18D103CE00C4EE1B /* Zoom Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55D066301C6EEAF200BEDAE9 /* Graphics.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55D0662F1C6EEAF200BEDAE9 /* Graphics.xcassets */; };
+		55D748FF1D52895100B099C9 /* NSArray_Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DCA8928A0FD4AAA3002BEC8A /* NSArray_Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55D749001D528B5800B099C9 /* Bucket.h in Headers */ = {isa = PBXBuildFile; fileRef = A8AC9FD204C2900600A80207 /* Bucket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55D749011D528B9200B099C9 /* MovePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F984D60BEEB83600375C73 /* MovePanel.m */; };
+		55D749031D528C2700B099C9 /* NSTextViewRedirect.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D6DDD50BEE08EF0092F477 /* NSTextViewRedirect.m */; };
+		55D749041D528C2A00B099C9 /* NSPreciseImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A881BF3B053C498800A80207 /* NSPreciseImageView.m */; };
+		55D749051D528C2D00B099C9 /* NSExtendedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A849725A07C4BE750033BE1B /* NSExtendedTableView.m */; };
+		55D749061D528C3100B099C9 /* WindowBackColorWell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C207400CD46C2C00F91B3C /* WindowBackColorWell.m */; };
+		55D749071D52914C00B099C9 /* XCFContent.h in Headers */ = {isa = PBXBuildFile; fileRef = F5B107C003C59B34012F5DCB /* XCFContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55D749081D52923900B099C9 /* CocoaContent.h in Headers */ = {isa = PBXBuildFile; fileRef = F52A09BD03D81A200192180E /* CocoaContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55D749091D52929400B099C9 /* CocoaLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = F56B095803D92759014143BA /* CocoaLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55D7490A1D5292E800B099C9 /* XBMLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A829BDFA053976DD00A80207 /* XBMLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55D7490B1D52930500B099C9 /* XBMContent.h in Headers */ = {isa = PBXBuildFile; fileRef = A829BDFE053976F900A80207 /* XBMContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55DA7C7B1926C26C002F6A3A /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
 		55DA7C7C1926C26C002F6A3A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A518D0138C00E4CDAF /* QuartzCore.framework */; };
 		55E5E39D18D26A8F0082E60F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
@@ -2189,6 +2196,7 @@
 		55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "White Point Adjust+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zoom Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55D0662F1C6EEAF200BEDAE9 /* Graphics.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Graphics.xcassets; sourceTree = "<group>"; };
+		55D748FD1D5271DA00B099C9 /* ToolboxUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxUtility.swift; sourceTree = "<group>"; };
 		55E5E29218D26A2F0082E60F /* BrightnessClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessClass.h; sourceTree = "<group>"; };
 		55E5E29318D26A2F0082E60F /* BrightnessClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrightnessClass.m; sourceTree = "<group>"; };
 		55E5E29818D26A2F0082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2281,8 +2289,8 @@
 		A829BDFF053976F900A80207 /* XBMContent.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XBMContent.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A830C7B00B8AE3B4002AB85C /* EffectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectTool.h; sourceTree = "<group>"; };
 		A830C7B10B8AE3B4002AB85C /* EffectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EffectTool.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		A835EAB305355C3800A80207 /* IndiciesKeeper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndiciesKeeper.m; sourceTree = "<group>"; };
-		A835EAB405355C3800A80207 /* IndiciesKeeper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndiciesKeeper.h; sourceTree = "<group>"; };
+		A835EAB305355C3800A80207 /* IndiciesKeeper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IndiciesKeeper.m; path = ../source/extra/IndiciesKeeper.m; sourceTree = "<group>"; };
+		A835EAB405355C3800A80207 /* IndiciesKeeper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IndiciesKeeper.h; path = ../source/extra/IndiciesKeeper.h; sourceTree = "<group>"; };
 		A842BF5104A2D5D400A80207 /* LayerSettings.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LayerSettings.m; sourceTree = "<group>"; };
 		A842BF5204A2D5D400A80207 /* LayerSettings.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LayerSettings.h; sourceTree = "<group>"; };
 		A843451D075893FB008C6517 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = en; path = "en.lproj/Seashore Guide.pdf"; sourceTree = "<group>"; };
@@ -2368,8 +2376,8 @@
 		A8AC97B00570909500A80207 /* EraserTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EraserTool.m; sourceTree = "<group>"; };
 		A8AC97B30570926D00A80207 /* EraserOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EraserOptions.m; sourceTree = "<group>"; };
 		A8AC97B40570926D00A80207 /* EraserOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EraserOptions.h; sourceTree = "<group>"; };
-		A8AC9FD204C2900600A80207 /* Bucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bucket.h; sourceTree = "<group>"; };
-		A8AC9FD304C2900600A80207 /* Bucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bucket.m; sourceTree = "<group>"; };
+		A8AC9FD204C2900600A80207 /* Bucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bucket.h; path = ../source/extra/Bucket.h; sourceTree = "<group>"; };
+		A8AC9FD304C2900600A80207 /* Bucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bucket.m; path = ../source/extra/Bucket.m; sourceTree = "<group>"; };
 		A8ACE382047CF0C700A80207 /* textures */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
 		A8ACE3A8047CF23E00A80207 /* TextureUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TextureUtility.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A8ACE3A9047CF23E00A80207 /* TextureUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureUtility.h; sourceTree = "<group>"; };
@@ -2379,14 +2387,14 @@
 		A8B4153404AFC90400A80207 /* EyedropTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EyedropTool.m; sourceTree = "<group>"; };
 		A8B72B47047E1B1200A80207 /* SeaTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaTexture.h; sourceTree = "<group>"; };
 		A8B72B48047E1B1200A80207 /* SeaTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaTexture.m; sourceTree = "<group>"; };
-		A8BC14FE04C0F1A700A80207 /* StandardMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardMerge.h; sourceTree = "<group>"; };
-		A8BC14FF04C0F1A700A80207 /* StandardMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandardMerge.m; sourceTree = "<group>"; };
-		A8BC150204C0F2FD00A80207 /* ColorConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorConversion.h; sourceTree = "<group>"; };
-		A8BC150304C0F2FD00A80207 /* ColorConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorConversion.m; sourceTree = "<group>"; };
-		A8BDC7FE04BEE4A100A80207 /* RLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RLE.h; sourceTree = "<group>"; };
-		A8BDC80004BEE4DE00A80207 /* RLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLE.m; sourceTree = "<group>"; };
-		A8BDC80904BF04B000A80207 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
-		A8BDC80A04BF04B000A80207 /* Bitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bitmap.m; sourceTree = "<group>"; };
+		A8BC14FE04C0F1A700A80207 /* StandardMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StandardMerge.h; path = ../source/extra/StandardMerge.h; sourceTree = "<group>"; };
+		A8BC14FF04C0F1A700A80207 /* StandardMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StandardMerge.m; path = ../source/extra/StandardMerge.m; sourceTree = "<group>"; };
+		A8BC150204C0F2FD00A80207 /* ColorConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorConversion.h; path = ../source/extra/ColorConversion.h; sourceTree = "<group>"; };
+		A8BC150304C0F2FD00A80207 /* ColorConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorConversion.m; path = ../source/extra/ColorConversion.m; sourceTree = "<group>"; };
+		A8BDC7FE04BEE4A100A80207 /* RLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RLE.h; path = ../source/extra/RLE.h; sourceTree = "<group>"; };
+		A8BDC80004BEE4DE00A80207 /* RLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RLE.m; path = ../source/extra/RLE.m; sourceTree = "<group>"; };
+		A8BDC80904BF04B000A80207 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bitmap.h; path = ../source/extra/Bitmap.h; sourceTree = "<group>"; };
+		A8BDC80A04BF04B000A80207 /* Bitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bitmap.m; path = ../source/extra/Bitmap.m; sourceTree = "<group>"; };
 		A8BF60E5050ADE1400A80207 /* SeaCompositor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaCompositor.h; sourceTree = "<group>"; };
 		A8BF60E6050ADE1400A80207 /* SeaCompositor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaCompositor.m; sourceTree = "<group>"; };
 		A8BF652608E6FEAB006E9BFC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -2470,8 +2478,8 @@
 		DC5ED8FA0FF2E3A900DB0897 /* InfoPanelBacking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPanelBacking.m; sourceTree = "<group>"; };
 		DC5ED9010FF2FAE500DB0897 /* NSBezierPath_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPath_Extensions.h; sourceTree = "<group>"; };
 		DC5ED9020FF2FAE500DB0897 /* NSBezierPath_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPath_Extensions.m; sourceTree = "<group>"; };
-		DC709EE30A61A173000B8333 /* Units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Units.h; sourceTree = "<group>"; };
-		DC709EE50A61A35C000B8333 /* Units.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Units.m; sourceTree = "<group>"; };
+		DC709EE30A61A173000B8333 /* Units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Units.h; path = ../source/extra/Units.h; sourceTree = "<group>"; };
+		DC709EE50A61A35C000B8333 /* Units.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Units.m; path = ../source/extra/Units.m; sourceTree = "<group>"; };
 		DC70A09C0A620A4B000B8333 /* ImageToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageToolbarItem.h; sourceTree = "<group>"; };
 		DC70A09D0A620A4B000B8333 /* ImageToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageToolbarItem.m; sourceTree = "<group>"; };
 		DC7474770A43AAA400CB1C1D /* EllipseSelectOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EllipseSelectOptions.h; sourceTree = "<group>"; };
@@ -3693,6 +3701,7 @@
 		5575352618DB56CB00AC0FBC /* SeashoreKit */ = {
 			isa = PBXGroup;
 			children = (
+				55D749021D528BB900B099C9 /* Extra Sources */,
 				5575352D18DB56CB00AC0FBC /* SeashoreKit.h */,
 				A8E00A1D04BE5DF800A80207 /* Rects.h */,
 				A8EF9CC00536DE2000A80207 /* Rects.m */,
@@ -4324,6 +4333,28 @@
 			path = source;
 			sourceTree = "<group>";
 		};
+		55D749021D528BB900B099C9 /* Extra Sources */ = {
+			isa = PBXGroup;
+			children = (
+				DC9C47B00FFC6BE700C44AA4 /* Cocoa Extensions */,
+				A8BDC80904BF04B000A80207 /* Bitmap.h */,
+				A8BDC80A04BF04B000A80207 /* Bitmap.m */,
+				A8AC9FD204C2900600A80207 /* Bucket.h */,
+				A8AC9FD304C2900600A80207 /* Bucket.m */,
+				A8BC150204C0F2FD00A80207 /* ColorConversion.h */,
+				A8BC150304C0F2FD00A80207 /* ColorConversion.m */,
+				A8BC14FE04C0F1A700A80207 /* StandardMerge.h */,
+				A8BC14FF04C0F1A700A80207 /* StandardMerge.m */,
+				A8BDC7FE04BEE4A100A80207 /* RLE.h */,
+				A8BDC80004BEE4DE00A80207 /* RLE.m */,
+				A835EAB405355C3800A80207 /* IndiciesKeeper.h */,
+				A835EAB305355C3800A80207 /* IndiciesKeeper.m */,
+				DC709EE30A61A173000B8333 /* Units.h */,
+				DC709EE50A61A35C000B8333 /* Units.m */,
+			);
+			name = "Extra Sources";
+			sourceTree = "<group>";
+		};
 		55E5E28C18D26A2E0082E60F /* Brightness */ = {
 			isa = PBXGroup;
 			children = (
@@ -4578,19 +4609,6 @@
 		A8BDC80404BEF77D00A80207 /* Extra Sources */ = {
 			isa = PBXGroup;
 			children = (
-				DC9C47B00FFC6BE700C44AA4 /* Cocoa Extensions */,
-				A8BDC80904BF04B000A80207 /* Bitmap.h */,
-				A8BDC80A04BF04B000A80207 /* Bitmap.m */,
-				A8AC9FD204C2900600A80207 /* Bucket.h */,
-				A8AC9FD304C2900600A80207 /* Bucket.m */,
-				A8BC150204C0F2FD00A80207 /* ColorConversion.h */,
-				A8BC150304C0F2FD00A80207 /* ColorConversion.m */,
-				A8BC14FE04C0F1A700A80207 /* StandardMerge.h */,
-				A8BC14FF04C0F1A700A80207 /* StandardMerge.m */,
-				A8BDC7FE04BEE4A100A80207 /* RLE.h */,
-				A8BDC80004BEE4DE00A80207 /* RLE.m */,
-				A835EAB405355C3800A80207 /* IndiciesKeeper.h */,
-				A835EAB305355C3800A80207 /* IndiciesKeeper.m */,
 				A8F984D50BEEB83600375C73 /* MovePanel.h */,
 				A8F984D60BEEB83600375C73 /* MovePanel.m */,
 				A8D6DDD40BEE08EF0092F477 /* NSTextViewRedirect.h */,
@@ -4601,8 +4619,6 @@
 				A849725A07C4BE750033BE1B /* NSExtendedTableView.m */,
 				A8C2073F0CD46C2C00F91B3C /* WindowBackColorWell.h */,
 				A8C207400CD46C2C00F91B3C /* WindowBackColorWell.m */,
-				DC709EE30A61A173000B8333 /* Units.h */,
-				DC709EE50A61A35C000B8333 /* Units.m */,
 			);
 			name = "Extra Sources";
 			path = source/extra;
@@ -4721,7 +4737,7 @@
 				DC5ED9020FF2FAE500DB0897 /* NSBezierPath_Extensions.m */,
 			);
 			name = "Cocoa Extensions";
-			path = ../utility;
+			path = ../source/utility;
 			sourceTree = "<group>";
 		};
 		DCC905500FC62CDD00C74521 /* Layer Pane */ = {
@@ -4758,6 +4774,7 @@
 				A8823C4404AD43EE00000007 /* InfoUtility.m */,
 				F5B9A82B0401D5BE017A821F /* ToolboxUtility.h */,
 				F5B9A82C0401D5BE017A821F /* ToolboxUtility.m */,
+				55D748FD1D5271DA00B099C9 /* ToolboxUtility.swift */,
 				F577AC3E0407A68101092A6C /* ColorSelectView.h */,
 				F577AC3F0407A68101092A6C /* ColorSelectView.m */,
 				A8A64F83041216EB00B2D42F /* BrushUtility.h */,
@@ -4982,6 +4999,7 @@
 				55472BBF1C6EE23B0065A852 /* CenteringClipView.h in Headers */,
 				55AF35781D4A866500A0EA26 /* NSOutlineView_Extensions.h in Headers */,
 				55472B991C6EDEA10065A852 /* PluginData.h in Headers */,
+				55D748FF1D52895100B099C9 /* NSArray_Extensions.h in Headers */,
 				55472BEA1C6EE7F20065A852 /* RLE.h in Headers */,
 				556D43CF1D41677900BECFB2 /* SVGImporter.h in Headers */,
 				556D43D11D41678300BECFB2 /* SVGContent.h in Headers */,
@@ -4992,22 +5010,28 @@
 				55472BA81C6EE1530065A852 /* SeaWarning.h in Headers */,
 				55472B961C6EDDF80065A852 /* SSKVisualPlugin.h in Headers */,
 				55472BC21C6EE4220065A852 /* Bitmap.h in Headers */,
+				55D7490B1D52930500B099C9 /* XBMContent.h in Headers */,
 				55AF35771D4A865E00A0EA26 /* NSBezierPath_Extensions.h in Headers */,
 				55472B951C6EDDF80065A852 /* SSKPlugin.h in Headers */,
+				55D7490A1D5292E800B099C9 /* XBMLayer.h in Headers */,
 				55472BB81C6EE2010065A852 /* SeaHelpers.h in Headers */,
+				55D749071D52914C00B099C9 /* XCFContent.h in Headers */,
 				55472BB31C6EE2010065A852 /* SeaDocument.h in Headers */,
 				55472BAA1C6EE1530065A852 /* SeaPrefs.h in Headers */,
 				55472BCF1C6EE4EC0065A852 /* SeaCompositor.h in Headers */,
 				55472BA01C6EE1530065A852 /* SeaController.h in Headers */,
+				55D749081D52923900B099C9 /* CocoaContent.h in Headers */,
 				55472BDF1C6EE5FC0065A852 /* ColorConversion.h in Headers */,
 				55472BB91C6EE2010065A852 /* SeaLayer.h in Headers */,
 				55472BBD1C6EE2010065A852 /* TextureExporter.h in Headers */,
 				556D43D01D41677F00BECFB2 /* SVGLayer.h in Headers */,
 				55472BDA1C6EE5400065A852 /* Units.h in Headers */,
+				55D749091D52929400B099C9 /* CocoaLayer.h in Headers */,
 				55FD12411C6F0352009FB22C /* AbstractExporter.h in Headers */,
 				55472BDC1C6EE5730065A852 /* IndiciesKeeper.h in Headers */,
 				55472BCD1C6EE4EC0065A852 /* SeaWhiteboard.h in Headers */,
 				55472BA61C6EE1530065A852 /* SeaHelp.h in Headers */,
+				55D749001D528B5800B099C9 /* Bucket.h in Headers */,
 				55472B8A1C6EDD300065A852 /* Rects.h in Headers */,
 				55472B8C1C6EDD800065A852 /* SeaPlugins.h in Headers */,
 				55472B971C6EDDF80065A852 /* SSKCIPlugin.h in Headers */,
@@ -7354,7 +7378,6 @@
 				55472BE81C6EE7D70065A852 /* XBMLayer.m in Sources */,
 				55472BCC1C6EE4EC0065A852 /* SeaView.m in Sources */,
 				55472BF71C6EE8BF0065A852 /* XBMImporter.m in Sources */,
-				55472BF31C6EE8960065A852 /* NSExtendedTableView.m in Sources */,
 				55472BC31C6EE4670065A852 /* CocoaContent.m in Sources */,
 				55472BE71C6EE7B20065A852 /* XCFContent.m in Sources */,
 				55472BBA1C6EE2010065A852 /* SeaLayer.m in Sources */,
@@ -7367,20 +7390,16 @@
 				55472BEE1C6EE8250065A852 /* NSBezierPath_Extensions.m in Sources */,
 				55472BD41C6EE4EC0065A852 /* SeaShadowView.m in Sources */,
 				55472BF81C6EE8BF0065A852 /* XCFImporter.m in Sources */,
-				55472BF41C6EE8960065A852 /* WindowBackColorWell.m in Sources */,
 				55472B8B1C6EDD380065A852 /* Rects.m in Sources */,
 				55472BAF1C6EE1530065A852 /* SeaToolbarItem.m in Sources */,
 				55472BAD1C6EE1530065A852 /* ImageToolbarItem.m in Sources */,
 				55472BA91C6EE1530065A852 /* SeaWarning.m in Sources */,
 				55472BAB1C6EE1530065A852 /* SeaPrefs.m in Sources */,
 				55472BB51C6EE2010065A852 /* SeaHelpers.m in Sources */,
-				55472BF21C6EE8960065A852 /* NSPreciseImageView.m in Sources */,
-				55472BF11C6EE8960065A852 /* NSTextViewRedirect.m in Sources */,
 				55472BA31C6EE1530065A852 /* SeaDocumentController.m in Sources */,
 				55472BC11C6EE40F0065A852 /* Bitmap.m in Sources */,
 				55472BED1C6EE8250065A852 /* NSOutlineView_Extensions.m in Sources */,
 				55472B901C6EDDF10065A852 /* SSKPlugin.m in Sources */,
-				55472BF01C6EE8960065A852 /* MovePanel.m in Sources */,
 				55472BB21C6EE2010065A852 /* PluginData.m in Sources */,
 				55472BE01C6EE6020065A852 /* ColorConversion.m in Sources */,
 				55472BA71C6EE1530065A852 /* SeaHelp.m in Sources */,
@@ -7975,23 +7994,28 @@
 				A8EDF147078959C80022BB31 /* WandOptions.m in Sources */,
 				A8EDF148078959C80022BB31 /* PNGExporter.m in Sources */,
 				A827DCE907D06EEB000E45A1 /* SeaAlignment.m in Sources */,
+				55D749031D528C2700B099C9 /* NSTextViewRedirect.m in Sources */,
+				55D749051D528C2D00B099C9 /* NSExtendedTableView.m in Sources */,
 				A89827FD07EF1B4A003E05D5 /* JPEGExporter.m in Sources */,
 				A845B95107F3B5F3007A1B94 /* SeaRotation.m in Sources */,
 				A80983D70871420900F7412F /* JP2Exporter.m in Sources */,
 				A87183DB090BA6D400345EA0 /* LassoOptions.m in Sources */,
 				A87183EC090BA8C400345EA0 /* LassoTool.m in Sources */,
 				A8E30CC109A3F4BC00B67097 /* SeaDocRotation.m in Sources */,
+				55D749041D528C2A00B099C9 /* NSPreciseImageView.m in Sources */,
 				A881AC7109EFC6E400B176A8 /* CloneOptions.m in Sources */,
 				A881AC8D09EFC97700B176A8 /* CloneTool.m in Sources */,
 				A8F0FFD10A35E06300259FD6 /* GIFExporter.m in Sources */,
 				DC74747A0A43AAA400CB1C1D /* EllipseSelectOptions.m in Sources */,
 				DC7474840A43AC5100CB1C1D /* PolygonLassoOptions.m in Sources */,
 				DC7474960A43AFEE00CB1C1D /* EllipseSelectTool.m in Sources */,
+				55D749011D528B9200B099C9 /* MovePanel.m in Sources */,
 				5594803D1D47E5990065E83B /* IntRectAdditions.swift in Sources */,
 				DC7476B00A43B0F600CB1C1D /* PolygonLassoTool.m in Sources */,
 				A8D52D2F0A8C26A100927657 /* AbstractSelectOptions.m in Sources */,
 				A8A948C50B8AAFE300BBD71C /* CropTool.m in Sources */,
 				A8A9496C0B8AB04900BBD71C /* CropOptions.m in Sources */,
+				55D749061D528C3100B099C9 /* WindowBackColorWell.m in Sources */,
 				A8A949740B8AB1FC00BBD71C /* AspectRatio.m in Sources */,
 				A830C7B30B8AE3B4002AB85C /* EffectTool.m in Sources */,
 				A84DAD650BEF435B00E4311A /* EffectOptions.m in Sources */,
@@ -12462,7 +12486,6 @@
 		A8D01E0A09BD8EA3007CFE76 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Main Icon";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -12488,7 +12511,6 @@
 		A8D01E0B09BD8EA3007CFE76 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Main Icon";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";

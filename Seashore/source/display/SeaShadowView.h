@@ -1,5 +1,9 @@
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@class		SeaShadowView
@@ -11,7 +15,7 @@
 */
 
 @interface SeaShadowView : NSView {
-	IBOutlet id scrollView;
+	IBOutlet NSScrollView *scrollView;
 	BOOL areRulersVisible;
 }
 

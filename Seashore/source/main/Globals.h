@@ -7,8 +7,13 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
+#ifdef SEASYSPLUGIN
 #import "Rects.h"
 #import "Constants.h"
+#else
+#import <SeashoreKit/Rects.h>
+#import <SeashoreKit/Constants.h>
+#endif
 
 #ifdef __BIG_ENDIAN__
 #define MSB 0

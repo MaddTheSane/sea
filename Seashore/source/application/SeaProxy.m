@@ -157,13 +157,12 @@
 
 - (IBAction)toggleFloatingSelection:(id)sender
 {
-	id selection = [(SeaDocument*)gCurrentDocument selection];
-	id contents = [gCurrentDocument contents];
+	SeaSelection *selection = [(SeaDocument*)gCurrentDocument selection];
+	SeaContent *contents = [gCurrentDocument contents];
 	
 	if ([selection floating]) {
 		[contents anchorSelection];
-	}
-	else {
+	} else {
 		[contents makeSelectionFloat:NO];
 	}
 }

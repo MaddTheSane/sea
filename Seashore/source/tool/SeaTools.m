@@ -20,7 +20,7 @@
 #import "CloneTool.h"
 #import "CropTool.h"
 #import "EffectTool.h"
-#import "SeaDocument.h"
+#import <SeashoreKit/SeaDocument.h>
 
 @implementation SeaTools
 

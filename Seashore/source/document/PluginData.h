@@ -1,7 +1,13 @@
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
 #import "Constants.h"
 #import "SeaWhiteboard.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/Constants.h>
+#import <SeashoreKit/SeaWhiteboard.h>
+#endif
 
 /*!
 	@class		PluginData

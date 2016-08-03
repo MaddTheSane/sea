@@ -9,7 +9,7 @@
 */
 
 #import <Cocoa/Cocoa.h>
-#import "Globals.h"
+#import <SeashoreKit/Globals.h>
 
 @class SeaPrefs;
 
