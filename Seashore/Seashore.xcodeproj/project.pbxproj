@@ -176,7 +176,6 @@
 		551E56D518D01AB500E4CDAF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551E56D718D01AB500E4CDAF /* MainMenu.xib */; };
 		551E56DA18D01AD900E4CDAF /* CocoaContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551E56DC18D01AD900E4CDAF /* CocoaContent.xib */; };
 		551E56DF18D01AF900E4CDAF /* SVGContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551E56E118D01AF900E4CDAF /* SVGContent.xib */; };
-		551E570B18D01E2400E4CDAF /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551E570A18D01E2400E4CDAF /* Icons.xcassets */; };
 		551E572018D0268500E4CDAF /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
 		551E572118D0268500E4CDAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A518D0138C00E4CDAF /* QuartzCore.framework */; };
 		551E572218D0268500E4CDAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557D533418CF9FEC005809E3 /* Cocoa.framework */; };
@@ -1823,7 +1822,6 @@
 		551E56A218D0132B00E4CDAF /* Edge Work+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Edge Work+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E56A418D0138C00E4CDAF /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		551E56A518D0138C00E4CDAF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		551E570A18D01E2400E4CDAF /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		551E572918D0268500E4CDAF /* Exposure+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Exposure+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E573A18D0268A00E4CDAF /* False Color+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "False Color+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -3516,7 +3514,6 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				551E570A18D01E2400E4CDAF /* Icons.xcassets */,
 				55D0662F1C6EEAF200BEDAE9 /* Graphics.xcassets */,
 				A8FBD1FE0410E1DB00DF7825 /* Additions */,
 				A87E672506D1F4A000A5C89A /* Credits.rtf */,
@@ -7246,7 +7243,6 @@
 				A8EDF0EE078959C80022BB31 /* Seashore Guide.pdf in Resources */,
 				55D066301C6EEAF200BEDAE9 /* Graphics.xcassets in Resources */,
 				A8138D660CEFD5FA00C2F880 /* Seashore Effects Guide.pdf in Resources */,
-				551E570B18D01E2400E4CDAF /* Icons.xcassets in Resources */,
 				551E56DA18D01AD900E4CDAF /* CocoaContent.xib in Resources */,
 				551E56DF18D01AF900E4CDAF /* SVGContent.xib in Resources */,
 				551E56D518D01AB500E4CDAF /* MainMenu.xib in Resources */,

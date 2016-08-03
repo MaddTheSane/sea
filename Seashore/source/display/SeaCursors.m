@@ -20,50 +20,50 @@
 @implementation SeaCursors
 @synthesize closeRect;
 
-- (instancetype)initWithDocument:(id)newDocument andView:(id)newView
+- (instancetype)initWithDocument:(SeaDocument*)newDocument andView:(id)newView
 {
 	if (self = [super init]) {
 	document = newDocument;
 	view = newView;
 	/* Set-up the cursors */
 	// Tool Specific Cursors
-	crosspointCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"crosspoint-cursor"] hotSpot:NSMakePoint(7, 7)];
+	crosspointCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/crosspoint"] hotSpot:NSMakePoint(7, 7)];
 	[crosspointCursor setOnMouseEntered:YES];
-	wandCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"wand-cursor"] hotSpot:NSMakePoint(2, 2)];
+	wandCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/wand"] hotSpot:NSMakePoint(2, 2)];
 	[wandCursor setOnMouseEntered:YES];
-	zoomCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"zoom-cursor"] hotSpot:NSMakePoint(5, 6)];
+	zoomCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/zoom"] hotSpot:NSMakePoint(5, 6)];
 	[zoomCursor setOnMouseEntered:YES];
-	pencilCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"pencil-cursor"] hotSpot:NSMakePoint(3, 15)];
+	pencilCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/pencil"] hotSpot:NSMakePoint(3, 15)];
 	[pencilCursor setOnMouseEntered:YES];
-	brushCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"brush-cursor"] hotSpot:NSMakePoint(1, 14)];
+	brushCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/brush"] hotSpot:NSMakePoint(1, 14)];
 	[brushCursor setOnMouseEntered:YES];
-	bucketCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"bucket-cursor"] hotSpot:NSMakePoint(14, 14)];
+	bucketCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/bucket"] hotSpot:NSMakePoint(14, 14)];
 	[bucketCursor setOnMouseEntered:YES];
-	eyedropCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"eyedrop-cursor"] hotSpot:NSMakePoint(1, 14)];
+	eyedropCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/eyedrop"] hotSpot:NSMakePoint(1, 14)];
 	[eyedropCursor setOnMouseEntered:YES];
-	moveCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"move-cursor"] hotSpot:NSMakePoint(7, 7)];
+	moveCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/move"] hotSpot:NSMakePoint(7, 7)];
 	[moveCursor setOnMouseEntered:YES];
-	eraserCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"eraser-cursor"] hotSpot:NSMakePoint(2, 12)];
+	eraserCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/eraser"] hotSpot:NSMakePoint(2, 12)];
 	[eraserCursor setOnMouseEntered:YES];
-	smudgeCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"smudge-cursor"] hotSpot:NSMakePoint(1, 15)];
+	smudgeCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/smudge"] hotSpot:NSMakePoint(1, 15)];
 	[smudgeCursor setOnMouseEntered:YES];
-	effectCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"effect-cursor"] hotSpot:NSMakePoint(1, 1)];
+	effectCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/effect"] hotSpot:NSMakePoint(1, 1)];
 	[smudgeCursor setOnMouseEntered:YES];
 	noopCursor = [NSCursor operationNotAllowedCursor];
 	[noopCursor setOnMouseEntered:YES];
 	
 	// Additional Cursors
-	addCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"crosspoint-add-cursor"] hotSpot:NSMakePoint(7, 7)];
+	addCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/crosspoint-add"] hotSpot:NSMakePoint(7, 7)];
 	[addCursor setOnMouseEntered:YES];
-	subtractCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"crosspoint-subtract-cursor"] hotSpot:NSMakePoint(7, 7)];
+	subtractCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/crosspoint-subtract"] hotSpot:NSMakePoint(7, 7)];
 	[subtractCursor setOnMouseEntered:YES];
-	closeCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"crosspoint-close-cursor"] hotSpot:NSMakePoint(7, 7)];
+	closeCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/crosspoint-close"] hotSpot:NSMakePoint(7, 7)];
 	[closeCursor setOnMouseEntered:YES];
-	resizeCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"resize-cursor"] hotSpot:NSMakePoint(7, 7)];
+	resizeCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/resize"] hotSpot:NSMakePoint(7, 7)];
 	[resizeCursor setOnMouseEntered:YES];
-	rotateCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"rotate-cursor"] hotSpot:NSMakePoint(7, 7)];
+	rotateCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/rotate"] hotSpot:NSMakePoint(7, 7)];
 	[rotateCursor setOnMouseEntered:YES];
-	anchorCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"anchor-cursor"] hotSpot:NSMakePoint(7, 7)];
+	anchorCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/anchor"] hotSpot:NSMakePoint(7, 7)];
 	[anchorCursor setOnMouseEntered:YES];
 	
 	// View Generic Cursors
@@ -75,12 +75,12 @@
 	[lrCursor setOnMouseEntered:YES];
 	udCursor = [NSCursor resizeUpDownCursor];
 	[udCursor setOnMouseEntered:YES];
-	urdlCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"resize-ne-sw-cursor"] hotSpot:NSMakePoint(7, 7)];
+	urdlCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/resize-ne-sw"] hotSpot:NSMakePoint(7, 7)];
 	[urdlCursor setOnMouseEntered:YES];
-	uldrCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"resize-nw-se-cursor"] hotSpot:NSMakePoint(7, 7)];
+	uldrCursor = [[NSCursor alloc] initWithImage:[NSImage imageNamed:@"cursors/resize-nw-se"] hotSpot:NSMakePoint(7, 7)];
 	[uldrCursor setOnMouseEntered:YES];
 	
-	handleCursors[0]  = uldrCursor;
+	handleCursors[0] = uldrCursor;
 	handleCursors[1] = udCursor;
 	handleCursors[2] = urdlCursor;
 	handleCursors[3] = lrCursor;
@@ -113,71 +113,63 @@
 
 - (void)resetCursorRects
 {
-	if(scrollingMode){
-		if(scrollingMouseDown)
+	if (scrollingMode) {
+		if (scrollingMouseDown)
 			[self addCursorRect:[view frame] cursor:grabCursor];
 		else
 			[self addCursorRect:[view frame] cursor:handCursor];
 		return;
 	}
 	
-	int tool = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines tool = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	SeaLayer *activeLayer = [[document contents] activeLayer];
-	float xScale = [[document contents] xscale];
-	float yScale = [[document contents] yscale];
-	NSRect operableRect;
-	IntRect operableIntRect;
-	
-	operableIntRect = IntMakeRect([activeLayer xoff] * xScale, [activeLayer yoff] * yScale, [activeLayer width] * xScale, [activeLayer height] *yScale);
-	operableRect = IntRectMakeNSRect(IntConstrainRect(NSRectMakeIntRect([view frame]), operableIntRect));
+	CGFloat xScale = [[document contents] xscale];
+	CGFloat yScale = [[document contents] yscale];
+	IntRect operableIntRect = IntMakeRect([activeLayer xoff] * xScale, [activeLayer yoff] * yScale, [activeLayer width] * xScale, [activeLayer height] *yScale);
+	NSRect operableRect = IntRectMakeNSRect(IntConstrainRect(NSRectMakeIntRect([view frame]), operableIntRect));
 
-	if(tool >= kFirstSelectionTool && tool <= kLastSelectionTool){
+	if (tool >= kFirstSelectionTool && tool <= kLastSelectionTool) {
 		// Find out what the selection mode is
 		int selectionMode = [(AbstractSelectOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] selectionMode];
 		
-		if(selectionMode == kAddMode){
+		if (selectionMode == kAddMode) {
 			[self addCursorRect:operableRect cursor:addCursor];
-		}else if (selectionMode == kSubtractMode) {
+		} else if (selectionMode == kSubtractMode) {
 			[self addCursorRect:operableRect cursor:subtractCursor];
-		}else if(selectionMode != kDefaultMode){
+		} else if(selectionMode != kDefaultMode) {
 			[self addCursorRect:operableRect cursor:crosspointCursor];
-		}else{
+		} else {
 			[self addCursorRect:operableRect cursor:crosspointCursor];
 			
 			// Now we need the handles and the hand
-			if([[document selection] active]){
+			if ([[document selection] active]) {
 				NSRect selectionRect = IntRectMakeNSRect([[document selection] globalRect]);
 				selectionRect = NSMakeRect(selectionRect.origin.x * xScale, selectionRect.origin.y * yScale, selectionRect.size.width * xScale, selectionRect.size.height * yScale);
 
 				[self addCursorRect:NSConstrainRect(selectionRect,[view frame]) cursor:handCursor];
-				int i;
-				for(i = 0; i < 8; i++){
+				for (int i = 0; i < 8; i++) {
 					[self addCursorRect:handleRects[i] cursor:handleCursors[i]];
 				}
 				
 			}
 		}
 		
-		if(tool == kPolygonLassoTool && closeRect.size.width > 0 && closeRect.size.height > 0){
+		if (tool == kPolygonLassoTool && closeRect.size.width > 0 && closeRect.size.height > 0) {
 			[self addCursorRect:closeRect cursor: closeCursor];
 		}
-	}else if(tool == kCropTool){
-		NSRect cropRect;
-		IntRect origRect;
+	} else if(tool == kCropTool) {
 		[self addCursorRect:[view frame] cursor:crosspointCursor];
 		
-		origRect = [(CropTool *)[[document tools] currentTool] cropRect];
-		cropRect = NSMakeRect(origRect.origin.x * xScale, origRect.origin.y * yScale, origRect.size.width * xScale, origRect.size.height * yScale);
+		IntRect origRect = [(CropTool *)[[document tools] currentTool] cropRect];
+		NSRect cropRect = NSMakeRect(origRect.origin.x * xScale, origRect.origin.y * yScale, origRect.size.width * xScale, origRect.size.height * yScale);
 		
-		if (cropRect.size.width != 0 && cropRect.size.height != 0){
-				
+		if (cropRect.size.width != 0 && cropRect.size.height != 0) {
 			[self addCursorRect:NSConstrainRect(cropRect,[view frame]) cursor:handCursor];
-			int i;
-			for(i = 0; i < 8; i++){
+			for (int i = 0; i < 8; i++) {
 				[self addCursorRect:handleRects[i] cursor:handleCursors[i]];
 			}
 		}
-	}else if (tool == kPositionTool) {
+	} else if (tool == kPositionTool) {
 		NSRect cropRect;
 		IntRect origRect;
 
@@ -186,22 +178,18 @@
 		origRect =IntConstrainRect(NSRectMakeIntRect([view frame]), operableIntRect);
 		cropRect = NSMakeRect(origRect.origin.x * xScale, origRect.origin.y * yScale, origRect.size.width * xScale, origRect.size.height * yScale);
 		
-		if (cropRect.size.width != 0 && cropRect.size.height != 0){
-			
+		if (cropRect.size.width != 0 && cropRect.size.height != 0) {
 			[self addCursorRect:NSConstrainRect(cropRect,[view frame]) cursor:handCursor];
-			int i;
-			for(i = 0; i < 8; i++){
+			for (int i = 0; i < 8; i++) {
 				[self addCursorRect:handleRects[i] cursor:handleCursors[i]];
 			}
 		}
-	}else{
-
+	} else {
 		// If there is currently a selection, then users can operate in there only
 		if([[document selection] active]){
 			operableIntRect = [[document selection] globalRect];
 			operableIntRect = IntMakeRect(operableIntRect.origin.x * xScale, operableIntRect.origin.y * yScale, operableIntRect.size.width * xScale, operableIntRect.size.height * yScale);
 			operableRect = IntRectMakeNSRect(IntConstrainRect(NSRectMakeIntRect([view frame]), operableIntRect));
-		
 		}
 		
 		switch (tool) {
@@ -245,11 +233,11 @@
 		
 	}
 
-	if(tool == kBrushTool && [(BrushOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] brushIsErasing]){
+	if (tool == kBrushTool && [(BrushOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] brushIsErasing]) {
 		// Do we need this?
 		//[view removeCursorRect:operableRect cursor:brushCursor];
 		[self addCursorRect:operableRect cursor:eraserCursor];
-	}else if (tool == kPencilTool && [(PencilOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] pencilIsErasing]){
+	} else if (tool == kPencilTool && [(PencilOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] pencilIsErasing]) {
 		// Do we need this?
 		//[view removeCursorRect:operableRect cursor:pencilCursor];
 		[self addCursorRect:operableRect cursor:eraserCursor];
@@ -266,23 +254,23 @@
 	
 	
 	// Some tools can operate outside of the selection rectangle
-	if(tool != kZoomTool && tool != kEyedropTool && tool != kGradientTool && tool != kSmudgeTool && tool != kCloneTool && tool != kCropTool && tool != kEffectTool && tool != kPositionTool){
+	if (tool != kZoomTool && tool != kEyedropTool && tool != kGradientTool && tool != kSmudgeTool && tool != kCloneTool && tool != kCropTool && tool != kEffectTool && tool != kPositionTool) {
 		// Now we need the noop section		
-		if(operableRect.origin.x > 0){
+		if (operableRect.origin.x > 0) {
 			NSRect leftRect = NSMakeRect(0,0,operableRect.origin.x,[view frame].size.height);
 			[self addCursorRect:leftRect cursor:noopCursor];
 		}
-		float rightX = operableRect.origin.x + operableRect.size.width; 
-		if(rightX < [view frame].size.width){
+		CGFloat rightX = operableRect.origin.x + operableRect.size.width;
+		if (rightX < [view frame].size.width) {
 			NSRect rightRect = NSMakeRect(rightX, 0, [view frame].size.width - rightX, [view frame].size.height);
 			[self addCursorRect:rightRect cursor:noopCursor];
 		}
-		if(operableRect.origin.y > 0){
+		if (operableRect.origin.y > 0) {
 			NSRect bottomRect = NSMakeRect(0, 0, [view frame].size.width, operableRect.origin.y);
 			[self addCursorRect:bottomRect cursor:noopCursor];
 		}
-		float topY = operableRect.origin.y + operableRect.size.height;
-		if(topY < [view frame].size.height){
+		CGFloat topY = operableRect.origin.y + operableRect.size.height;
+		if (topY < [view frame].size.height) {
 			NSRect topRect = NSMakeRect(0, topY, [view frame].size.width, [view frame].size.height - topY);
 			[self addCursorRect:topRect cursor:noopCursor];
 		}
