@@ -22,7 +22,7 @@
 #ifndef GIMPCORE_H
 #define GIMPCORE_H
 
-#include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/CFBase.h>
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -75,67 +75,41 @@ typedef struct {
 #endif /* INTRECT_T */
 
 typedef CF_ENUM(int, GimpInterpolationType) {
-  /*! Specifies no interpolation. */
-  GIMP_INTERPOLATION_NONE,
-  /*! Specifies lower-quality but faster linear interpolation. */
-  GIMP_INTERPOLATION_LINEAR,
-  /*! Specifies high-quality cubic interpolation */
-  GIMP_INTERPOLATION_CUBIC
+  GIMP_INTERPOLATION_NONE, 		/**< Specifies no interpolation. */
+  GIMP_INTERPOLATION_LINEAR, 	/**< Specifies lower-quality but faster linear interpolation. */
+  GIMP_INTERPOLATION_CUBIC		/**< Specifies high-quality cubic interpolation */
 };
 
 typedef CF_ENUM(int, GimpGradientType) {
-  /*! Specifies linear gradient */
-  GIMP_GRADIENT_LINEAR,
-  /*! Specifies bi-linear gradient */
-  GIMP_GRADIENT_BILINEAR,
-  /*! Specifies radial gradient */
-  GIMP_GRADIENT_RADIAL,
-  /*! Specifies square gradient */
-  GIMP_GRADIENT_SQUARE,
-  /*! Specifies conical (symmetric) gradient */
-  GIMP_GRADIENT_CONICAL_SYMMETRIC,
-  /*! Specifies conical (asymmetric) gradient */
-  GIMP_GRADIENT_CONICAL_ASYMMETRIC,
-  /*! Specifies shapeburst (angular) gradient (NYI)*/
-  GIMP_GRADIENT_SHAPEBURST_ANGULAR,
-  /*! Specifies shapeburst (spherical) gradient (NYI) */
-  GIMP_GRADIENT_SHAPEBURST_SPHERICAL,
-  /*! Specifies shapeburst (dimpled) gradient (NYI) */
-  GIMP_GRADIENT_SHAPEBURST_DIMPLED,
-  /*! Specifies spiral (clockwise) gradient */
-  GIMP_GRADIENT_SPIRAL_CLOCKWISE,
-  /*! Specifies spiral (anticlockwise) gradient */
-  GIMP_GRADIENT_SPIRAL_ANTICLOCKWISE
+  GIMP_GRADIENT_LINEAR,                /**< Specifies linear gradient */
+  GIMP_GRADIENT_BILINEAR,              /**< Specifies bi-linear gradient */
+  GIMP_GRADIENT_RADIAL,                /**< Specifies radial gradient */
+  GIMP_GRADIENT_SQUARE,                /**< Specifies square gradient */
+  GIMP_GRADIENT_CONICAL_SYMMETRIC,     /**< Specifies conical (symmetric) gradient */
+  GIMP_GRADIENT_CONICAL_ASYMMETRIC,    /**< Specifies conical (asymmetric) gradient */
+  GIMP_GRADIENT_SHAPEBURST_ANGULAR,    /**< Specifies shapeburst (angular) gradient (NYI)*/
+  GIMP_GRADIENT_SHAPEBURST_SPHERICAL,  /**< Specifies shapeburst (spherical) gradient (NYI) */
+  GIMP_GRADIENT_SHAPEBURST_DIMPLED,    /**< Specifies shapeburst (dimpled) gradient (NYI) */
+  GIMP_GRADIENT_SPIRAL_CLOCKWISE,      /**< Specifies spiral (clockwise) gradient */
+  GIMP_GRADIENT_SPIRAL_ANTICLOCKWISE   /**< Specifies spiral (anticlockwise) gradient */
 };
 
 typedef CF_ENUM(int, GimpRepeatMode) {
-  /*! Specifies no repeat */
-  GIMP_REPEAT_NONE,
-  /*! Specifies sawtooth repeat wave */
-  GIMP_REPEAT_SAWTOOTH,
-  /*! Specifies triangular repeat wave */
-  GIMP_REPEAT_TRIANGULAR
+  GIMP_REPEAT_NONE,       /**< Specifies no repeat */
+  GIMP_REPEAT_SAWTOOTH,   /**< Specifies sawtooth repeat wave */
+  GIMP_REPEAT_TRIANGULAR  /**< Specifies triangular repeat wave */
 };
 
 typedef struct {
-  /*! Specifies the gradient type */
-  GimpGradientType gradient_type;
-  /*! Specifies the repeat mode */
-  GimpRepeatMode repeat;
-  /*! Specifies whether supersampling should be used */
-  unsigned int supersample;
-  /*! Specifies the maximum depth for use in supersampling */
-  int max_depth;
-  /*! Specifies the threshold for use in supersampling */
-  double threshold;
-  /*! Specifies the colour to start with */
-  unsigned char start_color[4];
-  /*! Specifies the start co-ordinates */
-  IntPoint start;
-  /*! Specifies the colour to end with */
-  unsigned char end_color[4];
-  /*! Specifies the end co-ordinates */
-  IntPoint end;
+	 GimpGradientType gradient_type;	/**< Specifies the gradient type */
+	 GimpRepeatMode repeat;				/**< Specifies the repeat mode */
+	 unsigned int supersample;			/**< Specifies whether supersampling should be used */
+	 int max_depth;						/**< Specifies the maximum depth for use in supersampling */
+	 double threshold;					/**< Specifies the threshold for use in supersampling */
+	 unsigned char start_color[4];		/**< Specifies the colour to start with */
+	 IntPoint start;					/**< Specifies the start co-ordinates */
+	 unsigned char end_color[4];		/**< Specifies the colour to end with */
+	 IntPoint end;						/**< Specifies the end co-ordinates */
 } GimpGradientInfo;
 
 typedef struct _GimpVector2 GimpVector2;
