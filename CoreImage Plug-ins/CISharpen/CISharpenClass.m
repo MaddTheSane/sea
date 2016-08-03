@@ -22,7 +22,7 @@
 
 - (int)type
 {
-	return 0;
+	return kBasicPlugin;
 }
 
 - (NSString *)name
