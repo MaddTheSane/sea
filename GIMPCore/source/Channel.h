@@ -7,7 +7,7 @@ typedef struct
 	guchar *data;
 } GimpChannel;
 
-GimpChannel channel_make(unsigned char *data, int width, int height)
+static inline GimpChannel channel_make(unsigned char *data, int width, int height)
 {
 	GimpChannel channel;
 	
