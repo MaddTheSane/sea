@@ -33,7 +33,7 @@
 #include "tiff.h"
 #include "tiffvers.h"
 
-/*
+/*!
  * TIFF is defined as an incomplete type to hide the
  * library's internal data structures from clients.
  */
@@ -58,14 +58,14 @@ typedef	struct tiff TIFF;
  *     32-bit file offsets being the most important, and to ensure
  *     that it is unsigned, rather than signed.
  */
-typedef	uint32 ttag_t;		/* directory tag */
-typedef	uint16 tdir_t;		/* directory index */
-typedef	uint16 tsample_t;	/* sample number */
-typedef	uint32 tstrip_t;	/* strip number */
-typedef uint32 ttile_t;		/* tile number */
-typedef	int32 tsize_t;		/* i/o size in bytes */
-typedef	void* tdata_t;		/* image data ref */
-typedef	uint32 toff_t;		/* file offset */
+typedef	uint32 ttag_t;		/**< directory tag */
+typedef	uint16 tdir_t;		/**< directory index */
+typedef	uint16 tsample_t;	/**< sample number */
+typedef	uint32 tstrip_t;	/**< strip number */
+typedef uint32 ttile_t;		/**< tile number */
+typedef	int32 tsize_t;		/**< i/o size in bytes */
+typedef	void* tdata_t;		/**< image data ref */
+typedef	uint32 toff_t;		/**< file offset */
 
 #if !defined(__WIN32__) && (defined(_WIN32) || defined(WIN32))
 #define __WIN32__
@@ -88,12 +88,12 @@ typedef	uint32 toff_t;		/* file offset */
 # define VC_EXTRALEAN
 # include <windows.h>
 # ifdef __WIN32__
-DECLARE_HANDLE(thandle_t);	/* Win32 file handle */
+DECLARE_HANDLE(thandle_t);	/**< Win32 file handle */
 # else
-typedef	HFILE thandle_t;	/* client data handle */
+typedef	HFILE thandle_t;	/**< client data handle */
 # endif /* __WIN32__ */
 #else
-typedef	void* thandle_t;	/* client data handle */
+typedef	void* thandle_t;	/**< client data handle */
 #endif /* USE_WIN32_FILEIO */
 
 #ifndef NULL
@@ -106,13 +106,13 @@ typedef	void* thandle_t;	/* client data handle */
  * very large.   Bit-or these flags to enable printing
  * multiple items.
  */
-#define	TIFFPRINT_NONE		0x0		/* no extra info */
-#define	TIFFPRINT_STRIPS	0x1		/* strips/tiles info */
-#define	TIFFPRINT_CURVES	0x2		/* color/gray response curves */
-#define	TIFFPRINT_COLORMAP	0x4		/* colormap */
-#define	TIFFPRINT_JPEGQTABLES	0x100		/* JPEG Q matrices */
-#define	TIFFPRINT_JPEGACTABLES	0x200		/* JPEG AC tables */
-#define	TIFFPRINT_JPEGDCTABLES	0x200		/* JPEG DC tables */
+#define	TIFFPRINT_NONE		0x0		/**< no extra info */
+#define	TIFFPRINT_STRIPS	0x1		/**< strips/tiles info */
+#define	TIFFPRINT_CURVES	0x2		/**< color/gray response curves */
+#define	TIFFPRINT_COLORMAP	0x4		/**< colormap */
+#define	TIFFPRINT_JPEGQTABLES	0x100		/**< JPEG Q matrices */
+#define	TIFFPRINT_JPEGACTABLES	0x200		/**< JPEG AC tables */
+#define	TIFFPRINT_JPEGDCTABLES	0x200		/**< JPEG DC tables */
 
 /* 
  * Colour conversion stuff
@@ -129,10 +129,10 @@ typedef	void* thandle_t;	/* client data handle */
 
 /* Structure for holding information about a display device. */
 
-typedef	unsigned char TIFFRGBValue;		/* 8-bit samples */
+typedef	unsigned char TIFFRGBValue;		/**< 8-bit samples */
 
 typedef struct {
-	float d_mat[3][3]; 		/* XYZ -> luminance matrix */
+	float d_mat[3][3]; 		/**< XYZ -> luminance matrix */
 	float d_YCR;			/* Light o/p for reference white */
 	float d_YCG;
 	float d_YCB;
@@ -157,21 +157,21 @@ typedef struct {				/* YCbCr->RGB support */
 } TIFFYCbCrToRGB;
 
 typedef struct {				/* CIE Lab 1976->RGB support */
-	int	range;				/* Size of conversion table */
+	int	range;				/**< Size of conversion table */
 #define CIELABTORGB_TABLE_RANGE 1500
 	float	rstep, gstep, bstep;
-	float	X0, Y0, Z0;			/* Reference white point */
+	float	X0, Y0, Z0;			/**< Reference white point */
 	TIFFDisplay display;
-	float	Yr2r[CIELABTORGB_TABLE_RANGE + 1];  /* Conversion of Yr to r */
-	float	Yg2g[CIELABTORGB_TABLE_RANGE + 1];  /* Conversion of Yg to g */
-	float	Yb2b[CIELABTORGB_TABLE_RANGE + 1];  /* Conversion of Yb to b */
+	float	Yr2r[CIELABTORGB_TABLE_RANGE + 1];  /**< Conversion of Yr to r */
+	float	Yg2g[CIELABTORGB_TABLE_RANGE + 1];  /**< Conversion of Yg to g */
+	float	Yb2b[CIELABTORGB_TABLE_RANGE + 1];  /**< Conversion of Yb to b */
 } TIFFCIELabToRGB;
 
-/*
+/*!
  * RGBA-style image support.
  */
 typedef struct _TIFFRGBAImage TIFFRGBAImage;
-/*
+/*!
  * The image reading and conversion routines invoke
  * ``put routines'' to copy/image/whatever tiles of
  * raw image data.  A default set of routines are 
@@ -187,36 +187,36 @@ typedef void (*tileContigRoutine)
 typedef void (*tileSeparateRoutine)
     (TIFFRGBAImage*, uint32*, uint32, uint32, uint32, uint32, int32, int32,
 	unsigned char*, unsigned char*, unsigned char*, unsigned char*);
-/*
+/*!
  * RGBA-reader state.
  */
 struct _TIFFRGBAImage {
-	TIFF*	tif;				/* image handle */
-	int	stoponerr;			/* stop on read error */
-	int	isContig;			/* data is packed/separate */
-	int	alpha;				/* type of alpha data present */
-	uint32	width;				/* image width */
-	uint32	height;				/* image height */
-	uint16	bitspersample;			/* image bits/sample */
-	uint16	samplesperpixel;		/* image samples/pixel */
-	uint16	orientation;			/* image orientation */
-	uint16	req_orientation;		/* requested orientation */
-	uint16	photometric;			/* image photometric interp */
+	TIFF*	tif;				/**< image handle */
+	int	stoponerr;			/**< stop on read error */
+	int	isContig;			/**< data is packed/separate */
+	int	alpha;				/**< type of alpha data present */
+	uint32	width;				/**< image width */
+	uint32	height;				/**< image height */
+	uint16	bitspersample;			/**< image bits/sample */
+	uint16	samplesperpixel;		/**< image samples/pixel */
+	uint16	orientation;			/**< image orientation */
+	uint16	req_orientation;		/**< requested orientation */
+	uint16	photometric;			/**< image photometric interp */
 	uint16*	redcmap;			/* colormap pallete */
 	uint16*	greencmap;
 	uint16*	bluecmap;
-						/* get image data routine */
+						/*! get image data routine */
 	int	(*get)(TIFFRGBAImage*, uint32*, uint32, uint32);
-	union {
+	union _TIFFRGBAImagePut {
 	    void (*any)(TIFFRGBAImage*);
 	    tileContigRoutine	contig;
 	    tileSeparateRoutine	separate;
-	} put;					/* put decoded strip/tile */
-	TIFFRGBValue* Map;			/* sample mapping array */
-	uint32** BWmap;				/* black&white map */
-	uint32** PALmap;			/* palette image map */
-	TIFFYCbCrToRGB* ycbcr;			/* YCbCr conversion state */
-        TIFFCIELabToRGB* cielab;		/* CIE L*a*b conversion state */
+	} put;					/**< put decoded strip/tile */
+	TIFFRGBValue* Map;			/**< sample mapping array */
+	uint32** BWmap;				/**< black&white map */
+	uint32** PALmap;			/**< palette image map */
+	TIFFYCbCrToRGB* ycbcr;			/**< YCbCr conversion state */
+        TIFFCIELabToRGB* cielab;		/**< CIE L*a*b conversion state */
 
         int	row_offset;
         int     col_offset;
@@ -291,22 +291,22 @@ extern	void _TIFFfree(tdata_t);
 extern  int  TIFFGetTagListCount( TIFF * );
 extern  ttag_t TIFFGetTagListEntry( TIFF *, int tag_index );
     
-#define	TIFF_ANY	TIFF_NOTYPE	/* for field descriptor searching */
-#define	TIFF_VARIABLE	-1		/* marker for variable length tags */
-#define	TIFF_SPP	-2		/* marker for SamplesPerPixel tags */
-#define	TIFF_VARIABLE2	-3		/* marker for uint32 var-length tags */
+#define	TIFF_ANY	TIFF_NOTYPE	/**< for field descriptor searching */
+#define	TIFF_VARIABLE	-1		/**< marker for variable length tags */
+#define	TIFF_SPP	-2		/**< marker for SamplesPerPixel tags */
+#define	TIFF_VARIABLE2	-3		/**< marker for uint32 var-length tags */
 
 #define FIELD_CUSTOM    65    
 
 typedef	struct {
-	ttag_t	field_tag;		/* field's tag */
-	short	field_readcount;	/* read count/TIFF_VARIABLE/TIFF_SPP */
-	short	field_writecount;	/* write count/TIFF_VARIABLE */
-	TIFFDataType field_type;	/* type of associated data */
-        unsigned short field_bit;	/* bit in fieldsset bit vector */
-	unsigned char field_oktochange;	/* if true, can change while writing */
-	unsigned char field_passcount;	/* if true, pass dir count on set */
-	char	*field_name;		/* ASCII name */
+	ttag_t	field_tag;		/**< field's tag */
+	short	field_readcount;	/**< read count/TIFF_VARIABLE/TIFF_SPP */
+	short	field_writecount;	/**< write count/TIFF_VARIABLE */
+	TIFFDataType field_type;	/**< type of associated data */
+        unsigned short field_bit;	/**< bit in fieldsset bit vector */
+	unsigned char field_oktochange;	/**< if true, can change while writing */
+	unsigned char field_passcount;	/**< if true, pass dir count on set */
+	char	*field_name;		/**< ASCII name */
 } TIFFFieldInfo;
 
 typedef struct _TIFFTagValue {
@@ -327,9 +327,9 @@ typedef	int (*TIFFVGetMethod)(TIFF*, ttag_t, va_list);
 typedef	void (*TIFFPrintMethod)(TIFF*, FILE*, long);
     
 typedef struct {
-    TIFFVSetMethod	vsetfield;	/* tag set routine */
-    TIFFVGetMethod	vgetfield;	/* tag get routine */
-    TIFFPrintMethod	printdir;	/* directory print routine */
+    TIFFVSetMethod	vsetfield;	/**< tag set routine */
+    TIFFVGetMethod	vgetfield;	/**< tag get routine */
+    TIFFPrintMethod	printdir;	/**< directory print routine */
 } TIFFTagMethods;
         
 extern  TIFFTagMethods *TIFFAccessTagMethods( TIFF * );
@@ -459,7 +459,7 @@ extern	tsize_t TIFFWriteEncodedStrip(TIFF*, tstrip_t, tdata_t, tsize_t);
 extern	tsize_t TIFFWriteRawStrip(TIFF*, tstrip_t, tdata_t, tsize_t);
 extern	tsize_t TIFFWriteEncodedTile(TIFF*, ttile_t, tdata_t, tsize_t);
 extern	tsize_t TIFFWriteRawTile(TIFF*, ttile_t, tdata_t, tsize_t);
-extern	int TIFFDataWidth(TIFFDataType);    /* table of tag datatype widths */
+extern	int TIFFDataWidth(TIFFDataType);    /**< table of tag datatype widths */
 extern	void TIFFSetWriteOffset(TIFF*, toff_t);
 extern	void TIFFSwabShort(uint16*);
 extern	void TIFFSwabLong(uint32*);

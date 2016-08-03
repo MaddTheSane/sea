@@ -9,12 +9,12 @@ framework module TIFF [extern_c] {
 		export *
 	}
 	
-	explicit module io {
+	module io {
 		header "tiffio.h"
 		export *
 	}
 	
-	explicit module version {
+	module version {
 		header "tiffvers.h"
 		export *
 	}
