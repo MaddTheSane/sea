@@ -15,16 +15,16 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
 @interface TextureUtility : AbstractPanelUtility {
-	// The proxy object
+	/// The proxy object
 	IBOutlet SeaProxy *seaProxy;
 	
-	// The texture grouping pop-up
+	/// The texture grouping pop-up
     IBOutlet NSPopUpButton *textureGroupPopUp;
 	
-	// The label that presents the user with the texture name
+	/// The label that presents the user with the texture name
 	IBOutlet NSTextField *textureNameLabel;
 	
-	// The view that displays the textures
+	/// The view that displays the textures
     IBOutlet id view;
     	
 	// The opacity selection items
@@ -34,22 +34,22 @@
 	// The document which is the focus of this utility
 	IBOutlet SeaDocument *document;
 	
-	// An dictionary of all brushes known to Seashore
+	/// A dictionary of all brushes known to Seashore
 	NSDictionary *textures;
 	
-	// An array of all groups (an array of an array SeaTexture's) and group names (an array of NSString's)
+	/// An array of all groups (an array of an array of <code>SeaTexture</code>s)
 	NSArray<NSArray<SeaTexture*>*> *groups;
+	/// An array of all group names (an array of <code>NSString</code>s)
 	NSArray<NSString*> *groupNames;
 	
-	// The index of the currently active group
+	/// The index of the currently active group
 	NSInteger activeGroupIndex;
 	
-	// The index of the currently active texture
+	/// The index of the currently active texture
 	NSInteger activeTextureIndex;
 	
-	// The opacity value to be used with the texture
+	/// The opacity value to be used with the texture
 	int opacity;
-	
 }
 
 /*!
@@ -123,12 +123,12 @@
 @property (readonly) int opacity;
 
 /*!
-	@method		activeTexture
+	@property	activeTexture
 	@discussion	Returns the currently active texture.
 	@result		Returns an instance of SeaTexture representing the currently
 				active texture.
 */
-- (SeaTexture*)activeTexture;
+@property (readonly, retain) SeaTexture *activeTexture;
 
 /*!
 	@property	activeTextureIndex
@@ -136,7 +136,7 @@
 	@result		Returns an integer representing the index of the currently
 				active texture.
 */
-@property (readonly) NSInteger activeTextureIndex;
+@property (nonatomic) NSInteger activeTextureIndex;
 
 /*!
 	@method		setActiveTextureIndex:
@@ -147,18 +147,18 @@
 - (void)setActiveTextureIndex:(NSInteger)index;
 
 /*!
-	@method		textures
+	@property	textures
 	@discussion	Returns all the textures in the currently active group.
 	@result		Returns an array with all the textures in the currently active
 				group. 
 */
-- (NSArray<SeaTexture*> *)textures;
+@property (readonly, copy) NSArray<SeaTexture*> *textures;
 
 /*!
-	@method		groupNames
+	@property	groupNames
 	@discussion	Returns the textures' group names (excluding custom groups).
-	@result		Returns an NSArray containing the textures' group names.
+	@result		Returns an \c NSArray containing the textures' group names.
 */
-- (NSArray<NSString*> *)groupNames;
+@property (readonly, copy) NSArray<NSString*> *groupNames;
 
 @end

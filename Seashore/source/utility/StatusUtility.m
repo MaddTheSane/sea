@@ -46,7 +46,7 @@
 
 - (IBAction)show:(id)sender
 {
-	[[[document window] contentView] setVisibility: YES forRegion: kStatusBar];
+	[[[document window] contentView] setVisibility: YES forRegion: SeaWindowRegionStatusBar];
 	[self update];
 	[self updateZoom];
 	[self updateQuickColor];
@@ -54,12 +54,12 @@
 
 - (IBAction)hide:(id)sender
 {
-	[[[document window] contentView] setVisibility: NO forRegion: kStatusBar];
+	[[[document window] contentView] setVisibility: NO forRegion: SeaWindowRegionStatusBar];
 }
 
 - (IBAction)toggle:(id)sender
 {
-	if([[[document window] contentView] visibilityForRegion: kStatusBar]) {
+	if([[[document window] contentView] visibilityForRegion: SeaWindowRegionStatusBar]) {
 		[self hide:sender];
 	}else{
 		[self show:sender];

@@ -14,7 +14,6 @@
     return self;
 }
 
-
 - (void)drawRect:(NSRect)dirtyRect {
     // We use images for the backgrounds
 	NSImage *background = NULL;
@@ -45,20 +44,20 @@
 	
 	// We need to calculate the width of the text box
 	NSRect drawRect = NSMakeRect(10, 8, [self frame].size.width, 18);
-	if([alternateButton frame].origin.x < [self frame].size.width){
+	if ([alternateButton frame].origin.x < [self frame].size.width) {
 		drawRect.size.width -= 232;
-	}else if ([defaultButton frame].origin.x < [self frame].size.width ){
+	} else if ([defaultButton frame].origin.x < [self frame].size.width) {
 		drawRect.size.width -= 124;
 	}
 	
-	if(drawRect.size.width < [bannerText sizeWithAttributes:attrs].width){
+	if (drawRect.size.width < [bannerText sizeWithAttributes:attrs].width) {
 		[@"…" drawInRect:NSMakeRect(drawRect.size.width + 8, 8, 18, 18) withAttributes:attrs];
 	}
 	[bannerText drawInRect: drawRect withAttributes:attrs];
 	[NSGraphicsContext restoreGraphicsState];
 }
 
-- (void)setBannerText:(NSString *)text defaultButtonText:(NSString *)dText alternateButtonText:(NSString *)aText andImportance:(int)importance
+- (void)setBannerText:(NSString *)text defaultButtonText:(NSString *)dText alternateButtonText:(NSString *)aText andImportance:(SeaWarningImportance)importance
 {
 	bannerText = [text copy];
 	bannerImportance = importance;

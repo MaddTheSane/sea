@@ -502,12 +502,12 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 		minHeight += 35;
 	}
 	// Options Bar
-	rect.size.height += [[docWindow contentView] sizeForRegion: kOptionsBar];
+	rect.size.height += [[docWindow contentView] sizeForRegion: SeaWindowRegionOptionsBar];
 	 // Status Bar
-	rect.size.height += [[docWindow contentView] sizeForRegion: kStatusBar];
+	rect.size.height += [[docWindow contentView] sizeForRegion: SeaWindowRegionStatusBar];
 	
 	 // Layers
-	rect.size.width += [[docWindow contentView] sizeForRegion: kSidebar];
+	rect.size.width += [[docWindow contentView] sizeForRegion: SeaWindowRegionSidebar];
 	
 	// Disallow ridiculously small or large windows
 	NSRect defaultFrame = [[docWindow screen] frame];

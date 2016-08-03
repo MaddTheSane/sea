@@ -67,12 +67,12 @@
 
 - (IBAction)show:(id)sender
 {
-	[[[document window] contentView] setVisibility: YES forRegion: kSidebar];
+	[[[document window] contentView] setVisibility: YES forRegion: SeaWindowRegionSidebar];
 }
 
 - (IBAction)hide:(id)sender
 {
-	[[[document window] contentView] setVisibility: NO forRegion: kSidebar];
+	[[[document window] contentView] setVisibility: NO forRegion: SeaWindowRegionSidebar];
 }
 
 - (void)setEnabled:(BOOL)value
@@ -106,7 +106,7 @@
 
 - (BOOL)visible
 {
-	return [[[document window] contentView] visibilityForRegion: kSidebar];
+	return [[[document window] contentView] visibilityForRegion: SeaWindowRegionSidebar];
 }
 
 - (IBAction)addLayer:(id)sender

@@ -409,28 +409,28 @@
 	// Sometimes in other cases
 	switch ([menuItem tag]) {
 		case 200:
-			if([[[document window] contentView] visibilityForRegion: kSidebar])
+			if([[[document window] contentView] visibilityForRegion: SeaWindowRegionSidebar])
 				[menuItem setTitle:@"Hide Layers"];
 			else
 				[menuItem setTitle:@"Show Layers"];
 			return YES;
 			break;
 		case 192:
-			if([[[document window] contentView] visibilityForRegion:kPointInformation])
+			if([[[document window] contentView] visibilityForRegion:SeaWindowRegionPointInformation])
 				[menuItem setTitle:@"Hide Point Information"];
 			else
 				[menuItem setTitle:@"Show Point Information"];
 			return YES;
 			break;
 		case 191:
-			if([[[document window] contentView] visibilityForRegion: kOptionsBar])
+			if([[[document window] contentView] visibilityForRegion: SeaWindowRegionOptionsBar])
 				[menuItem setTitle:@"Hide Options Bar"];
 			else
 				[menuItem setTitle:@"Show Options Bar"];
 			return YES;
 			break;
 		case 194:
-			if([[[document window] contentView] visibilityForRegion:kStatusBar])
+			if([[[document window] contentView] visibilityForRegion:SeaWindowRegionStatusBar])
 				[menuItem setTitle:@"Hide Status Bar"];
 			else
 				[menuItem setTitle:@"Show Status Bar"];

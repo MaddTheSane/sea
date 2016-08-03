@@ -1,5 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "SeaTools.h"
 
 @class SeaDocument;
 @class SeaProxy;
@@ -36,10 +37,10 @@
 	IBOutlet OptionsUtility *optionsUtility;
 	
 	// The tag of the currently selected tool
-	int tool;
+	SeaToolsDefines tool;
 	
 	// The old tool
-	int oldTool;
+	SeaToolsDefines oldTool;
 
 	// The toolbar
 	NSToolbar *toolbar;
@@ -67,7 +68,7 @@
 //! The background colour.
 @property (copy) NSColor *background;
 //! The foreground colour.
-@property (copy) NSColor *foreground;
+@property (nonatomic, copy) NSColor *foreground;
 
 /*!
 	@method		init
@@ -150,12 +151,12 @@
 - (void)update:(BOOL)full;
 
 /*!
-	@method		tool
+	@property	tool
 	@discussion	Returns the currently selected tool.
 	@result		Returns the tool type (see SeaTools) representing the currently
 				selected tool.
 */
-- (int)tool;
+@property (readonly) SeaToolsDefines tool;
 
 /*!
 	@method		selectToolUsingTag:
@@ -180,7 +181,7 @@
 	@param		newTool
 				The index of the new tool.
 */
-- (void)changeToolTo:(int)newTool;
+- (void)changeToolTo:(SeaToolsDefines)newTool;
 
 /*!
 	@method		floatTool

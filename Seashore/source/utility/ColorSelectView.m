@@ -32,13 +32,11 @@
 	[self setNeedsDisplay:YES];
 	
 	if (doc == NULL) {
-	
 		// If we are closing the last document hide the panel for selecting the foreround or background colour
 		if ([gColorPanel isVisible] && ([[gColorPanel title] isEqualToString:LOCALSTR(@"foreground", @"Foreground")] || [[gColorPanel title] isEqualToString:LOCALSTR(@"background", @"Background")])) {
 			if ([[[NSDocumentController sharedDocumentController] documents] count] == 1)
 				[gColorPanel orderOut:self];
 		}
-		
 	}
 }
 
@@ -73,13 +71,14 @@
 	[tempPath lineToPoint:NSMakePoint(26,24)];
 	[tempPath fill];
 	// Actual Color
-	if (document == NULL)
+	if (document == NULL) {
 		[[NSColor whiteColor] set];
-	else {
-		if ([[document whiteboard] CMYKPreview])
+	} else {
+		if ([[document whiteboard] CMYKPreview]) {
 			[[[document whiteboard] matchColor:[[document contents] background]] set];
-		else
+		} else {
 			[[[document contents] background] set];
+		}
 	}
 	[[NSBezierPath bezierPathWithRect:NSMakeRect(26, 8, 26, 16)] fill];
 
@@ -108,15 +107,15 @@
 	if (foregroundIsTexture) {
 		[[NSColor colorWithPatternImage:[[[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture] thumbnail]] set];
 		[[NSBezierPath bezierPathWithRect:NSMakeRect(2, 2, 26, 16)] fill];
-	}
-	else {
-		if (document == NULL)
+	} else {
+		if (document == NULL) {
 			[[NSColor blackColor] set];
-		else {
-			if ([[document whiteboard] CMYKPreview])
+		} else {
+			if ([[document whiteboard] CMYKPreview]) {
 				[[[document whiteboard] matchColor:[[document contents] foreground]] set];
-			else
+			} else {
 				[[[document contents] foreground] set];
+			}
 		}
 		[[NSBezierPath bezierPathWithRect:NSMakeRect(2, 2, 26, 16)] fill];
 	}
@@ -201,7 +200,6 @@
 	NSPoint clickPoint = [self convertPoint:[theEvent locationInWindow] fromView:NULL];
 	
 	if (mouseDownOnSwap) {
-	
 		// Return the swap button to normal
 		mouseDownOnSwap = NO;
 		[self setNeedsDisplay:YES];
@@ -233,13 +231,12 @@
 {
 	// Reconfigure the colour panel correctly
 	if ([gColorPanel isVisible] && ([[gColorPanel title] isEqualToString:LOCALSTR(@"foreground", @"Foreground")] || [[gColorPanel title] isEqualToString:LOCALSTR(@"background", @"Background")])) {
-				
 		// Set colour correctly
-		if ([[gColorPanel title] isEqualToString:LOCALSTR(@"foreground", @"Foreground")])
+		if ([[gColorPanel title] isEqualToString:LOCALSTR(@"foreground", @"Foreground")]) {
 			[gColorPanel setColor:[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] foreground]];
-		else
+		} else {
 			[gColorPanel setColor:[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] background]];
-		
+		}
 	}
 	
 	// Call for an update of the view

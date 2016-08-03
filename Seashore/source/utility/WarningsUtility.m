@@ -11,17 +11,17 @@
 
 - (instancetype)init
 {
-	if(self = [super init]){
+	if (self = [super init]) {
 		mostRecentImportance = -1;
 	}
 	return self;	
 }
 
-- (void)setWarning:(NSString *)message ofImportance:(int)importance
+- (void)setWarning:(NSString *)message ofImportance:(SeaWarningImportance)importance
 {
 	[view setBannerText:message defaultButtonText:@"OK" alternateButtonText:NULL andImportance:importance];
 	mostRecentImportance = importance;
-	[windowContent setVisibility:YES forRegion:kWarningsBar];
+	[windowContent setVisibility:YES forRegion:SeaWindowRegionWarningsBar];
 }
 
 
@@ -29,31 +29,31 @@
 {
 	[view setBannerText:@"Drag the floating layer to position it, then click Anchor to merge it into the layer below." defaultButtonText:@"Anchor" alternateButtonText:@"New Layer" andImportance:kUIImportance];
 	mostRecentImportance = kUIImportance;
-	[windowContent setVisibility:YES forRegion:kWarningsBar];
+	[windowContent setVisibility:YES forRegion:SeaWindowRegionWarningsBar];
 }
 
 - (void)hideFloatBanner
 {
 	mostRecentImportance = -1;
-	[windowContent setVisibility:NO forRegion:kWarningsBar];	
+	[windowContent setVisibility:NO forRegion:SeaWindowRegionWarningsBar];	
 }
 
 - (void)keyTriggered
 {
-	if(mostRecentImportance != -1){
+	if (mostRecentImportance != -1) {
 		[self defaultAction: self];
 	}
 }
 
 - (IBAction)defaultAction:(id)sender
 {
-	if(mostRecentImportance == kUIImportance){
+	if (mostRecentImportance == kUIImportance) {
 		mostRecentImportance = -1;
-		[windowContent setVisibility:NO forRegion:kWarningsBar];
+		[windowContent setVisibility:NO forRegion:SeaWindowRegionWarningsBar];
 		[[document contents] toggleFloatingSelection];
-	}else{
+	} else {
 		mostRecentImportance = -1;
-		[windowContent setVisibility:NO forRegion:kWarningsBar];
+		[windowContent setVisibility:NO forRegion:SeaWindowRegionWarningsBar];
 		[[SeaController seaWarning] triggerQueue: document];
 	}
 }
@@ -61,9 +61,9 @@
 
 - (IBAction)alternateAction:(id)sender
 {
-	if(mostRecentImportance == kUIImportance){
+	if (mostRecentImportance == kUIImportance) {
 		mostRecentImportance = -1;
-		[windowContent setVisibility:NO forRegion:kWarningsBar];	
+		[windowContent setVisibility:NO forRegion:SeaWindowRegionWarningsBar];	
 		[[document contents] addLayer:kActiveLayer];
 	}
 }

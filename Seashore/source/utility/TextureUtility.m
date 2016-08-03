@@ -15,6 +15,7 @@
 
 @implementation TextureUtility
 @synthesize activeTextureIndex;
+@synthesize opacity;
 
 - (instancetype)init
 {		
@@ -138,7 +139,6 @@
 			newValues = [[textures allValues] arrayByAddingObject:texture];
 			textures = [NSDictionary dictionaryWithObjects:newValues forKeys:newKeys];
 		}
-		
 	}
 	
 	// Create the all group
@@ -179,10 +179,7 @@
 	NSMutableArray *newValues, *newKeys, *array;
 	NSString *tpath;
 	BOOL isDirectory;
-	id texture;
-	int i, j;
-	
-	// Release any existing textures
+	SeaTexture *texture;
 	
 	// Update dictionary of all textures
 	if (textures[path]) {
@@ -193,11 +190,10 @@
 		for (NSString *oldKey in oldKeys) {
 			if (![path isEqualToString:oldKey]) {
 				[newKeys addObject:oldKey];
-				[newValues addObject:texture[oldKey]];
+				[newValues addObject:textures[oldKey]];
 			}
 		}
-	}
-	else {
+	} else {
 		newKeys = [[textures allKeys] mutableCopy];
 		newValues = [[textures allValues] mutableCopy];
 	}
@@ -222,7 +218,7 @@
 		if (isDirectory) {
 			subfiles = [gFileManager subpathsAtPath:tpath];
 			array = [NSMutableArray new];
-			for (j = 0; j < [subfiles count]; j++) {
+			for (NSInteger j = 0; j < [subfiles count]; j++) {
 				texture = textures[[tpath stringByAppendingString:subfiles[j]]];
 				if (texture) {
 					[array addObject:texture];
@@ -243,7 +239,7 @@
 	[textureGroupPopUp addItemWithTitle:groupNames[0]];
 	[[textureGroupPopUp itemAtIndex:0] setTag:0];
 	[[textureGroupPopUp menu] addItem:[NSMenuItem separatorItem]];
-	for (i = 1; i < [groupNames count]; i++) {
+	for (NSInteger i = 1; i < [groupNames count]; i++) {
 		[textureGroupPopUp addItemWithTitle:groupNames[i]];
 		[[textureGroupPopUp itemAtIndex:[[textureGroupPopUp menu] numberOfItems] - 1] setTag:i];
 	}
@@ -266,11 +262,6 @@
 	opacity = [opacitySlider intValue] * 2.55;
 }
 
-- (int)opacity
-{
-	return opacity;
-}
-
 - (id)activeTexture
 {
 	return groups[activeGroupIndex][activeTextureIndex];
@@ -286,18 +277,14 @@
 
 - (void)setActiveTextureIndex:(NSInteger)index
 {
-	id oldTexture;
-	id newTexture;
-	
 	if (index == -1) {
 		[[SeaController seaPrefs] setUseTextures:NO];
 		[textureNameLabel setStringValue:@""];
 		[opacitySlider setEnabled:NO];
 		[view setNeedsDisplay:YES];
-	}
-	else {
-		oldTexture = groups[activeGroupIndex][activeTextureIndex];
-		newTexture = groups[activeGroupIndex][index];
+	} else {
+		SeaTexture *oldTexture = groups[activeGroupIndex][activeTextureIndex];
+		SeaTexture *newTexture = groups[activeGroupIndex][index];
 		[oldTexture deactivate];
 		activeTextureIndex = index;
 		[[SeaController seaPrefs] setUseTextures:YES];

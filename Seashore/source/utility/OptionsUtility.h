@@ -1,9 +1,28 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "SeaTools.h"
 
 @class SeaDocument;
 @class ToolboxUtility;
 @class AbstractOptions;
+@class LassoOptions;
+@class PolygonLassoOptions;
+@class PositionOptions;
+@class ZoomOptions;
+@class PencilOptions;
+@class BrushOptions;
+@class BucketOptions;
+@class TextOptions;
+@class EyedropOptions;
+@class RectSelectOptions;
+@class EllipseSelectOptions;
+@class EraserOptions;
+@class SmudgeOptions;
+@class GradientOptions;
+@class WandOptions;
+@class CloneOptions;
+@class CropOptions;
+@class EffectOptions;
 
 /*!
 	@class		OptionsUtility
@@ -27,30 +46,30 @@
 	IBOutlet NSView *blankView;
 	
 	// The various options objects
-	IBOutlet id lassoOptions;
-	IBOutlet id polygonLassoOptions;
-	IBOutlet id positionOptions;
-	IBOutlet id zoomOptions;
-	IBOutlet id pencilOptions;
-	IBOutlet id brushOptions;
-    IBOutlet id bucketOptions;
-	IBOutlet id textOptions;
-	IBOutlet id eyedropOptions;
-	IBOutlet id rectSelectOptions;
-	IBOutlet id ellipseSelectOptions;
-	IBOutlet id eraserOptions;
-	IBOutlet id smudgeOptions;
-	IBOutlet id gradientOptions;
-	IBOutlet id wandOptions;
-	IBOutlet id cloneOptions;
-	IBOutlet id cropOptions;
-	IBOutlet id effectOptions;
+	IBOutlet LassoOptions *lassoOptions;
+	IBOutlet PolygonLassoOptions *polygonLassoOptions;
+	IBOutlet PositionOptions *positionOptions;
+	IBOutlet ZoomOptions *zoomOptions;
+	IBOutlet PencilOptions *pencilOptions;
+	IBOutlet BrushOptions *brushOptions;
+    IBOutlet BucketOptions *bucketOptions;
+	IBOutlet TextOptions *textOptions;
+	IBOutlet EyedropOptions *eyedropOptions;
+	IBOutlet RectSelectOptions *rectSelectOptions;
+	IBOutlet EllipseSelectOptions *ellipseSelectOptions;
+	IBOutlet EraserOptions *eraserOptions;
+	IBOutlet SmudgeOptions *smudgeOptions;
+	IBOutlet GradientOptions *gradientOptions;
+	IBOutlet WandOptions *wandOptions;
+	IBOutlet CloneOptions *cloneOptions;
+	IBOutlet CropOptions *cropOptions;
+	IBOutlet EffectOptions *effectOptions;
 	
 	// The toolbox utility object
 	IBOutlet ToolboxUtility *toolboxUtility;
 	
 	// The currently active tool - not a reliable indication (see code)
-	int currentTool;
+	SeaToolsDefines currentTool;
 }
 
 /*!
@@ -93,7 +112,7 @@
 				SeaTools).
 	@result		Returns the options object associated with the given index.
 */
-- (__kindof AbstractOptions*)getOptions:(int)whichTool;
+- (__kindof AbstractOptions*)getOptions:(SeaToolsDefines)whichTool;
 
 /*!
 	@method		update
@@ -133,10 +152,10 @@
 - (void)viewNeedsDisplay;
 
 /*!
-	@method		visible
+	@property	visible
 	@discussion	Returns whether or not the utility's window is visible.
 	@result		Returns YES if the utility's window is visible, NO otherwise.
 */
-- (BOOL)visible;
+@property (readonly, getter=isVisible) BOOL visible;
 
 @end

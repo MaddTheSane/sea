@@ -1,5 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "SeaWarning.h"
 
 @class SeaDocument;
 
@@ -19,7 +20,7 @@
 	NSString *bannerText;
 	
 	/// The importance of the banner (this defines the color)
-	int bannerImportance;
+	SeaWarningImportance bannerImportance;
 	
 	/// The default button for the banner
 	IBOutlet NSButton *defaultButton;
@@ -41,6 +42,6 @@
 	@param		importance
 				The importance sets the color of the background.
 */
-- (void)setBannerText:(NSString *)text defaultButtonText:(NSString *)dText alternateButtonText:(NSString *)aText andImportance:(int)importance;
+- (void)setBannerText:(NSString *)text defaultButtonText:(NSString *)dText alternateButtonText:(NSString *)aText andImportance:(SeaWarningImportance)importance;
 
 @end

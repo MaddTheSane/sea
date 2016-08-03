@@ -49,13 +49,13 @@
 
 - (IBAction)show:(id)sender
 {
-	[[[document window] contentView] setVisibility: YES forRegion: kPointInformation];
+	[[[document window] contentView] setVisibility: YES forRegion: SeaWindowRegionPointInformation];
 	[toggleButton setImage:[NSImage imageNamed:@"hide-info"]];
 }
 
 - (IBAction)hide:(id)sender
 {
-	[[[document window] contentView] setVisibility: NO forRegion: kPointInformation];	
+	[[[document window] contentView] setVisibility: NO forRegion: SeaWindowRegionPointInformation];	
 	[toggleButton setImage:[NSImage imageNamed:@"show-info"]];
 }
 
@@ -157,7 +157,7 @@
 
 - (BOOL)visible
 {
-	return [[[document window] contentView] visibilityForRegion: kPointInformation];
+	return [[[document window] contentView] visibilityForRegion: SeaWindowRegionPointInformation];
 }
 
 @end

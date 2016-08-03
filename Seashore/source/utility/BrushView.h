@@ -25,10 +25,8 @@
 */
 
 @interface BrushView : NSView {
-	
-	// The BrushUtility controlling this view
+	/// The \c BrushUtility controlling this view
 	__weak BrushUtility *master;
-	
 }
 
 /*!

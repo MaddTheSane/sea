@@ -1,5 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "SeaWarning.h"
 
 @class BannerView;
 @class SeaWindowContent;
@@ -24,7 +25,7 @@
 	IBOutlet BannerView* view;
 	
 	// What type of message are we currently displaying?
-	int mostRecentImportance;
+	SeaWarningImportance mostRecentImportance;
 }
 
 /*!
@@ -35,7 +36,7 @@
 	@param		importance
 				This affects the color
 */
-- (void)setWarning:(NSString *)message ofImportance:(int)importance;
+- (void)setWarning:(NSString *)message ofImportance:(SeaWarningImportance)importance;
 
 /*!
 	@method		showFloatBanner
@@ -77,5 +78,5 @@
 	@discussion	This is used to figure out how important the current warning is.
 	@result		The importance of the current warning (an int).
 */
-@property (readonly) int activeWarningImportance;
+@property (readonly) SeaWarningImportance activeWarningImportance;
 @end

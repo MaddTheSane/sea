@@ -18,7 +18,10 @@
 	SeaSelectMode mode;
 }
 
-/// The Selection mode
+/*!
+	@property	selectionMode
+	@discussion	The mode to be used for the selection.
+*/
 @property (nonatomic) SeaSelectMode selectionMode;
 
 /*!

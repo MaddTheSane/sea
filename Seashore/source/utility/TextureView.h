@@ -26,10 +26,8 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
 @interface TextureView : NSView {
-	
-	// The TextureUtility controlling this view
+	/// The \c TextureUtility controlling this view
 	__weak TextureUtility *master;
-	
 }
 
 /*!

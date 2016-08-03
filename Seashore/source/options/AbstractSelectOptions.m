@@ -18,12 +18,11 @@
 - (void)setSelectionMode:(SeaSelectMode)newMode
 {
 	mode = newMode;
-	if(mode == kDefaultMode){
+	if (mode == kDefaultMode) {
 		[self setIgnoresMove:NO];
-	}else {
+	} else {
 		[self setIgnoresMove:YES];
 	}
-
 }
 
 - (void)setModeFromModifier:(AbstractModifiers)modifier

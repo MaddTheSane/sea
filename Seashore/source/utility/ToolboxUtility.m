@@ -59,6 +59,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 @implementation ToolboxUtility
 @synthesize background;
 @synthesize foreground;
+@synthesize tool;
+@synthesize colorView = colorSelectView;
 
 - (instancetype)init
 {
@@ -125,7 +127,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		// set sizes
 		[toolbarItem setMinSize: [selectionTBView frame].size];
 		[toolbarItem setMaxSize: [selectionTBView frame].size];
-	}else if([itemIdent isEqual:DrawIdentifier]){
+	} else if([itemIdent isEqual:DrawIdentifier]) {
 		toolbarItem = [[SeaToolbarItem alloc] initWithItemIdentifier:DrawIdentifier];
 		[toolbarItem setView: drawTBView];
 		[toolbarItem setLabel:@"Draw Tools"];
@@ -133,7 +135,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[toolbarItem setMenuFormRepresentation:drawMenu];
 		[toolbarItem setMinSize: [drawTBView frame].size];
 		[toolbarItem setMaxSize: [drawTBView frame].size];
-	}else if([itemIdent isEqual:EffectIdentifier]){
+	} else if([itemIdent isEqual:EffectIdentifier]) {
 		toolbarItem =[[SeaToolbarItem alloc] initWithItemIdentifier:EffectIdentifier];
 		[toolbarItem setView:effectTBView];
 		[toolbarItem setLabel:	@"Effect Tools"];
@@ -141,7 +143,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[toolbarItem setMenuFormRepresentation:effectMenu];
 		[toolbarItem setMinSize: [effectTBView frame].size];
 		[toolbarItem setMaxSize: [effectTBView frame].size];
-	}else if([itemIdent isEqual:TransformIdentifier]){
+	} else if([itemIdent isEqual:TransformIdentifier]) {
 		toolbarItem = [[SeaToolbarItem alloc] initWithItemIdentifier:TransformIdentifier];
 		[toolbarItem setView:transformTBView];
 		[toolbarItem setLabel:@"Transform Tools"];
@@ -149,7 +151,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[toolbarItem setMenuFormRepresentation:transformMenu];
 		[toolbarItem setMinSize: [transformTBView frame].size];
 		[toolbarItem setMaxSize: [transformTBView frame].size];
-	}else if([itemIdent isEqual:ColorsIdentifier]){
+	} else if([itemIdent isEqual:ColorsIdentifier]) {
 		toolbarItem = [[SeaToolbarItem alloc] initWithItemIdentifier:ColorsIdentifier];
 		[toolbarItem setView:colorSelectView];
 		[toolbarItem setLabel:@"Colors"];
@@ -232,11 +234,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			NSToolbarSeparatorItemIdentifier];
 }
 
-- (NSColor *)foreground
-{
-	return foreground;
-}
-
 - (void)setForeground:(NSColor *)color
 {
 	foreground = color;
@@ -247,8 +244,6 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[[[SeaController utilitiesManager] statusUtilityFor:document] updateQuickColor];
 }
 
-@synthesize colorView = colorSelectView;
-
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
 {
 	return YES;
@@ -256,7 +251,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)activate
 {
-	if(tool == -1)
+	if (tool == -1)
 		[self changeToolTo:kRectSelectTool];
 	// Set the document appropriately
 	[colorSelectView setDocument:document];
@@ -267,28 +262,23 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)deactivate
 {
-	int i;
-	
 	[colorSelectView setDocument:document];
-	for (i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
+	for (SeaToolsDefines i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
 		[[toolbox cellWithTag:i] setEnabled:YES];
 	}
 }
 
 - (void)update:(BOOL)full
 {
-	int i;
-	
 	if (full) {
 		/* Disable or enable the tool */
 		if ([[document selection] floating]) {
-			for (i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
+			for (SeaToolsDefines i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
 				[selectionTBView setEnabled:NO forSegment:i];
 			}
 			[selectionMenu setEnabled:NO];
-		}
-		else {
-			for (i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
+		} else {
+			for (SeaToolsDefines i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
 				[selectionTBView setEnabled:YES forSegment:i];
 			}
 			[selectionMenu setEnabled:YES];
@@ -297,14 +287,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[[document docView] setNeedsDisplay:YES];
 		[optionsUtility update];
 		[[SeaController seaHelp] updateInstantHelp:tool];
-
 	}
 	[colorSelectView update];
-}
-
-- (int)tool
-{
-	return tool;
 }
 
 - (IBAction)selectToolUsingTag:(id)sender
@@ -317,7 +301,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[self changeToolTo:[[sender cell] tagForSegment:sender.selectedSegment] % 100];
 }
 
-- (void)changeToolTo:(int)newTool
+- (void)changeToolTo:(SeaToolsDefines)newTool
 {
 	BOOL updateCrop = NO;
 	
@@ -348,10 +332,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 		[self update:YES];
 	}
-	if (updateCrop) [[[SeaController utilitiesManager] infoUtilityFor:document] update];
+	if (updateCrop)
+		[[[SeaController utilitiesManager] infoUtilityFor:document] update];
 }
 
--(void)floatTool
+- (void)floatTool
 {
 	// Show the banner
 	[[document warnings] showFloatBanner];
@@ -360,11 +345,12 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[self changeToolTo: kPositionTool];
 }
 
--(void)anchorTool
+- (void)anchorTool
 {
 	// Hide the banner
 	[[document warnings] hideFloatBanner];
-	if (oldTool != -1) [self changeToolTo: oldTool];
+	if (oldTool != -1)
+		[self changeToolTo: oldTool];
 }
 
 - (void)setEffectEnabled:(BOOL)enable

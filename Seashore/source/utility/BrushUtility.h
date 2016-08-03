@@ -121,11 +121,11 @@
 - (void)setActiveBrushIndex:(NSInteger)index;
 
 /*!
-	@method		brushes
+	@property	brushes
 	@discussion	Returns all the brushes in the currently active group.
 	@result		Returns an array with all the brushes in the currently active
 				group. 
 */
-- (NSArray<SeaBrush*> *)brushes;
+@property (readonly, copy) NSArray<SeaBrush*> *brushes;
 
 @end

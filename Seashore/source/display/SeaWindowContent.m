@@ -6,23 +6,22 @@
 -(void)awakeFromNib
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	dict = @{@(kOptionsBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", optionsBar, @"view", nonOptionsBar, @"nonView", @"above", @"side", @0.0f, @"oldValue", nil],
-			 @(kSidebar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", sidebar, @"view", nonSidebar, @"nonView", @"left", @"side", @0.0f, @"oldValue", nil],
-			 @(kPointInformation): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", pointInformation, @"view", layers, @"nonView", @"below", @"side", @0.0f, @"oldValue", nil],
-			 @(kWarningsBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", warningsBar, @"view", mainDocumentView, @"nonView", @"above", @"side", @0.0f, @"oldValue", nil],
-			 @(kStatusBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", statusBar, @"view", mainDocumentView, @"nonView", @"below", @"side", @0.0f, @"oldValue", nil]};
+	dict = @{@(SeaWindowRegionOptionsBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", optionsBar, @"view", nonOptionsBar, @"nonView", @"above", @"side", @0.0f, @"oldValue", nil],
+			 @(SeaWindowRegionSidebar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", sidebar, @"view", nonSidebar, @"nonView", @"left", @"side", @0.0f, @"oldValue", nil],
+			 @(SeaWindowRegionPointInformation): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", pointInformation, @"view", layers, @"nonView", @"below", @"side", @0.0f, @"oldValue", nil],
+			 @(SeaWindowRegionWarningsBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", warningsBar, @"view", mainDocumentView, @"nonView", @"above", @"side", @0.0f, @"oldValue", nil],
+			 @(SeaWindowRegionStatusBar): [NSMutableDictionary dictionaryWithObjectsAndKeys: @YES, @"visibility", statusBar, @"view", mainDocumentView, @"nonView", @"below", @"side", @0.0f, @"oldValue", nil]};
 	
-	int i;
-	for(i = kOptionsBar; i <= kStatusBar; i++){
+	for (SeaWindowRegion i = SeaWindowRegionOptionsBar; i <= SeaWindowRegionStatusBar; i++) {
 		NSString *key = [NSString stringWithFormat:@"region%ldvisibility", (long)i];
-		if([defaults objectForKey: key] && ![defaults boolForKey:key]){
+		if ([defaults objectForKey: key] && ![defaults boolForKey:key]) {
 			// We need to hide it
 			[self setVisibility: NO forRegion: i];
 		}
 	}
 	
 	// by default, the warning bar should be hidden. we will only show it iff we need it
-	[self setVisibility:NO forRegion:kWarningsBar];
+	[self setVisibility:NO forRegion:SeaWindowRegionWarningsBar];
 }
 
 -(BOOL)visibilityForRegion:(SeaWindowRegion)region
@@ -45,8 +44,8 @@
 	NSView *view = thisDict[@"view"];
 	NSView *nonView = thisDict[@"nonView"];
 	NSString *side = thisDict[@"side"];
+	
 	if (!visibility) {
-		
 		if([side isEqual:@"above"] || [side isEqual:@"below"]){
 			oldValue = [view frame].size.height;
 		}else {
@@ -83,7 +82,7 @@
 		[nonView setNeedsDisplay:YES];
 		
 		thisDict[@"oldValue"] = @(oldValue);
-		[defaults setObject: @"NO" forKey:[NSString stringWithFormat:@"region%ldvisibility", (long)region]];		
+		[defaults setBool: NO forKey:[NSString stringWithFormat:@"region%ldvisibility", (long)region]];
 	} else {
 		NSRect newRect = [view frame];
 		if([side isEqual:@"above"] || [side isEqual:@"below"]){
@@ -112,7 +111,7 @@
 				
 		[nonView setNeedsDisplay:YES];
 		
-		[defaults setObject: @"YES" forKey:[NSString stringWithFormat:@"region%ldvisibility", (long)region]];
+		[defaults setBool: YES forKey:[NSString stringWithFormat:@"region%ldvisibility", (long)region]];
 	}
 	thisDict[@"visibility"] = @(visibility);
 }
@@ -123,9 +122,9 @@
 		NSMutableDictionary *thisDict = dict[@(region)];
 		NSString *side = thisDict[@"side"];
 		NSView *view = thisDict[@"view"];
-		if([side isEqual: @"above"] || [side isEqual: @"below"]){
+		if ([side isEqual: @"above"] || [side isEqual: @"below"]) {
 			return [view frame].size.height;
-		}else{
+		} else {
 			return [view frame].size.width;
 		}
 	}

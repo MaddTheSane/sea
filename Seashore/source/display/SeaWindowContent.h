@@ -2,11 +2,17 @@
 #import "Globals.h"
 
 typedef NS_ENUM(int, SeaWindowRegion) {
-	kOptionsBar,
-	kSidebar,
-	kPointInformation,
-	kStatusBar,
-	kWarningsBar
+	SeaWindowRegionOptionsBar,
+	SeaWindowRegionSidebar,
+	SeaWindowRegionPointInformation,
+	SeaWindowRegionStatusBar,
+	SeaWindowRegionWarningsBar,
+	
+	kOptionsBar DEPRECATED_MSG_ATTRIBUTE("Use SeaWindowRegionOptionsBar instead") NS_SWIFT_UNAVAILABLE("Use .OptionsBar instead") = SeaWindowRegionOptionsBar,
+	kSidebar DEPRECATED_MSG_ATTRIBUTE("Use SeaWindowRegionSidebar instead") NS_SWIFT_UNAVAILABLE("Use .Sidebar instead") = SeaWindowRegionSidebar,
+	kPointInformation DEPRECATED_MSG_ATTRIBUTE("Use SeaWindowRegionPointInformation instead") NS_SWIFT_UNAVAILABLE("Use .PointInformation instead") = SeaWindowRegionPointInformation,
+	kStatusBar DEPRECATED_MSG_ATTRIBUTE("Use SeaWindowRegionStatusBar instead") NS_SWIFT_UNAVAILABLE("Use .StatusBar instead") = SeaWindowRegionStatusBar,
+	kWarningsBar DEPRECATED_MSG_ATTRIBUTE("Use SeaWindowRegionWarningsBar instead") NS_SWIFT_UNAVAILABLE("Use .WarningsBar instead") = SeaWindowRegionWarningsBar,
 };
 
 @class SeaDocument;

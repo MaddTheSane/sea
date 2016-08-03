@@ -11,6 +11,26 @@
 #import "AbstractTool.h"
 #import "SeaWindowContent.h"
 
+// SeaOptions subclasses
+#import "LassoOptions.h"
+#import "PolygonLassoOptions.h"
+#import "PositionOptions.h"
+#import "ZoomOptions.h"
+#import "PencilOptions.h"
+#import "BrushOptions.h"
+#import "BucketOptions.h"
+#import "TextOptions.h"
+#import "EyedropOptions.h"
+#import "RectSelectOptions.h"
+#import "EllipseSelectOptions.h"
+#import "EraserOptions.h"
+#import "SmudgeOptions.h"
+#import "GradientOptions.h"
+#import "WandOptions.h"
+#import "CloneOptions.h"
+#import "CropOptions.h"
+#import "EffectOptions.h"
+
 @implementation OptionsUtility
 
 - (instancetype)init
@@ -65,7 +85,7 @@
 		return [self getOptions:[toolboxUtility tool]];
 }
 
-- (__kindof AbstractOptions*)getOptions:(int)whichTool
+- (__kindof AbstractOptions*)getOptions:(SeaToolsDefines)whichTool
 {
 	switch (whichTool) {
 		case kRectSelectTool:
@@ -122,6 +142,9 @@
 		case kEffectTool:
 			return effectOptions;
 		break;
+			
+		case SeaToolsInvalid:
+			return nil;
 	}
 	
 	return NULL;
@@ -153,20 +176,20 @@
 
 - (IBAction)show:(id)sender
 {
-	[[[document window] contentView] setVisibility:YES forRegion:kOptionsBar];
+	[[[document window] contentView] setVisibility:YES forRegion:SeaWindowRegionOptionsBar];
 }
 
 - (IBAction)hide:(id)sender
 {
-	[[[document window] contentView] setVisibility:NO forRegion:kOptionsBar];
+	[[[document window] contentView] setVisibility:NO forRegion:SeaWindowRegionOptionsBar];
 }
 
 
 - (IBAction)toggle:(id)sender
 {
-	if([self visible]){
+	if (self.visible) {
 		[self hide:sender];
-	}else{
+	} else {
 		[self show:sender];
 	}
 }
@@ -176,9 +199,9 @@
 	[view setNeedsDisplay: YES];
 }
 
-- (BOOL)visible
+- (BOOL)isVisible
 {
-	return [[[document window] contentView] visibilityForRegion: kOptionsBar];
+	return [[[document window] contentView] visibilityForRegion: SeaWindowRegionOptionsBar];
 }
 
 @end

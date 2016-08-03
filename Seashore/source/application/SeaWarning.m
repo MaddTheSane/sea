@@ -18,7 +18,7 @@
 }
 
 
-- (void)addMessage:(NSString *)message level:(int)level
+- (void)addMessage:(NSString *)message level:(SeaWarningImportance)level
 {
 	[appQueue addObject: @{@"message": message, @"importance": @(level)}];
 	[self triggerQueue: NULL];
@@ -27,15 +27,15 @@
 - (void)triggerQueue:(id)key
 {
 	NSMutableArray* queue;
-	if(!key){
+	if (!key) {
 		queue = appQueue;
-	}else{
-		queue = documentQueues[@((long)key)];
+	} else {
+		queue = documentQueues[@((size_t)key)];
 	}
 	// First check to see if we have any messages
-	if(queue && [queue count] > 0){
+	if (queue && [queue count] > 0) {
 		// This is the app modal queue
-		if(!key){
+		if (!key) {
 			while([queue count] > 0){
 				NSDictionary *thisWarning = queue[0];
 				if([thisWarning[@"importance"] intValue] <= [[SeaController seaPrefs] warningLevel]){
@@ -43,10 +43,10 @@
 				}
 				[queue removeObjectAtIndex:0];
 			}
-		}else {
+		} else {
 			// First we need to see if the app has a warning object that
 			// is ready to be used (at init it's not all hooked up)
-			if([(SeaDocument *)key warnings] && [[key warnings] activeWarningImportance] == -1){
+			if ([(SeaDocument *)key warnings] && [[key warnings] activeWarningImportance] == -1) {
 				// Next, pop the object out of the queue and pass to the warnings
 				NSDictionary *thisWarning = queue[0];
 				[[key warnings] setWarning: thisWarning[@"message"] ofImportance: [thisWarning[@"importance"] intValue]];
@@ -56,12 +56,12 @@
 	}
 }
 
-- (void)addMessage:(NSString *)message forDocument:(id)document level:(int)level
+- (void)addMessage:(NSString *)message forDocument:(id)document level:(SeaWarningImportance)level
 {	
-	NSMutableArray* thisDocQueue = documentQueues[@((long)document)];
+	NSMutableArray* thisDocQueue = documentQueues[@((size_t)document)];
 	if(!thisDocQueue){
 		thisDocQueue = [NSMutableArray array];
-		documentQueues[@((long)document)] = thisDocQueue;
+		documentQueues[@((size_t)document)] = thisDocQueue;
 	}
 	[thisDocQueue addObject: @{@"message": message, @"importance": @(level)}];
 	[self triggerQueue: document];

@@ -41,8 +41,6 @@
 
 - (void)awakeFromNib
 {
-	NSInteger yoff, i;
-
 	[super awakeFromNib];
 	
 	// Configure the view
@@ -51,7 +49,7 @@
 	[view setDocumentView:[[BrushView alloc] initWithMaster:self]];
 	[view setBackgroundColor:[NSColor lightGrayColor]];
 	if ([[view documentView] bounds].size.height > 3 * kBrushPreviewSize) {
-		yoff = MIN((activeBrushIndex / kBrushesPerRow) * kBrushPreviewSize, ([[self brushes] count] / kBrushesPerRow - 2) * kBrushPreviewSize);
+		NSInteger yoff = MIN((activeBrushIndex / kBrushesPerRow) * kBrushPreviewSize, ([[self brushes] count] / kBrushesPerRow - 2) * kBrushPreviewSize);
 		[[view contentView] scrollToPoint:NSMakePoint(0, yoff)];
 	}
 	[view reflectScrolledClipView:[view contentView]];
@@ -63,13 +61,13 @@
 	[[brushGroupPopUp itemAtIndex:0] setTag:0];
 	if (customGroups != 0) {
 		[[brushGroupPopUp menu] addItem:[NSMenuItem separatorItem]];
-		for (i = 1; i < customGroups + 1; i++) {
+		for (NSInteger i = 1; i < customGroups + 1; i++) {
 			[brushGroupPopUp addItemWithTitle:groupNames[i]];
 			[[brushGroupPopUp itemAtIndex:[[brushGroupPopUp menu] numberOfItems] - 1] setTag:i];
 		}
 	}
 	[[brushGroupPopUp menu] addItem:[NSMenuItem separatorItem]];
-	for (i = customGroups + 1; i < [groupNames count]; i++) {
+	for (NSInteger i = customGroups + 1; i < [groupNames count]; i++) {
 		[brushGroupPopUp addItemWithTitle:groupNames[i]];
 		[[brushGroupPopUp itemAtIndex:[[brushGroupPopUp menu] numberOfItems] - 1] setTag:i];
 	}
@@ -79,7 +77,7 @@
 	[self setActiveBrushIndex:activeBrushIndex];
 	
 	// Set the window's properties
-	[(InfoPanel *)window setPanelStyle:kVerticalPanelStyle];
+	[window setPanelStyle:kVerticalPanelStyle];
 	
 	[[SeaController utilitiesManager] setBrushUtility: self for:document];
 }
@@ -215,13 +213,13 @@
 
 - (void)setActiveBrushIndex:(NSInteger)index
 {
-	id oldBrush = groups[activeGroupIndex][activeBrushIndex];
-	id newBrush = groups[activeGroupIndex][index];
+	SeaBrush *oldBrush = groups[activeGroupIndex][activeBrushIndex];
+	SeaBrush *newBrush = groups[activeGroupIndex][index];
 	
 	[oldBrush deactivate];
 	activeBrushIndex = index;
 	[brushNameLabel setStringValue:[newBrush name]];
-	[spacingSlider setIntValue:[(SeaBrush*)newBrush spacing]];
+	[spacingSlider setIntValue:[newBrush spacing]];
 	[spacingLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"spacing", @"Spacing: %d%%"), [self spacing]]];
 	[newBrush activate];
 }
