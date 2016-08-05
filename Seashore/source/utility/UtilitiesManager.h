@@ -24,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface UtilitiesManager : NSObject <SSKTerminatable> {
-	
 	// The controller object
 	IBOutlet SeaController *controller;
 	IBOutlet TransparentUtility *transparentUtility;
@@ -43,7 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
 	int optionsChoice;
 	BOOL infoChoice;
 	BOOL colorChoice;
-	
 }
 
 /*!

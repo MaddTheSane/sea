@@ -16,7 +16,6 @@
 */
 
 @interface SeaUtilityPanel : NSPanel <NSWindowDelegate> {
-
 	// Used for window shading
 	CGFloat priorShadeHeight;
 	
@@ -25,7 +24,6 @@
 	
 	// Used for window shading
 	IBOutlet NSView *nullView;
-	
 }
 
 /*!
