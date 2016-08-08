@@ -70,18 +70,16 @@
 
 - (void)executeGrey:(PluginData *)pluginData
 {
-	IntRect selection;
-	int i, j, width, height;
 	unsigned char *overlay, *resdata;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:SeaOverlayBehaviourNormal];
-	selection = [pluginData selection];
+	IntRect selection = [pluginData selection];
 	
 	// Get plug-in data
-	width = [pluginData width];
-	height = [pluginData height];
+	int width = [pluginData width];
+	int height = [pluginData height];
 	overlay = [pluginData overlay];
 	
 	// Run CoreImage effect
@@ -89,15 +87,14 @@
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (j = 0; j < selection.size.height; j++) {
-			for (i = 0; i < selection.size.width; i++) {
+		for (int j = 0; j < selection.size.height; j++) {
+			for (int i = 0; i < selection.size.width; i++) {
 				overlay[(width * (selection.origin.y + j) + selection.origin.x + i) * 2] = resdata[i * 4];
 				overlay[(width * (selection.origin.y + j) + selection.origin.x + i) * 2 + 1] = resdata[i * 4 + 3];
 			}
 		}
-	}
-	else {
-		for (i = 0; i < width * height; i++) {
+	} else {
+		for (int i = 0; i < width * height; i++) {
 			overlay[i * 2] = resdata[i * 4];
 			overlay[i * 2 + 1] = resdata[i * 4 + 3];
 		}
@@ -107,7 +104,7 @@
 - (void)executeColor:(PluginData *)pluginData
 {
 	IntRect selection;
-	int i, width, height;
+	int width, height;
 	unsigned char *resdata, *overlay;
 	
 	// Set-up plug-in
@@ -125,7 +122,7 @@
 
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (i = 0; i < selection.size.height; i++) {
+		for (int i = 0; i < selection.size.height; i++) {
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
 		}
 	} else {
@@ -135,7 +132,6 @@
 
 - (unsigned char *)stripes:(PluginData *)pluginData
 {
-	CIContext *context;
 	CIImage *crop_output, *output;
 	CIFilter *filter;
 	CGImageRef temp_image;
@@ -145,15 +141,14 @@
 	unsigned char *resdata;
 	IntRect selection;
 	IntPoint point, apoint;
-	CIColor *backColorAlpha, *foreColorAlpha;
 	int amount;
 	
 	// Get colors
-	foreColorAlpha = [[CIColor alloc] initWithColor:[pluginData foreColor:YES]];
-	backColorAlpha = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
+	CIColor *foreColorAlpha = [[CIColor alloc] initWithColor:[pluginData foreColor:YES]];
+	CIColor *backColorAlpha = [[CIColor alloc] initWithColor:[pluginData backColor:YES]];
 	
 	// Find core image context
-	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
+	CIContext *context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
 	
 	// Get plug-in data
 	width = [pluginData width];

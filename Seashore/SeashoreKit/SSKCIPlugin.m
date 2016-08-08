@@ -13,7 +13,7 @@
 
 - (int)type
 {
-	return 1;
+	return kPointPlugin;
 }
 
 - (int)points

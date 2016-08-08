@@ -99,7 +99,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 		run()
 	}
 
-	public override func validateMenuItem(menuItem: NSMenuItem?) -> Bool {
+	public override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
 		if let pluginData = seaPlugins?.data {
 			if pluginData.channel == .Alpha {
 				return false

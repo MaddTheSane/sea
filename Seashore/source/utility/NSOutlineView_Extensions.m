@@ -94,7 +94,6 @@
 	} else {
 		[super draggingSession:session endedAtPoint:screenPoint operation:operation];
 	}
-
 }
 
 -(void)highlightSelectionInClipRect:(NSRect)theClipRect

@@ -112,7 +112,7 @@ public final class SwiftHorizStripes: SSKPlugin {
 		success = true;
 	}
 	
-	public override func validateMenuItem(menuItem: AnyObject!) -> Bool {
+	public override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
 		return true
 	}
 }

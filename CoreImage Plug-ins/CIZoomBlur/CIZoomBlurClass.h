@@ -10,10 +10,10 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
-#import "SeaPlugins.h"
+#import <SeashoreKit/SeaPlugins.h>
 #import "PluginData.h"
-#import "SeaWhiteboard.h"
-#import "SSKPlugin.h"
+#import <SeashoreKit/SeaWhiteboard.h>
+#import <SeashoreKit/SSKPlugin.h>
 
 @interface CIZoomBlurClass : SSKPlugin
 {

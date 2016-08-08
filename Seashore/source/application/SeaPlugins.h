@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @property (readonly) BOOL canReapply;
 
-- (BOOL)validateMenuItem:(nullable NSMenuItem*)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @optional
 
@@ -248,7 +248,7 @@ NS_ENUM(int) {
 				The menu item to be validated.
 	@result		YES if the menu item should be enabled, NO otherwise.
 */
-- (BOOL)validateMenuItem:(nullable NSMenuItem*)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end
 
