@@ -218,6 +218,8 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
+			<key>NSDocumentClass</key>
+			<string>SeaDocument</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
