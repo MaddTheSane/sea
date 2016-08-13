@@ -6,7 +6,7 @@
 
 @implementation SVGLayer
 
-- (instancetype)initWithImageRep:(NSBitmapImageRep*)imageRep document:(id)doc spp:(int)lspp
+- (instancetype)initWithImageRep:(NSBitmapImageRep*)imageRep document:(SeaDocument*)doc spp:(int)lspp
 {
 	NSInteger i, bps = [imageRep bitsPerSample], sspp = [imageRep samplesPerPixel];
 	unsigned char *srcPtr = [imageRep bitmapData];

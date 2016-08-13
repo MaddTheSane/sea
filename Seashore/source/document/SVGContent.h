@@ -4,6 +4,7 @@
 
 
 extern IntSize getDocumentSize(const char *path);
+#define SeaUseOldSVGImporterKey @"UseOldSVGApp"
 
 /*!
 	@class		SVGContent

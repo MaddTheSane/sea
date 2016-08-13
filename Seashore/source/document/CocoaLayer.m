@@ -66,7 +66,7 @@
 	}
 	
 	// Unpremultiply the image if required
-	if (hasAlpha && !((format & NSAlphaNonpremultipliedBitmapFormat) >> 1)) {
+	if (hasAlpha && !(format & NSAlphaNonpremultipliedBitmapFormat)) {
 		SeaUnpremultiplyBitmap(spp, data, data, width * height);
 	}
 		
