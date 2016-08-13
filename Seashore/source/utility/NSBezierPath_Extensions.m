@@ -27,8 +27,3 @@
 }
 
 @end
-
-void NSLogRect(NSRect rect)
-{
-	NSLog(@"rect { size { %f, %f}, origin { %f, %f } }", rect.size.width, rect.size.height, rect.origin.x, rect.origin.y);
-}
