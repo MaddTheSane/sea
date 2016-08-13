@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "Rects.h"
 #import "Globals.h"
 
