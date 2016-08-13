@@ -7,10 +7,10 @@
 //
 
 import Cocoa
-import SeashoreKit
+import GIMPCore
 
-final class NewSVGImporter: NSObject {
-	@objc enum NewSVGImporterErrors: Int, ErrorType {
+public final class SVGImporter: NSObject {
+	@objc public enum NewSVGImporterErrors: Int, ErrorType {
 		case CouldNotFindBundle = -1
 		case CouldNotLoadBundle = -2
 		case CouldNotLoadSVG = -3
@@ -18,7 +18,10 @@ final class NewSVGImporter: NSObject {
 		case UnableToCreateBitmap = -5
 		case UnableToCreateLayer = -6
 		
-		var _code: Int {
+		case CouldNotFindApp = -7
+		case CouldNotLoadConvertedPNG = -8
+
+		public var _code: Int {
 			return rawValue
 		}
 		
@@ -56,23 +59,86 @@ final class NewSVGImporter: NSObject {
 	
 	private var nibArr = NSArray()
 	
-	@objc(addToDocument:contentsOfURL:error:) func add(to doc: SeaDocument, contentsOf path: NSURL) throws {
-		trueSize = getDocumentSize(path.fileSystemRepresentation)
-		size = trueSize
+	private func getSVGFromSVGImporterApp(url url: NSURL, to doc: SeaDocument) throws {
 		let fm = NSFileManager.defaultManager()
+		let pathOut: String
+
+		let importerPath: String? = {
+			guard let bundURL = NSBundle.mainBundle().builtInPlugInsURL?.URLByAppendingPathComponent("SVGImporter.app"),
+			importerBundle = NSBundle(URL: bundURL) else {
+				return nil
+			}
+			
+			if let importerInternalPath = importerBundle.executablePath {
+				return importerInternalPath
+			}
+			
+			return nil
+		}()
 		
-		var tmpNibArr: NSArray?
-		NSBundle.mainBundle().loadNibNamed("SVGContent", owner: self, topLevelObjects: &tmpNibArr)
-		if let tmpNibArr = tmpNibArr {
-			nibArr = tmpNibArr
+		if let importerPath = importerPath where fm.fileExistsAtPath(importerPath) {
+			let args: [String]
+			if !fm.fileExistsAtPath("/tmp/seaimport") {
+				try fm.createDirectoryAtPath("/tmp/seaimport", withIntermediateDirectories: true, attributes: nil)
+			}
+			let pathIn = url.path!
+			pathOut = "/tmp/seaimport/\((url.lastPathComponent! as NSString).stringByDeletingPathExtension).png"
+			if (size.width > 0 && size.height > 0 && size.width < kMaxImageSize && size.height < kMaxImageSize) {
+				let widthArg = "\(size.width)"
+				let heightArg = "\(size.height)"
+				args = [pathIn, pathOut, widthArg, heightArg]
+			} else {
+				args = [pathIn, pathOut]
+			}
+			waitPanel.center()
+			waitPanel.makeKeyAndOrderFront(self)
+			let task = NSTask.launchedTaskWithLaunchPath(importerPath, arguments: args)
+			spinner.startAnimation(self)
+			while task.running {
+				NSThread.sleepUntilDate(NSDate(timeIntervalSinceNow: 0.5))
+			}
+			spinner.stopAnimation(self)
+			waitPanel.orderOut(self)
+		} else {
+			throw NewSVGImporterErrors.CouldNotFindApp
 		}
 		
-		scalePanel.center()
-		sizeLabel.stringValue = "\(size.width) x \(size.height)"
-		scaleSlider.integerValue = 2
-		NSApp.runModalForWindow(scalePanel)
-		scalePanel.orderOut(self)
+		// Open the image
+		guard let image = NSImage(byReferencingFile: pathOut)  else {
+			throw NewSVGImporterErrors.CouldNotLoadConvertedPNG
+		}
 		
+		// Form a bitmap representation of the file at the specified path
+		func getImgRep() -> NSBitmapImageRep? {
+			var imageRep: NSImageRep?
+			if let imgRep = image.representations.first {
+				if let imgBitRep = imgRep as? NSBitmapImageRep {
+					imageRep = imgBitRep
+				} else if let tiffData = image.TIFFRepresentation {
+					imageRep = NSBitmapImageRep.imageRepsWithData(tiffData).first
+				}
+			}
+			return imageRep as? NSBitmapImageRep
+		}
+		guard let imgBitmapRep = getImgRep() else {
+			throw NewSVGImporterErrors.UnableToCreateBitmap
+		}
+		
+		// Create the layer
+		guard let layer = CocoaLayer(imageRep: imgBitmapRep, document: doc, spp: doc.contents.samplesPerPixel) else {
+			throw NewSVGImporterErrors.UnableToCreateLayer
+		}
+		
+		// Rename the layer
+		layer.name = (url.lastPathComponent! as NSString).stringByDeletingPathExtension
+		
+		// Add the layer
+		doc.contents.addLayerObject(layer)
+		
+		// Now forget the NSImage
+	}
+	
+	private func getSVGFromSVGImageRep(url url: NSURL, to doc: SeaDocument) throws {
 		func getImageRep() throws -> NSImageRep {
 			var aClass: AnyClass? = NSClassFromString("SVGImageRep")
 			if aClass == nil {
@@ -85,12 +151,11 @@ final class NewSVGImporter: NSObject {
 				aClass = NSClassFromString("SVGImageRep")
 			}
 			
-			guard let toRet = (aClass as? NSImageRep.Type)?.imageRepsWithContentsOfURL(path)?.first else {
+			guard let toRet = (aClass as? NSImageRep.Type)?.imageRepsWithContentsOfURL(url)?.first else {
 				throw NewSVGImporterErrors.CouldNotLoadSVG
 			}
 			return toRet
 		}
-		
 		let svgRep = try getImageRep()
 		let image = NSImage()
 		image.addRepresentation(svgRep)
@@ -110,10 +175,46 @@ final class NewSVGImporter: NSObject {
 		}
 		
 		// Rename the layer
-		layer.name = (path.lastPathComponent! as NSString).stringByDeletingPathExtension
+		layer.name = (url.lastPathComponent! as NSString).stringByDeletingPathExtension
 		
 		// Add the layer
 		doc.contents.addLayerObject(layer)
+	}
+	
+	@objc(addToDocument:contentsOfURL:error:) public func add(to doc: SeaDocument, contentsOf path: NSURL) throws {
+		trueSize = getDocumentSize(path.fileSystemRepresentation)
+		size = trueSize
+		
+		var tmpNibArr: NSArray?
+		NSBundle.mainBundle().loadNibNamed("SVGContent", owner: self, topLevelObjects: &tmpNibArr)
+		if let tmpNibArr = tmpNibArr {
+			nibArr = tmpNibArr
+		}
+		
+		scalePanel.center()
+		sizeLabel.stringValue = "\(size.width) x \(size.height)"
+		scaleSlider.integerValue = 2
+		NSApp.runModalForWindow(scalePanel)
+		scalePanel.orderOut(self)
+		
+		do {
+			if NSUserDefaults.standardUserDefaults().boolForKey(SeaUseOldSVGImporterKey) {
+				try getSVGFromSVGImporterApp(url: path, to: doc)
+			} else {
+				do {
+					try getSVGFromSVGImageRep(url: path, to: doc)
+				} catch NewSVGImporterErrors.CouldNotFindBundle {
+					try getSVGFromSVGImporterApp(url: path, to: doc)
+				} catch {
+					throw error
+				}
+			}
+		} catch NewSVGImporterErrors.CouldNotFindApp {
+			SeaController.seaWarning().addMessage(NSLocalizedString("SVG message", value: "Seashore is unable to open the given SVG file because the SVG Importer is not installed. The installer for this importer can be found on Seashore's website.", comment: "SVG message"), level: .High)
+			throw NewSVGImporterErrors.CouldNotFindApp
+		} catch {
+			throw error
+		}
 		
 		// Position the new layer correctly
 		doc.operations.seaAlignment.centerLayerHorizontally(nil)

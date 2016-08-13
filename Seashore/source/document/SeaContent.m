@@ -21,7 +21,7 @@
 #import "CocoaImporter.h"
 #import "XCFImporter.h"
 #import "XBMImporter.h"
-#import "SVGImporter.h"
+#import <SeashoreKit/SeashoreKit-Swift.h>
 #import "ToolboxUtility.h"
 #import "CloneTool.h"
 #import "PositionTool.h"
