@@ -78,26 +78,6 @@ IntRect IntSumRects(IntRect augendRect, IntRect addendRect)
 	return rect;
 }
 
-IntRect NSRectMakeIntRect(NSRect rect)
-{
-	IntRect newRect;
-	
-	newRect.origin = NSPointMakeIntPoint(rect.origin);
-	newRect.size = NSSizeMakeIntSize(rect.size);
-	
-	return newRect;
-}
-
-NSRect IntRectMakeNSRect(IntRect rect)
-{
-	NSRect newRect;
-	
-	newRect.origin = IntPointMakeNSPoint(rect.origin);
-	newRect.size = IntSizeMakeNSSize(rect.size);
-	
-	return newRect;
-}
-
 NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, CGFloat radians)
 {
 	if(radians == 0.0)

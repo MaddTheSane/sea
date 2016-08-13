@@ -25,6 +25,9 @@ extension IntPoint: Equatable {
 }
 
 extension IntPoint {
+	/// Given an `NSPoint`, makes an `IntPoint` with similar values 
+	/// (fields are rounded down if necessary).
+	/// - parameter point: The `NSPoint` to convert.
 	public init(NSPoint point: Foundation.NSPoint) {
 		x = Int32(floor(point.x))
 		y = Int32(floor(point.y))
@@ -40,6 +43,9 @@ extension IntSize: Equatable {
 }
 
 extension IntSize {
+	/// Given an `NSSize`, makes an `IntSize` with similar values 
+	/// (fields are rounded up if necessary).
+	/// - parameter size: The `NSSize` to convert.
 	public init(NSSize size: Foundation.NSSize) {
 		width = Int32(ceil(size.width))
 		height = Int32(ceil(size.height))

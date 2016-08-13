@@ -286,13 +286,21 @@ extern IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
 
 /*!
 	@function	NSRectMakeIntRect
-	@discussion	Given an \c NSRect makes an \c IntRect with similar values,  the
-				\c IntRect will always exceed the NSRect in size.
+	@discussion	Given an <code>NSRect</code>, makes an \c IntRect with similar values.  The
+				\c IntRect will always exceed the \c NSRect in size.
 	@param		rect
 				The \c NSRect to convert.
-	@result		Returns an \c IntRect at least the size of NSRect.
+	@result		Returns an \c IntRect at least the size of <code>NSRect</code>.
 */
-extern IntRect NSRectMakeIntRect(NSRect rect);
+static inline IntRect NSRectMakeIntRect(NSRect rect)
+{
+	IntRect newRect;
+	
+	newRect.origin = NSPointMakeIntPoint(rect.origin);
+	newRect.size = NSSizeMakeIntSize(rect.size);
+	
+	return newRect;
+}
 
 /*!
 	@function	IntRectMakeNSRect
@@ -301,7 +309,15 @@ extern IntRect NSRectMakeIntRect(NSRect rect);
 				The \c IntRect to convert.
 	@result		Returns an \c NSRect with similar values to the IntRect.
 */
-extern NSRect IntRectMakeNSRect(IntRect rect);
+static inline NSRect IntRectMakeNSRect(IntRect rect)
+{
+	NSRect newRect;
+	
+	newRect.origin = IntPointMakeNSPoint(rect.origin);
+	newRect.size = IntSizeMakeNSSize(rect.size);
+	
+	return newRect;
+}
 
 /*!
 	@function	NSPointRotateNSPoint
