@@ -1,16 +1,6 @@
 #import "BrushDocument.h"
+#include "GimpBrush.h"
 
-typedef struct _BrushHeader {
-  unsigned int   header_size;  /*  header_size = sizeof (BrushHeader) + brush name  */
-  unsigned int   version;      /*  brush file version #  */
-  unsigned int   width;        /*  width of brush  */
-  unsigned int   height;       /*  height of brush  */
-  unsigned int   bytes;        /*  depth of brush in bytes */
-  unsigned int   magic_number; /*  GIMP brush magic number  */
-  unsigned int   spacing;      /*  brush spacing  */
-} BrushHeader;
-
-#define GBRUSH_MAGIC    (('G' << 24) + ('I' << 16) + ('M' << 8) + ('P' << 0))
 #define window [self windowForSheet]
 #define int_mult(a,b,t)  ((t) = (a) * (b) + 0x80, ((((t) >> 8) + (t)) >> 8))
 

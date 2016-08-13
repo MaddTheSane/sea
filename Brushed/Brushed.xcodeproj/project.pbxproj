@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		554E65911D5FA9D100F2DF77 /* BrushDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554E65901D5FA9D100F2DF77 /* BrushDocument.swift */; };
 		55909F0E18D000EB00F43F90 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909F1018D000EB00F43F90 /* MainMenu.xib */; };
 		55909F1318D0010700F43F90 /* BrushDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909F1518D0010700F43F90 /* BrushDocument.xib */; };
 		A898E52709BEFCA00075C7AB /* BrushDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = A84A94EA043DB32500A80207 /* BrushDocument.h */; };
@@ -28,6 +29,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		554E658F1D5FA9D100F2DF77 /* Brushed-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Brushed-Bridging-Header.h"; sourceTree = "<group>"; };
+		554E65901D5FA9D100F2DF77 /* BrushDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrushDocument.swift; sourceTree = "<group>"; };
+		554E65921D5FAA9F00F2DF77 /* GimpBrush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GimpBrush.h; sourceTree = "<group>"; };
 		5596973E194F799B0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		5596973F194F79A60068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BrushDocument.xib; sourceTree = "<group>"; };
 		A80D889E043EE40D00A80207 /* BrushView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BrushView.h; sourceTree = "<group>"; };
@@ -61,12 +65,14 @@
 			children = (
 				A80D889E043EE40D00A80207 /* BrushView.h */,
 				A80D889F043EE40D00A80207 /* BrushView.m */,
+				554E65901D5FA9D100F2DF77 /* BrushDocument.swift */,
 				A84A94EA043DB32500A80207 /* BrushDocument.h */,
 				A84A94EB043DB32500A80207 /* BrushDocument.m */,
 				A865217604400768005BE329 /* BrushedController.h */,
 				A865217704400768005BE329 /* BrushedController.m */,
 				A89B63D504403A9E00D5D43C /* BrushedDocumentController.h */,
 				A89B63D604403A9E00D5D43C /* BrushedDocumentController.m */,
+				554E658F1D5FA9D100F2DF77 /* Brushed-Bridging-Header.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -103,6 +109,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				554E65921D5FAA9F00F2DF77 /* GimpBrush.h */,
 				A84A94EE043DB36200A80207 /* Globals.h */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -216,6 +223,7 @@
 				A898E53109BEFCA00075C7AB /* main.m in Sources */,
 				A898E53209BEFCA00075C7AB /* BrushDocument.m in Sources */,
 				A898E53309BEFCA00075C7AB /* BrushView.m in Sources */,
+				554E65911D5FA9D100F2DF77 /* BrushDocument.swift in Sources */,
 				A898E53409BEFCA00075C7AB /* BrushedController.m in Sources */,
 				A898E53509BEFCA00075C7AB /* BrushedDocumentController.m in Sources */,
 			);
@@ -254,6 +262,7 @@
 		A898E53909BEFCA00075C7AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -264,8 +273,11 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.brushed;
 				PRODUCT_NAME = Brushed;
+				SWIFT_OBJC_BRIDGING_HEADER = "Brushed-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -273,6 +285,7 @@
 		A898E53A09BEFCA00075C7AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
@@ -283,8 +296,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.brushed;
 				PRODUCT_NAME = Brushed;
+				SWIFT_OBJC_BRIDGING_HEADER = "Brushed-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

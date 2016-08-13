@@ -12,8 +12,7 @@
 
 #define INT_MULT(a,b,t)  ((t) = (a) * (b) + 0x80, ((((t) >> 8) + (t)) >> 8))
 
-// Premultiplies the alpha channel of an image - destPtr's memory may intersect srcPtr's
-
+/// Premultiplies the alpha channel of an image - destPtr's memory may intersect srcPtr's
 static inline void premultiplyAlpha(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length)
 {
 	int i, j, alphaPos, temp;
@@ -38,8 +37,7 @@ static inline void premultiplyAlpha(int spp, unsigned char *destPtr, unsigned ch
 	}
 }
 
-// Unpremultiplies the alpha channel of an image - destPtr's memory may intersect srcPtr's
-
+/// Unpremultiplies the alpha channel of an image - destPtr's memory may intersect srcPtr's
 static inline void SeaUnpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
 {
 	int i, j, alphaPos, newValue;
