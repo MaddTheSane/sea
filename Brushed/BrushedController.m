@@ -1,5 +1,6 @@
 #import "BrushedController.h"
 #import "BrushDocument.h"
+#import "Brushed-Swift.h"
 
 #define document [[NSDocumentController sharedDocumentController] currentDocument]
 
@@ -22,7 +23,7 @@
 	
 	// Copy the image from the pasteboard
 	if (dataType) {
-		[document changeImage:[NSBitmapImageRep imageRepWithData:[pasteboard dataForType:dataType]]];
+		[document changeImage:[NSBitmapImageRep imageRepWithData:[pasteboard dataForType:dataType]] error:NULL];
 	}
 }
 

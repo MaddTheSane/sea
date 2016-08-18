@@ -5,3 +5,4 @@
 #include "GimpBrush.h"
 #import "BrushView.h"
 #import "BrushDocument.h"
+#import "ImgRepWrappers.h"

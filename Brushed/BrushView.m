@@ -1,5 +1,6 @@
 #import "BrushView.h"
 #import "BrushDocument.h"
+#import "Brushed-Swift.h"
 
 @implementation BrushView
 
