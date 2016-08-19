@@ -217,8 +217,8 @@ public final class SVGImporter: NSObject {
 		}
 		
 		// Position the new layer correctly
-		doc.operations.seaAlignment.centerLayerHorizontally(nil)
-		doc.operations.seaAlignment.centerLayerVertically(nil)
+		doc.operations!.seaAlignment.centerLayerHorizontally(nil)
+		doc.operations!.seaAlignment.centerLayerVertically(nil)
 	}
 	
 	/// Closes the current modal dialog.

@@ -106,8 +106,8 @@
 			[[self stringValue] drawInRect:cellFrame withAttributes:attrs];
 		}
 		
-		[image drawAtPoint:imageFrame.origin fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
-	}else{
+		[image drawInRect:NSMakeRect(imageFrame.origin.x, imageFrame.origin.y - imageSize.height, imageSize.width, imageSize.height) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
+	} else {
 		[super drawWithFrame:cellFrame inView:controlView];
 	}
 }

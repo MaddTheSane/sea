@@ -22,6 +22,8 @@
 @class SeaWarning;
 @class SeaView;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
 	@class		SeaDocument
 	@abstract	Represents a single Seashore document.
@@ -32,13 +34,13 @@
 */
 @interface SeaDocument : NSDocument <NSWindowDelegate>
 {
-	// The selection manager for this document
+	/// The selection manager for this document
 	SeaSelection *selection;
 	
-	// An outlet to the view associated with this document
+	/// An outlet to the view associated with this document
 	IBOutlet NSScrollView *view;
 	
-	// An outlet to the window associated with this document
+	/// An outlet to the window associated with this document
 	IBOutlet NSWindow *docWindow;
 	
 	// The exporters
@@ -49,49 +51,48 @@
 	IBOutlet TIFFExporter *tiffExporter;
 	IBOutlet XCFExporter *xcfExporter;
 	
-	// An array of all possible exporters
+	/// An array of all possible exporters
 	NSArray<id<AbstractExporter>> *exporters;
 	
-	// The view to attach to the save panel
+	/// The view to attach to the save panel
 	IBOutlet NSView *accessoryView;
 	
-	// A pop-up menu of all possible exporters
+	/// A pop-up menu of all possible exporters
 	IBOutlet NSPopUpButton *exportersPopUp;
 	
-	// The button showing the options for the exporter
+	/// The button showing the options for the exporter
 	IBOutlet NSButton *optionsButton;
 	
-	// A summary of the export options
+	/// A summary of the export options
 	IBOutlet id optionsSummary;
 	
-	// The Layer Data Source
-	IBOutlet LayerDataSource *dataSource;
+	/// The Layer Data Source
+	//IBOutlet LayerDataSource *dataSource;
 	
-	// The unique ID for layer
+	/// The unique ID for layer
 	int uniqueLayerID;
 	
-	// The unique ID for floating layer
+	/// The unique ID for floating layer
 	int uniqueFloatingLayerID;
 	
-	// The unique ID for this document (sometimes used)
+	/// The unique ID for this document (sometimes used)
 	int uniqueDocID;
 	
-	// The document's measure style
+	/// The document's measure style
 	int measureStyle;
 	
-	// Is the document locked?
+	/// Is the document locked?
 	BOOL locked;
 	
-	// Is the document initing from the pasteboard or plug-in?
+	/// Is the document initing from the pasteboard or plug-in?
 	int specialStart;
 	
 	// File types with Cocoa can be difficult
 	BOOL restoreOldType;
 	NSString *oldType;
 	
-	// Is the file the current version?
+	/// Is the file the current version?
 	BOOL current;
-	
 }
 
 /*!
@@ -147,7 +148,7 @@
 	@param		sender
 				Ignored.
 */
-- (IBAction)saveDocument:(id)sender;
+- (IBAction)saveDocument:(nullable id)sender;
 
 /*!
 	@method		saveDocumentAs:
@@ -155,7 +156,7 @@
 	@param		sender
 				Ignored.
 */
-- (IBAction)saveDocumentAs:(id)sender;
+- (IBAction)saveDocumentAs:(nullable id)sender;
 
 // GATEWAY METHODS
 
@@ -521,7 +522,7 @@
 	@param		contextInfo
 				The pointer to pass to the callback method.
 */
-- (void)runModalSavePanelForSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo;
+- (void)runModalSavePanelForSaveOperation:(NSSaveOperationType)saveOperation delegate:(nullable id)delegate didSaveSelector:(nullable SEL)didSaveSelector contextInfo:(nullable void *)contextInfo;
 
 /*!
 	@method		document:didSave:contextInfo:
@@ -550,9 +551,11 @@
 - (NSScrollView *)scrollView;
 
 /*!
-	@method		dataSource
+	@property	dataSource
 	@result		Returns the data source used by the layers view
 */
-- (LayerDataSource*) dataSource;
+@property (weak) IBOutlet LayerDataSource *dataSource;
 
 @end
+
+NS_ASSUME_NONNULL_END

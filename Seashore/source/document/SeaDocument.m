@@ -55,6 +55,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 @synthesize textureExporter;
 @synthesize uniqueDocID;
 @synthesize selection;
+@synthesize dataSource;
 
 - (instancetype)init
 {
@@ -179,7 +180,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	specialStart = kPlugInStart;
 
 	// Set the measure style
-	measureStyle = [(SeaPrefs *)[SeaController seaPrefs] newUnits];
+	measureStyle = [[SeaController seaPrefs] newUnits];
 
 	// Increment change count
 	[self updateChangeCount:NSChangeDone];
@@ -633,11 +634,6 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 - (NSScrollView *)scrollView
 {
 	return (NSScrollView *)view;
-}
-
-- (id)dataSource
-{
-	return dataSource;
 }
 
 @end

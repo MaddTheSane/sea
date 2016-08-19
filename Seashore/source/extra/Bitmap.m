@@ -332,7 +332,7 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 				rotate_bytes(pbitmap, i * ispp * 2, i * ispp * 2 - 1);
 			}
 		}
-		iformat = iformat & ~(kAlphaFirstFormat);
+		iformat &= ~(kAlphaFirstFormat);
 	}
 	
 	// Convert inverted gray color space

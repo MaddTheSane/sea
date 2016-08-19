@@ -62,7 +62,7 @@
 	}
 	
 	// Rename the layer
-	[layer setName:[[NSString alloc] initWithString:[[path lastPathComponent] stringByDeletingPathExtension]]];
+	[layer setName:[[path lastPathComponent] stringByDeletingPathExtension]];
 	
 	// Add the layer
 	[[doc contents] addLayerObject:layer];

@@ -108,11 +108,17 @@
 + (SeaWarning *)seaWarning;
 
 #if __has_feature(objc_class_property)
+/// The instance of utilitiesManager
 @property (class, readonly, strong) UtilitiesManager *utilitiesManager;
+/// The instance of SeaPlugins
 @property (class, readonly, strong) SeaPlugins *seaPlugins;
+/// The instance of SeaPrefs
 @property (class, readonly, strong) SeaPrefs *seaPrefs;
+/// The instance of SeaProxy
 @property (class, readonly, strong) SeaProxy *seaProxy;
+/// The instance of SeaHelp
 @property (class, readonly, strong) SeaHelp *seaHelp;
+/// The instance of SeaWarning
 @property (class, readonly, strong) SeaWarning *seaWarning;
 #endif
 
