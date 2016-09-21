@@ -4,6 +4,7 @@
 #import "SeaTools.h"
 #import "PluginClass.h"
 #import "InfoPanel.h"
+#import "EffectTool.h"
 
 @implementation EffectOptions
 

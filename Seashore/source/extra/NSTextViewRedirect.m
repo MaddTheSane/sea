@@ -5,6 +5,7 @@
 #import "SeaTools.h"
 #import "TextTool.h"
 #import "SeaDocument.h"
+#import "TextOptions.h"
 
 @implementation NSTextViewRedirect
 

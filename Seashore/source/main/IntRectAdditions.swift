@@ -70,7 +70,7 @@ extension IntRect: Equatable {
 		return IntConstrainRect(littleRect, self)
 	}
 	
-	public func offset(x x: Int32, y: Int32) -> IntRect {
+	public func offset(x: Int32, y: Int32) -> IntRect {
 		var tmpRect = self
 		tmpRect.offsetInPlace(x: x, y: y)
 		return tmpRect
@@ -79,7 +79,7 @@ extension IntRect: Equatable {
 	/// Offsets the current `IntRect` by the specified coordinates.
 	/// - parameter x: The amount by which to offset the x coordinates.
 	/// - parameter y: The amount by which to offset the y coordinates.
-	public mutating func offsetInPlace(x x: Int32, y: Int32) {
+	public mutating func offsetInPlace(x: Int32, y: Int32) {
 		IntOffsetRect(&self, x, y)
 	}
 	
@@ -88,7 +88,7 @@ extension IntRect: Equatable {
 	/// used by QuickDraw or `NSPointInRect()`.
 	/// - parameter point: The point to be tested.
 	/// - returns: `true` if the point lies within the rectangle, `false` otherwise.
-	public func contains(point point: IntPoint) -> Bool {
+	public func contains(point: IntPoint) -> Bool {
 		return IntPointInRect(point, self)
 	}
 	
@@ -102,7 +102,7 @@ extension IntRect: Equatable {
 	}
 	
 	//extern IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
-	public func sum(addendRect: IntRect) -> IntRect {
+	public func sum(_ addendRect: IntRect) -> IntRect {
 		return IntSumRects(self, addendRect)
 	}
 }

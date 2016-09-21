@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @property (readonly) BOOL canReapply;
 
-- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem NS_SWIFT_NAME(validateMenuItem(_:));
 
 @optional
 

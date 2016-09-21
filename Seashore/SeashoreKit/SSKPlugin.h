@@ -85,7 +85,7 @@
  *					The menu item to be validated.
  * @result		YES if the menu item should be enabled, NO otherwise.
  */
-- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem NS_SWIFT_NAME(validateMenuItem(_:));
 
 /*!
  * @method		determineContentBorders

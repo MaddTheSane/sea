@@ -10,6 +10,7 @@
 #import "UtilitiesManager.h"
 #import "OptionsUtility.h"
 #import "CIAffineTransformClass.h"
+#import "EffectOptions.h"
 
 extern BOOL useAltiVec;
 

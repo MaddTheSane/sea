@@ -6358,9 +6358,13 @@
 					};
 					55472B7D1C6EDCCA0065A852 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 					555F598C1D373CEC0085AC96 = {
 						CreatedOnToolsVersion = 7.3.1;
+					};
+					A8EDF05C078959C80022BB31 = {
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -9895,6 +9899,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.SeashoreKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -9925,6 +9930,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.SeashoreKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -12500,6 +12506,7 @@
 				SKIP_INSTALL = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "source/main/Seashore-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -12525,6 +12532,7 @@
 				PRODUCT_NAME = Seashore;
 				SKIP_INSTALL = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "source/main/Seashore-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
