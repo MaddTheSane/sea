@@ -20,7 +20,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 	}
 	
 	public var groupName: String {
-		return NSBundle(forClass: self.dynamicType).localizedStringForKey("groupName", value: "Color Effect", table: nil)
+		return Bundle(for: type(of: self)).localizedString(forKey: "groupName", value: "Color Effect", table: nil)
 	}
 	
 	public var canReapply: Bool {
@@ -34,7 +34,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 	public func run() {
 		let pluginData = seaPlugins!.data
 		pluginData.overlayOpacity = 255
-		pluginData.overlayBehaviour = .Replacing
+		pluginData.overlayBehaviour = .replacing
 		let selection = pluginData.selection
 		let width = pluginData.width
 		let data = pluginData.data
@@ -59,7 +59,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 				kColorSyncTransformTag.takeUnretainedValue() as String: kColorSyncTransformPCSToDevice.takeUnretainedValue() as NSString]
 		]
 		
-		let cw = ColorSyncTransformCreate(profSeq, nil).takeRetainedValue()
+		let cw = ColorSyncTransformCreate(profSeq as NSArray, nil).takeRetainedValue()
 		
 		for j in selection.origin.y..<(selection.origin.y + selection.size.height)  {
 			let pos = j * width + selection.origin.x;
@@ -67,28 +67,28 @@ final public class CMYK: NSObject, SeaPluginClass {
 			var srcLayout: ColorSyncDataLayout = ColorSyncDataLayout(kColorSyncByteOrderDefault);
 			let srcDepth = kColorSync8BitInteger;
 			var srcRowBytes: Int
-			var srcBytes: UnsafeMutablePointer<Void> = nil
-			let dstBytes = UnsafeMutablePointer<Void>(overlay.advancedBy(Int(pos) * 4))
+			var srcBytes: UnsafeMutableRawPointer? = nil
+			let dstBytes = UnsafeMutableRawPointer(overlay?.advanced(by: Int(pos) * 4))
 			
-			if channel == .Primary {
-				srcBytes = UnsafeMutablePointer<Void>(data.advancedBy(Int(pos) * 3))
+			if channel == .primary {
+				srcBytes = UnsafeMutableRawPointer(data?.advanced(by: Int(pos) * 3))
 				srcRowBytes = Int(selection.size.width) * 3;
 				srcLayout |= kColorSyncAlphaNone.rawValue;
 			} else {
-				srcBytes = UnsafeMutablePointer<Void>(data.advancedBy(Int(pos) * 4))
+				srcBytes = UnsafeMutableRawPointer(data?.advanced(by: Int(pos) * 4))
 				srcRowBytes = Int(selection.size.width) * 4;
 				srcLayout |= kColorSyncAlphaLast.rawValue;
 			}
 			
 			ColorSyncTransformConvert(cw, Int(selection.size.width), 1, dstBytes, kColorSync8BitInteger, srcLayout, srcRowBytes, srcBytes, srcDepth, srcLayout, srcRowBytes, nil);
 			
-			for i in (0..<selection.size.width).reverse() {
-				if channel == .Primary {
-					overlay[Int(pos + i) * 4 + 3] = 255;
+			for i in (0..<selection.size.width).reversed() {
+				if channel == .primary {
+					overlay?[Int(pos + i) * 4 + 3] = 255;
 				} else {
-					overlay[Int(pos + i) * 4 + 3] = data[Int(pos + i) * 4 + 3];
+					overlay?[Int(pos + i) * 4 + 3] = data![Int(pos + i) * 4 + 3];
 				}
-				replace[Int(pos + i)] = 255;
+				replace?[Int(pos + i)] = 255;
 			}
 		}
 		
@@ -99,9 +99,9 @@ final public class CMYK: NSObject, SeaPluginClass {
 		run()
 	}
 
-	public override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+	public override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		if let pluginData = seaPlugins?.data {
-			if pluginData.channel == .Alpha {
+			if pluginData.channel == .alpha {
 				return false
 			}
 			
