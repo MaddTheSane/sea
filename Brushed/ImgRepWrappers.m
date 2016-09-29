@@ -41,18 +41,3 @@
 }
 
 @end
-
-
-NSBitmapImageRep *bitmapImageRepFromDataWithError(NSData *data, NSError **error)
-{
-	NSBitmapImageRep *imgRep;
-	
-	return imgRep;
-}
-
-NSBitmapImageRep *bitmapImageRepFromURLWithError(NSURL *url, NSError **error)
-{
-	NSBitmapImageRep *imgRep;
-	
-	return imgRep;
-}

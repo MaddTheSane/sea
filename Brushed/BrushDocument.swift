@@ -148,10 +148,6 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 				var bleh = unsafeBitCast(thePtr, to: Optional<UnsafeMutablePointer<UInt8>>.self)
 				return NSBitmapImageRep(bitmapDataPlanes: &bleh, pixelsWide: Int(size.width), pixelsHigh: Int(size.height), bitsPerSample: 8, samplesPerPixel: 1, hasAlpha: false, isPlanar: false, colorSpaceName: NSCalibratedWhiteColorSpace, bytesPerRow: Int(size.width), bitsPerPixel: 8)!
 			})
-			//thePtr.withMemoryRebound(to: UnsafeMutablePointer<UInt8>.self, capacity:1) {
-			//
-			//}
-			//tempRep = NSBitmapImageRep(bitmapDataPlanes: tmpWhitePtr, pixelsWide: Int(size.width), pixelsHigh: Int(size.height), bitsPerSample: 8, samplesPerPixel: 1, hasAlpha: false, isPlanar: false, colorSpaceName: NSCalibratedWhiteColorSpace, bytesPerRow: Int(size.width), bitsPerPixel: 8)!
 		}
 		
 		// Wrap it up in an NSImage
@@ -209,7 +205,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		}()
 		
 		// Allow the undo
-		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoImageTo(curUndoPos)
+		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoImage(to: curUndoPos)
 		
 		// Replace with appropriate values
 		usePixmap = isRGB;
@@ -279,7 +275,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		if name != nameTextField.stringValue {
 			
 			// Allow the undo
-			(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoNameTo(name)
+			(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoName(to: name)
 			
 			// Store new name and remember last names for undo
 			name = nameTextField.stringValue
@@ -291,7 +287,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	@IBAction func changeSpacing(_ sender: AnyObject!) {
 		// Allow the undo
 		if NSApp.currentEvent?.type == .leftMouseDown {
-			(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoSpacingTo(spacing)
+			(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoSpacing(to: spacing)
 		}
 		
 		// Adjust the spacing
@@ -339,12 +335,12 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		// Check version compatibility
 		var versionGood = (header.version == 2 && header.magic_number == GBRUSH_MAGIC);
 		versionGood = versionGood || (header.version == 1);
-		if (!versionGood) {
+		if !versionGood {
 			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
 		}
 
 		// Accomodate version 1 brushes (no spacing)
-		if (header.version == 1) {
+		if header.version == 1 {
 			let offset = file.offsetInFile - 8
 			file.seek(toFileOffset: offset)
 			header.header_size += 8;
@@ -405,9 +401,9 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Undoes the image to that which is stored by a given undo record
-	func undoImageTo(_ index: Int) {
+	@objc(undoImageTo:) func undoImage(to index: Int) {
 		// Allow the redo
-		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoImageTo(curUndoPos)
+		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoImage(to: curUndoPos)
 		
 		// Restore image from undo record
 		pixmap = undoRecords[index].pixmap;
@@ -426,9 +422,9 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Undoes the name to a given string
-	func undoNameTo(_ string: String) {
+	@objc(undoNameTo:) func undoName(to string: String) {
 		// Allow the redo
-		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoNameTo(name)
+		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoName(to: name)
 		
 		// Set the new name
 		name = string;
@@ -436,9 +432,9 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Undoes the spacing to a given value
-	func undoSpacingTo(_ value: Int32) {
+	@objc(undoSpacingTo:) func undoSpacing(to value: Int32) {
 		// Allow the redo
-		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoSpacingTo(spacing)
+		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoSpacing(to: spacing)
 		
 		// Adjust the spacing
 		spacing = value;
@@ -466,7 +462,6 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		header.spacing = UInt32(spacing).bigEndian
 		
 		// Write the header
-		//Data(
 		var toWrite = Data(bytes: &header, count: MemoryLayout<BrushHeader>.size)
 		file.write(toWrite)
 		
