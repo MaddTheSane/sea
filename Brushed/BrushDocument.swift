@@ -12,43 +12,44 @@ extension String {
 	/// Creates a new `String` with the contents of `self`
 	/// up to `len` UTF-8 characters long, truncating incomplete
 	/// Swift characters at the end.
-	private func substringWithLength(utf8 len: Int) -> String {
+	fileprivate func substringWithLength(utf8 len: Int) -> String {
 		let ourUTF = utf8
 		guard ourUTF.count > len else {
 			return self
 		}
-		let from8 = ourUTF.startIndex
-		let to8 = from8.advancedBy(len, limit: ourUTF.endIndex)
-		if let to = String.Index(to8, within: self) {
-			return self[startIndex ..< to]
+		var pref = ourUTF.prefix(len)
+		var toRet = String(pref)
+		var len2 = len
+		while len2 > 0 {
+			if let toRet = toRet {
+				return toRet
+			}
+			len2 -= 1
+			pref = ourUTF.prefix(len2)
+			toRet = String(pref)
 		}
 		
-		//Oops, we ran into the middle of a code point!
-		let stripped = ourUTF[from8 ..< to8]
-		var preScalar = String.UnicodeScalarView()
-		// Stopping on error because there only error would be cut-off unicode scalars
-		transcode(UTF8.self, UTF32.self, stripped.generate(), { preScalar.append(UnicodeScalar($0)) }, stopOnError: true)
-		
-		return String(preScalar)
+		return ""
 	}
+	
 }
 //#define int_mult(a,b,t)  ((t) = (a) * (b) + 0x80, ((((t) >> 8) + (t)) >> 8))
 
-private func int_mult(a: UInt8, _ b: UInt8) -> UInt8 {
+private func int_mult(_ a: UInt8, _ b: UInt8) -> UInt8 {
 	let t = Int(a) * Int(b) + 0x80
 	return UInt8((((t) >> 8) + (t)) >> 8)
 }
 
 class BrushDocument: NSDocument, NSWindowDelegate {
 	/// A grayscale mask of the brush
-	private var mask: UnsafeMutablePointer<UInt8> = nil
+	fileprivate var mask: UnsafeMutablePointer<UInt8>? = nil
 	
 	/// A coloured pixmap of the brush (RGBA)
-	private var pixmap: UnsafeMutablePointer<UInt8> = nil
+	fileprivate var pixmap: UnsafeMutablePointer<UInt8>? = nil
 	
 	// All previous bitmaps (for undos)
-	private var undoRecords = [BitmapUndo]()
-	private var curUndoPos = 0
+	fileprivate var undoRecords = [BitmapUndo]()
+	fileprivate var curUndoPos = 0
 	
 	/// The spacing between brush strokes
 	dynamic var spacing: Int32 = 25 {
@@ -58,7 +59,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// The width and height of the brush
-	private var size: (width: Int32, height: Int32) = (0, 0) {
+	fileprivate var size: (width: Int32, height: Int32) = (0, 0) {
 		didSet {
 			dimensionsLabel?.stringValue = "\(size.width) x \(size.height)"
 		}
@@ -68,10 +69,10 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	dynamic var name = "Untitled";
 	
 	/// A memory of all past names for the undo manager
-	private var pastNames = ["Untitled"];
+	fileprivate var pastNames = ["Untitled"];
 	
 	/// Do we use the pixmap or the mask?
-	private var usePixmap = false
+	fileprivate var usePixmap = false
 
 	/// The view displaying the brush
 	@IBOutlet weak var view: BrushView!
@@ -106,7 +107,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 				free(record.pixmap)
 			}
 		}
-		undoRecords.removeAll(keepCapacity: false)
+		undoRecords.removeAll(keepingCapacity: false)
 	}
 
 	override func awakeFromNib() {
@@ -143,10 +144,14 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 			var tmpWhite = tempBlack.map({ (blackComp) -> UInt8 in
 				return blackComp ^ 0xff
 			})
-			let tmpWhitePtr = withUnsafeMutablePointer(&tmpWhite, { (thePtr) -> UnsafeMutablePointer<UnsafeMutablePointer<UInt8>> in
-				return UnsafeMutablePointer<UnsafeMutablePointer<UInt8>>(thePtr)
+			tempRep = withUnsafeMutablePointer(to: &tmpWhite, { (thePtr) -> NSBitmapImageRep in
+				var bleh = unsafeBitCast(thePtr, to: Optional<UnsafeMutablePointer<UInt8>>.self)
+				return NSBitmapImageRep(bitmapDataPlanes: &bleh, pixelsWide: Int(size.width), pixelsHigh: Int(size.height), bitsPerSample: 8, samplesPerPixel: 1, hasAlpha: false, isPlanar: false, colorSpaceName: NSCalibratedWhiteColorSpace, bytesPerRow: Int(size.width), bitsPerPixel: 8)!
 			})
-			tempRep = NSBitmapImageRep(bitmapDataPlanes: tmpWhitePtr, pixelsWide: Int(size.width), pixelsHigh: Int(size.height), bitsPerSample: 8, samplesPerPixel: 1, hasAlpha: false, isPlanar: false, colorSpaceName: NSCalibratedWhiteColorSpace, bytesPerRow: Int(size.width), bitsPerPixel: 8)!
+			//thePtr.withMemoryRebound(to: UnsafeMutablePointer<UInt8>.self, capacity:1) {
+			//
+			//}
+			//tempRep = NSBitmapImageRep(bitmapDataPlanes: tmpWhitePtr, pixelsWide: Int(size.width), pixelsHigh: Int(size.height), bitsPerSample: 8, samplesPerPixel: 1, hasAlpha: false, isPlanar: false, colorSpaceName: NSCalibratedWhiteColorSpace, bytesPerRow: Int(size.width), bitsPerPixel: 8)!
 		}
 		
 		// Wrap it up in an NSImage
@@ -169,7 +174,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 
 	/// Adjust the image of the brush
-	func changeImage(newImage: NSBitmapImageRep!) throws {
+	func changeImage(_ newImage: NSBitmapImageRep!) throws {
 		//BOOL invert, isRGB, useAlpha;
 		//int i, j, t;
 		let spp = newImage.samplesPerPixel
@@ -193,9 +198,9 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		
 		// Fill out useAlpha boolean
 		let useAlpha: Bool = {
-			if newImage.alpha {
+			if newImage.hasAlpha {
 				for i in 0..<(newImage.pixelsWide * newImage.pixelsHigh) {
-					if data[i * 2 + 1] != 0xFF {
+					if data?[i * 2 + 1] != 0xFF {
 						return true
 					}
 				}
@@ -204,51 +209,52 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		}()
 		
 		// Allow the undo
-		undoManager?.prepareWithInvocationTarget(self).undoImageTo(curUndoPos)
+		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoImageTo(curUndoPos)
 		
 		// Replace with appropriate values
 		usePixmap = isRGB;
 		size = (Int32(newImage.size.width), Int32(newImage.size.height))
 		//width = [newImage size].width; height = [newImage size].height;
 		if (!isRGB) {
-			mask = UnsafeMutablePointer<UInt8>(malloc(Int(size.width * size.height)))
+			mask = malloc(Int(size.width * size.height)).assumingMemoryBound(to: UInt8.self)
+			//UnsafeMutablePointer<UInt8>(malloc(Int(size.width * size.height)))
 			for i in 0 ..< Int(size.width * size.height) {
 				if (useAlpha) {
-					mask[i] = data[i * spp + 1];
+					mask?[i] = (data?[i * spp + 1])!;
 				} else {
-					mask[i] = (invert) ? 255 &- data[i * spp] : data[i * spp];
+					mask?[i] = (invert) ? 255 &- (data?[i * spp])! : (data?[i * spp])!;
 				}
 			}
-			pixmap = UnsafeMutablePointer<UInt8>(malloc(Int(size.width * size.height) * 4))
+			pixmap = malloc(Int(size.width * size.height) * 4).assumingMemoryBound(to: UInt8.self)
 			for i in 0 ..< Int(size.width * size.height) {
 				if (spp == 2) {
-					let intVal = int_mult((invert) ? data[i * spp] : 255 &- data[i * spp], data[i * spp + 1])
-					pixmap[i * 4] = intVal
-					pixmap[i * 4 + 1] = intVal
-					pixmap[i * 4 + 2] = intVal
-					pixmap[i * 4 + 3] = data[i * spp + 1];
+					let intVal = int_mult((invert) ? (data?[i * spp])! : 255 &- (data?[i * spp])!, (data?[i * spp + 1])!)
+					pixmap?[i * 4] = intVal
+					pixmap?[i * 4 + 1] = intVal
+					pixmap?[i * 4 + 2] = intVal
+					pixmap?[i * 4 + 3] = (data?[i * spp + 1])!;
 				} else {
-					let intVal = (invert) ? data[i * spp] : 255 - data[i * spp];
-					pixmap[i * 4] = intVal
-					pixmap[i * 4 + 1] = intVal
-					pixmap[i * 4 + 2] = intVal
-					pixmap[i * 4 + 3] = 255;
+					let intVal = (invert) ? data?[i * spp] : 255 - (data?[i * spp])!;
+					pixmap?[i * 4] = intVal!
+					pixmap?[i * 4 + 1] = intVal!
+					pixmap?[i * 4 + 2] = intVal!
+					pixmap?[i * 4 + 3] = 255;
 				}
 			}
 		} else {
-			mask = UnsafeMutablePointer<UInt8>(malloc(Int(size.width * size.height)))
+			mask = malloc(Int(size.width * size.height)).assumingMemoryBound(to: UInt8.self)
 			for i in 0 ..< Int(size.width * size.height) {
 				if (useAlpha) {
-					mask[i] = data[i * spp + 3];
+					mask?[i] = (data?[i * spp + 3])!;
 				} else {
-					mask[i] = 255 - UInt8((Int(data[i * spp]) + Int(data[i * spp + 1]) + Int(data[i * spp + 2])) / 3);
+					mask?[i] = 255 - UInt8((Int(data![i * spp]) + Int(data![i * spp + 1]) + Int(data![i * spp + 2])) / 3);
 				}
 			}
-			pixmap = UnsafeMutablePointer<UInt8>(malloc(Int(size.width * size.height) * 4))
-			pixmap = UnsafeMutablePointer<UInt8>(memset(pixmap, 255, Int(size.width * size.height) * 4))
+			pixmap = malloc(Int(size.width * size.height) * 4).assumingMemoryBound(to: UInt8.self)
+			pixmap = memset(pixmap, 255, Int(size.width * size.height) * 4).assumingMemoryBound(to: UInt8.self)
 			for i in 0 ..< Int(size.width * size.height) {
 				for j in 0..<spp {
-					pixmap[i * 4 + j] = data[i * spp + j];
+					pixmap?[i * 4 + j] = (data?[i * spp + j])!;
 				}
 			}
 		}
@@ -268,12 +274,12 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Adjust the name of the brush
-	@IBAction func changeName(sender: AnyObject!) {
+	@IBAction func changeName(_ sender: AnyObject!) {
 		// Only do the following if the name has actually changed
 		if name != nameTextField.stringValue {
 			
 			// Allow the undo
-			undoManager?.prepareWithInvocationTarget(self).undoNameTo(name)
+			(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoNameTo(name)
 			
 			// Store new name and remember last names for undo
 			name = nameTextField.stringValue
@@ -282,10 +288,10 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Adjust the brush's spacing
-	@IBAction func changeSpacing(sender: AnyObject!) {
+	@IBAction func changeSpacing(_ sender: AnyObject!) {
 		// Allow the undo
-		if NSApp.currentEvent?.type == .LeftMouseDown {
-			undoManager?.prepareWithInvocationTarget(self).undoSpacingTo(spacing)
+		if NSApp.currentEvent?.type == .leftMouseDown {
+			(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoSpacingTo(spacing)
 		}
 		
 		// Adjust the spacing
@@ -293,9 +299,9 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Adjust the brush's type
-	@IBAction func changeType(sender: AnyObject!) {
+	@IBAction func changeType(_ sender: AnyObject!) {
 		// Allow the undo
-		undoManager?.prepareWithInvocationTarget(self).changeType(sender)
+		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).changeType(sender)
 		
 		// Make the changes
 		usePixmap = !usePixmap;
@@ -308,8 +314,8 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Loads the given file from disk, returns success
-	override func readFromURL(url: NSURL, ofType typeName: String) throws {
-		let file = try NSFileHandle(forReadingFromURL: url)
+	override func read(from url: URL, ofType typeName: String) throws {
+		let file = try FileHandle(forReadingFrom: url)
 		
 		// Set variables appropriately
 		undoRecords.removeAll()
@@ -318,8 +324,8 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		var header = BrushHeader()
 		
 		// Read in the header
-		var readData = file.readDataOfLength(sizeof(BrushHeader))
-		readData.getBytes(&header, length: sizeof(BrushHeader))
+		var readData = file.readData(ofLength: MemoryLayout<BrushHeader>.size)
+		(readData as NSData).getBytes(&header, length: MemoryLayout<BrushHeader>.size)
 		
 		// Convert brush header to proper endianess
 		header.header_size = header.header_size.bigEndian;
@@ -340,7 +346,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		// Accomodate version 1 brushes (no spacing)
 		if (header.version == 1) {
 			let offset = file.offsetInFile - 8
-			file.seekToFileOffset(offset)
+			file.seek(toFileOffset: offset)
 			header.header_size += 8;
 			header.spacing = 25;
 		}
@@ -351,15 +357,15 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		spacing = Int32(header.spacing)
 
 		// Read in brush name
-		let nameLen = Int(header.header_size) - sizeof(BrushHeader)
+		let nameLen = Int(header.header_size) - MemoryLayout<BrushHeader>.size
 		if (nameLen > 512) {
 			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
 		}
 		if (nameLen > 0) {
-			readData = file.readDataOfLength(nameLen)
-			if let aStr = String(data: readData, encoding: NSUTF8StringEncoding) {
+			readData = file.readData(ofLength: nameLen)
+			if let aStr = String(data: readData, encoding: String.Encoding.utf8) {
 				//Remove included nil terminator.
-				name = aStr.stringByReplacingOccurrencesOfString("\0", withString: "")
+				name = aStr.replacingOccurrences(of: "\0", with: "")
 			} else {
 				name = "Untitled"
 			}
@@ -372,21 +378,21 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		case 1:
 			usePixmap = false
 			let tempSize = Int(size.width * size.height)
-			mask = UnsafeMutablePointer<UInt8>(malloc(tempSize))
-			readData = file.readDataOfLength(tempSize)
-			if readData.length < tempSize {
+			mask = malloc(tempSize).assumingMemoryBound(to: UInt8.self)
+			readData = file.readData(ofLength: tempSize)
+			if readData.count < tempSize {
 				throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
 			}
-			readData.getBytes(mask, length: tempSize)
+			(readData as NSData).getBytes(mask!, length: tempSize)
 			
 		case 4:
 			usePixmap = true
 			let tempSize = Int(size.width * size.height) * 4
-			pixmap = UnsafeMutablePointer<UInt8>(malloc(tempSize))
-			if readData.length < tempSize {
+			pixmap = malloc(tempSize).assumingMemoryBound(to: UInt8.self)
+			if readData.count < tempSize {
 				throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
 			}
-			readData.getBytes(pixmap, length: tempSize)
+			(readData as NSData).getBytes(pixmap!, length: tempSize)
 			premultiplyAlpha(4, pixmap, pixmap, size.width * size.height)
 			
 		default:
@@ -399,9 +405,9 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Undoes the image to that which is stored by a given undo record
-	func undoImageTo(index: Int) {
+	func undoImageTo(_ index: Int) {
 		// Allow the redo
-		undoManager?.prepareWithInvocationTarget(self).undoImageTo(curUndoPos)
+		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoImageTo(curUndoPos)
 		
 		// Restore image from undo record
 		pixmap = undoRecords[index].pixmap;
@@ -420,9 +426,9 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Undoes the name to a given string
-	func undoNameTo(string: String) {
+	func undoNameTo(_ string: String) {
 		// Allow the redo
-		undoManager?.prepareWithInvocationTarget(self).undoNameTo(name)
+		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoNameTo(name)
 		
 		// Set the new name
 		name = string;
@@ -430,9 +436,9 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Undoes the spacing to a given value
-	func undoSpacingTo(value: Int32) {
+	func undoSpacingTo(_ value: Int32) {
 		// Allow the redo
-		undoManager?.prepareWithInvocationTarget(self).undoSpacingTo(spacing)
+		(undoManager?.prepare(withInvocationTarget: self) as AnyObject).undoSpacingTo(spacing)
 		
 		// Adjust the spacing
 		spacing = value;
@@ -445,13 +451,13 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Writes to the given file on disk, returns success
-	override func writeToURL(url: NSURL, ofType typeName: String) throws {
-		let file = try NSFileHandle(forWritingToURL: url)
+	override func write(to url: URL, ofType typeName: String) throws {
+		let file = try FileHandle(forWritingTo: url)
 		// Set-up the header
 		let tempName = name.substringWithLength(utf8: 128)
 		// Convert brush header to proper endianess
 		var header = BrushHeader()
-		header.header_size = UInt32(tempName.utf8.count + 1 + sizeof(BrushHeader)).bigEndian
+		header.header_size = UInt32(tempName.utf8.count + 1 + MemoryLayout<BrushHeader>.size).bigEndian
 		header.version = UInt32(2).bigEndian
 		header.width = UInt32(size.width).bigEndian
 		header.height = UInt32(size.height).bigEndian
@@ -460,43 +466,46 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		header.spacing = UInt32(spacing).bigEndian
 		
 		// Write the header
-		var toWrite = NSData(bytes: &header, length: sizeof(BrushHeader))
-		file.writeData(toWrite)
+		//Data(
+		var toWrite = Data(bytes: &header, count: MemoryLayout<BrushHeader>.size)
+		file.write(toWrite)
 		
 		// Write down brush name
-		guard var aName = tempName.cStringUsingEncoding(NSUTF8StringEncoding) else {
+		guard var aName = tempName.cString(using: String.Encoding.utf8) else {
 			throw NSError(domain: NSCocoaErrorDomain, code: -1, userInfo: nil)
 		}
 		aName.append(0)
-		toWrite = NSData(bytes: &aName, length: aName.count)
-		file.writeData(toWrite)
+		toWrite = aName.withUnsafeBufferPointer { (aBod) -> Data in
+			return Data(buffer: aBod)
+		}
+		file.write(toWrite)
 		
 		// And then write down the meat of the brush
 		if usePixmap {
-			let brushData = UnsafeMutablePointer<UInt8>.alloc(Int(size.width * size.height) * 4)
+			let brushData = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(size.width * size.height) * 4)
 			SeaUnpremultiplyBitmap(4, brushData, pixmap, size.width * size.height);
-			toWrite = NSData(bytes: brushData, length: Int(size.width * size.height) * 4)
-			brushData.dealloc(Int(size.width * size.height) * 4)
+			toWrite = Data(bytes: UnsafePointer<UInt8>(brushData), count: Int(size.width * size.height) * 4)
+			brushData.deallocate(capacity: Int(size.width * size.height) * 4)
 		} else {
-			toWrite = NSData(bytes: mask, length: Int(size.width * size.height))
+			toWrite = Data(bytes: UnsafePointer<UInt8>(mask!), count: Int(size.width * size.height))
 		}
-		file.writeData(toWrite)
+		file.write(toWrite)
 	}
 	
 	/// Import a graphic for the brush
-	@IBAction func importGraphic(sender: AnyObject!) {
+	@IBAction func importGraphic(_ sender: AnyObject!) {
 		let openPanel = NSOpenPanel()
 		
 		openPanel.allowsMultipleSelection = false
 		openPanel.prompt = "Import"
 		openPanel.allowedFileTypes = [kUTTypeTIFF as String, kUTTypeJPEG as String, kUTTypePNG as String]
 		
-		openPanel.beginSheetModalForWindow(windowForSheet!) { (result) in
+		openPanel.beginSheetModal(for: windowForSheet!) { (result) in
 			if result == NSCancelButton {
 				return
 			}
 			do {
-				let bmpImg = try BitmapImageRepHelper.bitmapImageRepFromURL(openPanel.URL!)
+				let bmpImg = try BitmapImageRepHelper.bitmapImageRep(from: openPanel.url!)
 				try self.changeImage(bmpImg)
 			} catch {
 				let alert = NSAlert()
@@ -509,40 +518,40 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Export the brush's graphic
-	@IBAction func exportGraphic(sender: AnyObject!) {
+	@IBAction func exportGraphic(_ sender: AnyObject!) {
 		let savePanel = NSSavePanel()
 		
 		savePanel.prompt = "Export"
 		savePanel.allowedFileTypes = [kUTTypeTIFF as String]
-		savePanel.beginSheetModalForWindow(windowForSheet!) { (result) in
+		savePanel.beginSheetModal(for: windowForSheet!) { (result) in
 			if result == NSCancelButton {
 				return
 			}
-			self.brushImage?.TIFFRepresentation?.writeToURL(savePanel.URL!, atomically: true)
+			try? self.brushImage?.tiffRepresentation?.write(to: savePanel.url!, options: [.atomic])
 		}
 	}
 	
 	/// The following calls `changeName:` before scheduling saving (two events cannot occur in the same loop)
-	@IBAction func preSaveDocument(sender: AnyObject!) {
+	@IBAction func preSaveDocument(_ sender: AnyObject!) {
 		changeName(sender)
-		NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: #selector(BrushDocument.saveDocument(_:)), userInfo: nil, repeats: false)
+		Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(BrushDocument.save(_:)), userInfo: nil, repeats: false)
 	}
 	
 	/// The following calls `changeName:` before scheduling saving (two events cannot occur in the same loop)
-	@IBAction func preSaveDocumentAs(sender: AnyObject!) {
+	@IBAction func preSaveDocumentAs(_ sender: AnyObject!) {
 		changeName(sender)
-		NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: #selector(BrushDocument.saveDocumentAs(_:)), userInfo: nil, repeats: false)
+		Timer.scheduledTimer(timeInterval: 0.0, target: self, selector: #selector(BrushDocument.saveAs(_:)), userInfo: nil, repeats: false)
 	}
 	
 	/// Allows the save panel to explore
-	override func prepareSavePanel(savePanel: NSSavePanel) -> Bool {
+	override func prepareSavePanel(_ savePanel: NSSavePanel) -> Bool {
 		savePanel.treatsFilePackagesAsDirectories = true
 		//[savePanel setDirectoryURL:[NSURL fileURLWithPath:@"/Applications/Seashore.app/Contents/Resources/brushes/"]];
 		
 		return true;
 	}
 
-	override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		switch menuItem.tag {
 		case 120, 121:
 			if (pixmap == nil && mask == nil) {
