@@ -56,14 +56,14 @@ public final class SwiftHorizStripes: SSKPlugin {
 	public override func run()  {
 		var backColorAlpha = [UInt8](repeating: 0, count: 4)
 		var foreColorAlpha = [UInt8](repeating: 0, count: 4)
-		let pluginData = seaPlugins.data
+		let pluginData = seaPlugins!.data
 		
 		// Get plug-in data
 		let width = pluginData.width
 		let spp = pluginData.spp
 		let selection = pluginData.selection
-		let point = pluginData.point(0)
-		let apoint = pluginData.point(1)
+		let point = pluginData.point(at: 0)
+		let apoint = pluginData.point(at: 1)
 		let amount = abs(apoint.y - point.y);
 		let overlay = pluginData.overlay
 		
@@ -73,21 +73,21 @@ public final class SwiftHorizStripes: SSKPlugin {
 		
 		// Get colors
 		if spp == 4 {
-			foreColorAlpha[0] = UInt8(clamp(pluginData.foreColor(true).redComponent * 255, minimum: 0, maximum: 255))
-			foreColorAlpha[1] = UInt8(clamp(pluginData.foreColor(true).greenComponent * 255, minimum: 0, maximum: 255))
-			foreColorAlpha[2] = UInt8(clamp(pluginData.foreColor(true).blueComponent * 255, minimum: 0, maximum: 255))
-			foreColorAlpha[3] = UInt8(clamp(pluginData.foreColor(true).alphaComponent * 255, minimum: 0, maximum: 255))
+			foreColorAlpha[0] = UInt8(clamp(pluginData.foreColor(calibrated: true).redComponent * 255, minimum: 0, maximum: 255))
+			foreColorAlpha[1] = UInt8(clamp(pluginData.foreColor(calibrated: true).greenComponent * 255, minimum: 0, maximum: 255))
+			foreColorAlpha[2] = UInt8(clamp(pluginData.foreColor(calibrated: true).blueComponent * 255, minimum: 0, maximum: 255))
+			foreColorAlpha[3] = UInt8(clamp(pluginData.foreColor(calibrated: true).alphaComponent * 255, minimum: 0, maximum: 255))
 			
-			backColorAlpha[0] = UInt8(clamp(pluginData.backColor(true).redComponent * 255, minimum: 0, maximum: 255))
-			backColorAlpha[1] = UInt8(clamp(pluginData.backColor(true).greenComponent * 255, minimum: 0, maximum: 255))
-			backColorAlpha[2] = UInt8(clamp(pluginData.backColor(true).blueComponent * 255, minimum: 0, maximum: 255))
-			backColorAlpha[3] = UInt8(clamp(pluginData.backColor(true).alphaComponent * 255, minimum: 0, maximum: 255))
+			backColorAlpha[0] = UInt8(clamp(pluginData.backColor(calibrated: true).redComponent * 255, minimum: 0, maximum: 255))
+			backColorAlpha[1] = UInt8(clamp(pluginData.backColor(calibrated: true).greenComponent * 255, minimum: 0, maximum: 255))
+			backColorAlpha[2] = UInt8(clamp(pluginData.backColor(calibrated: true).blueComponent * 255, minimum: 0, maximum: 255))
+			backColorAlpha[3] = UInt8(clamp(pluginData.backColor(calibrated: true).alphaComponent * 255, minimum: 0, maximum: 255))
 		} else {
-			foreColorAlpha[0] = UInt8(clamp(pluginData.foreColor(true).whiteComponent * 255, minimum: 0, maximum: 255))
-			foreColorAlpha[1] = UInt8(clamp(pluginData.foreColor(true).alphaComponent * 255, minimum: 0, maximum: 255))
+			foreColorAlpha[0] = UInt8(clamp(pluginData.foreColor(calibrated: true).whiteComponent * 255, minimum: 0, maximum: 255))
+			foreColorAlpha[1] = UInt8(clamp(pluginData.foreColor(calibrated: true).alphaComponent * 255, minimum: 0, maximum: 255))
 			
-			backColorAlpha[0] = UInt8(clamp(pluginData.backColor(true).whiteComponent * 255, minimum: 0, maximum: 255))
-			backColorAlpha[1] = UInt8(clamp(pluginData.backColor(true).alphaComponent * 255, minimum: 0, maximum: 255))
+			backColorAlpha[0] = UInt8(clamp(pluginData.backColor(calibrated: true).whiteComponent * 255, minimum: 0, maximum: 255))
+			backColorAlpha[1] = UInt8(clamp(pluginData.backColor(calibrated: true).alphaComponent * 255, minimum: 0, maximum: 255))
 		}
 		
 		// Run checkboard

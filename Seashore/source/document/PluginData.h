@@ -107,7 +107,7 @@
 				value.
 	@result		The corresponding point from the effect tool.
 */
-- (IntPoint)point:(NSInteger)index;
+- (IntPoint)point:(NSInteger)index NS_SWIFT_NAME(point(at:));
 
 /*!
 	@method		foreColor
@@ -117,7 +117,7 @@
 	@result		Returns an NSColor representing the active foreground
 				colour.
 */
-- (NSColor *)foreColor:(BOOL)calibrated;
+- (NSColor *)foreColor:(BOOL)calibrated NS_SWIFT_NAME(foreColor(calibrated:));
 
 /*!
 	@method		backColor
@@ -127,7 +127,7 @@
 	@result		Returns an NSColor representing the active background
 				colour.
 */
-- (NSColor *)backColor:(BOOL)calibrated;
+- (NSColor *)backColor:(BOOL)calibrated NS_SWIFT_NAME(backColor(calibrated:));
 
 /*!
 	@property	displayProf

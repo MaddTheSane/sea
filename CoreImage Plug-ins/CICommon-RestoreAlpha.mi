@@ -14,7 +14,7 @@
 	IntRect selection;
 	int spp, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
-	int vec_len, max;
+	size_t vec_len, max;
 	
 	// Set-up plug-in
 	[pluginData setOverlayOpacity:255];
