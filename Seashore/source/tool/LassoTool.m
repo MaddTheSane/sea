@@ -1,3 +1,6 @@
+#include <math.h>
+#include <tgmath.h>
+
 #import "LassoTool.h"
 #import "SeaDocument.h"
 #import "SeaSelection.h"
@@ -102,9 +105,9 @@
 		if (pos <= 1) return;
 
 		// Fill out the variables
-		if([[document docView] zoom] <= 1){
+		if ([[document docView] zoom] <= 1) {
 			interpolation = GIMP_INTERPOLATION_NONE;
-		}else{
+		} else {
 			interpolation = GIMP_INTERPOLATION_CUBIC;
 		}
 					

@@ -16,7 +16,8 @@
 #import "SSKCIPlugin.h"
 
 @interface CIBumpClass : SSKCIPlugin
-// The scale of the bump
+
+/// The scale of the bump
 @property CGFloat scale;
 
 /*!

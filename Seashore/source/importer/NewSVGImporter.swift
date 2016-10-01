@@ -230,43 +230,42 @@ public final class SVGImporter: NSObject {
 	@IBAction func update(_ sender: AnyObject?) {
 		var factor: Double
 		
-		switch (scaleSlider.intValue) {
+		switch scaleSlider.intValue {
 		case 0:
-			factor = 0.5;
-			break;
+			factor = 0.5
+			
 		case 1:
-			factor = 0.75;
-			break;
+			factor = 0.75
+			
 		case 2:
-			factor = 1.0;
-			break;
+			factor = 1.0
+			
 		case 3:
-			factor = 1.5;
-			break;
+			factor = 1.5
+			
 		case 4:
-			factor = 2.0;
-			break;
+			factor = 2.0
+			
 		case 5:
-			factor = 3.75;
-			break;
+			factor = 3.75
+			
 		case 6:
-			factor = 5.0;
-			break;
+			factor = 5.0
+			
 		case 7:
-			factor = 7.5;
-			break;
+			factor = 7.5
+			
 		case 8:
-			factor = 10.0;
-			break;
+			factor = 10.0
+			
 		case 9:
-			factor = 25.0;
-			break;
+			factor = 25.0
+			
 		case 10:
-			factor = 50.0;
-			break;
+			factor = 50.0
+			
 		default:
-			factor = 1.0;
-			break;
+			factor = 1.0
 		}
 		
 		size.width = Int32(Double(trueSize.width) * factor);

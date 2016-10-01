@@ -141,16 +141,16 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
 	 @property		intermediate
 	 @discussion	This is used to detect if there is currently a mouse drag
-	 @result		Returns a BOOL: YES if there is currently an action being made.
+					Returns a BOOL: \c YES if there is currently an action being made.
 */
 @property (readonly) BOOL intermediate;
 
 /*!
 	@property	fineTool
 	@discussion	Returns whether the tool needs an NSPoint input as opposed to an IntPoint
-				input (i.e. whether fineMouse... or mouse... should be called).
-	@result		Returns YES if the tool needs an NSPoint input as opposed to an IntPoint
-				input, NO otherwise. The implementation in this class always returns NO.
+				input (i.e. whether \c fineMouse... or \c mouse... should be called).
+				Is \c YES if the tool needs an \c NSPoint input as opposed to an \c IntPoint
+				input, \c NO otherwise. The default implementation always returns <code>NO</code>.
 */
 @property (readonly, getter=isFineTool) BOOL fineTool;
 

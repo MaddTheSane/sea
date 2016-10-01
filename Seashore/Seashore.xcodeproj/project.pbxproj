@@ -3653,9 +3653,9 @@
 		55115C1E1D46D65100E76B5B /* SwiftCMYK */ = {
 			isa = PBXGroup;
 			children = (
-				55115C291D46D71200E76B5B /* Localizable.strings */,
 				55115C231D46D68D00E76B5B /* SwiftCMYK.swift */,
 				55115C1F1D46D65100E76B5B /* Info.plist */,
+				55115C291D46D71200E76B5B /* Localizable.strings */,
 			);
 			path = SwiftCMYK;
 			sourceTree = "<group>";

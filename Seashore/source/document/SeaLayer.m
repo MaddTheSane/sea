@@ -169,7 +169,7 @@
 		height = width = mode = 0;
 		opacity = 255; xoff = yoff = 0;
 		spp = 4;
-		srand(time(NULL));
+		srand(time(NULL) & 0x7FFFFFFF);
 		
 		uniqueLayerID = rand();
 		if (uniqueLayerID == 0)

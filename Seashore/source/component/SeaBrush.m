@@ -262,11 +262,11 @@ typedef struct {
 
 - (unsigned char *)maskForPoint:(NSPoint)point pressure:(int)value
 {
-	float remainder, factor, xextra, yextra;
+	CGFloat remainder, factor, xextra, yextra;
 	int i, index1, index2, scale, scalew, scaleh, minCheckPos;
 	
 	// Determine the scale
-	factor = (0.30 * ((float)value / 255.0) + 0.70);
+	factor = (0.30 * ((CGFloat)value / 255.0) + 0.70);
 	if (width >= height) {
 		scale = factor * width;
 	}

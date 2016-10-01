@@ -10,7 +10,6 @@
 	if (self = [super init]) {
 	unsigned char *tempBitmap;
 	NSBitmapImageRep *tempBitmapRep;
-	NSInteger k, j, l, bpr, spp;
 	BOOL isDir;
 	
 	// Check if file is a directory
@@ -22,8 +21,8 @@
 	tempBitmapRep = [NSBitmapImageRep imageRepWithData:[NSData dataWithContentsOfFile:path]];
 	width = (int)[tempBitmapRep pixelsWide];
 	height = (int)[tempBitmapRep pixelsHigh];
-	spp = [tempBitmapRep samplesPerPixel];
-	bpr = [tempBitmapRep bytesPerRow];
+	NSInteger spp = [tempBitmapRep samplesPerPixel];
+	NSInteger bpr = [tempBitmapRep bytesPerRow];
 	tempBitmap = [tempBitmapRep bitmapData];
 	
 	// Check the bps
@@ -39,43 +38,40 @@
 	// Copy in the data
 	if ((spp == 3 || spp == 4) && ([[tempBitmapRep colorSpaceName] isEqualTo:NSCalibratedRGBColorSpace] || [[tempBitmapRep colorSpaceName] isEqualTo:NSDeviceRGBColorSpace])) {
 		
-		for (j = 0; j < height; j++) {
+		for (int j = 0; j < height; j++) {
 			if (spp == 3)
 				memcpy(&(colorTexture[j * width * 3]), &(tempBitmap[j * bpr]), width * 3);
 			else {
-				for (k = 0; k < width; k++) {
-					for (l = 0; l < spp - 1; l++)
+				for (int k = 0; k < width; k++) {
+					for (int l = 0; l < spp - 1; l++)
 						colorTexture[k * 3 + l] = tempBitmap[j * bpr + k * 4 + l];
 				}
 			}
 		}
 		
-		for (k = 0; k < width * height; k++) {
+		for (int k = 0; k < width * height; k++) {
 			greyTexture[k] = (unsigned char)(((int)(colorTexture[k * 3]) + (int)(colorTexture[k * 3 + 1]) + (int)(colorTexture[k * 3 + 2])) / 3);
 		}
 		
-	}
-	else if ((spp == 1 || spp == 2) && ([[tempBitmapRep colorSpaceName] isEqualTo:NSCalibratedWhiteColorSpace] || [[tempBitmapRep colorSpaceName] isEqualTo:NSDeviceWhiteColorSpace])) {
+	} else if ((spp == 1 || spp == 2) && ([[tempBitmapRep colorSpaceName] isEqualTo:NSCalibratedWhiteColorSpace] || [[tempBitmapRep colorSpaceName] isEqualTo:NSDeviceWhiteColorSpace])) {
 		
-		for (j = 0; j < height; j++) {
+		for (int j = 0; j < height; j++) {
 			if (spp == 1) {
 				memcpy(&(greyTexture[j * width]), &(tempBitmap[j * bpr]), width);
-			}
-			else {
-				for (k = 0; k < width * height; k++) {
+			} else {
+				for (int k = 0; k < width * height; k++) {
 					greyTexture[k] = tempBitmap[j * bpr + k * 2];
 				}
 			}
 		}
 		
-		for (k = 0; k < width * height; k++) {
+		for (int k = 0; k < width * height; k++) {
 			colorTexture[k * 3] = greyTexture[k];
 			colorTexture[k * 3 + 1] = greyTexture[k];
 			colorTexture[k * 3 + 2] = greyTexture[k];
 		}
 		
-	}
-	else {
+	} else {
 		NSLog(@"Texture \"%@\" failed to load\n", [path lastPathComponent]);
 		return NULL;
 	}
@@ -112,11 +108,11 @@
 	thumbHeight = height;
 	if (width > 44 || height > 44) {
 		if (width > height) {
-			thumbHeight = (int)((float)height * (44.0 / (float)width));
+			thumbHeight = (int)((CGFloat)height * (44.0 / (CGFloat)width));
 			thumbWidth = 44;
 		}
 		else {
-			thumbWidth = (int)((float)width * (44.0 / (float)height));
+			thumbWidth = (int)((CGFloat)width * (44.0 / (CGFloat)height));
 			thumbHeight = 44;
 		}
 	}

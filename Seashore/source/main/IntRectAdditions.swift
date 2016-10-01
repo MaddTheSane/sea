@@ -72,16 +72,22 @@ extension IntRect: Equatable {
 	
 	public func offset(x: Int32, y: Int32) -> IntRect {
 		var tmpRect = self
-		tmpRect.offsetInPlace(x: x, y: y)
+		tmpRect.formOffset(x: x, y: y)
 		return tmpRect
 	}
 	
 	/// Offsets the current `IntRect` by the specified coordinates.
 	/// - parameter x: The amount by which to offset the x coordinates.
 	/// - parameter y: The amount by which to offset the y coordinates.
+	public mutating func formOffset(x: Int32, y: Int32) {
+		IntOffsetRect(&self, x, y)
+	}
+	
+	@available(*, unavailable, renamed: "formOffset(x:y:)")
 	public mutating func offsetInPlace(x: Int32, y: Int32) {
 		IntOffsetRect(&self, x, y)
 	}
+
 	
 	/// Tests to see if a given `IntPoint` lies within
 	/// this `IntRect`. This function assumes a flipped coordinate system like that

@@ -125,9 +125,9 @@ typedef NS_ENUM(int, XcfLayerMode) {
 	XCF_GRAIN_EXTRACT_MODE, 	/* 20 */
 	XCF_GRAIN_MERGE_MODE,		/* 21 */
 	XCF_COLOR_ERASE_MODE,
-	XCF_ERASE_MODE,				/**< skip >*/
-	XCF_REPLACE_MODE,			/**< skip >*/
-	XCF_ANTI_ERASE_MODE			/**< skip >*/
+	XCF_ERASE_MODE,				/**< skip */
+	XCF_REPLACE_MODE,			/**< skip */
+	XCF_ANTI_ERASE_MODE			/**< skip */
 };
 
 

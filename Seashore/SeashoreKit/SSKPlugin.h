@@ -40,11 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithManager:(SeaPlugins *)manager;
 
 /*!
- @method		type
+ @property		type
  @discussion	Returns the type of plug-in so Seashore can correctly interact with the plug-in.
  @result		Returns an integer indicating the plug-in's type.
  */
-- (int)type;
+@property (readonly) int type;
 
 /*!
  @property		name

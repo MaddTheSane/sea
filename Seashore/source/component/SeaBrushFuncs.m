@@ -48,7 +48,7 @@ void determineBrushMask(unsigned char *input, unsigned char *output, int width, 
 	unsigned char *m = input;
 	unsigned char *d = output;
 	const int *k;
-	int new_val, i, j, r, s;
+	int new_val, s;
 
 	// Clear the output
 	memset(output, 0, (width + 2) * (height + 2));
@@ -57,10 +57,10 @@ void determineBrushMask(unsigned char *input, unsigned char *output, int width, 
 	kernel = subsample[index2][index1];
 	
 	// Work out the brush mask
-	for (j = 0; j < height; j++) {
-		for (i = 0; i < width; i++) {
+	for (int j = 0; j < height; j++) {
+		for (int i = 0; i < width; i++) {
 			k = kernel;
-			for (r = 0; r < KERNEL_HEIGHT; r++) {
+			for (int r = 0; r < KERNEL_HEIGHT; r++) {
 				d = output + (j+r) * (width + 2) + i;
 				s = KERNEL_WIDTH;
 				while (s--) {
@@ -75,13 +75,13 @@ void determineBrushMask(unsigned char *input, unsigned char *output, int width, 
 
 void arrangePixels(unsigned char *dest, int destWidth, int destHeight, unsigned char *src, int srcWidth, int srcHeight)
 {
-	int i, j, xoff, yoff;
+	int xoff, yoff;
 	
 	memset(dest, 0, destWidth * destHeight);
 	xoff = (destWidth / 2) - (srcWidth / 2);
 	yoff = (destHeight / 2) - (srcHeight / 2);
-	for (j = 0; j < srcHeight; j++) {
-		for (i = 0; i < srcWidth; i++) {
+	for (int j = 0; j < srcHeight; j++) {
+		for (int i = 0; i < srcWidth; i++) {
 			dest[(j + yoff) * destWidth + (i + xoff)] = src[j * srcWidth + i];
 		}
 	}
