@@ -288,7 +288,7 @@ static inline void fix_endian_read(int *input, size_t size)
 					// NSLog(@"Tile begins at: %d", ftell(file));
 					srcData = malloc(expectedSize * 1.3 + 1);
 					srcSize = fread(srcData, sizeof(char), expectedSize * 1.3 + 1, file);
-					if (!RLEDecompress(tileData, srcData, (int)srcSize, tileWidth, tileHeight, srcSPP)) {
+					if (!SeaRLEDecompress(tileData, srcData, (int)srcSize, tileWidth, tileHeight, srcSPP)) {
 						// NSRunAlertPanel(@"RLE decompression failed", @"The RLE decompression of a certain part of this file failed, this could be due to an incomplete or corrupted XCF file. As such this file cannot be properly loaded.", @"OK", NULL, NULL);
 						NSLog(@"RLE decompression failed (pixels)");
 						free(srcData); free(tileData); free(totalData);
@@ -428,7 +428,7 @@ static inline void fix_endian_read(int *input, size_t size)
 					// In case of RLE compression (typical case)...
 					srcData = malloc(expectedSize * 1.3 + 1);
 					srcSize = fread(srcData, sizeof(char), expectedSize * 1.3 + 1, file);
-					if (!RLEDecompress(tileData, srcData, (int)srcSize, tileWidth, tileHeight, 1)) {
+					if (!SeaRLEDecompress(tileData, srcData, (int)srcSize, tileWidth, tileHeight, 1)) {
 						// NSRunAlertPanel(@"RLE decompression failed", @"The RLE decompression of a certain part of this file failed, this could be due to an incomplete or corrupted XCF file. As such this file cannot be properly loaded.", @"OK", NULL, NULL);
 						NSLog(@"RLE decompression failed (mask)");
 						free(srcData); free(tileData); free(totalData);

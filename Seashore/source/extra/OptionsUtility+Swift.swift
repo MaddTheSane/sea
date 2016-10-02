@@ -11,8 +11,9 @@ import SeashoreKit
 
 
 protocol SeaOptions: NSObjectProtocol {
-	static var toolType: SeaToolsDefines {get}
 	associatedtype OptionClass: AbstractOptions
+	
+	static var toolType: SeaToolsDefines {get}
 }
 
 extension RectSelectTool: SeaOptions {

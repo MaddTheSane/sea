@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import <SeashoreKit/Globals.h>
 
-/*!
+/*
 	@enum		k...Tool
 	@constant	kRectSelectTool
 				The rectangular selection tool.
@@ -45,27 +45,49 @@
 				The last selection tool.
 */
 typedef NS_ENUM(int, SeaToolsDefines) {
-	SeaToolsInvalid = -1, 
+	//! An invalid value.
+	SeaToolsInvalid = -1,
+	//! The rectangular selection tool.
 	kRectSelectTool = 0,
+	//! The elliptical selection tool.
 	kEllipseSelectTool = 1,
+	//! The lasso tool.
 	kLassoTool = 2,
+	//! The polygon lasso tool.
 	kPolygonLassoTool = 3,
+	//! The wand selection tool.
 	kWandTool = 4,
-	kPencilTool = 5, 
+	//! The pencil tool.
+	kPencilTool = 5,
+	//! The paintbrush tool.
 	kBrushTool = 6,
+	//! The colour sampling tool.
 	kEyedropTool = 7,
+	//! The text tool.
 	kTextTool = 8,
+	//! The eraser tool.
 	kEraserTool = 9,
+	//! The paint bucket tool.
 	kBucketTool = 10,
+	//! The gradient tool.
 	kGradientTool = 11,
+	//! The crop tool.
 	kCropTool = 12,
+	//! The clone tool.
 	kCloneTool = 13,
+	//! The smudging tool.
 	kSmudgeTool = 14,
+	//! The effect tool.
 	kEffectTool = 15,
+	//! The zoom tool.
 	kZoomTool = 16,
+	//! The layer positioning tool.
 	kPositionTool = 17,
+	//! The first selection tool.
 	kFirstSelectionTool = 0,
+	//! The last selection tool.
 	kLastSelectionTool = 4,
+	//! The last tool.
 	kLastTool = 17
 };
 
@@ -98,7 +120,6 @@ typedef NS_ENUM(int, SeaToolsDefines) {
 */
 
 @interface SeaTools : NSObject {
-
 	// Various objects representing various tools
 	IBOutlet RectSelectTool *rectSelectTool;
 	IBOutlet EllipseSelectTool *ellipseSelectTool;
@@ -118,7 +139,6 @@ typedef NS_ENUM(int, SeaToolsDefines) {
 	IBOutlet CropTool *cropTool;
 	IBOutlet EffectTool *effectTool;
 	//IBOutlet AbstractTool *zoomTool;
-	
 }
 
 /*!

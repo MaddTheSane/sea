@@ -299,12 +299,12 @@ static void hueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char
 		r1 = destPtr[destLoc]; g1 = destPtr[destLoc + 1]; b1 = destPtr[destLoc + 2];
 		r2 = srcPtr[srcLoc]; g2 = srcPtr[srcLoc + 1]; b2 = srcPtr[srcLoc + 2];
 		
-		RGBtoHSV(&r1, &g1, &b1);
-		RGBtoHSV(&r2, &g2, &b2);
+		SeaRGBtoHSV(&r1, &g1, &b1);
+		SeaRGBtoHSV(&r2, &g2, &b2);
 		
 		r1 = r2;
 		
-		HSVtoRGB(&r1, &g1, &b1);
+		SeaHSVtoRGB(&r1, &g1, &b1);
 		
 		destPtr[destLoc] = r1; destPtr[destLoc + 1] = g1; destPtr[destLoc + 2] = b1;
 		
@@ -322,12 +322,12 @@ static void saturationMerge(int spp, unsigned char *destPtr, int destLoc, unsign
 		int r1 = destPtr[destLoc], g1 = destPtr[destLoc + 1], b1 = destPtr[destLoc + 2];
 		int r2 = srcPtr[srcLoc], g2 = srcPtr[srcLoc + 1], b2 = srcPtr[srcLoc + 2];
 		
-		RGBtoHSV(&r1, &g1, &b1);
-		RGBtoHSV(&r2, &g2, &b2);
+		SeaRGBtoHSV(&r1, &g1, &b1);
+		SeaRGBtoHSV(&r2, &g2, &b2);
 		
 		g1 = g2;
 		
-		HSVtoRGB(&r1, &g1, &b1);
+		SeaHSVtoRGB(&r1, &g1, &b1);
 		
 		destPtr[destLoc] = r1; destPtr[destLoc + 1] = g1; destPtr[destLoc + 2] = b1;
 		
@@ -347,12 +347,12 @@ static void valueMerge(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 		r1 = destPtr[destLoc]; g1 = destPtr[destLoc + 1]; b1 = destPtr[destLoc + 2];
 		r2 = srcPtr[srcLoc]; g2 = srcPtr[srcLoc + 1]; b2 = srcPtr[srcLoc + 2];
 		
-		RGBtoHSV(&r1, &g1, &b1);
-		RGBtoHSV(&r2, &g2, &b2);
+		SeaRGBtoHSV(&r1, &g1, &b1);
+		SeaRGBtoHSV(&r2, &g2, &b2);
 		
 		b1 = b2;
 		
-		HSVtoRGB(&r1, &g1, &b1);
+		SeaHSVtoRGB(&r1, &g1, &b1);
 		
 		destPtr[destLoc] = r1; destPtr[destLoc + 1] = g1; destPtr[destLoc + 2] = b1;
 		
@@ -370,13 +370,13 @@ static void colorMerge(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 		int r1 = destPtr[destLoc], g1 = destPtr[destLoc + 1], b1 = destPtr[destLoc + 2];
 		int r2 = srcPtr[srcLoc], g2 = srcPtr[srcLoc + 1], b2 = srcPtr[srcLoc + 2];
 		
-		RGBtoHLS(&r1, &g1, &b1);
-		RGBtoHLS(&r2, &g2, &b2);
+		SeaRGBtoHLS(&r1, &g1, &b1);
+		SeaRGBtoHLS(&r2, &g2, &b2);
 		
 		r1 = r2;
 		b1 = b2;
 		
-		HLStoRGB(&r1, &g1, &b1);
+		SeaHLStoRGB(&r1, &g1, &b1);
 		
 		destPtr[destLoc] = r1; destPtr[destLoc + 1] = g1; destPtr[destLoc + 2] = b1;
 		

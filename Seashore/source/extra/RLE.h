@@ -14,7 +14,7 @@
 #endif
 
 /*!
-	@function	RLEDecompress
+	@function	SeaRLEDecompress
 	@discussion	Decompresses a given tile compressed with RLE.
 	@param		output
 				The block of memory in which to place the decompressed data,
@@ -33,10 +33,10 @@
 				The samples per pixel of the tile.
 	@result		Returns a YES upon success, NO otherwise.
 */
-BOOL RLEDecompress(unsigned char *output, unsigned char *input, int inputLength, int width, int height, int spp);
+BOOL SeaRLEDecompress(unsigned char *output, unsigned char *input, int inputLength, int width, int height, int spp);
 
 /*!
-	@function	RLECompress
+	@function	SeaRLECompress
 	@discussion	Compresses a given tile with RLE.
 	@param		output
 				The block of memory in which to place the compressed data,
@@ -52,4 +52,4 @@ BOOL RLEDecompress(unsigned char *output, unsigned char *input, int inputLength,
 				The samples per pixel of the tile.
 	@result		Returns a YES upon success, NO otherwise.
 */
-int RLECompress(unsigned char *output, unsigned char *input, int width, int height, int spp);
+int SeaRLECompress(unsigned char *output, unsigned char *input, int width, int height, int spp);

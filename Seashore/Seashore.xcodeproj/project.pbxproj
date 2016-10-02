@@ -188,6 +188,7 @@
 		551E574318D0271000E4CDAF /* CIFalseColorClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D50F318CF9FBC005809E3 /* CIFalseColorClass.m */; };
 		551E574418D0271400E4CDAF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50F418CF9FBC005809E3 /* Localizable.strings */; };
 		5522C0E31DA1A7A50009499F /* OptionsUtility+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522C0E21DA1A7A50009499F /* OptionsUtility+Swift.swift */; };
+		5522C0E51DA1BE920009499F /* RGBConv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522C0E41DA1BE910009499F /* RGBConv.swift */; };
 		5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in Copy Spotlight plug-in */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in Copy QuickLook plug-in */ = {isa = PBXBuildFile; fileRef = 5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55472B851C6EDCCA0065A852 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; };
@@ -1833,6 +1834,7 @@
 		551E572918D0268500E4CDAF /* Exposure+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Exposure+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E573A18D0268A00E4CDAF /* False Color+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "False Color+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5522C0E21DA1A7A50009499F /* OptionsUtility+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OptionsUtility+Swift.swift"; sourceTree = "<group>"; };
+		5522C0E41DA1BE910009499F /* RGBConv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBConv.swift; sourceTree = "<group>"; };
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5530858A1D3857B1003D87C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIPosterize.xib; sourceTree = "<group>"; };
 		5530858B1D3857BA003D87C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPosterize.strings; sourceTree = "<group>"; };
@@ -3712,6 +3714,7 @@
 				5575354E18DB59A600AC0FBC /* SSKCIPlugin.h */,
 				5575354F18DB59A600AC0FBC /* SSKCIPlugin.m */,
 				55115C031D46AC2700E76B5B /* SSKTerminatable.h */,
+				5522C0E41DA1BE910009499F /* RGBConv.swift */,
 				5575352718DB56CB00AC0FBC /* Supporting Files */,
 			);
 			path = SeashoreKit;
@@ -7363,6 +7366,7 @@
 				55472BA51C6EE1530065A852 /* SeaProxy.m in Sources */,
 				55472BDD1C6EE58D0065A852 /* StandardMerge.m in Sources */,
 				55472BD91C6EE53C0065A852 /* Units.m in Sources */,
+				5522C0E51DA1BE920009499F /* RGBConv.swift in Sources */,
 				55472BDB1C6EE56C0065A852 /* IndiciesKeeper.m in Sources */,
 				55472BC71C6EE4940065A852 /* SVGLayer.m in Sources */,
 				55472B911C6EDDF10065A852 /* SSKVisualPlugin.m in Sources */,

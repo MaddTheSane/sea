@@ -139,11 +139,11 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 			g = data[pos + 1];
 			b = data[pos + 2];
 			overlay[pos + 3] = data[pos + 3];
-			RGBtoHSV(&r, &g, &b);
+			SeaRGBtoHSV(&r, &g, &b);
 			r = WRAPAROUND(r + (int)(hue * 255.0));
 			g = CLAMP(g + (int)(saturation * 255.0));
 			b = CLAMP(b + (int)(value * 255.0));
-			HSVtoRGB(&r, &g, &b);
+			SeaHSVtoRGB(&r, &g, &b);
 			overlay[pos] = (unsigned char)r;
 			overlay[pos + 1] = (unsigned char)g;
 			overlay[pos + 2] = (unsigned char)b;

@@ -20,7 +20,7 @@ static int HLSValue(double n1, double n2, double hue)
 	return (int)(value * 255);
 }
 
-void RGBtoHSV(int *red, int *green, int *blue)
+void SeaRGBtoHSV(int *red, int *green, int *blue)
 {
 	int r, g, b;
 	double h, s, v;
@@ -71,7 +71,7 @@ void RGBtoHSV(int *red, int *green, int *blue)
 	*blue  = v;
 }
 
-void HSVtoRGB(int *hue, int *saturation, int *value)
+void SeaHSVtoRGB(int *hue, int *saturation, int *value)
 {
 	if (*saturation == 0) {
 		*hue = *value;
@@ -127,7 +127,7 @@ void HSVtoRGB(int *hue, int *saturation, int *value)
 	}
 }
 
-void RGBtoHLS (int *red, int *green, int *blue)
+void SeaRGBtoHLS (int *red, int *green, int *blue)
 {
 	double h, s;
 	int min, max;
@@ -177,7 +177,7 @@ void RGBtoHLS (int *red, int *green, int *blue)
 	*blue = s;
 }
 
-void HLStoRGB(int *hue, int *lightness, int *saturation)
+void SeaHLStoRGB(int *hue, int *lightness, int *saturation)
 {
 	double m1, m2;
 	

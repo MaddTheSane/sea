@@ -344,7 +344,7 @@ static inline void fix_endian_write(int *input, int size)
 		}
 		
 		// Compress the tile data
-		compressedLength = RLECompress(compressedTileData, tileData, tileWidth, tileHeight, spp);
+		compressedLength = SeaRLECompress(compressedTileData, tileData, tileWidth, tileHeight, spp);
 		
 		// Write it
 		fwrite(compressedTileData, sizeof(char), compressedLength, file);
