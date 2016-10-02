@@ -15,23 +15,22 @@
 /// Premultiplies the alpha channel of an image - destPtr's memory may intersect srcPtr's
 static inline void premultiplyAlpha(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length)
 {
-	int i, j, alphaPos, temp;
-	
-	for (i = 0; i < length; i++) {
-		alphaPos = (i + 1) * spp - 1;
+	for (int i = 0; i < length; i++) {
+		int alphaPos = (i + 1) * spp - 1;
 		if (srcPtr[alphaPos] == 255) {
-			for (j = 0; j < spp; j++)
+			for (int j = 0; j < spp; j++) {
 				destPtr[i * spp + j] = srcPtr[i * spp + j];
-		}
-		else {
-			if (srcPtr[alphaPos] != 0) {
-				for (j = 0; j < spp - 1; j++)
-					destPtr[i * spp + j] = INT_MULT(srcPtr[i * spp + j], srcPtr[alphaPos], temp);
-				destPtr[alphaPos] = srcPtr[alphaPos];
 			}
-			else {
-				for (j = 0; j < spp; j++)
-					destPtr[i * spp + j] = 0;
+		} else if (srcPtr[alphaPos] != 0) {
+			int temp;
+			
+			for (int j = 0; j < spp - 1; j++) {
+				destPtr[i * spp + j] = INT_MULT(srcPtr[i * spp + j], srcPtr[alphaPos], temp);
+			}
+			destPtr[alphaPos] = srcPtr[alphaPos];
+		} else {
+			for (int j = 0; j < spp; j++) {
+				destPtr[i * spp + j] = 0;
 			}
 		}
 	}
@@ -40,28 +39,23 @@ static inline void premultiplyAlpha(int spp, unsigned char *destPtr, unsigned ch
 /// Unpremultiplies the alpha channel of an image - destPtr's memory may intersect srcPtr's
 static inline void SeaUnpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
 {
-	int i, j, alphaPos, newValue;
-	double alphaRatio;
-	
-	for (i = 0; i < length; i++) {
-		alphaPos = (i + 1) * spp - 1;
+	for (int i = 0; i < length; i++) {
+		int alphaPos = (i + 1) * spp - 1;
 		if (input[alphaPos] == 255) {
-			for (j = 0; j < spp; j++)
+			for (int j = 0; j < spp; j++) {
 				output[i * spp + j] = input[i * spp + j];
-		}
-		else {
-			if (input[alphaPos] != 0) {
-				alphaRatio = 255.0 / input[alphaPos];
-				for (j = 0; j < spp - 1; j++) {
-					newValue = 0.5 + input[i * spp + j] * alphaRatio;
-					newValue = MIN(newValue, 255);
-					output[i * spp + j] = newValue;
-				}
-				output[alphaPos] = input[alphaPos];
 			}
-			else {
-				for (j = 0; j < spp; j++)
-					output[i * spp + j] = 0;
+		} else if (input[alphaPos] != 0) {
+			double alphaRatio = 255.0 / input[alphaPos];
+			for (int j = 0; j < spp - 1; j++) {
+				int newValue = 0.5 + input[i * spp + j] * alphaRatio;
+				newValue = MIN(newValue, 255);
+				output[i * spp + j] = newValue;
+			}
+			output[alphaPos] = input[alphaPos];
+		} else {
+			for (int j = 0; j < spp; j++) {
+				output[i * spp + j] = 0;
 			}
 		}
 	}

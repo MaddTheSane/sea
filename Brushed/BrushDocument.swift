@@ -211,11 +211,10 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		usePixmap = isRGB;
 		size = (Int32(newImage.size.width), Int32(newImage.size.height))
 		//width = [newImage size].width; height = [newImage size].height;
-		if (!isRGB) {
+		if !isRGB {
 			mask = malloc(Int(size.width * size.height)).assumingMemoryBound(to: UInt8.self)
-			//UnsafeMutablePointer<UInt8>(malloc(Int(size.width * size.height)))
 			for i in 0 ..< Int(size.width * size.height) {
-				if (useAlpha) {
+				if useAlpha {
 					mask?[i] = (data?[i * spp + 1])!;
 				} else {
 					mask?[i] = (invert) ? 255 &- (data?[i * spp])! : (data?[i * spp])!;
@@ -223,7 +222,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 			}
 			pixmap = malloc(Int(size.width * size.height) * 4).assumingMemoryBound(to: UInt8.self)
 			for i in 0 ..< Int(size.width * size.height) {
-				if (spp == 2) {
+				if spp == 2 {
 					let intVal = int_mult((invert) ? (data?[i * spp])! : 255 &- (data?[i * spp])!, (data?[i * spp + 1])!)
 					pixmap?[i * 4] = intVal
 					pixmap?[i * 4 + 1] = intVal
@@ -333,8 +332,8 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		header.spacing = header.spacing.bigEndian
 
 		// Check version compatibility
-		var versionGood = (header.version == 2 && header.magic_number == GBRUSH_MAGIC);
-		versionGood = versionGood || (header.version == 1);
+		var versionGood = (header.version == 2 && header.magic_number == GBRUSH_MAGIC)
+		versionGood = versionGood || (header.version == 1)
 		if !versionGood {
 			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
 		}
@@ -354,10 +353,10 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 
 		// Read in brush name
 		let nameLen = Int(header.header_size) - MemoryLayout<BrushHeader>.size
-		if (nameLen > 512) {
+		if nameLen > 512 {
 			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
 		}
-		if (nameLen > 0) {
+		if nameLen > 0 {
 			readData = file.readData(ofLength: nameLen)
 			if let aStr = String(data: readData, encoding: String.Encoding.utf8) {
 				//Remove included nil terminator.
@@ -450,7 +449,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	override func write(to url: URL, ofType typeName: String) throws {
 		let file = try FileHandle(forWritingTo: url)
 		// Set-up the header
-		let tempName = name.substringWithLength(utf8: 128)
+		let tempName = name.substringWithLength(utf8: 511)
 		// Convert brush header to proper endianess
 		var header = BrushHeader()
 		header.header_size = UInt32(tempName.utf8.count + 1 + MemoryLayout<BrushHeader>.size).bigEndian
@@ -466,23 +465,20 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		file.write(toWrite)
 		
 		// Write down brush name
-		guard var aName = tempName.cString(using: String.Encoding.utf8) else {
-			throw NSError(domain: NSCocoaErrorDomain, code: -1, userInfo: nil)
-		}
+		var aName = Array(tempName.utf8)
 		aName.append(0)
-		toWrite = aName.withUnsafeBufferPointer { (aBod) -> Data in
-			return Data(buffer: aBod)
-		}
+		toWrite = Data(aName)
 		file.write(toWrite)
 		
 		// And then write down the meat of the brush
 		if usePixmap {
-			let brushData = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(size.width * size.height) * 4)
-			SeaUnpremultiplyBitmap(4, brushData, pixmap, size.width * size.height);
-			toWrite = Data(bytes: UnsafePointer<UInt8>(brushData), count: Int(size.width * size.height) * 4)
-			brushData.deallocate(capacity: Int(size.width * size.height) * 4)
+			toWrite = Data(count: Int(size.width * size.height) * 4)
+			toWrite.withUnsafeMutableBytes({ (brushData: UnsafeMutablePointer<UInt8>) -> Void in
+				SeaUnpremultiplyBitmap(4, brushData, pixmap, size.width * size.height);
+			})
 		} else {
-			toWrite = Data(bytes: UnsafePointer<UInt8>(mask!), count: Int(size.width * size.height))
+			let aWrite = UnsafeMutableBufferPointer(start: mask!, count: Int(size.width * size.height))
+			toWrite = Data(buffer: aWrite)
 		}
 		file.write(toWrite)
 	}

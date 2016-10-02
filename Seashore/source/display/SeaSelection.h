@@ -22,12 +22,12 @@
 				For a new selection
 */
 typedef NS_ENUM(int, SeaSelectMode) {
-	SeaSelectDefault,
-	SeaSelectAdd,
-	SeaSelectSubtract,
-	SeaSelectMultiply,
-	SeaSelectSubtractProduct,
-	SeaSelectForceNew,
+	SeaSelectDefault,			///< Default selection.
+	SeaSelectAdd,				///< Add to the selection.
+	SeaSelectSubtract,			///< Subtract from the selection.
+	SeaSelectMultiply,			///< Multiply the selections.
+	SeaSelectSubtractProduct,	///< Subtract the product of the selections.
+	SeaSelectForceNew,			///< For a new selection
 	
 	kDefaultMode NS_SWIFT_UNAVAILABLE("Use .Default instead") = SeaSelectDefault,
 	kAddMode NS_SWIFT_UNAVAILABLE("Use .Add instead") = SeaSelectAdd,
@@ -48,17 +48,19 @@ typedef NS_ENUM(int, SeaSelectMode) {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface SeaSelection : NSObject {
-	// The document associated with this object
-	SeaDocument *document;
+NS_ASSUME_NONNULL_BEGIN
 
-	// The current selection rectangle
+@interface SeaSelection : NSObject {
+	/// The document associated with this object
+	__weak SeaDocument *document;
+
+	/// The current selection rectangle
 	IntRect rect, globalRect;
 	
-	// The current selection bitmap and mask
+	/// The current selection bitmap and mask
 	unsigned char *mask;
 	
-	// Used to determine if the selection is active
+	/// Used to determine if the selection is active
 	BOOL active;
 	
 	// Help present the user with a visual representation of the mask
@@ -99,12 +101,12 @@ typedef NS_ENUM(int, SeaSelectMode) {
 
 /*!
 	@property	mask
-	@discussion	Returns a mask indicating the opacity of the selection, if NULL
+	@discussion	Returns a mask indicating the opacity of the selection, if \c NULL
 				is returned the selection rectangle should be assumed to be
 				entirely opaque.
 	@result		Returns a reference to an 8-bit single-channel bitmap or NULL.
 */
-@property (readonly) unsigned char *mask NS_RETURNS_INNER_POINTER;
+@property (readonly, nullable) unsigned char *mask NS_RETURNS_INNER_POINTER;
 
 /*!
 	@property	maskImage
@@ -200,7 +202,7 @@ typedef NS_ENUM(int, SeaSelectMode) {
 	@param		mode
 				The mode of the selection (see above).
 */
-- (void)selectOverlay:(BOOL)destructively inRect:(IntRect)selectionRect mode:(SeaSelectMode)mode;
+- (void)selectOverlay:(BOOL)destructively inRect:(IntRect)selectionRect mode:(SeaSelectMode)mode NS_SWIFT_NAME(selectOverlay(destructively:in:mode:));
 
 /*!
 	@method		selectOpaque
@@ -257,7 +259,7 @@ typedef NS_ENUM(int, SeaSelectMode) {
 	@result		Returns a pointer to a block of memory containing the layer data
 				encapsulated by the rectangle.
 */
-- (unsigned char *)selectionData:(BOOL)premultiplied;
+- (unsigned char *)selectionData:(BOOL)premultiplied NS_SWIFT_NAME(selectionData(premultiplied:));
 
 /*!
 	@method		selectionSizeMatch:
@@ -315,7 +317,7 @@ typedef NS_ENUM(int, SeaSelectMode) {
 	@param		interpolation
 				The interpolation to be used when scaling (see GIMPCore).
 */
-- (void)scaleSelectionHorizontally:(float)xScale vertically:(float)yScale interpolation:(int)interpolation;
+- (void)scaleSelectionHorizontally:(float)xScale vertically:(float)yScale interpolation:(GimpInterpolationType)interpolation NS_SWIFT_NAME(scale(horizontally:vertically:interpolation:));
 
 /*!
 	@method		scaleSelectionTo:from:interpolation:usingMask:
@@ -329,7 +331,7 @@ typedef NS_ENUM(int, SeaSelectMode) {
 	@param		oldMask
 				The mask that should be scaled to the newRect.
 */
-- (void)scaleSelectionTo:(IntRect)newRect from:(IntRect)oldRect interpolation:(GimpInterpolationType)interpolation usingMask:(unsigned char*)oldMask NS_SWIFT_NAME(scaleSelection(to:from:interpolation:usingMask:));
+- (void)scaleSelectionTo:(IntRect)newRect from:(IntRect)oldRect interpolation:(GimpInterpolationType)interpolation usingMask:(nullable unsigned char*)oldMask NS_SWIFT_NAME(scale(to:from:interpolation:usingMask:));
 
 /*!
 	@method		trimSelection
@@ -339,3 +341,5 @@ typedef NS_ENUM(int, SeaSelectMode) {
 - (void)trimSelection;
 
 @end
+
+NS_ASSUME_NONNULL_END

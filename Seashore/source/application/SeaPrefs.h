@@ -422,25 +422,25 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 - (void)windowWillClose:(NSNotification *)aNotification;
 
 /*!
-	@method		layerBounds
+	@property	layerBounds
 	@discussion	Returns whether or not the layer boundaries should be visible.
 	@result		YES if the layer boundaries should be visible, NO otherwise.
 */
-- (BOOL)layerBounds;
+@property (readonly) BOOL layerBounds;
 
 /*!
-	@method		guides
+	@property	guides
 	@discussion	Returns whether or not the layer guides should be visible.
 	@result		YES if the layer guides should be visible, NO otherwise.
 */
-- (BOOL)guides;
+@property (readonly) BOOL guides;
 
 /*!
-	@method		rulers
+	@property	rulers
 	@discussion	Returns whether or not the rulers should be visible.
 	@result		YES if the rulers should be visible, NO otherwise.
 */
-- (BOOL)rulers;
+@property (readonly) BOOL rulers;
 
 /*!
 	@property	firstRun
@@ -462,12 +462,12 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 @property (readonly) size_t memoryCacheSize;
 
 /*!
-	@method		warningLevel
+	@property	warningLevel
 	@discussion	Returns the warning level. Only warnings with a priority less
 				than the returned to level shoule be displayed.
 	@result		Returns an integer indicating the warning level.
 */
-- (SeaWarningImportance)warningLevel;
+@property (readonly) SeaWarningImportance warningLevel;
 
 /*!
 	@method		effectsPanel
@@ -570,7 +570,7 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 				The alpha value to be associated with the colour.
 	@result		Returns a RGB NSColor object representing the selection colour.
 */
-- (NSColor *)selectionColor:(CGFloat)alpha;
+- (NSColor *)selectionColor:(CGFloat)alpha NS_SWIFT_NAME(selectionColor(alpha:));
 
 /*!
 	@property	selectionColorIndex
@@ -608,7 +608,7 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 				The alpha value to be associated with the colour.
  @result		Returns a RGB NSColor object representing the guide colour.
  */
-- (NSColor *)guideColor:(CGFloat)alpha;
+- (NSColor *)guideColor:(CGFloat)alpha NS_SWIFT_NAME(guideColor(alpha:));
 
 /*!
  @property		guideColorIndex

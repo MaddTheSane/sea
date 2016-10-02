@@ -592,7 +592,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	}
 }
 
-- (void)drawDragHandles:(NSRect) rect type: (int)type
+- (void)drawDragHandles:(NSRect) rect type: (SeaHandleType)type
 {
 	rect.origin.x -= 1;
 	rect.origin.y -= 1;
@@ -613,7 +613,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[self drawHandle: rect.origin type: type index: 7];
 }
 
-- (void)drawHandle:(NSPoint) origin  type: (int)type index:(int) index
+- (void)drawHandle:(NSPoint) origin  type: (SeaHandleType)type index:(NSInteger) index
 {
 	NSRect outside  = NSMakeRect(origin.x - 4,origin.y - 4,8,8);
 	// This function is also used to set the appropriate cursor rects
@@ -646,7 +646,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			[cursorsManager setCloseRect:outside];
 			break;
 		case kPositionType:
-			[[(SeaPrefs *)[SeaController seaPrefs] guideColor: 1.0] set];
+			[[[SeaController seaPrefs] guideColor: 1.0] set];
 			outside = NSMakeRect(origin.x - 3, origin.y - 3, 6, 6);
 			path = [NSBezierPath bezierPathWithRect:outside];
 			break;

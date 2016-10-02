@@ -23,17 +23,17 @@
 	__weak SeaDocument *document;
 	__weak SeaView *view;
 	
-	// The various cursors used by the toolbox
+	/// The various cursors used by the toolbox
 	NSCursor *crosspointCursor, *wandCursor, *zoomCursor, *pencilCursor, *brushCursor, *bucketCursor, *eyedropCursor, *moveCursor, *eraserCursor, *smudgeCursor, *effectCursor, *addCursor, *subtractCursor, *noopCursor;
 
-	// The view-specific cursors
+	/// The view-specific cursors
 	NSCursor *handCursor, *grabCursor, *udCursor, *lrCursor, *urdlCursor, *uldrCursor, *closeCursor, *resizeCursor, *rotateCursor , *anchorCursor;
 	
 	// The rects for the handles and selection
 	NSRect handleRects[8];
 	NSCursor* handleCursors[8];
 	
-	// The close rect
+	/// The close rect
 	NSRect closeRect;
 
 	// Scrolling mode variables

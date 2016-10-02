@@ -46,18 +46,18 @@
 	NSString *side = thisDict[@"side"];
 	
 	if (!visibility) {
-		if([side isEqual:@"above"] || [side isEqual:@"below"]){
+		if ([side isEqual:@"above"] || [side isEqual:@"below"]) {
 			oldValue = [view frame].size.height;
-		}else {
+		} else {
 			oldValue = [view frame].size.width;
 		}
 
 		NSRect oldRect = [view frame];
 		
 		
-		if([side isEqual:@"above"] || [side isEqual:@"below"]){
+		if ([side isEqual:@"above"] || [side isEqual:@"below"]) {
 			oldRect.size.height = 0;
-		}else {
+		} else {
 			oldRect.size.width = 0;
 		}
 		
@@ -65,15 +65,15 @@
 		
 		oldRect = [nonView frame];
 		
-		if([side isEqual:@"above"]){
+		if ([side isEqual:@"above"]) {
 			oldRect.size.height += oldValue;
-		}else if([side isEqual:@"below"]){
+		} else if([side isEqual:@"below"]) {
 			oldRect.origin.y = [view frame].origin.y;
 			oldRect.size.height += oldValue;
-		}else if([side isEqual:@"left"]){
+		} else if([side isEqual:@"left"]) {
 			oldRect.origin.x = [view frame].origin.x;
 			oldRect.size.width += oldValue;
-		}else if([side isEqual:@"right"]){
+		} else if([side isEqual:@"right"]) {
 			oldRect.size.width += oldValue;
 		}
 		
@@ -85,9 +85,9 @@
 		[defaults setBool: NO forKey:[NSString stringWithFormat:@"region%ldvisibility", (long)region]];
 	} else {
 		NSRect newRect = [view frame];
-		if([side isEqual:@"above"] || [side isEqual:@"below"]){
+		if ([side isEqual:@"above"] || [side isEqual:@"below"]) {
 			newRect.size.height = oldValue;
-		}else{
+		} else {
 			newRect.size.width = oldValue;
 		}
 		
@@ -95,15 +95,15 @@
 		
 		newRect = [nonView frame];
 
-		if([side isEqual:@"above"]){
+		if ([side isEqual:@"above"]) {
 			newRect.size.height -= oldValue;
-		}else if([side isEqual:@"below"]){
+		} else if([side isEqual:@"below"]) {
 			newRect.origin.y += oldValue;
 			newRect.size.height -= oldValue;
-		}else if([side isEqual:@"left"]){
+		} else if([side isEqual:@"left"]) {
 			newRect.origin.x += oldValue;
 			newRect.size.width -= oldValue;
-		}else if([side isEqual:@"right"]){
+		} else if([side isEqual:@"right"]) {
 			newRect.size.width -= oldValue;
 		}
 		

@@ -827,7 +827,7 @@
 	
 	// Copy the image data
 	destPtr = malloc(make_128(globalRect.size.width * globalRect.size.height * spp));
-	srcPtr = [(SeaLayer *)layer data];
+	srcPtr = [layer data];
 	for (int i = 0; i < globalRect.size.height; i++) {
 		memcpy(&(destPtr[i * globalRect.size.width * spp]), &(srcPtr[((i + localRect.origin.y) * width + localRect.origin.x) * spp]), globalRect.size.width * spp); 
 	}
@@ -956,7 +956,7 @@
 	globalRect.origin.y += offset.y;
 }
 
-- (void)scaleSelectionHorizontally:(float)xScale vertically:(float)yScale interpolation:(int)interpolation
+- (void)scaleSelectionHorizontally:(float)xScale vertically:(float)yScale interpolation:(GimpInterpolationType)interpolation
 {
 	if (active) {
 		// Work out the new rectangle and allocate space for the new mask

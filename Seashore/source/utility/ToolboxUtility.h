@@ -22,31 +22,31 @@
 */
 @interface ToolboxUtility : NSObject {
 
-	// The document which is the focus of this utility
+	/// The document which is the focus of this utility
 	IBOutlet SeaDocument *document;
 
-	// The proxy object
+	/// The proxy object
 	IBOutlet SeaProxy *seaProxy;
 	
-	// The current foreground and background colour
+	/// The current foreground and background colour
 	NSColor *foreground, *background;
 	
-	// The colorSelectView associated with this utility
+	/// The colorSelectView associated with this utility
 	IBOutlet __weak ColorSelectView *colorSelectView;
 	
-	// The toolbox
+	/// The toolbox
 	IBOutlet NSMatrix *toolbox;
 	
-	// The options utility object
+	/// The options utility object
 	IBOutlet OptionsUtility *optionsUtility;
 	
-	// The tag of the currently selected tool
+	/// The tag of the currently selected tool
 	SeaToolsDefines tool;
 	
-	// The old tool
+	/// The old tool
 	SeaToolsDefines oldTool;
 
-	// The toolbar
+	/// The toolbar
 	NSToolbar *toolbar;
 
 	IBOutlet NSSegmentedControl *selectionTBView;
@@ -65,7 +65,7 @@
 	NSArray<NSNumber*> *effectTools;
 	NSArray<NSNumber*> *transformTools;
 	
-	// A timer that delays colour changes
+	/// A timer that delays colour changes
 	NSTimer *delay_timer;
 }
 
@@ -149,10 +149,10 @@
 	@method		update:
 	@discussion	Updates the utility for the current document.
 	@param		full
-				YES if the update is to also include setting the cursor, NO
+				\c YES if the update is to also include setting the cursor, \c NO
 				otherwise.
 */
-- (void)update:(BOOL)full;
+- (void)update:(BOOL)full NS_SWIFT_NAME(update(full:));
 
 /*!
 	@property	tool
@@ -203,7 +203,7 @@
 	@method		setEffectEnabled:
 	@discussion	Sets whether the effect tool is enabled or not.
 	@param		enable
-				YES to enable the tool, NO otherwise.
+				\c YES to enable the tool, \c NO otherwise.
 */
 - (void)setEffectEnabled:(BOOL)enable;
 
@@ -214,8 +214,8 @@
 				appropriate).
 	@param		menuItem
 				The menu item to be validated.
-	@result		YES if the menu item should be enabled, NO otherwise.
+	@result		\c YES if the menu item should be enabled, \c NO otherwise.
 */
-- (BOOL)validateMenuItem:(id)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end

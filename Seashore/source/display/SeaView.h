@@ -22,7 +22,7 @@
 	@constant	kPositionType
 				Indicates the handle for the position tool (scale, rotate).
 */
-enum {
+typedef NS_ENUM(int, SeaHandleType) {
 	kSelectionHandleType,
 	kLayerHandleType,
 	kCropHandleType,
@@ -249,7 +249,7 @@ enum {
  @param			type
 				An element of HandleType enum that describes the appearance of the handles.
 */
-- (void)drawDragHandles:(NSRect) rect type: (int)type;
+- (void)drawDragHandles:(NSRect) rect type: (SeaHandleType)type;
 
 /*!
  @method		drawHandles:type:
@@ -260,9 +260,9 @@ enum {
 				An element of HandleType enum that describes the appearance of the handle.
  @param			index
 				If the handles are part of a rect, the order of the handle.
-				If the handle is not part of a rect use -1
+				If the handle is not part of a rect, use -1
 */
-- (void)drawHandle:(NSPoint) origin  type: (int)type index:(int)index;
+- (void)drawHandle:(NSPoint) origin  type: (SeaHandleType)type index:(NSInteger)index;
 
 /*!
  @method		drawCropBoundaries

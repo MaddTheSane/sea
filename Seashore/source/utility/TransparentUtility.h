@@ -42,7 +42,7 @@
 	@param		sender
 				The colour panel responsible for the change in colour.
 */
-- (void)changeColor:(id)sender;
+- (IBAction)changeColor:(id)sender;
 
 /*!
 	@property	color

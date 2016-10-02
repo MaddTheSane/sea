@@ -25,7 +25,6 @@
 				http://bergdesign.com/missing_cocoa_docs/nsclipview.html</a>
 				for the tutorial from which this code came.</i>
 */
-
 @interface CenteringClipView : NSClipView {
 	
 	// Does the view have a horizontal scrollbar?

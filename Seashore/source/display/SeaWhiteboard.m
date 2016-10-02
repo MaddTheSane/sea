@@ -577,7 +577,7 @@ extern IntPoint SeaScreenResolution;
 	IntRect selectRect, minorUpdateRect;
 	IntSize maskSize = IntMakeSize(0, 0);
 	IntPoint point, maskOffset = IntMakePoint(0, 0);
-	BOOL useSelection, floating;
+	BOOL useSelection = NO, floating = NO;
 #if MAIN_COMPILE
 	id flayer;
 #endif

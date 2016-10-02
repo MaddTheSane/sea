@@ -85,6 +85,9 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 @synthesize guideColorIndex = guideColor;
 @synthesize selectionColorIndex = selectionColor;
 @synthesize useTextures;
+@synthesize layerBounds;
+@synthesize guides;
+@synthesize rulers;
 
 - (instancetype)init
 {
@@ -595,21 +598,6 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 		[self setWidth: self];
 		[self setHeight: self];
 	}
-}
-
-- (BOOL)layerBounds
-{
-	return layerBounds;
-}
-
-- (BOOL)guides
-{
-	return guides;
-}
-
-- (BOOL)rulers
-{
-	return rulers;
 }
 
 - (SeaWarningImportance)warningLevel

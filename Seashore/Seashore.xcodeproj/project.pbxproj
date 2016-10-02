@@ -187,6 +187,7 @@
 		551E574218D0270900E4CDAF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50EB18CF9FBC005809E3 /* Localizable.strings */; };
 		551E574318D0271000E4CDAF /* CIFalseColorClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D50F318CF9FBC005809E3 /* CIFalseColorClass.m */; };
 		551E574418D0271400E4CDAF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D50F418CF9FBC005809E3 /* Localizable.strings */; };
+		5522C0E31DA1A7A50009499F /* OptionsUtility+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522C0E21DA1A7A50009499F /* OptionsUtility+Swift.swift */; };
 		5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in Copy Spotlight plug-in */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in Copy QuickLook plug-in */ = {isa = PBXBuildFile; fileRef = 5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55472B851C6EDCCA0065A852 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; };
@@ -1831,6 +1832,7 @@
 		551E56A518D0138C00E4CDAF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		551E572918D0268500E4CDAF /* Exposure+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Exposure+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E573A18D0268A00E4CDAF /* False Color+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "False Color+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5522C0E21DA1A7A50009499F /* OptionsUtility+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OptionsUtility+Swift.swift"; sourceTree = "<group>"; };
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5530858A1D3857B1003D87C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIPosterize.xib; sourceTree = "<group>"; };
 		5530858B1D3857BA003D87C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPosterize.strings; sourceTree = "<group>"; };
@@ -4617,6 +4619,7 @@
 				A849725A07C4BE750033BE1B /* NSExtendedTableView.m */,
 				A8C2073F0CD46C2C00F91B3C /* WindowBackColorWell.h */,
 				A8C207400CD46C2C00F91B3C /* WindowBackColorWell.m */,
+				5522C0E21DA1A7A50009499F /* OptionsUtility+Swift.swift */,
 			);
 			name = "Extra Sources";
 			path = source/extra;
@@ -7985,6 +7988,7 @@
 				A8EDF132078959C80022BB31 /* BrushTool.m in Sources */,
 				A8EDF133078959C80022BB31 /* PencilTool.m in Sources */,
 				A8EDF13C078959C80022BB31 /* RectSelectOptions.m in Sources */,
+				5522C0E31DA1A7A50009499F /* OptionsUtility+Swift.swift in Sources */,
 				A8EDF13D078959C80022BB31 /* RectSelectTool.m in Sources */,
 				A8EDF13E078959C80022BB31 /* EraserTool.m in Sources */,
 				A8EDF13F078959C80022BB31 /* EraserOptions.m in Sources */,

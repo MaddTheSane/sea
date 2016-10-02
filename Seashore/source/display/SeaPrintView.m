@@ -60,12 +60,12 @@
 	
 	// For non 72 dpi resolutions we must scale here
 	if (xres != 72) {
-		srcRect.origin.x *= ((float)xres / 72.0);
-		srcRect.size.width *= ((float)xres / 72.0);
+		srcRect.origin.x *= ((CGFloat)xres / 72.0);
+		srcRect.size.width *= ((CGFloat)xres / 72.0);
 	}
 	if (yres != 72) {
-		srcRect.origin.y *= ((float)yres / 72.0);
-		srcRect.size.height *= ((float)yres / 72.0);
+		srcRect.origin.y *= ((CGFloat)yres / 72.0);
+		srcRect.size.height *= ((CGFloat)yres / 72.0);
 	}
 	
 	// Set interpolation (image smoothing) appropriately
@@ -74,14 +74,9 @@
 			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
 		else
 			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
-	}
-	else {
+	} else {
 		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
 	}
-	
-	// Fix for Jaguar
-	if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_2)
-		srcRect.origin.y = [image size].height - srcRect.origin.y - srcRect.size.height;
 	
 	// Draw the image to screen
 	[image drawInRect:destRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0];
@@ -95,7 +90,7 @@
 	float scale;
 	
 	// Work out the image's bounds
-	bounds = NSMakeRect(0, 0, [(SeaContent *)[document contents] width] * (72.0 / (float)[[document contents] xres]), [(SeaContent *)[document contents] height] * (72.0 / (float)[[document contents] yres]));
+	bounds = NSMakeRect(0, 0, [(SeaContent *)[document contents] width] * (72.0 / (CGFloat)[[document contents] xres]), [(SeaContent *)[document contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
 	
 	// Work out the paper's bounding rectangle
 	paper.size = [pi paperSize];
@@ -106,22 +101,17 @@
 	paper.size.width /= scale;
 	
 	if (bounds.size.width < paper.size.width && bounds.size.height < paper.size.height) {
-		
 		// Handle one page documents
 		range->location = 1;
 		range->length = 1;
 		[pi setHorizontallyCentered:YES];
 		[pi setVerticallyCentered:YES];
-		
-	}
-	else {
-		
+	} else {
 		// Otherwise do tiling
 		range->location = 1;
 		range->length = ceil((float)bounds.size.width / (float)paper.size.width) * ceil((float)bounds.size.height / (float)paper.size.height);
 		[pi setHorizontallyCentered:NO];
 		[pi setVerticallyCentered:NO];
-		
 	}
 	
 	return YES;

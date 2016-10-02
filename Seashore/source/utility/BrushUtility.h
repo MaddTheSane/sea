@@ -16,36 +16,36 @@
 */
 @interface BrushUtility : AbstractPanelUtility {
 
-	// The brush grouping pop-up
+	/// The brush grouping pop-up
 	IBOutlet NSPopUpButton *brushGroupPopUp;
 
-	// The label that presents the user with the brushes name
+	/// The label that presents the user with the brushes name
 	IBOutlet NSTextField *brushNameLabel;
 	
 	// The label and slider that present spacing to the user
     IBOutlet NSTextField *spacingLabel;
     IBOutlet NSSlider *spacingSlider;
 	
-	// The view that displays the brushes
+	/// The view that displays the brushes
     IBOutlet NSScrollView *view;
 		
-	// The document which is the focus of this utility
+	/// The document which is the focus of this utility
 	IBOutlet SeaDocument *document;
 	
-	// An dictionary of all brushes known to Seashore
+	/// An dictionary of all brushes known to Seashore
 	NSDictionary<NSString*, SeaBrush*> *brushes;
 	
 	// An array of all groups (an array of an array SeaBrush's) and group names (an array of NSString's)
 	NSArray<NSArray<SeaBrush*>*> *groups;
 	NSArray<NSString*> *groupNames;
 	
-	// The index of the currently active group
+	/// The index of the currently active group
 	NSInteger activeGroupIndex;
 	
-	// The index of the currently active brush
+	/// The index of the currently active brush
 	NSInteger activeBrushIndex;
 	
-	// The number of custom groups
+	/// The number of custom groups
 	NSInteger customGroups;
 }
 
