@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CIStarshineClass">
@@ -15,10 +14,10 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Starshine" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
-            <rect key="contentRect" x="66" y="439" width="365" height="211"/>
+            <rect key="contentRect" x="66" y="439" width="365" height="208"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="5">
-                <rect key="frame" x="0.0" y="0.0" width="365" height="211"/>
+                <rect key="frame" x="0.0" y="0.0" width="365" height="208"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7">
@@ -48,7 +47,7 @@ Gw
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38">
-                        <rect key="frame" x="18" y="177" width="36" height="14"/>
+                        <rect key="frame" x="18" y="174" width="36" height="14"/>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Scale:" id="91">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -56,7 +55,7 @@ Gw
                         </textFieldCell>
                     </textField>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="39">
-                        <rect key="frame" x="18" y="151" width="283" height="20"/>
+                        <rect key="frame" x="18" y="149" width="283" height="19"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="100" doubleValue="15" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="92">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
@@ -66,7 +65,7 @@ Gw
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40">
-                        <rect key="frame" x="305" y="153" width="42" height="14"/>
+                        <rect key="frame" x="305" y="151" width="42" height="14"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="38" id="nIs-tm-Gi3"/>
                         </constraints>
@@ -95,7 +94,7 @@ Gw
                         </connections>
                     </colorWell>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="71">
-                        <rect key="frame" x="18" y="131" width="48" height="14"/>
+                        <rect key="frame" x="18" y="129" width="48" height="14"/>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Opacity:" id="94">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -103,7 +102,7 @@ Gw
                         </textFieldCell>
                     </textField>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="72">
-                        <rect key="frame" x="18" y="105" width="283" height="20"/>
+                        <rect key="frame" x="18" y="104" width="283" height="19"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" minValue="-8" doubleValue="-2" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="95">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
@@ -113,12 +112,12 @@ Gw
                         </connections>
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="73">
-                        <rect key="frame" x="305" y="107" width="42" height="14"/>
+                        <rect key="frame" x="305" y="106" width="42" height="14"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="38" id="dve-qe-AEu"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="-2.0" id="96">
-                            <numberFormatter key="formatter" formatterBehavior="custom10_4" negativeFormat="-#" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="309" minimumFractionDigits="1" maximumFractionDigits="1" id="17f-Hd-HMz"/>
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" negativeFormat="-#" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="1" maximumIntegerDigits="42" minimumFractionDigits="1" maximumFractionDigits="1" id="17f-Hd-HMz"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -128,7 +127,7 @@ Gw
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="74">
-                        <rect key="frame" x="18" y="85" width="39" height="14"/>
+                        <rect key="frame" x="18" y="84" width="39" height="14"/>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Width:" id="97">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -136,7 +135,7 @@ Gw
                         </textFieldCell>
                     </textField>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="75">
-                        <rect key="frame" x="18" y="59" width="283" height="20"/>
+                        <rect key="frame" x="18" y="59" width="283" height="19"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="10" doubleValue="2.5" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="98">
                             <font key="font" size="12" name="Helvetica-Oblique"/>
                         </sliderCell>
@@ -151,7 +150,7 @@ Gw
                             <constraint firstAttribute="width" constant="38" id="rpT-xz-NQg"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="2.5" id="99">
-                            <numberFormatter key="formatter" formatterBehavior="custom10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" minimumFractionDigits="1" maximumFractionDigits="1" id="CZw-hr-V9X"/>
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="1" maximumIntegerDigits="42" minimumFractionDigits="1" maximumFractionDigits="1" id="CZw-hr-V9X"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -166,6 +165,7 @@ Gw
                     <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" constant="20" symbolic="YES" id="6dB-5Y-War"/>
                     <constraint firstItem="7" firstAttribute="leading" secondItem="16" secondAttribute="trailing" constant="12" symbolic="YES" id="7x7-5l-m4c"/>
                     <constraint firstItem="73" firstAttribute="leading" secondItem="72" secondAttribute="trailing" constant="8" symbolic="YES" id="AwV-Rc-xkP"/>
+                    <constraint firstItem="75" firstAttribute="top" secondItem="74" secondAttribute="bottom" constant="8" symbolic="YES" id="EoE-5r-bIZ"/>
                     <constraint firstItem="71" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="GKs-yc-mIV"/>
                     <constraint firstItem="74" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="JIQ-Pr-d9i"/>
                     <constraint firstItem="7" firstAttribute="width" secondItem="16" secondAttribute="width" id="TAe-6j-Tgx"/>

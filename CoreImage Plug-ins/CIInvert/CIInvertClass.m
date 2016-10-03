@@ -104,7 +104,6 @@
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];
 	} else {
-	
 		// Create output core image
 		rect.origin.x = 0;
 		rect.origin.y = 0;
