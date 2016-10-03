@@ -133,7 +133,7 @@
 		55115C041D46AC2700E76B5B /* SSKTerminatable.h in Headers */ = {isa = PBXBuildFile; fileRef = 55115C031D46AC2700E76B5B /* SSKTerminatable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55115C241D46D68E00E76B5B /* SwiftCMYK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55115C231D46D68D00E76B5B /* SwiftCMYK.swift */; };
 		55115C271D46D71200E76B5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55115C291D46D71200E76B5B /* Localizable.strings */; };
-		551E568518D0131D00E4CDAF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E568418D0131D00E4CDAF /* libz.dylib */; };
+		551E568518D0131D00E4CDAF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E568418D0131D00E4CDAF /* libz.tbd */; };
 		551E568C18D0132900E4CDAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		551E569B18D0132B00E4CDAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		551E56A618D0138C00E4CDAF /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
@@ -177,6 +177,7 @@
 		5522C14B1DA1C82F0009499F /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5CE25B003D7112D013D2EC9 /* ApplicationServices.framework */; };
 		5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in Copy Spotlight plug-in */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in Copy QuickLook plug-in */ = {isa = PBXBuildFile; fileRef = 5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		552D702D1DA2063200AFBD32 /* XCFLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DEAE1303C5C847010475F1 /* XCFLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55472B851C6EDCCA0065A852 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; };
 		55472B861C6EDCCA0065A852 /* SeashoreKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55472B8A1C6EDD300065A852 /* Rects.h in Headers */ = {isa = PBXBuildFile; fileRef = A8E00A1D04BE5DF800A80207 /* Rects.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1773,15 +1774,17 @@
 		55115C1F1D46D65100E76B5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55115C231D46D68D00E76B5B /* SwiftCMYK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCMYK.swift; sourceTree = "<group>"; };
 		55115C281D46D71200E76B5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		551E568418D0131D00E4CDAF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		551E568418D0131D00E4CDAF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		551E569318D0132900E4CDAF /* Edges+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Edges+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E56A218D0132B00E4CDAF /* Edge Work+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Edge Work+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E56A418D0138C00E4CDAF /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		551E56A518D0138C00E4CDAF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		551E572918D0268500E4CDAF /* Exposure+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Exposure+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		551E573A18D0268A00E4CDAF /* False Color+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "False Color+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5522C0E21DA1A7A50009499F /* OptionsUtility+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OptionsUtility+Swift.swift"; sourceTree = "<group>"; };
 		5522C0E41DA1BE910009499F /* RGBConv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBConv.swift; sourceTree = "<group>"; };
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
+		552D702B1DA2057300AFBD32 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		5530858A1D3857B1003D87C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIPosterize.xib; sourceTree = "<group>"; };
 		5530858B1D3857BA003D87C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPosterize.strings; sourceTree = "<group>"; };
 		5530858C1D3857BF003D87C5 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CIPosterize.strings"; sourceTree = "<group>"; };
@@ -1873,7 +1876,6 @@
 		5575352A18DB56CB00AC0FBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5575352C18DB56CB00AC0FBC /* SeashoreKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SeashoreKit-Prefix.pch"; sourceTree = "<group>"; };
 		5575352D18DB56CB00AC0FBC /* SeashoreKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeashoreKit.h; sourceTree = "<group>"; };
-		5575353518DB56CB00AC0FBC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5575354918DB576600AC0FBC /* SSKPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SSKPlugin.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5575354A18DB576600AC0FBC /* SSKPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SSKPlugin.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5575354E18DB59A600AC0FBC /* SSKCIPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKCIPlugin.h; sourceTree = "<group>"; };
@@ -3242,7 +3244,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				551E568518D0131D00E4CDAF /* libz.dylib in Frameworks */,
+				551E568518D0131D00E4CDAF /* libz.tbd in Frameworks */,
 				55850B3E13D63BC500C3B2CB /* GIMPCore.framework in Frameworks */,
 				55850B3F13D63BC500C3B2CB /* TIFF.framework in Frameworks */,
 				A84E106408E7A4FB0084BCB7 /* IOKit.framework in Frameworks */,
@@ -3260,11 +3262,13 @@
 		1058C7A8FEA54F5311CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
-				2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */,
-				A8C47DA4045285AE00A80207 /* CoreFoundation.framework */,
 				A81A8486046431A300A80207 /* Accelerate.framework */,
+				2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */,
 				557D533618CF9FEC005809E3 /* CoreData.framework */,
+				A8C47DA4045285AE00A80207 /* CoreFoundation.framework */,
+				552D702B1DA2057300AFBD32 /* CoreServices.framework */,
+				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
+				551E56A518D0138C00E4CDAF /* QuartzCore.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -3435,13 +3439,12 @@
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				551E56A418D0138C00E4CDAF /* Quartz.framework */,
-				551E568418D0131D00E4CDAF /* libz.dylib */,
-				A84E106308E7A4FB0084BCB7 /* IOKit.framework */,
-				A8BF652608E6FEAB006E9BFC /* Carbon.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
+				551E56A418D0138C00E4CDAF /* Quartz.framework */,
 				F5CE25B003D7112D013D2EC9 /* ApplicationServices.framework */,
-				5575353518DB56CB00AC0FBC /* XCTest.framework */,
+				A8BF652608E6FEAB006E9BFC /* Carbon.framework */,
+				A84E106308E7A4FB0084BCB7 /* IOKit.framework */,
+				551E568418D0131D00E4CDAF /* libz.tbd */,
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -4900,6 +4903,7 @@
 				55472B8E1C6EDDD50065A852 /* SeashoreKit.h in Headers */,
 				55115C041D46AC2700E76B5B /* SSKTerminatable.h in Headers */,
 				55472BA81C6EE1530065A852 /* SeaWarning.h in Headers */,
+				552D702D1DA2063200AFBD32 /* XCFLayer.h in Headers */,
 				55472B961C6EDDF80065A852 /* SSKVisualPlugin.h in Headers */,
 				55472BC21C6EE4220065A852 /* Bitmap.h in Headers */,
 				55D7490B1D52930500B099C9 /* XBMContent.h in Headers */,
@@ -5066,9 +5070,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55472B891C6EDCCB0065A852 /* Build configuration list for PBXNativeTarget "SeashoreKit" */;
 			buildPhases = (
+				55472B7B1C6EDCCA0065A852 /* Headers */,
 				55472B791C6EDCCA0065A852 /* Sources */,
 				55472B7A1C6EDCCA0065A852 /* Frameworks */,
-				55472B7B1C6EDCCA0065A852 /* Headers */,
 				55472B7C1C6EDCCA0065A852 /* Resources */,
 			);
 			buildRules = (
@@ -12456,7 +12460,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -12515,7 +12519,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

@@ -57,6 +57,7 @@ FOUNDATION_EXPORT const unsigned char SeashoreKitVersionString[];
 #import <SeashoreKit/XBMContent.h>
 #import <SeashoreKit/XBMLayer.h>
 #import <SeashoreKit/XCFContent.h>
+#import <SeashoreKit/XCFLayer.h>
 
 #import <SeashoreKit/SeaOperations.h>
 
