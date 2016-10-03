@@ -1,0 +1,39 @@
+
+/* Class = "NSWindow"; title = "Open"; ObjectID = "27"; */
+"27.title" = "Open";
+
+/* Class = "NSTextFieldCell"; title = "This may take several minutes"; ObjectID = "53"; */
+"53.title" = "This may take several minutes";
+
+/* Class = "NSTextFieldCell"; title = "Loading SVG File..."; ObjectID = "54"; */
+"54.title" = "Loading SVG File…";
+
+/* Class = "NSTextFieldCell"; title = "50%"; ObjectID = "56"; */
+"56.title" = "50%";
+
+/* Class = "NSTextFieldCell"; title = "100%"; ObjectID = "57"; */
+"57.title" = "100%";
+
+/* Class = "NSTextFieldCell"; title = "200%"; ObjectID = "58"; */
+"58.title" = "200%";
+
+/* Class = "NSTextFieldCell"; title = "500%"; ObjectID = "59"; */
+"59.title" = "500%";
+
+/* Class = "NSTextFieldCell"; title = "1000%"; ObjectID = "60"; */
+"60.title" = "1000%";
+
+/* Class = "NSTextFieldCell"; title = "5000%"; ObjectID = "61"; */
+"61.title" = "5000%";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "62"; */
+"62.title" = "OK";
+
+/* Class = "NSTextFieldCell"; title = "Set document scale:"; ObjectID = "63"; */
+"63.title" = "Set document scale:";
+
+/* Class = "NSTextFieldCell"; title = "500 x 400"; ObjectID = "64"; */
+"64.title" = "500 x 400";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "p8F-TM-7mQ"; */
+"p8F-TM-7mQ.title" = "Cancel";

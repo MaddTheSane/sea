@@ -1,0 +1,42 @@
+
+/* Class = "NSWindow"; title = "Select page…"; ObjectID = "5"; */
+"5.title" = "Select page…";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "21"; */
+"21.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "150 dpi"; ObjectID = "22"; */
+"22.title" = "150 dpi";
+
+/* Class = "NSMenuItem"; title = "96 dpi"; ObjectID = "23"; */
+"23.title" = "96 dpi";
+
+/* Class = "NSMenuItem"; title = "72 dpi"; ObjectID = "24"; */
+"24.title" = "72 dpi";
+
+/* Class = "NSMenuItem"; title = "300 dpi"; ObjectID = "25"; */
+"25.title" = "300 dpi";
+
+/* Class = "NSMenuItem"; title = "600 dpi"; ObjectID = "26"; */
+"26.title" = "600 dpi";
+
+/* Class = "NSMenuItem"; title = "900 dpi"; ObjectID = "27"; */
+"27.title" = "900 dpi";
+
+/* Class = "NSTextFieldCell"; title = "Page:"; ObjectID = "36"; */
+"36.title" = "Page:";
+
+/* Class = "NSTextFieldCell"; title = "1"; ObjectID = "37"; */
+"37.title" = "1";
+
+/* Class = "NSTextFieldCell"; title = "of 1"; ObjectID = "38"; */
+"38.title" = "of 1";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "39"; */
+"39.title" = "OK";
+
+/* Class = "NSTextFieldCell"; title = "Resolution:"; ObjectID = "41"; */
+"41.title" = "Resolution:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "yeY-1n-JeA"; */
+"yeY-1n-JeA.title" = "Cancel";

@@ -1785,6 +1785,15 @@
 		5522C0E41DA1BE910009499F /* RGBConv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBConv.swift; sourceTree = "<group>"; };
 		5528597D13D62FAB001564E5 /* XCFQuickLook.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCFQuickLook.xcodeproj; path = ../XCFQuickLook/XCFQuickLook.xcodeproj; sourceTree = SOURCE_ROOT; };
 		552D702B1DA2057300AFBD32 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		552D70B51DA20B0000AFBD32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SeaDocument.xib; sourceTree = "<group>"; };
+		552D70B61DA20B0B00AFBD32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SeaDocument.strings; sourceTree = "<group>"; };
+		552D70B81DA20BE700AFBD32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		552D70B91DA20BF300AFBD32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		552D70BB1DA20C0700AFBD32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CocoaContent.xib; sourceTree = "<group>"; };
+		552D70BC1DA20C0E00AFBD32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CocoaContent.strings; sourceTree = "<group>"; };
+		552D70BE1DA20C2700AFBD32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SVGContent.xib; sourceTree = "<group>"; };
+		552D70BF1DA20C2D00AFBD32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SVGContent.strings; sourceTree = "<group>"; };
+		552D70C21DA20D0C00AFBD32 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/SeaDocument.strings"; sourceTree = "<group>"; };
 		5530858A1D3857B1003D87C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CIPosterize.xib; sourceTree = "<group>"; };
 		5530858B1D3857BA003D87C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CIPosterize.strings; sourceTree = "<group>"; };
 		5530858C1D3857BF003D87C5 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/CIPosterize.strings"; sourceTree = "<group>"; };
@@ -2099,10 +2108,6 @@
 		559480371D47D6D90065E83B /* Seashore-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Seashore-Bridging-Header.h"; sourceTree = "<group>"; };
 		5594803A1D47D70F0065E83B /* NewSVGImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSVGImporter.swift; sourceTree = "<group>"; };
 		5594803C1D47E5990065E83B /* IntRectAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntRectAdditions.swift; sourceTree = "<group>"; };
-		55969703194F755D0068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		55969704194F75680068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SeaDocument.xib; sourceTree = "<group>"; };
-		55969705194F75710068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CocoaContent.xib; sourceTree = "<group>"; };
-		55969708194F75820068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SVGContent.xib; sourceTree = "<group>"; };
 		5599389718CFC72A00E92088 /* Bloom+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bloom+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938B218CFCCCA00E92088 /* Checkerboard+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checkerboard+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		559938C118CFCCCC00E92088 /* Circular Screen+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Screen+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2393,7 +2398,7 @@
 		A8E5085804576FB200A80207 /* OptionsUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsUtility.h; sourceTree = "<group>"; };
 		A8E5085904576FB200A80207 /* OptionsUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsUtility.m; sourceTree = "<group>"; };
 		A8EDF154078959C80022BB31 /* Seashore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seashore.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8EDF16707895A9F0022BB31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		A8EDF16707895A9F0022BB31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		A8EDF39F07895DBE0022BB31 /* PluginClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginClass.h; sourceTree = "<group>"; };
 		A8EF9CC00536DE2000A80207 /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rects.m; path = ../source/extra/Rects.m; sourceTree = "<group>"; };
 		A8F0FFCE0A35E06200259FD6 /* GIFExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIFExporter.h; sourceTree = "<group>"; };
@@ -8426,7 +8431,9 @@
 		551E56D218D01A7500E4CDAF /* SeaDocument.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55969704194F75680068C5AC /* en */,
+				552D70B51DA20B0000AFBD32 /* Base */,
+				552D70B61DA20B0B00AFBD32 /* en */,
+				552D70C21DA20D0C00AFBD32 /* en-GB */,
 			);
 			name = SeaDocument.xib;
 			sourceTree = "<group>";
@@ -8434,7 +8441,8 @@
 		551E56D718D01AB500E4CDAF /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55969703194F755D0068C5AC /* en */,
+				552D70B81DA20BE700AFBD32 /* Base */,
+				552D70B91DA20BF300AFBD32 /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -8442,7 +8450,8 @@
 		551E56DC18D01AD900E4CDAF /* CocoaContent.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55969705194F75710068C5AC /* en */,
+				552D70BB1DA20C0700AFBD32 /* Base */,
+				552D70BC1DA20C0E00AFBD32 /* en */,
 			);
 			name = CocoaContent.xib;
 			sourceTree = "<group>";
@@ -8450,7 +8459,8 @@
 		551E56E118D01AF900E4CDAF /* SVGContent.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55969708194F75820068C5AC /* en */,
+				552D70BE1DA20C2700AFBD32 /* Base */,
+				552D70BF1DA20C2D00AFBD32 /* en */,
 			);
 			name = SVGContent.xib;
 			sourceTree = "<group>";

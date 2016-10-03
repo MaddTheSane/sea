@@ -1,15 +1,17 @@
 #import "MainController.h"
 
 typedef struct {
-  unsigned int	header_size;  	/*  header_size = sizeof(PatternHeader) + pattern name  */
-  unsigned int	version;  		/*  pattern file version #  */
-  unsigned int	width;			/*  width of pattern  */
-  unsigned int	height;			/*  height of pattern  */
-  unsigned int	bytes;			/*  depth of pattern in bytes  */
-  unsigned int	magic_number;	/*  GIMP pattern magic number  */
+  unsigned int	header_size;  	/**<  header_size = sizeof(PatternHeader) + pattern name  */
+  unsigned int	version;  		/**<  pattern file version #  */
+  unsigned int	width;			/**<  width of pattern  */
+  unsigned int	height;			/**<  height of pattern  */
+  unsigned int	bytes;			/**<  depth of pattern in bytes  */
+  unsigned int	magic_number;	/**<  GIMP pattern magic number  */
 } PatternHeader;
 
-#define GPATTERN_MAGIC    (('G' << 24) + ('P' << 16) + ('A' << 8) + ('T' << 0))
+NS_ENUM(OSType) {
+	GPATTERN_MAGIC = (('G' << 24) + ('P' << 16) + ('A' << 8) + ('T' << 0))
+};
 
 @implementation MainController
 
@@ -22,7 +24,7 @@ typedef struct {
 	[panel setAllowsMultipleSelection:YES];
 	[panel setAllowedFileTypes:types];
 	[panel beginWithCompletionHandler:^(NSInteger result) {
-		if (result != NSOKButton) {
+		if (result == NSFileHandlingPanelOKButton) {
 			// Go through each of the files
 			for (NSURL *theURL in [panel URLs]) {
 				PatternHeader header;

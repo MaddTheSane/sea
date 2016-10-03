@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -21,7 +20,7 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="alertPanel" id="5" userLabel="SVG Load" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="409" y="434" width="240" height="115"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="240" height="115"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -64,14 +63,14 @@
         </window>
         <window title="Open" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="27" userLabel="Scaling" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
-            <rect key="contentRect" x="311" y="595" width="344" height="144"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="contentRect" x="311" y="595" width="344" height="143"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="28">
-                <rect key="frame" x="0.0" y="0.0" width="344" height="144"/>
+                <rect key="frame" x="0.0" y="0.0" width="344" height="143"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="30">
-                        <rect key="frame" x="18" y="78" width="308" height="27"/>
+                        <rect key="frame" x="18" y="79" width="308" height="24"/>
                         <sliderCell key="cell" alignment="left" maxValue="10" doubleValue="2" tickMarkPosition="below" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="55">
                             <font key="font" size="12" name="Helvetica"/>
                         </sliderCell>
@@ -101,7 +100,7 @@ DQ
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="43">
-                        <rect key="frame" x="18" y="110" width="112" height="14"/>
+                        <rect key="frame" x="18" y="109" width="112" height="14"/>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Set document scale:" id="63">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -109,7 +108,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45">
-                        <rect key="frame" x="267" y="110" width="59" height="14"/>
+                        <rect key="frame" x="267" y="109" width="59" height="14"/>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="500 x 400" id="64">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -196,7 +195,8 @@ Gw
                     <constraint firstItem="36" firstAttribute="width" secondItem="39" secondAttribute="width" id="XGo-0p-hEg"/>
                     <constraint firstItem="36" firstAttribute="width" secondItem="35" secondAttribute="width" id="XcV-K3-fcC"/>
                     <constraint firstItem="39" firstAttribute="baseline" secondItem="38" secondAttribute="baseline" id="Xyg-Mn-Gry"/>
-                    <constraint firstItem="30" firstAttribute="top" secondItem="43" secondAttribute="bottom" constant="7" id="g0Z-QP-epk"/>
+                    <constraint firstItem="39" firstAttribute="top" secondItem="30" secondAttribute="bottom" constant="8" symbolic="YES" id="ehq-kH-k95"/>
+                    <constraint firstItem="30" firstAttribute="top" secondItem="43" secondAttribute="bottom" constant="8" symbolic="YES" id="g0Z-QP-epk"/>
                     <constraint firstItem="40" firstAttribute="leading" secondItem="E4j-cs-dAa" secondAttribute="trailing" constant="12" symbolic="YES" id="gZw-DX-2C3"/>
                     <constraint firstItem="43" firstAttribute="baseline" secondItem="45" secondAttribute="baseline" id="l4b-dt-JFb"/>
                     <constraint firstItem="36" firstAttribute="baseline" secondItem="31" secondAttribute="baseline" id="lc9-U6-Yih"/>
