@@ -11,14 +11,13 @@
 		55909F0E18D000EB00F43F90 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909F1018D000EB00F43F90 /* MainMenu.xib */; };
 		55909F1318D0010700F43F90 /* BrushDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909F1518D0010700F43F90 /* BrushDocument.xib */; };
 		55A6D1681D666CDB00CAD607 /* ImgRepWrappers.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A6D1671D666CDB00CAD607 /* ImgRepWrappers.m */; };
+		55F7A5E21DA42B6E007C1B7E /* BrushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7A5E11DA42B6E007C1B7E /* BrushView.swift */; };
 		A898E52709BEFCA00075C7AB /* BrushDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = A84A94EA043DB32500A80207 /* BrushDocument.h */; };
 		A898E52809BEFCA00075C7AB /* Globals.h in Headers */ = {isa = PBXBuildFile; fileRef = A84A94EE043DB36200A80207 /* Globals.h */; };
-		A898E52909BEFCA00075C7AB /* BrushView.h in Headers */ = {isa = PBXBuildFile; fileRef = A80D889E043EE40D00A80207 /* BrushView.h */; };
 		A898E52A09BEFCA00075C7AB /* BrushedController.h in Headers */ = {isa = PBXBuildFile; fileRef = A865217604400768005BE329 /* BrushedController.h */; };
 		A898E52B09BEFCA00075C7AB /* BrushedDocumentController.h in Headers */ = {isa = PBXBuildFile; fileRef = A89B63D504403A9E00D5D43C /* BrushedDocumentController.h */; };
 		A898E52E09BEFCA00075C7AB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A8EC24B7043D9B5A00A80207 /* Credits.rtf */; };
 		A898E53109BEFCA00075C7AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
-		A898E53309BEFCA00075C7AB /* BrushView.m in Sources */ = {isa = PBXBuildFile; fileRef = A80D889F043EE40D00A80207 /* BrushView.m */; };
 		A898E53409BEFCA00075C7AB /* BrushedController.m in Sources */ = {isa = PBXBuildFile; fileRef = A865217704400768005BE329 /* BrushedController.m */; };
 		A898E53509BEFCA00075C7AB /* BrushedDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = A89B63D604403A9E00D5D43C /* BrushedDocumentController.m */; };
 		A898E53709BEFCA00075C7AB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -36,8 +35,7 @@
 		5596973F194F79A60068C5AC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BrushDocument.xib; sourceTree = "<group>"; };
 		55A6D1671D666CDB00CAD607 /* ImgRepWrappers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgRepWrappers.m; sourceTree = "<group>"; };
 		55A6D1691D666CEA00CAD607 /* ImgRepWrappers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImgRepWrappers.h; sourceTree = "<group>"; };
-		A80D889E043EE40D00A80207 /* BrushView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BrushView.h; sourceTree = "<group>"; };
-		A80D889F043EE40D00A80207 /* BrushView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BrushView.m; sourceTree = "<group>"; };
+		55F7A5E11DA42B6E007C1B7E /* BrushView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrushView.swift; sourceTree = "<group>"; };
 		A84A94EA043DB32500A80207 /* BrushDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrushDocument.h; sourceTree = "<group>"; };
 		A84A94EE043DB36200A80207 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		A865217604400768005BE329 /* BrushedController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BrushedController.h; sourceTree = "<group>"; };
@@ -64,8 +62,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A80D889E043EE40D00A80207 /* BrushView.h */,
-				A80D889F043EE40D00A80207 /* BrushView.m */,
+				55F7A5E11DA42B6E007C1B7E /* BrushView.swift */,
 				554E65901D5FA9D100F2DF77 /* BrushDocument.swift */,
 				A84A94EA043DB32500A80207 /* BrushDocument.h */,
 				A865217604400768005BE329 /* BrushedController.h */,
@@ -147,7 +144,6 @@
 			files = (
 				A898E52709BEFCA00075C7AB /* BrushDocument.h in Headers */,
 				A898E52809BEFCA00075C7AB /* Globals.h in Headers */,
-				A898E52909BEFCA00075C7AB /* BrushView.h in Headers */,
 				A898E52A09BEFCA00075C7AB /* BrushedController.h in Headers */,
 				A898E52B09BEFCA00075C7AB /* BrushedDocumentController.h in Headers */,
 			);
@@ -228,7 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A898E53109BEFCA00075C7AB /* main.m in Sources */,
-				A898E53309BEFCA00075C7AB /* BrushView.m in Sources */,
+				55F7A5E21DA42B6E007C1B7E /* BrushView.swift in Sources */,
 				554E65911D5FA9D100F2DF77 /* BrushDocument.swift in Sources */,
 				55A6D1681D666CDB00CAD607 /* ImgRepWrappers.m in Sources */,
 				A898E53409BEFCA00075C7AB /* BrushedController.m in Sources */,

@@ -9,7 +9,6 @@
 */
 
 #import "Globals.h"
-#import "BrushView.h"
 #include <stdbool.h>
 
 typedef struct
