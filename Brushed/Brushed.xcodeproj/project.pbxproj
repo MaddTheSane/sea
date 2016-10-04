@@ -12,7 +12,6 @@
 		55909F1318D0010700F43F90 /* BrushDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55909F1518D0010700F43F90 /* BrushDocument.xib */; };
 		55A6D1681D666CDB00CAD607 /* ImgRepWrappers.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A6D1671D666CDB00CAD607 /* ImgRepWrappers.m */; };
 		55F7A5E21DA42B6E007C1B7E /* BrushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7A5E11DA42B6E007C1B7E /* BrushView.swift */; };
-		A898E52709BEFCA00075C7AB /* BrushDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = A84A94EA043DB32500A80207 /* BrushDocument.h */; };
 		A898E52809BEFCA00075C7AB /* Globals.h in Headers */ = {isa = PBXBuildFile; fileRef = A84A94EE043DB36200A80207 /* Globals.h */; };
 		A898E52A09BEFCA00075C7AB /* BrushedController.h in Headers */ = {isa = PBXBuildFile; fileRef = A865217604400768005BE329 /* BrushedController.h */; };
 		A898E52B09BEFCA00075C7AB /* BrushedDocumentController.h in Headers */ = {isa = PBXBuildFile; fileRef = A89B63D504403A9E00D5D43C /* BrushedDocumentController.h */; };
@@ -36,7 +35,6 @@
 		55A6D1671D666CDB00CAD607 /* ImgRepWrappers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgRepWrappers.m; sourceTree = "<group>"; };
 		55A6D1691D666CEA00CAD607 /* ImgRepWrappers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImgRepWrappers.h; sourceTree = "<group>"; };
 		55F7A5E11DA42B6E007C1B7E /* BrushView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrushView.swift; sourceTree = "<group>"; };
-		A84A94EA043DB32500A80207 /* BrushDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrushDocument.h; sourceTree = "<group>"; };
 		A84A94EE043DB36200A80207 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		A865217604400768005BE329 /* BrushedController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BrushedController.h; sourceTree = "<group>"; };
 		A865217704400768005BE329 /* BrushedController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BrushedController.m; sourceTree = "<group>"; };
@@ -64,7 +62,6 @@
 			children = (
 				55F7A5E11DA42B6E007C1B7E /* BrushView.swift */,
 				554E65901D5FA9D100F2DF77 /* BrushDocument.swift */,
-				A84A94EA043DB32500A80207 /* BrushDocument.h */,
 				A865217604400768005BE329 /* BrushedController.h */,
 				A865217704400768005BE329 /* BrushedController.m */,
 				A89B63D504403A9E00D5D43C /* BrushedDocumentController.h */,
@@ -142,7 +139,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A898E52709BEFCA00075C7AB /* BrushDocument.h in Headers */,
 				A898E52809BEFCA00075C7AB /* Globals.h in Headers */,
 				A898E52A09BEFCA00075C7AB /* BrushedController.h in Headers */,
 				A898E52B09BEFCA00075C7AB /* BrushedDocumentController.h in Headers */,

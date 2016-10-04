@@ -1,5 +1,4 @@
 #import "BrushedController.h"
-#import "BrushDocument.h"
 #import "Brushed-Swift.h"
 
 #define document [[NSDocumentController sharedDocumentController] currentDocument]

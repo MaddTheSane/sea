@@ -48,7 +48,10 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26">
-                        <rect key="frame" x="18" y="71" width="86" height="14"/>
+                        <rect key="frame" x="18" y="71" width="98" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="94" id="ycR-Kg-H1L"/>
+                        </constraints>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Spacing - 100%" id="62">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -70,9 +73,9 @@
                             <outlet property="document" destination="-2" id="46"/>
                         </connections>
                     </customView>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="54">
-                        <rect key="frame" x="206" y="123" width="31" height="14"/>
-                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="0 x 0" id="64">
+                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="54">
+                        <rect key="frame" x="57" y="123" width="180" height="14"/>
+                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="0 x 0" id="64">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -106,7 +109,7 @@
                     <constraint firstItem="56" firstAttribute="top" secondItem="27" secondAttribute="bottom" constant="8" symbolic="YES" id="gxf-CF-YWC"/>
                     <constraint firstItem="39" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="30" id="kua-of-8QB"/>
                     <constraint firstAttribute="bottom" secondItem="56" secondAttribute="bottom" constant="20" symbolic="YES" id="sHU-yR-YXD"/>
-                    <constraint firstItem="54" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="23" secondAttribute="trailing" constant="8" symbolic="YES" id="ure-2L-kVT"/>
+                    <constraint firstItem="54" firstAttribute="leading" secondItem="23" secondAttribute="trailing" constant="8" symbolic="YES" id="ure-2L-kVT"/>
                     <constraint firstItem="26" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="vEA-F4-X63"/>
                     <constraint firstItem="26" firstAttribute="top" secondItem="21" secondAttribute="bottom" constant="8" symbolic="YES" id="vNo-4F-cVY"/>
                 </constraints>

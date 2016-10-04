@@ -3,5 +3,5 @@
 //
 
 #include "GimpBrush.h"
-#import "BrushDocument.h"
+#import "Globals.h"
 #import "ImgRepWrappers.h"
