@@ -74,10 +74,10 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	// The name of the brush
-	dynamic var name = "Untitled";
+	dynamic var name = "Untitled"
 	
 	/// A memory of all past names for the undo manager
-	fileprivate var pastNames = ["Untitled"];
+	fileprivate var pastNames = ["Untitled"]
 	
 	/// Do we use the pixmap or the mask?
 	fileprivate var usePixmap = false
@@ -127,7 +127,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		
 		// If we have no width or height in the image return NULL
 		if size.width == 0 || size.height == 0 {
-			return nil;
+			return nil
 		}
 		
 		// Create the representation
@@ -156,7 +156,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		let brushImage1 = NSImage(size: NSSize(width: Int(size.width), height: Int(size.height)))
 		brushImage1.addRepresentation(tempRep)
 		
-		return brushImage1;
+		return brushImage1
 	}
 	
 	/// Add current brush image to the undo records
@@ -173,19 +173,18 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 
 	/// Adjust the image of the brush
 	func changeImage(_ newImage: NSBitmapImageRep!) throws {
-		//BOOL invert, isRGB, useAlpha;
-		//int i, j, t;
+		// Check we can handle this image
+		guard newImage?.bitsPerSample == 8 else {
+			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
+		}
+
 		let spp = newImage.samplesPerPixel
-		let data = newImage.bitmapData
+		let data = newImage.bitmapData!
 		var invert = false
 		var isRGB = false
 		
-		// Check we can handle this image
-		guard newImage.bitsPerSample == 8 else {
-			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
-		}
 		
-		// Fill out isRGB and invert booleans
+		// Fill out `isRGB` and `invert` booleans
 		if newImage.colorSpaceName == NSCalibratedWhiteColorSpace || newImage.colorSpaceName == NSDeviceWhiteColorSpace {
 			isRGB = false; invert = true;
 		} else if newImage.colorSpaceName == NSCalibratedRGBColorSpace || newImage.colorSpaceName == NSDeviceRGBColorSpace {
@@ -198,7 +197,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		let useAlpha: Bool = {
 			if newImage.hasAlpha {
 				for i in 0..<(newImage.pixelsWide * newImage.pixelsHigh) {
-					if data?[i * 2 + 1] != 0xFF {
+					if data[i * 2 + 1] != 0xFF {
 						return true
 					}
 				}
@@ -210,47 +209,46 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		undoManager?.registerUndo(withTarget: self, selector: #selector(BrushDocument.undoImage(to:)), object: curUndoPos)
 		
 		// Replace with appropriate values
-		usePixmap = isRGB;
+		usePixmap = isRGB
 		size = (Int32(newImage.size.width), Int32(newImage.size.height))
-		//width = [newImage size].width; height = [newImage size].height;
 		if !isRGB {
 			mask = [UInt8](repeating: 0, count: Int(size.width * size.height))
 			for i in 0 ..< Int(size.width * size.height) {
 				if useAlpha {
-					mask[i] = (data?[i * spp + 1])!;
+					mask[i] = data[i * spp + 1]
 				} else {
-					mask[i] = (invert) ? 255 &- (data?[i * spp])! : (data?[i * spp])!;
+					mask[i] = (invert) ? 255 &- data[i * spp] : data[i * spp]
 				}
 			}
 			pixmap = [UInt8](repeating: 0, count: Int(size.width * size.height) * 4)
 			for i in 0 ..< Int(size.width * size.height) {
 				if spp == 2 {
-					let intVal = int_mult((invert) ? (data?[i * spp])! : 255 &- (data?[i * spp])!, (data?[i * spp + 1])!)
+					let intVal = int_mult((invert) ? data[i * spp] : 255 &- data[i * spp], data[i * spp + 1])
 					pixmap[i * 4] = intVal
 					pixmap[i * 4 + 1] = intVal
 					pixmap[i * 4 + 2] = intVal
-					pixmap[i * 4 + 3] = (data?[i * spp + 1])!;
+					pixmap[i * 4 + 3] = data[i * spp + 1]
 				} else {
-					let intVal = (invert) ? data?[i * spp] : 255 - (data?[i * spp])!;
-					pixmap[i * 4] = intVal!
-					pixmap[i * 4 + 1] = intVal!
-					pixmap[i * 4 + 2] = intVal!
-					pixmap[i * 4 + 3] = 255;
+					let intVal = (invert) ? data[i * spp] : 255 &- data[i * spp]
+					pixmap[i * 4] = intVal
+					pixmap[i * 4 + 1] = intVal
+					pixmap[i * 4 + 2] = intVal
+					pixmap[i * 4 + 3] = 255
 				}
 			}
 		} else {
 			mask = [UInt8](repeating: 0, count: Int(size.width * size.height))
 			for i in 0 ..< Int(size.width * size.height) {
 				if (useAlpha) {
-					mask[i] = (data?[i * spp + 3])!;
+					mask[i] = data[i * spp + 3]
 				} else {
-					mask[i] = 255 - UInt8((Int(data![i * spp]) + Int(data![i * spp + 1]) + Int(data![i * spp + 2])) / 3);
+					mask[i] = 255 - UInt8((Int(data[i * spp]) + Int(data[i * spp + 1]) + Int(data[i * spp + 2])) / 3)
 				}
 			}
 			pixmap = [UInt8](repeating: 255, count: Int(size.width * size.height) * 4)
 			for i in 0 ..< Int(size.width * size.height) {
 				for j in 0..<spp {
-					pixmap[i * 4 + j] = (data?[i * spp + j])!;
+					pixmap[i * 4 + j] = data[i * spp + j]
 				}
 			}
 		}
@@ -300,7 +298,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		undoManager?.registerUndo(withTarget: self, selector: #selector(BrushDocument.changeType(_:)), object: sender)
 		
 		// Make the changes
-		usePixmap = !usePixmap;
+		usePixmap = !usePixmap
 		view.needsDisplay = true
 		if usePixmap {
 			typeButton.title = "Type - Full Colour"
@@ -324,9 +322,9 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		(readData as NSData).getBytes(&header, length: MemoryLayout<BrushHeader>.size)
 		
 		// Convert brush header to proper endianess
-		header.header_size = header.header_size.bigEndian;
-		header.version = header.version.bigEndian;
-		header.width = header.width.bigEndian;
+		header.header_size = header.header_size.bigEndian
+		header.version = header.version.bigEndian
+		header.width = header.width.bigEndian
 		header.height = header.height.bigEndian
 		header.bytes = header.bytes.bigEndian
 		header.magic_number = header.magic_number.bigEndian
@@ -343,8 +341,8 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		if header.version == 1 {
 			let offset = file.offsetInFile - 8
 			file.seek(toFileOffset: offset)
-			header.header_size += 8;
-			header.spacing = 25;
+			header.header_size += 8
+			header.spacing = 25
 		}
 
 		// Store information from the header
@@ -368,13 +366,12 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		} else {
 			name = "Untitled"
 		}
-		pastNames = [name];
+		pastNames = [name]
 		
 		switch header.bytes {
 		case 1:
 			usePixmap = false
 			let tempSize = Int(size.width * size.height)
-			mask = [UInt8](repeating: 0, count: tempSize)
 			readData = file.readData(ofLength: tempSize)
 			if readData.count < tempSize {
 				throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
@@ -384,7 +381,6 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		case 4:
 			usePixmap = true
 			let tempSize = Int(size.width * size.height) * 4
-			pixmap = [UInt8](repeating: 0, count: tempSize)
 			readData = file.readData(ofLength: tempSize)
 			if readData.count < tempSize {
 				throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
@@ -407,13 +403,13 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		undoManager?.registerUndo(withTarget: self, selector: #selector(BrushDocument.undoImage(to:)), object: curUndoPos)
 		
 		// Restore image from undo record
-		pixmap = undoRecords[index].pixmap;
-		mask = undoRecords[index].mask;
+		pixmap = undoRecords[index].pixmap
+		mask = undoRecords[index].mask
 		size = (undoRecords[index].width, undoRecords[index].height)
 		usePixmap = undoRecords[index].usePixmap
 		
 		// Update everything
-		curUndoPos = index;
+		curUndoPos = index
 		view.needsDisplay = true
 		if usePixmap {
 			typeButton.title = "Type - Full Colour"
@@ -428,7 +424,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		undoManager?.registerUndo(withTarget: self, selector: #selector(BrushDocument.undoName(to:)), object: name)
 		
 		// Set the new name
-		name = string;
+		name = string
 		nameTextField.stringValue = name
 	}
 	
@@ -438,7 +434,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		undoManager?.registerUndo(withTarget: self, selector: #selector(BrushDocument.undoSpacing(to:)), object: spacing)
 		
 		// Adjust the spacing
-		spacing = value;
+		spacing = value
 		spacingSlider.intValue = spacing
 	}
 	
@@ -473,7 +469,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		if usePixmap {
 			var toWrite = Data(count: Int(size.width * size.height) * 4)
 			toWrite.withUnsafeMutableBytes({ (brushData: UnsafeMutablePointer<UInt8>) -> Void in
-				SeaUnpremultiplyBitmap(4, brushData, &pixmap, size.width * size.height);
+				SeaUnpremultiplyBitmap(4, brushData, &pixmap, size.width * size.height)
 			})
 			toRet.append(toWrite)
 		} else {
@@ -492,7 +488,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		openPanel.allowedFileTypes = [kUTTypeTIFF as String, kUTTypeJPEG as String, kUTTypePNG as String]
 		
 		openPanel.beginSheetModal(for: windowForSheet!) { (result) in
-			if result == NSCancelButton {
+			guard result == NSFileHandlingPanelOKButton else {
 				return
 			}
 			do {
@@ -515,7 +511,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		savePanel.prompt = "Export"
 		savePanel.allowedFileTypes = [kUTTypeTIFF as String]
 		savePanel.beginSheetModal(for: windowForSheet!) { (result) in
-			if result == NSCancelButton {
+			guard result == NSFileHandlingPanelOKButton else {
 				return
 			}
 			try? self.brushImage?.tiffRepresentation?.write(to: savePanel.url!, options: [.atomic])
@@ -539,7 +535,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		savePanel.treatsFilePackagesAsDirectories = true
 		//[savePanel setDirectoryURL:[NSURL fileURLWithPath:@"/Applications/Seashore.app/Contents/Resources/brushes/"]];
 		
-		return true;
+		return true
 	}
 
 	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {

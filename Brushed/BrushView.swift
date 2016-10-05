@@ -30,15 +30,17 @@ class BrushView: NSView {
 
 		// Center and draw the image of the brush
 		if let brushImage = document.brushImage {
-			if ((brushImage.size.width > bounds.size.width - 20.0) && (brushImage.size.height * (bounds.size.width - 20.0) / brushImage.size.width <= bounds.size.height)) {
-				brushImage.size = NSSize(width: bounds.size.width - 20.0, height: brushImage.size.height * (bounds.size.width - 20.0) / brushImage.size.width)
-			} else if ((brushImage.size.height > bounds.size.height - 20.0) && (brushImage.size.width * (bounds.size.height - 20.0) / brushImage.size.height <= bounds.size.width)) {
-				brushImage.size = NSMakeSize(brushImage.size.width * (bounds.size.height - 20.0) / brushImage.size.height, bounds.size.height - 20.0)
+			var drawRect = NSRect()
+			if (brushImage.size.width > bounds.size.width - 20.0) && (brushImage.size.height * (bounds.size.width - 20.0) / brushImage.size.width <= bounds.size.height) {
+				drawRect.size = NSSize(width: bounds.size.width - 20.0, height: brushImage.size.height * (bounds.size.width - 20.0) / brushImage.size.width)
+			} else if (brushImage.size.height > bounds.size.height - 20.0) && (brushImage.size.width * (bounds.size.height - 20.0) / brushImage.size.height <= bounds.size.width) {
+				drawRect.size = NSSize(width: brushImage.size.width * (bounds.size.height - 20.0) / brushImage.size.height, height: bounds.size.height - 20.0)
 			}
 			var whereLoc = NSPoint()
-			whereLoc.x = bounds.size.width / 2 - brushImage.size.width / 2;
-			whereLoc.y = bounds.size.height / 2 - brushImage.size.height / 2;
-			brushImage.draw(at: whereLoc, from: .zero, operation: .sourceOver, fraction: 1)
+			whereLoc.x = bounds.size.width / 2 - drawRect.size.width / 2
+			whereLoc.y = bounds.size.height / 2 - drawRect.size.height / 2
+			drawRect.origin = whereLoc
+			brushImage.draw(in: drawRect, from: .zero, operation: .sourceOver, fraction: 1)
 		}
 	}
 }
