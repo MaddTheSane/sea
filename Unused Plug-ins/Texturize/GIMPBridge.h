@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef unsigned char guchar;
 typedef char gchar;
 typedef unsigned int guint;
@@ -33,4 +37,6 @@ typedef unsigned long gulong;
 #define g_free(x) free(x)
 #define g_new(x,y) (guchar *)malloc(y * sizeof(x))
 
-
+#ifdef __cplusplus
+}
+#endif

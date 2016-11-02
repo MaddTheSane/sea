@@ -14,6 +14,8 @@
 #import <SeashoreKit/Globals.h>
 #endif
 
+__BEGIN_DECLS
+
 /*!
 	@struct		IndiciesRecord
 	@discussion	A record to which an arbitrary number of indicies may be added.
@@ -67,3 +69,5 @@ void freeKeeper(IndiciesKeeper *keeper);
 				The IndiciesRecord to be added.
 */
 void addToKeeper(IndiciesKeeper *keeper, IndiciesRecord record);
+
+__END_DECLS

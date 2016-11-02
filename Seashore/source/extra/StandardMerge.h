@@ -17,6 +17,8 @@
 #import <SeashoreKit/Globals.h>
 #endif
 
+__BEGIN_DECLS
+
 /*!
 	@defined	RANDOM_SEED
 	@discussion	The value to be used by the dissolve merge technique.
@@ -220,8 +222,12 @@ extern void SeaBlendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned
 	@function	SeaSelectMerge
 	@discussion	Given two pixels in two bitmaps composites the source pixel on
 				to the destination pixel using the selected merge technique.
-				Note for \c XCF_DISSOLVE_MODE you must call <code>srandom(randomTable[y %
-				4096]); for (k = 0; k < x; k++)  random();</code> for the merge to
+				Note for \c XCF_DISSOLVE_MODE you must call 
+	\code 
+	srandom(randomTable[y % RANDOM_TABLE_SIZE]);
+	for (k = 0; k < x; k++) 
+		random();\endcode
+				for the merge to
 				work correctly.
 	@param		choice
 				The selected merge technique (see Constants documentation).
@@ -240,3 +246,4 @@ extern void SeaBlendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned
 */
 extern void SeaSelectMerge(XcfLayerMode choice, int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc);
 
+__END_DECLS

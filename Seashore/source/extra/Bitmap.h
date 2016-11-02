@@ -15,6 +15,7 @@
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
+__BEGIN_DECLS
 
 /*!
 	@enum		k...ColorSpace
@@ -113,7 +114,7 @@ extern unsigned char *convertBitmap(int dspp, BMPColorSpace dspace, int dbps, un
 				possible. You should <i>always</i> check for failed conversions. The
 				block of memory is safe for use with AltiVec.
  */
-extern unsigned char *__nullable SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger iebpp, NSInteger iebpr, BMPColorSpace ispace, ColorSyncProfileRef __nullable iprofile, NSInteger ibps, GIMPBitmapFormat iformat);
+extern unsigned char *__nullable SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger iebpp, NSInteger iebpr, BMPColorSpace ispace, ColorSyncProfileRef __nullable iprofile, NSInteger ibps, GIMPBitmapFormat iformat) NS_SWIFT_NAME(convertBitmap(destinationSamplesPerPixel:destinationColorSpace:destinationBitsPerSample:bitmap:width:height:originalSamplesPerPixel:originalExtraBytesPerPixel:originalExtraBytesPerRow:originalColorSpace:profile:originalBitsPerSample:originalFormat:));
 
 
 /*!
@@ -132,7 +133,7 @@ extern unsigned char *__nullable SeaConvertBitmap(NSInteger dspp, BMPColorSpace 
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern void SeaStripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length);
+extern void SeaStripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length) NS_SWIFT_NAME(stripAlphaToWhite(originalSamplesPerPixel:output:input:length:));
 
 /*!
 	@function	SeaPremultiplyBitmap
@@ -148,7 +149,7 @@ extern void SeaStripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned 
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern void SeaPremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length);
+extern void SeaPremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length) NS_SWIFT_NAME(premultiplyBitmap(samplesPerPixel:destination:source:length:));
 
 /*!
 	@function	SeaUnpremultiplyBitmap
@@ -165,7 +166,7 @@ extern void SeaPremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-extern void SeaUnpremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length);
+extern void SeaUnpremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length) NS_SWIFT_NAME(unpremultiplyBitmap(samplesPerPixel:destination:source:length:));
 
 /*!
 	@function	SeaAveragedComponentValue
@@ -188,7 +189,7 @@ extern void SeaUnpremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsign
 	@param		where
 				The point at which to centre the box.
 */
-extern unsigned char SeaAveragedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where);
+extern unsigned char SeaAveragedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where) NS_SWIFT_NAME(averagedComponentValue(samplesPerPixel:data:width:height:component:radius:centerPoint:));
 
 
 /*!
@@ -207,4 +208,5 @@ extern void OpenDisplayProfile(CMProfileRef __nonnull*__nullable profile) DEPREC
 */
 extern void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
 
+__END_DECLS
 NS_ASSUME_NONNULL_END

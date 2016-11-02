@@ -13,6 +13,8 @@
 #import <SeashoreKit/Globals.h>
 #endif
 
+__BEGIN_DECLS
+
 /*!
 	@function	SeaRLEDecompress
 	@discussion	Decompresses a given tile compressed with RLE.
@@ -53,3 +55,5 @@ BOOL SeaRLEDecompress(unsigned char *output, unsigned char *input, int inputLeng
 	@result		Returns a YES upon success, NO otherwise.
 */
 int SeaRLECompress(unsigned char *output, unsigned char *input, int width, int height, int spp);
+
+__END_DECLS

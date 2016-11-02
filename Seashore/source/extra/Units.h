@@ -14,6 +14,7 @@
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
+__BEGIN_DECLS
 
 /*!
 	@enum		k...Units
@@ -65,4 +66,5 @@ int SeaPixelsFromFloat(CGFloat measure, SeaUnits units, int resolution);
 */
 NSString *SeaUnitsString(SeaUnits units);
 
+__END_DECLS
 NS_ASSUME_NONNULL_END

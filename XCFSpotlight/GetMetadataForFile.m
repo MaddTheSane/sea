@@ -99,7 +99,7 @@ Boolean GetMetadataForFile(void* thisInterface,
 			}
 
 			nsAttribs[(NSString *)kMDItemHasAlphaChannel] = @(hasAlpha);
-			nsAttribs[(NSString *)kMDItemLayerNames] = names;
+			nsAttribs[(NSString *)kMDItemLayerNames] = [names copy];
 
 			if ([contents exifData]) {
 				NSDictionary *data = [contents exifData];

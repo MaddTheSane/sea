@@ -19,6 +19,7 @@
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
+__BEGIN_DECLS
 
 /*!
 	@function	SeaRGBtoHSV
@@ -84,4 +85,5 @@ extern void SeaRGBtoHLS (int *red, int *green, int *blue);
 */
 extern void SeaHLStoRGB(int *hue, int *lightness, int *saturation);
 
+__END_DECLS
 NS_ASSUME_NONNULL_END

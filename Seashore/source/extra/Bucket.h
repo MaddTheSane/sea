@@ -15,6 +15,8 @@
 #import <SeashoreKit/Globals.h>
 #endif
 
+__BEGIN_DECLS
+
 /*!
 	@function	SeaBucketFill
 	@discussion	Given a seed point replaces all neighbouring pixels of similar
@@ -108,3 +110,4 @@ void SeaTextureFill(int spp, IntRect rect, unsigned char *data, int width, int h
 */
 void SeaCloneFill(int spp, IntRect rect, unsigned char *data, unsigned char *replace, int width, int height, unsigned char *source, int sourceWidth, int sourceHeight, IntPoint spt);
 
+__END_DECLS

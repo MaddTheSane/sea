@@ -120,7 +120,7 @@ HRESULT MetadataImporterQueryInterface(void *thisInstance, REFIID iid, LPVOID *p
 {
 	CFUUIDRef interfaceID = CFUUIDCreateFromUUIDBytes(kCFAllocatorDefault, iid);
 	
-	if (CFEqual(interfaceID,kMDImporterInterfaceID)) {
+	if (CFEqual(interfaceID, kMDImporterInterfaceID)) {
 		/* If the Right interface was requested, bump the ref count,
 		 * set the ppv parameter equal to the instance, and
 		 * return good status.
@@ -129,7 +129,7 @@ HRESULT MetadataImporterQueryInterface(void *thisInstance, REFIID iid, LPVOID *p
 		*ppv = thisInstance;
 		CFRelease(interfaceID);
 		return S_OK;
-	} else if (CFEqual(interfaceID,IUnknownUUID)) {
+	} else if (CFEqual(interfaceID, IUnknownUUID)) {
 		/* If the IUnknown interface was requested, same as above. */
 		((MDImportPlugType*)thisInstance)->conduitInterface->AddRef(thisInstance);
 		*ppv = thisInstance;

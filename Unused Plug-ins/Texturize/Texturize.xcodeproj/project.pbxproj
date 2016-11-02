@@ -22,6 +22,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		554461551DCA93FD00D638C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55F084881D3998C500A34BF3 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55115C1D1D46D65000E76B5B;
+			remoteInfo = SwiftCMYK;
+		};
 		55F084D91D3998C500A34BF3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 55F084881D3998C500A34BF3 /* Seashore.xcodeproj */;
@@ -564,7 +571,7 @@
 		A80CEDA109FE733D009859A6 /* graph.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = graph.cpp; path = src/graph.cpp; sourceTree = "<group>"; };
 		A80CEDA209FE733D009859A6 /* graph.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = graph.h; path = src/graph.h; sourceTree = "<group>"; };
 		A80CEDAD09FE7352009859A6 /* maxflow.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = maxflow.cpp; path = src/maxflow.cpp; sourceTree = "<group>"; };
-		A80CEDD209FE740E009859A6 /* graphcut.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = graphcut.cpp; path = src/graphcut.cpp; sourceTree = "<group>"; };
+		A80CEDD209FE740E009859A6 /* graphcut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = graphcut.cpp; path = src/graphcut.cpp; sourceTree = "<group>"; };
 		A80CEE1109FE7517009859A6 /* offset.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = offset.cpp; path = src/offset.cpp; sourceTree = "<group>"; };
 		A80CF0AA09FE848A009859A6 /* render.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; name = render.mm; path = src/render.mm; sourceTree = "<group>"; };
 		A80CF12009FE87CB009859A6 /* block.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = block.h; path = src/block.h; sourceTree = "<group>"; };
@@ -650,6 +657,7 @@
 			isa = PBXGroup;
 			children = (
 				55F084DA1D3998C500A34BF3 /* Seashore.app */,
+				55F0856A1D3998C500A34BF3 /* SeashoreKit.framework */,
 				55F084DC1D3998C500A34BF3 /* Affine Tile+.bundle */,
 				55F084DE1D3998C500A34BF3 /* Affine Transform+.bundle */,
 				55F084E01D3998C500A34BF3 /* Bloom+.bundle */,
@@ -721,8 +729,8 @@
 				55F085641D3998C500A34BF3 /* Sharpen.bundle */,
 				55F085661D3998C500A34BF3 /* Threshold.bundle */,
 				55F085681D3998C500A34BF3 /* Vertical Stripes.bundle */,
-				55F0856A1D3998C500A34BF3 /* SeashoreKit.framework */,
 				55F0856C1D3998C500A34BF3 /* SwiftHorizStripes.bundle */,
+				554461561DCA93FD00D638C2 /* SwiftCMYK.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -781,7 +789,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 			};
 			buildConfigurationList = A8582DD609BD8EF90098D48C /* Build configuration list for PBXProject "Texturize" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -806,6 +814,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		554461561DCA93FD00D638C2 /* SwiftCMYK.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftCMYK.bundle;
+			remoteRef = 554461551DCA93FD00D638C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		55F084DA1D3998C500A34BF3 /* Seashore.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
@@ -1418,10 +1433,24 @@
 		A8582DD709BD8EF90098D48C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
@@ -1433,8 +1462,22 @@
 		A8582DD809BD8EF90098D48C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;

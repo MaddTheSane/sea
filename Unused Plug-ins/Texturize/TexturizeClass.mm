@@ -42,7 +42,7 @@
 
 - (int)type
 {
-	return 0;
+	return kBasicPlugin;
 }
 
 -(int)points
