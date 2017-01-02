@@ -77,7 +77,7 @@
 #ifndef __GRAPH_H__
 #define __GRAPH_H__
 
-#include "block.h"
+#include "block.hpp"
 
 /*
 	Nodes, arcs and pointers to nodes are

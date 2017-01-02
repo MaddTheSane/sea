@@ -1,4 +1,4 @@
-#include <cmath>
+#include <math.h>
 #include <tgmath.h>
 #import "TexturizeClass.h"
 #import "render.hpp"

@@ -12,7 +12,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface MovePanel : NSPanel {
-	// The associated text tool
+	/// The associated text tool
 	IBOutlet TextTool *textTool;
 }
 

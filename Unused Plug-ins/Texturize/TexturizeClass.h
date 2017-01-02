@@ -13,49 +13,49 @@
 
 @interface TexturizeClass : NSObject <SeaPluginClass> {
 
-	// The plug-in's manager
+	/// The plug-in's manager
 	__unsafe_unretained SeaPlugins *seaPlugins;
 
-	// The label displaying the overlap
+	/// The label displaying the overlap
 	IBOutlet NSTextField *overlapLabel;
 	
-	// The slider for the overlap
+	/// The slider for the overlap
 	IBOutlet NSSlider *overlapSlider;
 
-	// The label displaying the width
+	/// The label displaying the width
 	IBOutlet NSTextField *widthLabel;
 	
-	// The slider for the width
+	/// The slider for the width
 	IBOutlet NSSlider *widthSlider;
 	
-	// The label displaying the height
+	/// The label displaying the height
 	IBOutlet NSTextField *heightLabel;
 	
-	// The slider for the height
+	/// The slider for the height
 	IBOutlet NSSlider *heightSlider;
 	
-	// The checkbox indicating whether the resulting texture should be tileable
+	/// The checkbox indicating whether the resulting texture should be tileable
 	IBOutlet NSButton *tileableCheckbox;
 	
-	// The panel for the plug-in
+	/// The panel for the plug-in
 	IBOutlet NSPanel *panel;
 	
-	// The progress bar to indicate progress
+	/// The progress bar to indicate progress
 	IBOutlet NSProgressIndicator *progressBar;
 
-	// The overlap
+	/// The overlap
 	CGFloat overlap;
 	
-	// The width
+	/// The width
 	CGFloat width;
 	
-	// The height
+	/// The height
 	CGFloat height;
 	
-	// Should the resulting texture be tileable?
+	/// Should the resulting texture be tileable?
 	BOOL tileable;
 
-	// YES if the application succeeded
+	/// \c YES if the application succeeded
 	BOOL success;
 }
 

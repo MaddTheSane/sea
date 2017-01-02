@@ -9,7 +9,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2008 Mark Pazolli
 */
-
 @interface SeaApplication : NSApplication {
 
 }

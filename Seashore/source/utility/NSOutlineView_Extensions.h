@@ -17,10 +17,10 @@
 
 @interface SeaOutlineView : NSOutlineView
 {
-	// The document the outline view is in
+	//! The document the outline view is in
 	IBOutlet SeaDocument *document;
 	
-	// Whether or not the view is the first responder
+	//! Whether or not the view is the first responder
 	BOOL isFirst;
 }
 
