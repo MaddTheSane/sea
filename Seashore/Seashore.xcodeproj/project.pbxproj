@@ -299,6 +299,7 @@
 		55850B3813D63BA100C3B2CB /* TIFF.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E90A2C00E0005B688F /* TIFF.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55850B3E13D63BC500C3B2CB /* GIMPCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E20A2C00D0005B688F /* GIMPCore.framework */; };
 		55850B3F13D63BC500C3B2CB /* TIFF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E90A2C00E0005B688F /* TIFF.framework */; };
+		558A002D1E1ACE7900739585 /* ToolboxUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D748FD1D5271DA00B099C9 /* ToolboxUtility.swift */; };
 		55909D9E18CFCCF400F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		55909DAD18CFCCF700F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		55909DBB18CFCE5500F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
@@ -7938,6 +7939,7 @@
 				DC9C467A0FFC2CCF00C44AA4 /* AbstractPanelUtility.m in Sources */,
 				DC414BAA102F54FD00B66F04 /* StatusUtility.m in Sources */,
 				DC56186810CC73CF009CF792 /* BannerView.m in Sources */,
+				558A002D1E1ACE7900739585 /* ToolboxUtility.swift in Sources */,
 				DCD6A5A5114DA294002A4CFD /* WarningsUtility.m in Sources */,
 				DC4E4FA4134AD4D400BA6ACB /* AbstractSelectTool.m in Sources */,
 				DC4E51231350E10500BA6ACB /* AbstractScaleOptions.m in Sources */,

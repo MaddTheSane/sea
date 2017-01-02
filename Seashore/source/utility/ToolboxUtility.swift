@@ -37,7 +37,7 @@ private let SelectInverseToolbarItemIdentifier = "Select Inverse Toolbar Item Id
 private let SelectAlphaToolbarItemIdentifier = "Select Alpha Toolbar Item Identifier";
 
 
-class ToolboxUtility : NSObject {
+class ToolboxUtility2 : NSObject {
 	/// The document which is the focus of this utility
 	@IBOutlet weak var document: SeaDocument!
 	
@@ -50,8 +50,8 @@ class ToolboxUtility : NSObject {
 			if let delayTimer = delayTimer {
 				delayTimer.invalidate()
 			}
-			delayTimer = NSTimer(timeInterval: 0.1, target: (document.tools as Seashore.SeaTools).getTool(.kTextTool)!, selector: #selector(TextTool.preview(_:)), userInfo: nil, repeats: false)
-			SeaController.utilitiesManager().statusUtility(for: document)!.updateQuickColor()
+			delayTimer = Timer(timeInterval: 0.1, target: (document.tools! as Seashore.SeaTools).getTool(.kTextTool)!, selector: #selector(TextTool.preview(_:)), userInfo: nil, repeats: false)
+			SeaController.utilitiesManager.statusUtility(for: document)!.updateQuickColor()
 		}
 	}
 	
@@ -111,7 +111,7 @@ class ToolboxUtility : NSObject {
 		.kPositionTool];
 	
 	/// A timer that delays colour changes
-	private var delayTimer: NSTimer?
+	private var delayTimer: Timer?
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -121,7 +121,7 @@ class ToolboxUtility : NSObject {
 		// Set up toolbar properties: Allow customization, give a default display mode, and remember state in user defaults
 		toolbar.allowsUserCustomization = true
 		toolbar.autosavesConfiguration = true
-		toolbar.displayMode = .IconOnly
+		toolbar.displayMode = .iconOnly
 		
 		// We are the delegate
 		toolbar.delegate = self
@@ -149,14 +149,14 @@ class ToolboxUtility : NSObject {
 		colorView.document = document
 		
 		// Then pretend a tool change
-		update(true)
+		update(full: true)
 	}
 	
 	/// Deactivates this utility.
 	func deactivate() {
 		colorView.document = document
 		for i in SeaToolsDefines.kFirstSelectionTool.rawValue ... SeaToolsDefines.kLastSelectionTool.rawValue {
-			toolbox.cellWithTag(Int(i))?.enabled = true
+			toolbox.cell(withTag: Int(i))?.isEnabled = true
 		}
 	}
 	
@@ -170,17 +170,17 @@ class ToolboxUtility : NSObject {
 				for i in SeaToolsDefines.kFirstSelectionTool.rawValue ... SeaToolsDefines.kLastSelectionTool.rawValue {
 					selectionTBView.setEnabled(false, forSegment: Int(i))
 				}
-				selectionMenu.enabled = false
+				selectionMenu.isEnabled = false
 			} else {
 				for i in SeaToolsDefines.kFirstSelectionTool.rawValue ... SeaToolsDefines.kLastSelectionTool.rawValue {
 					selectionTBView.setEnabled(true, forSegment: Int(i))
 				}
-				selectionMenu.enabled = false
+				selectionMenu.isEnabled = false
 			}
 			// Implement the change
 			document.docView.needsDisplay = true
 			optionsUtility.update()
-			SeaController.seaHelp().updateInstantHelp(tool.rawValue)
+			SeaController.seaHelp.updateInstantHelp(tool.rawValue)
 		}
 		colorView.update()
 	}
@@ -188,9 +188,9 @@ class ToolboxUtility : NSObject {
 	/// Called by menu item to change the tool.
 	/// - parameter sender: An object with a tag that modulo-100 
 	/// specifies the tool to be selected.
-	@IBAction func selectToolUsingTag(sender: AnyObject) {
-		let theTag = sender.tag()
-		let preTool = Int32(theTag % 100)
+	@IBAction func selectToolUsingTag(_ sender: AnyObject) {
+		let theTag = sender.tag
+		let preTool = Int32(theTag! % 100)
 		if let newTool = SeaToolsDefines(rawValue: preTool) {
 			changeTool(to: newTool)
 		}
@@ -198,8 +198,8 @@ class ToolboxUtility : NSObject {
 	
 	/// Called when the segmented controls get clicked.
 	/// - parameter sender: The segemented control to select the tool.
-	@IBAction func selectToolFromSender(sender: NSSegmentedControl) {
-		if let newTool = SeaToolsDefines(rawValue: Int32((sender.cell as! NSSegmentedCell).tagForSegment(sender.selectedSegment) % 100)) {
+	@IBAction func selectToolFromSender(_ sender: NSSegmentedControl) {
+		if let newTool = SeaToolsDefines(rawValue: Int32((sender.cell as! NSSegmentedCell).tag(forSegment: sender.selectedSegment) % 100)) {
 			changeTool(to: newTool)
 		}
 	}
@@ -209,13 +209,13 @@ class ToolboxUtility : NSObject {
 	@objc(changeToolTo:) func changeTool(to newTool: SeaToolsDefines) {
 		var updateCrop = false;
 		
-		document.helpers.endLineDrawing()
+		document.helpers?.endLineDrawing()
 		if (tool == .kCropTool || newTool == .kCropTool) {
 			updateCrop = true;
 			document.docView.needsDisplay = true
 		}
-		if (tool == newTool && NSApp.currentEvent?.type == .LeftMouseUp && NSApp.currentEvent?.clickCount > 1) {
-			SeaController.utilitiesManager().optionsUtility(for: document)!.show(nil)
+		if tool == newTool, NSApp.currentEvent?.type == .leftMouseUp, let clickCnt = NSApp.currentEvent?.clickCount, clickCnt > 1 {
+			SeaController.utilitiesManager.optionsUtility(for: document)!.show(nil)
 		} else {
 			tool = newTool;
 			// Deselect the old tool
@@ -232,22 +232,22 @@ class ToolboxUtility : NSObject {
 				transformTBView.setSelected(false, forSegment: i)
 			}
 			
-			selectionTBView.selectSegmentWithTag(Int(tool.rawValue))
-			drawTBView.selectSegmentWithTag(Int(tool.rawValue))
-			effectTBView.selectSegmentWithTag(Int(tool.rawValue))
-			transformTBView.selectSegmentWithTag(Int(tool.rawValue))
+			selectionTBView.selectSegment(withTag: Int(tool.rawValue))
+			drawTBView.selectSegment(withTag: Int(tool.rawValue))
+			effectTBView.selectSegment(withTag: Int(tool.rawValue))
+			transformTBView.selectSegment(withTag: Int(tool.rawValue))
 			
-			update(true)
+			update(full: true)
 		}
 		if (updateCrop) {
-			SeaController.utilitiesManager().infoUtility(for: document)!.update()
+			SeaController.utilitiesManager.infoUtility(for: document)!.update()
 		}
 	}
 	
 	/// Selects the position tool.
 	func floatTool() {
 		// Show the banner
-		document.warnings.showFloatBanner()
+		document.warnings?.showFloatBanner()
 		
 		oldTool = tool;
 		changeTool(to: .kPositionTool)
@@ -256,17 +256,17 @@ class ToolboxUtility : NSObject {
 	/// Selects the last tool to call floatTool.
 	func anchorTool() {
 		// Hide the banner
-		document.warnings.hideFloatBanner()
+		document.warnings?.hideFloatBanner()
 		if oldTool != .SeaToolsInvalid {
 			changeTool(to: oldTool)
 		}
 	}
 	
-	func setEffectEnabled(enable: Bool) {
+	func setEffectEnabled(_ enable: Bool) {
 		effectTBView.setEnabled(enable, forSegment: Int(SeaToolsDefines.kEffectTool.rawValue))
 	}
 	
-	override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		if menuItem.tag >= 600 && menuItem.tag < 700 {
 			menuItem.state = (menuItem.tag == Int(tool.rawValue) + 600) ? NSOnState : NSOffState
 		}
@@ -275,8 +275,8 @@ class ToolboxUtility : NSObject {
 	}
 }
 
-extension ToolboxUtility: NSToolbarDelegate {
-	func toolbar(toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+extension ToolboxUtility2: NSToolbarDelegate {
+	func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
 		var toolbarItem: SeaToolbarItem?
 		
 		switch itemIdentifier {
@@ -327,20 +327,20 @@ extension ToolboxUtility: NSToolbarDelegate {
 			toolbarItem!.maxSize = colorView.frame.size
 
 		case NewLayerToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: NewLayerToolbarItemIdentifier, label: NSLocalizedString("new", value: "New", comment: "New"), imageNamed: "toolbar/new", toolTip: NSLocalizedString("new tooltip", value: "Add a new layer to the image", comment: "new tooltip"), target: SeaController.utilitiesManager().pegasusUtility(for: document), selector: #selector(PegasusUtility.addLayer(_:)))
+			return ImageToolbarItem(itemIdentifier: NewLayerToolbarItemIdentifier, label: NSLocalizedString("new", value: "New", comment: "New"), imageNamed: "toolbar/new", toolTip: NSLocalizedString("new tooltip", value: "Add a new layer to the image", comment: "new tooltip"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.addLayer(_:)))
 			
 		case DuplicateLayerToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: DuplicateLayerToolbarItemIdentifier, label: NSLocalizedString("duplicate", value: "Duplicate", comment: "Duplicate"), imageNamed: "toolbar/duplicate", toolTip: NSLocalizedString("duplicate tooltip", value: "Duplicate the current layer", comment: "Duplicate the current layer"), target: SeaController.utilitiesManager().pegasusUtility(for: document), selector: #selector(PegasusUtility.duplicateLayer(_:)))
+			return ImageToolbarItem(itemIdentifier: DuplicateLayerToolbarItemIdentifier, label: NSLocalizedString("duplicate", value: "Duplicate", comment: "Duplicate"), imageNamed: "toolbar/duplicate", toolTip: NSLocalizedString("duplicate tooltip", value: "Duplicate the current layer", comment: "Duplicate the current layer"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.duplicateLayer(_:)))
 
 		case ForwardToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: ForwardToolbarItemIdentifier, label: NSLocalizedString("forward", value: "Forward", comment: "Forward"), imageNamed: "toolbar/forward", toolTip: NSLocalizedString("forward tooltip", value: "Move the current layer forward", comment: "Move the current layer forward"), target: SeaController.utilitiesManager().pegasusUtility(for: document), selector: #selector(PegasusUtility.forward(_:)))
+			return ImageToolbarItem(itemIdentifier: ForwardToolbarItemIdentifier, label: NSLocalizedString("forward", value: "Forward", comment: "Forward"), imageNamed: "toolbar/forward", toolTip: NSLocalizedString("forward tooltip", value: "Move the current layer forward", comment: "Move the current layer forward"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.forward(_:)))
 
 		case BackwardToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: BackwardToolbarItemIdentifier, label: NSLocalizedString("backward", value: "Backward", comment: "Backward"), imageNamed: "toolbar/backward", toolTip: NSLocalizedString("backward tooltip", value: "Move the current layer backward", comment: "Move the current layer backward"), target: SeaController.utilitiesManager().pegasusUtility(for: document), selector: #selector(PegasusUtility.backward(_:)))
+			return ImageToolbarItem(itemIdentifier: BackwardToolbarItemIdentifier, label: NSLocalizedString("backward", value: "Backward", comment: "Backward"), imageNamed: "toolbar/backward", toolTip: NSLocalizedString("backward tooltip", value: "Move the current layer backward", comment: "Move the current layer backward"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.backward(_:)))
 
 		case DeleteLayerToolbarItemIdentifier:
-			let icon = NSWorkspace.sharedWorkspace().iconForFileType(NSFileTypeForHFSTypeCode(OSType(kToolbarDeleteIcon)))
-			return ImageToolbarItem(itemIdentifier: DeleteLayerToolbarItemIdentifier, label: NSLocalizedString("delete", value: "Delete", comment: "delete"), image: icon, toolTip: NSLocalizedString("delete tooltip", value: "Delete the current layer", comment: "Delete the current layer"), target: SeaController.utilitiesManager().pegasusUtility(for: document), selector: #selector(PegasusUtility.deleteLayer(_:)))
+			let icon = NSWorkspace.shared().icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kToolbarDeleteIcon)))
+			return ImageToolbarItem(itemIdentifier: DeleteLayerToolbarItemIdentifier, label: NSLocalizedString("delete", value: "Delete", comment: "delete"), image: icon, toolTip: NSLocalizedString("delete tooltip", value: "Delete the current layer", comment: "Delete the current layer"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.deleteLayer(_:)))
 			
 		case ZoomInToolbarItemIdentifier:
 			return ImageToolbarItem(itemIdentifier: ZoomInToolbarItemIdentifier, label: NSLocalizedString("zoom in", value: "Zoom In", comment: "Zoom In"), imageNamed: "toolbar/zoomIn", toolTip: NSLocalizedString("zoom in tooltip", value: "Zoom in on the current view", comment: "Zoom in on the current view"), target: document.docView, selector: #selector(SeaView.zoomIn(_:)))
@@ -352,10 +352,10 @@ extension ToolboxUtility: NSToolbarDelegate {
 			return ImageToolbarItem(itemIdentifier: ActualSizeToolbarItemIdentifier, label: NSLocalizedString("actual size", value: "Actual Size", comment: "Actual Size"), imageNamed: "toolbar/actualSize", toolTip: NSLocalizedString("actual size tooltip", value: "View the document at its actual size", comment: "View the document at its actual size"), target: document.docView, selector: #selector(SeaView.zoomNormal(_:)))
 
 		case ToggleLayersToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: ToggleLayersToolbarItemIdentifier, label: NSLocalizedString("toggle layers", value: "Layers", comment: "toggle layers"), imageNamed: "toolbar/showhidelayers", toolTip: NSLocalizedString("toggle layers tooltip", value: "Show or hide the layers list view", comment: "Show or hide the layers list view"), target: SeaController.utilitiesManager().pegasusUtility(for: document), selector: #selector(PegasusUtility.toggleLayers(_:)))
+			return ImageToolbarItem(itemIdentifier: ToggleLayersToolbarItemIdentifier, label: NSLocalizedString("toggle layers", value: "Layers", comment: "toggle layers"), imageNamed: "toolbar/showhidelayers", toolTip: NSLocalizedString("toggle layers tooltip", value: "Show or hide the layers list view", comment: "Show or hide the layers list view"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.toggleLayers(_:)))
 
 		case InspectorToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: InspectorToolbarItemIdentifier, label: NSLocalizedString("information", value: "Information", comment: "Information"), imageNamed: NSImageNameInfo, toolTip: NSLocalizedString("information tooltip", value: "Show or hide point information", comment: "Show or hide point information"), target: SeaController.utilitiesManager().infoUtility(for: document), selector: #selector(InfoUtility.toggle(_:)))
+			return ImageToolbarItem(itemIdentifier: InspectorToolbarItemIdentifier, label: NSLocalizedString("information", value: "Information", comment: "Information"), imageNamed: NSImageNameInfo, toolTip: NSLocalizedString("information tooltip", value: "Show or hide point information", comment: "Show or hide point information"), target: SeaController.utilitiesManager.infoUtility(for: document), selector: #selector(InfoUtility.toggle(_:)))
 			
 		case FloatAnchorToolbarItemIdentifier:
 			return ImageToolbarItem(itemIdentifier: FloatAnchorToolbarItemIdentifier, label: NSLocalizedString("float", value: "Float", comment: "Float"), imageNamed: "toolbar/float-tb", toolTip: NSLocalizedString("float tooltip", value: "Float or anchor the current selection", comment: "Float or anchor the current selection"), target: document.contents, selector: #selector(SeaContent.toggleFloatingSelection(_:)))
@@ -382,7 +382,7 @@ extension ToolboxUtility: NSToolbarDelegate {
 		return toolbarItem
 	}
 	
-	func toolbarDefaultItemIdentifiers(toolbar: NSToolbar) -> [String] {
+	func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
 		return [NSToolbarFlexibleSpaceItemIdentifier,
 		SelectionIdentifier,
 		DrawIdentifier,
@@ -392,7 +392,7 @@ extension ToolboxUtility: NSToolbarDelegate {
 		ColorsIdentifier]
 	}
 	
-	func toolbarAllowedItemIdentifiers(toolbar: NSToolbar) -> [String] {
+	func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
 		return [SelectionIdentifier,
 		DrawIdentifier,
 		EffectIdentifier,
