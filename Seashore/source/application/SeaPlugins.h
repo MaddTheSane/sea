@@ -132,25 +132,25 @@ NS_ENUM(int) {
 */
 @interface SeaPlugins : NSObject <SSKTerminatable> {
 
-	// The SeaController object
+	/// The SeaController object
 	IBOutlet SeaController *controller;
 
-	// An array of all Seahore's plug-ins
+	/// An array of all Seahore's plug-ins
 	NSMutableArray<id<SeaPluginClass>> *plugins;
 
-	// The plug-ins used by the effect tool
+	/// The plug-ins used by the effect tool
 	NSArray<id<SeaPluginClass>> *pointPlugins;
 
-	// The names of the plug-ins used by the effect tool
+	/// The names of the plug-ins used by the effect tool
 	NSArray<NSString*> *pointPluginsNames;
 
-	// The submenu to add plug-ins to
-	IBOutlet id effectMenu;
+	/// The submenu to add plug-ins to
+	IBOutlet NSMenu *effectMenu;
 	
-	// The last effect applied
+	/// The last effect applied
 	NSInteger lastEffect;
 	
-	// Stores the index of the "CIAffineTransform" plug-in - this plug-in handles Seashore CoreImage manipulation
+	/// Stores the index of the "CIAffineTransform" plug-in - this plug-in handles Seashore CoreImage manipulation
 	NSInteger ciAffineTransformIndex;
 	
 }

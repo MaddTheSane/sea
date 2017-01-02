@@ -14,7 +14,7 @@
 @interface TexturizeClass : NSObject <SeaPluginClass> {
 
 	/// The plug-in's manager
-	__unsafe_unretained SeaPlugins *seaPlugins;
+	__weak SeaPlugins *seaPlugins;
 
 	/// The label displaying the overlap
 	IBOutlet NSTextField *overlapLabel;
@@ -161,7 +161,7 @@
 				disabled.
 	@param		menuItem
 				The menu item to be validated.
-	@result		YES if the menu item should be enabled, NO otherwise.
+	@result		\c YES if the menu item should be enabled, \c NO otherwise.
 */
 - (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 

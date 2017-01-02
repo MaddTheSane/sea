@@ -12,25 +12,25 @@
 
 @interface BlurClass : NSObject <SeaPluginClass> {
 
-	// The plug-in's manager
-	__unsafe_unretained SeaPlugins *seaPlugins;
+	/// The plug-in's manager
+	__weak SeaPlugins *seaPlugins;
 
-	// The label displaying the number of applications
+	/// The label displaying the number of applications
 	IBOutlet NSTextField *applicationsLabel;
 	
-	// The slider for the number of applications
+	/// The slider for the number of applications
 	IBOutlet NSSlider *applicationsSlider;
 
-	// The panel for the plug-in
+	/// The panel for the plug-in
 	IBOutlet NSPanel *panel;
 
-	// The number of applications
+	/// The number of applications
 	NSInteger applications;
 
-	// YES if the blurring must be refreshed
+	/// \c YES if the blurring must be refreshed
 	BOOL refresh;
 	
-	// YES if the application succeeded
+	/// \c YES if the application succeeded
 	BOOL success;
 
 }
@@ -42,7 +42,7 @@
 				The SeaPlugins instance responsible for managing the plug-ins.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithManager:(SeaPlugins *)manager;
+- (instancetype)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type

@@ -533,6 +533,13 @@
 			remoteGlobalIDString = 555F598D1D373CEC0085AC96;
 			remoteInfo = SwiftHorizStripes;
 		};
+		558A002B1E1AC52700739585 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55115C1D1D46D65000E76B5B;
+			remoteInfo = SwiftCMYK;
+		};
 		55F084851D39969C00A34BF3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
@@ -629,6 +636,7 @@
 			isa = PBXGroup;
 			children = (
 				556CBC911D3995AB007D73A1 /* Seashore.app */,
+				556CBD211D3995AB007D73A1 /* SeashoreKit.framework */,
 				556CBC931D3995AB007D73A1 /* Affine Tile+.bundle */,
 				556CBC951D3995AB007D73A1 /* Affine Transform+.bundle */,
 				556CBC971D3995AB007D73A1 /* Bloom+.bundle */,
@@ -700,8 +708,8 @@
 				556CBD1B1D3995AB007D73A1 /* Sharpen.bundle */,
 				556CBD1D1D3995AB007D73A1 /* Threshold.bundle */,
 				556CBD1F1D3995AB007D73A1 /* Vertical Stripes.bundle */,
-				556CBD211D3995AB007D73A1 /* SeashoreKit.framework */,
 				556CBD231D3995AB007D73A1 /* SwiftHorizStripes.bundle */,
+				558A002C1E1AC52700739585 /* SwiftCMYK.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1277,6 +1285,13 @@
 			remoteRef = 556CBD221D3995AB007D73A1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		558A002C1E1AC52700739585 /* SwiftCMYK.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftCMYK.bundle;
+			remoteRef = 558A002B1E1AC52700739585 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1333,6 +1348,7 @@
 		A8582DD309BD8EF90098D48C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -1350,6 +1366,7 @@
 		A8582DD409BD8EF90098D48C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";

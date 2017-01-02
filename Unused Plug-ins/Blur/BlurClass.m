@@ -17,17 +17,10 @@
 		seaPlugins = manager;
 		NSArray *tmpNibObjs;
 		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"Blur" owner:self topLevelObjects:&tmpNibObjs];
-		nibObjs = [tmpNibObjs retain];
+		nibObjs = tmpNibObjs;
 	}
 	
 	return self;
-}
-
-- (void)dealloc
-{
-	[nibObjs release];
-	
-	[super dealloc];
 }
 
 - (int)type

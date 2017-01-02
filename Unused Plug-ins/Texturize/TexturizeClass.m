@@ -84,7 +84,6 @@
 		alert.informativeText = smallBody;
 		
 		[alert runModal];
-		[alert release];
 		return;
 	}
 	
