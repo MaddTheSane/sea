@@ -146,7 +146,7 @@ extern IntPoint SeaScreenResolution;
 		altData = NULL;
 		
 		// Create the colour world
-		displayProf = ColorSyncProfileCreateWithDisplayID(0);
+		displayProf = ColorSyncProfileCreateWithName(kColorSyncSRGBProfile);
 		cgDisplayProf = CGColorSpaceCreateWithPlatformColorSpace(displayProf);
 		destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile);
 		NSArray<NSDictionary<NSString*,id>*>*

@@ -65,8 +65,6 @@
 			</array>
 			<key>UTTypeDescription</key>
 			<string>GIMP image</string>
-			<key>UTTypeIconFile</key>
-			<string>XCF Icon</string>
 			<key>UTTypeIdentifier</key>
 			<string>org.gimp.xcf</string>
 			<key>UTTypeReferenceURL</key>

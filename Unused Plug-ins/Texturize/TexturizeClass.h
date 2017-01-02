@@ -75,7 +75,7 @@
 				The SeaPlugins instance responsible for managing the plug-ins.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithManager:(SeaPlugins *)manager;
+- (instancetype)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type
@@ -163,6 +163,6 @@
 				The menu item to be validated.
 	@result		YES if the menu item should be enabled, NO otherwise.
 */
-- (BOOL)validateMenuItem:(id)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end

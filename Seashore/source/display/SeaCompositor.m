@@ -41,7 +41,7 @@
 		// Work out the random table for the dissolve effect
 		srandom(RANDOM_SEED);
 		for (i = 0; i < 4096; i++)
-			randomTable[i] = random();
+			randomTable[i] = (int)random();
 	}
 	return self;
 }

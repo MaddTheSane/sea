@@ -82,11 +82,11 @@ static void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp,
 	ColorSyncDataDepth srcDepth = 0;
 	ColorSyncDataDepth dstDepth = kColorSync8BitInteger;
 	ColorSyncDataLayout dstLayout = kColorSyncAlphaLast | kColorSyncByteOrderDefault;
-	ColorSyncDataLayout srcLayout;
-	ColorSyncProfileRef destProf;
-	size_t srcBytesPerRow;
-	size_t dstBytesPerRow;
-	ColorSyncTransformRef cw;
+	ColorSyncDataLayout srcLayout = 0;
+	ColorSyncProfileRef destProf = NULL;
+	size_t srcBytesPerRow = 0;
+	size_t dstBytesPerRow = 0;
+	ColorSyncTransformRef cw = NULL;
 	
 	switch (ispace) {
 		case kGrayColorSpace:

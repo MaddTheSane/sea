@@ -223,7 +223,7 @@
 	[pluginData applyWithNewDocumentData:odata spp:spp width:owidth height:oheight];
 }
 
-- (BOOL)validateMenuItem:(id)menuItem
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem
 {
 	return YES;
 }

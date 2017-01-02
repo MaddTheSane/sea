@@ -45,18 +45,18 @@ final public class CMYK: NSObject, SeaPluginClass {
 		let srcProf = ColorSyncProfileCreateWithDisplayID(0).takeRetainedValue()
 		let destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile.takeUnretainedValue()).takeRetainedValue()
 		// TODO: Hey Apple! Audit your ColorSync API for Swift!
-		let profSeq: [[String: AnyObject]] = [
+		let profSeq: [[String: Any]] = [
 			[kColorSyncProfile.takeUnretainedValue() as String: srcProf,
-				kColorSyncRenderingIntent.takeUnretainedValue() as String: kColorSyncRenderingIntentPerceptual.takeUnretainedValue() as NSString,
-				kColorSyncTransformTag.takeUnretainedValue() as String: kColorSyncTransformDeviceToPCS.takeUnretainedValue() as NSString],
+				kColorSyncRenderingIntent.takeUnretainedValue() as String: kColorSyncRenderingIntentPerceptual.takeUnretainedValue() as String,
+				kColorSyncTransformTag.takeUnretainedValue() as String: kColorSyncTransformDeviceToPCS.takeUnretainedValue() as String],
 			
 			[kColorSyncProfile.takeUnretainedValue() as String: destProf,
-				kColorSyncRenderingIntent.takeUnretainedValue() as String: kColorSyncRenderingIntentPerceptual.takeUnretainedValue() as NSString,
-				kColorSyncTransformTag.takeUnretainedValue() as String: kColorSyncTransformPCSToPCS.takeUnretainedValue() as NSString],
+				kColorSyncRenderingIntent.takeUnretainedValue() as String: kColorSyncRenderingIntentPerceptual.takeUnretainedValue() as String,
+				kColorSyncTransformTag.takeUnretainedValue() as String: kColorSyncTransformPCSToPCS.takeUnretainedValue() as String],
 			
 			[kColorSyncProfile.takeUnretainedValue() as String: srcProf,
-				kColorSyncRenderingIntent.takeUnretainedValue() as String: kColorSyncRenderingIntentPerceptual.takeUnretainedValue() as NSString,
-				kColorSyncTransformTag.takeUnretainedValue() as String: kColorSyncTransformPCSToDevice.takeUnretainedValue() as NSString]
+				kColorSyncRenderingIntent.takeUnretainedValue() as String: kColorSyncRenderingIntentPerceptual.takeUnretainedValue() as String,
+				kColorSyncTransformTag.takeUnretainedValue() as String: kColorSyncTransformPCSToDevice.takeUnretainedValue() as String]
 		]
 		
 		let cw = ColorSyncTransformCreate(profSeq as NSArray, nil).takeRetainedValue()

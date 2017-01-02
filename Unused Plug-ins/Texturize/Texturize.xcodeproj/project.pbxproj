@@ -566,14 +566,14 @@
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A80CECF109FE6F79009859A6 /* GIMPBridge.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GIMPBridge.h; sourceTree = "<group>"; };
 		A80CED1409FE6FDE009859A6 /* texturize.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = texturize.h; path = src/texturize.h; sourceTree = "<group>"; };
-		A80CED2109FE7001009859A6 /* initialiser.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = initialiser.cpp; path = src/initialiser.cpp; sourceTree = "<group>"; };
-		A80CED2F09FE7062009859A6 /* compter.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = compter.cpp; path = src/compter.cpp; sourceTree = "<group>"; };
-		A80CEDA109FE733D009859A6 /* graph.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = graph.cpp; path = src/graph.cpp; sourceTree = "<group>"; };
+		A80CED2109FE7001009859A6 /* initialiser.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = initialiser.cpp; sourceTree = "<group>"; };
+		A80CED2F09FE7062009859A6 /* compter.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = compter.cpp; sourceTree = "<group>"; };
+		A80CEDA109FE733D009859A6 /* graph.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = graph.cpp; sourceTree = "<group>"; };
 		A80CEDA209FE733D009859A6 /* graph.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = graph.h; path = src/graph.h; sourceTree = "<group>"; };
-		A80CEDAD09FE7352009859A6 /* maxflow.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = maxflow.cpp; path = src/maxflow.cpp; sourceTree = "<group>"; };
-		A80CEDD209FE740E009859A6 /* graphcut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = graphcut.cpp; path = src/graphcut.cpp; sourceTree = "<group>"; };
-		A80CEE1109FE7517009859A6 /* offset.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = offset.cpp; path = src/offset.cpp; sourceTree = "<group>"; };
-		A80CF0AA09FE848A009859A6 /* render.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; name = render.mm; path = src/render.mm; sourceTree = "<group>"; };
+		A80CEDAD09FE7352009859A6 /* maxflow.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = maxflow.cpp; sourceTree = "<group>"; };
+		A80CEDD209FE740E009859A6 /* graphcut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graphcut.cpp; sourceTree = "<group>"; };
+		A80CEE1109FE7517009859A6 /* offset.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = offset.cpp; sourceTree = "<group>"; };
+		A80CF0AA09FE848A009859A6 /* render.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = render.mm; sourceTree = "<group>"; };
 		A80CF12009FE87CB009859A6 /* block.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = block.h; path = src/block.h; sourceTree = "<group>"; };
 		A831E1400789471D0009080F /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A8CA58340793689B004BE921 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Texturize.xib; sourceTree = "<group>"; };
@@ -759,6 +759,7 @@
 				A80CF0AA09FE848A009859A6 /* render.mm */,
 			);
 			name = Source;
+			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -8,7 +8,8 @@
 
 #import "SeaMain.h"
 #import "Globals.h"
-#import <sys/sysctl.h>
+#include <sys/sysctl.h>
+#import "SeaDocumentController.h"
 
 //int randomTable[4096];
 extern int globalUniqueDocID;
@@ -38,5 +39,6 @@ int SeaShoreMain(int argc, const char *argv[])
 	userWarnedOnDiskSpace = globalReadOnlyWarning = NO;
 	globalUniqueDocID = tempFileCount = 0;
 	useAltiVec = isAltiVecAvailable();
+	[SeaDocumentController sharedDocumentController];
 	return NSApplicationMain(argc, argv);
 }

@@ -329,9 +329,9 @@ static inline void fix_endian_read(int *input, size_t size)
 {
 	if (self = [super init]) {
 		SharedXCFInfo info;
-		int layerOffsets, offset;
+		long layerOffsets, offset;
 		FILE *file;
-		id layer;
+		SeaLayer *layer;
 		int i;
 		BOOL maskToAlpha = NO;
 		ParasiteData *exifParasite;
@@ -377,7 +377,7 @@ static inline void fix_endian_read(int *input, size_t size)
 			
 			// If it exists, move to it
 			if (offset != 0) {
-				layer = [[XCFLayer alloc] initWithFile:file offset:offset sharedInfo:&info];
+				layer = [[XCFLayer alloc] initWithFile:file offset:(int)offset sharedInfo:&info];
 				if (layer == NULL) {
 					fclose(file);
 					return nil;
