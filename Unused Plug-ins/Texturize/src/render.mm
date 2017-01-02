@@ -1,6 +1,6 @@
 #include "GIMPBridge.h"
 #include "texturize.h"
-#import "render.hpp"
+#import "render.h"
 
 
 int render(unsigned char *image_in, int width_in, int height_in, unsigned char *image_out, int width_out, int height_out, int overlap, int channels, bool tileable, NSProgressIndicator *progressBar)

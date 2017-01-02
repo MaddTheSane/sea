@@ -1,7 +1,7 @@
 #include <math.h>
 #include <tgmath.h>
 #import "TexturizeClass.h"
-#import "render.hpp"
+#import "render.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 

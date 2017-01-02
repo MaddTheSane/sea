@@ -561,7 +561,7 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		55F084881D3998C500A34BF3 /* Seashore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Seashore.xcodeproj; path = ../../Seashore/Seashore.xcodeproj; sourceTree = "<group>"; };
-		55F085701D399A3C00A34BF3 /* render.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = render.hpp; sourceTree = "<group>"; };
+		55F085701D399A3C00A34BF3 /* render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = render.h; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Texturize.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Texturize.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A80CECF109FE6F79009859A6 /* GIMPBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIMPBridge.h; sourceTree = "<group>"; };
@@ -749,7 +749,7 @@
 				A80CF12009FE87CB009859A6 /* block.hpp */,
 				A80CEDA209FE733D009859A6 /* graph.h */,
 				A80CED1409FE6FDE009859A6 /* texturize.h */,
-				55F085701D399A3C00A34BF3 /* render.hpp */,
+				55F085701D399A3C00A34BF3 /* render.h */,
 				A80CEDA109FE733D009859A6 /* graph.cpp */,
 				A80CEDD209FE740E009859A6 /* graphcut.cpp */,
 				A80CEDAD09FE7352009859A6 /* maxflow.cpp */,
