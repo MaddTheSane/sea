@@ -2,3 +2,4 @@
 
 CFBundleGetInfoString = "XCFQuickLook version 1.0, Copyright (c) 2009 University of Michigan.";
 NSHumanReadableCopyright = "Copyright (c) 2009 University of Michigan.";
+"org.gimp.xcf" = "Gimp Image";

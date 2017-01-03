@@ -300,6 +300,7 @@
 		55850B3E13D63BC500C3B2CB /* GIMPCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E20A2C00D0005B688F /* GIMPCore.framework */; };
 		55850B3F13D63BC500C3B2CB /* TIFF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E90A2C00E0005B688F /* TIFF.framework */; };
 		558A002D1E1ACE7900739585 /* ToolboxUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D748FD1D5271DA00B099C9 /* ToolboxUtility.swift */; };
+		558A003A1E1AD25300739585 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 558A003C1E1AD25300739585 /* InfoPlist.strings */; };
 		55909D9E18CFCCF400F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		55909DAD18CFCCF700F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		55909DBB18CFCE5500F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
@@ -2080,6 +2081,7 @@
 		5584C7A71D385E1200347CDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Sharpen.strings; sourceTree = "<group>"; };
 		5584C7A81D385E1C00347CDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Threshold.xib; sourceTree = "<group>"; };
 		5584C7A91D385E2000347CDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Threshold.strings; sourceTree = "<group>"; };
+		558A003B1E1AD25300739585 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55909DA518CFCCF400F43F90 /* Circular Wrap+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Wrap+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55909DB418CFCCF700F43F90 /* CMYK Halftone+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CMYK Halftone+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55909DC018CFCE5500F43F90 /* Circle Splash+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circle Splash+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3430,6 +3432,7 @@
 				A8FBD1FE0410E1DB00DF7825 /* Additions */,
 				A87E672506D1F4A000A5C89A /* Credits.rtf */,
 				A8CA47A306D82C10006F0681 /* Localizable.strings */,
+				558A003C1E1AD25300739585 /* InfoPlist.strings */,
 				551E56D218D01A7500E4CDAF /* SeaDocument.xib */,
 				551E56D718D01AB500E4CDAF /* MainMenu.xib */,
 				551E56DC18D01AD900E4CDAF /* CocoaContent.xib */,
@@ -7168,6 +7171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8EDF0D0078959C80022BB31 /* brushes in Resources */,
+				558A003A1E1AD25300739585 /* InfoPlist.strings in Resources */,
 				A8EDF0D1078959C80022BB31 /* textures in Resources */,
 				A8EDF0E9078959C80022BB31 /* Credits.rtf in Resources */,
 				A8EDF0ED078959C80022BB31 /* Localizable.strings in Resources */,
@@ -8942,6 +8946,14 @@
 				557D528818CF9FC1005809E3 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		558A003C1E1AD25300739585 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				558A003B1E1AD25300739585 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		55909DD518CFCF3600F43F90 /* CIBloom.xib */ = {

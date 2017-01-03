@@ -1,10 +1,11 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreServices/CoreServices.h>
 #include <QuickLook/QuickLook.h>
-#include <Cocoa/Cocoa.h>
+#include "GenerateThumb.h"
+#import <Cocoa/Cocoa.h>
 
-#include "XCFContent.h"
-#include "SeaWhiteboard.h"
+#import "XCFContent.h"
+#import "SeaWhiteboard.h"
 
 /* -----------------------------------------------------------------------------
     Generate a thumbnail for file

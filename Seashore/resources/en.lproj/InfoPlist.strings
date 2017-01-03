@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Seashore
+
+  Created by C.W. Betts on 1/2/17.
+
+*/
+
+CFBundleName = "Seashore";
+"org.gimp.xcf" = "Gimp Image";

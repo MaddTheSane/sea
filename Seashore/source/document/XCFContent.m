@@ -12,11 +12,9 @@
 
 static inline void fix_endian_read(int *input, size_t size)
 {
-#ifdef __LITTLE_ENDIAN__
-	dispatch_apply(size, dispatch_get_global_queue(0, 0), ^(size_t i) {
+	for (NSInteger i = 0; i < size; i++) {
 		input[i] = CFSwapInt32BigToHost(input[i]);
-	});
-#endif
+	}
 }
 
 #if MAIN_COMPILE

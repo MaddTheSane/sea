@@ -6,11 +6,9 @@
 
 static inline void fix_endian_read(int *input, size_t size)
 {
-#ifdef __LITTLE_ENDIAN__
-	dispatch_apply(size, dispatch_get_global_queue(0, 0), ^(size_t i) {
+	for (NSInteger i = 0; i < size; i++) {
 		input[i] = CFSwapInt32BigToHost(input[i]);
-	});
-#endif
+	}
 }
 
 - (BOOL)readHeader:(FILE *)file
@@ -569,13 +567,8 @@ static inline void fix_endian_read(int *input, size_t size)
 
 - (instancetype)initWithFile:(FILE *)file offset:(int)offset sharedInfo:(SharedXCFInfo *)info
 {
+	// Initialize superclass first
 	if (self = [super init]) {
-		int i;
-		
-		// Initialize superclass first
-		if (![super  init])
-			return NULL;
-		
 		// Go to the given offset
 		fseek(file, offset, SEEK_SET);
 		
@@ -602,7 +595,7 @@ static inline void fix_endian_read(int *input, size_t size)
 		
 		// Check the alpha
 		hasAlpha = NO;
-		for (i = 0; i < width * height; i++) {
+		for (int i = 0; i < width * height; i++) {
 			if (data[(i + 1) * spp - 1] != 255)
 				hasAlpha = YES;
 		}
