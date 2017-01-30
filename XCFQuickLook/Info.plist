@@ -55,7 +55,7 @@
 	<false/>
 	<key>QLThumbnailMinimumSize</key>
 	<real>17</real>
-	<key>UTImportedTypeDeclarations</key>
+	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
 			<key>UTTypeConformsTo</key>

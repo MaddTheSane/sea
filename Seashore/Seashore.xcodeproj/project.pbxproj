@@ -299,6 +299,7 @@
 		55850B3813D63BA100C3B2CB /* TIFF.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E90A2C00E0005B688F /* TIFF.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55850B3E13D63BC500C3B2CB /* GIMPCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E20A2C00D0005B688F /* GIMPCore.framework */; };
 		55850B3F13D63BC500C3B2CB /* TIFF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B156E90A2C00E0005B688F /* TIFF.framework */; };
+		55868EFA1E1C2C6F00CDDED1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55868EF91E1C2C6F00CDDED1 /* CoreGraphics.framework */; };
 		558A002D1E1ACE7900739585 /* ToolboxUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D748FD1D5271DA00B099C9 /* ToolboxUtility.swift */; };
 		558A003A1E1AD25300739585 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 558A003C1E1AD25300739585 /* InfoPlist.strings */; };
 		55909D9E18CFCCF400F43F90 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
@@ -2081,6 +2082,7 @@
 		5584C7A71D385E1200347CDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Sharpen.strings; sourceTree = "<group>"; };
 		5584C7A81D385E1C00347CDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Threshold.xib; sourceTree = "<group>"; };
 		5584C7A91D385E2000347CDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Threshold.strings; sourceTree = "<group>"; };
+		55868EF91E1C2C6F00CDDED1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		558A003B1E1AD25300739585 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55909DA518CFCCF400F43F90 /* Circular Wrap+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Circular Wrap+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55909DB418CFCCF700F43F90 /* CMYK Halftone+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CMYK Halftone+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2600,6 +2602,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55868EFA1E1C2C6F00CDDED1 /* CoreGraphics.framework in Frameworks */,
 				5522C14B1DA1C82F0009499F /* ApplicationServices.framework in Frameworks */,
 				5522C1061DA1C6420009499F /* Quartz.framework in Frameworks */,
 				5522C14A1DA1C8270009499F /* Cocoa.framework in Frameworks */,
@@ -3448,6 +3451,7 @@
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55868EF91E1C2C6F00CDDED1 /* CoreGraphics.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				551E56A418D0138C00E4CDAF /* Quartz.framework */,
 				F5CE25B003D7112D013D2EC9 /* ApplicationServices.framework */,
