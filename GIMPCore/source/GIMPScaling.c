@@ -83,54 +83,77 @@ get_premultiplied_double_row (PixelRegion *srcPR,
 static void
 expand_line (gdouble               *dest,
 	     gdouble               *src,
-	     guint                  bytes,
+	     guint                  bpp,
 	     guint                  old_width,
 	     gint                   width,
 	     GimpInterpolationType  interp)
 {
-  gdouble  ratio;
-  gint     x,b;
-  gint     src_col;
-  gdouble  frac;
-  gdouble *s;
-
-  ratio = old_width / (gdouble) width;
-
-/* this could be opimized much more by precalculating the coeficients for
-   each x */
-  switch(interp)
+  const gdouble *s;
+  /* reverse scaling_factor */
+  const gdouble  ratio = (gdouble) old_width / (gdouble) width;
+  gint           x, b;
+  gint           src_col;
+  gdouble        frac;
+  
+  /* we can overflow src's boundaries, so we expect our caller to have
+   * allocated extra space for us to do so safely (see scale_region ())
+   */
+  
+  switch (interp)
   {
+      /* -0.5 is because cubic() interpolates a position between 2nd and 3rd
+       * data points we are assigning to 2nd in dest, hence mean shift of +0.5
+       * +1, -1 ensures we dont (int) a negative; first src col only.
+       */
     case GIMP_INTERPOLATION_CUBIC:
       for (x = 0; x < width; x++)
       {
-	src_col = ((int)((x) * ratio  + 2.0 - 0.5)) - 2;
-	/* +2, -2 is there because (int) rounds towards 0 and we need 
-	   to round down */
-	frac =          ((x) * ratio - 0.5) - src_col;
-	s = &src[src_col * bytes];
-	for (b = 0; b < bytes; b++)
-	  dest[b] = cubic (frac, s[b - bytes], s[b], s[b+bytes], s[b+bytes*2]);
-	dest += bytes;
+        gdouble xr = x * ratio - 0.5;
+        
+        if (xr < 0)
+          src_col = (gint) (xr + 1) - 1;
+        else
+          src_col = (gint) xr;
+        
+        frac = xr - src_col;
+        s = &src[src_col * bpp];
+        
+        for (b = 0; b < bpp; b++)
+          dest[b] = cubic (frac, s[b - bpp], s[b], s[b + bpp],
+                                      s[b + bpp * 2]);
+        
+        dest += bpp;
       }
+      
       break;
-
+      
+      /* -0.5 corrects the drift from averaging between adjacent points and
+       * assigning to dest[b]
+       * +1, -1 ensures we dont (int) a negative; first src col only.
+       */
     case GIMP_INTERPOLATION_LINEAR:
       for (x = 0; x < width; x++)
       {
-	src_col = ((int)((x) * ratio + 2.0 - 0.5)) - 2;
-	/* +2, -2 is there because (int) rounds towards 0 and we need 
-	   to round down */
-	frac =          ((x) * ratio - 0.5) - src_col;
-	s = &src[src_col * bytes];
-	for (b = 0; b < bytes; b++)
-	  dest[b] = ((s[b + bytes] - s[b]) * frac + s[b]);
-	dest += bytes;
+        gdouble xr = (x * ratio + 1 - 0.5) - 1;
+        
+        src_col = (gint) xr;
+        frac = xr - src_col;
+        s = &src[src_col * bpp];
+        
+        for (b = 0; b < bpp; b++)
+          dest[b] = ((s[b + bpp] - s[b]) * frac + s[b]);
+        
+        dest += bpp;
       }
       break;
-
-   case GIMP_INTERPOLATION_NONE:
-     g_assert_not_reached ();
-     break;
+      
+    case GIMP_INTERPOLATION_NONE:
+    //case GIMP_INTERPOLATION_LANCZOS:
+      g_assert_not_reached ();
+      break;
+      
+    default:
+      break;
   }
 }
 
