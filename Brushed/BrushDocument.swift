@@ -60,7 +60,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	fileprivate var curUndoPos = 0
 	
 	/// The spacing between brush strokes
-	dynamic var spacing: Int32 = 25 {
+	@objc dynamic var spacing: Int32 = 25 {
 		didSet {
 			spacingLabel?.stringValue = "Spacing - \(spacing)%"
 		}
@@ -74,7 +74,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	// The name of the brush
-	dynamic var name = "Untitled"
+	@objc dynamic var name = "Untitled"
 	
 	/// A memory of all past names for the undo manager
 	fileprivate var pastNames = ["Untitled"]
@@ -122,7 +122,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Returns an image representing the brush
-	var brushImage: NSImage? {
+	@objc var brushImage: NSImage? {
 		let tempRep: NSBitmapImageRep
 		
 		// If we have no width or height in the image return NULL
@@ -135,7 +135,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 			tempRep = pixmap.withUnsafeMutableBufferPointer({ (thePix) -> NSBitmapImageRep in
 				var aBase = thePix.baseAddress
 				return withUnsafeMutablePointer(to: &aBase, { (bleh) -> NSBitmapImageRep in
-					return NSBitmapImageRep(bitmapDataPlanes: bleh, pixelsWide: Int(size.width), pixelsHigh: Int(size.height), bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: NSCalibratedRGBColorSpace, bytesPerRow: Int(size.width) * 4, bitsPerPixel: 32)!
+					return NSBitmapImageRep(bitmapDataPlanes: bleh, pixelsWide: Int(size.width), pixelsHigh: Int(size.height), bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .calibratedRGB, bytesPerRow: Int(size.width) * 4, bitsPerPixel: 32)!
 				})
 			})
 		} else {
@@ -147,7 +147,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 			tempRep = tmpWhite.withUnsafeMutableBufferPointer({ (thePtr) -> NSBitmapImageRep in
 				var aBase = thePtr.baseAddress
 				return withUnsafeMutablePointer(to: &aBase, { (bleh) -> NSBitmapImageRep in
-					return NSBitmapImageRep(bitmapDataPlanes: bleh, pixelsWide: Int(size.width), pixelsHigh: Int(size.height), bitsPerSample: 8, samplesPerPixel: 1, hasAlpha: true, isPlanar: false, colorSpaceName: NSCalibratedRGBColorSpace, bytesPerRow: Int(size.width), bitsPerPixel: 8)!
+					return NSBitmapImageRep(bitmapDataPlanes: bleh, pixelsWide: Int(size.width), pixelsHigh: Int(size.height), bitsPerSample: 8, samplesPerPixel: 1, hasAlpha: true, isPlanar: false, colorSpaceName: .calibratedWhite, bytesPerRow: Int(size.width), bitsPerPixel: 8)!
 				})
 			})
 		}
@@ -172,7 +172,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 
 	/// Adjust the image of the brush
-	func changeImage(_ newImage: NSBitmapImageRep!) throws {
+	@objc func changeImage(_ newImage: NSBitmapImageRep!) throws {
 		// Check we can handle this image
 		guard newImage?.bitsPerSample == 8 else {
 			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
@@ -185,9 +185,9 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		
 		
 		// Fill out `isRGB` and `invert` booleans
-		if newImage.colorSpaceName == NSCalibratedWhiteColorSpace || newImage.colorSpaceName == NSDeviceWhiteColorSpace {
+		if newImage.colorSpaceName == .calibratedWhite || newImage.colorSpaceName == .deviceWhite {
 			isRGB = false; invert = true;
-		} else if newImage.colorSpaceName == NSCalibratedRGBColorSpace || newImage.colorSpaceName == NSDeviceRGBColorSpace {
+		} else if newImage.colorSpaceName == .calibratedRGB || newImage.colorSpaceName == .deviceRGB {
 			isRGB = true; invert = false;
 		} else {
 			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
@@ -439,8 +439,8 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// Returns the nib file associated with this class
-	override var windowNibName: String? {
-		return "BrushDocument"
+	override var windowNibName: NSNib.Name? {
+		return NSNib.Name(rawValue: "BrushDocument")
 	}
 	
 	override func data(ofType typeName: String) throws -> Data {
@@ -488,7 +488,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		openPanel.allowedFileTypes = [kUTTypeTIFF as String, kUTTypeJPEG as String, kUTTypePNG as String]
 		
 		openPanel.beginSheetModal(for: windowForSheet!) { (result) in
-			guard result == NSFileHandlingPanelOKButton else {
+			guard result.rawValue == NSFileHandlingPanelOKButton else {
 				return
 			}
 			do {
@@ -511,7 +511,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		savePanel.prompt = "Export"
 		savePanel.allowedFileTypes = [kUTTypeTIFF as String]
 		savePanel.beginSheetModal(for: windowForSheet!) { (result) in
-			guard result == NSFileHandlingPanelOKButton else {
+			guard result.rawValue == NSFileHandlingPanelOKButton else {
 				return
 			}
 			try? self.brushImage?.tiffRepresentation?.write(to: savePanel.url!, options: [.atomic])
