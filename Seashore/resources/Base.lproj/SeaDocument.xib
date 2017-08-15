@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13178.6"/>
         <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SeaDocument">
@@ -34,7 +34,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
             <rect key="contentRect" x="159" y="283" width="960" height="724"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
@@ -293,7 +293,7 @@ DQ
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="39" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="9834" id="7811" customClass="SeaOutlineView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="42"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="543"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="2" height="3"/>
                                                     <color key="backgroundColor" red="0.89411770999999995" green="0.91764712000000004" blue="0.94509810000000005" alpha="1" colorSpace="deviceRGB"/>
@@ -645,12 +645,9 @@ DQ
                                             </textField>
                                         </subviews>
                                     </customView>
-                                    <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="7358">
+                                    <box horizontalHuggingPriority="750" boxType="separator" id="7358">
                                         <rect key="frame" x="196" y="0.0" width="5" height="735"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
-                                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <font key="titleFont" metaFont="system"/>
                                     </box>
                                 </subviews>
                             </customView>
@@ -852,8 +849,6 @@ Gw
                                 </textField>
                             </subviews>
                         </view>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                 </subviews>
             </view>
@@ -1157,8 +1152,6 @@ Gw
                                 </popUpButton>
                             </subviews>
                         </view>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <popUpButton toolTip="Various predefined sizes" id="658">
                         <rect key="frame" x="17" y="18" width="90" height="22"/>
@@ -1432,8 +1425,6 @@ Gw
                                 </popUpButton>
                             </subviews>
                         </view>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <popUpButton toolTip="Various predefined sizes" id="583">
                         <rect key="frame" x="17" y="18" width="90" height="22"/>
@@ -1538,15 +1529,13 @@ Gw
                             <rect key="frame" x="1" y="1" width="438" height="54"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textView importsGraphics="NO" richText="NO" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1007" customClass="NSTextViewRedirect">
+                                <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" usesFontPanel="YES" usesRuler="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1007" customClass="NSTextViewRedirect">
                                     <rect key="frame" x="0.0" y="0.0" width="423" height="54"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="423" height="54"/>
+                                    <size key="minSize" width="438" height="54"/>
                                     <size key="maxSize" width="466" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="423" height="54"/>
-                                    <size key="maxSize" width="466" height="10000000"/>
                                     <connections>
                                         <outlet property="delegate" destination="310" id="1017"/>
                                     </connections>
@@ -1708,12 +1697,9 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="16862"/>
                     </imageView>
-                    <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="347">
+                    <box verticalHuggingPriority="750" boxType="separator" id="347">
                         <rect key="frame" x="20" y="49" width="320" height="5"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <font key="titleFont" metaFont="system"/>
                     </box>
                     <button verticalHuggingPriority="750" id="349">
                         <rect key="frame" x="250" y="12" width="96" height="32"/>
@@ -1837,12 +1823,9 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="398">
+                    <box verticalHuggingPriority="750" boxType="separator" id="398">
                         <rect key="frame" x="20" y="294" width="274" height="5"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <font key="titleFont" metaFont="system"/>
                     </box>
                     <button toolTip="Adds texture to a new category" id="402">
                         <rect key="frame" x="18" y="88" width="278" height="32"/>
@@ -1864,12 +1847,9 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="405">
+                    <box verticalHuggingPriority="750" boxType="separator" id="405">
                         <rect key="frame" x="20" y="49" width="274" height="5"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <font key="titleFont" metaFont="system"/>
                     </box>
                     <button verticalHuggingPriority="750" id="408">
                         <rect key="frame" x="204" y="12" width="96" height="32"/>
@@ -1903,11 +1883,11 @@ Gw
                         <rect key="frame" x="46" y="126" width="248" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="9yS-N0-Caa">
-                            <rect key="frame" x="1" y="1" width="230" height="94"/>
+                            <rect key="frame" x="1" y="1" width="246" height="94"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" id="415" customClass="NSExtendedTableView">
-                                    <rect key="frame" x="0.0" y="0.0" width="231" height="19"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="246" height="94"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1931,7 +1911,6 @@ Gw
                                     </connections>
                                 </tableView>
                             </subviews>
-                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="17055">
                             <rect key="frame" x="-100" y="-100" width="231" height="15"/>
@@ -2066,12 +2045,9 @@ DQ
                             <action selector="endPanel:" target="330" id="706"/>
                         </connections>
                     </button>
-                    <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="703">
+                    <box verticalHuggingPriority="750" boxType="separator" id="703">
                         <rect key="frame" x="12" y="49" width="175" height="5"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <font key="titleFont" metaFont="system"/>
                     </box>
                 </subviews>
             </view>
@@ -2161,8 +2137,6 @@ Gw
                                 </textField>
                             </subviews>
                         </view>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                 </subviews>
             </view>
@@ -2224,12 +2198,9 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="16887"/>
                     </imageView>
-                    <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="812">
+                    <box verticalHuggingPriority="750" boxType="separator" id="812">
                         <rect key="frame" x="20" y="49" width="320" height="5"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <font key="titleFont" metaFont="system"/>
                     </box>
                     <button verticalHuggingPriority="750" id="802">
                         <rect key="frame" x="250" y="12" width="96" height="32"/>
@@ -2657,26 +2628,17 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16896"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12057">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12057">
                     <rect key="frame" x="803" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="11974">
+                <box horizontalHuggingPriority="750" boxType="separator" id="11974">
                     <rect key="frame" x="228" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="11973">
+                <box horizontalHuggingPriority="750" boxType="separator" id="11973">
                     <rect key="frame" x="105" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <button verticalHuggingPriority="750" id="11971">
                     <rect key="frame" x="4" y="5" width="96" height="16"/>
@@ -2718,19 +2680,13 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16900"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12032">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12032">
                     <rect key="frame" x="322" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6451">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6451">
                     <rect key="frame" x="163" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="2167">
                     <rect key="frame" x="177" y="7" width="140" height="15"/>
@@ -2811,31 +2767,22 @@ Gw
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="16682">
+                <box horizontalHuggingPriority="750" boxType="separator" id="16682">
                     <rect key="frame" x="217" y="2" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <imageView toolTip="You can fill all of a selection by clicking with the option key." id="12034">
                     <rect key="frame" x="653" y="5" width="15" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16905"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12033">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12033">
                     <rect key="frame" x="642" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12011">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12011">
                     <rect key="frame" x="486" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <button verticalHuggingPriority="750" id="12010">
                     <rect key="frame" x="418" y="5" width="63" height="16"/>
@@ -2848,12 +2795,9 @@ Gw
                         <action selector="toggleTextures:" target="1869" id="12013"/>
                     </connections>
                 </button>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6468">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6468">
                     <rect key="frame" x="408" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="2155">
                     <rect key="frame" x="497" y="6" width="140" height="15"/>
@@ -2895,24 +2839,18 @@ Gw
             <rect key="frame" x="0.0" y="0.0" width="896" height="26"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="11992">
+                <box horizontalHuggingPriority="750" boxType="separator" id="11992">
                     <rect key="frame" x="647" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <imageView toolTip="You can erase by clicking with the option key." id="12040">
                     <rect key="frame" x="813" y="5" width="15" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16916"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12039">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12039">
                     <rect key="frame" x="802" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <button verticalHuggingPriority="750" id="7435">
                     <rect key="frame" x="579" y="5" width="63" height="16"/>
@@ -3003,26 +2941,17 @@ Gw
                         <action selector="update:" target="1871" id="6436"/>
                     </connections>
                 </button>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6449">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6449">
                     <rect key="frame" x="221" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6450">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6450">
                     <rect key="frame" x="504" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6448">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6448">
                     <rect key="frame" x="406" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <slider toolTip="Length before fading" verticalHuggingPriority="750" tag="2" id="2138">
                     <rect key="frame" x="90" y="7" width="120" height="12"/>
@@ -3046,19 +2975,13 @@ Gw
                     <string key="toolTip">You can scale the current layer by dragging with the shift key. You can rotate a floating selection by dragging with the control key.</string>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16919"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12042">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12042">
                     <rect key="frame" x="358" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6614">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6614">
                     <rect key="frame" x="201" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="2122">
                     <rect key="frame" x="213" y="6" width="140" height="15"/>
@@ -3097,12 +3020,9 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16923"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12045">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12045">
                     <rect key="frame" x="249" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <button verticalHuggingPriority="750" id="12018">
                     <rect key="frame" x="180" y="5" width="59" height="16"/>
@@ -3115,12 +3035,9 @@ Gw
                         <action selector="toggleBrushes:" target="1872" id="12024"/>
                     </connections>
                 </button>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12017">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12017">
                     <rect key="frame" x="170" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <slider toolTip="Rate of smudging" verticalHuggingPriority="750" id="2117">
                     <rect key="frame" x="64" y="8" width="100" height="12"/>
@@ -3147,19 +3064,13 @@ Gw
             <rect key="frame" x="0.0" y="0.0" width="896" height="26"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6610">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6610">
                     <rect key="frame" x="272" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6609">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6609">
                     <rect key="frame" x="163" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="2096">
                     <rect key="frame" x="289" y="6" width="140" height="15"/>
@@ -3195,12 +3106,9 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16928"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12048">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12048">
                     <rect key="frame" x="434" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="2099">
                     <rect key="frame" x="77" y="7" width="77" height="15"/>
@@ -3247,12 +3155,9 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16933"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12060">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12060">
                     <rect key="frame" x="599" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <button verticalHuggingPriority="750" id="12021">
                     <rect key="frame" x="374" y="5" width="59" height="16"/>
@@ -3265,12 +3170,9 @@ Gw
                         <action selector="toggleBrushes:" target="1874" id="12023"/>
                     </connections>
                 </button>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12020">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12020">
                     <rect key="frame" x="364" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <textField verticalHuggingPriority="750" id="6621">
                     <rect key="frame" x="6" y="3" width="198" height="16"/>
@@ -3281,19 +3183,13 @@ Gw
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6606">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6606">
                     <rect key="frame" x="216" y="2" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6605">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6605">
                     <rect key="frame" x="438" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="2085">
                     <rect key="frame" x="454" y="7" width="140" height="15"/>
@@ -3334,12 +3230,9 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16940"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12066">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12066">
                     <rect key="frame" x="583" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="2055">
                     <rect key="frame" x="438" y="7" width="140" height="15"/>
@@ -3378,19 +3271,13 @@ Gw
                         </menu>
                     </popUpButtonCell>
                 </popUpButton>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6466">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6466">
                     <rect key="frame" x="211" y="2" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6465">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6465">
                     <rect key="frame" x="423" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <textField verticalHuggingPriority="750" id="2059">
                     <rect key="frame" x="224" y="8" width="89" height="11"/>
@@ -3441,12 +3328,9 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16948"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12051">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12051">
                     <rect key="frame" x="732" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <button verticalHuggingPriority="750" id="12002">
                     <rect key="frame" x="664" y="5" width="63" height="16"/>
@@ -3459,33 +3343,21 @@ Gw
                         <action selector="toggleTextures:" target="1882" id="12005"/>
                     </connections>
                 </button>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12000">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12000">
                     <rect key="frame" x="654" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6464">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6464">
                     <rect key="frame" x="510" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6461">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6461">
                     <rect key="frame" x="82" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6460">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6460">
                     <rect key="frame" x="295" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <segmentedControl verticalHuggingPriority="750" id="6458">
                     <rect key="frame" x="7" y="6" width="64" height="17"/>
@@ -3565,26 +3437,17 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16955"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12054">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12054">
                     <rect key="frame" x="530" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6602">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6602">
                     <rect key="frame" x="368" y="2" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6601">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6601">
                     <rect key="frame" x="207" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="2016">
                     <rect key="frame" x="385" y="7" width="140" height="15"/>
@@ -3656,19 +3519,13 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16962"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12072">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12072">
                     <rect key="frame" x="437" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="11997">
+                <box horizontalHuggingPriority="750" boxType="separator" id="11997">
                     <rect key="frame" x="282" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <button verticalHuggingPriority="750" id="11996">
                     <rect key="frame" x="214" y="5" width="63" height="16"/>
@@ -3681,12 +3538,9 @@ Gw
                         <action selector="toggleTextures:" target="1870" id="11999"/>
                     </connections>
                 </button>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6453">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6453">
                     <rect key="frame" x="204" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="1997">
                     <rect key="frame" x="292" y="6" width="140" height="15"/>
@@ -3752,12 +3606,9 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16968"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12063">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12063">
                     <rect key="frame" x="565" y="2" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <button verticalHuggingPriority="750" id="12007">
                     <rect key="frame" x="346" y="5" width="59" height="16"/>
@@ -3770,19 +3621,13 @@ Gw
                         <action selector="toggleBrushes:" target="1883" id="12009"/>
                     </connections>
                 </button>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12006">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12006">
                     <rect key="frame" x="410" y="2" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6456">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6456">
                     <rect key="frame" x="187" y="2" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="1983">
                     <rect key="frame" x="420" y="6" width="140" height="15"/>
@@ -3802,12 +3647,9 @@ Gw
                         <action selector="modifierPopupChanged:" target="1883" id="6455"/>
                     </connections>
                 </popUpButton>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6457">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6457">
                     <rect key="frame" x="336" y="2" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <button id="1985">
                     <rect key="frame" x="200" y="6" width="129" height="18"/>
@@ -3847,12 +3689,9 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16970"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12069">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12069">
                     <rect key="frame" x="139" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="1970">
                     <rect key="frame" x="4" y="7" width="130" height="15"/>
@@ -3887,19 +3726,13 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16973"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12078">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12078">
                     <rect key="frame" x="272" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6615">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6615">
                     <rect key="frame" x="110" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="1960">
                     <rect key="frame" x="127" y="6" width="140" height="15"/>
@@ -3938,12 +3771,9 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16979"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12084">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12084">
                     <rect key="frame" x="523" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="11373">
                     <rect key="frame" x="378" y="7" width="140" height="15"/>
@@ -3968,19 +3798,13 @@ Gw
                         <action selector="modifierPopupChanged:" target="1875" id="11384"/>
                     </connections>
                 </popUpButton>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="10997">
+                <box horizontalHuggingPriority="750" boxType="separator" id="10997">
                     <rect key="frame" x="368" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6447">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6447">
                     <rect key="frame" x="198" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <button id="1934">
                     <rect key="frame" x="4" y="6" width="101" height="18"/>
@@ -4043,12 +3867,9 @@ Gw
             <rect key="frame" x="0.0" y="0.0" width="896" height="26"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="16676">
+                <box horizontalHuggingPriority="750" boxType="separator" id="16676">
                     <rect key="frame" x="408" y="2" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <slider toolTip="Tolerance range for colour" verticalHuggingPriority="750" id="16675">
                     <rect key="frame" x="274" y="8" width="128" height="12"/>
@@ -4072,19 +3893,13 @@ Gw
                     <string key="toolTip">The control key allows you to force a new selection, create a new selection (with shft) or subtract from the selection (with option).</string>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16983"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12081">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12081">
                     <rect key="frame" x="563" y="2" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="6452">
+                <box horizontalHuggingPriority="750" boxType="separator" id="6452">
                     <rect key="frame" x="217" y="2" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="1917">
                     <rect key="frame" x="418" y="7" width="140" height="15"/>
@@ -4138,12 +3953,9 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" image="help-button" id="16987"/>
                 </imageView>
-                <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="12075">
+                <box horizontalHuggingPriority="750" boxType="separator" id="12075">
                     <rect key="frame" x="139" y="3" width="5" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
                 </box>
                 <popUpButton verticalHuggingPriority="750" id="1904">
                     <rect key="frame" x="4" y="7" width="130" height="15"/>
@@ -5111,7 +4923,7 @@ DQ
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="14" id="11980">
-                                    <rect key="frame" x="0.0" y="0.0" width="197" height="16"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="214" height="160"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -5136,7 +4948,6 @@ DQ
                                     </connections>
                                 </tableView>
                             </subviews>
-                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" controlSize="small" horizontal="YES" id="17057">
                             <rect key="frame" x="-100" y="-100" width="197" height="11"/>
@@ -5223,10 +5034,10 @@ DQ
                     <segment image="lasso" width="32" tag="2">
                         <nil key="label"/>
                     </segment>
-                    <segment image="poly-lasso" tag="3">
+                    <segment image="poly-lasso" width="32" tag="3">
                         <nil key="label"/>
                     </segment>
-                    <segment image="wand" tag="4">
+                    <segment image="wand" width="32" tag="4">
                         <nil key="label"/>
                     </segment>
                 </segments>
@@ -5265,13 +5076,13 @@ DQ
                     <segment image="text" width="32" tag="8">
                         <nil key="label"/>
                     </segment>
-                    <segment image="eraser" tag="9">
+                    <segment image="eraser" width="32" tag="9">
                         <nil key="label"/>
                     </segment>
-                    <segment image="bucket" tag="10">
+                    <segment image="bucket" width="32" tag="10">
                         <nil key="label"/>
                     </segment>
-                    <segment image="gradient" tag="11">
+                    <segment image="gradient" width="32" tag="11">
                         <nil key="label"/>
                     </segment>
                 </segments>
@@ -5292,7 +5103,7 @@ DQ
                     <segment image="zoom" width="32" tag="16">
                         <nil key="label"/>
                     </segment>
-                    <segment image="move" tag="17">
+                    <segment image="move" width="32" tag="17">
                         <nil key="label"/>
                     </segment>
                 </segments>
@@ -5300,7 +5111,7 @@ DQ
             <connections>
                 <action selector="selectToolFromSender:" target="1598" id="NoL-po-zQq"/>
             </connections>
-            <point key="canvasLocation" x="5" y="64.5"/>
+            <point key="canvasLocation" x="8" y="64"/>
         </segmentedControl>
     </objects>
     <resources>

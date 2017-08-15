@@ -117,7 +117,7 @@
 	id activeLayer = [contents activeLayer];
 	int xoff, yoff, whichLayer;
 	int deltax = where.x - initialPoint.x, deltay = where.y - initialPoint.y;
-	IntPoint oldOffsets;
+	IntPoint oldOffsets = {0};
 	NSPoint activeCenter = NSMakePoint([activeLayer xoff] + [(SeaLayer *)activeLayer width] / 2, [activeLayer yoff] + [(SeaLayer *)activeLayer height] / 2);
 	float original, current;
 	

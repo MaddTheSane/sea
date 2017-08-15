@@ -37,7 +37,7 @@ extension EllipseSelectTool: SeaOptions {
 extension LassoTool: SeaOptions {
 	typealias OptionClass = LassoOptions
 	
-	class var toolType: SeaToolsDefines {
+	@objc class var toolType: SeaToolsDefines {
 		return .kLassoTool
 	}
 }
