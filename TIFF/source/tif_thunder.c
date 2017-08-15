@@ -78,7 +78,7 @@ ThunderDecode(TIFF* tif, tidata_t op, tsize_t maxpixels)
 	while (cc > 0 && npixels < maxpixels) {
 		int n, delta;
 
-		n = *bp++, cc--;
+		n = *bp++; cc--;
 		switch (n & THUNDER_CODE) {
 		case THUNDER_RUN:		/* pixel run */
 			/*

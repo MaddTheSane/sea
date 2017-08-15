@@ -67,7 +67,7 @@ NeXTDecode(TIFF* tif, tidata_t buf, tsize_t occ, tsample_t s)
 	cc = tif->tif_rawcc;
 	scanline = tif->tif_scanlinesize;
 	for (row = buf; (long)occ > 0; occ -= scanline, row += scanline) {
-		n = *bp++, cc--;
+		n = *bp++; cc--;
 		switch (n) {
 		case LITERALROW:
 			/*
@@ -115,7 +115,7 @@ NeXTDecode(TIFF* tif, tidata_t buf, tsize_t occ, tsample_t s)
 					break;
 				if (cc == 0)
 					goto bad;
-				n = *bp++, cc--;
+				n = *bp++; cc--;
 			}
 			break;
 		}

@@ -189,16 +189,21 @@ TIFFRGBAImageOK(TIFF* tif, char emsg[1024])
 void
 TIFFRGBAImageEnd(TIFFRGBAImage* img)
 {
-	if (img->Map)
-		_TIFFfree(img->Map), img->Map = NULL;
-	if (img->BWmap)
-		_TIFFfree(img->BWmap), img->BWmap = NULL;
-	if (img->PALmap)
-		_TIFFfree(img->PALmap), img->PALmap = NULL;
-	if (img->ycbcr)
-		_TIFFfree(img->ycbcr), img->ycbcr = NULL;
-	if (img->cielab)
-		_TIFFfree(img->cielab), img->cielab = NULL;
+	if (img->Map) {
+		_TIFFfree(img->Map); img->Map = NULL;
+	}
+	if (img->BWmap) {
+		_TIFFfree(img->BWmap); img->BWmap = NULL;
+	}
+	if (img->PALmap) {
+		_TIFFfree(img->PALmap); img->PALmap = NULL;
+	}
+	if (img->ycbcr) {
+		_TIFFfree(img->ycbcr); img->ycbcr = NULL;
+	}
+	if (img->cielab) {
+		_TIFFfree(img->cielab); img->cielab = NULL;
+	}
 
 	if( img->redcmap ) {
 		_TIFFfree( img->redcmap );
@@ -637,7 +642,7 @@ gtTileContig(TIFFRGBAImage* img, uint32* raster, uint32 w, uint32 h)
 			    uint32 temp = *left;
 			    *left = *right;
 			    *right = temp;
-			    left++, right--;
+				left++; right--;
 		    }
 	    }
     }
@@ -760,7 +765,7 @@ gtTileSeparate(TIFFRGBAImage* img, uint32* raster, uint32 w, uint32 h)
 			    uint32 temp = *left;
 			    *left = *right;
 			    *right = temp;
-			    left++, right--;
+				left++; right--;
 		    }
 	    }
     }
@@ -838,7 +843,7 @@ gtStripContig(TIFFRGBAImage* img, uint32* raster, uint32 w, uint32 h)
 			    uint32 temp = *left;
 			    *left = *right;
 			    *right = temp;
-			    left++, right--;
+				left++; right--;
 		    }
 	    }
     }
@@ -948,7 +953,7 @@ gtStripSeparate(TIFFRGBAImage* img, uint32* raster, uint32 w, uint32 h)
 			    uint32 temp = *left;
 			    *left = *right;
 			    *right = temp;
-			    left++, right--;
+				left++; right--;
 		    }
 	    }
     }
@@ -1703,10 +1708,10 @@ DECLAREContigPutFunc(putcontig8bitYCbCr44tile)
                 YCbCrtoRGB(cp3[2], pp[14]);
                 YCbCrtoRGB(cp3[3], pp[15]);
 
-                cp += 4, cp1 += 4, cp2 += 4, cp3 += 4;
+				cp += 4; cp1 += 4; cp2 += 4; cp3 += 4;
                 pp += 18;
             } while (--x);
-            cp += incr, cp1 += incr, cp2 += incr, cp3 += incr;
+			cp += incr; cp1 += incr; cp2 += incr; cp3 += incr;
             pp += fromskew;
         }
     } else {
@@ -1757,7 +1762,7 @@ DECLAREContigPutFunc(putcontig8bitYCbCr44tile)
             if (h <= 4)
                 break;
             h -= 4;
-            cp += incr, cp1 += incr, cp2 += incr, cp3 += incr;
+			cp += incr; cp1 += incr; cp2 += incr; cp3 += incr;
             pp += fromskew;
         }
     }
@@ -1789,10 +1794,10 @@ DECLAREContigPutFunc(putcontig8bitYCbCr42tile)
                 YCbCrtoRGB(cp1[2], pp[6]);
                 YCbCrtoRGB(cp1[3], pp[7]);
                 
-                cp += 4, cp1 += 4;
+				cp += 4; cp1 += 4;
                 pp += 10;
             } while (--x);
-            cp += incr, cp1 += incr;
+			cp += incr; cp1 += incr;
             pp += fromskew;
         }
     } else {
@@ -1835,7 +1840,7 @@ DECLAREContigPutFunc(putcontig8bitYCbCr42tile)
             if (h <= 2)
                 break;
             h -= 2;
-            cp += incr, cp1 += incr;
+			cp += incr; cp1 += incr;
             pp += fromskew;
         }
     }
@@ -1907,10 +1912,10 @@ DECLAREContigPutFunc(putcontig8bitYCbCr22tile)
                 YCbCrtoRGB(cp1[0], pp[2]);
                 YCbCrtoRGB(cp1[1], pp[3]);
 
-                cp += 2, cp1 += 2;
+				cp += 2; cp1 += 2;
                 pp += 6;
             } while (--x);
-            cp += incr, cp1 += incr;
+			cp += incr; cp1 += incr;
             pp += fromskew;
         }
     } else {
@@ -1943,7 +1948,7 @@ DECLAREContigPutFunc(putcontig8bitYCbCr22tile)
             if (h <= 2)
                 break;
             h -= 2;
-            cp += incr, cp1 += incr;
+			cp += incr; cp1 += incr;
             pp += fromskew;
         }
     }
@@ -2189,7 +2194,7 @@ setupMap(TIFFRGBAImage* img)
 	if (!makebwmap(img))
 	    return (0);
 	/* no longer need Map, free it */
-	_TIFFfree(img->Map), img->Map = NULL;
+	_TIFFfree(img->Map); img->Map = NULL;
     }
     return (1);
 }

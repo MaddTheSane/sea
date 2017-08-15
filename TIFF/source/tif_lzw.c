@@ -381,7 +381,7 @@ LZWDecode(TIFF* tif, tidata_t op0, tsize_t occ0, tsample_t s)
 		/*
 		 * Residue satisfies only part of the decode request.
 		 */
-		op += residue, occ -= residue;
+		op += residue; occ -= residue;
 		tp = op;
 		do {
 			int t;
@@ -414,7 +414,7 @@ LZWDecode(TIFF* tif, tidata_t op0, tsize_t occ0, tsample_t s)
 			NextCode(tif, sp, bp, code, GetNextCode);
 			if (code == CODE_EOI)
 				break;
-			*op++ = (char)code, occ--;
+			*op++ = (char)code; occ--;
 			oldcodep = sp->dec_codetab + code;
 			continue;
 		}
@@ -498,9 +498,10 @@ LZWDecode(TIFF* tif, tidata_t op0, tsize_t occ0, tsample_t s)
 			    codeLoop(tif);
 			    break;
 			}
-			op += len, occ -= len;
-		} else
-			*op++ = (char)code, occ--;
+			op += len; occ -= len;
+		} else {
+			*op++ = (char)code; occ--;
+		}
 	}
 
 	tif->tif_rawcp = (tidata_t) bp;
@@ -580,7 +581,7 @@ LZWDecodeCompat(TIFF* tif, tidata_t op0, tsize_t occ0, tsample_t s)
 		/*
 		 * Residue satisfies only part of the decode request.
 		 */
-		op += residue, occ -= residue;
+		op += residue; occ -= residue;
 		tp = op;
 		do {
 			*--tp = codep->value;
@@ -610,7 +611,7 @@ LZWDecodeCompat(TIFF* tif, tidata_t op0, tsize_t occ0, tsample_t s)
 			NextCode(tif, sp, bp, code, GetNextCodeCompat);
 			if (code == CODE_EOI)
 				break;
-			*op++ = code, occ--;
+			*op++ = code; occ--;
 			oldcodep = sp->dec_codetab + code;
 			continue;
 		}
@@ -677,13 +678,14 @@ LZWDecodeCompat(TIFF* tif, tidata_t op0, tsize_t occ0, tsample_t s)
 				}  while (--occ);
 				break;
 			}
-			op += codep->length, occ -= codep->length;
+			op += codep->length; occ -= codep->length;
 			tp = op;
 			do {
 				*--tp = codep->value;
 			} while( (codep = codep->next) != NULL);
-		} else
-			*op++ = code, occ--;
+		} else {
+			*op++ = code; occ--;
+		}
 	}
 
 	tif->tif_rawcp = (tidata_t) bp;

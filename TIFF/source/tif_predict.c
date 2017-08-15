@@ -231,7 +231,7 @@ horAcc8(TIFF* tif, tidata_t cp0, tsize_t cc)
 			unsigned int cg = cp[1];
 			unsigned int cb = cp[2];
 			do {
-				cc -= 3, cp += 3;
+				cc -= 3; cp += 3;
 				cp[0] = (char) (cr += cp[0]);
 				cp[1] = (char) (cg += cp[1]);
 				cp[2] = (char) (cb += cp[2]);
@@ -242,7 +242,7 @@ horAcc8(TIFF* tif, tidata_t cp0, tsize_t cc)
 			unsigned int cb = cp[2];
 			unsigned int ca = cp[3];
 			do {
-				cc -= 4, cp += 4;
+				cc -= 4; cp += 4;
 				cp[0] = (char) (cr += cp[0]);
 				cp[1] = (char) (cg += cp[1]);
 				cp[2] = (char) (cb += cp[2]);

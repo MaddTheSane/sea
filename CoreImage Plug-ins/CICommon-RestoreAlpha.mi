@@ -12,7 +12,7 @@
 - (void)executeGrey:(PluginData *)pluginData
 {
 	IntRect selection;
-	int spp, width, height;
+	int spp = 0, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
 	size_t vec_len, max;
 	

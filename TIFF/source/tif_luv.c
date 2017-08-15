@@ -345,8 +345,9 @@ LogLuvDecodeStrip(TIFF* tif, tidata_t bp, tsize_t cc, tsample_t s)
 	tsize_t rowlen = TIFFScanlineSize(tif);
 
 	assert(cc%rowlen == 0);
-	while (cc && (*tif->tif_decoderow)(tif, bp, rowlen, s))
-		bp += rowlen, cc -= rowlen;
+	while (cc && (*tif->tif_decoderow)(tif, bp, rowlen, s)) {
+		bp += rowlen; cc -= rowlen;
+	}
 	return (cc == 0);
 }
 
@@ -361,8 +362,9 @@ LogLuvDecodeTile(TIFF* tif, tidata_t bp, tsize_t cc, tsample_t s)
 	tsize_t rowlen = TIFFTileRowSize(tif);
 
 	assert(cc%rowlen == 0);
-	while (cc && (*tif->tif_decoderow)(tif, bp, rowlen, s))
-		bp += rowlen, cc -= rowlen;
+	while (cc && (*tif->tif_decoderow)(tif, bp, rowlen, s)) {
+		bp += rowlen; cc -= rowlen;
+	}
 	return (cc == 0);
 }
 
@@ -598,8 +600,9 @@ LogLuvEncodeStrip(TIFF* tif, tidata_t bp, tsize_t cc, tsample_t s)
 	tsize_t rowlen = TIFFScanlineSize(tif);
 
 	assert(cc%rowlen == 0);
-	while (cc && (*tif->tif_encoderow)(tif, bp, rowlen, s) == 0)
-		bp += rowlen, cc -= rowlen;
+	while (cc && (*tif->tif_encoderow)(tif, bp, rowlen, s) == 0) {
+		bp += rowlen; cc -= rowlen;
+	}
 	return (cc == 0);
 }
 
@@ -613,8 +616,9 @@ LogLuvEncodeTile(TIFF* tif, tidata_t bp, tsize_t cc, tsample_t s)
 	tsize_t rowlen = TIFFTileRowSize(tif);
 
 	assert(cc%rowlen == 0);
-	while (cc && (*tif->tif_encoderow)(tif, bp, rowlen, s) == 0)
-		bp += rowlen, cc -= rowlen;
+	while (cc && (*tif->tif_encoderow)(tif, bp, rowlen, s) == 0) {
+		bp += rowlen; cc -= rowlen;
+	}
 	return (cc == 0);
 }
 
@@ -1490,17 +1494,17 @@ LogLuvVSetField(TIFF* tif, ttag_t tag, va_list ap)
 		 */
 		switch (sp->user_datafmt) {
 		case SGILOGDATAFMT_FLOAT:
-			bps = 32, fmt = SAMPLEFORMAT_IEEEFP;
+			bps = 32; fmt = SAMPLEFORMAT_IEEEFP;
 			break;
 		case SGILOGDATAFMT_16BIT:
-			bps = 16, fmt = SAMPLEFORMAT_INT;
+			bps = 16; fmt = SAMPLEFORMAT_INT;
 			break;
 		case SGILOGDATAFMT_RAW:
-			bps = 32, fmt = SAMPLEFORMAT_UINT;
+			bps = 32; fmt = SAMPLEFORMAT_UINT;
 			TIFFSetField(tif, TIFFTAG_SAMPLESPERPIXEL, 1);
 			break;
 		case SGILOGDATAFMT_8BIT:
-			bps = 8, fmt = SAMPLEFORMAT_UINT;
+			bps = 8; fmt = SAMPLEFORMAT_UINT;
 			break;
 		default:
 			TIFFErrorExt(tif->tif_clientdata, tif->tif_name,

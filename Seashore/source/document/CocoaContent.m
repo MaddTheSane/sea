@@ -49,7 +49,7 @@
 	__kindof NSImageRep *imageRep;
 	NSImage *image;
 	CocoaLayer *layer;
-	BOOL test, res_set = NO;
+	BOOL test = NO, res_set = NO;
 	NSInteger value;
 	
 	// Initialize superclass first

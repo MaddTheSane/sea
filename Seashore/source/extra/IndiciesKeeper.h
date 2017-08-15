@@ -48,7 +48,7 @@ typedef struct {
 				IndiciesRecords can be added.
 	@result		Returns a data structure representing the IndiciesKeeper.
 */
-IndiciesKeeper allocKeeper();
+IndiciesKeeper allocKeeper(void);
 
 /*!
 	@function	freeKeeper

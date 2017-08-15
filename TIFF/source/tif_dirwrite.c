@@ -859,13 +859,17 @@ TIFFWriteRationalArray(TIFF* tif, TIFFDirEntry* dir, float* v)
 				_TIFFFieldWithTag(tif,dir->tdir_tag)->field_name,
 				fv);
 				fv = 0;
-			} else
-				fv = -fv, sign = -1;
+			} else {
+				fv = -fv;
+				sign = -1;
+			}
 		}
 		den = 1L;
 		if (fv > 0) {
-			while (fv < 1L<<(31-3) && den < 1L<<(31-3))
-				fv *= 1<<3, den *= 1L<<3;
+			while (fv < 1L<<(31-3) && den < 1L<<(31-3)) {
+				fv *= 1<<3;
+				den *= 1L<<3;
+			}
 		}
 		t[2*i+0] = (uint32) (sign * (fv + 0.5));
 		t[2*i+1] = den;

@@ -99,7 +99,7 @@ IntSize getDocumentSize(const char *path)
 	NSImageRep *imageRep = nil;
 	id layer;
 	NSImage *image;
-	BOOL test;
+	BOOL test = NO;
 	NSString *path_in, *path_out, *width_arg, *height_arg;
 	NSArray *args;
 	NSTask *task;
