@@ -102,27 +102,48 @@ typedef NS_ENUM(int, XcfCompressionType) {
 				The grain merge merge technique.
 */	
 typedef NS_ENUM(int, XcfLayerMode) {
+	//! The normal merge technique.
 	XCF_NORMAL_MODE,			/* 0 */
+	//! The dissolve merge technique.
 	XCF_DISSOLVE_MODE,			/* 1 */
 	XCF_BEHIND_MODE,			/* 2 */
+	//! The multiply merge technique.
 	XCF_MULTIPLY_MODE,			/* 3 */
+	//! The screen merge technique.
 	XCF_SCREEN_MODE,			/* 4 */
+	//! The overlay merge technique.
 	XCF_OVERLAY_MODE,			/* 5 */
+	//! The difference merge technique.
 	XCF_DIFFERENCE_MODE,		/* 6 */
+	//! The addition merge technique.
 	XCF_ADDITION_MODE,			/* 7 */
+	//! The subtract merge technique.
 	XCF_SUBTRACT_MODE,			/* 8 */
+	//! The darken-only merge technique.
 	XCF_DARKEN_ONLY_MODE,		/* 9 */
+	//! The lighten-only merge technique.
 	XCF_LIGHTEN_ONLY_MODE,		/* 10 */
+	//! The hue-mode merge technique.
 	XCF_HUE_MODE,				/* 11 */
+	//! The saturation-mode merge technique.
 	XCF_SATURATION_MODE,		/* 12 */
+	//! The colour-mode merge technique.
 	XCF_COLOR_MODE,				/* 13 */
+	//! The value-mode merge technique.
 	XCF_VALUE_MODE,				/* 14 */
+	//! The divide merge technique.
 	XCF_DIVIDE_MODE,			/* 15 */
+	//! The dodge merge technique.
 	XCF_DODGE_MODE,				/* 16 */
+	//! The brun merge technique.
 	XCF_BURN_MODE,				/* 17 */
+	//! The hard light merge technique.
 	XCF_HARDLIGHT_MODE,			/* 18 */
+	//! The soft light merge technique.
 	XCF_SOFTLIGHT_MODE,			/* 19 */
+	//! The grain extract merge technique.
 	XCF_GRAIN_EXTRACT_MODE, 	/* 20 */
+	//! The grain merge merge technique.
 	XCF_GRAIN_MERGE_MODE,		/* 21 */
 	XCF_COLOR_ERASE_MODE,
 	XCF_ERASE_MODE,				/**< skip */
@@ -210,9 +231,9 @@ typedef NS_ENUM(int, SeaSelectedChannel) {
 	//! Specifies the alpha channel.
 	SeaSelectedChannelAlpha,
 	
-	kAllChannels NS_SWIFT_UNAVAILABLE("Use .All instead") = SeaSelectedChannelAll,
-	kPrimaryChannels NS_SWIFT_UNAVAILABLE("Use .Primary instead")  = SeaSelectedChannelPrimary,
-	kAlphaChannel NS_SWIFT_UNAVAILABLE("Use .Alpha instead")  = SeaSelectedChannelAlpha,
+	kAllChannels NS_SWIFT_UNAVAILABLE("Use .all instead") = SeaSelectedChannelAll,
+	kPrimaryChannels NS_SWIFT_UNAVAILABLE("Use .primary instead")  = SeaSelectedChannelPrimary,
+	kAlphaChannel NS_SWIFT_UNAVAILABLE("Use .alpha instead")  = SeaSelectedChannelAlpha,
 
 };
 
@@ -252,11 +273,11 @@ typedef NS_OPTIONS(unsigned int, GIMPBitmapFormat) {
 	GIMPBitmapFormatFloatingPoint = 1 << 2,
 	
 	//! Specifies the alpha channel is first.
-	kAlphaFirstFormat NS_SWIFT_UNAVAILABLE("Use .AlphaFirst instead") = GIMPBitmapFormatAlphaFirst,
+	kAlphaFirstFormat NS_SWIFT_UNAVAILABLE("Use .alphaFirst instead") = GIMPBitmapFormatAlphaFirst,
 	//! Specifies the alpha is not premultiplied.
-	kAlphaNonPremultipliedFormat NS_SWIFT_UNAVAILABLE("Use .AlphaNonPremultiplied instead") = GIMPBitmapFormatAlphaNonPremultiplied,
+	kAlphaNonPremultipliedFormat NS_SWIFT_UNAVAILABLE("Use .alphaNonPremultiplied instead") = GIMPBitmapFormatAlphaNonPremultiplied,
 	//! Specifies the colour components are specified as floating point values.
-	kFloatingFormat NS_SWIFT_UNAVAILABLE("Use .FloatingPoint instead") = GIMPBitmapFormatFloatingPoint
+	kFloatingFormat NS_SWIFT_UNAVAILABLE("Use .floatingPoint instead") = GIMPBitmapFormatFloatingPoint
 };
 
 

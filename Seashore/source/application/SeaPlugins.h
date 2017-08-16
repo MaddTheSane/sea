@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion	Initializes an instance of this class with the given manager.
 	@param		manager
 				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
+	@result		Returns instance upon success (or \c NULL otherwise).
 */
 - (instancetype)initWithManager:(SeaPlugins *)manager;
 

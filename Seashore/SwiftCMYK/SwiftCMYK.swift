@@ -20,7 +20,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 	}
 	
 	public var groupName: String {
-		return NSLocalizedString("groupName", bundle: Bundle(for: type(of: self)), value: "Color Effect", comment: "Group Name")
+		return NSLocalizedString("groupName", bundle: Bundle(for: Swift.type(of: self)), value: "Color Effect", comment: "Group Name")
 	}
 	
 	public var canReapply: Bool {

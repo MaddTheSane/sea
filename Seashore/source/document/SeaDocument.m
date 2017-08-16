@@ -15,6 +15,8 @@
 #import "XCFExporter.h"
 #import "PNGExporter.h"
 #import "JPEGExporter.h"
+#import "GIFExporter.h"
+#import "JP2Exporter.h"
 #import "SeaPrefs.h"
 #import "SeaSelection.h"
 #import "SeaLayer.h"
@@ -240,12 +242,12 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	[super saveDocumentAs:sender];
 }
 
-- (id)docView
+- (SeaView *)docView
 {
 	return [view documentView];
 }
 
-- (id)window
+- (NSWindow*)window
 {
 	return docWindow;
 }

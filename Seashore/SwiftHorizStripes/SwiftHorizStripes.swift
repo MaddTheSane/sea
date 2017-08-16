@@ -38,15 +38,15 @@ public final class SwiftHorizStripes: SSKPlugin {
 	}
 	
 	public override var name: String {
-		return Bundle(for: type(of: self)).localizedString(forKey: "name", value: "HorizStripes", table: nil)
+		return Bundle(for: Swift.type(of: self)).localizedString(forKey: "name", value: "HorizStripes", table: nil)
 	}
 	
 	public override var groupName: String {
-		return Bundle(for: type(of: self)).localizedString(forKey: "groupName", value: "Generate", table: nil)
+		return Bundle(for: Swift.type(of: self)).localizedString(forKey: "groupName", value: "Generate", table: nil)
 	}
 	
 	public override var instruction: String {
-		return Bundle(for: type(of: self)).localizedString(forKey: "instruction", value: "Needs localization.", table: nil)
+		return Bundle(for: Swift.type(of: self)).localizedString(forKey: "instruction", value: "Needs localization.", table: nil)
 	}
 
 	public override var sanity: String {
