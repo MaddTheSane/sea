@@ -45,9 +45,9 @@
 	}
 }
 
-- (BOOL)floating
+- (BOOL)isFloating
 {
-	return [[[document contents] activeLayer] floating];
+	return document.contents.activeLayer.floating;
 }
 
 - (NSImage *)maskImage
@@ -699,7 +699,7 @@
 
 - (void)clearSelection
 {
-	if (![self floating]) {
+	if (![self isFloating]) {
 		active = NO;
 		if (mask) { free(mask); mask = NULL; }
 		if (maskBitmap) { free(maskBitmap); maskBitmap = NULL;  maskImage = NULL; }

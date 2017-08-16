@@ -114,7 +114,7 @@
 	data = memcpy(data, [layer data], width * height * spp);
 	xoff = [layer xoff];
 	yoff = [layer yoff];
-	visible = [layer visible];
+	visible = [layer isVisible];
 	opacity = [layer opacity];
 	name = [NSString stringWithString:[layer name]];
 	
@@ -643,10 +643,7 @@
 }
 #endif
 
-- (BOOL)floating
-{
-	return floating;
-}
+@synthesize floating;
 
 #if MAIN_COMPILE
 - (id)seaLayerUndo

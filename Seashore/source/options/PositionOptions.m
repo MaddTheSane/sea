@@ -43,10 +43,10 @@
 	}
 	// Let's not check for floating, maybe we can do it all
 	/*if(function == kRotatingLayer){
-		if(![[document selection] floating])
+		if(!document.selection.floating)
 			function = kMovingLayer;
 	}else if(function == kScalingLayer){
-		if([[document selection] floating])
+		if(document.selection.floating)
 			function = kMovingLayer;
 	}*/
 }

@@ -215,7 +215,7 @@ static inline void fix_endian_write(int *input, int size)
 	}
 	
 	// Write if the layer is floating
-	if ([layer floating]) {
+	if (layer.floating) {
 		floatingFiller = (int)(ftell(file) + 2 * sizeof(int));
 		tempIntString[0] = PROP_FLOATING_SELECTION;
 		tempIntString[1] = sizeof(int);
@@ -234,14 +234,14 @@ static inline void fix_endian_write(int *input, int size)
 	// Write the layer's visibility
 	tempIntString[0] = PROP_VISIBLE;
 	tempIntString[1] = sizeof(int);
-	tempIntString[2] = [layer visible];
+	tempIntString[2] = [layer isVisible];
 	fix_endian_write(tempIntString, 3);
 	fwrite(tempIntString, sizeof(int), 3, file);
 	
 	// Write the whether or not the layer is linked
 	tempIntString[0] = PROP_LINKED;
 	tempIntString[1] = sizeof(int);
-	tempIntString[2] = [layer linked];
+	tempIntString[2] = [layer isLinked];
 	fix_endian_write(tempIntString, 3);
 	fwrite(tempIntString, sizeof(int), 3, file);
 	

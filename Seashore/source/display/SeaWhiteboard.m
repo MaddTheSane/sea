@@ -213,10 +213,10 @@ extern IntPoint SeaScreenResolution;
 	selectedChannel = [contents selectedChannel];
 	layer = [contents activeLayer];
 #endif
-	floating = [layer floating];
-	srcPtr = [(SeaLayer *)layer data];
-	lwidth = [(SeaLayer *)layer width];
-	lheight = [(SeaLayer *)layer height];
+	floating = layer.floating;
+	srcPtr = [layer data];
+	lwidth = [layer width];
+	lheight = [layer height];
 	xoff = [layer xoff];
 	yoff = [layer yoff];
 #if MAIN_COMPILE
@@ -289,7 +289,7 @@ extern IntPoint SeaScreenResolution;
 					break;
 			}
 #if MAIN_COMPILE
-			if ([[document selection] active]) {
+			if (document.selection.active) {
 				point.x = i;
 				point.y = j;
 				if (IntPointInRect(point, selectRect)) {
@@ -493,7 +493,7 @@ extern IntPoint SeaScreenResolution;
 	
 	// Change layer if appropriate
 #if MAIN_COMPILE
-	if ([[document selection] floating]) {
+	if (document.selection.floating) {
 		layer = [contents layerAtIndex:[contents activeLayerIndex] + 1];
 	} else {
 		layer = [contents activeLayer];
@@ -570,7 +570,7 @@ extern IntPoint SeaScreenResolution;
 
 - (void)forcedChannelUpdate
 {
-	id layer;
+	SeaLayer *layer;
 	int layerWidth, layerHeight, lxoff, lyoff;
 	unsigned char *layerData, tempSpace[4], tempSpace2[4], *mask, *floatingData;
 	int i, j, k, temp, tx, ty, t, selectOpacity, nextOpacity;
@@ -579,16 +579,16 @@ extern IntPoint SeaScreenResolution;
 	IntPoint point, maskOffset = IntMakePoint(0, 0);
 	BOOL useSelection = NO, floating = NO;
 #if MAIN_COMPILE
-	id flayer;
+	SeaLayer *flayer;
 #endif
 	
 	// Prepare variables for later use
 	mask = NULL;
 	selectRect = IntMakeRect(0, 0, 0, 0);
 #if MAIN_COMPILE
-	useSelection = [[document selection] active];
-	floating = [[document selection] floating];
-	floatingData = [(SeaLayer *)[[document contents] activeLayer] data];
+	useSelection = document.selection.active;
+	floating = document.selection.floating;
+	floatingData = [[[document contents] activeLayer] data];
 	if (useSelection && floating) {
 		layer = [[document contents] layerAtIndex:[[document contents] activeLayerIndex] + 1];
 	}
@@ -598,7 +598,7 @@ extern IntPoint SeaScreenResolution;
 	if (useSelection) {
 		if (floating) {
 			flayer = [[document contents] activeLayer];
-			selectRect = IntMakeRect([(SeaLayer *)flayer xoff] - [(SeaLayer *)layer xoff], [(SeaLayer *)flayer yoff] - [(SeaLayer *)layer yoff], [(SeaLayer *)flayer width], [(SeaLayer *)flayer height]);
+			selectRect = IntMakeRect([flayer xoff] - [layer xoff], [flayer yoff] - [layer yoff], [flayer width], [flayer height]);
 		}
 		else {
 			selectRect = [[document selection] globalRect];
@@ -612,11 +612,11 @@ extern IntPoint SeaScreenResolution;
 	layer = [contents activeLayer];
 #endif
 	selectOpacity = 255;
-	layerWidth = [(SeaLayer *)layer width];
-	layerHeight = [(SeaLayer *)layer height];
-	lxoff = [(SeaLayer *)layer xoff];
-	lyoff = [(SeaLayer *)layer yoff];
-	layerData = [(SeaLayer *)layer data];
+	layerWidth = [layer width];
+	layerHeight = [layer height];
+	lxoff = [layer xoff];
+	lyoff = [layer yoff];
+	layerData = [layer data];
 	
 	// Determine the minor update rect
 	if (useUpdateRect) {
@@ -818,10 +818,10 @@ extern IntPoint SeaScreenResolution;
 		// Determine how many layers are visible
 		for (i = 0; count < 2 && i < layerCount; i++) {
 #if MAIN_COMPILE
-			if ([[[document contents] layerAtIndex:i] visible])
+			if ([[document contents] layerAtIndex:i].visible)
 				count++;
 #else
-			if ([[contents layerAtIndex:i] visible])
+			if ([contents layerAtIndex:i].visible)
 				count++;
 #endif
 		}
@@ -836,13 +836,13 @@ extern IntPoint SeaScreenResolution;
 		options.useSelection = NO;
 		
 #if MAIN_COMPILE
-		if ([[document selection] floating]) {
+		if (document.selection.floating) {
 	
 			// Go through compositing each visible layer
 			for (i = layerCount - 1; i >= 0; i--) {
-				if (i >= 1) floating = [[[document contents] layerAtIndex:i - 1] floating];
+				if (i >= 1) floating = [document.contents layerAtIndex:i - 1].floating;
 				else floating = NO;
-				if ([[[document contents] layerAtIndex:i] visible]) {
+				if ([document.contents layerAtIndex:i].visible) {
 					options.insertOverlay = floating;
 					if (floating)
 						[compositor compositeLayer:[[document contents] layerAtIndex:i] withFloat:[[document contents] layerAtIndex:i - 1] andOptions:options];
@@ -857,9 +857,9 @@ extern IntPoint SeaScreenResolution;
 
 			// Go through compositing each visible layer
 			for (i = layerCount - 1; i >= 0; i--) {
-				if ([[[document contents] layerAtIndex:i] visible]) {
+				if ([[document contents] layerAtIndex:i].visible) {
 					options.insertOverlay = (i == [[document contents] activeLayerIndex]);
-					options.useSelection = (i == [[document contents] activeLayerIndex]) && [[document selection] active];
+					options.useSelection = (i == [[document contents] activeLayerIndex]) && document.selection.active;
 					[compositor compositeLayer:[[document contents] layerAtIndex:i] withOptions:options];
 				}
 			}
@@ -868,7 +868,7 @@ extern IntPoint SeaScreenResolution;
 #else
 		// Go through compositing each visible layer
 		for (i = layerCount - 1; i >= 0; i--) {
-			if ([[contents layerAtIndex:i] visible]) {
+			if ([contents layerAtIndex:i].visible) {
 				options.insertOverlay = (i == [contents activeLayerIndex]);
 				options.useSelection = NO;
 				[compositor compositeLayer:[contents layerAtIndex:i] withOptions:options];
@@ -985,7 +985,7 @@ extern IntPoint SeaScreenResolution;
 	
 	if (viewType == kPrimaryChannelsView || viewType == kAlphaChannelView) {
 #if MAIN_COMPILE
-		if ([[document selection] floating])
+		if (document.selection.floating)
 			layer = [[document contents] layerAtIndex:[[document contents] activeLayerIndex] + 1];
 		else
 			layer = [[document contents] activeLayer];
@@ -1010,7 +1010,7 @@ extern IntPoint SeaScreenResolution;
 	image = [[NSImage alloc] init];
 	
 	if (altData) {
-		if ([[document selection] floating]) {
+		if (document.selection.floating) {
 			layer = [contents layerAtIndex:[contents activeLayerIndex] + 1];
 		} else {
 			layer = [contents activeLayer];

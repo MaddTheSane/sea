@@ -20,7 +20,7 @@
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
 		layer = [contents layerAtIndex:i];
-		if ([layer linked]) {
+		if (layer.linked) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
 			[layer setOffsets:IntMakePoint((int)offset, oldOffsets.y)];
@@ -43,7 +43,7 @@
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
 		layer = [contents layerAtIndex:i];
-		if ([layer linked]) {
+		if (layer.linked) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
 			[layer setOffsets:IntMakePoint((int)(offset - [layer width]), oldOffsets.y)];
@@ -66,7 +66,7 @@
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
 		layer = [contents layerAtIndex:i];
-		if ([layer linked]) {
+		if (layer.linked) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
 			[layer setOffsets:IntMakePoint((int)(offset - [layer width] / 2), oldOffsets.y)];
@@ -78,8 +78,8 @@
 
 - (IBAction)alignTop:(id)sender
 {
-	id contents = [document contents];
-	id layer = [contents activeLayer];
+	SeaContent *contents = [document contents];
+	SeaLayer *layer = [contents activeLayer];
 	NSInteger offset, i, layerCount;
 	IntPoint oldOffsets;
 	
@@ -90,7 +90,7 @@
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
 		layer = [contents layerAtIndex:i];
-		if ([layer linked]) {
+		if (layer.linked) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
 			[layer setOffsets:IntMakePoint(oldOffsets.x, (int)offset)];
@@ -113,7 +113,7 @@
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
 		layer = [contents layerAtIndex:i];
-		if ([layer linked]) {
+		if (layer.linked) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
 			[layer setOffsets:IntMakePoint(oldOffsets.x, (int)(offset - [layer height]))];
@@ -136,7 +136,7 @@
 	layerCount = [contents layerCount];
 	for (i = 0; i < layerCount; i++) {
 		layer = [contents layerAtIndex:i];
-		if ([layer linked]) {
+		if (layer.linked) {
 			oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 			[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
 			[layer setOffsets:IntMakePoint(oldOffsets.x, (int)(offset - [layer height] / 2))];
@@ -154,7 +154,7 @@
 	IntRect rect;
 	
 	// Check if layer is linked
-	if (![layer linked]) {
+	if (!layer.linked) {
 		
 		// Allow the undo
 		oldOffsets = IntMakePoint(layer.xOffset, layer.yOffset);
@@ -176,7 +176,7 @@
 		layerCount = [contents layerCount];
 		for (i = 0; i < layerCount; i++) {
 			layer = [contents layerAtIndex:i];
-			if ([layer linked]) {
+			if (layer.linked) {
 				rect.origin.x = MIN([layer xoff], rect.origin.x);
 				rect.origin.y = MIN([layer yoff], rect.origin.y);
 				rect.size.width = MAX([layer xoff] + [layer width] - rect.origin.x, rect.size.width);
@@ -191,7 +191,7 @@
 		layerCount = [contents layerCount];
 		for (i = 0; i < layerCount; i++) {
 			layer = [contents layerAtIndex:i];
-			if ([layer linked]) {
+			if (layer.linked) {
 				oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 				[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
 				[layer setOffsets:IntMakePoint((int)(oldOffsets.x + shift), oldOffsets.y)];
@@ -211,7 +211,7 @@
 	IntRect rect;
 	
 	// Check if layer is linked
-	if (![layer linked]) {
+	if (!layer.linked) {
 	
 		// Allow the undo
 		oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
@@ -236,7 +236,7 @@
 		layerCount = [contents layerCount];
 		for (i = 0; i < layerCount; i++) {
 			layer = [contents layerAtIndex:i];
-			if ([layer linked]) {
+			if (layer.linked) {
 				rect.origin.x = MIN([layer xoff], rect.origin.x);
 				rect.origin.y = MIN([layer yoff], rect.origin.y);
 				rect.size.width = MAX([layer xoff] + [layer width] - rect.origin.x, rect.size.width);
@@ -251,7 +251,7 @@
 		layerCount = [contents layerCount];
 		for (i = 0; i < layerCount; i++) {
 			layer = [contents layerAtIndex:i];
-			if ([layer linked]) {
+			if (layer.linked) {
 				oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
 				[[[document undoManager] prepareWithInvocationTarget:self] undoOffsets:oldOffsets layer:i];
 				[layer setOffsets:IntMakePoint(oldOffsets.x, (int)(oldOffsets.y + shift))];

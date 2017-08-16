@@ -181,6 +181,9 @@ typedef struct {
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (instancetype)initWithDocument:(SeaDocument*)doc data:(unsigned char *)ddata type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
+
+- (instancetype)init UNAVAILABLE_ATTRIBUTE;
+
 #endif
 
 #pragma mark PROPERTY METHODS
@@ -431,7 +434,7 @@ typedef struct {
 /*!
 	@method		exifData
 	@discussion	Returns the EXIF data for this document.
-	@result		Returns an NSDictionary containing the EXIF data or NULL if no
+	@result		Returns an \c NSDictionary containing the EXIF data or \c NULL if no
 				such data exists.
 */
 - (NSDictionary *)exifData;
@@ -443,7 +446,7 @@ typedef struct {
 	@discussion	Returns the layer with the given index.
 	@param		index
 				The index of the desired layer.
-	@result		An instance of SeaLayer corresponding to the specified index.
+	@result		An instance of \c SeaLayer corresponding to the specified index.
 */
 - (SeaLayer*)layerAtIndex:(NSInteger)index;
 
@@ -460,7 +463,7 @@ typedef struct {
 	@discussion	Returns the currently active layer.
 	@result		An instance of SeaLayer representing the active layer.
 */
-@property (readonly, weak) SeaLayer *activeLayer;
+@property (readonly, weak/*,nullable*/) SeaLayer *activeLayer;
 
 /*!
 	@property	activeLayerIndex

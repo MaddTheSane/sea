@@ -15,30 +15,30 @@
 
 - (IntRect)selection
 {
-	if ([[(SeaDocument *)document selection] active])
-		return [[(SeaDocument *)document selection] localRect];
+	if (document.selection.active)
+		return [document.selection localRect];
 	else
-		return IntMakeRect(0, 0, [(SeaLayer *)[[document contents] activeLayer] width], [(SeaLayer *)[[document contents] activeLayer] height]);
+		return IntMakeRect(0, 0, [[[document contents] activeLayer] width], [[[document contents] activeLayer] height]);
 }
 
 - (unsigned char *)data
 {
-	return [(SeaLayer *)[[document contents] activeLayer] data];
+	return [[[document contents] activeLayer] data];
 }
 
 - (unsigned char *)whiteboardData
 {
-	return [(SeaWhiteboard *)[document whiteboard] data];
+	return [[document whiteboard] data];
 }
 
 - (unsigned char *)replace
 {
-	return [(SeaWhiteboard *)[document whiteboard] replace];
+	return [[document whiteboard] replace];
 }
 
 - (unsigned char *)overlay
 {
-	return [(SeaWhiteboard *)[document whiteboard] overlay];
+	return [[document whiteboard] overlay];
 }
 
 - (int)spp
@@ -48,7 +48,7 @@
 
 - (SeaSelectedChannel)channel
 {
-	if ([[(SeaDocument *)document selection] floating])
+	if (document.selection.floating)
 		return kAllChannels;
 	else
 		return [[document contents] selectedChannel];	
@@ -56,17 +56,17 @@
 
 - (int)width
 {
-	return [(SeaLayer *)[[document contents] activeLayer] width];
+	return [[[document contents] activeLayer] width];
 }
 
 - (int)height
 {
-	return [(SeaLayer *)[[document contents] activeLayer] height];
+	return [[[document contents] activeLayer] height];
 }
 
 - (BOOL)hasAlpha
 {
-	return [(SeaLayer *)[[document contents] activeLayer] hasAlpha];
+	return [[[document contents] activeLayer] hasAlpha];
 }
 
 - (IntPoint)point:(NSInteger)index;
@@ -133,7 +133,7 @@
 {
 	NSDocument *newDocument;
 	
-	if (data == NULL || data == [(SeaWhiteboard *)[document whiteboard] data] || data == [(SeaLayer *)[[document contents] activeLayer] data]) {
+	if (data == NULL || data == [[document whiteboard] data] || data == [[[document contents] activeLayer] data]) {
 		NSRunAlertPanel(@"Critical Plug-in Malfunction", @"The plug-in has returned the same pointer passed to it (or returned NULL). This is a critical malfunction, please refrain from further use of this plug-in and contact the plug-in's developer.", @"Ok", NULL, NULL);
 	}
 	else {
@@ -146,18 +146,18 @@
 
 - (void)apply
 {
-	[(SeaHelpers *)[document helpers] applyOverlay];
+	[[document helpers] applyOverlay];
 }
 
 - (void)preview
 {
-	[(SeaHelpers *)[document helpers] overlayChanged:[self selection] inThread:NO];
+	[[document helpers] overlayChanged:[self selection] inThread:NO];
 }
 
 - (void)cancel
 {
-	[(SeaWhiteboard *)[document whiteboard] clearOverlay];
-	[(SeaHelpers *)[document helpers] overlayChanged:[self selection] inThread:NO];
+	[[document whiteboard] clearOverlay];
+	[[document helpers] overlayChanged:[self selection] inThread:NO];
 }
 
 @end

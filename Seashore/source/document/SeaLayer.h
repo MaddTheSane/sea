@@ -295,46 +295,59 @@
 - (void)setRotation:(float)degrees interpolation:(int)interpolation withTrim:(BOOL)trim;
 #endif
 
-@property BOOL visible;
-@property BOOL linked;
+/*!
+	@property	visible
+	@discussion	Returns whether or not the layer is currently visible.
+	@result		Returns \c YES if the layer is currently visible, \c NO otherwise.
+ */
+@property (getter=isVisible) BOOL visible;
+
+/*!
+	@property	linked
+	@discussion	Returns whether or not the layer is currently linked to others.
+	@result		Returns \c YES if the layer is currently linked to others, \c NO
+				otherwise.
+ */
+@property (getter=isLinked) BOOL linked;
+
 @property int opacity;
 @property int mode;
 
 /*!
-	@method		visible
+	@method		isVisible
 	@discussion	Returns whether or not the layer is currently visible.
-	@result		Returns YES if the layer is currently visible, NO otherwise.
+	@result		Returns \c YES if the layer is currently visible, \c NO otherwise.
 */
-- (BOOL)visible;
+- (BOOL)isVisible;
 
 /*!
 	@method		setVisible:
 	@discussion	Sets whether or not the layer should be visible.
 	@param		value
-				YES if the layer should be visible, NO otherwise.
+				\c YES if the layer should be visible, \c NO otherwise.
 */
 - (void)setVisible:(BOOL)value;
 
 /*!
-	@method		linked
+	@method		isLinked
 	@discussion	Returns whether or not the layer is currently linked to others.
-	@result		Returns YES if the layer is currently linked to others, NO
+	@result		Returns \c YES if the layer is currently linked to others, \c NO
 				otherwise.
 */
-- (BOOL)linked;
+- (BOOL)isLinked;
 
 /*!
 	@method		setLinked:
 	@discussion	Sets whether or not the layer should be linked to others.
 	@param		value
-				YES if the layer should be linked to others, NO otherwise.
+				\c YES if the layer should be linked to others, \c NO otherwise.
 */
 - (void)setLinked:(BOOL)value;
 
 /*!
 	@method		opacity
 	@discussion	Returns the opacity of the layer.
-	@result		Reutrns an integer from 0 to 255 indicating the opacity of the
+	@result		Reutrns an integer from \c 0 to \c 255 indicating the opacity of the
 				layer. The layer's contents are fully opaque if the opacity is
 				255.
 */
@@ -344,7 +357,7 @@
 	@method		setOpacity:
 	@discussion	Sets the opacity of the layer.
 	@param		value
-				An integer from 0 to 255 representing the revised opacity of the
+				An integer from \c 0 to \c 255 representing the revised opacity of the
 				layer.
 */
 - (void)setOpacity:(int)value;
@@ -369,7 +382,7 @@
 /*!
 	@method		name
 	@discussion	Returns the name of the layer.
-	@result		Returns an NSString representing the name of the layer.
+	@result		Returns an \c NSString representing the name of the layer.
 */
 - (NSString *)name;
 
@@ -476,10 +489,10 @@
 /*!
 	@property	floating
 	@discussion	Returns whether or not the layer is a floating layer.
-	@result		Returns YES if the layer is a floating layer, NO otherwise. This
+	@result		Returns \c YES if the layer is a floating layer, \c NO otherwise. This
 				implementation of the method always returns NO.
 */
-@property (readonly) BOOL floating;
+@property (readonly, getter=isFloating) BOOL floating;
 
 #if MAIN_COMPILE
 // EXTRA METHODS

@@ -35,8 +35,8 @@
 
 - (void)run:(BOOL)global
 {
-	id contents = [document contents];
-	id layer = NULL;
+	SeaContent *contents = [document contents];
+	SeaLayer *layer = NULL;
 	id menuItem;
 	int value;
 	NSString *string;
@@ -55,7 +55,7 @@
 	}
 	else {
 		layer = [contents layerAtIndex:workingIndex];
-		if ([layer floating])
+		if (layer.floating)
 			[selectionLabel setStringValue:LOCALSTR(@"floating", @"Floating Selection")];
 		else
 			[selectionLabel setStringValue:[NSString stringWithFormat:@"%@", [layer name]]];
@@ -244,7 +244,7 @@
 	// Adjust for floating selections
 	if (index != kAllLayers) {
 		curLayer = [[document contents] layerAtIndex:index];
-		if ([curLayer floating]) {
+		if (curLayer.floating) {
 			[[document selection] selectOpaque];
 		}
 	}
@@ -382,7 +382,7 @@
 	// Adjust for floating selections
 	if (undoRecord.index != kAllLayers) {
 		curLayer = [[document contents] layerAtIndex:undoRecord.index];
-		if ([curLayer floating]) {
+		if (curLayer.floating) {
 			[[document selection] selectOpaque];
 		}
 	}

@@ -125,7 +125,7 @@
 {
 	SeaSelection *selection = [(SeaDocument*)gCurrentDocument selection];
 	
-	if (![selection floating]) {
+	if (!selection.floating) {
 		[(SeaContent *)[gCurrentDocument contents] duplicateLayer:kActiveLayer];
 	}
 }
@@ -147,7 +147,7 @@
 
 - (IBAction)toggleLinked:(id)sender
 {
-	[[gCurrentDocument contents] setLinked: ![[[gCurrentDocument contents] activeLayer] linked] forLayer: kActiveLayer];
+	[[gCurrentDocument contents] setLinked: ![[[gCurrentDocument contents] activeLayer] isLinked] forLayer: kActiveLayer];
 }
 
 - (IBAction)clearAllLinks:(id)sender
@@ -160,7 +160,7 @@
 	SeaSelection *selection = [(SeaDocument*)gCurrentDocument selection];
 	SeaContent *contents = [gCurrentDocument contents];
 	
-	if ([selection floating]) {
+	if ([selection isFloating]) {
 		[contents anchorSelection];
 	} else {
 		[contents makeSelectionFloat:NO];
@@ -482,15 +482,15 @@
 				return NO;
 			break;
 		case 264:
-			if(![[(SeaDocument*)document selection] active] || [[(SeaDocument*)document selection] floating])
+			if(!document.selection.active || document.selection.floating)
 				return NO;
 			break;
 		case 300:
-			if ([[(SeaDocument*)document selection] floating])
+			if (document.selection.floating)
 				[menuItem setTitle:LOCALSTR(@"anchor selection", @"Anchor Selection")];
 			else
 				[menuItem setTitle:LOCALSTR(@"float selection", @"Float Selection")];
-			if (![[(SeaDocument*)document selection] active])
+			if (!document.selection.active)
 				return NO;
 			break;
 		case 320:
@@ -505,13 +505,13 @@
 		case 411:
 		case 412:
 		case 413:
-			if ([[(SeaDocument*)document selection] floating])
+			if (document.selection.floating)
 				return NO;
 			break;
 		case 450:
 		case 451:
 		case 452:
-			if([[(SeaDocument*)document selection] floating])
+			if(document.selection.floating)
 				return NO;
 			[menuItem setState: [[document contents] selectedChannel] == [menuItem tag] % 10];
 			break;
@@ -525,13 +525,13 @@
 		case 346:
 		case 347:
 		case 349:
-			if (![[contents activeLayer] linked])
+			if (![contents activeLayer].linked)
 				return NO;
 			break;
 		case 382:
-			if ([[contents activeLayer] linked]){
+			if ([contents activeLayer].linked) {
 				[menuItem setTitle:@"Unlink Layer"];
-			}else{
+			} else {
 				[menuItem setTitle:@"Link Layer"];
 			}
 			break;

@@ -89,22 +89,22 @@
 	// Determine what is being copied
 	startX = MAX(options.rect.origin.x - xoff, (xoff < 0) ? -xoff : 0);
 	startY = MAX(options.rect.origin.y - yoff, (yoff < 0) ? -yoff : 0);
-	endX = MIN([(SeaContent *)[document contents] width] - xoff, lwidth);
+	endX = MIN([[document contents] width] - xoff, lwidth);
 	endX = MIN(endX, options.rect.origin.x + options.rect.size.width - xoff);
-	endY = MIN([(SeaContent *)[document contents] height] - yoff, lheight);
+	endY = MIN([[document contents] height] - yoff, lheight);
 	endY = MIN(endY, options.rect.origin.y + options.rect.size.height - yoff);
 	
 	// Get some stuff we're going to use later
-	selectRect = [(SeaSelection *)[document selection] localRect];
+	selectRect = [[document selection] localRect];
 	srcPtr = [layer data];
-	if(!destPtr) destPtr = [(SeaWhiteboard *)[document whiteboard] data];
-	overlay = [(SeaWhiteboard *)[document whiteboard] overlay];
-	replace = [(SeaWhiteboard *)[document whiteboard] replace];
+	if(!destPtr) destPtr = [[document whiteboard] data];
+	overlay = [[document whiteboard] overlay];
+	replace = [[document whiteboard] replace];
 	mask = [[document selection] mask];
 	maskOffset = [[document selection] maskOffset];
 	trueMaskOffset = IntMakePoint(maskOffset.x - selectRect.origin.x, maskOffset.y -  selectRect.origin.y);
 	maskSize = [[document selection] maskSize];
-	floating = [layer floating];
+	floating = [layer isFloating];
 #else
 	// Determine what is being copied
 	startX = MAX(options.rect.origin.x - xoff, (xoff < 0) ? -xoff : 0);
@@ -124,7 +124,7 @@
 	//maskOffset = [[document selection] maskOffset];
 	//trueMaskOffset = IntMakePoint(maskOffset.x - selectRect.origin.x, maskOffset.y -  selectRect.origin.y);
 	//maskSize = [[document selection] maskSize];
-	floating = [layer floating];
+	floating = [layer isFloating];
 #endif
 	
 	// Check what we are doing has a point
@@ -287,23 +287,23 @@
 	// Determine what is being copied
 	startX = MAX(options.rect.origin.x - xoff, (xoff < 0) ? -xoff : 0);
 	startY = MAX(options.rect.origin.y - yoff, (yoff < 0) ? -yoff : 0);
-	endX = MIN([(SeaContent *)[document contents] width] - xoff, lwidth);
+	endX = MIN([[document contents] width] - xoff, lwidth);
 	endX = MIN(endX, options.rect.origin.x + options.rect.size.width - xoff);
-	endY = MIN([(SeaContent *)[document contents] height] - yoff, lheight);
+	endY = MIN([[document contents] height] - yoff, lheight);
 	endY = MIN(endY, options.rect.origin.y + options.rect.size.height - yoff);
 	
 	// Get some stuff we're going to use later
-	selectRect = [(SeaSelection *)[document selection] localRect];
+	selectRect = [[document selection] localRect];
 	srcPtr = [layer data];
 	floatPtr = [floatingLayer data];
-	destPtr = [(SeaWhiteboard *)[document whiteboard] data];
-	overlay = [(SeaWhiteboard *)[document whiteboard] overlay];
-	replace = [(SeaWhiteboard *)[document whiteboard] replace];
+	destPtr = [[document whiteboard] data];
+	overlay = [[document whiteboard] overlay];
+	replace = [[document whiteboard] replace];
 	mask = [[document selection] mask];
 	maskOffset = [[document selection] maskOffset];
 	trueMaskOffset = IntMakePoint(maskOffset.x - selectRect.origin.x, maskOffset.y -  selectRect.origin.y);
 	maskSize = [[document selection] maskSize];
-	floating = [layer floating];
+	floating = [layer isFloating];
 #else
 	// Determine what is being copied
 	startX = MAX(options.rect.origin.x - xoff, (xoff < 0) ? -xoff : 0);
@@ -315,8 +315,8 @@
 	
 	// Get some stuff we're going to use later
 	//selectRect = [(SeaSelection *)[document selection] localRect];
-	srcPtr = [(SeaLayer *)layer data];
-	floatPtr = [(SeaLayer *)floatingLayer data];
+	srcPtr = [layer data];
+	floatPtr = [floatingLayer data];
 	destPtr = [whiteboard data];
 	overlay = [whiteboard overlay];
 	replace = [whiteboard replace];
@@ -324,7 +324,7 @@
 	//maskOffset = [[document selection] maskOffset];
 	//trueMaskOffset = IntMakePoint(maskOffset.x - selectRect.origin.x, maskOffset.y -  selectRect.origin.y);
 	//maskSize = [[document selection] maskSize];
-	floating = [layer floating];
+	floating = [layer isFloating];
 #endif
 	
 	// Check what we are doing has a point

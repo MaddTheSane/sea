@@ -88,7 +88,7 @@
 	}
 	
 	// Work out the rectangle for the gradient
-	if ([[document selection] active])
+	if (document.selection.active)
 		rect = [[document selection] localRect];
 	else
 		rect = IntMakeRect(0, 0, [[contents activeLayer] width], [[contents activeLayer] height]);

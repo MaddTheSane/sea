@@ -571,11 +571,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	NSArray *tempArray = @[];
 	int i;
 	
-	if([[document selection] floating]){
+	if(document.selection.floating){
 		unsigned char *data;
 		int spp = [self spp];
 		IntRect dataRect;
-		id layer;
+		SeaLayer *layer;
 		// Save the existing selection
 		layer = layers[activeLayerIndex];
 		dataRect = IntMakeRect([layer xoff], [layer yoff], [(SeaLayer *)layer width], [(SeaLayer *)layer height]);;
@@ -836,7 +836,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (void)deleteLayer:(NSInteger)index
 {
-	id layer;
+	SeaLayer *layer;
 	NSArray *tempArray = @[];
 	IntRect rect;
 	int i;
@@ -849,10 +849,10 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[document helpers] activeLayerWillChange];
 	
 	// Clear the selection if the layer is a floating one
-	if ([layer floating]){
+	if (layer.floating) {
 		[[document selection] clearSelection];
-		[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] anchorTool];
-		[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] update:YES];
+		[[[SeaController utilitiesManager] toolboxUtilityFor:document] anchorTool];
+		[[[SeaController utilitiesManager] toolboxUtilityFor:document] update:YES];
 	}
 		
 	// Create a new array with all the existing layers except the one being deleted
@@ -883,13 +883,13 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[[document undoManager] prepareWithInvocationTarget:self] restoreLayer:index fromLostIndex:[deletedLayers count] - 1];
 	
 	// Update toolbox
-	if ([layer floating])
-		[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] update:YES];
+	if (layer.floating)
+		[[[SeaController utilitiesManager] toolboxUtilityFor:document] update:YES];
 }
 
 - (void)restoreLayer:(NSInteger)index fromLostIndex:(NSInteger)lostIndex
 {
-	id layer = deletedLayers[lostIndex];
+	SeaLayer *layer = deletedLayers[lostIndex];
 	NSArray *tempArray;
 	IntRect rect;
 	int i;
@@ -930,7 +930,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	activeLayerIndex = index;
 		
 	// Wrap selection to the opaque if the layer is a floating one
-	if ([layer floating])
+	if (layer.floating)
 		[[document selection] selectOpaque];
 		
 	// Update Seashore with the changes
@@ -941,7 +941,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:index];
 	
 	// Update toolbox
-	if ([layer floating]){
+	if (layer.floating){
 		[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] floatTool];
 		[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] update:YES];
 	}
@@ -957,7 +957,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	int i, spp = [[document contents] spp];
 	
 	// Check the state is valid
-	if (![[document selection] active] || [[document selection] floating])
+	if (!document.selection.active || document.selection.floating)
 		return;
 	
 	// Save the existing selection
@@ -1019,7 +1019,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 -(void)toggleFloatingSelection
 {	
-	if ([[document selection] floating]) {
+	if (document.selection.floating) {
 		[self anchorSelection];
 	}
 	else {
@@ -1036,7 +1036,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	NSPasteboard *pboard = [NSPasteboard generalPasteboard];
 	SeaLayer *layer;
 	unsigned char *data, *tdata;
-	NSInteger i, spp = [[document contents] spp], sspp, dspp;
+	NSInteger i, spp = document.contents.samplesPerPixel, sspp, dspp;
 	ColorSyncProfileRef cmProfileLoc = NULL;
 	NSInteger bipp, bypr, bps;
 	//NSData *profile = nil;
@@ -1045,7 +1045,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	IntSize sel_size;
 	
 	// Check the state is valid
-	if ([[document selection] floating])
+	if (document.selection.floating)
 		return;
 	
 	// Get the data from the pasteboard
@@ -1172,15 +1172,15 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	id layer;
 	
 	// Don't do anything if there's no selection
-	if (![[document selection] floating])
+	if (!document.selection.floating)
 		return;
 	
 	// We need to figure out what layer is floating
 	// This isn't nessisarily the current active layer since people can select different
 	// layers while there is a floating layer.
 	for(i = 0; i < [layers count]; i++){
-		if([layers[i] floating]){
-			if(floatingLayerIndex != -1){
+		if (layers[i].floating) {
+			if (floatingLayerIndex != -1) {
 				NSLog(@"Multiple floating layers?");
 			}else {
 				floatingLayerIndex = i;
@@ -1236,7 +1236,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 - (BOOL)canLower:(NSInteger)index
 {
 	if (index == kActiveLayer) index = activeLayerIndex;
-	if ([layers[index] floating] && index == [layers count] - 2) return NO;
+	if (layers[index].floating && index == [layers count] - 2) return NO;
 	return !(index == [layers count] - 1);
 }
 
@@ -1370,7 +1370,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	
 	// Go through all layers and toggle them back so they are unlinked
 	for (i = 0; i < [layers count]; i++) {
-		if ([layers[i] linked])
+		if (layers[i].linked)
 			[self setLinked: NO forLayer: i];
 	}
 }
@@ -1419,7 +1419,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	unsigned char *mask;
 
 	// Check selection
-	if ([[document selection] active]) {
+	if (document.selection.active) {
 		mask = [[document selection] mask];
 		globalRect = [[document selection] globalRect];
 		ndata = malloc(make_128(globalRect.size.width * globalRect.size.height * spp));
@@ -1465,7 +1465,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 - (BOOL)canFlatten
 {
 	// No, if there is a floating selection active
-	if ([[document selection] floating])
+	if (document.selection.floating)
 		return NO;
 	
 	// Yes, if there are one or more layers
@@ -1487,13 +1487,12 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (void)mergeLinked
 {
-	SeaLayer *layer;
 	NSMutableArray *linkedLayers = [NSMutableArray array];
 	// Go through noting each linked layer
-	NSEnumerator *e = [layers objectEnumerator];
-	while(layer = [e nextObject]) {
-		if ([layer linked])
+	for (SeaLayer *layer in layers) {
+		if (layer.linked) {
 			[linkedLayers addObject: layer];
+		}
 	}
 	// Preform the merge
 	[self merge:linkedLayers useRepresentation: NO withName: LOCALSTR(@"flattened", @"Flattened Layer")];
@@ -1682,7 +1681,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Composite the layers underneath
 	for (i = [layers count] - 1; i >= activeLayerIndex; i--) {
 		layer = layers[i];
-		if ([layer visible]) {
+		if (layer.visible) {
 			[[[document whiteboard] compositor] compositeLayer:layer withOptions:options andData:data];
 		}
 	}
@@ -1796,11 +1795,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {
-	if (![[document selection] active])
+	if (!document.selection.active)
 		return NO;
 
 	if([[theItem itemIdentifier] isEqual: FloatAnchorToolbarItemIdentifier]){
-		if ([[document selection] floating]){
+		if (document.selection.floating){
 			[theItem setLabel: @"Anchor"];
 			[theItem setPaletteLabel: LOCALSTR(@"anchor selection", @"Anchor Selection")];
 			[theItem setImage:[NSImage imageNamed:@"toolbar/anchor-tb"]];
@@ -1810,7 +1809,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 			[theItem setImage:[NSImage imageNamed:@"toolbar/float-tb"]];
 		}
 	}else if([[theItem itemIdentifier] isEqual: DuplicateSelectionToolbarItemIdentifier]){
-		if([[document selection]floating])
+		if(document.selection.floating)
 			return NO;
 	}
 	

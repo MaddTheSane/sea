@@ -142,7 +142,7 @@
 			[self addCursorRect:operableRect cursor:crosspointCursor];
 			
 			// Now we need the handles and the hand
-			if ([[document selection] active]) {
+			if (document.selection.active) {
 				NSRect selectionRect = IntRectMakeNSRect([[document selection] globalRect]);
 				selectionRect = NSMakeRect(selectionRect.origin.x * xScale, selectionRect.origin.y * yScale, selectionRect.size.width * xScale, selectionRect.size.height * yScale);
 
@@ -186,7 +186,7 @@
 		}
 	} else {
 		// If there is currently a selection, then users can operate in there only
-		if([[document selection] active]){
+		if(document.selection.active){
 			operableIntRect = [[document selection] globalRect];
 			operableIntRect = IntMakeRect(operableIntRect.origin.x * xScale, operableIntRect.origin.y * yScale, operableIntRect.size.width * xScale, operableIntRect.size.height * yScale);
 			operableRect = IntRectMakeNSRect(IntConstrainRect(NSRectMakeIntRect([view frame]), operableIntRect));

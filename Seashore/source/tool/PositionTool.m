@@ -38,14 +38,14 @@
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id contents = [document contents];
-	id activeLayer = [contents activeLayer];
+	SeaContent *contents = [document contents];
+	SeaLayer *activeLayer = [contents activeLayer];
 	IntPoint oldOffsets;
 	int whichLayer;
 	int function = kMovingLayer;
 	
 	// Determine the function
-	if ([activeLayer floating] && [options canAnchor] && (where.x < 0 || where.y < 0 || where.x >= [(SeaLayer *)activeLayer width] || where.y >= [(SeaLayer *)activeLayer height])){
+	if (activeLayer.floating && [options canAnchor] && (where.x < 0 || where.y < 0 || where.x >= [activeLayer width] || where.y >= [activeLayer height])){
 		function = kAnchoringLayer;
 	}else{
 		function = [options toolFunction];
@@ -67,11 +67,11 @@
 			initialPoint.y = where.y - [activeLayer yoff];
 			
 			// If the active layer is linked we have to move all associated layers
-			if ([activeLayer linked]) {
+			if (activeLayer.linked) {
 			
 				// Go through all linked layers allowing a satisfactory undo
 				for (whichLayer = 0; whichLayer < [contents layerCount]; whichLayer++) {
-					if ([[contents layerAtIndex:whichLayer] linked]) {
+					if ([contents layerAtIndex:whichLayer].linked) {
 						oldOffsets.x = [[contents layerAtIndex:whichLayer] xoff]; oldOffsets.y = [[contents layerAtIndex:whichLayer] yoff];
 						[[[document undoManager] prepareWithInvocationTarget:self] undoToOrigin:oldOffsets forLayer:whichLayer];			
 					}
@@ -113,8 +113,8 @@
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id contents = [document contents];
-	id activeLayer = [contents activeLayer];
+	SeaContent *contents = [document contents];
+	SeaLayer *activeLayer = [contents activeLayer];
 	int xoff, yoff, whichLayer;
 	int deltax = where.x - initialPoint.x, deltay = where.y - initialPoint.y;
 	IntPoint oldOffsets = {0};
@@ -126,11 +126,11 @@
 		case SeaPositionOptionMoving:
 			
 			// If the active layer is linked we have to move all associated layers
-			if ([activeLayer linked]) {
+			if (activeLayer.linked) {
 			
 				// Move all of the linked layers
 				for (whichLayer = 0; whichLayer < [contents layerCount]; whichLayer++) {
-					if ([[contents layerAtIndex:whichLayer] linked]) {
+					if ([contents layerAtIndex:whichLayer].linked) {
 						xoff = [[contents layerAtIndex:whichLayer] xoff]; yoff = [[contents layerAtIndex:whichLayer] yoff];
 						[[contents layerAtIndex:whichLayer] setOffsets:IntMakePoint(xoff + deltax, yoff + deltay)];
 					}

@@ -104,7 +104,7 @@
 	// Get the selection
 	if (curToolIndex == kCropTool) {
 		size = [[[document tools] currentTool] cropRect].size;
-	} else if ([[document selection] active]) {
+	} else if (document.selection.active) {
 		size = [[document selection] globalRect].size;
 	} else {
 		size.height = size.width = 0;

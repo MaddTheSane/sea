@@ -10,7 +10,7 @@
 
 - (void)mouseDownAt:(IntPoint)localPoint withEvent:(NSEvent *)event
 {	
-	if([[document selection] active]){
+	if (document.selection.active) {
 		/* incidentally, we should only be translating when the mode is default
 		 However, we don't know how to pass that logic in yet
 		 here it is:
@@ -30,7 +30,7 @@
 
 - (void)mouseDraggedTo:(IntPoint)localPoint withEvent:(NSEvent *)event
 {
-	if([[document selection] active]){
+	if (document.selection.active) {
 		IntRect newRect = [self mouseDraggedTo: localPoint
 									   forRect: [[document selection] globalRect]
 									   andMask: [[document selection] mask]];
@@ -47,7 +47,7 @@
 
 - (void)mouseUpAt:(IntPoint)localPoint withEvent:(NSEvent *)event
 {
-	if([[document selection] active]){
+	if (document.selection.active) {
 		[self mouseUpAt: localPoint
 				forRect: [[document selection] globalRect]
 				andMask: [[document selection] mask]];		

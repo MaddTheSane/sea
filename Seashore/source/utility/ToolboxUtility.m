@@ -272,7 +272,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 {
 	if (full) {
 		/* Disable or enable the tool */
-		if ([[document selection] floating]) {
+		if (document.selection.floating) {
 			for (SeaToolsDefines i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
 				[selectionTBView setEnabled:NO forSegment:i];
 			}

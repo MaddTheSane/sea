@@ -101,11 +101,11 @@
 {
 	// There is only one colum so there's not much need to worry about this
     if ([[tableColumn identifier] isEqualToString:LAYER_THUMB_NAME_COL]) {
-		if([(SeaLayer *)item floating])
+		if([(SeaLayer *)item isFloating])
 			return @"Floating Layer";
 		return [(SeaLayer *)item name];
 	}else if([[tableColumn identifier] isEqualToString:LAYER_VISIBLE_COL]){
-		return @([(SeaLayer *)item visible]);
+		return @([(SeaLayer *)item isVisible]);
 	}else if([[tableColumn identifier] isEqualToString:INFO_BUTTON_COL]){
 		return @YES;
 	}else{
@@ -164,7 +164,7 @@
 		}
 	}else if([[tableColumn identifier] isEqualToString:LAYER_VISIBLE_COL]){
 		NSButtonCell *buttonCell = (NSButtonCell *)cell;
-		if([(SeaLayer *)item visible]){
+		if([(SeaLayer *)item isVisible]){
 			[buttonCell setImage:[NSImage imageNamed:@"checked"]];
 		}else{
 			[buttonCell setImage:[NSImage imageNamed:@"unchecked"]];

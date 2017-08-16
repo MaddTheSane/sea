@@ -118,15 +118,15 @@
 {
 	id selection = [document selection];
 	
-	if (![selection floating]) {
-		[(SeaContent *)[document contents] duplicateLayer:kActiveLayer];
+	if (![selection isFloating]) {
+		[[document contents] duplicateLayer:kActiveLayer];
 	}
 }
 
 - (IBAction)deleteLayer:(id)sender
 {
 	if ([[document contents] layerCount] > 1) {
-		[(SeaContent *)[document contents] deleteLayer:kActiveLayer];
+		[[document contents] deleteLayer:kActiveLayer];
 	} else {
 		NSBeep();
 	}

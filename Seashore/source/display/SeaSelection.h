@@ -86,18 +86,18 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
 	@property	active
 	@discussion	Returns whether the current selection is active or not.
-	@result		Returns YES if the selection is active, NO otherwise.
+	@result		Returns \c YES if the selection is active, \c NO otherwise.
 */
-@property (readonly) BOOL active;
+@property (readonly, getter=isActive) BOOL active;
 
 /*!
 	@property	floating
 	@discussion	Returns whether the current selection is floating or not.
 				Floating implies that the selection's bitmap data is a detached
 				from the layer.
-	@result		Returns YES if the selection is floating, NO otherwise.
+	@result		Returns \c YES if the selection is floating, \c NO otherwise.
 */
-@property (readonly) BOOL floating;
+@property (readonly, getter=isFloating) BOOL floating;
 
 /*!
 	@property	mask
@@ -317,7 +317,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		interpolation
 				The interpolation to be used when scaling (see GIMPCore).
 */
-- (void)scaleSelectionHorizontally:(float)xScale vertically:(float)yScale interpolation:(GimpInterpolationType)interpolation NS_SWIFT_NAME(scale(horizontally:vertically:interpolation:));
+- (void)scaleSelectionHorizontally:(float)xScale vertically:(float)yScale interpolation:(GimpInterpolationType)interpolation NS_SWIFT_NAME(scaleSelection(horizontally:vertically:interpolation:));
 
 /*!
 	@method		scaleSelectionTo:from:interpolation:usingMask:
@@ -331,7 +331,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		oldMask
 				The mask that should be scaled to the newRect.
 */
-- (void)scaleSelectionTo:(IntRect)newRect from:(IntRect)oldRect interpolation:(GimpInterpolationType)interpolation usingMask:(nullable unsigned char*)oldMask NS_SWIFT_NAME(scale(to:from:interpolation:usingMask:));
+- (void)scaleSelectionTo:(IntRect)newRect from:(IntRect)oldRect interpolation:(GimpInterpolationType)interpolation usingMask:(nullable unsigned char*)oldMask NS_SWIFT_NAME(scaleSelection(to:from:interpolation:usingMask:));
 
 /*!
 	@method		trimSelection

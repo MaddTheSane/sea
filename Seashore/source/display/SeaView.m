@@ -354,7 +354,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// If we aren't using the view for printing draw the boundaries and the marching ants
 	if (
 		([[SeaController seaPrefs] layerBounds] && ![[document whiteboard] whiteboardIsLayerSpecific]) ||
-		[[document selection] active] ||
+		document.selection.active ||
 		(curToolIndex == kCropTool) ||
 		(curToolIndex == kRectSelectTool && [(RectSelectTool *)[[document tools] getTool: kRectSelectTool] intermediate]) ||
 		(curToolIndex == kEllipseSelectTool && [(EllipseSelectTool *)[[document tools] getTool: kEllipseSelectTool] intermediate]) ||
@@ -421,7 +421,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	CGFloat revCurveRadius, f;
 
 	selectRect = [[document selection] globalRect];
-	useSelection = [[document selection] active];
+	useSelection = document.selection.active;
 	xoff = [[[document contents] activeLayer] xoff];
 	yoff = [[[document contents] activeLayer] yoff];
 	width = [(SeaContent *)[document contents] width];
@@ -1312,11 +1312,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 - (void)keyDown:(NSEvent *)theEvent
 {
 	int whichKey, whichLayer, xoff, yoff;
-	id curLayer, activeLayer;
+	SeaLayer *curLayer, *activeLayer;
 	IntPoint oldOffsets;
 	unichar key;
-	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
-	BOOL floating = [[document selection] floating];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	BOOL floating = document.selection.floating;
 	
 	// End the line drawing
 	[[document helpers] endLineDrawing];
@@ -1354,12 +1354,12 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			if (keyWasUp) {
 			
 				// If the active layer is linked we have to move all associated layers
-				if ([activeLayer linked]) {
+				if (activeLayer.linked) {
 				
 					// Go through all linked layers allowing a satisfactory undo
 					for (whichLayer = 0; whichLayer < [[document contents] layerCount]; whichLayer++) {
 						curLayer = [[document contents] layerAtIndex:whichLayer];
-						if ([curLayer linked]) {
+						if (curLayer.linked) {
 							oldOffsets.x = [curLayer xoff]; oldOffsets.y = [curLayer yoff];
 							[[[document undoManager] prepareWithInvocationTarget:[[document tools] getTool:kPositionTool]] undoToOrigin:oldOffsets forLayer:whichLayer];			
 						}
@@ -1395,7 +1395,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 				
 			
 			}
-			else if ([[document selection] active] && ![[document selection] floating]) {
+			else if (document.selection.active && !document.selection.floating) {
 			
 				// Make the adjustment
 				switch (key) {
@@ -1420,12 +1420,12 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			else {
 			
 				// If the active layer is linked we have to move all associated layers
-				if ([activeLayer linked]) {
+				if (activeLayer.linked) {
 				
 					// Move all of the linked layers
 					for (whichLayer = 0; whichLayer < [[document contents] layerCount]; whichLayer++) {
 						curLayer = [[document contents] layerAtIndex:whichLayer];
-						if ([curLayer linked]) {
+						if (curLayer.linked) {
 						
 							// Get the old position
 							xoff = [curLayer xoff]; yoff = [curLayer yoff];
@@ -1497,7 +1497,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 						[[document selection] clearSelection];
 				break;
 				case '`':
-					if ([[document selection] active] && ![[document selection] floating]) {
+					if (document.selection.active && !document.selection.floating) {
 						[self selectInverse:NULL];
 					}
 				break;
@@ -1691,7 +1691,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (IBAction)paste:(id)sender
 {
-	if ([[document selection] active])
+	if (document.selection.active)
 		[[document selection] clearSelection];
 	[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:kRectSelectTool];
 	[[document contents] makePasteboardFloat];
@@ -1699,7 +1699,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (IBAction)delete:(id)sender
 {
-	if ([[document selection] floating]) {
+	if (document.selection.floating) {
 		[(SeaContent*)[document contents] deleteLayer:kActiveLayer];
 		[[document selection] clearSelection];
 	} else {
@@ -1782,12 +1782,12 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Accept copy operations if possible
     if (sourceDragMask & NSDragOperationCopy) {
 		if ([[pboard types] containsObject:NSPasteboardTypeTIFF]) {
-        	if (layer != [[document contents] activeLayer] && ![document locked] && ![[document selection] floating] ) {
+        	if (layer != [[document contents] activeLayer] && ![document locked] && !document.selection.floating ) {
 				return NSDragOperationCopy;
 			}
         }
 		if ([[pboard types] containsObject:NSFilenamesPboardType]) {
-			if (layer != [[document contents] activeLayer] && ![document locked] && ![[document selection] floating]) {
+			if (layer != [[document contents] activeLayer] && ![document locked] && !document.selection.floating) {
 				files = [pboard propertyListForType:NSFilenamesPboardType];
 				BOOL success = YES;
 				for (NSString *file in files)
@@ -1914,34 +1914,34 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[[document helpers] endLineDrawing];
 	switch ([menuItem tag]) {
 		case 261: /* Copy */
-			if (![[document selection] active])
+			if (!document.selection.active)
 				return NO;
 		break;
 		case 260: /* Cut */
-			if (![[document selection] active] || [[document selection] floating] || [[document contents] selectedChannel] != kAllChannels)
+			if (!document.selection.active || document.selection.floating || [[document contents] selectedChannel] != kAllChannels)
 				return NO;
 		break;
 		case 263: /* Delete */
-			if (![[document selection] active] || [[document contents] selectedChannel] != kAllChannels)
+			if (!document.selection.active || [[document contents] selectedChannel] != kAllChannels)
 				return NO;
 		break;
 		case 270: /* Select All */
 		case 273: /* Select Alpha */
-			if ([[document selection] floating])
+			if (document.selection.floating)
 				return NO;
 		break;
 		case 271: /* Select None */
 			if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == kPolygonLassoTool && [[[document tools] currentTool] intermediate])
 				return YES;
-			if (![[document selection] active] || [[document selection] floating])
+			if (!document.selection.active || document.selection.floating)
 				return NO;
 		break;
 		case 272: /* Select Inverse */
-			if (![[document selection] active] || [[document selection] floating])
+			if (!document.selection.active || document.selection.floating)
 				return NO;
 		break;
 		case 262: /* Paste */
-			if ([[document selection] floating])
+			if (document.selection.floating)
 				return NO;
 			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 			if (availableType)
@@ -1959,13 +1959,13 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	if([[theItem itemIdentifier] isEqual: SelectNoneToolbarItemIdentifier]){
 		if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == kPolygonLassoTool && [[[document tools] currentTool] intermediate])
 			return YES;
-		if (![[document selection] active] || [[document selection] floating])
+		if (!document.selection.active || document.selection.floating)
 			return NO;
 	} else 	if([[theItem itemIdentifier] isEqual: SelectAllToolbarItemIdentifier] || [[theItem itemIdentifier] isEqual: SelectAlphaToolbarItemIdentifier] ){
-		if ([[document selection] floating])
+		if (document.selection.floating)
 			return NO;
 	} else if([[theItem itemIdentifier] isEqual: SelectInverseToolbarItemIdentifier]){
-		if (![[document selection] active] || [[document selection] floating])
+		if (!document.selection.active || document.selection.floating)
 			return NO;
 	}
 	

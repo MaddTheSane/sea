@@ -137,23 +137,30 @@
 
 	
 	// Fill everything
-	if (useTolerance)
+	if (useTolerance) {
 		tolerance = [(BucketOptions*)options tolerance];
-	else
+	} else {
 		tolerance = 255;
-	if ([layer floating])
+	}
+	
+	if (layer.floating) {
 		channel = kPrimaryChannels;
-	else
+	} else {
 		channel = [[document contents] selectedChannel];
-	if ([[document selection] active])
+	}
+	
+	if (document.selection.active) {
 		rect = SeaBucketFill(spp, [[document selection] localRect], overlay, data, width, height, seeds, intervals, basePixel, tolerance, channel);
-	else
+	} else {
 		rect = SeaBucketFill(spp, IntMakeRect(0, 0, width, height), overlay, data, width, height, seeds, intervals, basePixel, tolerance, channel);
+	}
+	
 	if ([options useTextures] && IntContainsRect(IntMakeRect(0, 0, width, height), rect)) {
-		if ([[document selection] active])
+		if (document.selection.active) {
 			SeaTextureFill(spp, rect, overlay, width, height, texture, textureWidth, textureHeight);
-		else
+		} else {
 			SeaTextureFill(spp, rect, overlay, width, height, texture, textureWidth, textureHeight);
+		}
 	}
 	
 	// Do the update

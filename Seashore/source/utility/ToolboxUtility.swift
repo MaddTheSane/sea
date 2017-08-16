@@ -166,7 +166,7 @@ class ToolboxUtility2 : NSObject {
 	func update(full: Bool) {
 		if full {
 			/* Disable or enable the tool */
-			if document.selection.floating {
+			if document.selection.isFloating {
 				for i in SeaToolsDefines.kFirstSelectionTool.rawValue ... SeaToolsDefines.kLastSelectionTool.rawValue {
 					selectionTBView.setEnabled(false, forSegment: Int(i))
 				}

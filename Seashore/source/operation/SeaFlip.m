@@ -79,11 +79,11 @@
 	width = [[[document contents] activeLayer] width];
 	height = [[[document contents] activeLayer] height];
 	spp = [[document contents] spp];
-	if ([[document selection] active])
+	if (document.selection.active)
 		rect = [[document selection] localRect];
 	else
 		rect = IntMakeRect(0, 0, width, height);
-	complex = [[document selection] active] && [[document selection] mask];
+	complex = document.selection.active && [[document selection] mask];
 	
 	// Erase selection if it is complex
 	if (complex) {
@@ -147,7 +147,7 @@
 
 - (void)run:(SeaFlipType)type
 {
-	if ([[[document contents] activeLayer] floating])
+	if (document.contents.activeLayer.floating)
 		[self floatingFlip:type];
 	else
 		[self standardFlip:type];	

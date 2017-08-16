@@ -35,7 +35,7 @@
 
 	// Fill out the selection label
 	layer = [contents layerAtIndex:[contents activeLayerIndex]];
-	if ([layer floating])
+	if (layer.floating)
 		[selectionLabel setStringValue:LOCALSTR(@"floating", @"Floating Selection")];
 	else
 		[selectionLabel setStringValue:[NSString stringWithFormat:@"%@", [layer name]]];
@@ -59,7 +59,7 @@
 	// Rotate the image
 	if ([rotateValue floatValue] != 0) {
 		SeaLayer *layer = [contents layerAtIndex:[contents activeLayerIndex]];
-		[self rotate:[rotateValue floatValue] withTrim:[layer floating]];
+		[self rotate:[rotateValue floatValue] withTrim:layer.floating];
 	}
 }
 
@@ -111,7 +111,7 @@ static inline CGFloat mod_float(CGFloat value, CGFloat divisor)
 	undoRecord.withTrim = trim;
 	[[[document undoManager] prepareWithInvocationTarget:self] undoRotation:undoCount];
 	[activeLayer setRotation:degrees interpolation:GIMP_INTERPOLATION_CUBIC withTrim:trim];
-	if ([activeLayer floating] && trim) [[document selection] selectOpaque];
+	if (activeLayer.floating && trim) [[document selection] selectOpaque];
 	else [[document selection] clearSelection];
 	if (!trim && ![activeLayer hasAlpha]) {
 		undoRecord.disableAlpha = YES;

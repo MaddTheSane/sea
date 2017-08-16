@@ -102,7 +102,7 @@
 	id docView = [document docView];
 	
 	[[document selection] readjustSelection];
-	if (![[[document contents] activeLayer] hasAlpha] && ![[document selection] floating] && [[document contents] selectedChannel] == kAlphaChannel) {
+	if (![[[document contents] activeLayer] hasAlpha] && !document.selection.floating && [[document contents] selectedChannel] == kAlphaChannel) {
 		[[document contents] setSelectedChannel:kAllChannels];
 		[[document helpers] channelChanged];
 	}
@@ -211,7 +211,7 @@
 		break;
 		case kLinkedLayers:
 			for (i = 0; i < [contents layerCount]; i++) {
-				if ([[contents layerAtIndex:i] linked])
+				if ([contents layerAtIndex:i].linked)
 					[[contents layerAtIndex:i] updateThumbnail];
 			}
 		break;
@@ -248,7 +248,7 @@
 		break;
 		case kLinkedLayers:
 			for (i = 0; i < [contents layerCount]; i++) {
-				if ([[contents layerAtIndex:i] linked])
+				if ([contents layerAtIndex:i].linked)
 					[[contents layerAtIndex:i] updateThumbnail];
 			}
 			[[document whiteboard] update];
@@ -302,7 +302,7 @@
 		break;
 	}
 	
-	if ([[document selection] active]) {
+	if (document.selection.active) {
 		[[document selection] adjustOffset:IntMakePoint(xoff - oldOffsets.x, yoff - oldOffsets.y)];
 	}
 }

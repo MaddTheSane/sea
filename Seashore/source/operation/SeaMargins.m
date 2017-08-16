@@ -588,7 +588,7 @@
 			size.height = (float)size.height * (yres / 72.0);
 		break;
 		case 3:
-			if(![[document selection] active])
+			if(!document.selection.active)
 				return;
 			size = [[document selection] localRect].size;
 			customOrigin = YES;
