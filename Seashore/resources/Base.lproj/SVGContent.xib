@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13189.4"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SVGContent">
@@ -20,7 +21,7 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="alertPanel" id="5" userLabel="SVG Load" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="409" y="434" width="240" height="115"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="240" height="115"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -64,7 +65,7 @@
         <window title="Open" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="27" userLabel="Scaling" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="311" y="595" width="344" height="143"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="28">
                 <rect key="frame" x="0.0" y="0.0" width="344" height="143"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -195,6 +196,7 @@ Gw
                     <constraint firstItem="36" firstAttribute="width" secondItem="39" secondAttribute="width" id="XGo-0p-hEg"/>
                     <constraint firstItem="36" firstAttribute="width" secondItem="35" secondAttribute="width" id="XcV-K3-fcC"/>
                     <constraint firstItem="39" firstAttribute="baseline" secondItem="38" secondAttribute="baseline" id="Xyg-Mn-Gry"/>
+                    <constraint firstItem="E4j-cs-dAa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="28" secondAttribute="leading" constant="20" symbolic="YES" id="eKZ-Pj-NRw"/>
                     <constraint firstItem="39" firstAttribute="top" secondItem="30" secondAttribute="bottom" constant="8" symbolic="YES" id="ehq-kH-k95"/>
                     <constraint firstItem="30" firstAttribute="top" secondItem="43" secondAttribute="bottom" constant="8" symbolic="YES" id="g0Z-QP-epk"/>
                     <constraint firstItem="40" firstAttribute="leading" secondItem="E4j-cs-dAa" secondAttribute="trailing" constant="12" symbolic="YES" id="gZw-DX-2C3"/>
@@ -206,6 +208,7 @@ Gw
                     <constraint firstItem="36" firstAttribute="baseline" secondItem="34" secondAttribute="baseline" id="qtN-rJ-tFL"/>
                     <constraint firstItem="38" firstAttribute="baseline" secondItem="36" secondAttribute="baseline" id="qyp-42-2LS"/>
                     <constraint firstItem="43" firstAttribute="leading" secondItem="31" secondAttribute="leading" id="sFp-AO-i0C"/>
+                    <constraint firstItem="45" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="43" secondAttribute="trailing" constant="8" symbolic="YES" id="vLc-vk-tJF"/>
                 </constraints>
             </view>
         </window>

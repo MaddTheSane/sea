@@ -33,7 +33,7 @@
 	@param		event
 				The mouse up event.
 */
-- (void)mouseUpAt:(IntPoint)where withEvent:(nonnull NSEvent *)event;
+- (void)mouseUpAt:(IntPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	@method		getColor

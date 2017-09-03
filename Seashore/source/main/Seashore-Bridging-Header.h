@@ -29,7 +29,6 @@
 #import "BucketTool.h"
 #import "TextTool.h"
 #import "EyedropTool.h"
-#import "EraserTool.h"
 #import "PositionTool.h"
 #import "GradientTool.h"
 #import "SmudgeTool.h"
@@ -56,3 +55,6 @@
 #import "CloneOptions.h"
 #import "CropOptions.h"
 #import "EffectOptions.h"
+
+
+#import "SeaBrush.h"

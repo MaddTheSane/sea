@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13178.6"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13189.4"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -290,7 +290,7 @@ DQ
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <clipView key="contentView" id="eIU-Ie-Ctz">
                                             <rect key="frame" x="0.0" y="0.0" width="198" height="543"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="39" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="9834" id="7811" customClass="SeaOutlineView">
                                                     <rect key="frame" x="0.0" y="0.0" width="198" height="543"/>
@@ -853,7 +853,7 @@ Gw
                 </subviews>
             </view>
         </window>
-        <customObject id="93" userLabel="SeaResolution" customClass="SeaResolution">
+        <customObject id="93" userLabel="Sea Resolution" customClass="SeaResolution">
             <connections>
                 <outlet property="document" destination="-2" id="102"/>
                 <outlet property="forceSquare" destination="545" id="548"/>
@@ -1178,7 +1178,7 @@ Gw
                 </subviews>
             </view>
         </window>
-        <customObject id="119" userLabel="SeaMargins" customClass="SeaMargins">
+        <customObject id="119" userLabel="Sea Margins" customClass="SeaMargins">
             <connections>
                 <outlet property="bottomLabel" destination="1057" id="1078"/>
                 <outlet property="bottomValue" destination="1054" id="1071"/>
@@ -1448,7 +1448,7 @@ Gw
                 </subviews>
             </view>
         </window>
-        <customObject id="207" userLabel="SeaScale" customClass="SeaScale">
+        <customObject id="207" userLabel="Sea Scale" customClass="SeaScale">
             <connections>
                 <outlet property="document" destination="-2" id="219"/>
                 <outlet property="heightUnits" destination="577" id="605"/>
@@ -1464,7 +1464,7 @@ Gw
                 <outlet property="yScaleValue" destination="566" id="593"/>
             </connections>
         </customObject>
-        <customObject id="259" userLabel="SeaTools" customClass="SeaTools">
+        <customObject id="259" userLabel="Sea Tools" customClass="SeaTools">
             <connections>
                 <outlet property="brushTool" destination="300" id="324"/>
                 <outlet property="bucketTool" destination="302" id="323"/>
@@ -1527,13 +1527,13 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="2az-qY-cA8">
                             <rect key="frame" x="1" y="1" width="438" height="54"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" usesFontPanel="YES" usesRuler="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1007" customClass="NSTextViewRedirect">
                                     <rect key="frame" x="0.0" y="0.0" width="423" height="54"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="438" height="54"/>
+                                    <size key="minSize" width="423" height="54"/>
                                     <size key="maxSize" width="466" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
@@ -1581,7 +1581,7 @@ Gw
                 </subviews>
             </view>
         </window>
-        <customObject id="288" userLabel="SeaOperations" customClass="SeaOperations">
+        <customObject id="288" userLabel="Sea Operations" customClass="SeaOperations">
             <connections>
                 <outlet property="seaAlignment" destination="662" id="861"/>
                 <outlet property="seaDocRotation" destination="859" id="862"/>
@@ -1592,38 +1592,38 @@ Gw
                 <outlet property="seaScale" destination="207" id="294"/>
             </connections>
         </customObject>
-        <customObject id="291" userLabel="SeaHelpers" customClass="SeaHelpers">
+        <customObject id="291" userLabel="Sea Helpers" customClass="SeaHelpers">
             <connections>
                 <outlet property="document" destination="-2" id="293"/>
             </connections>
         </customObject>
-        <customObject id="300" userLabel="BrushTool" customClass="BrushTool">
+        <customObject id="300" customClass="BrushTool">
             <connections>
                 <outlet property="document" destination="-2" id="301"/>
             </connections>
         </customObject>
-        <customObject id="302" userLabel="BucketTool" customClass="BucketTool">
+        <customObject id="302" customClass="BucketTool">
             <connections>
                 <outlet property="document" destination="-2" id="303"/>
             </connections>
         </customObject>
-        <customObject id="307" userLabel="EyedropTool" customClass="EyedropTool">
+        <customObject id="307" customClass="EyedropTool">
             <connections>
                 <outlet property="document" destination="-2" id="311"/>
             </connections>
         </customObject>
-        <customObject id="308" userLabel="PencilTool" customClass="PencilTool">
+        <customObject id="308" customClass="PencilTool">
             <connections>
                 <outlet property="document" destination="-2" id="312"/>
             </connections>
         </customObject>
-        <customObject id="309" userLabel="PositionTool" customClass="PositionTool">
+        <customObject id="309" customClass="PositionTool">
             <connections>
                 <outlet property="document" destination="-2" id="313"/>
                 <outlet property="seaOperations" destination="288" id="689"/>
             </connections>
         </customObject>
-        <customObject id="310" userLabel="TextTool" customClass="TextTool">
+        <customObject id="310" customClass="TextTool">
             <connections>
                 <outlet property="document" destination="-2" id="314"/>
                 <outlet property="movePanel" destination="1019" id="1025"/>
@@ -1631,7 +1631,7 @@ Gw
                 <outlet property="textbox" destination="1007" id="1008"/>
             </connections>
         </customObject>
-        <customObject id="328" userLabel="JPEGExporter" customClass="JPEGExporter">
+        <customObject id="328" userLabel="JPEG Exporter" customClass="JPEGExporter">
             <connections>
                 <outlet property="compressImageView" destination="346" id="371"/>
                 <outlet property="compressLabel" destination="341" id="357"/>
@@ -1641,15 +1641,15 @@ Gw
                 <outlet property="targetRadios" destination="677" id="687"/>
             </connections>
         </customObject>
-        <customObject id="329" userLabel="PNGExporter" customClass="PNGExporter"/>
-        <customObject id="330" userLabel="TIFFExporter" customClass="TIFFExporter">
+        <customObject id="329" userLabel="PNG Exporter" customClass="PNGExporter"/>
+        <customObject id="330" userLabel="TIFF Exporter" customClass="TIFFExporter">
             <connections>
                 <outlet property="idocument" destination="-2" id="855"/>
                 <outlet property="panel" destination="694" id="708"/>
                 <outlet property="targetRadios" destination="697" id="709"/>
             </connections>
         </customObject>
-        <customObject id="331" userLabel="XCFExporter" customClass="XCFExporter"/>
+        <customObject id="331" userLabel="XCF Exporter" customClass="XCFExporter"/>
         <window title="JPEG Options" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="336" userLabel="JPEG Options" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="520" y="370" width="360" height="354"/>
@@ -1764,32 +1764,32 @@ DQ
                 </subviews>
             </view>
         </window>
-        <customObject id="361" userLabel="EraserTool" customClass="EraserTool">
+        <customObject id="361" customClass="EraserTool" customModule="Seashore" customModuleProvider="target">
             <connections>
                 <outlet property="document" destination="-2" id="363"/>
             </connections>
         </customObject>
-        <customObject id="364" userLabel="SmudgeTool" customClass="SmudgeTool">
+        <customObject id="364" customClass="SmudgeTool">
             <connections>
                 <outlet property="document" destination="-2" id="366"/>
             </connections>
         </customObject>
-        <customObject id="367" userLabel="GradientTool" customClass="GradientTool">
+        <customObject id="367" customClass="GradientTool">
             <connections>
                 <outlet property="document" destination="-2" id="369"/>
             </connections>
         </customObject>
-        <customObject id="373" userLabel="SeaFlip" customClass="SeaFlip">
+        <customObject id="373" userLabel="Sea Flip" customClass="SeaFlip">
             <connections>
                 <outlet property="document" destination="-2" id="375"/>
             </connections>
         </customObject>
-        <customObject id="378" userLabel="WandTool" customClass="WandTool">
+        <customObject id="378" customClass="WandTool">
             <connections>
                 <outlet property="document" destination="-2" id="380"/>
             </connections>
         </customObject>
-        <customObject id="383" userLabel="PluginData" customClass="PluginData">
+        <customObject id="383" customClass="PluginData">
             <connections>
                 <outlet property="document" destination="-2" id="384"/>
             </connections>
@@ -1884,7 +1884,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="9yS-N0-Caa">
                             <rect key="frame" x="1" y="1" width="246" height="94"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" id="415" customClass="NSExtendedTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="246" height="94"/>
@@ -1942,7 +1942,7 @@ Gw
                 </subviews>
             </view>
         </window>
-        <customObject id="421" userLabel="TextureExporter" customClass="TextureExporter">
+        <customObject id="421" customClass="TextureExporter">
             <connections>
                 <outlet property="categoryTable" destination="415" id="434"/>
                 <outlet property="categoryTextbox" destination="403" id="435"/>
@@ -2141,7 +2141,7 @@ Gw
                 </subviews>
             </view>
         </window>
-        <customObject id="792" userLabel="JP2Exporter" customClass="JP2Exporter">
+        <customObject id="792" userLabel="JP2 Exporter" customClass="JP2Exporter">
             <connections>
                 <outlet property="compressImageView" destination="807" id="819"/>
                 <outlet property="compressLabel" destination="803" id="821"/>
@@ -2265,43 +2265,43 @@ DQ
                 </subviews>
             </view>
         </window>
-        <customObject id="856" userLabel="LassoTool" customClass="LassoTool">
+        <customObject id="856" customClass="LassoTool">
             <connections>
                 <outlet property="document" destination="-2" id="857"/>
             </connections>
         </customObject>
-        <customObject id="859" userLabel="SeaDocRotation" customClass="SeaDocRotation">
+        <customObject id="859" userLabel="SeaDoc Rotation" customClass="SeaDocRotation">
             <connections>
                 <outlet property="document" destination="-2" id="860"/>
             </connections>
         </customObject>
-        <customObject id="866" userLabel="CloneTool" customClass="CloneTool">
+        <customObject id="866" customClass="CloneTool">
             <connections>
                 <outlet property="document" destination="-2" id="867"/>
             </connections>
         </customObject>
-        <customObject id="870" userLabel="GIFExporter" customClass="GIFExporter"/>
-        <customObject id="954" userLabel="PolygonLassoTool" customClass="PolygonLassoTool">
+        <customObject id="870" userLabel="GIF Exporter" customClass="GIFExporter"/>
+        <customObject id="954" customClass="PolygonLassoTool">
             <connections>
                 <outlet property="document" destination="-2" id="962"/>
             </connections>
         </customObject>
-        <customObject id="955" userLabel="EllipseSelectTool" customClass="EllipseSelectTool">
+        <customObject id="955" customClass="EllipseSelectTool">
             <connections>
                 <outlet property="document" destination="-2" id="961"/>
             </connections>
         </customObject>
-        <customObject id="956" userLabel="RectSelectTool" customClass="RectSelectTool">
+        <customObject id="956" customClass="RectSelectTool">
             <connections>
                 <outlet property="document" destination="-2" id="960"/>
             </connections>
         </customObject>
-        <customObject id="998" userLabel="EffectTool" customClass="EffectTool">
+        <customObject id="998" customClass="EffectTool">
             <connections>
                 <outlet property="document" destination="-2" id="999"/>
             </connections>
         </customObject>
-        <customObject id="1000" userLabel="CropTool" customClass="CropTool">
+        <customObject id="1000" customClass="CropTool">
             <connections>
                 <outlet property="document" destination="-2" id="1001"/>
             </connections>
@@ -2362,7 +2362,7 @@ Gw
                 <outlet property="textTool" destination="310" id="1028"/>
             </connections>
         </window>
-        <customObject id="1595" userLabel="PegasusUtility" customClass="PegasusUtility">
+        <customObject id="1595" customClass="PegasusUtility">
             <connections>
                 <outlet property="colorSelectView" destination="2779" id="2875"/>
                 <outlet property="dataSource" destination="7818" id="8569"/>
@@ -2374,8 +2374,8 @@ Gw
                 <outlet property="newButton" destination="1611" id="1672"/>
             </connections>
         </customObject>
-        <customObject id="1596" userLabel="TransparentUtility" customClass="TransparentUtility"/>
-        <customObject id="1597" userLabel="BrushUtility" customClass="BrushUtility">
+        <customObject id="1596" customClass="TransparentUtility"/>
+        <customObject id="1597" customClass="BrushUtility">
             <connections>
                 <outlet property="brushGroupPopUp" destination="7413" id="7428"/>
                 <outlet property="brushNameLabel" destination="7415" id="7429"/>
@@ -2386,7 +2386,7 @@ Gw
                 <outlet property="window" destination="7411" id="7427"/>
             </connections>
         </customObject>
-        <customObject id="1598" userLabel="ToolboxUtility" customClass="ToolboxUtility">
+        <customObject id="1598" customClass="ToolboxUtility">
             <connections>
                 <outlet property="colorSelectView" destination="2779" id="2780"/>
                 <outlet property="colorsMenu" destination="3892" id="4274"/>
@@ -2402,7 +2402,7 @@ Gw
                 <outlet property="transformTBView" destination="4C7-Ki-uyR" id="WhM-UT-6FZ"/>
             </connections>
         </customObject>
-        <customObject id="1599" userLabel="OptionsUtility" customClass="OptionsUtility">
+        <customObject id="1599" customClass="OptionsUtility">
             <connections>
                 <outlet property="blankView" destination="2801" id="2804"/>
                 <outlet property="brushOptions" destination="1871" id="2793"/>
@@ -2428,7 +2428,7 @@ Gw
                 <outlet property="zoomOptions" destination="1867" id="2786"/>
             </connections>
         </customObject>
-        <customObject id="1600" userLabel="TextureUtility" customClass="TextureUtility">
+        <customObject id="1600" customClass="TextureUtility">
             <connections>
                 <outlet property="document" destination="-2" id="2645"/>
                 <outlet property="opacityLabel" destination="7396" id="7406"/>
@@ -2439,7 +2439,7 @@ Gw
                 <outlet property="window" destination="7389" id="7410"/>
             </connections>
         </customObject>
-        <customObject id="1601" userLabel="InfoUtility" customClass="InfoUtility">
+        <customObject id="1601" customClass="InfoUtility">
             <connections>
                 <outlet property="alphaValue" destination="2674" id="2717"/>
                 <outlet property="blueValue" destination="2672" id="2718"/>
@@ -2459,7 +2459,7 @@ Gw
                 <outlet property="yValue" destination="2680" id="2728"/>
             </connections>
         </customObject>
-        <customObject id="1867" userLabel="ZoomOptions" customClass="ZoomOptions">
+        <customObject id="1867" customClass="ZoomOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2589"/>
                 <outlet property="modifierPopup" destination="1960" id="2598"/>
@@ -2467,7 +2467,7 @@ Gw
                 <outlet property="zoomLabel" destination="1962" id="2599"/>
             </connections>
         </customObject>
-        <customObject id="1868" userLabel="PositionOptions" customClass="PositionOptions">
+        <customObject id="1868" customClass="PositionOptions">
             <connections>
                 <outlet property="canAnchorCheckbox" destination="2123" id="2586"/>
                 <outlet property="document" destination="-2" id="2588"/>
@@ -2475,7 +2475,7 @@ Gw
                 <outlet property="view" destination="1889" id="2226"/>
             </connections>
         </customObject>
-        <customObject id="1869" userLabel="BucketOptions" customClass="BucketOptions">
+        <customObject id="1869" customClass="BucketOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2590"/>
                 <outlet property="intervalsSlider" destination="16684" id="16686"/>
@@ -2485,7 +2485,7 @@ Gw
                 <outlet property="view" destination="1887" id="2219"/>
             </connections>
         </customObject>
-        <customObject id="1870" userLabel="PencilOptions" customClass="PencilOptions">
+        <customObject id="1870" customClass="PencilOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2591"/>
                 <outlet property="modifierPopup" destination="1997" id="2534"/>
@@ -2493,7 +2493,7 @@ Gw
                 <outlet property="view" destination="1896" id="2214"/>
             </connections>
         </customObject>
-        <customObject id="1871" userLabel="BrushOptions" customClass="BrushOptions">
+        <customObject id="1871" customClass="BrushOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2592"/>
                 <outlet property="fadeCheckbox" destination="2137" id="2535"/>
@@ -2505,7 +2505,7 @@ Gw
                 <outlet property="view" destination="1888" id="2215"/>
             </connections>
         </customObject>
-        <customObject id="1872" userLabel="SmudgeOptions" customClass="SmudgeOptions">
+        <customObject id="1872" customClass="SmudgeOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2593"/>
                 <outlet property="rateLabel" destination="2118" id="2584"/>
@@ -2513,7 +2513,7 @@ Gw
                 <outlet property="view" destination="1890" id="2223"/>
             </connections>
         </customObject>
-        <customObject id="1873" userLabel="GradientOptions" customClass="GradientOptions">
+        <customObject id="1873" customClass="GradientOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2594"/>
                 <outlet property="modifierPopup" destination="2055" id="2576"/>
@@ -2522,7 +2522,7 @@ Gw
                 <outlet property="view" destination="1893" id="2220"/>
             </connections>
         </customObject>
-        <customObject id="1874" userLabel="CloneOptions" customClass="CloneOptions">
+        <customObject id="1874" customClass="CloneOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2600"/>
                 <outlet property="mergedCheckbox" destination="2088" id="2577"/>
@@ -2530,7 +2530,7 @@ Gw
                 <outlet property="view" destination="1892" id="2222"/>
             </connections>
         </customObject>
-        <customObject id="1875" userLabel="RectSelectOptions" customClass="RectSelectOptions">
+        <customObject id="1875" customClass="RectSelectOptions">
             <connections>
                 <outlet property="aspectRatio" destination="2652" id="2657"/>
                 <outlet property="document" destination="-2" id="2596"/>
@@ -2540,13 +2540,13 @@ Gw
                 <outlet property="view" destination="1900" id="2209"/>
             </connections>
         </customObject>
-        <customObject id="1876" userLabel="LassoOptions" customClass="LassoOptions">
+        <customObject id="1876" customClass="LassoOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2597"/>
                 <outlet property="view" destination="1898" id="2211"/>
             </connections>
         </customObject>
-        <customObject id="1877" userLabel="EllipseSelectOptions" customClass="EllipseSelectOptions">
+        <customObject id="1877" customClass="EllipseSelectOptions">
             <connections>
                 <outlet property="aspectRatio" destination="2654" id="2656"/>
                 <outlet property="document" destination="-2" id="2612"/>
@@ -2554,7 +2554,7 @@ Gw
                 <outlet property="view" destination="1886" id="2210"/>
             </connections>
         </customObject>
-        <customObject id="1878" userLabel="CropOptions" customClass="CropOptions">
+        <customObject id="1878" customClass="CropOptions">
             <connections>
                 <outlet property="aspectRatio" destination="2653" id="2655"/>
                 <outlet property="document" destination="-2" id="2611"/>
@@ -2562,7 +2562,7 @@ Gw
                 <outlet property="view" destination="1891" id="2221"/>
             </connections>
         </customObject>
-        <customObject id="1879" userLabel="EffectOptions" customClass="EffectOptions">
+        <customObject id="1879" customClass="EffectOptions">
             <connections>
                 <outlet property="clickCountLabel" destination="2190" id="11985"/>
                 <outlet property="document" destination="-2" id="2610"/>
@@ -2572,7 +2572,7 @@ Gw
                 <outlet property="view" destination="1885" id="2224"/>
             </connections>
         </customObject>
-        <customObject id="1880" userLabel="EyedropOptions" customClass="EyedropOptions">
+        <customObject id="1880" customClass="EyedropOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2606"/>
                 <outlet property="mergedCheckbox" destination="2018" id="2608"/>
@@ -2581,7 +2581,7 @@ Gw
                 <outlet property="view" destination="1895" id="2216"/>
             </connections>
         </customObject>
-        <customObject id="1881" userLabel="WandOptions" customClass="WandOptions">
+        <customObject id="1881" customClass="WandOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2605"/>
                 <outlet property="intervalsSlider" destination="16675" id="16678"/>
@@ -2591,7 +2591,7 @@ Gw
                 <outlet property="view" destination="1901" id="2213"/>
             </connections>
         </customObject>
-        <customObject id="1882" userLabel="TextOptions" customClass="TextOptions">
+        <customObject id="1882" customClass="TextOptions">
             <connections>
                 <outlet property="alignmentControl" destination="6458" id="6469"/>
                 <outlet property="document" destination="-2" id="2604"/>
@@ -2602,7 +2602,7 @@ Gw
                 <outlet property="view" destination="1894" id="2217"/>
             </connections>
         </customObject>
-        <customObject id="1883" userLabel="EraserOptions" customClass="EraserOptions">
+        <customObject id="1883" customClass="EraserOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2603"/>
                 <outlet property="mimicBrushCheckbox" destination="1985" id="2548"/>
@@ -2612,7 +2612,7 @@ Gw
                 <outlet property="view" destination="1897" id="2218"/>
             </connections>
         </customObject>
-        <customObject id="1884" userLabel="PolygonLassoOptions" customClass="PolygonLassoOptions">
+        <customObject id="1884" userLabel="Polygon Lasso Options" customClass="PolygonLassoOptions">
             <connections>
                 <outlet property="document" destination="-2" id="2601"/>
                 <outlet property="modifierPopup" destination="1904" id="2602"/>
@@ -3981,7 +3981,7 @@ Gw
                 </popUpButton>
             </subviews>
         </customView>
-        <customObject id="2652" userLabel="RectAspectRatio" customClass="AspectRatio">
+        <customObject id="2652" userLabel="Rect Aspect Ratio" customClass="AspectRatio">
             <connections>
                 <outlet property="aspectTypePopup" destination="2841" id="2860"/>
                 <outlet property="document" destination="-2" id="13706"/>
@@ -3993,7 +3993,7 @@ Gw
                 <outlet property="yRatioValue" destination="2844" id="2858"/>
             </connections>
         </customObject>
-        <customObject id="2653" userLabel="CropAspectRatio" customClass="AspectRatio">
+        <customObject id="2653" userLabel="Crop Aspect Ratio" customClass="AspectRatio">
             <connections>
                 <outlet property="aspectTypePopup" destination="2813" id="2870"/>
                 <outlet property="document" destination="-2" id="13707"/>
@@ -4005,7 +4005,7 @@ Gw
                 <outlet property="yRatioValue" destination="2811" id="2868"/>
             </connections>
         </customObject>
-        <customObject id="2654" userLabel="EllipseAspectRatio" customClass="AspectRatio">
+        <customObject id="2654" userLabel="Ellipse Aspect Ratio" customClass="AspectRatio">
             <connections>
                 <outlet property="aspectTypePopup" destination="2826" id="2865"/>
                 <outlet property="document" destination="-2" id="13708"/>
@@ -4256,7 +4256,7 @@ DQ
                 </subviews>
             </view>
         </window>
-        <customObject id="2891" userLabel="LayerSettings" customClass="LayerSettings">
+        <customObject id="2891" customClass="LayerSettings">
             <connections>
                 <outlet property="alphaEnabledCheckbox" destination="15193" id="15198"/>
                 <outlet property="channelEditingMatrix" destination="16741" id="16748"/>
@@ -4975,7 +4975,7 @@ DQ
                 </subviews>
             </view>
         </window>
-        <customObject id="14766" userLabel="Status Utility" customClass="StatusUtility">
+        <customObject id="14766" customClass="StatusUtility">
             <connections>
                 <outlet property="alphaBox" destination="14783" id="15201"/>
                 <outlet property="blueBox" destination="14789" id="15202"/>
@@ -5012,7 +5012,7 @@ DQ
                 </menuItem>
             </items>
         </menu>
-        <customObject id="16701" userLabel="WarningsUtility" customClass="WarningsUtility">
+        <customObject id="16701" customClass="WarningsUtility">
             <connections>
                 <outlet property="document" destination="-2" id="16707"/>
                 <outlet property="view" destination="16661" id="16702"/>

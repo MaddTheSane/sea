@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" generatesPrototypingConstraints="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11129.15"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13189.4"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CocoaContent">
@@ -19,7 +19,7 @@
         <window title="Select page..." allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="alertPanel" id="5" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="397" y="484" width="251" height="136"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="251" height="136"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -104,6 +104,7 @@ Gw
                     <constraint firstItem="12" firstAttribute="baseline" secondItem="13" secondAttribute="baseline" id="CsU-Ay-Tp1"/>
                     <constraint firstItem="12" firstAttribute="baseline" secondItem="14" secondAttribute="baseline" id="Cuh-EK-WGK"/>
                     <constraint firstItem="13" firstAttribute="leading" secondItem="20" secondAttribute="leading" id="FFr-xo-gbZ"/>
+                    <constraint firstItem="gVc-IN-gGN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="HNA-0Q-hmo"/>
                     <constraint firstItem="13" firstAttribute="leading" secondItem="12" secondAttribute="trailing" constant="8" symbolic="YES" id="JAz-FP-JlZ"/>
                     <constraint firstItem="15" firstAttribute="leading" secondItem="gVc-IN-gGN" secondAttribute="trailing" constant="12" symbolic="YES" id="JfB-hn-prV"/>
                     <constraint firstItem="12" firstAttribute="trailing" secondItem="28" secondAttribute="trailing" id="L99-WV-JUP"/>

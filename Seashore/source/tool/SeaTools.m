@@ -13,7 +13,7 @@
 #import "BucketTool.h"
 #import "TextTool.h"
 #import "EyedropTool.h"
-#import "EraserTool.h"
+#import "Seashore-Swift.h"
 #import "PositionTool.h"
 #import "GradientTool.h"
 #import "SmudgeTool.h"
