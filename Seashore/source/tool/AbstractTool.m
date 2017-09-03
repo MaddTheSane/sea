@@ -12,6 +12,7 @@
 @implementation AbstractTool
 @synthesize intermediate;
 @synthesize options;
+@synthesize document;
 
 - (SeaToolsDefines)toolId
 {

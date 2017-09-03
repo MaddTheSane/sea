@@ -39,12 +39,12 @@
 	return NO;
 }
 
-- (void)plotBrush:(id)brush at:(NSPoint)point pressure:(int)pressure
+- (void)plotBrush:(SeaBrush *)brush at:(NSPoint)point pressure:(int)pressure
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	unsigned char *overlay = [[document whiteboard] overlay], *brushData;
-	int brushWidth = [(SeaBrush *)brush fakeWidth], brushHeight = [(SeaBrush *)brush fakeHeight];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+	int brushWidth = [brush fakeWidth], brushHeight = [brush fakeHeight];
+	int width = [layer width], height = [layer height];
 	int i, j, spp = [[document contents] spp], overlayPos;
 	IntPoint ipoint = NSPointMakeIntPoint(point);
 	id boptions = [[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:kBrushTool];
@@ -101,16 +101,16 @@
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	BOOL hasAlpha = [layer hasAlpha];
-	id curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
 	NSPoint curPoint = IntPointMakeNSPoint(where), temp;
 	IntRect rect;
 	NSColor *color = NULL;
 	int spp = [[document contents] spp];
 	int pressure;
 	BOOL ignoreFirstTouch;
-	id boptions;
+	BrushOptions *boptions;
 	
 	// Determine whether operation should continue
 	lastWhere.x = where.x;
@@ -149,12 +149,12 @@
 	[[document whiteboard] setOverlayOpacity:[(EraserOptions*)options opacity]];
 	
 	// Plot the initial point
-	rect.size.width = [(SeaBrush *)curBrush fakeWidth] + 1;
-	rect.size.height = [(SeaBrush *)curBrush fakeHeight] + 1;
-	temp = NSMakePoint(curPoint.x - (float)([(SeaBrush *)curBrush width] / 2) - 1.0, curPoint.y - (float)([(SeaBrush *)curBrush height] / 2) - 1.0);
+	rect.size.width = [curBrush fakeWidth] + 1;
+	rect.size.height = [curBrush fakeHeight] + 1;
+	temp = NSMakePoint(curPoint.x - (CGFloat)([curBrush width] / 2) - 1.0, curPoint.y - (CGFloat)([curBrush height] / 2) - 1.0);
 	rect.origin = NSPointMakeIntPoint(temp);
 	rect.origin.x--; rect.origin.y--;
-	rect = IntConstrainRect(rect, IntMakeRect(0, 0, [(SeaLayer *)layer width], [(SeaLayer *)layer height]));
+	rect = IntConstrainRect(rect, IntMakeRect(0, 0, [layer width], [layer height]));
 	if (rect.size.width > 0 && rect.size.height > 0) {
 		[self plotBrush:curBrush at:temp pressure:pressure];
 		[[document helpers] overlayChanged:rect inThread:YES];
@@ -179,9 +179,10 @@
 {
 	@autoreleasepool {
 		NSPoint curPoint;
-		id layer;
+		SeaLayer *layer;
 		int layerWidth, layerHeight;
-		id curBrush, activeTexture;
+		SeaBrush *curBrush;
+		id activeTexture;
 		int brushWidth, brushHeight;
 		double brushSpacing;
 		double deltaX, deltaY, mag, xd, yd, dist;
@@ -196,16 +197,16 @@
 		int pressure, origPressure;
 		int tim;
 		NSDate *lastDate;
-		id boptions;
+		BrushOptions *boptions;
 		
 		
 		// Set-up variables
 		layer = [[document contents] activeLayer];
 		curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
-		layerWidth = [(SeaLayer *)layer width];
-		layerHeight = [(SeaLayer *)layer height];
-		brushWidth = [(SeaBrush *)curBrush fakeWidth];
-		brushHeight = [(SeaBrush *)curBrush fakeHeight];
+		layerWidth = [layer width];
+		layerHeight = [layer height];
+		brushWidth = [curBrush fakeWidth];
+		brushHeight = [curBrush fakeHeight];
 		activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
 		boptions = [[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:kBrushTool];
 		brushSpacing = (double)[[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
@@ -326,7 +327,7 @@
 					t = t0 + n * dt;
 					rect.size.width = brushWidth + 1;
 					rect.size.height = brushHeight + 1;
-					temp = NSMakePoint(lastPoint.x + deltaX * t - (float)(brushWidth / 2), lastPoint.y + deltaY * t - (float)(brushHeight / 2));
+					temp = NSMakePoint(lastPoint.x + deltaX * t - (CGFloat)(brushWidth / 2), lastPoint.y + deltaY * t - (CGFloat)(brushHeight / 2));
 					rect.origin = NSPointMakeIntPoint(temp);
 					rect.origin.x--; rect.origin.y--;
 					rect = IntConstrainRect(rect, IntMakeRect(0, 0, layerWidth, layerHeight));
@@ -381,7 +382,7 @@
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id boptions = [[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:kBrushTool];
+	BrushOptions *boptions = [[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:kBrushTool];
 	
 	// Have we registerd the first touch
 	if (!firstTouchDone) {
@@ -440,7 +441,7 @@
 {
 	// Apply the changes
 	[self endLineDrawing];
-	[(SeaHelpers *)[document helpers] applyOverlay];
+	[[document helpers] applyOverlay];
 }
 
 - (void)startStroke:(IntPoint)where;

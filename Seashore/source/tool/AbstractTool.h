@@ -18,15 +18,18 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AbstractTool : NSObject {
 
 	// The document associated with this tool
-	IBOutlet SeaDocument *document;
+	__weak SeaDocument *document;
 	
-	// The options associated with this tool
+	//! The options associated with this tool
 	__unsafe_unretained __kindof AbstractOptions *options;
 	
-	// Is the selection being made
+	//! Is the selection being made
 	BOOL intermediate;
 	
 }
+
+//! The document associated with this tool
+@property (weak) IBOutlet SeaDocument *document;
 
 /// The options associated with this tool
 @property (unsafe_unretained) __kindof AbstractOptions *options;
@@ -81,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		event
 				The mouse down event.
 */
-- (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event;
+- (void)mouseDownAt:(IntPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	@method		mouseDraggedTo:withEvent:
@@ -92,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		event
 				The mouse dragged event.
 */
-- (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event;
+- (void)mouseDraggedTo:(IntPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	@method		mouseUpAt:withEvent:
@@ -103,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		event
 				The mouse up event.
 */
-- (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event;
+- (void)mouseUpAt:(IntPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	@method		fineMouseDownAt:withEvent:
@@ -114,7 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		event
 				The mouse down event.
 */
-- (void)fineMouseDownAt:(NSPoint)where withEvent:(NSEvent *)event;
+- (void)fineMouseDownAt:(NSPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	@method		fineMouseDraggedTo:withEvent:
@@ -125,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		event
 				The mouse dragged event.
 */
-- (void)fineMouseDraggedTo:(NSPoint)where withEvent:(NSEvent *)event;
+- (void)fineMouseDraggedTo:(NSPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	@method		fineMouseUpAt:withEvent:
@@ -136,7 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		event
 				The mouse up event.
 */
-- (void)fineMouseUpAt:(NSPoint)where withEvent:(NSEvent *)event;
+- (void)fineMouseUpAt:(NSPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	 @property		intermediate
