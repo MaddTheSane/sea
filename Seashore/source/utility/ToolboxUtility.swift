@@ -10,31 +10,31 @@ import Cocoa
 import SeashoreKit.SeaDocument
 import SeashoreKit
 
-private let DocToolbarIdentifier = "Document Toolbar Instance Identifier";
+private let DocToolbarIdentifier = NSToolbar.Identifier("Document Toolbar Instance Identifier")
 
-private let SelectionIdentifier	= "Selection  Item Identifier";
-private let DrawIdentifier		= "Draw Item Identifier";
-private let EffectIdentifier	= "Effect Item Identifier";
-private let TransformIdentifier	= "Transform Item Identifier";
-private let ColorsIdentifier	= "Colors Item Identifier";
+private let SelectionIdentifier	= NSToolbarItem.Identifier("Selection  Item Identifier")
+private let DrawIdentifier		= NSToolbarItem.Identifier("Draw Item Identifier")
+private let EffectIdentifier	= NSToolbarItem.Identifier("Effect Item Identifier")
+private let TransformIdentifier	= NSToolbarItem.Identifier("Transform Item Identifier")
+private let ColorsIdentifier	= NSToolbarItem.Identifier("Colors Item Identifier")
 
 // Additional (Non-default) toolbar items
-private let ZoomInToolbarItemIdentifier = "Zoom In Toolbar Item Identifier";
-private let ZoomOutToolbarItemIdentifier = "Zoom Out Toolbar Item Identifier";
-private let ActualSizeToolbarItemIdentifier = "Actual Size Toolbar Item Identifier";
-private let NewLayerToolbarItemIdentifier = "New Layer Toolbar Item Identifier";
-private let DuplicateLayerToolbarItemIdentifier = "Duplicate Layer Toolbar Item Identifier";
-private let ForwardToolbarItemIdentifier = "Move Layer Forward  Toolbar Item Identifier";
-private let BackwardToolbarItemIdentifier = "Move Layer Backward Toolbar Item Identifier";
-private let DeleteLayerToolbarItemIdentifier = "Delete Layer Toolbar Item Identifier";
-private let ToggleLayersToolbarItemIdentifier = "Show/Hide Layers Item Identifier";
-private let InspectorToolbarItemIdentifier = "Show/Hide Inspector Toolbar Item Identifier";
-private let FloatAnchorToolbarItemIdentifier = "Float/Anchor Toolbar Item Identifier";
-private let DuplicateSelectionToolbarItemIdentifier = "Duplicate Selection Toolbar Item Identifier";
-private let SelectNoneToolbarItemIdentifier = "Select None Toolbar Item Identifier";
-private let SelectAllToolbarItemIdentifier = "Select All Toolbar Item Identifier";
-private let SelectInverseToolbarItemIdentifier = "Select Inverse Toolbar Item Identifier";
-private let SelectAlphaToolbarItemIdentifier = "Select Alpha Toolbar Item Identifier";
+private let ZoomInToolbarItemIdentifier = NSToolbarItem.Identifier("Zoom In Toolbar Item Identifier")
+private let ZoomOutToolbarItemIdentifier = NSToolbarItem.Identifier("Zoom Out Toolbar Item Identifier")
+private let ActualSizeToolbarItemIdentifier = NSToolbarItem.Identifier("Actual Size Toolbar Item Identifier")
+private let NewLayerToolbarItemIdentifier = NSToolbarItem.Identifier("New Layer Toolbar Item Identifier")
+private let DuplicateLayerToolbarItemIdentifier = NSToolbarItem.Identifier("Duplicate Layer Toolbar Item Identifier")
+private let ForwardToolbarItemIdentifier = NSToolbarItem.Identifier("Move Layer Forward  Toolbar Item Identifier")
+private let BackwardToolbarItemIdentifier = NSToolbarItem.Identifier("Move Layer Backward Toolbar Item Identifier")
+private let DeleteLayerToolbarItemIdentifier = NSToolbarItem.Identifier("Delete Layer Toolbar Item Identifier")
+private let ToggleLayersToolbarItemIdentifier = NSToolbarItem.Identifier("Show/Hide Layers Item Identifier")
+private let InspectorToolbarItemIdentifier = NSToolbarItem.Identifier("Show/Hide Inspector Toolbar Item Identifier")
+private let FloatAnchorToolbarItemIdentifier = NSToolbarItem.Identifier("Float/Anchor Toolbar Item Identifier")
+private let DuplicateSelectionToolbarItemIdentifier = NSToolbarItem.Identifier("Duplicate Selection Toolbar Item Identifier")
+private let SelectNoneToolbarItemIdentifier = NSToolbarItem.Identifier("Select None Toolbar Item Identifier")
+private let SelectAllToolbarItemIdentifier = NSToolbarItem.Identifier("Select All Toolbar Item Identifier")
+private let SelectInverseToolbarItemIdentifier = NSToolbarItem.Identifier("Select Inverse Toolbar Item Identifier")
+private let SelectAlphaToolbarItemIdentifier = NSToolbarItem.Identifier("Select Alpha Toolbar Item Identifier")
 
 
 class ToolboxUtility2 : NSObject {
@@ -268,7 +268,7 @@ class ToolboxUtility2 : NSObject {
 	
 	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		if menuItem.tag >= 600 && menuItem.tag < 700 {
-			menuItem.state = (menuItem.tag == Int(tool.rawValue) + 600) ? NSOnState : NSOffState
+			menuItem.state = (menuItem.tag == Int(tool.rawValue) + 600) ? .on : .off
 		}
 		
 		return true
@@ -276,7 +276,7 @@ class ToolboxUtility2 : NSObject {
 }
 
 extension ToolboxUtility2: NSToolbarDelegate {
-	func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+	func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
 		var toolbarItem: SeaToolbarItem?
 		
 		switch itemIdentifier {
@@ -327,53 +327,53 @@ extension ToolboxUtility2: NSToolbarDelegate {
 			toolbarItem!.maxSize = colorView.frame.size
 
 		case NewLayerToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: NewLayerToolbarItemIdentifier, label: NSLocalizedString("new", value: "New", comment: "New"), imageNamed: "toolbar/new", toolTip: NSLocalizedString("new tooltip", value: "Add a new layer to the image", comment: "new tooltip"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.addLayer(_:)))
+			return ImageToolbarItem(itemIdentifier: NewLayerToolbarItemIdentifier, label: NSLocalizedString("new", value: "New", comment: "New"), image: #imageLiteral(resourceName: "toolbar/new"), toolTip: NSLocalizedString("new tooltip", value: "Add a new layer to the image", comment: "new tooltip"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.addLayer(_:)))
 			
 		case DuplicateLayerToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: DuplicateLayerToolbarItemIdentifier, label: NSLocalizedString("duplicate", value: "Duplicate", comment: "Duplicate"), imageNamed: "toolbar/duplicate", toolTip: NSLocalizedString("duplicate tooltip", value: "Duplicate the current layer", comment: "Duplicate the current layer"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.duplicateLayer(_:)))
+			return ImageToolbarItem(itemIdentifier: DuplicateLayerToolbarItemIdentifier, label: NSLocalizedString("duplicate", value: "Duplicate", comment: "Duplicate"), image: #imageLiteral(resourceName: "toolbar/duplicate"), toolTip: NSLocalizedString("duplicate tooltip", value: "Duplicate the current layer", comment: "Duplicate the current layer"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.duplicateLayer(_:)))
 
 		case ForwardToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: ForwardToolbarItemIdentifier, label: NSLocalizedString("forward", value: "Forward", comment: "Forward"), imageNamed: "toolbar/forward", toolTip: NSLocalizedString("forward tooltip", value: "Move the current layer forward", comment: "Move the current layer forward"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.forward(_:)))
+			return ImageToolbarItem(itemIdentifier: ForwardToolbarItemIdentifier, label: NSLocalizedString("forward", value: "Forward", comment: "Forward"), image: #imageLiteral(resourceName: "toolbar/forward"), toolTip: NSLocalizedString("forward tooltip", value: "Move the current layer forward", comment: "Move the current layer forward"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.forward(_:)))
 
 		case BackwardToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: BackwardToolbarItemIdentifier, label: NSLocalizedString("backward", value: "Backward", comment: "Backward"), imageNamed: "toolbar/backward", toolTip: NSLocalizedString("backward tooltip", value: "Move the current layer backward", comment: "Move the current layer backward"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.backward(_:)))
+			return ImageToolbarItem(itemIdentifier: BackwardToolbarItemIdentifier, label: NSLocalizedString("backward", value: "Backward", comment: "Backward"), image: #imageLiteral(resourceName: "toolbar/backward"), toolTip: NSLocalizedString("backward tooltip", value: "Move the current layer backward", comment: "Move the current layer backward"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.backward(_:)))
 
 		case DeleteLayerToolbarItemIdentifier:
-			let icon = NSWorkspace.shared().icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kToolbarDeleteIcon)))
+			let icon = NSWorkspace.shared.icon(forFileType: NSFileTypeForHFSTypeCode(OSType(kToolbarDeleteIcon)))
 			return ImageToolbarItem(itemIdentifier: DeleteLayerToolbarItemIdentifier, label: NSLocalizedString("delete", value: "Delete", comment: "delete"), image: icon, toolTip: NSLocalizedString("delete tooltip", value: "Delete the current layer", comment: "Delete the current layer"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.deleteLayer(_:)))
 			
 		case ZoomInToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: ZoomInToolbarItemIdentifier, label: NSLocalizedString("zoom in", value: "Zoom In", comment: "Zoom In"), imageNamed: "toolbar/zoomIn", toolTip: NSLocalizedString("zoom in tooltip", value: "Zoom in on the current view", comment: "Zoom in on the current view"), target: document.docView, selector: #selector(SeaView.zoomIn(_:)))
+			return ImageToolbarItem(itemIdentifier: ZoomInToolbarItemIdentifier, label: NSLocalizedString("zoom in", value: "Zoom In", comment: "Zoom In"), image: #imageLiteral(resourceName: "toolbar/zoomIn"), toolTip: NSLocalizedString("zoom in tooltip", value: "Zoom in on the current view", comment: "Zoom in on the current view"), target: document.docView, selector: #selector(SeaView.zoomIn(_:)))
 
 		case ZoomOutToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: ZoomOutToolbarItemIdentifier, label: NSLocalizedString("zoom out", value: "Zoom Out", comment: "Zoom Out"), imageNamed: "toolbar/zoomOut", toolTip: NSLocalizedString("zoom out tooltip", value: "Zoom out from the current view", comment: "Zoom out from the current view"), target: document.docView, selector: #selector(SeaView.zoomOut(_:)))
+			return ImageToolbarItem(itemIdentifier: ZoomOutToolbarItemIdentifier, label: NSLocalizedString("zoom out", value: "Zoom Out", comment: "Zoom Out"), image: #imageLiteral(resourceName: "toolbar/zoomOut"), toolTip: NSLocalizedString("zoom out tooltip", value: "Zoom out from the current view", comment: "Zoom out from the current view"), target: document.docView, selector: #selector(SeaView.zoomOut(_:)))
 
 		case ActualSizeToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: ActualSizeToolbarItemIdentifier, label: NSLocalizedString("actual size", value: "Actual Size", comment: "Actual Size"), imageNamed: "toolbar/actualSize", toolTip: NSLocalizedString("actual size tooltip", value: "View the document at its actual size", comment: "View the document at its actual size"), target: document.docView, selector: #selector(SeaView.zoomNormal(_:)))
+			return ImageToolbarItem(itemIdentifier: ActualSizeToolbarItemIdentifier, label: NSLocalizedString("actual size", value: "Actual Size", comment: "Actual Size"), image: #imageLiteral(resourceName: "toolbar/actualSize"), toolTip: NSLocalizedString("actual size tooltip", value: "View the document at its actual size", comment: "View the document at its actual size"), target: document.docView, selector: #selector(SeaView.zoomNormal(_:)))
 
 		case ToggleLayersToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: ToggleLayersToolbarItemIdentifier, label: NSLocalizedString("toggle layers", value: "Layers", comment: "toggle layers"), imageNamed: "toolbar/showhidelayers", toolTip: NSLocalizedString("toggle layers tooltip", value: "Show or hide the layers list view", comment: "Show or hide the layers list view"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.toggleLayers(_:)))
+			return ImageToolbarItem(itemIdentifier: ToggleLayersToolbarItemIdentifier, label: NSLocalizedString("toggle layers", value: "Layers", comment: "toggle layers"), image: #imageLiteral(resourceName: "toolbar/showhidelayers"), toolTip: NSLocalizedString("toggle layers tooltip", value: "Show or hide the layers list view", comment: "Show or hide the layers list view"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.toggleLayers(_:)))
 
 		case InspectorToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: InspectorToolbarItemIdentifier, label: NSLocalizedString("information", value: "Information", comment: "Information"), imageNamed: NSImageNameInfo, toolTip: NSLocalizedString("information tooltip", value: "Show or hide point information", comment: "Show or hide point information"), target: SeaController.utilitiesManager.infoUtility(for: document), selector: #selector(InfoUtility.toggle(_:)))
+			return ImageToolbarItem(itemIdentifier: InspectorToolbarItemIdentifier, label: NSLocalizedString("information", value: "Information", comment: "Information"), imageNamed: .info, toolTip: NSLocalizedString("information tooltip", value: "Show or hide point information", comment: "Show or hide point information"), target: SeaController.utilitiesManager.infoUtility(for: document), selector: #selector(InfoUtility.toggle(_:)))
 			
 		case FloatAnchorToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: FloatAnchorToolbarItemIdentifier, label: NSLocalizedString("float", value: "Float", comment: "Float"), imageNamed: "toolbar/float-tb", toolTip: NSLocalizedString("float tooltip", value: "Float or anchor the current selection", comment: "Float or anchor the current selection"), target: document.contents, selector: #selector(SeaContent.toggleFloatingSelection(_:)))
+			return ImageToolbarItem(itemIdentifier: FloatAnchorToolbarItemIdentifier, label: NSLocalizedString("float", value: "Float", comment: "Float"), image: #imageLiteral(resourceName: "toolbar/float-tb"), toolTip: NSLocalizedString("float tooltip", value: "Float or anchor the current selection", comment: "Float or anchor the current selection"), target: document.contents, selector: #selector(SeaContent.toggleFloatingSelection(_:)))
 			
 		case DuplicateSelectionToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: DuplicateSelectionToolbarItemIdentifier, label: NSLocalizedString("duplicate", value: "Duplicate", comment: "Duplicate"), imageNamed: "toolbar/duplicatesel", toolTip: NSLocalizedString("duplicate tooltip", value: "Duplicate the current selection", comment: "Duplicate the current selection"), target: document.contents, selector: #selector(SeaContent.duplicate(_:)))
+			return ImageToolbarItem(itemIdentifier: DuplicateSelectionToolbarItemIdentifier, label: NSLocalizedString("duplicate", value: "Duplicate", comment: "Duplicate"), image: #imageLiteral(resourceName: "toolbar/duplicatesel"), toolTip: NSLocalizedString("duplicate tooltip", value: "Duplicate the current selection", comment: "Duplicate the current selection"), target: document.contents, selector: #selector(SeaContent.duplicate(_:)))
 
 		case SelectNoneToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: SelectNoneToolbarItemIdentifier, label: NSLocalizedString("select none", value: "None", comment: "select none"), imageNamed: "toolbar/none", toolTip: NSLocalizedString("select none tooltip", value: "Select nothing", comment: "select none tooltip"), target: document.docView, selector: #selector(SeaView.selectNone(_:)))
+			return ImageToolbarItem(itemIdentifier: SelectNoneToolbarItemIdentifier, label: NSLocalizedString("select none", value: "None", comment: "select none"), image: #imageLiteral(resourceName: "toolbar/none"), toolTip: NSLocalizedString("select none tooltip", value: "Select nothing", comment: "select none tooltip"), target: document.docView, selector: #selector(SeaView.selectNone(_:)))
 			
 		case SelectAllToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: SelectAllToolbarItemIdentifier, label: NSLocalizedString("select all", value: "All", comment: "select all"), imageNamed: "toolbar/selectall", toolTip: NSLocalizedString("select All tooltip", value: "Select all of the current layer", comment: "select All tooltip"), target: document.docView, selector: #selector(SeaView.selectAll(_:)))
+			return ImageToolbarItem(itemIdentifier: SelectAllToolbarItemIdentifier, label: NSLocalizedString("select all", value: "All", comment: "select all"), image: #imageLiteral(resourceName: "toolbar/selectall"), toolTip: NSLocalizedString("select All tooltip", value: "Select all of the current layer", comment: "select All tooltip"), target: document.docView, selector: #selector(SeaView.selectAll(_:)))
 			
 		case SelectInverseToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: SelectInverseToolbarItemIdentifier, label: NSLocalizedString("select inverse", value: "Inverse", comment: "select inverse"), imageNamed: "toolbar/selectinverse", toolTip: NSLocalizedString("select inverse tooltip", value: "Select the inverse of the current selection", comment: "select inverse tooltip"), target: document.docView, selector: #selector(SeaView.selectInverse(_:)))
+			return ImageToolbarItem(itemIdentifier: SelectInverseToolbarItemIdentifier, label: NSLocalizedString("select inverse", value: "Inverse", comment: "select inverse"), image: #imageLiteral(resourceName: "toolbar/selectinverse"), toolTip: NSLocalizedString("select inverse tooltip", value: "Select the inverse of the current selection", comment: "select inverse tooltip"), target: document.docView, selector: #selector(SeaView.selectInverse(_:)))
 			
 		case SelectAlphaToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: SelectAlphaToolbarItemIdentifier, label: NSLocalizedString("select alpha", value: "Alpha", comment: "select alpha"), imageNamed: "toolbar/selectalpha", toolTip: NSLocalizedString("select alpha tooltip", value: "Select a copy of the alpha transparency channel", comment: "select alpha tooltip"), target: document.docView, selector: #selector(SeaView.selectOpaque(_:)))
+			return ImageToolbarItem(itemIdentifier: SelectAlphaToolbarItemIdentifier, label: NSLocalizedString("select alpha", value: "Alpha", comment: "select alpha"), image: #imageLiteral(resourceName: "toolbar/selectalpha"), toolTip: NSLocalizedString("select alpha tooltip", value: "Select a copy of the alpha transparency channel", comment: "select alpha tooltip"), target: document.docView, selector: #selector(SeaView.selectOpaque(_:)))
 
 		default:
 			break
@@ -382,17 +382,17 @@ extension ToolboxUtility2: NSToolbarDelegate {
 		return toolbarItem
 	}
 	
-	func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
-		return [NSToolbarFlexibleSpaceItemIdentifier,
+	func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+		return [NSToolbarItem.Identifier.flexibleSpace,
 		SelectionIdentifier,
 		DrawIdentifier,
 		EffectIdentifier,
 		TransformIdentifier,
-		NSToolbarFlexibleSpaceItemIdentifier,
+		NSToolbarItem.Identifier.flexibleSpace,
 		ColorsIdentifier]
 	}
 	
-	func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
+	func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
 		return [SelectionIdentifier,
 		DrawIdentifier,
 		EffectIdentifier,
@@ -414,9 +414,9 @@ extension ToolboxUtility2: NSToolbarDelegate {
 		SelectAllToolbarItemIdentifier,
 		SelectInverseToolbarItemIdentifier,
 		SelectAlphaToolbarItemIdentifier,
-		NSToolbarCustomizeToolbarItemIdentifier,
-		NSToolbarFlexibleSpaceItemIdentifier,
-		NSToolbarSpaceItemIdentifier,
-		NSToolbarSeparatorItemIdentifier]
+		NSToolbarItem.Identifier.customizeToolbar,
+		NSToolbarItem.Identifier.flexibleSpace,
+		NSToolbarItem.Identifier.space,
+		NSToolbarItem.Identifier.separator]
 	}
 }

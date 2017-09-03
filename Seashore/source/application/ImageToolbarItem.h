@@ -31,8 +31,8 @@
 				The selector used by the item.
 	@result		Returns instance upon success.
 */
--(ImageToolbarItem *)initWithItemIdentifier:  (NSString*) itemIdent label:(NSString *) label imageNamed:(NSString *) image toolTip: (NSString *) toolTip target: (id) target selector: (SEL) selector;
+-(ImageToolbarItem *)initWithItemIdentifier:  (NSToolbarItemIdentifier) itemIdent label:(NSString *) label imageNamed:(NSImageName) image toolTip: (NSString *) toolTip target: (id) target selector: (SEL) selector;
 
--(ImageToolbarItem *)initWithItemIdentifier:  (NSString*) itemIdent label:(NSString *) label image:(NSImage *) image toolTip: (NSString *) toolTip target: (id) target selector: (SEL) selector;
+-(ImageToolbarItem *)initWithItemIdentifier:  (NSToolbarItemIdentifier) itemIdent label:(NSString *) label image:(NSImage *) image toolTip: (NSString *) toolTip target: (id) target selector: (SEL) selector;
 
 @end

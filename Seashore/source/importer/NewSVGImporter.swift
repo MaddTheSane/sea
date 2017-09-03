@@ -186,7 +186,7 @@ public final class SVGImporter: NSObject {
 		size = trueSize
 		
 		var tmpNibArr: NSArray?
-		Bundle.main.loadNibNamed("SVGContent", owner: self, topLevelObjects: &tmpNibArr!)
+		Bundle.main.loadNibNamed(NSNib.Name(rawValue: "SVGContent"), owner: self, topLevelObjects: &tmpNibArr)
 		if let tmpNibArr = tmpNibArr {
 			nibArr = tmpNibArr
 		}
