@@ -122,6 +122,10 @@ NS_ENUM(int) {
 	kPointPlugin = 1
 };
 
+#if 0
+} // Because Xcode is being a dumb-dumb
+#endif
+
 /*!
 	@class		SeaPlugins
 	@abstract	Manages all of Seashore's plug-ins.

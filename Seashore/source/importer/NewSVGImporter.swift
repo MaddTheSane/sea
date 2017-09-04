@@ -159,7 +159,7 @@ public final class SVGImporter: NSObject {
 		let svgRep = try getImageRep()
 		let image = NSImage()
 		image.addRepresentation(svgRep)
-		if (size.width > 0 && size.height > 0 && size.width < kMaxImageSize && size.height < kMaxImageSize) {
+		if size.width > 0 && size.height > 0 && size.width < kMaxImageSize && size.height < kMaxImageSize {
 			image.size = size.NSSize
 		}
 		guard let tiffData = image.tiffRepresentation else {
@@ -181,8 +181,11 @@ public final class SVGImporter: NSObject {
 		doc.contents.addLayerObject(layer)
 	}
 	
-	@objc(addToDocument:contentsOfURL:error:) public func add(to doc: SeaDocument, contentsOf path: URL) throws {
-		trueSize = getDocumentSize((path as NSURL).fileSystemRepresentation)
+	@objc(addToDocument:contentsOfURL:error:)
+	public func add(to doc: SeaDocument, contentsOf path: URL) throws {
+		trueSize = path.withUnsafeFileSystemRepresentation { (fileRef) -> IntSize in
+			return getDocumentSize(fileRef)
+		}
 		size = trueSize
 		
 		var tmpNibArr: NSArray?

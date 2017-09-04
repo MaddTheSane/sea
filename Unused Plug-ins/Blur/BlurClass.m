@@ -25,7 +25,7 @@
 
 - (int)type
 {
-	return 0;
+	return kBasicPlugin;
 }
 
 -(int)points
@@ -158,14 +158,12 @@
 	
 	for (int j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (int i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
-		
 			if (channel == kAllChannels) {
-			
+				
 				denominator = 0;
 				l = 0;
 				
 				for (int k = 0; k < spp - 1; k++) {
-				
 					numerator = 0;
 					
 					for (int x = i - 1; x < i + 2; x++) {
@@ -191,10 +189,9 @@
 				replace[(j * width) + i] = 255;
 			} else if (channel == kPrimaryChannels) {
 				for (int k = 0; k < spp - 1; k++) {
-				
 					numerator = 0;
 					denominator = 0;
-				
+					
 					for (int x = i - 1; x < i + 2; x++) {
 						for (int y = j - 1; y < j + 2; y++) {
 							if (x >= selection.origin.x && y >= selection.origin.y  && x < selection.origin.x + selection.size.width && y < selection.origin.y + selection.size.height) {
@@ -207,17 +204,14 @@
 					
 					t = (int)(round((float)numerator / (float)denominator));
 					overlay[((j * width) + i) * spp + k] = t;
-					
 				}
 				
 				overlay[((j * width) + i + 1) * spp - 1] = 255;
 				replace[(j * width) + i] = 255;
-			
 			} else if (channel == kAlphaChannel) {
-			
 				numerator = 0;
 				denominator = 0;
-			
+				
 				for (int x = i - 1; x < i + 2; x++) {
 					for (int y = j - 1; y < j + 2; y++) {
 						if (x >= selection.origin.x && y >= selection.origin.y  && x < selection.origin.x + selection.size.width && y < selection.origin.y + selection.size.height) {
@@ -235,32 +229,28 @@
 				
 				overlay[((j * width) + i + 1) * spp - 1] = 255;
 				replace[(j * width) + i] = 255;
-			
+				
 			}
 			
 		}
 	}
 	
 	if (applications > 1) {
-	
 		workpad = malloc(selection.size.width * selection.size.height * spp);
 		
 		for (int count = 1; count < applications; count++) {
-			
 			for (int j = 0; j < selection.size.height; j++) {
 				memcpy(&(workpad[j * selection.size.width * spp]), &(overlay[((j + selection.origin.y) * width + selection.origin.x) * spp]), selection.size.width * spp);
 			}
 			
 			for (int j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 				for (int i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
-					
 					if (channel == kAllChannels) {
-				
+						
 						denominator = 0;
 						l = 0;
 						
 						for (int k = 0; k < spp - 1; k++) {
-						
 							numerator = 0;
 							
 							for (int x = i - 1; x < i + 2; x++) {
@@ -286,30 +276,27 @@
 						replace[(j * width) + i] = 255;
 						
 					} else if (channel == kPrimaryChannels) {
-					
 						for (int k = 0; k < spp - 1; k++) {
-						
-								numerator = 0;
-								denominator = 0;
+							numerator = 0;
+							denominator = 0;
 							
-								for (int x = i - 1 - selection.origin.x; x < i - selection.origin.x + 2; x++) {
-									for (int y = j - 1 - selection.origin.y; y < j - selection.origin.y + 2; y++) {
-										if (x >= 0 && y >= 0  && x < selection.size.width && y < selection.size.height) {
-											t = ((y - selection.origin.y) * selection.size.width) + (x - selection.origin.x);
-											numerator += workpad[t * spp + k];
-											denominator++;
-										}
+							for (int x = i - 1 - selection.origin.x; x < i - selection.origin.x + 2; x++) {
+								for (int y = j - 1 - selection.origin.y; y < j - selection.origin.y + 2; y++) {
+									if (x >= 0 && y >= 0  && x < selection.size.width && y < selection.size.height) {
+										t = ((y - selection.origin.y) * selection.size.width) + (x - selection.origin.x);
+										numerator += workpad[t * spp + k];
+										denominator++;
 									}
 								}
-								
-								t = (int)(round((float)numerator / (float)denominator));
-								overlay[((j * width) + i) * spp + k] = t;
+							}
 							
+							t = (int)(round((float)numerator / (float)denominator));
+							overlay[((j * width) + i) * spp + k] = t;
 						}
 					} else if (channel == kAlphaChannel) {
 						numerator = 0;
 						denominator = 0;
-					
+						
 						for (int x = i - 1 - selection.origin.x; x < i - selection.origin.x + 2; x++) {
 							for (int y = j - 1 - selection.origin.y; y < j - selection.origin.y + 2; y++) {
 								if (x >= 0 && y >= 0  && x < selection.size.width && y < selection.size.height) {
@@ -324,7 +311,7 @@
 						for (int k = 0; k < spp - 1; k++) {
 							overlay[((j * width) + i) * spp + k] = t;
 						}
-					
+						
 					}
 				}
 			}

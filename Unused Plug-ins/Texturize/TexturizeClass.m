@@ -71,7 +71,7 @@
 	NSString *smallTitle, *smallBody;
 	int iwidth, iheight;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [seaPlugins data];
 	
 	iwidth = [pluginData width];
 	iheight = [pluginData height];
