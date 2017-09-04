@@ -52,8 +52,8 @@
 	
 	lwidth = [layer width];
 	lheight = [layer height];
-	width = [(SeaContent *)[document contents] width];
-	height = [(SeaContent *)[document contents] height];
+	width = [[document contents] width];
+	height = [[document contents] height];
 	
 	pos = [[document docView] getMousePosition:NO];
 	if ([(EyedropOptions*)options mergedSample]) {

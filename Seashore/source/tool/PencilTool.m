@@ -1,3 +1,4 @@
+#include <tgmath.h>
 #import "PencilTool.h"
 #import "SeaDocument.h"
 #import "SeaContent.h"
@@ -36,11 +37,11 @@
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	SeaTexture *activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
 	SeaLayer *layer = [[document contents] activeLayer];
 	BOOL hasAlpha = [layer hasAlpha];
 	unsigned char *overlay = [[document whiteboard] overlay];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+	int width = [layer width], height = [layer height];
 	int i, j, k, spp = [[document contents] spp];
 	int halfSize;
 	IntPoint curPoint;
@@ -99,7 +100,7 @@
 	
 	// Work out the update rectangle
 	rect = IntMakeRect(where.x - halfSize, where.y - halfSize, size, size);
-	rect = IntConstrainRect(rect, IntMakeRect(0, 0, [(SeaLayer *)layer width], [(SeaLayer *)layer height]));
+	rect = IntConstrainRect(rect, IntMakeRect(0, 0, [layer width], [layer height]));
 	if (rect.size.width > 0 && rect.size.height > 0) {
 		
 		// Draw the initial dot
@@ -116,7 +117,7 @@
 		
 		// Do the update
 		if ([options useTextures] && ![options pencilIsErasing])
-			SeaTextureFill(spp, rect, [[document whiteboard] overlay], [(SeaLayer *)layer width], [(SeaLayer *)layer height], [activeTexture texture:(spp == 4)], [(SeaTexture *)activeTexture width], [(SeaTexture *)activeTexture height]);
+			SeaTextureFill(spp, rect, [[document whiteboard] overlay], [layer width], [layer height], [activeTexture texture:(spp == 4)], [activeTexture width], [activeTexture height]);
 		[[document helpers] overlayChanged:rect inThread:NO];
 	
 	}
@@ -127,10 +128,10 @@
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	SeaTexture *activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
 	SeaLayer *layer = [[document contents] activeLayer];
 	unsigned char *overlay = [[document whiteboard] overlay];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+	int width = [layer width], height = [layer height];
 	int xMod = (lastPoint.x > where.x) ? -1 : 1, yMod = (lastPoint.y > where.y) ? -1 : 1;
 	int xDist = abs(lastPoint.x - where.x), yDist = abs(lastPoint.y - where.y);
 	int i, i2, j2, k, spp = [[document contents] spp];
@@ -157,7 +158,7 @@
 		}
 		
 		rect = IntMakeRect(curPoint.x - halfSize, curPoint.y - halfSize, size, size);
-		rect = IntConstrainRect(rect, IntMakeRect(0, 0, [(SeaLayer *)layer width], [(SeaLayer *)layer height]));
+		rect = IntConstrainRect(rect, IntMakeRect(0, 0, [layer width], [layer height]));
 		if (rect.size.width > 0 && rect.size.height > 0) {
 
 			for (i2 = 0; i2 < size; i2++) {
@@ -172,7 +173,7 @@
 			}
 		
 			if ([options useTextures] && ![options pencilIsErasing])
-				SeaTextureFill(spp, rect, [[document whiteboard] overlay], [(SeaLayer *)layer width], [(SeaLayer *)layer height], [activeTexture texture:(spp == 4)], [(SeaTexture *)activeTexture width], [(SeaTexture *)activeTexture height]);
+				SeaTextureFill(spp, rect, [[document whiteboard] overlay], [layer width], [layer height], [activeTexture texture:(spp == 4)], [activeTexture width], [activeTexture height]);
 			[[document helpers] overlayChanged:rect inThread:NO];
 		}
 		newLastPoint = curPoint;

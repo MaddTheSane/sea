@@ -126,7 +126,7 @@ class EraserTool: AbstractTool {
 			// Go through all valid points
 			for j in 0 ..< brushHeight {
 				for i in 0 ..< brushWidth {
-					if (ipoint.x + i >= 0 && ipoint.y + j >= 0 && ipoint.x + i < width && ipoint.y + j < height) {
+					if ipoint.x + i >= 0 && ipoint.y + j >= 0 && ipoint.x + i < width && ipoint.y + j < height {
 						
 						// Change the pixel colour appropriately
 						overlayPos = (width * (ipoint.y + j) + ipoint.x + i) * spp;
@@ -143,7 +143,7 @@ class EraserTool: AbstractTool {
 	override func mouseDown(at where1: IntPoint, with event: NSEvent?) {
 		guard let document = document,
 			let curBrush = SeaController.utilitiesManager.brushUtility(for: document)?.activeBrush,
-			let boptions: BrushOptions = SeaController.utilitiesManager.optionsUtility(for: document)?.options(for: BrushTool.self),
+			let boptions = SeaController.utilitiesManager.optionsUtility(for: document)?.options(for: BrushTool.self),
 			let layer = document.contents.activeLayer else {
 				return
 		}
@@ -293,13 +293,13 @@ class EraserTool: AbstractTool {
 						stOffset = Double(lastPoint.y - 0.5)
 					}
 					
-					if (fabs(stFactor) > dist / brushSpacing) {
+					if fabs(stFactor) > dist / brushSpacing {
 						// We want to draw the maximum number of points
 						dt = brushSpacing / dist;
 						n = Int32(initial / brushSpacing + 1.0 + EPSILON);
 						t0 = (Double(n) * brushSpacing - initial) / dist;
 						num_points = 1 + Int32(floor((1 + EPSILON - t0) / dt))
-					} else if (fabs(stFactor) < EPSILON) {
+					} else if fabs(stFactor) < EPSILON {
 						// We can't draw any points - this does actually get called albeit once in a blue moon
 						lastPoint = curPoint;
 						if multithreaded {
@@ -308,7 +308,6 @@ class EraserTool: AbstractTool {
 							return;
 						}
 					} else {
-						
 						// We want to draw a number of points
 						let direction: Int32 = stFactor > 0 ? 1 : -1;
 						
@@ -355,7 +354,7 @@ class EraserTool: AbstractTool {
 						rect.origin = NSPointMakeIntPoint(temp);
 						rect.origin.x -= 1; rect.origin.y -= 1;
 						rect = IntConstrainRect(rect, IntMakeRect(0, 0, layerWidth, layerHeight));
-						if (fade) {
+						if fade {
 							dtx = (initial + t * dist) / Double(fadeValue)
 							pressure = Int32(exp ( -dtx * dtx * 5.541) * 255.0);
 							pressure = Int32(int_mult(UInt8(pressure), origPressure));
@@ -381,7 +380,6 @@ class EraserTool: AbstractTool {
 					distance = total;
 					lastPoint.x = lastPoint.x + deltaX;
 					lastPoint.y = lastPoint.y + deltaY;
-					
 				} else {
 					if multithreaded {
 						Thread.sleep(until: Date(timeIntervalSinceNow: 0.01))
@@ -398,7 +396,6 @@ class EraserTool: AbstractTool {
 				} else {
 					document.helpers?.overlayChanged(bigRect, inThread: true)
 				}
-
 			} while multithreaded
 		}
 	}
@@ -419,7 +416,7 @@ class EraserTool: AbstractTool {
 			lastWhere = where1
 		}
 		// Add to the list
-		if (pos < kMaxETPoints - 1) {
+		if pos < kMaxETPoints - 1 {
 			points[pos].point = where1
 			if (options as! EraserOptions).mimicBrush {
 				points[pos].pressure = UInt8(boptions?.pressureValue(event) ?? 255)
@@ -427,7 +424,7 @@ class EraserTool: AbstractTool {
 				points[pos].pressure = 255;
 			}
 			pos += 1
-		} else if (pos == kMaxETPoints - 1) {
+		} else if pos == kMaxETPoints - 1 {
 			points[pos].special = 2;
 			pos += 1
 		}

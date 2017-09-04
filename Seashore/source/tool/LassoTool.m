@@ -78,14 +78,14 @@
 
 - (void)fineMouseUpAt:(NSPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	[super mouseUpAt:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
 	
 	// Check we have a valid start point
 	if (intermediate && ![super isMovingOrScaling]) {
 		unsigned char *overlay = [[document whiteboard] overlay];
 		unsigned char *fakeOverlay;
-		int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+		int width = [layer width], height = [layer height];
 		float xScale, yScale;
 		int fakeHeight, fakeWidth;
 		int interpolation;

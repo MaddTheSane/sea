@@ -53,15 +53,15 @@
 	
 	BOOL optionDown = [options modifier] == kAltModifier;
 
-	id layer = [[document contents] activeLayer];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+	SeaLayer *layer = [[document contents] activeLayer];
+	int width = [layer width], height = [layer height];
 	
 	[[document whiteboard] clearOverlay];
 	[[document helpers] overlayChanged:rect inThread:NO];
 
 	if (where.x < 0 || where.y < 0 || where.x >= width || where.y >= height) {
 		rect.size.width = rect.size.height = 0;
-	}else if(isPreviewing){
+	} else if (isPreviewing) {
 		[self fillAtPoint:where useTolerance:!optionDown delay:YES];
 	}
 	
@@ -71,8 +71,8 @@
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+	SeaLayer *layer = [[document contents] activeLayer];
+	int width = [layer width], height = [layer height];
 	BOOL optionDown = [options modifier] == kAltModifier;
 	
 	[[document whiteboard] clearOverlay];
@@ -90,10 +90,10 @@
 - (void)fillAtPoint:(IntPoint)point useTolerance:(BOOL)useTolerance delay:(BOOL)delay
 {
 	SeaLayer *layer = [[document contents] activeLayer];
-	id activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
-	int tolerance, width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height], spp = [[document contents] spp];
-	int textureWidth = [(SeaTexture *)activeTexture width], textureHeight = [(SeaTexture *)activeTexture height];
-	unsigned char *overlay = [[document whiteboard] overlay], *data = [(SeaLayer *)layer data];
+	SeaTexture *activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	int tolerance, width = [layer width], height = [layer height], spp = [[document contents] spp];
+	int textureWidth = [activeTexture width], textureHeight = [activeTexture height];
+	unsigned char *overlay = [[document whiteboard] overlay], *data = [layer data];
 	unsigned char *texture = [activeTexture texture:(spp == 4)];
 	unsigned char basePixel[4];
 	NSColor *color = [[document contents] foreground];

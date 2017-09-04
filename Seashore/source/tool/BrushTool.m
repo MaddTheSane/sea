@@ -38,12 +38,12 @@
 	return NO;
 }
 
-- (void)plotBrush:(id)brush at:(NSPoint)point pressure:(int)pressure
+- (void)plotBrush:(SeaBrush *)brush at:(NSPoint)point pressure:(int)pressure
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	unsigned char *overlay = [[document whiteboard] overlay], *brushData;
-	int brushWidth = [(SeaBrush *)brush fakeWidth], brushHeight = [(SeaBrush *)brush fakeHeight];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+	int brushWidth = [brush fakeWidth], brushHeight = [brush fakeHeight];
+	int width = [layer width], height = [layer height];
 	int i, j, spp = [[document contents] spp], overlayPos;
 	IntPoint ipoint = NSPointMakeIntPoint(point);
 	
@@ -68,8 +68,7 @@
 				}
 			}
 		}
-	}
-	else {
+	} else {
 		
 		// Get the approrpiate brush data for the point
 		if ([(BrushOptions *)options scale])
@@ -197,9 +196,10 @@
 {
 	@autoreleasepool {
 		NSPoint curPoint;
-		id layer;
+		SeaLayer *layer;
 		int layerWidth, layerHeight;
-		id curBrush, activeTexture;
+		SeaBrush *curBrush;
+		id activeTexture;
 		int brushWidth, brushHeight;
 		double brushSpacing;
 		double deltaX, deltaY, mag, xd, yd, dist;
@@ -218,10 +218,10 @@
 		// Set-up variables
 		layer = [[document contents] activeLayer];
 		curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
-		layerWidth = [(SeaLayer *)layer width];
-		layerHeight = [(SeaLayer *)layer height];
-		brushWidth = [(SeaBrush *)curBrush fakeWidth];
-		brushHeight = [(SeaBrush *)curBrush fakeHeight];
+		layerWidth = [layer width];
+		layerHeight = [layer height];
+		brushWidth = [curBrush fakeWidth];
+		brushHeight = [curBrush fakeHeight];
 		activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
 		brushSpacing = (double)[[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
 		fade = [options fade];
@@ -379,8 +379,7 @@
 				lastPoint.x = lastPoint.x + deltaX;
 				lastPoint.y = lastPoint.y + deltaY;
 				
-			}
-			else {
+			} else {
 				if (multithreaded) [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
 			}
 			
@@ -391,8 +390,7 @@
 					lastDate = [NSDate date];
 					bigRect = IntMakeRect(0, 0, 0, 0);
 				}
-			}
-			else {
+			} else {
 				[[document helpers] overlayChanged:bigRect inThread:YES];
 			}
 			
@@ -411,8 +409,7 @@
 	// Check this is a new point
 	if (where.x == lastWhere.x && where.y == lastWhere.y) {
 		return;
-	}
-	else {
+	} else {
 		lastWhere = where;
 	}
 
@@ -421,8 +418,7 @@
 		points[pos].point = where;
 		points[pos].pressure = [options pressureValue:event];
 		pos++;
-	}
-	else if (pos == kMaxBTPoints - 1) {
+	} else if (pos == kMaxBTPoints - 1) {
 		points[pos].special = 2;
 		pos++;
 	}
@@ -446,8 +442,7 @@
 		while (!drawingDone) {
 			[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
 		}
-	}
-	else {
+	} else {
 		[self drawThread:NULL];
 	}
 }
@@ -456,7 +451,7 @@
 {
 	// Apply the changes
 	[self endLineDrawing];
-	[(SeaHelpers *)[document helpers] applyOverlay];
+	[[document helpers] applyOverlay];
 }
 
 - (void)startStroke:(IntPoint)where;

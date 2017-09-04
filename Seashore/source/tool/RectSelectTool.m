@@ -100,24 +100,20 @@
 				if (startPoint.y < where.y) {
 					selectionRect.size.height = selectionRect.size.width * ratio.height;
 					selectionRect.origin.y = startPoint.y;
-				}
-				else {
+				} else {
 					selectionRect.size.height = selectionRect.size.width * ratio.height;
 					selectionRect.origin.y = startPoint.y - selectionRect.size.height;
 				}
-			}
-			else {
+			} else {
 				if (selectionRect.origin.y < where.y) {
 					selectionRect.size.height = where.y - startPoint.y;
 					selectionRect.origin.y = startPoint.y;
-				}
-				else {
+				} else {
 					selectionRect.origin.y = where.y;
 					selectionRect.size.height = startPoint.y - where.y;
 				}
 			}		
-		}
-		else {
+		} else {
 			// Just change the origin
 			selectionRect.origin.x = where.x;
 			selectionRect.origin.y = where.y;
@@ -132,9 +128,9 @@
 	[super mouseUpAt:where withEvent:event];
 	
 	if(intermediate && ![super isMovingOrScaling]){
-		if([options radius]){
+		if ([options radius]) {
 			[[document selection] selectRoundedRect:selectionRect radius:[options radius] mode:[options selectionMode]];
-		}else{
+		} else {
 			[[document selection] selectRect:selectionRect mode:[options selectionMode]];
 		}
 		selectionRect = IntMakeRect(0,0,0,0);

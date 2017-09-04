@@ -164,20 +164,20 @@
 		
 		// Find the source
 		if (sourceMerged) {
-			sourceWidth = [(SeaContent *)[document contents] width];
-			sourceHeight = [(SeaContent *)[document contents] height];
+			sourceWidth = [[document contents] width];
+			sourceHeight = [[document contents] height];
 			if (mergedData) {
 				free(mergedData);
 				mergedData = NULL;
 			}
 			mergedData = malloc(make_128(sourceWidth * sourceHeight * spp));
-			memcpy(mergedData, [(SeaWhiteboard *)[document whiteboard] data], sourceWidth * sourceHeight * spp);
+			memcpy(mergedData, [[document whiteboard] data], sourceWidth * sourceHeight * spp);
 			sourceData = mergedData;
 		}
 		else {
-			sourceData = [(SeaLayer *)sourceLayer data];
-			sourceWidth = [(SeaLayer *)sourceLayer width];
-			sourceHeight = [(SeaLayer *)sourceLayer height];
+			sourceData = [sourceLayer data];
+			sourceWidth = [sourceLayer width];
+			sourceHeight = [sourceLayer height];
 		}
 		
 		// Determine whether operation should continue
@@ -200,18 +200,18 @@
 		[[document whiteboard] setOverlayBehaviour:SeaOverlayBehaviourMasking];
 		
 		// Plot the initial point
-		rect.size.width = [(SeaBrush *)curBrush fakeWidth] + 1;
-		rect.size.height = [(SeaBrush *)curBrush fakeHeight] + 1;
-		temp = NSMakePoint(curPoint.x - (float)([(SeaBrush *)curBrush width] / 2) - 1.0, curPoint.y - (float)([(SeaBrush *)curBrush height] / 2) - 1.0);
+		rect.size.width = [curBrush fakeWidth] + 1;
+		rect.size.height = [curBrush fakeHeight] + 1;
+		temp = NSMakePoint(curPoint.x - (CGFloat)([curBrush width] / 2) - 1.0, curPoint.y - (CGFloat)([curBrush height] / 2) - 1.0);
 		rect.origin = NSPointMakeIntPoint(temp);
 		rect.origin.x--; rect.origin.y--;
-		rect = IntConstrainRect(rect, IntMakeRect(0, 0, [(SeaLayer *)layer width], [(SeaLayer *)layer height]));
+		rect = IntConstrainRect(rect, IntMakeRect(0, 0, [layer width], [layer height]));
 		if (rect.size.width > 0 && rect.size.height > 0) {
 			[self plotBrush:curBrush at:temp pressure:pressure];
 			if (!isErasing) {
 				spt.x = sourcePoint.x + (rect.origin.x - startPoint.x) - 1;
 				spt.y = sourcePoint.y + (rect.origin.y - startPoint.y) - 1;
-				SeaCloneFill(spp, rect, [[document whiteboard] overlay], [[document whiteboard] replace], [(SeaLayer *)layer width], [(SeaLayer *)layer height], sourceData, sourceWidth, sourceHeight, spt);
+				SeaCloneFill(spp, rect, [[document whiteboard] overlay], [[document whiteboard] replace], [layer width], [layer height], sourceData, sourceWidth, sourceHeight, spt);
 			}
 			[[document helpers] overlayChanged:rect inThread:YES];
 		}
@@ -238,9 +238,10 @@
 {
 	@autoreleasepool {
 		NSPoint curPoint;
-		id layer;
+		SeaLayer *layer;
 		int layerWidth, layerHeight;
-		id curBrush, activeTexture;
+		SeaBrush *curBrush;
+		id activeTexture;
 		int brushWidth, brushHeight;
 		double brushSpacing;
 		double deltaX, deltaY, mag, xd, yd, dist;
@@ -259,10 +260,10 @@
 		// Set-up variables
 		layer = [[document contents] activeLayer];
 		curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
-		layerWidth = [(SeaLayer *)layer width];
-		layerHeight = [(SeaLayer *)layer height];
-		brushWidth = [(SeaBrush *)curBrush fakeWidth];
-		brushHeight = [(SeaBrush *)curBrush fakeHeight];
+		layerWidth = [layer width];
+		layerHeight = [layer height];
+		brushWidth = [curBrush fakeWidth];
+		brushHeight = [curBrush fakeHeight];
 		activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
 		brushSpacing = (double)[[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
 		spp = [[document contents] spp];
@@ -270,13 +271,13 @@
 		lastDate = [NSDate date];
 		if (sourceMerged) {
 			sourceData = mergedData;
-			sourceWidth = [(SeaContent *)[document contents] width];
-			sourceHeight = [(SeaContent *)[document contents] height];
+			sourceWidth = [[document contents] width];
+			sourceHeight = [[document contents] height];
 		}
 		else {
-			sourceData = [(SeaLayer *)sourceLayer data];
-			sourceWidth = [(SeaLayer *)sourceLayer width];
-			sourceHeight = [(SeaLayer *)sourceLayer height];
+			sourceData = [sourceLayer data];
+			sourceWidth = [sourceLayer width];
+			sourceHeight = [sourceLayer height];
 		}
 		
 		// While we are not done...
@@ -530,7 +531,7 @@
 	} else if (sourceSet) {
 		// Apply the changes
 		[self endLineDrawing];
-		[(SeaHelpers *)[document helpers] applyOverlay];
+		[[document helpers] applyOverlay];
 		
 	}
 	

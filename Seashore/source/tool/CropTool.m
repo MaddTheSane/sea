@@ -154,8 +154,8 @@
 {
 	int width, height;
 	
-	width = [(SeaContent *)[document contents] width];
-	height = [(SeaContent *)[document contents] height];
+	width = [[document contents] width];
+	height = [[document contents] height];
 	return IntConstrainRect(cropRect, IntMakeRect(0, 0, width, height));
 }
 

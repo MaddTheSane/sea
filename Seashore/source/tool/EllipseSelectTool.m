@@ -31,9 +31,9 @@
 		
 		// Get mode
 		modifier = [options modifier];
-		if(modifier == kShiftModifier){
+		if (modifier == kShiftModifier) {
 			oneToOne = YES;
-		}else{
+		} else {
 			oneToOne = NO;
 		}
 		

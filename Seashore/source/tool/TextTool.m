@@ -288,13 +288,13 @@ NSFont *gNewFont;
 	NSDictionary *attributes;
 	NSString *text;
 	int width;
-	id layer;
+	SeaLayer *layer;
 	
 	layer = [[document contents] activeLayer];
 	attributes = @{NSFontAttributeName: [fontManager selectedFont]};
 	text = [[textbox textStorage] string];
 	fontSize = NSSizeMakeIntSize([text sizeWithAttributes:attributes]);
-	width = [(SeaLayer *)layer width];
+	width = [layer width];
 	where.x = width / 2 - fontSize.width / 2;
 	[self preview:NULL];
 }
@@ -305,7 +305,8 @@ NSFont *gNewFont;
 	NSDictionary *attributes;
 	NSString *text;
 	int height;
-	id layer, font;
+	SeaLayer *layer;
+	NSFont *font;
 	
 	layer = [[document contents] activeLayer];
 	font = [fontManager selectedFont];

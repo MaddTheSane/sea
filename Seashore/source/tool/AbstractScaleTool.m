@@ -62,7 +62,7 @@
 	localRect.origin.y -= [[[document contents] activeLayer]  yoff];
 	
 	
-	if(scalingDir > kNoDir){
+	if (scalingDir > kNoDir) {
 		// 1. Resizing selection
 		preScaledRect = globalRect;
 		if(mask){
@@ -92,7 +92,7 @@
 
 		BOOL usesAspect = NO;
 		NSSize ratio = NSZeroSize;
-		if([(AbstractScaleOptions*)options aspectType] == kRatioAspectType){
+		if ([(AbstractScaleOptions*)options aspectType] == kRatioAspectType) {
 			usesAspect = YES;
 			ratio = [options ratio];
 		}
@@ -106,10 +106,10 @@
 			case kULDir:
 				newWidth = preScaledRect.origin.x -  globalPoint.x + preScaledRect.size.width;
 				newX = globalPoint.x;
-				if(usesAspect){
+				if (usesAspect) {
 					newHeight = newWidth * ratio.height;
 					newY = preScaledRect.origin.y + preScaledRect.size.height - newHeight;
-				}else{
+				} else {
 					newHeight = preScaledRect.origin.y - globalPoint.y + preScaledRect.size.height;
 					newY = globalPoint.y;
 				}
@@ -120,10 +120,10 @@
 				break;
 			case kURDir:
 				newWidth = globalPoint.x - preScaledRect.origin.x;
-				if(usesAspect){
+				if (usesAspect) {
 					newHeight = newWidth * ratio.height;
 					newY = preScaledRect.origin.y + preScaledRect.size.height - newHeight;
-				}else{
+				} else {
 					newHeight = preScaledRect.origin.y - globalPoint.y + preScaledRect.size.height;
 					newY = globalPoint.y;
 				}
@@ -133,9 +133,9 @@
 				break;
 			case kDRDir:
 				newWidth = globalPoint.x - preScaledRect.origin.x;
-				if(usesAspect){
+				if (usesAspect) {
 					newHeight = newWidth * ratio.height;
-				}else{
+				} else {
 					newHeight = globalPoint.y - preScaledRect.origin.y;
 				}
 				break;
@@ -145,9 +145,9 @@
 			case kDLDir:
 				newX = globalPoint.x;
 				newWidth = preScaledRect.origin.x -  globalPoint.x + preScaledRect.size.width;
-				if(usesAspect){
+				if (usesAspect) {
 					newHeight = newWidth * ratio.height;
-				}else{
+				} else {
 					newHeight = globalPoint.y - preScaledRect.origin.y;
 				}
 				break;
@@ -182,8 +182,8 @@
 - (SeaScaleDirection)point:(NSPoint) point isInHandleFor:(IntRect)rect
 {
 	
-	float xScale = [[document contents] xscale];
-	float yScale = [[document contents] yscale];
+	CGFloat xScale = [[document contents] xscale];
+	CGFloat yScale = [[document contents] yscale];
 	rect = IntMakeRect(rect.origin.x * xScale, rect.origin.y * yScale, rect.size.width * xScale, rect.size.height * yScale);
 	
 	BOOL inTop = point.y + 5 > rect.origin.y && point.y - 3 < rect.origin.y;

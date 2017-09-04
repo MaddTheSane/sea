@@ -22,7 +22,7 @@
 {
 	[super mouseDownAt:where withEvent:event];
 	
-	if(![super isMovingOrScaling]){
+	if (![super isMovingOrScaling]) {
 		startPoint = where;
 		startNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 		currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
@@ -45,9 +45,9 @@
 	[super mouseUpAt:where withEvent:event];
 
 	if(![super isMovingOrScaling]){
-		id layer = [[document contents] activeLayer];
-		int tolerance, width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height], spp = [[document contents] spp], k;
-		unsigned char *overlay = [[document whiteboard] overlay], *data = [(SeaLayer *)layer data];
+		SeaLayer *layer = [[document contents] activeLayer];
+		int tolerance, width = [layer width], height = [layer height], spp = [[document contents] spp], k;
+		unsigned char *overlay = [[document whiteboard] overlay], *data = [layer data];
 		unsigned char basePixel[4];
 		IntRect rect;
 			

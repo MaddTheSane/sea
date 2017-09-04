@@ -26,14 +26,14 @@
 	return NO;
 }
 
-- (void)smudgeWithBrush:(id)brush at:(NSPoint)point
+- (void)smudgeWithBrush:(SeaBrush *)brush at:(NSPoint)point
 {
-	id contents = [document contents];
-	id layer = [contents activeLayer];
-	unsigned char *overlay = [[document whiteboard] overlay], *data = [(SeaLayer *)layer data], *replace = [(SeaWhiteboard *)[document whiteboard] replace];
+	SeaContent *contents = [document contents];
+	SeaLayer *layer = [contents activeLayer];
+	unsigned char *overlay = [[document whiteboard] overlay], *data = [layer data], *replace = [[document whiteboard] replace];
 	unsigned char *brushData, basePixel[4];
-	int brushWidth = [(SeaBrush *)brush fakeWidth], brushHeight = [(SeaBrush *)brush fakeHeight];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+	int brushWidth = [brush fakeWidth], brushHeight = [brush fakeHeight];
+	int width = [layer width], height = [layer height];
 	int i, j, k, tx, ty, t1, t2, pos, spp = [[document contents] spp];
 	int rate = [(SmudgeOptions *)options rate];
 	IntPoint ipoint = NSPointMakeIntPoint(point);
@@ -91,11 +91,11 @@
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
-	int layerWidth = [(SeaLayer *)layer width], layerHeight = [(SeaLayer *)layer height];
-	unsigned char *data = [(SeaLayer *)layer data];
-	id curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
-	int brushWidth = [(SeaBrush *)curBrush fakeWidth], brushHeight = [(SeaBrush *)curBrush fakeHeight];
+	SeaLayer *layer = [[document contents] activeLayer];
+	int layerWidth = [layer width], layerHeight = [layer height];
+	unsigned char *data = [layer data];
+	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	int brushWidth = [curBrush fakeWidth], brushHeight = [curBrush fakeHeight];
 	int i, j, k, tx, ty, spp = [[document contents] spp];
 	NSPoint curPoint = IntPointMakeNSPoint(where), temp;
 	int selectedChannel = [[document contents] selectedChannel];
@@ -166,10 +166,10 @@
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
-	int layerWidth = [(SeaLayer *)layer width], layerHeight = [(SeaLayer *)layer height];
-	id curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
-	int brushWidth = [(SeaBrush *)curBrush fakeWidth], brushHeight = [(SeaBrush *)curBrush fakeHeight];
+	SeaLayer *layer = [[document contents] activeLayer];
+	int layerWidth = [layer width], layerHeight = [layer height];
+	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	int brushWidth = [curBrush fakeWidth], brushHeight = [curBrush fakeHeight];
 	NSPoint curPoint = IntPointMakeNSPoint(where);
 	double brushSpacing = 1.0 / 100.0;
 	double deltaX, deltaY, mag, xd, yd, dist;
@@ -183,8 +183,7 @@
 	// Check this is a new point
 	if (where.x == lastWhere.x && where.y == lastWhere.y) {
 		return;
-	}
-	else {
+	} else {
 		lastWhere = where;
 	}
 	

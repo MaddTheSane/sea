@@ -27,7 +27,7 @@
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id pointEffect = [seaPlugins activePointEffect];
+	id<SeaPluginClass> pointEffect = [seaPlugins activePointEffect];
 	CGFloat xScale, yScale;
 	IntPoint layerOff;
 	
