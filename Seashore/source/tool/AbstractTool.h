@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @interface AbstractTool : NSObject {
 
-	// The document associated with this tool
+	//! The document associated with this tool
 	__weak SeaDocument *document;
 	
 	//! The options associated with this tool

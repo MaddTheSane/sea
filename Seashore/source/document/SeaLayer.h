@@ -21,69 +21,68 @@
 
 @interface SeaLayer : NSObject {
 #if MAIN_COMPILE
-	// The document that contains this layer
+	//! The document that contains this layer
 	__weak SeaDocument *document;
 	
-	// The object responsible for changes to our bitmap
+	//! The object responsible for changes to our bitmap
 	id seaLayerUndo;
 #endif
 	
-	// The layer's height, width and mode
+	//! The layer's height, width and mode
 	int height, width, mode;
 	
-	// The layer's name
+	//! The layer's name
 	NSString *name;
 
-	// Old names of the layers
+	//! Old names of the layers
 	NSArray *oldNames;
 	
-	// The opacity of the layer (at most 255)
+	//! The opacity of the layer (at most 255)
 	int opacity;
 	
-	// The layer's offset
+	//! The layer's offset
 	int xoff, yoff;
 	
-	// The samples per pixel in this layer
-	// (this should be the same as determined from the document's type)
+	//! The samples per pixel in this layer
+	//! (this should be the same as determined from the document's type)
 	int spp;
 	
-	// Is the layer visible?
+	//! Is the layer visible?
 	BOOL visible;
 	
-	// Is the layer linked?
+	//! Is the layer linked?
 	BOOL linked;
 	
-	// Is the layer floating?
+	//! Is the layer floating?
 	BOOL floating;
 	
-	// The lost properties of the document
+	//! The lost properties of the document
 	char *lostprops;
 	int lostprops_len;
 	
-	// A reference to the image data representing this layer
+	//! A reference to the image data representing this layer
 	unsigned char *data;
 	
-	// A NSImage representing a thumbnail of the layer
+	//! A NSImage representing a thumbnail of the layer
 	NSImage *thumbnail;
 	unsigned char *thumbData;
 	int thumbWidth, thumbHeight;
 	
-	// Stores whether or not the data is compressed
+	//! Stores whether or not the data is compressed
 	BOOL compressed;
 	unsigned int compressedLen;
 	
-	// Remembers whether or not the layer has an alpha channel
+	//! Remembers whether or not the layer has an alpha channel
 	BOOL hasAlpha;
 	
-	// The unique ID for this layer - sometimes used
+	//! The unique ID for this layer - sometimes used
 	int uniqueLayerID;
 
-	// A path to the file we use for undoing
+	//! A path to the file we use for undoing
 	NSString *undoFilePath;
 	
-	// The affine transform plug-in (used to do CoreImage transforms)
+	//! The affine transform plug-in (used to do CoreImage transforms)
 	id affinePlugin;
-
 }
 
 // CREATION METHODS
