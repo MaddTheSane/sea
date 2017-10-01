@@ -130,7 +130,7 @@
 
 	if (tool >= kFirstSelectionTool && tool <= kLastSelectionTool) {
 		// Find out what the selection mode is
-		int selectionMode = [(AbstractSelectOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] selectionMode];
+		SeaSelectMode selectionMode = [(AbstractSelectOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] selectionMode];
 		
 		if (selectionMode == kAddMode) {
 			[self addCursorRect:operableRect cursor:addCursor];

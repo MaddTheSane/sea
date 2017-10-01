@@ -215,7 +215,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 		seaView = [[SeaView alloc] initWithDocument:self];
 #ifdef USE_CENTERING_CLIPVIEW
 		newClipView = [[CenteringClipView alloc] initWithFrame:[[view contentView] frame]];
-		[(NSScrollView *)view setContentView:newClipView];
+		[view setContentView:newClipView];
 #endif
 		[view setDocumentView:seaView];
 		[view setDrawsBackground:NO];
