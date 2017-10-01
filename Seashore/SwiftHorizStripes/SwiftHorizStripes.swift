@@ -10,7 +10,7 @@ import Cocoa
 import SeashoreKit
 
 
-private func specmod<A>(_ a: A, _ b: A) -> A where A: SignedInteger {
+private func specmod<A>(_ a: A, _ b: A) -> A where A: BinaryInteger {
 	if a < 0 {
 		return b + a % b;
 	} else {
