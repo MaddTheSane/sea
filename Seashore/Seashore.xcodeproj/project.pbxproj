@@ -179,6 +179,7 @@
 		5528596D13D62F6E001564E5 /* XCFSpotlight.mdimporter in Copy Spotlight plug-in */ = {isa = PBXBuildFile; fileRef = DC0D565A104205E10037378A /* XCFSpotlight.mdimporter */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5528598613D62FB4001564E5 /* XCFQuickLook.qlgenerator in Copy QuickLook plug-in */ = {isa = PBXBuildFile; fileRef = 5528598513D62FAB001564E5 /* XCFQuickLook.qlgenerator */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		552D702D1DA2063200AFBD32 /* XCFLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DEAE1303C5C847010475F1 /* XCFLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		553798C120ED5979007BFFE6 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; };
 		55472B851C6EDCCA0065A852 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; };
 		55472B861C6EDCCA0065A852 /* SeashoreKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55472B8A1C6EDD300065A852 /* Rects.h in Headers */ = {isa = PBXBuildFile; fileRef = A8E00A1D04BE5DF800A80207 /* Rects.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2554,6 +2555,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				553798C120ED5979007BFFE6 /* SeashoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
