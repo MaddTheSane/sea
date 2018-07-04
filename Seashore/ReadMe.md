@@ -1,3 +1,5 @@
+> Note: Parts of this read-me might be outdated and incorrect!
+
 # Seashore Source Code
 
 
@@ -14,13 +16,11 @@ Unless otherwise noted all of Seashore's source code is distributed under the GN
 
 ## Build Environment
 
-Building Seashore requires Xcode 2.2 or later on Mac OS 10.4 or later. Seashore is a Universal build, and will run on any Macintosh computer running Mac OS 10.3.9 or later.
-
-It is also strongly recommended that you have a common, **Customized Location** for your **Build Products**. This location may be anywhere on your disk. You can set this preference in Xcode by choosing **Xcode > Preferences > Building > Place Build Product in: > Customized location:**, and clicking on the **Choose...** button.
+Building Seashore requires Xcode 9.4 or later on Mac OS 10.13 or later. Seashore is a 64-bit application, and will run on any Macintosh computer running Mac OS 10.9 or later.
 
 ## Modules and Build Order
 
-The following are the modules of Seashore. You can build them independently, but we recommend that you use the Seashore project, which has the correct dependencies.
+The following are the modules of Seashore. You can build them independently, but we recommend that you use the Seashore workspace, which has the correct dependencies.
 
 ### GIMPCore
 
@@ -33,8 +33,6 @@ TIFF contains libtiff 3.8.2. Seashore relies upon the presence of the TIFF frame
 ### Plug-ins
 
 Plug-ins contains the various plug-ins of Seashore. It is not necessary to build any of Seashore's plug-ins to build the application but if you chose not to build them you should remove them from "Plug-ins" subgroup of the "Resources" group in the Seashore project.
-
-One of the Plug-ins (CompositorAV) is not Universal, and is not part of the default Seashore.xcodeproj
 
 ### SVGImporter (not required)
 
