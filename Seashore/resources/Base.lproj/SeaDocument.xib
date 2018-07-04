@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13189.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -290,7 +290,7 @@ DQ
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <clipView key="contentView" id="eIU-Ie-Ctz">
                                             <rect key="frame" x="0.0" y="0.0" width="198" height="543"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="39" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="9834" id="7811" customClass="SeaOutlineView">
                                                     <rect key="frame" x="0.0" y="0.0" width="198" height="543"/>
@@ -1527,13 +1527,13 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="2az-qY-cA8">
                             <rect key="frame" x="1" y="1" width="438" height="54"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" usesFontPanel="YES" usesRuler="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1007" customClass="NSTextViewRedirect">
                                     <rect key="frame" x="0.0" y="0.0" width="423" height="54"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="423" height="54"/>
+                                    <size key="minSize" width="438" height="54"/>
                                     <size key="maxSize" width="466" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
@@ -1884,7 +1884,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="9yS-N0-Caa">
                             <rect key="frame" x="1" y="1" width="246" height="94"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" id="415" customClass="NSExtendedTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="246" height="94"/>
@@ -1893,7 +1893,7 @@ Gw
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn editable="NO" width="228" minWidth="228" maxWidth="228" id="413">
+                                        <tableColumn identifier="" editable="NO" width="228" minWidth="228" maxWidth="228" id="413">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1953,27 +1953,16 @@ Gw
                 <outlet property="sheet" destination="389" id="423"/>
             </connections>
         </customObject>
-        <numberFormatter formatterBehavior="10_0" positiveFormat="0.######" negativeFormat="-0.######" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="523" userLabel="Decimal Formatter">
+        <numberFormatter formatterBehavior="custom10_4" positiveFormat="0.######" negativeFormat="-0.######" localizesFormat="NO" allowsFloats="NO" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="6" groupingSeparator="," id="523" userLabel="Decimal Formatter">
             <textAttributesForNegativeValues/>
-            <attributedString key="attributedStringForZero">
-                <fragment content="0"/>
-            </attributedString>
+            <nil key="negativeInfinitySymbol"/>
+            <nil key="positiveInfinitySymbol"/>
             <decimal key="minimum" value="0"/>
-            <decimal key="maximum" value="NaN"/>
         </numberFormatter>
-        <numberFormatter formatterBehavior="10_0" positiveFormat="0" negativeFormat="-0" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="526" userLabel="Integer Formatter">
-            <attributedString key="attributedStringForZero">
-                <fragment content="0"/>
-            </attributedString>
-            <decimal key="minimum" value="NaN"/>
-            <decimal key="maximum" value="NaN"/>
-        </numberFormatter>
-        <numberFormatter formatterBehavior="10_0" positiveFormat="0.######" negativeFormat="-0.######" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="646" userLabel="Negative Decimal Formatter">
-            <attributedString key="attributedStringForZero">
-                <fragment content="0"/>
-            </attributedString>
-            <decimal key="minimum" value="NaN"/>
-            <decimal key="maximum" value="NaN"/>
+        <numberFormatter formatterBehavior="custom10_4" positiveFormat="0" negativeFormat="-0" localizesFormat="NO" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" groupingSeparator="," id="526" userLabel="Integer Formatter"/>
+        <numberFormatter formatterBehavior="custom10_4" positiveFormat="0.######" negativeFormat="-0.######" localizesFormat="NO" allowsFloats="NO" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="6" groupingSeparator="," id="646" userLabel="Negative Decimal Formatter">
+            <nil key="negativeInfinitySymbol"/>
+            <nil key="positiveInfinitySymbol"/>
         </numberFormatter>
         <customObject id="662" userLabel="SeaAlignment" customClass="SeaAlignment">
             <connections>
@@ -2031,8 +2020,12 @@ Gw
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" id="700">
-                        <rect key="frame" x="97" y="12" width="96" height="32"/>
+                    <box verticalHuggingPriority="750" boxType="separator" id="703">
+                        <rect key="frame" x="12" y="49" width="175" height="5"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </box>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="700">
+                        <rect key="frame" x="97" y="13" width="96" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="16875">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -2045,10 +2038,6 @@ DQ
                             <action selector="endPanel:" target="330" id="706"/>
                         </connections>
                     </button>
-                    <box verticalHuggingPriority="750" boxType="separator" id="703">
-                        <rect key="frame" x="12" y="49" width="175" height="5"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </box>
                 </subviews>
             </view>
         </window>
@@ -2070,20 +2059,6 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" id="748">
-                        <rect key="frame" x="199" y="12" width="96" height="32"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="push" title="Rotate" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="16878">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
-                        </buttonCell>
-                        <connections>
-                            <action selector="apply:" target="688" id="787"/>
-                        </connections>
-                    </button>
                     <textField toolTip="Layer being rotated" verticalHuggingPriority="750" id="775">
                         <rect key="frame" x="112" y="138" width="180" height="13"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2138,6 +2113,20 @@ Gw
                             </subviews>
                         </view>
                     </box>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="748">
+                        <rect key="frame" x="199" y="13" width="96" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="push" title="Rotate" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="16878">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="apply:" target="688" id="787"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
         </window>
@@ -4114,15 +4103,15 @@ DQ
         </window>
         <window title="Aspect Ratio" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="2806" userLabel="Ellipse Aspect Ratio" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
-            <rect key="contentRect" x="754" y="619" width="303" height="107"/>
+            <rect key="contentRect" x="754" y="619" width="303" height="91"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="213" height="107"/>
-            <view key="contentView" id="2824">
-                <rect key="frame" x="0.0" y="0.0" width="303" height="107"/>
+            <view key="contentView" misplaced="YES" id="2824">
+                <rect key="frame" x="0.0" y="0.0" width="303" height="91"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" id="2829">
-                        <rect key="frame" x="20" y="65" width="72" height="22"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="2829">
+                        <rect key="frame" x="20" y="49" width="72" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="2" drawsBackground="YES" id="16998">
                             <font key="font" metaFont="system"/>
@@ -4130,8 +4119,8 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="2828">
-                        <rect key="frame" x="143" y="65" width="72" height="22"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="2828">
+                        <rect key="frame" x="143" y="49" width="72" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="1" drawsBackground="YES" id="16997">
                             <font key="font" metaFont="system"/>
@@ -4139,8 +4128,8 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="2827">
-                        <rect key="frame" x="100" y="67" width="35" height="13"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="2827">
+                        <rect key="frame" x="100" y="52" width="35" height="13"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="to" id="16996">
                             <font key="font" metaFont="label"/>
@@ -4148,8 +4137,8 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" id="2825">
-                        <rect key="frame" x="193" y="19" width="96" height="32"/>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="2825">
+                        <rect key="frame" x="193" y="13" width="96" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="16994">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -4162,8 +4151,8 @@ DQ
                             <action selector="applyCustomItem:" target="2654" id="13702"/>
                         </connections>
                     </button>
-                    <popUpButton id="2826">
-                        <rect key="frame" x="220" y="63" width="66" height="22"/>
+                    <popUpButton misplaced="YES" id="2826">
+                        <rect key="frame" x="220" y="50" width="66" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <popUpButtonCell key="cell" type="bevel" title="ratio" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="bezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="2835" id="16995">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -4183,18 +4172,19 @@ DQ
                     </popUpButton>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="-287.5" y="66.5"/>
         </window>
         <window title="Aspect Ratio" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="2807" userLabel="Crop Aspect Ratio1" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
-            <rect key="contentRect" x="782" y="592" width="303" height="107"/>
+            <rect key="contentRect" x="782" y="592" width="303" height="91"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="213" height="107"/>
-            <view key="contentView" id="2808">
-                <rect key="frame" x="0.0" y="0.0" width="303" height="107"/>
+            <view key="contentView" misplaced="YES" id="2808">
+                <rect key="frame" x="0.0" y="0.0" width="303" height="91"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" id="2812">
-                        <rect key="frame" x="20" y="65" width="72" height="22"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="2812">
+                        <rect key="frame" x="20" y="49" width="72" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="2" drawsBackground="YES" id="17002">
                             <font key="font" metaFont="system"/>
@@ -4202,8 +4192,8 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="2811">
-                        <rect key="frame" x="143" y="65" width="72" height="22"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="2811">
+                        <rect key="frame" x="143" y="49" width="72" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="1" drawsBackground="YES" id="17001">
                             <font key="font" metaFont="system"/>
@@ -4211,8 +4201,8 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="2810">
-                        <rect key="frame" x="100" y="67" width="35" height="13"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" id="2810">
+                        <rect key="frame" x="100" y="52" width="35" height="13"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="to" id="17000">
                             <font key="font" metaFont="label"/>
@@ -4220,8 +4210,8 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" id="2809">
-                        <rect key="frame" x="193" y="19" width="96" height="32"/>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="2809">
+                        <rect key="frame" x="193" y="13" width="96" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="16999">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -4234,8 +4224,8 @@ DQ
                             <action selector="applyCustomItem:" target="2653" id="13705"/>
                         </connections>
                     </button>
-                    <popUpButton id="2813">
-                        <rect key="frame" x="220" y="63" width="66" height="22"/>
+                    <popUpButton misplaced="YES" id="2813">
+                        <rect key="frame" x="220" y="50" width="66" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <popUpButtonCell key="cell" type="bevel" title="ratio" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="bezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="2817" id="17003">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -4255,6 +4245,7 @@ DQ
                     </popUpButton>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="137.5" y="1820.5"/>
         </window>
         <customObject id="2891" customClass="LayerSettings">
             <connections>
@@ -4915,21 +4906,21 @@ DQ
                 <rect key="frame" x="0.0" y="0.0" width="256" height="244"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="11977">
-                        <rect key="frame" x="20" y="41" width="216" height="162"/>
+                    <scrollView misplaced="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="11977">
+                        <rect key="frame" x="20" y="43" width="216" height="181"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="pW7-Ok-ht6">
-                            <rect key="frame" x="1" y="1" width="214" height="160"/>
+                            <rect key="frame" x="1" y="1" width="214" height="179"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="14" id="11980">
-                                    <rect key="frame" x="0.0" y="0.0" width="214" height="160"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="214" height="179"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn editable="NO" width="194" minWidth="8" maxWidth="1000" id="11981">
+                                        <tableColumn identifier="" editable="NO" width="194" minWidth="8" maxWidth="1000" id="11981">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -4954,7 +4945,7 @@ DQ
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="17056">
-                            <rect key="frame" x="199" y="1" width="16" height="160"/>
+                            <rect key="frame" x="199" y="1" width="16" height="179"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
@@ -4989,7 +4980,7 @@ DQ
                 <outlet property="zoomSlider" destination="15205" id="15218"/>
             </connections>
         </customObject>
-        <numberFormatter formatterBehavior="10_0" positiveFormat="#,##0" negativeFormat="-#,##0" thousandSeparator="," id="14786" userLabel="Number Formatter">
+        <numberFormatter formatterBehavior="custom10_4" positiveFormat="#,##0" negativeFormat="-#,##0" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" decimalSeparator="." groupingSeparator="," id="14786" userLabel="Number Formatter">
             <real key="minimum" value="0.0"/>
             <real key="maximum" value="255"/>
         </numberFormatter>

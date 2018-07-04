@@ -50,14 +50,14 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 
 	/// A grayscale mask of the brush
-	fileprivate var mask: [UInt8] = []
+	private var mask: [UInt8] = []
 	
 	/// A coloured pixmap of the brush (RGBA)
-	fileprivate var pixmap: [UInt8] = []
+	private var pixmap: [UInt8] = []
 	
 	// All previous bitmaps (for undos)
-	fileprivate var undoRecords = [BitmapUndo]()
-	fileprivate var curUndoPos = 0
+	private var undoRecords = [BitmapUndo]()
+	private var curUndoPos = 0
 	
 	/// The spacing between brush strokes
 	@objc dynamic var spacing: Int32 = 25 {
@@ -67,7 +67,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	/// The width and height of the brush
-	fileprivate var size: (width: Int32, height: Int32) = (0, 0) {
+	private var size: (width: Int32, height: Int32) = (0, 0) {
 		didSet {
 			dimensionsLabel?.stringValue = "\(size.width) x \(size.height)"
 		}
@@ -77,10 +77,10 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	@objc dynamic var name = "Untitled"
 	
 	/// A memory of all past names for the undo manager
-	fileprivate var pastNames = ["Untitled"]
+	private var pastNames = ["Untitled"]
 	
 	/// Do we use the pixmap or the mask?
-	fileprivate var usePixmap = false
+	private var usePixmap = false
 
 	/// The view displaying the brush
 	@IBOutlet weak var view: BrushView!
@@ -174,12 +174,11 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	/// Adjust the image of the brush
 	@objc func changeImage(_ newImage: NSBitmapImageRep!) throws {
 		// Check we can handle this image
-		guard newImage?.bitsPerSample == 8 else {
+		guard newImage?.bitsPerSample == 8, let data = newImage?.bitmapData else {
 			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
 		}
 
 		let spp = newImage.samplesPerPixel
-		let data = newImage.bitmapData!
 		var invert = false
 		var isRGB = false
 		
@@ -485,7 +484,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		
 		openPanel.allowsMultipleSelection = false
 		openPanel.prompt = "Import"
-		openPanel.allowedFileTypes = [kUTTypeTIFF as String, kUTTypeJPEG as String, kUTTypePNG as String]
+		openPanel.allowedFileTypes = NSBitmapImageRep.imageTypes
 		
 		openPanel.beginSheetModal(for: windowForSheet!) { (result) in
 			guard result.rawValue == NSFileHandlingPanelOKButton else {
@@ -511,7 +510,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		savePanel.prompt = "Export"
 		savePanel.allowedFileTypes = [kUTTypeTIFF as String]
 		savePanel.beginSheetModal(for: windowForSheet!) { (result) in
-			guard result.rawValue == NSFileHandlingPanelOKButton else {
+			guard result == .OK else {
 				return
 			}
 			try? self.brushImage?.tiffRepresentation?.write(to: savePanel.url!, options: [.atomic])
