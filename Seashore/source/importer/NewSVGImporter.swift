@@ -160,7 +160,7 @@ public final class SVGImporter: NSObject {
 		let image = NSImage()
 		image.addRepresentation(svgRep)
 		if size.width > 0 && size.height > 0 && size.width < kMaxImageSize && size.height < kMaxImageSize {
-			image.size = size.NSSize
+			image.size = size.nsSize
 		}
 		guard let tiffData = image.tiffRepresentation else {
 			throw ImporterErrors.unableToGenerateTIFF

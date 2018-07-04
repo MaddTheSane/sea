@@ -30,11 +30,11 @@
 	}
 	
 	dispatch_apply(256, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		max = (histogram[i] > max) ? histogram[i] : max;
+		max = (self->histogram[i] > max) ? self->histogram[i] : max;
 	});
 
 	dispatch_apply(256, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		histogram[i] = (int)(((float)histogram[i] / (float)max) * 120.0);
+		self->histogram[i] = (int)(((float)self->histogram[i] / (float)max) * 120.0);
 	});
 }
 

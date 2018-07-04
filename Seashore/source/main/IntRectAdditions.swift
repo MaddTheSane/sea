@@ -9,57 +9,62 @@
 import Foundation
 import GIMPCore
 
-public func ==(lhs: IntPoint, rhs: IntPoint) -> Bool {
-	return lhs.x == rhs.x && lhs.y == rhs.y
-}
-
-public func ==(lhs: IntSize, rhs: IntSize) -> Bool {
-	return lhs.height == rhs.height && lhs.width == rhs.width
-}
-
-public func ==(lhs: IntRect, rhs: IntRect) -> Bool {
-	return lhs.origin == rhs.origin && lhs.size == rhs.size
-}
-
 extension IntPoint: Equatable {
+	static public func ==(lhs: IntPoint, rhs: IntPoint) -> Bool {
+		return lhs.x == rhs.x && lhs.y == rhs.y
+	}
 }
 
 extension IntPoint {
 	/// Given an `NSPoint`, makes an `IntPoint` with similar values 
 	/// (fields are rounded down if necessary).
 	/// - parameter point: The `NSPoint` to convert.
-	public init(NSPoint point: Foundation.NSPoint) {
-		x = Int32(floor(point.x))
-		y = Int32(floor(point.y))
+	public init(nsPoint point: Foundation.NSPoint) {
+		self.init(x: Int32(floor(point.x)), y: Int32(floor(point.y)))
 	}
 	
-	public var NSPoint: Foundation.NSPoint {
+	/// Given an `NSPoint`, makes an `IntPoint` with similar values
+	/// (fields are rounded down if necessary).
+	/// - parameter point: The `NSPoint` to convert.
+	public init(_ point: Foundation.NSPoint) {
+		self.init(x: Int32(floor(point.x)), y: Int32(floor(point.y)))
+	}
+	
+	public var nsPoint: Foundation.NSPoint {
 		return CGPoint(x: Int(x), y: Int(y))
 	}
 }
 
 extension IntSize: Equatable {
-	
+	static public func ==(lhs: IntSize, rhs: IntSize) -> Bool {
+		return lhs.height == rhs.height && lhs.width == rhs.width
+	}
 }
 
 extension IntSize {
 	/// Given an `NSSize`, makes an `IntSize` with similar values 
 	/// (fields are rounded up if necessary).
 	/// - parameter size: The `NSSize` to convert.
-	public init(NSSize size: Foundation.NSSize) {
-		width = Int32(ceil(size.width))
-		height = Int32(ceil(size.height))
+	public init(nsSize size: Foundation.NSSize) {
+		self.init(width: Int32(ceil(size.width)), height: Int32(ceil(size.height)))
 	}
 	
-	public var NSSize: Foundation.NSSize {
+	/// Given an `NSSize`, makes an `IntSize` with similar values
+	/// (fields are rounded up if necessary).
+	/// - parameter size: The `NSSize` to convert.
+	public init(_ size: Foundation.NSSize) {
+		self.init(width: Int32(ceil(size.width)), height: Int32(ceil(size.height)))
+	}
+
+	
+	public var nsSize: Foundation.NSSize {
 		return CGSize(width: Int(width), height: Int(height))
 	}
 }
 
 extension IntRect: Equatable {
 	public init(x: Int32, y: Int32, width: Int32, height: Int32) {
-		origin = IntPoint(x: x, y: y)
-		size = IntSize(width: width, height: height)
+		self.init(origin: IntPoint(x: x, y: y), size: IntSize(width: width, height: height))
 	}
 	
 	public func constrain(into bigRect: IntRect) -> IntRect {
@@ -111,6 +116,10 @@ extension IntRect: Equatable {
 	public func sum(_ addendRect: IntRect) -> IntRect {
 		return IntSumRects(self, addendRect)
 	}
+	
+	static public func ==(lhs: IntRect, rhs: IntRect) -> Bool {
+		return lhs.origin == rhs.origin && lhs.size == rhs.size
+	}
 }
 
 extension IntRect {
@@ -119,14 +128,22 @@ extension IntRect {
 	///
 	/// - parameter rect: The `NSRect` to convert.
 	/// - returns: an `IntRect` at least the size of `NSRect`.
-	public init(NSRect rect: Foundation.NSRect) {
-		origin = IntPoint(NSPoint: rect.origin)
-		size = IntSize(NSSize: rect.size)
+	public init(nsRect rect: Foundation.NSRect) {
+		self.init(origin: IntPoint(nsPoint: rect.origin), size: IntSize(nsSize: rect.size))
 	}
-	
+
+	/// Given an `NSRect`, makes an `IntRect` with similar values,  the
+	/// `IntRect` will always exceed the `NSRect` in size.
+	///
+	/// - parameter rect: The `NSRect` to convert.
+	/// - returns: an `IntRect` at least the size of `NSRect`.
+	public init(_ rect: Foundation.NSRect) {
+		self.init(origin: IntPoint(nsPoint: rect.origin), size: IntSize(nsSize: rect.size))
+	}
+
 	/// An `NSRect` with similar values to this `IntRect`
-	public var NSRect: Foundation.NSRect {
-		let newRect = CGRect(origin: origin.NSPoint, size: size.NSSize)
+	public var nsRect: Foundation.NSRect {
+		let newRect = CGRect(origin: origin.nsPoint, size: size.nsSize)
 		
 		return newRect
 	}

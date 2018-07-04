@@ -88,7 +88,7 @@ class EraserTool: AbstractTool {
 		var brushData: UnsafeMutablePointer<UInt8>? = nil
 		let brushWidth = brush.fakeWidth
 		let brushHeight = brush.fakeHeight
-		let ipoint = IntPoint(NSPoint: point)
+		let ipoint = IntPoint(nsPoint: point)
 		let width = layer.width
 		let height = layer.height
 		var overlayPos: Int32 = 0
@@ -147,7 +147,7 @@ class EraserTool: AbstractTool {
 			let layer = document.contents.activeLayer else {
 				return
 		}
-		let curPoint = where1.NSPoint
+		let curPoint = where1.nsPoint
 		let hasAlpha = layer.hasAlpha
 		var rect = IntRect()
 		let spp = document.contents.samplesPerPixel
@@ -192,7 +192,7 @@ class EraserTool: AbstractTool {
 		rect.size.width = curBrush.fakeWidth + 1;
 		rect.size.height = curBrush.fakeHeight + 1;
 		let temp = NSPoint(x: curPoint.x - CGFloat(curBrush.width / 2) - 1.0, y: curPoint.y - CGFloat(curBrush.height / 2) - 1.0)
-		rect.origin = IntPoint(NSPoint: temp)
+		rect.origin = IntPoint(nsPoint: temp)
 		rect.origin.x -= 1; rect.origin.y -= 1;
 		rect = rect.constrain(into: IntRect(x: 0, y: 0, width: layer.width, height: layer.height))
 		if rect.size.width > 0 && rect.size.height > 0 {

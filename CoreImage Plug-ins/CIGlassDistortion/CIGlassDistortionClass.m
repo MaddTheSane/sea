@@ -9,6 +9,7 @@
 
 @implementation CIGlassDistortionClass
 @synthesize scale;
+@synthesize texturePath;
 
 - (instancetype)initWithManager:(SeaPlugins *)manager
 {
@@ -95,7 +96,7 @@
 - (void)panelSelectionDidChange:(id)openPanel
 {
 	if ([[openPanel URLs] count] > 0) {
-		texturePath = [[openPanel URLs][0] path];
+		self.texturePath = [[openPanel URLs][0] path];
 		if (texturePath) {
 			refresh = YES;
 			[self preview:NULL];
@@ -110,7 +111,7 @@
 	NSURL *path = [[[NSBundle mainBundle] resourceURL] URLByAppendingPathComponent:@"textures"];
 	
 	if (texturePath) {
-		texturePath = nil;
+		self.texturePath = nil;
 	}
 	[openPanel setTreatsFilePackagesAsDirectories:YES];
 	[openPanel setDelegate:self];
@@ -122,15 +123,12 @@
 	[openPanel beginSheet:self.panel completionHandler:^(NSModalResponse returnCode) {
 		NSString *localStr;
 		if (returnCode == NSOKButton) {
-			texturePath = [[openPanel URL] path];
+			self.texturePath = [[openPanel URL] path];
 			localStr = [gOurBundle localizedStringForKey:@"texture label" value:@"Texture: %@" table:nil];
-			[textureLabel setStringValue:[NSString stringWithFormat:localStr, [[texturePath lastPathComponent] stringByDeletingPathExtension]]];
+			[self->textureLabel setStringValue:[NSString stringWithFormat:localStr, [[self.texturePath lastPathComponent] stringByDeletingPathExtension]]];
 		}
-		if (texturePath) {
-			texturePath = NULL;
-		}
-		[panel setAlphaValue:1.0];
-		refresh = YES;
+		[self.panel setAlphaValue:1.0];
+		self->refresh = YES;
 		[self preview:NULL];
 	}];
 }
