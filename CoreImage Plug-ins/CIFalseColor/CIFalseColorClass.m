@@ -91,10 +91,10 @@
 	
 	// Convert from GA to ARGB
 	dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		newdata[i * 4] = data[i * 2 + 1];
-		newdata[i * 4 + 1] = data[i * 2];
-		newdata[i * 4 + 2] = data[i * 2];
-		newdata[i * 4 + 3] = data[i * 2];
+		self->newdata[i * 4] = data[i * 2 + 1];
+		self->newdata[i * 4 + 1] = data[i * 2];
+		self->newdata[i * 4 + 2] = data[i * 2];
+		self->newdata[i * 4 + 3] = data[i * 2];
 	});
 	
 	// Run CoreImage effect
@@ -106,15 +106,15 @@
 	else
 		max = width * height;
 	dispatch_apply(max, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		newdata[i * 2] = resdata[i * 4];
-		newdata[i * 2 + 1] = resdata[i * 4 + 3];
+		self->newdata[i * 2] = resdata[i * 4];
+		self->newdata[i * 2 + 1] = resdata[i * 4 + 3];
 	});
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
 		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
-			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(newdata[selection.size.width * 2 * i]), selection.size.width * 2);
+			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(self->newdata[selection.size.width * 2 * i]), selection.size.width * 2);
 		});
 	} else {
 		memset(replace, 0xFF, width * height);
@@ -216,8 +216,8 @@
 	datatouse = newdata;
 	if (channel == kAlphaChannel) {
 		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-			newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
-			newdata[i * 4] = 255;
+			self->newdata[i * 4 + 1] = self->newdata[i * 4 + 2] = self->newdata[i * 4 + 3] = data[i * 4];
+			self->newdata[i * 4] = 255;
 		});
 	} else {
 		for (i = 0; i < 16; i++) {

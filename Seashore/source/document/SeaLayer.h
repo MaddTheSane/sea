@@ -291,7 +291,7 @@
 	@param		trim
 				YES if the layer should be trimmed afterwards, NO otherwise.
 */
-- (void)setRotation:(float)degrees interpolation:(int)interpolation withTrim:(BOOL)trim;
+- (void)setRotation:(CGFloat)degrees interpolation:(NSImageInterpolation)interpolation withTrim:(BOOL)trim;
 #endif
 
 /*!
@@ -561,7 +561,7 @@
 	@param		interpolation
 				The interpolation style to be used (see GIMPCore).
 */
-- (void)setWidth:(int)newWidth height:(int)newHeight interpolation:(int)interpolation;
+- (void)setWidth:(int)newWidth height:(int)newHeight interpolation:(GimpInterpolationType)interpolation;
 
 /*!
 	@method		convertFromType:to:

@@ -75,29 +75,29 @@ typedef struct {
 #endif /* INTRECT_T */
 
 typedef CF_ENUM(int, GimpInterpolationType) {
-  GIMP_INTERPOLATION_NONE, 		/**< Specifies no interpolation. */
-  GIMP_INTERPOLATION_LINEAR, 	/**< Specifies lower-quality but faster linear interpolation. */
-  GIMP_INTERPOLATION_CUBIC		/**< Specifies high-quality cubic interpolation */
+  GIMP_INTERPOLATION_NONE CF_SWIFT_NAME(none), 		/**< Specifies no interpolation. */
+  GIMP_INTERPOLATION_LINEAR CF_SWIFT_NAME(linear), 	/**< Specifies lower-quality but faster linear interpolation. */
+  GIMP_INTERPOLATION_CUBIC CF_SWIFT_NAME(cubic)		/**< Specifies high-quality cubic interpolation */
 };
 
 typedef CF_ENUM(int, GimpGradientType) {
-  GIMP_GRADIENT_LINEAR,                /**< Specifies linear gradient */
-  GIMP_GRADIENT_BILINEAR,              /**< Specifies bi-linear gradient */
-  GIMP_GRADIENT_RADIAL,                /**< Specifies radial gradient */
-  GIMP_GRADIENT_SQUARE,                /**< Specifies square gradient */
-  GIMP_GRADIENT_CONICAL_SYMMETRIC,     /**< Specifies conical (symmetric) gradient */
-  GIMP_GRADIENT_CONICAL_ASYMMETRIC,    /**< Specifies conical (asymmetric) gradient */
-  GIMP_GRADIENT_SHAPEBURST_ANGULAR,    /**< Specifies shapeburst (angular) gradient (NYI)*/
-  GIMP_GRADIENT_SHAPEBURST_SPHERICAL,  /**< Specifies shapeburst (spherical) gradient (NYI) */
-  GIMP_GRADIENT_SHAPEBURST_DIMPLED,    /**< Specifies shapeburst (dimpled) gradient (NYI) */
-  GIMP_GRADIENT_SPIRAL_CLOCKWISE,      /**< Specifies spiral (clockwise) gradient */
-  GIMP_GRADIENT_SPIRAL_ANTICLOCKWISE   /**< Specifies spiral (anticlockwise) gradient */
+  GIMP_GRADIENT_LINEAR CF_SWIFT_NAME(linear),                             /**< Specifies linear gradient */
+  GIMP_GRADIENT_BILINEAR CF_SWIFT_NAME(bilinear),                         /**< Specifies bi-linear gradient */
+  GIMP_GRADIENT_RADIAL CF_SWIFT_NAME(radial),                             /**< Specifies radial gradient */
+  GIMP_GRADIENT_SQUARE CF_SWIFT_NAME(square),                             /**< Specifies square gradient */
+  GIMP_GRADIENT_CONICAL_SYMMETRIC CF_SWIFT_NAME(symmetricConical),        /**< Specifies conical (symmetric) gradient */
+  GIMP_GRADIENT_CONICAL_ASYMMETRIC CF_SWIFT_NAME(asymmetricConical),      /**< Specifies conical (asymmetric) gradient */
+  GIMP_GRADIENT_SHAPEBURST_ANGULAR CF_SWIFT_NAME(angularShapeBurst),      /**< Specifies shapeburst (angular) gradient (NYI)*/
+  GIMP_GRADIENT_SHAPEBURST_SPHERICAL CF_SWIFT_NAME(sphericalShapeBurst),  /**< Specifies shapeburst (spherical) gradient (NYI) */
+  GIMP_GRADIENT_SHAPEBURST_DIMPLED CF_SWIFT_NAME(dimpledShapeBurst),      /**< Specifies shapeburst (dimpled) gradient (NYI) */
+  GIMP_GRADIENT_SPIRAL_CLOCKWISE CF_SWIFT_NAME(clockwiseSpiral),          /**< Specifies spiral (clockwise) gradient */
+  GIMP_GRADIENT_SPIRAL_ANTICLOCKWISE CF_SWIFT_NAME(anticlockwiseSpiral)   /**< Specifies spiral (anticlockwise) gradient */
 };
 
 typedef CF_ENUM(int, GimpRepeatMode) {
-  GIMP_REPEAT_NONE,       /**< Specifies no repeat */
-  GIMP_REPEAT_SAWTOOTH,   /**< Specifies sawtooth repeat wave */
-  GIMP_REPEAT_TRIANGULAR  /**< Specifies triangular repeat wave */
+  GIMP_REPEAT_NONE CF_SWIFT_NAME(none),             /**< Specifies no repeat */
+  GIMP_REPEAT_SAWTOOTH CF_SWIFT_NAME(sawtooth),     /**< Specifies sawtooth repeat wave */
+  GIMP_REPEAT_TRIANGULAR CF_SWIFT_NAME(triangular)  /**< Specifies triangular repeat wave */
 };
 
 typedef struct {

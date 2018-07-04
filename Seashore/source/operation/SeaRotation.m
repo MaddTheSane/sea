@@ -105,12 +105,12 @@ static inline CGFloat mod_float(CGFloat value, CGFloat divisor)
 	// Record the undo details
 	undoRecord.index =  [contents activeLayerIndex];
 	undoRecord.rotation = degrees;
-	undoRecord.undoIndex = [[activeLayer seaLayerUndo] takeSnapshot:IntMakeRect(0, 0, [(SeaLayer *)activeLayer width], [(SeaLayer *)activeLayer height]) automatic:NO];
-	undoRecord.rect = IntMakeRect([activeLayer xoff], [activeLayer yoff], [(SeaLayer *)activeLayer width], [(SeaLayer *)activeLayer height]);
+	undoRecord.undoIndex = [[activeLayer seaLayerUndo] takeSnapshot:IntMakeRect(0, 0, [activeLayer width], [activeLayer height]) automatic:NO];
+	undoRecord.rect = IntMakeRect([activeLayer xoff], [activeLayer yoff], [activeLayer width], [activeLayer height]);
 	undoRecord.isRotated = YES;
 	undoRecord.withTrim = trim;
 	[[[document undoManager] prepareWithInvocationTarget:self] undoRotation:undoCount];
-	[activeLayer setRotation:degrees interpolation:GIMP_INTERPOLATION_CUBIC withTrim:trim];
+	[activeLayer setRotation:degrees interpolation:NSImageInterpolationHigh withTrim:trim];
 	if (activeLayer.floating && trim) [[document selection] selectOpaque];
 	else [[document selection] clearSelection];
 	if (!trim && ![activeLayer hasAlpha]) {

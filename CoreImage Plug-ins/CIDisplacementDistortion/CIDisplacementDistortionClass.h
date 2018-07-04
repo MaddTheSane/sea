@@ -21,10 +21,13 @@
 	// The path of the texture to be used
 	NSString *texturePath;
 }
-// The label displaying the current texture
+//! The label displaying the current texture
 @property (weak) IBOutlet NSTextField *textureLabel;
 
-// The scale of the crystallize
+//! The path of the texture to be used
+@property (copy) NSString *texturePath;
+
+//! The scale of the crystallize
 @property NSInteger scale;
 
 /*!

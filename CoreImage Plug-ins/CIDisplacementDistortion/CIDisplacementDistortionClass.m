@@ -8,6 +8,7 @@
 @implementation CIDisplacementDistortionClass
 @synthesize scale;
 @synthesize textureLabel;
+@synthesize texturePath;
 
 - (instancetype)initWithManager:(SeaPlugins *)manager
 {
@@ -125,14 +126,14 @@
 	}
 	
 	[openPanel beginSheetModalForWindow:[pluginData window] ? [pluginData window] : self.panel completionHandler:^(NSInteger result) {
-		[panel setAlphaValue:1.0];
+		[self.panel setAlphaValue:1.0];
 		if (result == NSOKButton) {
 			NSURL *fileURL = [openPanel URL];
-			texturePath = [fileURL path];
+			self.texturePath = [fileURL path];
 			NSString *localStr = [gOurBundle localizedStringForKey:@"texture label" value:@"Texture: %@" table:NULL];
-			[textureLabel setStringValue:[NSString stringWithFormat:localStr, [[texturePath lastPathComponent] stringByDeletingPathExtension]]];
+			[self.textureLabel setStringValue:[NSString stringWithFormat:localStr, [[self.texturePath lastPathComponent] stringByDeletingPathExtension]]];
 		}
-		refresh = YES;
+		self->refresh = YES;
 		[self preview:nil];
 	}];
 }

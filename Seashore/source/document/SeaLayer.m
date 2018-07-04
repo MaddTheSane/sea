@@ -411,7 +411,7 @@
 	yoff = ox;
 }
 
-- (void)setCocoaRotation:(float)degrees interpolation:(int)interpolation withTrim:(BOOL)trim
+- (void)setCocoaRotation:(CGFloat)degrees interpolation:(NSImageInterpolation)interpolation withTrim:(BOOL)trim
 {
 	NSAffineTransform *at, *tat;
 	unsigned char *srcData;
@@ -495,7 +495,7 @@
 	if (trim) [self trimLayer];
 }
 
-- (void)setCoreImageRotation:(CGFloat)degrees interpolation:(int)interpolation withTrim:(BOOL)trim
+- (void)setCoreImageRotation:(CGFloat)degrees interpolation:(NSImageInterpolation)interpolation withTrim:(BOOL)trim
 {
 	unsigned char *newData;
 	NSAffineTransform *at;
@@ -547,7 +547,7 @@
 }
 
 
-- (void)setRotation:(float)degrees interpolation:(int)interpolation withTrim:(BOOL)trim
+- (void)setRotation:(CGFloat)degrees interpolation:(NSImageInterpolation)interpolation withTrim:(BOOL)trim
 {
 	if (affinePlugin && [[SeaController seaPrefs] useCoreImage]) {
 		[self setCoreImageRotation:degrees interpolation:interpolation withTrim:trim];
@@ -859,7 +859,7 @@
 }
 
 
-- (void)setWidth:(int)newWidth height:(int)newHeight interpolation:(int)interpolation
+- (void)setWidth:(int)newWidth height:(int)newHeight interpolation:(GimpInterpolationType)interpolation
 {
 	// The issue here is it looks like we're not smart enough to pass anything
 	// to the affine plugin besides cubic, so if we're not cupbic we have to use cocoa
