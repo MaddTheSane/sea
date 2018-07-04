@@ -12,7 +12,7 @@
 - (void)executeGrey:(PluginData *)pluginData
 {
 	IntRect selection;
-	int spp = 0, width, height;
+	int spp, width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
 	size_t vec_len, max;
 	
@@ -24,6 +24,7 @@
 	// Get plug-in data
 	width = [pluginData width];
 	height = [pluginData height];
+	spp = [pluginData spp];
 	vec_len = width * height * spp;
 	if (vec_len % 16 == 0) {
 		vec_len /= 16;
@@ -61,7 +62,7 @@
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
 		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
-			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(newdata[selection.size.width * 2 * i]), selection.size.width * 2);
+			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(self->newdata[selection.size.width * 2 * i]), selection.size.width * 2);
 		});
 	} else {
 		memset(replace, 0xFF, width * height);

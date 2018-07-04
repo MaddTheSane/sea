@@ -75,15 +75,31 @@ static BOOL checkRun(NSString *path, NSString *file)
 #endif
 	
 	// Check system version
-	value = infoDict[@"MinSystemVersion"];
+	value = infoDict[@"LSMinimumSystemVersion"];
+	if (value == nil) {
+		value = infoDict[@"MinSystemVersion"];
+	}
 	if (value != NULL) {
-		switch ((int)floor(NSAppKitVersionNumber)) {
-			case NSAppKitVersionNumber10_3:
-				canRun = canRun && [value floatValue] <= 10.3;
-			break;
-			case NSAppKitVersionNumber10_4:
-				canRun = canRun && [value floatValue] <= 10.4;
-			break;
+		if ([value isKindOfClass:[NSString class]]) {
+			NSOperatingSystemVersion sysVers;
+			NSScanner *versScanner = [NSScanner scannerWithString:value];
+			versScanner.charactersToBeSkipped = [NSCharacterSet punctuationCharacterSet];
+			int toScan;
+			if (![versScanner scanInt:&toScan]) {
+				break;
+			}
+			sysVers.majorVersion = toScan;
+			if (![versScanner scanInt:&toScan]) {
+				break;
+			}
+			sysVers.minorVersion = toScan;
+			if ([versScanner scanInt:&toScan]) {
+				sysVers.patchVersion = toScan;
+			} else {
+				sysVers.patchVersion = 0;
+			}
+			
+			return canRun && [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:sysVers];
 		}
 	}
 	
@@ -166,12 +182,12 @@ static BOOL checkRun(NSString *path, NSString *file)
 	}
 	
 	// Sort plug-ins
-	[plugins sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+	[plugins sortUsingComparator:^NSComparisonResult(id<SeaPluginClass> obj1, id<SeaPluginClass> obj2) {
 		NSComparisonResult result;
 		
-		result = [[obj1 groupName] caseInsensitiveCompare:[obj2 groupName]];
+		result = [obj1.groupName caseInsensitiveCompare:obj2.groupName];
 		if (result == NSOrderedSame) {
-			result = [[obj1 name] caseInsensitiveCompare:[obj2 name]];
+			result = [obj1.name caseInsensitiveCompare:obj2.name];
 		}
 		
 		return result;
