@@ -16,45 +16,6 @@
 	/// The plug-in's manager
 	__weak SeaPlugins *seaPlugins;
 
-	/// The label displaying the overlap
-	IBOutlet NSTextField *overlapLabel;
-	
-	/// The slider for the overlap
-	IBOutlet NSSlider *overlapSlider;
-
-	/// The label displaying the width
-	IBOutlet NSTextField *widthLabel;
-	
-	/// The slider for the width
-	IBOutlet NSSlider *widthSlider;
-	
-	/// The label displaying the height
-	IBOutlet NSTextField *heightLabel;
-	
-	/// The slider for the height
-	IBOutlet NSSlider *heightSlider;
-	
-	/// The checkbox indicating whether the resulting texture should be tileable
-	IBOutlet NSButton *tileableCheckbox;
-	
-	/// The panel for the plug-in
-	IBOutlet NSPanel *panel;
-	
-	/// The progress bar to indicate progress
-	IBOutlet NSProgressIndicator *progressBar;
-
-	/// The overlap
-	CGFloat overlap;
-	
-	/// The width
-	CGFloat width;
-	
-	/// The height
-	CGFloat height;
-	
-	/// Should the resulting texture be tileable?
-	BOOL tileable;
-
 	/// \c YES if the application succeeded
 	BOOL success;
 }
@@ -67,6 +28,33 @@
 @property (nonatomic) CGFloat height;
 /// Should the resulting texture be tileable?
 @property (nonatomic, getter=isTileable) BOOL tileable;
+
+/// The label displaying the overlap
+@property (weak) IBOutlet NSTextField *overlapLabel;
+
+/// The slider for the overlap
+@property (weak) IBOutlet NSSlider *overlapSlider;
+
+/// The label displaying the width
+@property (weak) IBOutlet NSTextField *widthLabel;
+
+/// The slider for the width
+@property (weak) IBOutlet NSSlider *widthSlider;
+
+/// The label displaying the height
+@property (weak) IBOutlet NSTextField *heightLabel;
+
+/// The slider for the height
+@property (weak) IBOutlet NSSlider *heightSlider;
+
+/// The checkbox indicating whether the resulting texture should be tileable
+@property (weak) IBOutlet NSButton *tileableCheckbox;
+
+/// The panel for the plug-in
+@property (weak) IBOutlet NSPanel *panel;
+
+/// The progress bar to indicate progress
+@property (weak) IBOutlet NSProgressIndicator *progressBar;
 
 /*!
 	@method		initWithManager:
