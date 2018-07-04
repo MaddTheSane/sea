@@ -176,7 +176,7 @@
 				LastUpgradeCheck = 0940;
 				TargetAttributes = {
 					A898E52509BEFCA00075C7AB = {
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -277,6 +277,7 @@
 				PRODUCT_NAME = Brushed;
 				SWIFT_OBJC_BRIDGING_HEADER = "Brushed-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -299,6 +300,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.brushed;
 				PRODUCT_NAME = Brushed;
 				SWIFT_OBJC_BRIDGING_HEADER = "Brushed-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -42,8 +42,10 @@ final public class CMYK: NSObject, SeaPluginClass {
 		let replace = pluginData.replace
 		let channel = pluginData.channel
 		
-		let srcProf = ColorSyncProfileCreateWithDisplayID(0).takeRetainedValue()
-		let destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile.takeUnretainedValue()).takeRetainedValue()
+		guard let srcProf = ColorSyncProfileCreateWithDisplayID(0),
+			let destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile.takeUnretainedValue()) else {
+				return
+		}
 		// TODO: Hey Apple! Audit your ColorSync API for Swift!
 		let profSeq: [[String: Any]] = [
 			[kColorSyncProfile.takeUnretainedValue() as String: srcProf,
@@ -59,7 +61,9 @@ final public class CMYK: NSObject, SeaPluginClass {
 				kColorSyncTransformTag.takeUnretainedValue() as String: kColorSyncTransformPCSToDevice.takeUnretainedValue() as String]
 		]
 		
-		let cw = ColorSyncTransformCreate(profSeq as NSArray, nil).takeRetainedValue()
+		guard let cw = ColorSyncTransformCreate(profSeq as NSArray, nil) else {
+			return
+		}
 		
 		for j in selection.origin.y..<(selection.origin.y + selection.size.height)  {
 			let pos = j * width + selection.origin.x;
@@ -68,7 +72,9 @@ final public class CMYK: NSObject, SeaPluginClass {
 			let srcDepth = kColorSync8BitInteger;
 			var srcRowBytes: Int
 			var srcBytes: UnsafeMutableRawPointer? = nil
-			let dstBytes = UnsafeMutableRawPointer(overlay?.advanced(by: Int(pos) * 4))
+			guard let dstBytes = UnsafeMutableRawPointer(overlay?.advanced(by: Int(pos) * 4)) else {
+				return
+			}
 			
 			if channel == .primary {
 				srcBytes = UnsafeMutableRawPointer(data?.advanced(by: Int(pos) * 3))
@@ -80,7 +86,10 @@ final public class CMYK: NSObject, SeaPluginClass {
 				srcLayout |= kColorSyncAlphaLast.rawValue;
 			}
 			
-			ColorSyncTransformConvert(cw, Int(selection.size.width), 1, dstBytes, kColorSync8BitInteger, srcLayout, srcRowBytes, srcBytes, srcDepth, srcLayout, srcRowBytes, nil);
+			guard let srcBytes2 = srcBytes else {
+				return
+			}
+			ColorSyncTransformConvert(cw, Int(selection.size.width), 1, dstBytes, kColorSync8BitInteger, srcLayout, srcRowBytes, srcBytes2, srcDepth, srcLayout, srcRowBytes, nil);
 			
 			for i in (0..<selection.size.width).reversed() {
 				if channel == .primary {
