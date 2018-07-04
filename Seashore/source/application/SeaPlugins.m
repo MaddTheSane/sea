@@ -79,8 +79,8 @@ static BOOL checkRun(NSString *path, NSString *file)
 	if (value == nil) {
 		value = infoDict[@"MinSystemVersion"];
 	}
-	if (value != NULL) {
-		if ([value isKindOfClass:[NSString class]]) {
+	if (value != NULL && [value isKindOfClass:[NSString class]]) {
+		do {
 			NSOperatingSystemVersion sysVers;
 			NSScanner *versScanner = [NSScanner scannerWithString:value];
 			versScanner.charactersToBeSkipped = [NSCharacterSet punctuationCharacterSet];
@@ -99,8 +99,8 @@ static BOOL checkRun(NSString *path, NSString *file)
 				sysVers.patchVersion = 0;
 			}
 			
-			return canRun && [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:sysVers];
-		}
+			canRun = canRun && [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:sysVers];
+		} while (0);
 	}
 	
 	return canRun;
