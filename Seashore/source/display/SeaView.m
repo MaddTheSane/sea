@@ -306,17 +306,14 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[[NSBezierPath bezierPathWithRect:destRect] fill];
 	}
 	
-	// We want our image flipped
-	[image setFlipped:YES];
-	
 	// For non 72 dpi resolutions we must scale here
 	xResScale = yResScale = 1.0;
 	if (SeaScreenResolution.x != 0 && SeaScreenResolution.y != 0) {
 		if (xres != SeaScreenResolution.x) {
-			xResScale = ((float)xres / SeaScreenResolution.x);
+			xResScale = ((CGFloat)xres / SeaScreenResolution.x);
 		}
 		if (yres != SeaScreenResolution.y) {
-			yResScale = ((float)yres / SeaScreenResolution.y);
+			yResScale = ((CGFloat)yres / SeaScreenResolution.y);
 		}
 	}
 	srcRect.origin.x *= xResScale;
@@ -346,7 +343,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	}
 	
 	// Draw the image to screen
-	[image drawInRect:destRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0];
+	[image drawInRect:destRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
 
 	// Clear out the old cursor rects
 	[self needsCursorsReset];
@@ -476,7 +473,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		srcRect.size = IntSizeMakeNSSize(selectRect.size);
 		if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_2)
 			srcRect.origin.y = [[document selection] maskSize].height - (srcRect.origin.y + srcRect.size.height);
-		[maskImage drawInRect:tempRect fromRect:srcRect operation:NSCompositeSourceOver fraction:0.4];
+		[maskImage drawInRect:tempRect fromRect:srcRect operation:NSCompositeSourceOver fraction:0.4 respectFlipped:YES hints:nil];
 
 		// If the currently selected tool is a selection tool, draw the handles
 		if(curToolIndex >= kFirstSelectionTool && curToolIndex <= kLastSelectionTool){

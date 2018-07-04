@@ -55,9 +55,6 @@
 	[[NSColor whiteColor] set];
 	[[NSBezierPath bezierPathWithRect:destRect] fill];
 	
-	// We want our image flipped
-	[image setFlipped:YES];
-	
 	// For non 72 dpi resolutions we must scale here
 	if (xres != 72) {
 		srcRect.origin.x *= ((CGFloat)xres / 72.0);
@@ -79,7 +76,7 @@
 	}
 	
 	// Draw the image to screen
-	[image drawInRect:destRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0];
+	[image drawInRect:destRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
 }
 
 - (BOOL)knowsPageRange:(NSRangePointer)range

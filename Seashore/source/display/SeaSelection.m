@@ -68,7 +68,6 @@
 		SeaPremultiplyBitmap(4, maskBitmap, maskBitmap, rect.size.width * rect.size.height);
 		selectionColorIndex = [[SeaController seaPrefs] selectionColorIndex];
 	}
-	[maskImage setFlipped:YES];
 	
 	return maskImage;
 }

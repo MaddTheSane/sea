@@ -20,6 +20,7 @@
 #if MAIN_COMPILE
 #include <GIMPCore/GIMPCore.h>
 #endif
+#include <tgmath.h>
 
 @implementation SeaLayer
 @synthesize xOffset = xoff;
@@ -494,7 +495,7 @@
 	if (trim) [self trimLayer];
 }
 
-- (void)setCoreImageRotation:(float)degrees interpolation:(int)interpolation withTrim:(BOOL)trim
+- (void)setCoreImageRotation:(CGFloat)degrees interpolation:(int)interpolation withTrim:(BOOL)trim
 {
 	unsigned char *newData;
 	NSAffineTransform *at;
@@ -524,8 +525,8 @@
 		if (point[i].y > maxPoint.y)
 			maxPoint.y = point[i].y;
 	}
-	newWidth = ceilf(maxPoint.x - minPoint.x);
-	newHeight = ceilf(maxPoint.y - minPoint.y);
+	newWidth = ceil(maxPoint.x - minPoint.x);
+	newHeight = ceil(maxPoint.y - minPoint.y);
 	
 	// Run the transform
 	newData = [affinePlugin runAffineTransform:at withImage:data spp:spp width:width height:height opaque:NO newWidth:&newWidth newHeight:&newHeight];
@@ -842,7 +843,7 @@
 	
 	// Determine affine transform
 	at = [NSAffineTransform transform];
-	[at scaleXBy:(float)newWidth / (float)width yBy:(float)newHeight / (float)height];
+	[at scaleXBy:(CGFloat)newWidth / (CGFloat)width yBy:(CGFloat)newHeight / (CGFloat)height];
 	
 	// Run the transform
 	newData = [affinePlugin runAffineTransform:at withImage:data spp:spp width:width height:height opaque:!hasAlpha newWidth:&newWidth newHeight:&newHeight];
