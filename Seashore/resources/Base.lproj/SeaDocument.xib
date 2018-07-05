@@ -290,7 +290,7 @@ DQ
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <clipView key="contentView" id="eIU-Ie-Ctz">
                                             <rect key="frame" x="0.0" y="0.0" width="198" height="543"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="39" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="9834" id="7811" customClass="SeaOutlineView">
                                                     <rect key="frame" x="0.0" y="0.0" width="198" height="543"/>
@@ -1527,13 +1527,13 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="2az-qY-cA8">
                             <rect key="frame" x="1" y="1" width="438" height="54"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" usesFontPanel="YES" usesRuler="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1007" customClass="NSTextViewRedirect">
                                     <rect key="frame" x="0.0" y="0.0" width="423" height="54"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="438" height="54"/>
+                                    <size key="minSize" width="423" height="54"/>
                                     <size key="maxSize" width="466" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
@@ -1884,7 +1884,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="9yS-N0-Caa">
                             <rect key="frame" x="1" y="1" width="246" height="94"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" id="415" customClass="NSExtendedTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="246" height="94"/>
@@ -4105,7 +4105,7 @@ DQ
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="754" y="619" width="303" height="91"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
-            <value key="minSize" type="size" width="213" height="107"/>
+            <value key="minSize" type="size" width="213" height="90"/>
             <view key="contentView" misplaced="YES" id="2824">
                 <rect key="frame" x="0.0" y="0.0" width="303" height="91"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -4178,7 +4178,7 @@ DQ
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="782" y="592" width="303" height="91"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
-            <value key="minSize" type="size" width="213" height="107"/>
+            <value key="minSize" type="size" width="213" height="90"/>
             <view key="contentView" misplaced="YES" id="2808">
                 <rect key="frame" x="0.0" y="0.0" width="303" height="91"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -4911,7 +4911,7 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="pW7-Ok-ht6">
                             <rect key="frame" x="1" y="1" width="214" height="179"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="14" id="11980">
                                     <rect key="frame" x="0.0" y="0.0" width="214" height="179"/>

@@ -319,7 +319,7 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 	}
 	
 	// Swap alpha (if necessary)
-	if (iformat & kAlphaFirstFormat) {
+	if (iformat & GIMPBitmapFormatAlphaFirst) {
 		pbitmap = getPtr(ptrs); /* Note: transform is destructive (other destructive transforms follow) */
 		if (ibps == 8) {
 			for (int i = 0; i < width * height; i++) {
@@ -332,7 +332,7 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 				rotate_bytes(pbitmap, i * ispp * 2, i * ispp * 2 - 1);
 			}
 		}
-		iformat &= ~(kAlphaFirstFormat);
+		iformat &= ~(GIMPBitmapFormatAlphaFirst);
 	}
 	
 	// Convert inverted gray color space

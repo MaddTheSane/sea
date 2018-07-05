@@ -208,7 +208,7 @@
 	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (pluginData != NULL) {
-		if ([pluginData channel] == kAlphaChannel)
+		if ([pluginData channel] == SeaSelectedChannelAlpha)
 			return NO;
 		
 		if ([pluginData spp] == 2)

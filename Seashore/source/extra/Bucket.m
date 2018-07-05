@@ -20,7 +20,7 @@ static BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint see
 			continue;
 		}
 		
-		if (channel == kAllChannels) {
+		if (channel == SeaSelectedChannelAll) {
 			for (int k = spp - 1; k >= 0; k--) {
 				temp = abs((int)data[(width * j + i) * spp + k] - (int)data[(width * seed.y + seed.x) * spp + k]);
 				if (temp > tolerance){
@@ -30,7 +30,7 @@ static BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint see
 				if (k == spp - 1 && data[(width * j + i) * spp + k] == 0)
 					return YES;
 			}
-		} else if (channel == kPrimaryChannels) {
+		} else if (channel == SeaSelectedChannelPrimary) {
 			for (int k = 0; k < spp - 1; k++) {
 				temp = abs((int)data[(width * j + i) * spp + k] - (int)data[(width * seed.y + seed.x) * spp + k]);
 				if (temp > tolerance){
@@ -38,7 +38,7 @@ static BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint see
 					break;
 				}
 			}
-		} else if (channel == kAlphaChannel) {
+		} else if (channel == SeaSelectedChannelAlpha) {
 			temp = abs((int)data[(width * j + i + 1) * spp - 1] - (int)data[(width * seed.y + seed.x + 1) * spp - 1]);
 			if (temp > tolerance){
 				outsideTolerance = YES;

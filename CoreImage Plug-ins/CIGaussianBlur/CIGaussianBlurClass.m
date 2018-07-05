@@ -119,7 +119,7 @@
 	selection = [pluginData selection];
 	
 	// Check if image is opaque
-	opaque = ![pluginData hasAlpha] || ([pluginData channel] != kAllChannels);
+	opaque = ![pluginData hasAlpha] || ([pluginData channel] != SeaSelectedChannelAll);
 	if (opaque == NO) {
 		done = NO;
 		for (i = 0; i < width * height && !done; i++) {
@@ -168,6 +168,8 @@
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];
+		//output = [output imageByCroppingToRect:rect];
+		output = crop_output;
 	} else {
 		// Create output core image
 		rect.origin.x = 0;
@@ -178,7 +180,10 @@
 	}
 	
 	// Get data from output core image
-	temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
+	// FIXME: which one of these works best?
+	//temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
+	//temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCIImage:output];
 	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	
@@ -192,9 +197,9 @@
 		}
 		memcpy(&orvmask, ormask, 16);
 		vresdata = (__m128i *)resdata;
-		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		for (int i = 0; i < vec_len; i++) {
 			vresdata[i] = _mm_or_si128(vresdata[i], orvmask);
-		});
+		}
 	}
 	
 	return resdata;

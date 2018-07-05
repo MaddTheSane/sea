@@ -216,7 +216,7 @@
 	// Make adjustments for the channel
 	channel = [pluginData channel];
 	datatouse = data;
-	if (channel == kPrimaryChannels || channel == kAlphaChannel) {
+	if (channel == SeaSelectedChannelPrimary || channel == SeaSelectedChannelAlpha) {
 		width = [pluginData width];
 		height = [pluginData height];
 		vec_len = width * height * 4;
@@ -225,7 +225,7 @@
 		vdata = (__m128i *)data;
 		rvdata = (__m128i *)newdata;
 		datatouse = newdata;
-		if (channel == kPrimaryChannels) {
+		if (channel == SeaSelectedChannelPrimary) {
 			for (int i = 0; i < 16; i++) {
 				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 			}
@@ -233,7 +233,7 @@
 			dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
 			});
-		} else if (channel == kAlphaChannel) {
+		} else if (channel == SeaSelectedChannelAlpha) {
 			dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				self->newdata[i * 4 + 1] = self->newdata[i * 4 + 2] = self->newdata[i * 4 + 3] = data[i * 4];
 				self->newdata[i * 4] = 255;

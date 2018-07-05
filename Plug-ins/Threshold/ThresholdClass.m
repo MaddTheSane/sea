@@ -147,7 +147,7 @@
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
 			
-			if (channel == kAllChannels || channel == kPrimaryChannels) {
+			if (channel == SeaSelectedChannelAll || channel == SeaSelectedChannelPrimary) {
 				mid = 0;
 				for (k = 0; k < spp - 1; k++)
 					mid += data[(j * width + i) * spp + k];
@@ -161,7 +161,7 @@
 				overlay[(j * width + i + 1) * spp - 1] = data[(j * width + i + 1) * spp - 1];
 				
 				replace[j * width + i] = 255;
-			} else if (channel == kAlphaChannel) {
+			} else if (channel == SeaSelectedChannelAlpha) {
 				mid = data[(j * width + i + 1) * spp - 1];
 				
 				if (MIN(topValue, bottomValue) <= mid && mid <= MAX(topValue, bottomValue))

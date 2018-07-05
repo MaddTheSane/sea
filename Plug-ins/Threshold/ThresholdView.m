@@ -15,14 +15,14 @@
 	
 	memset(histogram, 0, sizeof(histogram));
 	
-	if (channel == kAllChannels || channel == kPrimaryChannels) {
+	if (channel == SeaSelectedChannelAll || channel == SeaSelectedChannelPrimary) {
 		for (i = 0; i < width * height; i++) {
 			for (j = 0; j < spp - 1; j++)
 				mid += data[i * spp + j];
 			mid /= (spp - 1);
 			histogram[mid]++; 
 		}
-	} else if (channel == kAlphaChannel) {
+	} else if (channel == SeaSelectedChannelAlpha) {
 		for (i = 0; i < width * height; i++) {
 			mid = data[(i + 1) * spp - 1];
 			histogram[mid]++; 

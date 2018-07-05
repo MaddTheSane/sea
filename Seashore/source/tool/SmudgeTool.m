@@ -52,7 +52,7 @@
 				// Change the pixel colour appropriately
 				pos = ty * width + tx;
 				if (replace[pos] == 255) {
-					if (selectedChannel == kAlphaChannel)
+					if (selectedChannel == SeaSelectedChannelAlpha)
 						basePixel[spp - 1] = overlay[pos * spp];
 					else
 						memcpy(basePixel, &(overlay[pos * spp]), spp);
@@ -61,7 +61,7 @@
 					memcpy(basePixel, &(data[pos * spp]), spp);
 				}
 				else {
-					if (selectedChannel == kAlphaChannel) {
+					if (selectedChannel == SeaSelectedChannelAlpha) {
 						basePixel[spp - 1] = int_mult(overlay[pos * spp], replace[pos], t1) + int_mult(data[(pos + 1) * spp - 1], 255 - replace[pos], t2);
 					}
 					else {
@@ -69,10 +69,10 @@
 							basePixel[k] = int_mult(overlay[pos * spp + k], replace[pos], t1) + int_mult(data[pos * spp + k], 255 - replace[pos], t2);
 					}
 				}
-				if (selectedChannel == kPrimaryChannels) {
+				if (selectedChannel == SeaSelectedChannelPrimary) {
 					basePixel[spp - 1] = 255;
 				}
-				else if (selectedChannel == kAlphaChannel) {
+				else if (selectedChannel == SeaSelectedChannelAlpha) {
 					for (k = 0; k < spp - 1; k++)
 						basePixel[k] = basePixel[spp - 1];
 					basePixel[spp - 1] = 255;
@@ -132,10 +132,10 @@
 			ty = where.y - brushHeight / 2 + j;
 			if (tx >= 0 && tx < layerWidth && ty >= 0 && ty < layerHeight) {
 				memcpy(&(accumData[(j * brushWidth + i) * spp]), &(data[(ty * layerWidth + tx) * spp]), spp);
-				if (selectedChannel == kPrimaryChannels) {
+				if (selectedChannel == SeaSelectedChannelPrimary) {
 					accumData[(j * brushWidth + i + 1) * spp - 1] = 255;
 				}
-				else if (selectedChannel == kAlphaChannel) {
+				else if (selectedChannel == SeaSelectedChannelAlpha) {
 					for (k = 0; k < spp - 1; k++)
 						accumData[(j * brushWidth + i) * spp + k] = accumData[(j * brushWidth + i + 1) * spp - 1];
 					accumData[(j * brushWidth + i + 1) * spp - 1] = 255;

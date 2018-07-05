@@ -49,9 +49,9 @@
 - (SeaSelectedChannel)channel
 {
 	if (document.selection.floating)
-		return kAllChannels;
+		return SeaSelectedChannelAll;
 	else
-		return [[document contents] selectedChannel];	
+		return [[document contents] selectedChannel];
 }
 
 - (int)width

@@ -144,7 +144,7 @@
 	}
 	
 	if (layer.floating) {
-		channel = kPrimaryChannels;
+		channel = SeaSelectedChannelPrimary;
 	} else {
 		channel = [[document contents] selectedChannel];
 	}

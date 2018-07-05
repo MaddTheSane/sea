@@ -1046,9 +1046,6 @@ extern IntPoint SeaScreenResolution;
 	return image;
 }
 
-- (CGColorSpaceRef)displayProf
-{
-	return cgDisplayProf;
-}
+@synthesize displayProf = cgDisplayProf;
 
 @end

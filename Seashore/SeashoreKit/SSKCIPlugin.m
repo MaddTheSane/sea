@@ -235,9 +235,9 @@
 				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 			}
 			memcpy(&orvmask, ormask, 16);
-			dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+			for (int i = 0; i < vec_len; i++) {
 				nvdata[i] = _mm_or_si128(vdata[i], orvmask);
-			});
+			}
 		}
 	} else {
 		if (channel == SeaSelectedChannelPrimary || channel == SeaSelectedChannelAlpha) {
@@ -257,14 +257,14 @@
 					ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 				}
 				memcpy(&orvmask, ormask, 16);
-				dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
+				for (int i = 0; i < vec_len; i++) {
 					rvdata[i] = _mm_or_si128(vdata[i], orvmask);
-				});
-			} else if (channel == kAlphaChannel) {
-				dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
-					self->newdata[i * 4 + 1] = self->newdata[i * 4 + 2] = self->newdata[i * 4 + 3] = data[i * 4];
-					self->newdata[i * 4] = 255;
-				});
+				}
+			} else if (channel == SeaSelectedChannelAlpha) {
+				for (int i = 0; i < width * height; i++) {
+					newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
+					newdata[i * 4] = 255;
+				}
 			}
 		}
 	}
@@ -275,13 +275,13 @@
 	if ([self restoreAlpha]) {
 		// Restore alpha
 		if (channel == SeaSelectedChannelAll) {
-			dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
+			for (int i = 0; i < selection.size.height; i++) {
 				for(int j = 0; j < selection.size.width; j++){
 					resdata[(i * selection.size.width + j) * 4 + 3] =
 					data[(width * (i + selection.origin.y) +
 						  j + selection.origin.x) * 4];
 				}
-			});
+			}
 		}
 	}
 	
