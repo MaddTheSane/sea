@@ -1915,11 +1915,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 				return NO;
 		break;
 		case 260: /* Cut */
-			if (!document.selection.active || document.selection.floating || [[document contents] selectedChannel] != kAllChannels)
+			if (!document.selection.active || document.selection.floating || [[document contents] selectedChannel] != SeaSelectedChannelAll)
 				return NO;
 		break;
 		case 263: /* Delete */
-			if (!document.selection.active || [[document contents] selectedChannel] != kAllChannels)
+			if (!document.selection.active || [[document contents] selectedChannel] != SeaSelectedChannelAll)
 				return NO;
 		break;
 		case 270: /* Select All */

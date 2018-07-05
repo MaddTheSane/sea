@@ -310,7 +310,7 @@ extern IntPoint SeaScreenResolution;
 			
 			// Apply the overlay
 			if (overlayOkay) {
-				if (selectedChannel == kAllChannels && !floating) {
+				if (selectedChannel == SeaSelectedChannelAll && !floating) {
 					// For the general case
 					switch (overlayBehaviour) {
 						case SeaOverlayBehaviourErasing:
@@ -326,7 +326,7 @@ extern IntPoint SeaScreenResolution;
 							break;
 					}
 					
-				} else if (selectedChannel == kPrimaryChannels || floating) {
+				} else if (selectedChannel == SeaSelectedChannelPrimary || floating) {
 				
 					// For the primary channels
 					switch (overlayBehaviour) {
@@ -338,7 +338,7 @@ extern IntPoint SeaScreenResolution;
 							SeaPrimaryMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity, NO);
 							break;
 					}
-				} else if (selectedChannel == kAlphaChannel) {
+				} else if (selectedChannel == SeaSelectedChannelAlpha) {
 					// For the alpha channels
 					switch (overlayBehaviour) {
 						case SeaOverlayBehaviourReplacing:
@@ -465,11 +465,11 @@ extern IntPoint SeaScreenResolution;
 	
 	if (replace) free(replace);
 #if MAIN_COMPILE
-	replace = malloc(make_128([(SeaLayer *)[[document contents] activeLayer] width] * [(SeaLayer *)[[document contents] activeLayer] height]));
-	memset(replace, 0, [(SeaLayer *)[[document contents] activeLayer] width] * [(SeaLayer *)[[document contents] activeLayer] height]);
+	replace = malloc(make_128([[[document contents] activeLayer] width] * [[[document contents] activeLayer] height]));
+	memset(replace, 0, [[[document contents] activeLayer] width] * [[[document contents] activeLayer] height]);
 #else
-	replace = malloc(make_128([(SeaLayer *)[contents activeLayer] width] * [(SeaLayer *)[contents activeLayer] height]));
-	memset(replace, 0, [(SeaLayer *)[contents activeLayer] width] * [(SeaLayer *)[contents activeLayer] height]);
+	replace = malloc(make_128([[contents activeLayer] width] * [[contents activeLayer] height]));
+	memset(replace, 0, [[contents activeLayer] width] * [[contents activeLayer] height]);
 #endif
 	
 	// Update ourselves
@@ -479,11 +479,11 @@ extern IntPoint SeaScreenResolution;
 - (void)readjustAltData:(BOOL)update
 {
 #if MAIN_COMPILE
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 #endif
-	int selectedChannel = [contents selectedChannel];
+	SeaSelectedChannel selectedChannel = [contents selectedChannel];
 	BOOL trueView = [contents trueView];
-	id layer;
+	SeaLayer *layer;
 	int xwidth, xheight;
 	
 	// Free existing data
@@ -503,22 +503,22 @@ extern IntPoint SeaScreenResolution;
 #endif
 	
 	// Create room for alternative data if necessary
-	if (!trueView && selectedChannel == kPrimaryChannels) {
+	if (!trueView && selectedChannel == SeaSelectedChannelPrimary) {
 		viewType = kPrimaryChannelsView;
 		xwidth = [(SeaLayer *)layer width];
 		xheight = [(SeaLayer *)layer height];
 		altData = malloc(make_128(xwidth * xheight * (spp - 1)));
 	}
-	else if (!trueView && selectedChannel == kAlphaChannel) {
+	else if (!trueView && selectedChannel == SeaSelectedChannelAlpha) {
 		viewType = kAlphaChannelView;
-		xwidth = [(SeaLayer *)layer width];
-		xheight = [(SeaLayer *)layer height];
+		xwidth = [layer width];
+		xheight = [layer height];
 		altData = malloc(make_128(xwidth * xheight));
 	}
 	else if (CMYKPreview && spp == 4) {
 		viewType = kCMYKPreviewView;
-		xwidth = [(SeaContent *)contents width];
-		xheight = [(SeaContent *)contents height];
+		xwidth = [contents width];
+		xheight = [contents height];
 		altData = malloc(make_128(xwidth * xheight * 4));
 	}
 	
@@ -527,10 +527,7 @@ extern IntPoint SeaScreenResolution;
 		[self update];
 }
 
-- (BOOL)CMYKPreview
-{
-	return CMYKPreview;
-}
+@synthesize CMYKPreview;
 
 - (BOOL)canToggleCMYKPreview
 {
@@ -547,7 +544,7 @@ extern IntPoint SeaScreenResolution;
 	CMYKPreview = !CMYKPreview;
 	[self readjustAltData:YES];
 #if MAIN_COMPILE
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
 #endif
 }
 
@@ -608,7 +605,7 @@ extern IntPoint SeaScreenResolution;
 		maskSize = [[document selection] maskSize];
 	}
 #else
-	floatingData = [(SeaLayer *)[contents activeLayer] data];
+	floatingData = [[contents activeLayer] data];
 	layer = [contents activeLayer];
 #endif
 	selectOpacity = 255;

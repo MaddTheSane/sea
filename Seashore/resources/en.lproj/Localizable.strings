@@ -98,3 +98,6 @@
 "xcf version title" = "XCF version not supported";
 "yes" = "Yes";
 "zoom" = "Zoom: %.0f%%";
+
+"Critical Plug-in Malfunction" = "Critical Plug-in Malfunction";
+"Plug-in malfunction body" = "The plug-in has returned the same pointer passed to it (or returned NULL). This is a critical malfunction, please refrain from further use of this plug-in and contact the plug-in's developer.";

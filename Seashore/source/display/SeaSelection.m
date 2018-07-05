@@ -835,15 +835,15 @@
 	for (int j = 0; j < globalRect.size.height; j++) {
 		for (int i = 0; i < globalRect.size.width; i++) {
 			switch (selectedChannel) {
-				case kAllChannels:
+				case SeaSelectedChannelAll:
 					destPtr[(j * globalRect.size.width + i + 1) * spp - 1] = int_mult(destPtr[(j * globalRect.size.width + i + 1) * spp - 1], (mask) ? mask[(j + maskOffset.y) * rect.size.width + i + maskOffset.x] : 255, t1);
 					break;
 					
-				case kPrimaryChannels:
+				case SeaSelectedChannelPrimary:
 					destPtr[(j * globalRect.size.width + i + 1) * spp - 1] = (mask) ? mask[(j + maskOffset.y) * rect.size.width + i + maskOffset.x] : 255;
 					break;
 					
-				case kAlphaChannel:
+				case SeaSelectedChannelAlpha:
 					for (int k = 0; k < spp - 1; k++)
 						destPtr[(j * globalRect.size.width + i ) * spp + k] = destPtr[(j * globalRect.size.width + i + 1) * spp - 1];
 					destPtr[(j * globalRect.size.width + i + 1) * spp - 1] = (mask) ? mask[(j + maskOffset.y) * rect.size.width + i + maskOffset.x] : 255;

@@ -225,7 +225,7 @@
 		}
 		nvdata = (__m128i *)newdata;
 		datatouse = newdata;
-		if (channel == kAlphaChannel) {
+		if (channel == SeaSelectedChannelAlpha) {
 			dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				self->newdata[i * 4 + 1] = self->newdata[i * 4 + 2] = self->newdata[i * 4 + 3] = data[i * 4];
 				self->newdata[i * 4] = 255;
@@ -240,7 +240,7 @@
 			});
 		}
 	} else {
-		if (channel == kPrimaryChannels || channel == kAlphaChannel) {
+		if (channel == SeaSelectedChannelPrimary || channel == SeaSelectedChannelAlpha) {
 			width = [pluginData width];
 			height = [pluginData height];
 			vec_len = width * height * 4;
@@ -252,7 +252,7 @@
 			}
 			rvdata = (__m128i *)newdata;
 			datatouse = newdata;
-			if (channel == kPrimaryChannels) {
+			if (channel == SeaSelectedChannelPrimary) {
 				for (short i = 0; i < 16; i++) {
 					ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 				}
@@ -274,7 +274,7 @@
 	
 	if ([self restoreAlpha]) {
 		// Restore alpha
-		if (channel == kAllChannels) {
+		if (channel == SeaSelectedChannelAll) {
 			dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
 				for(int j = 0; j < selection.size.width; j++){
 					resdata[(i * selection.size.width + j) * 4 + 3] =

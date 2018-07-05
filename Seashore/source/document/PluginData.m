@@ -134,10 +134,14 @@
 	NSDocument *newDocument;
 	
 	if (data == NULL || data == [[document whiteboard] data] || data == [[[document contents] activeLayer] data]) {
-		NSRunAlertPanel(@"Critical Plug-in Malfunction", @"The plug-in has returned the same pointer passed to it (or returned NULL). This is a critical malfunction, please refrain from further use of this plug-in and contact the plug-in's developer.", @"Ok", NULL, NULL);
+		NSAlert *alert = [NSAlert new];
+		alert.messageText = NSLocalizedString(@"Critical Plug-in Malfunction", @"Critical Plug-in Malfunction");
+		alert.informativeText = NSLocalizedString(@"Plug-in malfunction body", @"The plug-in has returned the same pointer passed to it (or returned NULL). This is a critical malfunction, please refrain from further use of this plug-in and contact the plug-in's developer.");
+		
+		[alert runModal];
 	}
 	else {
-		newDocument = [[SeaDocument alloc] initWithData:data type:(spp == 4) ? 0 : 1 width:width height:height];
+		newDocument = [[SeaDocument alloc] initWithData:data type:(spp == 4) ? XCF_RGB_IMAGE : XCF_GRAY_IMAGE width:width height:height];
 		[[NSDocumentController sharedDocumentController] addDocument:newDocument];
 		[newDocument makeWindowControllers];
 		[newDocument showWindows];
