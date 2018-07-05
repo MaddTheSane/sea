@@ -168,7 +168,6 @@
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		//output = [output imageByCroppingToRect:rect];
 		output = crop_output;
 	} else {
 		// Create output core image
@@ -177,6 +176,7 @@
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
+		output = [output imageByCroppingToRect:rect];
 	}
 	
 	// Get data from output core image

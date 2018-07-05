@@ -720,7 +720,7 @@
 		55E5E4CD18D27A370082E60F /* Brightness.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3A518D26A8F0082E60F /* Brightness.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4CE18D27A370082E60F /* Checkerboard.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3B518D26A950082E60F /* Checkerboard.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4CF18D27A370082E60F /* CMYK.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3CA18D26D0D0082E60F /* CMYK.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		55E5E4D018D27A370082E60F /* Gaussian.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3DA18D26D100082E60F /* Gaussian.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D018D27A370082E60F /* Gaussian Blur.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3DA18D26D100082E60F /* Gaussian Blur.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4D118D27A370082E60F /* Greyscale.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3EA18D26D120082E60F /* Greyscale.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4D218D27A370082E60F /* Horizontal Stripes.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4D318D27A370082E60F /* HSV.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E41C18D26EC00082E60F /* HSV.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -1626,7 +1626,7 @@
 				55E5E4CD18D27A370082E60F /* Brightness.bundle in Copy PlugIns */,
 				55E5E4CE18D27A370082E60F /* Checkerboard.bundle in Copy PlugIns */,
 				55E5E4CF18D27A370082E60F /* CMYK.bundle in Copy PlugIns */,
-				55E5E4D018D27A370082E60F /* Gaussian.bundle in Copy PlugIns */,
+				55E5E4D018D27A370082E60F /* Gaussian Blur.bundle in Copy PlugIns */,
 				55E5E4D118D27A370082E60F /* Greyscale.bundle in Copy PlugIns */,
 				55E5E4D218D27A370082E60F /* Horizontal Stripes.bundle in Copy PlugIns */,
 				55E5E4D318D27A370082E60F /* HSV.bundle in Copy PlugIns */,
@@ -2219,7 +2219,7 @@
 		55E5E3A518D26A8F0082E60F /* Brightness.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Brightness.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E3B518D26A950082E60F /* Checkerboard.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Checkerboard.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E3CA18D26D0D0082E60F /* CMYK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CMYK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E3DA18D26D100082E60F /* Gaussian.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Gaussian.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E5E3DA18D26D100082E60F /* Gaussian Blur.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gaussian Blur.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E3EA18D26D120082E60F /* Greyscale.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Greyscale.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Horizontal Stripes.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E41C18D26EC00082E60F /* HSV.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HSV.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3348,7 +3348,7 @@
 				55E5E3A518D26A8F0082E60F /* Brightness.bundle */,
 				55E5E3B518D26A950082E60F /* Checkerboard.bundle */,
 				55E5E3CA18D26D0D0082E60F /* CMYK.bundle */,
-				55E5E3DA18D26D100082E60F /* Gaussian.bundle */,
+				55E5E3DA18D26D100082E60F /* Gaussian Blur.bundle */,
 				55E5E3EA18D26D120082E60F /* Greyscale.bundle */,
 				55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */,
 				55E5E41C18D26EC00082E60F /* HSV.bundle */,
@@ -6006,9 +6006,9 @@
 			productReference = 55E5E3CA18D26D0D0082E60F /* CMYK.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		55E5E3CC18D26D100082E60F /* Gaussian */ = {
+		55E5E3CC18D26D100082E60F /* Gaussian Blur */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55E5E3D718D26D100082E60F /* Build configuration list for PBXNativeTarget "Gaussian" */;
+			buildConfigurationList = 55E5E3D718D26D100082E60F /* Build configuration list for PBXNativeTarget "Gaussian Blur" */;
 			buildPhases = (
 				55E5E3CD18D26D100082E60F /* Sources */,
 				55E5E3D118D26D100082E60F /* Frameworks */,
@@ -6018,9 +6018,9 @@
 			);
 			dependencies = (
 			);
-			name = Gaussian;
+			name = "Gaussian Blur";
 			productName = CIAffineTile;
-			productReference = 55E5E3DA18D26D100082E60F /* Gaussian.bundle */;
+			productReference = 55E5E3DA18D26D100082E60F /* Gaussian Blur.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55E5E3DC18D26D120082E60F /* Greyscale */ = {
@@ -6390,7 +6390,7 @@
 				55E5E39718D26A8F0082E60F /* Brightness */,
 				55E5E3A718D26A950082E60F /* Checkerboard */,
 				55E5E3BC18D26D0D0082E60F /* CMYK */,
-				55E5E3CC18D26D100082E60F /* Gaussian */,
+				55E5E3CC18D26D100082E60F /* Gaussian Blur */,
 				55E5E3DC18D26D120082E60F /* Greyscale */,
 				55E5E3FE18D26EBD0082E60F /* Horizontal Stripes */,
 				55E5E40E18D26EC00082E60F /* HSV */,
@@ -8339,7 +8339,7 @@
 		};
 		55E5E3F518D26D810082E60F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 55E5E3CC18D26D100082E60F /* Gaussian */;
+			target = 55E5E3CC18D26D100082E60F /* Gaussian Blur */;
 			targetProxy = 55E5E3F418D26D810082E60F /* PBXContainerItemProxy */;
 		};
 		55E5E3F718D26D810082E60F /* PBXTargetDependency */ = {
@@ -11875,13 +11875,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CIPrincipalClass = "$(PRODUCT_NAME)Class";
+				CIPrincipalClass = GaussianClass;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../Plug-ins/Univ-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.Gaussian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11891,11 +11891,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CIPrincipalClass = "$(PRODUCT_NAME)Class";
+				CIPrincipalClass = GaussianClass;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "../Plug-ins/Univ-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.Gaussian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -13031,7 +13031,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55E5E3D718D26D100082E60F /* Build configuration list for PBXNativeTarget "Gaussian" */ = {
+		55E5E3D718D26D100082E60F /* Build configuration list for PBXNativeTarget "Gaussian Blur" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55E5E3D818D26D100082E60F /* Debug */,
