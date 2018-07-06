@@ -102,8 +102,8 @@
 	id docView = [document docView];
 	
 	[[document selection] readjustSelection];
-	if (![[[document contents] activeLayer] hasAlpha] && !document.selection.floating && [[document contents] selectedChannel] == kAlphaChannel) {
-		[[document contents] setSelectedChannel:kAllChannels];
+	if (![[[document contents] activeLayer] hasAlpha] && !document.selection.floating && [[document contents] selectedChannel] == SeaSelectedChannelAlpha) {
+		[[document contents] setSelectedChannel:SeaSelectedChannelAll];
 		[[document helpers] channelChanged];
 	}
 	switch (eventType) {

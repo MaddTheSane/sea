@@ -139,9 +139,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Warn if bad resolution
 	if (xres != yres || (xres < 72)) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"strange res message", @"This image has an unusual resolution. As such, it may look different to what is expected at 100% zoom. To fix this use \"Image > Resolution...\" and set to 72 x 72 dpi.") forDocument: document level:kLowImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"strange res message", @"This image has an unusual resolution. As such, it may look different to what is expected at 100% zoom. To fix this use \"Image > Resolution...\" and set to 72 x 72 dpi.") forDocument: document level:SeaWarningImportanceLow];
 	} else if (xres > 300) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"high res message", @"This image has a high resolution. Seashore's performance may therefore be reduced. You can reduce the resolution using \"Image > Resolution...\" (with \"Preserve size\" checked). This will result in a lower-quality image.") forDocument: document level:kLowImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"high res message", @"This image has a high resolution. Seashore's performance may therefore be reduced. You can reduce the resolution using \"Image > Resolution...\" (with \"Preserve size\" checked). This will result in a lower-quality image.") forDocument: document level:SeaWarningImportanceLow];
 	}
 	}
 	
@@ -1697,7 +1697,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 - (IBAction)delete:(id)sender
 {
 	if (document.selection.floating) {
-		[(SeaContent*)[document contents] deleteLayer:kActiveLayer];
+		[[document contents] deleteLayer:kActiveLayer];
 		[[document selection] clearSelection];
 	} else {
 		[[document selection] deleteSelection];
@@ -1706,7 +1706,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (IBAction)selectAll:(id)sender
 {
-	[[document selection] selectRect:IntMakeRect(0, 0, [(SeaLayer *)[[document contents] activeLayer] width], [(SeaLayer *)[[document contents] activeLayer] height]) mode:kDefaultMode];
+	[[document selection] selectRect:IntMakeRect(0, 0, [[[document contents] activeLayer] width], [[[document contents] activeLayer] height]) mode:SeaSelectDefault];
 }
 
 - (IBAction)selectNone:(id)sender
@@ -1915,11 +1915,11 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 				return NO;
 		break;
 		case 260: /* Cut */
-			if (!document.selection.active || document.selection.floating || [[document contents] selectedChannel] != kAllChannels)
+			if (!document.selection.active || document.selection.floating || [[document contents] selectedChannel] != SeaSelectedChannelAll)
 				return NO;
 		break;
 		case 263: /* Delete */
-			if (!document.selection.active || [[document contents] selectedChannel] != kAllChannels)
+			if (!document.selection.active || [[document contents] selectedChannel] != SeaSelectedChannelAll)
 				return NO;
 		break;
 		case 270: /* Select All */

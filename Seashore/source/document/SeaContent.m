@@ -76,7 +76,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	layersToRedo = [[NSMutableArray alloc] init];
 	orderings = [[NSMutableArray alloc] init];
 	deletedLayers = [[NSArray alloc] init];
-	selectedChannel = kAllChannels; trueView = NO;
+		selectedChannel = SeaSelectedChannelAll; trueView = NO;
 	cmykSave = NO;
 	keeper = allocKeeper();
 	document = doc;
@@ -412,7 +412,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	NSColor *foreground;
 	
 	foreground = [[[SeaController utilitiesManager] toolboxUtilityFor:document] foreground];
-	if (type == XCF_RGB_IMAGE && selectedChannel != kAlphaChannel)
+	if (type == XCF_RGB_IMAGE && selectedChannel != SeaSelectedChannelAlpha)
 		return [foreground colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	else if (type == XCF_GRAY_IMAGE)
 		return [foreground colorUsingColorSpaceName:NSDeviceWhiteColorSpace];
@@ -425,7 +425,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	NSColor *background;
 	
 	background = [[[SeaController utilitiesManager] toolboxUtilityFor:document] background];
-	if (type == XCF_RGB_IMAGE && selectedChannel != kAlphaChannel)
+	if (type == XCF_RGB_IMAGE && selectedChannel != SeaSelectedChannelAlpha)
 		return [background colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	else if (type == XCF_GRAY_IMAGE)
 		return [background colorUsingColorSpaceName:NSDeviceWhiteColorSpace];
@@ -541,7 +541,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 	// Inform the user of failure
 	if (!success){
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"import failure message", @"The selected file was not able to be successfully imported into this document.") forDocument:document level:kHighImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"import failure message", @"The selected file was not able to be successfully imported into this document.") forDocument:document level:SeaWarningImportanceHigh];
 	}
 		
 	return success;
@@ -728,7 +728,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	bipp = [imageRep bitsPerPixel];
 	bypr = [imageRep bytesPerRow];
 	dspp = spp;
-	if (spp == 4 && selectedChannel == kAlphaChannel) {
+	if (spp == 4 && selectedChannel == SeaSelectedChannelAlpha) {
 		dspp = 2;
 	}
 	data = SeaConvertBitmap(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
@@ -1111,7 +1111,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	bipp = [imageRep bitsPerPixel];
 	bypr = [imageRep bytesPerRow];
 	dspp = spp;
-	if (spp == 4 && selectedChannel == kAlphaChannel) {
+	if (spp == 4 && selectedChannel == SeaSelectedChannelAlpha) {
 		dspp = 2;
 	}
 	data = SeaConvertBitmap(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);

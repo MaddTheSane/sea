@@ -81,30 +81,30 @@
 		if (newPos.x < 0 || newPos.x >= lwidth || newPos.y < 0 || newPos.y >= lheight)
 			return NULL;
 		if (spp == 2) {
-			if (channel != kAlphaChannel) {
+			if (channel != SeaSelectedChannelAlpha) {
 				t[0] = SeaAveragedComponentValue(2, data, lwidth, lheight, 0, radius, newPos);
 			}
-			if (channel == kPrimaryChannels) {
+			if (channel == SeaSelectedChannelPrimary) {
 				t[1] = 255;
 			} else {
 				t[1] = SeaAveragedComponentValue(2, data, lwidth, lheight, 1, radius, newPos);
 			}
-			if (channel == kAlphaChannel) {
+			if (channel == SeaSelectedChannelAlpha) {
 				t[0] = t[1]; t[1] = 255;
 			}
 			return [NSColor colorWithDeviceWhite:(CGFloat)t[0] / 255.0 alpha:(CGFloat)t[1] / 255.0];
 		} else {
-			if (channel != kAlphaChannel) {
+			if (channel != SeaSelectedChannelAlpha) {
 				t[0] = SeaAveragedComponentValue(4, data, lwidth, lheight, 0, radius, newPos);
 				t[1] = SeaAveragedComponentValue(4, data, lwidth, lheight, 1, radius, newPos);
 				t[2] = SeaAveragedComponentValue(4, data, lwidth, lheight, 2, radius, newPos);
 			}
-			if (channel == kPrimaryChannels) {
+			if (channel == SeaSelectedChannelPrimary) {
 				t[3] = 255;
 			} else {
 				t[3] = SeaAveragedComponentValue(4, data, lwidth, lheight, 3, radius, newPos);
 			}
-			if (channel == kAlphaChannel) {
+			if (channel == SeaSelectedChannelAlpha) {
 				t[0] = t[1] = t[2] = t[3]; t[3] = 255;
 			}
 			return [NSColor colorWithDeviceRed:(CGFloat)t[0] / 255.0 green:(CGFloat)t[1] / 255.0 blue:(CGFloat)t[2] / 255.0 alpha:(CGFloat)t[3] / 255.0];

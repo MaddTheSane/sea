@@ -157,7 +157,7 @@ static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1)
 	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (pluginData != NULL) {
-		if ([pluginData channel] == kAlphaChannel)
+		if ([pluginData channel] == SeaSelectedChannelAlpha)
 			return NO;
 		
 		if ([pluginData spp] == 2)

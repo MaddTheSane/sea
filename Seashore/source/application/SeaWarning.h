@@ -19,18 +19,20 @@
 				Used when the message is of little importance (e.g. user advice).
 */
 typedef NS_ENUM(NSInteger, SeaWarningImportance) {
+	//! Used for some message that is essential to the UI workflow (such as a floating layer).
 	SeaWarningImportanceUI,
+	//! Used when the message is of high importance (e.g. data loss upon saving).
 	SeaWarningImportanceHigh,
+	//! Used when the message is of moderate importance.
 	SeaWarningImportanceModerate,
+	/*! Used when the message is of low importance (e.g. saving is not possible because
+	 the format or file is read-only).
+	 */
 	SeaWarningImportanceLow,
+	//! Used when the message is of little importance (e.g. user advice).
 	SeaWarningImportanceVeryLow,
+	//! Placeholder when the importance isn't known.
 	SeaWarningImportanceUnknown = -1,
-	
-	kUIImportance NS_SWIFT_UNAVAILABLE("Use .UI instead") = SeaWarningImportanceUI,
-	kHighImportance NS_SWIFT_UNAVAILABLE("Use .High instead") = SeaWarningImportanceHigh,
-	kModerateImportance NS_SWIFT_UNAVAILABLE("Use .Moderate instead") = SeaWarningImportanceModerate,
-	kLowImportance NS_SWIFT_UNAVAILABLE("Use .Low instead") = SeaWarningImportanceLow,
-	kVeryLowImportance NS_SWIFT_UNAVAILABLE("Use .VeryLow instead") = SeaWarningImportanceVeryLow,
 };
 
 @class SeaDocument;
@@ -83,5 +85,11 @@ typedef NS_ENUM(NSInteger, SeaWarningImportance) {
 - (void)addMessage:(NSString *)message forDocument:(SeaDocument*)document level:(SeaWarningImportance)level;
 
 @end
+
+static const SeaWarningImportance kUIImportance NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaWarningImportanceUI", 10.2, 10.8) = SeaWarningImportanceUI;
+static const SeaWarningImportance kHighImportance NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaWarningImportanceHigh", 10.2, 10.8) = SeaWarningImportanceHigh;
+static const SeaWarningImportance kModerateImportance NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaWarningImportanceModerate", 10.2, 10.8) = SeaWarningImportanceModerate;
+static const SeaWarningImportance kLowImportance NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaWarningImportanceLow", 10.2, 10.8) = SeaWarningImportanceLow;
+static const SeaWarningImportance kVeryLowImportance NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaWarningImportanceLow", 10.2, 10.8) = SeaWarningImportanceVeryLow;
 
 #endif

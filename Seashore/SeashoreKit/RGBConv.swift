@@ -8,7 +8,9 @@
 
 import Foundation
 
-public final class ColorConversion {
+public struct ColorConversion {
+	private init() {}
+	
 	public static func RGBToHLS(red: Int32, green: Int32, blue: Int32) -> (hue: Int32, lightness: Int32, saturation: Int32) {
 		var red1 = red, green1 = green, blue1 = blue
 		SeaRGBtoHLS(&red1, &green1, &blue1)

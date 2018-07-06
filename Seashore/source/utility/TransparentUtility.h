@@ -14,7 +14,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface TransparentUtility : NSObject {
 	/// The current transparent color 
 	NSColor *color;

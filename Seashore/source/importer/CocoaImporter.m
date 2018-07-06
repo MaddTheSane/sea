@@ -52,7 +52,7 @@
 		
 	// Warn if 16-bit image
 	if ([imageRep bitsPerSample] == 16) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"16-bit message", @"Seashore does not currently support the editing of 16-bit images. This image has been resampled at 8 bits to be imported.") forDocument: doc level:kHighImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"16-bit message", @"Seashore does not currently support the editing of 16-bit images. This image has been resampled at 8 bits to be imported.") forDocument: doc level:SeaWarningImportanceHigh];
 	}
 		
 	// Create the layer

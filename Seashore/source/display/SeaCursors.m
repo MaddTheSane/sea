@@ -132,11 +132,11 @@
 		// Find out what the selection mode is
 		SeaSelectMode selectionMode = [(AbstractSelectOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] selectionMode];
 		
-		if (selectionMode == kAddMode) {
+		if (selectionMode == SeaSelectAdd) {
 			[self addCursorRect:operableRect cursor:addCursor];
-		} else if (selectionMode == kSubtractMode) {
+		} else if (selectionMode == SeaSelectSubtract) {
 			[self addCursorRect:operableRect cursor:subtractCursor];
-		} else if(selectionMode != kDefaultMode) {
+		} else if(selectionMode != SeaSelectDefault) {
 			[self addCursorRect:operableRect cursor:crosspointCursor];
 		} else {
 			[self addCursorRect:operableRect cursor:crosspointCursor];

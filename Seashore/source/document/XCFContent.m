@@ -195,7 +195,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	SharedXCFInfo info;
 	size_t layerOffsets, offset;
 	FILE *file;
-	id layer;
+	XCFLayer *layer;
 	int i;
 	BOOL maskToAlpha = NO;
 	ParasiteData *exifParasite;
@@ -280,7 +280,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	fread(tempIntString, sizeof(int), 1, file);
 	fix_endian_read(tempIntString, 1);
 	if (tempIntString[0] != 0) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"channels message", @"This XCF file contains channels which are not currently supported by Seashore. These channels will be lost upon saving.") forDocument: doc level:kHighImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"channels message", @"This XCF file contains channels which are not currently supported by Seashore. These channels will be lost upon saving.") forDocument: doc level:SeaWarningImportanceHigh];
 	}
 	
 	// Close the file
@@ -304,7 +304,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	
 	// Inform user if we've composited the mask to the alpha channel
 	if (maskToAlpha) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"mask-to-alpha message", @"Some of the masks in this image have been composited to their layer's alpha channel. These masks will be lost upon saving.") forDocument: doc level:kHighImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"mask-to-alpha message", @"Some of the masks in this image have been composited to their layer's alpha channel. These masks will be lost upon saving.") forDocument: doc level:SeaWarningImportanceHigh];
 	}
 	
 	// Store EXIF data

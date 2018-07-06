@@ -21,7 +21,6 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 @interface ToolboxUtility : NSObject {
-
 	/// The document which is the focus of this utility
 	IBOutlet SeaDocument *document;
 

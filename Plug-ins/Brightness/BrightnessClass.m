@@ -127,16 +127,16 @@
 				
 				pos = (j * width + i) * spp + k;
 				
-				if ((channel == kPrimaryChannels || channel == kAlphaChannel) && k == spp - 1) {
+				if ((channel == SeaSelectedChannelPrimary || channel == SeaSelectedChannelAlpha) && k == spp - 1) {
 					overlay[pos] = 255;
 					
-				} else if (channel == kAllChannels && k == spp - 1) {
+				} else if (channel == SeaSelectedChannelAll && k == spp - 1) {
 					
 					overlay[pos] = data[pos];
-				} else if (channel == kAlphaChannel && k > 0) {
+				} else if (channel == SeaSelectedChannelAlpha && k > 0) {
 					overlay[pos] = overlay[pos - k];
 				} else {
-					if (channel == kAlphaChannel)
+					if (channel == SeaSelectedChannelAlpha)
 						value = data[(j * width + i + 1) * spp - 1] / 255.0;
 					else
 						value = data[pos] / 255.0;

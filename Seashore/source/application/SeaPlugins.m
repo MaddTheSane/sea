@@ -125,12 +125,11 @@ static BOOL checkRun(NSString *path, NSString *file)
 	lastEffect = -1;
 	
 	// Add standard plug-ins
-	plugins = [[NSMutableArray alloc] init];
 	pluginsPath = [gMainBundle builtInPlugInsPath];
 	pre_files = [gFileManager contentsOfDirectoryAtPath:pluginsPath error:NULL];
+	plugins = [[NSMutableArray alloc] initWithCapacity:pre_files.count];
 	files = [NSMutableArray arrayWithCapacity:[pre_files count]];
-	for (i = 0; i < [pre_files count]; i++) {
-		pre_files_name = pre_files[i];
+	for (pre_files_name in pre_files) {
 		if ([pre_files_name hasSuffix:@".bundle"] && ![pre_files_name hasSuffix:@"+.bundle"]) {
 			can_run = checkRun(pluginsPath, pre_files_name);
 			if (can_run) [files addObject:pre_files_name];
@@ -143,15 +142,16 @@ static BOOL checkRun(NSString *path, NSString *file)
 		if ([pre_files_name hasSuffix:@"+.bundle"]) {
 			found = NO;
 			range.location = 0;
-			range.length = [pre_files_name length] - (strlen("+.bundle") - 1);
+			range.length = [pre_files_name length] - strlen("+.bundle");
 			found_id = -1;
 			for (j = 0; j < [files count] && !found; j++) {
 				files_name = files[j];
 				next_range.location = 0;
-				next_range.length = [files_name length] - (strlen(".bundle") - 1);
+				next_range.length = [files_name length] - strlen(".bundle");
 				if ([[files_name substringWithRange:next_range] isEqualToString:[pre_files_name substringWithRange:range]]) {
 					found = YES;
 					found_id = j;
+					break;
 				}
 			}
 			can_run = checkRun(pluginsPath, pre_files_name);

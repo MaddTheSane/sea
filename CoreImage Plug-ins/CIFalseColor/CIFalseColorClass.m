@@ -214,7 +214,7 @@
 	vdata = (__m128i *)data;
 	nvdata = (__m128i *)newdata;
 	datatouse = newdata;
-	if (channel == kAlphaChannel) {
+	if (channel == SeaSelectedChannelAlpha) {
 		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
 			self->newdata[i * 4 + 1] = self->newdata[i * 4 + 2] = self->newdata[i * 4 + 3] = data[i * 4];
 			self->newdata[i * 4] = 255;
@@ -233,7 +233,7 @@
 	resdata = [self whitePointAdjust:pluginData withBitmap:datatouse];
 	
 	// Restore alpha
-	if (channel == kAllChannels) {
+	if (channel == SeaSelectedChannelAll) {
 		for (i = 0; i < selection.size.height; i++) {
 			for(j = 0; j < selection.size.width; j++){
 				resdata[(i * selection.size.width + j) * 4 + 3] =

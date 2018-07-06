@@ -69,7 +69,7 @@
 		void *srcBytes;
 		void *dstBytes = &(overlay[pos * 4]);
 		
-		if (channel == kPrimaryChannels) {
+		if (channel == SeaSelectedChannelPrimary) {
 			srcBytes = &(data[pos * 3]);
 			srcRowBytes = selection.size.width * 3;
 			srcLayout |= kColorSyncAlphaNone;
@@ -82,7 +82,7 @@
 		ColorSyncTransformConvert(cw, selection.size.width, 1, dstBytes, kColorSync8BitInteger, srcLayout, srcRowBytes, srcBytes, srcDepth, srcLayout, srcRowBytes, NULL);
 		
 		for (int i = selection.size.width; i >= 0; i--) {
-			if (channel == kPrimaryChannels)
+			if (channel == SeaSelectedChannelPrimary)
 				overlay[(pos + i) * 4 + 3] = 255;
 			else
 				overlay[(pos + i) * 4 + 3] = data[(pos + i) * 4 + 3];
@@ -112,7 +112,7 @@
 	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (pluginData != NULL) {
-		if ([pluginData channel] == kAlphaChannel)
+		if ([pluginData channel] == SeaSelectedChannelAlpha)
 			return NO;
 		
 		if ([pluginData spp] == 2)

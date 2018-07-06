@@ -55,7 +55,7 @@
 		if (where.x >= 0 && where.y >= 0 && where.x < width && where.y < height) {
 			
 			// Clear last selection
-			if([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode)
+			if([options selectionMode] == SeaSelectDefault || [options selectionMode] == SeaSelectForceNew)
 				[[document selection] clearSelection];
 				
 			// Fill the region to be selected

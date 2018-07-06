@@ -9,7 +9,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         bannerText = [NSString string];
-		bannerImportance = kVeryLowImportance;
+		bannerImportance = SeaWarningImportanceLow;
     }
     return self;
 }
@@ -18,10 +18,10 @@
     // We use images for the backgrounds
 	NSImage *background = NULL;
 	switch(bannerImportance){
-		case kUIImportance:
+		case SeaWarningImportanceUI:
 			background = [NSImage imageNamed:@"floatbar"];
 			break;
-		case kHighImportance:
+		case SeaWarningImportanceHigh:
 			background = [NSImage imageNamed:@"errorbar"];
 			break;
 		default:

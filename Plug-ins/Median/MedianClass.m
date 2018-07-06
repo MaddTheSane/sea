@@ -51,7 +51,7 @@ int compar(const void *a, const void *b)
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
 			
-			if (channel == kAllChannels) {
+			if (channel == SeaSelectedChannelAll) {
 				
 				pos = j * width + i;
 				z = -1;
@@ -72,7 +72,7 @@ int compar(const void *a, const void *b)
 				
 			}
 			
-			if (channel == kPrimaryChannels) {
+			if (channel == SeaSelectedChannelPrimary) {
 			
 				pos = j * width + i;
 				z = -1;
@@ -94,7 +94,7 @@ int compar(const void *a, const void *b)
 				
 			}
 			
-			if (channel == kAlphaChannel) {
+			if (channel == SeaSelectedChannelAlpha) {
 				
 				pos = j * width + i;
 				z = -1;

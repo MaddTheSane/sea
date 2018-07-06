@@ -662,6 +662,11 @@
 		55D7490A1D5292E800B099C9 /* XBMLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A829BDFA053976DD00A80207 /* XBMLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55D7490B1D52930500B099C9 /* XBMContent.h in Headers */ = {isa = PBXBuildFile; fileRef = A829BDFE053976F900A80207 /* XBMContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55DA7C7B1926C26C002F6A3A /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
+		55DAC83E20EECC2600CD7B26 /* SVGImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 55DAC83D20EECC2600CD7B26 /* SVGImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55DAC84020EECC3400CD7B26 /* SVGImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAC83F20EECC3400CD7B26 /* SVGImporter.m */; };
+		55DAC84120EECE6800CD7B26 /* CocoaImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = A8D6BCE907C215E000B91A1D /* CocoaImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55DAC84220EECE6800CD7B26 /* XBMImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = A81F6EB007C2EE35005C2DBD /* XBMImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55DAC84320EECE6800CD7B26 /* XCFImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = A8D6C11C07C2323200B91A1D /* XCFImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55E5E39D18D26A8F0082E60F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		55E5E3AD18D26A950082E60F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		55E5E3B118D26A950082E60F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D528718CF9FC1005809E3 /* Localizable.strings */; };
@@ -720,7 +725,7 @@
 		55E5E4CD18D27A370082E60F /* Brightness.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3A518D26A8F0082E60F /* Brightness.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4CE18D27A370082E60F /* Checkerboard.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3B518D26A950082E60F /* Checkerboard.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4CF18D27A370082E60F /* CMYK.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3CA18D26D0D0082E60F /* CMYK.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		55E5E4D018D27A370082E60F /* Gaussian.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3DA18D26D100082E60F /* Gaussian.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55E5E4D018D27A370082E60F /* Gaussian Blur.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3DA18D26D100082E60F /* Gaussian Blur.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4D118D27A370082E60F /* Greyscale.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E3EA18D26D120082E60F /* Greyscale.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4D218D27A370082E60F /* Horizontal Stripes.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4D318D27A370082E60F /* HSV.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E41C18D26EC00082E60F /* HSV.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -1626,7 +1631,7 @@
 				55E5E4CD18D27A370082E60F /* Brightness.bundle in Copy PlugIns */,
 				55E5E4CE18D27A370082E60F /* Checkerboard.bundle in Copy PlugIns */,
 				55E5E4CF18D27A370082E60F /* CMYK.bundle in Copy PlugIns */,
-				55E5E4D018D27A370082E60F /* Gaussian.bundle in Copy PlugIns */,
+				55E5E4D018D27A370082E60F /* Gaussian Blur.bundle in Copy PlugIns */,
 				55E5E4D118D27A370082E60F /* Greyscale.bundle in Copy PlugIns */,
 				55E5E4D218D27A370082E60F /* Horizontal Stripes.bundle in Copy PlugIns */,
 				55E5E4D318D27A370082E60F /* HSV.bundle in Copy PlugIns */,
@@ -2160,6 +2165,8 @@
 		55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zoom Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55D0662F1C6EEAF200BEDAE9 /* Graphics.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Graphics.xcassets; sourceTree = "<group>"; };
 		55D748FD1D5271DA00B099C9 /* ToolboxUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxUtility.swift; sourceTree = "<group>"; };
+		55DAC83D20EECC2600CD7B26 /* SVGImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVGImporter.h; sourceTree = "<group>"; };
+		55DAC83F20EECC3400CD7B26 /* SVGImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVGImporter.m; sourceTree = "<group>"; };
 		55E5E29218D26A2F0082E60F /* BrightnessClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessClass.h; sourceTree = "<group>"; };
 		55E5E29318D26A2F0082E60F /* BrightnessClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrightnessClass.m; sourceTree = "<group>"; };
 		55E5E29818D26A2F0082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2219,7 +2226,7 @@
 		55E5E3A518D26A8F0082E60F /* Brightness.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Brightness.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E3B518D26A950082E60F /* Checkerboard.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Checkerboard.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E3CA18D26D0D0082E60F /* CMYK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CMYK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		55E5E3DA18D26D100082E60F /* Gaussian.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Gaussian.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E5E3DA18D26D100082E60F /* Gaussian Blur.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gaussian Blur.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E3EA18D26D120082E60F /* Greyscale.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Greyscale.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Horizontal Stripes.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E5E41C18D26EC00082E60F /* HSV.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HSV.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3348,7 +3355,7 @@
 				55E5E3A518D26A8F0082E60F /* Brightness.bundle */,
 				55E5E3B518D26A950082E60F /* Checkerboard.bundle */,
 				55E5E3CA18D26D0D0082E60F /* CMYK.bundle */,
-				55E5E3DA18D26D100082E60F /* Gaussian.bundle */,
+				55E5E3DA18D26D100082E60F /* Gaussian Blur.bundle */,
 				55E5E3EA18D26D120082E60F /* Greyscale.bundle */,
 				55E5E40C18D26EBD0082E60F /* Horizontal Stripes.bundle */,
 				55E5E41C18D26EC00082E60F /* HSV.bundle */,
@@ -4545,6 +4552,8 @@
 				A8D6C11C07C2323200B91A1D /* XCFImporter.h */,
 				A8D6C11B07C2323200B91A1D /* XCFImporter.m */,
 				5594803A1D47D70F0065E83B /* NewSVGImporter.swift */,
+				55DAC83D20EECC2600CD7B26 /* SVGImporter.h */,
+				55DAC83F20EECC3400CD7B26 /* SVGImporter.m */,
 			);
 			name = "Importer Classes";
 			path = importer;
@@ -4906,6 +4915,7 @@
 				55472BD31C6EE4EC0065A852 /* SeaShadowView.h in Headers */,
 				55472BBF1C6EE23B0065A852 /* CenteringClipView.h in Headers */,
 				55AF35781D4A866500A0EA26 /* NSOutlineView_Extensions.h in Headers */,
+				55DAC84220EECE6800CD7B26 /* XBMImporter.h in Headers */,
 				554E658D1D5F9B0E00F2DF77 /* SeaAlignment.h in Headers */,
 				55472B991C6EDEA10065A852 /* PluginData.h in Headers */,
 				55D748FF1D52895100B099C9 /* NSArray_Extensions.h in Headers */,
@@ -4914,6 +4924,7 @@
 				55472BAC1C6EE1530065A852 /* ImageToolbarItem.h in Headers */,
 				55472BE41C6EE6730065A852 /* SeaMain.h in Headers */,
 				55472B8E1C6EDDD50065A852 /* SeashoreKit.h in Headers */,
+				55DAC84320EECE6800CD7B26 /* XCFImporter.h in Headers */,
 				55115C041D46AC2700E76B5B /* SSKTerminatable.h in Headers */,
 				55472BA81C6EE1530065A852 /* SeaWarning.h in Headers */,
 				552D702D1DA2063200AFBD32 /* XCFLayer.h in Headers */,
@@ -4930,6 +4941,7 @@
 				55472BCF1C6EE4EC0065A852 /* SeaCompositor.h in Headers */,
 				55472BA01C6EE1530065A852 /* SeaController.h in Headers */,
 				55D749081D52923900B099C9 /* CocoaContent.h in Headers */,
+				55DAC84120EECE6800CD7B26 /* CocoaImporter.h in Headers */,
 				55472BDF1C6EE5FC0065A852 /* ColorConversion.h in Headers */,
 				55472BB91C6EE2010065A852 /* SeaLayer.h in Headers */,
 				55472BBD1C6EE2010065A852 /* TextureExporter.h in Headers */,
@@ -4951,6 +4963,7 @@
 				55472BA41C6EE1530065A852 /* SeaProxy.h in Headers */,
 				55472BB01C6EE1530065A852 /* SeaApplication.h in Headers */,
 				55472BCB1C6EE4EC0065A852 /* SeaView.h in Headers */,
+				55DAC83E20EECC2600CD7B26 /* SVGImporter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6006,9 +6019,9 @@
 			productReference = 55E5E3CA18D26D0D0082E60F /* CMYK.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		55E5E3CC18D26D100082E60F /* Gaussian */ = {
+		55E5E3CC18D26D100082E60F /* Gaussian Blur */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55E5E3D718D26D100082E60F /* Build configuration list for PBXNativeTarget "Gaussian" */;
+			buildConfigurationList = 55E5E3D718D26D100082E60F /* Build configuration list for PBXNativeTarget "Gaussian Blur" */;
 			buildPhases = (
 				55E5E3CD18D26D100082E60F /* Sources */,
 				55E5E3D118D26D100082E60F /* Frameworks */,
@@ -6018,9 +6031,9 @@
 			);
 			dependencies = (
 			);
-			name = Gaussian;
+			name = "Gaussian Blur";
 			productName = CIAffineTile;
-			productReference = 55E5E3DA18D26D100082E60F /* Gaussian.bundle */;
+			productReference = 55E5E3DA18D26D100082E60F /* Gaussian Blur.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55E5E3DC18D26D120082E60F /* Greyscale */ = {
@@ -6263,6 +6276,7 @@
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = Sea;
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0940;
 				TargetAttributes = {
@@ -6391,7 +6405,7 @@
 				55E5E39718D26A8F0082E60F /* Brightness */,
 				55E5E3A718D26A950082E60F /* Checkerboard */,
 				55E5E3BC18D26D0D0082E60F /* CMYK */,
-				55E5E3CC18D26D100082E60F /* Gaussian */,
+				55E5E3CC18D26D100082E60F /* Gaussian Blur */,
 				55E5E3DC18D26D120082E60F /* Greyscale */,
 				55E5E3FE18D26EBD0082E60F /* Horizontal Stripes */,
 				55E5E40E18D26EC00082E60F /* HSV */,
@@ -7285,6 +7299,7 @@
 				55472BC01C6EE23E0065A852 /* CenteringClipView.m in Sources */,
 				55472BC61C6EE48D0065A852 /* SVGContent.m in Sources */,
 				55472BE61C6EE7AC0065A852 /* XBMContent.m in Sources */,
+				55DAC84020EECC3400CD7B26 /* SVGImporter.m in Sources */,
 				55472BA11C6EE1530065A852 /* SeaController.m in Sources */,
 				55472BBC1C6EE2010065A852 /* SeaLayerUndo.m in Sources */,
 				55472BC41C6EE4730065A852 /* CocoaLayer.m in Sources */,
@@ -8340,7 +8355,7 @@
 		};
 		55E5E3F518D26D810082E60F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 55E5E3CC18D26D100082E60F /* Gaussian */;
+			target = 55E5E3CC18D26D100082E60F /* Gaussian Blur */;
 			targetProxy = 55E5E3F418D26D810082E60F /* PBXContainerItemProxy */;
 		};
 		55E5E3F718D26D810082E60F /* PBXTargetDependency */ = {
@@ -11878,13 +11893,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CIPrincipalClass = "$(PRODUCT_NAME)Class";
+				CIPrincipalClass = GaussianClass;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../Plug-ins/Univ-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.Gaussian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11894,11 +11909,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CIPrincipalClass = "$(PRODUCT_NAME)Class";
+				CIPrincipalClass = GaussianClass;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "../Plug-ins/Univ-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.Gaussian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -12363,7 +12378,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -12430,7 +12445,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = MAIN_COMPILE;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -13034,7 +13049,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55E5E3D718D26D100082E60F /* Build configuration list for PBXNativeTarget "Gaussian" */ = {
+		55E5E3D718D26D100082E60F /* Build configuration list for PBXNativeTarget "Gaussian Blur" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55E5E3D818D26D100082E60F /* Debug */,

@@ -8,7 +8,7 @@
 {
 	NSBezierPath *tempPath = [NSBezierPath bezierPath];
 	CGFloat revCurveRadius, f;
-	f = (4.0 / 3.0) * (sqrt(2) - 1);
+	f = (4.0 / 3.0) * (M_SQRT2 - 1);
 	if (rect.size.width < 2 * radius) revCurveRadius = rect.size.width / 2.0;
 	else if (rect.size.height < 2 * radius) revCurveRadius = rect.size.height / 2.0;
 	else revCurveRadius = radius;

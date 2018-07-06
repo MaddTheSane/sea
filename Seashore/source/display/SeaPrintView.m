@@ -87,7 +87,7 @@
 	float scale;
 	
 	// Work out the image's bounds
-	bounds = NSMakeRect(0, 0, [(SeaContent *)[document contents] width] * (72.0 / (CGFloat)[[document contents] xres]), [(SeaContent *)[document contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
+	bounds = NSMakeRect(0, 0, [(SeaContent *)[document contents] width] * (72.0 / (CGFloat)[[document contents] xres]), [[document contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
 	
 	// Work out the paper's bounding rectangle
 	paper.size = [pi paperSize];
@@ -106,7 +106,7 @@
 	} else {
 		// Otherwise do tiling
 		range->location = 1;
-		range->length = ceil((float)bounds.size.width / (float)paper.size.width) * ceil((float)bounds.size.height / (float)paper.size.height);
+		range->length = ceil((CGFloat)bounds.size.width / (CGFloat)paper.size.width) * ceil((CGFloat)bounds.size.height / (CGFloat)paper.size.height);
 		[pi setHorizontallyCentered:NO];
 		[pi setVerticallyCentered:NO];
 	}
@@ -158,13 +158,9 @@ __unused static inline double mod(double a, double b) __attribute__((__overloada
 	paper.size.width /= scale;
 	
 	if (bounds.size.width < paper.size.width && bounds.size.height < paper.size.height) {
-	
 		// Handle one page documents
 		return bounds;
-		
-	}
-	else {
-	
+	} else {
 		// Correct page (we work from page zero)
 		page--;
 	
@@ -177,22 +173,23 @@ __unused static inline double mod(double a, double b) __attribute__((__overloada
 		result.origin.y = (page / horizPages) * paper.size.height;
 		
 		// Work out width
-		if (page % horizPages == horizPages - 1)
+		if (page % horizPages == horizPages - 1) {
 			result.size.width = mod(bounds.size.width, paper.size.width);
-		else
+		} else {
 			result.size.width = paper.size.width;
+		}
 		
 		// Work out height
-		if (page / horizPages == vertPages - 1)
+		if (page / horizPages == vertPages - 1) {
 			result.size.height = mod(bounds.size.height, paper.size.height);
-		else
+		} else {
 			result.size.height = paper.size.height;
+		}
 		
 	}
 	
 	return result;
 }
-
 
 - (BOOL)isFlipped
 {

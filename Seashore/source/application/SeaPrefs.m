@@ -602,7 +602,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 
 - (SeaWarningImportance)warningLevel
 {
-	return (fewerWarnings) ? kModerateImportance : kVeryLowImportance;
+	return (fewerWarnings) ? SeaWarningImportanceModerate : SeaWarningImportanceLow;
 }
 
 - (BOOL)effectsPanel

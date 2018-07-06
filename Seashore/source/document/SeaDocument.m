@@ -318,7 +318,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	}
 	
 	if (readOnly && !globalReadOnlyWarning) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"read only message", @"This file is in a read-only format, as such you cannot save this file. This warning will not be displayed for subsequent files in a read-only format.") forDocument: self level:kLowImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"read only message", @"This file is in a read-only format, as such you cannot save this file. This warning will not be displayed for subsequent files in a read-only format.") forDocument: self level:SeaWarningImportanceLow];
 		globalReadOnlyWarning = YES;
 	}
 

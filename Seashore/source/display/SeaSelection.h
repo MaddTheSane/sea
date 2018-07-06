@@ -28,13 +28,6 @@ typedef NS_ENUM(int, SeaSelectMode) {
 	SeaSelectMultiply,			///< Multiply the selections.
 	SeaSelectSubtractProduct,	///< Subtract the product of the selections.
 	SeaSelectForceNew,			///< For a new selection
-	
-	kDefaultMode NS_SWIFT_UNAVAILABLE("Use .Default instead") = SeaSelectDefault,
-	kAddMode NS_SWIFT_UNAVAILABLE("Use .Add instead") = SeaSelectAdd,
-	kSubtractMode NS_SWIFT_UNAVAILABLE("Use .Subtract instead") = SeaSelectSubtract,
-	kMultiplyMode NS_SWIFT_UNAVAILABLE("Use .Multiply instead") = SeaSelectMultiply,
-	kSubtractProductMode NS_SWIFT_UNAVAILABLE("Use .SubtractProduct instead") = SeaSelectSubtractProduct,
-	kForceNewMode NS_SWIFT_UNAVAILABLE("Use .ForceNew instead") = SeaSelectForceNew
 };
 
 @class SeaDocument;
@@ -194,7 +187,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@method		selectOverlay:inRect:mode:
 	@discussion Selects the area given by the overlay's alpha channel.
 	@param		destructively
-				YES if the overlay is to be destroyed during the selection, NO
+				\c YES if the overlay is to be destroyed during the selection, \c NO
 				otherwise.
 	@param		selectionRect
 				The rectangle contianing the section of the overlay to be
@@ -217,21 +210,21 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		newOrigin
 				The new origin.
 */
-- (void)moveSelection:(IntPoint)newOrigin;
+- (void)moveSelection:(IntPoint)newOrigin NS_SWIFT_NAME(moveSelection(_:));
 
 /*!
 	@method		readjustSelection
 	@discussion	Readjusts the selection so it does not extend beyond the layer's
 				boundaries.
 */
-- (void)readjustSelection;
+- (void)readjustSelection NS_SWIFT_NAME(readjustSelection());
 
 /*!
 	@method		clearSelection
 	@discussion	Makes the current selection void (don't confuse this with
 				deleteSelection).
 */
-- (void)clearSelection;
+- (void)clearSelection NS_SWIFT_NAME(clearSelection());
 
 /*!
 	@method		flipSelection:
@@ -240,7 +233,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		type
 				The type of flip (see <code>SeaFlipType</code>).
 */
-- (void)flipSelection:(SeaFlipType)type;
+- (void)flipSelection:(SeaFlipType)type NS_SWIFT_NAME(flipSelection(_:));
 
 /*!
 	@method		invertSelection
@@ -248,14 +241,14 @@ NS_ASSUME_NONNULL_BEGIN
 				layer that is not selected or nothing if everything is
 				selected).
 */
-- (void)invertSelection;
+- (void)invertSelection NS_SWIFT_NAME(invertSelection());
 
 /*!
 	@method		selectionData
 	@discussion	Returns a block of memory containing the layer data encapsulated
 				by the rectangle.
 	@param		premultiplied
-				YES if the returned data should be premultiplied, NO otherwise.
+				\c YES if the returned data should be premultiplied, \c NO otherwise.
 	@result		Returns a pointer to a block of memory containing the layer data
 				encapsulated by the rectangle.
 */
@@ -266,8 +259,8 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion	Compares the given size to the size of the last selection.
 	@param		inp_size
 				The size for comparison.
-	@result		Returns YES if the size is equal to the size of the last selection,
-				NO otherwise.
+	@result		Returns \c YES if the size is equal to the size of the last selection,
+				\c NO otherwise.
 */
 - (BOOL)selectionSizeMatch:(IntSize)inp_size;
 
@@ -283,20 +276,20 @@ NS_ASSUME_NONNULL_BEGIN
 	@method		cutSelection
 	@discussion	Calls copySelection followed by deleteSelection.
 */
-- (void)cutSelection;
+- (void)cutSelection NS_SWIFT_NAME(cutSelection());
 
 /*!
 	@method		copySelection
 	@discussion	Copies the current selection to the clipboard.
 */
-- (void)copySelection;
+- (void)copySelection NS_SWIFT_NAME(copySelection());
 
 /*!
 	@method		deleteSelection
 	@discussion	Deletes the contents of the current selection from the active
 				layer (don't confuse this with clearSelection).
 */
-- (void)deleteSelection;
+- (void)deleteSelection NS_SWIFT_NAME(deleteSelection());
 
 /*!
 	@method		adjustOffset:
@@ -317,7 +310,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		interpolation
 				The interpolation to be used when scaling (see GIMPCore).
 */
-- (void)scaleSelectionHorizontally:(float)xScale vertically:(float)yScale interpolation:(GimpInterpolationType)interpolation NS_SWIFT_NAME(scaleSelection(horizontally:vertically:interpolation:));
+- (void)scaleSelectionHorizontally:(CGFloat)xScale vertically:(CGFloat)yScale interpolation:(GimpInterpolationType)interpolation NS_SWIFT_NAME(scaleSelection(horizontally:vertically:interpolation:));
 
 /*!
 	@method		scaleSelectionTo:from:interpolation:usingMask:
@@ -338,8 +331,15 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion	Trims the selection so it contains no redundant parts, that is,
 				so every line in the mask contains some white.
 */
-- (void)trimSelection;
+- (void)trimSelection NS_SWIFT_NAME(trimSelection());
 
 @end
+
+static const SeaSelectMode kDefaultMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectDefault", 10.2, 10.8) = SeaSelectDefault;
+static const SeaSelectMode kAddMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectAdd", 10.2, 10.8) = SeaSelectAdd;
+static const SeaSelectMode kSubtractMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectSubtract", 10.2, 10.8) = SeaSelectSubtract;
+static const SeaSelectMode kMultiplyMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectMultiply", 10.2, 10.8) = SeaSelectMultiply;
+static const SeaSelectMode kSubtractProductMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectSubtractProduct", 10.2, 10.8) = SeaSelectSubtractProduct;
+static const SeaSelectMode kForceNewMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectForceNew", 10.2, 10.8) = SeaSelectForceNew;
 
 NS_ASSUME_NONNULL_END

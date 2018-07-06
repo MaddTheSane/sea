@@ -10,32 +10,7 @@ import Cocoa
 import GIMPCore
 
 public final class SVGImporter: NSObject {
-	@objc public enum ImporterErrors: Int, Error {
-		case couldNotFindBundle = -1
-		case couldNotLoadBundle = -2
-		case couldNotLoadSVG = -3
-		case unableToGenerateTIFF = -4
-		case unableToCreateBitmap = -5
-		case unableToCreateLayer = -6
-		
-		case couldNotFindApp = -7
-		case couldNotLoadConvertedPNG = -8
-
-		public var _code: Int {
-			return rawValue
-		}
-		
-		#if false
-		var _domain: String {
-			return "Seashore.NewSVGImporter.Errors"
-		}
-		
-		var _NSErrorDomain: String {
-			return "Seashore.NewSVGImporter.Errors"
-		}
-		#endif
-	}
-	
+	typealias ImporterErrors = SVGImporterErrors
 	
 	/// The length warning panel
 	@IBOutlet weak var waitPanel: NSPanel!
@@ -57,9 +32,9 @@ public final class SVGImporter: NSObject {
 	/// The document's scaled size
 	var size = IntSize()
 	
-	fileprivate var nibArr = NSArray()
+	private var nibArr = NSArray()
 	
-	fileprivate func getSVGFromSVGImporterApp(url: URL, to doc: SeaDocument) throws {
+	private func getSVGFromSVGImporterApp(url: URL, to doc: SeaDocument) throws {
 		let fm = FileManager.default
 		let pathOut: String
 
@@ -76,13 +51,13 @@ public final class SVGImporter: NSObject {
 			return nil
 		}()
 		
-		if let importerPath = importerPath , fm.fileExists(atPath: importerPath) {
+		if let importerPath = importerPath, fm.fileExists(atPath: importerPath) {
 			let args: [String]
 			if !fm.fileExists(atPath: "/tmp/seaimport") {
 				try fm.createDirectory(atPath: "/tmp/seaimport", withIntermediateDirectories: true, attributes: nil)
 			}
 			let pathIn = url.path
-			pathOut = "/tmp/seaimport/\((url.lastPathComponent as NSString).deletingPathExtension).png"
+			pathOut = "/tmp/seaimport/\(url.deletingPathExtension().lastPathComponent).png"
 			if (size.width > 0 && size.height > 0 && size.width < kMaxImageSize && size.height < kMaxImageSize) {
 				let widthArg = "\(size.width)"
 				let heightArg = "\(size.height)"
@@ -100,12 +75,12 @@ public final class SVGImporter: NSObject {
 			spinner.stopAnimation(self)
 			waitPanel.orderOut(self)
 		} else {
-			throw ImporterErrors.couldNotFindApp
+			throw ImporterErrors(.couldNotFindApp)
 		}
 		
 		// Open the image
 		guard let image = NSImage(byReferencingFile: pathOut)  else {
-			throw ImporterErrors.couldNotLoadConvertedPNG
+			throw ImporterErrors(.couldNotLoadConvertedPNG)
 		}
 		
 		// Form a bitmap representation of the file at the specified path
@@ -121,16 +96,16 @@ public final class SVGImporter: NSObject {
 			return imageRep as? NSBitmapImageRep
 		}
 		guard let imgBitmapRep = getImgRep() else {
-			throw ImporterErrors.unableToCreateBitmap
+			throw ImporterErrors(.unableToCreateBitmap)
 		}
 		
 		// Create the layer
 		guard let layer = CocoaLayer(imageRep: imgBitmapRep, document: doc, spp: doc.contents.samplesPerPixel) else {
-			throw ImporterErrors.unableToCreateLayer
+			throw ImporterErrors(.unableToCreateLayer)
 		}
 		
 		// Rename the layer
-		layer.name = (url.lastPathComponent as NSString).deletingPathExtension
+		layer.name = url.deletingPathExtension().lastPathComponent
 		
 		// Add the layer
 		doc.contents.addLayerObject(layer)
@@ -138,21 +113,21 @@ public final class SVGImporter: NSObject {
 		// Now forget the NSImage
 	}
 	
-	fileprivate func getSVGFromSVGImageRep(url: URL, to doc: SeaDocument) throws {
+	private func getSVGFromSVGImageRep(url: URL, to doc: SeaDocument) throws {
 		func getImageRep() throws -> NSImageRep {
 			var aClass: AnyClass? = NSClassFromString("SVGImageRep")
 			if aClass == nil {
 				guard let bundURL = Bundle.main.builtInPlugInsURL?.appendingPathComponent("SVGImageRep.bundle") , (bundURL as NSURL).checkResourceIsReachableAndReturnError(nil) else {
-					throw ImporterErrors.couldNotFindBundle
+					throw ImporterErrors(.couldNotFindBundle)
 				}
 				guard let aBund = Bundle(url: bundURL) , aBund.load() else {
-					throw ImporterErrors.couldNotLoadBundle
+					throw ImporterErrors(.couldNotLoadBundle)
 				}
 				aClass = NSClassFromString("SVGImageRep")
 			}
 			
 			guard let toRet = (aClass as? NSImageRep.Type)?.imageReps(withContentsOf: url)?.first else {
-				throw ImporterErrors.couldNotLoadSVG
+				throw ImporterErrors(.couldNotLoadSVG)
 			}
 			return toRet
 		}
@@ -163,15 +138,15 @@ public final class SVGImporter: NSObject {
 			image.size = size.nsSize
 		}
 		guard let tiffData = image.tiffRepresentation else {
-			throw ImporterErrors.unableToGenerateTIFF
+			throw ImporterErrors(.unableToGenerateTIFF)
 		}
 		guard let bitRep = NSBitmapImageRep.imageReps(with: tiffData).first as? NSBitmapImageRep else {
-			throw ImporterErrors.unableToCreateBitmap
+			throw ImporterErrors(.unableToCreateBitmap)
 		}
 		
 		// Create the layer
-		guard let layer = CocoaLayer(imageRep: bitRep, document: doc, spp:doc.contents.samplesPerPixel) else {
-			throw ImporterErrors.unableToCreateLayer
+		guard let layer = CocoaLayer(imageRep: bitRep, document: doc, spp: doc.contents.samplesPerPixel) else {
+			throw ImporterErrors(.unableToCreateLayer)
 		}
 		
 		// Rename the layer
@@ -214,7 +189,7 @@ public final class SVGImporter: NSObject {
 			}
 		} catch ImporterErrors.couldNotFindApp {
 			SeaController.seaWarning.addMessage(NSLocalizedString("SVG message", value: "Seashore is unable to open the given SVG file because the SVG Importer is not installed. The installer for this importer can be found on Seashore's website.", comment: "SVG message"), level: .high)
-			throw ImporterErrors.couldNotFindApp
+			throw ImporterErrors(.couldNotFindApp)
 		} catch {
 			throw error
 		}

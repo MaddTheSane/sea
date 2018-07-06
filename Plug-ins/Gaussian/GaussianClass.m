@@ -159,10 +159,10 @@
 	y1 = selection.origin.y;
 	
 	switch (channel) {
-		case kPrimaryChannels:
+		case SeaSelectedChannelPrimary:
 			spp = 3;
 			break;
-		case kAlphaChannel:
+		case SeaSelectedChannelAlpha:
 			spp = 1;
 			break;
 	}
@@ -221,19 +221,19 @@
 			}
 			
 			switch (channel) {
-				case kAllChannels:
+				case SeaSelectedChannelAll:
 					for (k = 0; k < height; k++) {
 						memcpy(&(src[k * spp]), &(data[((y1 + k) * fwidth + x1 + col) * spp]), spp);
 					}
 					break;
 					
-				case kPrimaryChannels:
+				case SeaSelectedChannelPrimary:
 					for (k = 0; k < height; k++) {
 						memcpy(&(src[k * spp]), &(data[((y1 + k) * fwidth + x1 + col) * fspp]), spp);
 					}
 					break;
 					
-				case kAlphaChannel:
+				case SeaSelectedChannelAlpha:
 					for (k = 0; k < height; k++) {
 						src[k * spp] = data[((y1 + k) * fwidth + x1 + col + 1) * fspp - 1];
 					}
@@ -324,20 +324,20 @@
             }
 			
 			switch (channel) {
-				case kAllChannels:
+				case SeaSelectedChannelAll:
 					for (k = 0; k < height; k++) {
 						memcpy(&(overlay[((y1 + k) * fwidth + x1 + col) * fspp]), &(dest[k * spp]), spp);
 					}
 					break;
 					
-				case kPrimaryChannels:
+				case SeaSelectedChannelPrimary:
 					for (k = 0; k < height; k++) {
 						memcpy(&(overlay[((y1 + k) * fwidth + x1 + col) * fspp]), &(dest[k * spp]), spp);
 						overlay[((y1 + k) * fwidth + x1 + col + 1) * fspp - 1] = 255;
 					}
 					break;
 					
-				case kAlphaChannel:
+				case SeaSelectedChannelAlpha:
 					for (k = 0; k < height; k++) {
 						for (l = 0; l < spp; l++)
 							overlay[((y1 + k) * fwidth + x1 + col) * fspp + l] = dest[k * spp];
@@ -392,19 +392,19 @@
 			}
 			
 			switch (channel) {
-				case kAllChannels:
+				case SeaSelectedChannelAll:
 					for (k = 0; k < width; k++) {
 						memcpy(&(src[k * spp]), &(overlay[((y1 + row) * fwidth + x1 + k) * spp]), spp);
 					}
 					break;
 					
-				case kPrimaryChannels:
+				case SeaSelectedChannelPrimary:
 					for (k = 0; k < width; k++) {
 						memcpy(&(src[k * spp]), &(overlay[((y1 + row) * fwidth + x1 + k) * fspp]), spp);
 					}
 					break;
 					
-				case kAlphaChannel:
+				case SeaSelectedChannelAlpha:
 					for (k = 0; k < width; k++) {
 						src[k * spp] = overlay[((y1 + row) * fwidth + x1 + k) * fspp];
 					}
@@ -494,21 +494,21 @@
 			}
 			
 			switch (channel) {
-				case kAllChannels:
+				case SeaSelectedChannelAll:
 					for (k = 0; k < width; k++) {
 						memcpy(&(overlay[((y1 + row) * fwidth + x1 + k) * spp]), &(dest[k * spp]), spp);
 						replace[(y1 + row) * fwidth + x1 + k] = 255;
 					}
 					break;
 					
-				case kPrimaryChannels:
+				case SeaSelectedChannelPrimary:
 					for (k = 0; k < width; k++) {
 						memcpy(&(overlay[((y1 + row) * fwidth + x1 + k) * fspp]), &(dest[k * spp]), spp);
 						replace[(y1 + row) * fwidth + x1 + k] = 255;
 					}
 					break;
 					
-				case kAlphaChannel:
+				case SeaSelectedChannelAlpha:
 					for (k = 0; k < width; k++) {
 						for (l = 0; l < spp; l++)
 							overlay[((y1 + row) * fwidth + x1 + k) * fspp + l] = dest[k * spp];

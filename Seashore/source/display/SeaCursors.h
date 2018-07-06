@@ -5,6 +5,9 @@
 #import <SeashoreKit/Globals.h>
 #endif
 
+@class SeaDocument;
+@class SeaView;
+
 /*!
 	@class		SeaCursors
 	@abstract	Handles the cursors for the SeaView
@@ -14,10 +17,6 @@
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@class SeaDocument;
-@class SeaView;
-
 @interface SeaCursors : NSObject {
 	// Other Important Objects
 	__weak SeaDocument *document;

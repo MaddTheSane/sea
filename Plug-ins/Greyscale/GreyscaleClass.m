@@ -70,7 +70,7 @@
 		void *srcBytes;
 		void *dstBytes = &(overlay[pos * 4]);
 		
-		if (channel == kPrimaryChannels) {
+		if (channel == SeaSelectedChannelPrimary) {
 			srcBytes = &(data[pos * 3]);
 			srcRowBytes = selection.size.width * 3;
 			srcLayout |= kColorSyncAlphaNone;
@@ -86,7 +86,7 @@
 			overlay[(pos + i) * 4] = overlay[pos * 4 + i];
 			overlay[(pos + i) * 4 + 1] = overlay[pos * 4 + i];
 			overlay[(pos + i) * 4 + 2] = overlay[pos * 4 + i];
-			if (channel == kPrimaryChannels)
+			if (channel == SeaSelectedChannelPrimary)
 				overlay[(pos + i) * 4 + 3] = 255;
 			else
 				overlay[(pos + i) * 4 + 3] = data[(pos + i) * 4 + 3];
@@ -116,7 +116,7 @@
 	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (pluginData != NULL) {
-		if ([pluginData channel] == kAlphaChannel)
+		if ([pluginData channel] == SeaSelectedChannelAlpha)
 			return NO;
 		
 		if ([pluginData spp] == 2)

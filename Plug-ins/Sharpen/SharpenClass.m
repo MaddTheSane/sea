@@ -120,11 +120,11 @@
 	}
 }
 
-static inline void get_row(unsigned char *out_row, unsigned char *in_row, int spp, int channel, int width)
+static inline void get_row(unsigned char *out_row, unsigned char *in_row, int spp, SeaSelectedChannel channel, int width)
 {
 	int i;
 	
-	if (channel == kAllChannels || channel == kPrimaryChannels) {
+	if (channel == SeaSelectedChannelAll || channel == SeaSelectedChannelPrimary) {
 		memcpy(out_row, in_row, width * spp);
 	} else {
 		for (i = 0; i < width; i++)
@@ -132,13 +132,13 @@ static inline void get_row(unsigned char *out_row, unsigned char *in_row, int sp
 	}
 }
 
-static inline void set_row(unsigned char *out_row, unsigned char *in_row, int spp, int channel, int width)
+static inline void set_row(unsigned char *out_row, unsigned char *in_row, int spp, SeaSelectedChannel channel, int width)
 {
 	int i, j;
 	
-	if (channel == kAllChannels) {
+	if (channel == SeaSelectedChannelAll) {
 		memcpy(out_row, in_row, width * spp);
-	} else if (channel == kPrimaryChannels) {
+	} else if (channel == SeaSelectedChannelPrimary) {
 		memcpy(out_row, in_row, width * spp);
 		for (i = 0; i < width; i++)
 			out_row[i * spp - 1] = 255;
@@ -160,7 +160,8 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 	unsigned char *src_ptr;
 	intneg *neg_rows[4];
 	intneg *neg_ptr;
-	int swidth, spp, rspp, row, count, i, y, channel;
+	int swidth, spp, rspp, row, count, i, y;
+	SeaSelectedChannel channel;
 	void (*filter)(int, guchar *, guchar *, intneg *, intneg *, intneg *) = NULL;
 	int y1, y2, x1, width;
 	
@@ -172,7 +173,7 @@ static inline void set_row(unsigned char *out_row, unsigned char *in_row, int sp
 	x1 = selection.origin.x;
 	channel = [pluginData channel];
 	spp = [pluginData spp];
-	if (channel == kAlphaChannel)
+	if (channel == SeaSelectedChannelAlpha)
 		rspp = 2;
 	else
 		rspp = spp;

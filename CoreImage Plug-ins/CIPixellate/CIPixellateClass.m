@@ -278,18 +278,18 @@
 				
 				// Determine the revised pixel
 				switch (channel) {
-					case kAllChannels:
+					case SeaSelectedChannelAll:
 						for (k = 0; k < spp; k++) {
 							newPixel[k] = total[k] / n;
 						}
 						break;
-					case kPrimaryChannels:
+					case SeaSelectedChannelPrimary:
 						for (k = 0; k < spp - 1; k++) {
 							newPixel[k] = total[k] / n;
 						}
 						newPixel[spp - 1] = 255;
 						break;
-					case kAlphaChannel:
+					case SeaSelectedChannelAlpha:
 						for (k = 0; k < spp - 1; k++) {
 							newPixel[k] = total[spp - 1] / n;
 						}

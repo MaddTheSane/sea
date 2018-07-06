@@ -12,6 +12,15 @@
 @synthesize width;
 @synthesize height;
 @synthesize tileable;
+@synthesize overlapLabel;
+@synthesize overlapSlider;
+@synthesize widthLabel;
+@synthesize widthSlider;
+@synthesize heightLabel;
+@synthesize heightSlider;
+@synthesize tileableCheckbox;
+@synthesize panel;
+@synthesize progressBar;
 
 #if 0
 - (void)setOverlap:(CGFloat)newOverlap

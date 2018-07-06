@@ -27,8 +27,8 @@
 
 - (void)showFloatBanner
 {
-	[view setBannerText:@"Drag the floating layer to position it, then click Anchor to merge it into the layer below." defaultButtonText:@"Anchor" alternateButtonText:@"New Layer" andImportance:kUIImportance];
-	mostRecentImportance = kUIImportance;
+	[view setBannerText:@"Drag the floating layer to position it, then click Anchor to merge it into the layer below." defaultButtonText:@"Anchor" alternateButtonText:@"New Layer" andImportance:SeaWarningImportanceUI];
+	mostRecentImportance = SeaWarningImportanceUI;
 	[windowContent setVisibility:YES forRegion:SeaWindowRegionWarningsBar];
 }
 
@@ -47,7 +47,7 @@
 
 - (IBAction)defaultAction:(id)sender
 {
-	if (mostRecentImportance == kUIImportance) {
+	if (mostRecentImportance == SeaWarningImportanceUI) {
 		mostRecentImportance = -1;
 		[windowContent setVisibility:NO forRegion:SeaWindowRegionWarningsBar];
 		[[document contents] toggleFloatingSelection];
@@ -61,7 +61,7 @@
 
 - (IBAction)alternateAction:(id)sender
 {
-	if (mostRecentImportance == kUIImportance) {
+	if (mostRecentImportance == SeaWarningImportanceUI) {
 		mostRecentImportance = -1;
 		[windowContent setVisibility:NO forRegion:SeaWindowRegionWarningsBar];	
 		[[document contents] addLayer:kActiveLayer];

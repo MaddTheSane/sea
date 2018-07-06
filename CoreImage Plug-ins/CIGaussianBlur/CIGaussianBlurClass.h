@@ -16,7 +16,8 @@
 #import "SSKCIPlugin.h"
 
 @interface CIGaussianBlurClass : SSKCIPlugin
-// The radius of the crystallize
+
+//! The radius of the crystallize
 @property NSInteger radius;
 
 /*!
