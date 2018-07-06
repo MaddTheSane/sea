@@ -116,7 +116,7 @@
 {
 	PluginData *pluginData = [self.seaPlugins data];
 	
-	if ([pluginData spp] == 2 || [pluginData channel] != kAllChannels)
+	if ([pluginData spp] == 2 || [pluginData channel] != SeaSelectedChannelAll)
 		newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	[self execute];
 	[pluginData apply];
@@ -235,7 +235,7 @@
 	PluginData *pluginData = [self.seaPlugins data];
 	
 	if (pluginData != NULL) {
-		if ([pluginData channel] == kAlphaChannel)
+		if ([pluginData channel] == SeaSelectedChannelAlpha)
 			return NO;
 		
 		if ([pluginData spp] == 2)

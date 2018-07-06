@@ -17,6 +17,7 @@
 
 #if MAIN_COMPILE
 @class SeaDocument;
+@class SeaLayerUndo;
 #endif
 
 @interface SeaLayer : NSObject {
@@ -309,7 +310,10 @@
  */
 @property (getter=isLinked) BOOL linked;
 
+//! The opacity of the layer (at most 255)
 @property int opacity;
+
+//! The layer's mode
 @property int mode;
 
 /*!
@@ -386,8 +390,10 @@
 - (NSString *)name;
 
 #if MAIN_COMPILE
+//! The layer's name
 @property (nonatomic, copy) NSString *name;
 #else
+//! The layer's name
 @property (readonly, copy) NSString *name;
 #endif
 
@@ -501,7 +507,7 @@
 	@discussion	Returns the undo manager of the layer.
 	@result		Returns an instance of SeaLayerUndo.
 */
-- (id)seaLayerUndo;
+- (SeaLayerUndo*)seaLayerUndo;
 
 /*!
 	@method		thumbnail

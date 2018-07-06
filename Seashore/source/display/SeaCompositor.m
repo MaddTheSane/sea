@@ -186,7 +186,7 @@
 				
 				// Apply the overlay if we get the okay
 				if (overlayOkay) {
-					if (selectedChannel == kAllChannels && !floating) {
+					if (selectedChannel == SeaSelectedChannelAll && !floating) {
 						switch (options.overlayBehaviour) {
 							case SeaOverlayBehaviourErasing:
 								SeaEraseMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
@@ -200,7 +200,7 @@
 								SeaSpecialMerge(options.spp, tempSpace2, 0, overlay, srcLoc, selectOpacity);
 								break;
 						}
-					} else if (selectedChannel == kPrimaryChannels || floating) {
+					} else if (selectedChannel == SeaSelectedChannelPrimary || floating) {
 						if (selectOpacity > 0) {
 							switch (options.overlayBehaviour) {							
 								case SeaOverlayBehaviourReplacing:
@@ -212,7 +212,7 @@
 									break;
 							}
 						}
-					} else if (selectedChannel == kAlphaChannel) {
+					} else if (selectedChannel == SeaSelectedChannelAlpha) {
 						if (selectOpacity > 0) {
 							switch (options.overlayBehaviour) {							
 								case SeaOverlayBehaviourReplacing:
@@ -373,11 +373,11 @@
 							SeaPrimaryMerge(options.spp, tempSpace3, 0, overlay, floatLoc, selectOpacity, YES);
 						}
 					}
-					if (selectedChannel == kAllChannels) {
+					if (selectedChannel == SeaSelectedChannelAll) {
 						SeaNormalMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255);
-					} else if (selectedChannel == kPrimaryChannels) {
+					} else if (selectedChannel == SeaSelectedChannelPrimary) {
 						SeaPrimaryMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255, YES);
-					} else if (selectedChannel == kAlphaChannel) {
+					} else if (selectedChannel == SeaSelectedChannelAlpha) {
 						SeaAlphaMerge(options.spp, tempSpace2, 0, tempSpace3, 0, 255);
 					}
 				}

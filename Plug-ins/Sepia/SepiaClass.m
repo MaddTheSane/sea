@@ -54,7 +54,7 @@
 			overlay[pos * spp + 1] = MIN(int_mult(data[pos * spp], 89, t[0]) + int_mult(data[pos * spp + 1], 175, t[1]) + int_mult(data[pos * spp + 2], 43, t[2]), 255);
 			overlay[pos * spp + 2] = MIN(int_mult(data[pos * spp], 69, t[0]) + int_mult(data[pos * spp + 1], 136, t[1]) + int_mult(data[pos * spp + 2], 33, t[2]), 255);
 			
-			if (channel == kAllChannels) 
+			if (channel == SeaSelectedChannelAll) 
 				overlay[(pos + 1) * spp - 1] = data[(pos + 1) * spp - 1];
 			else
 				overlay[(pos + 1) * spp - 1] = 255;
@@ -78,7 +78,7 @@
 - (BOOL)validateMenuItem:(id)menuItem
 {
 	PluginData *pluginData = [self.seaPlugins data];
-	if ([pluginData spp] != 4 || [pluginData channel] == kAlphaChannel)
+	if ([pluginData spp] != 4 || [pluginData channel] == SeaSelectedChannelAlpha)
 		return NO;
 
 	return YES;

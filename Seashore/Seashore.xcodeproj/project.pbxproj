@@ -662,6 +662,11 @@
 		55D7490A1D5292E800B099C9 /* XBMLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A829BDFA053976DD00A80207 /* XBMLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55D7490B1D52930500B099C9 /* XBMContent.h in Headers */ = {isa = PBXBuildFile; fileRef = A829BDFE053976F900A80207 /* XBMContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55DA7C7B1926C26C002F6A3A /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
+		55DAC83E20EECC2600CD7B26 /* SVGImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 55DAC83D20EECC2600CD7B26 /* SVGImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55DAC84020EECC3400CD7B26 /* SVGImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAC83F20EECC3400CD7B26 /* SVGImporter.m */; };
+		55DAC84120EECE6800CD7B26 /* CocoaImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = A8D6BCE907C215E000B91A1D /* CocoaImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55DAC84220EECE6800CD7B26 /* XBMImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = A81F6EB007C2EE35005C2DBD /* XBMImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55DAC84320EECE6800CD7B26 /* XCFImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = A8D6C11C07C2323200B91A1D /* XCFImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55E5E39D18D26A8F0082E60F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		55E5E3AD18D26A950082E60F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		55E5E3B118D26A950082E60F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557D528718CF9FC1005809E3 /* Localizable.strings */; };
@@ -2160,6 +2165,8 @@
 		55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zoom Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55D0662F1C6EEAF200BEDAE9 /* Graphics.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Graphics.xcassets; sourceTree = "<group>"; };
 		55D748FD1D5271DA00B099C9 /* ToolboxUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxUtility.swift; sourceTree = "<group>"; };
+		55DAC83D20EECC2600CD7B26 /* SVGImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVGImporter.h; sourceTree = "<group>"; };
+		55DAC83F20EECC3400CD7B26 /* SVGImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVGImporter.m; sourceTree = "<group>"; };
 		55E5E29218D26A2F0082E60F /* BrightnessClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessClass.h; sourceTree = "<group>"; };
 		55E5E29318D26A2F0082E60F /* BrightnessClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrightnessClass.m; sourceTree = "<group>"; };
 		55E5E29818D26A2F0082E60F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -4545,6 +4552,8 @@
 				A8D6C11C07C2323200B91A1D /* XCFImporter.h */,
 				A8D6C11B07C2323200B91A1D /* XCFImporter.m */,
 				5594803A1D47D70F0065E83B /* NewSVGImporter.swift */,
+				55DAC83D20EECC2600CD7B26 /* SVGImporter.h */,
+				55DAC83F20EECC3400CD7B26 /* SVGImporter.m */,
 			);
 			name = "Importer Classes";
 			path = importer;
@@ -4906,6 +4915,7 @@
 				55472BD31C6EE4EC0065A852 /* SeaShadowView.h in Headers */,
 				55472BBF1C6EE23B0065A852 /* CenteringClipView.h in Headers */,
 				55AF35781D4A866500A0EA26 /* NSOutlineView_Extensions.h in Headers */,
+				55DAC84220EECE6800CD7B26 /* XBMImporter.h in Headers */,
 				554E658D1D5F9B0E00F2DF77 /* SeaAlignment.h in Headers */,
 				55472B991C6EDEA10065A852 /* PluginData.h in Headers */,
 				55D748FF1D52895100B099C9 /* NSArray_Extensions.h in Headers */,
@@ -4914,6 +4924,7 @@
 				55472BAC1C6EE1530065A852 /* ImageToolbarItem.h in Headers */,
 				55472BE41C6EE6730065A852 /* SeaMain.h in Headers */,
 				55472B8E1C6EDDD50065A852 /* SeashoreKit.h in Headers */,
+				55DAC84320EECE6800CD7B26 /* XCFImporter.h in Headers */,
 				55115C041D46AC2700E76B5B /* SSKTerminatable.h in Headers */,
 				55472BA81C6EE1530065A852 /* SeaWarning.h in Headers */,
 				552D702D1DA2063200AFBD32 /* XCFLayer.h in Headers */,
@@ -4930,6 +4941,7 @@
 				55472BCF1C6EE4EC0065A852 /* SeaCompositor.h in Headers */,
 				55472BA01C6EE1530065A852 /* SeaController.h in Headers */,
 				55D749081D52923900B099C9 /* CocoaContent.h in Headers */,
+				55DAC84120EECE6800CD7B26 /* CocoaImporter.h in Headers */,
 				55472BDF1C6EE5FC0065A852 /* ColorConversion.h in Headers */,
 				55472BB91C6EE2010065A852 /* SeaLayer.h in Headers */,
 				55472BBD1C6EE2010065A852 /* TextureExporter.h in Headers */,
@@ -4951,6 +4963,7 @@
 				55472BA41C6EE1530065A852 /* SeaProxy.h in Headers */,
 				55472BB01C6EE1530065A852 /* SeaApplication.h in Headers */,
 				55472BCB1C6EE4EC0065A852 /* SeaView.h in Headers */,
+				55DAC83E20EECC2600CD7B26 /* SVGImporter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7284,6 +7297,7 @@
 				55472BC01C6EE23E0065A852 /* CenteringClipView.m in Sources */,
 				55472BC61C6EE48D0065A852 /* SVGContent.m in Sources */,
 				55472BE61C6EE7AC0065A852 /* XBMContent.m in Sources */,
+				55DAC84020EECC3400CD7B26 /* SVGImporter.m in Sources */,
 				55472BA11C6EE1530065A852 /* SeaController.m in Sources */,
 				55472BBC1C6EE2010065A852 /* SeaLayerUndo.m in Sources */,
 				55472BC41C6EE4730065A852 /* CocoaLayer.m in Sources */,
@@ -12360,7 +12374,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -12427,7 +12441,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = MAIN_COMPILE;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
