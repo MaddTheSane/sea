@@ -210,21 +210,21 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		newOrigin
 				The new origin.
 */
-- (void)moveSelection:(IntPoint)newOrigin;
+- (void)moveSelection:(IntPoint)newOrigin NS_SWIFT_NAME(moveSelection(_:));
 
 /*!
 	@method		readjustSelection
 	@discussion	Readjusts the selection so it does not extend beyond the layer's
 				boundaries.
 */
-- (void)readjustSelection;
+- (void)readjustSelection NS_SWIFT_NAME(readjustSelection());
 
 /*!
 	@method		clearSelection
 	@discussion	Makes the current selection void (don't confuse this with
 				deleteSelection).
 */
-- (void)clearSelection;
+- (void)clearSelection NS_SWIFT_NAME(clearSelection());
 
 /*!
 	@method		flipSelection:
@@ -233,7 +233,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		type
 				The type of flip (see <code>SeaFlipType</code>).
 */
-- (void)flipSelection:(SeaFlipType)type;
+- (void)flipSelection:(SeaFlipType)type NS_SWIFT_NAME(flipSelection(_:));
 
 /*!
 	@method		invertSelection
@@ -241,7 +241,7 @@ NS_ASSUME_NONNULL_BEGIN
 				layer that is not selected or nothing if everything is
 				selected).
 */
-- (void)invertSelection;
+- (void)invertSelection NS_SWIFT_NAME(invertSelection());
 
 /*!
 	@method		selectionData
@@ -276,20 +276,20 @@ NS_ASSUME_NONNULL_BEGIN
 	@method		cutSelection
 	@discussion	Calls copySelection followed by deleteSelection.
 */
-- (void)cutSelection;
+- (void)cutSelection NS_SWIFT_NAME(cutSelection());
 
 /*!
 	@method		copySelection
 	@discussion	Copies the current selection to the clipboard.
 */
-- (void)copySelection;
+- (void)copySelection NS_SWIFT_NAME(copySelection());
 
 /*!
 	@method		deleteSelection
 	@discussion	Deletes the contents of the current selection from the active
 				layer (don't confuse this with clearSelection).
 */
-- (void)deleteSelection;
+- (void)deleteSelection NS_SWIFT_NAME(deleteSelection());
 
 /*!
 	@method		adjustOffset:
@@ -331,7 +331,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion	Trims the selection so it contains no redundant parts, that is,
 				so every line in the mask contains some white.
 */
-- (void)trimSelection;
+- (void)trimSelection NS_SWIFT_NAME(trimSelection());
 
 @end
 

@@ -35,7 +35,7 @@ __BEGIN_DECLS
 				The samples per pixel of the tile.
 	@result		Returns a YES upon success, NO otherwise.
 */
-BOOL SeaRLEDecompress(unsigned char *output, unsigned char *input, int inputLength, int width, int height, int spp);
+extern BOOL SeaRLEDecompress(unsigned char *output, unsigned char *input, int inputLength, int width, int height, int spp);
 
 /*!
 	@function	SeaRLECompress
@@ -54,6 +54,6 @@ BOOL SeaRLEDecompress(unsigned char *output, unsigned char *input, int inputLeng
 				The samples per pixel of the tile.
 	@result		Returns a YES upon success, NO otherwise.
 */
-int SeaRLECompress(unsigned char *output, unsigned char *input, int width, int height, int spp);
+extern int SeaRLECompress(unsigned char *output, unsigned char *input, int width, int height, int spp);
 
 __END_DECLS

@@ -111,7 +111,7 @@ extern unsigned char *convertBitmap(int dspp, BMPColorSpace dspace, int dbps, un
 				The format of the original bitmap.
 	@result		Returns a block of memory containing the desired bitmap which
 				must be freed after use or \c NULL if the conversion was not
-				possible. You should <i>always</i> check for failed conversions. The
+				possible. You should \a always check for failed conversions. The
 				block of memory is safe for use with AltiVec.
  */
 extern unsigned char *__nullable SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger iebpp, NSInteger iebpr, BMPColorSpace ispace, ColorSyncProfileRef __nullable iprofile, NSInteger ibps, GIMPBitmapFormat iformat) NS_SWIFT_NAME(convertBitmap(destinationSamplesPerPixel:destinationColorSpace:destinationBitsPerSample:bitmap:width:height:originalSamplesPerPixel:originalExtraBytesPerPixel:originalExtraBytesPerRow:originalColorSpace:profile:originalBitsPerSample:originalFormat:));
