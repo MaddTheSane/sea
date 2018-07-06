@@ -442,7 +442,7 @@
 	}
 	
 	// Get data from output core image
-	temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
 	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	
@@ -566,7 +566,7 @@
 	temp_image = [context createCGImage:output fromRect:rect];
 
 	// Get data from output core image
-	temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
 	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	
