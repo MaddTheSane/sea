@@ -9,9 +9,9 @@
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CheckerboardClass
-- (int)type
+- (SeaPluginType)type
 {
-	return kPointPlugin;
+	return SeaPluginPoint;
 }
 
 - (int)points

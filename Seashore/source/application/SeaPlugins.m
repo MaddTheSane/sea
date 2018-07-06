@@ -224,7 +224,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 		plugin = plugins[i];
         
 		// If the plug-in is a basic plug-in add it to the effects menu
-		if ([(id <SeaPluginClass>)plugin type] == kBasicPlugin) {
+		if ([(id <SeaPluginClass>)plugin type] == SeaPluginBasic) {
 			
 			// Add or find group submenu
 			submenuItem = [effectMenu itemWithTitle:[plugin groupName]];
@@ -248,7 +248,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 			}
 			
 		}
-		else if ([(id <SeaPluginClass>)plugin type] == kPointPlugin) {
+		else if ([(id <SeaPluginClass>)plugin type] == SeaPluginPoint) {
 			pointPluginsNames = [pointPluginsNames arrayByAddingObject:[NSString stringWithFormat:@"%@ / %@", [plugin groupName], [plugin name]]];
 			pointPlugins = [pointPlugins arrayByAddingObject:plugin];
 		}

@@ -12,6 +12,27 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
+ @enum		k...Plugin
+ @constant	kBasicPlugin
+ Specifies a basic effects plug-in.
+ @constant	kPointPlugin
+ Specifies a basic effect plug-in that acts on one or
+ more point given to it by the effects tool.
+ */
+typedef NS_ENUM(int, SeaPluginType) {
+	//! Specifies a basic effects plug-in.
+	SeaPluginBasic = 0,
+	//! Specifies a basic effect plug-in that acts on one or
+	//! more point given to it by the effects tool.
+	SeaPluginPoint = 1
+};
+
+#if 0
+} // Because Xcode is being a dumb-dumb
+#endif
+
+
+/*!
 	@protocol	SeaPluginClass
 	@abstract	A basic class from which to build plug-ins.
 	@discussion	This class is in the public domain allowing plug-ins of any
@@ -37,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-@property (readonly) int type;
+@property (readonly) SeaPluginType type;
 
 @optional
 /*!
@@ -107,26 +128,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /*!
-	@enum		k...Plugin
-	@constant	kBasicPlugin
-				Specifies a basic effects plug-in.
-	@constant	kPointPlugin
-				Specifies a basic effect plug-in that acts on one or
-				more point given to it by the effects tool.
-*/
-NS_ENUM(int) {
-	//! Specifies a basic effects plug-in.
-	kBasicPlugin = 0,
-	//! Specifies a basic effect plug-in that acts on one or
-	//! more point given to it by the effects tool.
-	kPointPlugin = 1
-};
-
-#if 0
-} // Because Xcode is being a dumb-dumb
-#endif
-
-/*!
 	@class		SeaPlugins
 	@abstract	Manages all of Seashore's plug-ins.
 	@discussion	N/A
@@ -178,7 +179,7 @@ NS_ENUM(int) {
 	@property	affinePlugin
 	@discussion	Returns the plug-in to be used for Core Image affine transforms.
 	@result		Returns an instance of the plug-in to be used  for Core Image
-				affine transforms or NULL if no such instance exists.
+				affine transforms or \c nil if no such instance exists.
 */
 @property (readonly, retain, nullable) id<SeaPluginClass> affinePlugin;
 
@@ -236,12 +237,12 @@ NS_ENUM(int) {
 
 
 /*!
-	@method		activePointEffect
+	@property	activePointEffect
 	@discussion	Returns the presently active plug-in according to
 				the effect table.
 	@result		Returns an instance of the plug-in's class.
 */
-- (nullable id<SeaPluginClass>)activePointEffect;
+@property (readonly, nullable) id<SeaPluginClass> activePointEffect;
 
 /*!
 	@method		validateMenuItem:
@@ -249,10 +250,17 @@ NS_ENUM(int) {
 				disabled.
 	@param		menuItem
 				The menu item to be validated.
-	@result		YES if the menu item should be enabled, NO otherwise.
+	@result		\c YES if the menu item should be enabled, \c NO otherwise.
 */
 - (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end
+
+//! Specifies a basic effects plug-in.
+static const SeaPluginType kBasicPlugin NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPluginBasic", 10.2, 10.8)  = SeaPluginBasic;
+//! Specifies a basic effect plug-in that acts on one or
+//! more point given to it by the effects tool.
+static const SeaPluginType kPointPlugin NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPluginPoint", 10.2, 10.8) = SeaPluginPoint;
+
 
 NS_ASSUME_NONNULL_END

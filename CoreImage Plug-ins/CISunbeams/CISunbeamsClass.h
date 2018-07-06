@@ -35,7 +35,7 @@
 	@discussion	Returns the type of plug-in so Seashore can correctly interact with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		points

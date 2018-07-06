@@ -29,8 +29,8 @@ private func clamp<X: Comparable>(_ value: X, minimum: X, maximum: X) -> X {
 }
 
 public final class SwiftHorizStripes: SSKPlugin {
-	public override var type: Int32 {
-		return kPointPlugin
+	public override var type: SeaPluginType {
+		return .point
 	}
 	
 	public override var points: Int32 {

@@ -6,9 +6,9 @@
 
 @implementation CIHorizStripesClass
 
-- (int)type
+- (SeaPluginType)type
 {
-	return kPointPlugin;
+	return SeaPluginPoint;
 }
 
 - (int)points

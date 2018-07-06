@@ -16,7 +16,7 @@
 #import "SSKCIPlugin.h"
 
 @interface CIPinchClass : SSKCIPlugin
-// The scale of the bump
+//! The scale of the bump
 @property CGFloat scale;
 	
 /*!
@@ -25,7 +25,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		points

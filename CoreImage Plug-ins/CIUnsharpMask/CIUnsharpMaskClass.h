@@ -16,9 +16,9 @@
 #import "SSKCIPlugin.h"
 
 @interface CIUnsharpMaskClass : SSKCIPlugin
-// The new radius
+//! The new radius
 @property CGFloat radius;
-// The new intensity
+//! The new intensity
 @property CGFloat intensity;
 
 /*!
@@ -26,7 +26,7 @@
 	@discussion	Returns the type of plug-in so Seashore can correctly interact with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		name
