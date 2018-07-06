@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ThresholdClass">
@@ -17,7 +18,7 @@
         <window title="Threshold" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="334" y="375" width="365" height="269"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="365" height="269"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -60,7 +61,7 @@ DQ
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
                         <rect key="frame" x="141" y="107" width="84" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="N6Y-F4-5xm"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="N6Y-F4-5xm"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="center" title="0 - 255" id="47">
                             <font key="font" metaFont="smallSystem"/>
@@ -91,6 +92,7 @@ DQ
                 </subviews>
                 <constraints>
                     <constraint firstItem="16" firstAttribute="width" secondItem="7" secondAttribute="width" id="2CP-Zg-BPU"/>
+                    <constraint firstItem="16" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="9pv-o7-a4c"/>
                     <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="20" symbolic="YES" id="9ti-T3-GQD"/>
                     <constraint firstItem="35" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="D5L-62-gEu"/>
                     <constraint firstAttribute="centerX" secondItem="21" secondAttribute="centerX" id="Nqm-JI-mer"/>
