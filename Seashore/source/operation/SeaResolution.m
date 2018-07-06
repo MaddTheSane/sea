@@ -56,7 +56,7 @@ extern IntPoint SeaScreenResolution;
 	if (newRes.y > 73728) { NSBeep(); return; }
 	if (newRes.x == [contents xres] && newRes.y == [contents yres]) { return; }
 	if (SeaScreenResolution.x == 0 || SeaScreenResolution.y == 0) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"resolution no effect message", @"The resolution of this image has been changed and this will affect printing and saving. However this will not affect the viewing window because your Preferences are set to ignore image resolution.") forDocument: document level:kModerateImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"resolution no effect message", @"The resolution of this image has been changed and this will affect printing and saving. However this will not affect the viewing window because your Preferences are set to ignore image resolution.") forDocument: document level:SeaWarningImportanceModerate];
 	}
 	
 	// Make the changes

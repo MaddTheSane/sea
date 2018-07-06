@@ -129,7 +129,7 @@ IntSize getDocumentSize(const char *path)
 		[spinner stopAnimation:self];
 		[waitPanel orderOut:self];
 	} else {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"SVG message", @"Seashore is unable to open the given SVG file because the SVG Importer is not installed. The installer for this importer can be found on Seashore's website.") level:kHighImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"SVG message", @"Seashore is unable to open the given SVG file because the SVG Importer is not installed. The installer for this importer can be found on Seashore's website.") level:SeaWarningImportanceHigh];
 		return NO;
 	}
 	

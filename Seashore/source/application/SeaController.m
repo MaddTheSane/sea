@@ -47,7 +47,7 @@ static SeaController *seaController;
 	// Run initial tests
 	if ([seaPrefs firstRun] && [crashReport checkResourceIsReachableAndReturnError:NULL]) {
 		if ([fileManager trashItemAtURL:crashReport resultingItemURL:NULL error:NULL]) {
-			[seaWarning addMessage:LOCALSTR(@"old crash report message", @"Seashore has moved its old crash report to the Trash so that it will be deleted next time you empty the trash.") level:kModerateImportance];
+			[seaWarning addMessage:LOCALSTR(@"old crash report message", @"Seashore has moved its old crash report to the Trash so that it will be deleted next time you empty the trash.") level:SeaWarningImportanceModerate];
 		}
 	}
 	/*

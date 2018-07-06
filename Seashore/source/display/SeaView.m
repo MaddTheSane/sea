@@ -139,9 +139,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Warn if bad resolution
 	if (xres != yres || (xres < 72)) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"strange res message", @"This image has an unusual resolution. As such, it may look different to what is expected at 100% zoom. To fix this use \"Image > Resolution...\" and set to 72 x 72 dpi.") forDocument: document level:kLowImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"strange res message", @"This image has an unusual resolution. As such, it may look different to what is expected at 100% zoom. To fix this use \"Image > Resolution...\" and set to 72 x 72 dpi.") forDocument: document level:SeaWarningImportanceLow];
 	} else if (xres > 300) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"high res message", @"This image has a high resolution. Seashore's performance may therefore be reduced. You can reduce the resolution using \"Image > Resolution...\" (with \"Preserve size\" checked). This will result in a lower-quality image.") forDocument: document level:kLowImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"high res message", @"This image has a high resolution. Seashore's performance may therefore be reduced. You can reduce the resolution using \"Image > Resolution...\" (with \"Preserve size\" checked). This will result in a lower-quality image.") forDocument: document level:SeaWarningImportanceLow];
 	}
 	}
 	

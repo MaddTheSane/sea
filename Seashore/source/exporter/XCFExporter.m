@@ -72,7 +72,7 @@ static inline void fix_endian_write(int *input, int size)
 		}
 	}
 	if (version == 2)
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"compatibility (gimp) message", @"This file contains layer modes which will not be recognized by the GIMP 1.2 series and earlier.") level:kVeryLowImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"compatibility (gimp) message", @"This file contains layer modes which will not be recognized by the GIMP 1.2 series and earlier.") level:SeaWarningImportanceLow];
 
 	
 	// Write the correct signature to file according to the version

@@ -72,7 +72,7 @@ enum {
 	if (!warnedUser && [sender tag] == 3) {
 		if ([pressureCheckbox state]) {
 			if (floor(NSAppKitVersionNumber) == NSAppKitVersionNumber10_4 && NSAppKitVersionNumber < NSAppKitVersionNumber10_4_6) {
-				[[SeaController seaWarning] addMessage:LOCALSTR(@"tablet bug message", @"There is a bug in Mac OS 10.4 that causes some tablets to incorrectly register their first touch at full strength. A workaround is provided in the \"Preferences\" dialog however the best solution is to upgrade to Mac OS 10.4.6 or later.") level:kModerateImportance];
+				[[SeaController seaWarning] addMessage:LOCALSTR(@"tablet bug message", @"There is a bug in Mac OS 10.4 that causes some tablets to incorrectly register their first touch at full strength. A workaround is provided in the \"Preferences\" dialog however the best solution is to upgrade to Mac OS 10.4.6 or later.") level:SeaWarningImportanceModerate];
 				warnedUser = YES;
 			}
 		}
