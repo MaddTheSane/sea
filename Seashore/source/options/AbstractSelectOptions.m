@@ -9,7 +9,7 @@
 - (instancetype)init
 {
 	if (self = [super init]) {
-		mode = kDefaultMode;
+		mode = SeaSelectDefault;
 	}
 	
 	return self;
@@ -18,7 +18,7 @@
 - (void)setSelectionMode:(SeaSelectMode)newMode
 {
 	mode = newMode;
-	if (mode == kDefaultMode) {
+	if (mode == SeaSelectDefault) {
 		[self setIgnoresMove:NO];
 	} else {
 		[self setIgnoresMove:YES];
@@ -29,28 +29,28 @@
 {
 	switch (modifier) {
 		case kNoModifier:
-			[self setSelectionMode: kDefaultMode];
+			[self setSelectionMode: SeaSelectDefault];
 			break;
 		case kControlModifier:
-			[self setSelectionMode: kForceNewMode];
+			[self setSelectionMode: SeaSelectForceNew];
 			break;
 		case kShiftModifier:
-			[self setSelectionMode: kDefaultMode];
+			[self setSelectionMode: SeaSelectDefault];
 			break;
 		case kShiftControlModifier:
-			[self setSelectionMode: kAddMode];
+			[self setSelectionMode: SeaSelectAdd];
 			break;
 		case kAltControlModifier:
-			[self setSelectionMode: kSubtractMode];
+			[self setSelectionMode: SeaSelectSubtract];
 			break;
 		case kReservedModifier1:
-			[self setSelectionMode: kMultiplyMode];
+			[self setSelectionMode: SeaSelectMultiply];
 			break;
 		case kReservedModifier2:
-			[self setSelectionMode: kSubtractProductMode];
+			[self setSelectionMode: SeaSelectSubtractProduct];
 			break;
 		default:
-			[self setSelectionMode: kDefaultMode];
+			[self setSelectionMode: SeaSelectDefault];
 			break;
 	}
 }

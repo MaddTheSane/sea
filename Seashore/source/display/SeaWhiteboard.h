@@ -32,11 +32,6 @@ typedef NS_ENUM(int, SeaChannelsView) {
 	SeaChannelsAlpha,
 	//! Indicates that all channels are being viewed in CMYK previewing mode.
 	SeaChannelsCMYKPreview,
-	
-	kAllChannelsView NS_SWIFT_UNAVAILABLE("Use .All instead") = SeaChannelsAll,
-	kPrimaryChannelsView NS_SWIFT_UNAVAILABLE("Use .Primary instead") = SeaChannelsPrimary,
-	kAlphaChannelView NS_SWIFT_UNAVAILABLE("Use .Alpha instead") = SeaChannelsAlpha,
-	kCMYKPreviewView NS_SWIFT_UNAVAILABLE("Use .CMYKPreview instead") = SeaChannelsCMYKPreview,
 };
 
 
@@ -64,11 +59,6 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 	 replace data being used as a mask.
 	 */
 	SeaOverlayBehaviourMasking,
-	
-	kNormalBehaviour NS_SWIFT_UNAVAILABLE("Use .Normal instead") = SeaOverlayBehaviourNormal,
-	kErasingBehaviour NS_SWIFT_UNAVAILABLE("Use .Erasing instead") = SeaOverlayBehaviourErasing,
-	kReplacingBehaviour NS_SWIFT_UNAVAILABLE("Use .Replacing instead") = SeaOverlayBehaviourReplacing,
-	kMaskingBehaviour NS_SWIFT_UNAVAILABLE("Use .Masking instead") = SeaOverlayBehaviourMasking
 };
 
 #if !MAIN_COMPILE
@@ -372,3 +362,13 @@ typedef NS_ENUM(int, SeaOverlayBehaviour) {
 @property (readonly) CGColorSpaceRef displayProf CF_RETURNS_NOT_RETAINED;
 
 @end
+
+static const SeaChannelsView kAllChannelsView NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaChannelsAll", 10.2, 10.8) = SeaChannelsAll;
+static const SeaChannelsView kPrimaryChannelsView NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaChannelsPrimary", 10.2, 10.8) = SeaChannelsPrimary;
+static const SeaChannelsView kAlphaChannelView NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaChannelsAlpha", 10.2, 10.8) = SeaChannelsAlpha;
+static const SeaChannelsView kCMYKPreviewView NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaChannelsCMYKPreview", 10.2, 10.8) = SeaChannelsCMYKPreview;
+
+static const SeaOverlayBehaviour kNormalBehaviour NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaOverlayBehaviourNormal", 10.2, 10.8) = SeaOverlayBehaviourNormal;
+static const SeaOverlayBehaviour kErasingBehaviour NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaOverlayBehaviourErasing", 10.2, 10.8) = SeaOverlayBehaviourErasing;
+static const SeaOverlayBehaviour kReplacingBehaviour NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaOverlayBehaviourReplacing", 10.2, 10.8) = SeaOverlayBehaviourReplacing;
+static const SeaOverlayBehaviour kMaskingBehaviour NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaOverlayBehaviourMasking", 10.2, 10.8) = SeaOverlayBehaviourMasking;

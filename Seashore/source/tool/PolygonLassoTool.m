@@ -102,7 +102,7 @@
 			[[document docView] setNeedsDisplay:YES];
 
 			// Clear last selection
-			if([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode)
+			if([options selectionMode] == SeaSelectDefault || [options selectionMode] == SeaSelectForceNew)
 				[[document selection] clearSelection];
 			
 			// All polygons have at least 3 points

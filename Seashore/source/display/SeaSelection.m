@@ -138,7 +138,7 @@
 	int tempMaskPoint, tempMaskProduct;
 
 	if(!mask)
-		mode = kDefaultMode;
+		mode = SeaSelectDefault;
 	
 	// Get the rectangles
 	if(mode){
@@ -175,27 +175,27 @@
 				
 				// Do the math
 				switch (mode) {
-					case kAddMode:
+					case SeaSelectAdd:
 						tempMaskPoint = oldMaskPoint + newMaskPoint;
 						if(tempMaskPoint > 0xFF)
 							tempMaskPoint = 0xFF;
 						newMaskPoint = (unsigned char)tempMaskPoint;
 						break;
 						
-					case kSubtractMode:
+					case SeaSelectSubtract:
 						tempMaskPoint = oldMaskPoint - newMaskPoint;
 						if(tempMaskPoint < 0x00)
 							tempMaskPoint = 0x00;
 						newMaskPoint = (unsigned char)tempMaskPoint;
 						break;
 						
-					case kMultiplyMode:
+					case SeaSelectMultiply:
 						tempMaskPoint = oldMaskPoint * newMaskPoint;
 						tempMaskPoint /= 0xFF;
 						newMaskPoint = (unsigned char)tempMaskPoint;
 						break;
 						
-					case kSubtractProductMode:
+					case SeaSelectSubtractProduct:
 						tempMaskProduct = oldMaskPoint * newMaskPoint;
 						tempMaskProduct /= 0xFF;
 						tempMaskPoint = oldMaskPoint + newMaskPoint;
@@ -252,7 +252,7 @@
 	int tempMaskPoint, tempMaskProduct;
 
 	if(!mask)
-		mode = kDefaultMode;
+		mode = SeaSelectDefault;
 
 	// Get the rectangles
 	if (mode) {
@@ -301,27 +301,27 @@
 				
 				// Do the math
 				switch(mode){
-					case kAddMode:
+					case SeaSelectAdd:
 						tempMaskPoint = oldMaskPoint + newMaskPoint;
 						if(tempMaskPoint > 0xFF)
 							tempMaskPoint = 0xFF;
 						newMaskPoint = (unsigned char)tempMaskPoint;
 						break;
 						
-					case kSubtractMode:
+					case SeaSelectSubtract:
 						tempMaskPoint = oldMaskPoint - newMaskPoint;
 						if(tempMaskPoint < 0x00)
 							tempMaskPoint = 0x00;
 						newMaskPoint = (unsigned char)tempMaskPoint;
 						break;
 						
-					case kMultiplyMode:
+					case SeaSelectMultiply:
 						tempMaskPoint = oldMaskPoint * newMaskPoint;
 						tempMaskPoint /= 0xFF;
 						newMaskPoint = (unsigned char)tempMaskPoint;
 						break;
 						
-					case kSubtractProductMode:
+					case SeaSelectSubtractProduct:
 						tempMaskProduct = oldMaskPoint * newMaskPoint;
 						tempMaskProduct /= 0xFF;
 						tempMaskPoint = oldMaskPoint + newMaskPoint;
@@ -377,7 +377,7 @@
 	int tempMaskPoint, tempMaskProduct;
 
 	if(!mask)
-		mode = kDefaultMode;
+		mode = SeaSelectDefault;
 
 	// Get the rectangles
 	if(mode){
@@ -455,27 +455,27 @@
 				
 				// Do the math
 				switch (mode) {
-					case kAddMode:
+					case SeaSelectAdd:
 						tempMaskPoint = oldMaskPoint + newMaskPoint;
 						if(tempMaskPoint > 0xFF)
 							tempMaskPoint = 0xFF;
 						newMaskPoint = (unsigned char)tempMaskPoint;
 						break;
 						
-					case kSubtractMode:
+					case SeaSelectSubtract:
 						tempMaskPoint = oldMaskPoint - newMaskPoint;
 						if(tempMaskPoint < 0x00)
 							tempMaskPoint = 0x00;
 						newMaskPoint = (unsigned char)tempMaskPoint;
 						break;
 						
-					case kMultiplyMode:
+					case SeaSelectMultiply:
 						tempMaskPoint = oldMaskPoint * newMaskPoint;
 						tempMaskPoint /= 0xFF;
 						newMaskPoint = (unsigned char)tempMaskPoint;
 						break;
 						
-					case kSubtractProductMode:
+					case SeaSelectSubtractProduct:
 						tempMaskProduct = oldMaskPoint * newMaskPoint;
 						tempMaskProduct /= 0xFF;
 						tempMaskPoint = oldMaskPoint + newMaskPoint;
@@ -534,7 +534,7 @@
 	// Get the rectangles
 	newRect = IntConstrainRect(selectionRect, IntMakeRect(0, 0, width, height));
 	if (!mask || !active) {
-		mode = kDefaultMode;		
+		mode = SeaSelectDefault;		
 		rect = newRect;
 	} else {
 		oldRect = [self localRect];
@@ -566,27 +566,27 @@
 				
 				// Do the math
 				switch(mode){
-					case kAddMode:
+					case SeaSelectAdd:
 						tempMask = oldMaskPoint + newMaskPoint;
 						if(tempMask > 0xFF)
 							tempMask = 0xFF;
 						newMaskPoint = (unsigned char)tempMask;
 						break;
 						
-					case kSubtractMode:
+					case SeaSelectSubtract:
 						tempMask = oldMaskPoint - newMaskPoint;
 						if(tempMask < 0x00)
 							tempMask = 0x00;
 						newMaskPoint = (unsigned char)tempMask;
 						break;
 						
-					case kMultiplyMode:
+					case SeaSelectMultiply:
 						tempMask = oldMaskPoint * newMaskPoint;
 						tempMask /= 0xFF;
 						newMaskPoint = (unsigned char)tempMask;
 						break;
 						
-					case kSubtractProductMode:
+					case SeaSelectSubtractProduct:
 						tempMaskProduct = oldMaskPoint * newMaskPoint;
 						tempMaskProduct /= 0xFF;
 						tempMask = oldMaskPoint + newMaskPoint;
@@ -955,7 +955,7 @@
 	globalRect.origin.y += offset.y;
 }
 
-- (void)scaleSelectionHorizontally:(float)xScale vertically:(float)yScale interpolation:(GimpInterpolationType)interpolation
+- (void)scaleSelectionHorizontally:(CGFloat)xScale vertically:(CGFloat)yScale interpolation:(GimpInterpolationType)interpolation
 {
 	if (active) {
 		// Work out the new rectangle and allocate space for the new mask

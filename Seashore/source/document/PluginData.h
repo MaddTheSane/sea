@@ -113,8 +113,8 @@
 	@method		foreColor
 	@discussion	Return the active foreground colour.
 	@param		calibrated
-				YES if the colour is to be calibrated (usually bad), NO otherwise.
-	@result		Returns an NSColor representing the active foreground
+				\c YES if the colour is to be calibrated (usually bad), \c NO otherwise.
+	@result		Returns an \c NSColor representing the active foreground
 				colour.
 */
 - (NSColor *)foreColor:(BOOL)calibrated NS_SWIFT_NAME(foreColor(calibrated:));
@@ -123,8 +123,8 @@
 	@method		backColor
 	@discussion	Return the active background colour.
 	@param		calibrated
-				YES if the colour is to be calibrated (usually bad), NO otherwise.
-	@result		Returns an NSColor representing the active background
+				\c YES if the colour is to be calibrated (usually bad), \c NO otherwise.
+	@result		Returns an \c NSColor representing the active background
 				colour.
 */
 - (NSColor *)backColor:(BOOL)calibrated NS_SWIFT_NAME(backColor(calibrated:));

@@ -39,7 +39,7 @@
 		
 		
 		// Clear the active selection and start the selection
-		if([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode)
+		if([options selectionMode] == SeaSelectDefault || [options selectionMode] == SeaSelectForceNew)
 			[[document selection] clearSelection];
 
 		// Record the start point

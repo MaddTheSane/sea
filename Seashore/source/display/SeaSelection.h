@@ -28,13 +28,6 @@ typedef NS_ENUM(int, SeaSelectMode) {
 	SeaSelectMultiply,			///< Multiply the selections.
 	SeaSelectSubtractProduct,	///< Subtract the product of the selections.
 	SeaSelectForceNew,			///< For a new selection
-	
-	kDefaultMode NS_SWIFT_UNAVAILABLE("Use .Default instead") = SeaSelectDefault,
-	kAddMode NS_SWIFT_UNAVAILABLE("Use .Add instead") = SeaSelectAdd,
-	kSubtractMode NS_SWIFT_UNAVAILABLE("Use .Subtract instead") = SeaSelectSubtract,
-	kMultiplyMode NS_SWIFT_UNAVAILABLE("Use .Multiply instead") = SeaSelectMultiply,
-	kSubtractProductMode NS_SWIFT_UNAVAILABLE("Use .SubtractProduct instead") = SeaSelectSubtractProduct,
-	kForceNewMode NS_SWIFT_UNAVAILABLE("Use .ForceNew instead") = SeaSelectForceNew
 };
 
 @class SeaDocument;
@@ -194,7 +187,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@method		selectOverlay:inRect:mode:
 	@discussion Selects the area given by the overlay's alpha channel.
 	@param		destructively
-				YES if the overlay is to be destroyed during the selection, NO
+				\c YES if the overlay is to be destroyed during the selection, \c NO
 				otherwise.
 	@param		selectionRect
 				The rectangle contianing the section of the overlay to be
@@ -255,7 +248,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion	Returns a block of memory containing the layer data encapsulated
 				by the rectangle.
 	@param		premultiplied
-				YES if the returned data should be premultiplied, NO otherwise.
+				\c YES if the returned data should be premultiplied, \c NO otherwise.
 	@result		Returns a pointer to a block of memory containing the layer data
 				encapsulated by the rectangle.
 */
@@ -266,8 +259,8 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion	Compares the given size to the size of the last selection.
 	@param		inp_size
 				The size for comparison.
-	@result		Returns YES if the size is equal to the size of the last selection,
-				NO otherwise.
+	@result		Returns \c YES if the size is equal to the size of the last selection,
+				\c NO otherwise.
 */
 - (BOOL)selectionSizeMatch:(IntSize)inp_size;
 
@@ -317,7 +310,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		interpolation
 				The interpolation to be used when scaling (see GIMPCore).
 */
-- (void)scaleSelectionHorizontally:(float)xScale vertically:(float)yScale interpolation:(GimpInterpolationType)interpolation NS_SWIFT_NAME(scaleSelection(horizontally:vertically:interpolation:));
+- (void)scaleSelectionHorizontally:(CGFloat)xScale vertically:(CGFloat)yScale interpolation:(GimpInterpolationType)interpolation NS_SWIFT_NAME(scaleSelection(horizontally:vertically:interpolation:));
 
 /*!
 	@method		scaleSelectionTo:from:interpolation:usingMask:
@@ -341,5 +334,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)trimSelection;
 
 @end
+
+static const SeaSelectMode kDefaultMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectDefault", 10.2, 10.8) = SeaSelectDefault;
+static const SeaSelectMode kAddMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectAdd", 10.2, 10.8) = SeaSelectAdd;
+static const SeaSelectMode kSubtractMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectSubtract", 10.2, 10.8) = SeaSelectSubtract;
+static const SeaSelectMode kMultiplyMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectMultiply", 10.2, 10.8) = SeaSelectMultiply;
+static const SeaSelectMode kSubtractProductMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectSubtractProduct", 10.2, 10.8) = SeaSelectSubtractProduct;
+static const SeaSelectMode kForceNewMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectForceNew", 10.2, 10.8) = SeaSelectForceNew;
 
 NS_ASSUME_NONNULL_END

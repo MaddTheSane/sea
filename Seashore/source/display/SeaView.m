@@ -1706,7 +1706,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (IBAction)selectAll:(id)sender
 {
-	[[document selection] selectRect:IntMakeRect(0, 0, [(SeaLayer *)[[document contents] activeLayer] width], [(SeaLayer *)[[document contents] activeLayer] height]) mode:kDefaultMode];
+	[[document selection] selectRect:IntMakeRect(0, 0, [[[document contents] activeLayer] width], [[[document contents] activeLayer] height]) mode:SeaSelectDefault];
 }
 
 - (IBAction)selectNone:(id)sender
