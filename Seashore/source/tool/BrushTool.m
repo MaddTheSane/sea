@@ -108,14 +108,14 @@
 	int spp = [[document contents] spp];
 	int pressure = [options pressureValue:event];
 	BOOL ignoreFirstTouch;
-	int modifier = [options modifier];
+	AbstractModifiers modifier = [options modifier];
 	
 	// Determine whether operation should continue
 	lastWhere.x = where.x;
 	lastWhere.y = where.y;
 	multithreaded = [[SeaController seaPrefs] multithreaded];
 	ignoreFirstTouch = [[SeaController seaPrefs] ignoreFirstTouch];
-	if (ignoreFirstTouch && ([event type] == NSLeftMouseDown || [event type] == NSRightMouseDown) && [options pressureSensitive] && (modifier != kShiftModifier && modifier != kShiftControlModifier)) { 
+	if (ignoreFirstTouch && ([event type] == NSLeftMouseDown || [event type] == NSRightMouseDown) && [options pressureSensitive] && (modifier != AbstractModifierShift && modifier != AbstractModifierShiftControl)) {
 		firstTouchDone = NO;
 		return;
 	} else {
@@ -123,7 +123,7 @@
 	}
 	
 	// Determine base pixels and hence brush colour
-	if (modifier == kAltModifier) {
+	if (modifier == AbstractModifierAlt) {
 		color = [[document contents] background];
 		if (spp == 4) {
 			basePixel[0] = (unsigned char)([color redComponent] * 255.0);

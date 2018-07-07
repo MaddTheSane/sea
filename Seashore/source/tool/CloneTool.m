@@ -131,9 +131,9 @@
 	int sourceWidth, sourceHeight;
 	IntPoint spt;
 	CGFloat xScale, yScale;
-	int modifier = [options modifier];
+	AbstractModifiers modifier = [options modifier];
 	
-	if (modifier == kAltModifier) {
+	if (modifier == AbstractModifierAlt) {
 		xScale = [[document contents] xscale];
 		yScale = [[document contents] yscale];
 		if (sourceSetting > 0) {
@@ -187,7 +187,7 @@
 		lastWhere.y = where.y;
 		multithreaded = [[SeaController seaPrefs] multithreaded];
 		ignoreFirstTouch = [[SeaController seaPrefs] ignoreFirstTouch];
-		if (ignoreFirstTouch && ([event type] == NSLeftMouseDown || [event type] == NSRightMouseDown) /* && [options pressureSensitive] */ && !(modifier == kAltModifier)) { 
+		if (ignoreFirstTouch && ([event type] == NSLeftMouseDown || [event type] == NSRightMouseDown) /* && [options pressureSensitive] */ && !(modifier == AbstractModifierAlt)) {
 			firstTouchDone = NO;
 			return;
 		} else {

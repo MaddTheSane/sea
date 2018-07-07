@@ -44,10 +44,10 @@
 - (void)updateModifiers:(NSEventModifierFlags)modifiers
 {
 	[super updateModifiers:modifiers];
-	int modifier = [super modifier];
+	AbstractModifiers modifier = [super modifier];
 	
 	switch (modifier) {
-		case kAltModifier:
+		case AbstractModifierAlt:
 			self.pencilIsErasing = YES;
 			break;
 		default:
@@ -59,7 +59,7 @@
 - (IBAction)modifierPopupChanged:(id)sender
 {
 	switch ([[sender selectedItem] tag]) {
-		case kAltModifier:
+		case AbstractModifierAlt:
 			self.pencilIsErasing = YES;
 			break;
 		default:

@@ -27,7 +27,7 @@
 		[effectTable scrollRowToVisible:effectIndex];
 		[effectTableInstruction setStringValue:[pointPlugins[effectIndex] instruction]];
 		[clickCountLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"click count", @"Clicks remaining: %d"), [pointPlugins[effectIndex] points]]];
-		[(InfoPanel *)panel setPanelStyle:kVerticalPanelStyle];
+		[panel setPanelStyle:SeaPanelStyleVertical];
     }	
 }
 

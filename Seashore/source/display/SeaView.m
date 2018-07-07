@@ -1084,7 +1084,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Run the event
 	[document lock];
 	if (curToolIndex == kZoomTool) {
-		if ([options modifier] == kAltModifier) {
+		if ([options modifier] == AbstractModifierAlt) {
 			if ([self canZoomOut])
 				[self zoomOutFromPoint:globalPoint];
 			else
@@ -1210,7 +1210,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Snap to 45 degree intervals if requested
 	deltaX = localActiveLayerPoint.x - lastActiveLayerPoint.x;
 	deltaY = localActiveLayerPoint.y - lastActiveLayerPoint.y;
-	if (lineDraw && ([options modifier] == kShiftControlModifier) && deltaX != 0) {
+	if (lineDraw && ([options modifier] == AbstractModifierShiftControl) && deltaX != 0) {
 		angle = atan((CGFloat)deltaY / (CGFloat)abs(deltaX));
 		if (angle > -0.3927 && angle < 0.3927)
 			localActiveLayerPoint.y = lastActiveLayerPoint.y;
@@ -1269,7 +1269,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	}
 	
 	// Check if it is a line draw
-	if ([curTool acceptsLineDraws] && ([options modifier] == kShiftModifier || [options modifier] == kShiftControlModifier)) {
+	if ([curTool acceptsLineDraws] && ([options modifier] == AbstractModifierShift || [options modifier] == AbstractModifierShiftControl)) {
 		lineDraw = YES;
 		return;
 	}

@@ -6,7 +6,7 @@
 - (void)awakeFromNib
 {
 	// Set up the window's properties
-	[window setPanelStyle:kVerticalPanelStyle];
+	[window setPanelStyle:SeaPanelStyleVertical];
 	parentWin = NULL;
 }	
 

@@ -20,7 +20,7 @@
 	} else {
 		[canAnchorCheckbox setState:[defaults boolForKey:@"position anchor"]];
 	}
-	function = kMovingLayer;
+	function = SeaPositionOptionMoving;
 }
 
 - (BOOL)canAnchor
@@ -31,14 +31,14 @@
 - (void)setFunctionFromIndex:(AbstractModifiers)index
 {
 	switch (index) {
-		case kShiftModifier:
-			function = kScalingLayer;
+		case AbstractModifierShift:
+			function = SeaPositionOptionScaling;
 			break;
-		case kControlModifier:
-			function = kRotatingLayer;
+		case AbstractModifierControl:
+			function = SeaPositionOptionRotating;
 			break;
 		default:
-			function = kMovingLayer;
+			function = SeaPositionOptionMoving;
 			break;
 	}
 	// Let's not check for floating, maybe we can do it all
@@ -71,7 +71,7 @@
 - (void)shutdown
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:[canAnchorCheckbox state] ? @"YES" : @"NO" forKey:@"position anchor"];
+	[defaults setBool:[canAnchorCheckbox state] != NSOffState forKey:@"position anchor"];
 }
 
 @end

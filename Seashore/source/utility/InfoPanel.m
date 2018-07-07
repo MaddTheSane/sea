@@ -55,10 +55,10 @@
 - (void) orderFrontToGoal:(NSPoint)goal onWindow:(NSWindow *)parent
 {
 	NSRect oldFrame = [self frame];
-	if(panelStyle == kVerticalPanelStyle){
+	if (panelStyle == SeaPanelStyleVertical) {
 		oldFrame.origin.x = goal.x - oldFrame.size.width / 2;
 		oldFrame.origin.y = goal.y - oldFrame.size.height;
-	}else if(panelStyle == kHorizontalPanelStyle){
+	} else if(panelStyle == SeaPanelStyleHorizontal) {
 		oldFrame.origin.x = goal.x;
 		oldFrame.origin.y = goal.y - 2 * oldFrame.size.height / 3;
 	}

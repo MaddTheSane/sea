@@ -9,9 +9,9 @@
 	BOOL side = NO, top = NO;
 	SeaPanelStyle panelStyle = [(InfoPanel *)[self window] panelStyle];
 	
-	if(panelStyle == kVerticalPanelStyle){
+	if (panelStyle == SeaPanelStyleVertical) {
 		top = YES;
-	}else if(panelStyle == kHorizontalPanelStyle){
+	} else if(panelStyle == SeaPanelStyleHorizontal) {
 		side = YES;
 	}
 	

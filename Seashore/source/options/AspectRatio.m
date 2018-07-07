@@ -43,7 +43,7 @@
 	}
 	
 	if ([defaults objectForKey:[NSString stringWithFormat:@"%@ ratio type", prefString]] == NULL) {
-		aspectType = kRatioAspectType;
+		aspectType = SeaAspectTypeRatio;
 	}
 	else {
 		aspectType = [defaults integerForKey:[NSString stringWithFormat:@"%@ ratio type", prefString]];
@@ -51,23 +51,23 @@
 	
 	customItem = [ratioPopup itemAtIndex:customItemIndex];
 	switch (aspectType) {
-		case kRatioAspectType:
+		case SeaAspectTypeRatio:
 			[customItem setTitle:[NSString stringWithFormat:@"%g to %g", ratioX, ratioY]];
 			break;
 			
-		case kExactPixelAspectType:
+		case SeaAspectTypeExactPixel:
 			[customItem setTitle:[NSString stringWithFormat:@"%d by %d px", (int)ratioX, (int)ratioY]];
 			break;
 			
-		case kExactInchAspectType:
+		case SeaAspectTypeExactInch:
 			[customItem setTitle:[NSString stringWithFormat:@"%g by %g in", ratioX, ratioY]];
 			break;
 			
-		case kExactMillimeterAspectType:
+		case SeaAspectTypeExactMillimeter:
 			[customItem setTitle:[NSString stringWithFormat:@"%g by %g mm", ratioX, ratioY]];
 			break;
 			
-		case kNoAspectType:
+		case SeaAspectTypeNone:
 			break;
 	}
 
@@ -80,27 +80,27 @@
 	[xRatioValue setStringValue:[NSString stringWithFormat:@"%g", ratioX]];
 	[yRatioValue setStringValue:[NSString stringWithFormat:@"%g", ratioY]];
 	switch (aspectType) {
-		case kRatioAspectType:
+		case SeaAspectTypeRatio:
 			[toLabel setStringValue:@"to"];
 			[aspectTypePopup selectItemAtIndex:0];
 			break;
 			
-		case kExactPixelAspectType:
+		case SeaAspectTypeExactPixel:
 			[toLabel setStringValue:@"by"];
 			[aspectTypePopup selectItemAtIndex:1];
 			break;
 			
-		case kExactInchAspectType:
+		case SeaAspectTypeExactInch:
 			[toLabel setStringValue:@"by"];
 			[aspectTypePopup selectItemAtIndex:2];
 			break;
 			
-		case kExactMillimeterAspectType:
+		case SeaAspectTypeExactMillimeter:
 			[toLabel setStringValue:@"by"];
 			[aspectTypePopup selectItemAtIndex:3];
 			break;
 			
-		case kNoAspectType:
+		case SeaAspectTypeNone:
 			break;
 	}
 	
@@ -113,7 +113,7 @@
 {
 	id customItem;
 	
-	if (aspectType == kExactPixelAspectType) {
+	if (aspectType == SeaAspectTypeExactPixel) {
 		ratioX = [xRatioValue intValue];
 		ratioY = [yRatioValue intValue];
 	}
@@ -123,23 +123,23 @@
 	}
 	customItem = [ratioPopup itemAtIndex:customItemIndex];
 	switch (aspectType) {
-		case kRatioAspectType:
+		case SeaAspectTypeRatio:
 			[customItem setTitle:[NSString stringWithFormat:@"%g to %g", ratioX, ratioY]];
 		break;
 			
-		case kExactPixelAspectType:
+		case SeaAspectTypeExactPixel:
 			[customItem setTitle:[NSString stringWithFormat:@"%d by %d px", (int)ratioX, (int)ratioY]];
 		break;
 			
-		case kExactInchAspectType:
+		case SeaAspectTypeExactInch:
 			[customItem setTitle:[NSString stringWithFormat:@"%g by %g in", ratioX, ratioY]];
 		break;
 			
-		case kExactMillimeterAspectType:
+		case SeaAspectTypeExactMillimeter:
 			[customItem setTitle:[NSString stringWithFormat:@"%g by %g mm", ratioX, ratioY]];
 		break;
 			
-		case kNoAspectType:
+		case SeaAspectTypeNone:
 			break;
 
 	}
@@ -156,12 +156,12 @@
 	
 	oldType = aspectType;
 	aspectType = [aspectTypePopup indexOfSelectedItem] - 1;
-	if (oldType != kRatioAspectType) {
+	if (oldType != SeaAspectTypeRatio) {
 		forgotX = SeaPixelsFromFloat([xRatioValue doubleValue], (SeaUnits)oldType, xres);
 		forgotY = SeaPixelsFromFloat([yRatioValue doubleValue], (SeaUnits)oldType, yres);
 	}
 	switch (aspectType) {
-		case kRatioAspectType:
+		case SeaAspectTypeRatio:
 			ratioX = 2;
 			ratioY = 1;
 			[xRatioValue setStringValue:[NSString stringWithFormat:@"%d", (int)ratioX]];
@@ -169,7 +169,7 @@
 			[toLabel setStringValue:@"to"];
 			[aspectTypePopup setTitle:@"ratio"];
 			break;
-		case kExactPixelAspectType:
+		case SeaAspectTypeExactPixel:
 			[xRatioValue setStringValue:SeaStringFromPixels(forgotX, (SeaUnits)aspectType, xres)];
 			[yRatioValue setStringValue:SeaStringFromPixels(forgotY, (SeaUnits)aspectType, yres)];
 			ratioX = [xRatioValue floatValue];
@@ -177,7 +177,7 @@
 			[toLabel setStringValue:@"by"];
 			[aspectTypePopup setTitle:@"px"];
 			break;
-		case kExactInchAspectType:
+		case SeaAspectTypeExactInch:
 			[xRatioValue setStringValue:SeaStringFromPixels(forgotX, (SeaUnits)aspectType, xres)];
 			[yRatioValue setStringValue:SeaStringFromPixels(forgotY, (SeaUnits)aspectType, yres)];
 			ratioX = [xRatioValue floatValue];
@@ -185,7 +185,7 @@
 			[toLabel setStringValue:@"by"];
 			[aspectTypePopup setTitle:@"in"];
 			break;
-		case kExactMillimeterAspectType:
+		case SeaAspectTypeExactMillimeter:
 			[xRatioValue setStringValue:SeaStringFromPixels(forgotX, (SeaUnits)aspectType, xres)];
 			[yRatioValue setStringValue:SeaStringFromPixels(forgotY, (SeaUnits)aspectType, yres)];
 			ratioX = [xRatioValue floatValue];
@@ -194,7 +194,7 @@
 			[aspectTypePopup setTitle:@"mm"];
 			break;
 			
-		case kNoAspectType:
+		case SeaAspectTypeNone:
 			break;
 			
 	}
@@ -214,9 +214,9 @@
 			break;
 			
 		case 2:
-			if (aspectType == kRatioAspectType)
+			if (aspectType == SeaAspectTypeRatio)
 				result = NSMakeSize(ratioX / ratioY, ratioY / ratioX);
-			else if (aspectType == kExactPixelAspectType)
+			else if (aspectType == SeaAspectTypeExactPixel)
 				result = NSMakeSize((int)ratioX, (int)ratioY);
 			else
 				result = NSMakeSize(ratioX, ratioY);
@@ -241,11 +241,11 @@
 	
 	if ([ratioCheckbox state]) {
 		if ([ratioPopup indexOfSelectedItem] < customItemIndex)
-			result = kRatioAspectType;
+			result = SeaAspectTypeRatio;
 		else
 			result = aspectType;
 	} else {
-		result = kNoAspectType;
+		result = SeaAspectTypeNone;
 	}
 	
 	return result;

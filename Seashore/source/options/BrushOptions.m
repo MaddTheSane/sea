@@ -140,7 +140,7 @@ enum {
 	AbstractModifiers modifier = [super modifier];
 	
 	switch (modifier) {
-		case kAltModifier:
+		case AbstractModifierAlt:
 			isErasing = YES;
 			break;
 		default:
@@ -152,7 +152,7 @@ enum {
 - (IBAction)modifierPopupChanged:(id)sender
 {
 	switch ([[sender selectedItem] tag]) {
-		case kAltModifier:
+		case AbstractModifierAlt:
 			isErasing = YES;
 			break;
 		default:

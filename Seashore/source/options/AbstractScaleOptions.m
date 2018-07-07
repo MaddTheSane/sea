@@ -9,7 +9,7 @@
 {
 	self = [super init];
 	if(self){
-		aspectType = kNoAspectType;
+		aspectType = SeaAspectTypeNone;
 		ignoresMove = NO;
 	}
 	return self;
@@ -20,16 +20,16 @@
 {
 	[super updateModifiers:modifiers];
 
-	if ([super modifier] == kShiftModifier) {
-		aspectType = kRatioAspectType;
+	if ([super modifier] == AbstractModifierShift) {
+		aspectType = SeaAspectTypeRatio;
 	} else {
-		aspectType = kNoAspectType;
+		aspectType = SeaAspectTypeNone;
 	}
 }
 
 - (NSSize)ratio
 {
-	if (aspectType == kRatioAspectType) {
+	if (aspectType == SeaAspectTypeRatio) {
 		return NSMakeSize(1, 1);
 	}
 	return NSZeroSize;
