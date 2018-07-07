@@ -132,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				A854AD2809BC12B9004AD947 /* Public Headers */,
-				A854AD3609BC13B0004AD947 /* Private Headers */,
 				32C88DFF0371C24200C91783 /* Source */,
 				089C1665FE841158C02AAC07 /* Resources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -160,6 +159,7 @@
 		32C88DFF0371C24200C91783 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A854AD3609BC13B0004AD947 /* Private Headers */,
 				A854AD7D09BC15BB004AD947 /* tif_aux.c */,
 				A854ACC309BC12A2004AD947 /* tif_close.c */,
 				A854ACC409BC12A2004AD947 /* tif_codec.c */,
@@ -225,7 +225,6 @@
 				A854ACEF09BC12A2004AD947 /* uvcode.h */,
 			);
 			name = "Private Headers";
-			path = source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

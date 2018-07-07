@@ -37,15 +37,6 @@ typedef NS_ENUM(NSInteger, AbstractModifiers) {
 	AbstractModifierReserved1 = 20,
 	//! Indicates a reserved modifier (no shortcut key).
 	AbstractModifierReserved2 = 21,
-	
-	kNoModifier NS_SWIFT_UNAVAILABLE("Use .None instead") = AbstractModifierNone,
-	kAltModifier NS_SWIFT_UNAVAILABLE("Use .Alt instead") = AbstractModifierAlt,
-	kShiftModifier NS_SWIFT_UNAVAILABLE("Use .Shift instead") = AbstractModifierShift,
-	kControlModifier NS_SWIFT_UNAVAILABLE("Use .Control instead") = AbstractModifierControl,
-	kShiftControlModifier NS_SWIFT_UNAVAILABLE("Use .ShiftControl instead") = AbstractModifierShiftControl,
-	kAltControlModifier NS_SWIFT_UNAVAILABLE("Use .AltControl instead") = AbstractModifierAltControl,
-	kReservedModifier1 NS_SWIFT_UNAVAILABLE("Use .Reserved1 instead") = AbstractModifierReserved1,
-	kReservedModifier2 NS_SWIFT_UNAVAILABLE("Use .Reserved2 instead") = AbstractModifierReserved2,
 };
 
 @class SeaDocument;
@@ -141,3 +132,12 @@ typedef NS_ENUM(NSInteger, AbstractModifiers) {
 - (NSView *)view;
 
 @end
+
+static const AbstractModifiers kNoModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierNone", 10.2, 10.8) = AbstractModifierNone;
+static const AbstractModifiers kAltModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierAlt", 10.2, 10.8) = AbstractModifierAlt;
+static const AbstractModifiers kShiftModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierShift", 10.2, 10.8) = AbstractModifierShift;
+static const AbstractModifiers kControlModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierControl", 10.2, 10.8) = AbstractModifierControl;
+static const AbstractModifiers kShiftControlModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierShiftControl", 10.2, 10.8) = AbstractModifierShiftControl;
+static const AbstractModifiers kAltControlModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierAltControl", 10.2, 10.8) = AbstractModifierAltControl;
+static const AbstractModifiers kReservedModifier1 NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierReserved1", 10.2, 10.8) = AbstractModifierReserved1;
+static const AbstractModifiers kReservedModifier2 NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierReserved2", 10.2, 10.8) = AbstractModifierReserved2;

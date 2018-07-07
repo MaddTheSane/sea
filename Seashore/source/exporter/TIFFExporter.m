@@ -25,10 +25,11 @@ CF_ENUM(int) {
 - (IBAction)showOptions:(id)sender
 {
 	// Work things out
-	if ([[idocument contents] cmykSave])
+	if ([[idocument contents] cmykSave]) {
 		[targetRadios selectCellAtRow:1 column:0];
-	else
+	} else {
 		[targetRadios selectCellAtRow:0 column:0];
+	}
 	
 	// Display the options dialog
 	[panel center];
@@ -91,21 +92,21 @@ CF_ENUM(int) {
 
 	// Get the data to write
 	srcData = [[document whiteboard] data];
-	width = [(SeaContent *)[document contents] width];
-	height = [(SeaContent *)[document contents] height];
-	spp = [(SeaContent *)[document contents] spp];
+	width = [[document contents] width];
+	height = [[document contents] height];
+	spp = [[document contents] spp];
 	xres = [[document contents] xres];
 	yres = [[document contents] yres];
 	
 	// Determine whether or not an alpha channel would be redundant
 	for (i = 0; i < width * height && hasAlpha == NO; i++) {
-		if (srcData[(i + 1) * spp - 1] != 255)
+		if (srcData[(i + 1) * spp - 1] != 255) {
 			hasAlpha = YES;
+		}
 	}
 	
 	// Behave differently if we are targeting a CMYK file
 	if ([[document contents] cmykSave] && spp == 4) {
-	
 		// Strip the alpha channel
 		tempData = malloc(width * height * 3);
 		SeaStripAlphaToWhite(spp, tempData, srcData, width * height);
@@ -134,7 +135,9 @@ CF_ENUM(int) {
 		ColorSyncTransformConvert(cw, width, height, destData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaNone, width * 4, tempData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaNone, width * 3, NULL);
 		
 		// Clean up after ourselves
-		if (cw) CFRelease(cw);
+		if (cw) {
+			CFRelease(cw);
+		}
 		free(tempData);
 		CFRelease(srcProf);
 		
@@ -163,21 +166,22 @@ CF_ENUM(int) {
 		TIFFSetField(tiff, TIFFTAG_XRESOLUTION, (float)xres);
 		TIFFSetField(tiff, TIFFTAG_YRESOLUTION, (float)yres);
 		TIFFSetField(tiff, TIFFTAG_RESOLUTIONUNIT, RESUNIT_INCH);
-		TIFFSetField(tiff, TIFFTAG_SOFTWARE, "Seashore 0.2.0");
+		TIFFSetField(tiff, TIFFTAG_SOFTWARE, "Seashore 0.6.0");
 		if (cmOkay) TIFFSetField(tiff, TIFFTAG_ICCPROFILE, (int)cmData.length, cmData.bytes);
 		TIFFSetField(tiff, TIFFTAG_ROWSPERSTRIP, (width * 4 * height > 8192) ? (8192 / (width * 4) + 1) : height);
 		linebytes = 4 * width;
 		if (TIFFScanlineSize(tiff) > linebytes) {
 			buf = (unsigned char *)malloc(TIFFScanlineSize(tiff));
 			memset(buf, 0, TIFFScanlineSize(tiff));
-		}
-		else {
+		} else {
 			buf = (unsigned char *)malloc(linebytes);
 		}
 		for (i = 0; i < height; i++) {
 			memcpy(buf, &(destData[width * 4 * i]), linebytes);
 			if (TIFFWriteScanline(tiff, buf, i, 0) < 0) {
-				if (destData != srcData) free(destData);
+				if (destData != srcData) {
+					free(destData);
+				}
 				return NO;
 			}
 		}
@@ -185,19 +189,17 @@ CF_ENUM(int) {
 		// Close the file
 		TIFFClose(tiff);
 		free(buf);
-	}
-	else {
-		
+	} else {
 		// Strip the alpha channel if necessary
 		if (!hasAlpha) {
 			spp--;
 			destData = malloc(width * height * spp);
 			for (i = 0; i < width * height; i++) {
-				for (j = 0; j < spp; j++)
+				for (j = 0; j < spp; j++) {
 					destData[i * spp + j] = srcData[i * (spp + 1) + j];
+				}
 			}
-		}
-		else {
+		} else {
 			destData = malloc(width * height * spp);
 			SeaUnpremultiplyBitmap(spp, destData, srcData, width * height);
 		}
@@ -234,7 +236,7 @@ CF_ENUM(int) {
 		TIFFSetField(tiff, TIFFTAG_XRESOLUTION, (float)xres);
 		TIFFSetField(tiff, TIFFTAG_YRESOLUTION, (float)yres);
 		TIFFSetField(tiff, TIFFTAG_RESOLUTIONUNIT, RESUNIT_INCH);
-		TIFFSetField(tiff, TIFFTAG_SOFTWARE, "Seashore 0.1.9");
+		TIFFSetField(tiff, TIFFTAG_SOFTWARE, "Seashore 0.6.0");
 		if (cmOkay) TIFFSetField(tiff, TIFFTAG_ICCPROFILE, (int)cmData.length, cmData.bytes);
 		TIFFSetField(tiff, TIFFTAG_ROWSPERSTRIP, (width * spp * height > 8192) ? (8192 / (width * spp) + 1) : height);
 		linebytes = spp * width;

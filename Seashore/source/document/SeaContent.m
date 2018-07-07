@@ -491,7 +491,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Determine which document we have and act appropriately	
 	docType = (NSString *)CFBridgingRelease(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
 																(__bridge CFStringRef)[path pathExtension],
-																(CFStringRef)@"public.data"));
+																kUTTypeData));
 	
 	success = [XCFContent typeIsEditable:docType] ||
 		[XBMContent typeIsEditable:docType] ||
@@ -509,7 +509,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	
 	docType = (NSString *)CFBridgingRelease(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
 																(__bridge CFStringRef)[path pathExtension],
-																(CFStringRef)@"public.data"));
+																kUTTypeData));
 
 	if ([XCFContent typeIsEditable:docType]) {
 		
