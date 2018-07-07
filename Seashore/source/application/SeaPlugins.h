@@ -262,5 +262,4 @@ static const SeaPluginType kBasicPlugin NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaP
 //! more point given to it by the effects tool.
 static const SeaPluginType kPointPlugin NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPluginPoint", 10.2, 10.8) = SeaPluginPoint;
 
-
 NS_ASSUME_NONNULL_END

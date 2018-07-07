@@ -13,7 +13,6 @@
 				<b>Copyright:</b> Copyright (c) 2006 Mark Pazolli
 */
 @interface SeaDocumentController : NSDocumentController {
-
 	/// An outlet to the preferences manager of the application
 	IBOutlet SeaPrefs *seaPrefs;
 	
@@ -61,7 +60,6 @@
 	
 	/// A long list of the possible things we can read
 	NSMutableDictionary<NSString*,NSSet<NSString*>*> *viewableTypes;
-	
 }
 
 /*!
