@@ -12,7 +12,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kCropTool;
+	return SeaToolsCrop;
 }	
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event

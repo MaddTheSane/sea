@@ -268,7 +268,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 - (void)terminate
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setInteger:[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: kEffectTool] selectedRow] forKey:@"effectIndex"];
+	[defaults setInteger:[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: SeaToolsEffect] selectedRow] forKey:@"effectIndex"];
 }
 
 - (id)affinePlugin
@@ -307,7 +307,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 
 - (id)activePointEffect
 {
-	return pointPlugins[[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: kEffectTool] selectedRow]];
+	return pointPlugins[[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: SeaToolsEffect] selectedRow]];
 }
 
 - (BOOL)validateMenuItem:(id)menuItem

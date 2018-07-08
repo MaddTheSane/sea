@@ -95,14 +95,14 @@
 	}
 	
 	// Set the radius value
-	[radiusValue setIntValue:[[[document tools] getTool:kEyedropTool] sampleSize]];
+	[radiusValue setIntValue:[[[document tools] getTool:SeaToolsEyedrop] sampleSize]];
 
 	// Update the document information
 	xres = [[document contents] xres];
 	yres = [[document contents] yres];
 
 	// Get the selection
-	if (curToolIndex == kCropTool) {
+	if (curToolIndex == SeaToolsCrop) {
 		size = [[[document tools] currentTool] cropRect].size;
 	} else if (document.selection.active) {
 		size = [[document selection] globalRect].size;
@@ -123,7 +123,7 @@
 	[yValue setStringValue:[SeaStringFromPixels(point.y, units, yres) stringByAppendingFormat:@" %@", label]];
 
 	// Update the RGBA values
-	color = [[[document tools] getTool:kEyedropTool] getColor];
+	color = [[[document tools] getTool:SeaToolsEyedrop] getColor];
 	if (color) {
 		[colorWell setColor:color];
 		if ([[color colorSpaceName] isEqualToString:NSDeviceRGBColorSpace]) {

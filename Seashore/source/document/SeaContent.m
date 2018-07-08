@@ -877,7 +877,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[document helpers] activeLayerChanged:kLayerDeleted rect:&rect];
 	
 	// Unset the clone tool
-	[[[document tools] getTool:kCloneTool] unset];
+	[[[document tools] getTool:SeaToolsClone] unset];
 	
 	// Make action undoable
 	[[[document undoManager] prepareWithInvocationTarget:self] restoreLayer:index fromLostIndex:[deletedLayers count] - 1];
@@ -1597,7 +1597,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	selectedChannel = 0;
 	
 	// Unset the clone tool
-	[[[document tools] getTool:kCloneTool] unset];
+	[[[document tools] getTool:SeaToolsClone] unset];
 	
 	// Inform the helpers we have flattened the document
 	[[document helpers] documentFlattened];
@@ -1647,7 +1647,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	layers = oldLayers;
 	
 	// Unset the clone tool
-	[[[document tools] getTool:kCloneTool] unset];
+	[[[document tools] getTool:SeaToolsClone] unset];
 	
 	// Inform the helpers we have unflattened the document
 	[[document helpers] documentFlattened];
@@ -1730,7 +1730,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 
 	// Unset the clone tool
-	[[[document tools] getTool:kCloneTool] unset];
+	[[[document tools] getTool:SeaToolsClone] unset];
 	
 	// Inform the helpers we have flattened the document
 	[[document helpers] documentFlattened];

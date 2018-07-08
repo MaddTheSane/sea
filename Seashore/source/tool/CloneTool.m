@@ -30,7 +30,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kCloneTool;
+	return SeaToolsClone;
 }
 
 - (BOOL)acceptsLineDraws

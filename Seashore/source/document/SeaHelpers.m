@@ -50,7 +50,7 @@
 	}
 	
 	// Special case for the effect tool
-	if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == kEffectTool) {
+	if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == SeaToolsEffect) {
 		[curTool reset];
 	}
 }

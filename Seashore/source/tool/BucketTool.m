@@ -22,7 +22,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kBucketTool;
+	return SeaToolsBucket;
 }
 
 - (instancetype)init

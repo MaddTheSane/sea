@@ -14,7 +14,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kEffectTool;
+	return SeaToolsEffect;
 }
 
 - (instancetype)init

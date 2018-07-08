@@ -15,7 +15,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kWandTool;
+	return SeaToolsWand;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event

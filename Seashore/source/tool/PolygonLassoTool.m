@@ -16,7 +16,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kPolygonLassoTool;
+	return SeaToolsPolygonLasso;
 }
 
 - (void)fineMouseDownAt:(NSPoint)where withEvent:(NSEvent *)event

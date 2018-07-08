@@ -45,7 +45,7 @@
 {
 	NSArray *pointPlugins = [[SeaController seaPlugins] pointPlugins];
 	[effectTableInstruction setStringValue:[pointPlugins[[effectTable selectedRow]] instruction]];
-	[[[gCurrentDocument tools] getTool:kEffectTool] reset];
+	[[[gCurrentDocument tools] getTool:SeaToolsEffect] reset];
 }
 
 - (NSInteger)selectedRow
@@ -55,7 +55,7 @@
 
 - (IBAction)updateClickCount:(id)sender
 {
-	[clickCountLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"click count", @"Clicks remaining: %d"), [[[SeaController seaPlugins] pointPlugins][[effectTable selectedRow]] points] - [[[gCurrentDocument tools] getTool:kEffectTool] clickCount]]];
+	[clickCountLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"click count", @"Clicks remaining: %d"), [[[SeaController seaPlugins] pointPlugins][[effectTable selectedRow]] points] - [[[gCurrentDocument tools] getTool:SeaToolsEffect] clickCount]]];
 }
 
 - (IBAction)showEffects:(id)sender

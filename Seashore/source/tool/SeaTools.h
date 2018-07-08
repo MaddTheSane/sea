@@ -3,92 +3,92 @@
 
 /*
 	@enum		k...Tool
-	@constant	kRectSelectTool
+	@constant	SeaToolsSelectRect
 				The rectangular selection tool.
-	@constant	kEllipseSelectTool
+	@constant	SeaToolsSelectEllipse
 				The elliptical selection tool.
-	@constant	kLassoTool
+	@constant	SeaToolsLasso
 				The lasso tool.
-	@constant	kPolygonLassoTool
+	@constant	SeaToolsPolygonLasso
 				The polygon lasso tool.
-	@constant   kWandTool
+	@constant   SeaToolsWand
 				The wand selection tool.
-	@constant	kPencilTool
+	@constant	SeaToolsPencil
 				The pencil tool.
-	@constant	kBrushTool
+	@constant	SeaToolsBrush
 				The paintbrush tool.
-	@constant	kEyedropTool
+	@constant	SeaToolsEyedrop
 				The colour sampling tool.
-	@constant	kTextTool
+	@constant	SeaToolsText
 				The text tool.
-	@constant	kEraserTool
+	@constant	SeaToolsEraser
 				The eraser tool.
-	@constant	kBucketTool
+	@constant	SeaToolsBucket
 				The paint bucket tool.
-	@constant	kGradientTool
+	@constant	SeaToolsGradient
 				The gradient tool.
-	@constant	kCropTool
+	@constant	SeaToolsCrop
 				The crop tool.
-	@constant	kCloneTool
+	@constant	SeaToolsClone
 				The clone tool.
-	@constant	kSmudgeTool
+	@constant	SeaToolsSmudge
 				The smudging tool.
-	@constant	kEffectTool
+	@constant	SeaToolsEffect
 				The effect tool.
-	@constant	kZoomTool
+	@constant	SeaToolsZoom
 				The zoom tool.
-	@constant	kPositionTool
+	@constant	SeaToolsPosition
 				The layer positioning tool.
-	@constant	kFirstSelectionTool
+	@constant	SeaToolsFirstSelection
 				The first selection tool.
-	@constant	kLastSelectionTool
+	@constant	SeaToolsLastSelection
 				The last selection tool.
 */
-typedef NS_ENUM(int, SeaToolsDefines) {
+typedef NS_ENUM(NSInteger, SeaToolsDefines) {
 	//! An invalid value.
 	SeaToolsInvalid = -1,
 	//! The rectangular selection tool.
-	kRectSelectTool = 0,
+	SeaToolsSelectRect = 0,
 	//! The elliptical selection tool.
-	kEllipseSelectTool = 1,
+	SeaToolsSelectEllipse = 1,
 	//! The lasso tool.
-	kLassoTool = 2,
+	SeaToolsLasso = 2,
 	//! The polygon lasso tool.
-	kPolygonLassoTool = 3,
+	SeaToolsPolygonLasso = 3,
 	//! The wand selection tool.
-	kWandTool = 4,
+	SeaToolsWand = 4,
 	//! The pencil tool.
-	kPencilTool = 5,
+	SeaToolsPencil = 5,
 	//! The paintbrush tool.
-	kBrushTool = 6,
+	SeaToolsBrush = 6,
 	//! The colour sampling tool.
-	kEyedropTool = 7,
+	SeaToolsEyedrop = 7,
 	//! The text tool.
-	kTextTool = 8,
+	SeaToolsText = 8,
 	//! The eraser tool.
-	kEraserTool = 9,
+	SeaToolsEraser = 9,
 	//! The paint bucket tool.
-	kBucketTool = 10,
+	SeaToolsBucket = 10,
 	//! The gradient tool.
-	kGradientTool = 11,
+	SeaToolsGradient = 11,
 	//! The crop tool.
-	kCropTool = 12,
+	SeaToolsCrop = 12,
 	//! The clone tool.
-	kCloneTool = 13,
+	SeaToolsClone = 13,
 	//! The smudging tool.
-	kSmudgeTool = 14,
+	SeaToolsSmudge = 14,
 	//! The effect tool.
-	kEffectTool = 15,
+	SeaToolsEffect = 15,
 	//! The zoom tool.
-	kZoomTool = 16,
+	SeaToolsZoom = 16,
 	//! The layer positioning tool.
-	kPositionTool = 17,
+	SeaToolsPosition = 17,
 	//! The first selection tool.
-	kFirstSelectionTool = 0,
+	SeaToolsFirstSelection = 0,
 	//! The last selection tool.
-	kLastSelectionTool = 4,
+	SeaToolsLastSelection = 4,
 	//! The last tool.
-	kLastTool = 17
+	SeaToolsLast = 17
 };
 
 @class AbstractTool;

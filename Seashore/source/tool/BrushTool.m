@@ -25,7 +25,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kBrushTool;
+	return SeaToolsBrush;
 }
 
 - (BOOL)acceptsLineDraws

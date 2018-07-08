@@ -21,7 +21,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kPositionTool;
+	return SeaToolsPosition;
 }
 
 - (instancetype)init

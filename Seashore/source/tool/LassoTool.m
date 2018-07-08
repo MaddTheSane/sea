@@ -21,7 +21,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kLassoTool;
+	return SeaToolsLasso;
 }
 
 

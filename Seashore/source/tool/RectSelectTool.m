@@ -12,7 +12,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kRectSelectTool;
+	return SeaToolsSelectRect;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event

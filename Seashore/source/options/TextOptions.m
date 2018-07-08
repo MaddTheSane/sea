@@ -95,7 +95,7 @@
 {
 	gNewFont = [sender convertFont:[sender selectedFont]];
 	[fontLabel setStringValue:[NSString stringWithFormat:@"%@ %d pt",  [gNewFont displayName],  (int)[gNewFont pointSize]]];
-	[(TextTool *)[[document tools] getTool:kTextTool] preview:NULL];
+	[(TextTool *)[[document tools] getTool:SeaToolsText] preview:NULL];
 	gNewFont = NULL;
 }
 
@@ -152,7 +152,7 @@
 	[outlineCheckbox setTitle:[NSString stringWithFormat:LOCALSTR(@"outline", @"Outline: %d pt"), [outlineSlider intValue]]];
 		
 	// Update the text tool
-	[(TextTool *)[[document tools] getTool:kTextTool] preview:NULL];
+	[(TextTool *)[[document tools] getTool:SeaToolsText] preview:NULL];
 }
 
 - (void)shutdown

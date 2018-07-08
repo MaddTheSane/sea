@@ -22,7 +22,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kPencilTool;
+	return SeaToolsPencil;
 }
 
 - (BOOL)acceptsLineDraws

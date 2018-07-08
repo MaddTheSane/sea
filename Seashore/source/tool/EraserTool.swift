@@ -12,7 +12,7 @@ private let EPSILON = 0.0001
 ///Specifies the maximum number of points.
 private let kMaxETPoints = 16384
 
-func sqr<A: FloatingPoint>(_ val: A) -> A {
+private func sqr<A: FloatingPoint>(_ val: A) -> A {
 	return val * val
 }
 
@@ -24,7 +24,9 @@ private func int_mult(_ a: UInt8, _ b: UInt8) -> UInt8 {
 	return UInt8((((t) >> 8) + (t)) >> 8)
 }
 
-class EraserTool: AbstractTool {
+class EraserTool: AbstractTool, SeaOptions {
+	typealias OptionClass = EraserOptions
+	
 	/// Specifies a point to be drawn.
 	struct PointRecord {
 		/// The point to be drawn.
@@ -33,6 +35,10 @@ class EraserTool: AbstractTool {
 		var pressure: UInt8
 		/// 0 = normal, 2 = terminate
 		var special: UInt8
+	}
+	
+	class var toolType: SeaToolsDefines {
+		return .eraser
 	}
 	
 	/// The last point we've been (there is a difference from the last point a brush was plotted)
@@ -69,7 +75,7 @@ class EraserTool: AbstractTool {
 	var lastWhere: IntPoint = IntPoint(x: 0, y: 0)
 
 	override var toolId: SeaToolsDefines {
-		return .kEraserTool
+		return .eraser
 	}
 	
 	override var acceptsLineDraws: Bool {

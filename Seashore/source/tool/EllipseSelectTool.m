@@ -15,7 +15,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kEllipseSelectTool;
+	return SeaToolsSelectEllipse;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event

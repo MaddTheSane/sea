@@ -83,7 +83,7 @@
 	[check_url loadResourceDataNotifyingClient:self usingCache:YES];
 }
 
-- (void)displayInstantHelp:(int)stringID
+- (void)displayInstantHelp:(NSInteger)stringID
 {
 	NSArray *instantHelpArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Instant" ofType:@"plist"]];
 	
@@ -93,7 +93,7 @@
 	}
 }
 
-- (void)updateInstantHelp:(int)stringID
+- (void)updateInstantHelp:(NSInteger)stringID
 {
 	NSArray *instantHelpArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Instant" ofType:@"plist"]];
 	

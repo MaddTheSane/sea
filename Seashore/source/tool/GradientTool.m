@@ -17,7 +17,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kGradientTool;
+	return SeaToolsGradient;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event

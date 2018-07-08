@@ -17,7 +17,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kEyedropTool;
+	return SeaToolsEyedrop;
 }
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event

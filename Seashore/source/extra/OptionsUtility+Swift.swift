@@ -20,7 +20,7 @@ extension RectSelectTool: SeaOptions {
 	typealias OptionClass = RectSelectOptions
 
 	class var toolType: SeaToolsDefines {
-		return .kRectSelectTool
+		return .selectRect
 	}
 }
 
@@ -29,7 +29,7 @@ extension EllipseSelectTool: SeaOptions {
 	typealias OptionClass = EllipseSelectOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kEllipseSelectTool
+		return .selectEllipse
 	}
 }
 
@@ -38,7 +38,7 @@ extension LassoTool: SeaOptions {
 	typealias OptionClass = LassoOptions
 	
 	@objc class var toolType: SeaToolsDefines {
-		return .kLassoTool
+		return .lasso
 	}
 }
 
@@ -46,7 +46,7 @@ extension PolygonLassoTool {
 	typealias OptionClass = PolygonLassoOptions
 	
 	override class var toolType: SeaToolsDefines {
-		return .kPolygonLassoTool
+		return .polygonLasso
 	}
 }
 
@@ -54,7 +54,7 @@ extension WandTool: SeaOptions {
 	typealias OptionClass = WandOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kWandTool
+		return .wand
 	}
 }
 
@@ -62,7 +62,7 @@ extension PencilTool: SeaOptions {
 	typealias OptionClass = PencilOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kPencilTool
+		return .pencil
 	}
 }
 
@@ -70,7 +70,7 @@ extension BrushTool: SeaOptions {
 	typealias OptionClass = BrushOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kBrushTool
+		return .brush
 	}
 }
 
@@ -78,7 +78,7 @@ extension BucketTool: SeaOptions {
 	typealias OptionClass = BucketOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kBucketTool
+		return .bucket
 	}
 }
 
@@ -86,7 +86,7 @@ extension TextTool: SeaOptions {
 	typealias OptionClass = TextOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kTextTool
+		return .text
 	}
 }
 
@@ -94,15 +94,7 @@ extension EyedropTool: SeaOptions {
 	typealias OptionClass = EyedropOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kEyedropTool
-	}
-}
-
-extension EraserTool: SeaOptions {
-	typealias OptionClass = EraserOptions
-	
-	class var toolType: SeaToolsDefines {
-		return .kEraserTool
+		return .eyedrop
 	}
 }
 
@@ -110,7 +102,7 @@ extension PositionTool: SeaOptions {
 	typealias OptionClass = PositionOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kPositionTool
+		return .position
 	}
 }
 
@@ -118,7 +110,7 @@ extension GradientTool: SeaOptions {
 	typealias OptionClass = GradientOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kGradientTool
+		return .gradient
 	}
 }
 
@@ -126,7 +118,7 @@ extension SmudgeTool: SeaOptions {
 	typealias OptionClass = SmudgeOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kSmudgeTool
+		return .smudge
 	}
 }
 
@@ -134,7 +126,7 @@ extension CloneTool: SeaOptions {
 	typealias OptionClass = CloneOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kCloneTool
+		return .clone
 	}
 }
 
@@ -142,7 +134,7 @@ extension CropTool: SeaOptions {
 	typealias OptionClass = CropOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kCropTool
+		return .crop
 	}
 }
 
@@ -150,7 +142,7 @@ extension EffectTool: SeaOptions {
 	typealias OptionClass = EffectOptions
 	
 	class var toolType: SeaToolsDefines {
-		return .kEffectTool
+		return .effect
 	}
 }
 
