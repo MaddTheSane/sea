@@ -50,7 +50,7 @@ class ToolboxUtility2 : NSObject {
 			if let delayTimer = delayTimer {
 				delayTimer.invalidate()
 			}
-			delayTimer = Timer(timeInterval: 0.1, target: (document.tools! as Seashore.SeaTools).getTool(.kTextTool)!, selector: #selector(TextTool.preview(_:)), userInfo: nil, repeats: false)
+			delayTimer = Timer(timeInterval: 0.1, target: (document.tools! as Seashore.SeaTools).getTool(.text)!, selector: #selector(TextTool.preview(_:)), userInfo: nil, repeats: false)
 			SeaController.utilitiesManager.statusUtility(for: document)!.updateQuickColor()
 		}
 	}
@@ -68,10 +68,10 @@ class ToolboxUtility2 : NSObject {
 	@IBOutlet weak var optionsUtility: OptionsUtility!
 	
 	/// The tag of the currently selected tool
-	private(set) var tool = SeaToolsDefines.SeaToolsInvalid
+	private(set) var tool = SeaToolsDefines.invalid
 	
 	/// The old tool
-	private var oldTool = SeaToolsDefines.SeaToolsInvalid
+	private var oldTool = SeaToolsDefines.invalid
 	
 	/// The toolbar
 	var toolbar: NSToolbar!
@@ -88,27 +88,27 @@ class ToolboxUtility2 : NSObject {
 	@IBOutlet weak var colorsMenu: NSMenuItem!
 
 	private let selectionTools: [SeaToolsDefines] = [
-		.kRectSelectTool,
-		.kEllipseSelectTool,
-		.kLassoTool,
-		.kPolygonLassoTool,
-		.kWandTool]
+		.selectRect,
+		.selectEllipse,
+		.lasso,
+		.polygonLasso,
+		.wand]
 	private let drawTools: [SeaToolsDefines] = [
-		.kPencilTool,
-		.kBrushTool,
-		.kTextTool,
-		.kEraserTool,
-		.kBucketTool,
-		.kGradientTool];
+		.pencil,
+		.brush,
+		.text,
+		.eraser,
+		.bucket,
+		.gradient];
 	private let effectTools: [SeaToolsDefines] = [
-		.kEffectTool,
-		.kSmudgeTool,
-		.kCloneTool];
+		.effect,
+		.smudge,
+		.clone];
 	private let transformTools: [SeaToolsDefines] = [
-		.kEyedropTool,
-		.kCropTool,
-		.kZoomTool,
-		.kPositionTool];
+		.eyedrop,
+		.crop,
+		.zoom,
+		.position];
 	
 	/// A timer that delays colour changes
 	private var delayTimer: Timer?
@@ -141,8 +141,8 @@ class ToolboxUtility2 : NSObject {
 	
 	/// Activates this utility with its document.
 	func activate() {
-		if tool == .SeaToolsInvalid {
-			changeTool(to: .kRectSelectTool)
+		if tool == .invalid {
+			changeTool(to: .selectRect)
 		}
 		
 		// Set the document appropriately
@@ -155,7 +155,7 @@ class ToolboxUtility2 : NSObject {
 	/// Deactivates this utility.
 	func deactivate() {
 		colorView.document = document
-		for i in SeaToolsDefines.kFirstSelectionTool.rawValue ... SeaToolsDefines.kLastSelectionTool.rawValue {
+		for i in SeaToolsDefines.firstSelection.rawValue ... SeaToolsDefines.lastSelection.rawValue {
 			toolbox.cell(withTag: Int(i))?.isEnabled = true
 		}
 	}
@@ -163,17 +163,17 @@ class ToolboxUtility2 : NSObject {
 	/// Updates the utility for the current document.
 	/// - parameter full: `true` if the update is to also include setting 
 	/// the cursor, `false` otherwise.
-	func update(full: Bool) {
+	@objc(update:) func update(full: Bool) {
 		if full {
 			/* Disable or enable the tool */
 			if document.selection.isFloating {
-				for i in SeaToolsDefines.kFirstSelectionTool.rawValue ... SeaToolsDefines.kLastSelectionTool.rawValue {
-					selectionTBView.setEnabled(false, forSegment: Int(i))
+				for i in SeaToolsDefines.firstSelection.rawValue ... SeaToolsDefines.lastSelection.rawValue {
+					selectionTBView.setEnabled(false, forSegment: i)
 				}
 				selectionMenu.isEnabled = false
 			} else {
-				for i in SeaToolsDefines.kFirstSelectionTool.rawValue ... SeaToolsDefines.kLastSelectionTool.rawValue {
-					selectionTBView.setEnabled(true, forSegment: Int(i))
+				for i in SeaToolsDefines.firstSelection.rawValue ... SeaToolsDefines.lastSelection.rawValue {
+					selectionTBView.setEnabled(true, forSegment: i)
 				}
 				selectionMenu.isEnabled = false
 			}
@@ -190,7 +190,7 @@ class ToolboxUtility2 : NSObject {
 	/// specifies the tool to be selected.
 	@IBAction func selectToolUsingTag(_ sender: AnyObject) {
 		let theTag = sender.tag
-		let preTool = Int32(theTag! % 100)
+		let preTool = theTag! % 100
 		if let newTool = SeaToolsDefines(rawValue: preTool) {
 			changeTool(to: newTool)
 		}
@@ -199,7 +199,7 @@ class ToolboxUtility2 : NSObject {
 	/// Called when the segmented controls get clicked.
 	/// - parameter sender: The segemented control to select the tool.
 	@IBAction func selectToolFromSender(_ sender: NSSegmentedControl) {
-		if let newTool = SeaToolsDefines(rawValue: Int32((sender.cell as! NSSegmentedCell).tag(forSegment: sender.selectedSegment) % 100)) {
+		if let newTool = SeaToolsDefines(rawValue: (sender.cell as! NSSegmentedCell).tag(forSegment: sender.selectedSegment) % 100) {
 			changeTool(to: newTool)
 		}
 	}
@@ -210,7 +210,7 @@ class ToolboxUtility2 : NSObject {
 		var updateCrop = false;
 		
 		document.helpers?.endLineDrawing()
-		if (tool == .kCropTool || newTool == .kCropTool) {
+		if (tool == .crop || newTool == .crop) {
 			updateCrop = true;
 			document.docView.needsDisplay = true
 		}
@@ -250,20 +250,20 @@ class ToolboxUtility2 : NSObject {
 		document.warnings?.showFloatBanner()
 		
 		oldTool = tool;
-		changeTool(to: .kPositionTool)
+		changeTool(to: .position)
 	}
 	
 	/// Selects the last tool to call floatTool.
 	func anchorTool() {
 		// Hide the banner
 		document.warnings?.hideFloatBanner()
-		if oldTool != .SeaToolsInvalid {
+		if oldTool != .invalid {
 			changeTool(to: oldTool)
 		}
 	}
 	
 	func setEffectEnabled(_ enable: Bool) {
-		effectTBView.setEnabled(enable, forSegment: Int(SeaToolsDefines.kEffectTool.rawValue))
+		effectTBView.setEnabled(enable, forSegment: SeaToolsDefines.effect.rawValue)
 	}
 	
 	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {

@@ -27,8 +27,8 @@ final public class CMYK: NSObject, SeaPluginClass {
 		return true
 	}
 	
-	public var type: Int32 {
-		return kBasicPlugin
+	public var type: SeaPluginType {
+		return .basic
 	}
 	
 	public func run() {

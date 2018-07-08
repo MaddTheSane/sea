@@ -21,9 +21,9 @@
 	return self;
 }
 
-- (int)type
+- (SeaPluginType)type
 {
-	return kBasicPlugin;
+	return SeaPluginBasic;
 }
 
 - (NSString *)name
@@ -168,7 +168,6 @@
 		rect.size.width = selection.size.width;
 		rect.size.height = selection.size.height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		output = crop_output;
 	} else {
 		// Create output core image
 		rect.origin.x = 0;
@@ -176,14 +175,10 @@
 		rect.size.width = width;
 		rect.size.height = height;
 		temp_image = [context createCGImage:output fromRect:rect];
-		output = [output imageByCroppingToRect:rect];
 	}
 	
 	// Get data from output core image
-	// FIXME: which one of these works best?
-	//temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
-	//temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
-	temp_rep = [[NSBitmapImageRep alloc] initWithCIImage:output];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
 	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 	

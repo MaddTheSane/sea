@@ -21,7 +21,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kPositionTool;
+	return SeaToolsPosition;
 }
 
 - (instancetype)init
@@ -42,11 +42,11 @@
 	SeaLayer *activeLayer = [contents activeLayer];
 	IntPoint oldOffsets;
 	int whichLayer;
-	int function = kMovingLayer;
+	SeaPositionOptions function = SeaPositionOptionMoving;
 	
 	// Determine the function
 	if (activeLayer.floating && [options canAnchor] && (where.x < 0 || where.y < 0 || where.x >= [activeLayer width] || where.y >= [activeLayer height])){
-		function = kAnchoringLayer;
+		function = SeaPositionOptionAnchoring;
 	}else{
 		function = [options toolFunction];
 	}
@@ -56,7 +56,7 @@
 
 	// Vary behaviour based on function
 	switch (function) {
-		case kMovingLayer:
+		case SeaPositionOptionMoving:
 			
 			// Determine the absolute where
 			where.x += [activeLayer xoff]; where.y += [activeLayer yoff];
@@ -87,7 +87,7 @@
 			}
 			
 		break;
-		case kRotatingLayer:
+		case SeaPositionOptionRotating:
 		
 			// Start rotating layer
 			rotation = 0.0;
@@ -95,14 +95,14 @@
 			[[document docView] setNeedsDisplay:YES]; 
 			
 		break;
-		case kScalingLayer:
+		case SeaPositionOptionScaling:
 		
 			// Start scaling layer
 			scale = 1.0;
 			[[document docView] setNeedsDisplay:YES];
 			
 		break;
-		case kAnchoringLayer:
+		case SeaPositionOptionAnchoring:
 		
 			// Anchor the layer
 			[contents anchorSelection];
@@ -184,12 +184,12 @@
 	
 	// Vary behaviour based on function
 	switch ([options toolFunction]) {
-		case kRotatingLayer:
+		case SeaPositionOptionRotating:
 			// Finish rotating layer
 			[[seaOperations seaRotation] rotate:rotation * 180.0 / 3.1415 withTrim:YES];
 			break;
 			
-		case kScalingLayer:
+		case SeaPositionOptionScaling:
 			// Finish scaling layer
 			layer = [[document contents] activeLayer];
 			newWidth = scale *  [layer width];

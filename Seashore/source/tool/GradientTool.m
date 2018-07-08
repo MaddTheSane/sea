@@ -17,7 +17,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kGradientTool;
+	return SeaToolsGradient;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
@@ -54,7 +54,7 @@
 	info.start = startPoint;
 	deltaX = where.x - startPoint.x;
 	deltaY = where.y - startPoint.y;
-	if ([(GradientOptions *)options modifier] == kControlModifier) {
+	if ([(GradientOptions *)options modifier] == AbstractModifierControl) {
 		angle = atan((double)deltaY / (double)abs(deltaX));
 		if (angle > -0.3927 && angle < 0.3927)
 			where.y = startPoint.y;

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PosterizeClass">
@@ -15,7 +16,7 @@
         <window title="Posterize" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="334" y="526" width="365" height="118"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="365" height="118"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -23,7 +24,7 @@
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="43">
                         <rect key="frame" x="305" y="61" width="42" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="38" id="c10-Pw-8ta"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="38" id="c10-Pw-8ta"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="2" id="56">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="sTk-Zz-XM5"/>
@@ -81,9 +82,11 @@ DQ
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="44" secondAttribute="trailing" constant="20" symbolic="YES" id="A1V-bQ-53I"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="46" secondAttribute="trailing" constant="20" symbolic="YES" id="Clr-Va-FW6"/>
                     <constraint firstItem="46" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="DJx-M1-hLb"/>
                     <constraint firstAttribute="bottom" secondItem="44" secondAttribute="bottom" constant="20" symbolic="YES" id="KUC-9D-EuD"/>
                     <constraint firstItem="46" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" id="LzU-Ff-lCn"/>
+                    <constraint firstItem="48" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="P4w-eN-aMW"/>
                     <constraint firstItem="44" firstAttribute="baseline" secondItem="48" secondAttribute="baseline" id="UCj-he-Qlv"/>
                     <constraint firstItem="43" firstAttribute="leading" secondItem="45" secondAttribute="trailing" constant="8" symbolic="YES" id="Wig-GD-yBE"/>
                     <constraint firstItem="45" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="e9u-q4-XD9"/>

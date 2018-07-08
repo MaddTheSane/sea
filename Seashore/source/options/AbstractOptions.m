@@ -30,7 +30,7 @@ static BOOL forceAlt = NO;
 
 - (void)forceAlt
 {
-	NSInteger index = [modifierPopup indexOfItemWithTag:kAltModifier];
+	NSInteger index = [modifierPopup indexOfItemWithTag:AbstractModifierAlt];
 	if (index > 0) [modifierPopup selectItemAtIndex:index];
 	forceAlt = YES;
 }
@@ -50,27 +50,27 @@ static BOOL forceAlt = NO;
 	if (modifierPopup) {
 	
 		if ((modifiers & NSAlternateKeyMask) >> 19 && (modifiers & NSControlKeyMask) >> 18) {
-			index = [modifierPopup indexOfItemWithTag:kAltControlModifier];
+			index = [modifierPopup indexOfItemWithTag:AbstractModifierAltControl];
 			if (index > 0)
 				[modifierPopup selectItemAtIndex:index];
 		} else if ((modifiers & NSShiftKeyMask) >> 17 && (modifiers & NSControlKeyMask) >> 18) {
-			index = [modifierPopup indexOfItemWithTag:kShiftControlModifier];
+			index = [modifierPopup indexOfItemWithTag:AbstractModifierShiftControl];
 			if (index > 0)
 				[modifierPopup selectItemAtIndex:index];
 		} else if ((modifiers & NSControlKeyMask) >> 18) {
-			index = [modifierPopup indexOfItemWithTag:kControlModifier];
+			index = [modifierPopup indexOfItemWithTag:AbstractModifierControl];
 			if (index > 0)
 				[modifierPopup selectItemAtIndex:index];
 		} else if ((modifiers & NSShiftKeyMask) >> 17) {
-			index = [modifierPopup indexOfItemWithTag:kShiftModifier];
+			index = [modifierPopup indexOfItemWithTag:AbstractModifierShift];
 			if (index > 0)
 				[modifierPopup selectItemAtIndex:index];
 		} else if ((modifiers & NSAlternateKeyMask) >> 19) {
-			index = [modifierPopup indexOfItemWithTag:kAltModifier];
+			index = [modifierPopup indexOfItemWithTag:AbstractModifierAlt];
 			if (index > 0)
 				[modifierPopup selectItemAtIndex:index];
 		} else {
-			[modifierPopup selectItemAtIndex:kNoModifier];
+			[modifierPopup selectItemAtIndex:AbstractModifierNone];
 		}
 	}
 	// We now need to update all of the documents because the modifiers, and thus possibly

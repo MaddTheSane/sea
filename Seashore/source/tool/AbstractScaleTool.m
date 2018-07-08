@@ -92,7 +92,7 @@
 
 		BOOL usesAspect = NO;
 		NSSize ratio = NSZeroSize;
-		if ([(AbstractScaleOptions*)options aspectType] == kRatioAspectType) {
+		if ([(AbstractScaleOptions*)options aspectType] == SeaAspectTypeRatio) {
 			usesAspect = YES;
 			ratio = [options ratio];
 		}

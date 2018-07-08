@@ -70,24 +70,24 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	delay_timer = NULL;
 	tool = -1;
 	oldTool = -1;
-	selectionTools = @[@(kRectSelectTool),
-					  @(kEllipseSelectTool),
-					  @(kLassoTool),
-					  @(kPolygonLassoTool),
-					  @(kWandTool)];
-	drawTools =	@[@(kPencilTool),
-				 @(kBrushTool),
-				 @(kTextTool),
-				 @(kEraserTool),
-				 @(kBucketTool),
-				 @(kGradientTool)];
-	effectTools =	@[@(kEffectTool),
-				 @(kSmudgeTool),
-				 @(kCloneTool)];
-	transformTools = @[@(kEyedropTool),
-					 @(kCropTool),
-					 @(kZoomTool),
-					 @(kPositionTool)];
+	selectionTools = @[@(SeaToolsSelectRect),
+					  @(SeaToolsSelectEllipse),
+					  @(SeaToolsLasso),
+					  @(SeaToolsPolygonLasso),
+					  @(SeaToolsWand)];
+	drawTools =	@[@(SeaToolsPencil),
+				 @(SeaToolsBrush),
+				 @(SeaToolsText),
+				 @(SeaToolsEraser),
+				 @(SeaToolsBucket),
+				 @(SeaToolsGradient)];
+	effectTools =	@[@(SeaToolsEffect),
+				 @(SeaToolsSmudge),
+				 @(SeaToolsClone)];
+	transformTools = @[@(SeaToolsEyedrop),
+					 @(SeaToolsCrop),
+					 @(SeaToolsZoom),
+					 @(SeaToolsPosition)];
 	
 	}
 	return self;
@@ -240,7 +240,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	if (delay_timer) {
 		[delay_timer invalidate];
 	}
-	delay_timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:[[document tools] getTool:kTextTool]  selector:@selector(preview:) userInfo:NULL repeats:NO];
+	delay_timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:[[document tools] getTool:SeaToolsText]  selector:@selector(preview:) userInfo:NULL repeats:NO];
 	[[[SeaController utilitiesManager] statusUtilityFor:document] updateQuickColor];
 }
 
@@ -252,7 +252,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 - (void)activate
 {
 	if (tool == -1)
-		[self changeToolTo:kRectSelectTool];
+		[self changeToolTo:SeaToolsSelectRect];
 	// Set the document appropriately
 	[colorSelectView setDocument:document];
 		
@@ -263,7 +263,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 - (void)deactivate
 {
 	[colorSelectView setDocument:document];
-	for (SeaToolsDefines i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
+	for (SeaToolsDefines i = SeaToolsFirstSelection; i <= SeaToolsLastSelection; i++) {
 		[[toolbox cellWithTag:i] setEnabled:YES];
 	}
 }
@@ -273,12 +273,12 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	if (full) {
 		/* Disable or enable the tool */
 		if (document.selection.floating) {
-			for (SeaToolsDefines i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
+			for (SeaToolsDefines i = SeaToolsFirstSelection; i <= SeaToolsLastSelection; i++) {
 				[selectionTBView setEnabled:NO forSegment:i];
 			}
 			[selectionMenu setEnabled:NO];
 		} else {
-			for (SeaToolsDefines i = kFirstSelectionTool; i <= kLastSelectionTool; i++) {
+			for (SeaToolsDefines i = SeaToolsFirstSelection; i <= SeaToolsLastSelection; i++) {
 				[selectionTBView setEnabled:YES forSegment:i];
 			}
 			[selectionMenu setEnabled:YES];
@@ -306,7 +306,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	BOOL updateCrop = NO;
 	
 	[[document helpers] endLineDrawing];
-	if (tool == kCropTool || newTool == kCropTool) {
+	if (tool == SeaToolsCrop || newTool == SeaToolsCrop) {
 		updateCrop = YES;
 		[[document docView] setNeedsDisplay:YES];
 	}
@@ -342,7 +342,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	[[document warnings] showFloatBanner];
 	
 	oldTool = tool;
-	[self changeToolTo: kPositionTool];
+	[self changeToolTo: SeaToolsPosition];
 }
 
 - (void)anchorTool
@@ -355,7 +355,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)setEffectEnabled:(BOOL)enable
 {
-	[effectTBView setEnabled:enable forSegment:kEffectTool];
+	[effectTBView setEnabled:enable forSegment:SeaToolsEffect];
 	//[[effectTBView cellAtRow: 0 column: kEffectTool] setEnabled: enable];
 }
 

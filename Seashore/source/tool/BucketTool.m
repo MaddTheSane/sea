@@ -22,7 +22,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kBucketTool;
+	return SeaToolsBucket;
 }
 
 - (instancetype)init
@@ -40,7 +40,7 @@
 	
 	startNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 	currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
-	if([options modifier] == kShiftModifier){
+	if ([options modifier] == AbstractModifierShift) {
 		isPreviewing = YES;
 	}
 	
@@ -51,7 +51,7 @@
 {
 	currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 	
-	BOOL optionDown = [options modifier] == kAltModifier;
+	BOOL optionDown = [options modifier] == AbstractModifierAlt;
 
 	SeaLayer *layer = [[document contents] activeLayer];
 	int width = [layer width], height = [layer height];
@@ -73,14 +73,14 @@
 {
 	SeaLayer *layer = [[document contents] activeLayer];
 	int width = [layer width], height = [layer height];
-	BOOL optionDown = [options modifier] == kAltModifier;
+	BOOL optionDown = [options modifier] == AbstractModifierAlt;
 	
 	[[document whiteboard] clearOverlay];
 	[[document helpers] overlayChanged:rect inThread:NO];
 
 	if (where.x < 0 || where.y < 0 || where.x >= width || where.y >= height) {
 		rect.size.width = rect.size.height = 0;
-	} else if(!isPreviewing || [options modifier] != kShiftModifier){
+	} else if(!isPreviewing || [options modifier] != AbstractModifierShift) {
 		[self fillAtPoint:where useTolerance:!optionDown delay:NO];
 	}
 	isPreviewing = NO;

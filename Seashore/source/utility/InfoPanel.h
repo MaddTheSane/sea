@@ -27,10 +27,6 @@ typedef NS_ENUM(NSInteger, SeaPanelStyle) {
 	 This would be for a vertical list of elements.
 	 */
 	SeaPanelStyleHorizontal,
-	
-	kFloatingPanelStyle NS_SWIFT_UNAVAILABLE("Use .Floating instead") = SeaPanelStyleFloating,
-	kVerticalPanelStyle NS_SWIFT_UNAVAILABLE("Use .Vertical instead") = SeaPanelStyleVertical,
-	kHorizontalPanelStyle NS_SWIFT_UNAVAILABLE("Use .Horizontal instead") = SeaPanelStyleHorizontal,
 };
 
 /*!
@@ -69,3 +65,7 @@ typedef NS_ENUM(NSInteger, SeaPanelStyle) {
 - (void) orderFrontToGoal:(NSPoint)goal onWindow:(NSWindow *)parent;
  
 @end
+
+static const SeaPanelStyle kFloatingPanelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPanelStyleFloating", 10.2, 10.8) = SeaPanelStyleFloating;
+static const SeaPanelStyle kVerticalPanelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPanelStyleVertical", 10.2, 10.8) = SeaPanelStyleVertical;
+static const SeaPanelStyle kHorizontalPanelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPanelStyleHorizontal", 10.2, 10.8) = SeaPanelStyleHorizontal;

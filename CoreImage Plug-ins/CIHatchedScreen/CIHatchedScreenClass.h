@@ -16,13 +16,13 @@
 #import "SSKCIPlugin.h"
 
 @interface CIHatchedScreenClass : SSKCIPlugin
-// The new width
+//! The new width
 @property NSInteger dotWidth;
 
-// The new angle
+//! The new angle
 @property CGFloat angle;
 
-// The new sharpness
+//! The new sharpness
 @property CGFloat sharpness;
 
 /*!
@@ -30,7 +30,7 @@
 	@discussion	Returns the type of plug-in so Seashore can correctly interact with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		name

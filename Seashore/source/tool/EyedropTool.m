@@ -17,7 +17,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kEyedropTool;
+	return SeaToolsEyedrop;
 }
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
@@ -26,7 +26,7 @@
 	NSColor *color = [self getColor];
 	
 	if (color != NULL) {
-		if ([(EyedropOptions*)options modifier] == kAltModifier)
+		if ([(EyedropOptions*)options modifier] == AbstractModifierAlt)
 			[toolboxUtility setBackground:[self getColor]];
 		else
 			[toolboxUtility setForeground:[self getColor]];

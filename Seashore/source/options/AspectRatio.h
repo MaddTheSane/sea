@@ -25,12 +25,6 @@ typedef NS_ENUM(NSInteger, SeaAspectType) {
 	SeaAspectTypeExactInch = 1,
 	//! Indicates exact specification in millimetres.
 	SeaAspectTypeExactMillimeter = 2,
-	
-	kNoAspectType NS_SWIFT_UNAVAILABLE("Use .None instead") = SeaAspectTypeNone,
-	kRatioAspectType NS_SWIFT_UNAVAILABLE("Use .Ratio instead") = SeaAspectTypeRatio,
-	kExactPixelAspectType NS_SWIFT_UNAVAILABLE("Use .ExactPixel instead") = SeaAspectTypeExactPixel,
-	kExactInchAspectType NS_SWIFT_UNAVAILABLE("Use .ExactInch instead") = SeaAspectTypeExactInch,
-	kExactMillimeterAspectType NS_SWIFT_UNAVAILABLE("Use .ExactMillimeter instead") = SeaAspectTypeExactMillimeter,
 };
 
 @class SeaDocument;
@@ -139,3 +133,9 @@ typedef NS_ENUM(NSInteger, SeaAspectType) {
 - (void)shutdown;
 
 @end
+
+static const SeaAspectType kNoAspectType NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaAspectTypeNone", 10.2, 10.8) = SeaAspectTypeNone;
+static const SeaAspectType kRatioAspectType NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaAspectTypeRatio", 10.2, 10.8) = SeaAspectTypeRatio;
+static const SeaAspectType kExactPixelAspectType NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaAspectTypeExactPixel", 10.2, 10.8) = SeaAspectTypeExactPixel;
+static const SeaAspectType kExactInchAspectType NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaAspectTypeExactInch", 10.2, 10.8) = SeaAspectTypeExactInch;
+static const SeaAspectType kExactMillimeterAspectType NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaAspectTypeExactMillimeter", 10.2, 10.8) = SeaAspectTypeExactMillimeter;

@@ -71,7 +71,7 @@
 
 - (IntPoint)point:(NSInteger)index;
 {
-	return [[[document tools] getTool:kEffectTool] point:index];
+	return [[[document tools] getTool:SeaToolsEffect] point:index];
 }
 
 - (NSColor *)foreColor:(BOOL)calibrated

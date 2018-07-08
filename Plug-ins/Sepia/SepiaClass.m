@@ -8,9 +8,9 @@
 
 @implementation SepiaClass
 
-- (int)type
+- (SeaPluginType)type
 {
-	return kBasicPlugin;
+	return SeaPluginBasic;
 }
 
 - (NSString *)name

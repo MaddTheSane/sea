@@ -22,7 +22,7 @@ NSFont *gNewFont;
 
 - (SeaToolsDefines)toolId
 {
-	return kTextTool;
+	return SeaToolsText;
 }
 
 - (instancetype)init

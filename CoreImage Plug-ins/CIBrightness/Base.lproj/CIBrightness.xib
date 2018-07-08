@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CIBrightnessClass">
@@ -15,7 +16,7 @@
         <window title="Brightness and Contrast" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="396" y="298" width="365" height="208"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="365" height="208"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -124,7 +125,7 @@ Gw
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38">
                         <rect key="frame" x="305" y="61" width="42" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="38" id="Rbh-fx-OPU"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="38" id="Rbh-fx-OPU"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="1.00" id="56">
                             <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="1" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="UXK-mx-EAQ"/>
@@ -142,6 +143,8 @@ Gw
                     <constraint firstItem="34" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="62p-oX-iHw"/>
                     <constraint firstAttribute="trailing" secondItem="35" secondAttribute="trailing" constant="20" symbolic="YES" id="7Us-P2-Mrk"/>
                     <constraint firstItem="13" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="997-di-kQp"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="36" secondAttribute="trailing" constant="20" symbolic="YES" id="Aih-Eh-nbp"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="33" secondAttribute="trailing" constant="20" symbolic="YES" id="BGW-ff-Q2b"/>
                     <constraint firstItem="36" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="DNi-FB-FLI"/>
                     <constraint firstItem="14" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="Dni-sB-LUq"/>
                     <constraint firstItem="36" firstAttribute="top" secondItem="34" secondAttribute="bottom" constant="8" symbolic="YES" id="HdS-z9-56b"/>
@@ -159,6 +162,7 @@ Gw
                     <constraint firstItem="36" firstAttribute="leading" secondItem="13" secondAttribute="leading" id="bH6-Dp-W5b"/>
                     <constraint firstItem="36" firstAttribute="leading" secondItem="33" secondAttribute="leading" id="bYq-nF-ICQ"/>
                     <constraint firstItem="38" firstAttribute="leading" secondItem="37" secondAttribute="trailing" constant="8" symbolic="YES" id="c02-nN-1Xn"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="13" secondAttribute="trailing" constant="20" symbolic="YES" id="dSA-wU-ZVP"/>
                     <constraint firstItem="34" firstAttribute="top" secondItem="33" secondAttribute="bottom" constant="8" symbolic="YES" id="dSG-M9-Q60"/>
                     <constraint firstItem="21" firstAttribute="baseline" secondItem="14" secondAttribute="baseline" id="e4m-ks-h4g"/>
                     <constraint firstItem="35" firstAttribute="leading" secondItem="34" secondAttribute="trailing" constant="8" symbolic="YES" id="ffV-k1-t2A"/>
@@ -170,6 +174,7 @@ Gw
                     <constraint firstItem="35" firstAttribute="baseline" secondItem="34" secondAttribute="baseline" id="s17-t5-0B1"/>
                     <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="20" symbolic="YES" id="uPB-1Y-skc"/>
                     <constraint firstItem="21" firstAttribute="leading" secondItem="38" secondAttribute="leading" id="w3r-d8-QXX"/>
+                    <constraint firstItem="16" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="xX0-h4-hML"/>
                     <constraint firstItem="37" firstAttribute="top" secondItem="36" secondAttribute="bottom" constant="8" symbolic="YES" id="yGJ-hO-cMd"/>
                 </constraints>
             </view>

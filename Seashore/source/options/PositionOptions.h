@@ -15,15 +15,14 @@
 */
 
 typedef NS_ENUM(int, SeaPositionOptions) {
+	//! The tool changes the position of the layer.
 	SeaPositionOptionMoving = 0,
+	//! The tool scales the layer.
 	SeaPositionOptionScaling = 1,
+	//! If the layer is floating, it rotates it.
 	SeaPositionOptionRotating = 2,
+	//! The tool anchors the floating layer.
 	SeaPositionOptionAnchoring = 3,
-	
-	kMovingLayer NS_SWIFT_UNAVAILABLE("Use .Moving instead") = SeaPositionOptionMoving,
-	kScalingLayer NS_SWIFT_UNAVAILABLE("Use .Scaling instead") = SeaPositionOptionScaling,
-	kRotatingLayer NS_SWIFT_UNAVAILABLE("Use .Rotating instead") = SeaPositionOptionRotating,
-	kAnchoringLayer NS_SWIFT_UNAVAILABLE("Use .Anchoring instead") = SeaPositionOptionAnchoring
 };
 
 
@@ -79,3 +78,8 @@ typedef NS_ENUM(int, SeaPositionOptions) {
 - (void)shutdown;
 
 @end
+
+static const SeaPositionOptions kMovingLayer NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPositionOptionMoving", 10.2, 10.8) = SeaPositionOptionMoving;
+static const SeaPositionOptions kScalingLayer NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPositionOptionScaling", 10.2, 10.8) = SeaPositionOptionScaling;
+static const SeaPositionOptions kRotatingLayer NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPositionOptionRotating", 10.2, 10.8) = SeaPositionOptionRotating;
+static const SeaPositionOptions kAnchoringLayer NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPositionOptionAnchoring", 10.2, 10.8) = SeaPositionOptionAnchoring;

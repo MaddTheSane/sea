@@ -22,7 +22,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kPencilTool;
+	return SeaToolsPencil;
 }
 
 - (BOOL)acceptsLineDraws
@@ -47,10 +47,10 @@
 	IntPoint curPoint;
 	NSColor *color = NULL;
 	IntRect rect;
-	int modifier = [options modifier];
+	AbstractModifiers modifier = [options modifier];
 	
 	// Determine base pixels and hence pencil colour
-	if (modifier == kAltModifier) {
+	if (modifier == AbstractModifierAlt) {
 		color = [[document contents] background];
 		if (spp == 4) {
 			basePixel[0] = (unsigned char)([color redComponent] * 255.0);

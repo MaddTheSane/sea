@@ -28,25 +28,25 @@
 - (void)setModeFromModifier:(AbstractModifiers)modifier
 {
 	switch (modifier) {
-		case kNoModifier:
+		case AbstractModifierNone:
 			[self setSelectionMode: SeaSelectDefault];
 			break;
-		case kControlModifier:
+		case AbstractModifierControl:
 			[self setSelectionMode: SeaSelectForceNew];
 			break;
-		case kShiftModifier:
+		case AbstractModifierShift:
 			[self setSelectionMode: SeaSelectDefault];
 			break;
-		case kShiftControlModifier:
+		case AbstractModifierShiftControl:
 			[self setSelectionMode: SeaSelectAdd];
 			break;
-		case kAltControlModifier:
+		case AbstractModifierAltControl:
 			[self setSelectionMode: SeaSelectSubtract];
 			break;
-		case kReservedModifier1:
+		case AbstractModifierReserved1:
 			[self setSelectionMode: SeaSelectMultiply];
 			break;
-		case kReservedModifier2:
+		case AbstractModifierReserved2:
 			[self setSelectionMode: SeaSelectSubtractProduct];
 			break;
 		default:

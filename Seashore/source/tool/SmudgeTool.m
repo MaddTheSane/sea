@@ -18,7 +18,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kSmudgeTool;
+	return SeaToolsSmudge;
 }
 
 - (BOOL)useMouseCoalescing

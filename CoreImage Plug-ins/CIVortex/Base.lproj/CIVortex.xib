@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CIVortexClass">
@@ -16,7 +17,7 @@
         <window title="Twirl" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="518" y="656" width="365" height="140"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="365" height="140"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -68,7 +69,7 @@ Gw
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
                         <rect key="frame" x="305" y="83" width="42" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="38" id="jpw-ss-CJx"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="38" id="jpw-ss-CJx"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="3.14" id="41">
                             <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="1" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="3RZ-xP-oof"/>
@@ -100,13 +101,16 @@ Gw
                     <constraint firstItem="13" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="PpY-Cu-uJw"/>
                     <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" constant="20" symbolic="YES" id="Tw1-ZA-HQv"/>
                     <constraint firstAttribute="trailing" secondItem="21" secondAttribute="trailing" constant="20" symbolic="YES" id="YKe-Rg-md0"/>
+                    <constraint firstItem="16" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="Ygr-hi-cLq"/>
                     <constraint firstItem="7" firstAttribute="width" secondItem="16" secondAttribute="width" id="Yt2-0o-Uz2"/>
                     <constraint firstItem="21" firstAttribute="leading" secondItem="14" secondAttribute="trailing" constant="8" symbolic="YES" id="c1a-uN-cHY"/>
                     <constraint firstItem="16" firstAttribute="top" secondItem="33" secondAttribute="bottom" constant="20" symbolic="YES" id="dfT-Kk-6Wg"/>
                     <constraint firstItem="13" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" id="dwY-Bs-n3U"/>
                     <constraint firstItem="33" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="eec-TL-8jg"/>
                     <constraint firstItem="14" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="mlf-xs-yEw"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="13" secondAttribute="trailing" constant="20" symbolic="YES" id="p0O-K0-2Nx"/>
                     <constraint firstItem="14" firstAttribute="top" secondItem="13" secondAttribute="bottom" constant="8" id="tyr-Ul-tib"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="33" secondAttribute="trailing" constant="20" symbolic="YES" id="yI1-em-vvy"/>
                 </constraints>
             </view>
         </window>

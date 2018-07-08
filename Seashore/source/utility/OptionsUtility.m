@@ -88,58 +88,58 @@
 - (__kindof AbstractOptions*)getOptions:(SeaToolsDefines)whichTool
 {
 	switch (whichTool) {
-		case kRectSelectTool:
+		case SeaToolsSelectRect:
 			return rectSelectOptions;
 		break;
-		case kEllipseSelectTool:
+		case SeaToolsSelectEllipse:
 			return ellipseSelectOptions;
 		break;
-		case kLassoTool:
+		case SeaToolsLasso:
 			return lassoOptions;
 		break;
-		case kPolygonLassoTool:
+		case SeaToolsPolygonLasso:
 			return polygonLassoOptions;
 		break;
-		case kPositionTool:
+		case SeaToolsPosition:
 			return positionOptions;
 		break;
-		case kZoomTool:
+		case SeaToolsZoom:
 			return zoomOptions;
 		break;
-		case kPencilTool:
+		case SeaToolsPencil:
 			return pencilOptions;
 		break;
-		case kBrushTool:
+		case SeaToolsBrush:
 			return brushOptions;
 		break;
-		case kBucketTool:
+		case SeaToolsBucket:
 			return bucketOptions;
 		break;
-		case kTextTool:
+		case SeaToolsText:
 			return textOptions;
 		break;
-		case kEyedropTool:
+		case SeaToolsEyedrop:
 			return eyedropOptions;
 		break;
-		case kEraserTool:
+		case SeaToolsEraser:
 			return eraserOptions;
 		break;
-		case kSmudgeTool:
+		case SeaToolsSmudge:
 			return smudgeOptions;
 		break;
-		case kGradientTool:
+		case SeaToolsGradient:
 			return gradientOptions;
 		break;
-		case kWandTool:
+		case SeaToolsWand:
 			return wandOptions;
 		break;
-		case kCloneTool:
+		case SeaToolsClone:
 			return cloneOptions;
 		break;
-		case kCropTool:
+		case SeaToolsCrop:
 			return cropOptions;
 		break;
-		case kEffectTool:
+		case SeaToolsEffect:
 			return effectOptions;
 		break;
 			

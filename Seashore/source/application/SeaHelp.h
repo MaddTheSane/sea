@@ -99,6 +99,6 @@
 	@param		stringID
 				The index of the string in the Instant.plist to be displayed.
 */
-- (void)updateInstantHelp:(int)stringID;
+- (void)updateInstantHelp:(NSInteger)stringID;
 
 @end

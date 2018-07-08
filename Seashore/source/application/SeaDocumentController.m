@@ -246,15 +246,8 @@
 	[super removeDocument:document];
 }
 
-- (NSMutableDictionary*)editableTypes
-{
-	return editableTypes;
-}
-
-- (NSMutableDictionary*)viewableTypes
-{
-	return viewableTypes;
-}
+@synthesize editableTypes;
+@synthesize viewableTypes;
 
 - (NSArray*)readableTypes
 {

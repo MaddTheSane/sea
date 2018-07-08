@@ -128,7 +128,7 @@
 	IntRect operableIntRect = IntMakeRect([activeLayer xoff] * xScale, [activeLayer yoff] * yScale, [activeLayer width] * xScale, [activeLayer height] *yScale);
 	NSRect operableRect = IntRectMakeNSRect(IntConstrainRect(NSRectMakeIntRect([view frame]), operableIntRect));
 
-	if (tool >= kFirstSelectionTool && tool <= kLastSelectionTool) {
+	if (tool >= SeaToolsFirstSelection && tool <= SeaToolsLastSelection) {
 		// Find out what the selection mode is
 		SeaSelectMode selectionMode = [(AbstractSelectOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] selectionMode];
 		
@@ -154,10 +154,10 @@
 			}
 		}
 		
-		if (tool == kPolygonLassoTool && closeRect.size.width > 0 && closeRect.size.height > 0) {
+		if (tool == SeaToolsPolygonLasso && closeRect.size.width > 0 && closeRect.size.height > 0) {
 			[self addCursorRect:closeRect cursor: closeCursor];
 		}
-	} else if(tool == kCropTool) {
+	} else if(tool == SeaToolsCrop) {
 		[self addCursorRect:[view frame] cursor:crosspointCursor];
 		
 		IntRect origRect = [(CropTool *)[[document tools] currentTool] cropRect];
@@ -169,7 +169,7 @@
 				[self addCursorRect:handleRects[i] cursor:handleCursors[i]];
 			}
 		}
-	} else if (tool == kPositionTool) {
+	} else if (tool == SeaToolsPosition) {
 		NSRect cropRect;
 		IntRect origRect;
 
@@ -193,37 +193,37 @@
 		}
 		
 		switch (tool) {
-			case kZoomTool:
+			case SeaToolsZoom:
 				[self addCursorRect:[view frame] cursor:zoomCursor];
 				break;
-			case kPencilTool:
+			case SeaToolsPencil:
 				[self addCursorRect:operableRect cursor:pencilCursor];
 				break;
-			case kBrushTool:
+			case SeaToolsBrush:
 				[self addCursorRect:operableRect cursor:brushCursor];
 				break;
-			case kBucketTool:
+			case SeaToolsBucket:
 				[self addCursorRect:operableRect cursor:bucketCursor];
 				break;
-			case kTextTool:
+			case SeaToolsText:
 				[self addCursorRect:operableRect cursor:[NSCursor IBeamCursor]];
 				break;
-			case kEyedropTool:
+			case SeaToolsEyedrop:
 				[self addCursorRect:[view frame] cursor:eyedropCursor];
 				break;
-			case kEraserTool:
+			case SeaToolsEraser:
 				[self addCursorRect:operableRect cursor:eraserCursor];
 				break;
-			case kGradientTool:
+			case SeaToolsGradient:
 				[self addCursorRect:[view frame] cursor:crosspointCursor];
 				break;
-			case kSmudgeTool:
+			case SeaToolsSmudge:
 				[self addCursorRect:[view frame] cursor:smudgeCursor];
 				break;
-			case kCloneTool:
+			case SeaToolsClone:
 				[self addCursorRect:[view frame] cursor:brushCursor];
 				break;
-			case kEffectTool:
+			case SeaToolsEffect:
 				[self addCursorRect:[view frame] cursor:effectCursor];
 				break;
 			default:
@@ -233,11 +233,11 @@
 		
 	}
 
-	if (tool == kBrushTool && [(BrushOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] brushIsErasing]) {
+	if (tool == SeaToolsBrush && [(BrushOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] brushIsErasing]) {
 		// Do we need this?
 		//[view removeCursorRect:operableRect cursor:brushCursor];
 		[self addCursorRect:operableRect cursor:eraserCursor];
-	} else if (tool == kPencilTool && [(PencilOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] pencilIsErasing]) {
+	} else if (tool == SeaToolsPencil && [(PencilOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] pencilIsErasing]) {
 		// Do we need this?
 		//[view removeCursorRect:operableRect cursor:pencilCursor];
 		[self addCursorRect:operableRect cursor:eraserCursor];
@@ -254,7 +254,7 @@
 	
 	
 	// Some tools can operate outside of the selection rectangle
-	if (tool != kZoomTool && tool != kEyedropTool && tool != kGradientTool && tool != kSmudgeTool && tool != kCloneTool && tool != kCropTool && tool != kEffectTool && tool != kPositionTool) {
+	if (tool != SeaToolsZoom && tool != SeaToolsEyedrop && tool != SeaToolsGradient && tool != SeaToolsSmudge && tool != SeaToolsClone && tool != SeaToolsCrop && tool != SeaToolsEffect && tool != SeaToolsPosition) {
 		// Now we need the noop section		
 		if (operableRect.origin.x > 0) {
 			NSRect leftRect = NSMakeRect(0,0,operableRect.origin.x,[view frame].size.height);

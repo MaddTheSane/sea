@@ -2,6 +2,8 @@
 #import "Globals.h"
 #import "SeaTools.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class SeaDocument;
 @class ToolboxUtility;
 @class AbstractOptions;
@@ -98,11 +100,11 @@
 - (void)shutdown;
 
 /*!
-	@method		currentOptions
+	@property	currentOptions
 	@discussion	Returns the currently active options object.
 	@result		Returns the currently active options object (NULL if none).
 */
-- (__kindof AbstractOptions*)currentOptions;
+@property (readonly, nullable) __kindof AbstractOptions *currentOptions;
 
 /*!
 	@method		getOptions:
@@ -112,7 +114,7 @@
 				SeaTools).
 	@result		Returns the options object associated with the given index.
 */
-- (__kindof AbstractOptions*)getOptions:(SeaToolsDefines)whichTool;
+- (nullable __kindof AbstractOptions*)getOptions:(SeaToolsDefines)whichTool;
 
 /*!
 	@method		update
@@ -126,7 +128,7 @@
 	@param		sender
 				Ignored.
 */
-- (IBAction)show:(id)sender;
+- (IBAction)show:(nullable id)sender;
 
 /*!
 	@method		hide:
@@ -134,7 +136,7 @@
 	@param		sender
 				Ignored.
 */
-- (IBAction)hide:(id)sender;
+- (IBAction)hide:(nullable id)sender;
 
 /*!
 	@method		toggle:
@@ -142,7 +144,7 @@
 	@param		sender
 				Ignored.
 */
-- (IBAction)toggle:(id)sender;
+- (IBAction)toggle:(nullable id)sender;
 
 
 /*!
@@ -159,3 +161,5 @@
 @property (readonly, getter=isVisible) BOOL visible;
 
 @end
+
+NS_ASSUME_NONNULL_END

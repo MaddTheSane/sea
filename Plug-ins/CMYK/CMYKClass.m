@@ -7,9 +7,9 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation CMYKClass
-- (int)type
+- (SeaPluginType)type
 {
-	return kBasicPlugin;
+	return SeaPluginBasic;
 }
 
 - (NSString *)name

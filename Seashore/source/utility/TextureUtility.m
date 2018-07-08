@@ -292,7 +292,7 @@
 		[opacitySlider setEnabled:YES];
 		[newTexture activate];
 		[[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
-		[(TextTool *)[[document tools] getTool:kTextTool] preview:NULL];
+		[(TextTool *)[[document tools] getTool:SeaToolsText] preview:NULL];
 	}
 }
 

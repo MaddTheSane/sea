@@ -55,7 +55,6 @@ extension IntSize {
 	public init(_ size: Foundation.NSSize) {
 		self.init(width: Int32(ceil(size.width)), height: Int32(ceil(size.height)))
 	}
-
 	
 	public var nsSize: Foundation.NSSize {
 		return CGSize(width: Int(width), height: Int(height))

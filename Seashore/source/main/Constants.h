@@ -310,13 +310,13 @@ typedef NS_ENUM(int, SeaFlipType) {
 #define kMinResolution 18
 
 
-static const SeaSelectedChannel kAllChannels NS_SWIFT_UNAVAILABLE("Use .all instead") NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectedChannelAll", 10.2, 10.8) = SeaSelectedChannelAll;
-static const SeaSelectedChannel kPrimaryChannels NS_SWIFT_UNAVAILABLE("Use .primary instead") NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectedChannelPrimary", 10.2, 10.8) = SeaSelectedChannelPrimary;
-static const SeaSelectedChannel kAlphaChannel NS_SWIFT_UNAVAILABLE("Use .alpha instead") NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectedChannelAlpha", 10.2, 10.8) = SeaSelectedChannelAlpha;
+static const SeaSelectedChannel kAllChannels NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectedChannelAll", 10.2, 10.8) = SeaSelectedChannelAll;
+static const SeaSelectedChannel kPrimaryChannels NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectedChannelPrimary", 10.2, 10.8) = SeaSelectedChannelPrimary;
+static const SeaSelectedChannel kAlphaChannel NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaSelectedChannelAlpha", 10.2, 10.8) = SeaSelectedChannelAlpha;
 
 //! Specifies the alpha channel is first.
-static const GIMPBitmapFormat kAlphaFirstFormat NS_SWIFT_UNAVAILABLE("Use .alphaFirst instead") NS_DEPRECATED_WITH_REPLACEMENT_MAC("GIMPBitmapFormatAlphaFirst", 10.2, 10.8) = GIMPBitmapFormatAlphaFirst;
+static const GIMPBitmapFormat kAlphaFirstFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("GIMPBitmapFormatAlphaFirst", 10.2, 10.8) = GIMPBitmapFormatAlphaFirst;
 //! Specifies the alpha is not premultiplied.
-static const GIMPBitmapFormat kAlphaNonPremultipliedFormat NS_SWIFT_UNAVAILABLE("Use .alphaNonPremultiplied instead") NS_DEPRECATED_WITH_REPLACEMENT_MAC("GIMPBitmapFormatAlphaNonPremultiplied", 10.2, 10.8) = GIMPBitmapFormatAlphaNonPremultiplied;
+static const GIMPBitmapFormat kAlphaNonPremultipliedFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("GIMPBitmapFormatAlphaNonPremultiplied", 10.2, 10.8) = GIMPBitmapFormatAlphaNonPremultiplied;
 //! Specifies the colour components are specified as floating point values.
-static const GIMPBitmapFormat kFloatingFormat NS_SWIFT_UNAVAILABLE("Use .floatingPoint instead") NS_DEPRECATED_WITH_REPLACEMENT_MAC("GIMPBitmapFormatFloatingPoint", 10.2, 10.8) = GIMPBitmapFormatFloatingPoint;
+static const GIMPBitmapFormat kFloatingFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("GIMPBitmapFormatFloatingPoint", 10.2, 10.8) = GIMPBitmapFormatFloatingPoint;

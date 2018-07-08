@@ -37,7 +37,7 @@ typedef NS_ENUM(int, SeaMeasure) {
 */
 @interface InfoUtility : NSObject {
 	
-	// The document which is the focus of this utility
+	//! The document which is the focus of this utility
 	IBOutlet SeaDocument *document;
 	
 	// Displays the red, green, blue and alpha value of the focused pixel
@@ -56,7 +56,7 @@ typedef NS_ENUM(int, SeaMeasure) {
 	IBOutlet NSTextField *deltaY;
 	IBOutlet NSTextField *radiusValue;
 
-	// The active measuring style
+	//! The active measuring style
 	SeaMeasure measureStyle;
 
 	// The approprate views

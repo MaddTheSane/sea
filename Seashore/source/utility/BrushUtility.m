@@ -77,7 +77,7 @@
 	[self setActiveBrushIndex:activeBrushIndex];
 	
 	// Set the window's properties
-	[window setPanelStyle:kVerticalPanelStyle];
+	[window setPanelStyle:SeaPanelStyleVertical];
 	
 	[[SeaController utilitiesManager] setBrushUtility: self for:document];
 }

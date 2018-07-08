@@ -15,7 +15,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kEllipseSelectTool;
+	return SeaToolsSelectEllipse;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
@@ -31,7 +31,7 @@
 		
 		// Get mode
 		modifier = [options modifier];
-		if (modifier == kShiftModifier) {
+		if (modifier == AbstractModifierShift) {
 			oneToOne = YES;
 		} else {
 			oneToOne = NO;
@@ -48,24 +48,24 @@
 		selectionRect.origin = where;
 		
 		// If we have a fixed size selection
-		if (aspectType >= kExactPixelAspectType) {
+		if (aspectType >= SeaAspectTypeExactPixel) {
 		
 			// Determine it
 			ratio = [options ratio];
 			xres = [[document contents] xres];
 			yres = [[document contents] yres];
 			switch (aspectType) {
-				case kExactPixelAspectType:
+				case SeaAspectTypeExactPixel:
 					selectionRect.size.width = ratio.width;
 					selectionRect.size.height = ratio.height;
 					break;
 					
-				case kExactInchAspectType:
+				case SeaAspectTypeExactInch:
 					selectionRect.size.width = ratio.width * xres;
 					selectionRect.size.height = ratio.height * yres;
 					break;
 					
-				case kExactMillimeterAspectType:
+				case SeaAspectTypeExactMillimeter:
 					selectionRect.size.width = ratio.width * xres * 0.03937;
 					selectionRect.size.height = ratio.height * yres * 0.03937;
 					break;
@@ -88,7 +88,7 @@
 		SeaAspectType aspectType = [options aspectType];
 		NSSize ratio;
 	
-		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {
+		if (aspectType == SeaAspectTypeNone || aspectType == SeaAspectTypeRatio || oneToOne) {
 		
 			// Determine the width of the selection rectangle
 			if (startPoint.x < where.x) {
@@ -100,7 +100,7 @@
 			}
 			
 			// Determine the height of the selection rectangle
-			if (aspectType == kRatioAspectType || oneToOne) {
+			if (aspectType == SeaAspectTypeRatio || oneToOne) {
 				if (oneToOne)
 					ratio = NSMakeSize(1, 1);
 				else

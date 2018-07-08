@@ -22,14 +22,14 @@
 
 - (IBAction)mergedChanged:(id)sender
 {
-	id cloneTool = [[document tools] getTool:kCloneTool];
+	id cloneTool = [[document tools] getTool:SeaToolsClone];
 
 	[cloneTool unset];
 }
 
 - (void)update
 {
-	id cloneTool = [[document tools] getTool:kCloneTool];
+	id cloneTool = [[document tools] getTool:SeaToolsClone];
 	IntPoint sourcePoint;
 	
 	if ([cloneTool sourceSet]) {

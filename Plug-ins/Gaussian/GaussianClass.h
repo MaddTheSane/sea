@@ -23,7 +23,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		name

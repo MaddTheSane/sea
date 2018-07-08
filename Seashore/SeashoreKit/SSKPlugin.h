@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion	Returns the type of plug-in so Seashore can correctly interact with the plug-in.
  @result		Returns an integer indicating the plug-in's type.
  */
-@property (readonly) int type;
+@property (readonly) SeaPluginType type;
 
 /*!
  @property		name

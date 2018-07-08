@@ -12,7 +12,7 @@
 
 - (SeaToolsDefines)toolId
 {
-	return kCropTool;
+	return SeaToolsCrop;
 }	
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
@@ -39,8 +39,8 @@
 		startPoint = where;
 		
 		// Start the cropping rectangle
-		oneToOne = (modifier == kShiftModifier);
-		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {
+		oneToOne = (modifier == AbstractModifierShift);
+		if (aspectType == SeaAspectTypeNone || aspectType == SeaAspectTypeRatio || oneToOne) {
 			cropRect.origin.x = startPoint.x;
 			cropRect.origin.y = startPoint.y;
 			cropRect.size.width = 0;
@@ -52,17 +52,17 @@
 			xres = [[document contents] xres];
 			yres = [[document contents] yres];
 			switch (aspectType) {
-				case kExactPixelAspectType:
+				case SeaAspectTypeExactPixel:
 					cropRect.size.width = ratio.width;
 					cropRect.size.height = ratio.height;
 					break;
 					
-				case kExactInchAspectType:
+				case SeaAspectTypeExactInch:
 					cropRect.size.width = ratio.width * xres;
 					cropRect.size.height = ratio.height * yres;
 					break;
 					
-				case kExactMillimeterAspectType:
+				case SeaAspectTypeExactMillimeter:
 					cropRect.size.width = ratio.width * xres * 0.03937;
 					cropRect.size.height = ratio.height * yres * 0.03937;
 					break;
@@ -91,7 +91,7 @@
 		where.x += [activeLayer xoff];
 		where.y += [activeLayer yoff];
 		
-		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {
+		if (aspectType == SeaAspectTypeNone || aspectType == SeaAspectTypeRatio || oneToOne) {
 			// Determine the width of the cropping rectangle
 			if (startPoint.x < where.x) {
 				cropRect.origin.x = startPoint.x;
@@ -110,7 +110,7 @@
 					cropRect.size.height = cropRect.size.width;
 					cropRect.origin.y = startPoint.y - cropRect.size.height;
 				}
-			} else if (aspectType == kRatioAspectType) {
+			} else if (aspectType == SeaAspectTypeRatio) {
 				ratio = [options ratio];
 				if (startPoint.y < where.y) {
 					cropRect.size.height = cropRect.size.width * ratio.height;

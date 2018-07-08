@@ -22,7 +22,7 @@
 				  andMask: [[document selection] mask]];
 		
 		// Also, we universally float the selection if alt is down
-		if(![self isMovingOrScaling] && [options modifier] == kAltModifier) {
+		if(![self isMovingOrScaling] && [options modifier] == AbstractModifierAlt) {
 			[[document contents] makeSelectionFloat:NO];
 		}
 	}	

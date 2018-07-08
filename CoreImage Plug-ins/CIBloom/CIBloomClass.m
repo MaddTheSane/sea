@@ -22,9 +22,9 @@
 	return self;
 }
 
-- (int)type
+- (SeaPluginType)type
 {
-	return kBasicPlugin;
+	return SeaPluginBasic;
 }
 
 - (NSString *)name
@@ -180,7 +180,7 @@
 	}
 	
 	// Get data from output core image
-	temp_rep = [NSBitmapImageRep imageRepWithData:[[[NSBitmapImageRep alloc] initWithCGImage:temp_image] TIFFRepresentation]];
+	temp_rep = [[NSBitmapImageRep alloc] initWithCGImage:temp_image];
 	CGImageRelease(temp_image);
 	resdata = [temp_rep bitmapData];
 		

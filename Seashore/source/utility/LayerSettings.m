@@ -13,7 +13,7 @@
 - (void)awakeFromNib
 {
 	settingsLayer = nil;
-	[panel setPanelStyle:kHorizontalPanelStyle];	
+	[panel setPanelStyle:SeaPanelStyleHorizontal];	
 }
 
 - (void)activate

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CIHatchedScreenClass">
@@ -15,7 +16,7 @@
         <window title="Hatched Screen" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="66" y="444" width="365" height="208"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="365" height="208"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -66,9 +67,6 @@ Gw
                     </button>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
                         <rect key="frame" x="305" y="151" width="42" height="14"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="38" id="acG-nh-enw"/>
-                        </constraints>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="6" id="64">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="CGg-2q-gqZ"/>
                             <font key="font" metaFont="smallSystem"/>
@@ -100,7 +98,7 @@ Gw
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35">
                         <rect key="frame" x="305" y="106" width="42" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="38" id="yua-i1-gqw"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="38" id="yua-i1-gqw"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="0.00" id="67">
                             <numberFormatter key="formatter" formatterBehavior="custom10_4" alwaysShowsDecimalSeparator="YES" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="1" maximumIntegerDigits="42" minimumFractionDigits="2" maximumFractionDigits="2" id="HNH-mQ-beM"/>
@@ -132,9 +130,6 @@ Gw
                     </slider>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40">
                         <rect key="frame" x="305" y="61" width="42" height="14"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="38" id="TMf-KQ-9O7"/>
-                        </constraints>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="1" id="70">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="bKU-WJ-bZc"/>
                             <font key="font" metaFont="smallSystem"/>
@@ -148,6 +143,7 @@ Gw
                 </subviews>
                 <constraints>
                     <constraint firstItem="39" firstAttribute="top" secondItem="38" secondAttribute="bottom" constant="8" symbolic="YES" id="0pU-iv-fDC"/>
+                    <constraint firstItem="16" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="1vn-4J-Hpv"/>
                     <constraint firstItem="35" firstAttribute="leading" secondItem="34" secondAttribute="trailing" constant="8" symbolic="YES" id="3HM-ht-IOK"/>
                     <constraint firstItem="7" firstAttribute="leading" secondItem="16" secondAttribute="trailing" constant="12" symbolic="YES" id="5m4-MR-edQ"/>
                     <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" constant="20" symbolic="YES" id="Cce-6C-Z0P"/>
@@ -165,9 +161,14 @@ Gw
                     <constraint firstAttribute="trailing" secondItem="40" secondAttribute="trailing" constant="20" symbolic="YES" id="PGv-cv-TD9"/>
                     <constraint firstItem="7" firstAttribute="top" secondItem="39" secondAttribute="bottom" constant="20" symbolic="YES" id="TJA-Re-Kfz"/>
                     <constraint firstItem="16" firstAttribute="width" secondItem="7" secondAttribute="width" id="WcV-X4-NwG"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="33" secondAttribute="trailing" constant="20" symbolic="YES" id="Xg9-9n-bxu"/>
                     <constraint firstItem="14" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="bSF-fH-5Xy"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="13" secondAttribute="trailing" constant="20" symbolic="YES" id="czE-zA-3d3"/>
                     <constraint firstItem="13" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="el8-kD-YYy"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="38" secondAttribute="trailing" constant="20" symbolic="YES" id="fNv-OO-hoX"/>
                     <constraint firstItem="34" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="gAB-Sh-MHm"/>
+                    <constraint firstItem="35" firstAttribute="width" secondItem="21" secondAttribute="width" id="jrA-7q-4Og"/>
+                    <constraint firstItem="40" firstAttribute="width" secondItem="21" secondAttribute="width" id="o2f-NH-c5l"/>
                     <constraint firstItem="33" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="8" symbolic="YES" id="oT1-mw-Qup"/>
                     <constraint firstItem="13" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" id="r8y-y6-dj9"/>
                     <constraint firstItem="40" firstAttribute="leading" secondItem="39" secondAttribute="trailing" constant="8" symbolic="YES" id="tIa-Sd-eYf"/>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CIDisplacementDistortionClass">
@@ -16,7 +17,7 @@
         <window title="Displacement Distortion" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="398" y="381" width="365" height="144"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="365" height="144"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -68,7 +69,7 @@ Gw
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
                         <rect key="frame" x="305" y="87" width="42" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="38" id="qMV-ey-UyT"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="38" id="qMV-ey-UyT"/>
                         </constraints>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="50" id="46">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="sJl-RW-5QF"/>
@@ -102,6 +103,7 @@ Gw
                 <constraints>
                     <constraint firstItem="7" firstAttribute="leading" secondItem="16" secondAttribute="trailing" constant="12" symbolic="YES" id="38A-1P-0Yd"/>
                     <constraint firstItem="37" firstAttribute="leading" secondItem="33" secondAttribute="trailing" constant="8" symbolic="YES" id="6Oh-4x-zyj"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="13" secondAttribute="trailing" constant="20" symbolic="YES" id="8ba-iS-XpW"/>
                     <constraint firstItem="14" firstAttribute="top" secondItem="13" secondAttribute="bottom" constant="8" symbolic="YES" id="CL9-mG-XxC"/>
                     <constraint firstItem="14" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="G3D-wB-Bya"/>
                     <constraint firstItem="7" firstAttribute="top" secondItem="37" secondAttribute="bottom" constant="20" symbolic="YES" id="GOc-lL-xQg"/>
@@ -118,6 +120,7 @@ Gw
                     <constraint firstItem="13" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="l1l-5d-4JU"/>
                     <constraint firstItem="7" firstAttribute="width" secondItem="16" secondAttribute="width" id="lTP-NY-teJ"/>
                     <constraint firstItem="21" firstAttribute="baseline" secondItem="14" secondAttribute="baseline" id="lWI-ca-7V3"/>
+                    <constraint firstItem="16" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="qzO-ne-oB0"/>
                 </constraints>
             </view>
         </window>
