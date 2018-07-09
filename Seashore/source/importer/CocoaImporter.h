@@ -1,5 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "SeaImporter.h"
 
 @class SeaDocument;
 
@@ -12,7 +13,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-@interface CocoaImporter : NSObject {
+@interface CocoaImporter : NSObject <SeaImporter> {
 	IBOutlet NSPanel *pdfPanel;
 	IBOutlet NSTextField *pageLabel;
 	IBOutlet NSTextField *pageInput;
@@ -28,7 +29,7 @@
 				The path to the image file.
 	@result		YES if the operation was successful, NO otherwise.
 */
-- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path;
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path DEPRECATED_ATTRIBUTE;
 
 /*!
 	@method		endPanel:

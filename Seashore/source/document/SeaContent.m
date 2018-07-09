@@ -503,44 +503,48 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (BOOL)importLayerFromFile:(NSString *)path
 {
+	return [self importLayerFromURL:[NSURL fileURLWithPath:path] error:NULL];
+}
+
+- (BOOL)importLayerFromURL:(NSURL *)path error:(NSError *__autoreleasing *)error
+{
 	NSString *docType;
 	BOOL success = NO;
-	id importer;
+	id<SeaImporter> importer;
 	
 	docType = (NSString *)CFBridgingRelease(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
 																(__bridge CFStringRef)[path pathExtension],
 																kUTTypeData));
 
 	if ([XCFContent typeIsEditable:docType]) {
-		
 		// Load GIMP or XCF layers
 		importer = [[XCFImporter alloc] init];
-		success = [importer addToDocument:document contentsOfFile:path];
-		
+		success = [importer addToDocument:document contentsOfURL:path error:error];
 	} else if ([CocoaContent typeIsViewable:docType forDoc: document]) {
-		
 		// Load PNG, TIFF, JPEG, GIF and other layers
 		importer = [[CocoaImporter alloc] init];
-		success = [importer addToDocument:document contentsOfFile:path];
-	
-	
+		success = [importer addToDocument:document contentsOfURL:path error:error];
 	} else if ([XBMContent typeIsEditable:docType]) {
 		// Load X bitmap layers
 		importer = [[XBMImporter alloc] init];
-		success = [importer addToDocument:document contentsOfFile:path];
+		success = [importer addToDocument:document contentsOfURL:path error:error];
 	} else if ([SVGContent typeIsViewable:docType]) {
 		// Load SVG layers
 		importer = [[SVGImporter alloc] init];
-		success = [importer addToDocument:document contentsOfFile:path];
+		success = [importer addToDocument:document contentsOfURL:path error:error];
 	} else {
 		// Handle an unknown document type
 		NSLog(@"Unknown type passed to importLayerFromFile:<%@> docType:<%@>", path, docType);
 		success = NO;
-	
+		if (error) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+					  @{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Unknown type %@", docType],
+						NSURLErrorKey: path}];
+		}
 	}
 
 	// Inform the user of failure
-	if (!success){
+	if (!success) {
 		[[SeaController seaWarning] addMessage:LOCALSTR(@"import failure message", @"The selected file was not able to be successfully imported into this document.") forDocument:document level:SeaWarningImportanceHigh];
 	}
 		
@@ -1324,7 +1328,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[document helpers] layerLevelChanged:activeLayerIndex];
 	
 	// Make action undoable
-	[[[document undoManager] prepareWithInvocationTarget:self] lowerLayer:index - 1];
+	[(SeaContent*)[[document undoManager] prepareWithInvocationTarget:self] lowerLayer:index - 1];
 }
 
 - (void)lowerLayer:(NSInteger)index
@@ -1361,7 +1365,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[document helpers] layerLevelChanged:activeLayerIndex];
 	
 	// Make action undoable
-	[[[document undoManager] prepareWithInvocationTarget:self] raiseLayer:index + 1];
+	[(SeaContent*)[[document undoManager] prepareWithInvocationTarget:self] raiseLayer:index + 1];
 }
 
 - (void)clearAllLinks

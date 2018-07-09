@@ -648,6 +648,7 @@
 		55BD2E8A18D103CE00C4EE1B /* Vortex+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D8518D0D0B900C4EE1B /* Vortex+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55BD2E8B18D103CE00C4EE1B /* White Point Adjust+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55BD2E8C18D103CE00C4EE1B /* Zoom Blur+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		55CCA39A20F31E6200B4D2F7 /* SeaImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CCA39920F31E6200B4D2F7 /* SeaImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55D066301C6EEAF200BEDAE9 /* Graphics.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55D0662F1C6EEAF200BEDAE9 /* Graphics.xcassets */; };
 		55D748FF1D52895100B099C9 /* NSArray_Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = DCA8928A0FD4AAA3002BEC8A /* NSArray_Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55D749001D528B5800B099C9 /* Bucket.h in Headers */ = {isa = PBXBuildFile; fileRef = A8AC9FD204C2900600A80207 /* Bucket.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2163,6 +2164,7 @@
 		55BD2D8518D0D0B900C4EE1B /* Vortex+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vortex+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2D9618D0D0C200C4EE1B /* White Point Adjust+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "White Point Adjust+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BD2DA718D0D0C500C4EE1B /* Zoom Blur+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zoom Blur+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55CCA39920F31E6200B4D2F7 /* SeaImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeaImporter.h; sourceTree = "<group>"; };
 		55D0662F1C6EEAF200BEDAE9 /* Graphics.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Graphics.xcassets; sourceTree = "<group>"; };
 		55D748FD1D5271DA00B099C9 /* ToolboxUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxUtility.swift; sourceTree = "<group>"; };
 		55DAC83D20EECC2600CD7B26 /* SVGImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVGImporter.h; sourceTree = "<group>"; };
@@ -4545,6 +4547,7 @@
 		A8D6BCDC07C2152100B91A1D /* Importer Classes */ = {
 			isa = PBXGroup;
 			children = (
+				55CCA39920F31E6200B4D2F7 /* SeaImporter.h */,
 				A8D6BCE907C215E000B91A1D /* CocoaImporter.h */,
 				A8D6BCEA07C215E000B91A1D /* CocoaImporter.m */,
 				A81F6EB007C2EE35005C2DBD /* XBMImporter.h */,
@@ -4919,6 +4922,7 @@
 				554E658D1D5F9B0E00F2DF77 /* SeaAlignment.h in Headers */,
 				55472B991C6EDEA10065A852 /* PluginData.h in Headers */,
 				55D748FF1D52895100B099C9 /* NSArray_Extensions.h in Headers */,
+				55CCA39A20F31E6200B4D2F7 /* SeaImporter.h in Headers */,
 				55472BEA1C6EE7F20065A852 /* RLE.h in Headers */,
 				556D43D11D41678300BECFB2 /* SVGContent.h in Headers */,
 				55472BAC1C6EE1530065A852 /* ImageToolbarItem.h in Headers */,

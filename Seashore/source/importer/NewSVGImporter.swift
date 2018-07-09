@@ -9,7 +9,7 @@
 import Cocoa
 import GIMPCore
 
-public final class SVGImporter: NSObject {
+public final class SVGImporter: NSObject, SeaImporter {
 	typealias ImporterErrors = SVGImporterErrors
 	
 	/// The length warning panel
@@ -150,7 +150,7 @@ public final class SVGImporter: NSObject {
 		}
 		
 		// Rename the layer
-		layer.name = (url.lastPathComponent as NSString).deletingPathExtension
+		layer.name = url.deletingPathExtension().lastPathComponent
 		
 		// Add the layer
 		doc.contents.addLayerObject(layer)
@@ -200,7 +200,7 @@ public final class SVGImporter: NSObject {
 	}
 	
 	/// Closes the current modal dialog.
-	@IBAction func endPanel(_ sender: AnyObject?) {
+	@IBAction public func endPanel(_ sender: Any?) {
 		NSApp.stopModal()
 	}
 	

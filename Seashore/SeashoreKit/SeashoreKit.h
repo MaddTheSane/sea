@@ -50,6 +50,7 @@ FOUNDATION_EXPORT const unsigned char SeashoreKitVersionString[];
 #import <SeashoreKit/TextureExporter.h>
 #import <SeashoreKit/Bucket.h>
 
+#import <SeashoreKit/SeaImporter.h>
 #import <SeashoreKit/CocoaContent.h>
 #import <SeashoreKit/CocoaLayer.h>
 #import <SeashoreKit/CocoaImporter.h>
