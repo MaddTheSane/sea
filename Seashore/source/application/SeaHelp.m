@@ -73,6 +73,33 @@
 	}
 }
 
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+	didReceiveData:(NSData *)data
+{
+	NSURL *download_url;
+	NSDictionary *dict = [NSPropertyListSerialization propertyListWithData:data options:0 format:NULL error:NULL];
+	int newest_version;
+	int installed_version = (int)[[[[NSBundle mainBundle] infoDictionary] valueForKey: @"CFBundleVersion"] intValue];
+	
+	if (dict) {
+		newest_version = [dict[@"current version"] intValue];
+		if (newest_version > installed_version) {
+			download_url = [NSURL URLWithString:dict[@"url"]];
+			if (NSRunAlertPanel(LOCALSTR(@"download available title", @"Update available"), @"%@", LOCALSTR(@"download now", @"Download now"), LOCALSTR(@"download later", @"Download later"), NULL, LOCALSTR(@"download available body", @"An updated version of Seashore is now availble for download.")) == NSAlertDefaultReturn) {
+				[[NSWorkspace sharedWorkspace] openURL:download_url];
+			}
+		} else {
+			if (adviseFailure) {
+				NSRunAlertPanel(LOCALSTR(@"up-to-date title", @"Seashore up-to-date"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"up-to-date body", @"Seashore is up-to-date."));
+			}
+		}
+	} else {
+		if (adviseFailure) {
+			NSRunAlertPanel(LOCALSTR(@"download error title", @"Download error"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"download error body", @"The file required to check if Seashore cannot be downloaded from the Internet. Please check your Internet connection and try again."));
+		}
+	}
+}
+
 - (IBAction)checkForUpdate:(id)sender
 {
 	//TODO: port to NSURLConnection
@@ -80,7 +107,12 @@
 	
 	check_url = [NSURL URLWithString:@"http://seashore.sourceforge.net/current.xml"];
 	adviseFailure = (sender != NULL);
-	[check_url loadResourceDataNotifyingClient:self usingCache:YES];
+	NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+	config.networkServiceType = adviseFailure ? NSURLNetworkServiceTypeDefault : NSURLNetworkServiceTypeBackground;
+	NSURLSession *urlConn = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+	NSURLSessionDataTask *datTask = [urlConn dataTaskWithURL:check_url];
+	[datTask resume];
+	//[check_url loadResourceDataNotifyingClient:self usingCache:YES];
 }
 
 - (void)displayInstantHelp:(NSInteger)stringID

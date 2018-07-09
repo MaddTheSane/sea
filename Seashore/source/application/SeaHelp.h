@@ -10,15 +10,15 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface SeaHelp : NSObject {
+@interface SeaHelp : NSObject <NSURLSessionDataDelegate> {
 	// The bugs and suggestions window
-    IBOutlet id bugsWindow;
+    IBOutlet NSWindow *bugsWindow;
 	
 	// The instant help window 
-	IBOutlet id instantHelpWindow;
+	IBOutlet NSWindow *instantHelpWindow;
 	
 	// The label for displaying the instant help text
-	IBOutlet id instantHelpLabel;
+	IBOutlet NSTextField *instantHelpLabel;
 	
 	// Should the user be advised if the download fails?
 	BOOL adviseFailure;
