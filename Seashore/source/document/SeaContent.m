@@ -489,6 +489,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	BOOL success = NO;
 	
 	// Determine which document we have and act appropriately	
+	// TODO: get UTI directly from file.
 	docType = (NSString *)CFBridgingRelease(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
 																(__bridge CFStringRef)[path pathExtension],
 																kUTTypeData));
@@ -512,6 +513,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	BOOL success = NO;
 	id<SeaImporter> importer;
 	
+	// TODO: get UTI directly from file.
 	docType = (NSString *)CFBridgingRelease(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
 																(__bridge CFStringRef)[path pathExtension],
 																kUTTypeData));
@@ -563,10 +565,9 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		
 		if (result == NSOKButton) {
 			for (NSURL *aURL in filenames) {
-				[self importLayerFromFile:[aURL path]];
+				[self importLayerFromURL:aURL error:NULL];
 			}
 		}
-
 	}];
 }
 
@@ -575,7 +576,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	NSArray *tempArray = @[];
 	int i;
 	
-	if(document.selection.floating){
+	if (document.selection.floating) {
 		unsigned char *data;
 		int spp = [self spp];
 		IntRect dataRect;
@@ -598,10 +599,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		// Create a new array with all the existing layers and the one being added
 		layer = [[SeaLayer alloc] initWithDocument:document rect:dataRect data:data spp:spp];
 		for (i = 0; i < [layers count] + 1; i++) {
-			if (i == activeLayerIndex)
+			if (i == activeLayerIndex) {
 				tempArray = [tempArray arrayByAddingObject:layer];
-			else
+			} else {
 				tempArray = [tempArray arrayByAddingObject:(i > activeLayerIndex) ? layers[i - 1] : layers[i]];
+			}
 		}
 		
 		// Now substitute in our new array
@@ -612,8 +614,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		
 		// Make action undoable
 		[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:activeLayerIndex];	
-	}else{
-	
+	} else {
 		// Inform the helpers we will change the layer
 		[[document helpers] activeLayerWillChange];
 		
@@ -622,10 +623,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		
 		// Create a new array with all the existing layers and the one being added
 		for (i = 0; i < [layers count] + 1; i++) {
-			if (i == index)
+			if (i == index) {
 				tempArray = [tempArray arrayByAddingObject:[[SeaLayer alloc] initWithDocument:document width:width height:height opaque:NO spp:[self spp]]];
-			else
+			} else {
 				tempArray = [tempArray arrayByAddingObject:(i > index) ? layers[i - 1] : layers[i]];
+			}
 		}
 		
 		// Now substitute in our new array
