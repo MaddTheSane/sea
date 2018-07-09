@@ -1,5 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "SeaImporter.h"
 
 @class SeaDocument;
 
@@ -12,7 +13,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-@interface XBMImporter : NSObject
+@interface XBMImporter : NSObject <SeaImporter>
 
 /*!
 	@method		addToDocument:contentsOfFile:
@@ -23,6 +24,17 @@
 				The path to the image file.
 	@result		YES if the operation was successful, NO otherwise.
 */
-- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path;
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path DEPRECATED_ATTRIBUTE;
+
+/*!
+ @method		addToDocument:contentsOfURL:error:
+ @discussion	Adds the given image file to the given document.
+ @param			doc
+ 				The document to add to.
+ @param			path
+ 				The file URL to the image file.
+ @result		\c YES if the operation was successful, \c NO otherwise.
+ */
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfURL:(NSURL *)path error:(NSError *__autoreleasing*)error;
 
 @end

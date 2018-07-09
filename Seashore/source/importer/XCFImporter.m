@@ -9,6 +9,11 @@
 
 @implementation XCFImporter
 
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
+{
+	return [self addToDocument:doc contentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+}
+
 static inline void fix_endian_read(int *input, size_t size)
 {
 	for (NSInteger i = 0; i < size; i++) {
@@ -105,7 +110,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	return YES;
 }
 
-- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfURL:(nonnull NSURL *)path error:(NSError *__autoreleasing  _Nullable * _Nullable)error
 {
 	SharedXCFInfo info;
 	NSInteger layerOffsets, offset;
@@ -121,11 +126,20 @@ static inline void fix_endian_read(int *input, size_t size)
 	// Open the file
 	file = fopen([path fileSystemRepresentation], "rb");
 	if (file == NULL) {
+		if (error) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:
+					  @{NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil]}];
+		}
 		return NO;
 	}
 	
 	// Read the header
 	if ([self readHeader:file] == NO) {
+		if (error) {
+			//TODO: Better error description/type
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+					  @{NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil]}];
+		}
 		fclose(file);
 		return NO;
 	}
@@ -134,6 +148,11 @@ static inline void fix_endian_read(int *input, size_t size)
 	
 	// Read properties
 	if ([self readProperties:file sharedInfo:&info] == NO) {
+		if (error) {
+			//TODO: Better error description/type
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+					  @{NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil]}];
+		}
 		fclose(file);
 		return NO;
 	}
@@ -158,6 +177,11 @@ static inline void fix_endian_read(int *input, size_t size)
 		if (offset != 0) {
 			layer = [[XCFLayer alloc] initWithFile:file offset:offset document:doc sharedInfo:&info];
 			if (layer == NULL) {
+				if (error) {
+					//TODO: Better error description/type
+					*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+							  @{NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil]}];
+				}
 				fclose(file);
 				return NO;
 			}

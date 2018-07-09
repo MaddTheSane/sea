@@ -489,6 +489,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	BOOL success = NO;
 	
 	// Determine which document we have and act appropriately	
+	// TODO: get UTI directly from file.
 	docType = (NSString *)CFBridgingRelease(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
 																(__bridge CFStringRef)[path pathExtension],
 																kUTTypeData));
@@ -503,44 +504,49 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (BOOL)importLayerFromFile:(NSString *)path
 {
+	return [self importLayerFromURL:[NSURL fileURLWithPath:path] error:NULL];
+}
+
+- (BOOL)importLayerFromURL:(NSURL *)path error:(NSError *__autoreleasing *)error
+{
 	NSString *docType;
 	BOOL success = NO;
-	id importer;
+	id<SeaImporter> importer;
 	
+	// TODO: get UTI directly from file.
 	docType = (NSString *)CFBridgingRelease(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
 																(__bridge CFStringRef)[path pathExtension],
 																kUTTypeData));
 
 	if ([XCFContent typeIsEditable:docType]) {
-		
 		// Load GIMP or XCF layers
 		importer = [[XCFImporter alloc] init];
-		success = [importer addToDocument:document contentsOfFile:path];
-		
+		success = [importer addToDocument:document contentsOfURL:path error:error];
 	} else if ([CocoaContent typeIsViewable:docType forDoc: document]) {
-		
 		// Load PNG, TIFF, JPEG, GIF and other layers
 		importer = [[CocoaImporter alloc] init];
-		success = [importer addToDocument:document contentsOfFile:path];
-	
-	
+		success = [importer addToDocument:document contentsOfURL:path error:error];
 	} else if ([XBMContent typeIsEditable:docType]) {
 		// Load X bitmap layers
 		importer = [[XBMImporter alloc] init];
-		success = [importer addToDocument:document contentsOfFile:path];
+		success = [importer addToDocument:document contentsOfURL:path error:error];
 	} else if ([SVGContent typeIsViewable:docType]) {
 		// Load SVG layers
 		importer = [[SVGImporter alloc] init];
-		success = [importer addToDocument:document contentsOfFile:path];
+		success = [importer addToDocument:document contentsOfURL:path error:error];
 	} else {
 		// Handle an unknown document type
 		NSLog(@"Unknown type passed to importLayerFromFile:<%@> docType:<%@>", path, docType);
 		success = NO;
-	
+		if (error) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+					  @{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Unknown type %@", docType],
+						NSURLErrorKey: path}];
+		}
 	}
 
 	// Inform the user of failure
-	if (!success){
+	if (!success) {
 		[[SeaController seaWarning] addMessage:LOCALSTR(@"import failure message", @"The selected file was not able to be successfully imported into this document.") forDocument:document level:SeaWarningImportanceHigh];
 	}
 		
@@ -559,10 +565,9 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		
 		if (result == NSOKButton) {
 			for (NSURL *aURL in filenames) {
-				[self importLayerFromFile:[aURL path]];
+				[self importLayerFromURL:aURL error:NULL];
 			}
 		}
-
 	}];
 }
 
@@ -571,7 +576,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	NSArray *tempArray = @[];
 	int i;
 	
-	if(document.selection.floating){
+	if (document.selection.floating) {
 		unsigned char *data;
 		int spp = [self spp];
 		IntRect dataRect;
@@ -594,10 +599,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		// Create a new array with all the existing layers and the one being added
 		layer = [[SeaLayer alloc] initWithDocument:document rect:dataRect data:data spp:spp];
 		for (i = 0; i < [layers count] + 1; i++) {
-			if (i == activeLayerIndex)
+			if (i == activeLayerIndex) {
 				tempArray = [tempArray arrayByAddingObject:layer];
-			else
+			} else {
 				tempArray = [tempArray arrayByAddingObject:(i > activeLayerIndex) ? layers[i - 1] : layers[i]];
+			}
 		}
 		
 		// Now substitute in our new array
@@ -608,8 +614,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		
 		// Make action undoable
 		[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:activeLayerIndex];	
-	}else{
-	
+	} else {
 		// Inform the helpers we will change the layer
 		[[document helpers] activeLayerWillChange];
 		
@@ -618,10 +623,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		
 		// Create a new array with all the existing layers and the one being added
 		for (i = 0; i < [layers count] + 1; i++) {
-			if (i == index)
+			if (i == index) {
 				tempArray = [tempArray arrayByAddingObject:[[SeaLayer alloc] initWithDocument:document width:width height:height opaque:NO spp:[self spp]]];
-			else
+			} else {
 				tempArray = [tempArray arrayByAddingObject:(i > index) ? layers[i - 1] : layers[i]];
+			}
 		}
 		
 		// Now substitute in our new array
@@ -664,7 +670,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:index];
 }
 
-- (void)addLayerFromPasteboard:(id)pboard
+- (void)addLayerFromPasteboard:(NSPasteboard*)pboard
 {
 	NSArray *tempArray = @[];
 	NSData *imageRepData;
@@ -1324,7 +1330,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[document helpers] layerLevelChanged:activeLayerIndex];
 	
 	// Make action undoable
-	[[[document undoManager] prepareWithInvocationTarget:self] lowerLayer:index - 1];
+	[(SeaContent*)[[document undoManager] prepareWithInvocationTarget:self] lowerLayer:index - 1];
 }
 
 - (void)lowerLayer:(NSInteger)index
@@ -1361,7 +1367,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[document helpers] layerLevelChanged:activeLayerIndex];
 	
 	// Make action undoable
-	[[[document undoManager] prepareWithInvocationTarget:self] raiseLayer:index + 1];
+	[(SeaContent*)[[document undoManager] prepareWithInvocationTarget:self] raiseLayer:index + 1];
 }
 
 - (void)clearAllLinks

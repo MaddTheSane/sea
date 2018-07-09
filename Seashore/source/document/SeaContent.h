@@ -513,6 +513,14 @@ typedef struct {
 - (BOOL)importLayerFromFile:(NSString *)path;
 
 /*!
+ @method		importLayerFromURL:error:
+ @discussion	Imports new layer(s) from a file into the document (handles
+ updates and undos).
+ @result		YES if import was successful, NO otherwise.
+ */
+- (BOOL)importLayerFromURL:(NSURL *)path error:(NSError**)error;
+
+/*!
 	@method		importLayer
 	@discussion	Imports new layer(s) into the document (handles updates and
 				undos).

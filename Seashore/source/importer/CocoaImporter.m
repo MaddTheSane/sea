@@ -13,6 +13,11 @@
 
 - (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
 {
+	return [self addToDocument:doc contentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+}
+
+- (BOOL)addToDocument:(SeaDocument *)doc contentsOfURL:(NSURL *)path error:(NSError *__autoreleasing *)error
+{
 	__kindof NSImageRep *imageRep;
 	NSImage *image;
 	SeaLayer *layer;
@@ -20,8 +25,11 @@
 	// NSPoint centerPoint;
 	
 	// Open the image
-	image = [[NSImage alloc] initByReferencingFile:path];
+	image = [[NSImage alloc] initByReferencingURL:path];
 	if (image == NULL) {
+		if (error) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:NULL];
+		}
 		return NO;
 	}
 	
@@ -47,6 +55,9 @@
 		}
 	}
 	if (imageRep == NULL) {
+		if (error) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:NULL];
+		}
 		return NO;
 	}
 		
@@ -58,6 +69,9 @@
 	// Create the layer
 	layer = [[CocoaLayer alloc] initWithImageRep:imageRep document:doc spp:[[doc contents] spp]];
 	if (layer == NULL) {
+		if (error) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:NULL];
+		}
 		return NO;
 	}
 	

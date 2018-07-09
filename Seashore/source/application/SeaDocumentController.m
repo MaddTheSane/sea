@@ -252,11 +252,11 @@
 - (NSArray*)readableTypes
 {
 	NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:editableTypes.count + viewableTypes.count];
-	for (NSSet *obj in editableTypes.objectEnumerator){
+	for (NSSet *obj in editableTypes.objectEnumerator) {
 		[array addObjectsFromArray:[obj allObjects]];
 	}
 	
-	for (NSSet *obj in viewableTypes.objectEnumerator){
+	for (NSSet *obj in viewableTypes.objectEnumerator) {
 		[array addObjectsFromArray:[obj allObjects]];
 	}
 	return [array copy];
