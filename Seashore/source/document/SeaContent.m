@@ -670,7 +670,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:index];
 }
 
-- (void)addLayerFromPasteboard:(id)pboard
+- (void)addLayerFromPasteboard:(NSPasteboard*)pboard
 {
 	NSArray *tempArray = @[];
 	NSData *imageRepData;

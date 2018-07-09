@@ -38,4 +38,15 @@
 */
 - (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path DEPRECATED_ATTRIBUTE;
 
+/*!
+ @method		addToDocument:contentsOfURL:error:
+ @discussion	Adds the given image file to the given document.
+ @param			doc
+ 				The document to add to.
+ @param			path
+ 				The file URL to the image file.
+ @result		\c YES if the operation was successful, \c NO otherwise.
+ */
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfURL:(NSURL *)path error:(NSError *__autoreleasing*)error;
+
 @end
