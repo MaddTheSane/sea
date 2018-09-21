@@ -439,7 +439,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	
 	/// Returns the nib file associated with this class
 	override var windowNibName: NSNib.Name? {
-		return NSNib.Name(rawValue: "BrushDocument")
+		return "BrushDocument"
 	}
 	
 	override func data(ofType typeName: String) throws -> Data {

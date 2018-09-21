@@ -10,7 +10,7 @@ import Cocoa
 import SeashoreKit.SeaDocument
 import SeashoreKit
 
-private let DocToolbarIdentifier = NSToolbar.Identifier("Document Toolbar Instance Identifier")
+private let DocToolbarIdentifier: NSToolbar.Identifier = "Document Toolbar Instance Identifier"
 
 private let SelectionIdentifier	= NSToolbarItem.Identifier("Selection  Item Identifier")
 private let DrawIdentifier		= NSToolbarItem.Identifier("Draw Item Identifier")
@@ -266,7 +266,7 @@ class ToolboxUtility2 : NSObject {
 		effectTBView.setEnabled(enable, forSegment: SeaToolsDefines.effect.rawValue)
 	}
 	
-	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+	func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		if menuItem.tag >= 600 && menuItem.tag < 700 {
 			menuItem.state = (menuItem.tag == Int(tool.rawValue) + 600) ? .on : .off
 		}
@@ -355,7 +355,7 @@ extension ToolboxUtility2: NSToolbarDelegate {
 			return ImageToolbarItem(itemIdentifier: ToggleLayersToolbarItemIdentifier, label: NSLocalizedString("toggle layers", value: "Layers", comment: "toggle layers"), image: #imageLiteral(resourceName: "toolbar/showhidelayers"), toolTip: NSLocalizedString("toggle layers tooltip", value: "Show or hide the layers list view", comment: "Show or hide the layers list view"), target: SeaController.utilitiesManager.pegasusUtility(for: document), selector: #selector(PegasusUtility.toggleLayers(_:)))
 
 		case InspectorToolbarItemIdentifier:
-			return ImageToolbarItem(itemIdentifier: InspectorToolbarItemIdentifier, label: NSLocalizedString("information", value: "Information", comment: "Information"), imageNamed: .info, toolTip: NSLocalizedString("information tooltip", value: "Show or hide point information", comment: "Show or hide point information"), target: SeaController.utilitiesManager.infoUtility(for: document), selector: #selector(InfoUtility.toggle(_:)))
+			return ImageToolbarItem(itemIdentifier: InspectorToolbarItemIdentifier, label: NSLocalizedString("information", value: "Information", comment: "Information"), imageNamed: NSImage.infoName, toolTip: NSLocalizedString("information tooltip", value: "Show or hide point information", comment: "Show or hide point information"), target: SeaController.utilitiesManager.infoUtility(for: document), selector: #selector(InfoUtility.toggle(_:)))
 			
 		case FloatAnchorToolbarItemIdentifier:
 			return ImageToolbarItem(itemIdentifier: FloatAnchorToolbarItemIdentifier, label: NSLocalizedString("float", value: "Float", comment: "Float"), image: #imageLiteral(resourceName: "toolbar/float-tb"), toolTip: NSLocalizedString("float tooltip", value: "Float or anchor the current selection", comment: "Float or anchor the current selection"), target: document.contents, selector: #selector(SeaContent.toggleFloatingSelection(_:)))

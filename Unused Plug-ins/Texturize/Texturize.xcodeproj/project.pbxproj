@@ -716,7 +716,7 @@
 				55F0854A1D3998C500A34BF3 /* Brightness.bundle */,
 				55F0854C1D3998C500A34BF3 /* Checkerboard.bundle */,
 				55F0854E1D3998C500A34BF3 /* CMYK.bundle */,
-				55F085501D3998C500A34BF3 /* Gaussian.bundle */,
+				55F085501D3998C500A34BF3 /* Gaussian Blur.bundle */,
 				55F085521D3998C500A34BF3 /* Greyscale.bundle */,
 				55F085541D3998C500A34BF3 /* Horizontal Stripes.bundle */,
 				55F085561D3998C500A34BF3 /* HSV.bundle */,
@@ -790,7 +790,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1000;
 			};
 			buildConfigurationList = A8582DD609BD8EF90098D48C /* Build configuration list for PBXProject "Texturize" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1235,10 +1235,10 @@
 			remoteRef = 55F0854D1D3998C500A34BF3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		55F085501D3998C500A34BF3 /* Gaussian.bundle */ = {
+		55F085501D3998C500A34BF3 /* Gaussian Blur.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = Gaussian.bundle;
+			path = "Gaussian Blur.bundle";
 			remoteRef = 55F0854F1D3998C500A34BF3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1407,7 +1407,6 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = Info.plist;
