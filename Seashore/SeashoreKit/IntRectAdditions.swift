@@ -147,3 +147,29 @@ extension IntRect {
 		return newRect
 	}
 }
+
+extension IntRect {
+	public var maxX: Int32 {
+		return (origin.x + size.width)
+	}
+	
+	public var maxY: Int32 {
+		return (origin.y + size.height);
+	}
+	
+	public var midX: Int32 {
+		return (origin.x + Int32(round(Double(size.width) * 0.5)))
+	}
+	
+	public var midY: Int32 {
+		return (origin.y + Int32(round(Double(size.height) * 0.5)))
+	}
+	
+	public var minX: Int32 {
+		return self.origin.x
+	}
+	
+	public var minY: Int32 {
+		return self.origin.y
+	}
+}

@@ -61,7 +61,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 		
 		let cw = ColorSyncTransformCreate(profSeq as NSArray, nil).takeRetainedValue()
 		
-		for j in selection.origin.y..<(selection.origin.y + selection.size.height)  {
+		for j in selection.minY ..< selection.maxY {
 			let pos = j * width + selection.origin.x;
 			
 			var srcLayout: ColorSyncDataLayout = ColorSyncDataLayout(kColorSyncByteOrderDefault);

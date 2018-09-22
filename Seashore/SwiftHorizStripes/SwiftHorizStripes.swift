@@ -91,8 +91,8 @@ public final class SwiftHorizStripes: SSKPlugin {
 		}
 		
 		// Run checkboard
-		for j in selection.origin.y..<(selection.origin.y + selection.size.height) {
-			for i in selection.origin.x..<(selection.origin.x + selection.size.width) {
+		for j in selection.minY..<selection.maxY {
+			for i in selection.minX..<selection.maxX {
 				let pos = j * width + i;
 				
 				let black: Bool = (specmod(j - point.y, amount * 2) < amount);
