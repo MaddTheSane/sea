@@ -94,10 +94,10 @@
 	apoint = [pluginData point:1];
 	baselen = (apoint.x - point.x) * (apoint.x - point.x) + (apoint.y - point.y) * (apoint.y - point.y);
 	baselen = sqrt(baselen);
-	if (boundsValid) scale = (float)baselen / (float)bounds.size.width;
-	else scale = (float)baselen / (float)width;
+	if (boundsValid) scale = (CGFloat)baselen / (CGFloat)bounds.size.width;
+	else scale = (CGFloat)baselen / (CGFloat)width;
 	if (apoint.x - point.x != 0)
-		angle = atan((float)(point.y - apoint.y) / (float)(apoint.x - point.x));
+		angle = atan((CGFloat)(point.y - apoint.y) / (CGFloat)(apoint.x - point.x));
 	else
 		angle = M_PI / 2 * ((point.y - apoint.y > 0) ? 1 : -1);
 	trueTransform = [NSAffineTransform transform];
