@@ -94,10 +94,10 @@
 			}
 		}
 	} else {
-		dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		for (size_t i = 0; i < width * height; i++) {
 			overlay[i * 2] = resdata[i * 4];
 			overlay[i * 2 + 1] = resdata[i * 4 + 3];
-		});
+		}
 	}
 }
 
@@ -122,9 +122,9 @@
 
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		for (size_t i = 0; i < selection.size.height; i++) {
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
-		});
+		}
 	} else {
 		memcpy(overlay, resdata, width * height * 4);
 	}
