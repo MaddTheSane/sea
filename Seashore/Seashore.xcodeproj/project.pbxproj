@@ -4543,7 +4543,7 @@
 			);
 			name = "Extra Sources";
 			path = source/extra;
-			sourceTree = SOURCE_ROOT;
+			sourceTree = "<group>";
 		};
 		A8D6BCDC07C2152100B91A1D /* Importer Classes */ = {
 			isa = PBXGroup;
