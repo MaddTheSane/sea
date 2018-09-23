@@ -88,7 +88,7 @@
 	}
 
 	translating = NO;
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 }
 
 @end

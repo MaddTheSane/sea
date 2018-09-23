@@ -175,7 +175,7 @@
 	}
 
 	translating = NO;
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 }
 
 - (BOOL)isFineTool

@@ -141,7 +141,7 @@
 	}
 	
 	// It's the responsibility of the subclass to reset these when its done
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 	translating = NO;
 }
 

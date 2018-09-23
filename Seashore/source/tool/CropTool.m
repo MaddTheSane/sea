@@ -146,7 +146,7 @@
 {
 	[self mouseDraggedTo:where withEvent:event];
 	
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 	translating = NO;
 }
 

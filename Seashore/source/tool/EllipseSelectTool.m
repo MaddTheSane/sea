@@ -145,7 +145,7 @@
 		intermediate = NO;
 	}
 	
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 	translating = NO;
 }
 

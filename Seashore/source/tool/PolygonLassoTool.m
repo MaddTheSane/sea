@@ -174,7 +174,7 @@
 	[super mouseUpAt:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
 
 	translating = NO;
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 }
 
 @end

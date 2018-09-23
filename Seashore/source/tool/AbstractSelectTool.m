@@ -34,12 +34,12 @@
 		IntRect newRect = [self mouseDraggedTo: localPoint
 									   forRect: [[document selection] globalRect]
 									   andMask: [[document selection] mask]];
-		if (scalingDir > kNoDir && !translating) {
+		if (scalingDir > SeaScaleDirectionNone && !translating) {
 			[[document selection] scaleSelectionTo: newRect
 											  from: [self preScaledRect]
 									 interpolation: GIMP_INTERPOLATION_CUBIC
 										 usingMask: [self preScaledMask]];
-		} else if (translating && scalingDir == kNoDir) {
+		} else if (translating && scalingDir == SeaScaleDirectionNone) {
 			[[document selection] moveSelection:IntMakePoint(newRect.origin.x, newRect.origin.y)];
 		}
 	}
@@ -57,7 +57,7 @@
 - (void)cancelSelection
 {
 	translating = NO;
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 
 	intermediate = NO;
 	[[document helpers] selectionChanged];

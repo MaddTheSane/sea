@@ -14,15 +14,15 @@
  @constant	kLDir 
  */
 typedef NS_ENUM(int, SeaScaleDirection) {
-	kNoDir = -1,
-	kULDir,
-	kUDir,
-	kURDir,
-	kRDir,
-	kDRDir,
-	kDDir,
-	kDLDir,
-	kLDir
+	SeaScaleDirectionNone = -1,
+	SeaScaleDirectionUpperLeft,
+	SeaScaleDirectionUp,
+	SeaScaleDirectionUpperRight,
+	SeaScaleDirectionRight,
+	SeaScaleDirectionDownRight,
+	SeaScaleDirectionDown,
+	SeaScaleDirectionDownLeft,
+	SeaScaleDirectionLeft
 };
 
 
@@ -121,24 +121,34 @@ typedef NS_ENUM(int, SeaScaleDirection) {
 - (SeaScaleDirection)point:(NSPoint) point isInHandleFor:(IntRect)rect;
 
 /*!
-	@method		preScaledRect
+	@property	preScaledRect
 	@discussion	For determining the previous rect for scaling.
 	@result		An IntRect
 */
-- (IntRect) preScaledRect;
+@property (readonly) IntRect preScaledRect;
 
 /*!
-	@method		preScaledMask
+	@property	preScaledMask
 	@discussion	For determining the old mask.
 	@result		An bitmap
 */
-- (unsigned char *) preScaledMask;
+@property (readonly) unsigned char *preScaledMask NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		postScaledRect
+	@property	postScaledRect
 	@discussion	For determining the rect to draw.
 	@result		An IntRect
 */
-- (IntRect) postScaledRect;
+@property (readonly) IntRect postScaledRect;
 
 @end
+
+static const SeaScaleDirection kNoDir NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaScaleDirectionNone", 10.2, 10.8) = SeaScaleDirectionNone;
+static const SeaScaleDirection kULDir NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaScaleDirectionUpperLeft", 10.2, 10.8) = SeaScaleDirectionUpperLeft;
+static const SeaScaleDirection kUDir NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaScaleDirectionUp", 10.2, 10.8) = SeaScaleDirectionUp;
+static const SeaScaleDirection kURDir NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaScaleDirectionUpperRight", 10.2, 10.8) = SeaScaleDirectionUpperRight;
+static const SeaScaleDirection kRDir NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaScaleDirectionRight", 10.2, 10.8) = SeaScaleDirectionRight;
+static const SeaScaleDirection kDRDir NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaScaleDirectionDownRight", 10.2, 10.8) = SeaScaleDirectionDownRight;
+static const SeaScaleDirection kDDir NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaScaleDirectionDown", 10.2, 10.8) = SeaScaleDirectionDown;
+static const SeaScaleDirection kDLDir NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaScaleDirectionDownLeft", 10.2, 10.8) = SeaScaleDirectionDownLeft;
+static const SeaScaleDirection kLDir NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaScaleDirectionLeft", 10.2, 10.8) = SeaScaleDirectionLeft;
