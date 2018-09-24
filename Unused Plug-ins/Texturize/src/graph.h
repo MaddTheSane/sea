@@ -88,7 +88,7 @@
 #define ARC_BLOCK_SIZE 1024
 #define NODEPTR_BLOCK_SIZE 128
 
-class Graph
+class __private_extern Graph
 {
 public:
 	typedef enum
