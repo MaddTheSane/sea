@@ -6,6 +6,7 @@
 #endif
 
 @class SeaDocument;
+@class NSExtendedTableView;
 
 /*!
 	@class		TextureExporter
@@ -17,21 +18,21 @@
 */
 @interface TextureExporter : NSObject <NSTableViewDataSource>
 {
-	// The document associated with this object
+	//! The document associated with this object
     IBOutlet SeaDocument *document;
 
-	// The exporting panel
+	//! The exporting panel
 	IBOutlet NSPanel *sheet;
 
-	IBOutlet id categoryTable;
+	IBOutlet NSTableView *categoryTable;
 	
-	IBOutlet id categoryTextbox;
+	IBOutlet NSTextField *categoryTextbox;
 	
-	IBOutlet id existingCategoryRadio;
+	IBOutlet NSButton *existingCategoryRadio;
 	
-	IBOutlet id newCategoryRadio;
+	IBOutlet NSButton *newCategoryRadio;
 	
-	IBOutlet id nameTextbox;
+	IBOutlet NSTextField *nameTextbox;
 }
 
 /*!

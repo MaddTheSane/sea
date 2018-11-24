@@ -160,8 +160,8 @@ class EraserTool: AbstractTool, SeaOptions {
 		
 		// Determine whether operation should continue
 		lastWhere = where1
-		multithreaded = SeaController.seaPrefs!.multithreaded()
-		let ignoreFirstTouch = SeaController.seaPrefs!.ignoreFirstTouch()
+		multithreaded = SeaController.seaPrefs!.multithreaded
+		let ignoreFirstTouch = SeaController.seaPrefs!.ignoreFirstTouch
 		if (ignoreFirstTouch && (event?.type == .leftMouseDown || event?.type == .rightMouseDown) && boptions.pressureSensitive && !((options as! EraserOptions).modifier() == .shift)) {
 			firstTouchDone = false;
 			return;

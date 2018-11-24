@@ -9,10 +9,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> N/A
 */
-
-@interface ImageToolbarItem : NSToolbarItem {
-
-}
+@interface ImageToolbarItem : NSToolbarItem
 
 /*!
 	@method		initWithIdentifier:label:image:toolTip:target:selector:
