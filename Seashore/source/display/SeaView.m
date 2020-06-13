@@ -283,7 +283,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	NSRect srcRect, destRect;
 	NSImage *image = NULL;
 	ToolboxUtility *tUtil = [[SeaController utilitiesManager] toolboxUtilityFor:document];
-	int curToolIndex = [tUtil tool];
+	SeaToolsDefines curToolIndex = [tUtil tool];
 	IntRect imageRect = [[document whiteboard] imageRect];
 	int xres = [[document contents] xres], yres = [[document contents] yres];
 	CGFloat xResScale, yResScale;

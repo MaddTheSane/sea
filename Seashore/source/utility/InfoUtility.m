@@ -75,7 +75,7 @@
 	IntSize size;
 	NSColor *color;
 	int xres, yres;
-	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	
 	// Show no values
 	if (!document) {

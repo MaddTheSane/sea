@@ -35,7 +35,7 @@
 		int tpos;
 		IntRect rect;
 		GimpVector2 *gimpPoints;
-		int modifier;
+		AbstractModifiers modifier;
 		
 		where.x -= [layer xoff];
 		where.y -= [layer yoff];

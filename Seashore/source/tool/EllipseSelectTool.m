@@ -27,7 +27,7 @@
 		SeaAspectType aspectType = [options aspectType];
 		NSSize ratio;
 		double xres, yres;
-		int modifier;
+		AbstractModifiers modifier;
 		
 		// Get mode
 		modifier = [options modifier];

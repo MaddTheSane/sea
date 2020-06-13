@@ -78,7 +78,7 @@ extern IntPoint SeaScreenResolution;
 	// Allow the undo/redo
 	oldRes.x = [[document contents] xres];
 	oldRes.y = [[document contents] yres];
-	[[[document undoManager] prepareWithInvocationTarget:self] setResolution:oldRes];
+	[(SeaResolution*)[[document undoManager] prepareWithInvocationTarget:self] setResolution:oldRes];
 	
 	// Change the resolution
 	[[document contents] setResolution:newRes];

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -949,6 +948,7 @@ CA
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="139" y="259"/>
         </menu>
         <window title="Seashore License" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="license window" animationBehavior="default" id="204" userLabel="License Win">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
@@ -959,20 +959,22 @@ CA
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="205">
-                        <rect key="frame" x="20" y="20" width="440" height="290"/>
-                        <clipView key="contentView" id="w0l-wE-1H6">
-                            <rect key="frame" x="1" y="1" width="438" height="288"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                        <rect key="frame" x="20" y="20" width="440" height="291"/>
+                        <clipView key="contentView" drawsBackground="NO" id="w0l-wE-1H6">
+                            <rect key="frame" x="1" y="1" width="438" height="289"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" baseWritingDirection="leftToRight" usesFontPanel="YES" usesRuler="YES" spellingCorrection="YES" smartInsertDelete="YES" id="4078">
                                     <rect key="frame" x="0.0" y="-117" width="408" height="6043"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="408" height="288"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="minSize" width="408" height="289"/>
                                     <size key="maxSize" width="465" height="10000000"/>
                                     <attributedString key="textStorage">
                                         <fragment content="The GNU General Public License (GPL)">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="28" name="Times-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -982,12 +984,14 @@ CA
 Cgo
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="14" name="Times-Roman"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="Version 2, June 1991">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="21" name="Times-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -997,6 +1001,7 @@ Cgo
 Cg
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="14" name="Times-Roman"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1010,12 +1015,14 @@ Everyone is permitted to copy and distribute verbatim copies of this license doc
 
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="Preamble">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1041,12 +1048,14 @@ The precise terms and conditions for copying, distribution and modification foll
 
 </mutableString>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1056,12 +1065,14 @@ The precise terms and conditions for copying, distribution and modification foll
 Cgo
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="0">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1073,12 +1084,14 @@ Activities other than copying, distribution and modification are not covered by 
 
 </mutableString>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="1">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1090,12 +1103,14 @@ You may charge a fee for the physical act of transferring a copy, and you may at
 
 </mutableString>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="2">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1118,12 +1133,14 @@ In addition, mere aggregation of another work not based on the Program with the 
 
 </mutableString>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="3">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1144,12 +1161,14 @@ If distribution of executable or object code is made by offering access to copy 
 
 </mutableString>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="4">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1159,12 +1178,14 @@ If distribution of executable or object code is made by offering access to copy 
 
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="5">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1174,12 +1195,14 @@ If distribution of executable or object code is made by offering access to copy 
 
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="6">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1189,12 +1212,14 @@ If distribution of executable or object code is made by offering access to copy 
 
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="7">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1210,12 +1235,14 @@ This section is intended to make thoroughly clear what is believed to be a conse
 
 </mutableString>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="8">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1225,12 +1252,14 @@ This section is intended to make thoroughly clear what is believed to be a conse
 
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="9">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1242,12 +1271,14 @@ Each version is given a distinguishing version number. If the Program specifies 
 
 </mutableString>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="10">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1257,12 +1288,14 @@ Each version is given a distinguishing version number. If the Program specifies 
 
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="NO WARRANTY">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1272,12 +1305,14 @@ Each version is given a distinguishing version number. If the Program specifies 
 Cgo
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="11">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1287,12 +1322,14 @@ Cgo
 
 </mutableString>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="12">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1304,12 +1341,14 @@ END OF TERMS AND CONDITIONS
 
 </mutableString>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="How to Apply These Terms to Your New Programs">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1324,12 +1363,14 @@ To do so, attach the following notices to the program. It is safest to attach th
 
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="one line to give the program's name and a brief idea of what it does.">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="11" name="Courier-Oblique"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1338,12 +1379,14 @@ To do so, attach the following notices to the program. It is safest to attach th
                                             <string key="content">
 Copyright (C) </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="11" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="yyyy name of author">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="11" name="Courier-Oblique"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1358,6 +1401,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 </mutableString>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="11" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1372,6 +1416,7 @@ If the program is interactive, make it output a short notice like this when it s
 
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1379,6 +1424,7 @@ If the program is interactive, make it output a short notice like this when it s
                                         <fragment>
                                             <string key="content">Gnomovision version 69, Copyright (C) year name of author Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'. This is free software, and you are welcome to redistribute it under certain conditions; type `show c' for details.</string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="11" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1394,6 +1440,7 @@ You should also get your employer (if you work as a programmer) or your school, 
 
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1406,6 +1453,7 @@ written by James Hacker.
 signature of Ty Coon, 1 April 1989
 Ty Coon, President of Vice</string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="11" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
@@ -1417,27 +1465,27 @@ Ty Coon, President of Vice</string>
 This General Public License does not permit incorporating your program into proprietary programs. If your program is a subroutine library, you may consider it more useful to permit linking proprietary applications with the library. If this is what you want to do, use the GNU Library General Public License instead of this License.
 </string>
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Courier"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
-                                    <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 </textView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="7367">
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="7367">
                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="7366">
-                            <rect key="frame" x="423" y="1" width="16" height="288"/>
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="7366">
+                            <rect key="frame" x="423" y="1" width="16" height="289"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="203">
-                        <rect key="frame" x="142" y="376" width="196" height="17"/>
+                        <rect key="frame" x="142" y="377" width="196" height="16"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Seashore Licensing Agreement" id="7298">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1445,7 +1493,7 @@ This General Public License does not permit incorporating your program into prop
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="428" translatesAutoresizingMaskIntoConstraints="NO" id="206">
-                        <rect key="frame" x="42" y="340" width="396" height="28"/>
+                        <rect key="frame" x="42" y="341" width="396" height="28"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="center" title="Except for plug-ins, Seashore is covered by version 2 of the GNU General Public License." id="7299">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1453,7 +1501,7 @@ This General Public License does not permit incorporating your program into prop
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1834">
-                        <rect key="frame" x="101" y="318" width="279" height="14"/>
+                        <rect key="frame" x="101" y="319" width="279" height="14"/>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="This version of Seashore can be redistributed as-is." id="7300">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1474,6 +1522,7 @@ This General Public License does not permit incorporating your program into prop
                     <constraint firstAttribute="trailing" secondItem="205" secondAttribute="trailing" constant="20" symbolic="YES" id="kit-cl-FrH"/>
                 </constraints>
             </view>
+            <point key="canvasLocation" x="103" y="930"/>
         </window>
         <customObject id="235" userLabel="SeaHelp" customClass="SeaHelp">
             <connections>
@@ -1549,6 +1598,7 @@ This General Public License does not permit incorporating your program into prop
                 <constraint firstItem="1131" firstAttribute="leading" secondItem="876" secondAttribute="leading" constant="20" symbolic="YES" id="JVt-95-hGA"/>
                 <constraint firstAttribute="centerY" secondItem="1131" secondAttribute="centerY" id="agK-t2-l2T"/>
             </constraints>
+            <point key="canvasLocation" x="103" y="1231"/>
         </customView>
         <window title="Instant Help" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="instant help window" animationBehavior="default" id="912" userLabel="Instant Help Win" customClass="SeaUtilityPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" utility="YES" nonactivatingPanel="YES"/>
@@ -1588,6 +1638,7 @@ This General Public License does not permit incorporating your program into prop
                     <constraint firstAttribute="trailing" secondItem="918" secondAttribute="trailing" constant="20" symbolic="YES" id="tRV-bB-V3k"/>
                 </constraints>
             </view>
+            <point key="canvasLocation" x="-396" y="971"/>
         </window>
         <customObject id="1244" userLabel="SeaWarning" customClass="SeaWarning"/>
         <window title="Warnings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="warning window" animationBehavior="default" id="1249" userLabel="Warning Win" customClass="SeaUtilityPanel">
@@ -1641,6 +1692,7 @@ This General Public License does not permit incorporating your program into prop
                     <constraint firstItem="1253" firstAttribute="top" secondItem="1252" secondAttribute="bottom" constant="8" symbolic="YES" id="wSG-sw-yop"/>
                 </constraints>
             </view>
+            <point key="canvasLocation" x="-397" y="1190"/>
         </window>
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="1329" userLabel="Preferences Win" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
@@ -1654,6 +1706,7 @@ This General Public License does not permit incorporating your program into prop
             <connections>
                 <outlet property="delegate" destination="507" id="2380"/>
             </connections>
+            <point key="canvasLocation" x="139" y="446"/>
         </window>
         <customObject id="1723" userLabel="SeaPlugins" customClass="SeaPlugins">
             <connections>
@@ -1681,22 +1734,22 @@ This General Public License does not permit incorporating your program into prop
             <rect key="contentRect" x="180" y="638" width="303" height="91"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="2247">
-                <rect key="frame" x="0.0" y="0.0" width="303" height="91"/>
+                <rect key="frame" x="0.0" y="0.0" width="303" height="90"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2252">
-                        <rect key="frame" x="20" y="49" width="80" height="22"/>
+                        <rect key="frame" x="20" y="49" width="80" height="21"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="2" drawsBackground="YES" id="7309">
                             <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2248">
-                        <rect key="frame" x="130" y="49" width="79" height="22"/>
+                        <rect key="frame" x="130" y="49" width="79" height="21"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="1" drawsBackground="YES" id="7307">
                             <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
@@ -1755,6 +1808,7 @@ DQ
                     <constraint firstItem="2250" firstAttribute="baseline" secondItem="2248" secondAttribute="baseline" id="vEJ-y3-Wut"/>
                 </constraints>
             </view>
+            <point key="canvasLocation" x="139" y="147"/>
         </window>
         <customObject id="2281" userLabel="SeaDocumentController" customClass="SeaDocumentController">
             <connections>
@@ -1777,13 +1831,13 @@ DQ
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <box autoresizesSubviews="NO" borderType="line" title="Window Settings" translatesAutoresizingMaskIntoConstraints="NO" id="wxJ-4D-ubW">
-                    <rect key="frame" x="17" y="276" width="281" height="78"/>
+                    <rect key="frame" x="17" y="276" width="283" height="78"/>
                     <view key="contentView" id="r0M-Km-2YQ">
-                        <rect key="frame" x="1" y="1" width="279" height="62"/>
+                        <rect key="frame" x="3" y="3" width="277" height="60"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3788">
-                                <rect key="frame" x="15" y="11" width="249" height="22"/>
+                                <rect key="frame" x="13" y="9" width="251" height="22"/>
                                 <popUpButtonCell key="cell" type="push" title="Assume screen is 72 dpi (recommended)" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="3792" id="7324">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -1797,7 +1851,7 @@ DQ
                                 </popUpButtonCell>
                             </popUpButton>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2717">
-                                <rect key="frame" x="15" y="37" width="171" height="18"/>
+                                <rect key="frame" x="13" y="35" width="171" height="18"/>
                                 <buttonCell key="cell" type="check" title="Configure effects in a dialog" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="7319">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -1823,11 +1877,11 @@ DQ
                 <box autoresizesSubviews="NO" borderType="line" title="Draw Settings" translatesAutoresizingMaskIntoConstraints="NO" id="ODY-tB-Qvb">
                     <rect key="frame" x="17" y="166" width="246" height="106"/>
                     <view key="contentView" id="9sm-hi-lXO">
-                        <rect key="frame" x="1" y="1" width="244" height="90"/>
+                        <rect key="frame" x="3" y="3" width="240" height="88"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2716">
-                                <rect key="frame" x="15" y="47" width="213" height="18"/>
+                                <rect key="frame" x="13" y="45" width="213" height="18"/>
                                 <buttonCell key="cell" type="check" title="Faster drawing (mouse coalescing)" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="7318">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -1837,7 +1891,7 @@ DQ
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2713">
-                                <rect key="frame" x="15" y="29" width="213" height="18"/>
+                                <rect key="frame" x="13" y="27" width="213" height="18"/>
                                 <buttonCell key="cell" type="check" title="Always use cross-hair cursor" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="7316">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -1847,7 +1901,7 @@ DQ
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2720">
-                                <rect key="frame" x="15" y="11" width="213" height="18"/>
+                                <rect key="frame" x="13" y="9" width="213" height="18"/>
                                 <buttonCell key="cell" type="check" title="Ignore first pressure-sensitive touch" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="7321">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -1857,7 +1911,7 @@ DQ
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2714">
-                                <rect key="frame" x="15" y="65" width="213" height="18"/>
+                                <rect key="frame" x="13" y="63" width="213" height="18"/>
                                 <buttonCell key="cell" type="check" title="Use image smoothing" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="7317">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -1890,11 +1944,11 @@ DQ
                 <box autoresizesSubviews="NO" borderType="line" title="Program Settings" translatesAutoresizingMaskIntoConstraints="NO" id="slL-g1-QeT">
                     <rect key="frame" x="17" y="56" width="242" height="106"/>
                     <view key="contentView" id="wrJ-4t-468">
-                        <rect key="frame" x="1" y="1" width="240" height="90"/>
+                        <rect key="frame" x="3" y="3" width="236" height="88"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2718">
-                                <rect key="frame" x="15" y="29" width="209" height="18"/>
+                                <rect key="frame" x="13" y="27" width="209" height="18"/>
                                 <buttonCell key="cell" type="check" title="Reduce warning messages" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="7320">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -1904,7 +1958,7 @@ DQ
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2725">
-                                <rect key="frame" x="15" y="47" width="209" height="18"/>
+                                <rect key="frame" x="13" y="45" width="209" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check for updates" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="7322">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -1914,7 +1968,7 @@ DQ
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2712">
-                                <rect key="frame" x="15" y="65" width="209" height="18"/>
+                                <rect key="frame" x="13" y="63" width="209" height="18"/>
                                 <buttonCell key="cell" type="check" title="Create a new document at start-up" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="7315">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -1924,7 +1978,7 @@ DQ
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="4922">
-                                <rect key="frame" x="15" y="11" width="209" height="18"/>
+                                <rect key="frame" x="13" y="9" width="209" height="18"/>
                                 <buttonCell key="cell" type="check" title="Use Core Image for rotating/scaling" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="7325">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -1966,19 +2020,20 @@ DQ
                 <constraint firstItem="ODY-tB-Qvb" firstAttribute="leading" secondItem="2708" secondAttribute="leading" constant="20" symbolic="YES" id="ZyT-Gn-iBA"/>
                 <constraint firstItem="slL-g1-QeT" firstAttribute="top" secondItem="ODY-tB-Qvb" secondAttribute="bottom" constant="8" symbolic="YES" id="pR1-U6-ySg"/>
             </constraints>
+            <point key="canvasLocation" x="139" y="428"/>
         </customView>
         <customView id="2726" userLabel="New Prefs">
             <rect key="frame" x="0.0" y="0.0" width="432" height="359"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <box autoresizesSubviews="NO" borderType="line" title="Image Settings" translatesAutoresizingMaskIntoConstraints="NO" id="KMm-bv-9fE">
-                    <rect key="frame" x="17" y="153" width="200" height="186"/>
+                    <rect key="frame" x="17" y="155" width="201" height="184"/>
                     <view key="contentView" id="nu1-9v-qse">
-                        <rect key="frame" x="1" y="1" width="198" height="170"/>
+                        <rect key="frame" x="3" y="3" width="195" height="166"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="3000">
-                                <rect key="frame" x="137" y="139" width="43" height="18"/>
+                                <rect key="frame" x="134" y="136" width="45" height="18"/>
                                 <popUpButtonCell key="cell" type="bevel" title="mm" bezelStyle="rounded" alignment="left" controlSize="small" state="on" borderStyle="bezel" tag="722" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="3004" id="7337">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -2004,10 +2059,10 @@ DQ
                                 </popUpButtonCell>
                             </popUpButton>
                             <textField toolTip="Width of the new image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2983">
-                                <rect key="frame" x="88" y="138" width="48" height="22"/>
+                                <rect key="frame" x="86" y="135" width="47" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="512" drawsBackground="YES" id="7328">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -2016,10 +2071,10 @@ DQ
                                 </connections>
                             </textField>
                             <textField toolTip="Height of the new image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2982">
-                                <rect key="frame" x="88" y="106" width="48" height="22"/>
+                                <rect key="frame" x="86" y="104" width="47" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="384" drawsBackground="YES" id="7327">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -2028,7 +2083,7 @@ DQ
                                 </connections>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2990">
-                                <rect key="frame" x="86" y="31" width="97" height="26"/>
+                                <rect key="frame" x="84" y="29" width="98" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Full Color" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="2992" id="7330">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -2045,7 +2100,7 @@ DQ
                                 </connections>
                             </popUpButton>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2995">
-                                <rect key="frame" x="16" y="141" width="66" height="14"/>
+                                <rect key="frame" x="14" y="138" width="66" height="14"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Width" id="7332">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2053,7 +2108,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <popUpButton toolTip="Resolution of the new image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2984">
-                                <rect key="frame" x="86" y="62" width="97" height="26"/>
+                                <rect key="frame" x="84" y="60" width="98" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="72 dpi" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" tag="72" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="2986" id="7329">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -2072,7 +2127,7 @@ DQ
                                 </connections>
                             </popUpButton>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2997">
-                                <rect key="frame" x="16" y="68" width="66" height="14"/>
+                                <rect key="frame" x="14" y="66" width="66" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="62" id="BY4-c6-4bU"/>
                                 </constraints>
@@ -2083,7 +2138,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2999">
-                                <rect key="frame" x="142" y="109" width="17" height="14"/>
+                                <rect key="frame" x="139" y="107" width="17" height="14"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="px" id="7336">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2091,7 +2146,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2998">
-                                <rect key="frame" x="16" y="37" width="66" height="14"/>
+                                <rect key="frame" x="14" y="35" width="66" height="14"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Mode" id="7335">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2099,7 +2154,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2996">
-                                <rect key="frame" x="16" y="109" width="66" height="14"/>
+                                <rect key="frame" x="14" y="107" width="66" height="14"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Height" id="7333">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2107,7 +2162,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="2994">
-                                <rect key="frame" x="23" y="11" width="151" height="18"/>
+                                <rect key="frame" x="22" y="9" width="151" height="18"/>
                                 <buttonCell key="cell" type="check" title="Transparent background" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="7331">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -2165,6 +2220,7 @@ DQ
                 <constraint firstItem="KMm-bv-9fE" firstAttribute="leading" secondItem="2726" secondAttribute="leading" constant="20" symbolic="YES" id="Osr-Sa-rSl"/>
                 <constraint firstItem="KMm-bv-9fE" firstAttribute="top" secondItem="2726" secondAttribute="top" constant="20" symbolic="YES" id="Pph-9V-j4a"/>
             </constraints>
+            <point key="canvasLocation" x="139" y="305"/>
         </customView>
         <window title="New Image" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="2877" userLabel="New Image" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
@@ -2176,7 +2232,7 @@ DQ
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2879">
-                        <rect key="frame" x="18" y="249" width="126" height="17"/>
+                        <rect key="frame" x="18" y="250" width="126" height="16"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="New Image Settings" id="7338">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2198,16 +2254,16 @@ DQ
                         </connections>
                     </button>
                     <box title="New Image Settings" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="2888">
-                        <rect key="frame" x="17" y="57" width="243" height="186"/>
+                        <rect key="frame" x="17" y="57" width="243" height="187"/>
                         <view key="contentView" id="OKt-vA-kxI">
-                            <rect key="frame" x="2" y="2" width="239" height="182"/>
+                            <rect key="frame" x="3" y="3" width="237" height="181"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField toolTip="Height of the new image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2899">
-                                    <rect key="frame" x="81" y="117" width="109" height="22"/>
+                                    <rect key="frame" x="80" y="119" width="107" height="21"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="384" drawsBackground="YES" id="7345">
                                         <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
@@ -2215,10 +2271,10 @@ DQ
                                     </connections>
                                 </textField>
                                 <textField toolTip="Width of the new image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2906">
-                                    <rect key="frame" x="81" y="149" width="109" height="22"/>
+                                    <rect key="frame" x="80" y="150" width="107" height="21"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="512" drawsBackground="YES" id="7349">
                                         <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
@@ -2226,7 +2282,7 @@ DQ
                                     </connections>
                                 </textField>
                                 <popUpButton toolTip="Resolution of the new image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2890">
-                                    <rect key="frame" x="79" y="73" width="146" height="26"/>
+                                    <rect key="frame" x="78" y="75" width="146" height="25"/>
                                     <popUpButtonCell key="cell" type="push" title="72 dpi" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" tag="72" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="2892" id="7341">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="menu"/>
@@ -2244,7 +2300,7 @@ DQ
                                     </connections>
                                 </popUpButton>
                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2901">
-                                    <rect key="frame" x="79" y="42" width="146" height="26"/>
+                                    <rect key="frame" x="78" y="44" width="146" height="25"/>
                                     <popUpButtonCell key="cell" type="push" title="Full Color" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="2903" id="7347">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="menu"/>
@@ -2260,7 +2316,7 @@ DQ
                                     </connections>
                                 </popUpButton>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="2900">
-                                    <rect key="frame" x="44" y="10" width="151" height="30"/>
+                                    <rect key="frame" x="43" y="9" width="151" height="33"/>
                                     <buttonCell key="cell" type="check" title="Transparent background" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="7346">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
@@ -2270,7 +2326,7 @@ DQ
                                     </connections>
                                 </button>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2907">
-                                    <rect key="frame" x="15" y="152" width="60" height="14"/>
+                                    <rect key="frame" x="14" y="153" width="60" height="14"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Width" id="7350">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2278,7 +2334,7 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2896">
-                                    <rect key="frame" x="15" y="120" width="60" height="14"/>
+                                    <rect key="frame" x="14" y="122" width="60" height="14"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Height" id="7342">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2286,7 +2342,7 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2897">
-                                    <rect key="frame" x="15" y="79" width="60" height="14"/>
+                                    <rect key="frame" x="14" y="81" width="60" height="14"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Resolution" id="7343">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2294,7 +2350,7 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2898">
-                                    <rect key="frame" x="15" y="48" width="60" height="14"/>
+                                    <rect key="frame" x="14" y="50" width="60" height="14"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Mode" id="7344">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2302,7 +2358,7 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2905">
-                                    <rect key="frame" x="196" y="120" width="33" height="14"/>
+                                    <rect key="frame" x="193" y="122" width="35" height="14"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="px" id="7348">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2310,7 +2366,7 @@ DQ
                                     </textFieldCell>
                                 </textField>
                                 <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="2908">
-                                    <rect key="frame" x="191" y="150" width="36" height="18"/>
+                                    <rect key="frame" x="188" y="151" width="38" height="18"/>
                                     <popUpButtonCell key="cell" type="bevel" title="px" bezelStyle="rounded" alignment="left" controlSize="small" state="on" borderStyle="bezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="2910" id="7351">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
@@ -2375,7 +2431,7 @@ DQ
                         </constraints>
                     </box>
                     <popUpButton toolTip="Various predefined sizes" horizontalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="2881">
-                        <rect key="frame" x="150" y="247" width="107" height="18"/>
+                        <rect key="frame" x="150" y="248" width="107" height="18"/>
                         <popUpButtonCell key="cell" type="bevel" title="Presets" bezelStyle="rounded" alignment="left" controlSize="small" borderStyle="bezel" tag="1" inset="2" pullsDown="YES" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="2887" id="7340">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="smallSystem"/>
@@ -2394,7 +2450,7 @@ DQ
                         </connections>
                     </popUpButton>
                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7277">
-                        <rect key="frame" x="17" y="17" width="118" height="26"/>
+                        <rect key="frame" x="17" y="17" width="118" height="25"/>
                         <popUpButtonCell key="cell" type="push" title="Open Recent" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" pullsDown="YES" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="7281" id="7352">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
@@ -2429,6 +2485,7 @@ DQ
             <connections>
                 <outlet property="initialFirstResponder" destination="2906" id="2917"/>
             </connections>
+            <point key="canvasLocation" x="139" y="409"/>
         </window>
         <customView id="3676" userLabel="Color Prefs">
             <rect key="frame" x="0.0" y="0.0" width="431" height="359"/>
@@ -2471,7 +2528,7 @@ DQ
                     <rect key="frame" x="12" y="256" width="407" height="5"/>
                 </box>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3784">
-                    <rect key="frame" x="337" y="135" width="64" height="28"/>
+                    <rect key="frame" x="337" y="135" width="64" height="27"/>
                     <buttonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="7360">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -2565,7 +2622,7 @@ DQ
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3696">
-                    <rect key="frame" x="316" y="314" width="91" height="28"/>
+                    <rect key="frame" x="316" y="314" width="91" height="27"/>
                     <buttonCell key="cell" type="push" title="Set Color…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="7356">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -2709,6 +2766,7 @@ DQ
                 <constraint firstItem="7286" firstAttribute="trailing" secondItem="3678" secondAttribute="trailing" id="yvB-Sy-9Kw"/>
                 <constraint firstItem="3784" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3759" secondAttribute="trailing" constant="8" symbolic="YES" id="zwS-sq-kbN"/>
             </constraints>
+            <point key="canvasLocation" x="139" y="428"/>
         </customView>
         <customObject id="6652" userLabel="Transparent Utility" customClass="TransparentUtility"/>
     </objects>
