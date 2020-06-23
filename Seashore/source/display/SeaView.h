@@ -23,12 +23,19 @@
 				Indicates the handle for the position tool (scale, rotate).
 */
 typedef NS_ENUM(int, SeaHandleType) {
+	//! Indicates the handle is for a selection.
 	kSelectionHandleType,
+	//! Indicates the handle is for layer boundaries.
 	kLayerHandleType,
+	//! Indicates the handle is for cropping.
 	kCropHandleType,
+	//! Indicates the handle is for the beginning of a gradient tool.
 	kGradientStartType,
+	//! Indicates the handle is for the end of a gradient tool.
 	kGradientEndType,
+	//! Indicates the handle at the beginning of a polygonal lasso tool.
 	kPolygonalLassoType,
+	//! Indicates the handle for the position tool (scale, rotate).
 	kPositionType
 };
 
@@ -45,84 +52,85 @@ typedef NS_ENUM(int, SeaHandleType) {
 */
 @interface SeaView : NSView {
 	
-	// The document associated with this view
+	//! The document associated with this view
 	SeaDocument *document;
 	
-	// The cursors manager for this view
+	//! The cursors manager for this view
 	SeaCursors *cursorsManager;
 	
-	// The current zoom of the view
+	//! The current zoom of the view
 	CGFloat zoom;
 
-	// Is this a line draw? (sent to mouseDragged methods)
+	//! Is this a line draw? (sent to mouseDragged methods)
 	BOOL lineDraw;
 	
-	// Is scrolling mode active?
+	//! Is scrolling mode active?
 	BOOL scrollingMode;
 	
-	// Is the mouse down during scrolling?
+	//! Is the mouse down during scrolling?
 	BOOL scrollingMouseDown;
 	
-	// Is scaling mode active
+	//! Is scaling mode active
 	int scalingMode;
 	
-	// The scroll timer
+	//! The scroll timer
 	NSTimer* scrollTimer;
 	
-	// The magnify timer
+	//! The magnify timer
 	NSTimer* magnifyTimer;
 		
-	// Is the tablet eraser active?
-	// 0 = No; 1 = Yes, activated through sub-events, 2 = Yes, activated through native events.
+	//! Is the tablet eraser active?
+	//!
+	//! 0 = No; 1 = Yes, activated through sub-events, 2 = Yes, activated through native events.
 	int tabletEraser;
 	
-	// Last scroll point
+	//! Last scroll point
 	NSPoint lastScrollPoint;
 	
-	// The change in the cursor position
+	//! The change in the cursor position
 	IntPoint delta;
 	IntPoint initialPoint;
 	
-	// The units used for the ruler
+	//! The units used for the ruler
 	int rulerUnits;
 	
-	// The horizontal ruler
+	//! The horizontal ruler
 	NSRulerView *horizontalRuler;
 	
-	// The vertical ruler
+	//! The vertical ruler
 	NSRulerView *verticalRuler;
 	
-	// The vertical ruler marker
+	//! The vertical ruler marker
 	NSRulerMarker *vMarker;
 	
-	// The horizontal ruler marker
+	//! The horizontal ruler marker
 	NSRulerMarker *hMarker;
 	
-	// The vertical stationary ruler marker
+	//! The vertical stationary ruler marker
 	NSRulerMarker *vStatMarker;
 	
-	// The horizontal stationary ruler marker
+	//! The horizontal stationary ruler marker
 	NSRulerMarker *hStatMarker;
 	
-	// The mouse down location
+	//! The mouse down location
 	NSPoint mouseDownLoc;
 	
-	// The last active layer point
+	//! The last active layer point
 	IntPoint lastActiveLayerPoint;
 
-	// Was the key up last time?
+	//! Was the key up last time?
 	BOOL keyWasUp;
 
-	// The time of the last ruler update
+	//! The time of the last ruler update
 	NSDate *lastRulerUpdate;
 
-	// Memorize the previous tool for a temporary eyedrop selection
-	int eyedropToolMemory;
+	//! Memorize the previous tool for a temporary eyedrop selection
+	NSInteger eyedropToolMemory;
 	
-	// Values to tell when to trigger scroll
+	//! Values to tell when to trigger scroll
 	CGFloat scrollZoom, lastTrigger;
 
-	// The amount we've magnified it the time
+	//! The amount we've magnified it the time
 	CGFloat magnifyFactor;
 }
 
