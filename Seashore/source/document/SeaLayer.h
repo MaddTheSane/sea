@@ -478,7 +478,7 @@
 				numbered sequentially.
 	@result		Returns an unique integer identifying the layer.
 */
-@property (readonly) int uniqueLayerID;
+@property (readonly) NSInteger uniqueLayerID;
 
 #if MAIN_COMPILE
 /*!
