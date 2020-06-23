@@ -283,7 +283,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	NSRect srcRect, destRect;
 	NSImage *image = NULL;
 	ToolboxUtility *tUtil = [[SeaController utilitiesManager] toolboxUtilityFor:document];
-	int curToolIndex = [tUtil tool];
+	SeaToolsDefines curToolIndex = [tUtil tool];
 	IntRect imageRect = [[document whiteboard] imageRect];
 	int xres = [[document contents] xres], yres = [[document contents] yres];
 	CGFloat xResScale, yResScale;
@@ -365,7 +365,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)drawBoundaries
 {
-	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	
 	if (curToolIndex == SeaToolsCrop) {
 		[self drawCropBoundaries];
@@ -709,7 +709,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)drawExtras
 {	
-	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	CloneTool *cloneTool = [[document tools] getTool:SeaToolsClone];
 	EffectTool *effectTool = [[document tools] getTool:SeaToolsEffect];
 	NSPoint outPoint, hilightPoint;
@@ -995,7 +995,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	__kindof AbstractTool *curTool;
 	IntPoint localActiveLayerPoint;
 	NSPoint localPoint, globalPoint;
-	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	__kindof AbstractOptions *options = [[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions];
 	
 	// Get xScale, yScale	
@@ -1114,7 +1114,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	__kindof AbstractTool *curTool;
 	IntPoint localActiveLayerPoint;
 	NSPoint localPoint;
-	int curToolIndex, deltaX, deltaY;
+	SeaToolsDefines curToolIndex;
+	int deltaX, deltaY;
 	double angle;
 	NSPoint origin, newScrollPoint;
 	NSClipView *view;
@@ -1320,7 +1321,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Check for zoom-in or zoom-out
 	NSEventModifierFlags mods = [theEvent modifierFlags];
-	if (mods & NSCommandKeyMask) {
+	if (mods & NSEventModifierFlagCommand) {
 		for (whichKey = 0; whichKey < [[theEvent characters] length]; whichKey++) {
 			key = [[theEvent charactersIgnoringModifiers] characterAtIndex:whichKey];
 			if (key == NSUpArrowFunctionKey)
@@ -1343,7 +1344,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		
 		// For arrow nudging
 		if (key == NSUpArrowFunctionKey || key == NSDownArrowFunctionKey || key == NSLeftArrowFunctionKey || key == NSRightArrowFunctionKey) {
-			int nudge = ((mods & NSAlternateKeyMask) >> 19) ? 10 : 1;
+			int nudge = ((mods & NSEventModifierFlagOption) >> 19) ? 10 : 1;
 			// Get the active layer
 			activeLayer = [[document contents] activeLayer];
 		
@@ -1711,7 +1712,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (IBAction)selectNone:(id)sender
 {
-	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	
 	if(curToolIndex >= SeaToolsFirstSelection && curToolIndex <= SeaToolsLastSelection && [[[document tools] currentTool] intermediate])
 		[[[document tools] currentTool] cancelSelection];

@@ -175,7 +175,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	@objc func changeImage(_ newImage: NSBitmapImageRep!) throws {
 		// Check we can handle this image
 		guard newImage?.bitsPerSample == 8, let data = newImage?.bitmapData else {
-			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
+			throw CocoaError(.fileReadCorruptFile)
 		}
 
 		let spp = newImage.samplesPerPixel
@@ -189,7 +189,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		} else if newImage.colorSpaceName == .calibratedRGB || newImage.colorSpaceName == .deviceRGB {
 			isRGB = true; invert = false;
 		} else {
-			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
+			throw CocoaError(.fileReadCorruptFile)
 		}
 		
 		// Fill out useAlpha boolean
@@ -314,11 +314,14 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		undoRecords.removeAll()
 		curUndoPos = 0
 		
-		var header = BrushHeader()
-		
 		// Read in the header
 		var readData = file.readData(ofLength: MemoryLayout<BrushHeader>.size)
-		(readData as NSData).getBytes(&header, length: MemoryLayout<BrushHeader>.size)
+		guard readData.count == MemoryLayout<BrushHeader>.size else {
+			throw CocoaError(.fileReadCorruptFile, userInfo: [NSURLErrorKey: url])
+		}
+		var header = readData.withUnsafeBytes { (body: UnsafePointer<BrushHeader>) -> BrushHeader in
+			return body.pointee
+		}
 		
 		// Convert brush header to proper endianess
 		header.header_size = header.header_size.bigEndian
@@ -333,7 +336,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		var versionGood: Bool = (header.version == 2 && header.magic_number == GBRUSH_MAGIC)
 		versionGood = versionGood || (header.version == 1)
 		if !versionGood {
-			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
+			throw CocoaError(.fileReadCorruptFile, userInfo: [NSURLErrorKey: url])
 		}
 
 		// Accomodate version 1 brushes (no spacing)
@@ -352,7 +355,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 		// Read in brush name
 		let nameLen = Int(header.header_size) - MemoryLayout<BrushHeader>.size
 		if nameLen > 512 {
-			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
+			throw CocoaError(.fileReadCorruptFile, userInfo: [NSURLErrorKey: url])
 		}
 		if nameLen > 0 {
 			readData = file.readData(ofLength: nameLen)
@@ -373,7 +376,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 			let tempSize = Int(size.width * size.height)
 			readData = file.readData(ofLength: tempSize)
 			if readData.count < tempSize {
-				throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
+				throw CocoaError(.fileReadCorruptFile, userInfo: [NSURLErrorKey: url])
 			}
 			mask = readData.map({$0})
 			
@@ -382,13 +385,13 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 			let tempSize = Int(size.width * size.height) * 4
 			readData = file.readData(ofLength: tempSize)
 			if readData.count < tempSize {
-				throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
+				throw CocoaError(.fileReadCorruptFile, userInfo: [NSURLErrorKey: url])
 			}
 			pixmap = readData.map({$0})
 			premultiplyAlpha(4, &pixmap, &pixmap, size.width * size.height)
 			
 		default:
-			throw NSError(domain: NSCocoaErrorDomain, code: NSFileReadCorruptFileError, userInfo: nil)
+			throw CocoaError(.fileReadCorruptFile, userInfo: [NSURLErrorKey: url])
 		}
 		
 		// Add to the stack
@@ -439,7 +442,7 @@ class BrushDocument: NSDocument, NSWindowDelegate {
 	
 	/// Returns the nib file associated with this class
 	override var windowNibName: NSNib.Name? {
-		return NSNib.Name(rawValue: "BrushDocument")
+		return "BrushDocument"
 	}
 	
 	override func data(ofType typeName: String) throws -> Data {

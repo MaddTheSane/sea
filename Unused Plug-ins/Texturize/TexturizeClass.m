@@ -51,7 +51,7 @@
 
 - (int)type
 {
-	return kBasicPlugin;
+	return SeaPluginBasic;
 }
 
 -(int)points

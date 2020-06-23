@@ -86,7 +86,7 @@
 		[trueViewCheckbox setImage:[NSImage imageNamed:([contents trueView] ? @"trueview-sel" : @"trueview-not" )]];
 		[trueViewCheckbox setEnabled:YES];
 		
-		int newUnits = [document measureStyle];
+		SeaUnits newUnits = [document measureStyle];
 		NSMutableString *statusString = [NSMutableString string];
 		//unichar ch = 0x00B7; // replace this with your code pointNSString
 		//NSString *divider = [NSString stringWithCharacters:&ch length:1];

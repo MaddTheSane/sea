@@ -27,7 +27,7 @@
 		SeaAspectType aspectType = [options aspectType];
 		NSSize ratio;
 		double xres, yres;
-		int modifier = [options modifier];
+		AbstractModifiers modifier = [options modifier];
 		SeaLayer *activeLayer;
 		
 		// Make where appropriate
@@ -146,7 +146,7 @@
 {
 	[self mouseDraggedTo:where withEvent:event];
 	
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 	translating = NO;
 }
 

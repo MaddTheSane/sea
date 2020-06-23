@@ -20,7 +20,7 @@
  * (x_min,y_min) -> (x_max,y_max) dans image_tab
  * (x_min,y_min)-posn -> (x_max,y_max)-posn dans patch_tab */
 
-float
+static float
 difference (gint width_i, gint height_i, gint width_p, gint height_p,
             guchar * image, guchar * patch,
             gint posn_x, gint posn_y,

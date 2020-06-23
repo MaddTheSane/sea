@@ -7,14 +7,14 @@
 #import "AspectRatio.h"
 #import "SeaView.h"
 
-static int lastTool = -1;
+static SeaToolsDefines lastTool = -1;
 static BOOL forceAlt = NO;
 
 @implementation AbstractOptions
 
 - (void)activate:(id)sender
 {
-	int curTool;
+	SeaToolsDefines curTool;
 	
 	document = sender;
 	curTool = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];

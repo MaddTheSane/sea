@@ -24,5 +24,8 @@ typedef struct _BrushHeader {
 CF_ENUM(OSType) {
 	GBRUSH_MAGIC = (('G' << 24) + ('I' << 16) + ('M' << 8) + ('P' << 0))
 };
+#if 0 // because Xcode is a dumb-dumb.
+}
+#endif
 
 #endif /* GimpBrush_h */

@@ -35,7 +35,7 @@
 		int tpos;
 		IntRect rect;
 		GimpVector2 *gimpPoints;
-		int modifier;
+		AbstractModifiers modifier;
 		
 		where.x -= [layer xoff];
 		where.y -= [layer yoff];
@@ -174,7 +174,7 @@
 	[super mouseUpAt:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
 
 	translating = NO;
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 }
 
 @end

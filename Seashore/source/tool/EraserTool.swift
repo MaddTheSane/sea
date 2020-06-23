@@ -160,8 +160,8 @@ class EraserTool: AbstractTool, SeaOptions {
 		
 		// Determine whether operation should continue
 		lastWhere = where1
-		multithreaded = SeaController.seaPrefs!.multithreaded()
-		let ignoreFirstTouch = SeaController.seaPrefs!.ignoreFirstTouch()
+		multithreaded = SeaController.seaPrefs!.multithreaded
+		let ignoreFirstTouch = SeaController.seaPrefs!.ignoreFirstTouch
 		if (ignoreFirstTouch && (event?.type == .leftMouseDown || event?.type == .rightMouseDown) && boptions.pressureSensitive && !((options as! EraserOptions).modifier() == .shift)) {
 			firstTouchDone = false;
 			return;
@@ -177,7 +177,7 @@ class EraserTool: AbstractTool, SeaOptions {
 		}
 
 		// Determine background colour and hence the brush colour
-		let color = document.contents.background!
+		let color = document.contents.background
 		if spp == 4 {
 			basePixel[0] = UInt8(color.redComponent * 255)
 			basePixel[1] = UInt8(color.greenComponent * 255)

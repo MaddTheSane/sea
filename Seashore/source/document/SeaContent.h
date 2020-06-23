@@ -6,6 +6,8 @@
 #import <SeashoreKit/IndiciesKeeper.h>
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
+
 #if MAIN_COMPILE
 @class SeaDocument;
 #else
@@ -27,10 +29,10 @@
 				The parasite's data.
 */
 typedef struct {
-	CFStringRef name;
+	CFStringRef _Nullable name;
 	unsigned int flags;
 	unsigned int size;
-	unsigned char *data;
+	unsigned char *_Nullable data;
 } ParasiteData;
 
 /*!
@@ -124,7 +126,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(SeaDocument*)doc NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithDocument:(SeaDocument*)doc NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@method		initForPasteboardWithDocument:
@@ -134,7 +136,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initFromPasteboardWithDocument:(SeaDocument*)doc;
+- (nullable instancetype)initFromPasteboardWithDocument:(SeaDocument*)doc;
 
 /*!
 	@method		initWithDocument:type:width:height:res:opaque:
@@ -157,7 +159,7 @@ typedef struct {
 				YES if the background layer should be opaque, NO otherwise.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(SeaDocument*)doc type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque;
+- (nullable instancetype)initWithDocument:(SeaDocument*)doc type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque;
 
 /*!
 	@method		initWithDocument:data:type:width:height:res:
@@ -180,7 +182,7 @@ typedef struct {
 				accepts square resolutions).
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (instancetype)initWithDocument:(SeaDocument*)doc data:(unsigned char *)ddata type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
+- (nullable instancetype)initWithDocument:(SeaDocument*)doc data:(unsigned char *)ddata type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
 
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;
 
@@ -331,7 +333,7 @@ typedef struct {
 				pieces of data that are saved by the GIMP and Seashore in XCF
 				documents.
 	@result		Returns an array of ParasiteData records of length given by the
-				parasites_count method.
+				\c countOfParasites method.
 */
 @property (readonly) ParasiteData *parasites NS_RETURNS_INNER_POINTER;
 
@@ -350,9 +352,9 @@ typedef struct {
 	@param		name
 				The name of the parasite.
 	@result		Returns a pointer to the ParasiteData record with the requested
-				name or NULL if no parasites match.
+				name or \c NULL if no parasites match.
 */
-- (ParasiteData *)parasiteWithName:(NSString *)name;
+- (nullable ParasiteData *)parasiteWithName:(NSString *)name;
 
 /*!
 	@method		deleteParasiteWithName:
@@ -377,7 +379,7 @@ typedef struct {
 	@method		trueView
 	@discussion	Returns whether the document view should be showing all channels
 				or just the channel being edited.
-	@result		YES if the document view should be showing all channels, NO
+	@result		\c YES if the document view should be showing all channels, \c NO
 				otherwise.
 */
 - (BOOL)trueView;
@@ -387,7 +389,7 @@ typedef struct {
 	@discussion	Sets whether the document view should be showing all channels or
 				just the channel being edited.
 	@param		value
-				YES if the document should be showing all channels, NO
+				\c YES if the document should be showing all channels, \c NO
 				otherwise.
 */
 - (void)setTrueView:(BOOL)value;
@@ -398,7 +400,7 @@ typedef struct {
 	@discussion	Returns the foreground colour, converting it to the same colour
 				space as the document and stripping any colour from it if the
 				alpha channel is selected.
-	@result		Returns a NSColor representing the foreground colour.
+	@result		Returns a \c NSColor representing the foreground colour.
 */
 @property (readonly, copy) NSColor *foreground;
 
@@ -407,7 +409,7 @@ typedef struct {
 	@discussion	Returns the background colour, converting it to the same colour
 				space as the document and stripping any colour from it if the
 				alpha channel is selected.
-	@result		Returns a NSColor representing the background colour.
+	@result		Returns a \c NSColor representing the background colour.
 */
 @property (readonly, copy) NSColor *background;
 #endif
@@ -437,7 +439,7 @@ typedef struct {
 	@result		Returns an \c NSDictionary containing the EXIF data or \c NULL if no
 				such data exists.
 */
-- (NSDictionary *)exifData;
+- (nullable NSDictionary *)exifData;
 
 // LAYER METHODS
 
@@ -463,7 +465,7 @@ typedef struct {
 	@discussion	Returns the currently active layer.
 	@result		An instance of SeaLayer representing the active layer.
 */
-@property (readonly, weak/*,nullable*/) SeaLayer *activeLayer;
+@property (readonly, weak, nullable) SeaLayer *activeLayer;
 
 /*!
 	@property	activeLayerIndex
@@ -500,9 +502,19 @@ typedef struct {
 	@discussion	Returns whether layers can be imported from the given file.
 	@param		path
 				The path to the file.
-	@result		YES if layers can be imported, NO otherwise.
+	@result		\c YES if layers can be imported, \c NO otherwise.
 */
 - (BOOL)canImportLayerFromFile:(NSString *)path;
+
+/*!
+ 	@method		canImportLayerFromFile:
+ 	@discussion	Returns whether layers can be imported from the given file.
+ 	@param		path
+ 				The path to the file.
+ 	@result		\c YES if layers can be imported, \c NO otherwise.
+ */
+- (BOOL)canImportLayerFromURL:(NSURL *)path;
+
 
 /*!
 	@method		importLayerFromFile:
@@ -609,7 +621,7 @@ typedef struct {
 	 @param			sender
 					Ignored
 */
-- (IBAction)duplicate:(id)sender;
+- (IBAction)duplicate:(nullable id)sender;
 
 /*!
 	@method		toggleFloatingSelection
@@ -621,7 +633,7 @@ typedef struct {
 	@method		toggleFloatingSelection:
 	@discussion	Toggles between making the selection float or not
  */
-- (void)toggleFloatingSelection:(id)sender;
+- (IBAction)toggleFloatingSelection:(nullable id)sender;
 
 /*!
 	@method		makePasteboardFloat
@@ -642,7 +654,7 @@ typedef struct {
 	@param		index
 				The index of the layer to test or kActiveLayer to indicate the
 				active layer.
-	@result		YES if the layer can be risen, NO otherwise.
+	@result		\c YES if the layer can be risen, \c NO otherwise.
 */
 - (BOOL)canRaise:(NSInteger)index;
 
@@ -652,7 +664,7 @@ typedef struct {
 	@param		index
 				The index of the layer to test or kActiveLayer to indicate the
 				active layer.
-	@result		YES if the layer can be lowered, NO otherwise.
+	@result		\c YES if the layer can be lowered, \c NO otherwise.
 */
 - (BOOL)canLower:(NSInteger)index;
 
@@ -683,7 +695,7 @@ typedef struct {
 	@discussion	Raises the level of a particular layer in the document if
 				possible.
 	@param		index
-				The index of the layer to raise or kActiveLayer to indicate the
+				The index of the layer to raise or \c kActiveLayer to indicate the
 				active layer.
 */
 - (void)raiseLayer:(NSInteger)index;
@@ -693,7 +705,7 @@ typedef struct {
 	@discussion	Lowers the level of a particular layer in the document if
 				possible.
 	@param		index
-				The index of the layer to lower or kActiveLayer to indicate the
+				The index of the layer to lower or \c kActiveLayer to indicate the
 				active layer.
 */
 - (void)lowerLayer:(NSInteger)index;
@@ -781,7 +793,7 @@ typedef struct {
 	@param		ordering
 				The indexes of the the lost layers of the image.
 */
-- (void)undoMergeWith:(NSInteger)origNoLayers andOrdering:(NSMutableDictionary *)ordering;
+- (void)undoMergeWith:(NSInteger)origNoLayers andOrdering:(NSMutableDictionary<NSString*,NSNumber*> *)ordering;
 
 /*!
 	@method		bitmapUnderneath:
@@ -801,7 +813,7 @@ typedef struct {
 	@param		ordering
 				The indexes of the the lost layers of the image.
 */
-- (void)redoMergeWith:(NSInteger)origNoLayers andOrdering:(NSMutableDictionary *)ordering;
+- (void)redoMergeWith:(NSInteger)origNoLayers andOrdering:(NSMutableDictionary<NSString*,NSNumber*> *)ordering;
 
 /*!
 	@method		convertToType:
@@ -828,3 +840,5 @@ typedef struct {
 #endif
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -8,6 +8,7 @@
 
 #import "SSKCIPlugin.h"
 #import "Bitmap.h"
+#include <simd/simd.h>
 
 @implementation SSKCIPlugin
 
@@ -90,12 +91,12 @@
 	replace = [pluginData replace];
 	
 	// Convert from GA to ARGB
-	dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		self->newdata[i * 4] = data[i * 2 + 1];
-		self->newdata[i * 4 + 1] = data[i * 2];
-		self->newdata[i * 4 + 2] = data[i * 2];
-		self->newdata[i * 4 + 3] = data[i * 2];
-	});
+	for (size_t i = 0; i < width * height; i++) {
+		newdata[i * 4] = data[i * 2 + 1];
+		newdata[i * 4 + 1] = data[i * 2];
+		newdata[i * 4 + 2] = data[i * 2];
+		newdata[i * 4 + 3] = data[i * 2];
+	}
 	
 	// Run CoreImage effect
 	resdata = [self executeChannel:pluginData withBitmap:newdata];
@@ -105,17 +106,17 @@
 		max = selection.size.width * selection.size.height;
 	else
 		max = width * height;
-	dispatch_apply(max, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		self->newdata[i * 2] = resdata[i * 4];
-		self->newdata[i * 2 + 1] = resdata[i * 4 + 3];
-	});
+	for (size_t i = 0; i < max; i++) {
+		newdata[i * 2] = resdata[i * 4];
+		newdata[i * 2 + 1] = resdata[i * 4 + 3];
+	}
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		for (size_t i = 0; i < selection.size.height; i++) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(self->newdata[selection.size.width * 2 * i]), selection.size.width * 2);
-		});
+		}
 	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, newdata, width * height * 2);
@@ -124,7 +125,7 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-	__m128i *vdata;
+	simd_int4 *vdata;
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -150,23 +151,23 @@
 	replace = [pluginData replace];
 	SeaPremultiplyBitmap(4, newdata, data, width * height);
 	// Convert from RGBA to ARGB
-	vdata = (__m128i *)newdata;
-	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
-		vdata[i] = _mm_slli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	});
+	vdata = (simd_int4 *)newdata;
+	for (size_t i = 0; i < vec_len; i++) {
+		simd_int4 vstore = vdata[i] >> 24;
+		vdata[i] = vdata[i] << 8;
+		vdata[i] = vdata[i] + vstore;
+	}
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
 	@try {
 		resdata = [self executeChannel:pluginData withBitmap:newdata];
 	}
 	@catch (NSException *exception) {
-		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-			vdata[i] = _mm_srli_epi32(vdata[i], 8);
-			vdata[i] = _mm_add_epi32(vdata[i], vstore);
-		});
+		for (size_t i = 0; i < vec_len; i++) {
+			simd_int4 vstore = vdata[i] << 24;
+			vdata[i] = vdata[i] >> 8;
+			vdata[i] = vdata[i] + vstore;
+		}
 		NSLog(@"%@", [exception reason]);
 		return;
 	}
@@ -176,18 +177,18 @@
 		SeaUnpremultiplyBitmap(4, resdata, resdata, width * height);
 	}
 	// Convert from ARGB to RGBA
-	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-		vdata[i] = _mm_srli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	});
+	for (size_t i = 0; i < vec_len; i++) {
+		simd_int4 vstore = vdata[i] << 24;
+		vdata[i] = vdata[i] >> 8;
+		vdata[i] = vdata[i] + vstore;
+	}
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		for (size_t i = 0; i < selection.size.height; i++) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
-		});
+		}
 	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, resdata, width * height * 4);
@@ -206,7 +207,7 @@
 	int width, height, channel;
 	unsigned char ormask[16], *resdata, *datatouse;
 	IntRect selection;
-	__m128i *vdata, *nvdata, *rvdata, orvmask;
+	simd_int4 *vdata, *nvdata, *rvdata, orvmask;
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -214,7 +215,7 @@
 	width = [pluginData width];
 	height = [pluginData height];
 	selection = [pluginData selection];
-	vdata = (__m128i *)data;
+	vdata = (simd_int4 *)data;
 	if ([self restoreAlpha]) {
 		vec_len = width * height * 4;
 		if (vec_len % 16 == 0) {
@@ -223,20 +224,20 @@
 			vec_len /= 16;
 			vec_len++;
 		}
-		nvdata = (__m128i *)newdata;
+		nvdata = (simd_int4 *)newdata;
 		datatouse = newdata;
 		if (channel == SeaSelectedChannelAlpha) {
-			dispatch_apply(width * height, dispatch_get_global_queue(0, 0), ^(size_t i) {
-				self->newdata[i * 4 + 1] = self->newdata[i * 4 + 2] = self->newdata[i * 4 + 3] = data[i * 4];
-				self->newdata[i * 4] = 255;
-			});
+			for (size_t i = 0; i < width * height; i++) {
+				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
+				newdata[i * 4] = 255;
+			}
 		} else {
 			for (short i = 0; i < 16; i++) {
 				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 			}
 			memcpy(&orvmask, ormask, 16);
 			for (int i = 0; i < vec_len; i++) {
-				nvdata[i] = _mm_or_si128(vdata[i], orvmask);
+				nvdata[i] = vdata[i] | orvmask;
 			}
 		}
 	} else {
@@ -250,7 +251,7 @@
 				vec_len /= 16;
 				vec_len++;
 			}
-			rvdata = (__m128i *)newdata;
+			rvdata = (simd_int4 *)newdata;
 			datatouse = newdata;
 			if (channel == SeaSelectedChannelPrimary) {
 				for (short i = 0; i < 16; i++) {
@@ -258,7 +259,7 @@
 				}
 				memcpy(&orvmask, ormask, 16);
 				for (int i = 0; i < vec_len; i++) {
-					rvdata[i] = _mm_or_si128(vdata[i], orvmask);
+					rvdata[i] = vdata[i] | orvmask;
 				}
 			} else if (channel == SeaSelectedChannelAlpha) {
 				for (int i = 0; i < width * height; i++) {

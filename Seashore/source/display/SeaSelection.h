@@ -2,8 +2,10 @@
 #import <Cocoa/Cocoa.h>
 #ifdef SEASYSPLUGIN
 #import "Globals.h"
+#import "SeaPrefs.h"
 #else
 #import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaPrefs.h>
 #endif
 
 /*!
@@ -57,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 	BOOL active;
 	
 	// Help present the user with a visual representation of the mask
-	int selectionColorIndex;
+	SeaGuideColor selectionColorIndex;
 	unsigned char *maskBitmap;
 	NSBitmapImageRep *maskBitmapRep;
 	NSImage *maskImage;

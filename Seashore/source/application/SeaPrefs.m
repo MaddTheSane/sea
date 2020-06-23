@@ -24,11 +24,11 @@ int memoryCacheSize;
 
 IntPoint SeaScreenResolution;
 
-static NSString*	PrefsToolbarIdentifier 	= @"Preferences Toolbar Instance Identifier";
+static NSToolbarIdentifier const PrefsToolbarIdentifier 	= @"Preferences Toolbar Instance Identifier";
 
-static NSString*	GeneralPrefsIdentifier 	= @"General Preferences Item Identifier";
-static NSString*	NewPrefsIdentifier 	= @"New Preferences Item Identifier";
-static NSString*    ColorPrefsIdentifier = @"Color Preferences Item Identifier";
+static NSToolbarItemIdentifier const GeneralPrefsIdentifier	= @"General Preferences Item Identifier";
+static NSToolbarItemIdentifier const NewPrefsIdentifier		= @"New Preferences Item Identifier";
+static NSToolbarItemIdentifier const ColorPrefsIdentifier	= @"Color Preferences Item Identifier";
 
 static int GetIntFromDictionaryForKey(NSDictionary *desc, NSString *key)
 {
@@ -792,15 +792,8 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	return multithreaded;
 }
 
-- (BOOL)ignoreFirstTouch
-{
-	return ignoreFirstTouch;
-}
-
-- (BOOL)mouseCoalescing
-{
-	return mouseCoalescing;
-}
+@synthesize ignoreFirstTouch;
+@synthesize mouseCoalescing;
 
 - (BOOL)checkForUpdates
 {
@@ -812,15 +805,8 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	return NO;
 }
 
-- (BOOL)preciseCursor
-{
-	return preciseCursor;
-}
-
-- (BOOL)useCoreImage
-{
-	return useCoreImage;
-}
+@synthesize preciseCursor;
+@synthesize useCoreImage;
 
 - (BOOL)delayOverlay
 {
@@ -855,10 +841,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	}
 }
 
-- (SeaUnits) newUnits
-{
-	return newUnits;
-}
+@synthesize newUnits;
 
 - (NSInteger)mode
 {
@@ -882,17 +865,10 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	return IntMakePoint(72, 72);
 }
 
-- (BOOL)transparentBackground
-{
-	return transparentBackground;
-}
+@synthesize transparentBackground;
+@synthesize openUntitled;
 
-- (BOOL)openUntitled
-{
-	return openUntitled;
-}
-
-- (BOOL)validateMenuItem:(id)menuItem
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem
 {
 	// Set the boundaries menu item appropriately
 	if ([menuItem tag] == 225) {

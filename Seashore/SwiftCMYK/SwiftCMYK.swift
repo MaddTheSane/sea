@@ -42,8 +42,8 @@ final public class CMYK: NSObject, SeaPluginClass {
 		let replace = pluginData.replace
 		let channel = pluginData.channel
 		
-		guard let srcProf = ColorSyncProfileCreateWithDisplayID(0),
-			let destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile.takeUnretainedValue()) else {
+		guard let srcProf = ColorSyncProfileCreateWithName(kColorSyncSRGBProfile.takeUnretainedValue()).takeRetainedValue(),
+			  let destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile.takeUnretainedValue()).takeRetainedValue() else {
 				return
 		}
 		// TODO: Hey Apple! Audit your ColorSync API for Swift!
@@ -65,7 +65,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 			return
 		}
 		
-		for j in selection.origin.y..<(selection.origin.y + selection.size.height)  {
+		for j in selection.minY ..< selection.maxY {
 			let pos = j * width + selection.origin.x;
 			
 			var srcLayout: ColorSyncDataLayout = ColorSyncDataLayout(kColorSyncByteOrderDefault);
@@ -108,7 +108,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 		run()
 	}
 
-	public override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+	public func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		if let pluginData = seaPlugins?.data {
 			if pluginData.channel == .alpha {
 				return false

@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <AppKit/NSMenu.h>
 #import "Globals.h"
 #import "SeaDocument.h"
 #import "PluginData.h"
@@ -41,7 +42,7 @@ typedef NS_ENUM(int, SeaPluginType) {
 				<b>License:</b> Public Domain 2004<br>
 				<b>Copyright:</b> N/A
 */
-@protocol SeaPluginClass <NSObject>
+@protocol SeaPluginClass <NSObject, NSMenuItemValidation>
 
 /*!
 	@method		initWithManager:
@@ -114,7 +115,7 @@ typedef NS_ENUM(int, SeaPluginType) {
 */
 @property (readonly) BOOL canReapply;
 
-- (BOOL)validateMenuItem:(NSMenuItem*)menuItem NS_SWIFT_NAME(validateMenuItem(_:));
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @optional
 

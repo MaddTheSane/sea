@@ -695,7 +695,7 @@
 				556CBD011D3995AB007D73A1 /* Brightness.bundle */,
 				556CBD031D3995AB007D73A1 /* Checkerboard.bundle */,
 				556CBD051D3995AB007D73A1 /* CMYK.bundle */,
-				556CBD071D3995AB007D73A1 /* Gaussian.bundle */,
+				556CBD071D3995AB007D73A1 /* Gaussian Blur.bundle */,
 				556CBD091D3995AB007D73A1 /* Greyscale.bundle */,
 				556CBD0B1D3995AB007D73A1 /* Horizontal Stripes.bundle */,
 				556CBD0D1D3995AB007D73A1 /* HSV.bundle */,
@@ -742,7 +742,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1000;
 			};
 			buildConfigurationList = A8582DD609BD8EF90098D48C /* Build configuration list for PBXProject "Blur" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1180,10 +1180,10 @@
 			remoteRef = 556CBD041D3995AB007D73A1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		556CBD071D3995AB007D73A1 /* Gaussian.bundle */ = {
+		556CBD071D3995AB007D73A1 /* Gaussian Blur.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = Gaussian.bundle;
+			path = "Gaussian Blur.bundle";
 			remoteRef = 556CBD061D3995AB007D73A1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1351,7 +1351,6 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -1381,6 +1380,7 @@
 		A8582DD709BD8EF90098D48C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -1418,6 +1418,7 @@
 		A8582DD809BD8EF90098D48C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;

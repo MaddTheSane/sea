@@ -51,7 +51,7 @@
 		[assembly addObjectsFromArray:typeDict[@"LSItemContentTypes"]];
 		
 		NSString* key = typeDict[@"CFBundleTypeName"];
-		//[assembly addObject:key];
+		[assembly addObject:key];
 				
 		NSString *role = typeDict[@"CFBundleTypeRole"];
 		if ([role isEqual:@"Editor"]) {

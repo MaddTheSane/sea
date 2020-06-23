@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-@interface SeaPrefs : NSObject <SSKTerminatable> {
+@interface SeaPrefs : NSObject <SSKTerminatable, NSMenuItemValidation> {
 	
 	// The SeaController object
 	IBOutlet SeaController *controller;
@@ -627,49 +627,49 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 - (IBAction)guideColorChanged:(id)sender;
 
 /*!
-	@method		multithreaded
+	@property	multithreaded
 	@discussion	Returns whether drawing should be multithreaded.
 	@result		Returns YES if drawing should be multithreaded, NO otherwise.
 */
-- (BOOL)multithreaded;
+@property (readonly) BOOL multithreaded;
 
 /*!
-	@method		ignoreFirstTouch
+	@property	ignoreFirstTouch
 	@discussion	Returns whether the first pressure-sensitive touch should be
 				ignored.
 	@result		Returns YES if it should be ignored, NO otherwise.
 */
-- (BOOL)ignoreFirstTouch;
+@property (readonly) BOOL ignoreFirstTouch;
 
 /*!
-	@method		mouseCoalescing
+	@property	mouseCoalescing
 	@discussion	Returns whether mouse coalescing should always be on.
 	@result		Returns YES if it should always be on, NO otherwise.
 */
-- (BOOL)mouseCoalescing;
+@property (readonly) BOOL mouseCoalescing;
 
 /*!
-	@method		checkForUpdates
+	@property	checkForUpdates
 	@discussion	Returns whether an application should check for updates. This
 				will only return YES if it's been more than a week since the
 				last update.
 	@result		Returns YES if Seashore should check for updates, NO otherwise.
 */
-- (BOOL)checkForUpdates;
+@property (readonly) BOOL checkForUpdates;
 
 /*!
-	@method		preciseCursor
+	@property	preciseCursor
 	@discussion	Returns whether a precise cursor should be used.
 	@result		Returns YES if the precise cursor should be used, NO otherwise.
 */
-- (BOOL)preciseCursor;
+@property (readonly) BOOL preciseCursor;
 
 /*!
-	@method		useCoreImage
+	@property	useCoreImage
 	@discussion	Returns whether Core Image should be used for scaling/rotation.
 	@result		Returns YES if Core Image should be used for scaling/rotation, NO otherwise.
 */
-- (BOOL)useCoreImage;
+@property (readonly) BOOL useCoreImage;
 
 /*!
 	@method		delayOverlay
@@ -712,18 +712,18 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 - (IntPoint)screenResolution;
 
 /*!
-	@method		transparentBackground
+	@property	transparentBackground
 	@discussion Returns whether the background should be transparent.
 	@result		Returns YES for transparency.
 */
-- (BOOL)transparentBackground;
+@property (readonly) BOOL transparentBackground;
 
 /*!
-	@method		newUnits
+	@property	newUnits
 	@discussion Returns the units used for new images.
 	@result		Returns an int that represents the units (see SeaDocument).
 */
-- (SeaUnits)newUnits;
+@property (readonly) SeaUnits newUnits;
 
 /*!
 	@property	runCount
@@ -734,12 +734,12 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 @property (readonly) NSInteger runCount;
 
 /*!
-	@method		openUntitled
+	@property	openUntitled
 	@discussion	Returns whether a new document should be created at
 				start-up.
 	@result		Returns YES if the a new document should be created, NO otherwise.
 */
-- (BOOL)openUntitled;
+@property (readonly) BOOL openUntitled;
 
 /*!
 	@method		validateMenuItem:
@@ -749,6 +749,6 @@ typedef NS_ENUM(NSInteger, SeaGuideColor) {
 				The menu item to be validated.
 	@result		YES if the menu item should be enabled, NO otherwise.
 */
-- (BOOL)validateMenuItem:(id)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end

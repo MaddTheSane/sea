@@ -1,5 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "Units.h"
 
 /*!
 	@defined	kNumberOfScaleRecordsPerMalloc
@@ -68,43 +69,43 @@ typedef struct {
 */
 @interface SeaScale : NSObject {
 
-	// The document and sheet associated with this object
+	//! The document and sheet associated with this object
     IBOutlet SeaDocument *document;
-	IBOutlet id sheet;
+	IBOutlet NSPanel *sheet;
 	
-	// The working index associated with this object
+	//! The working index associated with this object
 	NSInteger workingIndex;
 	
-	// The x and y scaling values
-    IBOutlet id xScaleValue;
-    IBOutlet id yScaleValue;
+	//! The x and y scaling values
+    IBOutlet NSTextField *xScaleValue;
+    IBOutlet NSTextField *yScaleValue;
 	
-	// The height and width values
-	IBOutlet id widthValue;
-	IBOutlet id heightValue;
+	//! The height and width values
+	IBOutlet NSTextField *widthValue;
+	IBOutlet NSTextField *heightValue;
 	
-	// The various buttons for changing units
-	IBOutlet id widthPopdown;
-	IBOutlet id heightUnits;
+	//! The various buttons for changing units
+	IBOutlet NSPopUpButton *widthPopdown;
+	IBOutlet NSButton *heightUnits;
 
-	// The options
-    IBOutlet id keepProportions;
+	//! The options
+    IBOutlet NSButton *keepProportions;
 	
-	// The interpolation style to be used for scaling
+	//! The interpolation style to be used for scaling
 	IBOutlet NSPopUpButton *interpolationPopup;
 	
-	// A list of various undo records required for undoing
+	//! A list of various undo records required for undoing
 	ScaleUndoRecord *undoRecords;
 	NSInteger undoMax, undoCount;
 	
-	// A label specifying the layer or document being scaled
+	//! A label specifying the layer or document being scaled
     IBOutlet NSTextField *selectionLabel;
 	
-	// The presets menu
-	IBOutlet id presetsMenu;
+	//! The presets menu
+	IBOutlet NSPopUpButton *presetsMenu;
 
-	// The units for the panel
-	int units;	
+	//! The units for the panel
+	SeaUnits units;
 }
 
 /*!

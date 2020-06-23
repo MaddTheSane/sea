@@ -274,7 +274,10 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 		contents = [[CocoaContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
 			if (outError) {
-				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load editable Cocoa file"}];
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+							 @{NSLocalizedDescriptionKey: @"Failed to load editable Cocoa file",
+							   NSURLErrorKey: url
+							   }];
 			}
 			return NO;
 		}
@@ -283,7 +286,10 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 		contents = [[CocoaContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
 			if (outError) {
-				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load viewable Cocoa file"}];
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+							 @{NSLocalizedDescriptionKey: @"Failed to load viewable Cocoa file",
+							   NSURLErrorKey: url
+							   }];
 			}
 			return NO;
 		}
@@ -293,7 +299,10 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 		contents = [[XBMContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
 			if (outError) {
-				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load X11 bitmap"}];
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+							 @{NSLocalizedDescriptionKey: @"Failed to load X11 bitmap",
+							   NSURLErrorKey: url
+							   }];
 			}
 			return NO;
 		}
@@ -303,7 +312,10 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 		contents = [[SVGContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
 			if (outError) {
-				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load SVG"}];
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+							 @{NSLocalizedDescriptionKey: @"Failed to load SVG",
+							   NSURLErrorKey: url
+							   }];
 			}
 			return NO;
 		}
@@ -312,7 +324,10 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 		// Handle an unknown document type
 		NSLog(@"Unknown type passed to readFromURL:<%@>ofType:<%@>error:", url.path, type);
 		if (outError) {
-			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Unknown type %@", type]}];
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+						 @{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Unknown type %@", type],
+						   NSURLErrorKey: url
+						   }];
 		}
 		return NO;
 	}
@@ -337,13 +352,17 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 			 ]) {
 			[exporter writeDocument:self toFile:[url path]];
 			result = YES;
+			break;
 		}
 	}
 	
 	if (!result) {
 		NSLog(@"Unknown type passed to writeToURL:<%@>ofType:<%@>error:", url, typeName);
 		if (outError) {
-			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:@{NSLocalizedFailureReasonErrorKey:  [NSString stringWithFormat:@"Unknown type passed to writeToURL:<%@>ofType:<%@>error:", url, typeName]}];
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:
+						 @{NSLocalizedFailureReasonErrorKey:  [NSString stringWithFormat:@"Unknown type passed to writeToURL:<%@>ofType:<%@>error:", url, typeName],
+						   NSURLErrorKey: url
+						   }];
 		}
 	}
 	return result;
@@ -575,16 +594,16 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	locked = NO;
 }
 
-- (BOOL)validateMenuItem:(id)menuItem
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem
 {
-	id type = [self fileType];
+	NSString *type = [self fileType];
 	
 	[helpers endLineDrawing];
 	if ([menuItem tag] == 171) {
 		if ([type isEqualToString:@"PDF Document"] || [type isEqualToString:@"PICT Document"] || [type isEqualToString:@"Graphics Interchange Format Image"] || [type isEqualToString:@"Windows Bitmap Image"])
 			return NO;
-		if ([self isDocumentEdited] == NO)
-			return NO;
+		//if ([self isDocumentEdited] == NO)
+		//	return NO;
 	}
 	
 	if ([menuItem tag] == 180)

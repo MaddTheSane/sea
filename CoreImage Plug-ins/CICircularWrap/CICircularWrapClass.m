@@ -1,6 +1,7 @@
 #include <GIMPCore/GIMPCore.h>
 #include <math.h>
 #include <tgmath.h>
+#include <simd/simd.h>
 #import "CICircularWrapClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
@@ -135,7 +136,7 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-	__m128i *vdata;
+	simd_int4 *vdata;
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -159,40 +160,40 @@
 	data = [pluginData data];
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
-	vdata = (__m128i *)data;
-	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
-		vdata[i] = _mm_slli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	});
+	vdata = (simd_int4 *)data;
+	for (size_t i = 0; i < vec_len; i++) {
+		simd_int4 vstore = vdata[i] >> 24;
+		vdata[i] = vdata[i] << 8;
+		vdata[i] = vdata[i] + vstore;
+	}
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
 	@try {
 		resdata = [self executeChannel:pluginData withBitmap:data];
 	}
 	@catch (NSException *exception) {
-		dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-			vdata[i] = _mm_srli_epi32(vdata[i], 8);
-			vdata[i] = _mm_add_epi32(vdata[i], vstore);
-		});
+		for (size_t i = 0; i < vec_len; i++) {
+			simd_int4 vstore = vdata[i] << 24;
+			vdata[i] = vdata[i] >> 8;
+			vdata[i] = vdata[i] + vstore;
+		}
 		NSLog(@"%@", [exception reason]);
 		return;
 	}
 
 	// Convert from ARGB to RGBA
-	dispatch_apply(vec_len, dispatch_get_global_queue(0, 0), ^(size_t i) {
-		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-		vdata[i] = _mm_srli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
-	});
+	for (size_t i = 0; i < vec_len; i++) {
+		simd_int4 vstore = vdata[i] << 24;
+		vdata[i] = vdata[i] >> 8;
+		vdata[i] = vdata[i] + vstore;
+	}
 	
 	// Copy to destination
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		dispatch_apply(selection.size.height, dispatch_get_global_queue(0, 0), ^(size_t i) {
+		for (size_t i = 0; i < selection.size.height; i++) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
-		});
+		}
 	} else {
 		memset(replace, 0xFF, width * height);
 		memcpy(overlay, resdata, width * height * 4);

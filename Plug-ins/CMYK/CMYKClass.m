@@ -39,7 +39,7 @@
 	unsigned char *replace = [pluginData replace];
 	int channel = [pluginData channel];
 	
-	ColorSyncProfileRef srcProf = ColorSyncProfileCreateWithDisplayID(0);
+	ColorSyncProfileRef srcProf = ColorSyncProfileCreateWithName(kColorSyncSRGBProfile);
 	ColorSyncProfileRef destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile);
 	NSArray *profSeq = @[
 				@{(__bridge NSString*)kColorSyncProfile: (__bridge id)srcProf,

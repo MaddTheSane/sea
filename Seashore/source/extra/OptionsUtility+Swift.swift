@@ -148,6 +148,10 @@ extension EffectTool: SeaOptions {
 
 
 extension OptionsUtility {
+	///	Returns the options object associated with a given tool.
+	/// - parameter tool: The tool type whose options object you are
+	/// seeking (see SeaTools).
+	/// - returns: Returns the options object associated with the given index.
 	func options<B: SeaOptions>(for tool: B.Type) -> B.OptionClass {
 		return getOptions(B.toolType) as! B.OptionClass
 	}

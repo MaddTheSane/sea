@@ -485,6 +485,11 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 - (BOOL)canImportLayerFromFile:(NSString *)path
 {
+	return [self canImportLayerFromURL:[NSURL fileURLWithPath:path]];
+}
+
+- (BOOL)canImportLayerFromURL:(NSURL *)path
+{
 	NSString *docType;
 	BOOL success = NO;
 	

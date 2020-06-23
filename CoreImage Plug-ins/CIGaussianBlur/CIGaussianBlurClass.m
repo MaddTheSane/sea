@@ -1,6 +1,7 @@
 #include <GIMPCore/GIMPCore.h>
 #include <math.h>
 #include <tgmath.h>
+#include <simd/simd.h>
 #import "Bitmap.h"
 #import "CIGaussianBlurClass.h"
 
@@ -108,7 +109,7 @@
 	BOOL opaque, done;
 	IntRect selection;
 	unsigned char ormask[16];
-	__m128i *vresdata, orvmask;
+	simd_int4 *vresdata, orvmask;
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
@@ -191,9 +192,9 @@
 			ormask[i] = (i % 4 == 3) ? 0xFF : 0x00;
 		}
 		memcpy(&orvmask, ormask, 16);
-		vresdata = (__m128i *)resdata;
+		vresdata = (simd_int4 *)resdata;
 		for (int i = 0; i < vec_len; i++) {
-			vresdata[i] = _mm_or_si128(vresdata[i], orvmask);
+			vresdata[i] = vresdata[i] | orvmask;
 		}
 	}
 	

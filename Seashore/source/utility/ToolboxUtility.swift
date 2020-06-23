@@ -10,7 +10,7 @@ import Cocoa
 import SeashoreKit.SeaDocument
 import SeashoreKit
 
-private let DocToolbarIdentifier = NSToolbar.Identifier("Document Toolbar Instance Identifier")
+private let DocToolbarIdentifier: NSToolbar.Identifier = "Document Toolbar Instance Identifier"
 
 private let SelectionIdentifier	= NSToolbarItem.Identifier("Selection  Item Identifier")
 private let DrawIdentifier		= NSToolbarItem.Identifier("Draw Item Identifier")
@@ -266,7 +266,7 @@ class ToolboxUtility2 : NSObject {
 		effectTBView.setEnabled(enable, forSegment: SeaToolsDefines.effect.rawValue)
 	}
 	
-	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+	func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		if menuItem.tag >= 600 && menuItem.tag < 700 {
 			menuItem.state = (menuItem.tag == Int(tool.rawValue) + 600) ? .on : .off
 		}

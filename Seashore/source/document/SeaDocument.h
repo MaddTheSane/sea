@@ -2,9 +2,11 @@
 #ifdef SEASYSPLUGIN
 #import "Globals.h"
 #import "AbstractExporter.h"
+#import "Units.h"
 #else
 #import <SeashoreKit/Globals.h>
 #import <SeashoreKit/AbstractExporter.h>
+#import <SeashoreKit/Units.h>
 #endif
 
 @class SeaSelection, SeaWhiteboard;
@@ -70,16 +72,16 @@ NS_ASSUME_NONNULL_BEGIN
 	//IBOutlet LayerDataSource *dataSource;
 	
 	/// The unique ID for layer
-	int uniqueLayerID;
+	NSInteger uniqueLayerID;
 	
 	/// The unique ID for floating layer
-	int uniqueFloatingLayerID;
+	NSInteger uniqueFloatingLayerID;
 	
 	/// The unique ID for this document (sometimes used)
-	int uniqueDocID;
+	NSInteger uniqueDocID;
 	
 	/// The document's measure style
-	int measureStyle;
+	SeaUnits measureStyle;
 	
 	/// Is the document locked?
 	BOOL locked;
@@ -105,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@property	measureStyle
 	@discussion	The document's measure style
  */
-@property (setter = changeMeasuringStyle:) int measureStyle;
+@property (setter = changeMeasuringStyle:) SeaUnits measureStyle;
 
 /// The whiteboard that represents this document
 @property (strong) SeaWhiteboard *whiteboard;
@@ -422,7 +424,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion	Returns the unique ID of the document.
 	@result		Returns an integer representing a unique ID for the document.
 */
-@property (readonly) int uniqueDocID;
+@property (readonly) NSInteger uniqueDocID;
 
 /*!
 	@method		windowNibName
@@ -457,7 +459,7 @@ NS_ASSUME_NONNULL_BEGIN
 				An integer representing the measuring style (see
 				Units.h).
 */
-- (void)changeMeasuringStyle:(int)aStyle;
+- (void)changeMeasuringStyle:(SeaUnits)aStyle;
 
 /*!
 	@method		measureStyle
@@ -465,7 +467,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@result		Returns an integer representing the measuring style (see
 				Units.h).
 */
-- (int)measureStyle;
+- (SeaUnits)measureStyle;
 
 /*!
 	@method		locked
