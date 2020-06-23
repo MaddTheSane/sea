@@ -254,13 +254,13 @@
 			};
 			buildConfigurationList = A8E9640409BD8F4E0038694C /* Build configuration list for PBXProject "GIMPCore" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
+				fr,
+				de,
+				ja,
+				en,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* GIMPCore */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
