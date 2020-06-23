@@ -1,6 +1,7 @@
 #include <GIMPCore/GIMPCore.h>
 #include <math.h>
 #include <tgmath.h>
+#include <simd/simd.h>
 #import "CIFalseColorClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
@@ -124,7 +125,7 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-	__m128i *vdata;
+	simd_int4 *vdata;
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -150,11 +151,11 @@
 	replace = [pluginData replace];
 	
 	// Convert from RGBA to ARGB
-	vdata = (__m128i *)data;
+	vdata = (simd_int4 *)data;
 	for (size_t i = 0; i < vec_len; i++) {
-		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
-		vdata[i] = _mm_slli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		simd_int4 vstore = vdata[i] >> 24;
+		vdata[i] = vdata[i] << 8;
+		vdata[i] = vdata[i] + vstore;
 	}
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
@@ -163,9 +164,9 @@
 	}
 	@catch (NSException *exception) {
 		for (size_t i = 0; i < vec_len; i++) {
-			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-			vdata[i] = _mm_srli_epi32(vdata[i], 8);
-			vdata[i] = _mm_add_epi32(vdata[i], vstore);
+			simd_int4 vstore = vdata[i] << 24;
+			vdata[i] = vdata[i] >> 8;
+			vdata[i] = vdata[i] + vstore;
 		}
 		NSLog(@"%@", [exception reason]);
 		return;
@@ -173,9 +174,9 @@
 	
 	// Convert from ARGB to RGBA
 	for (size_t i = 0; i < vec_len; i++) {
-		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-		vdata[i] = _mm_srli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		simd_int4 vstore = vdata[i] << 24;
+		vdata[i] = vdata[i] >> 8;
+		vdata[i] = vdata[i] + vstore;
 	}
 	
 	// Copy to destination
@@ -195,7 +196,7 @@
 	int i, j, vec_len, width, height, channel;
 	IntRect selection;
 	unsigned char ormask[16], *resdata, *datatouse;
-	__m128i *vdata, *nvdata, orvmask;
+	simd_int4 *vdata, *nvdata, orvmask;
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -211,8 +212,8 @@
 		vec_len /= 16;
 		vec_len++;
 	}
-	vdata = (__m128i *)data;
-	nvdata = (__m128i *)newdata;
+	vdata = (simd_int4 *)data;
+	nvdata = (simd_int4 *)newdata;
 	datatouse = newdata;
 	if (channel == SeaSelectedChannelAlpha) {
 		for (size_t i = 0; i < vec_len; i++) {
@@ -225,7 +226,7 @@
 		}
 		memcpy(&orvmask, ormask, 16);
 		for (size_t i = 0; i < vec_len; i++) {
-			nvdata[i] = _mm_or_si128(vdata[i], orvmask);
+			nvdata[i] = vdata[i] | orvmask;
 		}
 	}
 	

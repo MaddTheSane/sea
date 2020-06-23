@@ -1,6 +1,7 @@
 #include <GIMPCore/GIMPCore.h>
 #include <math.h>
 #include <tgmath.h>
+#include <simd/simd.h>
 #import "CICircularWrapClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
@@ -135,7 +136,7 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-	__m128i *vdata;
+	simd_int4 *vdata;
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -159,11 +160,11 @@
 	data = [pluginData data];
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
-	vdata = (__m128i *)data;
+	vdata = (simd_int4 *)data;
 	for (size_t i = 0; i < vec_len; i++) {
-		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
-		vdata[i] = _mm_slli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		simd_int4 vstore = vdata[i] >> 24;
+		vdata[i] = vdata[i] << 8;
+		vdata[i] = vdata[i] + vstore;
 	}
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
@@ -172,9 +173,9 @@
 	}
 	@catch (NSException *exception) {
 		for (size_t i = 0; i < vec_len; i++) {
-			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-			vdata[i] = _mm_srli_epi32(vdata[i], 8);
-			vdata[i] = _mm_add_epi32(vdata[i], vstore);
+			simd_int4 vstore = vdata[i] << 24;
+			vdata[i] = vdata[i] >> 8;
+			vdata[i] = vdata[i] + vstore;
 		}
 		NSLog(@"%@", [exception reason]);
 		return;
@@ -182,9 +183,9 @@
 
 	// Convert from ARGB to RGBA
 	for (size_t i = 0; i < vec_len; i++) {
-		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-		vdata[i] = _mm_srli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		simd_int4 vstore = vdata[i] << 24;
+		vdata[i] = vdata[i] >> 8;
+		vdata[i] = vdata[i] + vstore;
 	}
 	
 	// Copy to destination

@@ -8,6 +8,7 @@
 
 #import "SSKCIPlugin.h"
 #import "Bitmap.h"
+#include <simd/simd.h>
 
 @implementation SSKCIPlugin
 
@@ -124,7 +125,7 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-	__m128i *vdata;
+	simd_int4 *vdata;
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -150,11 +151,11 @@
 	replace = [pluginData replace];
 	SeaPremultiplyBitmap(4, newdata, data, width * height);
 	// Convert from RGBA to ARGB
-	vdata = (__m128i *)newdata;
+	vdata = (simd_int4 *)newdata;
 	for (size_t i = 0; i < vec_len; i++) {
-		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
-		vdata[i] = _mm_slli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		simd_int4 vstore = vdata[i] >> 24;
+		vdata[i] = vdata[i] << 8;
+		vdata[i] = vdata[i] + vstore;
 	}
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
@@ -163,9 +164,9 @@
 	}
 	@catch (NSException *exception) {
 		for (size_t i = 0; i < vec_len; i++) {
-			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-			vdata[i] = _mm_srli_epi32(vdata[i], 8);
-			vdata[i] = _mm_add_epi32(vdata[i], vstore);
+			simd_int4 vstore = vdata[i] << 24;
+			vdata[i] = vdata[i] >> 8;
+			vdata[i] = vdata[i] + vstore;
 		}
 		NSLog(@"%@", [exception reason]);
 		return;
@@ -177,9 +178,9 @@
 	}
 	// Convert from ARGB to RGBA
 	for (size_t i = 0; i < vec_len; i++) {
-		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-		vdata[i] = _mm_srli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		simd_int4 vstore = vdata[i] << 24;
+		vdata[i] = vdata[i] >> 8;
+		vdata[i] = vdata[i] + vstore;
 	}
 	
 	// Copy to destination
@@ -206,7 +207,7 @@
 	int width, height, channel;
 	unsigned char ormask[16], *resdata, *datatouse;
 	IntRect selection;
-	__m128i *vdata, *nvdata, *rvdata, orvmask;
+	simd_int4 *vdata, *nvdata, *rvdata, orvmask;
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -214,7 +215,7 @@
 	width = [pluginData width];
 	height = [pluginData height];
 	selection = [pluginData selection];
-	vdata = (__m128i *)data;
+	vdata = (simd_int4 *)data;
 	if ([self restoreAlpha]) {
 		vec_len = width * height * 4;
 		if (vec_len % 16 == 0) {
@@ -223,7 +224,7 @@
 			vec_len /= 16;
 			vec_len++;
 		}
-		nvdata = (__m128i *)newdata;
+		nvdata = (simd_int4 *)newdata;
 		datatouse = newdata;
 		if (channel == SeaSelectedChannelAlpha) {
 			for (size_t i = 0; i < width * height; i++) {
@@ -236,7 +237,7 @@
 			}
 			memcpy(&orvmask, ormask, 16);
 			for (int i = 0; i < vec_len; i++) {
-				nvdata[i] = _mm_or_si128(vdata[i], orvmask);
+				nvdata[i] = vdata[i] | orvmask;
 			}
 		}
 	} else {
@@ -250,7 +251,7 @@
 				vec_len /= 16;
 				vec_len++;
 			}
-			rvdata = (__m128i *)newdata;
+			rvdata = (simd_int4 *)newdata;
 			datatouse = newdata;
 			if (channel == SeaSelectedChannelPrimary) {
 				for (short i = 0; i < 16; i++) {
@@ -258,7 +259,7 @@
 				}
 				memcpy(&orvmask, ormask, 16);
 				for (int i = 0; i < vec_len; i++) {
-					rvdata[i] = _mm_or_si128(vdata[i], orvmask);
+					rvdata[i] = vdata[i] | orvmask;
 				}
 			} else if (channel == SeaSelectedChannelAlpha) {
 				for (int i = 0; i < width * height; i++) {

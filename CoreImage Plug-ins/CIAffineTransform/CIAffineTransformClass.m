@@ -1,6 +1,7 @@
 #include <GIMPCore/GIMPCore.h>
 #include <math.h>
 #include <tgmath.h>
+#include <simd/simd.h>
 #import "Bitmap.h"
 #import "CIAffineTransformClass.h"
 
@@ -136,7 +137,7 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-	__m128i *vdata;
+	simd_int4 *vdata;
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -162,11 +163,11 @@
 	replace = [pluginData replace];
 	SeaPremultiplyBitmap(4, newdata, data, width * height);
 	// Convert from RGBA to ARGB
-	vdata = (__m128i *)newdata;
+	vdata = (simd_int4 *)newdata;
 	for (size_t i = 0; i < vec_len; i++) {
-		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
-		vdata[i] = _mm_slli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		simd_int4 vstore = vdata[i] >> 24;
+		vdata[i] = vdata[i] << 8;
+		vdata[i] = vdata[i] + vstore;
 	}
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
@@ -175,9 +176,9 @@
 	}
 	@catch (NSException *exception) {
 		for (size_t i = 0; i < vec_len; i++) {
-			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-			vdata[i] = _mm_srli_epi32(vdata[i], 8);
-			vdata[i] = _mm_add_epi32(vdata[i], vstore);
+			simd_int4 vstore = vdata[i] << 24;
+			vdata[i] = vdata[i] >> 8;
+			vdata[i] = vdata[i] + vstore;
 		}
 		NSLog(@"%@", [exception reason]);
 		return;
@@ -189,9 +190,9 @@
 	}
 	// Convert from ARGB to RGBA
 	for (size_t i = 0; i < vec_len; i++) {
-		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
-		vdata[i] = _mm_srli_epi32(vdata[i], 8);
-		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+		simd_int4 vstore = vdata[i] << 24;
+		vdata[i] = vdata[i] >> 8;
+		vdata[i] = vdata[i] + vstore;
 	}
 	
 	// Copy to destination
@@ -210,7 +211,7 @@
 {
 	int width, height, channel;
 	unsigned char ormask[16], *resdata, *datatouse;
-	__m128i *vdata, *rvdata, orvmask;
+	simd_int4 *vdata, *rvdata, orvmask;
 	size_t vec_len;
 	
 	// Make adjustments for the channel
@@ -222,8 +223,8 @@
 		vec_len = width * height * 4;
 		if (vec_len % 16 == 0) { vec_len /= 16; }
 		else { vec_len /= 16; vec_len++; }
-		vdata = (__m128i *)data;
-		rvdata = (__m128i *)newdata;
+		vdata = (simd_int4 *)data;
+		rvdata = (simd_int4 *)newdata;
 		datatouse = newdata;
 		if (channel == SeaSelectedChannelPrimary) {
 			for (int i = 0; i < 16; i++) {
@@ -231,7 +232,7 @@
 			}
 			memcpy(&orvmask, ormask, 16);
 			for (size_t i = 0; i < vec_len; i++) {
-				rvdata[i] = _mm_or_si128(vdata[i], orvmask);
+				rvdata[i] = vdata[i] | orvmask;
 			}
 		} else if (channel == SeaSelectedChannelAlpha) {
 			for (size_t i = 0; i < width * height; i++) {
@@ -466,7 +467,7 @@
 
 - (unsigned char *)prepareAffineTransform:(NSAffineTransform *)at withImage:(unsigned char *)data spp:(int)spp width:(int)width height:(int)height
 {
-	__m128i *vdata, *rvdata, orvmask;
+	simd_int4 *vdata, *rvdata, orvmask;
 	unsigned char ormask[16];
 	unsigned char *ndata;
 	size_t vec_len;
@@ -490,8 +491,8 @@
 			vec_len /= 16;
 			vec_len++;
 		}
-		vdata = (__m128i *)data;
-		rvdata = (__m128i *)ndata;
+		vdata = (simd_int4 *)data;
+		rvdata = (simd_int4 *)ndata;
 		
 		// Convert from RGBA to ARGB with A = 0xFF
 		for (int i = 0; i < 16; i++) {
@@ -499,8 +500,8 @@
 		}
 		memcpy(&orvmask, ormask, 16);
 		for (size_t i = 0; i < vec_len; i++) {
-			rvdata[i] = _mm_slli_epi32(vdata[i], 8);
-			rvdata[i] = _mm_or_si128(rvdata[i], orvmask);
+			rvdata[i] = vdata[i] << 8;
+			rvdata[i] = rvdata[i] | orvmask;
 		}
 	}
 	

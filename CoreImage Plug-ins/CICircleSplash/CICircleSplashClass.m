@@ -1,6 +1,7 @@
 #include <GIMPCore/GIMPCore.h>
 #include <math.h>
 #include <tgmath.h>
+#include <simd/simd.h>
 #import "Bitmap.h"
 #import "CICircleSplashClass.h"
 
