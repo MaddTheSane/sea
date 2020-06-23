@@ -405,7 +405,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@result		Returns an integer representing a new layer may assign to
 				itself.
 */
-@property (readonly) int uniqueLayerID;
+@property (readonly) NSInteger uniqueLayerID;
 
 /*!
 	@property	uniqueFloatingLayerID
@@ -417,7 +417,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@result		Returns an integer representing a new layer may assign to
 				itself.
 */
-@property (readonly) int uniqueFloatingLayerID;
+@property (readonly) NSInteger uniqueFloatingLayerID;
 
 /*!
 	@property	uniqueDocID

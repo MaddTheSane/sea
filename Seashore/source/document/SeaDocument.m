@@ -552,13 +552,13 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	[super close];
 }
 
-- (int)uniqueLayerID
+- (NSInteger)uniqueLayerID
 {
 	uniqueLayerID++;
 	return uniqueLayerID;
 }
 
-- (int)uniqueFloatingLayerID
+- (NSInteger)uniqueFloatingLayerID
 {
 	uniqueFloatingLayerID++;
 	return uniqueFloatingLayerID;

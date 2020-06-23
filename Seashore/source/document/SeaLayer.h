@@ -77,7 +77,7 @@
 	BOOL hasAlpha;
 	
 	//! The unique ID for this layer - sometimes used
-	int uniqueLayerID;
+	NSInteger uniqueLayerID;
 
 	//! A path to the file we use for undoing
 	NSString *undoFilePath;
