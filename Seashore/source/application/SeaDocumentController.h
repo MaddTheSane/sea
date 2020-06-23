@@ -92,7 +92,7 @@
 				The path of the file.
 	@result		Returns an instance of the freshly opened document.
 */
-- (id)openNonCurrentFile:(NSString *)path;
+- (NSDocument*)openNonCurrentFile:(NSString *)path;
 
 /*!
 	@method		openRecent:

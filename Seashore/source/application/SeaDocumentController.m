@@ -110,9 +110,9 @@
 	[super openDocument:sender];
 }
 
-- (id)openNonCurrentFile:(NSString *)path
+- (NSDocument*)openNonCurrentFile:(NSString *)path
 {
-	id newDocument;
+	__kindof NSDocument* newDocument;
 	
 	stopNotingRecentDocuments = YES;
 	newDocument = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfFile:path display:YES];

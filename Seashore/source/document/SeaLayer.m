@@ -46,7 +46,7 @@
 		else
 			name = [[NSString alloc] initWithFormat:LOCALSTR(@"layer title", @"Layer %d"), uniqueLayerID];
 		oldNames = [[NSArray alloc] init];
-		undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%d-l%d", [document uniqueDocID], [self uniqueLayerID]];
+		undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%d-l%d", (long)[document uniqueDocID], [self uniqueLayerID]];
 		affinePlugin = [[SeaController seaPlugins] affinePlugin];
 	}
 	return self;
