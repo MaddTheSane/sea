@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "Globals.h"
+#import <SeashoreKit/Globals.h>
 #import "SeaBrushFuncs.h"
 
 NS_ASSUME_NONNULL_BEGIN
