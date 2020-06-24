@@ -12,7 +12,7 @@ private let EPSILON = 0.0001
 ///Specifies the maximum number of points.
 private let kMaxETPoints = 16384
 
-private func sqr<A: FloatingPoint>(_ val: A) -> A {
+private func sqr<A: Numeric>(_ val: A) -> A {
 	return val * val
 }
 
@@ -103,7 +103,7 @@ class EraserTool: AbstractTool, SeaOptions {
 		if brush.usePixmap {
 			// We can't handle this for anything but 4 samples per pixel
 			guard spp == 4 else {
-				return;
+				return
 			}
 			
 			// Get the approrpiate brush data for the point
@@ -115,8 +115,8 @@ class EraserTool: AbstractTool, SeaOptions {
 					if (ipoint.x + i >= 0 && ipoint.y + j >= 0 && ipoint.x + i < width && ipoint.y + j < height) {
 						
 						// Change the pixel colour appropriately
-						overlayPos = (width * (ipoint.y + j) + ipoint.x + i) * 4;
-						SeaSpecialMerge(4, overlay, overlayPos, brushData, (j * brushWidth + i) * 4, pressure);
+						overlayPos = (width * (ipoint.y + j) + ipoint.x + i) * 4
+						SeaSpecialMerge(4, overlay, overlayPos, brushData, (j * brushWidth + i) * 4, pressure)
 						
 					}
 				}
@@ -135,9 +135,9 @@ class EraserTool: AbstractTool, SeaOptions {
 					if ipoint.x + i >= 0 && ipoint.y + j >= 0 && ipoint.x + i < width && ipoint.y + j < height {
 						
 						// Change the pixel colour appropriately
-						overlayPos = (width * (ipoint.y + j) + ipoint.x + i) * spp;
-						basePixel[Int(spp - 1)] = brushData![Int(j * brushWidth + i)];
-						SeaSpecialMerge(spp, overlay, overlayPos, &basePixel, 0, pressure);
+						overlayPos = (width * (ipoint.y + j) + ipoint.x + i) * spp
+						basePixel[Int(spp - 1)] = brushData![Int(j * brushWidth + i)]
+						SeaSpecialMerge(spp, overlay, overlayPos, &basePixel, 0, pressure)
 					}
 				}
 			}
@@ -163,17 +163,17 @@ class EraserTool: AbstractTool, SeaOptions {
 		multithreaded = SeaController.seaPrefs!.multithreaded
 		let ignoreFirstTouch = SeaController.seaPrefs!.ignoreFirstTouch
 		if (ignoreFirstTouch && (event?.type == .leftMouseDown || event?.type == .rightMouseDown) && boptions.pressureSensitive && !((options as! EraserOptions).modifier() == .shift)) {
-			firstTouchDone = false;
-			return;
+			firstTouchDone = false
+			return
 		} else {
-			firstTouchDone = true;
+			firstTouchDone = true
 		}
 
 		let pressure: Int32
 		if (options as! EraserOptions).mimicBrush {
 			pressure =  boptions.pressureValue(event)
 		} else {
-			pressure = 255;
+			pressure = 255
 		}
 
 		// Determine background colour and hence the brush colour
@@ -182,10 +182,10 @@ class EraserTool: AbstractTool, SeaOptions {
 			basePixel[0] = UInt8(color.redComponent * 255)
 			basePixel[1] = UInt8(color.greenComponent * 255)
 			basePixel[2] = UInt8(color.blueComponent * 255)
-			basePixel[3] = 255;
+			basePixel[3] = 255
 		} else {
 			basePixel[0] = UInt8(color.whiteComponent * 255)
-			basePixel[1] = 255;
+			basePixel[1] = 255
 		}
 	
 		// Set the appropriate overlay opacity
@@ -195,8 +195,8 @@ class EraserTool: AbstractTool, SeaOptions {
 		document.whiteboard.overlayOpacity = (options as! EraserOptions).opacity
 		
 		// Plot the initial point
-		rect.size.width = curBrush.fakeWidth + 1;
-		rect.size.height = curBrush.fakeHeight + 1;
+		rect.size.width = curBrush.fakeWidth + 1
+		rect.size.height = curBrush.fakeHeight + 1
 		let temp = NSPoint(x: curPoint.x - CGFloat(curBrush.width / 2) - 1.0, y: curPoint.y - CGFloat(curBrush.height / 2) - 1.0)
 		rect.origin = IntPoint(nsPoint: temp)
 		rect.origin.x -= 1; rect.origin.y -= 1;
@@ -208,8 +208,8 @@ class EraserTool: AbstractTool, SeaOptions {
 		
 		// Record the position as the last point
 		lastPoint = curPoint
-		lastPlotPoint = curPoint;
-		distance = 0;
+		lastPlotPoint = curPoint
+		distance = 0
 		
 		// Create the points list
 		points = [PointRecord](repeating: PointRecord(point: IntPoint(), pressure: 0, special: 0), count: kMaxETPoints)
@@ -238,10 +238,10 @@ class EraserTool: AbstractTool, SeaOptions {
 			let layerHeight = layer.height
 			let brushWidth = curBrush.fakeWidth
 			let brushHeight = curBrush.fakeHeight
-			let brushSpacing = Double(bUtil.spacing) / 100.0;
+			let brushSpacing = Double(bUtil.spacing) / 100.0
 			let fade = (options as! EraserOptions).mimicBrush && boptions.fade
-			let fadeValue = boptions.fadeValue;
-			var bigRect = IntMakeRect(0, 0, 0, 0);
+			let fadeValue = boptions.fadeValue
+			var bigRect = IntRect()
 			var lastDate = Date()
 			var t0: Double = 0
 			var dt: Double = 0
@@ -255,38 +255,38 @@ class EraserTool: AbstractTool, SeaOptions {
 			repeat {
 				if drawingPos < pos {
 					// Get the next record and carry on
-					let curPoint = IntPointMakeNSPoint(points[drawingPos].point);
-					let origPressure = points[drawingPos].pressure;
+					let curPoint = points[drawingPos].point.nsPoint
+					let origPressure = points[drawingPos].pressure
 					if (points[drawingPos].special == 2) {
 						if (bigRect.size.width != 0) {
 							document.helpers?.overlayChanged(bigRect, inThread: true)
 						}
 						drawingDone = true
-						return;
+						return
 					}
 					drawingPos += 1
 					
 					// Determine the change in the x and y directions
-					let deltaX = curPoint.x - lastPoint.x;
-					let deltaY = curPoint.y - lastPoint.y;
+					let deltaX = curPoint.x - lastPoint.x
+					let deltaY = curPoint.y - lastPoint.y
 					if deltaX == 0.0 && deltaY == 0.0 {
 						if (multithreaded) {
 							continue
 						} else {
-							return;
+							return
 						}
 					}
 					
 					// Determine the number of brush strokes in the x and y directions
-					var mag = Double(brushWidth / 2);
-					let xd = (mag * Double(deltaX)) / sqr(mag);
-					mag = Double(brushHeight / 2);
-					let yd = (mag * Double(deltaY)) / sqr(mag);
+					var mag = Double(brushWidth / 2)
+					let xd = (mag * Double(deltaX)) / sqr(mag)
+					mag = Double(brushHeight / 2)
+					let yd = (mag * Double(deltaY)) / sqr(mag)
 					
 					// Determine the brush stroke distance and hence determine the initial and total distance
-					let dist = 0.5 * sqrt(sqr(xd) + sqr(yd));		// Why is this halved?
-					var total = dist + distance;
-					let initial = distance;
+					let dist = 0.5 * sqrt(sqr(xd) + sqr(yd))		// Why is this halved?
+					var total = dist + distance
+					let initial = distance
 					
 					var stFactor: Double = 0
 					var stOffset: Double = 0
@@ -301,52 +301,52 @@ class EraserTool: AbstractTool, SeaOptions {
 					
 					if fabs(stFactor) > dist / brushSpacing {
 						// We want to draw the maximum number of points
-						dt = brushSpacing / dist;
-						n = Int32(initial / brushSpacing + 1.0 + EPSILON);
-						t0 = (Double(n) * brushSpacing - initial) / dist;
+						dt = brushSpacing / dist
+						n = Int32(initial / brushSpacing + 1.0 + EPSILON)
+						t0 = (Double(n) * brushSpacing - initial) / dist
 						num_points = 1 + Int32(floor((1 + EPSILON - t0) / dt))
 					} else if fabs(stFactor) < EPSILON {
 						// We can't draw any points - this does actually get called albeit once in a blue moon
-						lastPoint = curPoint;
+						lastPoint = curPoint
 						if multithreaded {
 							continue
 						} else {
-							return;
+							return
 						}
 					} else {
 						// We want to draw a number of points
-						let direction: Int32 = stFactor > 0 ? 1 : -1;
+						let direction: Int32 = stFactor > 0 ? 1 : -1
 						
 						var s0 = Int32(floor(stOffset + 0.5))
 						var sn = Int32(floor(stOffset + stFactor + 0.5))
 						
-						t0 = (Double(s0) - stOffset) / stFactor;
-						tn = (Double(sn) - stOffset) / stFactor;
+						t0 = (Double(s0) - stOffset) / stFactor
+						tn = (Double(sn) - stOffset) / stFactor
 						
 						var x = Int32(floor(lastPoint.x.native + t0 * deltaX.native))
 						var y = Int32(floor(lastPoint.y.native + t0 * deltaY.native))
 						if t0 < 0.0 && !(x == Int32(floor(lastPoint.x)) && y == Int32(floor(lastPoint.y))) {
-							s0 += direction;
+							s0 += direction
 						}
 						if x == Int32(floor(lastPlotPoint.x)) && y == Int32(floor(lastPlotPoint.y)) {
-							s0 += direction;
+							s0 += direction
 						}
 						x = Int32(floor(lastPoint.x.native + tn * deltaX.native))
 						y = Int32(floor(lastPoint.y.native + tn * deltaY.native))
 						if tn > 1.0 && !(x == Int32(floor(lastPoint.x)) && y == Int32(floor(lastPoint.y))) {
-							sn -= direction;
+							sn -= direction
 						}
-						t0 = (Double(s0) - stOffset) / stFactor;
-						tn = (Double(sn) - stOffset) / stFactor;
-						dt = Double(direction) * 1.0 / stFactor;
-						num_points = 1 + direction * (sn - s0);
+						t0 = (Double(s0) - stOffset) / stFactor
+						tn = (Double(sn) - stOffset) / stFactor
+						dt = Double(direction) * 1.0 / stFactor
+						num_points = 1 + direction * (sn - s0)
 						
-						if (num_points >= 1) {
-							if (tn < 1) {
-							total = initial + tn * dist;
+						if num_points >= 1 {
+							if tn < 1 {
+								total = initial + tn * dist
 							}
-							total = brushSpacing * floor(total / brushSpacing + 0.5);
-							total += (1.0 - tn) * dist;
+							total = brushSpacing * floor(total / brushSpacing + 0.5)
+							total += (1.0 - tn) * dist
 						}
 					}
 					
@@ -354,38 +354,38 @@ class EraserTool: AbstractTool, SeaOptions {
 					for n in 0 ..< num_points {
 						let t = t0 + Double(n) * dt
 						var rect = IntRect()
-						rect.size.width = brushWidth + 1;
-						rect.size.height = brushHeight + 1;
-						let temp = NSPoint(x: lastPoint.x.native + deltaX.native * t - Double(brushWidth / 2), y: lastPoint.y.native + deltaY.native * t - Double(brushHeight / 2));
-						rect.origin = NSPointMakeIntPoint(temp);
+						rect.size.width = brushWidth + 1
+						rect.size.height = brushHeight + 1
+						let temp = NSPoint(x: lastPoint.x.native + deltaX.native * t - Double(brushWidth / 2), y: lastPoint.y.native + deltaY.native * t - Double(brushHeight / 2))
+						rect.origin = IntPoint(temp)
 						rect.origin.x -= 1; rect.origin.y -= 1;
-						rect = IntConstrainRect(rect, IntMakeRect(0, 0, layerWidth, layerHeight));
+						rect = IntConstrainRect(rect, IntMakeRect(0, 0, layerWidth, layerHeight))
 						if fade {
 							dtx = (initial + t * dist) / Double(fadeValue)
-							pressure = Int32(exp ( -dtx * dtx * 5.541) * 255.0);
-							pressure = Int32(int_mult(UInt8(pressure), origPressure));
+							pressure = Int32(exp(-dtx * dtx * 5.541) * 255.0)
+							pressure = Int32(int_mult(UInt8(pressure), origPressure))
 						} else {
-							pressure = Int32(origPressure);
+							pressure = Int32(origPressure)
 						}
 						if rect.size.width > 0 && rect.size.height > 0 && pressure > 0 {
 							plot(brush: curBrush, at: temp, pressure: pressure)
 							if (bigRect.size.width == 0) {
-								bigRect = rect;
+								bigRect = rect
 							} else {
 								var trect = IntRect()
-								trect.origin.x = min(rect.origin.x, bigRect.origin.x);
-								trect.origin.y = min(rect.origin.y, bigRect.origin.y);
-								trect.size.width = max(rect.origin.x + rect.size.width - trect.origin.x, bigRect.origin.x + bigRect.size.width - trect.origin.x);
-								trect.size.height = max(rect.origin.y + rect.size.height - trect.origin.y, bigRect.origin.y + bigRect.size.height - trect.origin.y);
-								bigRect = trect;
+								trect.origin.x = min(rect.origin.x, bigRect.origin.x)
+								trect.origin.y = min(rect.origin.y, bigRect.origin.y)
+								trect.size.width = max(rect.origin.x + rect.size.width - trect.origin.x, bigRect.origin.x + bigRect.size.width - trect.origin.x)
+								trect.size.height = max(rect.origin.y + rect.size.height - trect.origin.y, bigRect.origin.y + bigRect.size.height - trect.origin.y)
+								bigRect = trect
 							}
 						}
 					}
 					
 					// Update the distance and plot points
-					distance = total;
-					lastPoint.x = lastPoint.x + deltaX;
-					lastPoint.y = lastPoint.y + deltaY;
+					distance = total
+					lastPoint.x = lastPoint.x + deltaX
+					lastPoint.y = lastPoint.y + deltaY
 				} else {
 					if multithreaded {
 						Thread.sleep(until: Date(timeIntervalSinceNow: 0.01))
@@ -397,7 +397,7 @@ class EraserTool: AbstractTool, SeaOptions {
 					if bigRect.size.width != 0 && Date().timeIntervalSince(lastDate) > 0.02 {
 						document.helpers?.overlayChanged(bigRect, inThread: true)
 						lastDate = Date()
-						bigRect = IntMakeRect(0, 0, 0, 0);
+						bigRect = IntRect()
 					}
 				} else {
 					document.helpers?.overlayChanged(bigRect, inThread: true)
@@ -417,7 +417,7 @@ class EraserTool: AbstractTool, SeaOptions {
 		
 		// Check this is a new point
 		if where1 == lastWhere {
-			return;
+			return
 		} else {
 			lastWhere = where1
 		}
@@ -427,11 +427,11 @@ class EraserTool: AbstractTool, SeaOptions {
 			if (options as! EraserOptions).mimicBrush {
 				points[pos].pressure = UInt8(boptions?.pressureValue(event) ?? 255)
 			} else {
-				points[pos].pressure = 255;
+				points[pos].pressure = 255
 			}
 			pos += 1
 		} else if pos == kMaxETPoints - 1 {
-			points[pos].special = 2;
+			points[pos].special = 2
 			pos += 1
 		}
 		
@@ -444,7 +444,7 @@ class EraserTool: AbstractTool, SeaOptions {
 	func endLineDrawing() {
 		// Tell the other thread to terminate
 		if pos < kMaxETPoints {
-			points[pos].special = 2;
+			points[pos].special = 2
 			pos += 1
 		}
 		
