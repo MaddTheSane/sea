@@ -1,6 +1,11 @@
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
 #import "Units.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/Units.h>
+#endif
 
 @class SeaPrefs;
 

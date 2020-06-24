@@ -1,10 +1,18 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSMenu.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
 #import "SeaDocument.h"
 #import "PluginData.h"
 #import "SeaWhiteboard.h"
 #import "SSKTerminatable.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaDocument.h>
+#import <SeashoreKit/PluginData.h>
+#import <SeashoreKit/SeaWhiteboard.h>
+#import <SeashoreKit/SSKTerminatable.h>
+#endif
 
 @class SeaPlugins;
 @class PluginData;

@@ -1,8 +1,15 @@
 #import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "SSKTerminatable.h"
 #import "Globals.h"
 #import "SeaWarning.h"
 #import "Units.h"
+#else
+#import <SeashoreKit/SSKTerminatable.h>
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaWarning.h>
+#import <SeashoreKit/Units.h>
+#endif
 
 /*!
 	@enum		k...Color
