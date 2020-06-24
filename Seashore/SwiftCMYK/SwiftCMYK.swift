@@ -42,8 +42,8 @@ final public class CMYK: NSObject, SeaPluginClass {
 		let replace = pluginData.replace
 		let channel = pluginData.channel
 		
-		guard let srcProf = ColorSyncProfileCreateWithName(kColorSyncSRGBProfile.takeUnretainedValue()).takeRetainedValue(),
-			  let destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile.takeUnretainedValue()).takeRetainedValue() else {
+		guard let srcProf = ColorSyncProfileCreateWithName(kColorSyncSRGBProfile.takeUnretainedValue())?.takeRetainedValue(),
+			  let destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile.takeUnretainedValue())?.takeRetainedValue() else {
 				return
 		}
 		// TODO: Hey Apple! Audit your ColorSync API for Swift!
@@ -61,7 +61,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 				kColorSyncTransformTag.takeUnretainedValue() as String: kColorSyncTransformPCSToDevice.takeUnretainedValue() as String]
 		]
 		
-		guard let cw = ColorSyncTransformCreate(profSeq as NSArray, nil) else {
+		guard let cw = ColorSyncTransformCreate(profSeq as NSArray, nil)?.takeRetainedValue() else {
 			return
 		}
 		
