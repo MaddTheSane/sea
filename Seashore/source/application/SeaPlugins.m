@@ -212,7 +212,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 {
 	id menuItem, submenuItem;
 	NSMenu *submenu;
-	id plugin;
+	id<SeaPluginClass> plugin;
 	int i;
 	
 	// Set up

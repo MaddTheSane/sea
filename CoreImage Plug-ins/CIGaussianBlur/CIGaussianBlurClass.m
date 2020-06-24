@@ -108,8 +108,8 @@
 	unsigned char *resdata;
 	BOOL opaque, done;
 	IntRect selection;
-	unsigned char ormask[16];
-	simd_int4 *vresdata, orvmask;
+	simd_uint4 *vresdata;
+	const simd_uint4 orvmask = simd_make_uint4(255, 255, 255, 255);
 	
 	// Find core image context
 	context = [CIContext contextWithCGContext:[[NSGraphicsContext currentContext] graphicsPort] options:@{kCIContextWorkingColorSpace: (id)[pluginData displayProf], kCIContextOutputColorSpace: (id)[pluginData displayProf]}];
@@ -188,11 +188,7 @@
 		vec_len = [temp_rep pixelsWide] * [temp_rep pixelsHigh] * [temp_rep samplesPerPixel];
 		if (vec_len % 16 == 0) { vec_len /= 16; }
 		else { vec_len /= 16; vec_len++; }
-		for (i = 0; i < 16; i++) {
-			ormask[i] = (i % 4 == 3) ? 0xFF : 0x00;
-		}
-		memcpy(&orvmask, ormask, 16);
-		vresdata = (simd_int4 *)resdata;
+		vresdata = (simd_uint4 *)resdata;
 		for (int i = 0; i < vec_len; i++) {
 			vresdata[i] = vresdata[i] | orvmask;
 		}
