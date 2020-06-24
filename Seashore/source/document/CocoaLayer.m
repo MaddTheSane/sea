@@ -30,11 +30,11 @@
 	// Determine the color space
 	BMPColorSpace space = -1;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace])
-		space = kGrayColorSpace;
+		space = BMPColorSpaceGray;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedRGBColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceRGBColorSpace])
-		space = kRGBColorSpace;
+		space = BMPColorSpaceRGB;
 	if ([[imageRep colorSpaceName] isEqualToString:NSDeviceCMYKColorSpace])
-		space = kCMYKColorSpace;
+		space = BMPColorSpaceCMYK;
 	if (space == -1) {
 		NSLog(@"Color space %@ not yet handled.", [imageRep colorSpaceName]);
 		return nil;
@@ -49,7 +49,7 @@
 	// Convert data to what we want
 	NSInteger bipp = [imageRep bitsPerPixel];
 	NSInteger bypr = [imageRep bytesPerRow];
-	data = SeaConvertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcPtr, width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, (GIMPBitmapFormat)format);
+	data = SeaConvertBitmap(spp, (spp == 4) ? BMPColorSpaceRGB : BMPColorSpaceGray, 8, srcPtr, width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, (GIMPBitmapFormat)format);
 	if (cmProfileLoc) {
 		CFRelease(cmProfileLoc);
 	}

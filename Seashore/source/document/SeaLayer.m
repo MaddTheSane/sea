@@ -46,7 +46,7 @@
 		else
 			name = [[NSString alloc] initWithFormat:LOCALSTR(@"layer title", @"Layer %d"), uniqueLayerID];
 		oldNames = [[NSArray alloc] init];
-		undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%d-l%d", (long)[document uniqueDocID], [self uniqueLayerID]];
+		undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%ld-l%ld", (long)[document uniqueDocID], (long)[self uniqueLayerID]];
 		affinePlugin = [[SeaController seaPlugins] affinePlugin];
 	}
 	return self;
@@ -156,7 +156,7 @@
 		seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
 		uniqueLayerID = [(SeaDocument *)doc uniqueFloatingLayerID];
 		name = NULL; oldNames = NULL;
-		undoFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"seaundo-d%d-l%d", [self uniqueLayerID], [document uniqueDocID]]];
+		undoFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"seaundo-d%ld-l%ld", (long)[self uniqueLayerID], (long)[document uniqueDocID]]];
 	}
 	return self;
 }
@@ -484,9 +484,9 @@
 	ispp = [final_rep samplesPerPixel];
 	bipp = [final_rep bitsPerPixel];
 	bypr = [final_rep bytesPerRow];
-	BMPColorSpace ispace = (ispp > 2) ? kRGBColorSpace : kGrayColorSpace;
+	BMPColorSpace ispace = (ispp > 2) ? BMPColorSpaceRGB : BMPColorSpaceGray;
 	ibps = [final_rep bitsPerPixel] / [final_rep samplesPerPixel];
-	data = SeaConvertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcData, width, height, ispp, bipp, bypr, ispace, NULL, ibps, 0);
+	data = SeaConvertBitmap(spp, (spp == 4) ? BMPColorSpaceRGB : BMPColorSpaceGray, 8, srcData, width, height, ispp, bipp, bypr, ispace, NULL, ibps, 0);
 	
 	// Clean up
 	SeaUnpremultiplyBitmap(spp, data, data, width * height);

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55D30EE724A3E21F0025FDDA /* tif_jbig.c in Sources */ = {isa = PBXBuildFile; fileRef = 55D30EE624A3E21F0025FDDA /* tif_jbig.c */; };
+		55D30EEC24A3E24D0025FDDA /* tif_lzma.c in Sources */ = {isa = PBXBuildFile; fileRef = 55D30EE824A3E24C0025FDDA /* tif_lzma.c */; };
+		55D30EED24A3E24D0025FDDA /* tif_zstd.c in Sources */ = {isa = PBXBuildFile; fileRef = 55D30EE924A3E24C0025FDDA /* tif_zstd.c */; };
+		55D30EEE24A3E24D0025FDDA /* tif_jpeg_12.c in Sources */ = {isa = PBXBuildFile; fileRef = 55D30EEA24A3E24C0025FDDA /* tif_jpeg_12.c */; };
+		55D30EEF24A3E24D0025FDDA /* tif_webp.c in Sources */ = {isa = PBXBuildFile; fileRef = 55D30EEB24A3E24C0025FDDA /* tif_webp.c */; };
+		55D30EF124A3E2A00025FDDA /* tiffio.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 55D30EF024A3E2A00025FDDA /* tiffio.hxx */; settings = {ATTRIBUTES = (Public, ); }; };
+		55D30EF324A3E2BC0025FDDA /* tif_stream.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 55D30EF224A3E2BC0025FDDA /* tif_stream.cxx */; };
 		A854ACF109BC12A2004AD947 /* t4.h in Headers */ = {isa = PBXBuildFile; fileRef = A854ACBE09BC12A2004AD947 /* t4.h */; };
 		A854ACF609BC12A2004AD947 /* tif_close.c in Sources */ = {isa = PBXBuildFile; fileRef = A854ACC309BC12A2004AD947 /* tif_close.c */; };
 		A854ACF709BC12A2004AD947 /* tif_codec.c in Sources */ = {isa = PBXBuildFile; fileRef = A854ACC409BC12A2004AD947 /* tif_codec.c */; };
@@ -58,6 +65,13 @@
 
 /* Begin PBXFileReference section */
 		55B95A951C6FB13600E37A8C /* TIFF.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = TIFF.modulemap; sourceTree = "<group>"; };
+		55D30EE624A3E21F0025FDDA /* tif_jbig.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tif_jbig.c; sourceTree = "<group>"; };
+		55D30EE824A3E24C0025FDDA /* tif_lzma.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tif_lzma.c; sourceTree = "<group>"; };
+		55D30EE924A3E24C0025FDDA /* tif_zstd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tif_zstd.c; sourceTree = "<group>"; };
+		55D30EEA24A3E24C0025FDDA /* tif_jpeg_12.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tif_jpeg_12.c; sourceTree = "<group>"; };
+		55D30EEB24A3E24C0025FDDA /* tif_webp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tif_webp.c; sourceTree = "<group>"; };
+		55D30EF024A3E2A00025FDDA /* tiffio.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tiffio.hxx; sourceTree = "<group>"; };
+		55D30EF224A3E2BC0025FDDA /* tif_stream.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tif_stream.cxx; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* TIFF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TIFF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A854ACBE09BC12A2004AD947 /* t4.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = t4.h; sourceTree = "<group>"; };
@@ -176,17 +190,21 @@
 				A854ACD109BC12A2004AD947 /* tif_fax3sm.c */,
 				A854ACD209BC12A2004AD947 /* tif_flush.c */,
 				A854ACD309BC12A2004AD947 /* tif_getimage.c */,
+				55D30EE624A3E21F0025FDDA /* tif_jbig.c */,
+				55D30EEA24A3E24C0025FDDA /* tif_jpeg_12.c */,
 				A854ACD409BC12A2004AD947 /* tif_jpeg.c */,
 				A854ACD509BC12A2004AD947 /* tif_luv.c */,
+				55D30EE824A3E24C0025FDDA /* tif_lzma.c */,
 				A854ACD609BC12A2004AD947 /* tif_lzw.c */,
+				A854AD7B09BC1598004AD947 /* tif_next.c */,
 				A854ACD909BC12A2004AD947 /* tif_ojpeg.c */,
 				A854ACDA09BC12A2004AD947 /* tif_open.c */,
 				A854ACDB09BC12A2004AD947 /* tif_packbits.c */,
 				A854ACDC09BC12A2004AD947 /* tif_pixarlog.c */,
 				A854ACDD09BC12A2004AD947 /* tif_predict.c */,
 				A854ACDF09BC12A2004AD947 /* tif_print.c */,
-				A854AD7B09BC1598004AD947 /* tif_next.c */,
 				A854ACE009BC12A2004AD947 /* tif_read.c */,
+				55D30EF224A3E2BC0025FDDA /* tif_stream.cxx */,
 				A854ACE209BC12A2004AD947 /* tif_strip.c */,
 				A854ACE309BC12A2004AD947 /* tif_swab.c */,
 				A854ACE409BC12A2004AD947 /* tif_thunder.c */,
@@ -194,8 +212,10 @@
 				A854ACE609BC12A2004AD947 /* tif_unix.c */,
 				A854ACE709BC12A2004AD947 /* tif_version.c */,
 				A854ACE809BC12A2004AD947 /* tif_warning.c */,
+				55D30EEB24A3E24C0025FDDA /* tif_webp.c */,
 				A854ACEB09BC12A2004AD947 /* tif_write.c */,
 				A854ACEC09BC12A2004AD947 /* tif_zip.c */,
+				55D30EE924A3E24C0025FDDA /* tif_zstd.c */,
 			);
 			name = Source;
 			path = source;
@@ -207,6 +227,7 @@
 				A854AD2A09BC12CC004AD947 /* tiff.h */,
 				A854AD2B09BC12CC004AD947 /* tiffconf.h */,
 				A854AD2C09BC12CC004AD947 /* tiffio.h */,
+				55D30EF024A3E2A00025FDDA /* tiffio.hxx */,
 				A854AD2D09BC12CC004AD947 /* tiffvers.h */,
 			);
 			name = "Public Headers";
@@ -239,6 +260,7 @@
 				A854AD0309BC12A2004AD947 /* tif_fax3.h in Headers */,
 				A854AD1109BC12A2004AD947 /* tif_predict.h in Headers */,
 				A854AD2209BC12A2004AD947 /* uvcode.h in Headers */,
+				55D30EF124A3E2A00025FDDA /* tiffio.hxx in Headers */,
 				A854AD2E09BC12CC004AD947 /* tiff.h in Headers */,
 				A854AD2F09BC12CC004AD947 /* tiffconf.h in Headers */,
 				A854AD3009BC12CC004AD947 /* tiffio.h in Headers */,
@@ -284,8 +306,8 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				ja,
 				en,
+				ja,
 				fr,
 				de,
 			);
@@ -317,6 +339,7 @@
 				A854ACF609BC12A2004AD947 /* tif_close.c in Sources */,
 				A854ACF709BC12A2004AD947 /* tif_codec.c in Sources */,
 				A854ACF809BC12A2004AD947 /* tif_color.c in Sources */,
+				55D30EEF24A3E24D0025FDDA /* tif_webp.c in Sources */,
 				A854ACF909BC12A2004AD947 /* tif_compress.c in Sources */,
 				A854ACFA09BC12A2004AD947 /* tif_dir.c in Sources */,
 				A854ACFC09BC12A2004AD947 /* tif_dirinfo.c in Sources */,
@@ -330,21 +353,26 @@
 				A854AD0509BC12A2004AD947 /* tif_flush.c in Sources */,
 				A854AD0609BC12A2004AD947 /* tif_getimage.c in Sources */,
 				A854AD0709BC12A2004AD947 /* tif_jpeg.c in Sources */,
+				55D30EEE24A3E24D0025FDDA /* tif_jpeg_12.c in Sources */,
 				A854AD0809BC12A2004AD947 /* tif_luv.c in Sources */,
+				55D30EEC24A3E24D0025FDDA /* tif_lzma.c in Sources */,
 				A854AD0909BC12A2004AD947 /* tif_lzw.c in Sources */,
 				A854AD0C09BC12A2004AD947 /* tif_ojpeg.c in Sources */,
 				A854AD0D09BC12A2004AD947 /* tif_open.c in Sources */,
 				A854AD0E09BC12A2004AD947 /* tif_packbits.c in Sources */,
+				55D30EE724A3E21F0025FDDA /* tif_jbig.c in Sources */,
 				A854AD0F09BC12A2004AD947 /* tif_pixarlog.c in Sources */,
 				A854AD1009BC12A2004AD947 /* tif_predict.c in Sources */,
 				A854AD1209BC12A2004AD947 /* tif_print.c in Sources */,
 				A854AD1309BC12A2004AD947 /* tif_read.c in Sources */,
 				A854AD1509BC12A2004AD947 /* tif_strip.c in Sources */,
 				A854AD1609BC12A2004AD947 /* tif_swab.c in Sources */,
+				55D30EF324A3E2BC0025FDDA /* tif_stream.cxx in Sources */,
 				A854AD1709BC12A2004AD947 /* tif_thunder.c in Sources */,
 				A854AD1809BC12A2004AD947 /* tif_tile.c in Sources */,
 				A854AD1909BC12A2004AD947 /* tif_unix.c in Sources */,
 				A854AD1A09BC12A2004AD947 /* tif_version.c in Sources */,
+				55D30EED24A3E24D0025FDDA /* tif_zstd.c in Sources */,
 				A854AD1B09BC12A2004AD947 /* tif_warning.c in Sources */,
 				A854AD1E09BC12A2004AD947 /* tif_write.c in Sources */,
 				A854AD1F09BC12A2004AD947 /* tif_zip.c in Sources */,
@@ -364,17 +392,17 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 4.1.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/Frameworks";
+				MARKETING_VERSION = 4.1.0;
 				MODULEMAP_FILE = TIFF.modulemap;
 				OTHER_LDFLAGS = (
 					"-seg1addr",
@@ -394,6 +422,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 4.1.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -401,10 +430,9 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				GCC_AUTO_VECTORIZATION = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/Frameworks";
+				MARKETING_VERSION = 4.1.0;
 				MODULEMAP_FILE = TIFF.modulemap;
 				OTHER_LDFLAGS = (
 					"-seg1addr",
@@ -451,7 +479,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -490,7 +518,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};

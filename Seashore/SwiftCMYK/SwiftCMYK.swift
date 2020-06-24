@@ -43,7 +43,7 @@ final public class CMYK: NSObject, SeaPluginClass {
 		let channel = pluginData.channel
 		
 		guard let srcProf = ColorSyncProfileCreateWithName(kColorSyncSRGBProfile.takeUnretainedValue())?.takeRetainedValue(),
-			  let destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile.takeUnretainedValue())?.takeRetainedValue() else {
+			let destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile.takeUnretainedValue())?.takeRetainedValue() else {
 				return
 		}
 		// TODO: Hey Apple! Audit your ColorSync API for Swift!

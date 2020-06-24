@@ -11,6 +11,11 @@ framework module TIFF [extern_c] {
 	
 	module io {
 		header "tiffio.h"
+		module cxx {
+			requires cplusplus
+			header "tiffio.hpp"
+			export *
+		}
 		export *
 	}
 	

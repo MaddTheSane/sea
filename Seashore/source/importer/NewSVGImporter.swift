@@ -40,8 +40,8 @@ public final class SVGImporter: NSObject, SeaImporter {
 
 		let importerPath: String? = {
 			guard let bundURL = Bundle.main.builtInPlugInsURL?.appendingPathComponent("SVGImporter.app"),
-			let importerBundle = Bundle(url: bundURL) else {
-				return nil
+				let importerBundle = Bundle(url: bundURL) else {
+					return nil
 			}
 			
 			if let importerInternalPath = importerBundle.executablePath {
@@ -109,18 +109,16 @@ public final class SVGImporter: NSObject, SeaImporter {
 		
 		// Add the layer
 		doc.contents.addLayerObject(layer)
-		
-		// Now forget the NSImage
 	}
 	
 	private func getSVGFromSVGImageRep(url: URL, to doc: SeaDocument) throws {
 		func getImageRep() throws -> NSImageRep {
 			var aClass: AnyClass? = NSClassFromString("SVGImageRep")
 			if aClass == nil {
-				guard let bundURL = Bundle.main.builtInPlugInsURL?.appendingPathComponent("SVGImageRep.bundle") , (bundURL as NSURL).checkResourceIsReachableAndReturnError(nil) else {
+				guard let bundURL = Bundle.main.builtInPlugInsURL?.appendingPathComponent("SVGImageRep.bundle"), (try? bundURL.checkResourceIsReachable()) == true else {
 					throw ImporterErrors(.couldNotFindBundle)
 				}
-				guard let aBund = Bundle(url: bundURL) , aBund.load() else {
+				guard let aBund = Bundle(url: bundURL), aBund.load() else {
 					throw ImporterErrors(.couldNotLoadBundle)
 				}
 				aClass = NSClassFromString("SVGImageRep")
@@ -170,7 +168,7 @@ public final class SVGImporter: NSObject, SeaImporter {
 		}
 		
 		scalePanel.center()
-		sizeLabel.stringValue = "\(size.width) x \(size.height)"
+		sizeLabel.stringValue = "\(size.width) × \(size.height)"
 		scaleSlider.integerValue = 2
 		NSApp.runModal(for: scalePanel)
 		scalePanel.orderOut(self)
@@ -208,7 +206,7 @@ public final class SVGImporter: NSObject, SeaImporter {
 	@IBAction func update(_ sender: AnyObject?) {
 		var factor: Double
 		
-		switch scaleSlider.intValue {
+		switch scaleSlider.integerValue {
 		case 0:
 			factor = 0.5
 			
@@ -249,6 +247,6 @@ public final class SVGImporter: NSObject, SeaImporter {
 		size.width = Int32(Double(trueSize.width) * factor);
 		size.height = Int32(Double(trueSize.height) * factor)
 		
-		sizeLabel.stringValue = "\(size.width) x \(size.height)"
+		sizeLabel.stringValue = "\(size.width) × \(size.height)"
 	}
 }

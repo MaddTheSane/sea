@@ -19,24 +19,24 @@ __BEGIN_DECLS
 
 /*!
 	@enum		k...ColorSpace
-	@constant	kGrayColorSpace
+	@constant	BMPColorSpaceGray
 				Indicates the gray/white colour space.
-	@constant	kInvertedGrayColorSpace
+	@constant	BMPColorSpaceInvertedGray
 				Indicates the gray/black colour space.
-	@constant	kRGBColorSpace
+	@constant	BMPColorSpaceRGB
 				Indicates the RGB colour space.
-	@constant	kCMYKColorSpace
+	@constant	BMPColorSpaceCMYK
 				Indicates the CMYK colour space
 */
 typedef NS_ENUM(int, BMPColorSpace) {
 	//! Indicates the gray/white colour space.
-	kGrayColorSpace,
+	BMPColorSpaceGray,
 	//! Indicates the gray/black colour space.
-	kInvertedGrayColorSpace,
+	BMPColorSpaceInvertedGray,
 	//! Indicates the RGB colour space.
-	kRGBColorSpace,
+	BMPColorSpaceRGB,
 	//! Indicates the CMYK colour space.
-	kCMYKColorSpace,
+	BMPColorSpaceCMYK,
 	BMPColorSpaceInvalid = -1,
 };
 
@@ -207,6 +207,11 @@ extern void OpenDisplayProfile(CMProfileRef __nonnull*__nullable profile) DEPREC
 				The profile to make the default display's profile.
 */
 extern void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
+
+static const BMPColorSpace kGrayColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceGray", 10.2, 10.8) = BMPColorSpaceGray;
+static const BMPColorSpace kInvertedGrayColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceInvertedGray", 10.2, 10.8) = BMPColorSpaceInvertedGray;
+static const BMPColorSpace kRGBColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceRGB", 10.2, 10.8) = BMPColorSpaceRGB;
+static const BMPColorSpace kCMYKColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceCMYK", 10.2, 10.8) = BMPColorSpaceCMYK;
 
 __END_DECLS
 NS_ASSUME_NONNULL_END

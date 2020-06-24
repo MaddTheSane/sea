@@ -166,7 +166,7 @@
 	vdata = (simd_uint4 *)newdata;
 	for (size_t i = 0; i < vec_len; i++) {
 		simd_uint4 vstore = (vdata[i] >> 24) & 0xFF;
-		vdata[i] = (vdata[i] << 8) & 0x00FFFFFF;
+		vdata[i] = (vdata[i] << 8) & 0xFFFFFF00;
 		vdata[i] = vdata[i] | vstore;
 	}
 	
@@ -493,7 +493,7 @@
 		
 		// Convert from RGBA to ARGB with A = 0xFF
 		for (size_t i = 0; i < vec_len; i++) {
-			rvdata[i] = vdata[i] << 8;
+			rvdata[i] = (vdata[i] << 8) & 0xFFFFFF00;
 			rvdata[i] = rvdata[i] | orvmask;
 		}
 	}
