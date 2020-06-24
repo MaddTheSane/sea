@@ -136,7 +136,7 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-	simd_int4 *vdata;
+	simd_uint4 *vdata;
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -160,11 +160,11 @@
 	data = [pluginData data];
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
-	vdata = (simd_int4 *)data;
+	vdata = (simd_uint4 *)data;
 	for (size_t i = 0; i < vec_len; i++) {
-		simd_int4 vstore = vdata[i] >> 24;
-		vdata[i] = vdata[i] << 8;
-		vdata[i] = vdata[i] + vstore;
+		simd_uint4 vstore = (vdata[i] >> 24) & 0xFF;
+		vdata[i] = (vdata[i] << 8) & 0x00FFFFFF;
+		vdata[i] = vdata[i] | vstore;
 	}
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
@@ -173,9 +173,9 @@
 	}
 	@catch (NSException *exception) {
 		for (size_t i = 0; i < vec_len; i++) {
-			simd_int4 vstore = vdata[i] << 24;
-			vdata[i] = vdata[i] >> 8;
-			vdata[i] = vdata[i] + vstore;
+			simd_uint4 vstore = (vdata[i] << 24) & 0xFF000000;
+			vdata[i] = (vdata[i] >> 8) & 0x00FFFFFF;
+			vdata[i] = vdata[i] | vstore;
 		}
 		NSLog(@"%@", [exception reason]);
 		return;
@@ -183,9 +183,9 @@
 
 	// Convert from ARGB to RGBA
 	for (size_t i = 0; i < vec_len; i++) {
-		simd_int4 vstore = vdata[i] << 24;
-		vdata[i] = vdata[i] >> 8;
-		vdata[i] = vdata[i] + vstore;
+		simd_uint4 vstore = (vdata[i] << 24) & 0xFF000000;
+		vdata[i] = (vdata[i] >> 8) & 0x00FFFFFF;
+		vdata[i] = vdata[i] | vstore;
 	}
 	
 	// Copy to destination

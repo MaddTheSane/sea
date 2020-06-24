@@ -125,7 +125,7 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-	simd_int4 *vdata;
+	simd_uint4 *vdata;
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -151,9 +151,9 @@
 	replace = [pluginData replace];
 	SeaPremultiplyBitmap(4, newdata, data, width * height);
 	// Convert from RGBA to ARGB
-	vdata = (simd_int4 *)newdata;
+	vdata = (simd_uint4 *)newdata;
 	for (size_t i = 0; i < vec_len; i++) {
-		simd_int4 vstore = vdata[i] >> 24;
+		simd_uint4 vstore = vdata[i] >> 24;
 		vdata[i] = vdata[i] << 8;
 		vdata[i] = vdata[i] + vstore;
 	}
@@ -164,9 +164,9 @@
 	}
 	@catch (NSException *exception) {
 		for (size_t i = 0; i < vec_len; i++) {
-			simd_int4 vstore = vdata[i] << 24;
-			vdata[i] = vdata[i] >> 8;
-			vdata[i] = vdata[i] + vstore;
+			simd_uint4 vstore = (vdata[i] << 24) & 0xFF000000;
+			vdata[i] = (vdata[i] >> 8) & 0x00FFFFFF;
+			vdata[i] = vdata[i] | vstore;
 		}
 		NSLog(@"%@", [exception reason]);
 		return;
@@ -178,9 +178,9 @@
 	}
 	// Convert from ARGB to RGBA
 	for (size_t i = 0; i < vec_len; i++) {
-		simd_int4 vstore = vdata[i] << 24;
-		vdata[i] = vdata[i] >> 8;
-		vdata[i] = vdata[i] + vstore;
+		simd_uint4 vstore = (vdata[i] << 24) & 0xFF000000;
+		vdata[i] = (vdata[i] >> 8) & 0x00FFFFFF;
+		vdata[i] = vdata[i] | vstore;
 	}
 	
 	// Copy to destination
@@ -205,9 +205,10 @@
 {
 	size_t vec_len;
 	int width, height, channel;
-	unsigned char ormask[16], *resdata, *datatouse;
+	unsigned char *resdata, *datatouse;
 	IntRect selection;
-	simd_int4 *vdata, *nvdata, *rvdata, orvmask;
+	simd_uint4 *vdata, *nvdata, *rvdata;
+	const simd_uint4 orvmask = simd_make_uint4(255, 255, 255, 255);
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -215,7 +216,7 @@
 	width = [pluginData width];
 	height = [pluginData height];
 	selection = [pluginData selection];
-	vdata = (simd_int4 *)data;
+	vdata = (simd_uint4 *)data;
 	if ([self restoreAlpha]) {
 		vec_len = width * height * 4;
 		if (vec_len % 16 == 0) {
@@ -224,7 +225,7 @@
 			vec_len /= 16;
 			vec_len++;
 		}
-		nvdata = (simd_int4 *)newdata;
+		nvdata = (simd_uint4 *)newdata;
 		datatouse = newdata;
 		if (channel == SeaSelectedChannelAlpha) {
 			for (size_t i = 0; i < width * height; i++) {
@@ -232,10 +233,6 @@
 				newdata[i * 4] = 255;
 			}
 		} else {
-			for (short i = 0; i < 16; i++) {
-				ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
-			}
-			memcpy(&orvmask, ormask, 16);
 			for (int i = 0; i < vec_len; i++) {
 				nvdata[i] = vdata[i] | orvmask;
 			}
@@ -251,13 +248,9 @@
 				vec_len /= 16;
 				vec_len++;
 			}
-			rvdata = (simd_int4 *)newdata;
+			rvdata = (simd_uint4 *)newdata;
 			datatouse = newdata;
 			if (channel == SeaSelectedChannelPrimary) {
-				for (short i = 0; i < 16; i++) {
-					ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
-				}
-				memcpy(&orvmask, ormask, 16);
 				for (int i = 0; i < vec_len; i++) {
 					rvdata[i] = vdata[i] | orvmask;
 				}
