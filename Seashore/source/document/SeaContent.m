@@ -119,19 +119,19 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 
 	// Determine the color space of the pasteboard image and the type
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace]) {
-		space = kGrayColorSpace;
+		space = BMPColorSpaceGray;
 		type = XCF_GRAY_IMAGE;
 	}
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedBlackColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceBlackColorSpace]) {
-		space = kInvertedGrayColorSpace;
+		space = BMPColorSpaceInvertedGray;
 		type = XCF_GRAY_IMAGE;
 	}
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedRGBColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceRGBColorSpace]) {
-		space = kRGBColorSpace;
+		space = BMPColorSpaceRGB;
 		type = XCF_RGB_IMAGE;
 	}
 	if ([[imageRep colorSpaceName] isEqualToString:NSDeviceCMYKColorSpace]) {
-		space = kCMYKColorSpace;
+		space = BMPColorSpaceCMYK;
 		type = XCF_RGB_IMAGE;
 	}
 	if (space == -1) {
@@ -154,7 +154,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		dspp = 4;
 	else
 		dspp = 2;
-	data = SeaConvertBitmap(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
+	data = SeaConvertBitmap(dspp, (dspp == 4) ? BMPColorSpaceRGB : BMPColorSpaceGray, 8, [imageRep bitmapData], width, height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
 	if (cmProfileLoc) {
 		CFRelease(cmProfileLoc);
 	}
@@ -704,13 +704,13 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Determine the color space of pasteboard image
 	BMPColorSpace space = -1;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace])
-		space = kGrayColorSpace;
+		space = BMPColorSpaceGray;
 	//if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedBlackColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceBlackColorSpace])
-	//	space = kInvertedGrayColorSpace;
+	//	space = BMPColorSpaceInvertedGray;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedRGBColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceRGBColorSpace])
-		space = kRGBColorSpace;
+		space = BMPColorSpaceRGB;
 	if ([[imageRep colorSpaceName] isEqualToString:NSDeviceCMYKColorSpace])
-		space = kCMYKColorSpace;
+		space = BMPColorSpaceCMYK;
 	if (space == -1) {
 		NSLog(@"Color space %@ not yet handled.", [imageRep colorSpaceName]);
 		return;
@@ -742,7 +742,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	if (spp == 4 && selectedChannel == SeaSelectedChannelAlpha) {
 		dspp = 2;
 	}
-	data = SeaConvertBitmap(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
+	data = SeaConvertBitmap(dspp, (dspp == 4) ? BMPColorSpaceRGB : BMPColorSpaceGray, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
 	if (cmProfileLoc) {
 		CFRelease(cmProfileLoc);
 	}
@@ -1075,13 +1075,13 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Determine the color space of pasteboard image
 	BMPColorSpace space = -1;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace])
-		space = kGrayColorSpace;
+		space = BMPColorSpaceGray;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedBlackColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceBlackColorSpace])
-		space = kInvertedGrayColorSpace;
+		space = BMPColorSpaceInvertedGray;
 	if ([[imageRep colorSpaceName] isEqualToString:NSCalibratedRGBColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceRGBColorSpace])
-		space = kRGBColorSpace;
+		space = BMPColorSpaceRGB;
 	if ([[imageRep colorSpaceName] isEqualToString:NSDeviceCMYKColorSpace])
-		space = kCMYKColorSpace;
+		space = BMPColorSpaceCMYK;
 	if (space == -1) {
 		NSLog(@"Color space %@ not yet handled.", [imageRep colorSpaceName]);
 		return;
@@ -1125,7 +1125,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	if (spp == 4 && selectedChannel == SeaSelectedChannelAlpha) {
 		dspp = 2;
 	}
-	data = SeaConvertBitmap(dspp, (dspp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
+	data = SeaConvertBitmap(dspp, (dspp == 4) ? BMPColorSpaceRGB : BMPColorSpaceGray, 8, [imageRep bitmapData], rect.size.width, rect.size.height, sspp, bipp, bypr, space, cmProfileLoc, bps, 0);
 	if (!data) {
 		NSLog(@"Required conversion not supported.");
 		return;

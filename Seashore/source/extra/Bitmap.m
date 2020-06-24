@@ -89,8 +89,8 @@ static void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp,
 	ColorSyncTransformRef cw = NULL;
 	
 	switch (ispace) {
-		case kGrayColorSpace:
-		case kInvertedGrayColorSpace:
+		case BMPColorSpaceGray:
+		case BMPColorSpaceInvertedGray:
 			if (ibps == 8) {
 				srcDepth = kColorSync8BitInteger;
 			} else {
@@ -104,7 +104,7 @@ static void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp,
 			srcBytesPerRow = width * ispp * (ibps / 8);
 			break;
 			
-		case kRGBColorSpace:
+		case BMPColorSpaceRGB:
 			if (ibps == 8) {
 				srcDepth = kColorSync8BitInteger;
 			} else {
@@ -118,7 +118,7 @@ static void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp,
 			srcBytesPerRow = width * ispp * (ibps / 8);
 			break;
 			
-		case kCMYKColorSpace:
+		case BMPColorSpaceCMYK:
 			if (ibps == 8) {
 				srcDepth = kColorSync8BitInteger;
 			} else {
@@ -133,13 +133,13 @@ static void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp,
 	}
 	
 	switch (dspace) {
-		case kGrayColorSpace:
-		case kInvertedGrayColorSpace:
+		case BMPColorSpaceGray:
+		case BMPColorSpaceInvertedGray:
 			destProf = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
 			dstBytesPerRow = width * 2;
 			break;
 			
-		case kRGBColorSpace:
+		case BMPColorSpaceRGB:
 			destProf = ColorSyncProfileCreateWithName(kColorSyncSRGBProfile);
 			dstBytesPerRow = width * 4;
 			break;
@@ -177,7 +177,7 @@ static void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp,
 
 static void covertBitmapNoColorSync(unsigned char *dbitmap, NSInteger dspp, BMPColorSpace dspace, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, BMPColorSpace ispace, NSInteger ibps)
 {
-	if (ispace == kGrayColorSpace && dspace == kGrayColorSpace) {
+	if (ispace == BMPColorSpaceGray && dspace == BMPColorSpaceGray) {
 		if (ibps == 8) {
 			if (ispp == 2) {
 				memcpy(dbitmap, ibitmap, width * height * 2);
@@ -193,7 +193,7 @@ static void covertBitmapNoColorSync(unsigned char *dbitmap, NSInteger dspp, BMPC
 				}
 			}
 		}
-	} else if (ispace == kRGBColorSpace && dspace == kRGBColorSpace) {
+	} else if (ispace == BMPColorSpaceRGB && dspace == BMPColorSpaceRGB) {
 		if (ibps == 8) {
 			if (ispp == 4) {
 				memcpy(dbitmap, ibitmap, width * height * 4);
@@ -209,7 +209,7 @@ static void covertBitmapNoColorSync(unsigned char *dbitmap, NSInteger dspp, BMPC
 				}
 			}
 		}
-	} else if (ispace == kGrayColorSpace && dspace == kRGBColorSpace) {
+	} else if (ispace == BMPColorSpaceGray && dspace == BMPColorSpaceRGB) {
 		if (ibps == 8) {
 			for (int i = 0; i < width * height; i++) {
 				dbitmap[i * 4] = dbitmap[i * 4 + 1] = dbitmap[i * 4 + 2] = ibitmap[i * ispp];
@@ -221,7 +221,7 @@ static void covertBitmapNoColorSync(unsigned char *dbitmap, NSInteger dspp, BMPC
 				if (ispp == 2) dbitmap[i * 4 + 3] = ibitmap[i * 4 + 2 + MSB];
 			}
 		}
-	} else if (ispace == kRGBColorSpace && dspace == kGrayColorSpace) {
+	} else if (ispace == BMPColorSpaceRGB && dspace == BMPColorSpaceGray) {
 		if (ibps == 8) {
 			for (int i = 0; i < width * height; i++) {
 				dbitmap[i * 2] = ((int)ibitmap[i * ispp] + (int)ibitmap[i * ispp + 1] + (int)ibitmap[i * ispp + 2]) / 3;
@@ -253,10 +253,10 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 	// Point out conversions that are not possible
 	fail = NULL;
 	if (dbps != 8) fail = @"Only converts to 8 bps";
-	if (dspace == kCMYKColorSpace) fail = @"Cannot convert to CMYK color space";
-	if (dspace == kInvertedGrayColorSpace) fail = @"Cannot convert to inverted gray color space";
-	if (dspace == kRGBColorSpace && dspp != 4) fail = @"Can only convert to 4 spp for RGB color space";
-	if (dspace == kGrayColorSpace && dspp != 2) fail = @"Can only convert to 2 spp for RGB color space";
+	if (dspace == BMPColorSpaceCMYK) fail = @"Cannot convert to CMYK color space";
+	if (dspace == BMPColorSpaceInvertedGray) fail = @"Cannot convert to inverted gray color space";
+	if (dspace == BMPColorSpaceRGB && dspp != 4) fail = @"Can only convert to 4 spp for RGB color space";
+	if (dspace == BMPColorSpaceGray && dspp != 2) fail = @"Can only convert to 2 spp for RGB color space";
 	if (fail) { NSLog(@"%@", fail); return NULL; }
 	
 	// Create initial pointer
@@ -336,7 +336,7 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 	}
 	
 	// Convert inverted gray color space
-	if (ispace == kInvertedGrayColorSpace) {
+	if (ispace == BMPColorSpaceInvertedGray) {
 		pbitmap = getPtr(ptrs);
 		if (ibps == 8) {
 			for (int i = 0; i < width * height; i++) {
@@ -348,11 +348,11 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 				pbitmap[i * ispp * 2 + 1] = ~pbitmap[i * ispp * 2 + 1];
 			}
 		}
-		ispace = kGrayColorSpace;
+		ispace = BMPColorSpaceGray;
 	}
 	
 	// Convert colour space
-	if (iprofile || ispace == kCMYKColorSpace) {
+	if (iprofile || ispace == BMPColorSpaceCMYK) {
 		pbitmap = getPtr(ptrs);
 		bitmap = mallocPtr(&ptrs, width * height * dspp);
 		covertBitmapColorSyncProfile(bitmap, dspp, dspace, pbitmap, width, height, ispp, ispace, ibps, iprofile);
@@ -363,7 +363,7 @@ unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger 
 	}
 	
 	// Add in alpha (not 16-bit friendly)
-	s_hasalpha = (ispace == kRGBColorSpace && ispp == 4) || (ispace == kGrayColorSpace && ispp == 2);
+	s_hasalpha = (ispace == BMPColorSpaceRGB && ispp == 4) || (ispace == BMPColorSpaceGray && ispp == 2);
 	if (!s_hasalpha) {
 		for (int i = 0; i < width * height; i++) {
 			pbitmap = getPtr(ptrs);
