@@ -249,9 +249,6 @@ NS_ENUM(NSInteger) {
 	//! Specifies all linked layers.
 	kLinkedLayers = -3
 };
-#if 0
-}
-#endif
 	
 /*!
 	@enum		k...Format

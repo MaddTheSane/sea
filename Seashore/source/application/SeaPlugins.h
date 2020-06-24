@@ -28,11 +28,6 @@ typedef NS_ENUM(int, SeaPluginType) {
 	SeaPluginPoint = 1
 };
 
-#if 0
-} // Because Xcode is being a dumb-dumb
-#endif
-
-
 /*!
 	@protocol	SeaPluginClass
 	@abstract	A basic class from which to build plug-ins.
