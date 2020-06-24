@@ -37,7 +37,7 @@
 
 - (BOOL)mimicBrush
 {
-	return [mimicBrushCheckbox state];
+	return [mimicBrushCheckbox state] == NSControlStateValueOn;
 }
 
 - (void)shutdown
