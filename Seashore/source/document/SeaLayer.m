@@ -46,7 +46,7 @@
 		else
 			name = [[NSString alloc] initWithFormat:LOCALSTR(@"layer title", @"Layer %d"), uniqueLayerID];
 		oldNames = [[NSArray alloc] init];
-		undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%d-l%ld", (long)[document uniqueDocID], (long)[self uniqueLayerID]];
+		undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%ld-l%ld", (long)[document uniqueDocID], (long)[self uniqueLayerID]];
 		affinePlugin = [[SeaController seaPlugins] affinePlugin];
 	}
 	return self;
@@ -156,7 +156,7 @@
 		seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
 		uniqueLayerID = [(SeaDocument *)doc uniqueFloatingLayerID];
 		name = NULL; oldNames = NULL;
-		undoFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"seaundo-d%d-l%d", [self uniqueLayerID], [document uniqueDocID]]];
+		undoFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"seaundo-d%ld-l%ld", (long)[self uniqueLayerID], (long)[document uniqueDocID]]];
 	}
 	return self;
 }
