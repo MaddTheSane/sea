@@ -98,7 +98,7 @@
 
 - (void)addCursorRect:(NSRect)rect cursor:(NSCursor *)cursor
 {
-	NSScrollView *scrollView = (NSScrollView *)[[view superview] superview];
+	NSScrollView *scrollView = [view enclosingScrollView];
 	
 	// Convert to the scrollview's origin
 	rect.origin = [scrollView convertPoint: rect.origin fromView: view];

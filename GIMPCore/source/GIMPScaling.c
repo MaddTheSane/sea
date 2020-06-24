@@ -2,7 +2,7 @@
 #include "GIMPBridge.h"
 #include "PixelRegion.h"
 
-void
+static void
 scale_region (PixelRegion           *srcPR,
 	      PixelRegion           *destPR,
               GimpInterpolationType  interpolation_type);
@@ -118,9 +118,11 @@ expand_line (gdouble               *dest,
         frac = xr - src_col;
         s = &src[src_col * bpp];
         
-        for (b = 0; b < bpp; b++)
+        for (b = 0; b < bpp; b++) {
+          //FIXME: this causes crash!
           dest[b] = cubic (frac, s[b - bpp], s[b], s[b + bpp],
                                       s[b + bpp * 2]);
+        }
         
         dest += bpp;
       }

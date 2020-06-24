@@ -1556,7 +1556,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		memcpy(data, [(NSBitmapImageRep*)[[[document whiteboard] image] representations][0] bitmapData], rect.size.width * rect.size.height * spp);
 		NSEnumerator *e = [layers objectEnumerator];
 		while(layer = [e nextObject]){
-			[ordering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
+			[ordering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%ld", (long)[layer uniqueLayerID]]];
 		}
 		[tempArray addObject:tempLayer];
 	}else{
@@ -1564,7 +1564,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		// Here we find out the dimensions of the new layer, plus keep track of
 		// which layers are not going to be merged (tempArray).
 		while(layer = [e nextObject]) {
-			[ordering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
+			[ordering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%ld", (long)[layer uniqueLayerID]]];
 			if([mergingLayers indexOfObject:layer] != NSNotFound){
 				IntRect thisRect = IntMakeRect([layer xoff], [layer yoff], [layer width], [layer height]);
 				rect = IntSumRects(rect, thisRect);
@@ -1627,7 +1627,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Get the current orderings for the undo history
 	NSEnumerator *e = [layers objectEnumerator];
 	while(layer = [e nextObject])
-		[newOrdering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
+		[newOrdering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%ld", (long)[layer uniqueLayerID]]];
 	
 	// Make action undoable
 	[[[document undoManager] prepareWithInvocationTarget:self] redoMergeWith:[layers count] andOrdering: newOrdering];
@@ -1640,13 +1640,13 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	for(i = 0; i < oldNoLayers - [layers count] + 1; i++){
 		SeaLayer *oldLayer = [layersToUndo lastObject];
 		[layersToUndo removeLastObject];
-		int replInd = [ordering[[NSString stringWithFormat:@"%d", [oldLayer uniqueLayerID]]] intValue];		
+		int replInd = [ordering[[NSString stringWithFormat:@"%ld", (long)[oldLayer uniqueLayerID]]] intValue];		
 		oldLayers[replInd] = oldLayer;
 	}
 	
 	for(i = 0; i < [layers count]; i++){
 		SeaLayer *oldLayer = layers[i];
-		NSNumber *oldIndex = ordering[[NSString stringWithFormat:@"%d", [oldLayer uniqueLayerID]]];
+		NSNumber *oldIndex = ordering[[NSString stringWithFormat:@"%ld", (long)[oldLayer uniqueLayerID]]];
 		// We also will need to store the merged layer for redo
 		if(oldIndex != nil)
 			oldLayers[[oldIndex intValue]] = oldLayer;
@@ -1713,7 +1713,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	// Store the orderings
 	NSEnumerator *e = [layers objectEnumerator];
 	while(layer = [e nextObject])
-		[oldOrdering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%d" ,[layer uniqueLayerID]]];
+		[oldOrdering setValue: @([layers indexOfObject: layer]) forKey: [NSString stringWithFormat: @"%ld", (long)[layer uniqueLayerID]]];
 
 	// Make action undoable
 	[[[document undoManager] prepareWithInvocationTarget:self] undoMergeWith:[layers count] andOrdering:oldOrdering];
@@ -1724,12 +1724,12 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	
 	SeaLayer *newLayer = [layersToRedo lastObject];
 	[layersToRedo removeLastObject];
-	newLayers[[ordering[[NSString stringWithFormat:@"%d", [newLayer uniqueLayerID]]] intValue]] = newLayer;
+	newLayers[[ordering[[NSString stringWithFormat:@"%ld", (long)[newLayer uniqueLayerID]]] intValue]] = newLayer;
 
 	// Go through and insert the layers at the appropriate places
 	for(i = 0; i < [layers count]; i++){
 		SeaLayer *newLayer = layers[i];
-		NSNumber *newIndex = ordering[[NSString stringWithFormat:@"%d", [newLayer uniqueLayerID]]];
+		NSNumber *newIndex = ordering[[NSString stringWithFormat:@"%ld", (long)[newLayer uniqueLayerID]]];
 		if(newIndex != nil)
 			newLayers[[newIndex intValue]] = newLayer;
 		else
