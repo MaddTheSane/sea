@@ -281,13 +281,13 @@
 			};
 			buildConfigurationList = A85D0B2509BD8F60009BD89D /* Build configuration list for PBXProject "TIFF" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
+				en,
+				ja,
+				fr,
+				de,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* TIFF */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
@@ -364,6 +364,7 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3.8.2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -375,6 +376,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/Frameworks";
+				MARKETING_VERSION = 3.8.2;
 				MODULEMAP_FILE = TIFF.modulemap;
 				OTHER_LDFLAGS = (
 					"-seg1addr",
@@ -394,6 +396,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3.8.2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -405,6 +408,7 @@
 				GCC_OPTIMIZATION_LEVEL = 3;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "${LOCAL_LIBRARY_DIR}/Frameworks";
+				MARKETING_VERSION = 3.8.2;
 				MODULEMAP_FILE = TIFF.modulemap;
 				OTHER_LDFLAGS = (
 					"-seg1addr",
