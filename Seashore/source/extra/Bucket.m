@@ -1,8 +1,8 @@
 #include "Bucket.h"
 
-#define kStackSizeIncrement 2500
+#define kStackSizeIncrement 8192
 
-static inline BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint seeds[], int numSeeds, IntPoint point, int width, int spp, int tolerance, int channel)
+inline BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPoint seeds[], int numSeeds, IntPoint point, int width, int spp, int tolerance, int channel)
 {
 	int seedIndex;
 	
@@ -10,12 +10,12 @@ static inline BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPo
 		
 		IntPoint seed = seeds[seedIndex];
 		BOOL outsideTolerance = NO;
-		int i, j, k, temp;
+		int k, temp;
 		
-		i = point.x;
-		j = point.y;
+		int offset = (width * point.y + point.x)*spp;
+        int offset0 = (width *seed.y + seed.x)*spp;
 		
-		if (overlay[(width * j + i + 1) * spp - 1] > 0){
+		if (overlay[offset + spp - 1] > 0){
 			outsideTolerance = YES;
 			continue;
 		}
@@ -23,19 +23,19 @@ static inline BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPo
 		if (channel == kAllChannels) {
 			
 			for (k = spp - 1; k >= 0; k--) {
-				temp = abs((int)data[(width * j + i) * spp + k] - (int)data[(width * seed.y + seed.x) * spp + k]);
+				temp = abs((int)data[offset + k] - (int)data[offset0 + k]);
 				if (temp > tolerance){
 					outsideTolerance = YES;
 					break;
 				}
-				if (k == spp - 1 && data[(width * j + i) * spp + k] == 0)
+				if (k == spp - 1 && data[offset + k] == 0)
 					return YES;
 			}
 		
 		} else if (channel == kPrimaryChannels) {
 		
 			for (k = 0; k < spp - 1; k++) {
-				temp = abs((int)data[(width * j + i) * spp + k] - (int)data[(width * seed.y + seed.x) * spp + k]);
+				temp = abs((int)data[offset + k] - (int)data[offset0 + k]);
 				if (temp > tolerance){
 					outsideTolerance = YES;
 					break;
@@ -44,7 +44,7 @@ static inline BOOL shouldFill(unsigned char *overlay, unsigned char *data, IntPo
 		
 		} else if (channel == kAlphaChannel) {
 		
-			temp = abs((int)data[(width * j + i + 1) * spp - 1] - (int)data[(width * seed.y + seed.x + 1) * spp - 1]);
+			temp = abs((int)data[offset +spp - 1] - (int)data[offset0+spp-1]);
 			if (temp > tolerance){
 				outsideTolerance = YES;
 			}

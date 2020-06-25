@@ -8,8 +8,8 @@
 	<string>Seashore is unable to open the given SVG file because the SVG Importer is not installed. The installer for this importer can be found on Seashore&apos;s website.</string>
 	<key>all group</key>
 	<string>All</string>
-	<key>anchor selection</key>
-	<string>Anchor Selection</string>
+	<key>anchor layer</key>
+	<string>Anchor Layer</string>
 	<key>background</key>
 	<string>Background</string>
 	<key>gif trans</key>
@@ -108,6 +108,8 @@
 	<string>Indexed color not supported</string>
 	<key>jp2 not supported</key>
 	<string>The JPEG 2000 image format is only supported on systems running Mac OS 10.4 or later.</string>
+    <key>heic not supported</key>
+    <string>The HEIC image format is only supported on systems running Mac OS 10.13.4 or later.</string>
 	<key>layer title</key>
 	<string>Layer %d</string>
 	<key>locked body</key>
@@ -137,7 +139,7 @@
 	<key>rate</key>
 	<string>Rate: %d%%</string>
 	<key>read only message</key>
-	<string>This file is in a read-only format, as such you cannot save this file. This warning will not be displayed for subsequent files in a read-only format.</string>
+	<string>This file is in a read-only format, so you must Save As/Export any changes. This warning will not be displayed for subsequent files in a read-only format.</string>
 	<key>resolution no effect message</key>
 	<string>The resolution of this image has been changed and this will affect printing and saving. However this will not affect the viewing window because your Preferences are set to ignore image resolution.</string>
 	<key>revert</key>

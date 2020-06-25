@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B7B472623A728DC00287F6D /* XCFLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B472223A728DB00287F6D /* XCFLayer.m */; };
+		2B7B472723A728DC00287F6D /* XCFContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B472423A728DC00287F6D /* XCFContent.m */; };
+		2BC964B721CE0D2A004B22DB /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC964B621CE0D2A004B22DB /* Bitmap.m */; };
+		2BC964BC21CE0E37004B22DB /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC964B821CE0E37004B22DB /* Rects.m */; };
+		2BC964BD21CE0E37004B22DB /* RLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC964BB21CE0E37004B22DB /* RLE.m */; };
+		2BE97F4623CBAC9200A09AAC /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE97F4523CBAC9200A09AAC /* Accelerate.framework */; };
 		2C05A19C06CAA52B00D84F6F /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.m */; };
 		61E3BCFB0870B4F2002186A0 /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */; };
 		8D576312048677EA00EA77CD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B6FE84183AC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
@@ -14,27 +20,16 @@
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
 		C86B05270671AA6E00DD9006 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86B05260671AA6E00DD9006 /* CoreServices.framework */; };
 		DC0E914E1041DD3F00C3FC48 /* Globals.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E91361041DD3F00C3FC48 /* Globals.h */; };
-		DC0E914F1041DD3F00C3FC48 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E91371041DD3F00C3FC48 /* Constants.h */; };
-		DC0E91501041DD3F00C3FC48 /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0E91381041DD3F00C3FC48 /* Rects.m */; };
-		DC0E91511041DD3F00C3FC48 /* Rects.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E91391041DD3F00C3FC48 /* Rects.h */; };
-		DC0E91521041DD3F00C3FC48 /* RLE.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0E913A1041DD3F00C3FC48 /* RLE.m */; };
-		DC0E91531041DD3F00C3FC48 /* RLE.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E913B1041DD3F00C3FC48 /* RLE.h */; };
 		DC0E91541041DD3F00C3FC48 /* SeaContent.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E913C1041DD3F00C3FC48 /* SeaContent.h */; };
 		DC0E91551041DD3F00C3FC48 /* SeaContent.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0E913D1041DD3F00C3FC48 /* SeaContent.m */; };
-		DC0E91561041DD3F00C3FC48 /* XCFContent.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E913E1041DD3F00C3FC48 /* XCFContent.h */; };
-		DC0E91571041DD3F00C3FC48 /* XCFContent.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0E913F1041DD3F00C3FC48 /* XCFContent.m */; };
 		DC0E91581041DD3F00C3FC48 /* SeaLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E91401041DD3F00C3FC48 /* SeaLayer.h */; };
 		DC0E91591041DD3F00C3FC48 /* SeaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0E91411041DD3F00C3FC48 /* SeaLayer.m */; };
-		DC0E915A1041DD3F00C3FC48 /* XCFLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E91421041DD3F00C3FC48 /* XCFLayer.h */; };
-		DC0E915B1041DD3F00C3FC48 /* XCFLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0E91431041DD3F00C3FC48 /* XCFLayer.m */; };
 		DC0E915C1041DD3F00C3FC48 /* ColorConversion.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E91441041DD3F00C3FC48 /* ColorConversion.h */; };
 		DC0E915D1041DD3F00C3FC48 /* ColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0E91451041DD3F00C3FC48 /* ColorConversion.m */; };
 		DC0E915E1041DD3F00C3FC48 /* StandardMerge.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E91461041DD3F00C3FC48 /* StandardMerge.h */; };
 		DC0E915F1041DD3F00C3FC48 /* StandardMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0E91471041DD3F00C3FC48 /* StandardMerge.m */; };
 		DC0E91601041DD3F00C3FC48 /* SeaCompositor.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E91481041DD3F00C3FC48 /* SeaCompositor.h */; };
 		DC0E91611041DD3F00C3FC48 /* SeaCompositor.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0E91491041DD3F00C3FC48 /* SeaCompositor.m */; };
-		DC0E91621041DD3F00C3FC48 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E914A1041DD3F00C3FC48 /* Bitmap.h */; };
-		DC0E91631041DD3F00C3FC48 /* Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0E914B1041DD3F00C3FC48 /* Bitmap.m */; };
 		DC0E91641041DD3F00C3FC48 /* SeaWhiteboard.h in Headers */ = {isa = PBXBuildFile; fileRef = DC0E914C1041DD3F00C3FC48 /* SeaWhiteboard.h */; };
 		DC0E91651041DD3F00C3FC48 /* SeaWhiteboard.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0E914D1041DD3F00C3FC48 /* SeaWhiteboard.m */; };
 		DC0E916C1041DD6300C3FC48 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E916B1041DD6300C3FC48 /* Cocoa.framework */; };
@@ -46,33 +41,34 @@
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		08FB77B6FE84183AC02AAC07 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		2B7B472223A728DB00287F6D /* XCFLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCFLayer.m; sourceTree = "<group>"; };
+		2B7B472323A728DC00287F6D /* XCFLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFLayer.h; sourceTree = "<group>"; };
+		2B7B472423A728DC00287F6D /* XCFContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCFContent.m; sourceTree = "<group>"; };
+		2B7B472523A728DC00287F6D /* XCFContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFContent.h; sourceTree = "<group>"; };
+		2BC964B521CE0D29004B22DB /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bitmap.h; path = ../Seashore/source/extra/Bitmap.h; sourceTree = "<group>"; };
+		2BC964B621CE0D2A004B22DB /* Bitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bitmap.m; path = ../Seashore/source/extra/Bitmap.m; sourceTree = "<group>"; };
+		2BC964B821CE0E37004B22DB /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rects.m; path = ../Seashore/source/extra/Rects.m; sourceTree = "<group>"; };
+		2BC964B921CE0E37004B22DB /* Rects.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Rects.h; path = ../Seashore/source/extra/Rects.h; sourceTree = "<group>"; };
+		2BC964BA21CE0E37004B22DB /* RLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RLE.h; path = ../Seashore/source/extra/RLE.h; sourceTree = "<group>"; };
+		2BC964BB21CE0E37004B22DB /* RLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RLE.m; path = ../Seashore/source/extra/RLE.m; sourceTree = "<group>"; };
+		2BE97F4523CBAC9200A09AAC /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		2BF173CC21D58A8200579D9D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Seashore/source/main/Constants.h; sourceTree = "<group>"; };
 		2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
 		61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GenerateThumbnailForURL.m; sourceTree = "<group>"; };
 		8D576316048677EA00EA77CD /* XCFQuickLook.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCFQuickLook.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C86B05260671AA6E00DD9006 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		DC0E91361041DD3F00C3FC48 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
-		DC0E91371041DD3F00C3FC48 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		DC0E91381041DD3F00C3FC48 /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rects.m; sourceTree = "<group>"; };
-		DC0E91391041DD3F00C3FC48 /* Rects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rects.h; sourceTree = "<group>"; };
-		DC0E913A1041DD3F00C3FC48 /* RLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLE.m; sourceTree = "<group>"; };
-		DC0E913B1041DD3F00C3FC48 /* RLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RLE.h; sourceTree = "<group>"; };
 		DC0E913C1041DD3F00C3FC48 /* SeaContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaContent.h; sourceTree = "<group>"; };
 		DC0E913D1041DD3F00C3FC48 /* SeaContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaContent.m; sourceTree = "<group>"; };
-		DC0E913E1041DD3F00C3FC48 /* XCFContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFContent.h; sourceTree = "<group>"; };
-		DC0E913F1041DD3F00C3FC48 /* XCFContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFContent.m; sourceTree = "<group>"; };
 		DC0E91401041DD3F00C3FC48 /* SeaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaLayer.h; sourceTree = "<group>"; };
 		DC0E91411041DD3F00C3FC48 /* SeaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaLayer.m; sourceTree = "<group>"; };
-		DC0E91421041DD3F00C3FC48 /* XCFLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFLayer.h; sourceTree = "<group>"; };
-		DC0E91431041DD3F00C3FC48 /* XCFLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFLayer.m; sourceTree = "<group>"; };
 		DC0E91441041DD3F00C3FC48 /* ColorConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorConversion.h; sourceTree = "<group>"; };
 		DC0E91451041DD3F00C3FC48 /* ColorConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorConversion.m; sourceTree = "<group>"; };
 		DC0E91461041DD3F00C3FC48 /* StandardMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardMerge.h; sourceTree = "<group>"; };
 		DC0E91471041DD3F00C3FC48 /* StandardMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandardMerge.m; sourceTree = "<group>"; };
 		DC0E91481041DD3F00C3FC48 /* SeaCompositor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaCompositor.h; sourceTree = "<group>"; };
 		DC0E91491041DD3F00C3FC48 /* SeaCompositor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaCompositor.m; sourceTree = "<group>"; };
-		DC0E914A1041DD3F00C3FC48 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
-		DC0E914B1041DD3F00C3FC48 /* Bitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bitmap.m; sourceTree = "<group>"; };
 		DC0E914C1041DD3F00C3FC48 /* SeaWhiteboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaWhiteboard.h; sourceTree = "<group>"; };
 		DC0E914D1041DD3F00C3FC48 /* SeaWhiteboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaWhiteboard.m; sourceTree = "<group>"; };
 		DC0E916B1041DD6300C3FC48 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -88,6 +84,7 @@
 				8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */,
 				C86B05270671AA6E00DD9006 /* CoreServices.framework in Frameworks */,
 				F28CFBFD0A3EC0AF000ABFF5 /* ApplicationServices.framework in Frameworks */,
+				2BE97F4623CBAC9200A09AAC /* Accelerate.framework in Frameworks */,
 				F28CFC030A3EC0C6000ABFF5 /* QuickLook.framework in Frameworks */,
 				DC0E916C1041DD6300C3FC48 /* Cocoa.framework in Frameworks */,
 			);
@@ -103,6 +100,7 @@
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB6FE9D52B211CA2CBB /* Products */,
+				2BE97F4423CBAC9100A09AAC /* Frameworks */,
 			);
 			name = XCFQuickLook;
 			sourceTree = "<group>";
@@ -131,31 +129,31 @@
 		08FB77AFFE84173DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				2B7B472523A728DC00287F6D /* XCFContent.h */,
+				2B7B472423A728DC00287F6D /* XCFContent.m */,
+				2B7B472323A728DC00287F6D /* XCFLayer.h */,
+				2B7B472223A728DB00287F6D /* XCFLayer.m */,
+				2BF173CC21D58A8200579D9D /* Constants.h */,
+				2BC964BA21CE0E37004B22DB /* RLE.h */,
+				2BC964BB21CE0E37004B22DB /* RLE.m */,
+				2BC964B921CE0E37004B22DB /* Rects.h */,
+				2BC964B821CE0E37004B22DB /* Rects.m */,
+				2BC964B521CE0D29004B22DB /* Bitmap.h */,
+				2BC964B621CE0D2A004B22DB /* Bitmap.m */,
 				61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */,
 				2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.m */,
 				08FB77B6FE84183AC02AAC07 /* main.c */,
 				DC0E91361041DD3F00C3FC48 /* Globals.h */,
-				DC0E91371041DD3F00C3FC48 /* Constants.h */,
-				DC0E91381041DD3F00C3FC48 /* Rects.m */,
-				DC0E91391041DD3F00C3FC48 /* Rects.h */,
-				DC0E913A1041DD3F00C3FC48 /* RLE.m */,
-				DC0E913B1041DD3F00C3FC48 /* RLE.h */,
 				DC0E913C1041DD3F00C3FC48 /* SeaContent.h */,
 				DC0E913D1041DD3F00C3FC48 /* SeaContent.m */,
-				DC0E913E1041DD3F00C3FC48 /* XCFContent.h */,
-				DC0E913F1041DD3F00C3FC48 /* XCFContent.m */,
 				DC0E91401041DD3F00C3FC48 /* SeaLayer.h */,
 				DC0E91411041DD3F00C3FC48 /* SeaLayer.m */,
-				DC0E91421041DD3F00C3FC48 /* XCFLayer.h */,
-				DC0E91431041DD3F00C3FC48 /* XCFLayer.m */,
 				DC0E91441041DD3F00C3FC48 /* ColorConversion.h */,
 				DC0E91451041DD3F00C3FC48 /* ColorConversion.m */,
 				DC0E91461041DD3F00C3FC48 /* StandardMerge.h */,
 				DC0E91471041DD3F00C3FC48 /* StandardMerge.m */,
 				DC0E91481041DD3F00C3FC48 /* SeaCompositor.h */,
 				DC0E91491041DD3F00C3FC48 /* SeaCompositor.m */,
-				DC0E914A1041DD3F00C3FC48 /* Bitmap.h */,
-				DC0E914B1041DD3F00C3FC48 /* Bitmap.m */,
 				DC0E914C1041DD3F00C3FC48 /* SeaWhiteboard.h */,
 				DC0E914D1041DD3F00C3FC48 /* SeaWhiteboard.m */,
 			);
@@ -170,6 +168,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2BE97F4423CBAC9100A09AAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2BE97F4523CBAC9200A09AAC /* Accelerate.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -178,17 +184,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC0E914E1041DD3F00C3FC48 /* Globals.h in Headers */,
-				DC0E914F1041DD3F00C3FC48 /* Constants.h in Headers */,
-				DC0E91511041DD3F00C3FC48 /* Rects.h in Headers */,
-				DC0E91531041DD3F00C3FC48 /* RLE.h in Headers */,
 				DC0E91541041DD3F00C3FC48 /* SeaContent.h in Headers */,
-				DC0E91561041DD3F00C3FC48 /* XCFContent.h in Headers */,
 				DC0E91581041DD3F00C3FC48 /* SeaLayer.h in Headers */,
-				DC0E915A1041DD3F00C3FC48 /* XCFLayer.h in Headers */,
 				DC0E915C1041DD3F00C3FC48 /* ColorConversion.h in Headers */,
 				DC0E915E1041DD3F00C3FC48 /* StandardMerge.h in Headers */,
 				DC0E91601041DD3F00C3FC48 /* SeaCompositor.h in Headers */,
-				DC0E91621041DD3F00C3FC48 /* Bitmap.h in Headers */,
 				DC0E91641041DD3F00C3FC48 /* SeaWhiteboard.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,7 +204,6 @@
 				8D57630F048677EA00EA77CD /* Resources */,
 				8D576311048677EA00EA77CD /* Sources */,
 				8D576313048677EA00EA77CD /* Frameworks */,
-				8D576315048677EA00EA77CD /* Rez */,
 			);
 			buildRules = (
 			);
@@ -221,9 +220,17 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1000;
+			};
 			buildConfigurationList = 2CA326220896AD4900168862 /* Build configuration list for PBXProject "XCFQuickLook" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				English,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* XCFQuickLook */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -244,16 +251,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXRezBuildPhase section */
-		8D576315048677EA00EA77CD /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXRezBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		8D576311048677EA00EA77CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -262,17 +259,17 @@
 				8D576312048677EA00EA77CD /* main.c in Sources */,
 				2C05A19C06CAA52B00D84F6F /* GeneratePreviewForURL.m in Sources */,
 				61E3BCFB0870B4F2002186A0 /* GenerateThumbnailForURL.m in Sources */,
-				DC0E91501041DD3F00C3FC48 /* Rects.m in Sources */,
-				DC0E91521041DD3F00C3FC48 /* RLE.m in Sources */,
+				2BC964BD21CE0E37004B22DB /* RLE.m in Sources */,
 				DC0E91551041DD3F00C3FC48 /* SeaContent.m in Sources */,
-				DC0E91571041DD3F00C3FC48 /* XCFContent.m in Sources */,
+				2B7B472623A728DC00287F6D /* XCFLayer.m in Sources */,
 				DC0E91591041DD3F00C3FC48 /* SeaLayer.m in Sources */,
-				DC0E915B1041DD3F00C3FC48 /* XCFLayer.m in Sources */,
+				2B7B472723A728DC00287F6D /* XCFContent.m in Sources */,
 				DC0E915D1041DD3F00C3FC48 /* ColorConversion.m in Sources */,
 				DC0E915F1041DD3F00C3FC48 /* StandardMerge.m in Sources */,
 				DC0E91611041DD3F00C3FC48 /* SeaCompositor.m in Sources */,
-				DC0E91631041DD3F00C3FC48 /* Bitmap.m in Sources */,
+				2BC964BC21CE0E37004B22DB /* Rects.m in Sources */,
 				DC0E91651041DD3F00C3FC48 /* SeaWhiteboard.m in Sources */,
+				2BC964B721CE0D2A004B22DB /* Bitmap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,14 +290,14 @@
 		2CA3261F0896AD4900168862 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = OTHER_PLUGIN;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/QuickLook;
+				PRODUCT_BUNDLE_IDENTIFIER = app.seashore.xcfquicklook;
 				PRODUCT_NAME = XCFQuickLook;
 				WRAPPER_EXTENSION = qlgenerator;
 			};
@@ -309,11 +306,13 @@
 		2CA326200896AD4900168862 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = OTHER_PLUGIN;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/QuickLook;
+				PRODUCT_BUNDLE_IDENTIFIER = app.seashore.xcfquicklook;
 				PRODUCT_NAME = XCFQuickLook;
 				WRAPPER_EXTENSION = qlgenerator;
 			};
@@ -322,25 +321,66 @@
 		2CA326230896AD4900168862 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
-				SDKROOT = macosx10.5;
 			};
 			name = Debug;
 		};
 		2CA326240896AD4900168862 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				PREBINDING = NO;
-				SDKROOT = macosx10.5;
 			};
 			name = Release;
 		};

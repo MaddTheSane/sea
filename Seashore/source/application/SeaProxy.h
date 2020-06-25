@@ -15,16 +15,17 @@
 @interface SeaProxy : NSObject {
 }
 
-// To methods in TextureExporter...
 - (IBAction)exportAsTexture:(id)sender;
+- (IBAction)exportAsBrush:(id)sender;
 
 // To methods in SeaView...
 - (IBAction)zoomIn:(id)sender;
 - (IBAction)zoomNormal:(id)sender;
+- (IBAction)zoomToFit:(id)sender;
 - (IBAction)zoomOut:(id)sender;
 
 // To methods in SeaWhiteboard...
-- (IBAction)toggleCMYKPreview:(id)sender;
+- (IBAction)toggleSoftProof:(id)sender;
 #ifdef PERFORMANCE
 - (IBAction)resetPerformance:(id)sender;
 #endif
@@ -49,7 +50,6 @@
 - (IBAction)clearAllLinks:(id)sender;
 - (IBAction)toggleFloatingSelection:(id)sender;
 - (IBAction)duplicate:(id)sender;
-- (IBAction)toggleCMYKSave:(id)sender;
 - (IBAction)changeSelectedChannel:(id)sender;
 - (IBAction)changeTrueView:(id)sender;
 
@@ -75,8 +75,6 @@
 - (IBAction)condenseLayer:(id)sender;
 - (IBAction)condenseToSelection:(id)sender;
 - (IBAction)expandLayer:(id)sender;
-- (IBAction)cropImage:(id)sender;
-- (IBAction)maskImage:(id)sender;
 
 // To methods in SeaScale...
 - (IBAction)setScale:(id)sender;
@@ -104,15 +102,13 @@
 - (IBAction)toggleInformation:(id)sender;
 - (IBAction)toggleOptions:(id)sender;
 - (IBAction)toggleStatusBar:(id)sender;
+- (IBAction)toggleRecentsBar:(id)sender;
 
 // To the ColorView
 - (IBAction)activateForegroundColor:(id)sender;
 - (IBAction)activateBackgroundColor:(id)sender;
 - (IBAction)swapColors:(id)sender;
 - (IBAction)defaultColors:(id)sender;
-
-// To ColorSync API...
-- (IBAction)openColorSyncPanel:(id)sender;
 
 // To crashing...
 - (IBAction)crash:(id)sender;

@@ -13,10 +13,10 @@
 @interface TIFFExporter : AbstractExporter {
 	
 	// The associated document
-	IBOutlet id idocument;
+	__weak IBOutlet id idocument;
 	
 	// The panel allowing colour space choice
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// The radio buttons specifying the target
 	IBOutlet id targetRadios;
@@ -29,12 +29,6 @@
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)init;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		targetChanged:

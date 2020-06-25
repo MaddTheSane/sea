@@ -21,14 +21,14 @@
 	// The checkbox specifying the outline of the font
 	IBOutlet id outlineCheckbox;
 	
-	// The slider specifying the outline of the font
+    // if checked, create a new layer on text add
+    IBOutlet id newLayerCheckbox;
+    
+    // The slider specifying the outline of the font
 	IBOutlet id outlineSlider;
 		
 	// A label specifying the font
 	IBOutlet id fontLabel;
-	
-	// The checkbox specifying whether a fringe is okay
-	IBOutlet id fringeCheckbox;
 	
 	// The font manager associated with the text tool
 	id fontManager;
@@ -73,6 +73,13 @@
 - (BOOL)useSubpixel;
 
 /*!
+    @method        shouldAddTextAsNewLayer
+    @discussion    Returns whether text should be added as a new layer
+    @result        Returns YES if text should be added as a new layer, NO otherwise.
+*/
+- (BOOL)shouldAddTextAsNewLayer;
+
+/*!
 	@method		outline
 	@discussion	Returns the number of points the outline should be.
 	@result		Returns an integer indicating the number of points the outline should be
@@ -87,16 +94,6 @@
 				should use the foreground colour.
 */
 - (BOOL)useTextures;
-
-/*!
-	@method		allowFringe
-	@discussion	Returns whether a fringe is allowed, the fringe is determined using
-				the background layers and will look out of place if the background
-				changes. On the other hand, the fringe will look better if the
-				background does not change.
-	@result		Returns YES if the fringe should be allowed, NO otherwise.
-*/
-- (BOOL)allowFringe;
 
 /*!
 	@method		update

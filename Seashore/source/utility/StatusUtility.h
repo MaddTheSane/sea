@@ -12,7 +12,7 @@
 
 @interface StatusUtility : NSObject {
 	// The document that owns the utility
-	IBOutlet id document;
+	__weak IBOutlet id document;
 	
 	// The pop-up men that reflect the currently active channel
 	IBOutlet id channelSelectionPopup;
@@ -26,17 +26,7 @@
 	// The actual view that is the status bar
 	IBOutlet id view;
 
-	// The text fields that have the colors
-	IBOutlet id redBox;
-	IBOutlet id greenBox;
-	IBOutlet id blueBox;
-	IBOutlet id alphaBox;
-	IBOutlet id redSlider;
-	IBOutlet id greenSlider;
-	IBOutlet id blueSlider;
-	IBOutlet id alphaSlider;
-	
-	// The slider that controls the zoom
+    // The slider that controls the zoom
 	IBOutlet id zoomSlider;
 }
 
@@ -71,17 +61,13 @@
 */
 - (void)update;
 
+- (void)shutdown;
+
 /*!
 	@method		updateZoom
 	@discussion	Updates the utility to reflect the current zoom
 */
 - (void)updateZoom;
-
-/*!
-	@method		updateQuickColor
-	@discussion	Updates the utility to reflect the current foreground color
-*/
-- (void)updateQuickColor;
 
 /*!
 	@method		changeChannel:
@@ -106,14 +92,6 @@
 					Ignored.
 */
 - (IBAction)trueViewChanged:(id)sender;
-
-/*!
-	@method		quickColorChange:
-	@discussion	Called when the text in the quickcolor boxes are changed.
-	@param		sender
-				Igonred.
-*/
-- (IBAction)quickColorChange:(id)sender;
 
 /*!
 	@method		changeZoom:
@@ -146,5 +124,13 @@
 				Ignored.
 */
 - (IBAction)zoomNormal:(id)sender;
+
+/*!
+    @method        zoomToFit:
+    @discussion    For when the zoom to fit button is pressed.
+    @param        sender
+                Ignored.
+*/
+- (IBAction)zoomToFit:(id)sender;
 
 @end

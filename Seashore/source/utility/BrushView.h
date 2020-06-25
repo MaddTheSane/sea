@@ -24,7 +24,7 @@
 @interface BrushView : NSView {
 	
 	// The BrushUtility controlling this view
-	id master;
+	__weak id master;
 	
 }
 
@@ -36,12 +36,6 @@
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)initWithMaster:(id)sender;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		mouseDown:

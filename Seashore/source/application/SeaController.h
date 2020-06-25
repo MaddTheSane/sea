@@ -1,5 +1,11 @@
 #import "Globals.h"
 
+
+@protocol SeaTerminate
+-(void)terminate;
+@end
+
+
 /*!
 	@class		SeaController
 	@abstract	Handles a number of special duties relating to the application's
@@ -13,10 +19,6 @@
 */
 
 @interface SeaController : NSObject {
-	
-	// An outlet to the utilities manager of the application
-	IBOutlet id utilitiesManager;
-	
 	// An outlet to the plug-ins manager of the application
 	IBOutlet id seaPlugins;
 	
@@ -35,8 +37,10 @@
 	// The window containing the GNU General Public License
 	IBOutlet id licenseWindow;
 	
-	// An array of objects wishing to recieve the terminate message
-	NSArray *terminationObjects;
+    IBOutlet id seaColorProfiles;
+    
+    // An array of objects wishing to recieve the terminate message
+	NSArray<SeaTerminate> *terminationObjects;
 
 }
 
@@ -48,25 +52,12 @@
 - (id)init;
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		applicationDidFinishLaunching:
 	@discussion	Called when the application finishes launching.
 	@param		notification
 				Ignored.
 */
 - (void)applicationDidFinishLaunching:(NSNotification *)notification;
-
-/*!
-	@method		utilitiesManager
-	@discussion	A class method that returns the object of the same name.
-	@result		Returns the instance of UtilitiesManager.
-*/
-+ (id)utilitiesManager;
 
 /*!
 	@method		seaPlugins
@@ -121,14 +112,6 @@
 - (IBAction)editLastSaved:(id)sender;
 
 /*!
-	@method		colorSyncChanged:
-	@discussion	Notifies all documents when the ColorSync preferences change.
-	@param		notification
-				Ignored.
-*/
-- (void)colorSyncChanged:(NSNotification *)notification;
-
-/*!
 	@method		showLicense:
 	@discussion	Shows the license for Seashore.
 	@param		sender
@@ -152,7 +135,7 @@
 				The object that wishes to recieve a termination message (the
 				object is not retained).
 */
-- (void)registerForTermination:(id)object;
+- (void)registerForTermination:(id<SeaTerminate>)object;
 
 /*!
 	@method		applicationWillTerminate:
@@ -162,6 +145,9 @@
 				Ignored.
 */
 - (void)applicationWillTerminate:(NSNotification *)notification;
+
+
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication*)application;
 
 /*!
 	@method		applicationShouldOpenUntitledFile:

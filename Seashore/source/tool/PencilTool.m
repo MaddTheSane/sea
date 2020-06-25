@@ -13,20 +13,15 @@
 #import "SeaTools.h"
 #import "SeaLayer.h"
 #import "SeaTexture.h"
-#import "UtilitiesManager.h"
 #import "TextureUtility.h"
 #import "Bucket.h"
+#import "RecentsUtility.h"
 
 @implementation PencilTool
 
 - (int)toolId
 {
 	return kPencilTool;
-}
-
-- (void)dealloc
-{
-	[super dealloc];
 }
 
 - (BOOL)acceptsLineDraws
@@ -41,7 +36,7 @@
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	id activeTexture = [[document textureUtility] activeTexture];
 	id layer = [[document contents] activeLayer];
 	BOOL hasAlpha = [layer hasAlpha];
 	unsigned char *overlay = [[document whiteboard] overlay];
@@ -93,7 +88,7 @@
 	}
 	else {
 		if ([options useTextures])
-			[[document whiteboard] setOverlayOpacity:[[[SeaController utilitiesManager] textureUtilityFor:document] opacity]];
+			[[document whiteboard] setOverlayOpacity:[[document textureUtility] opacity]];
 		else
 			[[document whiteboard] setOverlayOpacity:[color alphaComponent] * 255.0];
 	}
@@ -122,17 +117,18 @@
 		// Do the update
 		if ([options useTextures] && ![options pencilIsErasing])
 			textureFill(spp, rect, [[document whiteboard] overlay], [(SeaLayer *)layer width], [(SeaLayer *)layer height], [activeTexture texture:(spp == 4)], [(SeaTexture *)activeTexture width], [(SeaTexture *)activeTexture height]);
-		[[document helpers] overlayChanged:rect inThread:NO];
+		[[document helpers] overlayChanged:rect];
 	
 	}
 	
 	// Record the position as the last point
 	lastPoint = where;
+    intermediate = YES;
 }
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	id activeTexture = [[document textureUtility] activeTexture];
 	id layer = [[document contents] activeLayer];
 	unsigned char *overlay = [[document whiteboard] overlay];
 	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
@@ -142,6 +138,9 @@
 	IntPoint curPoint, revisedCurPoint, newLastPoint;
 	int halfSize = (size % 2 == 0) ? size / 2 - 1 : size / 2;
 	IntRect rect;
+    
+    if (!intermediate)
+        return;
 	
 	// Only continue if the current point is different from the last point
 	if (lastPoint.x == where.x && lastPoint.y == where.y)
@@ -178,7 +177,7 @@
 		
 			if ([options useTextures] && ![options pencilIsErasing])
 				textureFill(spp, rect, [[document whiteboard] overlay], [(SeaLayer *)layer width], [(SeaLayer *)layer height], [activeTexture texture:(spp == 4)], [(SeaTexture *)activeTexture width], [(SeaTexture *)activeTexture height]);
-			[[document helpers] overlayChanged:rect inThread:NO];
+			[[document helpers] overlayChanged:rect];
 		}
 		newLastPoint = curPoint;
 	}
@@ -188,8 +187,11 @@
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	// Apply the changes
 	[(SeaHelpers *)[document helpers] applyOverlay];
+    
+    [[document recentsUtility] rememberPencil:(PencilOptions*)options];
+    
+    intermediate = NO;
 }
 
 - (void)startStroke:(IntPoint)where;
@@ -206,5 +208,15 @@
 {
 	[self mouseUpAt:where withEvent:NULL];
 }
+
+- (AbstractOptions*)getOptions
+{
+    return options;
+}
+- (void)setOptions:(AbstractOptions*)newoptions
+{
+    options = (PencilOptions*)newoptions;
+}
+
 
 @end

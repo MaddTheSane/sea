@@ -19,11 +19,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (BOOL)acceptsFirstMouse:(NSEvent *)event
 {
 	return YES;
@@ -40,20 +35,20 @@
 		[master setActiveTextureIndex:elemNo];
 		[self setNeedsDisplay:YES];
 	}
+    
+    if(event.clickCount>1){
+        [master closePanel:self];
+    }
 }
 
 - (void)drawRect:(NSRect)rect
 {
 	NSArray *textures = [master textures];
-	int textureCount =  [textures count];
+	int textureCount =  (int)[textures count];
 	int activeTextureIndex = [master activeTextureIndex];
 	int i, j, elemNo;
 	NSImage *thumbnail;
-	NSRect elemRect, tempRect;
-	
-	// Draw background
-	[[NSColor lightGrayColor] set];
-	[[NSBezierPath bezierPathWithRect:rect] fill];
+	NSRect elemRect;
 	
 	// Draw each elements
 	for (i = rect.origin.x / kTexturePreviewSize; i <= (rect.origin.x + rect.size.width) / kTexturePreviewSize; i++) {
@@ -63,31 +58,25 @@
 			elemNo = j * kTexturesPerRow + i;
 			elemRect = NSMakeRect(i * kTexturePreviewSize, j * kTexturePreviewSize, kTexturePreviewSize, kTexturePreviewSize);
 			
+            [[NSColor controlBackgroundColor] set];
+            [[NSBezierPath bezierPathWithRect:elemRect] fill];
+            
 			// Continue if we are in range
 			if (elemNo < textureCount) {
-				
-				// Draw the texture background and frame
-				[[NSColor whiteColor] set];
-				[[NSBezierPath bezierPathWithRect:elemRect] fill];
-				if (elemNo != activeTextureIndex) {
-					[[NSColor grayColor] set];
-					[NSBezierPath setDefaultLineWidth:1];
-					[[NSBezierPath bezierPathWithRect:elemRect] stroke];
-				}
-				else {
-					[[NSColor blackColor] set];
-					[NSBezierPath setDefaultLineWidth:2];
-					tempRect = elemRect;
-					tempRect.origin.x++; tempRect.origin.y++; tempRect.size.width -= 2; tempRect.size.height -= 2;
-					[[NSBezierPath bezierPathWithRect:tempRect] stroke];
-				}
-				
-				// Draw the thumbnail
-				thumbnail = [[textures objectAtIndex:elemNo] thumbnail];
-				[thumbnail compositeToPoint:NSMakePoint(i * kTexturePreviewSize + kTexturePreviewSize / 2 - [thumbnail size].width / 2, j * kTexturePreviewSize + kTexturePreviewSize / 2 + [thumbnail size].height / 2) operation:NSCompositeSourceOver];
-				
+                
+                // Draw the thumbnail
+                thumbnail = [[textures objectAtIndex:elemNo] thumbnail];
+                [thumbnail compositeToPoint:NSMakePoint(i * kTexturePreviewSize + kTexturePreviewSize / 2 - [thumbnail size].width / 2, j * kTexturePreviewSize + kTexturePreviewSize / 2 + [thumbnail size].height / 2) operation:NSCompositeSourceOver];
+                
+                if (elemNo == activeTextureIndex) {
+                    [NSBezierPath setDefaultLineWidth:4];
+                    [[NSColor selectedControlColor] set];
+                } else {
+                    [NSBezierPath setDefaultLineWidth:1];
+                    [[NSColor gridColor] set];
+                }
+                [[NSBezierPath bezierPathWithRect:NSInsetRect(elemRect,1,1)] stroke];
 			}
-			
 		}
 	}
 }
@@ -95,10 +84,11 @@
 - (void)update
 {
 	NSArray *textures = [master textures];
-	int textureCount =  [textures count];
+	int textureCount =  (int)[textures count];
 	NSSize size = NSMakeSize(kTexturePreviewSize * kTexturesPerRow + 1, ((textureCount % kTexturesPerRow == 0) ? (textureCount / kTexturesPerRow) : (textureCount / kTexturesPerRow + 1)) * kTexturePreviewSize);
 	
 	[self setFrameSize:size];
+    [self setNeedsDisplay:YES];
 }
 
 - (BOOL)isFlipped

@@ -17,7 +17,7 @@
 	id lastView;
 
 	// The document which is the focus of this utility
-	IBOutlet id document;
+	__weak IBOutlet id document;
 	
 	// The view to show when no document is active
 	IBOutlet id blankView;
@@ -41,9 +41,11 @@
 	IBOutlet id cloneOptions;
 	IBOutlet id cropOptions;
 	IBOutlet id effectOptions;
+    
+    IBOutlet id horizontalLine;
 	
 	// The toolbox utility object
-	IBOutlet id toolboxUtility;
+	__weak IBOutlet id toolboxUtility;
 	
 	// The currently active tool - not a reliable indication (see code)
 	int currentTool;
@@ -61,12 +63,6 @@
 	@discussion	Configures the utility's interface.
 */
 - (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		activate

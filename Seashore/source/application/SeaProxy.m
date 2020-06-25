@@ -11,10 +11,10 @@
 #import "SeaSelection.h"
 #import "SeaController.h"
 #import "SeaTools.h"
-#import "UtilitiesManager.h"
 #import "ToolboxUtility.h"
 #import "SeaFlip.h"
 #import "TextureExporter.h"
+#import "BrushExporter.h"
 #import "SeaAlignment.h"
 #import "SeaPlugins.h"
 #import "SeaRotation.h"
@@ -31,6 +31,12 @@
 	[[gCurrentDocument textureExporter] exportAsTexture:sender];
 }
 
+- (IBAction)exportAsBrush:(id)sender
+{
+    [[gCurrentDocument brushExporter] exportAsBrush:sender];
+}
+
+
 - (IBAction)zoomIn:(id)sender
 {
 	[[gCurrentDocument docView] zoomIn:sender];
@@ -41,14 +47,19 @@
 	[[gCurrentDocument docView] zoomNormal:sender];
 }
 
+- (IBAction)zoomToFit:(id)sender
+{
+    [[gCurrentDocument docView] zoomToFit:sender];
+}
+
 - (IBAction)zoomOut:(id)sender
 {
 	[[gCurrentDocument docView] zoomOut:sender];
 }
 
-- (IBAction)toggleCMYKPreview:(id)sender
+- (IBAction)toggleSoftProof:(id)sender
 {
-	[[gCurrentDocument whiteboard] toggleCMYKPreview];
+    [[gCurrentDocument whiteboard] toggleSoftProof:(ColorSyncProfileRef)NULL];
 }
 
 #ifdef PERFORMANCE
@@ -123,11 +134,7 @@
 
 - (IBAction)duplicateLayer:(id)sender
 {
-	id selection = [gCurrentDocument selection];
-	
-	if (![selection floating]) {
-		[(SeaContent *)[gCurrentDocument contents] duplicateLayer:kActiveLayer];
-	}
+    [(SeaContent *)[gCurrentDocument contents] duplicateLayer:kActiveLayer];
 }
 
 - (IBAction)layerAbove:(id)sender
@@ -161,7 +168,7 @@
 	id contents = [gCurrentDocument contents];
 	
 	if ([selection floating]) {
-		[contents anchorSelection];
+		[contents anchorLayer];
 	}
 	else {
 		[contents makeSelectionFloat:NO];
@@ -171,13 +178,6 @@
 - (IBAction)duplicate:(id)sender
 {
 	[[gCurrentDocument contents] makeSelectionFloat: YES];
-}
-
-- (IBAction)toggleCMYKSave:(id)sender
-{
-	id contents = [gCurrentDocument contents];
-	
-	[contents setCMYKSave:![contents cmykSave]];
 }
 
 - (IBAction)toggleLayerAlpha:(id)sender
@@ -293,16 +293,6 @@
 	[(SeaMargins *)[(SeaOperations *)[gCurrentDocument operations] seaMargins] expandLayer:sender];
 }
 
-- (IBAction)cropImage:(id)sender
-{
-	[(SeaMargins *)[(SeaOperations *)[gCurrentDocument operations] seaMargins] cropImage:sender];
-}
-
-- (IBAction)maskImage:(id)sender
-{
-	[(SeaMargins *)[(SeaOperations *)[gCurrentDocument operations] seaMargins] maskImage:sender];
-}
-
 - (IBAction)setScale:(id)sender
 {
 	[(SeaScale *)[(SeaOperations *)[gCurrentDocument operations] seaScale] run:YES];
@@ -336,53 +326,52 @@
 // To Utitilies
 - (IBAction)selectTool:(id)sender
 {
-	[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] selectToolUsingTag:sender];
+	[[gCurrentDocument toolboxUtility] selectToolUsingTag:sender];
 }
 
 - (IBAction)toggleLayers:(id)sender
 {
-	[[[SeaController utilitiesManager] pegasusUtilityFor:gCurrentDocument] toggleLayers:sender];
+	[[gCurrentDocument pegasusUtility] toggleLayers:sender];
 }
 
 - (IBAction)toggleInformation:(id)sender
 {
-	[[[SeaController utilitiesManager] infoUtilityFor:gCurrentDocument] toggle: sender];
+	[[gCurrentDocument infoUtility] toggle: sender];
 }
 
 - (IBAction)toggleOptions:(id)sender
 {
-	[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] toggle: sender];
+	[[gCurrentDocument optionsUtility] toggle: sender];
 }
 
 - (IBAction)toggleStatusBar:(id)sender
 {
-	[[[SeaController utilitiesManager] statusUtilityFor:gCurrentDocument] toggle: sender];
+	[[gCurrentDocument statusUtility] toggle: sender];
+}
+
+- (IBAction)toggleRecentsBar:(id)sender {
+    [[gCurrentDocument recentsUtility] toggle: sender];
 }
 
 // To the ColorView
 - (IBAction)activateForegroundColor:(id)sender
 {
-	[(ColorSelectView *)[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] colorView] activateForegroundColor: sender];
+	[(ColorSelectView *)[[gCurrentDocument toolboxUtility] colorView] activateForegroundColor: sender];
 }
 
 - (IBAction)activateBackgroundColor:(id)sender
 {
-	[[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] colorView] activateBackgroundColor: sender];
+	[[[gCurrentDocument toolboxUtility] colorView] activateBackgroundColor: sender];
 }
 
 - (IBAction)swapColors:(id)sender
 {
-	[[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] colorView] swapColors: sender];
+	[[[gCurrentDocument toolboxUtility] colorView] swapColors: sender];
 }
 
 - (IBAction)defaultColors:(id)sender
 {
-	[[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] colorView] defaultColors: sender];
-}
-
-- (IBAction)openColorSyncPanel:(id)sender
-{
-	CMLaunchControlPanel(0);
+	[[[gCurrentDocument toolboxUtility] colorView] defaultColors: sender];
 }
 
 - (BOOL)validateMenuItem:(id)menuItem
@@ -394,19 +383,22 @@
 	if (document == NULL)
 		return NO;
 	
-	// End the line drawing
-	[[document helpers] endLineDrawing];
+    int tag = (int)[menuItem tag];
 	
 	// Sometimes we always enable
-	if ([menuItem tag] == 999)
+	if (tag == 999)
 		return YES;
 	
 	// Never when the document is locked
 	if ([document locked])
 		return NO;
+    
+    if(tag>=270 && tag<=273){
+        return [[gCurrentDocument docView] validateMenuItem:menuItem];
+    }
 	
 	// Sometimes in other cases
-	switch ([menuItem tag]) {
+	switch (tag) {
 		case 200:
 			if([[[document window] contentView] visibilityForRegion: kSidebar])
 				[menuItem setTitle:@"Hide Layers"];
@@ -435,6 +427,13 @@
 				[menuItem setTitle:@"Show Status Bar"];
 			return YES;			
 		break;
+        case 195:
+            if([[[document window] contentView] visibilityForRegion:kRecentsBar])
+                [menuItem setTitle:@"Hide Recents Bar"];
+            else
+                [menuItem setTitle:@"Show Recents Bar"];
+            return YES;
+            break;
 		case 210:
 			if (![[document docView] canZoomIn])
 				return NO;
@@ -461,14 +460,6 @@
 			if ([contents canFlatten] == NO)
 				return NO;
 		break;
-		case 230:
-			[menuItem setState:[[document whiteboard] CMYKPreview]];
-			if (![[document whiteboard] canToggleCMYKPreview])
-				return NO;
-		break;
-		case 232:
-			[menuItem setState:[[document contents] cmykSave]];
-		break;
 		case 240:
 		case 241:
 			[menuItem setState:[menuItem tag] == 240 + [(SeaContent *)contents type]];
@@ -482,12 +473,12 @@
 				return NO;
 		break;
 		case 264:
-			if(![[document selection] active] || [[document selection] floating])
+			if(![[document selection] active])
 				return NO;
 		break;
 		case 300:
 			if ([[document selection] floating])
-				[menuItem setTitle:LOCALSTR(@"anchor selection", @"Anchor Selection")];
+				[menuItem setTitle:LOCALSTR(@"anchor layer", @"Anchor Layer")];
 			else
 				[menuItem setTitle:LOCALSTR(@"float selection", @"Float Selection")];
 			if (![[document selection] active])
@@ -505,14 +496,16 @@
 		case 411:
 		case 412:
 		case 413:
-			if ([[document selection] floating])
-				return NO;
+            // floating is like any other layer
+//			if ([[document selection] floating])
+//				return NO;
 		break;
 		case 450:
 		case 451:
 		case 452:
-			if([[document selection] floating])
-				return NO;
+            // floating is like any other layer
+//			if([[document selection] floating])
+//				return NO;
 			[menuItem setState: [[document contents] selectedChannel] == [menuItem tag] % 10];
 		break;
 		case 460:
@@ -525,8 +518,9 @@
 		case 346:
 		case 347:
 		case 349:
-			if (![[contents activeLayer] linked])
-				return NO;
+            // disabled check, because multiple floating layers are allowed
+//			if (![[contents activeLayer] linked])
+//				return NO;
 		break;
 		case 382:
 			if ([[contents activeLayer] linked]){

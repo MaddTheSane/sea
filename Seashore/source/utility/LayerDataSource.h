@@ -11,7 +11,7 @@
 
 @interface LayerDataSource : NSObject {
 	// The document this data source is connected to
-	IBOutlet id document;
+	__weak IBOutlet id document;
 
 	// The nodes that are being dragged (if any)
 	// This should be null during no dragging
@@ -19,16 +19,10 @@
 	
 	// A reference back to the outline view
     IBOutlet id outlineView;
+    
+    BOOL reloading;
 	
 }
-
-/*!
-	@method		outlineViewAction:
-	@discussion	Called when outline view is chicked on.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)outlineViewAction:(id)sender;
 
 /*!
 	@method		draggedNodes

@@ -15,11 +15,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)mouseDown:(NSEvent *)event
 {
 	NSPoint clickPoint = [self convertPoint:[event locationInWindow] fromView:NULL];
@@ -31,6 +26,10 @@
 		[master setActiveBrushIndex:elemNo];
 		[self setNeedsDisplay:YES];
 	}
+    
+    if(event.clickCount > 1){
+        [master closePanel:self];
+    }
 }
 
 - (void)drawRect:(NSRect)rect
@@ -39,17 +38,8 @@
 	int brushCount =  [brushes count];
 	int activeBrushIndex = [master activeBrushIndex];
 	int i, j, elemNo;
-	NSImage *thumbnail;
-	NSRect elemRect, tempRect;
-	NSString *pixelTag;
-	NSDictionary *attributes;
-	NSFont *font;
-	IntSize fontSize;
+	NSRect elemRect;
 	
-	// Draw background
-	[[NSColor lightGrayColor] set];
-	[[NSBezierPath bezierPathWithRect:rect] fill];
-		
 	// Draw each elements
 	for (i = rect.origin.x / kBrushPreviewSize; i <= (rect.origin.x + rect.size.width) / kBrushPreviewSize; i++) {
 		for (j = rect.origin.y / kBrushPreviewSize; j <= (rect.origin.y + rect.size.height) / kBrushPreviewSize; j++) {
@@ -58,39 +48,24 @@
 			elemNo = j * kBrushesPerRow + i;
 			elemRect = NSMakeRect(i * kBrushPreviewSize, j * kBrushPreviewSize, kBrushPreviewSize, kBrushPreviewSize);
 			
+            [[NSColor controlBackgroundColor] set];
+            [[NSBezierPath bezierPathWithRect:elemRect] fill];
+            
 			// Continue if we are in range
 			if (elemNo < brushCount) {
-				
-				// Draw the brush background and frame
-				[[NSColor whiteColor] set];
-				[[NSBezierPath bezierPathWithRect:elemRect] fill];
-				if (elemNo != activeBrushIndex) {
-					[[NSColor grayColor] set];
-					[NSBezierPath setDefaultLineWidth:1];
-					[[NSBezierPath bezierPathWithRect:elemRect] stroke];
-				}
-				else {
-					[[NSColor blackColor] set];
-					[NSBezierPath setDefaultLineWidth:2];
-					tempRect = elemRect;
-					tempRect.origin.x++; tempRect.origin.y++; tempRect.size.width -= 2; tempRect.size.height -= 2;
-					[[NSBezierPath bezierPathWithRect:tempRect] stroke];
-				}
-				
-				// Draw the thumbnail
-				thumbnail = [[brushes objectAtIndex:elemNo] thumbnail];
-				[thumbnail compositeToPoint:NSMakePoint(i * kBrushPreviewSize + kBrushPreviewSize / 2 - [thumbnail size].width / 2, j * kBrushPreviewSize + kBrushPreviewSize / 2 + [thumbnail size].height / 2) operation:NSCompositeSourceOver];
-				
-				// Draw the pixel tag if needed
-				pixelTag = [[brushes objectAtIndex:elemNo] pixelTag];
-				if (pixelTag) {
-					font = [NSFont systemFontOfSize:9.0];
-					attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:1.0], NSForegroundColorAttributeName, NULL];
-					fontSize = NSSizeMakeIntSize([pixelTag sizeWithAttributes:attributes]);
-					[pixelTag drawAtPoint:NSMakePoint(elemRect.origin.x + elemRect.size.width / 2 - fontSize.width / 2, elemRect.origin.y + elemRect.size.height / 2 - fontSize.height / 2) withAttributes:attributes];
-				}
-				
-			}
+                
+                [[brushes objectAtIndex:elemNo] drawBrushAt:elemRect];
+                
+				if (elemNo == activeBrushIndex) {
+                    [NSBezierPath setDefaultLineWidth:4];
+					[[NSColor selectedControlColor] set];
+                } else {
+                    [NSBezierPath setDefaultLineWidth:1];
+                    [[NSColor gridColor] set];
+                }
+                [[NSBezierPath bezierPathWithRect:NSInsetRect(elemRect,1,1)] stroke];
+
+            }
 			
 		}
 	}
@@ -102,6 +77,7 @@
 	int brushCount =  [brushes count];
 	
 	[self setFrameSize:NSMakeSize(kBrushPreviewSize * kBrushesPerRow + 1, ((brushCount % kBrushesPerRow == 0) ? (brushCount / kBrushesPerRow) : (brushCount / kBrushesPerRow + 1)) * kBrushPreviewSize)];
+    [self setNeedsDisplay:YES];
 }
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event

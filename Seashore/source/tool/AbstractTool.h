@@ -10,17 +10,15 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
+@class SeaDocument;
+
 @interface AbstractTool : NSObject {
 
 	// The document associated with this tool
-	IBOutlet id document;
-	
-	// The options associated with this tool
-	id options;
+	__weak SeaDocument *document;
 	
 	// Is the selection being made
 	BOOL intermediate;
-	
 }
 
 /*!
@@ -37,7 +35,16 @@
 	@param		newOptions
 				The options to set.
 */
-- (void)setOptions:(id)newOptions;
+- (void)setOptions:(AbstractOptions*)newOptions;
+
+/*!
+ @method        setOptions:
+ @discussion    Sets the options for this tool.
+ @param        newOptions
+ The options to set.
+ */
+- (AbstractOptions*)getOptions;
+
 
 /*!
 	@method		acceptsLineDraws

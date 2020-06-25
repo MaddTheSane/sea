@@ -7,7 +7,6 @@
 #import "SeaHelpers.h"
 #import "SeaController.h"
 #import "SeaPrefs.h"
-#import "UtilitiesManager.h"
 #import "SeaProxy.h"
 #import "SeaWindowContent.h"
 
@@ -22,14 +21,6 @@
 {
 	// Enable the utility
 	enabled = YES;
-	
-	[[SeaController utilitiesManager] setPegasusUtility: self for:document];
-}
-
-- (void)dealloc
-{
-	//if ([layersView documentView]) [[layersView documentView] autorelease];
-	[super dealloc];
 }
 
 - (void)activate
@@ -124,22 +115,20 @@
 
 - (IBAction)addLayer:(id)sender
 {
-	[(SeaContent*)[document contents] addLayer:kActiveLayer];
+	[[document contents] addLayer:kActiveLayer];
 }
 
 - (IBAction)duplicateLayer:(id)sender
 {
 	id selection = [document selection];
 	
-	if (![selection floating]) {
-		[(SeaContent *)[document contents] duplicateLayer:kActiveLayer];
-	}
+    [[document contents] duplicateLayer:kActiveLayer];
 }
 
 - (IBAction)deleteLayer:(id)sender
 {
 	if ([[document contents] layerCount] > 1){
-		[(SeaContent *)[document contents] deleteLayer:kActiveLayer];
+		[[document contents] deleteLayer:kActiveLayer];
 	}else{
 		NSBeep();
 	}

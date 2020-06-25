@@ -11,29 +11,26 @@
 
 @interface LayerControlView : NSView {
 	// If the user is dragging right now
-	BOOL intermediate;
+	BOOL dragging;
 	
 	// The previous width before the drag
 	float oldWidth;
 	NSPoint oldPoint;
 	
 	// The other views in the window
-	IBOutlet id leftPane;
-	IBOutlet id rightPane;
+	__weak IBOutlet id leftPane;
+	__weak IBOutlet id rightPane;
 	
 	// The buttons
 	IBOutlet id newButton;
 	IBOutlet id dupButton;
 	IBOutlet id delButton;
-	IBOutlet id shButton;
+	IBOutlet id infoButton;
 	
-	IBOutlet id divider;
-	
-	BOOL drawThumb;
-	
-	IBOutlet id statusUtility;
+    IBOutlet id grabberImage;
 }
-
-- (void)setHasResizeThumb:(BOOL)hasIt;
+- (IBAction)newLayer:(id)sender;
+- (IBAction)duplicateLayer:(id)sender;
+- (IBAction)removeLayer:(id)sender;
 
 @end

@@ -1,4 +1,5 @@
 #import "Globals.h"
+#import "EraserOptions.h"
 #import "AbstractTool.h"
 
 /*!
@@ -25,8 +26,7 @@ typedef struct {
 
 /*!
 	@class		BrushTool
-	@abstract	The paintbrush's role in Seashore is much the same as that in
-				the GIMP. 
+	@abstract	The paintbrush's role in Seashore is much the same as that in the GIMP. 
 	@discussion	Shift key - Draws straight lines.<br>Control key - Draws lines
 				at 45 degree intervals.
 				<br><br>
@@ -58,21 +58,15 @@ typedef struct {
 	// Have we finished drawing?
 	BOOL drawingDone;
 	
-	// Is drawing multithreaded?
-	BOOL multithreaded;
-		
 	// Has the first touch been done?
 	BOOL firstTouchDone;
 
 	// The last where recorded
 	IntPoint lastWhere;
+    
+    EraserOptions *options;
 	
 }
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		acceptsLineDraws

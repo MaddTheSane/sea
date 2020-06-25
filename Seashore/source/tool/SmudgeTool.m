@@ -4,7 +4,6 @@
 #import "SeaDocument.h"
 #import "SeaContent.h"
 #import "SeaController.h"
-#import "UtilitiesManager.h"
 #import "BrushUtility.h"
 #import "SeaLayer.h"
 #import "StandardMerge.h"
@@ -21,12 +20,6 @@
 	return kSmudgeTool;
 }
 
-
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (BOOL)useMouseCoalescing
 {
 	return NO;
@@ -35,19 +28,25 @@
 - (void)smudgeWithBrush:(id)brush at:(NSPoint)point
 {
 	id contents = [document contents];
-	id layer = [contents activeLayer];
-	unsigned char *overlay = [[document whiteboard] overlay], *data = [(SeaLayer *)layer data], *replace = [(SeaWhiteboard *)[document whiteboard] replace];
+	SeaLayer *layer = [contents activeLayer];
+	unsigned char *overlay = [[document whiteboard] overlay], *data = [layer data], *replace = [[document whiteboard] replace];
 	unsigned char *brushData, basePixel[4];
 	int brushWidth = [(SeaBrush *)brush fakeWidth], brushHeight = [(SeaBrush *)brush fakeHeight];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+	int width = [layer width], height = [layer height];
 	int i, j, k, tx, ty, t1, t2, pos, spp = [[document contents] spp];
 	int rate = [(SmudgeOptions *)options rate];
 	IntPoint ipoint = NSPointMakeIntPoint(point);
 	int selectedChannel = [[document contents] selectedChannel];
+    
+    int brush_spp = 1;
+    if ([brush usePixmap]) {
+        brushData = [brush pixmapForPoint:point] + 3; // address the alpha channel
+        brush_spp = 4;
+    } else {
+        brushData = [brush maskForPoint:point pressure:255];
+    }
 	
 	// Get the approrpiate brush data for the point
-	brushData = [brush maskForPoint:point pressure:255];
-
 	// Go through all valid points
 	for (j = 0; j < brushHeight; j++) {
 		for (i = 0; i < brushWidth; i++) {
@@ -83,9 +82,11 @@
 						basePixel[k] = basePixel[spp - 1];
 					basePixel[spp - 1] = 255;
 				}
-				blendPixel(spp, accumData, (j * brushWidth + i) * spp, basePixel, 0, rate);
-				replace[pos] = brushData[j * brushWidth + i] + int_mult((255 - brushData[j * brushWidth + i]), replace[pos], t1);
-				memcpy(&(overlay[pos * spp]), &(accumData[(j * brushWidth + i) * spp]), spp);
+                int bOffset = (j*brushWidth+i);
+                unsigned char brush_alpha = brushData[bOffset*brush_spp];
+				blendPixel(spp, accumData, bOffset * spp, basePixel, 0, rate);
+				replace[pos] = brush_alpha + int_mult((255 - brush_alpha), replace[pos], t1);
+				memcpy(&(overlay[pos * spp]), &(accumData[bOffset * spp]), spp);
 				
 			}
 		}
@@ -97,10 +98,10 @@
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
-	int layerWidth = [(SeaLayer *)layer width], layerHeight = [(SeaLayer *)layer height];
-	unsigned char *data = [(SeaLayer *)layer data];
-	id curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	SeaLayer *layer = [[document contents] activeLayer];
+	int layerWidth = [layer width], layerHeight = [layer height];
+	unsigned char *data = [layer data];
+	id curBrush = [[document brushUtility] activeBrush];
 	int brushWidth = [(SeaBrush *)curBrush fakeWidth], brushHeight = [(SeaBrush *)curBrush fakeHeight];
 	int i, j, k, tx, ty, spp = [[document contents] spp];
 	NSPoint curPoint = IntPointMakeNSPoint(where), temp;
@@ -159,22 +160,23 @@
 	rect.size.height = [(SeaBrush *)curBrush fakeHeight] + 1;
 	temp = NSMakePoint((int)curPoint.x - [(SeaBrush *)curBrush width] / 2, (int)curPoint.y - [(SeaBrush *)curBrush height] / 2);
 	rect.origin = NSPointMakeIntPoint(temp);
-	rect = IntConstrainRect(rect, IntMakeRect(0, 0, [(SeaLayer *)layer width], [(SeaLayer *)layer height]));
+	rect = IntConstrainRect(rect, IntMakeRect(0, 0, [layer width], [layer height]));
 	if (rect.size.width > 0 && rect.size.height > 0) {
 		[self smudgeWithBrush:curBrush at:temp];
-		[[document helpers] overlayChanged:rect inThread:NO];
+		[[document helpers] overlayChanged:rect];
 	}
 	
 	// Record the position as the last point
 	lastPoint = lastPlotPoint = IntPointMakeNSPoint(where);
 	distance = 0;
+    intermediate = YES;
 }
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
-	int layerWidth = [(SeaLayer *)layer width], layerHeight = [(SeaLayer *)layer height];
-	id curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	SeaLayer *layer = [[document contents] activeLayer];
+	int layerWidth = [layer width], layerHeight = [layer height];
+	id curBrush = [[document brushUtility] activeBrush];
 	int brushWidth = [(SeaBrush *)curBrush fakeWidth], brushHeight = [(SeaBrush *)curBrush fakeHeight];
 	NSPoint curPoint = IntPointMakeNSPoint(where);
 	double brushSpacing = 1.0 / 100.0;
@@ -185,6 +187,9 @@
 	int n, num_points;
 	IntRect rect;
 	NSPoint temp;
+    
+    if (!intermediate)
+        return;
 	
 	// Check this is a new point
 	if (where.x == lastWhere.x && where.y == lastWhere.y) {
@@ -280,7 +285,7 @@
 		rect = IntConstrainRect(rect, IntMakeRect(0, 0, layerWidth, layerHeight));
 		if (rect.size.width > 0 && rect.size.height > 0) {
 			[self smudgeWithBrush:curBrush at:temp];
-			[[document helpers] overlayChanged:rect inThread:NO];
+			[[document helpers] overlayChanged:rect];
 		}
 	}
 	
@@ -297,6 +302,7 @@
 
 	// Free the accumulating data
 	if (accumData) { free(accumData); accumData = NULL; }
+    intermediate = NO;
 }
 
 - (void)startStroke:(IntPoint)where;
@@ -313,5 +319,15 @@
 {
 	[self mouseUpAt:where withEvent:NULL];
 }
+
+- (AbstractOptions*)getOptions
+{
+    return options;
+}
+- (void)setOptions:(AbstractOptions*)newoptions
+{
+    options = (SmudgeOptions*)newoptions;
+}
+
 
 @end

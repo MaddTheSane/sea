@@ -1,5 +1,6 @@
 #import "Globals.h"
 #import "AbstractPanelUtility.h"
+#import "SeaTexture.h"
 
 /*!
 	@class		TextureUtility
@@ -9,6 +10,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
+@class SeaDocument;
 
 @interface TextureUtility : AbstractPanelUtility {
 	
@@ -29,10 +31,10 @@
 	IBOutlet id opacityLabel;
 	
 	// The document which is the focus of this utility
-	IBOutlet id document;
+	__weak IBOutlet SeaDocument *document;
 	
 	// An dictionary of all brushes known to Seashore
-	NSDictionary *textures;
+	NSDictionary<NSString*,SeaTexture*> *textures;
 	
 	// An array of all groups (an array of an array SeaTexture's) and group names (an array of NSString's)
 	NSArray *groups;
@@ -131,6 +133,13 @@
 */
 - (int)opacity;
 
+
+/*!
+ @method        setOpacity
+ @discussion    sets the opacity, must be between 0 and 255 inclusive. 25 is fully opaque.
+ */
+- (void)setOpacity:(int)value;
+
 /*!
 	@method		activeTexture
 	@discussion	Returns the currently active texture.
@@ -138,6 +147,12 @@
 				active texture.
 */
 - (id)activeTexture;
+
+/*!
+ @method        setActiveTexture
+ @discussion    set the active texture, or NULL to disable textures
+ */
+- (void)setActiveTexture:(SeaTexture*)texture;
 
 /*!
 	@method		activeTextureIndex

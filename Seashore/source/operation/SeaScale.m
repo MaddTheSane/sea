@@ -8,6 +8,7 @@
 #import "SeaHelpers.h"
 #import "SeaSelection.h"
 #import "Units.h"
+#import "Bitmap.h"
 
 @implementation SeaScale
 
@@ -29,7 +30,6 @@
 		free(undoRecords[i].rects);
 	}
 	free(undoRecords);
-	[super dealloc];
 }
 
 - (void)run:(BOOL)global
@@ -89,18 +89,17 @@
 	
 	// Set the options appropriately
 	[keepProportions setState:NSOnState];
-	[interpolationPopup selectItemAtIndex:[interpolationPopup indexOfItemWithTag:GIMP_INTERPOLATION_LINEAR]];
 	
 	// Set the interpolation style
 	if ([gUserDefaults objectForKey:@"interpolation"] == NULL) {
-		value = GIMP_INTERPOLATION_CUBIC;
+		value = 3;
 	}
 	else {
 		value = [gUserDefaults integerForKey:@"interpolation"];
 		if (value < 0 || value >= [interpolationPopup numberOfItems])
-			value = GIMP_INTERPOLATION_CUBIC;
+            value = 3;
 	}
-	[interpolationPopup selectItemAtIndex:value];
+    [interpolationPopup selectItemAtIndex:value];
 	
 	// Show the sheet
 	[NSApp beginSheet:sheet modalForWindow:[document window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -135,9 +134,11 @@
 	else {
 		if (newWidth == [(SeaContent *)[contents activeLayer] width] && newHeight == [(SeaContent *)[contents activeLayer] height]) { return; }
 	}
+    
+    NSImageInterpolation interpolation = [interpolationPopup selectedTag];
 	
 	// Make the changes
-	[self scaleToWidth:newWidth height:newHeight interpolation:[interpolationPopup indexOfSelectedItem] index:workingIndex]; 
+	[self scaleToWidth:newWidth height:newHeight interpolation:interpolation index:workingIndex];
 }
 
 - (IBAction)cancel:(id)sender
@@ -241,9 +242,6 @@
 	// Adjust for floating selections
 	if (index != kAllLayers) {
 		curLayer = [[document contents] layer:index];
-		if ([curLayer floating]) {
-			[[document selection] selectOpaque];
-		}
 	}
 }
 
@@ -381,9 +379,6 @@
 	// Adjust for floating selections
 	if (undoRecord.index != kAllLayers) {
 		curLayer = [[document contents] layer:undoRecord.index];
-		if ([curLayer floating]) {
-			[[document selection] selectOpaque];
-		}
 	}
 }
 
@@ -518,7 +513,6 @@
 			if (availableType) {
 				image = [[NSImage alloc] initWithData:[pboard dataForType:availableType]];
 				size = NSSizeMakeIntSize([image size]);
-				[image autorelease];
 			}
 			else {
 				NSBeep();

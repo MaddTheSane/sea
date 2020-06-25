@@ -28,7 +28,7 @@
 	BOOL targetWeb;
 
 	// The panel allowing compression options to be set
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// The compressed preview
 	IBOutlet id compressImageView;
@@ -59,12 +59,6 @@
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)init;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		compressionChanged:

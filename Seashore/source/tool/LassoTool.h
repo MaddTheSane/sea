@@ -1,4 +1,5 @@
 #import "Globals.h"
+#import "LassoOptions.h"
 #import "AbstractSelectTool.h"
 
 /*!
@@ -34,12 +35,11 @@ typedef struct {
 	// The list of points
 	IntPoint *points;
 	
-	// The last point
-	NSPoint lastPoint;
-	
 	// The current position in the list
 	int pos;
-
+    IntRect dirty;
+    
+    LassoOptions *options;
 }
 
 /*!
@@ -90,5 +90,9 @@ typedef struct {
 	@result		A LassoPoints struct
 */
 - (LassoPoints) currentPoints;
+
+- (void) initializePoints:(NSPoint)where;
+- (void) addPoint:(NSPoint)where;
+- (void) createOverlayFromPoints;
 
 @end

@@ -7,7 +7,7 @@
 
 @implementation SeaLayer
 
-- (id)init
+- (id)initWithDocument:(id)doc
 {	
 	// Set the data members to reasonable values
 	height = width = mode = 0;
@@ -34,12 +34,8 @@
 
 - (void)dealloc
 {	
-	if (name) [name autorelease];
-	if (oldNames) [oldNames autorelease];
 	if (data) free(data);
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
-	[super dealloc];
 }
 
 - (int)width

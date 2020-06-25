@@ -1,9 +1,7 @@
 #import "AbstractTool.h"
 #import "SeaController.h"
-#import "UtilitiesManager.h"
 #import "OptionsUtility.h"
 #import "SeaController.h"
-#import "UtilitiesManager.h"
 #import "TextureUtility.h"
 #import "AbstractOptions.h"
 #import "SeaDocument.h"
@@ -25,12 +23,6 @@
 	return self;
 }
 
-
-- (void)setOptions:(id)newOptions
-{
-	options = newOptions;
-}
-
 - (BOOL)acceptsLineDraws
 {
 	return NO;
@@ -43,7 +35,7 @@
 
 - (BOOL)foregroundIsTexture
 {
-	return [options useTextures];
+	return [[self getOptions] useTextures];
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event

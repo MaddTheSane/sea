@@ -36,7 +36,7 @@ enum {
 @interface SeaSelection : NSObject {
 
 	// The document associated with this object
-	id document;
+	__weak id document;
 
 	// The current selection rectangle
 	IntRect rect, globalRect;
@@ -50,7 +50,6 @@ enum {
 	// Help present the user with a visual representation of the mask
 	int selectionColorIndex;
 	unsigned char *maskBitmap;
-	NSBitmapImageRep *maskBitmapRep;
 	NSImage *maskImage;
 	
 	// The point of the last copied selection and its size
@@ -120,15 +119,6 @@ enum {
 	@result		Returns an IntSize indicating the size of the mask.
 */
 - (IntSize)maskSize;
-
-/*!
-	@method		trueLocalRect
-	@discussion	Returns the selection's true rectangle (this rectangle may
-				be larger than the active layer and should rarely be required).
-	@result		Returns an IntRect reprensenting the rectangle selection's true
-				rectangle in the overlay's co-ordinates.
-*/
-- (IntRect)trueLocalRect;
 
 /*!
 	@method		globalRect
@@ -208,7 +198,7 @@ enum {
 	@param		newOrigin
 				The new origin.
 */
-- (void)moveSelection:(IntPoint)newOrigin;
+- (void)moveSelection:(IntPoint)newOrigin fromOrigin:(IntPoint)oldOrigin;
 
 /*!
 	@method		readjustSelection
@@ -306,7 +296,7 @@ enum {
 	@param		yScale
 				The scaling to be done vertically on the selection.
 	@param		interpolation
-				The interpolation to be used when scaling (see GIMPCore).
+				The interpolation to be used when scaling.
 */
 - (void)scaleSelectionHorizontally:(float)xScale vertically:(float)yScale interpolation:(int)interpolation;
 
@@ -318,7 +308,7 @@ enum {
 	@param		oldRect
 				The rectangle of the old selection.
 	@param		interpolation
-				The interpolation to be used when scaling (see GIMPCore).
+				The interpolation to be used when scaling.
 	@param		oldMask
 				The mask that should be scaled to the newRect.
 */

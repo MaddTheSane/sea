@@ -1,5 +1,4 @@
 #import "LayerCell.h"
-#import "NSBezierPath_Extensions.h"
 
 @implementation LayerCell
 
@@ -12,25 +11,18 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [image release];
-    [super dealloc];
-}
-
 - (id)copyWithZone:(NSZone *)zone
 {
     LayerCell *cell = (LayerCell *)[super copyWithZone:zone];
     // The image ivar will be directly copied; we need to retain or copy it.
-    cell->image = [image retain];
+    cell->image = image;
     return cell;
 }
 
 - (void)setImage:(NSImage *)anImage
 {
     if (anImage != image) {
-        [image release];
-        image = [anImage retain];
+        image = anImage;
     }
 }
 
@@ -85,10 +77,10 @@
 {
 	if (image != nil) {
 		[NSGraphicsContext saveGraphicsState];
-		NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
+        NSShadow *shadow = [[NSShadow alloc] init];
 		[shadow setShadowOffset: NSMakeSize(1, 1)];
 		[shadow setShadowBlurRadius:2];
-		[shadow setShadowColor:[NSColor blackColor]];
+		[shadow setShadowColor:[NSColor shadowColor]];
 		[shadow set];
 		
 		NSRect	imageFrame;
@@ -107,21 +99,22 @@
             imageFrame.origin.y += ceil((cellFrame.size.height - imageFrame.size.height) / 2);
 
         [[NSImage imageNamed:@"checkerboard"] drawInRect:NSMakeRect(imageFrame.origin.x, imageFrame.origin.y - imageSize.height, imageSize.width, imageSize.height) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction: 1.0];
-
+        
+        [NSGraphicsContext restoreGraphicsState];
+        
+        [image drawInRect:NSMakeRect(imageFrame.origin.x, imageFrame.origin.y - imageSize.height, imageSize.width, imageSize.height) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction: 1.0];
+        
 		cellFrame.size.height = 18;
 		cellFrame.origin.y += 10;
 		NSDictionary *attrs;
 		if(selected){
-			attrs = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12] , NSFontAttributeName, [NSColor whiteColor], NSForegroundColorAttributeName, nil];
+			attrs = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12] , NSFontAttributeName, [NSColor selectedControlTextColor], NSForegroundColorAttributeName, nil];
 			[[self stringValue] drawInRect:cellFrame withAttributes:attrs];
-			[NSGraphicsContext restoreGraphicsState];
 		}else{
-			[NSGraphicsContext restoreGraphicsState];
-			attrs = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont systemFontOfSize:12] , NSFontAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];
+			attrs = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont systemFontOfSize:12] , NSFontAttributeName, [NSColor controlTextColor], NSForegroundColorAttributeName, nil];
 			[[self stringValue] drawInRect:cellFrame withAttributes:attrs];
 		}
 		
-        [image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
 	}else{
 		[super drawWithFrame:cellFrame inView:controlView];
 	}

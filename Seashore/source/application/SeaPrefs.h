@@ -1,4 +1,5 @@
 #import "Globals.h"
+#import "SeaController.h"
 
 /*!
 	@enum		k...Color
@@ -31,13 +32,13 @@ enum {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface SeaPrefs : NSObject {
+@interface SeaPrefs : NSObject <SeaTerminate> {
 	
 	// The SeaController object
 	IBOutlet id controller;
 	
 	// The preferences panel
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// The general prefs view
 	IBOutlet id generalPrefsView;
@@ -66,7 +67,10 @@ enum {
 	// The color well for the window back
 	IBOutlet id windowBackWell;
 	
-	// The text field for the suggested width value for a new image
+    // the color well for the transparency color
+    IBOutlet id transparencyColorWell;
+    
+    // The text field for the suggested width value for a new image
 	IBOutlet id widthValue;
 	
 	// The text field for the suggested height value for a new image
@@ -102,23 +106,16 @@ enum {
 	// A checkbox which when checked indicates a new document should be created at start-up
 	IBOutlet id openUntitledCheckbox;
 
-	// A checkbox which when checked indicates the first pressure sensitive touch should be ignored
+    // if checked, zoom document to fit at open
+    IBOutlet id zoomToFitAtOpenCheckbox;
+    // A checkbox which when checked indicates the first pressure sensitive touch should be ignored
 	IBOutlet id ignoreFirstTouchCheckbox;
-	
-	// A checkbox which when checked indicates drawing should be multithreaded
-	IBOutlet id multithreadedCheckbox;
 	
 	// A checkbox which when checked indicates mouse coalescing should always be on
 	IBOutlet id coalescingCheckbox;
 	
-	// A checkbox which when checked indicates updates should be checked for weekly
-	IBOutlet id checkForUpdatesCheckbox;
-	
 	// A checkbox which when checks indicates the precise cursor should be used
 	IBOutlet id preciseCursorCheckbox;
-	
-	// A checkbox which when checks indicates CoreImage should be used for scaling/rotation
-	IBOutlet id useCoreImageCheckbox;
 	
 	// Stores whether or not layer boundaries are visible
 	BOOL layerBounds;
@@ -134,16 +131,13 @@ enum {
 	
 	// The color of the back of the window
 	NSColor *windowBackColor;
-	
+
+    // The color of to use for transparency
+    NSColor *transparencyColor;
+    
 	// Is this the first run?
 	BOOL firstRun;
 	
-	// Stores the memory cache size
-	int memoryCacheSize;
-	
-	// Whether textures should be used
-	BOOL useTextures;
-		
 	// Whether fewer warnings should be shown
 	BOOL fewerWarnings;
 	
@@ -153,17 +147,14 @@ enum {
 	// Whether smart interpolation should be used
 	BOOL smartInterpolation;
 	
-	// Whether to check for updates weekly
-	BOOL checkForUpdates;
-	
 	// Whether to create a new document at start-up
 	BOOL openUntitled;
-	
+    
+    // Whether to zoom to fit documents at open
+    BOOL zoomToFitAtOpen;
+
 	// Whether the precise cursor should be used
 	BOOL preciseCursor;
-	
-	// Whether Core Image should be used for scaling/rotation
-	BOOL useCoreImage;
 	
 	// The current selection colour
 	int selectionColor;
@@ -194,12 +185,6 @@ enum {
 
 	// Stores the number of times this version of Seashore has been run
 	int runCount;
-	
-	// The time of the last check
-	NSTimeInterval lastCheck;
-	
-	// Whether drawing should be multithreaded
-	BOOL multithreaded;
 	
 	// Whether the first pressure-sensitive touch should be ignored
 	BOOL ignoreFirstTouch;
@@ -358,12 +343,12 @@ enum {
 -(IBAction)setOpenUntitled:(id)sender;
 
 /*!
-	@method		setMultithreaded:
-	@discussion	Sets if multithreaded.
-	@param		sender
-				Ignored.
+    @method        setZoomToFitAtOpen:
+    @discussion    Sets if a  document should be zoom to fit at open.
+    @param        sender
+                Ignored.
 */
--(IBAction)setMultithreaded:(id)sender;
+-(IBAction)setZoomToFitAtOpen:(id)sender;
 
 /*!
 	@method		setIgnoreFirstTouch:
@@ -383,28 +368,12 @@ enum {
 -(IBAction)setMouseCoalescing:(id)sender;
 
 /*!
-	@method		setCheckForUpdates:
-	@discussion	Sets if updates should be checked for.
-	@param		sender
-				Ignored.
-*/
--(IBAction)setCheckForUpdates:(id)sender;
-
-/*!
 	@method		setPreciseCursor:
 	@discussion	Sets if use a precise cursor.
 	@param		sender
 				Ignored.
 */
 -(IBAction)setPreciseCursor:(id)sender;
-
-/*!
-	@method		setUseCoreImage:
-	@discussion	Sets if CoreImage should be used for scaling/rotating.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)setUseCoreImage:(id)sender;
 
 /*!
 	@method		apply:
@@ -452,15 +421,6 @@ enum {
 */
 - (BOOL)firstRun;
 
-/*!
-	@method		memoryCacheSize
-	@discussion	Returns the minimum size of the undo data for a paticular layer
-				that should be stored in memory before it is written to disk.
-				This is known as the memory cache size for that layer.
-	@result		Returns an integer representing the memory cache size in  bytes
-				for any layer.
-*/
-- (int)memoryCacheSize;
 
 /*!
 	@method		warningLevel
@@ -483,21 +443,6 @@ enum {
 	@result		Returns YES if smart interpolation should be used, NO otherwise.
 */
 - (BOOL)smartInterpolation;
-
-/*!
-	@method		useTextures
-	@discussion	Returns whether textures should be used where possible.
-	@result		Returns YES if textures should be used, NO otherwise.
-*/
-- (BOOL)useTextures;
-
-/*!
-	@method		setUseTextures:
-	@discussion	Sets whether textures should be used where possible.
-	@param		value
-				YES if textures should be used, NO otherwise.
-*/
-- (void)setUseTextures:(BOOL)value;
 
 /*!
 	@method		toggleBoundaries:
@@ -537,6 +482,21 @@ enum {
 	@result		True if a pattern; false would use the transparency color.
 */
 - (BOOL)useCheckerboard;
+
+/*!
+    @method        transparecyColorChanged
+    @discussion    Called when the transparency color changes.
+    @param        sender
+                The Color Well sending the message.
+*/
+- (IBAction)transparencyColorChanged:(id)sender;
+
+/*!
+    @method        transparencyColor
+    @discussion    Returns the color of the transparecy when using non-checkboard
+    @result        Returns a RGB NSColor object representing the color.
+*/
+- (NSColor *)transparencyColor;
 
 /*!
 	@method		defaultWindowBack:
@@ -625,13 +585,6 @@ enum {
 - (IBAction)guideColorChanged:(id)sender;
 
 /*!
-	@method		multithreaded
-	@discussion	Returns whether drawing should be multithreaded.
-	@result		Returns YES if drawing should be multithreaded, NO otherwise.
-*/
-- (BOOL)multithreaded;
-
-/*!
 	@method		ignoreFirstTouch
 	@discussion	Returns whether the first pressure-sensitive touch should be
 				ignored.
@@ -647,27 +600,11 @@ enum {
 - (BOOL)mouseCoalescing;
 
 /*!
-	@method		checkForUpdates
-	@discussion	Returns whether an application should check for updates. This
-				will only return YES if it's been more than a week since the
-				last update.
-	@result		Returns YES if Seashore should check for updates, NO otherwise.
-*/
-- (BOOL)checkForUpdates;
-
-/*!
 	@method		preciseCursor
 	@discussion	Returns whether a precise cursor should be used.
 	@result		Returns YES if the precise cursor should be used, NO otherwise.
 */
 - (BOOL)preciseCursor;
-
-/*!
-	@method		useCoreImage
-	@discussion	Returns whether Core Image should be used for scaling/rotation.
-	@result		Returns YES if Core Image should be used for scaling/rotation, NO otherwise.
-*/
-- (BOOL)useCoreImage;
 
 /*!
 	@method		delayOverlay
@@ -737,6 +674,13 @@ enum {
 	@result		Returns YES if the a new document should be created, NO otherwise.
 */
 - (BOOL)openUntitled;
+
+/*!
+    @method        zoomToFitAtOpen
+    @discussion    Returns whether a document should zoom to fit at open
+    @result        Returns YES if the a new document should be zoomed, NO otherwise.
+*/
+- (BOOL)zoomToFitAtOpen;
 
 /*!
 	@method		validateMenuItem:

@@ -9,6 +9,7 @@
 ## Build generated
 build/
 DerivedData/
+Index/
 
 ## Various settings
 *.pbxuser

@@ -1,5 +1,6 @@
 #import "Globals.h"
 #import "SeaDocument.h"
+#import "SeaController.h"
 
 /*!
 	@enum		k...Plugin
@@ -23,7 +24,7 @@ enum {
 				<b>Copyright:</b> N/A
 */
 
-@interface SeaPlugins : NSObject {
+@interface SeaPlugins : NSObject <SeaTerminate> {
 
 	// The SeaController object
 	IBOutlet id controller;
@@ -42,10 +43,6 @@ enum {
 	
 	// The last effect applied
 	int lastEffect;
-	
-	// Stores the index of the "CIAffineTransform" plug-in - this plug-in handles Seashore CoreImage manipulation
-	int ciAffineTransformIndex;
-	
 }
 
 /*!
@@ -62,26 +59,12 @@ enum {
 - (void)awakeFromNib;
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		terminate
 	@discussion	Saves preferences to disk (this method is called before the
 				application exits by the SeaController).
 */
 - (void)terminate;
 
-
-/*!
-	@method		affinePlugin
-	@discussion	Returns the plug-in to be used for Core Image affine transforms.
-	@results	Returns an instance of the plug-in to be used  for Core Image
-				affine transforms or NULL if no such instance exists.
-*/
-- (id)affinePlugin;
 
 /*!
 	@method		data

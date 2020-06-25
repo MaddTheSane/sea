@@ -1,4 +1,5 @@
 #import "Globals.h"
+#import "SeaDocument.h"
 
 /*!
 	@class		SeaLayer
@@ -13,7 +14,7 @@
 @interface SeaLayer : NSObject {
 	
 	// The document that contains this layer
-	id document;
+	__weak SeaDocument *document;
 	
 	// The object responsible for changes to our bitmap
 	id seaLayerUndo;
@@ -58,22 +59,11 @@
 	unsigned char *thumbData;
 	int thumbWidth, thumbHeight;
 	
-	// Stores whether or not the data is compressed
-	BOOL compressed;
-	unsigned int compressedLen;
-	
 	// Remembers whether or not the layer has an alpha channel
 	BOOL hasAlpha;
 	
 	// The unique ID for this layer - sometimes used
 	int uniqueLayerID;
-
-	// A path to the file we use for undoing
-	NSString *undoFilePath;
-	
-	// The affine transform plug-in (used to do CoreImage transforms)
-	id affinePlugin;
-
 }
 
 // CREATION METHODS
@@ -161,26 +151,6 @@
 	@discussion	Frees memory occupied by an instance of this class.
 */
 - (void)dealloc;
-
-// COMPRESSION METHODS
-
-/*!
-	@method		compress
-	@discussion	Reduces the memory occupied by the layer by writing its data to
-				disk. This data can then be recovered by sending a decompress
-				message to the object. While the layer is compressed it is
-				largely dysfunctional. For this reason layers are typically only
-				compressed upon deletion and decompressed upon recovery (by an
-				undo operation).
-*/
-- (void)compress;
-
-/*!
-	@method		decompress
-	@discussion	Decompresses the layer if it has previously been compressed. See
-				the compress method for more information.
-*/
-- (void)decompress;
 
 // PROPERTY METHODS
 
@@ -470,6 +440,12 @@
 - (NSImage *)thumbnail;
 
 /*!
+    @method image
+    @result returns an autorelease NSBitmapImageRep of the current layer
+ */
+ - (NSBitmapImageRep *)bitmap;
+
+/*!
 	@method		updateThumbnail
 	@discussion	Updates the thumbnail so that it is up-to-date with the layer's
 				contents. This routine does not consider the overlay so it
@@ -514,7 +490,6 @@
 	@param		height
 				The revised height of the document or layer.
 	@param		interpolation
-				The interpolation style to be used (see GIMPCore).
 */
 - (void)setWidth:(int)newWidth height:(int)newHeight interpolation:(int)interpolation;
 

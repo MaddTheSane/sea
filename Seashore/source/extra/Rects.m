@@ -1,6 +1,8 @@
 #import "Rects.h"
 #import "Globals.h"
 
+IntRect IntZeroRect = {{0,0},{0,0}};
+
 inline IntPoint NSPointMakeIntPoint(NSPoint point)
 {
 	IntPoint newPoint;
@@ -73,10 +75,14 @@ inline IntRect IntMakeRect(int x, int y, int width, int height)
 	return newRect;
 }
 
-inline void IntOffsetRect(IntRect *rect, int x, int y)
+inline IntRect IntOffsetRect(IntRect rect, int x, int y)
 {
-	rect->origin.x += x;
-	rect->origin.y += y;
+    return IntMakeRect(rect.origin.x+x,rect.origin.y+y,rect.size.width,rect.size.height);
+}
+
+inline IntRect IntGrowRect(IntRect rect, int distance)
+{
+    return IntMakeRect(rect.origin.x-distance,rect.origin.y-distance,rect.size.width+distance*2,rect.size.height+distance*2);
 }
 
 inline BOOL IntPointInRect(IntPoint point, IntRect rect)
@@ -105,11 +111,13 @@ inline IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect)
 	
 	if (littleRect.origin.x < bigRect.origin.x) { rect.origin.x = bigRect.origin.x; rect.size.width = littleRect.size.width - (bigRect.origin.x - littleRect.origin.x); }
 	else { rect.origin.x = littleRect.origin.x; rect.size.width = littleRect.size.width; }
+    rect.origin.x = MIN(rect.origin.x,bigRect.origin.x+bigRect.size.width);
 	if (rect.origin.x + rect.size.width > bigRect.origin.x + bigRect.size.width) { rect.size.width = (bigRect.origin.x + bigRect.size.width) - rect.origin.x; }
 	if (rect.size.width < 0) rect.size.width = 0;
 	
 	if (littleRect.origin.y < bigRect.origin.y) { rect.origin.y = bigRect.origin.y; rect.size.height = littleRect.size.height - (bigRect.origin.y - littleRect.origin.y); }
 	else { rect.origin.y = littleRect.origin.y; rect.size.height = littleRect.size.height; }
+    rect.origin.y = MIN(rect.origin.y,bigRect.origin.y+bigRect.size.height);
 	if (rect.origin.y + rect.size.height > bigRect.origin.y + bigRect.size.height) { rect.size.height = (bigRect.origin.y + bigRect.size.height) - rect.origin.y; }
 	if (rect.size.height < 0) rect.size.height = 0;
 	
@@ -135,13 +143,6 @@ inline NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect)
 
 inline IntRect IntSumRects(IntRect augendRect, IntRect addendRect)
 {
-	// If either of the rects are zero
-	if(augendRect.size.width <= 0 || augendRect.size.height <= 0)
-		return addendRect;
-	
-	if(addendRect.size.width <= 0 || addendRect.size.width <= 0)
-		return augendRect;
-	
 	IntRect rect;
 	// Use the smallest origin
 	rect.origin.x = augendRect.origin.x < addendRect.origin.x ? augendRect.origin.x : addendRect.origin.x;
@@ -205,3 +206,8 @@ inline NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, 
 	return result;
 }
 
+
+inline NSString* NSStringFromIntRect(IntRect rect)
+{
+    return [NSString stringWithFormat:@"%d,%d,%d,%d",rect.origin.x,rect.origin.y,rect.size.width,rect.size.height];
+}

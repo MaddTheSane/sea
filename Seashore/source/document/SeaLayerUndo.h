@@ -20,7 +20,7 @@
 				information specifying where those pixels are.
 */
 typedef struct {
-	int fileNumber;
+    IntRect rect;
 	unsigned char *data;
 } UndoRecord;
 
@@ -36,23 +36,15 @@ typedef struct {
 @interface SeaLayerUndo : NSObject {
 	
 	// The document associated with this oject
-	id document;
+	__weak id document;
 	
 	// The layer associated with this oject
-	id layer;
+	__weak id layer;
 
 	// The records of all changes to the layer
 	UndoRecord *records;
 	int records_len;
 	int records_max_len;
-	
-	// The minimum size of the memory cache
-	unsigned long memoryCacheSize;
-	
-	// The big block of memory which we use to record new data
-	char *memory_cache;
-	int memory_cache_pos;
-	int memory_cache_len;
 	
 }
 
@@ -75,14 +67,6 @@ typedef struct {
 	@discussion	Frees memory occupied by an instance of this class.
 */
 - (void)dealloc;
-
-/*!
-	@method		checkDiskSpace
-	@discussion	Checks there is sufficient disk space to save the undo data.
-	@result		YES if there is enough space to save the undo data, NO
-				otherwise.
-*/
-- (BOOL)checkDiskSpace;
 
 /*!
 	@method		takeSanpshot:automatic:

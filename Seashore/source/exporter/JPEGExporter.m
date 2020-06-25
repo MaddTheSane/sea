@@ -7,51 +7,6 @@
 #import "SeaDocument.h"
 #import "Bitmap.h"
 
-static unsigned char *cmData;
-static unsigned int cmLen;
-
-static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xres, int yres)
-{
-	int dataPos;
-	short *temp;
-	unsigned short xress, yress;
-	
-	for (dataPos = 0; dataPos < len; dataPos++) {
-		if (input[dataPos] == 'J') {
-			if (memcmp(&(input[dataPos]), "JFIF\x00\x01", 6) == 0) {
-				dataPos = dataPos + 7;
-				xress = xres;
-				yress = yres;
-				xress = htons(xress);
-				yress = htons(yress);
-				input[dataPos] = 0x01;
-				dataPos++;
-				temp = (short *)&(input[dataPos]);
-				temp[0] = xress;
-				temp[1] = yress;
-				return YES;
-			}
-		}
-	}
-	
-	return NO;
-}
-
-static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
-{
-	if (cmData == NULL) {
-		cmData = malloc(*size);
-		memcpy(cmData, data, *size);
-		cmLen = *size;
-	}
-	else {
-		cmData = realloc(cmData, cmLen + *size);
-		memcpy(&(cmData[cmLen]), data, *size);
-		cmLen += *size;
-	}
-	
-	return 0;
-}
 
 @implementation JPEGExporter
 
@@ -85,11 +40,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	printCompression = value;
 	
 	return self;
-}
-
-- (void)dealloc
-{
-	[super dealloc];
 }
 
 - (BOOL)hasOptions
@@ -181,14 +131,13 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	free(temp);
 	
 	// Now make an image for the view
-	realImageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&sampleData pixelsWide:40 pixelsHigh:40 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bytesPerRow:40 * 3 bitsPerPixel:8 * 3];
+	realImageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&sampleData pixelsWide:40 pixelsHigh:40 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:MyRGBSpace bytesPerRow:40 * 3 bitsPerPixel:8 * 3];
 	realImage = [[NSImage alloc] initWithSize:NSMakeSize(160, 160)];
 	[realImage addRepresentation:realImageRep];
 	[realImageView setImage:realImage];
 	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
 	[compressImage setSize:NSMakeSize(160, 160)];
 	[compressImageView setImage:compressImage];
-	[compressImage autorelease];
 	
 	// Display the options dialog
 	[panel center];
@@ -202,8 +151,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	else
 		[gUserDefaults setInteger:printCompression forKey:@"jpeg print compression"];
 	free(sampleData);
-	[realImageRep autorelease];
-	[realImage autorelease];
 }
 
 - (IBAction)compressionChanged:(id)sender
@@ -218,7 +165,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	value = [self reviseCompression];
 	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
 	[compressImage setSize:NSMakeSize(160, 160)];
-	[compressImage autorelease];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
 }
@@ -239,10 +185,10 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 		[compressSlider setIntValue:webCompression];
 	else
 		[compressSlider setIntValue:printCompression];
+    
 	value = [self reviseCompression];
 	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
 	[compressImage setSize:NSMakeSize(160, 160)];
-	[compressImage autorelease];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
 }
@@ -277,8 +223,7 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	NSBitmapImageRep *imageRep;
 	NSData *imageData;
 	NSDictionary *exifData;
-	CMProfileRef cmProfile;
-	Boolean cmmNotFound;
+    bool hasAlpha=true;
 	
 	// Get the data to write
 	srcData = [(SeaWhiteboard *)[document whiteboard] data];
@@ -287,46 +232,32 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	spp = [(SeaContent *)[document contents] spp];
 	xres = [[document contents] xres];
 	yres = [[document contents] yres];
-	
-	// Strip the alpha channel if necessary
-	destData = malloc(width * height * (spp - 1));
-	stripAlphaToWhite(spp, destData, srcData, width * height);
-	spp--;
-	
-	// Make an image representation from the data
-	imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&destData pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:spp hasAlpha:NO isPlanar:NO colorSpaceName:(spp > 2) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:width * spp bitsPerPixel:8 * spp];
-	
+    
+    destData = stripAlpha(srcData,width,height,spp);
+    if (destData!=srcData) {
+        spp--;
+        hasAlpha=false;
+    }
+
+    // Make an image representation from the data
+    imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&destData pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:spp hasAlpha:hasAlpha isPlanar:NO colorSpaceName:(spp > 2) ? MyRGBSpace : MyGraySpace bytesPerRow:width * spp bitsPerPixel:8 * spp];
+
 	// Add EXIF data
 	exifData = [[document contents] exifData];
 	if (exifData) [imageRep setProperty:@"NSImageEXIFData" withValue:exifData];
 	
-	// Embed ColorSync profile
-	if (!targetWeb) {
-		if (spp < 3)
-			CMGetDefaultProfileBySpace(cmGrayData, &cmProfile);
-		else
-			OpenDisplayProfile(&cmProfile);
-		cmData = NULL;
-		CMFlattenProfile(cmProfile, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
-		if (cmData) {
-			[imageRep setProperty:NSImageColorSyncProfileData withValue:[NSData dataWithBytes:cmData length:cmLen]];
-			free(cmData);
-		}
-		if (spp >= 3) CloseDisplayProfile(cmProfile);
-	}
+    NSSize newSize;
+    newSize.width = [imageRep pixelsWide] * 72.0 / xres;  // x-resolution
+    newSize.height = [imageRep pixelsHigh] * 72.0 / yres;  // y-resolution
+    
+    [imageRep setSize:newSize];
 	
 	// Finally build the JPEG data
 	imageData = [imageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]];
 	
-	// Now add in the resolution settings
-	// Notice how we are working on [imageData bytes] despite being explicitly told not to in Cocoa's documentation - well if Cocoa gave us proper resolution handling that wouldn't be a problem
-	if (!JPEGReviseResolution((unsigned char *)[imageData bytes], [imageData length], xres, yres))
-		NSLog(@"The resolution of the current JPEG file could not be saved. This indicates a change in the approach with which Cocoa saves JPEG files. Please contact the author, quoting this log message, for further assistance."); 
-
 	// Save our file and let's go
-	[imageData writeToFile:path atomically:YES];
-	[imageRep autorelease];
-	
+	[imageData writeToFile:path atomically:NO];
+
 	// If the destination data is not equivalent to the source data free the former
 	if (destData != srcData)
 		free(destData);

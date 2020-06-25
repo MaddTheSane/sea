@@ -8,23 +8,32 @@ void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *s
 	unsigned char multi, alpha;
 	int t1, t2;
 	int k;
-	
-	if (srcPtr[srcLoc + alphaPos] == 0 || srcOpacity <= 0)
+    
+    unsigned char *sPtr = srcPtr+srcLoc;
+    unsigned char *dPtr = destPtr+destLoc;
+    
+    int sAlpha = *(sPtr+alphaPos);
+    int dAlpha = *(dPtr+alphaPos);
+
+	if (sAlpha == 0 || srcOpacity <= 0)
 		return;
 	
 	if (srcOpacity < 255)
-		alpha = int_mult(srcPtr[srcLoc + alphaPos], srcOpacity, t1);
+		alpha = int_mult(sAlpha, srcOpacity, t1);
 	else
-		alpha = srcPtr[srcLoc + alphaPos];
-	
-	if (alpha + destPtr[destLoc + alphaPos] < 255)
-		multi = (unsigned char)(((float)alpha / ((float)alpha + (float)destPtr[destLoc + alphaPos])) * 255.0);
+		alpha = sAlpha;
+    
+	if (alpha + dAlpha < 255 && alpha +dAlpha > 0)
+		multi = (unsigned char)(((float)alpha / ((float)alpha + (float)dAlpha)) * 255.0);
 	else
 		multi = alpha;
+    
 	for (k = 0; k < spp - 1; k++) {
-		destPtr[destLoc + k] = int_mult(srcPtr[srcLoc + k], multi, t1) + int_mult(destPtr[destLoc + k], 255 - multi, t2);
+		*dPtr = int_mult(*sPtr, multi, t1) + int_mult(*dPtr, 255 - multi, t2);
+        dPtr++;
+        sPtr++;
 	}
-	destPtr[destLoc + alphaPos] += int_mult(255 - destPtr[destLoc + alphaPos], alpha, t1);
+	*dPtr += int_mult(255 - *dPtr, alpha, t1);
 }
 
 void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
@@ -41,7 +50,6 @@ void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *s
 			destPtr[destLoc + k] = int_mult(destPtr[destLoc + k], 255 - srcOpacity, t1) + int_mult(srcPtr[srcLoc + k], srcOpacity, t2);
 	}
 }
-
 void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
 {
 	int t1, t2, k;
@@ -56,7 +64,6 @@ void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned 
 			destPtr[destLoc + k] = int_mult(destPtr[destLoc + k], 255 - srcOpacity, t1) + int_mult(srcPtr[srcLoc + k], srcOpacity, t2);
 	}
 }
-
 void replaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity)
 {
 	int t1, t2;
@@ -75,21 +82,30 @@ void normalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *sr
 {
 	unsigned char alpha;
 	int t1, t2;
-	int k;
-	
-	alpha = int_mult(srcPtr[srcLoc + alphaPos], srcOpacity, t1);
+    
+    unsigned char *sPtr = srcPtr+srcLoc;
+    unsigned char *sPtrEnd = sPtr+alphaPos;
+    unsigned char *dPtr = destPtr+destLoc;
+
+	alpha = int_mult(*(sPtrEnd), srcOpacity, t1);
+    unsigned char alpha0 = 255-alpha;
+    
 	if (alpha == 0)
 		return;
 		
 	if (alpha == 255) {
-		for (k = 0; k < alphaPos; k++)
-			destPtr[destLoc + k] = srcPtr[srcLoc + k];
-		destPtr[destLoc + alphaPos] = 255;
+        while(sPtr<sPtrEnd) {
+            *dPtr++ = *sPtr++;
+        }
+        *dPtr = 255;
 	}
 	else {
-		for (k = 0; k < alphaPos; k++)
-			destPtr[destLoc + k] = int_mult (srcPtr[srcLoc + k], alpha, t1) + int_mult (destPtr[destLoc + k], (255 - alpha), t2);
-		destPtr[destLoc + alphaPos] = alpha + int_mult((255 - alpha), destPtr[destLoc + alphaPos], t1);
+        while(sPtr<sPtrEnd) {
+			*dPtr = int_mult (*sPtr, alpha, t1) + int_mult (*dPtr,alpha0, t2);
+            sPtr++;
+            dPtr++;
+        }
+		*dPtr = alpha + int_mult(alpha0, *dPtr, t1);
 	}
 }
 
@@ -145,20 +161,24 @@ void blendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned char *src
 {
 	const int blend1 = 256 - blend;
 	const int blend2 = blend + 1;
-	int a1, a2, a, k;
-	
-	a1 = blend1 * srcPtr[srcLoc + alphaPos];
-	a2 = blend2 * destPtr[destLoc + alphaPos];
+    int a1, a2, a;
+    
+    unsigned char *sPtr = srcPtr+srcLoc;
+    unsigned char *sPtrEnd = sPtr+alphaPos;
+    unsigned char *dPtr = destPtr+destLoc;
+    unsigned char *dPtrEnd = dPtr+alphaPos;
+
+	a1 = blend1 * *sPtrEnd;
+	a2 = blend2 * *dPtrEnd;
 	a = a1 + a2;
 	
 	if (a == 0) {
-		for (k = 0; k < spp; k++)
-			destPtr[destLoc + k] = 0;
+        memset(dPtr,0,spp);
 	}
 	else {
-		for (k = 0; k < alphaPos; k++)
-			destPtr[destLoc + k] = (srcPtr[srcLoc + k] * a1 + destPtr[destLoc + k] * a2) / a;
-		destPtr[destLoc + alphaPos] = a >> 8;
+        for (;sPtr<sPtrEnd;dPtr++,sPtr++)
+			*dPtr = (*sPtr * a1 + *dPtr * a2) / a;
+		*dPtrEnd = a >> 8;
 	}
 }
 

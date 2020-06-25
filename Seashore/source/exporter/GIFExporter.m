@@ -47,7 +47,7 @@
 			samplesPerPixel: spp
 			hasAlpha: NO 
 			isPlanar: NO 
-			colorSpaceName: (spp > 2) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace 
+			colorSpaceName: (spp > 2) ? MyRGBSpace : MyGraySpace 
 			bytesPerRow:width * spp 
 			bitsPerPixel: 8 * spp];
 	
@@ -56,10 +56,9 @@
 	
 	// Save to a file
 	NSData* imageData = [imageRep representationUsingType: NSGIFFileType properties: gifProperties];
-	[imageData writeToFile: path atomically: YES];
+	[imageData writeToFile: path atomically: NO];
 	
 	// Cleanup
-	[imageRep autorelease];
 	free(destData);
 	
 	return YES;

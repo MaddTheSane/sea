@@ -87,6 +87,8 @@
 	if (intermediate && ![super isMovingOrScaling]) {
 		int aspectType = [options aspectType];
 		NSSize ratio;
+        
+        IntRect old = selectionRect;
 	
 		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {
 		
@@ -132,7 +134,7 @@
 			selectionRect.origin.y = where.y;
 
 		}
-		[[document helpers] selectionChanged];
+        [[document helpers] selectionChanged:IntSumRects(old,selectionRect)];
 	}
 }
 
@@ -154,4 +156,15 @@
 	selectionRect = IntMakeRect(0,0,0,0);
 	[super cancelSelection];
 }
+
+- (AbstractOptions*)getOptions
+{
+    return options;
+}
+- (void)setOptions:(AbstractOptions*)newoptions
+{
+    options = (EllipseSelectOptions*)newoptions;
+}
+
+
 @end
