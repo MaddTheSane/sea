@@ -208,7 +208,7 @@ extern void OpenDisplayProfile(CMProfileRef __nonnull*__nullable profile) DEPREC
 */
 extern void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
 
-void CMFlattenProfile(CMProfileRef pref, int flags, CMFlattenUPP *cmFlattenUPP, void * refcon, Boolean *cmmNotFound) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
+void CMFlattenProfile(CMProfileRef _Null_unspecified pref, int flags, CMFlattenUPP  _Null_unspecified* _Null_unspecified cmFlattenUPP, void * _Null_unspecified refcon, Boolean *_Null_unspecified cmmNotFound) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
 
 static const BMPColorSpace kGrayColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceGray", 10.2, 10.8) = BMPColorSpaceGray;
 static const BMPColorSpace kInvertedGrayColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceInvertedGray", 10.2, 10.8) = BMPColorSpaceInvertedGray;
