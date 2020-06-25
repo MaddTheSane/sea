@@ -18,10 +18,10 @@
 
 - (void)setColor:(NSColor *)color
 {
-	if ([gColorPanel isVisible] && [[gColorPanel title] isEqualToString:LOCALSTR(@"window back", @"Window Frame")]) {
-		[super setColor:color];
-		[seaPrefs windowBackChanged:color];
-	}
+//    if ([gColorPanel isVisible] && [[gColorPanel title] isEqualToString:LOCALSTR(@"window back", @"Window Frame")]) {
+//        [super setColor:color];
+//        [seaPrefs windowBackChanged:color];
+//    }
 }
 
 @end

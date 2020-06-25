@@ -218,7 +218,7 @@ inline NSRect IntRectMakeNSRect(IntRect rect);
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-inline void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
+void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
 
 /*!
 	@function	unpremultiplyBitmap
@@ -235,5 +235,5 @@ inline void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *sr
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-inline void unpremultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
+void unpremultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
 

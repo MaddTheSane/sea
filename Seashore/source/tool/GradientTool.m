@@ -58,7 +58,7 @@
 	info.start = startPoint;
 	deltaX = where.x - startPoint.x;
 	deltaY = where.y - startPoint.y;
-	if ([options modifier] == kControlModifier) {
+	if ([(GradientOptions*)options modifier] == kControlModifier) {
 		angle = atan((double)deltaY / (double)abs(deltaX));
 		if (angle > -0.3927 && angle < 0.3927)
 			where.y = startPoint.y;
@@ -107,7 +107,7 @@
 	intermediate = NO;
 }
 
-- (void)mouseDraggedTo:(NSPoint)where withEvent:(NSEvent *)event
+- (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
 	tempNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 	[[document docView] setNeedsDisplay: YES];

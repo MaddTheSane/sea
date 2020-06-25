@@ -35,7 +35,7 @@
 		int modifier;
 		
 		// Get mode
-		modifier = [options modifier];
+		modifier = [(EllipseSelectOptions*)options modifier];
 		if(modifier == kShiftModifier){
 			oneToOne = YES;
 		}else{

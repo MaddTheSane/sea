@@ -19,7 +19,7 @@ int extent;
 #define CLAMP0255(x) ((x) > 255 ? 255 : ((x) < 0 ? 0 : (x)))
 #define guchar unsigned char
 
-inline void
+static inline void
 compute_luts (int extent)
 {
   int i;       /* Looping var */

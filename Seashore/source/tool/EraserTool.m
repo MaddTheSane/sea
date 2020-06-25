@@ -124,7 +124,7 @@
 	boptions = [[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:kBrushTool];
 	multithreaded = [[SeaController seaPrefs] multithreaded];
 	ignoreFirstTouch = [[SeaController seaPrefs] ignoreFirstTouch];
-	if (ignoreFirstTouch && ([event type] == NSLeftMouseDown || [event type] == NSRightMouseDown) && [options pressureSensitive] && !([options modifier] == kShiftModifier)) { 
+	if (ignoreFirstTouch && ([event type] == NSLeftMouseDown || [event type] == NSRightMouseDown) && [options pressureSensitive] && !([(EraserOptions*)options modifier] == kShiftModifier)) {
 		firstTouchDone = NO;
 		return;
 	}
@@ -152,7 +152,7 @@
 	// Set the appropriate overlay opacity
 	if (hasAlpha)
 		[[document whiteboard] setOverlayBehaviour:kErasingBehaviour];
-	[[document whiteboard] setOverlayOpacity:[options opacity]];
+	[[document whiteboard] setOverlayOpacity:[(EraserOptions*)options opacity]];
 	
 	// Plot the initial point
 	rect.size.width = [(SeaBrush *)curBrush fakeWidth] + 1;
@@ -218,7 +218,7 @@
    brushHeight = [(SeaBrush *)curBrush fakeHeight];
    activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
    boptions = [[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:kBrushTool];
-   brushSpacing = (double)[[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
+   brushSpacing = (double)[(BrushUtility*)[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
    fade = [options mimicBrush] && [boptions fade];
    fadeValue = [boptions fadeValue];
    spp = [[document contents] spp];

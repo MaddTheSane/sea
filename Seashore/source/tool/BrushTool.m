@@ -114,7 +114,7 @@
 	int spp = [[document contents] spp], k;
 	int pressure = [options pressureValue:event];
 	BOOL ignoreFirstTouch;
-	int modifier = [options modifier];
+	int modifier = [(BrushOptions*)options modifier];
 	
 	// Determine whether operation should continue
 	lastWhere.x = where.x;
@@ -146,7 +146,7 @@
 	else if ([options useTextures]) {
 		for (k = 0; k < spp - 1; k++)
 			basePixel[k] = 0;
-		basePixel[spp - 1] = [[[SeaController utilitiesManager] textureUtilityFor:document] opacity];
+		basePixel[spp - 1] = [(TextureUtility*)[[SeaController utilitiesManager] textureUtilityFor:document] opacity];
 	}
 	else if (spp == 4) {
 		color = [[document contents] foreground];
@@ -169,7 +169,7 @@
 	}
 	else {
 		if ([options useTextures])
-			[[document whiteboard] setOverlayOpacity:[[[SeaController utilitiesManager] textureUtilityFor:document] opacity]];
+			[[document whiteboard] setOverlayOpacity:[(TextureUtility*)[[SeaController utilitiesManager] textureUtilityFor:document] opacity]];
 		else
 			[[document whiteboard] setOverlayOpacity:[color alphaComponent] * 255.0];
 	}
@@ -239,7 +239,7 @@
    brushWidth = [(SeaBrush *)curBrush fakeWidth];
    brushHeight = [(SeaBrush *)curBrush fakeHeight];
    activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
-   brushSpacing = (double)[[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
+   brushSpacing = (double)[(BrushUtility*)[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
    fade = [options fade];
    fadeValue = [options fadeValue];
    spp = [[document contents] spp];

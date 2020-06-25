@@ -19,10 +19,10 @@
 		
 		[self mouseDownAt: localPoint
 				  forRect: [[document selection] globalRect]
-				  andMask: [[document selection] mask]];
+				  andMask: [(SeaSelection*)[document selection] mask]];
 		
 		// Also, we universally float the selection if alt is down
-		if(![self isMovingOrScaling] && [options modifier] == kAltModifier) {
+		if(![self isMovingOrScaling] && [(AbstractOptions*)options modifier] == kAltModifier) {
 			[[document contents] makeSelectionFloat:NO];
 		}
 	}	
@@ -33,7 +33,7 @@
 	if([[document selection] active]){
 		IntRect newRect = [self mouseDraggedTo: localPoint
 									   forRect: [[document selection] globalRect]
-									   andMask: [[document selection] mask]];
+									   andMask: [(SeaSelection*)[document selection] mask]];
 		if(scalingDir > kNoDir && !translating){
 			[[document selection] scaleSelectionTo: newRect
 											  from: [self preScaledRect]
@@ -50,7 +50,7 @@
 	if([[document selection] active]){
 		[self mouseUpAt: localPoint
 				forRect: [[document selection] globalRect]
-				andMask: [[document selection] mask]];		
+				andMask: [(SeaSelection*)[document selection] mask]];
 	}
 }
 

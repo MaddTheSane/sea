@@ -41,7 +41,7 @@
 		where.y -= [layer yoff];
 
 		// Get mode
-		modifier = [options modifier];
+		modifier = [(AbstractOptions*)options modifier];
 
 		float anchorRadius = 4.0 / [[document docView] zoom];
 		

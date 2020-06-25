@@ -42,7 +42,7 @@
 	
 	startNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 	currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
-	if([options modifier] == kShiftModifier){
+	if([(BucketOptions*)options modifier] == kShiftModifier){
 		isPreviewing = YES;
 	}
 	
@@ -53,7 +53,7 @@
 {
 	currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 	
-	BOOL optionDown = [options modifier] == kAltModifier;
+	BOOL optionDown = [(BucketOptions*)options modifier] == kAltModifier;
 
 	id layer = [[document contents] activeLayer];
 	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
@@ -75,14 +75,14 @@
 {
 	id layer = [[document contents] activeLayer];
 	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
-	BOOL optionDown = [options modifier] == kAltModifier;
+	BOOL optionDown = [(BucketOptions*)options modifier] == kAltModifier;
 	
 	[[document whiteboard] clearOverlay];
 	[[document helpers] overlayChanged:rect inThread:NO];
 
 	if (where.x < 0 || where.y < 0 || where.x >= width || where.y >= height) {
 		rect.size.width = rect.size.height = 0;
-	} else if(!isPreviewing || [options modifier] != kShiftModifier){
+	} else if(!isPreviewing || [(BucketOptions*)options modifier] != kShiftModifier){
 		[self fillAtPoint:where useTolerance:!optionDown delay:NO];
 	}
 	isPreviewing = NO;
@@ -107,7 +107,7 @@
 	if ([options useTextures]) {
 		for (k = 0; k < spp - 1; k++)
 			basePixel[k] = 0;
-		basePixel[spp - 1] = [[[SeaController utilitiesManager] textureUtilityFor:document] opacity];
+		basePixel[spp - 1] = [(TextureUtility*)[[SeaController utilitiesManager] textureUtilityFor:document] opacity];
 	}
 	else {
 		if (spp == 4) {
@@ -139,7 +139,7 @@
 	
 	// Fill everything
 	if (useTolerance)
-		tolerance = [options tolerance];
+		tolerance = [(BucketOptions*)options tolerance];
 	else
 		tolerance = 255;
 	if ([layer floating])

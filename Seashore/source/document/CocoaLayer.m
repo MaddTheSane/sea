@@ -55,8 +55,8 @@
 	// Extract color profile
 	profile = [imageRep valueForProperty:NSImageColorSyncProfileData];
 	if (profile) {
-		cmProfileLoc.locType = cmPtrBasedProfile;
-		cmProfileLoc.u.ptrLoc.p = (Ptr)[profile bytes];
+		cmProfileLoc.locType = cmBufferBasedProfile;
+		cmProfileLoc.u.bufferLoc.buffer = (Ptr)[profile bytes];
 	}
 	
 	// Convert data to what we want

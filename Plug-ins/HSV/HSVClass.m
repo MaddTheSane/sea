@@ -6,7 +6,7 @@
 
 @implementation HSVClass
 
-inline void RGBtoHSV(int *ir, int *ig, int *ib)
+static inline void RGBtoHSV(int *ir, int *ig, int *ib)
 {
 	double max, min, delta;
 	double h, s, v;
@@ -58,7 +58,7 @@ inline void RGBtoHSV(int *ir, int *ig, int *ib)
 	*ib = v * 255.0;
 }
 
-inline void HSVtoRGB(int *ih, int *is, int *iv)
+static inline void HSVtoRGB(int *ih, int *is, int *iv)
 {
 	int		i;
 	double	r, g, b;
@@ -257,8 +257,8 @@ inline void HSVtoRGB(int *ih, int *is, int *iv)
 	}
 }
 
-inline unsigned char CLAMP(int x) { return (x < 0) ? 0 : ((x > 255) ? 255 : x); }
-inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1) % 255)) : ((x > 255) ? (x % 255) : x); }
+static inline unsigned char CLAMP(int x) { return (x < 0) ? 0 : ((x > 255) ? 255 : x); }
+static inline unsigned char WRAPAROUND(int x) { return (x < 0) ? (255 + ((x + 1) % 255)) : ((x > 255) ? (x % 255) : x); }
 
 - (void)adjust
 {

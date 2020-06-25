@@ -50,7 +50,7 @@ get_premultiplied_double_row (PixelRegion *srcPR,
 
   pixel_region_get_row (srcPR, x, y, w, tmp_src, n);
 
-  if (pixel_region_has_alpha (srcPR))
+  if (pixel_region_has_alpha ())
     {
       /* premultiply the alpha into the double array */
       gdouble *irow  = row;
@@ -80,64 +80,64 @@ get_premultiplied_double_row (PixelRegion *srcPR,
     row[w*bytes + b] = row[(w - 1) * bytes + (b%bytes)];
 }
 
+// uses premultiplied doubles (alpha * pixel)
 static void
-expand_line (gdouble               *dest,
-	     gdouble               *src,
-	     guint                  bytes,
-	     guint                  old_width,
+expand_line (gdouble             *dest,
+	     gdouble                 *src,
+	     gint                  bytes,
+	     gint                  old_width,
 	     gint                   width,
 	     GimpInterpolationType  interp)
 {
-  gdouble  ratio;
-  gint     x,b;
-  gint     src_col;
-  gdouble  frac;
-  gdouble *s;
-
-  ratio = old_width / (gdouble) width;
-
-/* this could be opimized much more by precalculating the coeficients for
-   each x */
-  switch(interp)
-  {
-    case GIMP_INTERPOLATION_CUBIC:
-      for (x = 0; x < width; x++)
-      {
-	src_col = ((int)((x) * ratio  + 2.0 - 0.5)) - 2;
-	/* +2, -2 is there because (int) rounds towards 0 and we need 
-	   to round down */
-	frac =          ((x) * ratio - 0.5) - src_col;
-	s = &src[src_col * bytes];
-	for (b = 0; b < bytes; b++)
-	  dest[b] = cubic (frac, s[b - bytes], s[b], s[b+bytes], s[b+bytes*2]);
-	dest += bytes;
-      }
-      break;
-
-    case GIMP_INTERPOLATION_LINEAR:
-      for (x = 0; x < width; x++)
-      {
-	src_col = ((int)((x) * ratio + 2.0 - 0.5)) - 2;
-	/* +2, -2 is there because (int) rounds towards 0 and we need 
-	   to round down */
-	frac =          ((x) * ratio - 0.5) - src_col;
-	s = &src[src_col * bytes];
-	for (b = 0; b < bytes; b++)
-	  dest[b] = ((s[b + bytes] - s[b]) * frac + s[b]);
-	dest += bytes;
-      }
-      break;
-
-   case GIMP_INTERPOLATION_NONE:
-     g_assert_not_reached ();
-     break;
-  }
+    gdouble  ratio;
+    gint     x,b;
+    gint      src_col;
+    gdouble  frac;
+    gdouble *s;
+    
+    ratio = old_width / (gdouble) width;
+    
+    /* this could be opimized much more by precalculating the coeficients for each x */
+    switch(interp)
+    {
+        case GIMP_INTERPOLATION_CUBIC:
+            for (x = 0; x < width; x++)
+            {
+                src_col = ((int)((x) * ratio  + 2.0 - 0.5)) - 2;
+                /* +2, -2 is there because (int) rounds towards 0 and we need to round down */
+                frac = ((x) * ratio - 0.5) - src_col;
+                s = &src[src_col * bytes];
+                for (b = 0; b < bytes; b++) {
+                    double v = cubic (frac, s[b - bytes], s[b], s[b+bytes], s[b+bytes*2]);
+                    dest[b]=v;
+                }
+                dest += bytes;
+            }
+            break;
+            
+        case GIMP_INTERPOLATION_LINEAR:
+            for (x = 0; x < width; x++)
+            {
+                src_col = ((int)((x) * ratio + 2.0 - 0.5)) - 2;
+                /* +2, -2 is there because (int) rounds towards 0 and we need to round down */
+                frac =          ((x) * ratio - 0.5) - src_col;
+                s = &src[src_col * bytes];
+                for (b = 0; b < bytes; b++)
+                    dest[b] = ((s[b + bytes] - s[b]) * frac + s[b]);
+                dest += bytes;
+            }
+            break;
+            
+        case GIMP_INTERPOLATION_NONE:
+            g_assert_not_reached ();
+            break;
+    }
 }
 
 static void
 shrink_line (gdouble               *dest,
 	     gdouble               *src,
-	     guint                  bytes,
+	     gint                  bytes,
 	     gint                   old_width,
 	     gint                   width,
 	     GimpInterpolationType  interp)
@@ -237,7 +237,7 @@ scale_region_no_resample (PixelRegion *srcPR,
   gint    last_src_y;
   gint    row_bytes;
   gint    x, y, b;
-  gchar   bytes;
+  gint   bytes;
 
   orig_width = srcPR->w;
   orig_height = srcPR->h;
@@ -302,7 +302,7 @@ scale_region (PixelRegion           *srcPR,
   gdouble *src[4];
   guchar  *src_tmp;
   guchar  *dest;
-  double  *row, *accum;
+  gdouble  *row, *accum;
   gint     bytes, b;
   gint     width, height;
   gint     orig_width, orig_height;
@@ -342,10 +342,10 @@ scale_region (PixelRegion           *srcPR,
 
  /* offset the row pointer by 2*bytes so the range of the array 
     is [-2*bytes] to [(orig_width + 2)*bytes] */
-  row = g_new(double, (orig_width + 2*2) * bytes);
+  row = g_new(gdouble, (orig_width + 2*2) * bytes);
   row += bytes*2;
 
-  accum = g_new(double, (width) * bytes);
+  accum = g_new(gdouble, (width) * bytes);
 
   /*  Scale the selected region  */
   
@@ -433,10 +433,10 @@ scale_region (PixelRegion           *srcPR,
           get_scaled_row ((void **)&src[0], y, width, srcPR, row,
                           src_tmp,
                           interpolation_type);
-          memcpy(accum, src[3], sizeof(double) * width * bytes);
+          memcpy(accum, src[3], sizeof(gdouble) * width * bytes);
         }
 
-      if (pixel_region_has_alpha (srcPR))
+      if (pixel_region_has_alpha ())
         { /* unmultiply the alpha */
           double inv_alpha;
           double *p = accum;

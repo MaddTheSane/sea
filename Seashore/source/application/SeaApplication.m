@@ -1,4 +1,5 @@
 #import "SeaApplication.h"
+#import "SeaDocumentController.h"
 
 @implementation SeaApplication
 

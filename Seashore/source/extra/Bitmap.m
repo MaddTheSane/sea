@@ -9,7 +9,7 @@ typedef struct {
 	int init_size;
 } PtrRecord;
 
-inline PtrRecord initPtrs(unsigned char *initial, int init_size)
+static inline PtrRecord initPtrs(unsigned char *initial, int init_size)
 {
 	PtrRecord ptrs;
 	
@@ -20,12 +20,12 @@ inline PtrRecord initPtrs(unsigned char *initial, int init_size)
 	return ptrs;
 }
 
-inline unsigned char *getPtr(PtrRecord ptrs)
+static inline unsigned char *getPtr(PtrRecord ptrs)
 {
 	return ptrs.ptrs[ptrs.n - 1];
 }
 
-inline unsigned char *getFinalPtr(PtrRecord ptrs)
+static inline unsigned char *getFinalPtr(PtrRecord ptrs)
 {
 	unsigned char *result;
 	
@@ -40,7 +40,7 @@ inline unsigned char *getFinalPtr(PtrRecord ptrs)
 	return result;
 }
 
-inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
+static inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
 {
 	unsigned char *result;
 	
@@ -57,7 +57,7 @@ inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
 	return result;
 }
 
-inline void freePtrs(PtrRecord ptrs)
+static inline void freePtrs(PtrRecord ptrs)
 {
 	int i;
 	
@@ -66,7 +66,7 @@ inline void freePtrs(PtrRecord ptrs)
 	}
 }
 
-inline void rotate_bytes(unsigned char *data, int pos1, int pos2)
+static inline void rotate_bytes(unsigned char *data, int pos1, int pos2)
 {
 	unsigned char tmp;
 	int i;
@@ -659,8 +659,13 @@ inline void OpenDisplayProfile(CMProfileRef *profile)
 	//}
 }
 
-inline void CloseDisplayProfile(CMProfileRef profile)
+void CloseDisplayProfile(CMProfileRef profile)
 {
 	CMCloseProfile(profile);
 }
+
+void CMFlattenProfile(CMProfileRef pref, int flags, CMFlattenUPP *cmFlattenUPP, void * refcon, Boolean *cmmNotFound){
+    
+}
+
 

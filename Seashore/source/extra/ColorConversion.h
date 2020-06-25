@@ -27,7 +27,7 @@
 				The blue component's value, upon return will be equal to the
 				value component's value.
 */
-inline void RGBtoHSV(int *red, int *green, int *blue);
+void RGBtoHSV(int *red, int *green, int *blue);
 
 /*!
 	@function	HSVtoRGB
@@ -43,7 +43,7 @@ inline void RGBtoHSV(int *red, int *green, int *blue);
 				The value component's value, upon return will be equal to the
 				blue component's value.
 */
-inline void HSVtoRGB(int *hue, int *saturation, int *value);
+void HSVtoRGB(int *hue, int *saturation, int *value);
 
 /*!
 	@function	RGBtoHLS
@@ -59,7 +59,7 @@ inline void HSVtoRGB(int *hue, int *saturation, int *value);
 				The blue component's value, upon return will be equal to the
 				saturation component's value.
 */
-inline void RGBtoHLS (int *red, int *green, int *blue);
+void RGBtoHLS (int *red, int *green, int *blue);
 
 /*!
 	@function	HLStoRGB
@@ -75,5 +75,5 @@ inline void RGBtoHLS (int *red, int *green, int *blue);
 				The saturation component's value, upon return will be equal to
 				the blue component's value.
 */
-inline void HLStoRGB(int *hue, int *lightness, int *saturation);
+void HLStoRGB(int *hue, int *lightness, int *saturation);
 

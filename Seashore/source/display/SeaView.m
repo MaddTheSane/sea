@@ -312,7 +312,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		if([(SeaPrefs *)[SeaController seaPrefs] useCheckerboard]){
 			[[NSColor colorWithPatternImage: [NSImage imageNamed:@"checkerboard"] ] set];
 		}else{
-			[[[[SeaController utilitiesManager] transparentUtility] color] set];
+			[(NSColor*)[[[SeaController utilitiesManager] transparentUtility] color] set];
 		}
 		[[NSBezierPath bezierPathWithRect:destRect] fill];
 	}
@@ -853,7 +853,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		}
 	}else if (curToolIndex == kEffectTool){
 		// Draw effect tool dots
-		for (i = 0; i < [effectTool clickCount]; i++) {
+		for (i = 0; i < [(EffectTool*)effectTool clickCount]; i++) {
 			[[[SeaController seaPrefs] selectionColor:0.6] set];
 			hilightPoint = IntPointMakeNSPoint([effectTool point:i]);
 			tempPath = [NSBezierPath bezierPath];
@@ -1112,7 +1112,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Run the event
 	[document lock];
 	if (curToolIndex == kZoomTool) {
-		if ([options modifier] == kAltModifier) {
+		if ([(AbstractOptions*)options modifier] == kAltModifier) {
 			if ([self canZoomOut])
 				[self zoomOutFromPoint:globalPoint];
 			else
@@ -1241,7 +1241,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Snap to 45 degree intervals if requested
 	deltaX = localActiveLayerPoint.x - lastActiveLayerPoint.x;
 	deltaY = localActiveLayerPoint.y - lastActiveLayerPoint.y;
-	if (lineDraw && ([options modifier] == kShiftControlModifier) && deltaX != 0) {
+	if (lineDraw && ([(AbstractOptions*)options modifier] == kShiftControlModifier) && deltaX != 0) {
 		angle = atan((double)deltaY / (double)abs(deltaX));
 		if (angle > -0.3927 && angle < 0.3927)
 			localActiveLayerPoint.y = lastActiveLayerPoint.y;
@@ -1301,7 +1301,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	}
 	
 	// Check if it is a line draw
-	if ([curTool acceptsLineDraws] && ([options modifier] == kShiftModifier || [options modifier] == kShiftControlModifier)) {
+	if ([curTool acceptsLineDraws] && ([(AbstractOptions*)options modifier] == kShiftModifier || [options modifier] == kShiftControlModifier)) {
 		lineDraw = YES;
 		return;
 	}

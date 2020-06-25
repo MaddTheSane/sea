@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -16,6 +16,7 @@
 				A89B83F80A426FEC00AD6941 /* ShellScript */,
 			);
 			dependencies = (
+				2BF5DB9E1FA0FA7E00EAFFDA /* PBXTargetDependency */,
 				A89B83D90A426D8200AD6941 /* PBXTargetDependency */,
 				A89B83DB0A426D8C00AD6941 /* PBXTargetDependency */,
 			);
@@ -84,8 +85,8 @@
 		A8E57D0E09EFE9200009FCE2 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E57D0D09EFE9200009FCE2 /* cross.png */; };
 		A8EB480509C5AE58007B9A41 /* GIMPCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EB480409C5AE58007B9A41 /* GIMPCore.framework */; };
 		A8EB480B09C5AE65007B9A41 /* TIFF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EB480A09C5AE65007B9A41 /* TIFF.framework */; };
-		A8EB481309C5AE79007B9A41 /* GIMPCore.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8EB480409C5AE58007B9A41 /* GIMPCore.framework */; };
-		A8EB481409C5AE79007B9A41 /* TIFF.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8EB480A09C5AE65007B9A41 /* TIFF.framework */; };
+		A8EB481309C5AE79007B9A41 /* GIMPCore.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8EB480409C5AE58007B9A41 /* GIMPCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		A8EB481409C5AE79007B9A41 /* TIFF.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A8EB480A09C5AE65007B9A41 /* TIFF.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		A8EDF0B9078959C80022BB31 /* duplicate.png in Resources */ = {isa = PBXBuildFile; fileRef = F5FE2C7203C43530013856BA /* duplicate.png */; };
 		A8EDF0BA078959C80022BB31 /* new.png in Resources */ = {isa = PBXBuildFile; fileRef = F5FE2C7303C43530013856BA /* new.png */; };
 		A8EDF0BF078959C80022BB31 /* expansion.png in Resources */ = {isa = PBXBuildFile; fileRef = F5FD458E03F416ED012349CA /* expansion.png */; };
@@ -353,6 +354,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2BF5DB9D1FA0FA7E00EAFFDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8EDF05C078959C80022BB31;
+			remoteInfo = Seashore;
+		};
 		35B156E10A2C00D0005B688F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 35B156DC0A2C00D0005B688F /* GIMPCore.xcodeproj */;
@@ -1787,7 +1795,6 @@
 		A8F984D60BEEB83600375C73 /* MovePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovePanel.m; sourceTree = "<group>"; };
 		A8FBD15D0410B5EC00DF7825 /* SeaBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaBrush.h; sourceTree = "<group>"; };
 		A8FBD15E0410B5EC00DF7825 /* SeaBrush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaBrush.m; sourceTree = "<group>"; };
-		A8FCB2600E74073B00D06575 /* CIAffineTransformClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIAffineTransformClass.h; path = /Users/pazollim/Developer/seashore/Seashore/source/document/CIAffineTransformClass.h; sourceTree = "<absolute>"; };
 		A8FEC68A0D9F64DB00F47425 /* SeaApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaApplication.h; sourceTree = "<group>"; };
 		A8FEC68B0D9F64DB00F47425 /* SeaApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaApplication.m; sourceTree = "<group>"; };
 		DC079DFB0C32082C00A08E2E /* ColorPrefsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ColorPrefsIcon.png; sourceTree = "<group>"; };
@@ -1798,8 +1805,6 @@
 		DC124C190FF1C1F30014E978 /* layer-info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "layer-info.png"; sourceTree = "<group>"; };
 		DC124C310FF1C6E40014E978 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		DC124C320FF1C6E40014E978 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
-		DC2004B01055FF37006B673A /* WebSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSlider.h; sourceTree = "<group>"; };
-		DC2004B11055FF37006B673A /* WebSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSlider.m; sourceTree = "<group>"; };
 		DC20066510561301006B673A /* slider-track.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider-track.png"; sourceTree = "<group>"; };
 		DC2FC3A310877C7B0092887A /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
 		DC2FC3A710877CEA0092887A /* eye-unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eye-unchecked.png"; sourceTree = "<group>"; };
@@ -3177,8 +3182,6 @@
 				DCC905500FC62CDD00C74521 /* Layer Pane */,
 				DC414BA8102F54FD00B66F04 /* StatusUtility.h */,
 				DC414BA9102F54FD00B66F04 /* StatusUtility.m */,
-				DC2004B01055FF37006B673A /* WebSlider.h */,
-				DC2004B11055FF37006B673A /* WebSlider.m */,
 				DCD6A5A3114DA294002A4CFD /* WarningsUtility.h */,
 				DCD6A5A4114DA294002A4CFD /* WarningsUtility.m */,
 				DCA87C09105A195800234465 /* BannerView.h */,
@@ -3205,7 +3208,6 @@
 		F50687FD039B9946016F7F19 /* Document Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A8FCB2600E74073B00D06575 /* CIAffineTransformClass.h */,
 				A8CA58EB07936EBF004BE921 /* PluginData.h */,
 				A8CA58EC07936EBF004BE921 /* PluginData.m */,
 				2A37F4AEFDCFA73011CA2CEA /* SeaDocument.h */,
@@ -3634,8 +3636,11 @@
 /* Begin PBXProject section */
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+			};
 			buildConfigurationList = A8D01E0D09BD8EA3007CFE76 /* Build configuration list for PBXProject "Seashore" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -4855,6 +4860,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2BF5DB9E1FA0FA7E00EAFFDA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8EDF05C078959C80022BB31 /* Seashore */;
+			targetProxy = 2BF5DB9D1FA0FA7E00EAFFDA /* PBXContainerItemProxy */;
+		};
 		35B157380A2C015A005B688F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GIMPCore;
@@ -5335,13 +5345,15 @@
 					MACOS_10_4_COMPILE,
 					MAIN_COMPILE,
 				);
-				GCC_VERSION = 4.0;
+				GCC_VERSION = "";
 				GCC_VERSION_i386 = 4.0;
 				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "-lz";
 				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore;
 				PRODUCT_NAME = Seashore;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -5356,10 +5368,6 @@
 		A8D01E0B09BD8EA3007CFE76 /* Deployment (Universal) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
 				FRAMEWORK_SEARCH_PATHS = "$(FRAMEWORK_SEARCH_PATHS)";
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -5369,13 +5377,15 @@
 					MACOS_10_4_COMPILE,
 					MAIN_COMPILE,
 				);
-				GCC_VERSION = 4.0;
+				GCC_VERSION = "";
 				GCC_VERSION_i386 = 4.0;
 				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "-lz";
 				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore;
 				PRODUCT_NAME = Seashore;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -5398,13 +5408,15 @@
 					MACOS_10_4_COMPILE,
 					MAIN_COMPILE,
 				);
-				GCC_VERSION = 4.0;
+				GCC_VERSION = "";
 				GCC_VERSION_i386 = 4.0;
 				GCC_VERSION_ppc = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "-lz";
 				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore;
 				PRODUCT_NAME = Seashore;
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -5418,24 +5430,101 @@
 		A8D01E0E09BD8EA3007CFE76 /* Development (Native) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = macosx;
 			};
 			name = "Development (Native)";
 		};
 		A8D01E0F09BD8EA3007CFE76 /* Deployment (Universal) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = macosx;
 			};
 			name = "Deployment (Universal)";
 		};
 		A8D01E1009BD8EA3007CFE76 /* Deployment (Native) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = macosx;
 			};
 			name = "Deployment (Native)";
 		};

@@ -36,7 +36,7 @@
 		int aspectType = [options aspectType];
 		NSSize ratio;
 		double xres, yres;
-		int modifier = [options modifier];
+		int modifier = [(CropOptions*)options modifier];
 		id activeLayer;
 		
 		// Make where appropriate

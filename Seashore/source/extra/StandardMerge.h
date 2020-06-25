@@ -42,7 +42,7 @@
 	@param		srcOpacity
 				The opacity with which the source pixel should replace.
 */
-inline void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	replacePrimaryMerge
@@ -61,7 +61,7 @@ inline void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned 
 	@param		srcOpacity
 				The opacity with which the source pixel should replace.
 */
-inline void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	replaceAlphaMerge
@@ -80,7 +80,7 @@ inline void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, un
 	@param		srcOpacity
 				The opacity with which the source pixel should replace.
 */
-inline void replaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+void replaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	specialMerge
@@ -101,7 +101,7 @@ inline void replaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsi
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	normalMerge
@@ -122,7 +122,7 @@ inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned 
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-inline void normalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+void normalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	eraseMerge
@@ -143,7 +143,7 @@ inline void normalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned c
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-inline void eraseMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+void eraseMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	primaryMerge
@@ -167,7 +167,7 @@ inline void eraseMerge(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 				YES if merges to destination pixel whose alpha is zero should be
 				skipped, NO otherwise.
 */
-inline void primaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity, BOOL lazy);
+void primaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity, BOOL lazy);
 
 /*!
 	@function	alphaMerge
@@ -188,7 +188,7 @@ inline void primaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned 
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-inline void alphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+void alphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
 	@function	blendPixel
@@ -209,7 +209,7 @@ inline void alphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 	@param		blend
 				The amount of blending to go on (between 0 and 255 inclusive).
 */
-inline void blendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int blend);
+void blendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int blend);
 
 /*!
 	@function	selectMerge
@@ -235,5 +235,5 @@ inline void blendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-inline void selectMerge(int choice, int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc);
+void selectMerge(int choice, int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc);
 

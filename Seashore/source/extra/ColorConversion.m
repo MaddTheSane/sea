@@ -1,6 +1,6 @@
 #import "ColorConversion.h"
 
-inline int HLSValue(double n1, double n2, double hue)
+static inline int HLSValue(double n1, double n2, double hue)
 {
 	double value;
 

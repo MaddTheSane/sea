@@ -247,8 +247,8 @@
 
 - (void)setActiveBrushIndex:(int)index
 {
-	id oldBrush = [[groups objectAtIndex:activeGroupIndex] objectAtIndex:activeBrushIndex];
-	id newBrush = [[groups objectAtIndex:activeGroupIndex] objectAtIndex:index];
+	SeaBrush* oldBrush = [[groups objectAtIndex:activeGroupIndex] objectAtIndex:activeBrushIndex];
+	SeaBrush* newBrush = [[groups objectAtIndex:activeGroupIndex] objectAtIndex:index];
 	
 	[oldBrush deactivate];
 	activeBrushIndex = index;

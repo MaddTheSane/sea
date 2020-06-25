@@ -128,7 +128,7 @@
 	return YES;
 }
 
-inline float mod(float a, float b)
+static inline float mod(float a, float b)
 {
 	float result;
 	

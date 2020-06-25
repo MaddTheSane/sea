@@ -65,7 +65,7 @@ typedef struct { IntPoint origin; IntSize size; } IntRect;
 				The NSPoint to convert.
 	@result		Returns an IntPoint with similar values to the NSPoint.
 */
-inline IntPoint NSPointMakeIntPoint(NSPoint point);
+IntPoint NSPointMakeIntPoint(NSPoint point);
 
 /*!
 	@function	NSSizeMakeIntSize
@@ -75,7 +75,7 @@ inline IntPoint NSPointMakeIntPoint(NSPoint point);
 				The NSSize to convert.
 	@result		Returns an IntSize with similar values to the NSSize.
 */
-inline IntSize NSSizeMakeIntSize(NSSize size);
+IntSize NSSizeMakeIntSize(NSSize size);
 
 /*!
 	@function	IntPointMakeNSPoint
@@ -84,7 +84,7 @@ inline IntSize NSSizeMakeIntSize(NSSize size);
 				The IntPoint to convert.
 	@result		Returns a NSPoint with similar values to the IntPoint.
 */
-inline NSPoint IntPointMakeNSPoint(IntPoint point);
+NSPoint IntPointMakeNSPoint(IntPoint point);
 
 /*!
 	@function	IntSizeMakeNSSize
@@ -93,7 +93,7 @@ inline NSPoint IntPointMakeNSPoint(IntPoint point);
 				The IntSize to convert.
 	@result		Returns a NSSize with similar values to the IntSize.
 */
-inline NSSize IntSizeMakeNSSize(IntSize size);
+NSSize IntSizeMakeNSSize(IntSize size);
 
 /*!
 	@function	IntMakePoint
@@ -104,7 +104,7 @@ inline NSSize IntSizeMakeNSSize(IntSize size);
 				The y co-ordinate of the new point.
 	@result		Returns an IntPoint with the given co-ordinates.
 */
-inline IntPoint IntMakePoint(int x, int y);
+IntPoint IntMakePoint(int x, int y);
 
 /*!
 	@function	IntMakeSize
@@ -115,7 +115,7 @@ inline IntPoint IntMakePoint(int x, int y);
 				The height of the new size.
 	@result		Returns an IntSize with the given values.
 */
-inline IntSize IntMakeSize(int width, int height);
+IntSize IntMakeSize(int width, int height);
 
 /*!
 	@function	IntMakeRect
@@ -130,7 +130,7 @@ inline IntSize IntMakeSize(int width, int height);
 				The height of the new rectangle.
 	@result		Returns an IntRect with the given values.
 */
-inline IntRect IntMakeRect(int x, int y, int width, int height);
+IntRect IntMakeRect(int x, int y, int width, int height);
 
 /*!
 	@function	IntOffsetRect
@@ -143,7 +143,7 @@ inline IntRect IntMakeRect(int x, int y, int width, int height);
 	@param		y
 				The amount by which to offset the y co-ordinates.
 */
-inline void IntOffsetRect(IntRect *rect, int x, int y);
+void IntOffsetRect(IntRect *rect, int x, int y);
 
 /*!
 	@function	IntPointInRect
@@ -156,7 +156,7 @@ inline void IntOffsetRect(IntRect *rect, int x, int y);
 				The rectangle in which to test for the point.
 	@result		YES if the point lies within the rectangle, NO otherwise.
 */
-inline BOOL IntPointInRect(IntPoint point, IntRect rect);
+BOOL IntPointInRect(IntPoint point, IntRect rect);
 
 /*!
 	@function	IntContainsRect
@@ -170,7 +170,7 @@ inline BOOL IntPointInRect(IntPoint point, IntRect rect);
 	@result		Returns YES if the bigRect entirely contains the littleRect, NO
 				otherwise.
 */
-inline BOOL IntContainsRect(IntRect bigRect, IntRect littleRect);
+BOOL IntContainsRect(IntRect bigRect, IntRect littleRect);
 
 /*!
 	@function	IntConstrainRect
@@ -182,7 +182,7 @@ inline BOOL IntContainsRect(IntRect bigRect, IntRect littleRect);
 	@result		Returns an IntRect that is the littleRect constrained to the
 				bigRect.
 */
-inline IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect);
+IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect);
 
 /*!
 	@function	NSConstrainRect
@@ -194,7 +194,7 @@ inline IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect);
 	@result		Returns an NSRect that is the littleRect constrained to the
 				bigRect.
 */
-inline NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect);
+NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect);
 
 /*!
 	@function	IntSumRects
@@ -205,7 +205,7 @@ inline NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect);
 				The second IntRect that we are adding to the aguend.
 	@result		Returns an IntRect that contains the aguend and addend.
 */
-inline IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
+IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
 
 /*!
 	@function	NSRectMakeIntRect
@@ -215,7 +215,7 @@ inline IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
 				The NSRect to convert.
 	@result		Returns an IntRect at least the size of NSRect.
 */
-inline IntRect NSRectMakeIntRect(NSRect rect);
+IntRect NSRectMakeIntRect(NSRect rect);
 
 /*!
 	@function	IntRectMakeNSRect
@@ -224,7 +224,7 @@ inline IntRect NSRectMakeIntRect(NSRect rect);
 				The IntRect to convert.
 	@result		Returns an NSRect with similar values to the NSRect.
 */
-inline NSRect IntRectMakeNSRect(IntRect rect);
+NSRect IntRectMakeNSRect(IntRect rect);
 
 /*!
 	@function	NSPointRotateNSPoint
@@ -237,4 +237,4 @@ inline NSRect IntRectMakeNSRect(IntRect rect);
 				The number of radians that point is rotated.
 	@result		Returns an NSPoint with the defined rotation.
 */
-inline NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians);
+NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians);

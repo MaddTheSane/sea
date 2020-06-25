@@ -31,7 +31,7 @@
 	NSColor *color = [self getColor];
 	
 	if (color != NULL) {
-		if ([options modifier] == kAltModifier)
+		if ([(EyedropOptions*)options modifier] == kAltModifier)
 			[toolboxUtility setBackground:[self getColor]];
 		else
 			[toolboxUtility setForeground:[self getColor]];

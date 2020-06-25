@@ -1,4 +1,5 @@
 #import "Globals.h"
+#import "AbstractOptions.h"
 
 /*!
 	@class		AbstractTool
