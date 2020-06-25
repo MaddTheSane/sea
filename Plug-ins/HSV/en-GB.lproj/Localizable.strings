@@ -1,0 +1,5 @@
+author = "Mark Pazolli, Spencer Kimball and Peter Mattis";
+description = "Adjusts the hue, saturation, and value of the selection";
+groupName = "Colour Adjust";
+license = "GNU General Public License";
+name = "Hue, Saturation and Value";

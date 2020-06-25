@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -7,7 +8,7 @@
 	@constant	kPegasusUpdateLayerView
 				Indicates that only the layer view of the Pegasus utility should be updated.
 */
-enum {
+NS_ENUM(int) {
 	kPegasusUpdateAll,
 	kPegasusUpdateLayerView
 };
@@ -19,6 +20,11 @@ enum {
 */
 #define kMaxPixelsForLiveUpdate 262144
 
+@class LayerSettings;
+@class SeaDocument;
+@class LayerDataSource;
+@class ColorSelectView;
+@class LayersView;
 
 /*!
 	@class		PegasusUtility
@@ -28,49 +34,33 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
 @interface PegasusUtility : NSObject {
 	
 	// The LayersView which appears in this utility
-	IBOutlet id layersView;
+	IBOutlet LayersView *layersView;
 	
 	// The panel responsible for layer settings
 	IBOutlet id layerSettingsPanel;
 	
-	// The object for handling layer settings
-	IBOutlet id layerSettings;
-	
 	// The colour select view (this needs to be updated when the channel is changed on an RGBA image)
-	IBOutlet id colorSelectView;
+	IBOutlet ColorSelectView *colorSelectView;
 	
 	// The various layer buttons
-	IBOutlet id newButton;
-	IBOutlet id duplicateButton;
-	IBOutlet id upButton;
-	IBOutlet id downButton;
-	IBOutlet id deleteButton;
+	IBOutlet NSButton *newButton;
+	IBOutlet NSButton *duplicateButton;
+	IBOutlet NSButton *upButton;
+	IBOutlet NSButton *downButton;
+	IBOutlet NSButton *deleteButton;
 	
 	// The document which is the focus of this utility
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// Whether or not the utility is enabled
 	BOOL enabled;
 
 	// The Data Source used by the table that serves as the layers view.
-	IBOutlet id dataSource;
+	IBOutlet LayerDataSource *dataSource;
 }
-
-/*!
-	@method		awakeFromNib
-	@discussion	Configures the utility's interface.
-*/
-- (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		activate
@@ -99,7 +89,10 @@ enum {
 	@result		Returns an instance of LayerSettings representing the layer
 				settings manager associated with this object.
 */
-- (id)layerSettings;
+- (LayerSettings*)layerSettings;
+
+/// The object for handling layer settings
+@property (weak) IBOutlet LayerSettings* layerSettings;
 
 /*!
 	@method		show:
@@ -125,6 +118,9 @@ enum {
 */
 - (void)setEnabled:(BOOL)value;
 
+/// Whether or not the utility is enabled
+@property (nonatomic, getter=isEnabled) BOOL enabled;
+
 /*!
 	@method		toggleLayers:
 	@discussion	Toggles the visibility of the of the "Layers" tab of the Pegasus
@@ -146,11 +142,11 @@ enum {
 - (BOOL)validateMenuItem:(id)menuItem;
 
 /*!
-	@method		visible
+	@property	visible
 	@discussion	Returns whether or not the utility's window is visible.
 	@result		Returns YES if the utility's window is visible, NO otherwise.
 */
-- (BOOL)visible;
+@property (readonly) BOOL visible;
 
 // Proxy Actions
 /*!
@@ -176,5 +172,8 @@ enum {
 				Ignored
  */
 - (IBAction)deleteLayer:(id)sender;
+
+- (IBAction)forward:(id)sender;
+- (IBAction)backward:(id)sender;
 
 @end

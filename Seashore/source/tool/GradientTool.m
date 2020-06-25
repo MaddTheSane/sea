@@ -9,17 +9,15 @@
 #import "SeaHelpers.h"
 #import "SeaController.h"
 #import "SeaPrefs.h"
+#import "SeaView.h"
 
 @implementation GradientTool
+@synthesize start = startNSPoint;
+@synthesize current = tempNSPoint;
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
-	return kGradientTool;
-}
-
-- (void)dealloc
-{
-	[super dealloc];
+	return SeaToolsGradient;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
@@ -27,13 +25,12 @@
 	startPoint = where;
 	intermediate = YES;
 	startNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
-
 }
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	GimpGradientInfo info;
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 	IntRect rect;
 	NSColor *color;
 	double angle;
@@ -48,8 +45,7 @@
 	info.supersample = [options supersample];
 	if (info.gradient_type == GIMP_GRADIENT_CONICAL_ASYMMETRIC || info.gradient_type == GIMP_GRADIENT_SPIRAL_CLOCKWISE || info.gradient_type == GIMP_GRADIENT_SPIRAL_ANTICLOCKWISE) {
 		info.supersample = YES;
-	}
-	else {
+	} else {
 		if (info.repeat == GIMP_REPEAT_SAWTOOTH && info.gradient_type <= GIMP_GRADIENT_SQUARE)
 			info.supersample = YES;
 	}
@@ -58,7 +54,7 @@
 	info.start = startPoint;
 	deltaX = where.x - startPoint.x;
 	deltaY = where.y - startPoint.y;
-	if ([(GradientOptions*)options modifier] == kControlModifier) {
+	if ([(GradientOptions *)options modifier] == AbstractModifierControl) {
 		angle = atan((double)deltaY / (double)abs(deltaX));
 		if (angle > -0.3927 && angle < 0.3927)
 			where.y = startPoint.y;
@@ -81,8 +77,7 @@
 		info.end_color[1] = [color greenComponent] * 255;
 		info.end_color[2] = [color blueComponent] * 255;
 		info.end_color[3] = [color alphaComponent] * 255;
-	}
-	else {
+	} else {
 		color = [contents foreground];
 		info.start_color[0] = info.start_color[1] = info.start_color[2] = [color whiteComponent] * 255;
 		info.start_color[3] = [color alphaComponent] * 255;
@@ -93,16 +88,16 @@
 	}
 	
 	// Work out the rectangle for the gradient
-	if ([[document selection] active])
+	if (document.selection.active)
 		rect = [[document selection] localRect];
 	else
-		rect = IntMakeRect(0, 0, [(SeaLayer *)[contents activeLayer] width], [(SeaLayer *)[contents activeLayer] height]);
+		rect = IntMakeRect(0, 0, [[contents activeLayer] width], [[contents activeLayer] height]);
 	
 	// Draw the gradient
-	GCFillGradient([[document whiteboard] overlay], [(SeaLayer *)[contents activeLayer] width], [(SeaLayer *)[contents activeLayer] height], rect, [contents spp], info, NULL);
+	GCFillGradient([[document whiteboard] overlay], [[contents activeLayer] width], [[contents activeLayer] height], rect, [contents spp], info, NULL);
 	
 	// Apply the changes
-	[(SeaHelpers *)[document helpers] applyOverlay];
+	[[document helpers] applyOverlay];
 	
 	intermediate = NO;
 }
@@ -111,17 +106,6 @@
 {
 	tempNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 	[[document docView] setNeedsDisplay: YES];
-}
-
-
-- (NSPoint)start
-{
-	return startNSPoint;
-}
-
-- (NSPoint)current
-{
-	return tempNSPoint;
 }
 
 @end

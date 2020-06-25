@@ -9,56 +9,52 @@
 */
 
 #import <Cocoa/Cocoa.h>
-#import "SeaPlugins.h"
+#import <SeashoreKit/SeaPlugins.h>
 
-@interface TexturizeClass : NSObject {
+@interface TexturizeClass : NSObject <SeaPluginClass> {
 
-	// The plug-in's manager
-	id seaPlugins;
+	/// The plug-in's manager
+	__weak SeaPlugins *seaPlugins;
 
-	// The label displaying the overlap
-	IBOutlet id overlapLabel;
-	
-	// The slider for the overlap
-	IBOutlet id overlapSlider;
-
-	// The label displaying the width
-	IBOutlet id widthLabel;
-	
-	// The slider for the width
-	IBOutlet id widthSlider;
-	
-	// The label displaying the height
-	IBOutlet id heightLabel;
-	
-	// The slider for the height
-	IBOutlet id heightSlider;
-	
-	// The checkbox indicating whether the resulting texture should be tileable
-	IBOutlet id tileableCheckbox;
-	
-	// The panel for the plug-in
-	IBOutlet id panel;
-	
-	// The progress bar to indicate progress
-	IBOutlet id progressBar;
-
-	// The overlap
-	float overlap;
-	
-	// The width
-	float width;
-	
-	// The height
-	float height;
-	
-	// Should the resulting texture be tileable?
-	BOOL tileable;
-
-	// YES if the application succeeded
+	/// \c YES if the application succeeded
 	BOOL success;
-
 }
+
+/// The overlap
+@property (nonatomic) CGFloat overlap;
+/// The width
+@property (nonatomic) CGFloat width;
+/// The height
+@property (nonatomic) CGFloat height;
+/// Should the resulting texture be tileable?
+@property (nonatomic, getter=isTileable) BOOL tileable;
+
+/// The label displaying the overlap
+@property (weak) IBOutlet NSTextField *overlapLabel;
+
+/// The slider for the overlap
+@property (weak) IBOutlet NSSlider *overlapSlider;
+
+/// The label displaying the width
+@property (weak) IBOutlet NSTextField *widthLabel;
+
+/// The slider for the width
+@property (weak) IBOutlet NSSlider *widthSlider;
+
+/// The label displaying the height
+@property (weak) IBOutlet NSTextField *heightLabel;
+
+/// The slider for the height
+@property (weak) IBOutlet NSSlider *heightSlider;
+
+/// The checkbox indicating whether the resulting texture should be tileable
+@property (weak) IBOutlet NSButton *tileableCheckbox;
+
+/// The panel for the plug-in
+@property (weak) IBOutlet NSPanel *panel;
+
+/// The progress bar to indicate progress
+@property (weak) IBOutlet NSProgressIndicator *progressBar;
 
 /*!
 	@method		initWithManager:
@@ -67,7 +63,7 @@
 				The SeaPlugins instance responsible for managing the plug-ins.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithManager:(SeaPlugins *)manager;
+- (instancetype)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type
@@ -153,8 +149,8 @@
 				disabled.
 	@param		menuItem
 				The menu item to be validated.
-	@result		YES if the menu item should be enabled, NO otherwise.
+	@result		\c YES if the menu item should be enabled, \c NO otherwise.
 */
-- (BOOL)validateMenuItem:(id)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end

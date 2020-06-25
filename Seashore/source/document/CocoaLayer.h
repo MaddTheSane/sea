@@ -1,5 +1,10 @@
-#import "Globals.h"
-#import "SeaLayer.h"
+#import <Cocoa/Cocoa.h>
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaLayer.h>
+
+@class SeaDocument;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
 	@class		CocoaLayer
@@ -9,10 +14,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface CocoaLayer : SeaLayer {
-
-}
+@interface CocoaLayer : SeaLayer
 
 /*!
 	@method		initWithImageRep:document:spp:
@@ -30,6 +32,8 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithImageRep:(id)imageRep document:(id)doc spp:(int)lspp;
+- (nullable instancetype)initWithImageRep:(NSBitmapImageRep *)imageRep document:(SeaDocument*)doc spp:(int)lspp;
 
 @end
+
+NS_ASSUME_NONNULL_END

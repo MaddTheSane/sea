@@ -7,51 +7,36 @@
 #import "SeaDocument.h"
 #import "Bitmap.h"
 
-static unsigned char *cmData;
-static unsigned int cmLen;
-
-static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
-{
-	if (cmData == NULL) {
-		cmData = malloc(*size);
-		memcpy(cmData, data, *size);
-		cmLen = *size;
-	}
-	else {
-		cmData = realloc(cmData, cmLen + *size);
-		memcpy(&(cmData[cmLen]), data, *size);
-		cmLen += *size;
-	}
-	
-	return 0;
-}
-
 @implementation JP2Exporter
 
-- (id)init
+- (instancetype)init
 {
-	int value;
+	if (!(self = [super init])) {
+		return nil;
+	}
+	NSInteger value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"jp2 target"] == NULL)
+	if ([defaults objectForKey:@"jp2 target"] == NULL)
 		targetWeb = YES;
 	else
-		targetWeb = [gUserDefaults boolForKey:@"jp2 target"];
+		targetWeb = [defaults boolForKey:@"jp2 target"];
 	
-	if ([gUserDefaults objectForKey:@"jp2 web compression"] == NULL) {
+	if ([defaults objectForKey:@"jp2 web compression"] == NULL) {
 		value = 26;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"jp2 web compression"];
+		value = [defaults integerForKey:@"jp2 web compression"];
 		if (value < 0 || value > kMaxCompression)
 			value = 26;
 	}
 	webCompression = value;
 	
-	if ([gUserDefaults objectForKey:@"jp2 print compression"] == NULL) {
+	if ([defaults objectForKey:@"jp2 print compression"] == NULL) {
 		value = 30;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"jp2 print compression"];
+		value = [defaults integerForKey:@"jp2 print compression"];
 		if (value < 0 || value > kMaxCompression)
 			value = 30;
 	}
@@ -60,18 +45,9 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (BOOL)hasOptions
 {
-#ifdef MACOS_10_4_COMPILE
 	return YES;
-#else
-	return NO;
-#endif
 }
 
 - (float)reviseCompression
@@ -81,28 +57,21 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	if (targetWeb) {
 		if (webCompression < 5) {
 			result = 0.1 + 0.08 * (float)webCompression;
-		}
-		else if (webCompression < 10) {
+		} else if (webCompression < 10) {
 			result = 0.3 + 0.04 * (float)webCompression;
-		}
-		else if (webCompression < 20) {
+		} else if (webCompression < 20) {
 			result = 0.5 + 0.02 * (float)webCompression;
-		}
-		else {
+		} else {
 			result = 0.7 + 0.01 * (float)webCompression;
 		}
-	}
-	else {
+	} else {
 		if (printCompression < 5) {
 			result = 0.1 + 0.08 * (float)printCompression;
-		}
-		else if (printCompression < 10) {
+		} else if (printCompression < 10) {
 			result = 0.3 + 0.04 * (float)printCompression;
-		}
-		else if (printCompression < 20) {
+		} else if (printCompression < 20) {
 			result = 0.5 + 0.02 * (float)printCompression;
-		}
-		else {
+		} else {
 			result = 0.7 + 0.01 * (float)printCompression;
 		}
 	}
@@ -126,12 +95,12 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 
 - (void)showOptions:(id)document
 {
-#ifdef MACOS_10_4_COMPILE
 	unsigned char *data;
 	int width = [(SeaContent *)[document contents] width], height = [(SeaContent *)[document contents] height], spp = [[document contents] spp];
 	int i, j, k, x, y;
 	id realImage, compressImage;
 	float value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Work things out
 	if (targetWeb)
@@ -141,9 +110,9 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	
 	// Revise the compression
 	if (targetWeb)
-		[compressSlider setIntValue:webCompression];
+		[compressSlider setIntegerValue:webCompression];
 	else
-		[compressSlider setIntValue:printCompression];
+		[compressSlider setIntegerValue:printCompression];
 	value = [self reviseCompression];
 	
 	// Set-up the sample data
@@ -167,17 +136,16 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 			}
 		}
 	}
-	premultiplyBitmap(4, sampleData, sampleData, 40 * 40);
+	SeaPremultiplyBitmap(4, sampleData, sampleData, 40 * 40);
 	
 	// Now make an image for the view
 	realImageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&sampleData pixelsWide:40 pixelsHigh:40 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bytesPerRow:40 * 4 bitsPerPixel:8 * 4];
 	realImage = [[NSImage alloc] initWithSize:NSMakeSize(160, 160)];
 	[realImage addRepresentation:realImageRep];
 	[realImageView setImage:realImage];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
 	[compressImageView setImage:compressImage];
-	[compressImage autorelease];
 	
 	// Display the options dialog
 	[panel center];
@@ -185,20 +153,16 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	[panel orderOut:self];
 	
 	// Clean-up
-	[gUserDefaults setObject:(targetWeb ? @"YES" : @"NO") forKey:@"jp2 target"];
+	[defaults setObject:(targetWeb ? @YES : @NO) forKey:@"jp2 target"];
 	if (targetWeb)
-		[gUserDefaults setInteger:webCompression forKey:@"jp2 web compression"];
+		[defaults setInteger:webCompression forKey:@"jp2 web compression"];
 	else
-		[gUserDefaults setInteger:printCompression forKey:@"jp2 print compression"];
+		[defaults setInteger:printCompression forKey:@"jp2 print compression"];
 	free(sampleData);
-	[realImageRep autorelease];
-	[realImage autorelease];
-#endif
 }
 
 - (IBAction)compressionChanged:(id)sender
 {
-#ifdef MACOS_10_4_COMPILE
 	id compressImage;
 	float value;
 	
@@ -207,17 +171,14 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	else
 		printCompression = [compressSlider intValue];
 	value = [self reviseCompression];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
-	[compressImage autorelease];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
-#endif
 }
 
 - (IBAction)targetChanged:(id)sender
 {
-#ifdef MACOS_10_4_COMPILE
 	id compressImage;
 	float value;
 	
@@ -229,23 +190,19 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	
 	// Revise the compression
 	if (targetWeb)
-		[compressSlider setIntValue:webCompression];
+		[compressSlider setIntegerValue:webCompression];
 	else
-		[compressSlider setIntValue:printCompression];
+		[compressSlider setIntegerValue:printCompression];
 	value = [self reviseCompression];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEG2000FileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
-	[compressImage autorelease];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
-#endif
 }
 
 - (IBAction)endPanel:(id)sender
 {
-#ifdef MACOS_10_4_COMPILE
 	[NSApp stopModal];
-#endif
 }
 
 - (NSString *)title
@@ -258,6 +215,11 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	return @"jp2";
 }
 
+- (NSString *)fileType
+{
+	return (NSString*)kUTTypeJPEG2000;
+}
+
 - (NSString *)optionsString
 {
 	if (targetWeb)
@@ -266,15 +228,12 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 		return [NSString stringWithFormat:@"Print %.0f%%", [self reviseCompression] * 100.0];
 }
 
-- (BOOL)writeDocument:(id)document toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path
 {
-#ifdef MACOS_10_4_COMPILE
 	int width, height, spp;
 	unsigned char *srcData, *destData;
 	NSBitmapImageRep *imageRep;
 	NSData *imageData;
-	CMProfileRef cmProfile;
-	Boolean cmmNotFound;
 	BOOL hasAlpha = NO;
 	int i, j;
 	
@@ -307,34 +266,31 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	
 	// Embed ColorSync profile
 	if (!targetWeb) {
+		ColorSyncProfileRef cmProfile;
 		if (spp < 3)
-			CMGetDefaultProfileBySpace(cmGrayData, &cmProfile);
+			cmProfile = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
 		else
-			OpenDisplayProfile(&cmProfile);
-		cmData = NULL;
-		CMFlattenProfile(cmProfile, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
+			cmProfile = ColorSyncProfileCreateWithDisplayID(0);
+		NSData *cmData = CFBridgingRelease(ColorSyncProfileCopyData(cmProfile, NULL));
+
+		//CMFlattenProfile(cmProfile, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
 		if (cmData) {
-			[imageRep setProperty:NSImageColorSyncProfileData withValue:[NSData dataWithBytes:cmData length:cmLen]];
-			free(cmData);
+			[imageRep setProperty:NSImageColorSyncProfileData withValue:cmData];
 		}
-		if (spp >= 3) CloseDisplayProfile(cmProfile);
+		CFRelease(cmProfile);
 	}
 	
 	// Finally build the JPEG 2000 data
-	imageData = [imageRep representationUsingType:NSJPEG2000FileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]];
+	imageData = [imageRep representationUsingType:NSJPEG2000FileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}];
 	
 	// Save our file and let's go
 	[imageData writeToFile:path atomically:YES];
-	[imageRep autorelease];
 	
 	// If the destination data is not equivalent to the source data free the former
 	if (destData != srcData)
 		free(destData);
 	
 	return YES;
-#else
-	return NO;
-#endif
 }
 
 @end

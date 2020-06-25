@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
@@ -12,26 +13,18 @@
 */
 
 @interface SmudgeTool : AbstractTool {
-	
-	// The accumulated data
+	/// The accumulated data
 	unsigned char *accumData;
 	
-	// The last point we've been and the last point a brush was plotted (there is a difference)
+	/// The last point we've been and the last point a brush was plotted (there is a difference)
 	NSPoint lastPoint, lastPlotPoint;
 	
-	// The distance travelled by the brush so far
+	/// The distance travelled by the brush so far
 	double distance;
 	
-	// The last where recorded
+	/// The last where recorded
 	IntPoint lastWhere;
-	
 }
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		useMouseCoalescing
@@ -69,8 +62,6 @@
 	@param		where
 				Where in the document the mouse up event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse up event.
 */
@@ -87,7 +78,7 @@
 /*!
 	@method		intermediateStroke:
 	@discussion	Specifies an intermediate point in the stroke.
-	@param		Where in the document to place the intermediate
+	@param		where in the document to place the intermediate
 				stroke.
 */
 - (void)intermediateStroke:(IntPoint)where;

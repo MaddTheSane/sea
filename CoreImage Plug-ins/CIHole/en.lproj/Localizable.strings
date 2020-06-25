@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Distort";
+description = "Places a big hole at the specified point";
+license = "Public Domain";
+name = "Hole";
+instruction = "Click twice: first to locate the centre of the hole and then to specify its radius.";

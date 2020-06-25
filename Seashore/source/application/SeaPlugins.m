@@ -1,3 +1,4 @@
+#import <Foundation/Foundation.h>
 #import "SeaPlugins.h"
 #import "PluginClass.h"
 #import "SeaSelection.h"
@@ -8,24 +9,16 @@
 #import "ToolboxUtility.h"
 #import "UtilitiesManager.h"
 #import "OptionsUtility.h"
+#import "CIAffineTransformClass.h"
+#import "EffectOptions.h"
 
 extern BOOL useAltiVec;
 
 @implementation SeaPlugins
+@synthesize pointPluginsNames;
+@synthesize pointPlugins;
 
-int plugin_sort(id obj1, id obj2, void *context)
-{
-	int result;
-	
-	result = [[obj1 groupName] caseInsensitiveCompare:[obj2 groupName]];
-	if (result == NSOrderedSame) {
-		result = [[obj1 name] caseInsensitiveCompare:[obj2 name]];
-	}
-	
-	return result;
-}
-
-BOOL checkRun(NSString *path, NSString *file)
+static BOOL checkRun(NSString *path, NSString *file)
 {
 	NSDictionary *infoDict;
 	BOOL canRun;
@@ -33,31 +26,39 @@ BOOL checkRun(NSString *path, NSString *file)
 	
 	// Get dictionary
 	canRun = YES;
-	infoDict = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/%@/Contents/Info.plist", path, file]];
+	{
+		NSString *bundDir = [path stringByAppendingPathComponent:file];
+		NSBundle *bund = [NSBundle bundleWithPath:bundDir];
+		infoDict = [bund infoDictionary];
+	}
+	
+	if (!infoDict) {
+		infoDict = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/%@/Contents/Info.plist", path, file]];
+	}
 	
 	// Check special
-	value = [infoDict objectForKey:@"SpecialPlugin"];
+	value = infoDict[@"SpecialPlugin"];
 	if (value != NULL) {
-		if ([value isEqualToString:@"YES"] || [value isEqualToString:@"yes"] || [value isEqualToString:@"1"]) {
+		if ([value boolValue]) {
 			canRun = NO;
 		}
 	}
 	
 	// Check PPC
 #ifndef __ppc__
-	value = [infoDict objectForKey:@"PPCOnly"];
+	value = infoDict[@"PPCOnly"];
 	if (value != NULL) {
-		if ([value isEqualToString:@"YES"] || [value isEqualToString:@"yes"] || [value isEqualToString:@"1"]) {
+		if ([value boolValue]) {
 			canRun = NO;
 		}
 	}
 #endif
 	
 	// Check Intel
-#ifndef __i386__
-	value = [infoDict objectForKey:@"IntelOnly"];
+#if !(defined(__i386__) || defined(__x86_64__))
+	value = infoDict[@"IntelOnly"];
 	if (value != NULL) {
-		if ([value isEqualToString:@"YES"] || [value isEqualToString:@"yes"] || [value isEqualToString:@"1"]) {
+		if ([value boolValue]) {
 			canRun = NO;
 		}
 	}
@@ -67,49 +68,68 @@ BOOL checkRun(NSString *path, NSString *file)
 #ifdef __ppc__
 	value = [infoDict objectForKey:@"AltiVecOrSSERequired"];
 	if (value != NULL) {
-		if ([value isEqualToString:@"YES"] || [value isEqualToString:@"yes"] || [value isEqualToString:@"1"]) {
+		if ([value boolValue]) {
 			if (useAltiVec == NO) canRun = NO;
 		}
 	}
 #endif
 	
 	// Check system version
-	value = [infoDict objectForKey:@"MinSystemVersion"];
-	if (value != NULL) {
-		switch ((int)floor(NSAppKitVersionNumber)) {
-			case NSAppKitVersionNumber10_3:
-				canRun = canRun && [value floatValue] <= 10.3;
-			break;
-			case NSAppKitVersionNumber10_4:
-				canRun = canRun && [value floatValue] <= 10.4;
-			break;
-		}
+	value = infoDict[@"LSMinimumSystemVersion"];
+	if (value == nil) {
+		value = infoDict[@"MinSystemVersion"];
+	}
+	if (value != NULL && [value isKindOfClass:[NSString class]]) {
+		do {
+			NSOperatingSystemVersion sysVers;
+			NSScanner *versScanner = [NSScanner scannerWithString:value];
+			versScanner.charactersToBeSkipped = [NSCharacterSet punctuationCharacterSet];
+			int toScan;
+			if (![versScanner scanInt:&toScan]) {
+				break;
+			}
+			sysVers.majorVersion = toScan;
+			if (![versScanner scanInt:&toScan]) {
+				break;
+			}
+			sysVers.minorVersion = toScan;
+			if ([versScanner scanInt:&toScan]) {
+				sysVers.patchVersion = toScan;
+			} else {
+				sysVers.patchVersion = 0;
+			}
+			
+			canRun = canRun && [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:sysVers];
+		} while (0);
 	}
 	
 	return canRun;
 }
 
-- (id)init
+- (instancetype)init
 {
 	NSString *pluginsPath, *pre_files_name, *files_name;
 	NSArray *pre_files;
 	NSMutableArray *files;
 	NSBundle *bundle;
-	id plugin;
+	id<SeaPluginClass> plugin;
 	int i, j, found_id;
 	BOOL success, found, can_run;
 	NSRange range, next_range;
+	
+	if ((self = [super init]) == nil) {
+		return nil;
+	}
 	
 	// Set the last effect to nothing
 	lastEffect = -1;
 	
 	// Add standard plug-ins
-	plugins = [NSArray array];
 	pluginsPath = [gMainBundle builtInPlugInsPath];
-	pre_files = [gFileManager directoryContentsAtPath:pluginsPath];
+	pre_files = [gFileManager contentsOfDirectoryAtPath:pluginsPath error:NULL];
+	plugins = [[NSMutableArray alloc] initWithCapacity:pre_files.count];
 	files = [NSMutableArray arrayWithCapacity:[pre_files count]];
-	for (i = 0; i < [pre_files count]; i++) {
-		pre_files_name = [pre_files objectAtIndex:i];
+	for (pre_files_name in pre_files) {
 		if ([pre_files_name hasSuffix:@".bundle"] && ![pre_files_name hasSuffix:@"+.bundle"]) {
 			can_run = checkRun(pluginsPath, pre_files_name);
 			if (can_run) [files addObject:pre_files_name];
@@ -118,64 +138,69 @@ BOOL checkRun(NSString *path, NSString *file)
 	
 	// Add plus plug-ins
 	for (i = 0; i < [pre_files count]; i++) {
-		pre_files_name = [pre_files objectAtIndex:i];
+		pre_files_name = pre_files[i];
 		if ([pre_files_name hasSuffix:@"+.bundle"]) {
 			found = NO;
 			range.location = 0;
-			range.length = [pre_files_name length] - (sizeof("+.bundle") - 1);
+			range.length = [pre_files_name length] - strlen("+.bundle");
 			found_id = -1;
 			for (j = 0; j < [files count] && !found; j++) {
-				files_name = [files objectAtIndex:j];
+				files_name = files[j];
 				next_range.location = 0;
-				next_range.length = [files_name length] - (sizeof(".bundle") - 1);
+				next_range.length = [files_name length] - strlen(".bundle");
 				if ([[files_name substringWithRange:next_range] isEqualToString:[pre_files_name substringWithRange:range]]) {
 					found = YES;
 					found_id = j;
+					break;
 				}
 			}
 			can_run = checkRun(pluginsPath, pre_files_name);
 			if (can_run) {
-				if (found) [files replaceObjectAtIndex:found_id withObject:pre_files_name];
-				else [files addObject:pre_files_name];
+				if (found)
+					files[found_id] = pre_files_name;
+				else
+					[files addObject:pre_files_name];
 			}
 		}
 	}
 	
 	// Check added plug-ins
 	ciAffineTransformIndex = -1;
-	for (i = 0; i < [files count]; i++) {		
-		bundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/%@", pluginsPath, [files objectAtIndex:i]]];
+	for (NSString *file in files) {
+		bundle = [NSBundle bundleWithPath:[pluginsPath stringByAppendingPathComponent:file]];
 		if (bundle && [bundle principalClass]) {
 			success = NO;
-			plugin = [[bundle principalClass] alloc];
-			if (plugin) {
-				if ([plugin respondsToSelector:@selector(initWithManager:)]) {
-					[plugin initWithManager:self];
-					if ([plugin respondsToSelector:@selector(sanity)] && [[plugin sanity] isEqualToString:@"Seashore Approved (Bobo)"]) {
-						plugins = [plugins arrayByAddingObject:plugin];
-						success = YES;
-					}		
-				}
-				if (!success) {
-					[plugin autorelease];
-				}
+			if (![[bundle principalClass] instancesRespondToSelector:@selector(initWithManager:)]) {
+				continue;
+			}
+			plugin = [[[bundle principalClass] alloc] initWithManager:self];
+			if ([plugin respondsToSelector:@selector(sanity)] && [[plugin sanity] isEqualToString:@"Seashore Approved (Bobo)"]) {
+				[plugins addObject:plugin];
+				success = YES;
 			}
 		}
 	}
 	
-	// Sort and retain plug-ins
-	plugins = [plugins sortedArrayUsingFunction:plugin_sort context:NULL];
-	[plugins retain];
+	// Sort plug-ins
+	[plugins sortUsingComparator:^NSComparisonResult(id<SeaPluginClass> obj1, id<SeaPluginClass> obj2) {
+		NSComparisonResult result;
+		
+		result = [obj1.groupName caseInsensitiveCompare:obj2.groupName];
+		if (result == NSOrderedSame) {
+			result = [obj1.name caseInsensitiveCompare:obj2.name];
+		}
+		
+		return result;
+	}];
 
 	// Determine affine transform plug-in
 	for (i = 0; i < [plugins count]; i++) {
-		plugin = [plugins objectAtIndex:i];
+		plugin = plugins[i];
 		if ([plugin respondsToSelector:@selector(runAffineTransform:withImage:spp:width:height:opaque:newWidth:newHeight:)]) {
 			if (ciAffineTransformIndex == -1) {
 				ciAffineTransformIndex = i;
-			}
-			else {
-				NSLog(@"Multiple plug-ins are affine transform capable (using first): %@ %@", [files objectAtIndex:ciAffineTransformIndex], [files objectAtIndex:i]);
+			} else {
+				NSLog(@"Multiple plug-ins are affine transform capable (using first): %@ %@", files[ciAffineTransformIndex], files[i]);
 			}
 		}
 	}
@@ -187,19 +212,19 @@ BOOL checkRun(NSString *path, NSString *file)
 {
 	id menuItem, submenuItem;
 	NSMenu *submenu;
-	id plugin;
+	id<SeaPluginClass> plugin;
 	int i;
 	
 	// Set up
-	pointPlugins = [NSArray array];
-	pointPluginsNames = [NSArray array];
+	pointPlugins = @[];
+	pointPluginsNames = @[];
 	    
 	// Configure all plug-ins
 	for (i = 0; i < [plugins count] && i < 7500; i++) {
-		plugin = [plugins objectAtIndex:i];
+		plugin = plugins[i];
         
 		// If the plug-in is a basic plug-in add it to the effects menu
-		if ([(PluginClass *)plugin type] == kBasicPlugin) {
+		if ([(id <SeaPluginClass>)plugin type] == SeaPluginBasic) {
 			
 			// Add or find group submenu
 			submenuItem = [effectMenu itemWithTitle:[plugin groupName]];
@@ -208,8 +233,6 @@ BOOL checkRun(NSString *path, NSString *file)
 				[effectMenu insertItem:submenuItem atIndex:[effectMenu numberOfItems] - 2];
 				submenu = [[NSMenu alloc] initWithTitle:[submenuItem title]];
 				[submenuItem setSubmenu:submenu];
-				[submenu autorelease];
-				[submenuItem autorelease];
 			}
 			else {
 				submenu = [submenuItem submenu];
@@ -222,11 +245,10 @@ BOOL checkRun(NSString *path, NSString *file)
 				[menuItem setTarget:self];
 				[submenu addItem:menuItem];
 				[menuItem setTag:i + 10000];
-				[menuItem autorelease];
 			}
 			
 		}
-		else if ([(PluginClass *)plugin type] == kPointPlugin) {
+		else if ([(id <SeaPluginClass>)plugin type] == SeaPluginPoint) {
 			pointPluginsNames = [pointPluginsNames arrayByAddingObject:[NSString stringWithFormat:@"%@ / %@", [plugin groupName], [plugin name]]];
 			pointPlugins = [pointPlugins arrayByAddingObject:plugin];
 		}
@@ -234,57 +256,43 @@ BOOL checkRun(NSString *path, NSString *file)
 	}
 	
 	// Finish off
-	[pointPluginsNames retain];
-	[pointPlugins retain];
 	
 	// Correct effect tool
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] setEffectEnabled:([pointPluginsNames count] != 0)];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] setEffectEnabled:([pointPluginsNames count] != 0)];
 
 	// Register to recieve the terminate message when Seashore quits
 	[controller registerForTermination:self];
 }
 
-- (void)dealloc
-{
-	int i;
-	
-	if (pointPlugins) [pointPlugins autorelease];
-	if (plugins) {
-		for (i = 0; i < [plugins count]; i++) {
-			[[plugins objectAtIndex:i] autorelease];
-		}
-		[plugins autorelease];
-	}
-	[super dealloc];
-}
 
 - (void)terminate
 {
-	[gUserDefaults setInteger:[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: kEffectTool] selectedRow] forKey:@"effectIndex"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: SeaToolsEffect] selectedRow] forKey:@"effectIndex"];
 }
 
 - (id)affinePlugin
 {
 	if (ciAffineTransformIndex >= 0)
-		return [plugins objectAtIndex:ciAffineTransformIndex];
+		return plugins[ciAffineTransformIndex];
 	else
-		return NULL;
+		return nil;
 }
 
-- (id)data
+- (PluginData*)data
 {
 	return [gCurrentDocument pluginData];
 }
 
 - (IBAction)run:(id)sender
 {
-	[(PluginClass *)[plugins objectAtIndex:[sender tag] - 10000] run];
+	[(id <SeaPluginClass>)plugins[[sender tag] - 10000] run];
 	lastEffect = [sender tag] - 10000;
 }
 
 - (IBAction)reapplyEffect:(id)sender
 {
-	[[plugins objectAtIndex:lastEffect] reapply];
+	[plugins[lastEffect] reapply];
 }
 
 - (void)cancelReapply
@@ -294,27 +302,17 @@ BOOL checkRun(NSString *path, NSString *file)
 
 - (BOOL)hasLastEffect
 {
-	return lastEffect != -1 && [[plugins objectAtIndex:lastEffect] canReapply];
-}
-
-- (NSArray *)pointPluginsNames
-{
-	return pointPluginsNames;
-}
-
-- (NSArray *)pointPlugins
-{
-	return pointPlugins;
+	return lastEffect != -1 && [plugins[lastEffect] canReapply];
 }
 
 - (id)activePointEffect
 {
-	return [pointPlugins objectAtIndex:[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: kEffectTool] selectedRow] ];
+	return pointPlugins[[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: SeaToolsEffect] selectedRow]];
 }
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	id document = gCurrentDocument;
+	SeaDocument *document = gCurrentDocument;
 	
 	// Never when there is no document
 	if (document == NULL)
@@ -329,7 +327,7 @@ BOOL checkRun(NSString *path, NSString *file)
 	
 	// Never if we are told not to
 	if ([menuItem tag] >= 10000 && [menuItem tag] < 17500) {
-		if (![[plugins objectAtIndex:[menuItem tag] - 10000] validateMenuItem:menuItem])
+		if (![plugins[[menuItem tag] - 10000] validateMenuItem:menuItem])
 			return NO;
 	}
 

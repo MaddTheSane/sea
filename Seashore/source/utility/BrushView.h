@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -12,6 +13,8 @@
 */
 #define kBrushesPerRow 5
 
+@class BrushUtility;
+
 /*!
 	@class		BrushView
 	@abstract	Displays all available brushes for easy selection by the user.
@@ -22,10 +25,8 @@
 */
 
 @interface BrushView : NSView {
-	
-	// The BrushUtility controlling this view
-	id master;
-	
+	/// The \c BrushUtility controlling this view
+	__weak BrushUtility *master;
 }
 
 /*!
@@ -35,18 +36,12 @@
 				The brush utility that will control the contents of this view.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithMaster:(id)sender;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)initWithMaster:(BrushUtility*)sender;
 
 /*!
 	@method		mouseDown:
 	@discussion	Handles mouse down events inside the view.
-	@param		theEvent
+	@param		event
 				The event triggering this method.
 */
 - (void)mouseDown:(NSEvent *)event;

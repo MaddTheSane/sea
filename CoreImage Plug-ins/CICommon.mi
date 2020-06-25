@@ -1,0 +1,197 @@
+#ifndef __SIMD_VECTOR_HEADER__
+#error We need #include <simd/simd.h>
+#endif
+
+- (void)execute
+{
+	PluginData *pluginData = [self.seaPlugins data];
+	
+	if ([pluginData spp] == 2) {
+		[self executeGrey:pluginData];
+	} else {
+		[self executeColor:pluginData];
+	}
+}
+
+- (void)executeGrey:(PluginData *)pluginData
+{
+	IntRect selection;
+	int spp, width, height;
+	unsigned char *data, *resdata, *overlay, *replace;
+	size_t vec_len, max;
+	
+	// Set-up plug-in
+	[pluginData setOverlayOpacity:255];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
+	selection = [pluginData selection];
+	
+	// Get plug-in data
+	width = [pluginData width];
+	height = [pluginData height];
+	spp = [pluginData spp];
+	vec_len = width * height * spp;
+	if (vec_len % 16 == 0) {
+		vec_len /= 16;
+	} else {
+		vec_len /= 16;
+		vec_len++;
+	}
+	data = [pluginData data];
+	overlay = [pluginData overlay];
+	replace = [pluginData replace];
+	
+	// Convert from GA to ARGB
+	for (int i = 0; i < width * height; i++) {
+		newdata[i * 4] = data[i * 2 + 1];
+		newdata[i * 4 + 1] = data[i * 2];
+		newdata[i * 4 + 2] = data[i * 2];
+		newdata[i * 4 + 3] = data[i * 2];
+	}
+	
+	// Run CoreImage effect
+	resdata = [self executeChannel:pluginData withBitmap:newdata];
+	
+	// Convert from output to GA
+	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height))
+		max = selection.size.width * selection.size.height;
+	else
+		max = width * height;
+	for (size_t i = 0; i < max; i++) {
+		newdata[i * 2] = resdata[i * 4];
+		newdata[i * 2 + 1] = resdata[i * 4 + 3];
+	}
+	
+	// Copy to destination
+	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
+		for (int i = 0; i < selection.size.height; i++) {
+			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
+			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 2]), &(newdata[selection.size.width * 2 * i]), selection.size.width * 2);
+		}
+	} else {
+		memset(replace, 0xFF, width * height);
+		memcpy(overlay, newdata, width * height * 2);
+	}
+}
+
+- (void)executeColor:(PluginData *)pluginData
+{
+	simd_uint4 *vdata;
+	IntRect selection;
+	int width, height;
+	unsigned char *data, *resdata, *overlay, *replace;
+	size_t vec_len;
+	
+	// Set-up plug-in
+	[pluginData setOverlayOpacity:255];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
+	selection = [pluginData selection];
+	
+	// Get plug-in data
+	width = [pluginData width];
+	height = [pluginData height];
+	vec_len = width * height * 4;
+	if (vec_len % 16 == 0) {
+		vec_len /= 16;
+	} else {
+		vec_len /= 16;
+		vec_len++;
+	}
+	data = [pluginData data];
+	overlay = [pluginData overlay];
+	replace = [pluginData replace];
+#ifndef NO_PREMULTIPLY
+	SeaPremultiplyBitmap(4, newdata, data, width * height);
+	// Convert from RGBA to ARGB
+	vdata = (simd_uint4 *)newdata;
+#else
+	vdata = (simd_uint4 *)data;
+#endif
+	for (size_t i = 0; i < vec_len; i++) {
+		simd_uint4 vstore = (vdata[i] >> 24) & 0xFF;
+		vdata[i] = (vdata[i] << 8) & 0xFFFFFF00;
+		vdata[i] = vdata[i] | vstore;
+	}
+	
+	// Run CoreImage effect (exception handling is essential because we've altered the image data)
+	@try {
+#ifndef NO_PREMULTIPLY
+		resdata = [self executeChannel:pluginData withBitmap:newdata];
+#else
+		resdata = [self executeChannel:pluginData withBitmap:data];
+#endif
+	}
+	@catch (NSException *exception) {
+		for (size_t i = 0; i < vec_len; i++) {
+			simd_uint4 vstore = (vdata[i] << 24) & 0xFF000000;
+			vdata[i] = (vdata[i] >> 8) & 0x00FFFFFF;
+			vdata[i] = vdata[i] | vstore;
+		}
+		NSLog(@"%@", [exception reason]);
+		return;
+	}
+#ifndef NO_PREMULTIPLY
+	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
+		SeaUnpremultiplyBitmap(4, resdata, resdata, selection.size.width * selection.size.height);
+	} else {
+		SeaUnpremultiplyBitmap(4, resdata, resdata, width * height);
+	}
+#endif
+	// Convert from ARGB to RGBA
+	for (size_t i = 0; i < vec_len; i++) {
+		simd_uint4 vstore = (vdata[i] << 24) & 0xFF000000;
+		vdata[i] = (vdata[i] >> 8) & 0x00FFFFFF;
+		vdata[i] = vdata[i] | vstore;
+	}
+	
+	// Copy to destination
+	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
+		for (int i = 0; i < selection.size.height; i++) {
+			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
+			memcpy(&(overlay[(width * (selection.origin.y + i) + selection.origin.x) * 4]), &(resdata[selection.size.width * 4 * i]), selection.size.width * 4);
+		}
+	} else {
+		memset(replace, 0xFF, width * height);
+		memcpy(overlay, resdata, width * height * 4);
+	}
+}
+
+- (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data
+{
+	size_t vec_len;
+	int width, height, channel;
+	unsigned char *resdata, *datatouse;
+	simd_uint4 *vdata, *rvdata, orvmask = simd_make_uint4(255, 255, 255, 255);
+	
+	// Make adjustments for the channel
+	channel = [pluginData channel];
+	datatouse = data;
+	if (channel == SeaSelectedChannelPrimary || channel == SeaSelectedChannelAlpha) {
+		width = [pluginData width];
+		height = [pluginData height];
+		vec_len = width * height * 4;
+		if (vec_len % 16 == 0) {
+			vec_len /= 16;
+		} else {
+			vec_len /= 16;
+			vec_len++;
+		}
+		vdata = (simd_uint4 *)data;
+		rvdata = (simd_uint4 *)newdata;
+		datatouse = newdata;
+		if (channel == SeaSelectedChannelPrimary) {
+			for (int i = 0; i < vec_len; i++) {
+				rvdata[i] = (vdata[i] | orvmask);
+			}
+		} else if (channel == SeaSelectedChannelAlpha) {
+			for (size_t i = 0; i < width * height; i++) {
+				newdata[i * 4 + 1] = newdata[i * 4 + 2] = newdata[i * 4 + 3] = data[i * 4];
+				newdata[i * 4] = 255;
+			}
+		}
+	}
+	
+	// Run CoreImage effect
+	resdata = [self CLASSMETHOD :pluginData withBitmap:datatouse];
+	
+	return resdata;
+}

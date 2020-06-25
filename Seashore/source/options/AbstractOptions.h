@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -19,16 +20,26 @@
 	@constant	kReservedModifier2
 				Indicates a reserved modifier (no shortcut key).
 */
-enum {
-	kNoModifier = 0,
-	kAltModifier = 1,
-	kShiftModifier = 2,
-	kControlModifier = 3,
-	kShiftControlModifier = 4,
-	kAltControlModifier = 5,
-	kReservedModifier1 = 20,
-	kReservedModifier2 = 21
+typedef NS_ENUM(NSInteger, AbstractModifiers) {
+	//! Indicates no modifier.
+	AbstractModifierNone = 0,
+	//! Indicates an option key modifier.
+	AbstractModifierAlt = 1,
+	//! Indicates a shift key modifier.
+	AbstractModifierShift = 2,
+	//! Indicates a control key modifier.
+	AbstractModifierControl = 3,
+	//! Indicates a shift-control key modifier.
+	AbstractModifierShiftControl = 4,
+	//! Indicates a option-control key modifier.
+	AbstractModifierAltControl = 5,
+	//! Indicates a reserved modifier (no shortcut key).
+	AbstractModifierReserved1 = 20,
+	//! Indicates a reserved modifier (no shortcut key).
+	AbstractModifierReserved2 = 21,
 };
+
+@class SeaDocument;
 
 /*		
 	@class		AbstractOptions
@@ -38,18 +49,15 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface AbstractOptions : NSObject {
+	/// The options view associated with this tool
+    IBOutlet NSView *view;
 	
-	// The options view associated with this tool
-    IBOutlet id view;
+	/// The modifier options associated with this tool
+	IBOutlet NSPopUpButton *modifierPopup;
 	
-	// The modifier options associated with this tool
-	IBOutlet id modifierPopup;
-	
-	// The document associated
-	id document;
-	
+	/// The document associated
+	SeaDocument *document;
 }
 
 /*!
@@ -84,14 +92,14 @@ enum {
 	@param		modifiers
 				An unsigned int representing the new modifiers.
 */
-- (void)updateModifiers:(unsigned int)modifiers;
+- (void)updateModifiers:(NSEventModifierFlags)modifiers;
 
 /*!
 	@method		modifier
 	@discussion	Returns an indication of the modifier.
 	@result		Returns an integer indicating the active modifier's tag.
 */
-- (int)modifier;
+- (AbstractModifiers)modifier;
 
 
 /*!
@@ -121,6 +129,15 @@ enum {
 	@discussion	Returns the option's view
 	@result		Returns the option's view
 */
-- (id)view;
+- (NSView *)view;
 
 @end
+
+static const AbstractModifiers kNoModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierNone", 10.2, 10.8) = AbstractModifierNone;
+static const AbstractModifiers kAltModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierAlt", 10.2, 10.8) = AbstractModifierAlt;
+static const AbstractModifiers kShiftModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierShift", 10.2, 10.8) = AbstractModifierShift;
+static const AbstractModifiers kControlModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierControl", 10.2, 10.8) = AbstractModifierControl;
+static const AbstractModifiers kShiftControlModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierShiftControl", 10.2, 10.8) = AbstractModifierShiftControl;
+static const AbstractModifiers kAltControlModifier NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierAltControl", 10.2, 10.8) = AbstractModifierAltControl;
+static const AbstractModifiers kReservedModifier1 NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierReserved1", 10.2, 10.8) = AbstractModifierReserved1;
+static const AbstractModifiers kReservedModifier2 NS_DEPRECATED_WITH_REPLACEMENT_MAC("AbstractModifierReserved2", 10.2, 10.8) = AbstractModifierReserved2;

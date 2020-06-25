@@ -1,4 +1,5 @@
-#include "Bitmap.h"
+#include <stdlib.h>
+#import "Bitmap.h"
 #import "bitstring.h"
 
 #define kMaxPtrsInPtrRecord 8
@@ -6,10 +7,10 @@
 typedef struct {
 	unsigned char *ptrs[kMaxPtrsInPtrRecord];
 	int n;
-	int init_size;
+	size_t init_size;
 } PtrRecord;
 
-static inline PtrRecord initPtrs(unsigned char *initial, int init_size)
+static inline PtrRecord initPtrs(unsigned char *initial, size_t init_size)
 {
 	PtrRecord ptrs;
 	
@@ -40,7 +41,7 @@ static inline unsigned char *getFinalPtr(PtrRecord ptrs)
 	return result;
 }
 
-static inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
+static inline unsigned char *mallocPtr(PtrRecord *ptrs, size_t size)
 {
 	unsigned char *result;
 	
@@ -59,235 +60,112 @@ static inline unsigned char *mallocPtr(PtrRecord *ptrs, int size)
 
 static inline void freePtrs(PtrRecord ptrs)
 {
-	int i;
+	size_t i;
 	
 	for (i = 1; i < ptrs.n - 1; i++) {
 		free(ptrs.ptrs[i]);
 	}
 }
 
-static inline void rotate_bytes(unsigned char *data, int pos1, int pos2)
+static inline void rotate_bytes(unsigned char *data, size_t pos1, size_t pos2)
 {
 	unsigned char tmp;
-	int i;
+	ssize_t i;
 	
 	tmp = data[pos1];
 	for (i = pos1; i < pos2 - 1; i++) data[i] = data[i + 1];
 	data[pos2] = tmp;
 }
 
-/*
-	Gray -> Gray
-	RGB -> RGB
-	CMYK -> RGB
-	CMYK -> Gray
-	Gray -> RGB
-	RGB -> Gray
-*/
-
-void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigned char *ibitmap, int width, int height, int ispp, int ispace, int ibps, CMProfileLocation *iprofile)
+static void covertBitmapColorSyncProfile(unsigned char *dbitmap, NSInteger dspp, BMPColorSpace dspace, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, BMPColorSpace ispace, NSInteger ibps, ColorSyncProfileRef iprofile)
 {
-	CMProfileRef srcProf, destProf;
-	CMBitmap srcBitmap, destBitmap;
-	CMWorldRef cw;
-	BOOL mustClose;
+	ColorSyncDataDepth srcDepth = 0;
+	ColorSyncDataDepth dstDepth = kColorSync8BitInteger;
+	ColorSyncDataLayout dstLayout = kColorSyncAlphaLast | kColorSyncByteOrderDefault;
+	ColorSyncDataLayout srcLayout = 0;
+	ColorSyncProfileRef destProf = NULL;
+	size_t srcBytesPerRow = 0;
+	size_t dstBytesPerRow = 0;
+	ColorSyncTransformRef cw = NULL;
 	
-	if (ispace == kGrayColorSpace && dspace == kGrayColorSpace) {
-	
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		if (ibps == 8)
-			srcBitmap.space = (ispp == 1) ? cmGray8Space : cmGrayA16Space;
-		else
-			srcBitmap.space = (ispp == 1) ? cmGray16Space : cmGrayA32Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 2;
-		destBitmap.pixelSize = 8 * 2;
-		destBitmap.space = cmGrayA16Space;
-		
-		// Execute the conversion
-		CMOpenProfile(&srcProf, iprofile);
-		CMGetDefaultProfileBySpace(cmGrayData, &destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CMCloseProfile(srcProf);
-	
+	switch (ispace) {
+		case BMPColorSpaceGray:
+		case BMPColorSpaceInvertedGray:
+			if (ibps == 8) {
+				srcDepth = kColorSync8BitInteger;
+			} else {
+				srcDepth = kColorSync16BitInteger;
+			}
+			if (ispp == 1) {
+				srcLayout = kColorSyncByteOrderDefault | kColorSyncAlphaNone;
+			} else {
+				srcLayout = kColorSyncByteOrderDefault | kColorSyncAlphaLast;
+			}
+			srcBytesPerRow = width * ispp * (ibps / 8);
+			break;
+			
+		case BMPColorSpaceRGB:
+			if (ibps == 8) {
+				srcDepth = kColorSync8BitInteger;
+			} else {
+				srcDepth = kColorSync16BitInteger;
+			}
+			if (ispp == 3) {
+				srcLayout = kColorSyncByteOrderDefault | kColorSyncAlphaNone;
+			} else {
+				srcLayout = kColorSyncByteOrderDefault | kColorSyncAlphaLast;
+			}
+			srcBytesPerRow = width * ispp * (ibps / 8);
+			break;
+			
+		case BMPColorSpaceCMYK:
+			if (ibps == 8) {
+				srcDepth = kColorSync8BitInteger;
+			} else {
+				srcDepth = kColorSync16BitInteger;
+			}
+			srcLayout = kColorSyncByteOrderDefault | kColorSyncAlphaNone;
+			srcBytesPerRow = width * ispp * (ibps / 8);
+			break;
+
+		default:
+			break;
 	}
-	else if (ispace == kRGBColorSpace && dspace == kRGBColorSpace) {
-		
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		if (ibps == 8)
-			srcBitmap.space = (ispp == 3) ? cmRGB24Space : cmRGBA32Space;
-		else
-			srcBitmap.space = (ispp == 3) ? cmRGB48Space : cmRGBA64Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 4;
-		destBitmap.pixelSize = 8 * 4;
-		destBitmap.space = cmRGBA32Space;
-		
-		// Execute the conversion
-		CMOpenProfile(&srcProf, iprofile);
-		OpenDisplayProfile(&destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(destProf);
-		CMCloseProfile(srcProf);
-		
-	}
-	else if (ispace == kCMYKColorSpace && dspace == kRGBColorSpace) {
 	
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		srcBitmap.space = (ibps == 8) ? cmCMYK32Space : cmCMYK64Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 4;
-		destBitmap.pixelSize = 8 * 4;
-		destBitmap.space = cmRGBA32Space;
-		
-		// Execute the conversion
-		if (iprofile == NULL) {
-			CMGetDefaultProfileBySpace(cmCMYKData, &srcProf);
-			mustClose = NO;
-		}
-		else {
-			CMOpenProfile(&srcProf, iprofile);
-			mustClose = YES;
-		}
-		OpenDisplayProfile(&destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(destProf);
-		if (mustClose) {
-			CMCloseProfile(srcProf);
-		}
+	switch (dspace) {
+		case BMPColorSpaceGray:
+		case BMPColorSpaceInvertedGray:
+			destProf = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
+			dstBytesPerRow = width * 2;
+			break;
+			
+		case BMPColorSpaceRGB:
+			destProf = ColorSyncProfileCreateWithName(kColorSyncSRGBProfile);
+			dstBytesPerRow = width * 4;
+			break;
+			
+		default:
+			break;
+	}
 	
-	}
-	else if (ispace == kCMYKColorSpace && dspace == kGrayColorSpace) {
+	// Execute the conversion
+	NSArray<NSDictionary<NSString*,id>*>*
+	profSeq = @[
+				@{(__bridge NSString*)kColorSyncProfile: (__bridge id)iprofile,
+				  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+				  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+				  },
+				
+				@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+				  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+				  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+				  },
+				];
 	
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		srcBitmap.space = (ibps == 8) ? cmCMYK32Space : cmCMYK64Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 2;
-		destBitmap.pixelSize = 8 * 2;
-		destBitmap.space = cmGrayA16Space;
-		
-		// Execute the conversion
-		if (iprofile == NULL) {
-			CMGetDefaultProfileBySpace(cmCMYKData, &srcProf);
-			mustClose = NO;
-		}
-		else {
-			CMOpenProfile(&srcProf, iprofile);
-			mustClose = YES;
-		}
-		OpenDisplayProfile(&destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(destProf);
-		if (mustClose) {
-			CMCloseProfile(srcProf);
-		}
-	
-	}
-	else if (ispace == kGrayColorSpace && dspace == kRGBColorSpace) {
-		
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		if (ibps == 8)
-			srcBitmap.space = (ispp == 1) ? cmGray8Space : cmGrayA16Space;
-		else
-			srcBitmap.space = (ispp == 1) ? cmGray16Space : cmGrayA32Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 4;
-		destBitmap.pixelSize = 8 * 4;
-		destBitmap.space = cmRGBA32Space;
-		
-		// Execute the conversion
-		CMOpenProfile(&srcProf, iprofile);
-		OpenDisplayProfile(&destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(destProf);
-		CMCloseProfile(srcProf);
-		
-	}
-	else if (ispace == kRGBColorSpace && dspace == kGrayColorSpace) {
-		
-		// Define the source
-		srcBitmap.image = (char *)ibitmap;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * ispp * (ibps / 8);
-		srcBitmap.pixelSize = ispp * ibps;
-		if (ibps == 8)
-			srcBitmap.space = (ispp == 3) ? cmRGB24Space : cmRGBA32Space;
-		else
-			srcBitmap.space = (ispp == 3) ? cmRGB48Space : cmRGBA64Space;
-		
-		// Define the destination
-		destBitmap.image = (char *)dbitmap;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 2;
-		destBitmap.pixelSize = 8 * 2;
-		destBitmap.space = cmGrayA16Space;
-		
-		// Execute the conversion
-		CMOpenProfile(&srcProf, iprofile);
-		CMGetDefaultProfileBySpace(cmGrayData, &destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
-		CWDisposeColorWorld(cw);
-		CMCloseProfile(srcProf);
-		
-	}
+	cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+	ColorSyncTransformConvert(cw, width, height, dbitmap, dstDepth, dstLayout, dstBytesPerRow, ibitmap, srcDepth, srcLayout, srcBytesPerRow, NULL);
+	CFRelease(destProf);
+	CFRelease(cw);
 }
 
 /*
@@ -297,96 +175,75 @@ void covertBitmapColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigne
 	RGB -> Gray
 */
 
-void covertBitmapNoColorSync(unsigned char *dbitmap, int dspp, int dspace, unsigned char *ibitmap, int width, int height, int ispp, int ispace, int ibps)
+static void covertBitmapNoColorSync(unsigned char *dbitmap, NSInteger dspp, BMPColorSpace dspace, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, BMPColorSpace ispace, NSInteger ibps)
 {
-	int i, j;
-	
-	if (ispace == kGrayColorSpace && dspace == kGrayColorSpace) {
-		
+	if (ispace == BMPColorSpaceGray && dspace == BMPColorSpaceGray) {
 		if (ibps == 8) {
 			if (ispp == 2) {
 				memcpy(dbitmap, ibitmap, width * height * 2);
-			}
-			else {
-				for (i = 0; i < width * height; i++) {
+			} else {
+				for (int i = 0; i < width * height; i++) {
 					dbitmap[i * 2] = ibitmap[i * 1];
 				}
 			}
-		}
-		else if (ibps == 16) {
-			for (i = 0; i < width * height; i++) {
-				for (j = 0; j < ispp; j++) {
+		} else if (ibps == 16) {
+			for (int i = 0; i < width * height; i++) {
+				for (int j = 0; j < ispp; j++) {
 					dbitmap[i * 2 + j] = ibitmap[i * ispp * 2 + j * 2 + MSB];
 				}
 			}
 		}
-	
-	}
-	else if (ispace == kRGBColorSpace && dspace == kRGBColorSpace) {
-	
+	} else if (ispace == BMPColorSpaceRGB && dspace == BMPColorSpaceRGB) {
 		if (ibps == 8) {
 			if (ispp == 4) {
 				memcpy(dbitmap, ibitmap, width * height * 4);
-			}
-			else {
-				for (i = 0; i < width * height; i++) {
+			} else {
+				for (int i = 0; i < width * height; i++) {
 					memcpy(&(dbitmap[i * 4]), &(ibitmap[i * 3]), 3);
 				}
 			}
-		}
-		else if (ibps == 16) {
-			for (i = 0; i < width * height; i++) {
-				for (j = 0; j < ispp; j++) {
+		} else if (ibps == 16) {
+			for (int i = 0; i < width * height; i++) {
+				for (int j = 0; j < ispp; j++) {
 					dbitmap[i * 4 + j] = ibitmap[i * ispp * 2 + j * 2 + MSB];
 				}
 			}
 		}
-				
-	}
-	else if (ispace == kGrayColorSpace && dspace == kRGBColorSpace) {
-		
+	} else if (ispace == BMPColorSpaceGray && dspace == BMPColorSpaceRGB) {
 		if (ibps == 8) {
-			for (i = 0; i < width * height; i++) {
+			for (int i = 0; i < width * height; i++) {
 				dbitmap[i * 4] = dbitmap[i * 4 + 1] = dbitmap[i * 4 + 2] = ibitmap[i * ispp];
 				if (ispp == 2) dbitmap[i * 4 + 3] = ibitmap[i * ispp + 1];
 			}
-		}
-		else if (ibps == 16) {
-			for (i = 0; i < width * height; i++) {
+		} else if (ibps == 16) {
+			for (int i = 0; i < width * height; i++) {
 				dbitmap[i * 4] = dbitmap[i * 4 + 1] = dbitmap[i * 4 + 2] = ibitmap[i * ispp * 2 + MSB];
 				if (ispp == 2) dbitmap[i * 4 + 3] = ibitmap[i * 4 + 2 + MSB];
 			}
 		}
-				
-	}
-	else if (ispace == kRGBColorSpace && dspace == kGrayColorSpace) {
-	
+	} else if (ispace == BMPColorSpaceRGB && dspace == BMPColorSpaceGray) {
 		if (ibps == 8) {
-			for (i = 0; i < width * height; i++) {
+			for (int i = 0; i < width * height; i++) {
 				dbitmap[i * 2] = ((int)ibitmap[i * ispp] + (int)ibitmap[i * ispp + 1] + (int)ibitmap[i * ispp + 2]) / 3;
 				if (ispp == 4) dbitmap[i * 2 + 1] = ibitmap[i * 4 + 3];
 			}
-		}
-		else if (ibps == 16) {
-			for (i = 0; i < width * height; i++) {
+		} else if (ibps == 16) {
+			for (int i = 0; i < width * height; i++) {
 				dbitmap[i * 2] = ((int)ibitmap[i * ispp * 2 + MSB] + (int)ibitmap[i * ispp * 2 + 2 + MSB] + (int)ibitmap[i * ispp * 2 + 4 + MSB]) / 3;
 				if (ispp == 4) dbitmap[i * 2 + 1] = ibitmap[i * 8 + 6 + MSB];
 			}
 		}
-				
 	}
-	
 }
 
-unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int ibipp, int ibypr, int ispace, CMProfileLocation *iprofile, int ibps, int iformat)
+unsigned char *SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger ibipp, NSInteger ibypr, BMPColorSpace ispace, ColorSyncProfileRef iprofile, NSInteger ibps, GIMPBitmapFormat iformat)
 {
 	PtrRecord ptrs;
 	unsigned char *bitmap, *pbitmap;
-	int pos;
+	NSInteger pos;
 	BOOL s_hasalpha;
 	NSString *fail;
-	int i, j, k, l;
-
+	
 #ifdef DEBUG
 	if (!iprofile) {
 		NSLog(@"No ColorSync profile!");
@@ -396,11 +253,11 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 	// Point out conversions that are not possible
 	fail = NULL;
 	if (dbps != 8) fail = @"Only converts to 8 bps";
-	if (dspace == kCMYKColorSpace) fail = @"Cannot convert to CMYK color space";
-	if (dspace == kInvertedGrayColorSpace) fail = @"Cannot convert to inverted gray color space";
-	if (dspace == kRGBColorSpace && dspp != 4) fail = @"Can only convert to 4 spp for RGB color space";
-	if (dspace == kGrayColorSpace && dspp != 2) fail = @"Can only convert to 2 spp for RGB color space";
-	if (fail) { NSLog(fail); return NULL; }
+	if (dspace == BMPColorSpaceCMYK) fail = @"Cannot convert to CMYK color space";
+	if (dspace == BMPColorSpaceInvertedGray) fail = @"Cannot convert to inverted gray color space";
+	if (dspace == BMPColorSpaceRGB && dspp != 4) fail = @"Can only convert to 4 spp for RGB color space";
+	if (dspace == BMPColorSpaceGray && dspp != 2) fail = @"Can only convert to 2 spp for RGB color space";
+	if (fail) { NSLog(@"%@", fail); return NULL; }
 	
 	// Create initial pointer
 	ptrs = initPtrs(ibitmap, ibypr * height);
@@ -408,13 +265,13 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 	// Convert to from 1-, 2- or 4-bit to 8-bit
 	if (ibps < 8) {
 		pbitmap = getPtr(ptrs);
-		bitmap = mallocPtr(&ptrs, width * height * ispp); 
-		for (j = 0; j < height; j++) {
-			for (i = 0; i < width; i++) {
-				for (k = 0; k < ispp; k++) {
+		bitmap = mallocPtr(&ptrs, width * height * ispp);
+		for (int j = 0; j < height; j++) {
+			for (int i = 0; i < width; i++) {
+				for (int k = 0; k < ispp; k++) {
 					pos = (j * width + i) * ispp + k;
 					bitmap[pos] = 0;
-					for (l = 0; l < ibps; l++) {
+					for (int l = 0; l < ibps; l++) {
 						if (bit_test(&pbitmap[j * ibypr + (i * ibipp + l) / 8], 7 - ((i * ibipp + l) % 8))) {
 							bit_set(&bitmap[pos], l);
 						}
@@ -434,9 +291,9 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 		if (ibipp != ispp * 8 || ibypr != width * ispp) {
 			pbitmap = getPtr(ptrs);
 			bitmap = mallocPtr(&ptrs, width * height * ispp);
-			for (j = 0; j < height; j++) {
-				for (i = 0; i < width; i++) {
-					for (k = 0; k < ispp; k++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					for (int k = 0; k < ispp; k++) {
 						bitmap[(j * width + i) * ispp + k] = pbitmap[j * ibypr + i * (ibipp / 8) + k];
 					}
 				}
@@ -444,14 +301,13 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 			ibipp = ispp * 8;
 			ibypr = width * ispp;
 		}
-	}
-	else if (ibps == 16) {
+	} else if (ibps == 16) {
 		if (ibipp != ispp * 16 || ibypr != width * ispp * 2) {
 			pbitmap = getPtr(ptrs);
 			bitmap = mallocPtr(&ptrs, width * height * ispp * 2);
-			for (j = 0; j < height; j++) {
-				for (i = 0; i < width; i++) {
-					for (k = 0; k < ispp; k++) {
+			for (int j = 0; j < height; j++) {
+				for (int i = 0; i < width; i++) {
+					for (int k = 0; k < ispp; k++) {
 						bitmap[((j * width + i) * ispp + k) * 2] = pbitmap[j * ibypr + i * (ibipp / 8) + k * 2];
 						bitmap[((j * width + i) * ispp + k) * 2 + 1] = pbitmap[j * ibypr + i * (ibipp / 8) + k * 2 + 1];
 					}
@@ -463,56 +319,53 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 	}
 	
 	// Swap alpha (if necessary)
-	if (iformat & kAlphaFirstFormat) {
+	if (iformat & GIMPBitmapFormatAlphaFirst) {
 		pbitmap = getPtr(ptrs); /* Note: transform is destructive (other destructive transforms follow) */
 		if (ibps == 8) {
-			for (i = 0; i < width * height; i++) {
+			for (int i = 0; i < width * height; i++) {
 				rotate_bytes(pbitmap, i * ispp, (i + 1) * ispp - 1);
 			}
-		}
-		else if (ibps == 16) {
+		} else if (ibps == 16) {
 			pbitmap = getPtr(ptrs);
-			for (i = 0; i < width * height; i++) {
+			for (int i = 0; i < width * height; i++) {
 				rotate_bytes(pbitmap, i * ispp * 2, i * ispp * 2 - 1);
 				rotate_bytes(pbitmap, i * ispp * 2, i * ispp * 2 - 1);
 			}
 		}
-		iformat = iformat & ~(kAlphaFirstFormat);
+		iformat &= ~(GIMPBitmapFormatAlphaFirst);
 	}
-
+	
 	// Convert inverted gray color space
-	if (ispace == kInvertedGrayColorSpace) {
+	if (ispace == BMPColorSpaceInvertedGray) {
 		pbitmap = getPtr(ptrs);
 		if (ibps == 8) {
-			for (i = 0; i < width * height; i++) {
+			for (int i = 0; i < width * height; i++) {
 				pbitmap[i * ispp] = ~pbitmap[i * ispp];
 			}
-		}
-		else if (ibps == 16) {
-			for (i = 0; i < width * height; i++) {
+		} else if (ibps == 16) {
+			for (int i = 0; i < width * height; i++) {
 				pbitmap[i * ispp * 2] = ~pbitmap[i * ispp * 2];
 				pbitmap[i * ispp * 2 + 1] = ~pbitmap[i * ispp * 2 + 1];
 			}
 		}
-		ispace = kGrayColorSpace;
+		ispace = BMPColorSpaceGray;
 	}
-
+	
 	// Convert colour space
-	if (iprofile || ispace == kCMYKColorSpace) {
+	if (iprofile || ispace == BMPColorSpaceCMYK) {
 		pbitmap = getPtr(ptrs);
 		bitmap = mallocPtr(&ptrs, width * height * dspp);
-		covertBitmapColorSync(bitmap, dspp, dspace, pbitmap, width, height, ispp, ispace, ibps, iprofile);
-	}
-	else {
+		covertBitmapColorSyncProfile(bitmap, dspp, dspace, pbitmap, width, height, ispp, ispace, ibps, iprofile);
+	} else {
 		pbitmap = getPtr(ptrs);
 		bitmap = mallocPtr(&ptrs, width * height * dspp);
 		covertBitmapNoColorSync(bitmap, dspp, dspace, pbitmap, width, height, ispp, ispace, ibps);
 	}
 	
 	// Add in alpha (not 16-bit friendly)
-	s_hasalpha = (ispace == kRGBColorSpace && ispp == 4) || (ispace == kGrayColorSpace && ispp == 2);
+	s_hasalpha = (ispace == BMPColorSpaceRGB && ispp == 4) || (ispace == BMPColorSpaceGray && ispp == 2);
 	if (!s_hasalpha) {
-		for (i = 0; i < width * height; i++) {
+		for (int i = 0; i < width * height; i++) {
 			pbitmap = getPtr(ptrs);
 			pbitmap[(i + 1) * dspp - 1] = 255;
 		}
@@ -524,30 +377,28 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 	return getFinalPtr(ptrs);
 }
 
-inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length)
+void SeaStripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
 {
-	const int alphaPos = spp - 1;
-	const int outputSPP = spp - 1;
+	const NSInteger alphaPos = spp - 1;
+	const NSInteger outputSPP = spp - 1;
 	unsigned char alpha;
 	double alphaRatio;
-	int t1, t2, newValue;
-	int i, k;
+	NSInteger t1, t2, newValue;
 	
 	memset(output, 255, length * outputSPP);
 	
-	for (i = 0; i < length; i++) {
+	for (NSInteger i = 0; i < length; i++) {
 		
 		alpha = input[i * spp + alphaPos];
 		
 		if (alpha == 255) {
-			for (k = 0; k < outputSPP; k++)
+			for (NSInteger k = 0; k < outputSPP; k++)
 				output[i * outputSPP + k] = input[i * spp + k];
-		}
-		else {
+		} else {
 			if (alpha != 0) {
 
 				alphaRatio = 255.0 / alpha;
-				for (k = 0; k < outputSPP; k++) {
+				for (NSInteger k = 0; k < outputSPP; k++) {
 					newValue = 0.5 + input[i * spp + k] * alphaRatio;
 					newValue = MIN(newValue, 255);
 					output[i * outputSPP + k] = int_mult(newValue, alpha, t1) + int_mult(255, (255 - alpha), t2);
@@ -559,33 +410,33 @@ inline void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *inp
 	} 
 }
 
-inline void premultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
+void SeaPremultiplyBitmap(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
 {
-	int i, j, alphaPos, temp;
+	NSInteger alphaPos, temp;
 	
-	for (i = 0; i < length; i++) {
+	for (NSInteger i = 0; i < length; i++) {
 		alphaPos = (i + 1) * spp - 1;
 		if (input[alphaPos] == 255) {
-			for (j = 0; j < spp; j++)
+			for (NSInteger j = 0; j < spp; j++)
 				output[i * spp + j] = input[i * spp + j];
 		}
 		else {
 			if (input[alphaPos] != 0) {
-				for (j = 0; j < spp - 1; j++)
+				for (NSInteger j = 0; j < spp - 1; j++)
 					output[i * spp + j] = int_mult(input[i * spp + j], input[alphaPos], temp);
 				output[alphaPos] = input[alphaPos];
 			}
 			else {
-				for (j = 0; j < spp; j++)
+				for (NSInteger j = 0; j < spp; j++)
 					output[i * spp + j] = 0;
 			}
 		}
 	}
 }
 
-inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *input, int length)
+void SeaUnpremultiplyBitmap(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length)
 {
-	int i, j, alphaPos, newValue;
+	NSInteger i, j, alphaPos, newValue;
 	double alphaRatio;
 	
 	for (i = 0; i < length; i++) {
@@ -593,8 +444,7 @@ inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *i
 		if (input[alphaPos] == 255) {
 			for (j = 0; j < spp; j++)
 				output[i * spp + j] = input[i * spp + j];
-		}
-		else {
+		} else {
 			if (input[alphaPos] != 0) {
 				alphaRatio = 255.0 / input[alphaPos];
 				for (j = 0; j < spp - 1; j++) {
@@ -603,8 +453,7 @@ inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *i
 					output[i * spp + j] = newValue;
 				}
 				output[alphaPos] = input[alphaPos];
-			}
-			else {
+			} else {
 				for (j = 0; j < spp; j++)
 					output[i * spp + j] = 0;
 			}
@@ -612,7 +461,7 @@ inline void unpremultiplyBitmap(int spp, unsigned char *output, unsigned char *i
 	}
 }
 
-inline unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where)
+unsigned char SeaAveragedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where)
 {
 	int total, count;
 	int i, j;
@@ -631,41 +480,9 @@ inline unsigned char averagedComponentValue(int spp, unsigned char *data, int wi
 			}
 		}
 	}
-		
+	if (count == 0) {
+		return total;
+	}
+	
 	return (total / count);
 }
-
-inline void OpenDisplayProfile(CMProfileRef *profile)
-{
-	CMDeviceID device;
-	CMDeviceProfileID deviceID;
-	CMProfileLocation profileLoc;
-
-	// Actually, maybe we don't need the generic profile after all
-    /*OSStatus StatusError = noErr;
-    
-    // build up a profile location for ColorSync
-    profileLoc.locType        = cmPathBasedProfile;
-    strcpy(profileLoc.u.pathLoc.path, "/System/Library/ColorSync/Profiles/Generic RGB Profile.icc");
-    
-    // Open the pro	file with ColourSync
-    StatusError = CMOpenProfile(profile, &profileLoc);
-	
-	if (StatusError != noErr) {*/
-		CMGetDefaultDevice(cmDisplayDeviceClass, &device);
-		CMGetDeviceDefaultProfileID(cmDisplayDeviceClass, device, &deviceID);
-		CMGetDeviceProfile(cmDisplayDeviceClass, device, deviceID, &profileLoc);
-		CMOpenProfile(profile, &profileLoc);
-	//}
-}
-
-void CloseDisplayProfile(CMProfileRef profile)
-{
-	CMCloseProfile(profile);
-}
-
-void CMFlattenProfile(CMProfileRef pref, int flags, CMFlattenUPP *cmFlattenUPP, void * refcon, Boolean *cmmNotFound){
-    
-}
-
-

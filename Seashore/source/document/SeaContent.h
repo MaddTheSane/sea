@@ -1,5 +1,19 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
-#import "IndiciesKeeper.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/IndiciesKeeper.h>
+#endif
+
+NS_ASSUME_NONNULL_BEGIN
+
+#if MAIN_COMPILE
+@class SeaDocument;
+#else
+@class SeaWhiteboard;
+#endif
+@class SeaLayer;
 
 /*!
 	@struct		ParasiteData
@@ -15,10 +29,10 @@
 				The parasite's data.
 */
 typedef struct {
-	NSString *name;
+	CFStringRef _Nullable name;
 	unsigned int flags;
 	unsigned int size;
-	unsigned char *data;
+	unsigned char *_Nullable data;
 } ParasiteData;
 
 /*!
@@ -30,24 +44,27 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaContent : NSObject {
-	
+#if MAIN_COMPILE
 	// The document associated with this object
-	id document;
+	SeaDocument *document;
+#endif
 	
 	// The document's x and y resolution
 	int xres, yres;
 	
-	// The document's height, width and type
-	int height, width, type;
+	// The document's height, width
+	int height, width;
+	
+	// The document's type
+	XcfImageType type;
 	
 	// The lost properties of the document
 	char *lostprops;
 	int lostprops_len;
 	
 	// The layers in the document
-	NSArray *layers;
+	NSArray<SeaLayer*> *layers;
 	
 	// These are layers that are no longer in the document but are kept for undo operations
 	NSArray *deletedLayers;	
@@ -56,16 +73,13 @@ typedef struct {
 	NSMutableArray *orderings;
 	
 	// Stores index of layer that is active
-	int activeLayerIndex;
+	NSInteger activeLayerIndex;
 	
 	// The currently selected channel (see constants)
-	int selectedChannel;
+	SeaSelectedChannel selectedChannel;
 	
 	//  If YES the user wants the typical view otherwise the user wants the channel-specific view
 	BOOL trueView;
-	
-	// The keeper we use to keep IndiciesRecords in memory
-	IndiciesKeeper keeper;
 	
 	// All the parasites
 	ParasiteData *parasites;
@@ -76,11 +90,34 @@ typedef struct {
 	
 	// The EXIF data associated with this image
 	NSDictionary *exifData;
-	
 }
+
+/*!
+	@property	cmykSave
+	@discussion	Shows whether TIFF files should be saved using the CMYK colour
+				space.
+ */
+@property (setter=setCMYKSave:) BOOL cmykSave;
+
+/*!
+	@property	trueView
+	@discussion	Shows whether the document view should be showing all channels
+				or just the channel being edited.
+ */
+@property BOOL trueView;
+
+/*!
+	@property	activeLayerIndex
+	@discussion	The index of the currently active layer.
+ */
+@property NSInteger activeLayerIndex;
+
+/// The currently selected channel (see constants)
+@property SeaSelectedChannel selectedChannel;
 
 // CREATION METHODS
 
+#if MAIN_COMPILE
 /*!
 	@method		initWithDocument:
 	@discussion	Initializes an instance of this class with the given document.
@@ -89,7 +126,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc;
+- (nullable instancetype)initWithDocument:(SeaDocument*)doc NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@method		initForPasteboardWithDocument:
@@ -99,7 +136,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initFromPasteboardWithDocument:(id)doc;
+- (nullable instancetype)initFromPasteboardWithDocument:(SeaDocument*)doc;
 
 /*!
 	@method		initWithDocument:type:width:height:res:opaque:
@@ -122,7 +159,7 @@ typedef struct {
 				YES if the background layer should be opaque, NO otherwise.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque;
+- (nullable instancetype)initWithDocument:(SeaDocument*)doc type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres opaque:(BOOL)dopaque;
 
 /*!
 	@method		initWithDocument:data:type:width:height:res:
@@ -143,69 +180,66 @@ typedef struct {
 				The resolution with which to intialize the instance (note that
 				it is an integer not an IntResolution because this method only
 				accepts square resolutions).
-	@param		dopaque
-				YES if the background layer should be opaque, NO otherwise.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc data:(unsigned char *)ddata type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
+- (nullable instancetype)initWithDocument:(SeaDocument*)doc data:(unsigned char *)ddata type:(XcfImageType)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
+
+- (instancetype)init UNAVAILABLE_ATTRIBUTE;
+
+#endif
+
+#pragma mark PROPERTY METHODS
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-// PROPERTY METHODS
-
-/*!
-	@method		type
+	@property	type
 	@discussion	Returns the document type.
 	@result		Returns an integer representing the document type (see Constants
 				documentation).
 */
-- (int)type;
+@property (readonly) XcfImageType type;
 
 /*!
-	@method		spp
+	@property	spp
 	@discussion	Returns the samples per pixel of the document.
 	@result		Returns an integer indicating the samples per pixel of the
 				document.
 */
-- (int)spp;
+@property (readonly, getter=spp) int samplesPerPixel;
 
 /*!
-	@method		xres
+	@property	xres
 	@discussion	Returns the horizontal resolution of the document.
 	@result		Returns the horizontal resolution as an integer in
 				dots-per-inch.
 */
-- (int)xres;
+@property (readonly, getter=xres) int horizontalResolution;
 
 /*!
-	@method		yres
+	@property	yres
 	@discussion	Returns the vertical resolution of the document.
 	@result		Returns the vertical resolution as an integer in dots-per-inch.
 */
-- (int)yres;
+@property (readonly, getter=yres) int verticalResolution;
 
 /*!
-	@method		xscale
+	@property	xscale
 	@discussion	Returns how much the image should be scaled by horizontally given
 				the current zoom and resolution.
 	@result		A floating-point number indicating how much the image should be scaled
 				by horizontally given the current zoom and resolution.
 */
-- (float)xscale;
+@property (readonly) CGFloat xscale;
 
 /*!
-	@method		yscale
+	@property	yscale
 	@discussion	Returns how much the image should be scaled by vertically given
 				the current zoom and resolution.
 	@result		A floating-point number indicating how much the image should be scaled
 				by vertically given the current zoom and resolution.
 */
-- (float)yscale;
+@property (readonly) CGFloat yscale;
 
+#if MAIN_COMPILE
 /*!
 	@method		setResolution:
 	@discussion	Sets the horizontal and vertical resolutions for the document.
@@ -214,21 +248,21 @@ typedef struct {
 				IntPoint see Globals documentation for more information).
 */
 - (void)setResolution:(IntResolution)newRes;
+#endif
 
 /*!
-	@method		height
-	@discussion	Returns the height of the document.
-	@result		Returns the height as an integer in pixels.
+	@property	height
+	@discussion	The height of the document in pixels.
 */
-- (int)height;
+@property (readonly) int height;
 
 /*!
-	@method		width
-	@discussion	Returns the width of the document.
-	@result		Returns the width as an integer in pixels.
+	@property	width
+	@discussion	The width of the document in pixels.
 */
-- (int)width;
+@property (readonly) int width;
 
+#if MAIN_COMPILE
 /*!
 	@method		setWidth:height:
 	@discussion	Sets the width and height for the document.
@@ -255,7 +289,8 @@ typedef struct {
 	@param		bottom
 				The adjustment to be made to the bottom margin (in pixels).
 */
-- (void)setMarginLeft:(int)left top:(int)top right:(int)right bottom:(int)bottom;
+- (void)setMarginLeft:(int)left top:(int)top right:(int)right bottom:(int)bottom NS_SWIFT_NAME(setMargin(left:top:right:bottom:));
+#endif
 
 /*!
 	@method		selectedChannel
@@ -263,7 +298,7 @@ typedef struct {
 	@result		Returns an integer representing the currently selected group of
 				channels (see Constants documentation).
 */
-- (int)selectedChannel;
+- (SeaSelectedChannel)selectedChannel;
 
 /*!
 	@method		setSelectedChannel:
@@ -271,45 +306,45 @@ typedef struct {
 	@param		value
 				The revised group of channels (see Constants documentation)
 */
-- (void)setSelectedChannel:(int)value;
+- (void)setSelectedChannel:(SeaSelectedChannel)value;
 
 /*!
-	@method		lostprops
+	@property	lostprops
 	@discussion	Returns the lost properties of the document. Lost properties are
-				those saved by the GIMP that Seashore cannot interpret.
+				those saved by GIMP that Seashore cannot interpret.
 	@result		Returns a pointer to the block of memory containing the lost
 				properties of the document.
 */
-- (char *)lostprops;
+@property (readonly) char *lostprops NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		lostprops_len
+	@property	lengthOfLostprops
 	@discussion	Returns the size of the lost properties of the document. Lost
 				properties are those saved by the GIMP that Seashore cannot
 				interpret.
 	@result		Returns an integer indicating the size in bytes of the block of
 				memory containing the lost properties of the document.
 */
-- (int)lostprops_len;
+@property (readonly) int lengthOfLostprops;
 
 /*!
-	@method		parasites
+	@property	parasites
 	@discussion	Returns the parasistes of the document. Parasites are arbitrary
 				pieces of data that are saved by the GIMP and Seashore in XCF
 				documents.
 	@result		Returns an array of ParasiteData records of length given by the
-				parasites_count method.
+				\c countOfParasites method.
 */
-- (ParasiteData *)parasites;
+@property (readonly) ParasiteData *parasites NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		parasites_count
+	@parameter	countOfParasites
 	@discussion	Returns the number of parasites in the document's parasite
 				array.
 	@result		Returns an integer representing the number of parasites in the
 				document's parasite array.
 */
-- (int)parasites_count;
+@property (readonly) int countOfParasites;
 
 /*!
 	@method		parasiteWithName:
@@ -317,9 +352,9 @@ typedef struct {
 	@param		name
 				The name of the parasite.
 	@result		Returns a pointer to the ParasiteData record with the requested
-				name or NULL if no parasites match.
+				name or \c NULL if no parasites match.
 */
-- (ParasiteData *)parasiteWithName:(NSString *)name;
+- (nullable ParasiteData *)parasiteWithName:(NSString *)name;
 
 /*!
 	@method		deleteParasiteWithName:
@@ -344,7 +379,7 @@ typedef struct {
 	@method		trueView
 	@discussion	Returns whether the document view should be showing all channels
 				or just the channel being edited.
-	@result		YES if the document view should be showing all channels, NO
+	@result		\c YES if the document view should be showing all channels, \c NO
 				otherwise.
 */
 - (BOOL)trueView;
@@ -354,28 +389,30 @@ typedef struct {
 	@discussion	Sets whether the document view should be showing all channels or
 				just the channel being edited.
 	@param		value
-				YES if the document should be showing all channels, NO
+				\c YES if the document should be showing all channels, \c NO
 				otherwise.
 */
 - (void)setTrueView:(BOOL)value;
 
+#if MAIN_COMPILE
 /*!
-	@method		foreground
+	@property	foreground
 	@discussion	Returns the foreground colour, converting it to the same colour
 				space as the document and stripping any colour from it if the
 				alpha channel is selected.
-	@result		Returns a NSColor representing the foreground colour.
+	@result		Returns a \c NSColor representing the foreground colour.
 */
-- (NSColor *)foreground;
+@property (readonly, copy) NSColor *foreground;
 
 /*!
-	@method		background
+	@property	background
 	@discussion	Returns the background colour, converting it to the same colour
 				space as the document and stripping any colour from it if the
 				alpha channel is selected.
-	@result		Returns a NSColor representing the background colour.
+	@result		Returns a \c NSColor representing the background colour.
 */
-- (NSColor *)background;
+@property (readonly, copy) NSColor *background;
+#endif
 
 /*!
 	@method		setCMYKSave
@@ -399,10 +436,10 @@ typedef struct {
 /*!
 	@method		exifData
 	@discussion	Returns the EXIF data for this document.
-	@result		Returns an NSDictionary containing the EXIF data or NULL if no
+	@result		Returns an \c NSDictionary containing the EXIF data or \c NULL if no
 				such data exists.
 */
-- (NSDictionary *)exifData;
+- (nullable NSDictionary *)exifData;
 
 // LAYER METHODS
 
@@ -411,50 +448,52 @@ typedef struct {
 	@discussion	Returns the layer with the given index.
 	@param		index
 				The index of the desired layer.
-	@result		An instance of SeaLayer corresponding to the specified index.
+	@result		An instance of \c SeaLayer corresponding to the specified index.
 */
-- (id)layer:(int)index;
+- (SeaLayer*)layerAtIndex:(NSInteger)index;
 
 /*!
-	@method		layerCount
+	@property	layerCount
 	@discussion	Returns the total number of layers in the document.
 	@result		Returns an integer indicating the total number of layers in the
 				document.
 */
-- (int)layerCount;
+@property (readonly) NSInteger layerCount;
 
 /*!
-	@method		activeLayer
+	@property	activeLayer
 	@discussion	Returns the currently active layer.
 	@result		An instance of SeaLayer representing the active layer.
 */
-- (id)activeLayer;
+@property (readonly, weak, nullable) SeaLayer *activeLayer;
 
 /*!
-	@method		activeLayerIndex
+	@property	activeLayerIndex
 	@discussion	Returns the index of the currently active layer.
 	@result		Returns an integer representing the index of the active layer.
 */
-- (int)activeLayerIndex;
+- (NSInteger)activeLayerIndex;
 
+//! The layers in the document
+@property (readonly, copy) NSArray<SeaLayer*> *layers;
+
+#if MAIN_COMPILE
 /*!
 	@method		setActiveLayerIndex:
 	@param		value
 				The index of the new active layer.
 */
-- (void)setActiveLayerIndex:(int)value;
+- (void)setActiveLayerIndex:(NSInteger)value;
 
 /*!
 	@method		layerAbove
 	@discussion	Selects the layer above the current one. Wraps if at the top.
-	@result		Calls set active layer index.
 */
 - (void)layerAbove;
 
 /*!
 	@method		layerBelow
 	@discussion	Selects the layer below the current one. Wraps if at the bottom.
-	@result		Calls set active layer index.
 */
 - (void)layerBelow;
 
@@ -463,9 +502,19 @@ typedef struct {
 	@discussion	Returns whether layers can be imported from the given file.
 	@param		path
 				The path to the file.
-	@result		YES if layers can be imported, NO otherwise.
+	@result		\c YES if layers can be imported, \c NO otherwise.
 */
 - (BOOL)canImportLayerFromFile:(NSString *)path;
+
+/*!
+ 	@method		canImportLayerFromFile:
+ 	@discussion	Returns whether layers can be imported from the given file.
+ 	@param		path
+ 				The path to the file.
+ 	@result		\c YES if layers can be imported, \c NO otherwise.
+ */
+- (BOOL)canImportLayerFromURL:(NSURL *)path;
+
 
 /*!
 	@method		importLayerFromFile:
@@ -474,6 +523,14 @@ typedef struct {
 	@result		YES if import was successful, NO otherwise.
 */
 - (BOOL)importLayerFromFile:(NSString *)path;
+
+/*!
+ @method		importLayerFromURL:error:
+ @discussion	Imports new layer(s) from a file into the document (handles
+ updates and undos).
+ @result		YES if import was successful, NO otherwise.
+ */
+- (BOOL)importLayerFromURL:(NSURL *)path error:(NSError**)error;
 
 /*!
 	@method		importLayer
@@ -490,7 +547,7 @@ typedef struct {
 				The index above which to add the layer or kActiveLayer to
 				indicate the active layer.
 */
-- (void)addLayer:(int)index;
+- (void)addLayer:(NSInteger)index;
 
 /*!
 	@method		addLayerObject:
@@ -499,16 +556,17 @@ typedef struct {
 	@param		layer
 				The layer to add.
 */
-- (void)addLayerObject:(id)layer;
+- (void)addLayerObject:(SeaLayer*)layer;
 
 /*!
 	@method		addLayerFromPasteboard:
 	@discussion	Adds a layer to the document based on the pasteboard's contents
 				handles updates and undos).
 	@param		pboard
+				The pasteboard
 				
 */
-- (void)addLayerFromPasteboard:(id)pboard;
+- (void)addLayerFromPasteboard:(NSPasteboard*)pboard;
 
 /*!
 	@method		copyLayer:
@@ -517,7 +575,7 @@ typedef struct {
 	@param		layer
 				The layer upon which to base the new layer.
 */
-- (void)copyLayer:(id)layer;
+- (void)copyLayer:(SeaLayer*)layer;
 
 /*!
 	@method		duplicateLayer:
@@ -526,7 +584,7 @@ typedef struct {
 				The index of the layer to duplicate, the duplicate will be added
 				above this layer or kActiveLayer to indicate the active layer.
 */
-- (void)duplicateLayer:(int)index;
+- (void)duplicateLayer:(NSInteger)index;
 
 /*!
 	@method		deleteLayer:
@@ -535,7 +593,7 @@ typedef struct {
 				The index of the layer to delete or kActiveLayer to indicate the
 				active layer.
 */
-- (void)deleteLayer:(int)index;
+- (void)deleteLayer:(NSInteger)index;
 
 /*!
 	@method		restoreLayer:fromLostIndex:
@@ -547,7 +605,7 @@ typedef struct {
 	@param		lostIndex
 				The index in the lost layers of the layer.
 */
-- (void)restoreLayer:(int)index fromLostIndex:(int)lostIndex;
+- (void)restoreLayer:(NSInteger)index fromLostIndex:(NSInteger)lostIndex;
 
 /*!
 	@method		makeSelectionFloat
@@ -563,13 +621,19 @@ typedef struct {
 	 @param			sender
 					Ignored
 */
-- (IBAction)duplicate:(id)sender;
+- (IBAction)duplicate:(nullable id)sender;
 
 /*!
 	@method		toggleFloatingSelection
 	@discussion	Toggles between making the selection float or not
 */
 - (void)toggleFloatingSelection;
+
+/*!
+	@method		toggleFloatingSelection:
+	@discussion	Toggles between making the selection float or not
+ */
+- (IBAction)toggleFloatingSelection:(nullable id)sender;
 
 /*!
 	@method		makePasteboardFloat
@@ -590,9 +654,9 @@ typedef struct {
 	@param		index
 				The index of the layer to test or kActiveLayer to indicate the
 				active layer.
-	@result		YES if the layer can be risen, NO otherwise.
+	@result		\c YES if the layer can be risen, \c NO otherwise.
 */
-- (BOOL)canRaise:(int)index;
+- (BOOL)canRaise:(NSInteger)index;
 
 /*!
 	@method		canLower:
@@ -600,9 +664,9 @@ typedef struct {
 	@param		index
 				The index of the layer to test or kActiveLayer to indicate the
 				active layer.
-	@result		YES if the layer can be lowered, NO otherwise.
+	@result		\c YES if the layer can be lowered, \c NO otherwise.
 */
-- (BOOL)canLower:(int)index;
+- (BOOL)canLower:(NSInteger)index;
 
 /*!
 	@method		moveLayer:toIndex:
@@ -613,7 +677,7 @@ typedef struct {
 				index
 				The new index of the moved layer.
 */
-- (void)moveLayer:(id)layer toIndex:(int)index;
+- (void)moveLayer:(SeaLayer*)layer toIndex:(NSInteger)index;
 
 /*!
 	@method		moveLayerOfIndex:toIndex:
@@ -624,27 +688,27 @@ typedef struct {
 				dest
 				The new index of the moved layer.
 */
-- (void)moveLayerOfIndex:(int)source toIndex:(int)dest;
+- (void)moveLayerOfIndex:(NSInteger)source toIndex:(NSInteger)dest;
 
 /*!
 	@method		raiseLayer:
 	@discussion	Raises the level of a particular layer in the document if
 				possible.
 	@param		index
-				The index of the layer to raise or kActiveLayer to indicate the
+				The index of the layer to raise or \c kActiveLayer to indicate the
 				active layer.
 */
-- (void)raiseLayer:(int)index;
+- (void)raiseLayer:(NSInteger)index;
 
 /*!
 	@method		lowerLayer:
 	@discussion	Lowers the level of a particular layer in the document if
 				possible.
 	@param		index
-				The index of the layer to lower or kActiveLayer to indicate the
+				The index of the layer to lower or \c kActiveLayer to indicate the
 				active layer.
 */
-- (void)lowerLayer:(int)index;
+- (void)lowerLayer:(NSInteger)index;
 
 /*!
 	@method		clearAllLinks
@@ -662,7 +726,7 @@ typedef struct {
 				The index of the layer whose linked status to toggle or
 				kActiveLayer to indicate the active layer.
 */
-- (void)setLinked:(BOOL)isLinked forLayer:(int)index;
+- (void)setLinked:(BOOL)isLinked forLayer:(NSInteger)index;
 
 /*!
 	@method		setVisible:forLayer:
@@ -674,7 +738,7 @@ typedef struct {
 				The index of the layer whose visible status to toggle or
 				kActiveLayer to indicate the active layer.
 */
-- (void)setVisible:(BOOL)isVisible forLayer:(int)index;
+- (void)setVisible:(BOOL)isVisible forLayer:(NSInteger)index;
 
 /*!
 	@method		copyMerged
@@ -683,12 +747,12 @@ typedef struct {
 - (void)copyMerged;
 
 /*!
-	@method		canFlatten
+	@property	canFlatten
 	@discussion	Returns whether or not the document can be flattened, documents
 				for which flattening would have no effect cannot be flattened.
 	@result		Returns YES if the document can be flattened, NO otherwise.
 */
-- (BOOL)canFlatten;
+@property (readonly) BOOL canFlatten;
 
 /*!
 	@method		flatten
@@ -715,10 +779,10 @@ typedef struct {
 				Any array of all of the layers that should be merged.
 	@param		useRepresenation
 				Whether or not to use the image's bitmap representation.
-	@param		withName
+	@param		newName
 				The name of the new layer that will be output
 */
-- (void)merge:(NSArray *)mergingLayers useRepresentation: (BOOL)useRepresenation withName:(NSString *)newName;
+- (void)merge:(NSArray<SeaLayer*> *)mergingLayers useRepresentation: (BOOL)useRepresenation withName:(NSString *)newName;
 
 /*!
 	@method		undoMergeWith:andOrdering:
@@ -729,7 +793,7 @@ typedef struct {
 	@param		ordering
 				The indexes of the the lost layers of the image.
 */
-- (void)undoMergeWith:(int)origNoLayers andOrdering:(NSMutableDictionary *)ordering;
+- (void)undoMergeWith:(NSInteger)origNoLayers andOrdering:(NSMutableDictionary<NSString*,NSNumber*> *)ordering;
 
 /*!
 	@method		bitmapUnderneath:
@@ -749,7 +813,7 @@ typedef struct {
 	@param		ordering
 				The indexes of the the lost layers of the image.
 */
-- (void)redoMergeWith:(int)origNoLayers andOrdering:(NSMutableDictionary *)ordering;
+- (void)redoMergeWith:(NSInteger)origNoLayers andOrdering:(NSMutableDictionary<NSString*,NSNumber*> *)ordering;
 
 /*!
 	@method		convertToType:
@@ -758,7 +822,7 @@ typedef struct {
 				The new type to convert the document to (see Constants
 				documentation)
 */
-- (void)convertToType:(int)newType;
+- (void)convertToType:(XcfImageType)newType;
 
 /*!
 	@method		revertToType:withRecord:
@@ -772,6 +836,9 @@ typedef struct {
 				The record containing all the indicizes of the snapshots taken
 				before the conversion.
 */
-- (void)revertToType:(int)newType withRecord:(IndiciesRecord)record;
+- (void)revertToType:(XcfImageType)newType withRecord:(IndiciesRecord)record;
+#endif
 
 @end
+
+NS_ASSUME_NONNULL_END

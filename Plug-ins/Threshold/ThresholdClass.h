@@ -8,47 +8,30 @@
 */
 
 #import <Cocoa/Cocoa.h>
-#import "SeaPlugins.h"
+#import <SeashoreKit/SeaPlugins.h>
+#import "ThresholdView.h"
+#import <SeashoreKit/SSKCIPlugin.h>
 
-@interface ThresholdClass : NSObject {
+@interface ThresholdClass : SSKVisualPlugin
+//! The threshold range
+@property (weak) IBOutlet NSTextField *rangeLabel;
 
-	// The plug-in's manager
-	id seaPlugins;
-
-	// The threshold range
-	IBOutlet id rangeLabel;
-	
-	// The top threshold slider
-	IBOutlet id topSlider;
-	
-	// The bottom threshold slider
-	IBOutlet id bottomSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The view associated with this panel
-	IBOutlet id view;
-
-	// The various threshold values
-	int topValue, bottomValue;
-
-	// YES if the effect must be refreshed
-	BOOL refresh;
-
-	// YES if the application succeeded
-	BOOL success;
-
-}
+//! The view associated with this panel
+@property (weak) IBOutlet ThresholdView *view;
 
 /*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
+	@property	topValue
+	@discussion	Returns the value of the top slider.
+	@result		Returns an integer representing value of the top slider.
 */
-- (id)initWithManager:(SeaPlugins *)manager;
+@property NSInteger topValue;
+
+/*!
+	@property	bottomValue
+	@discussion	Returns the value of the bottom slider.
+	@result		Returns an integer representing value of the bottom slider.
+*/
+@property NSInteger bottomValue;
 
 /*!
 	@method		type
@@ -56,7 +39,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		name
@@ -115,14 +98,6 @@
 - (IBAction)preview:(id)sender;
 
 /*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
-
-/*!
 	@method		update:
 	@discussion	Updates the panel's labels.
 	@param		sender
@@ -135,20 +110,6 @@
 	@discussion	Executes the adjustments.
 */
 - (void)adjust;
-
-/*!
-	@method		topValue
-	@discussion	Returns the value of the top slider.
-	@result		Returns an integer representing value of the top slider.
-*/
-- (int)topValue;
-
-/*!
-	@method		bottomValue
-	@discussion	Returns the value of the bottom slider.
-	@result		Returns an integer representing value of the bottom slider.
-*/
-- (int)bottomValue;
 
 /*!
 	@method		validateMenuItem:

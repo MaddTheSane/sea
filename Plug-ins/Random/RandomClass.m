@@ -1,19 +1,13 @@
+#include <GIMPCore/GIMPCore.h>
 #import "RandomClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation RandomClass
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (SeaPluginType)type
 {
-	seaPlugins = manager;
-	
-	return self;
-}
-
-- (int)type
-{
-	return 0;
+	return SeaPluginBasic;
 }
 
 - (NSString *)name
@@ -34,34 +28,17 @@
 #define int_mult(a,b,t)  ((t) = (a) * (b) + 0x80, ((((t) >> 8) + (t)) >> 8))
 #define alphaPos (spp - 1)
 	
-static inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc)
-{
-	unsigned char multi, alpha;
-	int t1, t2;
-	int k;
-	
-	if (srcPtr[srcLoc + alphaPos] == 0)
-		return;
-	
-	alpha = srcPtr[srcLoc + alphaPos];
-	for (k = 0; k < spp - 1; k++) {
-		destPtr[destLoc + k] = int_mult(srcPtr[srcLoc + k], alpha, t1) + int_mult(destPtr[destLoc + k], 255 - alpha, t2);
-	}
-}
-
-
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *data, *overlay, *replace;
-	int pos, i, j, k, width, spp, channel;
+	int pos, i, j, k, width, spp;
 	unsigned char background[4], random[4];
 	BOOL opaque;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	selection = [pluginData selection];
 	spp = [pluginData spp];
 	width = [pluginData width];
@@ -73,8 +50,7 @@ static inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, un
 		if (spp == 2) {
 			background[0] = [[pluginData backColor:NO] whiteComponent] * 255;
 			background[1] = 255;
-		}
-		else {
+		} else {
 			background[0] = [[pluginData backColor:NO] redComponent] * 255;
 			background[1] = [[pluginData backColor:NO] greenComponent] * 255;
 			background[2] = [[pluginData backColor:NO] blueComponent] * 255;
@@ -82,7 +58,7 @@ static inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, un
 		}
 	}
 	
-	srand(time(nil));
+	//srand(time(NULL) & 0xffffffff);
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
 			
@@ -91,7 +67,7 @@ static inline void specialMerge(int spp, unsigned char *destPtr, int destLoc, un
 				memcpy(&overlay[pos * spp], background, spp);
 				for (k = 0; k < spp; k++)
 					random[k] = (rand() << 8) >> 20;
-				specialMerge(spp, overlay, pos * spp, random, 0); 
+				SeaSpecialMerge(spp, overlay, pos * spp, random, 0, 255);
 			}
 			else {
 				for (k = 0; k < spp; k++)

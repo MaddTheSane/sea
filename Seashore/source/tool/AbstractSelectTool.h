@@ -1,3 +1,5 @@
+#import <Cocoa/Cocoa.h>
+#import "AbstractScaleTool.h"
 /*!
  @class		AbstractSelectTool
  @abstract	Acts as a base class for all tools that use selection.
@@ -6,12 +8,7 @@
  <b>License:</b> GNU General Public License<br>
  <b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-#import "AbstractScaleTool.h"
-
-@interface AbstractSelectTool : AbstractScaleTool {
-
-}
+@interface AbstractSelectTool : AbstractScaleTool
 
 /*!
 	@method		cancelSelection

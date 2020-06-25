@@ -7,12 +7,9 @@
 #import "SeaDocument.h"
 #import "Bitmap.h"
 
-static unsigned char *cmData;
-static unsigned int cmLen;
-
-static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xres, int yres)
+static BOOL JPEGReviseResolution(unsigned char *input, size_t len, int xres, int yres)
 {
-	int dataPos;
+	size_t dataPos;
 	short *temp;
 	unsigned short xress, yress;
 	
@@ -37,59 +34,41 @@ static BOOL JPEGReviseResolution(unsigned char *input, unsigned int len, int xre
 	return NO;
 }
 
-static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
-{
-	if (cmData == NULL) {
-		cmData = malloc(*size);
-		memcpy(cmData, data, *size);
-		cmLen = *size;
-	}
-	else {
-		cmData = realloc(cmData, cmLen + *size);
-		memcpy(&(cmData[cmLen]), data, *size);
-		cmLen += *size;
-	}
-	
-	return 0;
-}
-
 @implementation JPEGExporter
 
-- (id)init
+- (instancetype)init
 {
-	int value;
-	
-	if ([gUserDefaults objectForKey:@"jpeg target"] == NULL)
-		targetWeb = YES;
-	else
-		targetWeb = [gUserDefaults boolForKey:@"jpeg target"];
-	
-	if ([gUserDefaults objectForKey:@"jpeg web compression"] == NULL) {
-		value = 26;
-	}
-	else {
-		value = [gUserDefaults integerForKey:@"jpeg web compression"];
-		if (value < 0 || value > kMaxCompression)
+	if (self = [super init]) {
+		NSInteger value;
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		
+		if ([defaults objectForKey:@"jpeg target"] == NULL)
+			targetWeb = YES;
+		else
+			targetWeb = [defaults boolForKey:@"jpeg target"];
+		
+		if ([defaults objectForKey:@"jpeg web compression"] == NULL) {
 			value = 26;
-	}
-	webCompression = value;
-	
-	if ([gUserDefaults objectForKey:@"jpeg print compression"] == NULL) {
-		value = 30;
-	}
-	else {
-		value = [gUserDefaults integerForKey:@"jpeg print compression"];
-		if (value < 0 || value > kMaxCompression)
+		}
+		else {
+			value = [defaults integerForKey:@"jpeg web compression"];
+			if (value < 0 || value > kMaxCompression)
+				value = 26;
+		}
+		webCompression = (int)value;
+		
+		if ([defaults objectForKey:@"jpeg print compression"] == NULL) {
 			value = 30;
+		}
+		else {
+			value = [defaults integerForKey:@"jpeg print compression"];
+			if (value < 0 || value > kMaxCompression)
+				value = 30;
+		}
+		printCompression = (int)value;
 	}
-	printCompression = value;
 	
 	return self;
-}
-
-- (void)dealloc
-{
-	[super dealloc];
 }
 
 - (BOOL)hasOptions
@@ -104,28 +83,21 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	if (targetWeb) {
 		if (webCompression < 5) {
 			result = 0.1 + 0.08 * (float)webCompression;
-		}
-		else if (webCompression < 10) {
+		} else if (webCompression < 10) {
 			result = 0.3 + 0.04 * (float)webCompression;
-		}
-		else if (webCompression < 20) {
+		} else if (webCompression < 20) {
 			result = 0.5 + 0.02 * (float)webCompression;
-		}
-		else {
+		} else {
 			result = 0.7 + 0.01 * (float)webCompression;
 		}
-	}
-	else {
+	} else {
 		if (printCompression < 5) {
 			result = 0.1 + 0.08 * (float)printCompression;
-		}
-		else if (printCompression < 10) {
+		} else if (printCompression < 10) {
 			result = 0.3 + 0.04 * (float)printCompression;
-		}
-		else if (printCompression < 20) {
+		} else if (printCompression < 20) {
 			result = 0.5 + 0.02 * (float)printCompression;
-		}
-		else {
+		} else {
 			result = 0.7 + 0.01 * (float)printCompression;
 		}
 	}
@@ -136,6 +108,7 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 
 - (void)showOptions:(id)document
 {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	unsigned char *temp, *data;
 	int width = [(SeaContent *)[document contents] width], height = [(SeaContent *)[document contents] height], spp = [[document contents] spp];
 	int i, j, k, x, y;
@@ -177,7 +150,7 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 			}
 		}
 	}
-	stripAlphaToWhite(4, sampleData, temp, 40 * 40);
+	SeaStripAlphaToWhite(4, sampleData, temp, 40 * 40);
 	free(temp);
 	
 	// Now make an image for the view
@@ -185,10 +158,9 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	realImage = [[NSImage alloc] initWithSize:NSMakeSize(160, 160)];
 	[realImage addRepresentation:realImageRep];
 	[realImageView setImage:realImage];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
 	[compressImageView setImage:compressImage];
-	[compressImage autorelease];
 	
 	// Display the options dialog
 	[panel center];
@@ -196,14 +168,12 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	[panel orderOut:self];
 	
 	// Clean-up
-	[gUserDefaults setObject:(targetWeb ? @"YES" : @"NO") forKey:@"jpeg target"];
+	[defaults setObject:(targetWeb ? @"YES" : @"NO") forKey:@"jpeg target"];
 	if (targetWeb)
-		[gUserDefaults setInteger:webCompression forKey:@"jpeg web compression"];
+		[defaults setInteger:webCompression forKey:@"jpeg web compression"];
 	else
-		[gUserDefaults setInteger:printCompression forKey:@"jpeg print compression"];
+		[defaults setInteger:printCompression forKey:@"jpeg print compression"];
 	free(sampleData);
-	[realImageRep autorelease];
-	[realImage autorelease];
 }
 
 - (IBAction)compressionChanged:(id)sender
@@ -216,9 +186,8 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	else
 		printCompression = [compressSlider intValue];
 	value = [self reviseCompression];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
-	[compressImage autorelease];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
 }
@@ -240,9 +209,8 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	else
 		[compressSlider setIntValue:printCompression];
 	value = [self reviseCompression];
-	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]]];
+	compressImage = [[NSImage alloc] initWithData:[realImageRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}]];
 	[compressImage setSize:NSMakeSize(160, 160)];
-	[compressImage autorelease];
 	[compressImageView setImage:compressImage];
 	[compressImageView display];
 }
@@ -262,6 +230,11 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	return @"jpg";
 }
 
+- (NSString *)fileType
+{
+	return (NSString*)kUTTypeJPEG;
+}
+
 - (NSString *)optionsString
 {
 	if (targetWeb)
@@ -270,15 +243,13 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 		return [NSString stringWithFormat:@"Print %.0f%%", [self reviseCompression] * 100.0];
 }
 
-- (BOOL)writeDocument:(id)document toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path
 {
 	int width, height, xres, yres, spp;
 	unsigned char *srcData, *destData;
 	NSBitmapImageRep *imageRep;
 	NSData *imageData;
 	NSDictionary *exifData;
-	CMProfileRef cmProfile;
-	Boolean cmmNotFound;
 	
 	// Get the data to write
 	srcData = [(SeaWhiteboard *)[document whiteboard] data];
@@ -290,7 +261,7 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	
 	// Strip the alpha channel if necessary
 	destData = malloc(width * height * (spp - 1));
-	stripAlphaToWhite(spp, destData, srcData, width * height);
+	SeaStripAlphaToWhite(spp, destData, srcData, width * height);
 	spp--;
 	
 	// Make an image representation from the data
@@ -302,21 +273,21 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 	
 	// Embed ColorSync profile
 	if (!targetWeb) {
+		ColorSyncProfileRef cmProfile;
 		if (spp < 3)
-			CMGetDefaultProfileBySpace(cmGrayData, &cmProfile);
+			cmProfile = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
 		else
-			OpenDisplayProfile(&cmProfile);
-		cmData = NULL;
-		CMFlattenProfile(cmProfile, 0, (CMFlattenUPP)&getcm, NULL, &cmmNotFound);
+			cmProfile = ColorSyncProfileCreateWithDisplayID(0);
+		NSData *cmData = CFBridgingRelease(ColorSyncProfileCopyData(cmProfile, NULL));
+
 		if (cmData) {
-			[imageRep setProperty:NSImageColorSyncProfileData withValue:[NSData dataWithBytes:cmData length:cmLen]];
-			free(cmData);
+			[imageRep setProperty:NSImageColorSyncProfileData withValue:cmData];
 		}
-		if (spp >= 3) CloseDisplayProfile(cmProfile);
+		CFRelease(cmProfile);
 	}
 	
 	// Finally build the JPEG data
-	imageData = [imageRep representationUsingType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:[self reviseCompression]] forKey:NSImageCompressionFactor]];
+	imageData = [imageRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}];
 	
 	// Now add in the resolution settings
 	// Notice how we are working on [imageData bytes] despite being explicitly told not to in Cocoa's documentation - well if Cocoa gave us proper resolution handling that wouldn't be a problem
@@ -325,7 +296,6 @@ static OSErr getcm(SInt32 command, SInt32 *size, void *data, void *refCon)
 
 	// Save our file and let's go
 	[imageData writeToFile:path atomically:YES];
-	[imageRep autorelease];
 	
 	// If the destination data is not equivalent to the source data free the former
 	if (destData != srcData)

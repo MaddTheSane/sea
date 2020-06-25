@@ -1,4 +1,30 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "SeaTools.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class SeaDocument;
+@class ToolboxUtility;
+@class AbstractOptions;
+@class LassoOptions;
+@class PolygonLassoOptions;
+@class PositionOptions;
+@class ZoomOptions;
+@class PencilOptions;
+@class BrushOptions;
+@class BucketOptions;
+@class TextOptions;
+@class EyedropOptions;
+@class RectSelectOptions;
+@class EllipseSelectOptions;
+@class EraserOptions;
+@class SmudgeOptions;
+@class GradientOptions;
+@class WandOptions;
+@class CloneOptions;
+@class CropOptions;
+@class EffectOptions;
 
 /*!
 	@class		OptionsUtility
@@ -8,45 +34,44 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
 @interface OptionsUtility : NSObject {
 	// The options view
-    IBOutlet id view;
+    IBOutlet NSView *view;
 		
 	// The last options view set 
-	id lastView;
+	__unsafe_unretained __kindof NSView *lastView;
 
 	// The document which is the focus of this utility
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// The view to show when no document is active
-	IBOutlet id blankView;
+	IBOutlet NSView *blankView;
 	
 	// The various options objects
-	IBOutlet id lassoOptions;
-	IBOutlet id polygonLassoOptions;
-	IBOutlet id positionOptions;
-	IBOutlet id zoomOptions;
-	IBOutlet id pencilOptions;
-	IBOutlet id brushOptions;
-    IBOutlet id bucketOptions;
-	IBOutlet id textOptions;
-	IBOutlet id eyedropOptions;
-	IBOutlet id rectSelectOptions;
-	IBOutlet id ellipseSelectOptions;
-	IBOutlet id eraserOptions;
-	IBOutlet id smudgeOptions;
-	IBOutlet id gradientOptions;
-	IBOutlet id wandOptions;
-	IBOutlet id cloneOptions;
-	IBOutlet id cropOptions;
-	IBOutlet id effectOptions;
+	IBOutlet LassoOptions *lassoOptions;
+	IBOutlet PolygonLassoOptions *polygonLassoOptions;
+	IBOutlet PositionOptions *positionOptions;
+	IBOutlet ZoomOptions *zoomOptions;
+	IBOutlet PencilOptions *pencilOptions;
+	IBOutlet BrushOptions *brushOptions;
+    IBOutlet BucketOptions *bucketOptions;
+	IBOutlet TextOptions *textOptions;
+	IBOutlet EyedropOptions *eyedropOptions;
+	IBOutlet RectSelectOptions *rectSelectOptions;
+	IBOutlet EllipseSelectOptions *ellipseSelectOptions;
+	IBOutlet EraserOptions *eraserOptions;
+	IBOutlet SmudgeOptions *smudgeOptions;
+	IBOutlet GradientOptions *gradientOptions;
+	IBOutlet WandOptions *wandOptions;
+	IBOutlet CloneOptions *cloneOptions;
+	IBOutlet CropOptions *cropOptions;
+	IBOutlet EffectOptions *effectOptions;
 	
 	// The toolbox utility object
-	IBOutlet id toolboxUtility;
+	IBOutlet ToolboxUtility *toolboxUtility;
 	
 	// The currently active tool - not a reliable indication (see code)
-	int currentTool;
+	SeaToolsDefines currentTool;
 }
 
 /*!
@@ -54,19 +79,7 @@
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
-
-/*!
-	@method		awakeFromNib
-	@discussion	Configures the utility's interface.
-*/
-- (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)init;
 
 /*!
 	@method		activate
@@ -87,11 +100,11 @@
 - (void)shutdown;
 
 /*!
-	@method		currentOptions
+	@property	currentOptions
 	@discussion	Returns the currently active options object.
 	@result		Returns the currently active options object (NULL if none).
 */
-- (id)currentOptions;
+@property (readonly, nullable) __kindof AbstractOptions *currentOptions;
 
 /*!
 	@method		getOptions:
@@ -101,7 +114,7 @@
 				SeaTools).
 	@result		Returns the options object associated with the given index.
 */
-- (id)getOptions:(int)whichTool;
+- (nullable __kindof AbstractOptions*)getOptions:(SeaToolsDefines)whichTool;
 
 /*!
 	@method		update
@@ -115,7 +128,7 @@
 	@param		sender
 				Ignored.
 */
-- (IBAction)show:(id)sender;
+- (IBAction)show:(nullable id)sender;
 
 /*!
 	@method		hide:
@@ -123,7 +136,7 @@
 	@param		sender
 				Ignored.
 */
-- (IBAction)hide:(id)sender;
+- (IBAction)hide:(nullable id)sender;
 
 /*!
 	@method		toggle:
@@ -131,7 +144,7 @@
 	@param		sender
 				Ignored.
 */
-- (IBAction)toggle:(id)sender;
+- (IBAction)toggle:(nullable id)sender;
 
 
 /*!
@@ -141,10 +154,12 @@
 - (void)viewNeedsDisplay;
 
 /*!
-	@method		visible
+	@property	visible
 	@discussion	Returns whether or not the utility's window is visible.
 	@result		Returns YES if the utility's window is visible, NO otherwise.
 */
-- (BOOL)visible;
+@property (readonly, getter=isVisible) BOOL visible;
 
 @end
+
+NS_ASSUME_NONNULL_END

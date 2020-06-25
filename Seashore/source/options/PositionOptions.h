@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractScaleOptions.h"
 
@@ -13,11 +14,15 @@
 				The tool anchors the floating layer.
 */
 
-enum {
-	kMovingLayer = 0,
-	kScalingLayer = 1,
-	kRotatingLayer = 2,
-	kAnchoringLayer = 3
+typedef NS_ENUM(int, SeaPositionOptions) {
+	//! The tool changes the position of the layer.
+	SeaPositionOptionMoving = 0,
+	//! The tool scales the layer.
+	SeaPositionOptionScaling = 1,
+	//! If the layer is floating, it rotates it.
+	SeaPositionOptionRotating = 2,
+	//! The tool anchors the floating layer.
+	SeaPositionOptionAnchoring = 3,
 };
 
 
@@ -29,14 +34,12 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface PositionOptions : AbstractScaleOptions {
-
 	// Checkbox specifying whether the position tool can anchor floating selections
-	IBOutlet id canAnchorCheckbox;
+	IBOutlet NSButton *canAnchorCheckbox;
 	
 	// Function of the tool
-	int function;
+	SeaPositionOptions function;
 }
 
 /*!
@@ -46,12 +49,12 @@ enum {
 - (void)awakeFromNib;
 
 /*!
-	@method		canAnchor
+	@property	canAnchor
 	@discussion	Returns whether the position tool can anchor floating selections.
 	@result		Returns YES if the position tool can anchor floating selections,
 				NO otherwise.
 */
-- (BOOL)canAnchor;
+@property (readonly) BOOL canAnchor;
 
 /*!
 	@method		setFunctionFromIndex:
@@ -59,14 +62,14 @@ enum {
 	@param		index
 				The modifier index of the new modifier.
 */
-- (void)setFunctionFromIndex:(unsigned int)index;
+- (void)setFunctionFromIndex:(AbstractModifiers)index;
 
 /*!
-	@method		toolFunction
+	@property	toolFunction
 	@discussion	For figuring out what the tool actually does. It changes depending on the appropriate modifiers or the popup menu.
 	@result		One of the elements from the k...Layer enum.
 */
-- (int)toolFunction;
+@property (readonly) SeaPositionOptions toolFunction;
 
 /*!
 	@method		shutdown
@@ -75,3 +78,8 @@ enum {
 - (void)shutdown;
 
 @end
+
+static const SeaPositionOptions kMovingLayer NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPositionOptionMoving", 10.2, 10.8) = SeaPositionOptionMoving;
+static const SeaPositionOptions kScalingLayer NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPositionOptionScaling", 10.2, 10.8) = SeaPositionOptionScaling;
+static const SeaPositionOptions kRotatingLayer NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPositionOptionRotating", 10.2, 10.8) = SeaPositionOptionRotating;
+static const SeaPositionOptions kAnchoringLayer NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPositionOptionAnchoring", 10.2, 10.8) = SeaPositionOptionAnchoring;

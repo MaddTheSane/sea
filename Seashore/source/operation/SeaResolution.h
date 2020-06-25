@@ -1,4 +1,12 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
+
+@class SeaDocument;
+@class SeaScale;
 
 /*!
 	@class		SeaResolution
@@ -9,25 +17,24 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaResolution : NSObject {
 
 	// The document associated with this object
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 
 	// The panel for changing the current document's resolution
-    IBOutlet id sheet;
+    IBOutlet NSPanel *sheet;
 	
 	// The object that handles our scaling
-	IBOutlet id seaScale;
+	IBOutlet SeaScale *seaScale;
 	
 	// The horizontal and vertical resolution values
     IBOutlet id xValue;
 	IBOutlet id yValue;
 	
 	// The options
-	IBOutlet id forceSquare;
-	IBOutlet id preserveSize;
+	IBOutlet NSButton *forceSquare;
+	IBOutlet NSButton *preserveSize;
 
 }
 

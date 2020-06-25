@@ -1,21 +1,17 @@
+#include <GIMPCore/GIMPCore.h>
+#include <math.h>
+#include <tgmath.h>
 #import "CheckerboardClass.h"
+#import "PluginData.h"
+#import "SeaWhiteboard.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
 #define make_128(x) (x + 16 - (x % 16))
 
 @implementation CheckerboardClass
-
-- (id)initWithManager:(SeaPlugins *)manager
+- (SeaPluginType)type
 {
-	seaPlugins = manager;
-	
-	return self;
-}
-
-- (int)type
-{
-	return 1;
+	return SeaPluginPoint;
 }
 
 - (int)points
@@ -43,7 +39,7 @@
 	return @"Seashore Approved (Bobo)";
 }
 
-static inline specmod(int a, int b)
+static inline int specmod(int a, int b)
 {
 	if (a < 0)
 		return b + a % b;
@@ -54,19 +50,17 @@ static inline specmod(int a, int b)
 - (void)run
 {
 	int width, height;
-	unsigned char *overlay, *replace;
+	unsigned char *overlay;
 	IntRect selection;
 	IntPoint point, apoint;
-	BOOL opaque;
-	unsigned char backColor[4], backColorAlpha[4], foreColorAlpha[4];
+	unsigned char backColorAlpha[4], foreColorAlpha[4];
 	int amount;
 	int spp, channel, pos;
 	int i, j, k;
 	BOOL black;
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	
 	// Get plug-in data
-	pluginData = [(SeaPlugins *)seaPlugins data];
 	width = [pluginData width];
 	height = [pluginData height];
 	spp = [pluginData spp];
@@ -79,7 +73,7 @@ static inline specmod(int a, int b)
 	
 	// Prepare for drawing
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kNormalBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourNormal];
 	
 	// Get colors
 	if (spp == 4) {
@@ -91,9 +85,7 @@ static inline specmod(int a, int b)
 		backColorAlpha[1] = [[pluginData backColor:YES] greenComponent] * 255;
 		backColorAlpha[2] = [[pluginData backColor:YES] blueComponent] * 255;
 		backColorAlpha[3] = [[pluginData backColor:YES] alphaComponent] * 255;
-
-	}
-	else {
+	} else {
 		foreColorAlpha[0] = [[pluginData foreColor:YES] whiteComponent] * 255;
 		foreColorAlpha[1] = [[pluginData foreColor:YES] alphaComponent] * 255;
 		backColorAlpha[0] = [[pluginData backColor:YES] whiteComponent] * 255;
@@ -112,8 +104,7 @@ static inline specmod(int a, int b)
 			for (k = 0; k < spp; k++) {
 				if (black) {
 					memcpy(&(overlay[pos * spp]), foreColorAlpha, spp);
-				}
-				else {
+				} else {
 					memcpy(&(overlay[pos * spp]), backColorAlpha, spp);
 				}
 			}

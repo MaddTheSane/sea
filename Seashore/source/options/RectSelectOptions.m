@@ -16,23 +16,24 @@
 
 - (void)awakeFromNib
 {	
-	int value;
+	NSInteger value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"rect selection radius enabled"] == NULL)
+	if ([defaults objectForKey:@"rect selection radius enabled"] == NULL)
 		[radiusCheckbox setState:NSOffState];
 	else
-		[radiusCheckbox setState:[gUserDefaults boolForKey:@"rect selection radius enabled"]];
+		[radiusCheckbox setState:[defaults boolForKey:@"rect selection radius enabled"]];
 	[radiusSlider setEnabled:[radiusCheckbox state]];
 	
-	if ([gUserDefaults objectForKey:@"rect selection radius"] == NULL) {
+	if ([defaults objectForKey:@"rect selection radius"] == NULL) {
 		value = 8;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"rect selection radius"];
+		value = [defaults integerForKey:@"rect selection radius"];
 		if (value < [radiusSlider minValue] || value > [radiusSlider maxValue])
 			value = 8;
 	}
-	[radiusSlider setIntValue:value];
+	[radiusSlider setIntegerValue:value];
 	[radiusCheckbox setTitle:[NSString stringWithFormat:LOCALSTR(@"corner radius", @"Corner radius: %d"), value]];
 	[aspectRatio awakeWithMaster:self andString:@"rect"];
 }
@@ -50,7 +51,7 @@
 	return [aspectRatio ratio];
 }
 
-- (int)aspectType
+- (SeaAspectType)aspectType
 {
 	return [aspectRatio aspectType];
 }
@@ -63,8 +64,9 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:[radiusSlider intValue] forKey:@"rect selection radius"];
-	[gUserDefaults setObject:[radiusCheckbox state] ? @"YES" : @"NO" forKey:@"rect selection radius enabled"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[radiusSlider intValue] forKey:@"rect selection radius"];
+	[defaults setObject:[radiusCheckbox state] ? @"YES" : @"NO" forKey:@"rect selection radius enabled"];
 	[aspectRatio shutdown];
 }
 

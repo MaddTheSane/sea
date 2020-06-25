@@ -10,80 +10,36 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
-#import "SeaPlugins.h"
+#import <SeashoreKit/SeaPlugins.h>
+#import <SeashoreKit/PluginData.h>
+#import <SeashoreKit/SeaWhiteboard.h>
+#import <SeashoreKit/SSKCIPlugin.h>
 
 #define gColorPanel [NSColorPanel sharedColorPanel]
 
-@interface CILenticularHaloClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// The label displaying the overlap
-	IBOutlet id overlapLabel;
-	
-	// The slider for the overlap
-	IBOutlet id overlapSlider;
-
-	// The label displaying the strength
-	IBOutlet id strengthLabel;
-	
-	// The slider for the strength
-	IBOutlet id strengthSlider;
-
-	// The label displaying the contrast
-	IBOutlet id contrastLabel;
-	
-	// The slider for the contrast
-	IBOutlet id contrastSlider;
-
-	// The main color to use
-	IBOutlet id mainColorWell;
-
-	// The color to be used
-	NSColor *mainNSColor;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The new overlap
-	float overlap;
-
-	// The new strength
-	float strength;
-	
-	// The new contrast
-	float contrast;
-	
-	// YES if the effect must be refreshed
-	BOOL refresh;
-	
-	// YES if the application succeeded
-	BOOL success;
-	
-	// Some temporary space we need preallocated for greyscale data
-	unsigned char *newdata;
-
+@interface CILenticularHaloClass : SSKCIPlugin
+{
 	// YES if the plug-in is running
 	BOOL running;
-
 }
+// The color to be used
+@property (copy) NSColor *mainColor;
 
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
+// The new overlap
+@property CGFloat overlap;
+
+// The new strength
+@property CGFloat strength;
+	
+// The new contrast
+@property CGFloat contrast;
 
 /*!
 	@method		type
 	@discussion	Returns the type of plug-in so Seashore can correctly interact with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		points
@@ -130,14 +86,6 @@
 - (void)run;
 
 /*!
-	@method		apply:
-	@discussion	Applies the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)apply:(id)sender;
-
-/*!
 	@method		reapply
 	@discussion	Applies the plug-in with previous settings.
 */
@@ -149,83 +97,6 @@
 	@result		Returns YES if the plug-in can be applied again, NO otherwise.
 */
 - (BOOL)canReapply;
-
-/*!
-	@method		preview:
-	@discussion	Previews the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
-
-/*!
-	@method		setColor:
-	@discussion	Sets the color of the receiver.
-	@param		color
-				The new color for the color well.
-*/
-- (void)setColor:(NSColor *)color;
-
-/*!
-	@method		update:
-	@discussion	Updates the panel's labels.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
-
-/*!
-	@method		execute
-	@discussion	Executes the effect.
-*/
-- (void)execute;
-
-/*!
-	@method		executeGrey
-	@discussion	Executes the effect for greyscale images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeGrey:(PluginData *)pluginData;
-
-/*!
-	@method		executeGrey
-	@discussion	Executes the effect for colour images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeColor:(PluginData *)pluginData;
-
-/*!
-	@method		executeChannel:withBitmap:
-	@discussion	Executes the effect with any necessary changes depending on channel selection
-				(called by either executeGrey or executeColor). 
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data;
-
-/*!
-	@method		halftone:withBitmap:
-	@discussion	Called by execute once preparation is complete.
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)halftone:(PluginData *)pluginData withBitmap:(unsigned char *)data;
 
 /*!
 	@method		validateMenuItem:

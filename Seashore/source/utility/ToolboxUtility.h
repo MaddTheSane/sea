@@ -1,4 +1,15 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
+#import "SeaTools.h"
+
+@class SeaDocument;
+@class SeaProxy;
+@class OptionsUtility;
+@class ColorSelectView;
 
 /*!
 	@class		ToolboxUtility
@@ -9,75 +20,65 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface ToolboxUtility : NSObject {
+	/// The document which is the focus of this utility
+	IBOutlet SeaDocument *document;
 
-	// The document which is the focus of this utility
-	IBOutlet id document;
+	/// The proxy object
+	IBOutlet SeaProxy *seaProxy;
+	
+	/// The current foreground and background colour
+	NSColor *foreground, *background;
+	
+	/// The colorSelectView associated with this utility
+	IBOutlet __weak ColorSelectView *colorSelectView;
+	
+	/// The toolbox
+	IBOutlet NSMatrix *toolbox;
+	
+	/// The options utility object
+	IBOutlet OptionsUtility *optionsUtility;
+	
+	/// The tag of the currently selected tool
+	SeaToolsDefines tool;
+	
+	/// The old tool
+	SeaToolsDefines oldTool;
 
-	// The proxy object
-	IBOutlet id seaProxy;
-	
-	// The current foreground and background colour
-	id foreground, background;
-	
-	// The colorSelectView associated with this utility
-	IBOutlet id colorSelectView;
-	
-	// The toolbox
-	IBOutlet id toolbox;
-	
-	// The options utility object
-	IBOutlet id optionsUtility;
-	
-	// The tag of the currently selected tool
-	int tool;
-	
-	// The old tool
-	int oldTool;
+	/// The toolbar
+	NSToolbar *toolbar;
 
-	// The toolbar
-	id toolbar;
-
-	IBOutlet id selectionTBView;
-	IBOutlet id drawTBView;
-	IBOutlet id effectTBView;
-	IBOutlet id transformTBView;
+	IBOutlet NSSegmentedControl *selectionTBView;
+	IBOutlet NSSegmentedControl *drawTBView;
+	IBOutlet NSSegmentedControl *effectTBView;
+	IBOutlet NSSegmentedControl *transformTBView;
 	
-	IBOutlet id selectionMenu;
-	IBOutlet id drawMenu;
-	IBOutlet id effectMenu;
-	IBOutlet id transformMenu;
-	IBOutlet id colorsMenu;
+	IBOutlet NSMenuItem *selectionMenu;
+	IBOutlet NSMenuItem *drawMenu;
+	IBOutlet NSMenuItem *effectMenu;
+	IBOutlet NSMenuItem *transformMenu;
+	IBOutlet NSMenuItem *colorsMenu;
 	
-	NSArray *selectionTools;
-	NSArray *drawTools;
-	NSArray *effectTools;
-	NSArray *transformTools;
+	NSArray<NSNumber*> *selectionTools;
+	NSArray<NSNumber*> *drawTools;
+	NSArray<NSNumber*> *effectTools;
+	NSArray<NSNumber*> *transformTools;
 	
-	// A timer that delays colour changes
-	id delay_timer;
-	
+	/// A timer that delays colour changes
+	NSTimer *delay_timer;
 }
+
+//! The background colour.
+@property (copy) NSColor *background;
+//! The foreground colour.
+@property (nonatomic, copy) NSColor *foreground;
 
 /*!
 	@method		init
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
-
-/*!
-	@method		awakeFromNib
-	@discussion	Configures the utility's interface.
-*/
-- (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)init;
 
 /*!
 	@method		foreground
@@ -114,12 +115,11 @@
 - (void)setBackground:(NSColor *)color;
 
 /*!
-	@method		colorView
+	@property	colorView
 	@discussion	Returns the color view for actions
 	@result		A ColorSelectView pointer.
 */
-
-- (id)colorView;
+@property (readonly, weak) ColorSelectView *colorView;
 
 /*!
 	@method		acceptsFirstMouse:
@@ -148,18 +148,18 @@
 	@method		update:
 	@discussion	Updates the utility for the current document.
 	@param		full
-				YES if the update is to also include setting the cursor, NO
+				\c YES if the update is to also include setting the cursor, \c NO
 				otherwise.
 */
-- (void)update:(BOOL)full;
+- (void)update:(BOOL)full NS_SWIFT_NAME(update(full:));
 
 /*!
-	@method		tool
+	@property	tool
 	@discussion	Returns the currently selected tool.
 	@result		Returns the tool type (see SeaTools) representing the currently
 				selected tool.
 */
-- (int)tool;
+@property (readonly) SeaToolsDefines tool;
 
 /*!
 	@method		selectToolUsingTag:
@@ -184,7 +184,7 @@
 	@param		newTool
 				The index of the new tool.
 */
-- (void)changeToolTo:(int)newTool;
+- (void)changeToolTo:(SeaToolsDefines)newTool;
 
 /*!
 	@method		floatTool
@@ -202,7 +202,7 @@
 	@method		setEffectEnabled:
 	@discussion	Sets whether the effect tool is enabled or not.
 	@param		enable
-				YES to enable the tool, NO otherwise.
+				\c YES to enable the tool, \c NO otherwise.
 */
 - (void)setEffectEnabled:(BOOL)enable;
 
@@ -213,8 +213,8 @@
 				appropriate).
 	@param		menuItem
 				The menu item to be validated.
-	@result		YES if the menu item should be enabled, NO otherwise.
+	@result		\c YES if the menu item should be enabled, \c NO otherwise.
 */
-- (BOOL)validateMenuItem:(id)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end

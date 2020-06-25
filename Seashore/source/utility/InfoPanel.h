@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -12,10 +13,20 @@
 				A panel with an arrow on the left side.
 				This would be for a vertical list of elements.
 */
-enum {
-	kFloatingPanelStyle,
-	kVerticalPanelStyle,
-	kHorizontalPanelStyle
+typedef NS_ENUM(NSInteger, SeaPanelStyle) {
+	//! A basic floating panel unattached to any window elements
+	SeaPanelStyleFloating,
+	/*!
+	 A panel with an arrow on the top.
+	 Generally, comes from elements in a horizontal list
+	 (so a vertical panel will not obscure too many elements).
+	 */
+	SeaPanelStyleVertical,
+	/*!
+	 A panel with an arrow on the left side.
+	 This would be for a vertical list of elements.
+	 */
+	SeaPanelStyleHorizontal,
 };
 
 /*!
@@ -29,30 +40,18 @@ enum {
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-@interface InfoPanel : NSPanel {
-	// Info panels can come in a few different styles.
-	// This stores what we currently think the style is.
-	int panelStyle;
-	
-	// Sometimes the panel is too close to the edge of the screen
-	// to fit, so it has to be flipped
+@interface InfoPanel : NSPanel <NSWindowDelegate>
+{
+	//! Sometimes the panel is too close to the edge of the screen
+	//! to fit, so it has to be flipped
 	BOOL panelFilpped;
 }
 
 /*!
-	@method		panelStyle
+	@property	panelStyle
 	@discussion	Allows other objects to know what kind of panel they are dealing with
-	@result		An int from the above enum.
 */
-- (int)panelStyle;
-
-/*!
-	@method		setPanelStyle:
-	@discussion Allows the style of the panel to change.
-	@param		newStyle
-				An element of the enum that the style is changing to.
-*/
-- (void) setPanelStyle:(int)newStyle;
+@property SeaPanelStyle panelStyle;
 
 /*!
 	@method		orderFrontToGoal:
@@ -66,3 +65,7 @@ enum {
 - (void) orderFrontToGoal:(NSPoint)goal onWindow:(NSWindow *)parent;
  
 @end
+
+static const SeaPanelStyle kFloatingPanelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPanelStyleFloating", 10.2, 10.8) = SeaPanelStyleFloating;
+static const SeaPanelStyle kVerticalPanelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPanelStyleVertical", 10.2, 10.8) = SeaPanelStyleVertical;
+static const SeaPanelStyle kHorizontalPanelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaPanelStyleHorizontal", 10.2, 10.8) = SeaPanelStyleHorizontal;

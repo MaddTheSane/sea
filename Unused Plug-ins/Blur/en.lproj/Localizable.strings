@@ -1,0 +1,6 @@
+"author" = "Mark Pazolli";
+"copyright" = "Public Domain 2004";
+"description" = "Blurs the selection using a classic blur.";
+"groupName" = "Blur";
+"license" = "Public Domain";
+"name" = "Blur";

@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@class		SeaLayer
@@ -10,74 +15,80 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
+#if MAIN_COMPILE
+@class SeaDocument;
+@class SeaLayerUndo;
+#endif
+
 @interface SeaLayer : NSObject {
+#if MAIN_COMPILE
+	//! The document that contains this layer
+	__weak SeaDocument *document;
 	
-	// The document that contains this layer
-	id document;
-	
-	// The object responsible for changes to our bitmap
+	//! The object responsible for changes to our bitmap
 	id seaLayerUndo;
+#endif
 	
-	// The layer's height, width and mode
+	//! The layer's height, width and mode
 	int height, width, mode;
 	
-	// The layer's name
+	//! The layer's name
 	NSString *name;
 
-	// Old names of the layers
+	//! Old names of the layers
 	NSArray *oldNames;
 	
-	// The opacity of the layer (at most 255)
+	//! The opacity of the layer (at most 255)
 	int opacity;
 	
-	// The layer's offset
+	//! The layer's offset
 	int xoff, yoff;
 	
-	// The samples per pixel in this layer
-	// (this should be the same as determined from the document's type)
+	//! The samples per pixel in this layer
+	//! (this should be the same as determined from the document's type)
 	int spp;
 	
-	// Is the layer visible?
+	//! Is the layer visible?
 	BOOL visible;
 	
-	// Is the layer linked?
+	//! Is the layer linked?
 	BOOL linked;
 	
-	// Is the layer floating?
+	//! Is the layer floating?
 	BOOL floating;
 	
-	// The lost properties of the document
+	//! The lost properties of the document
 	char *lostprops;
 	int lostprops_len;
 	
-	// A reference to the image data representing this layer
+	//! A reference to the image data representing this layer
 	unsigned char *data;
 	
-	// A NSImage representing a thumbnail of the layer
+	//! A NSImage representing a thumbnail of the layer
 	NSImage *thumbnail;
 	unsigned char *thumbData;
 	int thumbWidth, thumbHeight;
 	
-	// Stores whether or not the data is compressed
+	//! Stores whether or not the data is compressed
 	BOOL compressed;
 	unsigned int compressedLen;
 	
-	// Remembers whether or not the layer has an alpha channel
+	//! Remembers whether or not the layer has an alpha channel
 	BOOL hasAlpha;
 	
-	// The unique ID for this layer - sometimes used
-	int uniqueLayerID;
+	//! The unique ID for this layer - sometimes used
+	NSInteger uniqueLayerID;
 
-	// A path to the file we use for undoing
+	//! A path to the file we use for undoing
 	NSString *undoFilePath;
 	
-	// The affine transform plug-in (used to do CoreImage transforms)
+	//! The affine transform plug-in (used to do CoreImage transforms)
 	id affinePlugin;
-
 }
 
 // CREATION METHODS
 
+#if MAIN_COMPILE
 /*!
 	@method		initWithDocument:
 	@discussion	Initializes an instance of this class with the given document.
@@ -86,7 +97,7 @@
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc;
+- (instancetype)initWithDocument:(SeaDocument *)doc;
 
 /*!
 	@method		initWithDocument:width:height:opaque:spp:
@@ -104,7 +115,7 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc width:(int)lwidth height:(int)lheight opaque:(BOOL)opaque spp:(int)lspp;
+- (instancetype)initWithDocument:(SeaDocument *)doc width:(int)lwidth height:(int)lheight opaque:(BOOL)opaque spp:(int)lspp;
 
 /*!
 	@method		initWithDocument:rect:data:spp:
@@ -125,7 +136,7 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata spp:(int)lspp;
+- (instancetype)initWithDocument:(SeaDocument *)doc rect:(IntRect)lrect data:(unsigned char *)ldata spp:(int)lspp;
 
 /*!
 	@method		initWithDocument:layer:type:
@@ -139,7 +150,7 @@
 				The layer whose contents to mimic.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc layer:(SeaLayer*)layer;
+- (instancetype)initWithDocument:(SeaDocument *)doc layer:(SeaLayer*)layer;
 
 /*!
 	@method		initFloatingWithDocument:rect:data:
@@ -154,14 +165,13 @@
 				The data with which to initialize the instance. This should be
 				of the format prescibed by the document.
 */
-- (id)initFloatingWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata;
+- (instancetype)initFloatingWithDocument:(SeaDocument *)doc rect:(IntRect)lrect data:(unsigned char *)ldata;
 
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+#else
+- (instancetype)init;
+#endif
 
+#if MAIN_COMPILE
 // COMPRESSION METHODS
 
 /*!
@@ -191,43 +201,45 @@
 	@result		Returns the document associated with this layer.
 */
 - (id)document;
+#endif
 
 /*!
-	@method		width
+	@property	width
 	@discussion	Returns the width of the layer.
 	@result		Returns an integer representing the width of the layer.
 */
-- (int)width;
+@property (readonly) int width;
 
 /*!
-	@method		height
+	@property	height
 	@discussion	Returns the height of the layer.
 	@result		Returns an integer representing the height of the layer.
 */
-- (int)height;
+@property (readonly) int height;
 
 /*!
-	@method		xoff
+	@property	xOffset
 	@discussion	Returns the horizontal offset of the layer.
 	@result		Returns an integer representing the horizontal offset of the
 				layer (from the top-left).
 */
-- (int)xoff;
+@property (readonly, getter=xoff) int xOffset;
 
 /*!
-	@method		yoff
+	@property	yOffset
 	@discussion	Returns the vertical offset of the layer.
 	@result		Returns an integer representing the vertical offset of the layer
 				from the top-left).
 */
-- (int)yoff;
+@property (readonly, getter=yoff) int yOffset;
 
+#if MAIN_COMPILE
 /*!
-	@method		localRect
+	@property	localRect
 	@discussion	For finding out where it is, simply a combination of the above values.
 	@result		An Integer Rectangle
 */
-- (IntRect)localRect;
+@property (readonly) IntRect localRect;
 
 /*!
 	@method		setOffsets:
@@ -280,43 +292,65 @@
 	@param		trim
 				YES if the layer should be trimmed afterwards, NO otherwise.
 */
-- (void)setRotation:(float)degrees interpolation:(int)interpolation withTrim:(BOOL)trim;
+- (void)setRotation:(CGFloat)degrees interpolation:(NSImageInterpolation)interpolation withTrim:(BOOL)trim;
+#endif
 
 /*!
-	@method		visible
+	@property	visible
 	@discussion	Returns whether or not the layer is currently visible.
-	@result		Returns YES if the layer is currently visible, NO otherwise.
+	@result		Returns \c YES if the layer is currently visible, \c NO otherwise.
+ */
+@property (getter=isVisible) BOOL visible;
+
+/*!
+	@property	linked
+	@discussion	Returns whether or not the layer is currently linked to others.
+	@result		Returns \c YES if the layer is currently linked to others, \c NO
+				otherwise.
+ */
+@property (getter=isLinked) BOOL linked;
+
+//! The opacity of the layer (at most 255)
+@property int opacity;
+
+//! The layer's mode
+@property int mode;
+
+/*!
+	@method		isVisible
+	@discussion	Returns whether or not the layer is currently visible.
+	@result		Returns \c YES if the layer is currently visible, \c NO otherwise.
 */
-- (BOOL)visible;
+- (BOOL)isVisible;
 
 /*!
 	@method		setVisible:
 	@discussion	Sets whether or not the layer should be visible.
 	@param		value
-				YES if the layer should be visible, NO otherwise.
+				\c YES if the layer should be visible, \c NO otherwise.
 */
 - (void)setVisible:(BOOL)value;
 
 /*!
-	@method		linked
+	@method		isLinked
 	@discussion	Returns whether or not the layer is currently linked to others.
-	@result		Returns YES if the layer is currently linked to others, NO
+	@result		Returns \c YES if the layer is currently linked to others, \c NO
 				otherwise.
 */
-- (BOOL)linked;
+- (BOOL)isLinked;
 
 /*!
 	@method		setLinked:
 	@discussion	Sets whether or not the layer should be linked to others.
 	@param		value
-				YES if the layer should be linked to others, NO otherwise.
+				\c YES if the layer should be linked to others, \c NO otherwise.
 */
 - (void)setLinked:(BOOL)value;
 
 /*!
 	@method		opacity
 	@discussion	Returns the opacity of the layer.
-	@result		Reutrns an integer from 0 to 255 indicating the opacity of the
+	@result		Reutrns an integer from \c 0 to \c 255 indicating the opacity of the
 				layer. The layer's contents are fully opaque if the opacity is
 				255.
 */
@@ -326,7 +360,7 @@
 	@method		setOpacity:
 	@discussion	Sets the opacity of the layer.
 	@param		value
-				An integer from 0 to 255 representing the revised opacity of the
+				An integer from \c 0 to \c 255 representing the revised opacity of the
 				layer.
 */
 - (void)setOpacity:(int)value;
@@ -351,10 +385,19 @@
 /*!
 	@method		name
 	@discussion	Returns the name of the layer.
-	@result		Returns an NSString representing the name of the layer.
+	@result		Returns an \c NSString representing the name of the layer.
 */
 - (NSString *)name;
 
+#if MAIN_COMPILE
+//! The layer's name
+@property (nonatomic, copy) NSString *name;
+#else
+//! The layer's name
+@property (readonly, copy) NSString *name;
+#endif
+
+#if MAIN_COMPILE
 /*!
 	@method		setName:
 	@discussion	Sets the name of the layer (the old name will be retained until
@@ -363,29 +406,32 @@
 				The revised name of the layer.
 */
 - (void)setName:(NSString *)newName;
+#endif
 
 /*!
-	@method		data
+	@property	data
 	@discussion	Returns the bitmap data for the layer.
 	@result		Returns a pointer to the bitmap data for the layer.
 */
-- (unsigned char *)data;
+@property (readonly) unsigned char *data NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		hasAlpha
+	@property	hasAlpha
 	@discussion	Returns whether or not the layer's alpha channel should be
 				considered active.
 	@result		Returns YES if the layer's alpha channel should be considered
 				active, NO otherwise.
 */
-- (BOOL)hasAlpha;
+@property (readonly) BOOL hasAlpha;
 
+#if MAIN_COMPILE
 /*!
 	@method		toggleAlpha
 	@discussion	Toggles whether or not the layer should be considered active
 				handles undos).
 */
 - (void)toggleAlpha;
+#endif
 
 /*!
 	@method		introduceAlpha
@@ -394,8 +440,9 @@
 */
 - (void)introduceAlpha;
 
+#if MAIN_COMPILE
 /*!
-	@method		canToggleAlpha
+	@property	canToggleAlpha
 	@discussion	Returns whether or not the user should be permitted to toggle
 				the alpha channel treatment. Users aren't permitted to toggle
 				the alpha channel treatment off if the alpha channel is not
@@ -403,7 +450,8 @@
 	@result		Returns YES if the user should be permitted to toggle the alpha
 				channel treament, NO otherwise.
 */
-- (BOOL)canToggleAlpha;
+@property (readonly) BOOL canToggleAlpha;
+#endif
 
 /*!
 	@method		lostprops
@@ -412,7 +460,7 @@
 	@result		Returns a pointer to the block of memory containing the lost
 				properties of the layer.
 */
-- (char *)lostprops;
+- (char *)lostprops NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		lostprops_len
@@ -425,30 +473,33 @@
 - (int)lostprops_len;
 
 /*!
-	@method		uniqueLayerID
+	@property	uniqueLayerID
 	@discussion	Returns an unique integer identifying the layer. Layer IDs are
 				numbered sequentially.
 	@result		Returns an unique integer identifying the layer.
 */
-- (int)uniqueLayerID;
+@property (readonly) NSInteger uniqueLayerID;
 
+#if MAIN_COMPILE
 /*!
-	@method		index
+	@property	index
 	@discussion	Returns the index of this layer at the current moment. This
 				method is a linear time operation. Use it sparingly maybe
 				uniqueLayerID would serve your purpose better?
 	@result		Returns an integer indicating the current index of the layer.
 */
-- (int)index;
+@property (readonly) int index;
+#endif
 
 /*!
-	@method		floating
+	@property	floating
 	@discussion	Returns whether or not the layer is a floating layer.
-	@result		Returns YES if the layer is a floating layer, NO otherwise. This
+	@result		Returns \c YES if the layer is a floating layer, \c NO otherwise. This
 				implementation of the method always returns NO.
 */
-- (BOOL)floating;
+@property (readonly, getter=isFloating) BOOL floating;
 
+#if MAIN_COMPILE
 // EXTRA METHODS
 
 /*!
@@ -456,7 +507,7 @@
 	@discussion	Returns the undo manager of the layer.
 	@result		Returns an instance of SeaLayerUndo.
 */
-- (id)seaLayerUndo;
+- (SeaLayerUndo*)seaLayerUndo;
 
 /*!
 	@method		thumbnail
@@ -509,14 +560,14 @@
 	@discussion	Scales the contents of the layer to match the specified height
 				and width. Interpolation (allowing for smoother scaling) is used
 				as specified but no adjustment is made to the layer's offsets.
-	@param		width
+	@param		newWidth
 				The revised width of the document or layer.
-	@param		height
+	@param		newHeight
 				The revised height of the document or layer.
 	@param		interpolation
 				The interpolation style to be used (see GIMPCore).
 */
-- (void)setWidth:(int)newWidth height:(int)newHeight interpolation:(int)interpolation;
+- (void)setWidth:(int)newWidth height:(int)newHeight interpolation:(GimpInterpolationType)interpolation;
 
 /*!
 	@method		convertFromType:to:
@@ -528,6 +579,7 @@
 	@param		destType
 				The type to which the layer's bitmap is being converted.
 */
-- (void)convertFromType:(int)srcType to:(int)destType;
+- (void)convertFromType:(XcfImageType)srcType to:(XcfImageType)destType;
+#endif
 
 @end

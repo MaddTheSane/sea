@@ -1,4 +1,13 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#import "Units.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/Units.h>
+#endif
+
+@class SeaPrefs;
 
 /*!
 	@class		SeaDocumentController
@@ -8,57 +17,54 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2006 Mark Pazolli
 */
-
 @interface SeaDocumentController : NSDocumentController {
-
-	// An outlet to the preferences manager of the application
-	IBOutlet id seaPrefs;
+	/// An outlet to the preferences manager of the application
+	IBOutlet SeaPrefs *seaPrefs;
 	
-	// A panel through which a new image can be configured
-	IBOutlet id newPanel; 
+	/// A panel through which a new image can be configured
+	IBOutlet NSPanel *newPanel;
 	
-	// The various text boxes from the New Image Settings panel
-	IBOutlet id widthInput, heightInput;
+	/// The various text boxes from the New Image Settings panel
+	IBOutlet NSTextField *widthInput, *heightInput;
 	
-	// The various buttons for changing units
+	/// The various buttons for changing units
 	IBOutlet id widthUnits, heightUnits;
 	
-	// The resolution menu from the New Image Settings panel
-	IBOutlet id resMenu;
+	/// The resolution menu from the New Image Settings panel
+	IBOutlet NSPopUpButton *resMenu;
 	
-	// The mode menu from the New Image Settings panel
-	IBOutlet id modeMenu;
+	/// The mode menu from the New Image Settings panel
+	IBOutlet NSPopUpButton *modeMenu;
 	
-	// The units menu for the New Image Settings panel
-	IBOutlet id unitsMenu;
+	/// The units menu for the New Image Settings panel
+	IBOutlet NSPopUpButton *unitsMenu;
 	
-	// The templates menu from the New Image Settings panel
-	IBOutlet id templatesMenu;	
+	/// The templates menu from the New Image Settings panel
+	IBOutlet NSPopUpButton *templatesMenu;
 	
-	// The transparency checkbox for the New Image settings panel
-	IBOutlet id backgroundCheckbox;
+	/// The transparency checkbox for the New Image settings panel
+	IBOutlet NSButton *backgroundCheckbox;
 	
-	// The dropdown for the recent documents.
-	IBOutlet id recentMenu;
+	/// The dropdown for the recent documents.
+	IBOutlet NSPopUpButton *recentMenu;
 	
-	// The units for the New Image Settings panel
-	int units;
+	/// The units for the New Image Settings panel
+	SeaUnits units;
 	
-	// The variables stored for retrieval by the new document 
+	/// The variables stored for retrieval by the new document
 	int type, width, height, resolution;
 	
-	// The variables stored for retrieval by the new document
+	/// The variables stored for retrieval by the new document
 	BOOL opaque;
 	
-	// If YES prevents new documents being recorded as recently opened
+	/// If \c YES prevents new documents being recorded as recently opened
 	BOOL stopNotingRecentDocuments;
 	
-	// A long list of the possible things we can write
-	NSMutableDictionary *editableTypes;
+	/// A long list of the possible things we can write
+	NSMutableDictionary<NSString*,NSSet<NSString*>*> *editableTypes;
 	
-	// A long list of the possible things we can read
-	NSMutableDictionary *viewableTypes;
-	
+	/// A long list of the possible things we can read
+	NSMutableDictionary<NSString*,NSSet<NSString*>*> *viewableTypes;
 }
 
 /*!
@@ -66,7 +72,7 @@
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
+- (instancetype)init;
 
 /*!
 	@method		newDocument:
@@ -91,14 +97,13 @@
 				The path of the file.
 	@result		Returns an instance of the freshly opened document.
 */
-- (id)openNonCurrentFile:(NSString *)path;
+- (__kindof NSDocument*)openNonCurrentFile:(NSString *)path;
 
 /*!
 	@method		openRecent:
 	@discussion The action from the open recent popup menu.
-	@param		path
+	@param		sender
 				The path of the file.
-	@result		Returns an instance of the freshly opened document.
 */
 - (IBAction)openRecent:(id)sender;
 
@@ -159,62 +164,63 @@
 	@result		Returns the instance variable of the same name.
 */
 - (int)type;
+@property (readonly) int type;
 
 /*!
-	@method		width
+	@property	width
 	@discussion	Returns the instance variable of the same name.
 	@result		Returns the instance variable of the same name.
 */
-- (int)width;
+@property (readonly) int width;
 
 /*!
-	@method		height
+	@property	height
 	@discussion	Returns the instance variable of the same name.
 	@result		Returns the instance variable of the same name.
 */
-- (int)height;
+@property (readonly) int height;
 
 /*!
-	@method		resolution
+	@property	resolution
 	@discussion	Returns the instance variable of the same name.
 	@result		Returns the instance variable of the same name.
 */
-- (int)resolution;
+@property (readonly) int resolution;
 
 /*!
-	@method		opaque
+	@property	opaque
 	@discussion	Returns the instance variable of the same name.
 	@result		Returns the instance variable of the same name.
 */
-- (int)opaque;
+@property (readonly) BOOL opaque;
 
 /*!
-	@method		units
+	@property	units
 	@discussion	Returns the instance variable of the same name.
 	@result		Returns the instance variable of the same name.
 */
-- (int)units;
+@property (readonly) SeaUnits units;
 
 /*!
-	@method		editableTypes
+	@property	editableTypes
 	@discussion	The file types this document controller can open and save to.
 	@result		A dict of file extensions, UTI's, and document type strings.
 */
-- (NSMutableDictionary*)editableTypes;
+@property (readonly, copy) NSMutableDictionary<NSString*,NSSet<NSString*>*>* editableTypes;
 
 /*!
-	@method		viewableTypes
+	@property	viewableTypes
 	@discussion	The file types this document controller can open.
 	@result		A dict of file extensions, UTI's, and document type strings.
 */
-- (NSMutableDictionary*)viewableTypes;
+@property (readonly, copy) NSMutableDictionary<NSString*,NSSet<NSString*>*>* viewableTypes;
 
 /*!
-	@method		readableTypes
+	@property	readableTypes
 	@discussion	All of the kinds of type strings we can read in.
 	@result		Flat list of all of the types.
 */
-- (NSArray*)readableTypes;
+@property (readonly, copy) NSArray<NSString*> *readableTypes;
 
 /*!
 	@method		type:isContainedInDocType:

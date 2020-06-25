@@ -37,7 +37,7 @@ inline static int parse_value(char *input, char *value)
 }
 
 
-- (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path
+- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path
 {
 	FILE *file;
 	char buffer[4096], temp;
@@ -45,8 +45,8 @@ inline static int parse_value(char *input, char *value)
 	id layer;
 	
 	// Initialize superclass first
-	if (![super initWithDocument:doc])
-		return NULL;
+	if (!(self = [super initWithDocument:doc]))
+		return nil;
 	
 	// Parse the width and height of the image
 	file = fopen([path fileSystemRepresentation], "rb");
@@ -60,7 +60,6 @@ inline static int parse_value(char *input, char *value)
 	// Fail if something went wrong
 	if (info.width == -1 || info.height == -1) {
 		fclose(file);
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -77,7 +76,6 @@ inline static int parse_value(char *input, char *value)
 	// Fail if something went wrong
 	if (ferror(file) || feof(file)) {
 		fclose(file);
-		[self autorelease];
 		return NULL;
 	}
 
@@ -86,11 +84,9 @@ inline static int parse_value(char *input, char *value)
 	layer = [[XBMLayer alloc] initWithFile:file offset:ftell(file) document:doc sharedInfo:&info];
 	if (layer == NULL) {
 		fclose(file);
-		[self autorelease];
 		return NULL;
 	}
-	layers = [NSArray arrayWithObject:layer];
-	[layers retain];
+	layers = @[layer];
 
 	// Close the file
 	fclose(file);

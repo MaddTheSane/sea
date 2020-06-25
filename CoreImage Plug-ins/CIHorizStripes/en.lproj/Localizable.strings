@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Generate";
+description = "Generates horizontal stripes for the selection";
+license = "Public Domain";
+name = "Horizontal Stripes";
+instruction = "Click twice: first to locate the top-side of a stripe, then to locate the bottom-side of a stripe";

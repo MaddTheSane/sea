@@ -9,48 +9,19 @@
 
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
-#import <CoreGraphics/CoreGraphics.h>
+#import <ApplicationServices/ApplicationServices.h>
 #import "SeaPlugins.h"
+#import "PluginData.h"
+#import "SeaWhiteboard.h"
+#import "SSKCIPlugin.h"
 
-@interface CIVortexClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// The label displaying the angle
-	IBOutlet id angleLabel;
-	
-	// The slider for the angle
-	IBOutlet id angleSlider;
-
+@interface CIVortexClass : SSKCIPlugin
+{
 	// The checkbox for whether reverse directions
-	IBOutlet id reverseCheckbox;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// YES if the application succeeded
-	BOOL success;
-
-	// YES if the effect must be refreshed
-	BOOL refresh;
-	
-	// The angle of the twirl
-	float angle;
-	
-	// Some temporary space we need preallocated for greyscale data
-	unsigned char *newdata;
-
+	IBOutlet NSButton *reverseCheckbox;
 }
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
+// The angle of the twirl
+@property CGFloat angle;
 
 /*!
 	@method		type
@@ -58,7 +29,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		points
@@ -124,84 +95,6 @@
 	@result		Returns YES if the plug-in can be applied again, NO otherwise.
 */
 - (BOOL)canReapply;
-
-/*!
-	@method		preview:
-	@discussion	Previews the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
-
-
-/*!
-	@method		update:
-	@discussion	Updates the panel's labels.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
-
-/*!
-	@method		update:
-	@discussion	Updates the panel's labels.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
-
-/*!
-	@method		execute
-	@discussion	Executes the effect.
-*/
-- (void)execute;
-
-/*!
-	@method		executeGrey
-	@discussion	Executes the effect for greyscale images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeGrey:(PluginData *)pluginData;
-
-/*!
-	@method		executeGrey
-	@discussion	Executes the effect for colour images.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)executeColor:(PluginData *)pluginData;
-
-/*!
-	@method		executeChannel:withBitmap:
-	@discussion	Executes the effect with any necessary changes depending on channel selection
-				(called by either executeGrey or executeColor). 
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data;
-
-/*!
-	@method		twirl:
-	@discussion	Called by execute once preparation is complete.
-	@param		pluginData
-				The PluginData object.
-	@param		data
-				The bitmap data to work with (must be 8-bit ARGB).
-	@result		Returns the resulting bitmap.
-*/
-- (unsigned char *)twirl:(PluginData *)pluginData withBitmap:(unsigned char *)data;
 
 /*!
 	@method		validateMenuItem:

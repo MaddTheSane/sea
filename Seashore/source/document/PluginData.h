@@ -1,4 +1,13 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#import "Constants.h"
+#import "SeaWhiteboard.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/Constants.h>
+#import <SeashoreKit/SeaWhiteboard.h>
+#endif
 
 /*!
 	@class		PluginData
@@ -9,85 +18,85 @@
 				<b>Copyright:</b> N/A
 */
 
-@interface PluginData : NSObject {
+@class SeaDocument;
 
-	// The document associated with this object
-    IBOutlet id document;
+@interface PluginData : NSObject
 
-}
+//! The document associated with this object
+@property (weak) IBOutlet SeaDocument *document;
 
 /*!
-	@method		selection
+	@property	selection
 	@discussion	Returns the rectange bounding the active selection in the
 				layer's co-ordinates.
 	@result		Returns a IntRect indicating the active selection.
 */
-- (IntRect)selection;
+@property (readonly) IntRect selection;
 
 /*!
-	@method		data
+	@property	data
 	@discussion	Returns the bitmap data of the layer.
 	@result		Returns a pointer to the bitmap data of the layer.
 */
-- (unsigned char *)data;
+@property (readonly) unsigned char *data NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		whiteboardData
+	@property	whiteboardData
 	@discussion	Returns the bitmap data of the document.
 	@result		Returns a pointer to the bitmap data of the document.
 */
-- (unsigned char *)whiteboardData;
+@property (readonly) unsigned char *whiteboardData NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		replace
+	@property	replace
 	@discussion	Returns the replace mask of the overlay.
 	@result		Returns a pointer to the 8 bits per pixel replace mask of the
 				overlay.
 */
-- (unsigned char *)replace;
+@property (readonly) unsigned char *replace NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		overlay
+	@property	overlay
 	@discussion	Returns the bitmap data of the overlay.
 	@result		Returns a pointer to the bitmap data of the overlay.
 */
-- (unsigned char *)overlay;
+@property (readonly) unsigned char *overlay NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		spp
+	@property	spp
 	@discussion	Returns the document's samples per pixel (either 2 or 4).
 	@result		Returns an integer indicating the document's sample per pixel.
 */
-- (int)spp;
+@property (readonly) int spp;
 
 /*!
-	@method		channel
+	@property	channel
 	@discussion	Returns the currently selected channel.
 	@result		Returns an integer representing the currently selected channel.
 */
-- (int)channel;
+@property (readonly) SeaSelectedChannel channel;
 
 /*!
-	@method		width
+	@property	width
 	@discussion	Returns the layer's width in pixels.
 	@result		Returns an integer indicating the layer's width in pixels.
 */
-- (int)width;
+@property (readonly) int width;
 
 /*!
-	@method		height
+	@property	height
 	@discussion	Returns the layer's height in pixels.
 	@result		Returns an integer indicating the layer's height in pixels.
 */
-- (int)height;
+@property (readonly) int height;
 
 /*!
-	@method		hasAlpha
+	@property	hasAlpha
 	@discussion	Returns if the layer's alpha channel is enabled.
 	@result		Returns YES if the layer's alpha channel is enabled, NO
 				otherwise.
 */
-- (BOOL)hasAlpha;
+@property (readonly) BOOL hasAlpha;
 
 /*!
 	@method		point:
@@ -98,42 +107,45 @@
 				value.
 	@result		The corresponding point from the effect tool.
 */
-- (IntPoint)point:(int)index;
+- (IntPoint)point:(NSInteger)index NS_SWIFT_NAME(point(at:));
 
 /*!
 	@method		foreColor
 	@discussion	Return the active foreground colour.
 	@param		calibrated
-				YES if the colour is to be calibrated (usually bad), NO otherwise.
-	@result		Returns an NSColor representing the active foreground
+				\c YES if the colour is to be calibrated (usually bad), \c NO otherwise.
+	@result		Returns an \c NSColor representing the active foreground
 				colour.
 */
-- (NSColor *)foreColor:(BOOL)calibrated;
+- (NSColor *)foreColor:(BOOL)calibrated NS_SWIFT_NAME(foreColor(calibrated:));
 
 /*!
 	@method		backColor
 	@discussion	Return the active background colour.
 	@param		calibrated
-				YES if the colour is to be calibrated (usually bad), NO otherwise.
-	@result		Returns an NSColor representing the active background
+				\c YES if the colour is to be calibrated (usually bad), \c NO otherwise.
+	@result		Returns an \c NSColor representing the active background
 				colour.
 */
-- (NSColor *)backColor:(BOOL)calibrated;
+- (NSColor *)backColor:(BOOL)calibrated NS_SWIFT_NAME(backColor(calibrated:));
 
 /*!
-	@method		displayProf
+	@property	displayProf
 	@discussion	Returns the current display profile.
 	@result		Returns a CGColorSpaceRef representing the ColorSync display profile
 				Seashore is using.
 */
-- (CGColorSpaceRef)displayProf;
+@property (readonly) CGColorSpaceRef displayProf CF_RETURNS_NOT_RETAINED;
 
 /*!
 	@method		window
 	@discussion	Returns the window to use for the plug-in's panel.
 	@result		Returns the window to use for the plug-in's panel.
 */
-- (id)window;
+- (NSWindow *)window;
+
+//! The overlay behaviour
+@property SeaOverlayBehaviour overlayBehaviour;
 
 /*!
 	@method		setOverlayBehaviour:
@@ -141,7 +153,10 @@
 	@param		value
 				The new overlay behaviour (see SeaWhiteboard).
 */
-- (void)setOverlayBehaviour:(int)value;
+- (void)setOverlayBehaviour:(SeaOverlayBehaviour)value;
+
+//! The opacity of the overlay
+@property int overlayOpacity;
 
 /*!
 	@method		setOverlayOpacity:

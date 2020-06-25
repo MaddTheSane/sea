@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -10,26 +11,16 @@
 */
 
 @interface LayerCell : NSTextFieldCell {
-    NSImage *image;	
-	// We need to know if the cell is selected because
-	// we do some drawing.
+	/// We need to know if the cell is selected because
+	/// we do some drawing.
 	BOOL selected;
 }
 
 /*!
-	@method		setImage:
-	@discussion For setting the image showing the layer thumbnail.
-	@param		anImage
-				An NSImage representing the icon.
+	@property	image
+	@discussion	Gets and sets the image used in this cell's view.
 */
-- (void)setImage:(NSImage *)anImage;
-
-/*!
-	@method		image
-	@discussion	Gives the image used in this cell's view.
-	@result		An NSImage of the thumbnail.
-*/
-- (NSImage *)image;
+@property (strong) NSImage *image;
 
 /*!
 	@method		drawWithFrame:inView:
@@ -42,18 +33,16 @@
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 
 /*!
-	@method		cellSize
+	@property	cellSize
 	@discussion	Returns the dimensions of the cell
 	@result		An NSSize.
 */
-- (NSSize)cellSize;
+@property (readonly) NSSize cellSize;
 
 /*
-	@method		setSelected:
-	@discussion	Sets whether or not we need the selection highlight.
-	@param		isSelected
-				A BOOL.
+	@property	selected
+	@discussion	Indicates whether or not we need the selection highlight.
 */
-- (void) setSelected:(BOOL)isSelected;
+@property (getter=isSelected) BOOL selected;
 
 @end

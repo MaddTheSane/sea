@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractPaintOptions.h"
 
@@ -9,28 +10,21 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface PencilOptions : AbstractPaintOptions {
-	
-	// A slider indicating the size of the pencil block
-	IBOutlet id sizeSlider;
-	
-	// Are we erasing stuff?
-	BOOL isErasing;
+@interface PencilOptions : AbstractPaintOptions
+{	
+	/// A slider indicating the size of the pencil block
+	IBOutlet NSSlider *sizeSlider;
 }
 
-/*!
-	@method		awakeFromNib
-	@discussion	Loads previous options from preferences.
-*/
-- (void)awakeFromNib;
+// Are we erasing stuff?
+@property (readonly) BOOL pencilIsErasing;
 
 /*!
-	@method		pencilSize
+	@property	pencilSize
 	@discussion	Returns the current pencil size.
 	@result		Returns an integer representing the current pencil size.
 */
-- (int)pencilSize;
+@property (readonly) int pencilSize;
 
 /*!
 	@method		useTextures
@@ -41,20 +35,12 @@
 - (BOOL)useTextures;
 
 /*!
-	@method		pencilIsErasing
-	@discussion	Returns whether or not the pencil is erasing.
-	@result		Returns YES if the pencil is erasing, NO if the pencil is using
-				its normal operation.
-*/
-- (BOOL)pencilIsErasing;
-
-/*!
 	@method		updateModifiers:
 	@discussion	Updates the modifier pop-up.
 	@param		modifiers
 				An unsigned int representing the new modifiers.
 */
-- (void)updateModifiers:(unsigned int)modifiers;
+- (void)updateModifiers:(NSEventModifierFlags)modifiers;
 
 /*!
 	@method		modifierPopupChanged:

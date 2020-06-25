@@ -12,35 +12,24 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "SeaPlugins.h"
+#import "PluginData.h"
+#import "SeaWhiteboard.h"
+#import "SSKPlugin.h"
 
-@interface CIMedianClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// YES if the application succeeded
-	BOOL success;
-
+@interface CIMedianClass : SSKPlugin
+{
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
-	
-}
 
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
+	NSBitmapImageRep *temp_rep;
+}
 
 /*!
 	@method		type
 	@discussion	Returns the type of plug-in so Seashore can correctly interact with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		name

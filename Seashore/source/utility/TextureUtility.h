@@ -1,5 +1,10 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractPanelUtility.h"
+
+@class SeaTexture;
+@class SeaDocument;
+@class SeaProxy;
 
 /*!
 	@class		TextureUtility
@@ -9,44 +14,42 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
 @interface TextureUtility : AbstractPanelUtility {
+	/// The proxy object
+	IBOutlet SeaProxy *seaProxy;
 	
-	// The proxy object
-	IBOutlet id seaProxy;
+	/// The texture grouping pop-up
+    IBOutlet NSPopUpButton *textureGroupPopUp;
 	
-	// The texture grouping pop-up
-    IBOutlet id textureGroupPopUp;
+	/// The label that presents the user with the texture name
+	IBOutlet NSTextField *textureNameLabel;
 	
-	// The label that presents the user with the texture name
-	IBOutlet id textureNameLabel;
-	
-	// The view that displays the textures
+	/// The view that displays the textures
     IBOutlet id view;
     	
 	// The opacity selection items
-	IBOutlet id opacitySlider;
-	IBOutlet id opacityLabel;
+	IBOutlet NSSlider *opacitySlider;
+	IBOutlet NSTextField *opacityLabel;
 	
 	// The document which is the focus of this utility
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
-	// An dictionary of all brushes known to Seashore
+	/// A dictionary of all brushes known to Seashore
 	NSDictionary *textures;
 	
-	// An array of all groups (an array of an array SeaTexture's) and group names (an array of NSString's)
-	NSArray *groups;
-	NSArray *groupNames;
+	/// An array of all groups (an array of an array of <code>SeaTexture</code>s)
+	NSArray<NSArray<SeaTexture*>*> *groups;
+	/// An array of all group names (an array of <code>NSString</code>s)
+	NSArray<NSString*> *groupNames;
 	
-	// The index of the currently active group
-	int activeGroupIndex;
+	/// The index of the currently active group
+	NSInteger activeGroupIndex;
 	
-	// The index of the currently active texture
-	int activeTextureIndex;
+	/// The index of the currently active texture
+	NSInteger activeTextureIndex;
 	
-	// The opacity value to be used with the texture
+	/// The opacity value to be used with the texture
 	int opacity;
-	
 }
 
 /*!
@@ -54,19 +57,7 @@
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
-
-/*!
-	@method		awakeFromNib
-	@discussion	Configures the utility's interface.
-*/
-- (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)init;
 
 /*!
 	@method		activate:
@@ -123,29 +114,29 @@
 - (IBAction)changeGroup:(id)sender;
 
 /*!
-	@method		opacity
+	@property	opacity
 	@discussion	Returns the opacity to be used by the active texture.
 	@result		Reutrns an integer from 0 to 255 indicating the opacity to be
 				used by the active texture. The texture is fully opaque if the
 				opacity is 255.
 */
-- (int)opacity;
+@property (readonly) int opacity;
 
 /*!
-	@method		activeTexture
+	@property	activeTexture
 	@discussion	Returns the currently active texture.
 	@result		Returns an instance of SeaTexture representing the currently
 				active texture.
 */
-- (id)activeTexture;
+@property (readonly, retain) SeaTexture *activeTexture;
 
 /*!
-	@method		activeTextureIndex
+	@property	activeTextureIndex
 	@discussion	Returns the index of the currently active texture.
 	@result		Returns an integer representing the index of the currently
 				active texture.
 */
-- (int)activeTextureIndex;
+@property (nonatomic) NSInteger activeTextureIndex;
 
 /*!
 	@method		setActiveTextureIndex:
@@ -153,21 +144,21 @@
 	@param		index
 				The index of the texture to activate.
 */
-- (void)setActiveTextureIndex:(int)index;
+- (void)setActiveTextureIndex:(NSInteger)index;
 
 /*!
-	@method		textures
+	@property	textures
 	@discussion	Returns all the textures in the currently active group.
 	@result		Returns an array with all the textures in the currently active
 				group. 
 */
-- (NSArray *)textures;
+@property (readonly, copy) NSArray<SeaTexture*> *textures;
 
 /*!
-	@method		groupNames
+	@property	groupNames
 	@discussion	Returns the textures' group names (excluding custom groups).
-	@result		Returns an NSArray containing the textures' group names.
+	@result		Returns an \c NSArray containing the textures' group names.
 */
-- (NSArray *)groupNames;
+@property (readonly, copy) NSArray<NSString*> *groupNames;
 
 @end

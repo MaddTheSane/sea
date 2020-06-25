@@ -16,15 +16,9 @@
 
 @implementation SmudgeTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
-	return kSmudgeTool;
-}
-
-
-- (void)dealloc
-{
-	[super dealloc];
+	return SeaToolsSmudge;
 }
 
 - (BOOL)useMouseCoalescing
@@ -32,14 +26,14 @@
 	return NO;
 }
 
-- (void)smudgeWithBrush:(id)brush at:(NSPoint)point
+- (void)smudgeWithBrush:(SeaBrush *)brush at:(NSPoint)point
 {
-	id contents = [document contents];
-	id layer = [contents activeLayer];
-	unsigned char *overlay = [[document whiteboard] overlay], *data = [(SeaLayer *)layer data], *replace = [(SeaWhiteboard *)[document whiteboard] replace];
+	SeaContent *contents = [document contents];
+	SeaLayer *layer = [contents activeLayer];
+	unsigned char *overlay = [[document whiteboard] overlay], *data = [layer data], *replace = [[document whiteboard] replace];
 	unsigned char *brushData, basePixel[4];
-	int brushWidth = [(SeaBrush *)brush fakeWidth], brushHeight = [(SeaBrush *)brush fakeHeight];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+	int brushWidth = [brush fakeWidth], brushHeight = [brush fakeHeight];
+	int width = [layer width], height = [layer height];
 	int i, j, k, tx, ty, t1, t2, pos, spp = [[document contents] spp];
 	int rate = [(SmudgeOptions *)options rate];
 	IntPoint ipoint = NSPointMakeIntPoint(point);
@@ -58,7 +52,7 @@
 				// Change the pixel colour appropriately
 				pos = ty * width + tx;
 				if (replace[pos] == 255) {
-					if (selectedChannel == kAlphaChannel)
+					if (selectedChannel == SeaSelectedChannelAlpha)
 						basePixel[spp - 1] = overlay[pos * spp];
 					else
 						memcpy(basePixel, &(overlay[pos * spp]), spp);
@@ -67,7 +61,7 @@
 					memcpy(basePixel, &(data[pos * spp]), spp);
 				}
 				else {
-					if (selectedChannel == kAlphaChannel) {
+					if (selectedChannel == SeaSelectedChannelAlpha) {
 						basePixel[spp - 1] = int_mult(overlay[pos * spp], replace[pos], t1) + int_mult(data[(pos + 1) * spp - 1], 255 - replace[pos], t2);
 					}
 					else {
@@ -75,15 +69,15 @@
 							basePixel[k] = int_mult(overlay[pos * spp + k], replace[pos], t1) + int_mult(data[pos * spp + k], 255 - replace[pos], t2);
 					}
 				}
-				if (selectedChannel == kPrimaryChannels) {
+				if (selectedChannel == SeaSelectedChannelPrimary) {
 					basePixel[spp - 1] = 255;
 				}
-				else if (selectedChannel == kAlphaChannel) {
+				else if (selectedChannel == SeaSelectedChannelAlpha) {
 					for (k = 0; k < spp - 1; k++)
 						basePixel[k] = basePixel[spp - 1];
 					basePixel[spp - 1] = 255;
 				}
-				blendPixel(spp, accumData, (j * brushWidth + i) * spp, basePixel, 0, rate);
+				SeaBlendPixel(spp, accumData, (j * brushWidth + i) * spp, basePixel, 0, rate);
 				replace[pos] = brushData[j * brushWidth + i] + int_mult((255 - brushData[j * brushWidth + i]), replace[pos], t1);
 				memcpy(&(overlay[pos * spp]), &(accumData[(j * brushWidth + i) * spp]), spp);
 				
@@ -97,11 +91,11 @@
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
-	int layerWidth = [(SeaLayer *)layer width], layerHeight = [(SeaLayer *)layer height];
-	unsigned char *data = [(SeaLayer *)layer data];
-	id curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
-	int brushWidth = [(SeaBrush *)curBrush fakeWidth], brushHeight = [(SeaBrush *)curBrush fakeHeight];
+	SeaLayer *layer = [[document contents] activeLayer];
+	int layerWidth = [layer width], layerHeight = [layer height];
+	unsigned char *data = [layer data];
+	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	int brushWidth = [curBrush fakeWidth], brushHeight = [curBrush fakeHeight];
 	int i, j, k, tx, ty, spp = [[document contents] spp];
 	NSPoint curPoint = IntPointMakeNSPoint(where), temp;
 	int selectedChannel = [[document contents] selectedChannel];
@@ -138,10 +132,10 @@
 			ty = where.y - brushHeight / 2 + j;
 			if (tx >= 0 && tx < layerWidth && ty >= 0 && ty < layerHeight) {
 				memcpy(&(accumData[(j * brushWidth + i) * spp]), &(data[(ty * layerWidth + tx) * spp]), spp);
-				if (selectedChannel == kPrimaryChannels) {
+				if (selectedChannel == SeaSelectedChannelPrimary) {
 					accumData[(j * brushWidth + i + 1) * spp - 1] = 255;
 				}
-				else if (selectedChannel == kAlphaChannel) {
+				else if (selectedChannel == SeaSelectedChannelAlpha) {
 					for (k = 0; k < spp - 1; k++)
 						accumData[(j * brushWidth + i) * spp + k] = accumData[(j * brushWidth + i + 1) * spp - 1];
 					accumData[(j * brushWidth + i + 1) * spp - 1] = 255;
@@ -152,7 +146,7 @@
 		
 	// Make the overlay opaque
 	[[document whiteboard] setOverlayOpacity:255];
-	[[document whiteboard] setOverlayBehaviour:kReplacingBehaviour];
+	[[document whiteboard] setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	
 	// Plot the intial point
 	rect.size.width = [(SeaBrush *)curBrush fakeWidth] + 1;
@@ -172,10 +166,10 @@
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
-	int layerWidth = [(SeaLayer *)layer width], layerHeight = [(SeaLayer *)layer height];
-	id curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
-	int brushWidth = [(SeaBrush *)curBrush fakeWidth], brushHeight = [(SeaBrush *)curBrush fakeHeight];
+	SeaLayer *layer = [[document contents] activeLayer];
+	int layerWidth = [layer width], layerHeight = [layer height];
+	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	int brushWidth = [curBrush fakeWidth], brushHeight = [curBrush fakeHeight];
 	NSPoint curPoint = IntPointMakeNSPoint(where);
 	double brushSpacing = 1.0 / 100.0;
 	double deltaX, deltaY, mag, xd, yd, dist;
@@ -189,8 +183,7 @@
 	// Check this is a new point
 	if (where.x == lastWhere.x && where.y == lastWhere.y) {
 		return;
-	}
-	else {
+	} else {
 		lastWhere = where;
 	}
 	

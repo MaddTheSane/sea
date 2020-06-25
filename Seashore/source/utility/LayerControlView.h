@@ -1,4 +1,7 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+
+@class StatusUtility;
 
 /*!
 	@class		LayerControlView
@@ -8,32 +11,32 @@
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
 @interface LayerControlView : NSView {
 	// If the user is dragging right now
 	BOOL intermediate;
 	
 	// The previous width before the drag
-	float oldWidth;
+	CGFloat oldWidth;
 	NSPoint oldPoint;
 	
 	// The other views in the window
-	IBOutlet id leftPane;
-	IBOutlet id rightPane;
+	IBOutlet NSView *leftPane;
+	IBOutlet NSView *rightPane;
 	
 	// The buttons
-	IBOutlet id newButton;
-	IBOutlet id dupButton;
-	IBOutlet id delButton;
-	IBOutlet id shButton;
+	IBOutlet NSButton *newButton;
+	IBOutlet NSButton *dupButton;
+	IBOutlet NSButton *delButton;
+	IBOutlet NSButton *shButton;
 	
-	IBOutlet id divider;
+	IBOutlet NSView *divider;
 	
 	BOOL drawThumb;
 	
-	IBOutlet id statusUtility;
+	IBOutlet StatusUtility *statusUtility;
 }
 
+@property BOOL hasResizeThumb;
 - (void)setHasResizeThumb:(BOOL)hasIt;
 
 @end

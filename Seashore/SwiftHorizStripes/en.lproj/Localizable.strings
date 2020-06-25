@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Seashore
+
+  Created by C.W. Betts on 7/13/16.
+
+*/
+
+author = "C.W. Betts";
+copyright = "Public Domain 2016";
+description = "Generates horizontal stripes for the selection";
+groupName = "Generate";
+instruction = "Click twice: first to locate the top-side of a stripe, then to locate the bottom-side of a stripe";
+license = "Public Domain";
+name = "Swift Horizontal Stripes";

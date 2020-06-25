@@ -1,4 +1,11 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
+
+@class InfoPanel;
 
 /*		
 	@class		AbstractPanelUtility
@@ -8,10 +15,9 @@
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface AbstractPanelUtility : NSObject {
 	// The window associated with this utility
-    IBOutlet id window;
+    IBOutlet InfoPanel *window;
 	// The parent this is associated with
 	NSWindow *parentWin;
 }

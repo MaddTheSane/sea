@@ -1,5 +1,10 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractPanelUtility.h"
+
+
+@class SeaDocument;
+@class SeaBrush;
 
 /*!
 	@class		BrushUtility
@@ -9,41 +14,39 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
 @interface BrushUtility : AbstractPanelUtility {
 
-	// The brush grouping pop-up
-	IBOutlet id brushGroupPopUp;
+	/// The brush grouping pop-up
+	IBOutlet NSPopUpButton *brushGroupPopUp;
 
-	// The label that presents the user with the brushes name
-	IBOutlet id brushNameLabel;
+	/// The label that presents the user with the brushes name
+	IBOutlet NSTextField *brushNameLabel;
 	
 	// The label and slider that present spacing to the user
-    IBOutlet id spacingLabel;
-    IBOutlet id spacingSlider;
+    IBOutlet NSTextField *spacingLabel;
+    IBOutlet NSSlider *spacingSlider;
 	
-	// The view that displays the brushes
-    IBOutlet id view;
+	/// The view that displays the brushes
+    IBOutlet NSScrollView *view;
 		
-	// The document which is the focus of this utility
-	IBOutlet id document;
+	/// The document which is the focus of this utility
+	IBOutlet SeaDocument *document;
 	
-	// An dictionary of all brushes known to Seashore
-	NSDictionary *brushes;
+	/// An dictionary of all brushes known to Seashore
+	NSDictionary<NSString*, SeaBrush*> *brushes;
 	
 	// An array of all groups (an array of an array SeaBrush's) and group names (an array of NSString's)
-	NSArray *groups;
-	NSArray *groupNames;
+	NSArray<NSArray<SeaBrush*>*> *groups;
+	NSArray<NSString*> *groupNames;
 	
-	// The index of the currently active group
-	int activeGroupIndex;
+	/// The index of the currently active group
+	NSInteger activeGroupIndex;
 	
-	// The index of the currently active brush
-	int activeBrushIndex;
+	/// The index of the currently active brush
+	NSInteger activeBrushIndex;
 	
-	// The number of custom groups
-	int customGroups;
-	
+	/// The number of custom groups
+	NSInteger customGroups;
 }
 
 /*!
@@ -51,19 +54,7 @@
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
-
-/*!
-	@method		awakeFromNib
-	@discussion	Configures the utility's interface.
-*/
-- (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)init;
 
 /*!
 	@method		shutdown
@@ -76,8 +67,8 @@
 	@discussion	Frees (if necessary) and then reloads all the brushes from
 				Seashore's brushes directory.
 	@param		update
-				YES if the brush utility should be updated after reloading all
-				the brushes (typical case), NO otherwise.
+				\c YES if the brush utility should be updated after reloading all
+				the brushes (typical case), \c NO otherwise.
 */
 - (void)loadBrushes:(BOOL)update;
 
@@ -98,28 +89,28 @@
 - (IBAction)changeGroup:(id)sender;
 
 /*!
-	@method		spacing
+	@property	spacing
 	@discussion	Returns the spacing associated with the current brush.
 	@result		Returns an integer indicating the spacing associated with the
 				current brush.
 */
-- (int)spacing;
+@property (readonly) int spacing;
 
 /*!
-	@method		activeBrush
+	@property	activeBrush
 	@discussion	Returns the currently active brush.
 	@result		Returns an instance of SeaBrush representing the currently
 				active brush.
 */
-- (id)activeBrush;
+@property (readonly, retain) SeaBrush *activeBrush;
 
 /*!
-	@method		activeBrushIndex
-	@discussion	Returns the index of the currently active brush.
+	@property	activeBrushIndex
+	@discussion	The index of the currently active brush.
 	@result		Returns an integer representing the index of the currently
 				active brush.
 */
-- (int)activeBrushIndex;
+@property (nonatomic) NSInteger activeBrushIndex;
 
 /*!
 	@method		setActiveBrushIndex:
@@ -127,14 +118,14 @@
 	@param		index
 				The index of the brush to activate.
 */
-- (void)setActiveBrushIndex:(int)index;
+- (void)setActiveBrushIndex:(NSInteger)index;
 
 /*!
-	@method		brushes
+	@property	brushes
 	@discussion	Returns all the brushes in the currently active group.
 	@result		Returns an array with all the brushes in the currently active
 				group. 
 */
-- (NSArray *)brushes;
+@property (readonly, copy) NSArray<SeaBrush*> *brushes;
 
 @end

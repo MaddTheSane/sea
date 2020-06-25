@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@enum 		kLayer...
@@ -18,6 +23,8 @@ enum {
 	kLayerDeleted
 };
 
+@class SeaDocument;
+
 /*!
 	@class		SeaHelpers
 	@abstract	Provides methods that handle all updating necessary for a
@@ -27,11 +34,10 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaHelpers : NSObject {
 	
 	// The document associated with this object
-    IBOutlet id document;
+    IBOutlet SeaDocument *document;
 	
 }
 
@@ -144,7 +150,7 @@ enum {
 	@param		hold
 				YES if the Pegasus utility should not be updated, NO otherwise.
 */
-- (void)layerAttributesChanged:(int)index hold:(BOOL)hold;
+- (void)layerAttributesChanged:(NSInteger)index hold:(BOOL)hold;
 
 /*!
 	@method		layerBoundariesChanged:
@@ -153,7 +159,7 @@ enum {
 				The index of the layer changed or kActiveLayer to indicate the
 				active layer or kAllLayers to indicate all layers.
 */
-- (void)layerBoundariesChanged:(int)index;
+- (void)layerBoundariesChanged:(NSInteger)index;
 
 /*!
 	@method		layerContentsChanged:
@@ -162,7 +168,7 @@ enum {
 				The index of the layer changed or kActiveLayer to indicate the
 				active layer or kAllLayers to indicate all layers.
 */
-- (void)layerContentsChanged:(int)index;
+- (void)layerContentsChanged:(NSInteger)index;
 
 /*!
 	@method		layerLevelChanged:
@@ -171,7 +177,7 @@ enum {
 				The index of the layer changed or kActiveLayer to indicate the
 				active layer or kAllLayers to indicate all layers.
 */
-- (void)layerLevelChanged:(int)index;
+- (void)layerLevelChanged:(NSInteger)index;
 
 /*!
 	@method		layerOffsetsChanged:from:
@@ -184,7 +190,7 @@ enum {
 				The old offsets of the layer. This parameter is ignored if index
 				is kAllLayers or kLinkedLayers.
 */
-- (void)layerOffsetsChanged:(int)index from:(IntPoint)oldOffsets;
+- (void)layerOffsetsChanged:(NSInteger)index from:(IntPoint)oldOffsets;
 
 /*!
 	@method		layerSnapshotRestored:rect:

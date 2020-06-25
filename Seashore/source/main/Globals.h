@@ -7,8 +7,13 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
+#ifdef SEASYSPLUGIN
 #import "Rects.h"
 #import "Constants.h"
+#else
+#import <SeashoreKit/Rects.h>
+#import <SeashoreKit/Constants.h>
+#endif
 
 #ifdef __BIG_ENDIAN__
 #define MSB 0
@@ -48,18 +53,6 @@
 				operations which must operate on  128-bits at a time.
 */
 #define make_128(x) (x + 16 - (x % 16))
-
-/*!
-	@defined	PI
-	@discussion	The value of pi to 8 decimal places.
-*/
-#define PI 3.14159265
-
-/*!
-	@defined	gUserDefaults
-	@discussion	Allows quick reference to the standard user defaults manager.
-*/
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
 
 /*!
 	@defined	gColorPanel

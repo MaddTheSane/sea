@@ -1,0 +1,7 @@
+//author = "Mark Pazolli";
+//copyright = "Public Domain 2007";
+//description = "Applies a twirl to the selection";
+//groupName = "Distort";
+instruction = "Click twice: first to locate the centre of the circle to wrap around and then to specify its radius";
+//license = "Public Domain";
+//name = "Circular Wrap";

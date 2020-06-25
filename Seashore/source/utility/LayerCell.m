@@ -2,8 +2,10 @@
 #import "NSBezierPath_Extensions.h"
 
 @implementation LayerCell
+@synthesize image;
+@synthesize selected;
 
-- (id)init
+- (instancetype)init
 {
     if (self = [super init]) {
         [self setLineBreakMode:NSLineBreakByTruncatingTail];
@@ -12,31 +14,14 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [image release];
-    [super dealloc];
-}
-
 - (id)copyWithZone:(NSZone *)zone
 {
     LayerCell *cell = (LayerCell *)[super copyWithZone:zone];
-    // The image ivar will be directly copied; we need to retain or copy it.
-    cell->image = [image retain];
+	if (cell) {
+		// The image ivar will be directly copied; we need to retain or copy it.
+		cell.image = image;
+	}
     return cell;
-}
-
-- (void)setImage:(NSImage *)anImage
-{
-    if (anImage != image) {
-        [image release];
-        image = [anImage retain];
-    }
-}
-
-- (NSImage *)image
-{
-    return image;
 }
 
 - (NSRect)imageRectForBounds:(NSRect)cellFrame
@@ -74,7 +59,7 @@
     [super editWithFrame: textFrame inView: controlView editor:textObj delegate:anObject event: theEvent];
 }
 
-- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(int)selStart length:(int)selLength
+- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength
 {
     NSRect textFrame, imageFrame;
     NSDivideRect (aRect, &imageFrame, &textFrame, 3 + [image size].width, NSMinXEdge);
@@ -85,7 +70,7 @@
 {
 	if (image != nil) {
 		[NSGraphicsContext saveGraphicsState];
-		NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
+		NSShadow *shadow = [[NSShadow alloc] init];
 		[shadow setShadowOffset: NSMakeSize(1, 1)];
 		[shadow setShadowBlurRadius:2];
 		[shadow setShadowColor:[NSColor blackColor]];
@@ -112,17 +97,17 @@
 		cellFrame.origin.y += 10;
 		NSDictionary *attrs;
 		if(selected){
-			attrs = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12] , NSFontAttributeName, [NSColor whiteColor], NSForegroundColorAttributeName, nil];
+			attrs = @{NSFontAttributeName: [NSFont boldSystemFontOfSize:12], NSForegroundColorAttributeName: [NSColor whiteColor]};
 			[[self stringValue] drawInRect:cellFrame withAttributes:attrs];
 			[NSGraphicsContext restoreGraphicsState];
 		}else{
 			[NSGraphicsContext restoreGraphicsState];
-			attrs = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont systemFontOfSize:12] , NSFontAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];
+			attrs = @{NSFontAttributeName: [NSFont systemFontOfSize:12], NSForegroundColorAttributeName: [NSColor blackColor]};
 			[[self stringValue] drawInRect:cellFrame withAttributes:attrs];
 		}
 		
-        [image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
-	}else{
+		[image drawInRect:NSMakeRect(imageFrame.origin.x, imageFrame.origin.y - imageSize.height, imageSize.width, imageSize.height) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
+	} else {
 		[super drawWithFrame:cellFrame inView:controlView];
 	}
 }
@@ -132,11 +117,6 @@
     NSSize cellSize = [super cellSize];
     cellSize.width += (image ? [image size].width : 0) + 3;
     return cellSize;
-}
-
-- (void) setSelected:(BOOL)isSelected
-{
-	selected = isSelected;
 }
 
 @end

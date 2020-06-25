@@ -1,20 +1,23 @@
-#import "Globals.h"
+#import <Cocoa/Cocoa.h>
+#import <SeashoreKit/Globals.h>
 #import "SeaBrushFuncs.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
 	@struct		CachedMask
 	@discussion	Specifies a cached mask entry.
-	@param		index1
+	@field		index1
 				The corresponding horizontal subsample entry.
-	@param		index2
+	@field		index2
 				The corresponding horizontal subsample entry.
-	@param		scale
+	@field		scale
 				The corresponding scaling entry (major axis).
-	@param		lastCheck
+	@field		lastCheck
 				The time the entry was last used.
 */
 typedef struct {
-	unsigned char *cache;
+	unsigned char *__nullable cache;
 	int index1;
 	int index2;
 	int scale;
@@ -35,7 +38,6 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaBrush : NSObject {
 	
 	// A grayscale mask of the brush
@@ -64,7 +66,6 @@ typedef struct {
 	
 	// Do we use the pixmap or the mask?
 	BOOL usePixmap;
-	
 }
 
 /*!
@@ -75,13 +76,7 @@ typedef struct {
 				The path of the file with which to initalize this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithContentsOfFile:(NSString *)path;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (nullable instancetype)initWithContentsOfFile:(NSString *)path;
 
 /*!
 	@method		activate
@@ -96,81 +91,81 @@ typedef struct {
 - (void)deactivate;
 
 /*!
-	@method		pixelTag
+	@property	pixelTag
 	@discussion	Returns a string indicating the size of oversize brushes.
 	@result		Returns a string indicating the size of oversize brushes or NULL
 				if such a string is not required.
 */
-- (NSString *)pixelTag;
+@property (readonly, copy, nullable) NSString *pixelTag;
 
 /*!
-	@method		thumbnail
+	@property	thumbnail
 	@discussion	Returns a thumbnail of the brush.
 	@result		Returns an NSImage that is no greater in size than 44 by 44
 				pixels.
 */
-- (NSImage *)thumbnail;
+@property (readonly, copy) NSImage *thumbnail;
 
 /*!
-	@method		name
+	@property	name
 	@discussion	Returns the name of the brush.
 	@result		Returns an NSString representing the name of the brush.
 */
-- (NSString *)name;
+@property (readonly, copy) NSString *name;
 
 /*!
-	@method		spacing
+	@property	spacing
 	@discussion	Returns the default spacing between brush plots.
 	@result		Returns an integer specifying the default spacing between brush
 				plots  in pixels).
 */
-- (int)spacing;
+@property (readonly) int spacing;
 
 /*!
-	@method		width
+	@property	width
 	@discussion	Returns the width of the original brush bitmap (i.e. that
 				returned  by mask or pixmap).
 	@result		Returns the width of the original brush bitmap in pixels.
 */
-- (int)width;
+@property (readonly) int width;
 
 /*!
-	@method		height
+	@property	height
 	@discussion	Returns the height of the original brush bitmap (i.e. that
 				returned  by mask or pixmap).
 	@result		Returns the height of the original brush bitmap in pixels.
 */
-- (int)height;
+@property (readonly) int height;
 
 /*!
-	@method		fakeWidth
+	@property	fakeWidth
 	@discussion	Returns the width of the anti-aliased brush bitmaps (i.e. those
 				returned by maskForPoint: or pixmapForPoint:).
 	@result		Returns the width of the anti-aliased brush bitmaps in pixels.
 */
-- (int)fakeWidth;
+@property (readonly) int fakeWidth;
 
 /*!
-	@method		fakeHeight
+	@property	fakeHeight
 	@discussion	Returns the height of the anti-aliased brush bitmaps (i.e. those
 				returned by maskForPoint: or pixmapForPoint:).
 	@result		Returns the height of the anti-aliased brush bitmaps in pixels.
 */
-- (int)fakeHeight;
+@property (readonly) int fakeHeight;
 
 /*!
-	@method		mask
+	@property	mask
 	@discussion	Returns the alpha mask for a greyscale brush.
 	@result		Returns a reference to an 8-bit single-channel bitmap.
 */
-- (unsigned char *)mask;
+@property (readonly) unsigned char *mask;
 
 /*!
-	@method		pixmap
+	@property	pixmap
 	@discussion	Returns the pixmap for a full-coloured brush.
 	@result		Returns a reference to a 8-bit RGBA bitmap.
 */
-- (unsigned char *)pixmap;
+@property (readonly) unsigned char *pixmap;
 
 /*!
 	@method		maskForPoint:
@@ -178,7 +173,7 @@ typedef struct {
 				according to the fractional part of the point.
 	@param		point
 				An NSPoint at which the mask is being plotted.
-	@param		pressure
+	@param		value
 				An integer representing the pressure.
 	@result		Returns a reference to an 8-bit single-channel bitmap.
 */
@@ -195,14 +190,14 @@ typedef struct {
 - (unsigned char *)pixmapForPoint:(NSPoint)point;
 
 /*!
-	@method		usePixmap
+	@property	usePixmap
 	@discussion	Returns whether the brush uses a pixmap or an alpha mask. A
 				brush either uses one or the other, calls to mask or
-				maskForPoint: are invalid if the brush uses a pixmap and
+				\c maskForPoint: are invalid if the brush uses a pixmap and
 				vice-versa.
-	@result		Returns YES if the brush uses a pixmap, NO otherwise.
+	@result		Returns \c YES if the brush uses a pixmap, \c NO otherwise.
 */
-- (BOOL)usePixmap;
+@property (readonly) BOOL usePixmap;
 
 /*!
 	@method		compare:
@@ -212,6 +207,8 @@ typedef struct {
 				The other brush with which to compare this brush.
 	@result		Returns an NSComparisonResult.
 */
-- (NSComparisonResult)compare:(id)other;
+- (NSComparisonResult)compare:(SeaBrush*)other;
 
 @end
+
+NS_ASSUME_NONNULL_END

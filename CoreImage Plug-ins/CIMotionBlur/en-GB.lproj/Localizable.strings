@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Blur";
+description = "Applies a motion blur effect to the selection.";
+license = "Public Domain";
+name = "Motion Blur";
+instruction = "Click twice: first to begin and then to specify the direction and extent of the blur.";

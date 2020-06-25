@@ -1,5 +1,10 @@
-#import "Globals.h"
-#import "SeaContent.h"
+#import <Cocoa/Cocoa.h>
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaContent.h>
+
+
+extern IntSize getDocumentSize(const char *path);
+#define SeaUseOldSVGImporterKey @"UseOldSVGApp"
 
 /*!
 	@class		SVGContent
@@ -9,27 +14,24 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2005 Mark Pazolli
 */
-
 @interface SVGContent : SeaContent {
-
 	// The length warning panel
-	IBOutlet id waitPanel;
+	IBOutlet NSPanel *waitPanel;
 	
 	// The spinner to update
-	IBOutlet id spinner;
+	IBOutlet NSProgressIndicator *spinner;
 	
 	// The scaling panel
-	IBOutlet id scalePanel;
+	IBOutlet NSPanel *scalePanel;
 	
 	// The slider indicating the extent of scaling
-	IBOutlet id scaleSlider;
+	IBOutlet NSSlider *scaleSlider;
 	
 	// A label indicating the document's expected size
-	IBOutlet id sizeLabel;
+	IBOutlet NSTextField *sizeLabel;
 	
 	// The document's actual and scaled size
 	IntSize trueSize, size;
-	
 }
 
 /*!
@@ -50,7 +52,7 @@
 				The path of the image file with which to initalize this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
+- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
 
 /*!
 	@method		endPanel:

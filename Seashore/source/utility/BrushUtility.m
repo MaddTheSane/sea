@@ -10,35 +10,37 @@
 #endif
 
 @implementation BrushUtility
+@synthesize activeBrushIndex;
 
-- (id)init
+- (instancetype)init
 {		
+	if (self = [super init]) {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Load the brushes
 	[self loadBrushes:NO];
 	
 	// Determine the currently active brush group
-	if ([gUserDefaults objectForKey:@"active brush group"] == NULL)
+	if ([defaults objectForKey:@"active brush group"] == NULL)
 		activeGroupIndex = 0;
 	else
-		activeGroupIndex = [gUserDefaults integerForKey:@"active brush group"];
+		activeGroupIndex = [defaults integerForKey:@"active brush group"];
 	if (activeGroupIndex < 0 || activeGroupIndex >= [groups count])
 		activeGroupIndex = 0;
 		
 	// Determine the currently active brush 	
-	if ([gUserDefaults objectForKey:@"active brush"] == NULL)
+	if ([defaults objectForKey:@"active brush"] == NULL)
 		activeBrushIndex = 12;
 	else
-		activeBrushIndex = [gUserDefaults integerForKey:@"active brush"];
-	if (activeBrushIndex < 0 || activeBrushIndex >= [[groups objectAtIndex:activeGroupIndex] count])
+		activeBrushIndex = [defaults integerForKey:@"active brush"];
+	if (activeBrushIndex < 0 || activeBrushIndex >= [groups[activeGroupIndex] count])
 		activeBrushIndex = 0;
+	}
 	
 	return self;
 }
 
 - (void)awakeFromNib
 {
-	int yoff, i;
-
 	[super awakeFromNib];
 	
 	// Configure the view
@@ -47,7 +49,7 @@
 	[view setDocumentView:[[BrushView alloc] initWithMaster:self]];
 	[view setBackgroundColor:[NSColor lightGrayColor]];
 	if ([[view documentView] bounds].size.height > 3 * kBrushPreviewSize) {
-		yoff = MIN((activeBrushIndex / kBrushesPerRow) * kBrushPreviewSize, ([[self brushes] count] / kBrushesPerRow - 2) * kBrushPreviewSize);
+		NSInteger yoff = MIN((activeBrushIndex / kBrushesPerRow) * kBrushPreviewSize, ([[self brushes] count] / kBrushesPerRow - 2) * kBrushPreviewSize);
 		[[view contentView] scrollToPoint:NSMakePoint(0, yoff)];
 	}
 	[view reflectScrolledClipView:[view contentView]];
@@ -55,18 +57,18 @@
 	
 	// Configure the pop-up menu
 	[brushGroupPopUp removeAllItems];
-	[brushGroupPopUp addItemWithTitle:[groupNames objectAtIndex:0]];
+	[brushGroupPopUp addItemWithTitle:groupNames[0]];
 	[[brushGroupPopUp itemAtIndex:0] setTag:0];
 	if (customGroups != 0) {
 		[[brushGroupPopUp menu] addItem:[NSMenuItem separatorItem]];
-		for (i = 1; i < customGroups + 1; i++) {
-			[brushGroupPopUp addItemWithTitle:[groupNames objectAtIndex:i]];
+		for (NSInteger i = 1; i < customGroups + 1; i++) {
+			[brushGroupPopUp addItemWithTitle:groupNames[i]];
 			[[brushGroupPopUp itemAtIndex:[[brushGroupPopUp menu] numberOfItems] - 1] setTag:i];
 		}
 	}
 	[[brushGroupPopUp menu] addItem:[NSMenuItem separatorItem]];
-	for (i = customGroups + 1; i < [groupNames count]; i++) {
-		[brushGroupPopUp addItemWithTitle:[groupNames objectAtIndex:i]];
+	for (NSInteger i = customGroups + 1; i < [groupNames count]; i++) {
+		[brushGroupPopUp addItemWithTitle:groupNames[i]];
 		[[brushGroupPopUp itemAtIndex:[[brushGroupPopUp menu] numberOfItems] - 1] setTag:i];
 	}
 	[brushGroupPopUp selectItemAtIndex:[brushGroupPopUp indexOfItemWithTag:activeGroupIndex]];
@@ -75,31 +77,16 @@
 	[self setActiveBrushIndex:activeBrushIndex];
 	
 	// Set the window's properties
-	[(InfoPanel *)window setPanelStyle:kVerticalPanelStyle];
+	[window setPanelStyle:SeaPanelStyleVertical];
 	
 	[[SeaController utilitiesManager] setBrushUtility: self for:document];
 }
 
-- (void)dealloc
-{
-	int i;
-	
-	// Release any existing brushes
-	if (brushes) {
-		for (i = 0; i < [brushes count]; i++)
-			[[[brushes allValues] objectAtIndex:i] autorelease];
-		[brushes autorelease];
-	}
-	if (groups) [groups autorelease];
-	if (groupNames) [groupNames autorelease];
-	if ([view documentView]) [[view documentView] autorelease];
-	[super dealloc];
-}
-
 - (void)shutdown
 {
-	[gUserDefaults setInteger:activeBrushIndex forKey:@"active brush"];
-	[gUserDefaults setInteger:activeGroupIndex forKey:@"active brush group"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:activeBrushIndex forKey:@"active brush"];
+	[defaults setInteger:activeGroupIndex forKey:@"active brush group"];
 }
 
 - (void)activate:(id)sender
@@ -117,7 +104,7 @@
 	activeGroupIndex = [[brushGroupPopUp selectedItem] tag];
 	if (activeGroupIndex >= [groups count])
 		activeGroupIndex = 0;
-	if (activeBrushIndex >= [[groups objectAtIndex:activeGroupIndex] count])
+	if (activeBrushIndex >= [groups[activeGroupIndex] count])
 		activeBrushIndex = 0;
 	[self setActiveBrushIndex:activeBrushIndex];
 	[[view documentView] update];
@@ -128,56 +115,44 @@
 
 - (void)loadBrushes:(BOOL)update
 {
-	NSArray *files;
-	NSString *tempPathA, *tempPathB;
-	NSArray *newValues, *newKeys, *tempBrushArray, *tempArray;
+	NSArray *tempArray;
+	NSMutableArray *tempBrushArray;
 	BOOL isDirectory;
 	id tempBrush;
-	int i, j;
-	
-	// Release any existing brushes
-	if (brushes) {
-		for (i = 0; i < [brushes count]; i++)
-			[[[brushes allValues] objectAtIndex:i] autorelease];
-		[brushes autorelease];
-	}
-	if (groups) [groups autorelease];
-	if (groupNames) [groupNames autorelease];
 	
 	// Create a dictionary of all brushes
-	brushes = [NSDictionary dictionary];
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/brushes"]];
-	for (i = 0; i < [files count]; i++) {
-		tempPathA = [[[gMainBundle resourcePath] stringByAppendingString:@"/brushes/"] stringByAppendingString:[files objectAtIndex:i]];
+	NSMutableDictionary *tmpBrushDict = [NSMutableDictionary dictionary];
+	NSArray<NSString*> *files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
+	for (NSString *file in files) {
+		NSString *tempPathA = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"] stringByAppendingPathComponent:file];
 		if ([[tempPathA pathExtension] isEqualToString:@"gbr"]) {
-			tempBrush = [[SeaBrush alloc] initWithContentsOfFile:tempPathA];
+			SeaBrush *tempBrush = [[SeaBrush alloc] initWithContentsOfFile:tempPathA];
 			if (tempBrush) {
-				newKeys = [[brushes allKeys] arrayByAddingObject:tempPathA];
-				newValues = [[brushes allValues] arrayByAddingObject:tempBrush];
-				brushes = [NSDictionary dictionaryWithObjects:newValues forKeys:newKeys];
+				[tmpBrushDict setObject:tempBrush forKey:tempPathA];
 			}
 		}
 	}
-	[brushes retain];
+	
+	brushes = [tmpBrushDict copy];
 	
 	// Create the all group
-	tempBrushArray = [[brushes allValues] sortedArrayUsingSelector:@selector(compare:)];
-	groups = [NSArray arrayWithObject:tempBrushArray];
-	groupNames = [NSArray arrayWithObject:LOCALSTR(@"all group", @"All")];
+	tempBrushArray = [[[brushes allValues] sortedArrayUsingSelector:@selector(compare:)] mutableCopy];
+	groups = @[tempBrushArray];
+	groupNames = @[LOCALSTR(@"all group", @"All")];
 	
 	// Create the custom groups
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/brushes"]];
-	for (i = 0; i < [files count]; i++) {
-		tempPathA = [[gMainBundle resourcePath] stringByAppendingString:@"/brushes/"];
-		tempPathB = [tempPathA stringByAppendingString:[files objectAtIndex:i]];
+	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
+	for (NSString *file in files) {
+		NSString *tempPathA = [[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"];
+		NSString *tempPathB = [tempPathA stringByAppendingPathComponent:file];
 		if ([[tempPathB pathExtension] isEqualToString:@"txt"]) {
 			tempArray = [NSArray arrayWithContentsOfFile:tempPathB];
 			if (tempArray) {
-				tempBrushArray = [NSArray array];
-				for (j = 0; j < [tempArray count]; j++) {
-					tempBrush = [brushes objectForKey:[tempPathA stringByAppendingString:[tempArray objectAtIndex:j]]];
+				[tempBrushArray removeAllObjects];
+				for (NSString *tmpNam in tempArray) {
+					tempBrush = brushes[[tempPathA stringByAppendingPathComponent:tmpNam]];
 					if (tempBrush) {
-						tempBrushArray = [tempBrushArray arrayByAddingObject:tempBrush];
+						[tempBrushArray addObject:tempBrush];
 					}
 				}
 				if ([tempBrushArray count] > 0) {
@@ -190,34 +165,30 @@
 	customGroups = [groups count] - 1;
 	
 	// Create the other groups
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/brushes"]];
-	for (i = 0; i < [files count]; i++) {
-		tempPathA = [[[gMainBundle resourcePath] stringByAppendingString:@"/brushes/"] stringByAppendingString:[files objectAtIndex:i]];
+	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
+	for (NSString *file in files) {
+		NSString *tempPathA = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"] stringByAppendingPathComponent:file];
 		[gFileManager fileExistsAtPath:tempPathA isDirectory:&isDirectory];
 		if (isDirectory) {
-			tempPathA = [tempPathA stringByAppendingString:@"/"];
-			tempArray = [gFileManager subpathsAtPath:tempPathA];
-			tempBrushArray = [NSArray array];
-			for (j = 0; j < [tempArray count]; j++) {
-				tempBrush = [brushes objectForKey:[tempPathA stringByAppendingString:[tempArray objectAtIndex:j]]];
+			NSArray<NSString*> *tempArray = [gFileManager subpathsAtPath:tempPathA];
+			NSMutableArray *tempBrushArray = [[NSMutableArray alloc] init];
+			for (NSString *tmpNam in tempArray) {
+				SeaBrush *tempBrush = brushes[[tempPathA stringByAppendingPathComponent:tmpNam]];
 				if (tempBrush) {
-					tempBrushArray = [tempBrushArray arrayByAddingObject:tempBrush];
+					[tempBrushArray addObject:tempBrush];
 				}
 			}
 			if ([tempBrushArray count] > 0) {
-				tempBrushArray = [tempBrushArray sortedArrayUsingSelector:@selector(compare:)];
+				[tempBrushArray sortUsingSelector:@selector(compare:)];
 				groups = [groups arrayByAddingObject:tempBrushArray];
 				groupNames = [groupNames arrayByAddingObject:[tempPathA lastPathComponent]];
 			}
 		}
 	}
 	
-	// Retain the groups and groupNames
-	[groups retain];
-	[groupNames retain];
-	
 	// Update utility if requested
-	if (update) [self update];
+	if (update)
+		[self update];
 }
 
 - (IBAction)changeSpacing:(id)sender
@@ -237,18 +208,13 @@
 
 - (id)activeBrush
 {
-	return [[groups objectAtIndex:activeGroupIndex] objectAtIndex:activeBrushIndex];
+	return groups[activeGroupIndex][activeBrushIndex];
 }
 
-- (int)activeBrushIndex
+- (void)setActiveBrushIndex:(NSInteger)index
 {
-	return activeBrushIndex;
-}
-
-- (void)setActiveBrushIndex:(int)index
-{
-	SeaBrush* oldBrush = [[groups objectAtIndex:activeGroupIndex] objectAtIndex:activeBrushIndex];
-	SeaBrush* newBrush = [[groups objectAtIndex:activeGroupIndex] objectAtIndex:index];
+	SeaBrush *oldBrush = groups[activeGroupIndex][activeBrushIndex];
+	SeaBrush *newBrush = groups[activeGroupIndex][index];
 	
 	[oldBrush deactivate];
 	activeBrushIndex = index;
@@ -260,7 +226,7 @@
 
 - (NSArray *)brushes
 {
-	return [groups objectAtIndex:activeGroupIndex];
+	return groups[activeGroupIndex];
 }
 
 

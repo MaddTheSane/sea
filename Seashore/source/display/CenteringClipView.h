@@ -1,6 +1,11 @@
 #ifdef USE_CENTERING_CLIPVIEW
 
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@class		CenteringClipView
@@ -20,7 +25,6 @@
 				http://bergdesign.com/missing_cocoa_docs/nsclipview.html</a>
 				for the tutorial from which this code came.</i>
 */
-
 @interface CenteringClipView : NSClipView {
 	
 	// Does the view have a horizontal scrollbar?
@@ -29,14 +33,17 @@
 	// Does the view have a vertical scrollbar?
 	BOOL hasVerticalScrollbar;
 	
-	// We nede to prevent an infinate loop in scroll events...
+	// We nede to prevent an infinite loop in scroll events...
 	NSEvent *mostRecentScrollEvent;
 }
+
+//! the point at the center of the clip view.
+@property (nonatomic) NSPoint centerPoint;
 
 /*!
 	@method		centerPoint:
 	@discussion	Returns the point at the centre of the clip view.
-	@result		Returns a NSPoint indicating the point relative to the document
+	@result		Returns an \c NSPoint indicating the point relative to the document
 				contents at the centre of the clip view.
 */
 - (NSPoint)centerPoint;

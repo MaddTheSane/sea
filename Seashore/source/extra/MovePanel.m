@@ -4,12 +4,14 @@
 #import "OptionsUtility.h"
 #import "TextTool.h"
 #import "SeaTools.h"
+#import "SeaDocument.h"
+#import "TextOptions.h"
 
 @implementation MovePanel
 
 - (IBAction)changeSpecialFont:(id)sender
 {
-	[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions:kTextTool] changeFont:sender];
+	[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions:SeaToolsText] changeFont:sender];
 }
 
 - (void)keyDown:(NSEvent *)theEvent

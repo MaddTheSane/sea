@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractPaintOptions.h"
 
@@ -9,18 +10,15 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SmudgeOptions : AbstractPaintOptions {
-
-	// A slider indicating the opacity of the bucket
-	IBOutlet id rateSlider;
+	/// A slider indicating the opacity of the bucket
+	IBOutlet NSSlider *rateSlider;
 	
-	// A label displaying the opacity of the bucket
-	IBOutlet id rateLabel;
+	/// A label displaying the opacity of the bucket
+	IBOutlet NSTextField *rateLabel;
 	
 	// A checkbox that when checked implies that the tool should consider all pixels not those just in the current layer
 	//IBOutlet id mergedCheckbox;
-	
 }
 
 /*!
@@ -47,12 +45,12 @@
 - (IBAction)rateChanged:(id)sender;
 
 /*!
-	@method		rate
+	@property	rate
 	@discussion	Returns the rate of smudging. Higher values imply more smudging.
 	@result		Returns an integer (between 0 and 255) representing the rate of
 				smudging.
 */
-- (int)rate;
+@property (readonly) int rate;
 
 /*!
 	@method		shutdown

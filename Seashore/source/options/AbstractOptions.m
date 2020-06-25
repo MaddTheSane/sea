@@ -5,15 +5,16 @@
 #import "SeaPrefs.h"
 #import "SeaDocument.h"
 #import "AspectRatio.h"
+#import "SeaView.h"
 
-static int lastTool = -1;
+static SeaToolsDefines lastTool = -1;
 static BOOL forceAlt = NO;
 
 @implementation AbstractOptions
 
 - (void)activate:(id)sender
 {
-	int curTool;
+	SeaToolsDefines curTool;
 	
 	document = sender;
 	curTool = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
@@ -29,9 +30,7 @@ static BOOL forceAlt = NO;
 
 - (void)forceAlt
 {
-	int index;
-	
-	index = [modifierPopup indexOfItemWithTag:kAltModifier];
+	NSInteger index = [modifierPopup indexOfItemWithTag:AbstractModifierAlt];
 	if (index > 0) [modifierPopup selectItemAtIndex:index];
 	forceAlt = YES;
 }
@@ -44,47 +43,45 @@ static BOOL forceAlt = NO;
 	}
 }
 
-- (void)updateModifiers:(unsigned int)modifiers
+- (void)updateModifiers:(NSEventModifierFlags)modifiers
 {
-	int index;
+	NSInteger index;
 	
 	if (modifierPopup) {
 	
 		if ((modifiers & NSAlternateKeyMask) >> 19 && (modifiers & NSControlKeyMask) >> 18) {
-			index = [modifierPopup indexOfItemWithTag:kAltControlModifier];
-			if (index > 0) [modifierPopup selectItemAtIndex:index];
-		}
-		else if ((modifiers & NSShiftKeyMask) >> 17 && (modifiers & NSControlKeyMask) >> 18) {
-			index = [modifierPopup indexOfItemWithTag:kShiftControlModifier];
-			if (index > 0) [modifierPopup selectItemAtIndex:index];
-		}
-		else if ((modifiers & NSControlKeyMask) >> 18) {
-			index = [modifierPopup indexOfItemWithTag:kControlModifier];
-			if (index > 0) [modifierPopup selectItemAtIndex:index];
-		}
-		else if ((modifiers & NSShiftKeyMask) >> 17) {
-			index = [modifierPopup indexOfItemWithTag:kShiftModifier];
-			if (index > 0) [modifierPopup selectItemAtIndex:index];
-		}
-		else if ((modifiers & NSAlternateKeyMask) >> 19) {
-			index = [modifierPopup indexOfItemWithTag:kAltModifier];
-			if (index > 0) [modifierPopup selectItemAtIndex:index];
-		}
-		else {
-			[modifierPopup selectItemAtIndex:kNoModifier];
+			index = [modifierPopup indexOfItemWithTag:AbstractModifierAltControl];
+			if (index > 0)
+				[modifierPopup selectItemAtIndex:index];
+		} else if ((modifiers & NSShiftKeyMask) >> 17 && (modifiers & NSControlKeyMask) >> 18) {
+			index = [modifierPopup indexOfItemWithTag:AbstractModifierShiftControl];
+			if (index > 0)
+				[modifierPopup selectItemAtIndex:index];
+		} else if ((modifiers & NSControlKeyMask) >> 18) {
+			index = [modifierPopup indexOfItemWithTag:AbstractModifierControl];
+			if (index > 0)
+				[modifierPopup selectItemAtIndex:index];
+		} else if ((modifiers & NSShiftKeyMask) >> 17) {
+			index = [modifierPopup indexOfItemWithTag:AbstractModifierShift];
+			if (index > 0)
+				[modifierPopup selectItemAtIndex:index];
+		} else if ((modifiers & NSAlternateKeyMask) >> 19) {
+			index = [modifierPopup indexOfItemWithTag:AbstractModifierAlt];
+			if (index > 0)
+				[modifierPopup selectItemAtIndex:index];
+		} else {
+			[modifierPopup selectItemAtIndex:AbstractModifierNone];
 		}
 	}
 	// We now need to update all of the documents because the modifiers, and thus possibly
 	// the cursors and guides may have changed.
-	int i;
-	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *doc in [[NSDocumentController sharedDocumentController] documents]) {
+		[[doc docView] setNeedsDisplay:YES];
 	}
 	
 }
 
-- (int)modifier
+- (AbstractModifiers)modifier
 {
 	return [[modifierPopup selectedItem] tag];
 }

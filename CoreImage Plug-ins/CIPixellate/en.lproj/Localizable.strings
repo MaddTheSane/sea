@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Stylize";
+description = "Applies the pixellate effect to the selection";
+license = "Public Domain";
+name = "Pixellate";

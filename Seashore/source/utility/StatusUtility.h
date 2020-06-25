@@ -1,4 +1,8 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+
+@class SeaDocument;
+@class LayerControlView;
 
 /*!
 	@class		StatusUtility
@@ -9,35 +13,34 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
 @interface StatusUtility : NSObject {
 	// The document that owns the utility
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// The pop-up men that reflect the currently active channel
-	IBOutlet id channelSelectionPopup;
+	IBOutlet NSPopUpButton *channelSelectionPopup;
 	
 	// If this is checked, the user wants to see a normal view, not a channel specific one
-	IBOutlet id trueViewCheckbox;
+	IBOutlet NSButton *trueViewCheckbox;
 
 	// The label that displays at the center of the status bar
-	IBOutlet id dimensionLabel;
+	IBOutlet NSTextField *dimensionLabel;
 	
 	// The actual view that is the status bar
-	IBOutlet id view;
+	IBOutlet LayerControlView *view;
 
 	// The text fields that have the colors
-	IBOutlet id redBox;
-	IBOutlet id greenBox;
-	IBOutlet id blueBox;
-	IBOutlet id alphaBox;
-	IBOutlet id redSlider;
-	IBOutlet id greenSlider;
-	IBOutlet id blueSlider;
-	IBOutlet id alphaSlider;
+	IBOutlet NSTextField *redBox;
+	IBOutlet NSTextField *greenBox;
+	IBOutlet NSTextField *blueBox;
+	IBOutlet NSTextField *alphaBox;
+	IBOutlet NSSlider *redSlider;
+	IBOutlet NSSlider *greenSlider;
+	IBOutlet NSSlider *blueSlider;
+	IBOutlet NSSlider *alphaSlider;
 	
 	// The slider that controls the zoom
-	IBOutlet id zoomSlider;
+	IBOutlet NSSlider *zoomSlider;
 }
 
 /*!

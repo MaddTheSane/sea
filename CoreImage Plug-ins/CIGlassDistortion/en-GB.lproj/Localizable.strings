@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Stylise";
+"texture label" = "Texture: %@";
+description = "Applies a crystillizing effect to the selection.";
+license = "Public Domain";
+name = "Glass Distortion";

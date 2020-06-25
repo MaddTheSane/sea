@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Enhance";
+description = "Applies noise reduction to the selection";
+license = "Public Domain";
+name = "Noise Reduction";

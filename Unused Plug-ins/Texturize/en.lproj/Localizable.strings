@@ -1,0 +1,8 @@
+"author" = "Manu Cornet and Jean-Baptise Rouquier";
+"copyright" = "Copyright © 2004-2005 Manu Cornet and Jean-Baptise Rouquier";
+"description" = "Generate a texture from the active document.";
+"groupName" = "Document";
+"license" = "GNU General Public License";
+"name" = "Texturize";
+"small title" = "Image too small";
+"small body" = "The texturize plug-in can only be used with images that are larger than 64 pixels in both width and height.";

@@ -1,5 +1,5 @@
 #import "BrushedController.h"
-#import "BrushDocument.h"
+#import "Brushed-Swift.h"
 
 #define document [[NSDocumentController sharedDocumentController] currentDocument]
 
@@ -11,18 +11,18 @@
 	NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
 	
 	// Copy the image to the pasteboard
-	[pasteboard declareTypes:[NSArray arrayWithObject:NSTIFFPboardType] owner:nil];
-	[pasteboard setData:[image TIFFRepresentation] forType:NSTIFFPboardType];
+	[pasteboard declareTypes:@[NSPasteboardTypeTIFF] owner:nil];
+	[pasteboard setData:[image TIFFRepresentation] forType:NSPasteboardTypeTIFF];
 }
 
 - (IBAction)paste:(id)sender
 {
 	NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
-	NSString *dataType = [pasteboard availableTypeFromArray:[NSArray arrayWithObject:NSTIFFPboardType]];
+	NSString *dataType = [pasteboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 	
 	// Copy the image from the pasteboard
 	if (dataType) {
-		[document changeImage:[NSBitmapImageRep imageRepWithData:[pasteboard dataForType:dataType]]];
+		[document changeImage:[NSBitmapImageRep imageRepWithData:[pasteboard dataForType:dataType]] error:NULL];
 	}
 }
 

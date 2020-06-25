@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Tile";
+description = "Applies a triangle effect to the selection";
+license = "Public Domain";
+name = "Parallelogram";
+instruction = "Click twice: first at the start of a parallelogram tile and then at the end of a parallelogram tile";

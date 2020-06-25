@@ -2,51 +2,37 @@
 #import "AspectRatio.h"
 
 @implementation AbstractScaleOptions
+@synthesize ignoresMove;
+@synthesize aspectType;
 
-- (id)init
+- (instancetype)init
 {
 	self = [super init];
 	if(self){
-		aspectType = kNoAspectType;
+		aspectType = SeaAspectTypeNone;
 		ignoresMove = NO;
 	}
 	return self;
 }
 
 
-- (void)updateModifiers:(unsigned int)modifiers
+- (void)updateModifiers:(NSEventModifierFlags)modifiers
 {
 	[super updateModifiers:modifiers];
 
-	if ([super modifier] == kShiftModifier) {
-		aspectType = kRatioAspectType;
+	if ([super modifier] == AbstractModifierShift) {
+		aspectType = SeaAspectTypeRatio;
 	} else {
-		aspectType = kNoAspectType;
+		aspectType = SeaAspectTypeNone;
 	}
-
 }
 
 - (NSSize)ratio
 {
-	if(aspectType == kRatioAspectType){
+	if (aspectType == SeaAspectTypeRatio) {
 		return NSMakeSize(1, 1);
 	}
 	return NSZeroSize;
-}
-
-- (int)aspectType
-{
-	return aspectType;
-}
-
-- (void)setIgnoresMove:(BOOL)ignoring
-{
-	ignoresMove = ignoring;
-}
-
-- (BOOL)ignoresMove
-{
-	return ignoresMove;
 }
 
 @end

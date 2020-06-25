@@ -3,6 +3,24 @@
 #import "SeaController.h"
 #import "UtilitiesManager.h"
 #import "AbstractTool.h"
+#import "RectSelectTool.h"
+#import "EllipseSelectTool.h"
+#import "LassoTool.h"
+#import "PolygonLassoTool.h"
+#import "WandTool.h"
+#import "PencilTool.h"
+#import "BrushTool.h"
+#import "BucketTool.h"
+#import "TextTool.h"
+#import "EyedropTool.h"
+#import "Seashore-Swift.h"
+#import "PositionTool.h"
+#import "GradientTool.h"
+#import "SmudgeTool.h"
+#import "CloneTool.h"
+#import "CropTool.h"
+#import "EffectTool.h"
+#import <SeashoreKit/SeaDocument.h>
 
 @implementation SeaTools
 
@@ -11,60 +29,67 @@
 	return [self getTool:[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] tool]];
 }
 
-- (id)getTool:(int)whichOne
+- (id)getTool:(SeaToolsDefines)whichOne
 {
 	switch (whichOne) {
-		case kRectSelectTool:
+		case SeaToolsInvalid:
+			return nil;
+			
+		case SeaToolsSelectRect:
 			return rectSelectTool;
 		break;
-		case kEllipseSelectTool:
+		case SeaToolsSelectEllipse:
 			return ellipseSelectTool;
 		break;
-		case kLassoTool:
+		case SeaToolsLasso:
 			return lassoTool;
 		break;
-		case kPolygonLassoTool:
+		case SeaToolsPolygonLasso:
 			return polygonLassoTool;
 		break;
-		case kWandTool:
+		case SeaToolsWand:
 			return wandTool;
 		break;
-		case kPencilTool:
+		case SeaToolsPencil:
 			return pencilTool;
 		break;
-		case kBrushTool:
+		case SeaToolsBrush:
 			return brushTool;
 		break;
-		case kBucketTool:
+		case SeaToolsBucket:
 			return bucketTool;
 		break;
-		case kTextTool:
+		case SeaToolsText:
 			return textTool;
 		break;
-		case kEyedropTool:
+		case SeaToolsEyedrop:
 			return eyedropTool;
 		break;
-		case kEraserTool:
+		case SeaToolsEraser:
 			return eraserTool;
 		break;
-		case kPositionTool:
+		case SeaToolsPosition:
 			return positionTool;
 		break;
-		case kGradientTool:
+		case SeaToolsGradient:
 			return gradientTool;
 		break;
-		case kSmudgeTool:
+		case SeaToolsSmudge:
 			return smudgeTool;
 		break;
-		case kCloneTool:
+		case SeaToolsClone:
 			return cloneTool;
 		break;
-		case kCropTool:
+		case SeaToolsCrop:
 			return cropTool;
 		break;
-		case kEffectTool:
+		case SeaToolsEffect:
 			return effectTool;
 		break;
+			
+		case SeaToolsZoom:
+			
+			break;
 	}
 	
 	return NULL;
@@ -72,6 +97,6 @@
 
 - (NSArray *)allTools
 {
-	return [NSArray arrayWithObjects: rectSelectTool, ellipseSelectTool, lassoTool, polygonLassoTool, wandTool, pencilTool, brushTool, bucketTool, textTool, eyedropTool, eraserTool, positionTool, gradientTool, smudgeTool, cloneTool, cropTool, effectTool, nil];
+	return @[rectSelectTool, ellipseSelectTool, lassoTool, polygonLassoTool, wandTool, pencilTool, brushTool, bucketTool, textTool, eyedropTool, eraserTool, positionTool, gradientTool, smudgeTool, cloneTool, cropTool, effectTool];
 }
 @end

@@ -14,28 +14,28 @@
 
 @implementation PolygonLassoTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
-	return kPolygonLassoTool;
+	return SeaToolsPolygonLasso;
 }
 
 - (void)fineMouseDownAt:(NSPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	[super mouseDownAt:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
 	
 	if(![super isMovingOrScaling]){
 		float xScale, yScale;
 		unsigned char *overlay = [[document whiteboard] overlay];
 		unsigned char *fakeOverlay;
-		int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+		int width = [layer width], height = [layer height];
 		int fakeHeight, fakeWidth;
 		int interpolation;
 		int spp = [[document contents] spp];
 		int tpos;
 		IntRect rect;
 		GimpVector2 *gimpPoints;
-		int modifier;
+		AbstractModifiers modifier;
 		
 		where.x -= [layer xoff];
 		where.y -= [layer yoff];
@@ -57,8 +57,7 @@
 			pos = 0;
 			points[0] =  NSPointMakeIntPoint(where);
 			lastPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
-		}
-		else if ([[NSApp currentEvent] clickCount] == 1 && intermediate && !(abs(startPoint.x - where.x) < anchorRadius && abs(startPoint.y - where.y) < anchorRadius)) {
+		} else if ([[NSApp currentEvent] clickCount] == 1 && intermediate && !(fabs(startPoint.x - where.x) < anchorRadius && fabs(startPoint.y - where.y) < anchorRadius)) {
 			
 			// Check this point is different to the last
 			if (pos < kMaxLTPoints - 1) {
@@ -77,14 +76,12 @@
 					if (points[pos].y > height) points[pos].y = height;
 				}
 			}
-		}
-		 else if (intermediate) {
+		} else if (intermediate) {
 			
 			// Fill out the variables
 			if ([[document docView] zoom] <= 1) {
 				interpolation = GIMP_INTERPOLATION_NONE;
-			}
-			else {
+			} else {
 				interpolation = GIMP_INTERPOLATION_CUBIC;
 			}
 						
@@ -105,11 +102,11 @@
 			[[document docView] setNeedsDisplay:YES];
 
 			// Clear last selection
-			if([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode)
+			if([options selectionMode] == SeaSelectDefault || [options selectionMode] == SeaSelectForceNew)
 				[[document selection] clearSelection];
 			
 			// All polygons have at least 3 points
-			if (pos < 3){
+			if (pos < 3) {
 				free(fakeOverlay);
 				intermediate = NO;
 				return;
@@ -167,17 +164,17 @@
 
 - (void)fineMouseDraggedTo:(NSPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	[super mouseDraggedTo:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
 }
 
 - (void)fineMouseUpAt:(NSPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	[super mouseUpAt:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
 
 	translating = NO;
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 }
 
 @end

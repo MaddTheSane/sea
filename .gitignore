@@ -21,7 +21,13 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+project.xcworkspace/
 xcuserdata/
+profile
+*.moved-aside
+DerivedData
+.idea/
+*.xcscmblueprint
 
 ## Other
 *.moved-aside
@@ -35,5 +41,3 @@ xcuserdata/
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
-
-# End of https://www.gitignore.io/api/xcode

@@ -1,5 +1,16 @@
+#include <CoreFoundation/CFBase.h>
+#import <Foundation/Foundation.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
 #import "SeaCompositor.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaCompositor.h>
+#endif
+
+#if MAIN_COMPILE
+@class SeaDocument;
+#endif
 
 /*!
 	@enum		k...ChannelsView
@@ -12,11 +23,15 @@
 	@constant	kCMYKPreviewView
 				Indicates that all channels are being viewed in CMYK previewing mode.
 */
-enum {
-	kAllChannelsView,
-	kPrimaryChannelsView,
-	kAlphaChannelView,
-	kCMYKPreviewView
+typedef NS_ENUM(int, SeaChannelsView) {
+	//! Indicates that all channels are being viewed.
+	SeaChannelsAll,
+	//! Indicates that just the primary channel(s) are being viewed.
+	SeaChannelsPrimary,
+	//! Indicates that just the alpha channel is being viewed.
+	SeaChannelsAlpha,
+	//! Indicates that all channels are being viewed in CMYK previewing mode.
+	SeaChannelsCMYKPreview,
 };
 
 
@@ -32,13 +47,24 @@ enum {
 				Indicates the overlay is to be composited on to the underlying layer with the
 				replace data being used as a mask.
 */
-enum {
-	kNormalBehaviour,
-	kErasingBehaviour,
-	kReplacingBehaviour,
-	kMaskingBehaviour
+typedef NS_ENUM(int, SeaOverlayBehaviour) {
+	//! Indicates the overlay is to be composited on to the underlying layer.
+	SeaOverlayBehaviourNormal,
+	//! Indicates the overlay is to erase the underlying layer.
+	SeaOverlayBehaviourErasing,
+	//! Indicates the overlay is to replace the underling layer where specified.
+	SeaOverlayBehaviourReplacing,
+	/*!
+	 Indicates the overlay is to be composited on to the underlying layer with the
+	 replace data being used as a mask.
+	 */
+	SeaOverlayBehaviourMasking,
 };
 
+#if !MAIN_COMPILE
+@class SeaContent;
+@class SeaCompositor;
+#endif
 
 /*!
 	@class		SeaWhiteboard
@@ -50,14 +76,16 @@ enum {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 				Copyright (c) 2005 Daniel Jalkut
 */
-
 @interface SeaWhiteboard : NSObject {
-
+#if MAIN_COMPILE
 	// The document associated with this whiteboard
-	id document;
+	SeaDocument *document;
+#else
+	// The document associated with this whiteboard
+	SeaContent *contents;
 	
-	// The compositor for this whiteboard
-	id compositor;
+	IntPoint SeaScreenResolution;
+#endif
 	
 	// The width and height of the whitebaord
 	int width, height;
@@ -76,13 +104,13 @@ enum {
 	unsigned char *replace;
 	
 	// The behaviour of the overlay
-	int overlayBehaviour;
+	SeaOverlayBehaviour overlayBehaviour;
 	
 	// The opacity for the overlay
 	int overlayOpacity;
 	
 	// The colour world for colour space conversions
-	CMWorldRef cw;
+	ColorSyncTransformRef cw;
 	
 	// The whiteboard's samples per pixel
 	int spp;
@@ -104,13 +132,16 @@ enum {
 	NSThread *lockingThread;
 	
 	// The display profile
-	CMProfileRef displayProf;
+	ColorSyncProfileRef displayProf;
 	CGColorSpaceRef cgDisplayProf;
-	
 }
+
+/// The compositor for this whiteboard
+@property (strong) id<SeaCompositor> compositor;
 
 // CREATION METHODS
 
+#if MAIN_COMPILE
 /*!
 	@method		initWithDocument:
 	@discussion	Initializes an instance of this class with the given document.
@@ -118,13 +149,17 @@ enum {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc;
-
+- (instancetype)initWithDocument:(SeaDocument*)doc;
+#else
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+	@method		initWithDocument:
+	@discussion	Initializes an instance of this class with the given document.
+	@param		cont
+				The document with which to initialize the instance.
+	@result		Returns instance upon success (or NULL otherwise).
+ */
+- (instancetype)initWithContent:(SeaContent *)cont;
+#endif
 
 /*!
 	@method		compositor
@@ -135,21 +170,17 @@ enum {
 // OVERLAY METHODS
 
 /*!
-	@method		setOverlayBehaviour:
-	@discussion	Sets the overlay behaviour.
-	@param		value
-				The new overlay behaviour (see SeaWhiteboard).
+	@property	setOverlayBehaviour:
+	@discussion	The overlay behaviour (see SeaWhiteboard).
 */
-- (void)setOverlayBehaviour:(int)value;
+@property SeaOverlayBehaviour overlayBehaviour;
 
 /*!
-	@method		setOverlayOpacity:
-	@discussion	Sets the opacity of the overlay.
-	@param		value
-				An integer from 0 to 255 representing the revised opacity of the
+	@property	setOverlayOpacity:
+	@discussion	An integer from 0 to 255 representing the opacity of the
 				overlay.
 */
-- (void)setOverlayOpacity:(int)value;
+@property int overlayOpacity;
 
 /*!
 	@method		applyOverlay
@@ -167,30 +198,30 @@ enum {
 - (void)clearOverlay;
 
 /*!
-	@method		overlay
+	@property	overlay
 	@discussion	Returns the bitmap data of the overlay.
 	@result		Returns a pointer to the bitmap data of the overlay.
 */
-- (unsigned char *)overlay;
+@property (readonly) unsigned char *overlay NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		replace
+	@property	replace
 	@discussion	Returns the replace mask of the overlay.
 	@result		Returns a pointer to the 8 bits per pixel replace mask of the
 				overlay.
 */
-- (unsigned char *)replace;
+@property (readonly) unsigned char *replace NS_RETURNS_INNER_POINTER;
 
 // READJUSTING METHODS
 
 /*!
-	@method		whiteboardIsLayerSpecific
+	@property	whiteboardIsLayerSpecific
 	@discussion	Returns whether after the active layer is changed the alternate
 				data must be readjusted.
 	@result		YES if the alternate data must be readjusted after the active
 				layer is changed, NO otherwise.
 */
-- (BOOL)whiteboardIsLayerSpecific;
+@property (readonly) BOOL whiteboardIsLayerSpecific;
 
 /*!
 	@method		readjust
@@ -219,20 +250,20 @@ enum {
 // CMYK PREVIEWING METHODS
 
 /*!
-	@method		CMYKPreview
+	@property	CMYKPreview
 	@discussion	Returns whether or not CMYK previewing is active.
-	@result		Returns YES if the CMYK previewing is active, NO otherwise.
+	@result		Returns \c YES if the CMYK previewing is active, \c NO otherwise.
 */
-- (BOOL)CMYKPreview;
+@property (readonly) BOOL CMYKPreview;
 
 
 /*!
-	@method		canToggleCMYKPreview
+	@property	canToggleCMYKPreview
 	@discussion	Returns whether or not CMYK previewing can be toggled for this
 				document.
 	@result		Returns YES if CMYK previewing can be toggled, NO otherwise.
 */
-- (BOOL)canToggleCMYKPreview;
+@property (readonly) BOOL canToggleCMYKPreview;
 
 /*!
 	@method		toggleCMYKPreview
@@ -279,15 +310,16 @@ enum {
 // ACCESSOR METHODS
 
 /*!
-	@method		imageRect
+	@property	imageRect
 	@discussion	Returns the rectangle in which the whiteboard's image should be
 				plotted. This is only not equal to the document rectangle if
 				whiteboardIsLayerSpecific returns YES.
 	@result		Returns an IntRect indicating the rectangle in which the
 				whiteboard's image should be plotted. 
 */
-- (IntRect)imageRect;
+@property (readonly) IntRect imageRect;
 
+#if MAIN_COMPILE
 /*!
 	@method		image
 	@discussion	Returns an image representing the whiteboard (which may be CMYK
@@ -295,6 +327,7 @@ enum {
 	@result		Returns an NSImage representing the whiteboard.
 */
 - (NSImage *)image;
+#endif
 
 /*!
 	@method		printableImage
@@ -306,26 +339,36 @@ enum {
 - (NSImage *)printableImage;
 
 /*!
-	@method		data
+	@property	data
 	@discussion	Returns the bitmap data for the whiteboard.
 	@result		Returns a pointer to the bitmap data for the whiteboard.
 */
-- (unsigned char *)data;
+@property (readonly) unsigned char *data NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		altData
+	@property	altData
 	@discussion	Returns the alternate bitmap data for the whiteboard.
 	@result		Returns a pointer to the alternate bitmap data for the
 				whiteboard.
 */
-- (unsigned char *)altData;
+@property (readonly) unsigned char *altData NS_RETURNS_INNER_POINTER;
 
 /*!
-	@method		displayProf
+	@property	displayProf
 	@discussion	Returns the current display profile.
 	@result		Returns a CMProfileRef representing the ColorSync display profile
 				Seashore is using.
 */
-- (CGColorSpaceRef)displayProf;
+@property (readonly) CGColorSpaceRef displayProf CF_RETURNS_NOT_RETAINED;
 
 @end
+
+static const SeaChannelsView kAllChannelsView NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaChannelsAll", 10.2, 10.8) = SeaChannelsAll;
+static const SeaChannelsView kPrimaryChannelsView NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaChannelsPrimary", 10.2, 10.8) = SeaChannelsPrimary;
+static const SeaChannelsView kAlphaChannelView NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaChannelsAlpha", 10.2, 10.8) = SeaChannelsAlpha;
+static const SeaChannelsView kCMYKPreviewView NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaChannelsCMYKPreview", 10.2, 10.8) = SeaChannelsCMYKPreview;
+
+static const SeaOverlayBehaviour kNormalBehaviour NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaOverlayBehaviourNormal", 10.2, 10.8) = SeaOverlayBehaviourNormal;
+static const SeaOverlayBehaviour kErasingBehaviour NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaOverlayBehaviourErasing", 10.2, 10.8) = SeaOverlayBehaviourErasing;
+static const SeaOverlayBehaviour kReplacingBehaviour NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaOverlayBehaviourReplacing", 10.2, 10.8) = SeaOverlayBehaviourReplacing;
+static const SeaOverlayBehaviour kMaskingBehaviour NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaOverlayBehaviourMasking", 10.2, 10.8) = SeaOverlayBehaviourMasking;

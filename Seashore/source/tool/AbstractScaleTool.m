@@ -17,13 +17,13 @@
 #import "SeaLayer.h"
 
 @implementation AbstractScaleTool
-- (id)init
+- (instancetype)init
 {
-	if (![super init])
-		return NULL;
+	if (!(self = [super init]))
+		return nil;
 
 	translating = NO;
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 	preScaledMask = NULL;
 	
 	return self;
@@ -31,13 +31,13 @@
 
 - (BOOL) isMovingOrScaling
 {
-	return (translating || scalingDir > kNoDir);
+	return (translating || scalingDir > SeaScaleDirectionNone);
 }
 
 - (void)mouseDownAt:(IntPoint)localPoint forRect:(IntRect)globalRect andMask:(unsigned char *)mask
 {
 	translating = NO;
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 	
 	if([options ignoresMove]){
 		return;
@@ -62,7 +62,7 @@
 	localRect.origin.y -= [[[document contents] activeLayer]  yoff];
 	
 	
-	if(scalingDir > kNoDir){
+	if (scalingDir > SeaScaleDirectionNone) {
 		// 1. Resizing selection
 		preScaledRect = globalRect;
 		if(mask){
@@ -82,7 +82,7 @@
 
 - (IntRect)mouseDraggedTo:(IntPoint)localPoint forRect:(IntRect)globalRect andMask:(unsigned char *)mask
 {
-	if(scalingDir > kNoDir){
+	if(scalingDir > SeaScaleDirectionNone){
 		IntRect currTempRect;
 		// We need the global point for the handles
 		NSPoint globalPoint = IntPointMakeNSPoint(localPoint);
@@ -92,7 +92,7 @@
 
 		BOOL usesAspect = NO;
 		NSSize ratio = NSZeroSize;
-		if([options aspectType] == kRatioAspectType){
+		if ([(AbstractScaleOptions*)options aspectType] == SeaAspectTypeRatio) {
 			usesAspect = YES;
 			ratio = [options ratio];
 		}
@@ -103,55 +103,55 @@
 		float newY = preScaledRect.origin.y;
 		
 		switch(scalingDir){
-			case kULDir:
+			case SeaScaleDirectionUpperLeft:
 				newWidth = preScaledRect.origin.x -  globalPoint.x + preScaledRect.size.width;
 				newX = globalPoint.x;
-				if(usesAspect){
+				if (usesAspect) {
 					newHeight = newWidth * ratio.height;
 					newY = preScaledRect.origin.y + preScaledRect.size.height - newHeight;
-				}else{
+				} else {
 					newHeight = preScaledRect.origin.y - globalPoint.y + preScaledRect.size.height;
 					newY = globalPoint.y;
 				}
 				break;
-			case kUDir:
+			case SeaScaleDirectionUp:
 				newHeight = preScaledRect.origin.y - globalPoint.y + preScaledRect.size.height;
 				newY = globalPoint.y;
 				break;
-			case kURDir:
+			case SeaScaleDirectionUpperRight:
 				newWidth = globalPoint.x - preScaledRect.origin.x;
-				if(usesAspect){
+				if (usesAspect) {
 					newHeight = newWidth * ratio.height;
 					newY = preScaledRect.origin.y + preScaledRect.size.height - newHeight;
-				}else{
+				} else {
 					newHeight = preScaledRect.origin.y - globalPoint.y + preScaledRect.size.height;
 					newY = globalPoint.y;
 				}
 				break;
-			case kRDir:
+			case SeaScaleDirectionRight:
 				newWidth = globalPoint.x - preScaledRect.origin.x;
 				break;
-			case kDRDir:
+			case SeaScaleDirectionDownRight:
 				newWidth = globalPoint.x - preScaledRect.origin.x;
-				if(usesAspect){
+				if (usesAspect) {
 					newHeight = newWidth * ratio.height;
-				}else{
+				} else {
 					newHeight = globalPoint.y - preScaledRect.origin.y;
 				}
 				break;
-			case kDDir:
+			case SeaScaleDirectionDown:
 				newHeight = globalPoint.y - preScaledRect.origin.y;
 				break;
-			case kDLDir:
+			case SeaScaleDirectionDownLeft:
 				newX = globalPoint.x;
 				newWidth = preScaledRect.origin.x -  globalPoint.x + preScaledRect.size.width;
-				if(usesAspect){
+				if (usesAspect) {
 					newHeight = newWidth * ratio.height;
-				}else{
+				} else {
 					newHeight = globalPoint.y - preScaledRect.origin.y;
 				}
 				break;
-			case kLDir:
+			case SeaScaleDirectionLeft:
 				newX = globalPoint.x;
 				newWidth = preScaledRect.origin.x -  globalPoint.x + preScaledRect.size.width;
 				break;
@@ -172,18 +172,18 @@
 
 - (void)mouseUpAt:(IntPoint)localPoin forRect:(IntRect)globalRect andMask:(unsigned char *)mask
 {
-	if(scalingDir > kNoDir){
+	if(scalingDir > SeaScaleDirectionNone){
 		if(preScaledMask)
 			free(preScaledMask);
 	}
 }
 
 
-- (int)point:(NSPoint) point isInHandleFor:(IntRect)rect
+- (SeaScaleDirection)point:(NSPoint) point isInHandleFor:(IntRect)rect
 {
 	
-	float xScale = [[document contents] xscale];
-	float yScale = [[document contents] yscale];
+	CGFloat xScale = [[document contents] xscale];
+	CGFloat yScale = [[document contents] yscale];
 	rect = IntMakeRect(rect.origin.x * xScale, rect.origin.y * yScale, rect.size.width * xScale, rect.size.height * yScale);
 	
 	BOOL inTop = point.y + 5 > rect.origin.y && point.y - 3 < rect.origin.y;
@@ -195,38 +195,27 @@
 	BOOL inRight =  point.x + 3 > (rect.origin.x + rect.size.width) && point.x - 5 < (rect.origin.x + rect.size.width);
 	
 	if(inTop && inLeft )
-		return kULDir;
+		return SeaScaleDirectionUpperLeft;
 	if(inTop&& inCenter)
-		return kUDir;
+		return SeaScaleDirectionUp;
 	if(inTop && inRight)
-		return kURDir;
+		return SeaScaleDirectionUpperRight;
 	if(inMiddle && inRight)
-		return kRDir;
+		return SeaScaleDirectionRight;
 	if(inBottom && inRight)
-		return kDRDir;
+		return SeaScaleDirectionDownRight;
 	if(inBottom && inCenter)
-		return kDDir;
+		return SeaScaleDirectionDown;
 	if(inBottom && inLeft)
-		return kDLDir;
+		return SeaScaleDirectionDownLeft;
 	if(inMiddle && inLeft)
-		return kLDir;
+		return SeaScaleDirectionLeft;
 	
-	return kNoDir;
+	return SeaScaleDirectionNone;
 }
 
-- (IntRect) preScaledRect
-{
-	return preScaledRect;
-}
-
-- (unsigned char *) preScaledMask
-{
-	return preScaledMask;
-}
-
-- (IntRect) postScaledRect
-{
-	return postScaledRect;
-}
+@synthesize preScaledRect;
+@synthesize preScaledMask;
+@synthesize postScaledRect;
 
 @end

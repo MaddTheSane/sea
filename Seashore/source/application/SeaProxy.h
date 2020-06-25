@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@class		SeaProxy
@@ -11,9 +16,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface SeaProxy : NSObject {
-}
+@interface SeaProxy : NSObject
 
 // To methods in TextureExporter...
 - (IBAction)exportAsTexture:(id)sender;

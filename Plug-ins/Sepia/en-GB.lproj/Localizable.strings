@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+description = "Inverts a selection";
+groupName = "Colour Effect";
+license = "Public Domain";
+name = "Sepia";

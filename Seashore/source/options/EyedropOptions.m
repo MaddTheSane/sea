@@ -8,18 +8,19 @@
 
 - (void)awakeFromNib
 {
-	int value;
+	NSInteger value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"eyedrop size"] == NULL) {
+	if ([defaults objectForKey:@"eyedrop size"] == NULL) {
 		value = 1;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"eyedrop size"];
+		value = [defaults integerForKey:@"eyedrop size"];
 		if (value < [sizeSlider minValue] || value > [sizeSlider maxValue])
 			value = 1;
 	}
-	[sizeSlider setIntValue:value];
-	[mergedCheckbox setState:[gUserDefaults boolForKey:@"eyedrop merged"]];
+	[sizeSlider setIntegerValue:value];
+	[mergedCheckbox setState:[defaults boolForKey:@"eyedrop merged"]];
 }
 
 - (int)sampleSize
@@ -34,8 +35,9 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:[self sampleSize] forKey:@"eyedrop size"];
-	[gUserDefaults setObject:[self mergedSample] ? @"YES" : @"NO" forKey:@"eyedrop merged"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[self sampleSize] forKey:@"eyedrop size"];
+	[defaults setBool:[self mergedSample] forKey:@"eyedrop merged"];
 }
 
 @end

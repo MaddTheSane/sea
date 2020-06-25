@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+description = "Scales and rotates the selection and then tiles it";
+groupName = "Tile";
+instruction = "Click twice: to indicate the start and end of the revised baseline";
+license = "Public Domain";
+name = "Scale and Rotate";

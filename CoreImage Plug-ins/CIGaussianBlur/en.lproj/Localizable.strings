@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+description = "Applies a Gaussian blur to the selection";
+groupName = "Blur";
+license = "Public Domain";
+name = "Gaussian Blur";

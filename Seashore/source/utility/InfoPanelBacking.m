@@ -7,11 +7,11 @@
 {
 	// Get whether or not we have arrows
 	BOOL side = NO, top = NO;
-	int panelStyle = [(InfoPanel *)[self window] panelStyle];
+	SeaPanelStyle panelStyle = [(InfoPanel *)[self window] panelStyle];
 	
-	if(panelStyle == kVerticalPanelStyle){
+	if (panelStyle == SeaPanelStyleVertical) {
 		top = YES;
-	}else if(panelStyle == kHorizontalPanelStyle){
+	} else if(panelStyle == SeaPanelStyleHorizontal) {
 		side = YES;
 	}
 	

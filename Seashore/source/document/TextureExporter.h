@@ -1,4 +1,12 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
+
+@class SeaDocument;
+@class NSExtendedTableView;
 
 /*!
 	@class		TextureExporter
@@ -8,25 +16,23 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
+@interface TextureExporter : NSObject <NSTableViewDataSource>
+{
+	//! The document associated with this object
+    IBOutlet SeaDocument *document;
 
-@interface TextureExporter : NSObject {
+	//! The exporting panel
+	IBOutlet NSPanel *sheet;
 
-	// The document associated with this object
-    IBOutlet id document;
-
-	// The exporting panel
-	IBOutlet id sheet;
-
-	IBOutlet id categoryTable;
+	IBOutlet NSTableView *categoryTable;
 	
-	IBOutlet id categoryTextbox;
+	IBOutlet NSTextField *categoryTextbox;
 	
-	IBOutlet id existingCategoryRadio;
+	IBOutlet NSButton *existingCategoryRadio;
 	
-	IBOutlet id newCategoryRadio;
+	IBOutlet NSButton *newCategoryRadio;
 	
-	IBOutlet id nameTextbox;
-
+	IBOutlet NSTextField *nameTextbox;
 }
 
 /*!
@@ -62,13 +68,5 @@
 - (IBAction)existingCategoryClick:(id)sender;
 
 - (IBAction)newCategoryClick:(id)sender;
-
-/*
-*/
-- (void)selectButton:(int)button;
-
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)column row:(int)row;
-
-- (int)numberOfRowsInTableView:(NSTableView *)tableView;
 
 @end

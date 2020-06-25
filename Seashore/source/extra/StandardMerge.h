@@ -10,7 +10,14 @@
 				Copyright (c) 1995 Spencer Kimball and Peter Mattis
 */
 
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
+
+__BEGIN_DECLS
 
 /*!
 	@defined	RANDOM_SEED
@@ -26,7 +33,7 @@
 #define RANDOM_TABLE_SIZE  4096
 
 /*!
-	@function	replaceMerge
+	@function	SeaReplaceMerge
 	@discussion	Given two pixels in two bitmaps replaces the destination pixel
 				with the source pixel.
 	@param		spp
@@ -42,10 +49,10 @@
 	@param		srcOpacity
 				The opacity with which the source pixel should replace.
 */
-void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+extern void SeaReplaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
-	@function	replacePrimaryMerge
+	@function	SeaReplacePrimaryMerge
 	@discussion	Given two pixels in two bitmaps replaces the destination pixel
 				with the source pixel but only for the primary channels.
 	@param		spp
@@ -61,10 +68,10 @@ void replaceMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *s
 	@param		srcOpacity
 				The opacity with which the source pixel should replace.
 */
-void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+extern void SeaReplacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
-	@function	replaceAlphaMerge
+	@function	SeaReplaceAlphaMerge
 	@discussion	Given two pixels in two bitmaps replaces the destination pixel
 				with the source pixel but only for the alpha channel.
 	@param		spp
@@ -80,10 +87,10 @@ void replacePrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned 
 	@param		srcOpacity
 				The opacity with which the source pixel should replace.
 */
-void replaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+extern void SeaReplaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
-	@function	specialMerge
+	@function	SeaSpecialMerge
 	@discussion	Given two pixels in two bitmaps composites the source pixel on
 				to the destination pixel using the special merge technique.
 	@param		spp
@@ -101,10 +108,10 @@ void replaceAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned ch
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+extern void SeaSpecialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
-	@function	normalMerge
+	@function	SeaNormalMerge
 	@discussion	Given two pixels in two bitmaps composites the source pixel on
 				to the destination pixel using the normal merge technique.
 	@param		spp
@@ -122,10 +129,10 @@ void specialMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *s
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-void normalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+extern void SeaNormalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
-	@function	eraseMerge
+	@function	SeaEraseMerge
 	@discussion	Given two pixels in two bitmaps composites the source pixel on
 				to the destination pixel using the erase merge technique.
 	@param		spp
@@ -143,10 +150,10 @@ void normalMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *sr
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-void eraseMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+extern void SeaEraseMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
-	@function	primaryMerge
+	@function	SeaPrimaryMerge
 	@discussion	Given two pixels in two bitmaps composites the source pixel on
 				to the destination pixel using the primary merge technique.
 	@param		spp
@@ -167,10 +174,10 @@ void eraseMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *src
 				YES if merges to destination pixel whose alpha is zero should be
 				skipped, NO otherwise.
 */
-void primaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity, BOOL lazy);
+extern void SeaPrimaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity, BOOL lazy);
 
 /*!
-	@function	alphaMerge
+	@function	SeaAlphaMerge
 	@discussion	Given two pixels in two bitmaps composites the source pixel on
 				to the destination pixel using the alpha merge technique.
 	@param		spp
@@ -188,10 +195,10 @@ void primaryMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *s
 	@param		srcOpacity
 				The opacity with which the source pixel should be composited.
 */
-void alphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
+extern void SeaAlphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int srcOpacity);
 
 /*!
-	@function	blendPixel
+	@function	SeaBlendPixel
 	@discussion	Given two pixels in two bitmaps composites the source pixel on
 				to the destination pixel using a simple blending technique.
 	@param		spp
@@ -209,14 +216,18 @@ void alphaMerge(int spp, unsigned char *destPtr, int destLoc, unsigned char *src
 	@param		blend
 				The amount of blending to go on (between 0 and 255 inclusive).
 */
-void blendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int blend);
+extern void SeaBlendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc, int blend);
 
 /*!
-	@function	selectMerge
+	@function	SeaSelectMerge
 	@discussion	Given two pixels in two bitmaps composites the source pixel on
 				to the destination pixel using the selected merge technique.
-				Note for XCF_DISSOLVE_MODE you must call srandom(randomTable[y %
-				4096]); for (k = 0; k < x; k++)  random();" for the merge to
+				Note for \c XCF_DISSOLVE_MODE you must call 
+	\code 
+	srandom(randomTable[y % RANDOM_TABLE_SIZE]);
+	for (k = 0; k < x; k++) 
+		random();\endcode
+				for the merge to
 				work correctly.
 	@param		choice
 				The selected merge technique (see Constants documentation).
@@ -232,8 +243,7 @@ void blendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned char *src
 				composited.
 	@param		srcLoc
 				The position in that block of the pixel.
-	@param		srcOpacity
-				The opacity with which the source pixel should be composited.
 */
-void selectMerge(int choice, int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc);
+extern void SeaSelectMerge(XcfLayerMode choice, int spp, unsigned char *destPtr, int destLoc, unsigned char *srcPtr, int srcLoc);
 
+__END_DECLS

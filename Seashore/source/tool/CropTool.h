@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractScaleTool.h"
 
@@ -11,7 +12,6 @@
 */
 
 @interface CropTool : AbstractScaleTool {
-
 	// The point where the selection begun
 	IntPoint startPoint;
 		
@@ -20,7 +20,6 @@
 	
 	// Are we using the one-to-one ratio?
 	BOOL oneToOne;
-
 }
 
 /*!
@@ -57,11 +56,11 @@
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event;
 
 /*!
-	@method		cropRect
+	@property	cropRect
 	@discussion	Returns the cropping rectangle.
 	@result		Returns an IntRect representing the cropping rectangle.
 */
-- (IntRect)cropRect;
+@property (readonly) IntRect cropRect;
 
 /*!
 	@method		clearCrop
@@ -85,6 +84,5 @@
 				An IntRect representing the new rectangle.
 */
 - (void)setCropRect:(IntRect)newCropRect;
-
 
 @end

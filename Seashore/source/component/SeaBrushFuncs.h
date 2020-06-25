@@ -8,10 +8,20 @@
 				Copyright (c) 1995 Spencer Kimball and Peter Mattis
 */
 
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 #define kSubsampleLevel 4
 
-void determineBrushMask(unsigned char *input, unsigned char *output, int width, int height, int index1, int index2);
+#ifndef __private_extern
+#define __private_extern __attribute__((visibility("hidden")))
+#endif
 
-void arrangePixels(unsigned char *dest, int destWidth, int destHeight, unsigned char *src, int srcWidth, int srcHeight);
+
+extern __private_extern void determineBrushMask(unsigned char *input, unsigned char *output, int width, int height, int index1, int index2);
+
+extern __private_extern void arrangePixels(unsigned char *dest, int destWidth, int destHeight, unsigned char *src, int srcWidth, int srcHeight);

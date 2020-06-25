@@ -1,0 +1,26 @@
+framework module TIFF [extern_c] {
+	umbrella header "tiff.h"
+
+	export *
+	module * { export * }
+	
+	module configuration {
+		header "tiffconf.h"
+		export *
+	}
+	
+	module io {
+		header "tiffio.h"
+		module cxx {
+			requires cplusplus
+			header "tiffio.hpp"
+			export *
+		}
+		export *
+	}
+	
+	module version {
+		header "tiffvers.h"
+		export *
+	}
+}

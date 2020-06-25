@@ -2,7 +2,5 @@
 
 
 @interface NSBezierPath(MyExtensions)
-+ (NSBezierPath *)bezierPathWithRect:(NSRect) rect andRadius:(float) radius;
++ (NSBezierPath *)bezierPathWithRect:(NSRect)rect andRadius:(CGFloat) radius;
 @end
-
-void NSLogRect(NSRect rect);

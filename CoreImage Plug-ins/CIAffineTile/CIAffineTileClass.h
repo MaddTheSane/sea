@@ -11,34 +11,18 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "SeaPlugins.h"
+#import "PluginData.h"
+#import "SeaWhiteboard.h"
+#import "SeashoreKit.h"
+#import "SSKCIPlugin.h"
 
-@interface CIAffineTileClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// YES if the application succeeded
-	BOOL success;
-
+@interface CIAffineTileClass : SSKPlugin
+{
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 		
-	// Determines the boundaries of the layer
-	CGRect bounds;
-	
-	// Signals whether the bounds rectangle is valid
-	BOOL boundsValid;
-
+	NSBitmapImageRep *temp_rep;
 }
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type
@@ -46,7 +30,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		points
@@ -138,14 +122,6 @@
 	@result		Returns the resulting bitmap.
 */
 - (unsigned char *)executeChannel:(PluginData *)pluginData withBitmap:(unsigned char *)data;
-
-/*!
-	@method		determineContentBorders
-	@discussion	Determines the content borders, must be called before executing.
-	@param		pluginData
-				The PluginData object.
-*/
-- (void)determineContentBorders:(PluginData *)pluginData;
 
 /*!
 	@method		tile:

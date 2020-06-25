@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@class		SeaHelp
@@ -10,7 +15,6 @@
 */
 
 @interface SeaHelp : NSObject {
-	
 	// The bugs and suggestions window
     IBOutlet id bugsWindow;
 	
@@ -22,7 +26,6 @@
 	
 	// Should the user be advised if the download fails?
 	BOOL adviseFailure;
-	
 }
 
 /*!
@@ -100,6 +103,6 @@
 	@param		stringID
 				The index of the string in the Instant.plist to be displayed.
 */
-- (void)updateInstantHelp:(int)stringID;
+- (void)updateInstantHelp:(NSInteger)stringID;
 
 @end

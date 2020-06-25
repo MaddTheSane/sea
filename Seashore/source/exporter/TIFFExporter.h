@@ -1,5 +1,8 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractExporter.h"
+
+@class SeaDocument;
 
 /*!
 	@class		TIFFExporter
@@ -9,32 +12,18 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface TIFFExporter : AbstractExporter {
+@interface TIFFExporter : NSObject <AbstractExporter> {
 	
 	// The associated document
-	IBOutlet id idocument;
+	IBOutlet SeaDocument *idocument;
 	
 	// The panel allowing colour space choice
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// The radio buttons specifying the target
-	IBOutlet id targetRadios;
+	IBOutlet NSMatrix *targetRadios;
 
 }
-
-/*!
-	@method		init
-	@discussion	Initializes an instance of this class.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)init;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		targetChanged:

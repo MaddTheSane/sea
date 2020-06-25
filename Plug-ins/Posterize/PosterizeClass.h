@@ -9,40 +9,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
+#import "SSKCIPlugin.h"
 
-@interface PosterizeClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// The posterize slider
-	IBOutlet id posterizeSlider;
-	
-	// The posterize label
-	IBOutlet id posterizeLabel;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The posterize value
-	int posterize;
-
-	// YES if the effect must be refreshed
-	BOOL refresh;
-
-	// YES if the application succeeded
-	BOOL success;
-
-}
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
+@interface PosterizeClass : SSKVisualPlugin
+//! The posterize value
+@property NSInteger posterizeValue;
 
 /*!
 	@method		type
@@ -50,7 +21,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		name
@@ -107,14 +78,6 @@
 				Ignored.
 */
 - (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
 
 /*!
 	@method		update:

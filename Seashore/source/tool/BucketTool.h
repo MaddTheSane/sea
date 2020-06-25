@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
@@ -13,7 +14,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface BucketTool : AbstractTool {
 	// The point where to start the selection
 	IntPoint startPoint;
@@ -30,12 +30,6 @@
 	// You can preview by holding down shift, so we need to track that
 	BOOL isPreviewing;
 }
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		mouseDownAt:withEvent:
@@ -74,17 +68,17 @@
 - (void)fillAtPoint:(IntPoint)point useTolerance:(BOOL)useTolerance delay:(BOOL)delay;
 
 /*!
-	@method		startPoint
+	@property	start
 	@discussion	For figuring out where to draw the center
 	@result		Returns an NSPoint
 */
-- (NSPoint)start;
+@property (readonly) NSPoint start;
 
 /*!
-	@method		currentPoint
+	@property	current
 	@discussion	For figuring out where to draw the outside
 	@result		Returns an NSPoint
 */
-- (NSPoint)current;
+@property (readonly) NSPoint current;
 
 @end

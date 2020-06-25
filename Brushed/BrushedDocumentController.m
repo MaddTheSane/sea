@@ -2,12 +2,14 @@
 
 @implementation BrushedDocumentController
 
-- (int)runModalOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)extensions
+- (NSInteger)runModalOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)extensions
 {
+	NSURL *brushesResources = [[[NSBundle mainBundle] resourceURL] URLByAppendingPathComponent:@"brushes" isDirectory:YES];
 	[openPanel setTreatsFilePackagesAsDirectories:YES];
-	[openPanel setDirectory:@"/Applications/Seashore.app/Contents/Resources/brushes/"];
+	[openPanel setDirectoryURL:brushesResources];
+	openPanel.allowedFileTypes = extensions;
 	
-	return [openPanel runModalForDirectory:nil file:nil types:extensions];
+	return [openPanel runModal];
 }
 
 @end

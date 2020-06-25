@@ -1,6 +1,13 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
 #import "SeaLayer.h"
 #import "XCFContent.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaLayer.h>
+#import <SeashoreKit/XCFContent.h>
+#endif
 
 /*!
 	@class		XCFLayer
@@ -19,6 +26,7 @@
 
 }
 
+#if MAIN_COMPILE
 /*!
 	@method		initWithFile:document:shareInfo:
 	@discussion	Initializes an instance of this class with the layer at a given
@@ -35,6 +43,27 @@
 				information).
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithFile:(FILE *)file offset:(int)offset document:(id)doc sharedInfo:(SharedXCFInfo *)info;
+- (instancetype)initWithFile:(FILE *)file offset:(size_t)offset document:(SeaDocument*)doc sharedInfo:(SharedXCFInfo *)info;
+
+#else
+
+/*!
+	@method		initWithFile:document:shareInfo:
+	@discussion	Initializes an instance of this class with the layer at a given
+				offset inside a given file.
+	@param		file
+				The file containing the layer.
+	@param		offset
+				The offset at which the layer begins.
+	@param		doc
+				The document to be associated with this instance.
+	@param		info
+				A pointer to an information record for exchanging information
+				with the XCFContent class (see XCFContent documentation for more
+				information).
+	@result		Returns instance upon success (or NULL otherwise).
+ */
+- (instancetype)initWithFile:(FILE *)file offset:(int)offset sharedInfo:(SharedXCFInfo *)info;
+#endif
 
 @end

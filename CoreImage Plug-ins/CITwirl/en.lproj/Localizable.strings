@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Distort";
+description = "Applies a twirl to the selection";
+license = "Public Domain";
+name = "Twirl";
+instruction = "Click twice: first to locate the centre of the twirl and then to specify the radius of its impact";

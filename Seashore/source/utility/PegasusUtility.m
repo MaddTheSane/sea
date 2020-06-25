@@ -10,13 +10,11 @@
 #import "UtilitiesManager.h"
 #import "SeaProxy.h"
 #import "SeaWindowContent.h"
+#import "LayerDataSource.h"
 
 @implementation PegasusUtility
-
-- (id)init
-{
-	return self;
-}
+@synthesize layerSettings;
+@synthesize enabled;
 
 - (void)awakeFromNib
 {
@@ -26,16 +24,10 @@
 	[[SeaController utilitiesManager] setPegasusUtility: self for:document];
 }
 
-- (void)dealloc
-{
-	//if ([layersView documentView]) [[layersView documentView] autorelease];
-	[super dealloc];
-}
-
 - (void)activate
 {
 	// Get the LayersView and LayerSettings to activate
-	[(LayerSettings *)layerSettings activate];
+	[layerSettings activate];
 	[self update:kPegasusUpdateAll];
 }
 
@@ -48,7 +40,7 @@
 
 - (void)update:(int)updateCode
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	
 	switch (updateCode) {
 		case kPegasusUpdateAll:
@@ -73,19 +65,14 @@
 	[dataSource update];
 }
 
-- (id)layerSettings
-{
-	return layerSettings;
-}
-
 - (IBAction)show:(id)sender
 {
-	[[[document window] contentView] setVisibility: YES forRegion: kSidebar];
+	[[[document window] contentView] setVisibility: YES forRegion: SeaWindowRegionSidebar];
 }
 
 - (IBAction)hide:(id)sender
 {
-	[[[document window] contentView] setVisibility: NO forRegion: kSidebar];
+	[[[document window] contentView] setVisibility: NO forRegion: SeaWindowRegionSidebar];
 }
 
 - (void)setEnabled:(BOOL)value
@@ -119,7 +106,7 @@
 
 - (BOOL)visible
 {
-	return [[[document window] contentView] visibilityForRegion: kSidebar];
+	return [[[document window] contentView] visibilityForRegion: SeaWindowRegionSidebar];
 }
 
 - (IBAction)addLayer:(id)sender
@@ -131,18 +118,29 @@
 {
 	id selection = [document selection];
 	
-	if (![selection floating]) {
-		[(SeaContent *)[document contents] duplicateLayer:kActiveLayer];
+	if (![selection isFloating]) {
+		[[document contents] duplicateLayer:kActiveLayer];
 	}
 }
 
 - (IBAction)deleteLayer:(id)sender
 {
-	if ([[document contents] layerCount] > 1){
-		[(SeaContent *)[document contents] deleteLayer:kActiveLayer];
-	}else{
+	if ([[document contents] layerCount] > 1) {
+		[[document contents] deleteLayer:kActiveLayer];
+	} else {
 		NSBeep();
 	}
 }
+
+- (IBAction)forward:(id)sender
+{
+	//TODO: implement?
+}
+
+- (IBAction)backward:(id)sender
+{
+	//TODO: implement?
+}
+
 
 @end

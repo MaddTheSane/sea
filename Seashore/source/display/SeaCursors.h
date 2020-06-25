@@ -1,4 +1,12 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
+
+@class SeaDocument;
+@class SeaView;
 
 /*!
 	@class		SeaCursors
@@ -9,26 +17,22 @@
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@class SeaDocument;
-@class	SeaView;
-
 @interface SeaCursors : NSObject {
 	// Other Important Objects
-	SeaDocument *document;
-	SeaView *view;
+	__weak SeaDocument *document;
+	__weak SeaView *view;
 	
-	// The various cursors used by the toolbox
+	/// The various cursors used by the toolbox
 	NSCursor *crosspointCursor, *wandCursor, *zoomCursor, *pencilCursor, *brushCursor, *bucketCursor, *eyedropCursor, *moveCursor, *eraserCursor, *smudgeCursor, *effectCursor, *addCursor, *subtractCursor, *noopCursor;
 
-	// The view-specific cursors
+	/// The view-specific cursors
 	NSCursor *handCursor, *grabCursor, *udCursor, *lrCursor, *urdlCursor, *uldrCursor, *closeCursor, *resizeCursor, *rotateCursor , *anchorCursor;
 	
 	// The rects for the handles and selection
 	NSRect handleRects[8];
 	NSCursor* handleCursors[8];
 	
-	// The close rect
+	/// The close rect
 	NSRect closeRect;
 
 	// Scrolling mode variables
@@ -45,13 +49,7 @@
 	@param			newView
 				The SeaView that uses these cursors
 */
-- (id)initWithDocument:(id)newDocument andView:(id)newView;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)initWithDocument:(SeaDocument*)newDocument andView:(SeaView*)newView;
 
 /*!
 	@method		resetCursorRects
@@ -73,10 +71,10 @@
 - (void)addCursorRect:(NSRect)rect cursor:(NSCursor *)cursor;
 
 /*!
-	@method		handleRectsPointer
+	@property	handleRectsPointer
 	@discussion	Returns a pointer to the rectangles used for the handles.
 */
-- (NSRect *)handleRectsPointer;
+@property (readonly) NSRect *handleRectsPointer NS_RETURNS_INNER_POINTER;
 
 /*!
 	@method		setCloseRect:
@@ -85,6 +83,9 @@
 				A NSRect containing the rectangle of the handle.
 */
 - (void)setCloseRect:(NSRect)rect;
+
+//! The rectangle used for the close cursor for the polygon lasso tool.
+@property NSRect closeRect;
 
 /*!
 	@method		setScrollingMode:mouseDown:

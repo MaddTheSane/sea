@@ -11,10 +11,18 @@
 				Copyright (c) 1995 Spencer Kimball and Peter Mattis
 */
 
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
+
+NS_ASSUME_NONNULL_BEGIN
+__BEGIN_DECLS
 
 /*!
-	@function	RGBtoHSV
+	@function	SeaRGBtoHSV
 	@discussion	Converts a set of RGB (red, green, blue) values to HSV hue
 				saturation value) values.
 	@param		red
@@ -27,10 +35,10 @@
 				The blue component's value, upon return will be equal to the
 				value component's value.
 */
-void RGBtoHSV(int *red, int *green, int *blue);
+extern void SeaRGBtoHSV(int *red, int *green, int *blue);
 
 /*!
-	@function	HSVtoRGB
+	@function	SeaHSVtoRGB
 	@discussion	Converts a set of HSV (hue saturation value) values to  RGB red,
 				green, blue) values.
 	@param		hue
@@ -43,10 +51,10 @@ void RGBtoHSV(int *red, int *green, int *blue);
 				The value component's value, upon return will be equal to the
 				blue component's value.
 */
-void HSVtoRGB(int *hue, int *saturation, int *value);
+extern void SeaHSVtoRGB(int *hue, int *saturation, int *value);
 
 /*!
-	@function	RGBtoHLS
+	@function	SeaRGBtoHLS
 	@discussion	Converts a set of RGB (red, green, blue) values to HSV hue
 				lightness saturation) values.
 	@param		red
@@ -59,10 +67,10 @@ void HSVtoRGB(int *hue, int *saturation, int *value);
 				The blue component's value, upon return will be equal to the
 				saturation component's value.
 */
-void RGBtoHLS (int *red, int *green, int *blue);
+extern void SeaRGBtoHLS (int *red, int *green, int *blue);
 
 /*!
-	@function	HLStoRGB
+	@function	SeaHLStoRGB
 	@discussion	Converts a set of HLS (hue lightness saturation) values  to RGB
 				red, green, blue) values.
 	@param		hue
@@ -75,5 +83,7 @@ void RGBtoHLS (int *red, int *green, int *blue);
 				The saturation component's value, upon return will be equal to
 				the blue component's value.
 */
-void HLStoRGB(int *hue, int *lightness, int *saturation);
+extern void SeaHLStoRGB(int *hue, int *lightness, int *saturation);
 
+__END_DECLS
+NS_ASSUME_NONNULL_END

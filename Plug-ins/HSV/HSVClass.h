@@ -10,58 +10,15 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
+#import "SSKCIPlugin.h"
 
-@interface HSVClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// The label displaying the hue
-	IBOutlet id hueLabel;
-	
-	// The slider for the hue
-	IBOutlet id hueSlider;
-
-	// The label displaying the saturation
-	IBOutlet id saturationLabel;
-	
-	// The slider for the saturation
-	IBOutlet id saturationSlider;
-
-	// The label displaying the value
-	IBOutlet id valueLabel;
-	
-	// The slider for the value
-	IBOutlet id valueSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The hue
-	float hue;
-
-	// The saturation
-	float saturation;
-
-	// The value
-	float value;
-
-	// YES if the effect must be refreshed
-	BOOL refresh;
-
-	// YES if the application succeeded
-	BOOL success;
-
-}
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
+@interface HSVClass : SSKVisualPlugin
+//! The hue
+@property CGFloat hue;
+//! The saturation
+@property CGFloat saturation;
+//! The value
+@property CGFloat value;
 
 /*!
 	@method		type
@@ -69,7 +26,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		name
@@ -95,7 +52,6 @@
 /*!
 	@method		run
 	@discussion	Runs the plug-in.
-	@result		YES if the plug-in was run successfully, NO otherwise.
 */
 - (void)run;
 
@@ -127,14 +83,6 @@
 				Ignored.
 */
 - (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
 
 /*!
 	@method		update:

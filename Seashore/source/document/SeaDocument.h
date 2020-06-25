@@ -1,4 +1,30 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#import "AbstractExporter.h"
+#import "Units.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/AbstractExporter.h>
+#import <SeashoreKit/Units.h>
+#endif
+
+@class SeaSelection, SeaWhiteboard;
+
+@class GIFExporter, JPEGExporter, JP2Exporter, PNGExporter, TIFFExporter, XCFExporter;
+@class TextureExporter;
+@class SeaContent, SeaView;
+@class SeaOperations;
+@class SeaHelpers;
+@class SeaTools;
+@class PluginData;
+@class TextureExporter;
+@class WarningsUtility;
+@class LayerDataSource;
+@class SeaWarning;
+@class SeaView;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
 	@class		SeaDocument
@@ -8,89 +34,83 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface SeaDocument : NSDocument {
-
-	// The contents of the document (a subclass of SeaContent)
-	id contents;
+@interface SeaDocument : NSDocument <NSWindowDelegate>
+{
+	/// The selection manager for this document
+	SeaSelection *selection;
 	
-	// The whiteboard that represents this document
-	id whiteboard;
+	/// An outlet to the view associated with this document
+	IBOutlet NSScrollView *view;
 	
-	// The selection manager for this document
-	id selection;
-	
-	// The operations manager for this document
-	IBOutlet id operations;
-	
-	// The tools for this document
-	IBOutlet id tools;
-	
-	// An outlet to the helpers of this document
-	IBOutlet id helpers;
-	
-	// An outlet to the warnings utility for this document
-	IBOutlet id warnings;
-	
-	// The plug-in data used by this document
-	IBOutlet id pluginData;
-	
-	// An outlet to the view associated with this document
-	IBOutlet id view;
-	
-	// An outlet to the window associated with this document
-	IBOutlet id docWindow;
+	/// An outlet to the window associated with this document
+	IBOutlet NSWindow *docWindow;
 	
 	// The exporters
-	IBOutlet id gifExporter, jpegExporter, jp2Exporter, pngExporter, tiffExporter, xcfExporter;
+	IBOutlet GIFExporter *gifExporter;
+	IBOutlet JPEGExporter *jpegExporter;
+	IBOutlet JP2Exporter *jp2Exporter;
+	IBOutlet PNGExporter *pngExporter;
+	IBOutlet TIFFExporter *tiffExporter;
+	IBOutlet XCFExporter *xcfExporter;
 	
-	// The special texture exporter
-	IBOutlet id textureExporter;
+	/// An array of all possible exporters
+	NSArray<id<AbstractExporter>> *exporters;
 	
-	// An array of all possible exporters
-	id exporters;
+	/// The view to attach to the save panel
+	IBOutlet NSView *accessoryView;
 	
-	// The view to attach to the save panel
-	IBOutlet id accessoryView;
+	/// A pop-up menu of all possible exporters
+	IBOutlet NSPopUpButton *exportersPopUp;
 	
-	// A pop-up menu of all possible exporters
-	IBOutlet id exportersPopUp;
+	/// The button showing the options for the exporter
+	IBOutlet NSButton *optionsButton;
 	
-	// The button showing the options for the exporter
-	IBOutlet id optionsButton;
-	
-	// A summary of the export options
+	/// A summary of the export options
 	IBOutlet id optionsSummary;
 	
-	// The Layer Data Source
-	IBOutlet id dataSource;
+	/// The Layer Data Source
+	//IBOutlet LayerDataSource *dataSource;
 	
-	// The unique ID for layer
-	int uniqueLayerID;
+	/// The unique ID for layer
+	NSInteger uniqueLayerID;
 	
-	// The unique ID for floating layer
-	int uniqueFloatingLayerID;
+	/// The unique ID for floating layer
+	NSInteger uniqueFloatingLayerID;
 	
-	// The unique ID for this document (sometimes used)
-	int uniqueDocID;
+	/// The unique ID for this document (sometimes used)
+	NSInteger uniqueDocID;
 	
-	// The document's measure style
-	int measureStyle;
+	/// The document's measure style
+	SeaUnits measureStyle;
 	
-	// Is the document locked?
+	/// Is the document locked?
 	BOOL locked;
 	
-	// Is the document initing from the pasteboard or plug-in?
+	/// Is the document initing from the pasteboard or plug-in?
 	int specialStart;
 	
 	// File types with Cocoa can be difficult
 	BOOL restoreOldType;
 	NSString *oldType;
 	
-	// Is the file the current version?
+	/// Is the file the current version?
 	BOOL current;
-	
 }
+
+/*!
+	@property	contents
+	@discussion	The contents of the document (a subclass of <code>SeaContent</code>)
+ */
+@property (strong, readonly) __kindof SeaContent *contents;
+
+/*!
+	@property	measureStyle
+	@discussion	The document's measure style
+ */
+@property (setter = changeMeasuringStyle:) SeaUnits measureStyle;
+
+/// The whiteboard that represents this document
+@property (strong) SeaWhiteboard *whiteboard;
 
 // CREATION METHODS
 
@@ -99,7 +119,7 @@
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
+- (instancetype)init;
 
 /*!
 	@method		initWithPasteboard
@@ -107,18 +127,7 @@
 				layer.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithPasteboard;
-
-/*!
-	@method		initWithContentsOfFile:ofType:
-	@discussion	Initializes an instance of this class with the given image file.
-	@param		path
-				The path of the file with which to initalize this class.
-	@param		type
-				The type of file with which this class is being initialized.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithContentsOfFile:(NSString *)path ofType:(NSString *)type;
+- (instancetype)initWithPasteboard;
 
 /*!
 	@method		initWithData:type:width:height:
@@ -133,19 +142,7 @@
 				The height of the data with which this class is being initialized.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithData:(unsigned char *)data type:(int)type width:(int)width height:(int)height;
-
-/*!
-	@method		awakeFromNib
-	@discussion	Prepares document for use.
-*/
-- (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)initWithData:(unsigned char *)data type:(XcfImageType)type width:(int)width height:(int)height;
 
 /*!
 	@method		saveDocument:
@@ -153,7 +150,7 @@
 	@param		sender
 				Ignored.
 */
-- (IBAction)saveDocument:(id)sender;
+- (IBAction)saveDocument:(nullable id)sender;
 
 /*!
 	@method		saveDocumentAs:
@@ -161,80 +158,76 @@
 	@param		sender
 				Ignored.
 */
-- (IBAction)saveDocumentAs:(id)sender;
+- (IBAction)saveDocumentAs:(nullable id)sender;
 
 // GATEWAY METHODS
 
 /*!
 	@method		contents
 	@discussion	Returns the contents of the document.
-	@result		Returns an instance of SeaContent.
+	@result		Returns an instance of <code>SeaContent</code>.
 */
-- (id)contents;
+- (__kindof SeaContent*)contents;
 
 /*!
-	@method		whiteboard
-	@discussion	Returns the whiteboard of the document.
-	@result		Returns an instance of SeaWhiteboard.
-*/
-- (id)whiteboard;
-
-/*!
-	@method		selection
+	@property	selection
 	@discussion	Returns the selection manager of the document.
-	@result		Returns an instance of SeaSelection.
+	@result		Returns an instance of <code>SeaSelection</code>.
 */
-- (id)selection;
+@property (readonly, strong) SeaSelection *selection;
 
 /*!
-	@method		operations
-	@discussion	Returns the operation manager of the document.
-	@result		Returns an instance of SeaSelection.
+	@property	operations
+	@discussion	The operations manager for this document.
 */
-- (id)operations;
+@property (weak) IBOutlet SeaOperations *operations;
 
 /*!
-	@method		tools
+	@property	tools
+	@brief		The tools for this document.
 	@discussion	Returns the tools manager of the document.
-	@result		Returns an instance of SeaTools.
+	@result		Returns an instance of <code>SeaTools</code>.
 */
-- (id)tools;
+@property (weak) IBOutlet SeaTools *tools;
 
 /*!
-	@method		helpers
+	@property	helpers
+	@brief		An outlet to the helpers of this document
 	@discussion	Returns an object containing various helper methods for the
 				document.
-	@result		Returns an instance of SeaHelpers.
+	@result		Returns an instance of <code>SeaHelpers</code<.
 */
-- (id)helpers;
+@property (weak) IBOutlet SeaHelpers *helpers;
 
 /*!
-	@method		warnings
+	@property	warnings
+	@brief		An outlet to the warnings utility for this document
 	@discussion	Returns an object contaning the warning related methods.
-	@result		Returns an instance of WarningsUtility.
+	@result		Returns an instance of <code>WarningsUtility</code>.
 */
-- (id)warnings;
+@property (weak) IBOutlet WarningsUtility *warnings;
 
 /*!
-	@method		pluginData
+	@property	pluginData
+	@brief		The plug-in data used by this document
 	@discussion	Returns the object shared between Seashore and most plug-ins.
-	@result		Returns an instance of PluginData.
+	@result		Returns an instance of <code>PluginData</code>.
 */
-- (id)pluginData;
+@property (weak) IBOutlet PluginData *pluginData;
 
 /*!
-	@method		docView
+	@property	docView
 	@discussion	Returns the document view of the document.
 	@result		Returns an instance of SeaView.
 */
-- (id)docView;
+@property (readonly, retain) SeaView *docView;
 
 /*!
 	@method		window
 	@discussion	Returns the window of the document.
 	@result		Returns an instance of NSWindow.
 */
-- (id)window;
+- (NSWindow*)window;
 
 /*!
 	@method		updateWindowColor
@@ -243,35 +236,36 @@
 - (void)updateWindowColor;
 
 /*!
-	@method		textureExporter
+	@property	textureExporter
+	@brief		The special texture exporter
 	@discussion	Returns the texture exporter.
-	@result		Returns an instance of TextureExporter.
+	@result		Returns an instance of <code>TextureExporter</code>.
 */
-- (id)textureExporter;
+@property (weak) IBOutlet TextureExporter *textureExporter;
 
 // DOCUMENT METHODS
 
 /*!
-	@method		readFromFile:ofType:
+	@method		readFromURL:ofType:error:
 	@discussion	Reads a given file from disk.
 	@param		path
-				The path of the file to be read.
+				The file URL to be read.
 	@param		type
 				The type of the file to be read.
-	@result		Returns YES if the file is successfully read, NO otherwise.
+	@result		Returns \c YES if the file is successfully read, \c NO otherwise.
 */
-- (BOOL)readFromFile:(NSString *)path ofType:(NSString *)type;
+- (BOOL)readFromURL:(NSURL *)path ofType:(NSString *)type error:(NSError * __autoreleasing *)outError;
 
 /*!
-	@method		writeToFile:ofType:
+	@method		writeToURL:ofType:error:
 	@discussion	Writes the document's data to disk.
-	@param		path
-				The path of the file that the data should be written to.
-	@param		type
+	@param		filename
+				The file URL that the data should be written to.
+	@param		ignore
 				The type of the file that the data that should be written to.
-	@result		Returns YES if the file is successfully written, NO otherwise.
+	@result		Returns \c YES if the file is successfully written, \c NO otherwise.
 */
-- (BOOL)writeToFile:(NSString *)filename ofType:(NSString *)ignore;
+- (BOOL)writeToURL:(NSURL *)filename ofType:(NSString *)ignore error:(NSError * __autoreleasing *)outError;
 
 /*!
 	@method		printShowingPrintPanel:
@@ -352,7 +346,7 @@
 /*!
 	@method		windowDidResignKey:
 	@discussion	Called when the document loses key focus.
-	@param		notification
+	@param		aNotification
 				Ignored.
 */
 - (void)windowDidResignKey:(NSNotification *)aNotification;
@@ -394,7 +388,15 @@
 - (void)setCurrent:(BOOL)value;
 
 /*!
-	@method		uniqueLayerID
+	@oroperty	current
+	@discussion	A boolean indicating whether the document is current.
+				Documents are not current, if they were created using the "Compare
+				to Last Saved" menu item and have not been resaved since.
+ */
+@property BOOL current;
+
+/*!
+	@property	uniqueLayerID
 	@discussion	Returns a unique ID for a given layer and then increments the
 				uniqueLayerID instance variable so the next layer will recieve a
 				unique ID. To ensure sequential numbering this method should
@@ -403,10 +405,10 @@
 	@result		Returns an integer representing a new layer may assign to
 				itself.
 */
-- (int)uniqueLayerID;
+@property (readonly) NSInteger uniqueLayerID;
 
 /*!
-	@method		uniqueFloatingLayerID
+	@property	uniqueFloatingLayerID
 	@discussion	Returns a unique ID for a given floating layer and then
 				increments the uniqueFloatingLayerID instance variable so the
 				next floating layer will recieve a unique ID. To ensure
@@ -415,14 +417,14 @@
 	@result		Returns an integer representing a new layer may assign to
 				itself.
 */
-- (int)uniqueFloatingLayerID;
+@property (readonly) NSInteger uniqueFloatingLayerID;
 
 /*!
-	@method		uniqueDocID
+	@property	uniqueDocID
 	@discussion	Returns the unique ID of the document.
 	@result		Returns an integer representing a unique ID for the document.
 */
-- (int)uniqueDocID;
+@property (readonly) NSInteger uniqueDocID;
 
 /*!
 	@method		windowNibName
@@ -457,7 +459,7 @@
 				An integer representing the measuring style (see
 				Units.h).
 */
-- (void)changeMeasuringStyle:(int)aStyle;
+- (void)changeMeasuringStyle:(SeaUnits)aStyle;
 
 /*!
 	@method		measureStyle
@@ -465,7 +467,7 @@
 	@result		Returns an integer representing the measuring style (see
 				Units.h).
 */
-- (int)measureStyle;
+- (SeaUnits)measureStyle;
 
 /*!
 	@method		locked
@@ -522,7 +524,7 @@
 	@param		contextInfo
 				The pointer to pass to the callback method.
 */
-- (void)runModalSavePanelForSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo;
+- (void)runModalSavePanelForSaveOperation:(NSSaveOperationType)saveOperation delegate:(nullable id)delegate didSaveSelector:(nullable SEL)didSaveSelector contextInfo:(nullable void *)contextInfo;
 
 /*!
 	@method		document:didSave:contextInfo:
@@ -551,9 +553,11 @@
 - (NSScrollView *)scrollView;
 
 /*!
-	@method		dataSource
+	@property	dataSource
 	@result		Returns the data source used by the layers view
 */
-- (id) dataSource;
+@property (weak) IBOutlet LayerDataSource *dataSource;
 
 @end
+
+NS_ASSUME_NONNULL_END

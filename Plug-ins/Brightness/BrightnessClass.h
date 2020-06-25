@@ -10,49 +10,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
+#import "SSKCIPlugin.h"
 
-@interface BrightnessClass : NSObject {
+@interface BrightnessClass : SSKVisualPlugin
+//! The brightness
+@property CGFloat brightness;
 
-	// The plug-in's manager
-	id seaPlugins;
-
-	// The label displaying the brightness
-	IBOutlet id brightnessLabel;
-	
-	// The slider for the brightness
-	IBOutlet id brightnessSlider;
-
-	// The label displaying the contrast
-	IBOutlet id contrastLabel;
-	
-	// The slider for the contrast
-	IBOutlet id contrastSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The brightness
-	float brightness;
-
-	// The contrast
-	float contrast;
-
-	// YES if the effect must be refreshed
-	BOOL refresh;
-
-	// YES if the application succeeded
-	BOOL success;
-
-}
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
+//! The contrast
+@property CGFloat contrast;
 
 /*!
 	@method		type
@@ -60,7 +25,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		name
@@ -86,7 +51,6 @@
 /*!
 	@method		run
 	@discussion	Runs the plug-in.
-	@result		YES if the plug-in was run successfully, NO otherwise.
 */
 - (void)run;
 
@@ -118,22 +82,6 @@
 				Ignored.
 */
 - (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
-
-/*!
-	@method		update:
-	@discussion	Updates the panel's labels.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
 
 /*!
 	@method		adjust

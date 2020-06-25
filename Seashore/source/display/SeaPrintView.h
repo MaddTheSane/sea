@@ -1,4 +1,11 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
+
+@class SeaDocument;
 
 /*!
 	@class		SeaView
@@ -8,12 +15,9 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli		
 */
-
 @interface SeaPrintView : NSView {
-
 	// The document associated with this view
-	id document;
-	
+	SeaDocument *document;
 }
 
 /*!
@@ -23,13 +27,7 @@
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)initWithDocument:(SeaDocument*)doc;
 
 /*!
 	@method		drawRect:

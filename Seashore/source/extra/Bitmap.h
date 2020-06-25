@@ -7,24 +7,37 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
+
+NS_ASSUME_NONNULL_BEGIN
+__BEGIN_DECLS
 
 /*!
 	@enum		k...ColorSpace
-	@constant	kGrayColorSpace
+	@constant	BMPColorSpaceGray
 				Indicates the gray/white colour space.
-	@constant	kInvertedGrayColorSpace
+	@constant	BMPColorSpaceInvertedGray
 				Indicates the gray/black colour space.
-	@constant	kRGBColorSpace
+	@constant	BMPColorSpaceRGB
 				Indicates the RGB colour space.
-	@constant	kCMYKColorSpace
+	@constant	BMPColorSpaceCMYK
 				Indicates the CMYK colour space
 */
-enum {
-	kGrayColorSpace,
-	kInvertedGrayColorSpace,
-	kRGBColorSpace,
-	kCMYKColorSpace
+typedef NS_ENUM(int, BMPColorSpace) {
+	//! Indicates the gray/white colour space.
+	BMPColorSpaceGray,
+	//! Indicates the gray/black colour space.
+	BMPColorSpaceInvertedGray,
+	//! Indicates the RGB colour space.
+	BMPColorSpaceRGB,
+	//! Indicates the CMYK colour space.
+	BMPColorSpaceCMYK,
+	BMPColorSpaceInvalid = -1,
 };
 
 /*!
@@ -63,10 +76,49 @@ enum {
 				possible. You should always check for failed conversions. The
 				block of memory is safe for use with AltiVec.
 */
-unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibitmap, int width, int height, int ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, int iformat);
+extern unsigned char *convertBitmap(int dspp, BMPColorSpace dspace, int dbps, unsigned char *ibitmap, int width, int height, BMPColorSpace ispp, int iebpp, int iebpr, int ispace, CMProfileLocation *iprofile, int ibps, NSBitmapFormat iformat) DEPRECATED_ATTRIBUTE UNAVAILABLE_ATTRIBUTE;
 
 /*!
-	@function	stripAlphaToWhite
+	@function	SeaConvertBitmap
+	@discussion	Given a bitmap converts the bitmap to the given type. The
+				conversion will not affect the premultiplication of the data.
+	@param		dspp
+				The samples per pixel of the desired bitmap.
+	@param		dspace
+				The colour space of the desired bitmap.
+	@param		dbps
+				The bits per sample of the desired bitmap.
+	@param		ibitmap
+				The original bitmap.
+	@param		width
+				The width of the bitmap.
+	@param		height
+				The height of the bitmap.
+	@param		ispp
+				The samples per pixel of the original bitmap.
+	@param		iebpp
+				The number of extra bytes per pixel of the original bitmap.
+	@param		iebpr
+				The number of extra bytes per row of the original bitmap.
+	@param		ispace
+				The colour space of the original bitmap.
+	@param		iprofile
+				The ColorSync profile of the original bitmap or
+				\c NULL if none exists.
+	@param		ibps
+				The bits per sample of the original bitmap.
+	@param		iformat
+				The format of the original bitmap.
+	@result		Returns a block of memory containing the desired bitmap which
+				must be freed after use or \c NULL if the conversion was not
+				possible. You should \a always check for failed conversions. The
+				block of memory is safe for use with AltiVec.
+ */
+extern unsigned char *__nullable SeaConvertBitmap(NSInteger dspp, BMPColorSpace dspace, NSInteger dbps, unsigned char *ibitmap, NSInteger width, NSInteger height, NSInteger ispp, NSInteger iebpp, NSInteger iebpr, BMPColorSpace ispace, ColorSyncProfileRef __nullable iprofile, NSInteger ibps, GIMPBitmapFormat iformat) NS_SWIFT_NAME(convertBitmap(destinationSamplesPerPixel:destinationColorSpace:destinationBitsPerSample:bitmap:width:height:originalSamplesPerPixel:originalExtraBytesPerPixel:originalExtraBytesPerRow:originalColorSpace:profile:originalBitsPerSample:originalFormat:));
+
+
+/*!
+	@function	SeaStripAlphaToWhite
 	@discussion	Given a bitmap this function strips the alpha channel making it
 				appear as though the image is on a white background and places
 				the result in the output. The output and input can both point to
@@ -81,43 +133,43 @@ unsigned char *convertBitmap(int dspp, int dspace, int dbps, unsigned char *ibit
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-void stripAlphaToWhite(int spp, unsigned char *output, unsigned char *input, int length);
+extern void SeaStripAlphaToWhite(NSInteger spp, unsigned char *output, unsigned char *input, NSInteger length) NS_SWIFT_NAME(stripAlphaToWhite(originalSamplesPerPixel:output:input:length:));
 
 /*!
-	@function	premultiplyBitmap
+	@function	SeaPremultiplyBitmap
 	@discussion	Given a bitmap this function premultiplies the primary channels
 				and places the result in the output. The output and input can 
 				both point to the same block of memory.
 	@param		spp
 				The samples per pixel of the original bitmap.
-	@param		output
+	@param		destPtr
 				The block of memory in which to place the premultiplied bitmap.
-	@param		input
+	@param		srcPtr
 				The block of memory containing the original bitmap.
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-void premultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
+extern void SeaPremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length) NS_SWIFT_NAME(premultiplyBitmap(samplesPerPixel:destination:source:length:));
 
 /*!
-	@function	unpremultiplyBitmap
+	@function	SeaUnpremultiplyBitmap
 	@discussion	Given a bitmap this function tries to reverse the
 				premultiplication of the primary channels and places the result
 				in the output. The output and input can  both point to the same
 				block of memory.
 	@param		spp
 				The samples per pixel of the original bitmap.
-	@param		output
+	@param		destPtr
 				The block of memory in which to place the premultiplied bitmap.
-	@param		input
+	@param		srcPtr
 				The block of memory containing the original bitmap.
 	@param		length
 				The length of the bitmap in terms of pixels (not bytes).
 */
-void unpremultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr, int length);
+extern void SeaUnpremultiplyBitmap(NSInteger spp, unsigned char *destPtr, unsigned char *srcPtr, NSInteger length) NS_SWIFT_NAME(unpremultiplyBitmap(samplesPerPixel:destination:source:length:));
 
 /*!
-	@function	averagedComponentValue
+	@function	SeaAveragedComponentValue
 	@discussion	Given a point on the bitmap this function finds the average
 				value of particular component inside a box about that point.
 	@param		spp
@@ -137,7 +189,7 @@ void unpremultiplyBitmap(int spp, unsigned char *destPtr, unsigned char *srcPtr,
 	@param		where
 				The point at which to centre the box.
 */
-unsigned char averagedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where);
+extern unsigned char SeaAveragedComponentValue(int spp, unsigned char *data, int width, int height, int component, int radius, IntPoint where) NS_SWIFT_NAME(averagedComponentValue(samplesPerPixel:data:width:height:component:radius:centerPoint:));
 
 
 /*!
@@ -146,7 +198,7 @@ unsigned char averagedComponentValue(int spp, unsigned char *data, int width, in
 	@param		profile
 				The profile to make the default display's profile.
 */
-void OpenDisplayProfile(CMProfileRef *profile);
+extern void OpenDisplayProfile(CMProfileRef __nonnull*__nullable profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
 
 /*!
 	@function	CloseDisplayProfile
@@ -154,6 +206,14 @@ void OpenDisplayProfile(CMProfileRef *profile);
 	@param		profile
 				The profile to make the default display's profile.
 */
-void CloseDisplayProfile(CMProfileRef profile);
+extern void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
 
-void CMFlattenProfile(CMProfileRef pref, int flags, CMFlattenUPP *cmFlattenUPP, void * refcon, Boolean *cmmNotFound);
+void CMFlattenProfile(CMProfileRef pref, int flags, CMFlattenUPP *cmFlattenUPP, void * refcon, Boolean *cmmNotFound) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
+
+static const BMPColorSpace kGrayColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceGray", 10.2, 10.8) = BMPColorSpaceGray;
+static const BMPColorSpace kInvertedGrayColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceInvertedGray", 10.2, 10.8) = BMPColorSpaceInvertedGray;
+static const BMPColorSpace kRGBColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceRGB", 10.2, 10.8) = BMPColorSpaceRGB;
+static const BMPColorSpace kCMYKColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceCMYK", 10.2, 10.8) = BMPColorSpaceCMYK;
+
+__END_DECLS
+NS_ASSUME_NONNULL_END

@@ -7,7 +7,14 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
+
+__BEGIN_DECLS
 
 /*!
 	@struct		IndiciesRecord
@@ -18,8 +25,8 @@
 				The number of indicies in the record.
 */
 typedef struct {
-	int *indicies;
-	int length;
+	NSInteger *indicies;
+	size_t length;
 } IndiciesRecord;
 
 /*!
@@ -32,7 +39,7 @@ typedef struct {
 */
 typedef struct {
 	IndiciesRecord *stack;
-	int length;
+	size_t length;
 } IndiciesKeeper;
 
 /*!
@@ -41,7 +48,7 @@ typedef struct {
 				IndiciesRecords can be added.
 	@result		Returns a data structure representing the IndiciesKeeper.
 */
-IndiciesKeeper allocKeeper();
+IndiciesKeeper allocKeeper(void);
 
 /*!
 	@function	freeKeeper
@@ -62,3 +69,5 @@ void freeKeeper(IndiciesKeeper *keeper);
 				The IndiciesRecord to be added.
 */
 void addToKeeper(IndiciesKeeper *keeper, IndiciesRecord record);
+
+__END_DECLS

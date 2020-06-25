@@ -1,6 +1,7 @@
-#import "Globals.h"
-#import "SeaLayer.h"
-#import "XBMContent.h"
+#import <Cocoa/Cocoa.h>
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaLayer.h>
+#import <SeashoreKit/XBMContent.h>
 
 /*!
 	@class		XBMLayer
@@ -11,10 +12,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface XBMLayer : SeaLayer {
-
-}
+@interface XBMLayer : SeaLayer
 
 /*!
 	@method		initWithFile:document:shareInfo:
@@ -32,6 +30,6 @@
 				information).
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithFile:(FILE *)file offset:(int)offset document:(id)doc sharedInfo:(SharedXBMInfo *)info;
+- (instancetype)initWithFile:(FILE *)file offset:(long)offset document:(SeaDocument*)doc sharedInfo:(SharedXBMInfo *)info;
 
 @end

@@ -1,0 +1,6 @@
+//author = "Mark Pazolli";
+//copyright = "Public Domain 2007";
+//description = "Maps luminance of the selection to a color ramp of two colors";
+groupName = "Colour Effect";
+//license = "Public Domain";
+name = "Colour Ramp";

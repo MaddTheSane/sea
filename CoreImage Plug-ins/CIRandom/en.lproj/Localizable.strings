@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Generate";
+description = "Fills the selection with random noise";
+license = "Public Domain";
+name = "Random Generator";

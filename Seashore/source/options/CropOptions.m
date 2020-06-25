@@ -23,24 +23,21 @@
 	return [aspectRatio ratio];
 }
 
-- (int)aspectType
+- (SeaAspectType)aspectType
 {
 	return [aspectRatio aspectType];
 }
 
 - (IBAction)crop:(id)sender
 {
-	IntRect cropRect;
-	int width, height;
-	
-	cropRect = [[[gCurrentDocument tools] currentTool] cropRect];
+	IntRect cropRect = [[[gCurrentDocument tools] currentTool] cropRect];
 	if (cropRect.size.width < kMinImageSize) { NSBeep(); return; }
 	if (cropRect.size.height < kMinImageSize) { NSBeep(); return; }
 	if (cropRect.size.width > kMaxImageSize) { NSBeep(); return; }
 	if (cropRect.size.height > kMaxImageSize) { NSBeep(); return; }
-	width = [(SeaContent *)[gCurrentDocument contents] width];
-	height = [(SeaContent *)[gCurrentDocument contents] height];
-	[(SeaMargins *)[(SeaOperations *)[gCurrentDocument operations] seaMargins] setMarginLeft:-cropRect.origin.x top:-cropRect.origin.y right:(cropRect.origin.x + cropRect.size.width) - width bottom:(cropRect.origin.y + cropRect.size.height) - height index:kAllLayers];
+	int width = [(SeaContent *)[(SeaDocument*)gCurrentDocument contents] width];
+	int height = [(SeaContent *)[(SeaDocument*)gCurrentDocument contents] height];
+	[[[(SeaDocument*)gCurrentDocument operations] seaMargins] setMarginLeft:-cropRect.origin.x top:-cropRect.origin.y right:(cropRect.origin.x + cropRect.size.width) - width bottom:(cropRect.origin.y + cropRect.size.height) - height index:kAllLayers];
 	[[[gCurrentDocument tools] currentTool] clearCrop];
 }
 

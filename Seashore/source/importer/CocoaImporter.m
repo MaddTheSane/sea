@@ -11,35 +11,42 @@
 
 @implementation CocoaImporter
 
-- (BOOL)addToDocument:(id)doc contentsOfFile:(NSString *)path
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
 {
-	id imageRep;
+	return [self addToDocument:doc contentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+}
+
+- (BOOL)addToDocument:(SeaDocument *)doc contentsOfURL:(NSURL *)path error:(NSError *__autoreleasing *)error
+{
+	__kindof NSImageRep *imageRep;
 	NSImage *image;
-	id layer;
-	int value;
+	SeaLayer *layer;
+	NSInteger value;
 	// NSPoint centerPoint;
 	
 	// Open the image
-	image = [[NSImage alloc] initByReferencingFile:path];
+	image = [[NSImage alloc] initByReferencingURL:path];
 	if (image == NULL) {
-		[image autorelease];
+		if (error) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:NULL];
+		}
 		return NO;
 	}
 	
 	// Form a bitmap representation of the file at the specified path
 	imageRep = NULL;
 	if ([[image representations] count] > 0) {
-		imageRep = [[image representations] objectAtIndex:0];
+		imageRep = [image representations][0];
 		if (![imageRep isKindOfClass:[NSBitmapImageRep class]]) {
 			if ([imageRep isKindOfClass:[NSPDFImageRep class]]) {
 				if ([imageRep pageCount] > 1) {
 					[NSBundle loadNibNamed:@"CocoaContent" owner:self];
 					[resMenu setEnabled:NO];
 					[pdfPanel center];
-					[pageLabel setStringValue:[NSString stringWithFormat:@"of %d", [imageRep pageCount]]];
+					[pageLabel setStringValue:[NSString stringWithFormat:@"of %ld", (long)[imageRep pageCount]]];
 					[NSApp runModalForWindow:pdfPanel];
 					[pdfPanel orderOut:self];
-					value = [pageInput intValue];
+					value = [pageInput integerValue];
 					if (value > 0 && value <= [imageRep pageCount])
 						[imageRep setCurrentPage:value - 1];
 				}
@@ -48,34 +55,37 @@
 		}
 	}
 	if (imageRep == NULL) {
-		[image autorelease];
+		if (error) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:NULL];
+		}
 		return NO;
 	}
 		
 	// Warn if 16-bit image
 	if ([imageRep bitsPerSample] == 16) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"16-bit message", @"Seashore does not support the editing of 16-bit images. This image has been resampled at 8-bits to be imported.") forDocument: doc level:kHighImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"16-bit message", @"Seashore does not currently support the editing of 16-bit images. This image has been resampled at 8 bits to be imported.") forDocument: doc level:SeaWarningImportanceHigh];
 	}
 		
 	// Create the layer
 	layer = [[CocoaLayer alloc] initWithImageRep:imageRep document:doc spp:[[doc contents] spp]];
 	if (layer == NULL) {
-		[image autorelease];
+		if (error) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:NULL];
+		}
 		return NO;
 	}
 	
 	// Rename the layer
-	[(SeaLayer *)layer setName:[[NSString alloc] initWithString:[[path lastPathComponent] stringByDeletingPathExtension]]];
+	[layer setName:[[path lastPathComponent] stringByDeletingPathExtension]];
 	
 	// Add the layer
 	[[doc contents] addLayerObject:layer];
 	
 	// Now forget the NSImage
-	[image autorelease];
 	
 	// Position the new layer correctly
-	[[(SeaOperations *)[doc operations] seaAlignment] centerLayerHorizontally:NULL];
-	[[(SeaOperations *)[doc operations] seaAlignment] centerLayerVertically:NULL];
+	[[[doc operations] seaAlignment] centerLayerHorizontally:NULL];
+	[[[doc operations] seaAlignment] centerLayerVertically:NULL];
 	
 	return YES;
 }

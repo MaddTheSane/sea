@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractExporter.h"
 
@@ -10,8 +11,6 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface PNGExporter : AbstractExporter {
-
-}
+@interface PNGExporter : NSObject <AbstractExporter>
 
 @end

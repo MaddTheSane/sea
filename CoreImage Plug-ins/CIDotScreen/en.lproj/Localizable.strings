@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+description = "Generates a dot screen";
+groupName = "Halftone";
+license = "Public Domain";
+name = "Dot Screen";

@@ -1,5 +1,8 @@
-#import "Globals.h"
-#import "SeaLayer.h"
+#import <Cocoa/Cocoa.h>
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaLayer.h>
+
+@class SeaDocument;
 
 /*!
 	@class		SVGLayer
@@ -9,10 +12,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2005 Mark Pazolli
 */
-
-@interface SVGLayer : SeaLayer {
-
-}
+@interface SVGLayer : SeaLayer
 
 /*!
 	@method		initWithImageRep:document:spp:
@@ -30,6 +30,6 @@
 				redundant but it's not.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithImageRep:(id)imageRep document:(id)doc spp:(int)lspp;
+- (instancetype)initWithImageRep:(id)imageRep document:(SeaDocument*)doc spp:(int)lspp;
 
 @end

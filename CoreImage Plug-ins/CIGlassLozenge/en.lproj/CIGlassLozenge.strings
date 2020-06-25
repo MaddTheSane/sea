@@ -1,0 +1,21 @@
+
+/* Class = "NSWindow"; title = "Glass Lozenge"; ObjectID = "6"; */
+"6.title" = "Glass Lozenge";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "49"; */
+"49.title" = "OK";
+
+/* Class = "NSTextFieldCell"; title = "Refraction:"; ObjectID = "50"; */
+"50.title" = "Refraction:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "52"; */
+"52.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "1.7"; ObjectID = "53"; */
+"53.title" = "1.7";
+
+/* Class = "NSTextFieldCell"; title = "Radius:"; ObjectID = "54"; */
+"54.title" = "Radius:";
+
+/* Class = "NSTextFieldCell"; title = "100"; ObjectID = "57"; */
+"57.title" = "100";

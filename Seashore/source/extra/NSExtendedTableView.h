@@ -1,4 +1,5 @@
-#import "Globals.h"
+#import <Cocoa/Cocoa.h>
+#import <SeashoreKit/Globals.h>
 
 /*!
 	@class		NSExtendedTableView
@@ -13,13 +14,10 @@
 				http://www.pnelsoncomposer.com/writings/NewbieFAQ.html</a>
 				for the document from which this code came.</i>
 */
-
 @interface NSExtendedTableView : NSTableView {
-
   NSMutableArray *saveTextColors;
   NSMutableArray *saveBackgroundColors;
   BOOL saveVerticalScrollerEnabled, saveHorizontalScrollerEnabled;
-
 }
 
 @end

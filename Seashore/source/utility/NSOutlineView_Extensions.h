@@ -6,6 +6,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class SeaDocument;
+
 @interface NSOutlineView(MyExtensions)
 
 - (NSArray *)allSelectedItems;
@@ -13,14 +15,14 @@
 
 @end
 
-@interface SeaOutlineView : NSOutlineView{
-	// The document the outline view is in
-	IBOutlet id document;
+@interface SeaOutlineView : NSOutlineView
+{
+	//! The document the outline view is in
+	IBOutlet SeaDocument *document;
 	
-	// Whether or not the view is the first responder
+	//! Whether or not the view is the first responder
 	BOOL isFirst;
 }
 
-- (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation;
 @end
 

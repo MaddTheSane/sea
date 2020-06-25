@@ -1,0 +1,894 @@
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
+"5.title" = "Bring All to Front";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
+"19.title" = "Window";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
+"23.title" = "Minimize";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
+"24.title" = "Window";
+
+/* Class = "NSMenu"; title = "MainMenu"; ObjectID = "29"; */
+"29.title" = "MainMenu";
+
+/* Class = "NSMenuItem"; title = "NewApplication"; ObjectID = "56"; */
+"56.title" = "NewApplication";
+
+/* Class = "NSMenu"; title = "NewApplication"; ObjectID = "57"; */
+"57.title" = "NewApplication";
+
+/* Class = "NSMenuItem"; title = "About Seashore"; ObjectID = "58"; */
+"58.title" = "About Seashore";
+
+/* Class = "NSMenuItem"; title = "Open…"; ObjectID = "72"; */
+"72.title" = "Open…";
+
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "73"; */
+"73.title" = "Close";
+
+/* Class = "NSMenuItem"; title = "Save"; ObjectID = "75"; */
+"75.title" = "Save";
+
+/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
+"77.title" = "Page Setup…";
+
+/* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
+"78.title" = "Print…";
+
+/* Class = "NSMenuItem"; title = "Save As…"; ObjectID = "80"; */
+"80.title" = "Save As…";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "81"; */
+"81.title" = "File";
+
+/* Class = "NSMenuItem"; title = "New…"; ObjectID = "82"; */
+"82.title" = "New…";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "83"; */
+"83.title" = "File";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "103"; */
+"103.title" = "Help";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "106"; */
+"106.title" = "Help";
+
+/* Class = "NSMenuItem"; title = "Seashore Help"; ObjectID = "111"; */
+"111.title" = "Seashore Help";
+
+/* Class = "NSMenuItem"; title = "Revert"; ObjectID = "112"; */
+"112.title" = "Revert";
+
+/* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "124"; */
+"124.title" = "Open Recent";
+
+/* Class = "NSMenu"; title = "Open Recent"; ObjectID = "125"; */
+"125.title" = "Open Recent";
+
+/* Class = "NSMenuItem"; title = "Clear Menu"; ObjectID = "126"; */
+"126.title" = "Clear Menu";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+"129.title" = "Preferences…";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
+"130.title" = "Services";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
+"131.title" = "Services";
+
+/* Class = "NSMenuItem"; title = "Hide Seashore"; ObjectID = "134"; */
+"134.title" = "Hide Seashore";
+
+/* Class = "NSMenuItem"; title = "Quit Seashore"; ObjectID = "136"; */
+"136.title" = "Quit Seashore";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
+"145.title" = "Hide Others";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
+"150.title" = "Show All";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "157"; */
+"157.title" = "Copy";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "158"; */
+"158.title" = "Undo";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "160"; */
+"160.title" = "Cut";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "163"; */
+"163.title" = "Edit";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "164"; */
+"164.title" = "Delete";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "169"; */
+"169.title" = "Edit";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "171"; */
+"171.title" = "Paste";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "172"; */
+"172.title" = "Select All";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "173"; */
+"173.title" = "Redo";
+
+/* Class = "NSMenuItem"; title = "Spelling"; ObjectID = "184"; */
+"184.title" = "Spelling";
+
+/* Class = "NSMenu"; title = "Spelling"; ObjectID = "185"; */
+"185.title" = "Spelling";
+
+/* Class = "NSMenuItem"; title = "Spelling…"; ObjectID = "187"; */
+"187.title" = "Spelling…";
+
+/* Class = "NSMenuItem"; title = "Check Spelling"; ObjectID = "189"; */
+"189.title" = "Check Spelling";
+
+/* Class = "NSMenuItem"; title = "Check Spelling as You Type"; ObjectID = "191"; */
+"191.title" = "Check Spelling as You Type";
+
+/* Class = "NSWindow"; title = "Seashore License"; ObjectID = "204"; */
+"204.title" = "Seashore License";
+
+/* Class = "NSMenuItem"; title = "Seashore Website"; ObjectID = "240"; */
+"240.title" = "Seashore Website";
+
+/* Class = "NSMenuItem"; title = "Seashore License"; ObjectID = "243"; */
+"243.title" = "Seashore License";
+
+/* Class = "NSMenuItem"; title = "Report a Bug"; ObjectID = "246"; */
+"246.title" = "Report a Bug";
+
+/* Class = "NSMenuItem"; title = "Image"; ObjectID = "491"; */
+"491.title" = "Image";
+
+/* Class = "NSMenu"; title = "Image"; ObjectID = "492"; */
+"492.title" = "Image";
+
+/* Class = "NSMenuItem"; title = "Resolution…"; ObjectID = "531"; */
+"531.title" = "Resolution…";
+
+/* Class = "NSMenuItem"; title = "Image Boundaries…"; ObjectID = "572"; */
+"572.title" = "Image Boundaries…";
+
+/* Class = "NSMenuItem"; title = "Flatten Image…"; ObjectID = "575"; */
+"575.title" = "Flatten Image…";
+
+/* Class = "NSMenuItem"; title = "Scale Image…"; ObjectID = "584"; */
+"584.title" = "Scale Image…";
+
+/* Class = "NSMenuItem"; title = "Export…"; ObjectID = "594"; */
+"594.title" = "Export…";
+
+/* Class = "NSWindow"; title = "Instant Help"; ObjectID = "912"; */
+"912.title" = "Instant Help";
+
+/* Class = "NSWindow"; title = "Warnings"; ObjectID = "1249"; */
+"1249.title" = "Warnings";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Dismiss warning"; ObjectID = "1253"; */
+"1253.ibShadowedToolTip" = "Dismiss warning";
+
+/* Class = "NSMenuItem"; title = "Layer"; ObjectID = "1254"; */
+"1254.title" = "Layer";
+
+/* Class = "NSMenu"; title = "Layer"; ObjectID = "1255"; */
+"1255.title" = "Layer";
+
+/* Class = "NSMenuItem"; title = "Mode"; ObjectID = "1257"; */
+"1257.title" = "Mode";
+
+/* Class = "NSMenu"; title = "Mode"; ObjectID = "1258"; */
+"1258.title" = "Mode";
+
+/* Class = "NSMenuItem"; title = "Full Color"; ObjectID = "1259"; */
+"1259.title" = "Full Color";
+
+/* Class = "NSMenuItem"; title = "Grayscale"; ObjectID = "1261"; */
+"1261.title" = "Grayscale";
+
+/* Class = "NSMenuItem"; title = "Layer Boundaries…"; ObjectID = "1268"; */
+"1268.title" = "Layer Boundaries…";
+
+/* Class = "NSMenuItem"; title = "Scale Layer…"; ObjectID = "1269"; */
+"1269.title" = "Scale Layer…";
+
+/* Class = "NSMenuItem"; title = "Clear All Links"; ObjectID = "1284"; */
+"1284.title" = "Clear All Links";
+
+/* Class = "NSWindow"; title = "Preferences"; ObjectID = "1329"; */
+"1329.title" = "Preferences";
+
+/* Class = "NSMenuItem"; title = "Select Inverse"; ObjectID = "1354"; */
+"1354.title" = "Select Inverse";
+
+/* Class = "NSMenuItem"; title = "Select None"; ObjectID = "1355"; */
+"1355.title" = "Select None";
+
+/* Class = "NSMenuItem"; title = "Selection"; ObjectID = "1405"; */
+"1405.title" = "Selection";
+
+/* Class = "NSMenu"; title = "Selection"; ObjectID = "1406"; */
+"1406.title" = "Selection";
+
+/* Class = "NSMenuItem"; title = "Float Selection"; ObjectID = "1445"; */
+"1445.title" = "Float Selection";
+
+/* Class = "NSMenuItem"; title = "ColorSync"; ObjectID = "1531"; */
+"1531.title" = "ColorSync";
+
+/* Class = "NSMenu"; title = "ColorSync"; ObjectID = "1532"; */
+"1532.title" = "ColorSync";
+
+/* Class = "NSMenuItem"; title = "ColorSync Settings…"; ObjectID = "1534"; */
+"1534.title" = "ColorSync Settings…";
+
+/* Class = "NSMenuItem"; title = "CMYK Preview"; ObjectID = "1536"; */
+"1536.title" = "CMYK Preview";
+
+/* Class = "NSMenuItem"; title = "Flip Horizontally"; ObjectID = "1612"; */
+"1612.title" = "Flip Horizontally";
+
+/* Class = "NSMenuItem"; title = "Flip Vertically"; ObjectID = "1613"; */
+"1613.title" = "Flip Vertically";
+
+/* Class = "NSMenuItem"; title = "Seashore Feedback Survey"; ObjectID = "1672"; */
+"1672.title" = "Seashore Feedback Survey";
+
+/* Class = "NSMenuItem"; title = "Send Backward"; ObjectID = "1675"; */
+"1675.title" = "Send Backward";
+
+/* Class = "NSMenuItem"; title = "Bring Forward"; ObjectID = "1676"; */
+"1676.title" = "Bring Forward";
+
+/* Class = "NSMenuItem"; title = "Import…"; ObjectID = "1773"; */
+"1773.title" = "Import…";
+
+/* Class = "NSMenuItem"; title = "Export as Texture…"; ObjectID = "1780"; */
+"1780.title" = "Export as Texture…";
+
+/* Class = "NSMenuItem"; title = "Alignment"; ObjectID = "1814"; */
+"1814.title" = "Alignment";
+
+/* Class = "NSMenu"; title = "Alignment"; ObjectID = "1815"; */
+"1815.title" = "Alignment";
+
+/* Class = "NSMenuItem"; title = "Centre Vertically"; ObjectID = "1816"; */
+"1816.title" = "Centre Vertically";
+
+/* Class = "NSMenuItem"; title = "Centre Horizontally"; ObjectID = "1817"; */
+"1817.title" = "Centre Horizontally";
+
+/* Class = "NSMenuItem"; title = "Align Left"; ObjectID = "1821"; */
+"1821.title" = "Align Left";
+
+/* Class = "NSMenuItem"; title = "Align Right"; ObjectID = "1822"; */
+"1822.title" = "Align Right";
+
+/* Class = "NSMenuItem"; title = "Align Horizontal Centres"; ObjectID = "1823"; */
+"1823.title" = "Align Horizontal Centres";
+
+/* Class = "NSMenuItem"; title = "Align Top"; ObjectID = "1824"; */
+"1824.title" = "Align Top";
+
+/* Class = "NSMenuItem"; title = "Align Bottom"; ObjectID = "1825"; */
+"1825.title" = "Align Bottom";
+
+/* Class = "NSMenuItem"; title = "Align Vertical Centres"; ObjectID = "1826"; */
+"1826.title" = "Align Vertical Centres";
+
+/* Class = "NSMenuItem"; title = "Select Alpha"; ObjectID = "1849"; */
+"1849.title" = "Select Alpha";
+
+/* Class = "NSMenuItem"; title = "Reapply Last Effect"; ObjectID = "1853"; */
+"1853.title" = "Reapply Last Effect";
+
+/* Class = "NSMenuItem"; title = "Rotate…"; ObjectID = "1950"; */
+"1950.title" = "Rotate…";
+
+/* Class = "NSMenuItem"; title = "New from Pasteboard"; ObjectID = "1968"; */
+"1968.title" = "New from Pasteboard";
+
+/* Class = "NSMenuItem"; title = "Save using CMYK"; ObjectID = "2010"; */
+"2010.title" = "Save using CMYK";
+
+/* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "2158"; */
+"2158.title" = "Check for Updates";
+
+/* Class = "NSWindow"; title = "Aspect Ratio"; ObjectID = "2246"; */
+"2246.title" = "Aspect Ratio";
+
+/* Class = "NSWindow"; title = "New Image"; ObjectID = "2877"; */
+"2877.title" = "New Image";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Various predefined sizes"; ObjectID = "2881"; */
+"2881.ibShadowedToolTip" = "Various predefined sizes";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "2882"; */
+"2882.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Default"; ObjectID = "2883"; */
+"2883.title" = "Default";
+
+/* Class = "NSMenuItem"; title = "Clipboard"; ObjectID = "2884"; */
+"2884.title" = "Clipboard";
+
+/* Class = "NSMenuItem"; title = "Screen"; ObjectID = "2885"; */
+"2885.title" = "Screen";
+
+/* Class = "NSMenuItem"; title = "Paper Size"; ObjectID = "2886"; */
+"2886.title" = "Paper Size";
+
+/* Class = "NSMenuItem"; title = "Presets"; ObjectID = "2887"; */
+"2887.title" = "Presets";
+
+/* Class = "NSBox"; title = "New Image Settings"; ObjectID = "2888"; */
+"2888.title" = "New Image Settings";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Resolution of the new image"; ObjectID = "2890"; */
+"2890.ibShadowedToolTip" = "Resolution of the new image";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "2891"; */
+"2891.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "72 dpi"; ObjectID = "2892"; */
+"2892.title" = "72 dpi";
+
+/* Class = "NSMenuItem"; title = "96 dpi"; ObjectID = "2893"; */
+"2893.title" = "96 dpi";
+
+/* Class = "NSMenuItem"; title = "150 dpi"; ObjectID = "2894"; */
+"2894.title" = "150 dpi";
+
+/* Class = "NSMenuItem"; title = "300 dpi"; ObjectID = "2895"; */
+"2895.title" = "300 dpi";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Height of the new image"; ObjectID = "2899"; */
+"2899.ibShadowedToolTip" = "Height of the new image";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "2902"; */
+"2902.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Full Color"; ObjectID = "2903"; */
+"2903.title" = "Full Color";
+
+/* Class = "NSMenuItem"; title = "Grayscale"; ObjectID = "2904"; */
+"2904.title" = "Grayscale";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Width of the new image"; ObjectID = "2906"; */
+"2906.ibShadowedToolTip" = "Width of the new image";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "2909"; */
+"2909.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "px"; ObjectID = "2910"; */
+"2910.title" = "px";
+
+/* Class = "NSMenuItem"; title = "in"; ObjectID = "2911"; */
+"2911.title" = "in";
+
+/* Class = "NSMenuItem"; title = "mm"; ObjectID = "2912"; */
+"2912.title" = "mm";
+
+/* Class = "NSMenuItem"; title = "Duplicate"; ObjectID = "2939"; */
+"2939.title" = "Duplicate";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Height of the new image"; ObjectID = "2982"; */
+"2982.ibShadowedToolTip" = "Height of the new image";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Width of the new image"; ObjectID = "2983"; */
+"2983.ibShadowedToolTip" = "Width of the new image";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Resolution of the new image"; ObjectID = "2984"; */
+"2984.ibShadowedToolTip" = "Resolution of the new image";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "2985"; */
+"2985.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "72 dpi"; ObjectID = "2986"; */
+"2986.title" = "72 dpi";
+
+/* Class = "NSMenuItem"; title = "96 dpi"; ObjectID = "2987"; */
+"2987.title" = "96 dpi";
+
+/* Class = "NSMenuItem"; title = "150 dpi"; ObjectID = "2988"; */
+"2988.title" = "150 dpi";
+
+/* Class = "NSMenuItem"; title = "300 dpi"; ObjectID = "2989"; */
+"2989.title" = "300 dpi";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "2991"; */
+"2991.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Full Color"; ObjectID = "2992"; */
+"2992.title" = "Full Color";
+
+/* Class = "NSMenuItem"; title = "Grayscale"; ObjectID = "2993"; */
+"2993.title" = "Grayscale";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "3001"; */
+"3001.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "px"; ObjectID = "3002"; */
+"3002.title" = "px";
+
+/* Class = "NSMenuItem"; title = "in"; ObjectID = "3003"; */
+"3003.title" = "in";
+
+/* Class = "NSMenuItem"; title = "mm"; ObjectID = "3004"; */
+"3004.title" = "mm";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "3192"; */
+"3192.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "in"; ObjectID = "3193"; */
+"3193.title" = "in";
+
+/* Class = "NSMenuItem"; title = "ratio"; ObjectID = "3194"; */
+"3194.title" = "ratio";
+
+/* Class = "NSMenuItem"; title = "px"; ObjectID = "3195"; */
+"3195.title" = "px";
+
+/* Class = "NSMenuItem"; title = "mm"; ObjectID = "3196"; */
+"3196.title" = "mm";
+
+/* Class = "NSMenuItem"; title = "Merge Linked Layers"; ObjectID = "3564"; */
+"3564.title" = "Merge Linked Layers";
+
+/* Class = "NSMenuItem"; title = "Tool"; ObjectID = "3588"; */
+"3588.title" = "Tool";
+
+/* Class = "NSMenu"; title = "Tool"; ObjectID = "3589"; */
+"3589.title" = "Tool";
+
+/* Class = "NSMenuItem"; title = "Rectangular Select"; ObjectID = "3590"; */
+"3590.title" = "Rectangular Select";
+
+/* Class = "NSMenuItem"; title = "Lasso"; ObjectID = "3591"; */
+"3591.title" = "Lasso";
+
+/* Class = "NSMenuItem"; title = "Elliptical Select"; ObjectID = "3592"; */
+"3592.title" = "Elliptical Select";
+
+/* Class = "NSMenuItem"; title = "Polygon Lasso"; ObjectID = "3593"; */
+"3593.title" = "Polygon Lasso";
+
+/* Class = "NSMenuItem"; title = "Color Selection"; ObjectID = "3594"; */
+"3594.title" = "Color Selection";
+
+/* Class = "NSMenuItem"; title = "Pencil"; ObjectID = "3595"; */
+"3595.title" = "Pencil";
+
+/* Class = "NSMenuItem"; title = "Paintbrush"; ObjectID = "3596"; */
+"3596.title" = "Paintbrush";
+
+/* Class = "NSMenuItem"; title = "Paint Bucket"; ObjectID = "3597"; */
+"3597.title" = "Paint Bucket";
+
+/* Class = "NSMenuItem"; title = "Text"; ObjectID = "3598"; */
+"3598.title" = "Text";
+
+/* Class = "NSMenuItem"; title = "Eraser"; ObjectID = "3599"; */
+"3599.title" = "Eraser";
+
+/* Class = "NSMenuItem"; title = "Color Sampling"; ObjectID = "3600"; */
+"3600.title" = "Color Sampling";
+
+/* Class = "NSMenuItem"; title = "Gradient"; ObjectID = "3601"; */
+"3601.title" = "Gradient";
+
+/* Class = "NSMenuItem"; title = "Smudge"; ObjectID = "3602"; */
+"3602.title" = "Smudge";
+
+/* Class = "NSMenuItem"; title = "Clone"; ObjectID = "3603"; */
+"3603.title" = "Clone";
+
+/* Class = "NSMenuItem"; title = "Crop"; ObjectID = "3604"; */
+"3604.title" = "Crop";
+
+/* Class = "NSMenuItem"; title = "Effects"; ObjectID = "3605"; */
+"3605.title" = "Effects";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "3606"; */
+"3606.title" = "Zoom";
+
+/* Class = "NSMenuItem"; title = "Position"; ObjectID = "3607"; */
+"3607.title" = "Position";
+
+/* Class = "NSMenuItem"; title = "Rotate 90° Left"; ObjectID = "3608"; */
+"3608.title" = "Rotate 90° Left";
+
+/* Class = "NSMenuItem"; title = "Rotate 90° Right"; ObjectID = "3609"; */
+"3609.title" = "Rotate 90° Right";
+
+/* Class = "NSMenuItem"; title = "Flip Image Horizontally"; ObjectID = "3610"; */
+"3610.title" = "Flip Image Horizontally";
+
+/* Class = "NSMenuItem"; title = "Flip Image Vertically"; ObjectID = "3611"; */
+"3611.title" = "Flip Image Vertically";
+
+/* Class = "NSMenuItem"; title = "View"; ObjectID = "3613"; */
+"3613.title" = "View";
+
+/* Class = "NSMenu"; title = "View"; ObjectID = "3614"; */
+"3614.title" = "View";
+
+/* Class = "NSMenuItem"; title = "Zoom In"; ObjectID = "3616"; */
+"3616.title" = "Zoom In";
+
+/* Class = "NSMenuItem"; title = "Zoom Out"; ObjectID = "3617"; */
+"3617.title" = "Zoom Out";
+
+/* Class = "NSMenuItem"; title = "Actual Size"; ObjectID = "3618"; */
+"3618.title" = "Actual Size";
+
+/* Class = "NSMenuItem"; title = "New Layer"; ObjectID = "3622"; */
+"3622.title" = "New Layer";
+
+/* Class = "NSMenuItem"; title = "Duplicate Layer"; ObjectID = "3623"; */
+"3623.title" = "Duplicate Layer";
+
+/* Class = "NSMenuItem"; title = "Enable Alpha Channel"; ObjectID = "3624"; */
+"3624.title" = "Enable Alpha Channel";
+
+/* Class = "NSMenuItem"; title = "Show Layer Boundaries"; ObjectID = "3628"; */
+"3628.title" = "Show Layer Boundaries";
+
+/* Class = "NSMenuItem"; title = "Show Rulers"; ObjectID = "3629"; */
+"3629.title" = "Show Rulers";
+
+/* Class = "NSMenuItem"; title = "Show Layers"; ObjectID = "3631"; */
+"3631.title" = "Show Layers";
+
+/* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "3633"; */
+"3633.title" = "Show Toolbar";
+
+/* Class = "NSMenuItem"; title = "Show Point Information"; ObjectID = "3635"; */
+"3635.title" = "Show Point Information";
+
+/* Class = "NSMenuItem"; title = "Show Options Bar"; ObjectID = "3639"; */
+"3639.title" = "Show Options Bar";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "3647"; */
+"3647.title" = "Zoom";
+
+/* Class = "NSBox"; title = "Title"; ObjectID = "3685"; */
+"3685.title" = "Title";
+
+/* Class = "NSButtonCell"; title = "Checkerboard Pattern"; ObjectID = "3688"; */
+"3688.title" = "Checkerboard Pattern";
+
+/* Class = "NSButtonCell"; title = "Solid Color"; ObjectID = "3689"; */
+"3689.title" = "Solid Color";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "3691"; */
+"3691.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Magenta"; ObjectID = "3692"; */
+"3692.title" = "Magenta";
+
+/* Class = "NSMenuItem"; title = "Yellow"; ObjectID = "3693"; */
+"3693.title" = "Yellow";
+
+/* Class = "NSMenuItem"; title = "Cyan"; ObjectID = "3694"; */
+"3694.title" = "Cyan";
+
+/* Class = "NSMenuItem"; title = "Black"; ObjectID = "3695"; */
+"3695.title" = "Black";
+
+/* Class = "NSBox"; title = "Title"; ObjectID = "3698"; */
+"3698.title" = "Title";
+
+/* Class = "NSMenuItem"; title = "Trim Boundaries"; ObjectID = "3710"; */
+"3710.title" = "Trim Boundaries";
+
+/* Class = "NSMenu"; title = "Trim Boundaries"; ObjectID = "3711"; */
+"3711.title" = "Trim Boundaries";
+
+/* Class = "NSMenuItem"; title = "Expand to Document"; ObjectID = "3713"; */
+"3713.title" = "Expand to Document";
+
+/* Class = "NSMenuItem"; title = "Condense to Content"; ObjectID = "3715"; */
+"3715.title" = "Condense to Content";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "3789"; */
+"3789.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Use true screen resolution"; ObjectID = "3790"; */
+"3790.title" = "Use true screen resolution";
+
+/* Class = "NSMenuItem"; title = "Ignore image resolution"; ObjectID = "3791"; */
+"3791.title" = "Ignore image resolution";
+
+/* Class = "NSMenuItem"; title = "Assume screen is 72 dpi (recommended)"; ObjectID = "3792"; */
+"3792.title" = "Assume screen is 72 dpi (recommended)";
+
+/* Class = "NSMenuItem"; title = "Units"; ObjectID = "3827"; */
+"3827.title" = "Units";
+
+/* Class = "NSMenu"; title = "Units"; ObjectID = "3828"; */
+"3828.title" = "Units";
+
+/* Class = "NSMenuItem"; title = "Pixels"; ObjectID = "3829"; */
+"3829.title" = "Pixels";
+
+/* Class = "NSMenuItem"; title = "Inches"; ObjectID = "3830"; */
+"3830.title" = "Inches";
+
+/* Class = "NSMenuItem"; title = "Millimetres"; ObjectID = "3831"; */
+"3831.title" = "Millimetres";
+
+/* Class = "NSMenuItem"; title = "Seashore Effects Guide"; ObjectID = "3842"; */
+"3842.title" = "Seashore Effects Guide";
+
+/* Class = "NSMenuItem"; title = "Compare to Last Saved"; ObjectID = "3845"; */
+"3845.title" = "Compare to Last Saved";
+
+/* Class = "NSMenuItem"; title = "Merge with Underlying"; ObjectID = "4081"; */
+"4081.title" = "Merge with Underlying";
+
+/* Class = "NSMenuItem"; title = "Copy Image"; ObjectID = "4082"; */
+"4082.title" = "Copy Image";
+
+/* Class = "NSMenuItem"; title = "Colors"; ObjectID = "5687"; */
+"5687.title" = "Colors";
+
+/* Class = "NSMenu"; title = "Colors"; ObjectID = "5688"; */
+"5688.title" = "Colors";
+
+/* Class = "NSMenuItem"; title = "Default Colors"; ObjectID = "5689"; */
+"5689.title" = "Default Colors";
+
+/* Class = "NSMenuItem"; title = "Swap Colors"; ObjectID = "5690"; */
+"5690.title" = "Swap Colors";
+
+/* Class = "NSMenuItem"; title = "Background Color"; ObjectID = "5692"; */
+"5692.title" = "Background Color";
+
+/* Class = "NSMenuItem"; title = "Rotate Selection Shading"; ObjectID = "5693"; */
+"5693.title" = "Rotate Selection Shading";
+
+/* Class = "NSMenuItem"; title = "Foreground Color"; ObjectID = "5694"; */
+"5694.title" = "Foreground Color";
+
+/* Class = "NSBox"; title = "Title"; ObjectID = "5934"; */
+"5934.title" = "Title";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "5939"; */
+"5939.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Magenta"; ObjectID = "5940"; */
+"5940.title" = "Magenta";
+
+/* Class = "NSMenuItem"; title = "Yellow"; ObjectID = "5941"; */
+"5941.title" = "Yellow";
+
+/* Class = "NSMenuItem"; title = "Cyan"; ObjectID = "5942"; */
+"5942.title" = "Cyan";
+
+/* Class = "NSMenuItem"; title = "Black"; ObjectID = "5943"; */
+"5943.title" = "Black";
+
+/* Class = "NSMenuItem"; title = "Show Guides"; ObjectID = "5951"; */
+"5951.title" = "Show Guides";
+
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "6350"; */
+"6350.title" = "Customize Toolbar…";
+
+/* Class = "NSMenuItem"; title = "Arrange"; ObjectID = "7159"; */
+"7159.title" = "Arrange";
+
+/* Class = "NSMenu"; title = "Arrange"; ObjectID = "7160"; */
+"7160.title" = "Arrange";
+
+/* Class = "NSMenuItem"; title = "Delete Layer"; ObjectID = "7162"; */
+"7162.title" = "Delete Layer";
+
+/* Class = "NSMenuItem"; title = "Bring to Front"; ObjectID = "7163"; */
+"7163.title" = "Bring to Front";
+
+/* Class = "NSMenuItem"; title = "Send to Back"; ObjectID = "7164"; */
+"7164.title" = "Send to Back";
+
+/* Class = "NSMenuItem"; title = "Condense to Selection"; ObjectID = "7252"; */
+"7252.title" = "Condense to Selection";
+
+/* Class = "NSMenuItem"; title = "Show Status Bar"; ObjectID = "7264"; */
+"7264.title" = "Show Status Bar";
+
+/* Class = "NSMenuItem"; title = "Channel Editing"; ObjectID = "7266"; */
+"7266.title" = "Channel Editing";
+
+/* Class = "NSMenu"; title = "Channel Editing"; ObjectID = "7267"; */
+"7267.title" = "Channel Editing";
+
+/* Class = "NSMenuItem"; title = "Edit Primary Channels"; ObjectID = "7268"; */
+"7268.title" = "Edit Primary Channels";
+
+/* Class = "NSMenuItem"; title = "Edit Alpha Channel"; ObjectID = "7269"; */
+"7269.title" = "Edit Alpha Channel";
+
+/* Class = "NSMenuItem"; title = "Show All Channels During Edits"; ObjectID = "7271"; */
+"7271.title" = "Show All Channels During Edits";
+
+/* Class = "NSMenuItem"; title = "Edit All Channels"; ObjectID = "7272"; */
+"7272.title" = "Edit All Channels";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "7278"; */
+"7278.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "7281"; */
+"7281.title" = "Open Recent";
+
+/* Class = "NSBox"; title = "Title"; ObjectID = "7284"; */
+"7284.title" = "Title";
+
+/* Class = "NSButtonCell"; title = "Selection Shading"; ObjectID = "7288"; */
+"7288.title" = "Selection Shading";
+
+/* Class = "NSButtonCell"; title = "White"; ObjectID = "7289"; */
+"7289.title" = "White";
+
+/* Class = "NSMenuItem"; title = "Layer Above"; ObjectID = "7292"; */
+"7292.title" = "Layer Above";
+
+/* Class = "NSMenuItem"; title = "Layer Below"; ObjectID = "7293"; */
+"7293.title" = "Layer Below";
+
+/* Class = "NSTextFieldCell"; title = "Seashore Licensing Agreement"; ObjectID = "7298"; */
+"7298.title" = "Seashore Licensing Agreement";
+
+/* Class = "NSTextFieldCell"; title = "Except for plug-ins, Seashore is covered by version 2 of the GNU General Public License."; ObjectID = "7299"; */
+"7299.title" = "Except for plug-ins, Seashore is covered by version 2 of the GNU General Public License.";
+
+/* Class = "NSTextFieldCell"; title = "This version of Seashore can be redistributed as-is."; ObjectID = "7300"; */
+"7300.title" = "This version of Seashore can be redistributed as-is.";
+
+/* Class = "NSTextFieldCell"; title = "No document active"; ObjectID = "7301"; */
+"7301.title" = "No document active";
+
+/* Class = "NSTextFieldCell"; title = "1"; ObjectID = "7307"; */
+"7307.title" = "1";
+
+/* Class = "NSTextFieldCell"; title = "to"; ObjectID = "7308"; */
+"7308.title" = "to";
+
+/* Class = "NSTextFieldCell"; title = "2"; ObjectID = "7309"; */
+"7309.title" = "2";
+
+/* Class = "NSButtonCell"; title = "Set"; ObjectID = "7310"; */
+"7310.title" = "Set";
+
+/* Class = "NSButtonCell"; title = "Create a new document at start-up"; ObjectID = "7315"; */
+"7315.title" = "Create a new document at start-up";
+
+/* Class = "NSButtonCell"; title = "Always use cross-hair cursor"; ObjectID = "7316"; */
+"7316.title" = "Always use cross-hair cursor";
+
+/* Class = "NSButtonCell"; title = "Use image smoothing"; ObjectID = "7317"; */
+"7317.title" = "Use image smoothing";
+
+/* Class = "NSButtonCell"; title = "Faster drawing (mouse coalescing)"; ObjectID = "7318"; */
+"7318.title" = "Faster drawing (mouse coalescing)";
+
+/* Class = "NSButtonCell"; title = "Configure effects in a dialog"; ObjectID = "7319"; */
+"7319.title" = "Configure effects in a dialog";
+
+/* Class = "NSButtonCell"; title = "Reduce warning messages"; ObjectID = "7320"; */
+"7320.title" = "Reduce warning messages";
+
+/* Class = "NSButtonCell"; title = "Ignore first pressure-sensitive touch"; ObjectID = "7321"; */
+"7321.title" = "Ignore first pressure-sensitive touch";
+
+/* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "7322"; */
+"7322.title" = "Check for updates";
+
+/* Class = "NSButtonCell"; title = "Use Core Image for rotating/scaling"; ObjectID = "7325"; */
+"7325.title" = "Use Core Image for rotating/scaling";
+
+/* Class = "NSTextFieldCell"; title = "384"; ObjectID = "7327"; */
+"7327.title" = "384";
+
+/* Class = "NSTextFieldCell"; title = "512"; ObjectID = "7328"; */
+"7328.title" = "512";
+
+/* Class = "NSButtonCell"; title = "Transparent background"; ObjectID = "7331"; */
+"7331.title" = "Transparent background";
+
+/* Class = "NSTextFieldCell"; title = "Width"; ObjectID = "7332"; */
+"7332.title" = "Width";
+
+/* Class = "NSTextFieldCell"; title = "Height"; ObjectID = "7333"; */
+"7333.title" = "Height";
+
+/* Class = "NSTextFieldCell"; title = "Resolution"; ObjectID = "7334"; */
+"7334.title" = "Resolution";
+
+/* Class = "NSTextFieldCell"; title = "Mode"; ObjectID = "7335"; */
+"7335.title" = "Mode";
+
+/* Class = "NSTextFieldCell"; title = "px"; ObjectID = "7336"; */
+"7336.title" = "px";
+
+/* Class = "NSTextFieldCell"; title = "New Image Settings"; ObjectID = "7338"; */
+"7338.title" = "New Image Settings";
+
+/* Class = "NSButtonCell"; title = "Create"; ObjectID = "7339"; */
+"7339.title" = "Create";
+
+/* Class = "NSTextFieldCell"; title = "Height"; ObjectID = "7342"; */
+"7342.title" = "Height";
+
+/* Class = "NSTextFieldCell"; title = "Resolution"; ObjectID = "7343"; */
+"7343.title" = "Resolution";
+
+/* Class = "NSTextFieldCell"; title = "Mode"; ObjectID = "7344"; */
+"7344.title" = "Mode";
+
+/* Class = "NSTextFieldCell"; title = "384"; ObjectID = "7345"; */
+"7345.title" = "384";
+
+/* Class = "NSButtonCell"; title = "Transparent background"; ObjectID = "7346"; */
+"7346.title" = "Transparent background";
+
+/* Class = "NSTextFieldCell"; title = "px"; ObjectID = "7348"; */
+"7348.title" = "px";
+
+/* Class = "NSTextFieldCell"; title = "512"; ObjectID = "7349"; */
+"7349.title" = "512";
+
+/* Class = "NSTextFieldCell"; title = "Width"; ObjectID = "7350"; */
+"7350.title" = "Width";
+
+/* Class = "NSTextFieldCell"; title = "Transparency"; ObjectID = "7353"; */
+"7353.title" = "Transparency";
+
+/* Class = "NSTextFieldCell"; title = "Selection Shading "; ObjectID = "7354"; */
+"7354.title" = "Selection Shading ";
+
+/* Class = "NSButtonCell"; title = "Set Color…"; ObjectID = "7356"; */
+"7356.title" = "Set Color…";
+
+/* Class = "NSTextFieldCell"; title = "Window Frame"; ObjectID = "7357"; */
+"7357.title" = "Window Frame";
+
+/* Class = "NSTextFieldCell"; title = "* You can rotate this color at any time using \"View > Rotate Selection Mask\""; ObjectID = "7358"; */
+"7358.title" = "* You can rotate this color at any time using \"View > Rotate Selection Mask\"";
+
+/* Class = "NSTextFieldCell"; title = "*"; ObjectID = "7359"; */
+"7359.title" = "*";
+
+/* Class = "NSButtonCell"; title = "Default"; ObjectID = "7360"; */
+"7360.title" = "Default";
+
+/* Class = "NSTextFieldCell"; title = "Guide Color "; ObjectID = "7361"; */
+"7361.title" = "Guide Color ";
+
+/* Class = "NSTextFieldCell"; title = "Layer Bounds"; ObjectID = "7363"; */
+"7363.title" = "Layer Bounds";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "7364"; */
+"7364.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "7365"; */
+"7365.title" = "Radio";
+
+/* Class = "NSBox"; title = "Image Settings"; ObjectID = "KMm-bv-9fE"; */
+"KMm-bv-9fE.title" = "Image Settings";
+
+/* Class = "NSBox"; title = "Draw Settings"; ObjectID = "ODY-tB-Qvb"; */
+"ODY-tB-Qvb.title" = "Draw Settings";
+
+/* Class = "NSBox"; title = "Program Settings"; ObjectID = "slL-g1-QeT"; */
+"slL-g1-QeT.title" = "Program Settings";
+
+/* Class = "NSBox"; title = "Window Settings"; ObjectID = "wxJ-4D-ubW"; */
+"wxJ-4D-ubW.title" = "Window Settings";

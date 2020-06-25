@@ -5,95 +5,97 @@
 #import "Units.h"
 
 @implementation SeaDocumentController
+@synthesize type;
+@synthesize height;
+@synthesize width;
+@synthesize resolution;
+@synthesize opaque;
+@synthesize units;
 
-- (id)init
+- (instancetype)init
 {
-	if (![super init])
-		return NULL;
-		
-	stopNotingRecentDocuments = NO;
+	if (self = [super init]) {
+		stopNotingRecentDocuments = NO;
+	}
 	
 	return self;
 }
 
 - (void)awakeFromNib
 {
-	int i;
-	editableTypes = [[NSMutableDictionary dictionary] retain];
-	viewableTypes = [[NSMutableDictionary dictionary] retain];
+	editableTypes = [[NSMutableDictionary alloc] init];
+	viewableTypes = [[NSMutableDictionary alloc] init];
 	
 	// The document controller is responsible for tracking document types
 	// In addition, as it's in control of open, it also must know the types for import and export
 	NSArray *allDocumentTypes = [[[NSBundle mainBundle] infoDictionary]
 							  valueForKey:@"CFBundleDocumentTypes"];
-	for(i = 0; i < [allDocumentTypes count]; i++){
-		NSDictionary *typeDict = [allDocumentTypes objectAtIndex:i];
-		NSMutableSet *assembly = [NSMutableSet set];
+	for (NSDictionary *typeDict in allDocumentTypes) {
+		NSMutableSet<NSString*> *assembly = [NSMutableSet set];
 
-		[assembly addObjectsFromArray:[typeDict objectForKey:@"CFBundleTypeExtensions"]];
-		[assembly addObjectsFromArray:[typeDict objectForKey:@"CFBundleTypeOSTypes"]];
-		[assembly addObjectsFromArray:[typeDict objectForKey:@"LSItemContentTypes"]];
+		[assembly addObjectsFromArray:typeDict[@"CFBundleTypeExtensions"]];
+		{
+			NSArray *infoPlistOSType = typeDict[@"CFBundleTypeOSTypes"];
+			NSMutableArray<NSString*> *osTypeArr = [[NSMutableArray alloc] initWithCapacity:infoPlistOSType.count];
+			for (id osTyp in infoPlistOSType) {
+				if ([osTyp isKindOfClass:[NSNumber class]]) {
+					NSString *newType = NSFileTypeForHFSTypeCode([(NSNumber*)osTyp unsignedIntValue]);
+					[osTypeArr addObject:newType];
+				} else if ([osTyp isKindOfClass:[NSString class]]) {
+					NSString *newType = NSFileTypeForHFSTypeCode(UTGetOSTypeFromString((__bridge CFStringRef _Nonnull)(osTyp)));
+					[osTypeArr addObject:newType];
+				}
+			}
+			[assembly addObjectsFromArray:osTypeArr];
+		}
+		[assembly addObjectsFromArray:typeDict[@"LSItemContentTypes"]];
 		
-		NSString* key = [typeDict objectForKey:@"CFBundleTypeName"];
+		NSString* key = typeDict[@"CFBundleTypeName"];
 		[assembly addObject:key];
 				
-		NSString *role = [typeDict objectForKey:@"CFBundleTypeRole"];
-		if([role isEqual:@"Editor"]){
-			[editableTypes setObject:assembly forKey: key];
-		}else if ([role isEqual:@"Viewer"]) {
-			[viewableTypes setObject:assembly forKey: key];
+		NSString *role = typeDict[@"CFBundleTypeRole"];
+		if ([role isEqual:@"Editor"]) {
+			editableTypes[key] = assembly;
+		} else if ([role isEqual:@"Viewer"]) {
+			viewableTypes[key] = assembly;
 		}
 	}
 }
 
-- (void)dealloc
-{
-	// Then get rid of stuff that's no longer needed
-	if (editableTypes) [editableTypes autorelease];
-	if (viewableTypes) [viewableTypes autorelease];
-	// Finally call the super
-	[super dealloc];
-}
-
 - (IBAction)newDocument:(id)sender
 {		
-	NSString *string;
-	id menuItem;
-	IntSize size;
-	
 	// Set paper name
 	if ([[NSPrintInfo sharedPrintInfo] respondsToSelector:@selector(localizedPaperName)]) {
-		menuItem = [templatesMenu itemAtIndex:[templatesMenu indexOfItemWithTag:4]];
-		string = [NSString stringWithFormat:@"%@ (%@)", LOCALSTR(@"paper size", @"Paper size"), [[NSPrintInfo sharedPrintInfo] localizedPaperName]];
+		NSMenuItem *menuItem = [templatesMenu itemAtIndex:[templatesMenu indexOfItemWithTag:4]];
+		NSString *string = [NSString stringWithFormat:@"%@ (%@)", LOCALSTR(@"paper size", @"Paper size"), [[NSPrintInfo sharedPrintInfo] localizedPaperName]];
 		[menuItem setTitle:string];
 	}
 
 	// Display the panel for configuring
-	units = [(SeaPrefs *)[SeaController seaPrefs] newUnits];
+	units = [[SeaController seaPrefs] newUnits];
 	[unitsMenu selectItemAtIndex: units];
 	[resMenu selectItemAtIndex:[(SeaPrefs *)[SeaController seaPrefs] resolution]];
 	[modeMenu selectItemAtIndex:[(SeaPrefs *)[SeaController seaPrefs] mode]];
-	resolution = [[resMenu selectedItem] tag];
-	size = [(SeaPrefs *)[SeaController seaPrefs] size];
-	[widthInput setStringValue:StringFromPixels(size.width, units, resolution)];
-	[heightInput setStringValue:StringFromPixels(size.height, units, resolution)];
-	[heightUnits setStringValue:UnitsString(units)];
+	resolution = (int)[[resMenu selectedItem] tag];
+	IntSize size = [[SeaController seaPrefs] size];
+	[widthInput setStringValue:SeaStringFromPixels(size.width, units, resolution)];
+	[heightInput setStringValue:SeaStringFromPixels(size.height, units, resolution)];
+	[heightUnits setStringValue:SeaUnitsString(units)];
 	[backgroundCheckbox setState:[(SeaPrefs *)[SeaController seaPrefs] transparentBackground]];
 	
 	// Set up the recents menu
-	int i;
 	NSArray *recentDocs = [super recentDocumentURLs];
-	if([recentDocs count]){
+	if ([recentDocs count]) {
 		[recentMenu setEnabled:YES];
-		for(i = 0; i < [recentDocs count]; i++){
-			NSString *path = [[recentDocs objectAtIndex:i] path];
-			NSString *filename = [[path pathComponents] objectAtIndex:[[path pathComponents] count] -1];
+		for (NSURL *docURL in recentDocs) {
+			NSString *path = [docURL path];
+			NSString *filename = docURL.lastPathComponent;
 			NSImage *image = [[NSWorkspace sharedWorkspace] iconForFile: path];
 			[recentMenu addItemWithTitle: filename];
 			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setRepresentedObject:path];
 			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setImage: image];
 		}
-	}else {
+	} else {
 		[recentMenu setEnabled:NO];
 	}
 
@@ -108,9 +110,9 @@
 	[super openDocument:sender];
 }
 
-- (id)openNonCurrentFile:(NSString *)path
+- (NSDocument*)openNonCurrentFile:(NSString *)path
 {
-	id newDocument;
+	__kindof NSDocument* newDocument;
 	
 	stopNotingRecentDocuments = YES;
 	newDocument = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfFile:path display:YES];
@@ -122,7 +124,9 @@
 
 - (IBAction)openRecent:(id)sender
 {
-	[[NSDocumentController sharedDocumentController] openDocumentWithContentsOfFile:[[sender selectedItem] representedObject] display:YES];
+	[[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:[NSURL fileURLWithPath:[[sender selectedItem] representedObject]] display:YES completionHandler:^(NSDocument * _Nullable document, BOOL documentWasAlreadyOpen, NSError * _Nullable error) {
+		//do nothing
+	}];
 }
 
 - (void)noteNewRecentDocument:(NSDocument *)aDocument
@@ -135,18 +139,18 @@
 - (IBAction)createDocument:(id)sender
 {
 	// Determine the resolution
-	resolution = [[resMenu selectedItem] tag];
+	resolution = (int)[[resMenu selectedItem] tag];
 
 	// Parse width and height	
-	width = PixelsFromFloat([widthInput floatValue], units, resolution); 
-	height = PixelsFromFloat([heightInput floatValue], units, resolution); 
+	width = SeaPixelsFromFloat([widthInput floatValue], units, resolution); 
+	height = SeaPixelsFromFloat([heightInput floatValue], units, resolution); 
 			
 	// Don't accept rediculous heights or widths
 	if (width < kMinImageSize || width > kMaxImageSize) { NSBeep(); return; }
 	if (height < kMinImageSize || height > kMaxImageSize) { NSBeep(); return; }
 	
 	// Determine everything else
-	type = [modeMenu indexOfSelectedItem];
+	type = (int)[modeMenu indexOfSelectedItem];
 	opaque = ![backgroundCheckbox state];
 
 	// Create a new document
@@ -160,38 +164,37 @@
 	NSImage *image;
 	NSSize paperSize;
 	IntSize size = IntMakeSize(0, 0);
-	float res;
-	int selectedTag;
 	
-	selectedTag = [[templatesMenu selectedItem] tag];
-	res = [[resMenu selectedItem] tag];
+	NSInteger selectedTag = [[templatesMenu selectedItem] tag];
+	NSInteger res = [[resMenu selectedItem] tag];
 	switch (selectedTag) {
 		case 1:
-			size = [(SeaPrefs *)[SeaController seaPrefs] size];
-			units = [(SeaPrefs *)[SeaController seaPrefs] newUnits];
+			size = [[SeaController seaPrefs] size];
+			units = [[SeaController seaPrefs] newUnits];
 			[unitsMenu selectItemAtIndex: units];
-			res = [(SeaPrefs *)[SeaController seaPrefs] resolution];
+			res = [[SeaController seaPrefs] resolution];
 			[resMenu selectItemAtIndex:res];
-		break;
+			break;
+			
 		case 2:
 			pboard = [NSPasteboard generalPasteboard];
-			availableType = [pboard availableTypeFromArray:[NSArray arrayWithObjects:NSTIFFPboardType, NSPICTPboardType, NULL]];
+			availableType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 			if (availableType) {
 				image = [[NSImage alloc] initWithData:[pboard dataForType:availableType]];
 				size = NSSizeMakeIntSize([image size]);
-				[image autorelease];
-			}
-			else {
+			} else {
 				NSBeep();
 				return;
 			}
 			
-		break;
+			break;
+			
 		case 3:
 			size = NSSizeMakeIntSize([[NSScreen mainScreen] frame].size);
 			units = kPixelUnits;
 			[unitsMenu selectItemAtIndex: kPixelUnits];
-		break;
+			break;
+			
 		case 4:
 			paperSize = [[NSPrintInfo sharedPrintInfo] paperSize];
 			paperSize.height -= [[NSPrintInfo sharedPrintInfo] topMargin] + [[NSPrintInfo sharedPrintInfo] bottomMargin];
@@ -201,34 +204,35 @@
 			[unitsMenu selectItemAtIndex: kInchUnits];
 			size.width = (float)size.width * (res / 72.0);
 			size.height = (float)size.height * (res / 72.0);
-		break;
+			break;
 		case 1000:
 			/* Henry, add "Add..." item functionality here. */
-		break;
+			break;
+			
 		case 1001:
 			/* Henry, add "Editor..." item functionality here. */
-		break;
+			break;
 	}
 	
 	if (selectedTag != 1000 && selectedTag != 1001) {
-		[widthInput setStringValue:StringFromPixels(size.width, units, res)];
-		[heightInput setStringValue:StringFromPixels(size.height, units, res)];
-		[heightUnits setStringValue:UnitsString(units)];
+		[widthInput setStringValue:SeaStringFromPixels(size.width, units, (int)res)];
+		[heightInput setStringValue:SeaStringFromPixels(size.height, units, (int)res)];
+		[heightUnits setStringValue:SeaUnitsString(units)];
 	}
 }
 
 - (IBAction)changeUnits:(id)sender
 {
 	IntSize size = IntMakeSize(0, 0);
-	int res = [[resMenu selectedItem] tag];
+	int res = (int)[[resMenu selectedItem] tag];
 
-	size.height =  PixelsFromFloat([heightInput floatValue],units,res);
-	size.width =  PixelsFromFloat([widthInput floatValue],units,res);
+	size.height =  SeaPixelsFromFloat([heightInput floatValue],units,res);
+	size.width =  SeaPixelsFromFloat([widthInput floatValue],units,res);
 
-	units = [[unitsMenu selectedItem] tag];
-	[widthInput setStringValue:StringFromPixels(size.width, units, res)];
-	[heightInput setStringValue:StringFromPixels(size.height, units, res)];
-	[heightUnits setStringValue:UnitsString(units)];
+	units = (int)[[unitsMenu selectedItem] tag];
+	[widthInput setStringValue:SeaStringFromPixels(size.width, units, res)];
+	[heightInput setStringValue:SeaStringFromPixels(size.height, units, res)];
+	[heightUnits setStringValue:SeaUnitsString(units)];
 }
 
 - (void)addDocument:(NSDocument *)document
@@ -242,76 +246,40 @@
 	[super removeDocument:document];
 }
 
-- (int)type
-{
-	return type;
-}
-
-- (int)height
-{
-	return height;
-}
-
-- (int)width
-{
-	return width;
-}
-
-- (int)resolution
-{
-	return resolution;
-}
-
-- (int)opaque
-{
-	return opaque;
-}
-
-- (int)units
-{
-	return units;
-}
-
-- (NSMutableDictionary*)editableTypes
-{
-	return editableTypes;
-}
-
-- (NSMutableDictionary*)viewableTypes
-{
-	return viewableTypes;
-}
+@synthesize editableTypes;
+@synthesize viewableTypes;
 
 - (NSArray*)readableTypes
 {
-	NSMutableArray *array = [NSMutableArray array];
-	NSEnumerator *e = [editableTypes keyEnumerator];
-	NSString *key;
-	while (key = [e nextObject]) {
-		[array addObjectsFromArray:[[editableTypes objectForKey:key] allObjects]];
+	NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:editableTypes.count + viewableTypes.count];
+	for (NSSet *obj in editableTypes.objectEnumerator) {
+		[array addObjectsFromArray:[obj allObjects]];
 	}
 	
-	e = [viewableTypes keyEnumerator];
-	while(key = [e nextObject]){
-		[array addObjectsFromArray:[[viewableTypes objectForKey:key] allObjects]];
+	for (NSSet *obj in viewableTypes.objectEnumerator) {
+		[array addObjectsFromArray:[obj allObjects]];
 	}
-	return array;
+	return [array copy];
 }
 
+//- (NSArray *)fileExtensionsFromType:(NSString *)typeName
+//{
+//	return @[];
+//}
 
 - (BOOL)type:(NSString *)aType isContainedInDocType:(NSString*) key
 {
 	// We need to special case these for some reason, I don't know why
-	if([key isEqual:@"Gimp image"] &&
-	   (![aType caseInsensitiveCompare:@"com.gimp.xcf"] ||
-	    ![aType caseInsensitiveCompare:@"net.sourceforge.xcf"] ||
-		![aType caseInsensitiveCompare:@"Gimp Document"])){
-		return YES;
-	}
+	//if([key isEqual:@"Gimp image"] &&
+	//   (![aType caseInsensitiveCompare:@"com.gimp.xcf"] ||
+	//    ![aType caseInsensitiveCompare:@"net.sourceforge.xcf"] ||
+	//	![aType caseInsensitiveCompare:@"Gimp Document"])){
+	//	return YES;
+	//}
 	
-	NSMutableSet *set = [editableTypes objectForKey:key];
+	NSSet<NSString*> *set = editableTypes[key];
 	if(!set){
-		set = [viewableTypes objectForKey:key];
+		set = viewableTypes[key];
 		// That's wierd, someone has passed in an invalid type
 		if(!set){
 			NSLog(@"Invalid key passed to SeaDocumentController: <%@> \n Investigating type: <%@>", key, aType);
@@ -319,11 +287,9 @@
 		}
 	}
 	
-	NSEnumerator *e = [set objectEnumerator];
-	NSString *candidate;
-	while (candidate = [e nextObject]) {
+	for (NSString *candidate in set) {
 		// I think we don't care about case in types
-		if(![aType caseInsensitiveCompare:candidate]){
+		if ([aType caseInsensitiveCompare:candidate] == NSOrderedSame) {
 			return YES;
 		}
 	}

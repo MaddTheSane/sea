@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@class		ImageToolbarItem
@@ -8,10 +13,7 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> N/A
 */
-
-@interface ImageToolbarItem : NSToolbarItem {
-
-}
+@interface ImageToolbarItem : NSToolbarItem
 
 /*!
 	@method		initWithIdentifier:label:image:toolTip:target:selector:
@@ -30,6 +32,8 @@
 				The selector used by the item.
 	@result		Returns instance upon success.
 */
--(ImageToolbarItem *)initWithItemIdentifier:  (NSString*) itemIdent label:(NSString *) label image:(NSString *) image toolTip: (NSString *) toolTip target: (id) target selector: (SEL) selector;
+-(ImageToolbarItem *)initWithItemIdentifier:  (NSToolbarItemIdentifier) itemIdent label:(NSString *) label imageNamed:(NSImageName) image toolTip: (NSString *) toolTip target: (id) target selector: (SEL) selector;
+
+-(ImageToolbarItem *)initWithItemIdentifier:  (NSToolbarItemIdentifier) itemIdent label:(NSString *) label image:(NSImage *) image toolTip: (NSString *) toolTip target: (id) target selector: (SEL) selector;
 
 @end

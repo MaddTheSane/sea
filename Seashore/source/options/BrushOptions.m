@@ -6,6 +6,8 @@
 #import "UtilitiesManager.h"
 #import "SeaWarning.h"
 #import "SeaDocument.h"
+#import "SeaPrefs.h"
+#import "SeaView.h"
 
 enum {
 	kQuadratic,
@@ -14,49 +16,51 @@ enum {
 };
 
 @implementation BrushOptions
+@synthesize brushIsErasing = isErasing;
 
 - (void)awakeFromNib
 {
-	int rate, style;
+	NSInteger rate, style;
 	BOOL fadeOn, pressureOn;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"brush fade"] == NULL) {
+	if ([defaults objectForKey:@"brush fade"] == NULL) {
 		[fadeCheckbox setState:NSOffState];
 		[fadeCheckbox setTitle:[NSString stringWithFormat:LOCALSTR(@"fade-out", @"Fade-out: %d"), 10]];
 		[fadeSlider setIntValue:10];
 		[fadeSlider setEnabled:NO];
 	}
 	else {
-		rate = [gUserDefaults integerForKey:@"brush fade rate"];
+		rate = [defaults integerForKey:@"brush fade rate"];
 		if (rate < 1 || rate > 120)
 			rate = 10;
-		fadeOn = [gUserDefaults boolForKey:@"brush fade"];
+		fadeOn = [defaults boolForKey:@"brush fade"];
 		[fadeCheckbox setState:fadeOn];
 		[fadeCheckbox setTitle:[NSString stringWithFormat:LOCALSTR(@"fade-out", @"Fade-out: %d"), rate]];
-		[fadeSlider setIntValue:rate];
+		[fadeSlider setIntegerValue:rate];
 		[fadeSlider setEnabled:fadeOn];
 	}
 	
-	if ([gUserDefaults objectForKey:@"brush pressure"] == NULL) {
+	if ([defaults objectForKey:@"brush pressure"] == NULL) {
 		[pressureCheckbox setState:NSOffState];
 		[pressurePopup selectItemAtIndex:kLinear];
 		[pressurePopup setEnabled:NO];
 	}
 	else {
-		style = [gUserDefaults integerForKey:@"brush pressure style"];
+		style = [defaults integerForKey:@"brush pressure style"];
 		if (style < kQuadratic || style > kSquareRoot)
 			style = kLinear;
-		pressureOn = [gUserDefaults boolForKey:@"brush pressure"];
+		pressureOn = [defaults boolForKey:@"brush pressure"];
 		[pressureCheckbox setState:pressureOn];
 		[pressurePopup selectItemAtIndex:style];
 		[pressurePopup setEnabled:pressureOn];
 	}
 	
-	if ([gUserDefaults objectForKey:@"brush scale"] == NULL) {
+	if ([defaults objectForKey:@"brush scale"] == NULL) {
 		[scaleCheckbox setState:NSOnState];
 	}
 	else {
-		[scaleCheckbox setState:[gUserDefaults boolForKey:@"brush scale"]];
+		[scaleCheckbox setState:[defaults boolForKey:@"brush scale"]];
 	}
 	
 	isErasing = NO;
@@ -68,7 +72,7 @@ enum {
 	if (!warnedUser && [sender tag] == 3) {
 		if ([pressureCheckbox state]) {
 			if (floor(NSAppKitVersionNumber) == NSAppKitVersionNumber10_4 && NSAppKitVersionNumber < NSAppKitVersionNumber10_4_6) {
-				[[SeaController seaWarning] addMessage:LOCALSTR(@"tablet bug message", @"There is a bug in Mac OS 10.4 that causes some tablets to incorrectly register their first touch at full strength. A workaround is provided in the \"Preferences\" dialog however the best solution is to upgrade to Mac OS 10.4.6 or later.") level:kModerateImportance];
+				[[SeaController seaWarning] addMessage:LOCALSTR(@"tablet bug message", @"There is a bug in Mac OS 10.4 that causes some tablets to incorrectly register their first touch at full strength. A workaround is provided in the \"Preferences\" dialog however the best solution is to upgrade to Mac OS 10.4.6 or later.") level:SeaWarningImportanceModerate];
 				warnedUser = YES;
 			}
 		}
@@ -122,7 +126,7 @@ enum {
 
 - (BOOL)scale
 {
-	return [scaleCheckbox state];
+	return [scaleCheckbox state] == NSOnState;
 }
 
 - (BOOL)useTextures
@@ -130,18 +134,13 @@ enum {
 	return [[SeaController seaPrefs] useTextures];
 }
 
-- (BOOL)brushIsErasing
-{
-	return isErasing;
-}
-
-- (void)updateModifiers:(unsigned int)modifiers
+- (void)updateModifiers:(NSEventModifierFlags)modifiers
 {
 	[super updateModifiers:modifiers];
-	int modifier = [super modifier];
+	AbstractModifiers modifier = [super modifier];
 	
 	switch (modifier) {
-		case kAltModifier:
+		case AbstractModifierAlt:
 			isErasing = YES;
 			break;
 		default:
@@ -153,7 +152,7 @@ enum {
 - (IBAction)modifierPopupChanged:(id)sender
 {
 	switch ([[sender selectedItem] tag]) {
-		case kAltModifier:
+		case AbstractModifierAlt:
 			isErasing = YES;
 			break;
 		default:
@@ -162,20 +161,20 @@ enum {
 	}
 	// We now need to update all of the documents because the modifiers, and thus possibly
 	// the cursors and guides may have changed.
-	int i;
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	for (i = 0; i < [documents count]; i++) {
-		[[(SeaDocument *)[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *doc in documents) {
+		[doc docView].needsDisplay = YES;
 	}
 }
 
 - (void)shutdown
 {
-	[gUserDefaults setObject:[fadeCheckbox state] ? @"YES" : @"NO" forKey:@"brush fade"];
-	[gUserDefaults setInteger:[fadeSlider intValue] forKey:@"brush fade rate"];
-	[gUserDefaults setObject:[pressureCheckbox state] ? @"YES" : @"NO" forKey:@"brush pressure"];
-	[gUserDefaults setInteger:[pressurePopup indexOfSelectedItem] forKey:@"brush pressure style"];
-	[gUserDefaults setInteger:[scaleCheckbox state] forKey:@"brush scale"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setBool:[fadeCheckbox state] forKey:@"brush fade"];
+	[defaults setInteger:[fadeSlider integerValue] forKey:@"brush fade rate"];
+	[defaults setBool:[pressureCheckbox state] forKey:@"brush pressure"];
+	[defaults setInteger:[pressurePopup indexOfSelectedItem] forKey:@"brush pressure style"];
+	[defaults setInteger:[scaleCheckbox state] forKey:@"brush scale"];
 }
 
 @end

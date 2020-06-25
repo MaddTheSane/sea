@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@defined	kNumberOfRotationRecordsPerMalloc
@@ -27,14 +32,16 @@
 				undo, NO otherwise.
 */
 typedef struct {
-	int index;
-	float rotation;
-	int undoIndex;
+	NSInteger index;
+	CGFloat rotation;
+	NSInteger undoIndex;
 	IntRect rect;
 	BOOL isRotated;
 	BOOL withTrim;
 	BOOL disableAlpha;
 } RotationUndoRecord;
+
+@class SeaDocument;
 
 /*!
 	@class		SeaRotation
@@ -44,24 +51,21 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaRotation : NSObject
 {
-
 	// The document and sheet associated with this object
-    IBOutlet id document;
-	IBOutlet id sheet;
+    IBOutlet SeaDocument *document;
+	IBOutlet NSWindow *sheet;
 	
 	// A label specifying the layer being rotated
-    IBOutlet id selectionLabel;
+    IBOutlet NSTextField *selectionLabel;
 	
 	// The rotation value (in degrees)
-	IBOutlet id rotateValue;
+	IBOutlet NSTextField *rotateValue;
 
 	// A list of rotation undo records required for undoing
 	RotationUndoRecord *undoRecords;
-	int undoMax, undoCount; 
-	
+	NSInteger undoMax, undoCount;
 }
 
 /*!
@@ -69,21 +73,12 @@ typedef struct {
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)init;
 
 /*!
 	@method		run:
 	@discussion	Presents the user with a sheet allowing him to configure the
 				document's or layer's margins.
-	@param		global
-				YES if the document's margins should be changed, NO if the
-				layer's margins should be changed.
 */
 - (void)run;
 
@@ -114,7 +109,7 @@ typedef struct {
 				YES if the layer should be trimmed of alpha after rotation, NO
 				otherwise.
 */
-- (void)rotate:(float)degrees withTrim:(BOOL)trim;
+- (void)rotate:(CGFloat)degrees withTrim:(BOOL)trim;
 
 /*!
 	@method		undoRotation:
@@ -124,6 +119,6 @@ typedef struct {
 	@param		undoIndex
 				The index of the undo record to be used.
 */
-- (void)undoRotation:(int)undoIndex;
+- (void)undoRotation:(NSInteger)undoIndex;
 
 @end

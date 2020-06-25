@@ -1,23 +1,19 @@
 #import "XCFLayer.h"
 #import "RLE.h"
+#include <zlib.h>
 
 @implementation XCFLayer
 
-static inline void fix_endian_read(int *input, int size)
+static inline void fix_endian_read(int *input, size_t size)
 {
-#ifdef __LITTLE_ENDIAN__
-	int i;
-	
-	for (i = 0; i < size; i++) {
-		input[i] = ntohl(input[i]);
+	for (NSInteger i = 0; i < size; i++) {
+		input[i] = CFSwapInt32BigToHost(input[i]);
 	}
-#endif
 }
 
 - (BOOL)readHeader:(FILE *)file
 {
 	char nameString[256];
-	int i;
 	
 	// Read the width and height
 	fread(tempIntString, sizeof(int), 3, file);
@@ -29,7 +25,7 @@ static inline void fix_endian_read(int *input, int size)
 	fread(tempIntString, sizeof(int), 1, file);
 	fix_endian_read(tempIntString, 1);
 	if (tempIntString[0] > 0) {
-		i = 0;
+		int i = 0;
 		nameString[255] = 0;
 		do {
 			if (i < 255) {
@@ -37,12 +33,9 @@ static inline void fix_endian_read(int *input, int size)
 				i++;
 			}
 		} while (nameString[i - 1] != 0 && !ferror(file));
-		if (name) [name autorelease];
-		name = [[NSString alloc] initWithUTF8String:nameString];
-	}
-	else {
-		if (name) [name autorelease];
-		name = [[NSString alloc] initWithString:LOCALSTR(@"untitled", @"Untitled")];
+		name = @(nameString);
+	} else {
+		name = [LOCALSTR(@"untitled", @"Untitled") copy];
 	}
 	
 	// NSLog(@"Layer's name: %@", name);
@@ -169,7 +162,7 @@ static inline void fix_endian_read(int *input, int size)
 
 - (BOOL)skipMaskHeader:(FILE *)file
 {
-	int propType, propSize;
+	int propSize;
 	BOOL finished;
 	
 	// Skip width, height and name
@@ -187,7 +180,7 @@ static inline void fix_endian_read(int *input, int size)
 	while (!finished && !ferror(file)) {
 		fread(tempIntString, sizeof(int), 2, file);
 		fix_endian_read(tempIntString, 2);
-		propType = tempIntString[0];
+		XcfPropType propType = tempIntString[0];
 		propSize = tempIntString[1];
 		switch (propType) {
 			case PROP_END:
@@ -220,7 +213,9 @@ static inline void fix_endian_read(int *input, int size)
 	int tilesPerColumn = (height % XCF_TILE_HEIGHT) ? (height / XCF_TILE_HEIGHT + 1) : (height / XCF_TILE_HEIGHT);
 	int whichTile = 0, i, j, k, curColor, srcSPP, destSPP;
 	int tileHeight, tileWidth;
-	int tileOffset, oldOffset, srcLoc, destLoc, expectedSize, srcSize;
+	int tileOffset, srcLoc, destLoc, expectedSize;
+	long oldOffset;
+	size_t srcSize;
 	unsigned char *cmap = info->cmap;
 	unsigned char *srcData, *tileData, *totalData;
 	BOOL finished;
@@ -271,7 +266,6 @@ static inline void fix_endian_read(int *input, int size)
 			fseek(file, tileOffset, SEEK_SET);
 			switch (info->compression) {
 				case COMPRESS_NONE:
-				
 					// In case of no compression...
 					srcData = malloc(expectedSize);
 					if (fread(srcData, sizeof(char), expectedSize, file) != expectedSize) {
@@ -285,23 +279,39 @@ static inline void fix_endian_read(int *input, int size)
 							tileData[i + j * srcSPP] = srcData[i * width * height + j];
 					}
 					free(srcData);
+					break;
 					
-				break;
 				case COMPRESS_RLE:
-				
 					// In case of RLE compression (typical case)...
 					// NSLog(@"Tile begins at: %d", ftell(file));
 					srcData = malloc(expectedSize * 1.3 + 1);
 					srcSize = fread(srcData, sizeof(char), expectedSize * 1.3 + 1, file);
-					if (!RLEDecompress(tileData, srcData, srcSize, tileWidth, tileHeight, srcSPP)) {
+					if (!SeaRLEDecompress(tileData, srcData, (int)srcSize, tileWidth, tileHeight, srcSPP)) {
 						// NSRunAlertPanel(@"RLE decompression failed", @"The RLE decompression of a certain part of this file failed, this could be due to an incomplete or corrupted XCF file. As such this file cannot be properly loaded.", @"OK", NULL, NULL);
 						NSLog(@"RLE decompression failed (pixels)");
 						free(srcData); free(tileData); free(totalData);
 						return NULL;
 					}
 					free(srcData);
+					break;
 					
-				break;
+				case COMPRESS_ZLIB:
+					NSLog(@"xcf: zlib compression unimplemented");
+					free(tileData); free(totalData);
+					return NULL;
+					break;
+					
+				case COMPRESS_FRACTAL:
+					NSLog (@"xcf: fractal compression unimplemented");
+					free(tileData); free(totalData);
+					return NULL;
+					break;
+					
+				default:
+					NSLog (@"xcf: unknown compression format %i", info->compression);
+					free(tileData); free(totalData);
+					return NULL;
+					break;
 			}
 		
 			// Now transfer that data to the big picture
@@ -362,9 +372,11 @@ static inline void fix_endian_read(int *input, int size)
 	int tilesPerRow = (width % XCF_TILE_WIDTH) ? (width / XCF_TILE_WIDTH + 1) : (width / XCF_TILE_WIDTH);
 	int tilesPerColumn = (width % XCF_TILE_HEIGHT) ? (height / XCF_TILE_HEIGHT + 1) : (height / XCF_TILE_HEIGHT);
 	int tileHeight, tileWidth;
-	int tileOffset, oldOffset, srcLoc, destLoc, expectedSize, srcSize;
+	int tileOffset, srcLoc, destLoc, expectedSize;
+	size_t srcSize;
+	long oldOffset;
 	unsigned char *srcData, *tileData;
-	int whichTile = 0, i, j;
+	int whichTile = 0;
 	BOOL finished;
 
 	// We have no use for the mask's header information (we assume its reasonable)
@@ -397,7 +409,6 @@ static inline void fix_endian_read(int *input, int size)
 			fseek(file, tileOffset, SEEK_SET);
 			switch (info->compression) {
 				case COMPRESS_NONE:
-					
 					// In case of no compression...
 					srcData = malloc(expectedSize);
 					if (fread(srcData, sizeof(char), expectedSize, file) != expectedSize) {
@@ -406,30 +417,46 @@ static inline void fix_endian_read(int *input, int size)
 						free(srcData); free(tileData); free(totalData);
 						return NO;
 					}
-					for (i = 0; i < expectedSize; i++)
+					for (int i = 0; i < expectedSize; i++)
 						tileData[i] = srcData[i];
 					free(srcData);
-				
-				break;
-				case COMPRESS_RLE:
+					break;
 					
+				case COMPRESS_RLE:
 					// In case of RLE compression (typical case)...
 					srcData = malloc(expectedSize * 1.3 + 1);
 					srcSize = fread(srcData, sizeof(char), expectedSize * 1.3 + 1, file);
-					if (!RLEDecompress(tileData, srcData, srcSize, tileWidth, tileHeight, 1)) {
+					if (!SeaRLEDecompress(tileData, srcData, (int)srcSize, tileWidth, tileHeight, 1)) {
 						// NSRunAlertPanel(@"RLE decompression failed", @"The RLE decompression of a certain part of this file failed, this could be due to an incomplete or corrupted XCF file. As such this file cannot be properly loaded.", @"OK", NULL, NULL);
 						NSLog(@"RLE decompression failed (mask)");
 						free(srcData); free(tileData); free(totalData);
 						return NO;
 					}
 					free(srcData);
-				
-				break;
+					break;
+					
+				case COMPRESS_ZLIB:
+					NSLog(@"xcf: zlib compression unimplemented");
+					free(tileData); free(totalData);
+					return NO;
+					break;
+					
+				case COMPRESS_FRACTAL:
+					NSLog (@"xcf: fractal compression unimplemented");
+					free(tileData); free(totalData);
+					return NO;
+					break;
+					
+				default:
+					NSLog (@"xcf: unknown compression format %i", info->compression);
+					free(tileData); free(totalData);
+					return NO;
+					break;
 			}
 		
 			// Now transfer that data to the big picture overwriting any existing alpha channel
-			for (j = 0; j < tileHeight; j++) {
-				for (i = 0; i < tileWidth; i++) {
+			for (int j = 0; j < tileHeight; j++) {
+				for (int i = 0; i < tileWidth; i++) {
 					srcLoc = (i + j * tileWidth);
 					destLoc = (((whichTile % tilesPerRow) * XCF_TILE_WIDTH) + i) * spp + ((whichTile /  tilesPerRow) * XCF_TILE_HEIGHT + j) * width * spp;
 					totalData[destLoc + (spp - 1)] = tileData[srcLoc];				
@@ -491,13 +518,14 @@ static inline void fix_endian_read(int *input, int size)
 	return YES;
 }
 
-- (id)initWithFile:(FILE *)file offset:(int)offset document:(id)doc sharedInfo:(SharedXCFInfo *)info
+#if MAIN_COMPILE
+- (instancetype)initWithFile:(FILE *)file offset:(size_t)offset document:(id)doc sharedInfo:(SharedXCFInfo *)info
 {
 	// int i;
 	
 	// Initialize superclass first
 	if (![super  initWithDocument:doc])
-		return NULL;
+		return nil;
 
 	// Go to the given offset
 	fseek(file, offset, SEEK_SET);
@@ -506,7 +534,6 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Read the header
 	if ([self readHeader:file] == NO) {
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -514,7 +541,6 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Read the properties
 	if ([self readProperties:file sharedInfo:info] == NO) {
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -522,7 +548,6 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Read the body
 	if ([self readBody:file sharedInfo:info] == NO) {
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -537,5 +562,46 @@ static inline void fix_endian_read(int *input, int size)
 	
 	return self;
 }
+
+#else
+
+- (instancetype)initWithFile:(FILE *)file offset:(int)offset sharedInfo:(SharedXCFInfo *)info
+{
+	// Initialize superclass first
+	if (self = [super init]) {
+		// Go to the given offset
+		fseek(file, offset, SEEK_SET);
+		
+		// NSLog(@"Layer Header Begin: %d", ftell(file));
+		
+		// Read the header
+		if ([self readHeader:file] == NO) {
+			return nil;
+		}
+		
+		// NSLog(@"Layer Properties Begin: %d", ftell(file));
+		
+		// Read the properties
+		if ([self readProperties:file sharedInfo:info] == NO) {
+			return nil;
+		}
+		
+		// NSLog(@"Layer Properties End: %d", ftell(file));
+		
+		// Read the body
+		if ([self readBody:file sharedInfo:info] == NO) {
+			return nil;
+		}
+		
+		// Check the alpha
+		hasAlpha = NO;
+		for (int i = 0; i < width * height; i++) {
+			if (data[(i + 1) * spp - 1] != 255)
+				hasAlpha = YES;
+		}
+	}
+	return self;
+}
+#endif
 
 @end

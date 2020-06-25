@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractSelectTool.h"
 
@@ -10,25 +11,23 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface RectSelectTool : AbstractSelectTool {
-
-	// The point where the selection begun
+	/// The point where the selection begun
 	IntPoint startPoint;
 	
-	// The selection rectangle
+	/// The selection rectangle
 	IntRect selectionRect;
 
-	// Make the selection one-to-one
+	/// Make the selection one-to-one
 	BOOL oneToOne;
 }
 
 /*!
-	@method		selectionRect
+	@property	selectionRect
 	@discussion	The rectangle of the current selection.
 	@result		Returns the rectangle in the overlay's coordinates.
 */
-- (IntRect) selectionRect;
+@property (readonly) IntRect selectionRect;
 
 /*!
 	@method		mouseDownAt:withEvent:

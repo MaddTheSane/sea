@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+description = "Inserts a bump at the specified point";
+groupName = "Distort";
+instruction = "Click twice: first to locate the centre of the bump and then to determine its radius";
+license = "Public Domain";
+name = "Bump";

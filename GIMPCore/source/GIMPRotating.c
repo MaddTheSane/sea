@@ -161,7 +161,7 @@ pixel_surround_clear (PixelSurround *ps)
 #define REF_TILE(i,x,y) \
      tsrc[i] = &(src[(y * srcWidth + x) * spp]);
 
-void GCRotateImage(unsigned char **dest, int *destWidth, int *destHeight, int *destX, int *destY, unsigned char *src, int srcWidth, int srcHeight, float angle, int interpolation_type, int spp, ProgressFunction progress_callback)
+void GCRotateImage(unsigned char **dest, int *destWidth, int *destHeight, int *destX, int *destY, unsigned char *src, int srcWidth, int srcHeight, float angle, GimpInterpolationType interpolation_type, int spp, ProgressFunction progress_callback)
 {
   GimpMatrix3  m;
 #if 0

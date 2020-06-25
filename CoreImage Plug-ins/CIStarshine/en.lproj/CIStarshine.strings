@@ -1,0 +1,27 @@
+
+/* Class = "NSWindow"; title = "Starshine"; ObjectID = "6"; */
+"6.title" = "Starshine";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "89"; */
+"89.title" = "OK";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "90"; */
+"90.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "91"; */
+"91.title" = "Scale:";
+
+/* Class = "NSTextFieldCell"; title = "15"; ObjectID = "93"; */
+"93.title" = "15";
+
+/* Class = "NSTextFieldCell"; title = "Opacity:"; ObjectID = "94"; */
+"94.title" = "Opacity:";
+
+/* Class = "NSTextFieldCell"; title = "-2.0"; ObjectID = "96"; */
+"96.title" = "-2.0";
+
+/* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "97"; */
+"97.title" = "Width:";
+
+/* Class = "NSTextFieldCell"; title = "2.5"; ObjectID = "99"; */
+"99.title" = "2.5";

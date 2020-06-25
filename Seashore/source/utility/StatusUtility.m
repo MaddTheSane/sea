@@ -16,7 +16,7 @@
 {
 	[[SeaController utilitiesManager] setStatusUtility: self for:document];
 	
-	[(LayerControlView *)view setHasResizeThumb: NO];
+	[view setHasResizeThumb: NO];
 	
 	// This is how you're SUPPOSED to change these things
 	[[channelSelectionPopup itemAtIndex: 0] setTitle: @""];
@@ -46,7 +46,7 @@
 
 - (IBAction)show:(id)sender
 {
-	[[[document window] contentView] setVisibility: YES forRegion: kStatusBar];
+	[[[document window] contentView] setVisibility: YES forRegion: SeaWindowRegionStatusBar];
 	[self update];
 	[self updateZoom];
 	[self updateQuickColor];
@@ -54,12 +54,12 @@
 
 - (IBAction)hide:(id)sender
 {
-	[[[document window] contentView] setVisibility: NO forRegion: kStatusBar];
+	[[[document window] contentView] setVisibility: NO forRegion: SeaWindowRegionStatusBar];
 }
 
 - (IBAction)toggle:(id)sender
 {
-	if([[[document window] contentView] visibilityForRegion: kStatusBar]) {
+	if([[[document window] contentView] visibilityForRegion: SeaWindowRegionStatusBar]) {
 		[self hide:sender];
 	}else{
 		[self show:sender];
@@ -68,39 +68,39 @@
 
 - (void)update
 {
-	if(document){
+	if (document) {
 		SeaContent *contents = [document contents];
 
 		// Set the channel selections correction
-		int i;
-		for(i = 0; i < 3; i++){
-			if([contents selectedChannel] == i){
+		for (int i = 0; i < 3; i++) {
+			if ([contents selectedChannel] == i) {
 				[[channelSelectionPopup itemAtIndex: i + 1] setState: YES];
-			}else{
+			} else {
 				[[channelSelectionPopup itemAtIndex: i + 1] setState: NO];
 			}
 		}
 		
 		[channelSelectionPopup selectItemAtIndex:([contents selectedChannel] + 1)];
 		[channelSelectionPopup setEnabled:YES];
+		//trueViewCheckbox.state = [contents trueView] ? NSOnState : NSOffState;
 		[trueViewCheckbox setImage:[NSImage imageNamed:([contents trueView] ? @"trueview-sel" : @"trueview-not" )]];
 		[trueViewCheckbox setEnabled:YES];
 		
-		int newUnits = [document measureStyle];
-		NSString *statusString = @"";
-		unichar ch = 0x00B7; // replace this with your code pointNSString
-		NSString *divider = [NSString stringWithCharacters:&ch length:1];
-		if([view frame].size.width > 445){
-			statusString = [statusString stringByAppendingFormat: @"%@ %C %@ %@", StringFromPixels([contents width] , newUnits, [contents xres]), 0x00D7, StringFromPixels([contents height], newUnits, [contents yres]), UnitsString(newUnits)];
+		SeaUnits newUnits = [document measureStyle];
+		NSMutableString *statusString = [NSMutableString string];
+		//unichar ch = 0x00B7; // replace this with your code pointNSString
+		//NSString *divider = [NSString stringWithCharacters:&ch length:1];
+		if ([view frame].size.width > 445) {
+			[statusString appendFormat: @"%@ × %@ %@", SeaStringFromPixels([contents width] , newUnits, [contents xres]), SeaStringFromPixels([contents height], newUnits, [contents yres]), SeaUnitsString(newUnits)];
 		}
-		if([view frame].size.width > 480){
-			statusString = [[NSString stringWithFormat:@"%.0f%% %@ ", [contents xscale] * 100, divider] stringByAppendingString: statusString];
+		if ([view frame].size.width > 480) {
+			[statusString insertString:[NSString stringWithFormat:@"%.0f%% · ", [contents xscale] * 100] atIndex:0];
 		}
-		if([view frame].size.width > 525){
-			statusString = [statusString stringByAppendingFormat: @" %@ %d dpi", divider, [contents xres]];
+		if ([view frame].size.width > 525) {
+			[statusString appendFormat: @" · %d dpi", [contents xres]];
 		}
-		if([view frame].size.width > 575){
-			statusString = [statusString stringByAppendingFormat: @" %@ %@", divider, [contents type] ? @"Grayscale" : @"Full Color"];
+		if ([view frame].size.width > 575) {
+			[statusString appendFormat: @" · %@", [contents type] ? @"Grayscale" : @"Full Color"];
 		}
 		
 		[dimensionLabel setStringValue: statusString];		
@@ -111,6 +111,7 @@
 		[channelSelectionPopup setEnabled:NO];
 		[channelSelectionPopup selectItemAtIndex:0];
 		[trueViewCheckbox setEnabled:NO];
+		//trueViewCheckbox.state = NSOffState;
 		[trueViewCheckbox setImage:[NSImage imageNamed:@"trueview-not"]];
 		
 		[dimensionLabel setStringValue:@""];		
@@ -150,12 +151,10 @@
 		[alphaSlider setNeedsDisplay:YES];*/
 		
 	}else{
-		
 		[redBox setIntValue: 0];
 		[blueBox setIntValue: 0];
 		[greenBox setIntValue: 0];
 		[alphaBox setIntValue: 0];
-		
 	}
 }
 
@@ -192,22 +191,22 @@
 
 - (IBAction)changeZoom:(id)sender
 {
-	[(SeaView *)[document docView] zoomTo: [sender intValue]];
+	[[document docView] zoomTo: [sender intValue]];
 }
 
 - (IBAction)zoomIn:(id)sender
 {
-	[(SeaView *)[document docView] zoomIn: self];
+	[[document docView] zoomIn: self];
 }
 
 - (IBAction)zoomOut:(id)sender
 {
-	[(SeaView *)[document docView] zoomOut: self];
+	[[document docView] zoomOut: self];
 }
 
 - (IBAction)zoomNormal:(id)sender
 {
-	[(SeaView *)[document docView] zoomNormal: self];
+	[[document docView] zoomNormal: self];
 }
 
 - (id)view

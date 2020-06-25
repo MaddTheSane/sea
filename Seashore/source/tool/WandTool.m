@@ -7,19 +7,22 @@
 #import "SeaWhiteboard.h"
 #import "WandOptions.h"
 #import "SeaSelection.h"
+#import "SeaView.h"
 
 @implementation WandTool
+@synthesize start = startNSPoint;
+@synthesize current = currentNSPoint;
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
-	return kWandTool;
+	return SeaToolsWand;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	[super mouseDownAt:where withEvent:event];
 	
-	if(![super isMovingOrScaling]){
+	if (![super isMovingOrScaling]) {
 		startPoint = where;
 		startNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 		currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
@@ -42,9 +45,9 @@
 	[super mouseUpAt:where withEvent:event];
 
 	if(![super isMovingOrScaling]){
-		id layer = [[document contents] activeLayer];
-		int tolerance, width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height], spp = [[document contents] spp], k;
-		unsigned char *overlay = [[document whiteboard] overlay], *data = [(SeaLayer *)layer data];
+		SeaLayer *layer = [[document contents] activeLayer];
+		int tolerance, width = [layer width], height = [layer height], spp = [[document contents] spp], k;
+		unsigned char *overlay = [[document whiteboard] overlay], *data = [layer data];
 		unsigned char basePixel[4];
 		IntRect rect;
 			
@@ -52,7 +55,7 @@
 		if (where.x >= 0 && where.y >= 0 && where.x < width && where.y < height) {
 			
 			// Clear last selection
-			if([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode)
+			if([options selectionMode] == SeaSelectDefault || [options selectionMode] == SeaSelectForceNew)
 				[[document selection] clearSelection];
 				
 			// Fill the region to be selected
@@ -74,7 +77,7 @@
 				seeds[seedIndex] = IntMakePoint(x, y);				
 			}
 				
-			rect = bucketFill(spp, IntMakeRect(0, 0, width, height), overlay, data, width, height, seeds, intervals + 1, basePixel, tolerance, [[document contents] selectedChannel]);
+			rect = SeaBucketFill(spp, IntMakeRect(0, 0, width, height), overlay, data, width, height, seeds, intervals + 1, basePixel, tolerance, [[document contents] selectedChannel]);
 			free(seeds);
 			
 			// Then select it
@@ -85,17 +88,7 @@
 	}
 
 	translating = NO;
-	scalingDir = kNoDir;
-}
-
-- (NSPoint)start
-{
-	return startNSPoint;
-}
-
--(NSPoint)current
-{
-	return currentNSPoint;
+	scalingDir = SeaScaleDirectionNone;
 }
 
 @end

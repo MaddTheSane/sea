@@ -10,39 +10,40 @@
 
 - (void)flipDocHorizontally
 {
-	int i, layerCount;
+	NSInteger i, layerCount;
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] flipDocHorizontally];
 	[[document selection] clearSelection];
 	layerCount = [[document contents] layerCount];
 	for (i = 0; i < layerCount; i++) {
-		[[[document contents] layer:i] flipHorizontally];
+		[[[document contents] layerAtIndex:i] flipHorizontally];
 	}
 	[[document helpers] boundariesAndContentChanged:NO];
 }
 
 - (void)flipDocVertically
 {
-	int i, layerCount;
+	NSInteger i, layerCount;
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] flipDocVertically];
 	[[document selection] clearSelection];
 	layerCount = [[document contents] layerCount];
 	for (i = 0; i < layerCount; i++) {
-		[[[document contents] layer:i] flipVertically];
+		[[[document contents] layerAtIndex:i] flipVertically];
 	}
 	[[document helpers] boundariesAndContentChanged:NO];
 }
 
 - (void)rotateDocLeft
 {
-	int i, layerCount, width, height;
+	NSInteger i, layerCount;
+	int width, height;
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] rotateDocRight];
 	[[document selection] clearSelection];
 	layerCount = [[document contents] layerCount];
 	for (i = 0; i < layerCount; i++) {
-		[[[document contents] layer:i] rotateLeft];
+		[[[document contents] layerAtIndex:i] rotateLeft];
 	}
 	width = [(SeaContent *)[document contents] width];
 	height = [(SeaContent *)[document contents] height];
@@ -52,13 +53,14 @@
 
 - (void)rotateDocRight
 {
-	int i, layerCount, width, height;
+	NSInteger i, layerCount;
+	int width, height;
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] rotateDocLeft];
 	[[document selection] clearSelection];
 	layerCount = [[document contents] layerCount];
 	for (i = 0; i < layerCount; i++) {
-		[[[document contents] layer:i] rotateRight];
+		[[[document contents] layerAtIndex:i] rotateRight];
 	}
 	width = [(SeaContent *)[document contents] width];
 	height = [(SeaContent *)[document contents] height];

@@ -1,3 +1,5 @@
+#include <GIMPCore/GIMPCore.h>
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractOptions.h"
 
@@ -9,16 +11,13 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface GradientOptions : AbstractOptions
 {
-
-	// The pop-up menu indicating the gradient's type
-	IBOutlet id typePopup;
+	/// The pop-up menu indicating the gradient's type
+	IBOutlet NSPopUpButton *typePopup;
 	
-	// The pop-up menu indicating the repeating style for the gradient
-	IBOutlet id repeatPopup;
-	
+	/// The pop-up menu indicating the repeating style for the gradient
+	IBOutlet NSPopUpButton *repeatPopup;
 }
 
 /*!
@@ -28,45 +27,45 @@
 - (void)awakeFromNib;
 
 /*!
-	@method		type
+	@property	type
 	@discussion	Returns the gradient type to be used with the gradient tool.
-	@result		Returns an integer representing the gradient type to be used see
+	@result		Returns an integer representing the gradient type to be used (see
 				GIMPCore).
 */
-- (int)type;
+@property (readonly) GimpGradientType type;
 
 /*!
-	@method		repeat
+	@property	repeat
 	@discussion	Returns the repeating style to be used with the gradient tool.
 	@result		Returns an integer representing the repeating style to be used
-				see GIMPCore).
+				(see GIMPCore).
 */
-- (int)repeat;
+@property (readonly) GimpRepeatMode repeat;
 
 /*!
-	@method		supersample
+	@property	supersample
 	@discussion Returns whether adaptive supersampling should take place on the
 				gradient.
 	@result		Returns YES if adaptive supersampling should take place, NO
 				otherwise.
 */
-- (BOOL)supersample;
+@property (readonly) BOOL supersample;
 
 /*!
-	@method		maximumDepth
+	@property	maximumDepth
 	@discussion Returns the maximum depth of the recursive supersampling
 				algorithm.
 	@result		An integer indicating the maximum depth of the recursive
 				supersampling algorithm.
 */
-- (int)maximumDepth;
+@property (readonly) int maximumDepth;
 
 /*!
-	@method		threshold
+	@property	threshold
 	@discussion The threshold to be used with supersampling.
 	@result		A double indicating the threshold to be used with supersampling.
 */
-- (double)threshold;
+@property (readonly) double threshold;
 
 /*!
 	@method		shutdown

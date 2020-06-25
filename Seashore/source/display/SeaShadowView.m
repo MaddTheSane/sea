@@ -5,8 +5,9 @@
 #import "Globals.h"
 
 @implementation SeaShadowView
+@synthesize rulersVisible = areRulersVisible;
 
-- (id)initWithFrame:(NSRect)frame {
+- (instancetype)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         areRulersVisible = NO;
@@ -16,14 +17,14 @@
 
 - (void)drawRect:(NSRect)rect {
     // Drawing code here.
-	[[(SeaPrefs *)[SeaController seaPrefs] windowBack] set];
+	[[[SeaController seaPrefs] windowBack] set];
 	[[NSBezierPath bezierPathWithRect:rect] fill];
 
 	NSRect scrollRect = [[scrollView contentView] bounds];
 
 	NSRect shadowRect = NSMakeRect(-scrollRect.origin.x + areRulersVisible * 22, -scrollRect.origin.y + [scrollView hasHorizontalScroller] * 15, scrollRect.size.width + 2 * scrollRect.origin.x , scrollRect.size.height + 2 * scrollRect.origin.y);
 	
-	NSShadow *shadow = [[[NSShadow alloc] init] autorelease];
+	NSShadow *shadow = [[NSShadow alloc] init];
 	
 	[shadow setShadowOffset: NSMakeSize(3, -3)];
 	[shadow setShadowBlurRadius: 5];

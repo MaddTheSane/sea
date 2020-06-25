@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "CocoaContent.h"
 #import "CocoaLayer.h"
 #import "SeaController.h"
@@ -19,7 +21,7 @@
 		[[SeaController seaWarning]
 		 addMessage:LOCALSTR(@"gif trans",
 							 @"Seashore does not support GIF transparency or animation.")
-		 forDocument:doc level:kHighImportance];
+		 forDocument:doc level:SeaWarningImportanceHigh];
 		return YES;
 	}
 
@@ -42,40 +44,35 @@
 }
 
 
-- (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path
+- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
 {
-	id imageRep;
+	__kindof NSImageRep *imageRep;
 	NSImage *image;
-	id layer;
-	BOOL test, res_set = NO;
-	int value;
+	CocoaLayer *layer;
+	BOOL test = NO, res_set = NO;
+	NSInteger value;
 	
 	// Initialize superclass first
 	if (![super initWithDocument:doc])
-		return NULL;
+		return nil;
 	
 	// Open the image
 	image = [[NSImage alloc] initByReferencingFile:path];
 	if (image == NULL) {
-		[image autorelease];
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// Form a bitmap representation of the file at the specified path
 	imageRep = NULL;
 	if ([[image representations] count] > 0) {
-		imageRep = [[image representations] objectAtIndex:0];
+		imageRep = [image representations][0];
 		if (![imageRep isKindOfClass:[NSBitmapImageRep class]]) {
 			if ([imageRep isKindOfClass:[NSPDFImageRep class]]) {
-				
-				[image setScalesWhenResized:YES];
-				[image setDataRetained:YES];
 				
 				[NSBundle loadNibNamed:@"CocoaContent" owner:self];
 				[resMenu setEnabled:YES];
 				[pdfPanel center];
-				[pageLabel setStringValue:[NSString stringWithFormat:@"of %d", [imageRep pageCount]]];
+				[pageLabel setStringValue:[NSString stringWithFormat:@"of %ld", (long)[(NSPDFImageRep*)imageRep pageCount]]];
 				[resMenu selectItemAtIndex:0];
 				[NSApp runModalForWindow:pdfPanel];
 				[pdfPanel orderOut:self];
@@ -127,47 +124,43 @@
 				}
 				[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
 				[image setSize:size];
-				NSRect destinationRect = NSMakeRect( 0, 0, size.width, size.height );
+				NSRect destinationRect = NSMakeRect(0, 0, size.width, size.height);
 				NSImage* dest = [[NSImage alloc] initWithSize:size];
 				[dest lockFocus];
-				NSRectFillUsingOperation( destinationRect, NSCompositeClear );
+				NSRectFillUsingOperation(destinationRect, NSCompositeClear);
 				[image drawInRect: destinationRect
-						  fromRect: destinationRect
-						 operation: NSCompositeCopy fraction: 1.0];
+						 fromRect: destinationRect
+						operation: NSCompositeCopy fraction: 1.0];
 				
 				NSBitmapImageRep* newRep = [[NSBitmapImageRep alloc]
 											initWithFocusedViewRect: destinationRect];
 				[dest unlockFocus];
-				[dest autorelease];
 				imageRep = newRep;
-			}else {
+			} else {
 				imageRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
 			}
 		}
 	}
 	if (imageRep == NULL) {
-		[image autorelease];
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// Warn if 16-bit image
 	if ([imageRep bitsPerSample] == 16) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"16-bit message", @"Seashore does not support the editing of 16-bit images. This image has been resampled at 8-bits to be imported.") forDocument:doc level:kHighImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"16-bit message", @"Seashore does not currently support the editing of 16-bit images. This image has been resampled at 8 bits to be imported.") forDocument:doc level:SeaWarningImportanceHigh];
 	}
 	
 	// Determine the height and width of the image
-	height = [imageRep pixelsHigh];
-	width = [imageRep pixelsWide];
+	height = (int)[(NSImageRep*)imageRep pixelsHigh];
+	width = (int)[(NSImageRep*)imageRep pixelsWide];
 	
 	// Determine the resolution of the image
 	if (!res_set) {
-		xres = roundf(((float)width / [image size].width) * 72);
-		yres = roundf(((float)height / [image size].height) * 72);
+		xres = round(((CGFloat)width / [image size].width) * 72);
+		yres = round(((CGFloat)height / [image size].height) * 72);
 	}
 	
 	// Determine the image type
-	test = [[imageRep colorSpaceName] isEqualToString:NSCalibratedBlackColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceBlackColorSpace];
 	test = test || [[imageRep colorSpaceName] isEqualToString:NSCalibratedWhiteColorSpace] || [[imageRep colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace];
 	if (test) 
 		type = XCF_GRAY_IMAGE;
@@ -175,21 +168,14 @@
 		type = XCF_RGB_IMAGE;
 		
 	// Store EXIF data
-	exifData = [imageRep valueForProperty:@"NSImageEXIFData"];
-	if (exifData) [exifData retain];
+	exifData = [(NSBitmapImageRep*)imageRep valueForProperty:@"NSImageEXIFData"];
 	
 	// Create the layer
-	layer = [[CocoaLayer alloc] initWithImageRep:imageRep document:doc spp:(type == XCF_RGB_IMAGE) ? 4 : 2];
+	layer = [[CocoaLayer alloc] initWithImageRep:(NSBitmapImageRep*)imageRep document:doc spp:(type == XCF_RGB_IMAGE) ? 4 : 2];
 	if (layer == NULL) {
-		[image autorelease];
-		[self autorelease];
 		return NULL;
 	}
-	layers = [NSArray arrayWithObject:layer];
-	[layers retain];
-	
-	// Now forget the NSImage
-	[image autorelease];
+	layers = @[layer];
 	
 	return self;
 }

@@ -1,14 +1,15 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
 /*!
 	@struct		BTPointRecord
 	@discussion	Specifies a point to be drawn.
-	@param		point
+	@field		point
 				The point to be drawn.
-	@param		pressure
+	@field		pressure
 				The presure of the point to be drawn
-	@param		special
+	@field		special
 				0 = normal, 2 = terminate
 */
 typedef struct {
@@ -70,12 +71,6 @@ typedef struct {
 	// The last pressure value
 	int lastPressure;
 }
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		acceptsLineDraws
@@ -151,7 +146,7 @@ typedef struct {
 /*!
 	@method		intermediateStroke:
 	@discussion	Specifies an intermediate point in the stroke.
-	@param		Where in the document to place the intermediate
+	@param		where in the document to place the intermediate
 				stroke.
 */
 - (void)intermediateStroke:(IntPoint)where;

@@ -1,0 +1,15 @@
+
+/* Class = "NSWindow"; title = "Gaussian Blur"; ObjectID = "6"; */
+"6.title" = "Gaussian Blur";
+
+/* Class = "NSButtonCell"; title = "Ok"; ObjectID = "34"; */
+"34.title" = "Ok";
+
+/* Class = "NSTextFieldCell"; title = "Radius:"; ObjectID = "35"; */
+"35.title" = "Radius:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "37"; */
+"37.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "10"; ObjectID = "38"; */
+"38.title" = "10";

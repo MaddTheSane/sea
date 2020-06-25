@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractPaintOptions.h"
 
@@ -11,13 +12,11 @@
 */
 
 @interface CloneOptions : AbstractPaintOptions {
-
-	// A checkbox that when checked implies that the tool should consider all pixels not those just in the current layer
-	IBOutlet id mergedCheckbox;
+	/// A checkbox that when checked implies that the tool should consider all pixels not those just in the current layer
+	IBOutlet NSButton *mergedCheckbox;
 	
-	// A label indicating the source of the clone
-	IBOutlet id sourceLabel;
-	
+	/// A label indicating the source of the clone
+	IBOutlet NSTextField *sourceLabel;
 }
 
 /*!
@@ -27,13 +26,13 @@
 - (void)awakeFromNib;
 
 /*!
-	@method		mergedSample
+	@property	mergedSample
 	@discussion	Returns whether all layers should be considered in sampling or
 				just the active layer.
 	@result		Returns YES if all layers should be considered in sampling, NO 
 				if only the active layer should be considered.
 */
-- (BOOL)mergedSample;
+@property (readonly) BOOL mergedSample;
 
 /*!
 	@method		mergedChanged:

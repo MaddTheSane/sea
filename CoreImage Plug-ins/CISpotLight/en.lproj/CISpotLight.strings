@@ -1,0 +1,33 @@
+
+/* Class = "NSWindow"; title = "Spot Light"; ObjectID = "6"; */
+"6.title" = "Spot Light";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "60"; */
+"60.title" = "OK";
+
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "61"; */
+"61.title" = "Brightness:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "63"; */
+"63.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "3.0"; ObjectID = "64"; */
+"64.title" = "3.0";
+
+/* Class = "NSTextFieldCell"; title = "Concentration:"; ObjectID = "65"; */
+"65.title" = "Concentration:";
+
+/* Class = "NSTextFieldCell"; title = ".40"; ObjectID = "67"; */
+"67.title" = ".40";
+
+/* Class = "NSTextFieldCell"; title = "Source Height:"; ObjectID = "68"; */
+"68.title" = "Source Height:";
+
+/* Class = "NSTextFieldCell"; title = "150"; ObjectID = "70"; */
+"70.title" = "150";
+
+/* Class = "NSTextFieldCell"; title = "Destination Height:"; ObjectID = "71"; */
+"71.title" = "Destination Height:";
+
+/* Class = "NSTextFieldCell"; title = "0"; ObjectID = "73"; */
+"73.title" = "0";

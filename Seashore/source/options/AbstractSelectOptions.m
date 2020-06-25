@@ -1,67 +1,64 @@
 #import "AbstractSelectOptions.h"
 #import "SeaSelection.h"
 #import "SeaDocument.h"
+#import "SeaView.h"
 
 @implementation AbstractSelectOptions
+@synthesize selectionMode = mode;
 
-- (id)init
+- (instancetype)init
 {
-	self = [super init];
-	mode = kDefaultMode;
+	if (self = [super init]) {
+		mode = SeaSelectDefault;
+	}
 	
 	return self;
 }
 
-- (int)selectionMode
-{
-	return mode;
-}
-
-- (void)setSelectionMode:(int)newMode
+- (void)setSelectionMode:(SeaSelectMode)newMode
 {
 	mode = newMode;
-	if(mode == kDefaultMode){
+	if (mode == SeaSelectDefault) {
 		[self setIgnoresMove:NO];
-	}else {
+	} else {
 		[self setIgnoresMove:YES];
 	}
-
 }
 
-- (void)setModeFromModifier:(unsigned int)modifier
+- (void)setModeFromModifier:(AbstractModifiers)modifier
 {
 	switch (modifier) {
-		case kNoModifier:
-			[self setSelectionMode: kDefaultMode];
+		case AbstractModifierNone:
+			[self setSelectionMode: SeaSelectDefault];
 			break;
-		case kControlModifier:
-			[self setSelectionMode: kForceNewMode];
+		case AbstractModifierControl:
+			[self setSelectionMode: SeaSelectForceNew];
 			break;
-		case kShiftModifier:
-			[self setSelectionMode: kDefaultMode];
+		case AbstractModifierShift:
+			[self setSelectionMode: SeaSelectDefault];
 			break;
-		case kShiftControlModifier:
-			[self setSelectionMode: kAddMode];
+		case AbstractModifierShiftControl:
+			[self setSelectionMode: SeaSelectAdd];
 			break;
-		case kAltControlModifier:
-			[self setSelectionMode: kSubtractMode];
+		case AbstractModifierAltControl:
+			[self setSelectionMode: SeaSelectSubtract];
 			break;
-		case kReservedModifier1:
-			[self setSelectionMode: kMultiplyMode];
+		case AbstractModifierReserved1:
+			[self setSelectionMode: SeaSelectMultiply];
 			break;
-		case kReservedModifier2:
-			[self setSelectionMode: kSubtractProductMode];
+		case AbstractModifierReserved2:
+			[self setSelectionMode: SeaSelectSubtractProduct];
 			break;
 		default:
-			[self setSelectionMode: kDefaultMode];
+			[self setSelectionMode: SeaSelectDefault];
 			break;
 	}
 }
 
-- (void)updateModifiers:(unsigned int)modifiers
+- (void)updateModifiers:(NSEventModifierFlags)modifiers
 {
 	[super updateModifiers:modifiers];
-	int modifier = [super modifier];
+	AbstractModifiers modifier = [super modifier];
 	[self setModeFromModifier: modifier];
 }
 
@@ -70,10 +67,9 @@
 	[self setModeFromModifier: [[sender selectedItem] tag]];
 	// Since the selection method changed via the popup menu, we need to update all of the docs
 	// This is not nessisary in the above method because that case is already handled
-	int i;
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	for (i = 0; i < [documents count]; i++) {
-		[[(SeaDocument *)[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *doc in documents) {
+		[doc docView].needsDisplay = YES;
 	}
 }
 @end

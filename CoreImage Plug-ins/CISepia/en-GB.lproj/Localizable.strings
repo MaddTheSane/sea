@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Colour Effect";
+description = "Adjusts the selection so it appears in a sepia tone.";
+license = "Public Domain";
+name = "Sepia";

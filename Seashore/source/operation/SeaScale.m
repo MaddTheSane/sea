@@ -11,11 +11,13 @@
 
 @implementation SeaScale
 
-- (id)init
+- (instancetype)init
 {
+	if (self = [super init]) {
 	undoMax = kNumberOfScaleRecordsPerMalloc;
 	undoRecords = malloc(undoMax * sizeof(ScaleUndoRecord));
 	undoCount = 0;
+	}
 	
 	return self;
 }
@@ -29,17 +31,17 @@
 		free(undoRecords[i].rects);
 	}
 	free(undoRecords);
-	[super dealloc];
 }
 
 - (void)run:(BOOL)global
 {
-	id contents = [document contents];
-	id layer = NULL;
+	SeaContent *contents = [document contents];
+	SeaLayer *layer = NULL;
 	id menuItem;
 	int value;
 	NSString *string;
 	float xres, yres;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Determine the working index
 	if (global)
@@ -52,8 +54,8 @@
 		[selectionLabel setStringValue:LOCALSTR(@"whole document", @"Whole Document")];
 	}
 	else {
-		layer = [contents layer:workingIndex];
-		if ([layer floating])
+		layer = [contents layerAtIndex:workingIndex];
+		if (layer.floating)
 			[selectionLabel setStringValue:LOCALSTR(@"floating", @"Floating Selection")];
 		else
 			[selectionLabel setStringValue:[NSString stringWithFormat:@"%@", [layer name]]];
@@ -71,7 +73,7 @@
 	yres = [contents yres];
 	units = [document measureStyle];
 	[widthPopdown selectItemAtIndex:units];
-	[heightUnits setTitle:UnitsString(units)];
+	[heightUnits setTitle:SeaUnitsString(units)];
 	
 	// Set the initial scale values
 	[xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", 100.0]];
@@ -79,12 +81,12 @@
 	
 	// Set the initial width and height values
 	if (workingIndex == kAllLayers) {
-		[widthValue setStringValue:StringFromPixels([(SeaContent *)contents width], units, xres)];
-		[heightValue setStringValue:StringFromPixels([(SeaContent *)contents height], units, yres)];
+		[widthValue setStringValue:SeaStringFromPixels([(SeaContent *)contents width], units, xres)];
+		[heightValue setStringValue:SeaStringFromPixels([(SeaContent *)contents height], units, yres)];
 	}
 	else {
-		[widthValue setStringValue:StringFromPixels([(SeaLayer *)layer width], units, xres)];
-		[heightValue setStringValue:StringFromPixels([(SeaLayer *)layer height], units, yres)];
+		[widthValue setStringValue:SeaStringFromPixels([(SeaLayer *)layer width], units, xres)];
+		[heightValue setStringValue:SeaStringFromPixels([(SeaLayer *)layer height], units, yres)];
 	}
 	
 	// Set the options appropriately
@@ -92,11 +94,11 @@
 	[interpolationPopup selectItemAtIndex:[interpolationPopup indexOfItemWithTag:GIMP_INTERPOLATION_LINEAR]];
 	
 	// Set the interpolation style
-	if ([gUserDefaults objectForKey:@"interpolation"] == NULL) {
+	if ([defaults objectForKey:@"interpolation"] == NULL) {
 		value = GIMP_INTERPOLATION_CUBIC;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"interpolation"];
+		value = (int)[defaults integerForKey:@"interpolation"];
 		if (value < 0 || value >= [interpolationPopup numberOfItems])
 			value = GIMP_INTERPOLATION_CUBIC;
 	}
@@ -111,6 +113,7 @@
 	id contents = [document contents];
 	int newWidth, newHeight;
 	float xres, yres;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Get the resolutions
 	xres = [contents xres];
@@ -120,11 +123,11 @@
 	[NSApp stopModal];
 	[NSApp endSheet:sheet];
 	[sheet orderOut:self];
-	[gUserDefaults setInteger:[interpolationPopup indexOfSelectedItem] forKey:@"interpolation"];
+	[defaults setInteger:[interpolationPopup indexOfSelectedItem] forKey:@"interpolation"];
 
 	// Parse width and height	
-	newWidth = PixelsFromFloat([widthValue floatValue],units,xres);
-	newHeight = PixelsFromFloat([heightValue floatValue],units,yres);
+	newWidth = SeaPixelsFromFloat([widthValue floatValue],units,xres);
+	newHeight = SeaPixelsFromFloat([heightValue floatValue],units,yres);
 	
 	// Don't do if values are unreasonable or unchanged
 	if (newWidth < kMinImageSize || newWidth > kMaxImageSize) { NSBeep(); return; }
@@ -137,7 +140,7 @@
 	}
 	
 	// Make the changes
-	[self scaleToWidth:newWidth height:newHeight interpolation:[interpolationPopup indexOfSelectedItem] index:workingIndex]; 
+	[self scaleToWidth:newWidth height:newHeight interpolation:(GimpInterpolationType)[interpolationPopup indexOfSelectedItem] index:workingIndex];
 }
 
 - (IBAction)cancel:(id)sender
@@ -147,12 +150,13 @@
 	[sheet orderOut:self];
 }
 
-- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg moving:(BOOL)isMoving interpolation:(int)interpolation index:(int)index undoRecord:(ScaleUndoRecord *)undoRecord
+- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg moving:(BOOL)isMoving interpolation:(GimpInterpolationType)interpolation index:(NSInteger)index undoRecord:(ScaleUndoRecord *)undoRecord
 {
-	id contents = [document contents], curLayer;
+	SeaContent *contents = [document contents];
+	SeaLayer *curLayer;
 	int whichLayer, count, oldWidth, oldHeight;
-	int layerCount = [contents layerCount];
-	float xScale, yScale;
+	NSInteger layerCount = [contents layerCount];
+	CGFloat xScale, yScale;
 	int x, y;
 	
 	// Correct the index if necessary
@@ -161,12 +165,11 @@
 	
 	// Work out the old height and width
 	if (index == kAllLayers) {
-		oldWidth = [(SeaContent *)contents width];
-		oldHeight = [(SeaContent *)contents height];
-	}
-	else {
-		oldWidth = [(SeaLayer *)[contents layer:index] width];
-		oldHeight = [(SeaLayer *)[contents layer:index] height];
+		oldWidth = [contents width];
+		oldHeight = [contents height];
+	} else {
+		oldWidth = [[contents layerAtIndex:index] width];
+		oldHeight = [[contents layerAtIndex:index] height];
 	}
 	
 	// Prepare an undo record
@@ -212,7 +215,7 @@
 		if (index == kAllLayers || index == whichLayer) {
 			
 			// Get the layer
-			curLayer = [[document contents] layer:whichLayer];
+			curLayer = [[document contents] layerAtIndex:whichLayer];
 			
 			// Take a manual snapshot (recording the snapshot index)
 			if (undoRecord) {
@@ -240,15 +243,15 @@
 	
 	// Adjust for floating selections
 	if (index != kAllLayers) {
-		curLayer = [[document contents] layer:index];
-		if ([curLayer floating]) {
+		curLayer = [[document contents] layerAtIndex:index];
+		if (curLayer.floating) {
 			[[document selection] selectOpaque];
 		}
 	}
 }
 
 
-- (void)scaleToWidth:(int)width height:(int)height interpolation:(int)interpolation index:(int)index
+- (void)scaleToWidth:(int)width height:(int)height interpolation:(GimpInterpolationType)interpolation index:(NSInteger)index
 {
 	ScaleUndoRecord undoRecord;
 	
@@ -274,7 +277,7 @@
 		[[document helpers] layerBoundariesChanged:index];
 }
 
-- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg interpolation:(int)interpolation index:(int)index
+- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg interpolation:(GimpInterpolationType)interpolation index:(NSInteger)index
 {
 	ScaleUndoRecord undoRecord;
 	
@@ -301,11 +304,12 @@
 	}
 }
 
-- (void)undoScale:(int)undoIndex
+- (void)undoScale:(NSInteger)undoIndex
 {
-	id contents = [document contents], curLayer;
-	int whichLayer;
-	int layerCount = [contents layerCount];
+	SeaContent *contents = [document contents];
+	SeaLayer *curLayer;
+	NSInteger whichLayer;
+	NSInteger layerCount = [contents layerCount];
 	ScaleUndoRecord undoRecord;
 	int changeX, changeY;
 	
@@ -324,7 +328,7 @@
 			for (whichLayer = 0; whichLayer < layerCount; whichLayer++) {
 			
 				// Determine the current layer
-				curLayer = [[document contents] layer:whichLayer];
+				curLayer = [[document contents] layerAtIndex:whichLayer];
 				
 				// Change the layer's size
 				changeX = undoRecord.rects[whichLayer].size.width - [(SeaLayer *)curLayer width];
@@ -338,11 +342,10 @@
 			// Now the image is no longer scaled
 			undoRecord.isScaled = NO;
 			
-		}
-		else {
+		} else {
 		
 			// Determine the current layer
-			curLayer = [[document contents] layer:undoRecord.index];
+			curLayer = [[document contents] layerAtIndex:undoRecord.index];
 			
 			// Change the layer's size
 			changeX = undoRecord.rects[0].size.width - [(SeaLayer *)curLayer width];
@@ -355,9 +358,7 @@
 			undoRecord.isScaled = NO;
 		
 		}
-	
-	}
-	else {
+	} else {
 		
 		// Otherwise just reverse the process with the information we stored on the original scaling
 		[self scaleToWidth:undoRecord.scaledWidth height:undoRecord.scaledHeight xorg: undoRecord.scaledXOrg yorg: undoRecord.scaledYOrg moving: undoRecord.isMoving interpolation:undoRecord.interpolation index:undoRecord.index undoRecord:NULL];
@@ -380,8 +381,8 @@
 	
 	// Adjust for floating selections
 	if (undoRecord.index != kAllLayers) {
-		curLayer = [[document contents] layer:undoRecord.index];
-		if ([curLayer floating]) {
+		curLayer = [[document contents] layerAtIndex:undoRecord.index];
+		if (curLayer.floating) {
 			[[document selection] selectOpaque];
 		}
 	}
@@ -404,7 +405,7 @@
 			[heightValue setIntValue:[(SeaContent *)contents height] * (scaleValue / 100.0)];
 		}
 		else {
-			layer = [contents layer:workingIndex];
+			layer = [contents layerAtIndex:workingIndex];
 			[widthValue setIntValue:[(SeaLayer *)layer width] * (scaleValue / 100.0)];
 			[heightValue setIntValue:[(SeaContent *)layer height] * (scaleValue / 100.0)];
 		}
@@ -426,14 +427,14 @@
 	if (workingIndex == kAllLayers)
 		focusObject = contents;
 	else
-		focusObject = [contents layer:workingIndex];
+		focusObject = [contents layerAtIndex:workingIndex];
 	
 	// Handle a horizontal scale change
 	if ([sender tag] == 0) {
 		[xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [xScaleValue floatValue]]];
 		if (keepProp) [yScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [xScaleValue floatValue]]];
-		[widthValue setStringValue:StringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
-		if (keepProp) [heightValue setStringValue:StringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
+		[widthValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
+		if (keepProp) [heightValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
 		return;
 	}
 	
@@ -441,28 +442,28 @@
 	if ([sender tag] == 1) {
 		[yScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [yScaleValue floatValue]]];
 		if (keepProp) [xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [yScaleValue floatValue]]];
-		[heightValue setStringValue:StringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
-		if (keepProp) [widthValue setStringValue:StringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
+		[heightValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
+		if (keepProp) [widthValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
 		return;
 	}
 	
 	
 	// Handle a width change
 	if ([sender tag] == 2) {
-		[xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", PixelsFromFloat([widthValue floatValue],units, xres) / (float)[(SeaContent *)focusObject width] * 100.0]];
+		[xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", SeaPixelsFromFloat([widthValue floatValue],units, xres) / (float)[(SeaContent *)focusObject width] * 100.0]];
 		if (keepProp) {
 			[yScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [xScaleValue floatValue]]];
-			[heightValue setStringValue:StringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0),units, yres)];
+			[heightValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0),units, yres)];
 		}
 		return;
 	}
 	
 	// Handle a height change
 	if ([sender tag] == 3) {
-		[yScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", PixelsFromFloat([heightValue floatValue],units, yres) / (float)[(SeaContent *)focusObject height] * 100.0]];
+		[yScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", SeaPixelsFromFloat([heightValue floatValue],units, yres) / (float)[(SeaContent *)focusObject height] * 100.0]];
 		if (keepProp) {
 			[xScaleValue setStringValue:[NSString stringWithFormat:@"%.1f", [yScaleValue floatValue]]];
-			[widthValue setStringValue:StringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0),units, xres)];
+			[widthValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0),units, xres)];
 		}
 		return;
 	}
@@ -483,13 +484,13 @@
 	if (workingIndex == kAllLayers)
 		focusObject = contents;
 	else
-		focusObject = [contents layer:workingIndex];
+		focusObject = [contents layerAtIndex:workingIndex];
 	
 	// Handle a unit change
-	units = [sender indexOfSelectedItem];
-	[widthValue setStringValue:StringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
-	[heightValue setStringValue:StringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
-	[heightUnits setTitle:UnitsString(units)];
+	units = (int)[sender indexOfSelectedItem];
+	[widthValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject width] * ([xScaleValue floatValue] / 100.0), units, xres)];
+	[heightValue setStringValue:SeaStringFromPixels([(SeaContent *)focusObject height] * ([yScaleValue floatValue] / 100.0), units, yres)];
+	[heightUnits setTitle:SeaUnitsString(units)];
 }
 
 - (IBAction)changeToPreset:(id)sender
@@ -508,17 +509,16 @@
 	if (workingIndex == kAllLayers)
 		focusObject = contents;
 	else
-		focusObject = [contents layer:workingIndex];
+		focusObject = [contents layerAtIndex:workingIndex];
 	xres = [contents xres];
 	yres = [contents yres];
 	switch ([[presetsMenu selectedItem] tag]) {
 		case 0:
 			pboard = [NSPasteboard generalPasteboard];
-			availableType = [pboard availableTypeFromArray:[NSArray arrayWithObjects:NSTIFFPboardType, NSPICTPboardType, NULL]];
+			availableType = [pboard availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 			if (availableType) {
 				image = [[NSImage alloc] initWithData:[pboard dataForType:availableType]];
 				size = NSSizeMakeIntSize([image size]);
-				[image autorelease];
 			}
 			else {
 				NSBeep();

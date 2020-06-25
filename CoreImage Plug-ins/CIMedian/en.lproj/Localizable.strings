@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Enhance";
+description = "Adjusts the selection so that all pixels are the median value of them and their neighbors";
+license = "Public Domain";
+name = "Median";

@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+
+@class SeaDocument;
+@class SeaOutlineView;
+@class SeaLayer;
 
 /*!
 	@class		LayerDataSource
@@ -8,18 +13,16 @@
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
+@interface LayerDataSource : NSObject <NSOutlineViewDataSource> {
+	/// The document this data source is connected to
+	IBOutlet SeaDocument *document;
 
-@interface LayerDataSource : NSObject {
-	// The document this data source is connected to
-	IBOutlet id document;
-
-	// The nodes that are being dragged (if any)
-	// This should be null during no dragging
-    NSArray *draggedNodes;
+	/// The nodes that are being dragged (if any)
+	/// This should be null during no dragging
+    NSArray<SeaLayer *> *draggedNodes;
 	
-	// A reference back to the outline view
-    IBOutlet id outlineView;
-	
+	/// A reference back to the outline view
+    IBOutlet SeaOutlineView *outlineView;
 }
 
 /*!
@@ -31,18 +34,18 @@
 - (IBAction)outlineViewAction:(id)sender;
 
 /*!
-	@method		draggedNodes
+	@property	draggedNodes
 	@discussion	The nodes being dragged
 	@result		An NSArray
 */
-- (NSArray*)draggedNodes;
+@property (readonly, retain) NSArray<SeaLayer *> *draggedNodes;
 
 /*!
-	@method		selectedNodes
+	@property	selectedNodes
 	@discussion	The nodes selected
 	@result		An NSArray
 */
-- (NSArray *)selectedNodes;
+@property (readonly, copy) NSArray<SeaLayer *> *selectedNodes;
 
 /*!
 	@method		update

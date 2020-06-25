@@ -14,15 +14,18 @@
 #import "SeaController.h"
 #import "UtilitiesManager.h"
 #import "TextureUtility.h"
+#import "SeaView.h"
 
 @implementation BucketTool
+@synthesize start = startNSPoint;
+@synthesize current = currentNSPoint;
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
-	return kBucketTool;
+	return SeaToolsBucket;
 }
 
-- (id)init
+- (instancetype)init
 {
 	self = [super init];
 	if(self){
@@ -31,18 +34,13 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	startPoint = where;
 	
 	startNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 	currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
-	if([(BucketOptions*)options modifier] == kShiftModifier){
+	if ([options modifier] == AbstractModifierShift) {
 		isPreviewing = YES;
 	}
 	
@@ -53,17 +51,17 @@
 {
 	currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 	
-	BOOL optionDown = [(BucketOptions*)options modifier] == kAltModifier;
+	BOOL optionDown = [options modifier] == AbstractModifierAlt;
 
-	id layer = [[document contents] activeLayer];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+	SeaLayer *layer = [[document contents] activeLayer];
+	int width = [layer width], height = [layer height];
 	
 	[[document whiteboard] clearOverlay];
 	[[document helpers] overlayChanged:rect inThread:NO];
 
 	if (where.x < 0 || where.y < 0 || where.x >= width || where.y >= height) {
 		rect.size.width = rect.size.height = 0;
-	}else if(isPreviewing){
+	} else if (isPreviewing) {
 		[self fillAtPoint:where useTolerance:!optionDown delay:YES];
 	}
 	
@@ -73,16 +71,16 @@
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
-	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
-	BOOL optionDown = [(BucketOptions*)options modifier] == kAltModifier;
+	SeaLayer *layer = [[document contents] activeLayer];
+	int width = [layer width], height = [layer height];
+	BOOL optionDown = [options modifier] == AbstractModifierAlt;
 	
 	[[document whiteboard] clearOverlay];
 	[[document helpers] overlayChanged:rect inThread:NO];
 
 	if (where.x < 0 || where.y < 0 || where.x >= width || where.y >= height) {
 		rect.size.width = rect.size.height = 0;
-	} else if(!isPreviewing || [(BucketOptions*)options modifier] != kShiftModifier){
+	} else if(!isPreviewing || [options modifier] != AbstractModifierShift) {
 		[self fillAtPoint:where useTolerance:!optionDown delay:NO];
 	}
 	isPreviewing = NO;
@@ -91,10 +89,11 @@
 
 - (void)fillAtPoint:(IntPoint)point useTolerance:(BOOL)useTolerance delay:(BOOL)delay
 {
-	id layer = [[document contents] activeLayer], activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
-	int tolerance, width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height], spp = [[document contents] spp];
-	int textureWidth = [(SeaTexture *)activeTexture width], textureHeight = [(SeaTexture *)activeTexture height];
-	unsigned char *overlay = [[document whiteboard] overlay], *data = [(SeaLayer *)layer data];
+	SeaLayer *layer = [[document contents] activeLayer];
+	SeaTexture *activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	int tolerance, width = [layer width], height = [layer height], spp = [[document contents] spp];
+	int textureWidth = [activeTexture width], textureHeight = [activeTexture height];
+	unsigned char *overlay = [[document whiteboard] overlay], *data = [layer data];
 	unsigned char *texture = [activeTexture texture:(spp == 4)];
 	unsigned char basePixel[4];
 	NSColor *color = [[document contents] foreground];
@@ -138,23 +137,30 @@
 
 	
 	// Fill everything
-	if (useTolerance)
+	if (useTolerance) {
 		tolerance = [(BucketOptions*)options tolerance];
-	else
+	} else {
 		tolerance = 255;
-	if ([layer floating])
-		channel = kPrimaryChannels;
-	else
+	}
+	
+	if (layer.floating) {
+		channel = SeaSelectedChannelPrimary;
+	} else {
 		channel = [[document contents] selectedChannel];
-	if ([[document selection] active])
-		rect = bucketFill(spp, [[document selection] localRect], overlay, data, width, height, seeds, intervals, basePixel, tolerance, channel);
-	else
-		rect = bucketFill(spp, IntMakeRect(0, 0, width, height), overlay, data, width, height, seeds, intervals, basePixel, tolerance, channel);
+	}
+	
+	if (document.selection.active) {
+		rect = SeaBucketFill(spp, [[document selection] localRect], overlay, data, width, height, seeds, intervals, basePixel, tolerance, channel);
+	} else {
+		rect = SeaBucketFill(spp, IntMakeRect(0, 0, width, height), overlay, data, width, height, seeds, intervals, basePixel, tolerance, channel);
+	}
+	
 	if ([options useTextures] && IntContainsRect(IntMakeRect(0, 0, width, height), rect)) {
-		if ([[document selection] active])
-			textureFill(spp, rect, overlay, width, height, texture, textureWidth, textureHeight);
-		else
-			textureFill(spp, rect, overlay, width, height, texture, textureWidth, textureHeight);
+		if (document.selection.active) {
+			SeaTextureFill(spp, rect, overlay, width, height, texture, textureWidth, textureHeight);
+		} else {
+			SeaTextureFill(spp, rect, overlay, width, height, texture, textureWidth, textureHeight);
+		}
 	}
 	
 	// Do the update
@@ -162,16 +168,6 @@
 		[[document helpers] overlayChanged:rect inThread:NO];
 	else
 		[(SeaHelpers *)[document helpers] applyOverlay];
-}
-
-- (NSPoint)start
-{
-	return startNSPoint;
-}
-
--(NSPoint)current
-{
-	return currentNSPoint;
 }
 
 @end

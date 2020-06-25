@@ -6,14 +6,14 @@
 - (void)awakeFromNib
 {
 	// Set up the window's properties
-	[(InfoPanel *)window setPanelStyle:kVerticalPanelStyle];
+	[window setPanelStyle:SeaPanelStyleVertical];
 	parentWin = NULL;
 }	
 
 - (void)showPanelFrom:(NSPoint)p onWindow: (NSWindow *)parent
 {
 	parentWin = parent;
-	[(InfoPanel *)window orderFrontToGoal: p onWindow: parentWin];
+	[window orderFrontToGoal: p onWindow: parentWin];
 	[NSApp runModalForWindow:window];
 }
 

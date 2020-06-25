@@ -10,42 +10,44 @@
 #import "SeaTools.h"
 #import "SeaDocumentController.h"
 
-id seaController;
+static SeaController *seaController;
 
 @implementation SeaController
+@synthesize licenseWindow;
+@synthesize seaHelp;
+@synthesize seaPlugins;
+@synthesize seaPrefs;
+@synthesize seaProxy;
+@synthesize seaWarning;
+@synthesize utilitiesManager;
 
-- (id)init
+- (instancetype)init
 {
+	if (self = [super init]) {
 	// Remember ourselves
 	seaController = self;
 	
 	// Creates an array which can store objects that wish to recieve the terminate: message
-	terminationObjects = [[NSArray alloc] init];
+	terminationObjects = [[NSMutableArray alloc] init];
 	
 	// Specify ourselves as NSApp's delegate
     [NSApp setDelegate:seaController];
 
 	// We want to know when ColorSync changes
 	[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(colorSyncChanged:) name:@"AppleColorSyncPreferencesChangedNotification" object:NULL];
-	
+	}
 	return self;
-}
-
-- (void)dealloc
-{
-	if (terminationObjects) [terminationObjects autorelease];
-	[super dealloc];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	NSString *crashReport = [NSString stringWithFormat:@"%@/Library/Logs/CrashReporter/Seashore.crash.log", NSHomeDirectory()];
-	NSString *trashedReport = [NSString stringWithFormat:@"%@/.Trash/Seashore.crash.log", NSHomeDirectory()];
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSURL *crashReport = [[[[fileManager URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:NULL] URLByAppendingPathComponent:@"Logs"] URLByAppendingPathComponent:@"CrashReporter"] URLByAppendingPathComponent:@"Seashore.crash.log" isDirectory:NO];
 
 	// Run initial tests
-	if ([seaPrefs firstRun] && [gFileManager fileExistsAtPath:crashReport]) {
-		if ([gFileManager movePath:crashReport toPath:trashedReport handler:NULL]) {
-			[seaWarning addMessage:LOCALSTR(@"old crash report message", @"Seashore has moved its old crash report to the Trash so that it will be deleted next time you empty the trash.") level:kModerateImportance];
+	if ([seaPrefs firstRun] && [crashReport checkResourceIsReachableAndReturnError:NULL]) {
+		if ([fileManager trashItemAtURL:crashReport resultingItemURL:NULL error:NULL]) {
+			[seaWarning addMessage:LOCALSTR(@"old crash report message", @"Seashore has moved its old crash report to the Trash so that it will be deleted next time you empty the trash.") level:SeaWarningImportanceModerate];
 		}
 	}
 	/*
@@ -63,38 +65,8 @@ id seaController;
 	
 	// Check for update
 	if ([seaPrefs checkForUpdates]) {
-		[seaHelp checkForUpdate:NULL];
+		[seaHelp checkForUpdate:nil];
 	}
-}
-
-- (id)utilitiesManager
-{
-	return utilitiesManager;
-}
-
-- (id)seaPlugins
-{
-	return seaPlugins;
-}
-
-- (id)seaPrefs
-{
-	return seaPrefs;
-}
-
-- (id)seaProxy
-{
-	return seaProxy;
-}
-
-- (id)seaHelp
-{
-	return seaHelp;
-}
-
-- (id)seaWarning
-{
-	return seaWarning;
 }
 
 + (id)utilitiesManager
@@ -129,28 +101,27 @@ id seaController;
 
 - (IBAction)revert:(id)sender
 {
-	id newDocument;
-	NSString *filename = [gCurrentDocument fileName];
-	NSRect frame = [[[[gCurrentDocument windowControllers] objectAtIndex:0] window] frame];
-	id window;
+	NSURL *fileURL = [gCurrentDocument fileURL];
+	NSRect frame = [[[gCurrentDocument windowControllers][0] window] frame];
 	
 	// Question whether to proceed with reverting
-	if (NSRunAlertPanel(LOCALSTR(@"revert title", @"Revert"), [NSString stringWithFormat:LOCALSTR(@"revert body", @"\"%@\" has been edited. Are you sure you want to undo changes?"), [gCurrentDocument displayName]], LOCALSTR(@"revert", @"Revert"), LOCALSTR(@"cancel", @"Cancel"), NULL) == NSAlertDefaultReturn) {
+	if (NSRunAlertPanel(LOCALSTR(@"revert title", @"Revert"), LOCALSTR(@"revert body", @"\"%@\" has been edited. Are you sure you want to undo changes?"), LOCALSTR(@"revert", @"Revert"), LOCALSTR(@"cancel", @"Cancel"), NULL, [gCurrentDocument displayName]) == NSAlertDefaultReturn) {
 		
 		// Close the document and reopen it
 		[gCurrentDocument close];
-		newDocument = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfFile:filename display:NO];
-		window = [[[newDocument windowControllers] objectAtIndex:0] window];
-		[window setFrame:frame display:YES];
-		[window makeKeyAndOrderFront:self];		
-
+		[[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:fileURL display:NO completionHandler:^(NSDocument * _Nullable document, BOOL documentWasAlreadyOpen, NSError * _Nullable error) {
+			NSWindow *window = [[document windowControllers][0] window];
+			[window setFrame:frame display:YES];
+			[window makeKeyAndOrderFront:self];
+		}];
 	}
 }
 
 - (IBAction)editLastSaved:(id)sender
 {
-	id originalDocument, currentDocument = gCurrentDocument;
-	NSString *old_path = [currentDocument fileName], *new_path = NULL;
+	NSFileManager *fm = [NSFileManager defaultManager];
+	SeaDocument *originalDocument, *currentDocument = gCurrentDocument;
+	NSString *old_path = [[currentDocument fileURL] path], *new_path = NULL;
 	int i;
 	BOOL done;
 	
@@ -159,13 +130,13 @@ id seaController;
 	for (i = 1; i <= 64 && !done; i++) {
 		if (i == 1) {
 			new_path = [[old_path stringByDeletingPathExtension] stringByAppendingFormat:@" (Original).%@", [old_path pathExtension]];
-			if ([gFileManager fileExistsAtPath:new_path] == NO) {
+			if ([fm fileExistsAtPath:new_path] == NO) {
 				done = YES;
 			}
 		}
 		else {
 			new_path = [[old_path stringByDeletingPathExtension] stringByAppendingFormat:@" (Original %d).%@", i, [old_path pathExtension]];
-			if ([gFileManager fileExistsAtPath:new_path] == NO) {
+			if ([fm fileExistsAtPath:new_path] == NO) {
 				done = YES;
 			}
 		}
@@ -176,33 +147,31 @@ id seaController;
 	}
 	
 	// Copy the contents on disk and open so the last saved version can be edited
-	if ([gFileManager copyPath:old_path toPath:new_path handler:nil]) {
-		originalDocument = [(SeaDocumentController *)[NSDocumentController sharedDocumentController] openNonCurrentFile:new_path];
-	}
-	else {
-		NSRunAlertPanel(LOCALSTR(@"locked title", @"Operation Failed"), [NSString stringWithFormat:LOCALSTR(@"locked body", @"The \"Compare to Last Saved\" operation failed. The most likely cause for this is that the disk the original is kept on is full or read-only."), [gCurrentDocument displayName]], LOCALSTR(@"ok", @"OK"), NULL, NULL);
+	if ([fm copyItemAtPath:old_path toPath:new_path error:NULL]) {
+		originalDocument = [[SeaDocumentController sharedDocumentController] openNonCurrentFile:new_path];
+	} else {
+		NSRunAlertPanel(LOCALSTR(@"locked title", @"Operation Failed"), LOCALSTR(@"locked body", @"The \"Compare to Last Saved\" operation failed. The most likely cause for this is that the disk the original is kept on is full or read-only."), LOCALSTR(@"ok", @"OK"), NULL, NULL, [gCurrentDocument displayName]);
 		return;
 	}
 	
 	// Finally remove the file we just created
-	[gFileManager removeFileAtPath:new_path handler:NULL];
+	[fm removeItemAtPath:new_path error:NULL];
 }
 
 - (void)colorSyncChanged:(NSNotification *)notification
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
 	
-	// Tell all documents to update there colour worlds
-	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] whiteboard] updateColorWorld];
+	// Tell all documents to update their colour worlds
+	for (SeaDocument *doc in documents) {
+		[[doc whiteboard] updateColorWorld];
 	}
 }
 
 - (IBAction)showLicense:(id)sender
 {
 	[licenseWindow setLevel:NSFloatingWindowLevel];
-	[licenseWindow makeKeyAndOrderFront:self];
+	[licenseWindow makeKeyAndOrderFront:sender];
 }
 
 - (IBAction)newDocumentFromPasteboard:(id)sender
@@ -210,7 +179,7 @@ id seaController;
 	NSDocument *document;
 	
 	// Ensure that the document is valid
-	if(![[NSPasteboard generalPasteboard] availableTypeFromArray:[NSArray arrayWithObjects:NSTIFFPboardType, NSPICTPboardType, NULL]]){
+	if(![[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSPasteboardTypeTIFF]]){
 		NSBeep();
 		return;
 	}
@@ -220,25 +189,23 @@ id seaController;
 	[[NSDocumentController sharedDocumentController] addDocument:document];
 	[document makeWindowControllers];
 	[document showWindows];
-	[document autorelease];
 }
 
-- (void)registerForTermination:(id)object
+- (void)registerForTermination:(id<SSKTerminatable>)object
 {
-	[terminationObjects autorelease];
-	terminationObjects = [[terminationObjects arrayByAddingObject:object] retain];
+	[terminationObjects addObject:object];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
-	int i;
-	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Inform those that wish to know
-	for (i = 0; i < [terminationObjects count]; i++)
-		[[terminationObjects objectAtIndex:i] terminate];
+	for (id<SSKTerminatable> thePrefs in terminationObjects) {
+		[thePrefs terminate];
+	}
 	
 	// Save the changes in preferences
-	[gUserDefaults synchronize];
+	[defaults synchronize];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
@@ -248,34 +215,36 @@ id seaController;
 
 - (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)app
 {
-	return [seaPrefs openUntitled];
+	return [self.seaPrefs openUntitled];
 }
 
 - (BOOL)applicationOpenUntitledFile:(NSApplication *)app
 {
-	[[NSDocumentController sharedDocumentController] newDocument:self];
+	[[SeaDocumentController sharedDocumentController] newDocument:self];
 	
 	return YES;
 }
 
-- (BOOL)validateMenuItem:(id)menuItem
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem
 {
 	id availableType;
 	
 	switch ([menuItem tag]) {
 		case 175:
-			return gCurrentDocument && [gCurrentDocument fileName] && [gCurrentDocument isDocumentEdited] && [gCurrentDocument current];
-		break;
+			return gCurrentDocument && [gCurrentDocument fileURL] && [gCurrentDocument isDocumentEdited] && [gCurrentDocument current];
+			break;
+			
 		case 176:
-			return gCurrentDocument && [gCurrentDocument fileName] && [gCurrentDocument current];
-		break;
+			return gCurrentDocument && [gCurrentDocument fileURL] && [gCurrentDocument current];
+			break;
+			
 		case 400:
-			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:[NSArray arrayWithObjects:NSTIFFPboardType, NSPICTPboardType, NULL]];
+			availableType = [[NSPasteboard generalPasteboard] availableTypeFromArray:@[NSPasteboardTypeTIFF]];
 			if (availableType)
 				return YES;
 			else
 				return NO;
-		break;
+			break;
 	}
 	
 	return YES;

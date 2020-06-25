@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Color Effect";
+monochrome = "Monochrome";
+description = "Applies a crystallizing effect to the selection";
+license = "Public Domain";
+name = "Monochrome";

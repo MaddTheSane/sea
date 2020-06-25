@@ -9,6 +9,11 @@
 
 @implementation XBMImporter
 
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
+{
+	return [self addToDocument:doc contentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+}
+
 inline static int parse_value(char *input, char *value)
 {
 	char *temp;
@@ -34,7 +39,7 @@ inline static int parse_value(char *input, char *value)
 	return -1;
 }
 
-- (BOOL)addToDocument:(id)doc contentsOfFile:(NSString *)path
+- (BOOL)addToDocument:(SeaDocument *)doc contentsOfURL:(NSURL *)path error:(NSError *__autoreleasing _Nullable *)error
 {
 	FILE *file;
 	char buffer[4096], temp;
@@ -53,6 +58,10 @@ inline static int parse_value(char *input, char *value)
 	
 	// Fail if something went wrong
 	if (info.width == -1 || info.height == -1) {
+		if (error) {
+			//TODO: Better error description/type
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:NULL];
+		}
 		fclose(file);
 		return NO;
 	}
@@ -72,6 +81,10 @@ inline static int parse_value(char *input, char *value)
 	fseek(file, -1, SEEK_CUR);
 	layer = [[XBMLayer alloc] initWithFile:file offset:ftell(file) document:doc sharedInfo:&info];
 	if (layer == NULL) {
+		if (error) {
+			//TODO: Better error description/type
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:NULL];
+		}
 		fclose(file);
 		return NO;
 	}
@@ -82,8 +95,8 @@ inline static int parse_value(char *input, char *value)
 	fclose(file);
 	
 	// Position the new layer correctly
-	[[(SeaOperations *)[doc operations] seaAlignment] centerLayerHorizontally:NULL];
-	[[(SeaOperations *)[doc operations] seaAlignment] centerLayerVertically:NULL];
+	[[[doc operations] seaAlignment] centerLayerHorizontally:NULL];
+	[[[doc operations] seaAlignment] centerLayerVertically:NULL];
 	
 	return YES;
 }

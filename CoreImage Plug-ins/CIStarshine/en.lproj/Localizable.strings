@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Generate";
+description = "Generates starshine";
+license = "Public Domain";
+name = "Starshine";
+instruction = "Click twice: first to locate the centre of the star, then to specify the size and angle of the star's radial burst";

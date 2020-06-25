@@ -1,4 +1,11 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#import "Units.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/Units.h>
+#endif
 
 /*!
 	@defined	kNumberOfScaleRecordsPerMalloc
@@ -6,6 +13,8 @@
 				time.
 */
 #define kNumberOfScaleRecordsPerMalloc 10
+
+@class SeaDocument;
 
 /*!
 	@struct		ScaleUndoRecord
@@ -40,17 +49,17 @@
 				scaled.
 */
 typedef struct {
-	int index;
+	NSInteger index;
 	int unscaledWidth;
 	int unscaledHeight;
 	int scaledWidth;
 	int scaledHeight;
 	int scaledXOrg;
 	int scaledYOrg;
-	int interpolation;
+	GimpInterpolationType interpolation;
 	BOOL isMoving;
 	BOOL isScaled;
-	int *indicies;
+	NSInteger *indicies;
 	IntRect *rects;
 } ScaleUndoRecord;
 
@@ -63,46 +72,45 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaScale : NSObject {
 
-	// The document and sheet associated with this object
-    IBOutlet id document;
-	IBOutlet id sheet;
+	//! The document and sheet associated with this object
+    IBOutlet SeaDocument *document;
+	IBOutlet NSPanel *sheet;
 	
-	// The working index associated with this object
-	int workingIndex;
+	//! The working index associated with this object
+	NSInteger workingIndex;
 	
-	// The x and y scaling values
-    IBOutlet id xScaleValue;
-    IBOutlet id yScaleValue;
+	//! The x and y scaling values
+    IBOutlet NSTextField *xScaleValue;
+    IBOutlet NSTextField *yScaleValue;
 	
-	// The height and width values
-	IBOutlet id widthValue;
-	IBOutlet id heightValue;
+	//! The height and width values
+	IBOutlet NSTextField *widthValue;
+	IBOutlet NSTextField *heightValue;
 	
-	// The various buttons for changing units
-	IBOutlet id widthPopdown;
-	IBOutlet id heightUnits;
+	//! The various buttons for changing units
+	IBOutlet NSPopUpButton *widthPopdown;
+	IBOutlet NSButton *heightUnits;
 
-	// The options
-    IBOutlet id keepProportions;
+	//! The options
+    IBOutlet NSButton *keepProportions;
 	
-	// The interpolation style to be used for scaling
-	IBOutlet id interpolationPopup;
+	//! The interpolation style to be used for scaling
+	IBOutlet NSPopUpButton *interpolationPopup;
 	
-	// A list of various undo records required for undoing
+	//! A list of various undo records required for undoing
 	ScaleUndoRecord *undoRecords;
-	int undoMax, undoCount; 
+	NSInteger undoMax, undoCount;
 	
-	// A label specifying the layer or document being scaled
-    IBOutlet id selectionLabel;
+	//! A label specifying the layer or document being scaled
+    IBOutlet NSTextField *selectionLabel;
 	
-	// The presets menu
-	IBOutlet id presetsMenu;
+	//! The presets menu
+	IBOutlet NSPopUpButton *presetsMenu;
 
-	// The units for the panel
-	int units;	
+	//! The units for the panel
+	SeaUnits units;
 }
 
 /*!
@@ -110,13 +118,7 @@ typedef struct {
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)init;
 
 /*!
 	@method		run:
@@ -161,7 +163,7 @@ typedef struct {
 				The index of the layer to be scaled (or kAllLayers to indicate
 				the entire document).
 */
-- (void)scaleToWidth:(int)width height:(int)height interpolation:(int)interpolation index:(int)index;
+- (void)scaleToWidth:(int)width height:(int)height interpolation:(GimpInterpolationType)interpolation index:(NSInteger)index;
 
 /*!
 	@method		scaleToWidth:height:xorg:yorg:interpolation:index:
@@ -183,7 +185,7 @@ typedef struct {
 				The index of the layer to be scaled (or kAllLayers to indicate
 				the entire document).
 */
-- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg interpolation:(int)interpolation index:(int)index;
+- (void)scaleToWidth:(int)width height:(int)height xorg:(int)xorg yorg:(int)yorg interpolation:(GimpInterpolationType)interpolation index:(NSInteger)index;
 
 
 /*!
@@ -195,7 +197,7 @@ typedef struct {
 				The index of the undo record corresponding to the scale
 				operation to be undone.
 */
-- (void)undoScale:(int)undoIndex;
+- (void)undoScale:(NSInteger)undoIndex;
 
 /*!
 	@method		togglePreserveSize:

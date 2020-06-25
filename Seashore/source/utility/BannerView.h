@@ -1,4 +1,8 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "SeaWarning.h"
+
+@class SeaDocument;
 
 /*!
 	@class		BannerView
@@ -8,22 +12,21 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface BannerView : NSView {
-	// Reference to the document this banner is in
-	IBOutlet id document;
+	/// Reference to the document this banner is in
+	IBOutlet SeaDocument *document;
 	
-	// The text to display
+	/// The text to display
 	NSString *bannerText;
 	
-	// The importance of the banner (this defines the color)
-	int bannerImportance;
+	/// The importance of the banner (this defines the color)
+	SeaWarningImportance bannerImportance;
 	
-	// The default button for the banner
-	IBOutlet id defaultButton;
+	/// The default button for the banner
+	IBOutlet NSButton *defaultButton;
 	
-	// The alternate button (optional)
-	IBOutlet id alternateButton;
+	/// The alternate button (optional)
+	IBOutlet NSButton *alternateButton;
 }
 
 /*!
@@ -39,6 +42,6 @@
 	@param		importance
 				The importance sets the color of the background.
 */
-- (void)setBannerText:(NSString *)text defaultButtonText:(NSString *)dText alternateButtonText:(NSString *)aText andImportance:(int)importance;
+- (void)setBannerText:(NSString *)text defaultButtonText:(NSString *)dText alternateButtonText:(NSString *)aText andImportance:(SeaWarningImportance)importance;
 
 @end

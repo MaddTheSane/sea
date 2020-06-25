@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Tile";
+description = "Generates a set of overlapping squares";
+license = "Public Domain";
+name = "Squares";
+instruction = "Click once: to locate the centre of the squares";

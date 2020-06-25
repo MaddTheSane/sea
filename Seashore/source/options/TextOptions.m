@@ -8,7 +8,9 @@
 #import "TextTool.h"
 #import "SeaDocument.h"
 
-id gNewFont;
+@interface NSObject (changeFont)
+- (IBAction)changeSpecialFont:(id)sender;
+@end
 
 @implementation TextOptions
 
@@ -17,35 +19,36 @@ id gNewFont;
 	int ivalue;
 	BOOL bvalue;
 	NSFont *font;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Handle the text alignment
-	if ([gUserDefaults objectForKey:@"text alignment"] == NULL) {
+	if ([defaults objectForKey:@"text alignment"] == NULL) {
 		ivalue = NSLeftTextAlignment;
 	}
 	else {
-		ivalue = [gUserDefaults integerForKey:@"text alignment"];
+		ivalue = (int)[defaults integerForKey:@"text alignment"];
 		if (ivalue < 0 || ivalue >= [alignmentControl segmentCount])
 			ivalue = NSLeftTextAlignment;
 	}
 	[alignmentControl setSelectedSegment:ivalue];
 	
 	// Handle the text outline slider
-	if ([gUserDefaults objectForKey:@"text outline slider"] == NULL) {
+	if ([defaults objectForKey:@"text outline slider"] == NULL) {
 		ivalue = 5;
 	}
 	else {
-		ivalue = [gUserDefaults integerForKey:@"text outline slider"];
+		ivalue = (int)[defaults integerForKey:@"text outline slider"];
 		if (ivalue < 1 || ivalue > 24)
 			ivalue = 5;
 	}
 	[outlineSlider setIntValue:ivalue];
 	
 	// Handle the text outline checkbox
-	if ([gUserDefaults objectForKey:@"text outline checkbox"] == NULL) {
+	if ([defaults objectForKey:@"text outline checkbox"] == NULL) {
 		bvalue = NO;
 	}
 	else {
-		bvalue = [gUserDefaults boolForKey:@"text outline checkbox"];
+		bvalue = [defaults boolForKey:@"text outline checkbox"];
 	}
 	[outlineCheckbox setState:bvalue];
 	
@@ -59,11 +62,11 @@ id gNewFont;
 	[outlineCheckbox setTitle:[NSString stringWithFormat:LOCALSTR(@"outline", @"Outline: %d pt"), [outlineSlider intValue]]];
 	
 	// Handle the text fringe checkbox
-	if ([gUserDefaults objectForKey:@"text fringe checkbox"] == NULL) {
+	if ([defaults objectForKey:@"text fringe checkbox"] == NULL) {
 		bvalue = YES;
 	}
 	else {
-		bvalue = [gUserDefaults boolForKey:@"text fringe checkbox"];
+		bvalue = [defaults boolForKey:@"text fringe checkbox"];
 	}
 	[fringeCheckbox setState:bvalue];
 	
@@ -71,13 +74,13 @@ id gNewFont;
 	gNewFont = NULL;
 	fontManager = [NSFontManager sharedFontManager];
 	[fontManager setAction:@selector(changeSpecialFont:)];
-	if ([gUserDefaults objectForKey:@"text font"] == NULL) {
+	if ([defaults objectForKey:@"text font"] == NULL) {
 		font = [NSFont userFontOfSize:0];
 		[fontManager setSelectedFont:font isMultiple:NO];
 		[fontLabel setStringValue:[NSString stringWithFormat:@"%@ %d pt",  [font displayName],  (int)[font pointSize]]];
 	}
 	else {
-		font = [NSFont fontWithName:[gUserDefaults objectForKey:@"text font"] size:[gUserDefaults integerForKey:@"text size"]];
+		font = [NSFont fontWithName:[defaults objectForKey:@"text font"] size:[defaults integerForKey:@"text size"]];
 		[fontManager setSelectedFont:font isMultiple:NO];
 		[fontLabel setStringValue:[NSString stringWithFormat:@"%@ %d pt",  [font displayName],  (int)[font pointSize]]];
 	}
@@ -92,7 +95,7 @@ id gNewFont;
 {
 	gNewFont = [sender convertFont:[sender selectedFont]];
 	[fontLabel setStringValue:[NSString stringWithFormat:@"%@ %d pt",  [gNewFont displayName],  (int)[gNewFont pointSize]]];
-	[(TextTool *)[[document tools] getTool:kTextTool] preview:NULL];
+	[(TextTool *)[[document tools] getTool:SeaToolsText] preview:NULL];
 	gNewFont = NULL;
 }
 
@@ -134,7 +137,7 @@ id gNewFont;
 
 - (BOOL)allowFringe
 {
-	return [fringeCheckbox state];
+	return [fringeCheckbox state] == NSOnState;
 }
 
 - (IBAction)update:(id)sender
@@ -149,17 +152,18 @@ id gNewFont;
 	[outlineCheckbox setTitle:[NSString stringWithFormat:LOCALSTR(@"outline", @"Outline: %d pt"), [outlineSlider intValue]]];
 		
 	// Update the text tool
-	[(TextTool *)[[document tools] getTool:kTextTool] preview:NULL];
+	[(TextTool *)[[document tools] getTool:SeaToolsText] preview:NULL];
 }
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:[alignmentControl selectedSegment] forKey:@"text alignment"];
-	[gUserDefaults setObject:[outlineCheckbox state] ? @"YES" : @"NO" forKey:@"text outline checkbox"];
-	[gUserDefaults setInteger:[outlineSlider intValue] forKey:@"text outline slider"];
-	[gUserDefaults setObject:[fringeCheckbox state] ? @"YES" : @"NO" forKey:@"text fringe checkbox"];
-	[gUserDefaults setObject:[[fontManager selectedFont] fontName] forKey:@"text font"];
-	[gUserDefaults setInteger:(int)[[fontManager selectedFont] pointSize] forKey:@"text size"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[alignmentControl selectedSegment] forKey:@"text alignment"];
+	[defaults setObject:[outlineCheckbox state] ? @"YES" : @"NO" forKey:@"text outline checkbox"];
+	[defaults setInteger:[outlineSlider intValue] forKey:@"text outline slider"];
+	[defaults setObject:[fringeCheckbox state] ? @"YES" : @"NO" forKey:@"text fringe checkbox"];
+	[defaults setObject:[[fontManager selectedFont] fontName] forKey:@"text font"];
+	[defaults setInteger:(int)[[fontManager selectedFont] pointSize] forKey:@"text size"];
 }
 
 @end

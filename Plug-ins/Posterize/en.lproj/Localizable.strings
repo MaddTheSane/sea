@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Copyright © 2005 Mark Pazolli";
+description = "Runs a posterize operation on the selection";
+groupName = "Color Effect";
+license = "GNU General Public License";
+name = "Posterize";

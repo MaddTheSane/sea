@@ -1,6 +1,6 @@
 #import "RLE.h"
 
-BOOL RLEDecompress(unsigned char *output, unsigned char *input, int inputLength, int width, int height, int spp)
+BOOL SeaRLEDecompress(unsigned char *output, unsigned char *input, int inputLength, int width, int height, int spp)
 {
 	unsigned char *destData;
 	unsigned char *srcData = input;
@@ -106,7 +106,7 @@ BOOL RLEDecompress(unsigned char *output, unsigned char *input, int inputLength,
 }
 
 
-int RLECompress(unsigned char *output, unsigned char *input, int width, int height, int spp)
+int SeaRLECompress(unsigned char *output, unsigned char *input, int width, int height, int spp)
 {
 	int state, length, last, i, j;
 	int srcRemaining;

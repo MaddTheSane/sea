@@ -1,21 +1,13 @@
+#include <GIMPCore/GIMPCore.h>
 #import "MedianClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
-
 @implementation MedianClass
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (SeaPluginType)type
 {
-	seaPlugins = manager;
-	
-	return self;
-}
-
-- (int)type
-{
-	return 0;
+	return SeaPluginBasic;
 }
 
 - (NSString *)name
@@ -40,15 +32,14 @@ int compar(const void *a, const void *b)
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *data, *overlay, *replace;
 	int pos, i, j, x, y, z, k, width, spp, channel;
 	unsigned char vals[4][9];
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	selection = [pluginData selection];
 	spp = [pluginData spp];
 	width = [pluginData width];
@@ -60,7 +51,7 @@ int compar(const void *a, const void *b)
 	for (j = selection.origin.y; j < selection.origin.y + selection.size.height; j++) {
 		for (i = selection.origin.x; i < selection.origin.x + selection.size.width; i++) {
 			
-			if (channel == kAllChannels) {
+			if (channel == SeaSelectedChannelAll) {
 				
 				pos = j * width + i;
 				z = -1;
@@ -81,7 +72,7 @@ int compar(const void *a, const void *b)
 				
 			}
 			
-			if (channel == kPrimaryChannels) {
+			if (channel == SeaSelectedChannelPrimary) {
 			
 				pos = j * width + i;
 				z = -1;
@@ -103,7 +94,7 @@ int compar(const void *a, const void *b)
 				
 			}
 			
-			if (channel == kAlphaChannel) {
+			if (channel == SeaSelectedChannelAlpha) {
 				
 				pos = j * width + i;
 				z = -1;

@@ -15,6 +15,8 @@
 #import "XCFExporter.h"
 #import "PNGExporter.h"
 #import "JPEGExporter.h"
+#import "GIFExporter.h"
+#import "JP2Exporter.h"
 #import "SeaPrefs.h"
 #import "SeaSelection.h"
 #import "SeaLayer.h"
@@ -27,12 +29,14 @@
 #import "SeaWindowContent.h"
 
 extern int globalUniqueDocID;
+int globalUniqueDocID;
 
-extern IntPoint gScreenResolution;
+extern IntPoint SeaScreenResolution;
 
 extern BOOL globalReadOnlyWarning;
+BOOL globalReadOnlyWarning;
 
-enum {
+typedef NS_ENUM(int, SeaSpecialStart) {
 	kNoStart = 0,
 	kNormalStart = 1,
 	kOpenStart = 2,
@@ -41,15 +45,28 @@ enum {
 };
 
 @implementation SeaDocument
+@synthesize contents;
+@synthesize measureStyle;
+@synthesize whiteboard;
+@synthesize operations;
+@synthesize current;
+@synthesize tools;
+@synthesize helpers;
+@synthesize warnings;
+@synthesize pluginData;
+@synthesize textureExporter;
+@synthesize uniqueDocID;
+@synthesize selection;
+@synthesize dataSource;
 
-- (id)init
+- (instancetype)init
 {
 	int dtype, dwidth, dheight, dres;
 	BOOL dopaque;
 	
 	// Initialize superclass first
-	if (![super init])
-		return NULL;
+	if (!(self = [super init]))
+		return nil;
 	
 	// Reset uniqueLayerID
 	uniqueLayerID = -1;
@@ -79,10 +96,10 @@ enum {
 	return self;
 }
 
-- (id)initWithPasteboard
+- (instancetype)initWithPasteboard
 {
 	// Initialize superclass first
-	if (![super init])
+	if (!(self = [super init]))
 		return NULL;
 	
 	// Reset uniqueLayerID
@@ -100,7 +117,7 @@ enum {
 	specialStart = kPasteboardStart;
 	
 	// Set the measure style
-	measureStyle = [(SeaPrefs *)[SeaController seaPrefs] newUnits];
+	measureStyle = [[SeaController seaPrefs] newUnits];
 	
 	// Create contents
 	contents = [[SeaContent alloc] initFromPasteboardWithDocument:self];
@@ -111,46 +128,42 @@ enum {
 	return self;
 }
 
-- (id)initWithContentsOfFile:(NSString *)path ofType:(NSString *)type
+- (instancetype)initWithContentsOfURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
-	// Initialize superclass first
-	if (![super init])
-		return NULL;
-	
-	// Reset uniqueLayerID
-	uniqueLayerID = -1;
-	uniqueFloatingLayerID = 4999;
-	
-	// Get a unique ID for this document
-	uniqueDocID = globalUniqueDocID;
-	globalUniqueDocID++;
-	
-	// Set data members appropriately
-	whiteboard = NULL;
-	restoreOldType = NO;
-	current = YES;
-	specialStart = kOpenStart;
-	
-	// Set the measure style
-	measureStyle = [(SeaPrefs *)[SeaController seaPrefs] newUnits];
-	
-	// Do required work
-	if ([self readFromFile:path ofType:type]) {
-		[self setFileName:path];
-		[self setFileType:type];
+	if (self = [super init]) {
+		// Reset uniqueLayerID
+		uniqueLayerID = -1;
+		uniqueFloatingLayerID = 4999;
+		
+		// Get a unique ID for this document
+		uniqueDocID = globalUniqueDocID;
+		globalUniqueDocID++;
+		
+		// Set data members appropriately
+		whiteboard = NULL;
+		restoreOldType = NO;
+		current = YES;
+		specialStart = kOpenStart;
+		
+		// Set the measure style
+		measureStyle = [[SeaController seaPrefs] newUnits];
+		
+		// Do required work
+		if ([self readFromURL:url ofType:typeName error:outError]) {
+			self.fileURL = url;
+			[self setFileType:typeName];
+		} else {
+			return nil;
+		}
+
 	}
-	else {
-		[self autorelease];
-		return NULL;
-	}
-	
 	return self;
 }
 
-- (id)initWithData:(unsigned char *)data type:(int)type width:(int)width height:(int)height
+- (instancetype)initWithData:(unsigned char *)data type:(XcfImageType)type width:(int)width height:(int)height
 {
 	// Initialize superclass first
-	if (![super init])
+	if (!(self = [super init]))
 		return NULL;
 	
 	// Reset uniqueLayerID
@@ -169,7 +182,7 @@ enum {
 	specialStart = kPlugInStart;
 
 	// Set the measure style
-	measureStyle = [(SeaPrefs *)[SeaController seaPrefs] newUnits];
+	measureStyle = [[SeaController seaPrefs] newUnits];
 
 	// Increment change count
 	[self updateChangeCount:NSChangeDone];
@@ -179,22 +192,19 @@ enum {
 
 - (void)awakeFromNib
 {
-	id seaView;
-	#ifdef USE_CENTERING_CLIPVIEW
+	SeaView *seaView;
+#ifdef USE_CENTERING_CLIPVIEW
 	id newClipView;
-	#endif
+#endif
 	
 	// Believe it or not sometimes this function is called after it has already run
 	if (whiteboard == NULL) {
-		exporters = [NSArray arrayWithObjects:
-					 gifExporter,
-					 jpegExporter,
-					 jp2Exporter,
-					 pngExporter,
-					 tiffExporter,
-					 xcfExporter,
-					 NULL];
-		[exporters retain];
+		exporters = @[gifExporter,
+					  jpegExporter,
+					  jp2Exporter,
+					  pngExporter,
+					  tiffExporter,
+					  xcfExporter];
 		
 		// Create a fresh whiteboard and selection manager
 		whiteboard = [[SeaWhiteboard alloc] initWithDocument:self];
@@ -203,35 +213,21 @@ enum {
 		
 		// Setup the view to display the whiteboard
 		seaView = [[SeaView alloc] initWithDocument:self];
-		#ifdef USE_CENTERING_CLIPVIEW
+#ifdef USE_CENTERING_CLIPVIEW
 		newClipView = [[CenteringClipView alloc] initWithFrame:[[view contentView] frame]];
-		[(NSScrollView *)view setContentView:newClipView];
-		[newClipView autorelease];
-		#endif
+		[view setContentView:newClipView];
+#endif
 		[view setDocumentView:seaView];
-		[seaView autorelease];
 		[view setDrawsBackground:NO];
 		
 		// set the frame of the window
 		[docWindow setFrame:[self standardFrame] display:YES];
 		
 		// Finally, if the doc has any warnings we are ready for them
-		[(SeaWarning *)[SeaController seaWarning] triggerQueue: self];
+		[[SeaController seaWarning] triggerQueue: self];
 	}
 	
 	[docWindow setAcceptsMouseMovedEvents:YES];
-}
-
-- (void)dealloc
-{
-	// Then get rid of stuff that's no longer needed
-	if (selection) [selection autorelease];
-	if (whiteboard) [whiteboard autorelease];
-	if (contents) [contents autorelease];
-	if (exporters) [exporters autorelease];
-		
-	// Finally call the super
-	[super dealloc];
 }
 
 - (IBAction)saveDocument:(id)sender
@@ -246,52 +242,12 @@ enum {
 	[super saveDocumentAs:sender];
 }
 
-- (id)contents
-{
-	return contents;
-}
-
-- (id)whiteboard
-{
-	return whiteboard;
-}
-
-- (id)selection
-{
-	return selection;
-}
-
-- (id)operations
-{
-	return operations;
-}
-
-- (id)tools
-{
-	return tools;
-}
-
-- (id)helpers
-{
-	return helpers;
-}
-
-- (id)warnings
-{
-	return warnings;
-}
-
-- (id)pluginData
-{
-	return pluginData;
-}
-
-- (id)docView
+- (SeaView *)docView
 {
 	return [view documentView];
 }
 
-- (id)window
+- (NSWindow*)window
 {
 	return docWindow;
 }
@@ -301,91 +257,113 @@ enum {
 	[view setBackgroundColor:[[SeaController seaPrefs] windowBack]];
 }
 
-- (id)textureExporter
+- (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)type error:(NSError * _Nullable __autoreleasing *)outError
 {
-	return textureExporter;
-}
-
-- (BOOL)readFromFile:(NSString *)path ofType:(NSString *)type
-{	
 	BOOL readOnly = NO;
 	
 	// Determine which document we have and act appropriately
 	if ([XCFContent typeIsEditable: type]) {
-		
 		// Load a GIMP or XCF document
-		contents = [[XCFContent alloc] initWithDocument:self contentsOfFile:path];
+		contents = [[XCFContent alloc] initWithDocument:self contentsOfURL:url error:outError];
 		if (contents == NULL) {
 			return NO;
 		}
-		
 	} else if ([CocoaContent typeIsEditable: type forDoc: self]) {
-		
 		// Load a PNG, TIFF, JPEG document
 		// Or a GIF or JP2 document
-		contents = [[CocoaContent alloc] initWithDocument:self contentsOfFile:path];
+		contents = [[CocoaContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
+			if (outError) {
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+							 @{NSLocalizedDescriptionKey: @"Failed to load editable Cocoa file",
+							   NSURLErrorKey: url
+							   }];
+			}
 			return NO;
 		}
-		
 	} else if ([CocoaContent typeIsViewable: type forDoc: self]) {
-	
 		// Load a PDF, PCT, BMP document
-		contents = [[CocoaContent alloc] initWithDocument:self contentsOfFile:path];
+		contents = [[CocoaContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
+			if (outError) {
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+							 @{NSLocalizedDescriptionKey: @"Failed to load viewable Cocoa file",
+							   NSURLErrorKey: url
+							   }];
+			}
 			return NO;
 		}
 		readOnly = YES;
-			
 	} else if ([XBMContent typeIsEditable: type]) {
-	
 		// Load a X bitmap document
-		contents = [[XBMContent alloc] initWithDocument:self contentsOfFile:path];
+		contents = [[XBMContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
+			if (outError) {
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+							 @{NSLocalizedDescriptionKey: @"Failed to load X11 bitmap",
+							   NSURLErrorKey: url
+							   }];
+			}
 			return NO;
 		}
 		readOnly = YES;
-		
 	} else if ([SVGContent typeIsViewable: type]) {
-	
 		// Load a SVG document
-		contents = [[SVGContent alloc] initWithDocument:self contentsOfFile:path];
+		contents = [[SVGContent alloc] initWithDocument:self contentsOfFile:url.path];
 		if (contents == NULL) {
+			if (outError) {
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+							 @{NSLocalizedDescriptionKey: @"Failed to load SVG",
+							   NSURLErrorKey: url
+							   }];
+			}
 			return NO;
 		}
 		readOnly = YES;
-		
 	} else {
 		// Handle an unknown document type
-		NSLog(@"Unknown type passed to readFromFile:<%@>ofType:<%@>", path, type);
+		NSLog(@"Unknown type passed to readFromURL:<%@>ofType:<%@>error:", url.path, type);
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+						 @{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Unknown type %@", type],
+						   NSURLErrorKey: url
+						   }];
+		}
 		return NO;
 	}
 	
 	if (readOnly && !globalReadOnlyWarning) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"read only message", @"This file is in a read-only format, as such you cannot save this file. This warning will not be displayed for subsequent files in a read-only format.") forDocument: self level:kLowImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"read only message", @"This file is in a read-only format, as such you cannot save this file. This warning will not be displayed for subsequent files in a read-only format.") forDocument: self level:SeaWarningImportanceLow];
 		globalReadOnlyWarning = YES;
 	}
+
 	
 	return YES;
 }
 
-- (BOOL)writeToFile:(NSString *)path ofType:(NSString *)type
+- (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
 	BOOL result = NO;
-	int i;
 	
-	for (i = 0; i < [exporters count]; i++) {
+	for (id<AbstractExporter> exporter in exporters) {
 		if ([[SeaDocumentController sharedDocumentController]
-			 type: type
-			 isContainedInDocType:[[exporters objectAtIndex:i] title]
+			 type: typeName
+			 isContainedInDocType:[exporter title]
 			 ]) {
-			[[exporters objectAtIndex:i] writeDocument:self toFile:path];
+			[exporter writeDocument:self toFile:[url path]];
 			result = YES;
+			break;
 		}
 	}
 	
-	if (!result){
-		NSLog(@"Unknown type passed to writeToFile:<%@>ofType:<%@>", path, type);
+	if (!result) {
+		NSLog(@"Unknown type passed to writeToURL:<%@>ofType:<%@>error:", url, typeName);
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:
+						 @{NSLocalizedFailureReasonErrorKey:  [NSString stringWithFormat:@"Unknown type passed to writeToURL:<%@>ofType:<%@>error:", url, typeName],
+						   NSURLErrorKey: url
+						   }];
+		}
 	}
 	return result;
 }
@@ -400,28 +378,25 @@ enum {
 	op = [NSPrintOperation printOperationWithView:printView printInfo:[self printInfo]];
 	
 	// Insist the view be scaled to fit
-	[op setShowPanels:showPanels];
+	[op setShowsPrintPanel:showPanels];
     [self runModalPrintOperation:op delegate:NULL didRunSelector:NULL contextInfo:NULL];
-
-	// Release print view
-	[printView autorelease];
 }
 
 
 - (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
 {
-	int i, exporterIndex = -1;
+	NSInteger exporterIndex = -1;
 	
 	// Implement the view that allows us to select layers
 	[savePanel setAccessoryView:accessoryView];
 	
 	// Find the default exporter's index
-	for (i = 0; i < [exporters count]; i++) {
+	for (id<AbstractExporter> exporter in exporters) {
 		if ([[SeaDocumentController sharedDocumentController]
 			 type: [self fileType]
-			 isContainedInDocType:[[exporters objectAtIndex:i] title]
+			 isContainedInDocType:[exporter title]
 			 ]) {
-			exporterIndex = i;
+			exporterIndex = [exporters indexOfObject:exporter];
 			break;
 		}
 	}
@@ -429,35 +404,36 @@ enum {
 	// Deal with the rare case where we don't find one
 	if (exporterIndex == -1) {
 		exporterIndex = [exporters count] - 1;
-		[self setFileType:[[exporters objectAtIndex:[exporters count] - 1] title]];
+		[self setFileType:[exporters[[exporters count] - 1] title]];
 	}
 	
 	// Add in our exporters
 	[exportersPopUp removeAllItems];
-	for (i = 0; i < [exporters count]; i++)
-		[exportersPopUp addItemWithTitle:[[exporters objectAtIndex:i] title]];
+	for (id<AbstractExporter> exporter in exporters) {
+		[exportersPopUp addItemWithTitle:[exporter title]];
+	}
 	[exportersPopUp selectItemAtIndex:exporterIndex];
-	[savePanel setRequiredFileType:[[exporters objectAtIndex:exporterIndex] extension]];
+	savePanel.allowedFileTypes = @[exporters[exporterIndex].fileType];
 	
 	// Finally set the options button state appropriately
-	[optionsButton setEnabled:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] hasOptions]];
-	[optionsSummary setStringValue:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] optionsString]];
+	[optionsButton setEnabled:[exporters[[exportersPopUp indexOfSelectedItem]] hasOptions]];
+	[optionsSummary setStringValue:[exporters[[exportersPopUp indexOfSelectedItem]] optionsString]];
 	
 	return YES;
 }
 
 - (IBAction)showExporterOptions:(id)sender
 {
-	[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] showOptions:self];
-	[optionsSummary setStringValue:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] optionsString]];
+	[exporters[[exportersPopUp indexOfSelectedItem]] showOptions:self];
+	[optionsSummary setStringValue:[exporters[[exportersPopUp indexOfSelectedItem]] optionsString]];
 }
 
 - (IBAction)exporterChanged:(id)sender
 {
-	[(NSSavePanel *)[exportersPopUp window] setRequiredFileType:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] extension]];
-	[self setFileType:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] title]];
-	[optionsButton setEnabled:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] hasOptions]];
-	[optionsSummary setStringValue:[[exporters objectAtIndex:[exportersPopUp indexOfSelectedItem]] optionsString]];
+	((NSSavePanel*)[exportersPopUp window]).allowedFileTypes = @[[exporters[[exportersPopUp indexOfSelectedItem]] fileType]];
+	[self setFileType:[exporters[[exportersPopUp indexOfSelectedItem]] title]];
+	[optionsButton setEnabled:[exporters[[exportersPopUp indexOfSelectedItem]] hasOptions]];
+	[optionsSummary setStringValue:[exporters[[exportersPopUp indexOfSelectedItem]] optionsString]];
 }
 
 - (void)windowWillBeginSheet:(NSNotification *)notification
@@ -474,11 +450,11 @@ enum {
 {
 	NSPoint point;
 	
-	[(UtilitiesManager *)[SeaController utilitiesManager] activate:self];
+	[[SeaController utilitiesManager] activate:self];
 	if ([docWindow attachedSheet])
-		[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:NO];
+		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:NO];
 	else
-		[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:YES];
+		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:YES];
 	point = [docWindow mouseLocationOutsideOfEventStream];
 	[[self docView] updateRulerMarkings:point andStationary:NSMakePoint(-256e6, -256e6)];
 	[(OptionsUtility *)[(UtilitiesManager *)[SeaController utilitiesManager] optionsUtilityFor:self] viewNeedsDisplay];
@@ -490,12 +466,12 @@ enum {
 	
 	[helpers endLineDrawing];
 	if ([docWindow attachedSheet])
-		[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:NO];
+		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:NO];
 	else
-		[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:YES];
+		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:YES];
 	point = NSMakePoint(-256e6, -256e6);
 	[[self docView] updateRulerMarkings:point andStationary:point];
-	[(OptionsUtility *)[(UtilitiesManager *)[SeaController utilitiesManager] optionsUtilityFor:self] viewNeedsDisplay];
+	[[[SeaController utilitiesManager] optionsUtilityFor:self] viewNeedsDisplay];
 	[gColorPanel orderOut:self];
 }
 
@@ -548,12 +524,12 @@ enum {
 		minHeight += 35;
 	}
 	// Options Bar
-	rect.size.height += [[docWindow contentView] sizeForRegion: kOptionsBar];
+	rect.size.height += [[docWindow contentView] sizeForRegion: SeaWindowRegionOptionsBar];
 	 // Status Bar
-	rect.size.height += [[docWindow contentView] sizeForRegion: kStatusBar];
+	rect.size.height += [[docWindow contentView] sizeForRegion: SeaWindowRegionStatusBar];
 	
 	 // Layers
-	rect.size.width += [[docWindow contentView] sizeForRegion: kSidebar];
+	rect.size.width += [[docWindow contentView] sizeForRegion: SeaWindowRegionSidebar];
 	
 	// Disallow ridiculously small or large windows
 	NSRect defaultFrame = [[docWindow screen] frame];
@@ -576,31 +552,16 @@ enum {
 	[super close];
 }
 
-- (BOOL)current
-{
-	return current;
-}
-
-- (void)setCurrent:(BOOL)value
-{
-	current = value;
-}
-
-- (int)uniqueLayerID
+- (NSInteger)uniqueLayerID
 {
 	uniqueLayerID++;
 	return uniqueLayerID;
 }
 
-- (int)uniqueFloatingLayerID
+- (NSInteger)uniqueFloatingLayerID
 {
 	uniqueFloatingLayerID++;
 	return uniqueFloatingLayerID;
-}
-
-- (int)uniqueDocID
-{
-	return uniqueDocID;
 }
 
 - (NSString *)windowNibName
@@ -618,16 +579,6 @@ enum {
 	[[self undoManager] redo];
 }
 
-- (void)changeMeasuringStyle:(int)aStyle
-{
-	measureStyle = aStyle;
-}
-
-- (int)measureStyle
-{
-	return measureStyle;
-}
-
 - (BOOL)locked
 {
 	return locked || ([docWindow attachedSheet] != NULL);
@@ -643,16 +594,16 @@ enum {
 	locked = NO;
 }
 
-- (BOOL)validateMenuItem:(id)menuItem
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem
 {
-	id type = [self fileType];
+	NSString *type = [self fileType];
 	
 	[helpers endLineDrawing];
 	if ([menuItem tag] == 171) {
 		if ([type isEqualToString:@"PDF Document"] || [type isEqualToString:@"PICT Document"] || [type isEqualToString:@"Graphics Interchange Format Image"] || [type isEqualToString:@"Windows Bitmap Image"])
 			return NO;
-		if ([self isDocumentEdited] == NO)
-			return NO;
+		//if ([self isDocumentEdited] == NO)
+		//	return NO;
 	}
 	
 	if ([menuItem tag] == 180)
@@ -667,7 +618,6 @@ enum {
 {
 	// Remember the old type
 	oldType = [self fileType];
-	[oldType retain];
 	if (saveOperation == NSSaveToOperation) {
 		restoreOldType = YES;
 	}
@@ -686,12 +636,12 @@ enum {
 	// Restore the old type
 	if (restoreOldType && didSave) {
 		[self setFileType:oldType];
-		[oldType autorelease];
+		oldType = nil;
 		restoreOldType = NO;
 	}
 	else if (!didSave) {
 		[self setFileType:oldType];
-		[oldType autorelease];
+		oldType = nil;
 		restoreOldType = NO;
 	}
 }
@@ -705,11 +655,6 @@ enum {
 - (NSScrollView *)scrollView
 {
 	return (NSScrollView *)view;
-}
-
-- (id)dataSource
-{
-	return dataSource;
 }
 
 @end

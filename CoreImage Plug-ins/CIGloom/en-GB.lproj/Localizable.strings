@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Stylise";
+description = "Dulls the highlights of the selection";
+license = "Public Domain";
+name = "Gloom";

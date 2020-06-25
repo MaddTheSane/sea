@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@enum		k...HandleType
@@ -17,15 +22,25 @@
 	@constant	kPositionType
 				Indicates the handle for the position tool (scale, rotate).
 */
-enum {
+typedef NS_ENUM(int, SeaHandleType) {
+	//! Indicates the handle is for a selection.
 	kSelectionHandleType,
+	//! Indicates the handle is for layer boundaries.
 	kLayerHandleType,
+	//! Indicates the handle is for cropping.
 	kCropHandleType,
+	//! Indicates the handle is for the beginning of a gradient tool.
 	kGradientStartType,
+	//! Indicates the handle is for the end of a gradient tool.
 	kGradientEndType,
+	//! Indicates the handle at the beginning of a polygonal lasso tool.
 	kPolygonalLassoType,
+	//! Indicates the handle for the position tool (scale, rotate).
 	kPositionType
 };
+
+@class SeaDocument;
+@class SeaCursors;
 
 /*!
 	@class		SeaView
@@ -35,88 +50,88 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli		
 */
-
 @interface SeaView : NSView {
 	
-	// The document associated with this view
-	id document;
+	//! The document associated with this view
+	SeaDocument *document;
 	
-	// The cursors manager for this view
-	id cursorsManager;
+	//! The cursors manager for this view
+	SeaCursors *cursorsManager;
 	
-	// The current zoom of the view
-	float zoom;
+	//! The current zoom of the view
+	CGFloat zoom;
 
-	// Is this a line draw? (sent to mouseDragged methods)
+	//! Is this a line draw? (sent to mouseDragged methods)
 	BOOL lineDraw;
 	
-	// Is scrolling mode active?
+	//! Is scrolling mode active?
 	BOOL scrollingMode;
 	
-	// Is the mouse down during scrolling?
+	//! Is the mouse down during scrolling?
 	BOOL scrollingMouseDown;
 	
-	// Is scaling mode active
+	//! Is scaling mode active
 	int scalingMode;
 	
-	// The scroll timer
+	//! The scroll timer
 	NSTimer* scrollTimer;
 	
-	// The magnify timer
+	//! The magnify timer
 	NSTimer* magnifyTimer;
 		
-	// Is the tablet eraser active?
-	// 0 = No; 1 = Yes, activated through sub-events, 2 = Yes, activated through native events.
+	//! Is the tablet eraser active?
+	//!
+	//! 0 = No; 1 = Yes, activated through sub-events, 2 = Yes, activated through native events.
 	int tabletEraser;
 	
-	// Last scroll point
+	//! Last scroll point
 	NSPoint lastScrollPoint;
 	
-	// The change in the cursor position
+	//! The change in the cursor position
 	IntPoint delta;
 	IntPoint initialPoint;
 	
-	// The units used for the ruler
+	//! The units used for the ruler
 	int rulerUnits;
 	
-	// The horizontal ruler
+	//! The horizontal ruler
 	NSRulerView *horizontalRuler;
 	
-	// The vertical ruler
+	//! The vertical ruler
 	NSRulerView *verticalRuler;
 	
-	// The vertical ruler marker
+	//! The vertical ruler marker
 	NSRulerMarker *vMarker;
 	
-	// The horizontal ruler marker
+	//! The horizontal ruler marker
 	NSRulerMarker *hMarker;
 	
-	// The vertical stationary ruler marker
+	//! The vertical stationary ruler marker
 	NSRulerMarker *vStatMarker;
 	
-	// The horizontal stationary ruler marker
+	//! The horizontal stationary ruler marker
 	NSRulerMarker *hStatMarker;
 	
-	// The mouse down location
+	//! The mouse down location
 	NSPoint mouseDownLoc;
 	
-	// The last active layer point
+	//! The last active layer point
 	IntPoint lastActiveLayerPoint;
 
-	// Was the key up last time?
+	//! Was the key up last time?
 	BOOL keyWasUp;
 
-	// The time of the last ruler update
+	//! The time of the last ruler update
 	NSDate *lastRulerUpdate;
 
-	// Memorize the previous tool for a temporary eyedrop selection
-	int eyedropToolMemory;
+	//! Memorize the previous tool for a temporary eyedrop selection
+	NSInteger eyedropToolMemory;
 	
-	// Values to tell when to trigger scroll
-	float scrollZoom, lastTrigger;
+	//! Values to tell when to trigger scroll
+	CGFloat scrollZoom, lastTrigger;
 
-	// The amount we've magnified it the time
-	float magnifyFactor;
+	//! The amount we've magnified it the time
+	CGFloat magnifyFactor;
 }
 
 /*!
@@ -126,13 +141,7 @@ enum {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)initWithDocument:(SeaDocument*)doc;
 
 /*!
 	@method		changeSpecialFont:
@@ -219,12 +228,12 @@ enum {
 - (void)zoomOutFromPoint:(NSPoint)point;
 
 /*!
-	@method		zoom
+	@property	zoom
 	@discussion	Returns the current zoom level of the view.
 	@result		Returns a floating-point number representing the current zoom
 				level (1.0 = 100%).
 */
-- (float)zoom;
+@property (readonly) CGFloat zoom;
 
 /*!
 	@method		drawRect:
@@ -248,7 +257,7 @@ enum {
  @param			type
 				An element of HandleType enum that describes the appearance of the handles.
 */
-- (void)drawDragHandles:(NSRect) rect type: (int)type;
+- (void)drawDragHandles:(NSRect) rect type: (SeaHandleType)type;
 
 /*!
  @method		drawHandles:type:
@@ -259,9 +268,9 @@ enum {
 				An element of HandleType enum that describes the appearance of the handle.
  @param			index
 				If the handles are part of a rect, the order of the handle.
-				If the handle is not part of a rect use -1
+				If the handle is not part of a rect, use -1
 */
-- (void)drawHandle:(NSPoint) origin  type: (int)type index:(int)index;
+- (void)drawHandle:(NSPoint) origin  type: (SeaHandleType)type index:(NSInteger)index;
 
 /*!
  @method		drawCropBoundaries
@@ -326,7 +335,6 @@ enum {
 */
 - (void)readjust:(BOOL)scaling;
 
-#ifdef MACOS_10_4_COMPILE
 /*!
 	@method		tabletProximity:
 	@discussion	Handles tablet proximity events.
@@ -334,7 +342,6 @@ enum {
 				The event triggering this method.
 */
 - (void)tabletProximity:(NSEvent *)theEvent;
-#endif
 
 /*!
 	@method		tabletPoint:
@@ -397,11 +404,11 @@ enum {
 - (void)mouseUp:(NSEvent *)theEvent;
 
 /*!
-	@method		delta
+	@property	delta
 	@discussion	A measure of how far the mouse has been dragged.
 	@result		An IntPoint that represents the change in position.
 */
-- (IntPoint) delta;
+@property (readonly) IntPoint delta;
 
 /*!
 	@method		flagsChanged:
@@ -600,5 +607,8 @@ enum {
 	@result		YES if the menu item should be enabled, NO otherwise.
 */
 - (BOOL)validateMenuItem:(id)menuItem;
+
+
+- (IBAction)selectOpaque:(id)sender;
 
 @end

@@ -10,19 +10,10 @@
 
 @implementation CropTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
-	return kCropTool;
+	return SeaToolsCrop;
 }	
-
-- (id)init
-{
-	if(![super init])
-		return NULL;
-	
-	cropRect.size.width = cropRect.size.height = 0;
-	return self;
-}
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
@@ -33,11 +24,11 @@
 	}
 	
 	if(![self isMovingOrScaling]){
-		int aspectType = [options aspectType];
+		SeaAspectType aspectType = [options aspectType];
 		NSSize ratio;
 		double xres, yres;
-		int modifier = [(CropOptions*)options modifier];
-		id activeLayer;
+		AbstractModifiers modifier = [options modifier];
+		SeaLayer *activeLayer;
 		
 		// Make where appropriate
 		activeLayer = [[document contents] activeLayer];
@@ -48,32 +39,36 @@
 		startPoint = where;
 		
 		// Start the cropping rectangle
-		oneToOne = (modifier == kShiftModifier);
-		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {
+		oneToOne = (modifier == AbstractModifierShift);
+		if (aspectType == SeaAspectTypeNone || aspectType == SeaAspectTypeRatio || oneToOne) {
 			cropRect.origin.x = startPoint.x;
 			cropRect.origin.y = startPoint.y;
 			cropRect.size.width = 0;
 			cropRect.size.height = 0;
-		}
-		else {
+		} else {
 			ratio = [options ratio];
 			cropRect.origin.x = startPoint.x;
 			cropRect.origin.y = startPoint.y;
 			xres = [[document contents] xres];
 			yres = [[document contents] yres];
 			switch (aspectType) {
-				case kExactPixelAspectType:
+				case SeaAspectTypeExactPixel:
 					cropRect.size.width = ratio.width;
 					cropRect.size.height = ratio.height;
-				break;
-				case kExactInchAspectType:
+					break;
+					
+				case SeaAspectTypeExactInch:
 					cropRect.size.width = ratio.width * xres;
 					cropRect.size.height = ratio.height * yres;
-				break;
-				case kExactMillimeterAspectType:
+					break;
+					
+				case SeaAspectTypeExactMillimeter:
 					cropRect.size.width = ratio.width * xres * 0.03937;
 					cropRect.size.height = ratio.height * yres * 0.03937;
-				break;
+					break;
+					
+				default:
+					break;
 			}
 			[[document helpers] selectionChanged];
 		}
@@ -87,8 +82,7 @@
 									   andMask: NULL];
 	
 	if(![self isMovingOrScaling]){
-	
-		int aspectType = [options aspectType];
+		SeaAspectType aspectType = [options aspectType];
 		NSSize ratio;
 		id activeLayer;
 		
@@ -97,14 +91,12 @@
 		where.x += [activeLayer xoff];
 		where.y += [activeLayer yoff];
 		
-		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {
-
+		if (aspectType == SeaAspectTypeNone || aspectType == SeaAspectTypeRatio || oneToOne) {
 			// Determine the width of the cropping rectangle
 			if (startPoint.x < where.x) {
 				cropRect.origin.x = startPoint.x;
 				cropRect.size.width = where.x - startPoint.x;
-			}
-			else {
+			} else {
 				cropRect.origin.x = where.x;
 				cropRect.size.width = startPoint.x - where.x;
 			}
@@ -114,24 +106,20 @@
 				if (startPoint.y < where.y) {
 					cropRect.size.height = cropRect.size.width;
 					cropRect.origin.y = startPoint.y;
-				}
-				else {
+				} else {
 					cropRect.size.height = cropRect.size.width;
 					cropRect.origin.y = startPoint.y - cropRect.size.height;
 				}
-			}
-			else if (aspectType == kRatioAspectType) {
+			} else if (aspectType == SeaAspectTypeRatio) {
 				ratio = [options ratio];
 				if (startPoint.y < where.y) {
 					cropRect.size.height = cropRect.size.width * ratio.height;
 					cropRect.origin.y = startPoint.y;
-				}
-				else {
+				} else {
 					cropRect.size.height = cropRect.size.width * ratio.height;
 					cropRect.origin.y = startPoint.y - cropRect.size.height;
 				}
-			}
-			else {
+			} else {
 				if (startPoint.y < where.y) {
 					cropRect.origin.y = startPoint.y;
 					cropRect.size.height = where.y - startPoint.y;
@@ -141,13 +129,9 @@
 					cropRect.size.height = startPoint.y - where.y;
 				}
 			}
-			
-		}
-		else {
-		
+		} else {
 			cropRect.origin.x = where.x;
 			cropRect.origin.y = where.y;
-			
 		}
 
 		// Update the changes
@@ -162,7 +146,7 @@
 {
 	[self mouseDraggedTo:where withEvent:event];
 	
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 	translating = NO;
 }
 
@@ -170,8 +154,8 @@
 {
 	int width, height;
 	
-	width = [(SeaContent *)[document contents] width];
-	height = [(SeaContent *)[document contents] height];
+	width = [[document contents] width];
+	height = [[document contents] height];
 	return IntConstrainRect(cropRect, IntMakeRect(0, 0, width, height));
 }
 

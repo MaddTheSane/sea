@@ -1,3 +1,6 @@
+#include <math.h>
+#include <tgmath.h>
+
 #import "LassoTool.h"
 #import "SeaDocument.h"
 #import "SeaSelection.h"
@@ -16,9 +19,9 @@
 
 @implementation LassoTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
-	return kLassoTool;
+	return SeaToolsLasso;
 }
 
 
@@ -75,14 +78,14 @@
 
 - (void)fineMouseUpAt:(NSPoint)where withEvent:(NSEvent *)event
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer = [[document contents] activeLayer];
 	[super mouseUpAt:IntMakePoint(where.x - [layer xoff], where.y - [layer yoff]) withEvent:event];
 	
 	// Check we have a valid start point
 	if (intermediate && ![super isMovingOrScaling]) {
 		unsigned char *overlay = [[document whiteboard] overlay];
 		unsigned char *fakeOverlay;
-		int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
+		int width = [layer width], height = [layer height];
 		float xScale, yScale;
 		int fakeHeight, fakeWidth;
 		int interpolation;
@@ -95,16 +98,16 @@
 		[[document docView] setNeedsDisplay:YES];
 
 		// Clear last selection
-		if([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode)
+		if([options selectionMode] == SeaSelectDefault || [options selectionMode] == SeaSelectForceNew)
 			[[document selection] clearSelection];
 		
 		// No single-pixel loops
 		if (pos <= 1) return;
 
 		// Fill out the variables
-		if([[document docView] zoom] <= 1){
+		if ([[document docView] zoom] <= 1) {
 			interpolation = GIMP_INTERPOLATION_NONE;
-		}else{
+		} else {
 			interpolation = GIMP_INTERPOLATION_CUBIC;
 		}
 					
@@ -172,7 +175,7 @@
 	}
 
 	translating = NO;
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 }
 
 - (BOOL)isFineTool

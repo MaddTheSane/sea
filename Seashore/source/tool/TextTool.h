@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
@@ -11,35 +12,27 @@
 */
 
 @interface TextTool : AbstractTool {
+	/// The preview panel
+	IBOutlet NSPanel *panel;
+	
+	/// The move panel
+	IBOutlet NSWindow *movePanel;
+	
+	/// The preview text box
+	IBOutlet NSTextView *textbox;
+	
+	/// The font manager associated with the text tool
+	NSFontManager *fontManager;
 
-	// The preview panel
-	IBOutlet id panel;
-	
-	// The move panel
-	IBOutlet id movePanel;
-	
-	// The preview text box
-	IBOutlet id textbox;
-	
-	// The font manager associated with the text tool
-	id fontManager;
-
-	// The point where the mouse was released
+	/// The point where the mouse was released
 	IntPoint where;
 	
-	// The rect containing the preview
+	/// The rect containing the preview
 	IntRect previewRect;
 	
-	// Is the tool running?
+	/// Is the tool running?
 	BOOL running;
-	
 }
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		mouseUpAt:withEvent:
@@ -132,3 +125,9 @@
 - (void)centerVertically;
 
 @end
+
+#ifndef __private_extern
+#define __private_extern __attribute__((visibility("hidden")))
+#endif
+
+extern NSFont *gNewFont __private_extern;

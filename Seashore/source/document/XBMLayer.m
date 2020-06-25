@@ -6,7 +6,7 @@
 
 @implementation XBMLayer
 
-- (id)initWithFile:(FILE *)file offset:(int)offset document:(id)doc sharedInfo:(SharedXBMInfo *)info
+- (instancetype)initWithFile:(FILE *)file offset:(long)offset document:(id)doc sharedInfo:(SharedXBMInfo *)info
 {
 	unsigned char value;
 	char string[9], temp;
@@ -14,8 +14,8 @@
 	BOOL oddWidth = NO;
 	
 	// Initialize superclass first
-	if (![super initWithDocument:doc])
-		return NULL;
+	if (!(self =[super initWithDocument:doc]))
+		return nil;
 	
 	// Set the samples per pixel correctly
 	spp = 2; width = info->width; height = info->height;
@@ -32,8 +32,7 @@
 		
 		// Fail if something went wrong
 		if (ferror(file) || feof(file)) {
-			[self autorelease];
-			return NULL;
+			return nil;
 		}
 		
 		// Extract the string containing the value
@@ -42,11 +41,10 @@
 		do {
 			i++;
 			string[i] = fgetc(file);
-		} while ((i < 8) && (string[i] >= '0' && string[i] <= '9' || string[i] >= 'a' && string[i] <= 'f' || string[i] >= 'A' && string[i] <= 'F' || string[i] == 'x') && !(ferror(file) || feof(file)));
+		} while ((i < 8) && ((string[i] >= '0' && string[i] <= '9') || (string[i] >= 'a' && string[i] <= 'f') || (string[i] >= 'A' && string[i] <= 'F') || string[i] == 'x') && !(ferror(file) || feof(file)));
 		
 		// Fail if something went wrong
 		if (ferror(file) || feof(file)) {
-			[self autorelease];
 			return NULL;
 		}
 		

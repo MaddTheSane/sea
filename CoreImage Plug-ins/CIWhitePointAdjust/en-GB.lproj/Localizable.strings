@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Colour Adjust";
+description = "Adjusts the selection's white point to match the foreground colour";
+license = "Public Domain";
+name = "White Point";

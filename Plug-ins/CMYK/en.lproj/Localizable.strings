@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2004";
+groupName = "Color Effect";
+description = "Converts the selection to CMYK using ColorSync.";
+license = "Public Domain";
+name = "Convert to CMYK";

@@ -1,5 +1,8 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractOptions.h"
+
+@class InfoPanel;
 
 /*!
 	@class		EffectOptions
@@ -9,46 +12,22 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2007 Mark Pazolli
 */
-
-@interface EffectOptions : AbstractOptions {
+@interface EffectOptions : AbstractOptions <NSTableViewDataSource, NSTableViewDelegate> {
 	// The table listing all effects
-	IBOutlet id effectTable;
+	IBOutlet NSTableView *effectTable;
 	
 	// The instruction for those effects
-	IBOutlet id effectTableInstruction;
+	IBOutlet NSTextField *effectTableInstruction;
 	
 	// The label showing the number of clicks remaining
-	IBOutlet id clickCountLabel;
+	IBOutlet NSTextField *clickCountLabel;
 	
 	// The panel of the effect options
-	IBOutlet id panel;
+	IBOutlet InfoPanel *panel;
 
 	// The parent window for the effects options
-	id parentWin;
+	__weak id parentWin;
 }
-
-
-/*!
-	@method		tableView:objectValueForTableColumn:row:
-	@discussion	Returns the name of a given row in the effect table.
-	@param		tableView
-				Ignored.
-	@param		tableColumn
-				Ignored.
-	@param		rowIndex
-				The row of the table.
-	@result		An NSString representing the name of the effect.
-*/
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(int)rowIndex;
-
-/*!
-	@method		numberOfRowsInTableView:
-	@discussion	Returns the number of rows in the effect table.
-	@param		tableView
-				Ignored.
-	@result		An integer representing the number of rows.
-*/
-- (int)numberOfRowsInTableView:(NSTableView *)tableView;
 
 /*!
 	@method		tableViewSelectionDidChange:
@@ -59,11 +38,11 @@
 - (void)tableViewSelectionDidChange:(NSNotification *)notification;
 
 /*!
-	@method		selectedRow
+	@property	selectedRow
 	@discussion	The row currently selected by the options.
 	@result		An integer.
 */
-- (int)selectedRow;
+@property (readonly) NSInteger selectedRow;
 
 /*!
 	@method		updateClickCount:

@@ -1,4 +1,8 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+
+@class SeaDocument;
+@class TextureUtility;
 
 /*!
 	@class		ColorSelectView
@@ -8,19 +12,16 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface ColorSelectView : NSView {
-
-	// The document associated with this colour selection view
-	id document;
-
-	// YES if the mouse is down on the swap button
+	/// YES if the mouse is down on the swap button
 	BOOL mouseDownOnSwap;
 
-	// The texture utility
-	IBOutlet id textureUtility;
-	
+	/// The texture utility
+	IBOutlet TextureUtility *textureUtility;
 }
+
+/// The document associated with this colour selection view
+@property (nonatomic, weak) SeaDocument *document;
 
 /*!
 	@method		initWithFrame:
@@ -29,13 +30,7 @@
 				The frame with which to initialize the view.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithFrame:(NSRect)frame;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)initWithFrame:(NSRect)frame;
 
 /*!
 	@method		setDocument:
@@ -44,7 +39,7 @@
 	@param		doc
 				The document whose colours should be reflected.
 */
-- (void)setDocument:(id)doc;
+- (void)setDocument:(SeaDocument*)doc;
 
 /*!
 	@method		acceptsFirstMouse:
@@ -142,7 +137,7 @@
 	@method		isFlipped
 	@discussion	Returns whether or not the view uses a flipped co-ordinate
 				system.
-	@result		Returns YES indicating that the view does use a flipped
+	@result		Returns \c YES indicating that the view does use a flipped
 				co-ordinate system.
 */
 - (BOOL)isFlipped;
@@ -150,7 +145,7 @@
 /*!
 	@method		isOpaque
 	@discussion	Returns whether or not the view is opaque.
-	@result		Returns NO indicating that the view is opaque.
+	@result		Returns \c NO indicating that the view is opaque.
 */
 - (BOOL)isOpaque;
 

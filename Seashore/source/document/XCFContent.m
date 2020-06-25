@@ -1,28 +1,28 @@
 #import "XCFContent.h"
 #import "XCFLayer.h"
+#if MAIN_COMPILE
 #import "SeaController.h"
 #import "SeaWarning.h"
 #import "SeaDocument.h"
 #import "SeaDocumentController.h"
 #import "SeaSelection.h"
+#endif
 
 @implementation XCFContent
 
-static inline void fix_endian_read(int *input, int size)
+static inline void fix_endian_read(int *input, size_t size)
 {
-#ifdef __LITTLE_ENDIAN__
-	int i;
-	
-	for (i = 0; i < size; i++) {
-		input[i] = ntohl(input[i]);
+	for (NSInteger i = 0; i < size; i++) {
+		input[i] = CFSwapInt32BigToHost(input[i]);
 	}
-#endif
 }
 
+#if MAIN_COMPILE
 + (BOOL)typeIsEditable:(NSString *)aType
 {
 	return [[SeaDocumentController sharedDocumentController] type: aType isContainedInDocType: @"GIMP image"];
 }
+#endif
 
 - (BOOL)readHeader:(FILE *)file
 {
@@ -56,10 +56,10 @@ static inline void fix_endian_read(int *input, int size)
 
 - (BOOL)readProperties:(FILE *)file sharedInfo:(SharedXCFInfo *)info
 {
-	int propType, propSize;
+	int propSize;
 	BOOL finished = NO;
 	int lostprops_pos;
-	int parasites_start;
+	long parasites_start;
 	char *nameString;
 	int pos, i;
 	
@@ -69,7 +69,7 @@ static inline void fix_endian_read(int *input, int size)
 		// Read the property information
 		fread(tempIntString, sizeof(int), 2, file);
 		fix_endian_read(tempIntString, 2);
-		propType = tempIntString[0];
+		XcfPropType propType = tempIntString[0];
 		propSize = tempIntString[1];
 		
 		// Act appropriately on the property type
@@ -81,7 +81,7 @@ static inline void fix_endian_read(int *input, int size)
 			
 				// Store the color map and complain if we are using the problematic version 0 XCF file
 				if (version == 0) {
-					NSRunAlertPanel(LOCALSTR(@"indexed color title", @"Indexed colour not supported"), LOCALSTR(@"indexed color body", @"XCF files using indexed colours are only supported if they are of version 1 or greater. This is because version 0 is known to have certain problems with indexed colours."), LOCALSTR(@"ok", @"OK"), NULL, NULL);
+					NSRunAlertPanel(LOCALSTR(@"indexed color title", @"Indexed colour not supported"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"indexed color body", @"XCF files using indexed colours are only supported if they are of version 1 or greater. This is because version 0 is known to have certain problems with indexed colours."));
 					return NO;
 				}
 				else {
@@ -140,11 +140,11 @@ static inline void fix_endian_read(int *input, int size)
 								i++;
 							}
 						} while (nameString[i - 1] != 0 && !ferror(file));
-						parasites[pos].name = [[NSString alloc] initWithUTF8String:nameString];
+						parasites[pos].name = CFBridgingRetain([[NSString alloc] initWithUTF8String:nameString]);
 						free (nameString);
 					}
 					else {
-						parasites[pos].name = [[NSString alloc] initWithString:@"unnamed"];
+						parasites[pos].name = CFBridgingRetain(@"unnamed");
 					}
 					
 					// Remember flags and data size
@@ -188,12 +188,14 @@ static inline void fix_endian_read(int *input, int size)
 	return YES;
 }
 
-- (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
+#if MAIN_COMPILE
+- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfURL:(NSURL *)path error:(NSError**)outError;
 {
+	//NSFileHandle *file = [NSFileHandle fileHandleForReadingFromURL:path error:NULL];
 	SharedXCFInfo info;
-	int layerOffsets, offset;
+	size_t layerOffsets, offset;
 	FILE *file;
-	id layer;
+	XCFLayer *layer;
 	int i;
 	BOOL maskToAlpha = NO;
 	ParasiteData *exifParasite;
@@ -202,33 +204,40 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Initialize superclass first
 	if (![super initWithDocument:doc])
-		return NULL;
+		return nil;
 	
 	// Open the file
 	file = fopen([path fileSystemRepresentation], "rb");
 	if (file == NULL) {
-		[self autorelease];
-		return NULL;
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:nil];
+		}
+		return nil;
 	}
 	
 	// Read the header
 	if ([self readHeader:file] == NO) {
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Invalid header in GIMP file"}];
+		}
 		fclose(file);
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// Express warning if necessary
-	if (version > 2)
-		NSRunAlertPanel(LOCALSTR(@"xcf version title", @"XCF version not supported"), LOCALSTR(@"xcf version body", @"The version of the XCF file you are trying to load is not supported by this program, loading may fail."), LOCALSTR(@"ok", @"OK"), NULL, NULL);
+	if (version > 2) {
+		NSRunAlertPanel(LOCALSTR(@"xcf version title", @"XCF version not supported"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"xcf version body", @"The version of the XCF file you are trying to load is not supported by this program, loading may fail."));
+	}
 	
 	// NSLog(@"Properties begin: %d", ftell(file));
 	
 	// Read properties
 	if ([self readProperties:file sharedInfo:&info] == NO) {
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load GIMP properties"}];
+		}
 		fclose(file);
-		[self autorelease];
-		return NULL;
+		return nil;
 	}
 	
 	// NSLog(@"Properties end: %d", ftell(file));
@@ -239,7 +248,7 @@ static inline void fix_endian_read(int *input, int size)
 	// Determine the offset for the next layer
 	i = 0;
 	layerOffsets = ftell(file);
-	layers = [NSArray array];
+	layers = @[];
 	do {
 		fseek(file, layerOffsets + i * sizeof(int), SEEK_SET);
 		fread(tempIntString, sizeof(int), 1, file);
@@ -251,9 +260,10 @@ static inline void fix_endian_read(int *input, int size)
 		if (offset != 0) {
 			layer = [[XCFLayer alloc] initWithFile:file offset:offset document:doc sharedInfo:&info];
 			if (layer == NULL) {
+				if (outError) {
+					*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"Failed to load layer in GIMP file"}];
+				}
 				fclose(file);
-				[layers retain];
-				[self autorelease];
 				return NULL;
 			}
 			layers = [layers arrayByAddingObject:layer];
@@ -264,14 +274,13 @@ static inline void fix_endian_read(int *input, int size)
 		
 		i++;
 	} while (offset != 0);
-	[layers retain];
 	
 	// Check for channels
 	fseek(file, layerOffsets + i * sizeof(int), SEEK_SET);
 	fread(tempIntString, sizeof(int), 1, file);
 	fix_endian_read(tempIntString, 1);
 	if (tempIntString[0] != 0) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"channels message", @"This XCF file contains channels which are not currently supported by Seashore. These channels will be lost upon saving.") forDocument: doc level:kHighImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"channels message", @"This XCF file contains channels which are not currently supported by Seashore. These channels will be lost upon saving.") forDocument: doc level:SeaWarningImportanceHigh];
 	}
 	
 	// Close the file
@@ -281,8 +290,10 @@ static inline void fix_endian_read(int *input, int size)
 	if ( xres < kMinResolution || yres < kMinResolution || xres > kMaxResolution || yres > kMaxResolution)
 		xres = yres = 72;
 	if (width < kMinImageSize || height < kMinImageSize || width > kMaxImageSize || height > kMaxImageSize) {
-		[self autorelease];
-		return NULL;
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:@{NSLocalizedDescriptionKey: @"File width/height is incompatible with Seashore"}];
+		}
+		return nil;
 	}
 	
 	// We don't support indexed images any more
@@ -293,7 +304,7 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Inform user if we've composited the mask to the alpha channel
 	if (maskToAlpha) {
-		[[SeaController seaWarning] addMessage:LOCALSTR(@"mask-to-alpha message", @"Some of the masks in this image have been composited to their layer's alpha channel. These masks will be lost upon saving.") forDocument: doc level:kHighImportance];
+		[[SeaController seaWarning] addMessage:LOCALSTR(@"mask-to-alpha message", @"Some of the masks in this image have been composited to their layer's alpha channel. These masks will be lost upon saving.") forDocument: doc level:SeaWarningImportanceHigh];
 	}
 	
 	// Store EXIF data
@@ -301,11 +312,115 @@ static inline void fix_endian_read(int *input, int size)
 	if (exifParasite) {
 		exifContainer = [NSData dataWithBytesNoCopy:exifParasite->data length:exifParasite->size freeWhenDone:NO];
 		exifData = [NSPropertyListSerialization propertyListFromData:exifContainer mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:&errorString];
-		[exifData retain];
 	}
 	[self deleteParasiteWithName:@"exif-plist"];
 	
 	return self;
 }
+
+- (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
+{
+	return [self initWithDocument:doc contentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+}
+#else
+- (instancetype)initWithContentsOfFile:(NSString *)path;
+{
+	if (self = [super init]) {
+		SharedXCFInfo info;
+		long layerOffsets, offset;
+		FILE *file;
+		SeaLayer *layer;
+		int i;
+		BOOL maskToAlpha = NO;
+		ParasiteData *exifParasite;
+		NSString *errorString;
+		NSData *exifContainer;
+		
+		// Initialize superclass first
+		if (![super init])
+			return NULL;
+		
+		const char *fsRep = [path fileSystemRepresentation];
+		
+		// Open the file
+		file = fopen(fsRep, "r");
+		if (file == NULL) {
+			return nil;
+		}
+		
+		// Read the header
+		if ([self readHeader:file] == NO) {
+			fclose(file);
+			return nil;
+		}
+		
+		// Read properties
+		if ([self readProperties:file sharedInfo:&info] == NO) {
+			fclose(file);
+			return nil;
+		}
+		
+		// Provide the type for the layer
+		info.type = type;
+		
+		// Determine the offset for the next layer
+		i = 0;
+		layerOffsets = ftell(file);
+		layers = @[];
+		do {
+			fseek(file, layerOffsets + i * sizeof(int), SEEK_SET);
+			fread(tempIntString, sizeof(int), 1, file);
+			fix_endian_read(tempIntString, 1);
+			offset = tempIntString[0];
+			
+			// If it exists, move to it
+			if (offset != 0) {
+				layer = [[XCFLayer alloc] initWithFile:file offset:(int)offset sharedInfo:&info];
+				if (layer == NULL) {
+					fclose(file);
+					return nil;
+				}
+				layers = [layers arrayByAddingObject:layer];
+				if (info.active)
+					activeLayerIndex = i;
+				maskToAlpha = maskToAlpha || info.maskToAlpha;
+			}
+			
+			i++;
+		} while (offset != 0);
+		
+		// Check for channels
+		fseek(file, layerOffsets + i * sizeof(int), SEEK_SET);
+		fread(tempIntString, sizeof(int), 1, file);
+		fix_endian_read(tempIntString, 1);
+		
+		// Close the file
+		fclose(file);
+		
+		// Do some final checks to make sure we're are working with reasonable figures before returning ourselves
+		if ( xres < kMinResolution || yres < kMinResolution || xres > kMaxResolution || yres > kMaxResolution)
+			xres = yres = 72;
+		if (width < kMinImageSize || height < kMinImageSize || width > kMaxImageSize || height > kMaxImageSize) {
+			return NULL;
+		}
+		
+		// We don't support indexed images any more
+		if (type == XCF_INDEXED_IMAGE) {
+			type = XCF_RGB_IMAGE;
+			free(info.cmap);
+		}
+		
+		// Store EXIF data
+		exifParasite = [self parasiteWithName:@"exif-plist"];
+		if (exifParasite) {
+			exifContainer = [NSData dataWithBytesNoCopy:exifParasite->data length:exifParasite->size freeWhenDone:NO];
+			exifData = [NSPropertyListSerialization propertyListFromData:exifContainer mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:&errorString];
+		}
+		[self deleteParasiteWithName:@"exif-plist"];
+	}
+	return self;
+}
+
+#endif
 
 @end

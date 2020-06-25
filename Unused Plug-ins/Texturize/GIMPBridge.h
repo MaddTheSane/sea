@@ -2,6 +2,11 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef unsigned char guchar;
 typedef char gchar;
@@ -9,14 +14,18 @@ typedef unsigned int guint;
 typedef unsigned int guint32;
 typedef int gint;
 typedef int gint32;
-typedef char gboolean;
+typedef bool gboolean;
 typedef float gfloat;
 typedef double gdouble;
 typedef void *gpointer;
 typedef unsigned long gulong;
 
+#ifndef MAX
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
+#endif
+#ifndef MIN
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
+#endif
 #define g_warning(...)
 #define g_message(...)
 #define gimp_progress_init(...)
@@ -28,4 +37,6 @@ typedef unsigned long gulong;
 #define g_free(x) free(x)
 #define g_new(x,y) (guchar *)malloc(y * sizeof(x))
 
-
+#ifdef __cplusplus
+}
+#endif

@@ -1,5 +1,6 @@
 #import "SeaBrush.h"
 #import "Bitmap.h"
+#import "SeaBrushFuncs.h"
 
 typedef struct {
   unsigned int   header_size;  /*  header_size = sizeof (BrushHeader) + brush name  */
@@ -13,16 +14,21 @@ typedef struct {
 
 #define GBRUSH_MAGIC    (('G' << 24) + ('I' << 16) + ('M' << 8) + ('P' << 0))
 
-#ifdef TODO
-#warning Anti-aliasing for pixmap brushes?
-#endif
+//TODO: Anti-aliasing for pixmap brushes?
 
-extern void determineBrushMask(unsigned char *input, unsigned char *output, int width, int height, int index1, int index2);
 
 @implementation SeaBrush
+@synthesize usePixmap;
+@synthesize name;
+@synthesize spacing;
+@synthesize width;
+@synthesize height;
+@synthesize mask;
+@synthesize pixmap;
 
-- (id)initWithContentsOfFile:(NSString *)path
+- (instancetype)initWithContentsOfFile:(NSString *)path
 {
+	if (self = [super init]) {
 	FILE *file;
 	BrushHeader header;
 	BOOL versionGood = NO;
@@ -33,7 +39,6 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	file = fopen([path fileSystemRepresentation] ,"rb");
 	if (file == NULL) {
 		NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -42,13 +47,13 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	
 	// Convert brush header to proper endianess
 #ifdef __LITTLE_ENDIAN__
-	header.header_size = ntohl(header.header_size);
-	header.version = ntohl(header.version);
-	header.width = ntohl(header.width);
-	header.height = ntohl(header.height);
-	header.bytes = ntohl(header.bytes);
-	header.magic_number = ntohl(header.magic_number);
-	header.spacing = ntohl(header.spacing);
+	header.header_size = CFSwapInt32BigToHost(header.header_size);
+	header.version = CFSwapInt32BigToHost(header.version);
+	header.width = CFSwapInt32BigToHost(header.width);
+	header.height = CFSwapInt32BigToHost(header.height);
+	header.bytes = CFSwapInt32BigToHost(header.bytes);
+	header.magic_number = CFSwapInt32BigToHost(header.magic_number);
+	header.spacing = CFSwapInt32BigToHost(header.spacing);
 #endif
 
 	// Check version compatibility
@@ -56,7 +61,6 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	versionGood = versionGood || (header.version == 1); 
 	if (!versionGood) {
 		NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -74,7 +78,9 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	
 	// Read in brush name
 	nameLen = header.header_size - sizeof(header);
-	if (nameLen > 512) { [self autorelease]; return NULL; }
+	if (nameLen > 512) {
+		return nil;
+	}
 	if (nameLen > 0) {
 		fread(nameString, sizeof(char), nameLen, file);
 		name = [[NSString alloc] initWithUTF8String:nameString];
@@ -91,31 +97,31 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 			mask = malloc(make_128(tempSize));
 			if (fread(mask, sizeof(char), tempSize, file) < tempSize) {
 				NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
-				[self autorelease];
 				return NULL;
 			}
-		break;
+			break;
+			
 		case 4:
 			usePixmap = YES;
 			tempSize = width * height * 4;
 			pixmap = malloc(make_128(tempSize));
 			if (fread(pixmap, sizeof(char), tempSize, file) < tempSize) {
 				NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
-				[self autorelease];
-				return NULL;
+				return nil;
 			}
 			prePixmap = malloc(tempSize);
-			premultiplyBitmap(4, prePixmap, pixmap, width * height);
-		break;
+			SeaPremultiplyBitmap(4, prePixmap, pixmap, width * height);
+			break;
+			
 		default:
 			NSLog(@"Brush \"%@\" failed to load\n", [path lastPathComponent]);
-			[self autorelease];
-			return NULL;
-		break;
+			return nil;
+			break;
 	}
 
 	// Close the brush file
 	fclose(file);
+	}
 	
 	return self;
 }
@@ -126,30 +132,32 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	
 	if (maskCache) {
 		for (i = 0; i < kBrushCacheSize; i++) {
-			if (maskCache[i].cache) free(maskCache[i].cache);
+			if (maskCache[i].cache)
+				free(maskCache[i].cache);
 		}
 		free(maskCache);
 	}
-	if (scaled) free(scaled);
-	if (positioned) free(positioned);
-	if (name) [name autorelease];
-	if (mask) free(mask);
-	if (pixmap) free(pixmap);
-	if (prePixmap) free(prePixmap);
-	[super dealloc];
+	if (scaled)
+		free(scaled);
+	if (positioned)
+		free(positioned);
+	if (mask)
+		free(mask);
+	if (pixmap)
+		free(pixmap);
+	if (prePixmap)
+		free(prePixmap);
 }
 
 - (void)activate
 {
-	int i;
-	
 	// Deactivate ourselves first (just in case)
 	[self deactivate];
 	
 	// Reset the cache
 	checkCount = 0;
 	maskCache = malloc(sizeof(CachedMask) * kBrushCacheSize);
-	for (i = 0; i < kBrushCacheSize; i++) {
+	for (int i = 0; i < kBrushCacheSize; i++) {
 		maskCache[i].cache = malloc(make_128((width + 2) * (height + 2)));
 		maskCache[i].index1 = maskCache[i].index2 = maskCache[i].scale = -1;
 		maskCache[i].lastCheck = 0;
@@ -160,19 +168,23 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 
 - (void)deactivate
 {
-	int i;
-	
 	// Free the cache
 	if (maskCache) {
-		for (i = 0; i < kBrushCacheSize; i++) {
+		for (int i = 0; i < kBrushCacheSize; i++) {
 			if (maskCache[i].cache) free(maskCache[i].cache);
 			maskCache[i].cache = NULL;
 		}
 		free(maskCache);
 		maskCache = NULL;
 	}
-	if (scaled) { free(scaled); scaled = NULL; }
-	if (positioned) { free(positioned); positioned = NULL; }
+	if (scaled) {
+		free(scaled);
+		scaled = NULL;
+	}
+	if (positioned) {
+		free(positioned);
+		positioned = NULL;
+	}
 }
 
 - (NSString *)pixelTag
@@ -202,7 +214,7 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 		}
 	}
 	
-	return NULL;
+	return nil;
 }
 
 - (NSImage *)thumbnail
@@ -216,49 +228,26 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	thumbHeight = height;
 	if (width > 40 || height > 40) {
 		if (width > height) {
-			thumbHeight = (int)((float)height * (40.0 / (float)width));
+			thumbHeight = (int)((CGFloat)height * (40.0 / (CGFloat)width));
 			thumbWidth = 40;
-		}
-		else {
-			thumbWidth = (int)((float)width * (40.0 / (float)height));
+		} else {
+			thumbWidth = (int)((CGFloat)width * (40.0 / (CGFloat)height));
 			thumbHeight = 40;
 		}
 	}
 	
 	// Create the representation
-	if (usePixmap)
+	if (usePixmap) {
 		tempRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&prePixmap pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bytesPerRow:width * 4 bitsPerPixel:8 * 4];
-	else
+	} else {
 		tempRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&mask pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:1 hasAlpha:NO isPlanar:NO colorSpaceName:NSDeviceBlackColorSpace bytesPerRow:width * 1 bitsPerPixel:8 * 1];
+	}
 	
 	// Wrap it up in an NSImage
 	thumbnail = [[NSImage alloc] initWithSize:NSMakeSize(thumbWidth, thumbHeight)];
-	[thumbnail setScalesWhenResized:YES];
 	[thumbnail addRepresentation:tempRep];
-	[tempRep autorelease];
-	[thumbnail autorelease];
 	
 	return thumbnail;
-}
-
-- (NSString *)name
-{
-	return name;
-}
-
-- (int)spacing
-{
-	return spacing;
-}
-
-- (int)width
-{
-	return width;
-}
-
-- (int)height
-{
-	return height;
 }
 
 - (int)fakeWidth
@@ -271,23 +260,13 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	return usePixmap ? height : height + 2;
 }
 
-- (unsigned char *)mask
-{
-	return mask;
-}
-
-- (unsigned char *)pixmap
-{
-	return pixmap;
-}
-
 - (unsigned char *)maskForPoint:(NSPoint)point pressure:(int)value
 {
-	float remainder, factor, xextra, yextra;
+	CGFloat remainder, factor, xextra, yextra;
 	int i, index1, index2, scale, scalew, scaleh, minCheckPos;
 	
 	// Determine the scale
-	factor = (0.30 * ((float)value / 255.0) + 0.70);
+	factor = (0.30 * ((CGFloat)value / 255.0) + 0.70);
 	if (width >= height) {
 		scale = factor * width;
 	}
@@ -333,8 +312,7 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 		GCScalePixels(scaled, scalew, scaleh,  mask, width, height, GIMP_INTERPOLATION_LINEAR, 1);
 		arrangePixels(positioned, width, height, scaled, scalew, scaleh);
 		determineBrushMask(positioned, maskCache[minCheckPos].cache, width, height, index1, index2);
-	}
-	else {
+	} else {
 		determineBrushMask(mask, maskCache[minCheckPos].cache, width, height, index1, index2);
 	}
 	maskCache[minCheckPos].index1 = index1;
@@ -350,12 +328,7 @@ extern void determineBrushMask(unsigned char *input, unsigned char *output, int 
 	return pixmap;
 }
 
-- (BOOL)usePixmap
-{
-	return usePixmap;
-}
-
-- (NSComparisonResult)compare:(id)other
+- (NSComparisonResult)compare:(SeaBrush*)other
 {
 	return [[self name] caseInsensitiveCompare:[other name]];
 }

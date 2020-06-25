@@ -57,4 +57,3 @@ static inline void pixel_region_get_row(PixelRegion *pr, gint x, gint y, gint w,
 		}
 	}
 }
-

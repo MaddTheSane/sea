@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Copyright © 2005 Mark Pazolli";
+groupName = "Color Effect";
+license = "GNU General Public License";
+description = "Runs a threshold operation on the selection";
+name = "Threshold";

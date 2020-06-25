@@ -1,19 +1,14 @@
+#include <GIMPCore/GIMPCore.h>
 #import "InvertClass.h"
+#import "PluginData.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
 @implementation InvertClass
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (SeaPluginType)type
 {
-	seaPlugins = manager;
-	
-	return self;
-}
-
-- (int)type
-{
-	return 0;
+	return SeaPluginBasic;
 }
 
 - (NSString *)name
@@ -33,14 +28,13 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *data, *overlay, *replace;
 	int pos, i, j, k, width, spp, channel;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	selection = [pluginData selection];
 	spp = [pluginData spp];
 	width = [pluginData width];
@@ -54,19 +48,19 @@
 			
 			pos = j * width + i;
 			
-			if (channel == kAllChannels) {
+			if (channel == SeaSelectedChannelAll) {
 				for (k = 0; k < spp - 1; k++)
 					overlay[pos * spp + k] = 255 - data[pos * spp + k];
 				overlay[(pos + 1) * spp - 1] = data[(pos + 1) * spp - 1];
 			}
 			
-			if (channel == kPrimaryChannels) {
+			if (channel == SeaSelectedChannelPrimary) {
 				for (k = 0; k < spp - 1; k++)
 					overlay[pos * spp + k] = 255 - data[pos * spp + k];
 				overlay[(pos + 1) * spp - 1] = 255;
 			}
 			
-			if (channel == kAlphaChannel) {
+			if (channel == SeaSelectedChannelAlpha) {
 				pos = j * width + i;
 				for (k = 0; k < spp - 1; k++)
 					overlay[pos * spp + k] = 255 - data[(pos + 1) * spp - 1];

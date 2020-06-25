@@ -71,7 +71,7 @@
 - (IBAction)flatten:(id)sender
 {
 	// Warn before flattening the image
-	if (NSRunAlertPanel(LOCALSTR(@"flatten title", @"Information will be lost"), LOCALSTR(@"flatten body", @"Parts of the document that are not currently visible will be lost. Are you sure you wish to continue?"), LOCALSTR(@"flatten", @"Flatten"), LOCALSTR(@"cancel", @"Cancel"), NULL) == NSAlertDefaultReturn)
+	if (NSRunAlertPanel(LOCALSTR(@"flatten title", @"Information will be lost"), @"%@", LOCALSTR(@"flatten", @"Flatten"), LOCALSTR(@"cancel", @"Cancel"), NULL, LOCALSTR(@"flatten body", @"Parts of the document that are not currently visible will be lost. Are you sure you wish to continue?")) == NSAlertDefaultReturn)
 		[[gCurrentDocument contents] flatten];
 }
 
@@ -107,7 +107,7 @@
 
 - (IBAction)deleteLayer:(id)sender
 {
-	id document = gCurrentDocument;
+	SeaDocument *document = gCurrentDocument;
 	
 	if ([[document contents] layerCount] > 1)
 		[(SeaContent *)[document contents] deleteLayer:kActiveLayer];
@@ -123,9 +123,9 @@
 
 - (IBAction)duplicateLayer:(id)sender
 {
-	id selection = [gCurrentDocument selection];
+	SeaSelection *selection = [(SeaDocument*)gCurrentDocument selection];
 	
-	if (![selection floating]) {
+	if (!selection.floating) {
 		[(SeaContent *)[gCurrentDocument contents] duplicateLayer:kActiveLayer];
 	}
 }
@@ -142,12 +142,12 @@
 
 - (IBAction)setColorSpace:(id)sender
 {
-	[[gCurrentDocument contents] convertToType:[sender tag] - 240];
+	[[gCurrentDocument contents] convertToType:(int)([sender tag] - 240)];
 }
 
 - (IBAction)toggleLinked:(id)sender
 {
-	[[gCurrentDocument contents] setLinked: ![[[gCurrentDocument contents] activeLayer] linked] forLayer: kActiveLayer];
+	[[gCurrentDocument contents] setLinked: ![[[gCurrentDocument contents] activeLayer] isLinked] forLayer: kActiveLayer];
 }
 
 - (IBAction)clearAllLinks:(id)sender
@@ -157,13 +157,12 @@
 
 - (IBAction)toggleFloatingSelection:(id)sender
 {
-	id selection = [gCurrentDocument selection];
-	id contents = [gCurrentDocument contents];
+	SeaSelection *selection = [(SeaDocument*)gCurrentDocument selection];
+	SeaContent *contents = [gCurrentDocument contents];
 	
-	if ([selection floating]) {
+	if ([selection isFloating]) {
 		[contents anchorSelection];
-	}
-	else {
+	} else {
 		[contents makeSelectionFloat:NO];
 	}
 }
@@ -382,12 +381,13 @@
 
 - (IBAction)openColorSyncPanel:(id)sender
 {
-	CMLaunchControlPanel(0);
+	//CMLaunchControlPanel(0);
+	NSBeep();
 }
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	id document = gCurrentDocument;
+	SeaDocument *document = gCurrentDocument;
 	id contents = [document contents];
 	
 	// Never when there is no document
@@ -408,71 +408,71 @@
 	// Sometimes in other cases
 	switch ([menuItem tag]) {
 		case 200:
-			if([[[document window] contentView] visibilityForRegion: kSidebar])
+			if([[[document window] contentView] visibilityForRegion: SeaWindowRegionSidebar])
 				[menuItem setTitle:@"Hide Layers"];
 			else
 				[menuItem setTitle:@"Show Layers"];
 			return YES;
-		break;
+			break;
 		case 192:
-			if([[[document window] contentView] visibilityForRegion:kPointInformation])
+			if([[[document window] contentView] visibilityForRegion:SeaWindowRegionPointInformation])
 				[menuItem setTitle:@"Hide Point Information"];
 			else
 				[menuItem setTitle:@"Show Point Information"];
 			return YES;
-		break;
+			break;
 		case 191:
-			if([[[document window] contentView] visibilityForRegion: kOptionsBar])
+			if([[[document window] contentView] visibilityForRegion: SeaWindowRegionOptionsBar])
 				[menuItem setTitle:@"Hide Options Bar"];
 			else
 				[menuItem setTitle:@"Show Options Bar"];
-			return YES;			
-		break;
+			return YES;
+			break;
 		case 194:
-			if([[[document window] contentView] visibilityForRegion:kStatusBar])
+			if([[[document window] contentView] visibilityForRegion:SeaWindowRegionStatusBar])
 				[menuItem setTitle:@"Hide Status Bar"];
 			else
 				[menuItem setTitle:@"Show Status Bar"];
-			return YES;			
-		break;
+			return YES;
+			break;
 		case 210:
 			if (![[document docView] canZoomIn])
 				return NO;
-		break;
+			break;
 		case 211:
 			if (![[document docView] canZoomOut])
 				return NO;
-		break;
+			break;
 		case 213:
 		case 214:
 			if ([contents canRaise:kActiveLayer] == NO)
 				return NO;
-		break;
+			break;
 		case 215:
 		case 216:
 			if ([contents canLower:kActiveLayer] == NO)
 				return NO;
-		break;
+			break;
 		case 219:
 			if ([[document contents] layerCount] <= 1)
 				return NO;
-		break;
+			break;
 		case 220:
 			if ([contents canFlatten] == NO)
 				return NO;
-		break;
+			break;
 		case 230:
 			[menuItem setState:[[document whiteboard] CMYKPreview]];
 			if (![[document whiteboard] canToggleCMYKPreview])
 				return NO;
-		break;
+			break;
 		case 232:
 			[menuItem setState:[[document contents] cmykSave]];
-		break;
+			break;
 		case 240:
 		case 241:
 			[menuItem setState:[menuItem tag] == 240 + [(SeaContent *)contents type]];
-		break;
+			break;
 		case 250:
 			if ([[contents activeLayer] hasAlpha])
 				[menuItem setTitle:LOCALSTR(@"disable alpha", @"Disable Alpha Channel")];
@@ -480,19 +480,19 @@
 				[menuItem setTitle:LOCALSTR(@"enable alpha", @"Enable Alpha Channel")];
 			if (![[contents activeLayer] canToggleAlpha])
 				return NO;
-		break;
+			break;
 		case 264:
-			if(![[document selection] active] || [[document selection] floating])
+			if(!document.selection.active || document.selection.floating)
 				return NO;
-		break;
+			break;
 		case 300:
-			if ([[document selection] floating])
+			if (document.selection.floating)
 				[menuItem setTitle:LOCALSTR(@"anchor selection", @"Anchor Selection")];
 			else
 				[menuItem setTitle:LOCALSTR(@"float selection", @"Float Selection")];
-			if (![[document selection] active])
+			if (!document.selection.active)
 				return NO;
-		break;
+			break;
 		case 320:
 		case 321:
 		case 322:
@@ -505,19 +505,19 @@
 		case 411:
 		case 412:
 		case 413:
-			if ([[document selection] floating])
+			if (document.selection.floating)
 				return NO;
-		break;
+			break;
 		case 450:
 		case 451:
 		case 452:
-			if([[document selection] floating])
+			if(document.selection.floating)
 				return NO;
 			[menuItem setState: [[document contents] selectedChannel] == [menuItem tag] % 10];
-		break;
+			break;
 		case 460:
 			[menuItem setState: [contents trueView]];
-		break;
+			break;
 		case 340:
 		case 341:
 		case 342:
@@ -525,20 +525,20 @@
 		case 346:
 		case 347:
 		case 349:
-			if (![[contents activeLayer] linked])
+			if (![contents activeLayer].linked)
 				return NO;
-		break;
+			break;
 		case 382:
-			if ([[contents activeLayer] linked]){
+			if ([contents activeLayer].linked) {
 				[menuItem setTitle:@"Unlink Layer"];
-			}else{
+			} else {
 				[menuItem setTitle:@"Link Layer"];
 			}
-		break;
+			break;
 		case 380:
 			if (![[SeaController seaPlugins] hasLastEffect])
 				return NO;
-		break;
+			break;
 	}
 	
 	return YES;
@@ -546,7 +546,7 @@
 
 - (IBAction)crash:(id)sender
 {
-	int i;
+	long i;
 	
 	for (i = 0; i < 5000; i++) {
 		*((char *)i) = 0xFF;

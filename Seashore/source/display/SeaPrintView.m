@@ -1,3 +1,5 @@
+#include <math.h>
+#include <tgmath.h>
 #import "SeaPrintView.h"
 #import "SeaView.h"
 #import "SeaDocument.h"
@@ -21,27 +23,24 @@
 
 @implementation SeaPrintView
 
-- (id)initWithDocument:(id)doc 
+- (instancetype)initWithDocument:(SeaDocument*)doc
 {	
 	NSRect frame;
 		
 	// Remember the document this view is displaying
-	document = doc;
 
 	// Determine the frame at 100% 72-dpi
-	frame = NSMakeRect(0, 0, [(SeaContent *)[document contents] width] * (72.0 / (float)[[document contents] xres]), [(SeaContent *)[document contents] height] * (72.0 / (float)[[document contents] yres]));
+	frame = NSMakeRect(0, 0, [(SeaContent*)[doc contents] width] * (72.0 / (CGFloat)[[doc contents] xres]), [[doc contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
 
 	// Initialize superclass
-	if ([super initWithFrame:frame] == NULL)
+	if (!(self = [super initWithFrame:frame]))
 		return NULL;
+	
+	document = doc;
 	
     return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
 
 - (void)drawRect:(NSRect)rect
 {
@@ -56,17 +55,14 @@
 	[[NSColor whiteColor] set];
 	[[NSBezierPath bezierPathWithRect:destRect] fill];
 	
-	// We want our image flipped
-	[image setFlipped:YES];
-	
 	// For non 72 dpi resolutions we must scale here
 	if (xres != 72) {
-		srcRect.origin.x *= ((float)xres / 72.0);
-		srcRect.size.width *= ((float)xres / 72.0);
+		srcRect.origin.x *= ((CGFloat)xres / 72.0);
+		srcRect.size.width *= ((CGFloat)xres / 72.0);
 	}
 	if (yres != 72) {
-		srcRect.origin.y *= ((float)yres / 72.0);
-		srcRect.size.height *= ((float)yres / 72.0);
+		srcRect.origin.y *= ((CGFloat)yres / 72.0);
+		srcRect.size.height *= ((CGFloat)yres / 72.0);
 	}
 	
 	// Set interpolation (image smoothing) appropriately
@@ -75,17 +71,12 @@
 			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
 		else
 			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
-	}
-	else {
+	} else {
 		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
 	}
 	
-	// Fix for Jaguar
-	if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_2)
-		srcRect.origin.y = [image size].height - srcRect.origin.y - srcRect.size.height;
-	
 	// Draw the image to screen
-	[image drawInRect:destRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0];
+	[image drawInRect:destRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
 }
 
 - (BOOL)knowsPageRange:(NSRangePointer)range
@@ -96,39 +87,34 @@
 	float scale;
 	
 	// Work out the image's bounds
-	bounds = NSMakeRect(0, 0, [(SeaContent *)[document contents] width] * (72.0 / (float)[[document contents] xres]), [(SeaContent *)[document contents] height] * (72.0 / (float)[[document contents] yres]));
+	bounds = NSMakeRect(0, 0, [(SeaContent *)[document contents] width] * (72.0 / (CGFloat)[[document contents] xres]), [[document contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
 	
 	// Work out the paper's bounding rectangle
 	paper.size = [pi paperSize];
 	paper.size.height -= [pi topMargin] + [pi bottomMargin];
 	paper.size.width -= [pi leftMargin] + [pi rightMargin];
-	scale = [[[pi dictionary] objectForKey:NSPrintScalingFactor] floatValue];
+	scale = [[pi dictionary][NSPrintScalingFactor] floatValue];
 	paper.size.height /= scale;
 	paper.size.width /= scale;
 	
 	if (bounds.size.width < paper.size.width && bounds.size.height < paper.size.height) {
-		
 		// Handle one page documents
 		range->location = 1;
 		range->length = 1;
 		[pi setHorizontallyCentered:YES];
 		[pi setVerticallyCentered:YES];
-		
-	}
-	else {
-		
+	} else {
 		// Otherwise do tiling
 		range->location = 1;
-		range->length = ceil((float)bounds.size.width / (float)paper.size.width) * ceil((float)bounds.size.height / (float)paper.size.height);
+		range->length = ceil((CGFloat)bounds.size.width / (CGFloat)paper.size.width) * ceil((CGFloat)bounds.size.height / (CGFloat)paper.size.height);
 		[pi setHorizontallyCentered:NO];
 		[pi setVerticallyCentered:NO];
-		
 	}
 	
 	return YES;
 }
 
-static inline float mod(float a, float b)
+__unused static inline float mod(float a, float b) __attribute__((__overloadable__))
 {
 	float result;
 	
@@ -140,60 +126,70 @@ static inline float mod(float a, float b)
 	return result;
 }
 
+__unused static inline double mod(double a, double b) __attribute__((__overloadable__))
+{
+	double result;
+	
+	result = fabs(a);
+	while (result - b > 0.0) {
+		result -= b;
+	}
+	
+	return result;
+}
+
+
 - (NSRect)rectForPage:(int)page
 {
 	NSPrintInfo *pi = [[NSPrintOperation currentOperation] printInfo];
 	NSRect bounds, paper, result;
-	float scale;
+	CGFloat scale;
 	int horizPages, vertPages;
 	
 	// Work out the image's bounds
-	bounds = NSMakeRect(0, 0, [(SeaContent *)[document contents] width] * (72.0 / (float)[[document contents] xres]), [(SeaContent *)[document contents] height] * (72.0 / (float)[[document contents] yres]));
+	bounds = NSMakeRect(0, 0, [(SeaContent*)[document contents] width] * (72.0 / (float)[[document contents] xres]), [[document contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
 	
 	// Work out the paper's bounding rectangle
 	paper.size = [pi paperSize];
 	paper.size.height -= [pi topMargin] + [pi bottomMargin];
 	paper.size.width -= [pi leftMargin] + [pi rightMargin];
-	scale = [[[pi dictionary] objectForKey:NSPrintScalingFactor] floatValue];
+	scale = [[pi dictionary][NSPrintScalingFactor] doubleValue];
 	paper.size.height /= scale;
 	paper.size.width /= scale;
 	
 	if (bounds.size.width < paper.size.width && bounds.size.height < paper.size.height) {
-	
 		// Handle one page documents
 		return bounds;
-		
-	}
-	else {
-	
+	} else {
 		// Correct page (we work from page zero)
 		page--;
 	
 		// Otherwise do tiling
-		horizPages = ceil((float)bounds.size.width / (float)paper.size.width);
-		vertPages = ceil((float)bounds.size.height / (float)paper.size.height);
+		horizPages = ceil(bounds.size.width / paper.size.width);
+		vertPages = ceil(bounds.size.height / paper.size.height);
 		
 		// Work out origin
 		result.origin.x = (page % horizPages) * paper.size.width;
 		result.origin.y = (page / horizPages) * paper.size.height;
 		
 		// Work out width
-		if (page % horizPages == horizPages - 1)
+		if (page % horizPages == horizPages - 1) {
 			result.size.width = mod(bounds.size.width, paper.size.width);
-		else
+		} else {
 			result.size.width = paper.size.width;
+		}
 		
 		// Work out height
-		if (page / horizPages == vertPages - 1)
+		if (page / horizPages == vertPages - 1) {
 			result.size.height = mod(bounds.size.height, paper.size.height);
-		else
+		} else {
 			result.size.height = paper.size.height;
+		}
 		
 	}
 	
 	return result;
 }
-
 
 - (BOOL)isFlipped
 {

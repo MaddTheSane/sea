@@ -11,9 +11,19 @@
 	return NO;
 }
 
+- (NSString *)optionsString
+{
+	return @"";
+}
+
 - (IBAction) showOptions: (id) sender
 {
 	
+}
+
+- (NSString *)fileType
+{
+	return (NSString*)kUTTypeGIF;
 }
 
 - (NSString *) title
@@ -26,7 +36,7 @@
 	return @"gif";
 }
 
-- (BOOL) writeDocument: (id) document toFile: (NSString *) path
+- (BOOL) writeDocument: (SeaDocument*) document toFile: (NSString *) path
 {
 	// Get the image data
 	unsigned char* srcData = [(SeaWhiteboard *)[document whiteboard] data];
@@ -36,7 +46,7 @@
 	
 	// Strip the alpha channel (there is no alpha in then GIF format)
 	unsigned char* destData = malloc(width * height * (spp - 1));
-	stripAlphaToWhite(spp, destData, srcData, width * height);
+	SeaStripAlphaToWhite(spp, destData, srcData, width * height);
 	spp--;
 	
 	// Make an image representation from the data
@@ -52,14 +62,13 @@
 			bitsPerPixel: 8 * spp];
 	
 	// With these GIF properties, we will let the OS do the dithering
-	NSDictionary *gifProperties = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], NSImageDitherTransparency, NULL];
+	NSDictionary *gifProperties = @{NSImageDitherTransparency: @YES};
 	
 	// Save to a file
 	NSData* imageData = [imageRep representationUsingType: NSGIFFileType properties: gifProperties];
 	[imageData writeToFile: path atomically: YES];
 	
 	// Cleanup
-	[imageRep autorelease];
 	free(destData);
 	
 	return YES;

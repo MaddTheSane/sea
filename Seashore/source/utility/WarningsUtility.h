@@ -1,4 +1,10 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "SeaWarning.h"
+
+@class BannerView;
+@class SeaWindowContent;
+@class SeaDocument;
 
 /*!
 	@class		WarnigsUtility
@@ -8,14 +14,9 @@
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-#import <Cocoa/Cocoa.h>
-
-@class BannerView;
-@class SeaWindowContent;
-
 @interface WarningsUtility : NSObject {
 	// The host for the utility
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 	
 	// We need the content to show or hide the banner
 	IBOutlet SeaWindowContent *windowContent;
@@ -24,7 +25,7 @@
 	IBOutlet BannerView* view;
 	
 	// What type of message are we currently displaying?
-	int mostRecentImportance;
+	SeaWarningImportance mostRecentImportance;
 }
 
 /*!
@@ -35,7 +36,7 @@
 	@param		importance
 				This affects the color
 */
-- (void)setWarning:(NSString *)message ofImportance:(int)importance;
+- (void)setWarning:(NSString *)message ofImportance:(SeaWarningImportance)importance;
 
 /*!
 	@method		showFloatBanner
@@ -73,9 +74,9 @@
 - (void)keyTriggered;
 
 /*!
-	@method		activeWarningImportance
+	@property	activeWarningImportance
 	@discussion	This is used to figure out how important the current warning is.
 	@result		The importance of the current warning (an int).
 */
-- (int)activeWarningImportance;
+@property (readonly) SeaWarningImportance activeWarningImportance;
 @end

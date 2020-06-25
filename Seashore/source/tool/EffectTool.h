@@ -1,5 +1,7 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
+#import "SeaPlugins.h"
 
 /*!
 	@defined	kMaxEffectToolPoints
@@ -16,18 +18,15 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2007 Mark Pazolli
 */
-
 @interface EffectTool : AbstractTool {
+	/// The instance of the SeaPlugins class
+	SeaPlugins *seaPlugins;
 
-	// The instance of the SeaPlugins class
-	id seaPlugins;
-
-	// The points so far registered
+	/// The points so far registered
 	IntPoint points[kMaxEffectToolPoints];
 
-	// A count of the points so far registered
-	int count;
-
+	/// A count of the points so far registered
+	NSInteger count;
 }
 
 /*!
@@ -56,13 +55,13 @@
 				value.
 	@result		The corresponding point from the effect tool.
 */
-- (IntPoint)point:(int)index;
+- (IntPoint)point:(NSInteger)index;
 
 /*!
-	@method		clickCount
+	@property	clickCount
 	@discussion	Returns the number of clicks thus far.
 	@result		Returns an integer indicating the number of clicks thus far.
 */
-- (int)clickCount;
+@property (readonly) NSInteger clickCount;
 
 @end

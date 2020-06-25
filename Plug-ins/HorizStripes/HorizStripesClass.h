@@ -11,25 +11,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "SeaPlugins.h"
+#import "SSKCIPlugin.h"
 
-@interface HorizStripesClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// YES if the application succeeded
-	BOOL success;
-
-}
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
+@interface HorizStripesClass : SSKPlugin
 
 /*!
 	@method		type
@@ -37,7 +21,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		points

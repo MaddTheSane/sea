@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+description = "Generates a circular screen";
+groupName = "Halftone";
+instruction = "Click once: to locate the centre of the screen";
+license = "Public Domain";
+name = "Circular Screen";

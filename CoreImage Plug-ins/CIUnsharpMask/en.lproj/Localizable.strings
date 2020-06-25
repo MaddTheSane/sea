@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Enhance";
+description = "Increases the contrast of the edges";
+license = "Public Domain";
+name = "Contrast Sharpen";

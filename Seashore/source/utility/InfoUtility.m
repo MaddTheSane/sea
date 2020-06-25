@@ -20,11 +20,6 @@
 
 @implementation InfoUtility
 
-- (id)init
-{
-	return self;
-}
-
 - (void)awakeFromNib
 {
 	// Shown By Default
@@ -54,13 +49,13 @@
 
 - (IBAction)show:(id)sender
 {
-	[[[document window] contentView] setVisibility: YES forRegion: kPointInformation];
+	[[[document window] contentView] setVisibility: YES forRegion: SeaWindowRegionPointInformation];
 	[toggleButton setImage:[NSImage imageNamed:@"hide-info"]];
 }
 
 - (IBAction)hide:(id)sender
 {
-	[[[document window] contentView] setVisibility: NO forRegion: kPointInformation];	
+	[[[document window] contentView] setVisibility: NO forRegion: SeaWindowRegionPointInformation];	
 	[toggleButton setImage:[NSImage imageNamed:@"show-info"]];
 }
 
@@ -79,8 +74,8 @@
 	IntPoint point, delta;
 	IntSize size;
 	NSColor *color;
-	int xres, yres, units;
-	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	int xres, yres;
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	
 	// Show no values
 	if (!document) {
@@ -100,37 +95,35 @@
 	}
 	
 	// Set the radius value
-	[radiusValue setIntValue:[[[document tools] getTool:kEyedropTool] sampleSize]];
+	[radiusValue setIntValue:[[[document tools] getTool:SeaToolsEyedrop] sampleSize]];
 
 	// Update the document information
 	xres = [[document contents] xres];
 	yres = [[document contents] yres];
 
 	// Get the selection
-	if (curToolIndex == kCropTool) {
+	if (curToolIndex == SeaToolsCrop) {
 		size = [[[document tools] currentTool] cropRect].size;
-	}
-	else if ([[document selection] active]) {
+	} else if (document.selection.active) {
 		size = [[document selection] globalRect].size;
-	}
-	else {
+	} else {
 		size.height = size.width = 0;
 	}
 
 	point = [[document docView] getMousePosition:YES];
 	delta = [[document docView] delta];
-	units = [document measureStyle];
+	SeaUnits units = [document measureStyle];
 
-	NSString *label = UnitsString(units);
-	[widthValue setStringValue:[StringFromPixels(size.width, units, xres) stringByAppendingFormat:@" %@", label]];
-	[heightValue setStringValue:[StringFromPixels(size.height, units, yres) stringByAppendingFormat:@" %@", label]];
-	[deltaX setStringValue:[StringFromPixels(delta.x, units, xres) stringByAppendingFormat:@" %@", label]];
-	[deltaY setStringValue:[StringFromPixels(delta.y, units, yres) stringByAppendingFormat:@" %@", label]];
-	[xValue setStringValue:[StringFromPixels(point.x, units, xres) stringByAppendingFormat:@" %@", label]];
-	[yValue setStringValue:[StringFromPixels(point.y, units, yres) stringByAppendingFormat:@" %@", label]];
+	NSString *label = SeaUnitsString(units);
+	[widthValue setStringValue:[SeaStringFromPixels(size.width, units, xres) stringByAppendingFormat:@" %@", label]];
+	[heightValue setStringValue:[SeaStringFromPixels(size.height, units, yres) stringByAppendingFormat:@" %@", label]];
+	[deltaX setStringValue:[SeaStringFromPixels(delta.x, units, xres) stringByAppendingFormat:@" %@", label]];
+	[deltaY setStringValue:[SeaStringFromPixels(delta.y, units, yres) stringByAppendingFormat:@" %@", label]];
+	[xValue setStringValue:[SeaStringFromPixels(point.x, units, xres) stringByAppendingFormat:@" %@", label]];
+	[yValue setStringValue:[SeaStringFromPixels(point.y, units, yres) stringByAppendingFormat:@" %@", label]];
 
 	// Update the RGBA values
-	color = [[[document tools] getTool:kEyedropTool] getColor];
+	color = [[[document tools] getTool:SeaToolsEyedrop] getColor];
 	if (color) {
 		[colorWell setColor:color];
 		if ([[color colorSpaceName] isEqualToString:NSDeviceRGBColorSpace]) {
@@ -164,7 +157,7 @@
 
 - (BOOL)visible
 {
-	return [[[document window] contentView] visibilityForRegion: kPointInformation];
+	return [[[document window] contentView] visibilityForRegion: SeaWindowRegionPointInformation];
 }
 
 @end

@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@enum		kMeasure...
@@ -9,11 +14,17 @@
 	@constant	kMeasureMillimeters
 				Measure using millimetres.
 */
-enum {
+typedef NS_ENUM(int, SeaMeasure) {
+	//! Measure using pixels.
 	kMeasurePixels = 0,
+	//! Measure using inches.
 	kMeasureInches = 1,
+	//! Measure using millimetres.
 	kMeasureMillimeters = 2
 };
+
+@class SeaDocument;
+@class LayerControlView;
 
 /*!
 	@class		InfoUtility
@@ -24,44 +35,36 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface InfoUtility : NSObject {
 	
-	// The document which is the focus of this utility
-	IBOutlet id document;
+	//! The document which is the focus of this utility
+	IBOutlet SeaDocument *document;
 	
 	// Displays the red, green, blue and alpha value of the focused pixel
-	IBOutlet id redValue;
-    IBOutlet id greenValue;
-    IBOutlet id blueValue;
-    IBOutlet id alphaValue;
-	IBOutlet id colorWell;
+	IBOutlet NSTextField *redValue;
+    IBOutlet NSTextField *greenValue;
+    IBOutlet NSTextField *blueValue;
+    IBOutlet NSTextField *alphaValue;
+	IBOutlet NSColorWell *colorWell;
 	
 	// Displays the x and y co-ordinates of the cursor
-    IBOutlet id xValue;
-    IBOutlet id yValue;
-	IBOutlet id widthValue;
-    IBOutlet id heightValue;
-	IBOutlet id deltaX;
-	IBOutlet id deltaY;
-	IBOutlet id radiusValue;
+    IBOutlet NSTextField *xValue;
+    IBOutlet NSTextField *yValue;
+	IBOutlet NSTextField *widthValue;
+    IBOutlet NSTextField *heightValue;
+	IBOutlet NSTextField *deltaX;
+	IBOutlet NSTextField *deltaY;
+	IBOutlet NSTextField *radiusValue;
 
-	// The active measuring style
-	int measureStyle;
+	//! The active measuring style
+	SeaMeasure measureStyle;
 
 	// The approprate views
-	IBOutlet id view;
-	IBOutlet id controlView;
-	IBOutlet id toggleButton;
+	IBOutlet NSView *view;
+	IBOutlet LayerControlView *controlView;
+	IBOutlet NSButton *toggleButton;
 
 }
-
-/*!
-	@method		init
-	@discussion	Initializes an instance of this class.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)init;
 
 /*!
 	@method		awakeFromNib
@@ -119,10 +122,10 @@ enum {
 - (void)update;
 
 /*!
-	@method		visible
+	@property	visible
 	@discussion	Returns whether or not the utility's window is visible.
-	@result		Returns YES if the utility's window is visible, NO otherwise.
+	@result		Returns \c YES if the utility's window is visible, \c NO otherwise.
 */
-- (BOOL)visible;
+@property (readonly) BOOL visible;
 
 @end

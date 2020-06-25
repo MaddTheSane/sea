@@ -8,13 +8,17 @@
 				Copyright (c) 1995 Spencer Kimball and Peter Mattis
 */
 
+#include <math.h>
+#include <tgmath.h>
+#include <CoreFoundation/CFBase.h>
+
 #define G_PI 3.14159265358979323846
 
-typedef enum
+typedef NS_ENUM(int, BlurMethod)
 {
   BLUR_IIR,
   BLUR_RLE
-} BlurMethod;
+};
 
 static inline void
 find_constants (double n_p[],

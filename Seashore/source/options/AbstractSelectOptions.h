@@ -1,5 +1,7 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractScaleOptions.h"
+#import "SeaSelection.h"
 
 /*		
 	@class		AbstractSelectOptions
@@ -12,16 +14,22 @@
 */
 
 @interface AbstractSelectOptions : AbstractScaleOptions {
-	// The Selection mode
-	int mode;
+	/// The Selection mode
+	SeaSelectMode mode;
 }
+
+/*!
+	@property	selectionMode
+	@discussion	The mode to be used for the selection.
+*/
+@property (nonatomic) SeaSelectMode selectionMode;
 
 /*!
 	@method		selectionMode
 	@discussion	Returns the mode to be used for the selection.
 	@result		Returns an integer indicating the mode (see SeaSelection).
 */
-- (int)selectionMode;
+- (SeaSelectMode)selectionMode;
 
 /*!
 	@method		setSelectionMode
@@ -29,7 +37,7 @@
 	@param		newMode
 				The new mode to be set, from the k...Mode enum.
 */
-- (void)setSelectionMode:(int)newMode;
+- (void)setSelectionMode:(SeaSelectMode)newMode;
 
 /*!
 	@method		setModeFromModifier:
@@ -37,6 +45,6 @@
 	@param		modifier
 				The modifier of the new mode to be set, from the k...Modifier enum.
 */
-- (void)setModeFromModifier:(unsigned int)modifier;
+- (void)setModeFromModifier:(AbstractModifiers)modifier;
 
 @end

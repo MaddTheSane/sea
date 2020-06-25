@@ -10,25 +10,22 @@
 #import "SeaContent.h"
 
 @implementation AbstractTool
+@synthesize intermediate;
+@synthesize options;
+@synthesize document;
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
 	return -1;
 }
 
-- (id)init
+- (instancetype)init
 {
 	self = [super init];
 	if(self){
 		intermediate = NO;
 	}
 	return self;
-}
-
-
-- (void)setOptions:(id)newOptions
-{
-	options = newOptions;
 }
 
 - (BOOL)acceptsLineDraws
@@ -74,11 +71,5 @@
 {
 	return NO;
 }
-
-- (BOOL) intermediate
-{
-	return intermediate;
-}
-
 
 @end

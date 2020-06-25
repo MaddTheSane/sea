@@ -9,17 +9,17 @@
 
 @implementation XCFImporter
 
-static inline void fix_endian_read(int *input, int size)
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path
 {
-#ifdef __LITTLE_ENDIAN__
-	int i;
-	
-	for (i = 0; i < size; i++) {
-		input[i] = ntohl(input[i]);
-	}
-#endif
+	return [self addToDocument:doc contentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
 }
 
+static inline void fix_endian_read(int *input, size_t size)
+{
+	for (NSInteger i = 0; i < size; i++) {
+		input[i] = CFSwapInt32BigToHost(input[i]);
+	}
+}
 
 - (BOOL)readHeader:(FILE *)file
 {
@@ -53,7 +53,7 @@ static inline void fix_endian_read(int *input, int size)
 
 - (BOOL)readProperties:(FILE *)file sharedInfo:(SharedXCFInfo *)info
 {
-	int propType, propSize;
+	int propSize;
 	BOOL finished = NO;
 	
 	// Keep reading until we're finished or hit an error
@@ -62,7 +62,7 @@ static inline void fix_endian_read(int *input, int size)
 		// Read the property information
 		fread(tempIntString, sizeof(int), 2, file);
 		fix_endian_read(tempIntString, 2);
-		propType = tempIntString[0];
+		XcfPropType propType = tempIntString[0];
 		propSize = tempIntString[1];
 		
 		// Act appropriately on the property type
@@ -80,7 +80,7 @@ static inline void fix_endian_read(int *input, int size)
 					fread(tempIntString, sizeof(int), 1, file);
 					fix_endian_read(tempIntString, 1);
 					info->cmap_len = (int)tempIntString[0];
-					info->cmap = calloc(256 * 3, sizeof(char));
+					info->cmap = calloc(256 * 3, sizeof(unsigned char));
 					fread(info->cmap, sizeof(char), info->cmap_len * 3, file);
 				}
 				
@@ -110,14 +110,15 @@ static inline void fix_endian_read(int *input, int size)
 	return YES;
 }
 
-- (BOOL)addToDocument:(id)doc contentsOfFile:(NSString *)path
+- (BOOL)addToDocument:(SeaDocument*)doc contentsOfURL:(nonnull NSURL *)path error:(NSError *__autoreleasing  _Nullable * _Nullable)error
 {
 	SharedXCFInfo info;
-	int layerOffsets, offset;
+	NSInteger layerOffsets, offset;
 	FILE *file;
 	id layer;
-	int i, newType = [(SeaContent *)[doc contents] type];
+	int newType = [(SeaContent *)[doc contents] type];
 	NSArray *layers;
+	NSInteger i;
 
 	// Clear all links
 	[[doc contents] clearAllLinks];
@@ -125,11 +126,20 @@ static inline void fix_endian_read(int *input, int size)
 	// Open the file
 	file = fopen([path fileSystemRepresentation], "rb");
 	if (file == NULL) {
+		if (error) {
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:
+					  @{NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil]}];
+		}
 		return NO;
 	}
 	
 	// Read the header
 	if ([self readHeader:file] == NO) {
+		if (error) {
+			//TODO: Better error description/type
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+					  @{NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil]}];
+		}
 		fclose(file);
 		return NO;
 	}
@@ -138,6 +148,11 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Read properties
 	if ([self readProperties:file sharedInfo:&info] == NO) {
+		if (error) {
+			//TODO: Better error description/type
+			*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+					  @{NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil]}];
+		}
 		fclose(file);
 		return NO;
 	}
@@ -150,7 +165,7 @@ static inline void fix_endian_read(int *input, int size)
 	// Determine the offset for the next layer
 	i = 0;
 	layerOffsets = ftell(file);
-	layers = [NSArray array];
+	layers = @[];
 	do {
 		fseek(file, layerOffsets + i * sizeof(int), SEEK_SET);
 		fread(tempIntString, sizeof(int), 1, file);
@@ -162,8 +177,11 @@ static inline void fix_endian_read(int *input, int size)
 		if (offset != 0) {
 			layer = [[XCFLayer alloc] initWithFile:file offset:offset document:doc sharedInfo:&info];
 			if (layer == NULL) {
-				for (i = 0; i < [layers count]; i++)
-					[[layers objectAtIndex:i] autorelease];
+				if (error) {
+					//TODO: Better error description/type
+					*error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadCorruptFileError userInfo:
+							  @{NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil]}];
+				}
 				fclose(file);
 				return NO;
 			}
@@ -177,7 +195,7 @@ static inline void fix_endian_read(int *input, int size)
 	
 	// Add the layers
 	for (i = [layers count] - 1; i >= 0; i--) {
-		[[doc contents] addLayerObject:[layers objectAtIndex:i]];
+		[[doc contents] addLayerObject:layers[i]];
 	}
 	
 	// Close the file
@@ -190,8 +208,8 @@ static inline void fix_endian_read(int *input, int size)
 	}
 	
 	// Position the new layer correctly
-	[[(SeaOperations *)[doc operations] seaAlignment] centerLayerHorizontally:NULL];
-	[[(SeaOperations *)[doc operations] seaAlignment] centerLayerVertically:NULL];
+	[[[doc operations] seaAlignment] centerLayerHorizontally:NULL];
+	[[[doc operations] seaAlignment] centerLayerVertically:NULL];
 	
 	return YES;
 }

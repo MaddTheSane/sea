@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@class		SeaUtilityPanel
@@ -9,18 +14,15 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface SeaUtilityPanel : NSPanel {
-
+@interface SeaUtilityPanel : NSPanel <NSWindowDelegate> {
 	// Used for window shading
-	float priorShadeHeight;
+	CGFloat priorShadeHeight;
 	
 	// Used for window shading
 	id priorContentView;
 	
 	// Used for window shading
-	IBOutlet id nullView;
-	
+	IBOutlet NSView *nullView;
 }
 
 /*!

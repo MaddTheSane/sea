@@ -11,40 +11,11 @@
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
 #import "GaussianFuncs.h"
+#import "SSKCIPlugin.h"
 
-@interface GaussianClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// The label displaying the radius of the blur
-	IBOutlet id radiusLabel;
-	
-	// The slider for the radius of the blur
-	IBOutlet id radiusSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The number of applications
-	int radius;
-
-	// YES if the blurring must be refreshed
-	BOOL refresh;
-	
-	// YES if the application succeeded
-	BOOL success;
-
-}
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
+@interface GaussianClass : SSKVisualPlugin
+//! The number of applications
+@property NSInteger radius;
 
 /*!
 	@method		type
@@ -52,7 +23,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		name
@@ -109,14 +80,6 @@
 				Ignored.
 */
 - (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
 
 /*!
 	@method		update:

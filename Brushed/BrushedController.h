@@ -14,13 +14,13 @@
 {
 }
 
-// Handle a copy operation
+/// Handle a copy operation
 - (IBAction)copy:(id)sender;
 
-// Handle a paste operation
+/// Handle a paste operation
 - (IBAction)paste:(id)sender;
 
-// Determine whether a menu item should be enabled or disabled
+/// Determine whether a menu item should be enabled or disabled
 - (BOOL)validateMenuItem:(id)menuItem;
 
 @end

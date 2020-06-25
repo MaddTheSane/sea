@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Tile";
+description = "Applies a kaleidoscope effect to the selection";
+license = "Public Domain";
+name = "Kaleidoscope";
+instruction = "Click twice: first at the centre of the kaleidoscope and then in the direction of interest";

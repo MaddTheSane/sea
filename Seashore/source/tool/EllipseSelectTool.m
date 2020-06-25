@@ -11,16 +11,11 @@
 #import "AspectRatio.h"
 
 @implementation EllipseSelectTool
+@synthesize selectionRect;
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
-	return kEllipseSelectTool;
-}
-
-
-- (IntRect) selectionRect
-{
-	return selectionRect;
+	return SeaToolsSelectEllipse;
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
@@ -29,22 +24,22 @@
 
 	// Otherwise do the following...
 	if (![super isMovingOrScaling]) {
-		int aspectType = [options aspectType];
+		SeaAspectType aspectType = [options aspectType];
 		NSSize ratio;
 		double xres, yres;
-		int modifier;
+		AbstractModifiers modifier;
 		
 		// Get mode
-		modifier = [(EllipseSelectOptions*)options modifier];
-		if(modifier == kShiftModifier){
+		modifier = [options modifier];
+		if (modifier == AbstractModifierShift) {
 			oneToOne = YES;
-		}else{
+		} else {
 			oneToOne = NO;
 		}
 		
 		
 		// Clear the active selection and start the selection
-		if([options selectionMode] == kDefaultMode || [options selectionMode] == kForceNewMode)
+		if([options selectionMode] == SeaSelectDefault || [options selectionMode] == SeaSelectForceNew)
 			[[document selection] clearSelection];
 
 		// Record the start point
@@ -53,25 +48,30 @@
 		selectionRect.origin = where;
 		
 		// If we have a fixed size selection
-		if (aspectType >= kExactPixelAspectType) {
+		if (aspectType >= SeaAspectTypeExactPixel) {
 		
 			// Determine it
 			ratio = [options ratio];
 			xres = [[document contents] xres];
 			yres = [[document contents] yres];
 			switch (aspectType) {
-				case kExactPixelAspectType:
+				case SeaAspectTypeExactPixel:
 					selectionRect.size.width = ratio.width;
 					selectionRect.size.height = ratio.height;
-				break;
-				case kExactInchAspectType:
+					break;
+					
+				case SeaAspectTypeExactInch:
 					selectionRect.size.width = ratio.width * xres;
 					selectionRect.size.height = ratio.height * yres;
-				break;
-				case kExactMillimeterAspectType:
+					break;
+					
+				case SeaAspectTypeExactMillimeter:
 					selectionRect.size.width = ratio.width * xres * 0.03937;
 					selectionRect.size.height = ratio.height * yres * 0.03937;
-				break;
+					break;
+					
+				default:
+					break;
 			}
 		}
 		[[document helpers] selectionChanged];	
@@ -85,10 +85,10 @@
 	
 	// Check we have a valid start point
 	if (intermediate && ![super isMovingOrScaling]) {
-		int aspectType = [options aspectType];
+		SeaAspectType aspectType = [options aspectType];
 		NSSize ratio;
 	
-		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {
+		if (aspectType == SeaAspectTypeNone || aspectType == SeaAspectTypeRatio || oneToOne) {
 		
 			// Determine the width of the selection rectangle
 			if (startPoint.x < where.x) {
@@ -100,7 +100,7 @@
 			}
 			
 			// Determine the height of the selection rectangle
-			if (aspectType == kRatioAspectType || oneToOne) {
+			if (aspectType == SeaAspectTypeRatio || oneToOne) {
 				if (oneToOne)
 					ratio = NSMakeSize(1, 1);
 				else
@@ -145,7 +145,7 @@
 		intermediate = NO;
 	}
 	
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 	translating = NO;
 }
 
@@ -154,4 +154,5 @@
 	selectionRect = IntMakeRect(0,0,0,0);
 	[super cancelSelection];
 }
+
 @end

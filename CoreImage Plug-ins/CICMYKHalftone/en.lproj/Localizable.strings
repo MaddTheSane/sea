@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+description = "Applies CMYK halftone effect to the selection";
+groupName = "Halftone";
+license = "Public Domain";
+name = "CMYK Halftone";

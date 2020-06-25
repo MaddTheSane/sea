@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@class		TransparentUtility
@@ -9,12 +14,9 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface TransparentUtility : NSObject {
-
-	// The current transparent color 
+	/// The current transparent color 
 	NSColor *color;
-	
 }
 
 /*!
@@ -22,13 +24,7 @@
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)init;
 
 /*!
 	@method		toggle:
@@ -45,13 +41,13 @@
 	@param		sender
 				The colour panel responsible for the change in colour.
 */
-- (void)changeColor:(id)sender;
+- (IBAction)changeColor:(id)sender;
 
 /*!
-	@method		color
+	@property	color
 	@discussion	Returns the current transparency colour.
 	@result		Returns the current transparency colour.
 */
-- (id)color;
+@property (readonly, copy) NSColor *color;
 
 @end

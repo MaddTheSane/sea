@@ -1,0 +1,6 @@
+//author = "Mark Pazolli";
+//copyright = "Public Domain 2007";
+//description = "Applies gamma adjustment to the selection";
+groupName = "Colour Adjust";
+//license = "Public Domain";
+//name = "Gamma";

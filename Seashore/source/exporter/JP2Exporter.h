@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractExporter.h"
 
@@ -16,40 +17,39 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface JP2Exporter : AbstractExporter {
-
+@interface JP2Exporter : NSObject <AbstractExporter> {
 	// The compression factor to be used with the web target (between 0 and 30)
-	int webCompression;
+	NSInteger webCompression;
 
 	// The compression factor to be used with the print target (between 0 and 30)
-	int printCompression;
+	NSInteger printCompression;
 	
 	// YES if targeting the web, NO if targeting print
 	BOOL targetWeb;
 
 	// The panel allowing compression options to be set
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// The compressed preview
-	IBOutlet id compressImageView;
+	IBOutlet NSImageView *compressImageView;
 	
 	// The uncompressed preview
-	IBOutlet id realImageView;
+	IBOutlet NSImageView *realImageView;
 	
 	// The label specifying the compression level
-	IBOutlet id compressLabel;
+	IBOutlet NSTextField *compressLabel;
 	
 	// The slider allowing compression to be adjusted
-	IBOutlet id compressSlider;
+	IBOutlet NSSlider *compressSlider;
 	
 	// The radio buttons specifying the target
-	IBOutlet id targetRadios;
+	IBOutlet NSMatrix *targetRadios;
 	
 	// The sample data we are previewing
 	unsigned char *sampleData;
 	
 	// The NSImageBitmapRep used by the uncompressed preview
-	id realImageRep;
+	NSBitmapImageRep *realImageRep;
 
 }
 
@@ -58,13 +58,7 @@
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)init;
 
 /*!
 	@method		compressionChanged:

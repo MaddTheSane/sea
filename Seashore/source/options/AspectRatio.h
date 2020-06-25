@@ -1,7 +1,8 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
-	@enum		k...AspectType
+	@enum		SeaAspectType
 	@constant	kNoAspectType
 				Indicates no specification.
 	@constant	kRatioAspectType
@@ -13,13 +14,20 @@
 	@constant	kExactMillimeterAspectType
 				Indicates exact specification in millimetres.
 */
-enum {
-	kNoAspectType = -2,
-	kRatioAspectType = -1,
-	kExactPixelAspectType = 0,
-	kExactInchAspectType = 1,
-	kExactMillimeterAspectType = 2
+typedef NS_ENUM(NSInteger, SeaAspectType) {
+	//! Indicates no specification.
+	SeaAspectTypeNone = -2,
+	//! Indicates ratio specification.
+	SeaAspectTypeRatio = -1,
+	//! Indicates exact specification in pixels.
+	SeaAspectTypeExactPixel = 0,
+	//! Indicates exact specification in inches.
+	SeaAspectTypeExactInch = 1,
+	//! Indicates exact specification in millimetres.
+	SeaAspectTypeExactMillimeter = 2,
 };
+
+@class SeaDocument;
 
 /*		
 	@class		AspectRatio
@@ -29,46 +37,45 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2007 Mark Pazolli
 */
-
 @interface AspectRatio : NSObject {
 	// The host document
-	IBOutlet id document;
+	IBOutlet SeaDocument *document;
 
 	// The controlling object
-	id master;
+	__weak id master;
 
 	// The controlling object's identifier (used for preferences)
-	id prefString;
+	NSString *prefString;
 
 	// When checked indicates the cropping aspect ratio should be restricted
-	IBOutlet id ratioCheckbox;
+	IBOutlet NSButton *ratioCheckbox;
 	
 	// A popup menu indicating the aspect ratio
-	IBOutlet id ratioPopup;
+	IBOutlet NSPopUpButton *ratioPopup;
 	
 	// A panel for selecting the custom aspect ratio
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// Text boxes for custom ratio values
-    IBOutlet id xRatioValue;
-    IBOutlet id yRatioValue;
+    IBOutlet NSTextField *xRatioValue;
+    IBOutlet NSTextField *yRatioValue;
 	
 	// Various items associated with the aspect type
-	IBOutlet id toLabel;
-	IBOutlet id aspectTypePopup;
+	IBOutlet NSTextField *toLabel;
+	IBOutlet NSPopUpButton *aspectTypePopup;
 	
 	// Custom ratio values
-	float ratioX, ratioY;
+	CGFloat ratioX, ratioY;
 	
 	// Forgotten values
-	float forgotX, forgotY;
+	CGFloat forgotX, forgotY;
 	
 	// The type of aspect ratio
-	int aspectType;
+	SeaAspectType aspectType;
 	
 }
 
-- (void)awakeWithMaster:(id)imaster andString:(id)iprefString;
+- (void)awakeWithMaster:(id)imaster andString:(NSString*)iprefString;
 
 /*!
 	@method		setCustomItem:
@@ -95,21 +102,21 @@ enum {
 - (IBAction)changeCustomAspectType:(id)sender;
 
 /*!
-	@method		ratioX
+	@property	ratioX
 	@discussion	Returns the ratio/size for the crop.
 	@return		Returns a NSSize for the crop in the aspect type's
 				units. If it is a ratio the width = X / Y and the 
 				height = Y / X.
 */
-- (NSSize)ratio;
+@property (readonly) NSSize ratio;
 
 /*!
-	@method		aspectType
+	@property	aspectType
 	@discussion	Returns the type of aspect ratio.
 	@return		Returns a constant representing the type of aspect ratio
 				(see AspectRatio).
 */
-- (int)aspectType;
+@property (readonly) SeaAspectType aspectType;
 
 /*!
 	@method		update:
@@ -126,3 +133,9 @@ enum {
 - (void)shutdown;
 
 @end
+
+static const SeaAspectType kNoAspectType NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaAspectTypeNone", 10.2, 10.8) = SeaAspectTypeNone;
+static const SeaAspectType kRatioAspectType NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaAspectTypeRatio", 10.2, 10.8) = SeaAspectTypeRatio;
+static const SeaAspectType kExactPixelAspectType NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaAspectTypeExactPixel", 10.2, 10.8) = SeaAspectTypeExactPixel;
+static const SeaAspectType kExactInchAspectType NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaAspectTypeExactInch", 10.2, 10.8) = SeaAspectTypeExactInch;
+static const SeaAspectType kExactMillimeterAspectType NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaAspectTypeExactMillimeter", 10.2, 10.8) = SeaAspectTypeExactMillimeter;

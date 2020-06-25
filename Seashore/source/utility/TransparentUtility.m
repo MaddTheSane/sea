@@ -3,34 +3,32 @@
 #import "SeaController.h"
 #import "SeaPrefs.h"
 #import "UtilitiesManager.h"
+#import "SeaView.h"
 
 @implementation TransparentUtility
+@synthesize color;
 
-- (id)init
+- (instancetype)init
 {
-	float values[4];
+	if (self = [super init]) {
+	CGFloat values[4];
 	NSData *tempData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	// Determine the initial color (from preferences if possible)
-	if ([gUserDefaults objectForKey:@"transparency color data"] == NULL) {
+	if ([defaults objectForKey:@"transparency color data"] == NULL) {
 		values[0] = values[1] = values[2] = values[3] = 1.0;
 		color = [NSColor colorWithCalibratedRed:values[0] green:values[1] blue:values[2] alpha:values[3]];
-	}
-	else {
-		tempData = [gUserDefaults dataForKey:@"transparency color data"];
+	} else {
+		tempData = [defaults dataForKey:@"transparency color data"];
 		if (tempData != nil)
 			color = (NSColor *)[NSUnarchiver unarchiveObjectWithData:tempData];
 	}
-	[color retain];
+	}
 	
 	return self;
 }
 
-- (void)dealloc
-{
-	if (color) [color autorelease];
-	[super dealloc];
-}
 
 - (IBAction)toggle:(id)sender
 {
@@ -45,35 +43,27 @@
 		[gColorPanel setContinuous:NO];
 		[gColorPanel setAction:@selector(changeColor:)];
 		[gColorPanel setTarget:self];
-	}
-	else
+	} else {
 		[gColorPanel orderOut:self];
+	}
 }
 
 - (void)changeColor:(id)sender
 {
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
-	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
 	// Change the colour
-	[color autorelease];
 	color = [sender color];
 	if (![[color colorSpaceName] isEqualToString:NSNamedColorSpace])
-		[[sender color] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
-	[color retain];
+		color = [[sender color] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	
 	// Call for all documents' views to respond to the change
-	for (i = 0; i < [documents count]; i++) {
-		[[[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *doc in documents) {
+		[doc docView].needsDisplay = YES;
 	}
 
-	[gUserDefaults setObject:[NSArchiver archivedDataWithRootObject:color] forKey:@"transparency color data"];
-
-}
-
-- (id)color
-{		
-	return color;
+	[defaults setObject:[NSArchiver archivedDataWithRootObject:color] forKey:@"transparency color data"];
 }
 
 @end

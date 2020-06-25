@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@class		SeaToolbarItem
@@ -8,9 +13,7 @@
 	<b>License:</b> GNU General Public License<br>
 	<b>Copyright:</b> N/A
 */
-
-@interface SeaToolbarItem : NSToolbarItem {	
-}
+@interface SeaToolbarItem : NSToolbarItem
 
 /*!
 	@method		validate

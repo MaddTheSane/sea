@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Colour Effect";
+description = "Posterizes the selection";
+license = "Public Domain";
+name = "Posterize";

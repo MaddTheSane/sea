@@ -1,21 +1,16 @@
+#include <GIMPCore/GIMPCore.h>
+#include <math.h>
+#include <tgmath.h>
 #import "SepiaClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
-
 #define int_mult(a,b,t)  ((t) = (a) * (b) + 0x80, ((((t) >> 8) + (t)) >> 8))
 
 @implementation SepiaClass
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (SeaPluginType)type
 {
-	seaPlugins = manager;
-	
-	return self;
-}
-
-- (int)type
-{
-	return 0;
+	return SeaPluginBasic;
 }
 
 - (NSString *)name
@@ -35,15 +30,14 @@
 
 - (void)run
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *data, *overlay, *replace;
-	int pos, i, j, k, width, spp, channel;
+	int pos, i, j, width, spp, channel;
 	int t[5];
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	selection = [pluginData selection];
 	spp = [pluginData spp];
 	width = [pluginData width];
@@ -60,7 +54,7 @@
 			overlay[pos * spp + 1] = MIN(int_mult(data[pos * spp], 89, t[0]) + int_mult(data[pos * spp + 1], 175, t[1]) + int_mult(data[pos * spp + 2], 43, t[2]), 255);
 			overlay[pos * spp + 2] = MIN(int_mult(data[pos * spp], 69, t[0]) + int_mult(data[pos * spp + 1], 136, t[1]) + int_mult(data[pos * spp + 2], 33, t[2]), 255);
 			
-			if (channel == kAllChannels) 
+			if (channel == SeaSelectedChannelAll) 
 				overlay[(pos + 1) * spp - 1] = data[(pos + 1) * spp - 1];
 			else
 				overlay[(pos + 1) * spp - 1] = 255;
@@ -83,10 +77,8 @@
 
 - (BOOL)validateMenuItem:(id)menuItem
 {
-	PluginData *pluginData;
-
-	pluginData = [(SeaPlugins *)seaPlugins data];
-	if ([pluginData spp] != 4 || [pluginData channel] == kAlphaChannel)
+	PluginData *pluginData = [self.seaPlugins data];
+	if ([pluginData spp] != 4 || [pluginData channel] == SeaSelectedChannelAlpha)
 		return NO;
 
 	return YES;

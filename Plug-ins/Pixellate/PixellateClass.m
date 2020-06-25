@@ -1,22 +1,25 @@
+#include <GIMPCore/GIMPCore.h>
 #import "PixellateClass.h"
 
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 
-#define gUserDefaults [NSUserDefaults standardUserDefaults]
-
 @implementation PixellateClass
+@synthesize scale;
 
-- (id)initWithManager:(SeaPlugins *)manager
+- (instancetype)initWithManager:(SeaPlugins *)manager
 {
-	seaPlugins = manager;
-	[NSBundle loadNibNamed:@"Pixellate" owner:self];
+	if (self = [super initWithManager:manager]) {
+		NSArray *tmpArray;
+		[gOurBundle loadNibNamed:@"Pixellate" owner:self topLevelObjects:&tmpArray];
+		self.nibArray = tmpArray;
+	}
 	
 	return self;
 }
 
-- (int)type
+- (SeaPluginType)type
 {
-	return 0;
+	return SeaPluginBasic;
 }
 
 - (NSString *)name
@@ -37,22 +40,19 @@
 - (void)run
 {
 	PluginData *pluginData;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"Pixellate.scale"])
-		scale = [gUserDefaults integerForKey:@"Pixellate.scale"];
+	if ([defaults objectForKey:@"Pixellate.scale"])
+		self.scale = [defaults integerForKey:@"Pixellate.scale"];
 	else
-		scale = 8;
+		self.scale = 8;
 		
 	if (scale < 0 || scale > 100)
-		scale = 8;
-	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%d", scale]];
-	
-	[scaleSlider setIntValue:scale];
+		self.scale = 8;
 	
 	refresh = YES;
 	success = NO;
-	pluginData = [(SeaPlugins *)seaPlugins data];
+	pluginData = [self.seaPlugins data];
 	[self preview:self];
 	if ([pluginData window])
 		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
@@ -63,27 +63,28 @@
 
 - (IBAction)apply:(id)sender
 {
-	PluginData *pluginData;
-	
-	pluginData = [(SeaPlugins *)seaPlugins data];
-	if (refresh) [self pixellate];
+	PluginData *pluginData = [self.seaPlugins data];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if (refresh)
+		[self pixellate];
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window])
+		[NSApp endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	
-	[gUserDefaults setInteger:scale forKey:@"Pixellate.scale"];
+	[defaults setInteger:scale forKey:@"Pixellate.scale"];
 }
 
 - (void)reapply
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
 	[pluginData apply];
 }
 
@@ -94,19 +95,18 @@
 
 - (IBAction)preview:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
-	if (refresh) [self pixellate];
+	if (refresh)
+		[self pixellate];
 	[pluginData preview];
 	refresh = NO;
 }
 
 - (IBAction)cancel:(id)sender
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
 	[pluginData cancel];
 	
 	[panel setAlphaValue:1.0];
@@ -121,30 +121,27 @@
 {
 	PluginData *pluginData;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
-	scale = [scaleSlider intValue];
-	
-	[scaleLabel setStringValue:[NSString stringWithFormat:@"%d", scale]];
 	[panel setAlphaValue:1.0];
 	refresh = YES;
 	if ([[NSApp currentEvent] type] == NSLeftMouseUp) {
-		[self preview:self];
-		pluginData = [(SeaPlugins *)seaPlugins data];
-		if ([pluginData window]) [panel setAlphaValue:0.4];
+		[self preview:sender];
+		pluginData = [self.seaPlugins data];
+		if ([pluginData window])
+			[panel setAlphaValue:0.4];
 	}
 }
 
 - (void)pixellate
 {
-	PluginData *pluginData;
+	PluginData *pluginData = [self.seaPlugins data];
 	IntRect selection;
 	unsigned char *data, *overlay, *replace, newPixel[4];
-	int pos, i, j, k, i2, j2, width, height, spp, channel;
-	int total[4], n, x_stblk, x_endblk, y_stblk, y_endblk;
+	NSInteger pos, i, j, k, i2, j2;
+	int width, height, spp, channel;
+	int total[4], n = 1, x_stblk, x_endblk, y_stblk, y_endblk;
 	
-	pluginData = [(SeaPlugins *)seaPlugins data];
 	[pluginData setOverlayOpacity:255];
-	[pluginData setOverlayBehaviour:kReplacingBehaviour];
+	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	selection = [pluginData selection];
 	spp = [pluginData spp];
 	width = [pluginData width];
@@ -161,7 +158,7 @@
 	
 	for (j = y_stblk; j < y_endblk; j++) {
 		for (i = x_stblk; i < x_endblk; i++) {
-		
+			
 			// Sum and count the present pixels in the  block
 			total[0] = total[1] = total[2] = total[3] = 0;
 			n = 0;
@@ -179,29 +176,29 @@
 			
 			// Determine the revised pixel
 			switch (channel) {
-				case kAllChannels:
+				case SeaSelectedChannelAll:
 					for (k = 0; k < spp; k++) {
 						newPixel[k] = total[k] / n;
 					}
-				break;
-				case kPrimaryChannels:
+					break;
+				case SeaSelectedChannelPrimary:
 					for (k = 0; k < spp - 1; k++) {
 						newPixel[k] = total[k] / n;
 					}
 					newPixel[spp - 1] = 255;
-				break;
-				case kAlphaChannel:
+					break;
+				case SeaSelectedChannelAlpha:
 					for (k = 0; k < spp - 1; k++) {
 						newPixel[k] = total[spp - 1] / n;
 					}
 					newPixel[spp - 1] = 255;
-				break;
+					break;
 			}
 			
 			// Fill the block with this pixel
 			for (j2 = 0; j2 < scale; j2++) {
 				for (i2 = 0; i2 < scale; i2++) {
-					pos = (j * scale + j2) * width + (i * scale + i2);
+					//pos = (j * scale + j2) * width + (i * scale + i2);
 					if (i * scale + i2 < width && j * scale + j2 < height) {
 						pos = (j * scale + j2) * width + (i * scale + i2);
 						for (k = 0; k < spp; k++) {

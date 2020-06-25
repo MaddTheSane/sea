@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Transform";
+description = "Applies a perspective transform to the selection";
+license = "Public Domain";
+name = "Perspective";
+instruction = "Click four times: to indicate the points of the perspective transform in a clockwise direction from the top-left";

@@ -1,8 +1,8 @@
 #import "SeaDocument.h"
 #import "SeaContent.h"
 #import "LayerCell.h"
-#import "NSArray_Extensions.h"
-#import "NSOutlineView_Extensions.h"
+#import <SeashoreKit/NSArray_Extensions.h>
+#import <SeashoreKit/NSOutlineView_Extensions.h>
 #import "SeaLayer.h"
 #import "SeaHelpers.h"
 #import "SeaController.h"
@@ -17,11 +17,17 @@
 #define LAYER_VISIBLE_COL @"Layer Visible Checkbox Column"
 #define INFO_BUTTON_COL	@"Info Button Column"
 
+@interface NSObject (remFromPar)
+- (void)removeFromParent;
+@end
+
 @implementation LayerDataSource
+@synthesize draggedNodes;
+
 - (void)awakeFromNib
 {
 	// Register to get our custom type, strings, and filenames. Try dragging each into the view!
-    [outlineView registerForDraggedTypes:[NSArray arrayWithObjects:SEA_LAYER_PBOARD_TYPE, NSStringPboardType, NSFilenamesPboardType, nil]];
+    [outlineView registerForDraggedTypes:@[SEA_LAYER_PBOARD_TYPE, NSPasteboardTypeString, NSFilenamesPboardType]];
 	[outlineView setVerticalMotionCanBeginDrag: YES];
 
 	[outlineView setIndentationPerLevel: 0.0];
@@ -30,12 +36,6 @@
 	draggedNodes = nil;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
-- (NSArray *)draggedNodes { return draggedNodes; }
 - (NSArray *)selectedNodes { return [outlineView allSelectedItems]; }
 
 // ================================================================
@@ -49,7 +49,7 @@
 	if([selectedNodes count] != 1){
 		NSLog(@"%@ says the Selection has Changed for %@ the selectedNodes are %@",self, olv, selectedNodes);
 	}else{
-		SeaLayer *selectedLayer = [selectedNodes objectAtIndex:0];
+		SeaLayer *selectedLayer = selectedNodes[0];
 		[[document helpers] activeLayerWillChange];
 		[[document contents] setActiveLayerIndex:[selectedLayer index]];
 		[[document helpers] activeLayerChanged:kLayerSwitched rect:NULL];
@@ -61,7 +61,7 @@
     NSArray *selection = [self selectedNodes];
     
     // Tell all of the selected nodes to remove themselves from the model.
-    [selection makeObjectsPerformSelector: @selector(removeFromParent)];
+    [selection makeObjectsPerformSelector:@selector(removeFromParent)];
     [outlineView deselectAll:nil];
     [outlineView reloadData];
 }
@@ -71,13 +71,13 @@
 // ================================================================
 
 // Required methods. These methods must handle the case of a "nil" item, which indicates the root item.
-- (id)outlineView:(NSOutlineView *)olv child:(int)index ofItem:(id)item
+- (id)outlineView:(NSOutlineView *)olv child:(NSInteger)index ofItem:(id)item
 {
 	if(!document)
 		return 0;
 	if(item != nil)
-		NSLog(@"%@ says olv %@ requested a child at %d for %@ erroniously", self, olv, index, item);
-	return [[document contents] layer:index];
+		NSLog(@"%@ says olv %@ requested a child at %ld for %@ erroniously", self, olv, (long)index, item);
+	return [[document contents] layerAtIndex:index];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)olv isItemExpandable:(id)item
@@ -86,7 +86,7 @@
 	return NO;
 }
 
-- (int)outlineView:(NSOutlineView *)olv numberOfChildrenOfItem:(id)item
+- (NSInteger)outlineView:(NSOutlineView *)olv numberOfChildrenOfItem:(id)item
 {
 	if(!document)
 		return 0;
@@ -101,13 +101,13 @@
 {
 	// There is only one colum so there's not much need to worry about this
     if ([[tableColumn identifier] isEqualToString:LAYER_THUMB_NAME_COL]) {
-		if([(SeaLayer *)item floating])
+		if([(SeaLayer *)item isFloating])
 			return @"Floating Layer";
 		return [(SeaLayer *)item name];
 	}else if([[tableColumn identifier] isEqualToString:LAYER_VISIBLE_COL]){
-		return [NSNumber numberWithBool:[(SeaLayer *)item visible]];
+		return @([(SeaLayer *)item isVisible]);
 	}else if([[tableColumn identifier] isEqualToString:INFO_BUTTON_COL]){
-		return [NSNumber numberWithBool:YES];
+		return @YES;
 	}else{
 		NSLog(@"Object value for unkown column: %@", tableColumn);
 	}
@@ -122,7 +122,7 @@
 	}else if([[tableColumn identifier] isEqualToString:LAYER_VISIBLE_COL]){
 		[[document contents] setVisible:[object boolValue] forLayer:[(SeaLayer *)item index]];
 	}else if([[tableColumn identifier] isEqualToString:INFO_BUTTON_COL]){
-		NSPoint p = [[outlineView window] convertBaseToScreen:[[outlineView window] mouseLocationOutsideOfEventStream]];
+		NSPoint p = [NSEvent mouseLocation];
 		[[[[SeaController utilitiesManager] pegasusUtilityFor:document] layerSettings] showSettings:item from:p];
 	}else{
 		NSLog(@"Setting the value for unknown column %@", tableColumn);
@@ -157,14 +157,14 @@
 		LayerCell *layerCell = (LayerCell *)cell;
 		// Set the image here since the value returned from outlineView:objectValueForTableColumn:... didn't specify the image part...
 		[layerCell setImage:[(SeaLayer *)item thumbnail]];
-		if([[self selectedNodes] count] > 0 && [[self selectedNodes] objectAtIndex:0] == item){
+		if([[self selectedNodes] count] > 0 && [self selectedNodes][0] == item){
 			[layerCell setSelected: YES];
 		}else{
 			[layerCell setSelected: NO];
 		}
 	}else if([[tableColumn identifier] isEqualToString:LAYER_VISIBLE_COL]){
 		NSButtonCell *buttonCell = (NSButtonCell *)cell;
-		if([(SeaLayer *)item visible]){
+		if([(SeaLayer *)item isVisible]){
 			[buttonCell setImage:[NSImage imageNamed:@"checked"]];
 		}else{
 			[buttonCell setImage:[NSImage imageNamed:@"unchecked"]];
@@ -224,15 +224,14 @@ NSFileHandle *NewFileHandleForWritingFile(NSString *dirpath, NSString *basename,
 // We promised the files, so now lets make good on that promise!
 - (NSArray *)outlineView:(NSOutlineView *)outlineView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedItems:(NSArray *)items
 {
-    int i = 0, count = [items count];
+    NSInteger i = 0, count = [items count];
     NSMutableArray *filenames = [NSMutableArray array];
     for (i=0; i<count; i++) {
-        SeaLayer *layer = (SeaLayer *)[items objectAtIndex:i];
+        SeaLayer *layer = (SeaLayer *)items[i];
         NSString *filename  = nil;
         NSFileHandle *fileHandle = NewFileHandleForWritingFile([dropDestination path], [layer name], @"tif", &filename);
         if (fileHandle) {
             [fileHandle writeData: [layer TIFFRepresentation]];
-            [fileHandle release];
             fileHandle = nil;
             [filenames addObject: filename];
         }
@@ -245,22 +244,22 @@ NSFileHandle *NewFileHandleForWritingFile(NSString *dirpath, NSString *basename,
     draggedNodes = items; // Don't retain since this is just holding temporaral drag information, and it is only used during a drag!  We could put this in the pboard actually.
     
     // Provide data for our custom type, and simple NSStrings.
-    [pboard declareTypes:[NSArray arrayWithObjects:SEA_LAYER_PBOARD_TYPE, NSTIFFPboardType, NSFilesPromisePboardType, NSStringPboardType, nil] owner:self];
+    [pboard declareTypes:@[SEA_LAYER_PBOARD_TYPE, NSPasteboardTypeTIFF, NSFilesPromisePboardType, NSPasteboardTypeString] owner:self];
 	
     // the actual data doesn't matter since DragDropSimplePboardType drags aren't recognized by anyone but us!.
     [pboard setData:[NSData data] forType:SEA_LAYER_PBOARD_TYPE]; 
-	[pboard setData:[[draggedNodes objectAtIndex:0] TIFFRepresentation] forType:NSTIFFPboardType];
+	[pboard setData:[draggedNodes[0] TIFFRepresentation] forType:NSPasteboardTypeTIFF];
 
     // Put the promised type we handle on the pasteboard.
-    [pboard setPropertyList:[NSArray arrayWithObjects:@"tif", nil] forType:NSFilesPromisePboardType];
+    [pboard setPropertyList:@[@"tif"] forType:NSFilesPromisePboardType];
 	
     // Put string data on the pboard... notice you candrag into TextEdit!
-    [pboard setString: [[draggedNodes objectAtIndex: 0] name] forType: NSStringPboardType];
+    [pboard setString: [draggedNodes[0] name] forType: NSPasteboardTypeString];
     
     return YES;
 }
 
-- (NSDragOperation)outlineView:(NSOutlineView *)ov validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(int)childIndex
+- (NSDragOperation)outlineView:(NSOutlineView *)ov validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)childIndex
 {
    // This method validates whether or not the proposal is a valid one. Returns NO if the drop should not be allowed.
     BOOL targetNodeIsValid = YES;
@@ -282,10 +281,10 @@ NSFileHandle *NewFileHandleForWritingFile(NSString *dirpath, NSString *basename,
     return targetNodeIsValid ? NSDragOperationGeneric : NSDragOperationNone;
 }
 
-- (BOOL)outlineView:(NSOutlineView *)ov acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(int)childIndex
+- (BOOL)outlineView:(NSOutlineView *)ov acceptDrop:(id <NSDraggingInfo>)info item:(id)item childIndex:(NSInteger)childIndex
 {
 	if(draggedNodes){
-		SeaLayer *layer = [draggedNodes objectAtIndex:0];
+		SeaLayer *layer = draggedNodes[0];
 		[[document contents] moveLayer: layer toIndex:childIndex];
 		[self update];
 		draggedNodes = nil;

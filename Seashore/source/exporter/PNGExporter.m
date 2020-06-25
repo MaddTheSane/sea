@@ -11,6 +11,16 @@
 	return NO;
 }
 
+- (NSString *)fileType
+{
+	return (NSString*)kUTTypePNG;
+}
+
+- (NSString *)optionsString
+{
+	return @"";
+}
+
 - (IBAction)showOptions:(id)sender
 {
 }
@@ -25,7 +35,7 @@
 	return @"png";
 }
 
-- (BOOL)writeDocument:(id)document toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path
 {
 	int i, j, width, height, spp;
 	unsigned char *srcData, *destData;
@@ -34,7 +44,7 @@
 	BOOL hasAlpha = NO;
 	
 	// Get the data to write
-	srcData = [(SeaWhiteboard *)[document whiteboard] data];
+	srcData = [[document whiteboard] data];
 	width = [(SeaContent *)[document contents] width];
 	height = [(SeaContent *)[document contents] height];
 	spp = [(SeaContent *)[document contents] spp];
@@ -59,11 +69,10 @@
 	
 	// Make an image representation from the data
 	imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&destData pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:spp hasAlpha:hasAlpha isPlanar:NO colorSpaceName:(spp > 2) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:width * spp bitsPerPixel:8 * spp];
-	imageData = [imageRep representationUsingType:NSPNGFileType properties:NULL];
+	imageData = [imageRep representationUsingType:NSPNGFileType properties:@{}];
 		
 	// Save our file and let's go
 	[imageData writeToFile:path atomically:YES];
-	[imageRep autorelease];
 	
 	// If the destination data is not equivalent to the source data free the former
 	if (destData != srcData)

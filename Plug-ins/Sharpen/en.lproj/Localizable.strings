@@ -1,0 +1,6 @@
+author = "Mark Pazolli and Michael Sweet";
+copyright = "Copyright © 2005 Mark Pazolli and Copyright © 1997-1998 Michael Sweet";
+groupName = "Enhance";
+description = "Sharpens the selection";
+license = "GNU General Public License";
+name = "Sharpen";

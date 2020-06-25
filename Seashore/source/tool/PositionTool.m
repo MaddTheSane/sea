@@ -15,16 +15,19 @@
 
 
 @implementation PositionTool
+@synthesize scale;
+@synthesize rotation;
+@synthesize rotationDefined;
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
-	return kPositionTool;
+	return SeaToolsPosition;
 }
 
-- (id)init
+- (instancetype)init
 {
 	if(![super init])
-		return NULL;
+		return nil;
 	
 	scale = -1;
 	rotation = 0.0;
@@ -33,22 +36,17 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id contents = [document contents];
-	id activeLayer = [contents activeLayer];
+	SeaContent *contents = [document contents];
+	SeaLayer *activeLayer = [contents activeLayer];
 	IntPoint oldOffsets;
 	int whichLayer;
-	int function = kMovingLayer;
+	SeaPositionOptions function = SeaPositionOptionMoving;
 	
 	// Determine the function
-	if ([activeLayer floating] && [options canAnchor] && (where.x < 0 || where.y < 0 || where.x >= [(SeaLayer *)activeLayer width] || where.y >= [(SeaLayer *)activeLayer height])){
-		function = kAnchoringLayer;
+	if (activeLayer.floating && [options canAnchor] && (where.x < 0 || where.y < 0 || where.x >= [activeLayer width] || where.y >= [activeLayer height])){
+		function = SeaPositionOptionAnchoring;
 	}else{
 		function = [options toolFunction];
 	}
@@ -58,7 +56,7 @@
 
 	// Vary behaviour based on function
 	switch (function) {
-		case kMovingLayer:
+		case SeaPositionOptionMoving:
 			
 			// Determine the absolute where
 			where.x += [activeLayer xoff]; where.y += [activeLayer yoff];
@@ -69,12 +67,12 @@
 			initialPoint.y = where.y - [activeLayer yoff];
 			
 			// If the active layer is linked we have to move all associated layers
-			if ([activeLayer linked]) {
+			if (activeLayer.linked) {
 			
 				// Go through all linked layers allowing a satisfactory undo
 				for (whichLayer = 0; whichLayer < [contents layerCount]; whichLayer++) {
-					if ([[contents layer:whichLayer] linked]) {
-						oldOffsets.x = [[contents layer:whichLayer] xoff]; oldOffsets.y = [[contents layer:whichLayer] yoff];
+					if ([contents layerAtIndex:whichLayer].linked) {
+						oldOffsets.x = [[contents layerAtIndex:whichLayer] xoff]; oldOffsets.y = [[contents layerAtIndex:whichLayer] yoff];
 						[[[document undoManager] prepareWithInvocationTarget:self] undoToOrigin:oldOffsets forLayer:whichLayer];			
 					}
 				}
@@ -89,7 +87,7 @@
 			}
 			
 		break;
-		case kRotatingLayer:
+		case SeaPositionOptionRotating:
 		
 			// Start rotating layer
 			rotation = 0.0;
@@ -97,14 +95,14 @@
 			[[document docView] setNeedsDisplay:YES]; 
 			
 		break;
-		case kScalingLayer:
+		case SeaPositionOptionScaling:
 		
 			// Start scaling layer
 			scale = 1.0;
 			[[document docView] setNeedsDisplay:YES];
 			
 		break;
-		case kAnchoringLayer:
+		case SeaPositionOptionAnchoring:
 		
 			// Anchor the layer
 			[contents anchorSelection];
@@ -115,26 +113,26 @@
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id contents = [document contents];
-	id activeLayer = [contents activeLayer];
+	SeaContent *contents = [document contents];
+	SeaLayer *activeLayer = [contents activeLayer];
 	int xoff, yoff, whichLayer;
 	int deltax = where.x - initialPoint.x, deltay = where.y - initialPoint.y;
-	IntPoint oldOffsets;
+	IntPoint oldOffsets = {0};
 	NSPoint activeCenter = NSMakePoint([activeLayer xoff] + [(SeaLayer *)activeLayer width] / 2, [activeLayer yoff] + [(SeaLayer *)activeLayer height] / 2);
-	float original, current;
+	CGFloat original, current;
 	
 	// Vary behaviour based on function
 	switch ([options  toolFunction]) {
-		case kMovingLayer:
+		case SeaPositionOptionMoving:
 			
 			// If the active layer is linked we have to move all associated layers
-			if ([activeLayer linked]) {
+			if (activeLayer.linked) {
 			
 				// Move all of the linked layers
 				for (whichLayer = 0; whichLayer < [contents layerCount]; whichLayer++) {
-					if ([[contents layer:whichLayer] linked]) {
-						xoff = [[contents layer:whichLayer] xoff]; yoff = [[contents layer:whichLayer] yoff];
-						[[contents layer:whichLayer] setOffsets:IntMakePoint(xoff + deltax, yoff + deltay)];
+					if ([contents layerAtIndex:whichLayer].linked) {
+						xoff = [[contents layerAtIndex:whichLayer] xoff]; yoff = [[contents layerAtIndex:whichLayer] yoff];
+						[[contents layerAtIndex:whichLayer] setOffsets:IntMakePoint(xoff + deltax, yoff + deltay)];
 					}
 				}
 				[[document helpers] layerOffsetsChanged:kLinkedLayers from:oldOffsets];
@@ -151,7 +149,7 @@
 			}
 			
 		break;
-		case kRotatingLayer:
+		case SeaPositionOptionRotating:
 		
 			// Continue rotating layer
 			original = atan((initialPoint.y - activeCenter.y) / (initialPoint.x - activeCenter.x));
@@ -160,7 +158,7 @@
 			
 		
 		break;
-		case kScalingLayer:
+		case SeaPositionOptionScaling:
 	
 			// Continue scaling layer
 			original = sqrt(sqr(initialPoint.x - activeCenter.x) + sqr(initialPoint.y - activeCenter.y));
@@ -168,13 +166,16 @@
 			scale = current / original;
 		
 		break;
+			
+		case SeaPositionOptionAnchoring:
+			break;
 	}
 	[[document docView] setNeedsDisplay:YES];
 }
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
 {
-	id layer;
+	SeaLayer *layer;
 	int deltax;
 	int newWidth, newHeight;
 	
@@ -183,17 +184,21 @@
 	
 	// Vary behaviour based on function
 	switch ([options toolFunction]) {
-		case kRotatingLayer:
+		case SeaPositionOptionRotating:
 			// Finish rotating layer
 			[[seaOperations seaRotation] rotate:rotation * 180.0 / 3.1415 withTrim:YES];
-		break;
-		case kScalingLayer:
+			break;
+			
+		case SeaPositionOptionScaling:
 			// Finish scaling layer
 			layer = [[document contents] activeLayer];
-			newWidth = scale *  [(SeaLayer *)layer width];
-			newHeight = scale * [(SeaLayer *)layer height];
+			newWidth = scale *  [layer width];
+			newHeight = scale * [layer height];
 			[[seaOperations seaScale] scaleToWidth:newWidth height:newHeight interpolation:GIMP_INTERPOLATION_CUBIC index:kActiveLayer];
-		break;
+			break;
+			
+		default:
+			break;
 	}
 	
 	// Cancel the previewing
@@ -201,25 +206,10 @@
 	rotationDefined = NO;
 }
 
-- (float)scale
-{
-	return scale;
-}
-
-- (float)rotation
-{
-	return rotation;
-}
-
-- (BOOL)rotationDefined
-{
-	return rotationDefined;
-}
-
-- (void)undoToOrigin:(IntPoint)origin forLayer:(int)index
+- (void)undoToOrigin:(IntPoint)origin forLayer:(NSInteger)index
 {
 	IntPoint oldOffsets;
-	id layer = [[document contents] layer:index];
+	id layer = [[document contents] layerAtIndex:index];
 	
 	oldOffsets.x = [layer xoff]; oldOffsets.y = [layer yoff];
 	[[[document undoManager] prepareWithInvocationTarget:self] undoToOrigin:oldOffsets forLayer:index];

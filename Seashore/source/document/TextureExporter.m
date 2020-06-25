@@ -2,8 +2,9 @@
 #import "SeaController.h"
 #import "UtilitiesManager.h"
 #import "TextureUtility.h"
+#import "SeaDocument.h"
 
-enum {
+NS_ENUM(int) {
 	kExistingCategoryButton,
 	kNewCategoryButton
 };
@@ -32,16 +33,20 @@ enum {
 	
 	// Determine the path
 	if ([existingCategoryRadio state] == NSOnState) {
-		path = [[[gMainBundle resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:[groupNames objectAtIndex:[categoryTable selectedRow]]];
+		path = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"textures"] stringByAppendingPathComponent:groupNames[[categoryTable selectedRow]]];
 	}
 	else {
-		path = [[[gMainBundle resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:[categoryTextbox stringValue]];
-		[gFileManager createDirectoryAtPath:path attributes:nil];
+		path = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"textures"] stringByAppendingPathComponent:[categoryTextbox stringValue]];
+		[gFileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
-	path = [path stringByAppendingFormat:@"/%@.png", [nameTextbox stringValue]];
+	path = [[path stringByAppendingPathComponent:[nameTextbox stringValue]] stringByAppendingPathExtension:@"png"];
 	
 	// Write document
-	[document writeToFile:path ofType:@"Portable Network Graphics Image"];
+	NSError *err = nil;
+	if (![document writeToURL:[NSURL fileURLWithPath:path] ofType:(NSString*)kUTTypePNG error:&err]) {
+		[[NSAlert alertWithError:err] runModal];
+	}
+	//[document writeToFile:path ofType:@"Portable Network Graphics image"];
 	
 	// Refresh textures
 	[[[SeaController utilitiesManager] textureUtilityFor:document] addTextureFromPath:path];
@@ -82,14 +87,14 @@ enum {
 	}
 }
 
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)column row:(int)row
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)column row:(NSInteger)row
 {
 	NSArray *groupNames = [[[SeaController utilitiesManager] textureUtilityFor:document] groupNames];
 
-	return [groupNames objectAtIndex:row];
+	return groupNames[row];
 }
 
-- (int)numberOfRowsInTableView:(NSTableView *)tableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
 	NSArray *groupNames = [[[SeaController utilitiesManager] textureUtilityFor:document] groupNames];
 

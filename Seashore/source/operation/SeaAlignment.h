@@ -1,4 +1,11 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
+
+@class SeaDocument;
 
 /*!
 	@class		SeaAlignment
@@ -8,13 +15,10 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaAlignment : NSObject
 {
-
 	// The document associated with this object
-	IBOutlet id document;
-
+	IBOutlet SeaDocument *document;
 }
 
 /*!
@@ -95,6 +99,6 @@
 	@param		index
 				The index of the layer whose offsets to restore.
 */
-- (void)undoOffsets:(IntPoint)offsets layer:(int)index;
+- (void)undoOffsets:(IntPoint)offsets layer:(NSInteger)index;
 
 @end

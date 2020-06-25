@@ -1,4 +1,5 @@
-#import "Globals.h"
+#import <Cocoa/Cocoa.h>
+#import <SeashoreKit/Globals.h>
 
 /*!
 	@class		NSPreciseImageView
@@ -8,9 +9,6 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface NSPreciseImageView : NSImageView {
-
-}
+@interface NSPreciseImageView : NSImageView
 
 @end

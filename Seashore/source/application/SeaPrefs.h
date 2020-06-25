@@ -1,26 +1,39 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
+#import "SSKTerminatable.h"
 #import "Globals.h"
+#import "SeaWarning.h"
+#import "Units.h"
+#else
+#import <SeashoreKit/SSKTerminatable.h>
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaWarning.h>
+#import <SeashoreKit/Units.h>
+#endif
 
 /*!
 	@enum		k...Color
-	@constant	kCyanColor
+	@constant	SeaGuideColorCyan
 				The colour cyan.
-	@constant	kMagentaColor
+	@constant	SeaGuideColorMagenta
 				The colour magenta.
-	@constant	kYellowColor
+	@constant	SeaGuideColorYellow
 				The colour yellow.
-	@constant	kBlackColor
+	@constant	SeaGuideColorBlack
 				The colour black.
-	@constant	kMaxColor
+	@constant	SeaGuideColorMax
 				A marker indicating the last possible colour plus one.
 */
-enum {
-	kCyanColor,
-	kMagentaColor,
-	kYellowColor,
-	kBlackColor,
-	kMaxColor
+typedef NS_ENUM(NSInteger, SeaGuideColor) {
+	SeaGuideColorCyan,
+	SeaGuideColorMagenta,
+	SeaGuideColorYellow,
+	SeaGuideColorBlack,
+	SeaGuideColorMax,
 };
 
+@class SeaController;
+@class WindowBackColorWell;
 
 /*!
 	@class		SeaPrefs
@@ -30,95 +43,94 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@interface SeaPrefs : NSObject {
+@interface SeaPrefs : NSObject <SSKTerminatable, NSMenuItemValidation> {
 	
 	// The SeaController object
-	IBOutlet id controller;
+	IBOutlet SeaController *controller;
 	
 	// The preferences panel
-	IBOutlet id panel;
+	IBOutlet NSPanel *panel;
 	
 	// The general prefs view
-	IBOutlet id generalPrefsView;
+	IBOutlet NSView *generalPrefsView;
 	
 	// The new prefs view
-	IBOutlet id newPrefsView;
+	IBOutlet NSView *newPrefsView;
 	
 	// The color prefs view
-	IBOutlet id colorPrefsView;
+	IBOutlet NSView *colorPrefsView;
 	
 	// A checkbox which when checked indicates that there should be fewer warnings
-	IBOutlet id fewerWarningsCheckbox;
+	IBOutlet NSButton *fewerWarningsCheckbox;
 	
 	// The menu for selecting the selection colour
-	IBOutlet id selectionColorMenu;
+	IBOutlet NSPopUpButton *selectionColorMenu;
 
 	// The menu for selecting the guide colour
-	IBOutlet id guideColorMenu;
+	IBOutlet NSPopUpButton *guideColorMenu;
 	
 	// The matrix button for the checkrboard pattern
-	IBOutlet id checkerboardMatrix;
+	IBOutlet NSMatrix *checkerboardMatrix;
 
 	// The matrix button for the color of the layer bounds
-	IBOutlet id layerBoundsMatrix;
+	IBOutlet NSMatrix *layerBoundsMatrix;
 		
 	// The color well for the window back
-	IBOutlet id windowBackWell;
+	IBOutlet WindowBackColorWell *windowBackWell;
 	
 	// The text field for the suggested width value for a new image
-	IBOutlet id widthValue;
+	IBOutlet NSTextField *widthValue;
 	
 	// The text field for the suggested height value for a new image
-	IBOutlet id heightValue;
+	IBOutlet NSTextField *heightValue;
 	
 	// The units label for the height
-	IBOutlet id heightUnits;
+	IBOutlet NSTextField *heightUnits;
 	
 	// The menu for the default units
-	IBOutlet id newUnitsMenu;
+	IBOutlet NSPopUpButton *newUnitsMenu;
 	
 	// The menu for the current units
-	IBOutlet id docUnitsMenu;
+	IBOutlet NSPopUpButton *docUnitsMenu;
 	
 	// The menu for the default resolution
-	IBOutlet id resolutionMenu;
+	IBOutlet NSPopUpButton *resolutionMenu;
 	
 	// The menu for the mode
-	IBOutlet id modeMenu;
+	IBOutlet NSPopUpButton *modeMenu;
 	
 	// The menu for resolution handling
-	IBOutlet id resolutionHandlingMenu;
+	IBOutlet NSPopUpButton *resolutionHandlingMenu;
 	
 	// The checkbox for transparency
-	IBOutlet id transparentBackgroundCheckbox;
+	IBOutlet NSButton *transparentBackgroundCheckbox;
 	
 	// A checkbox which when checked indicates effects should use a panel not a sheet
-	IBOutlet id effectsPanelCheckbox;
+	IBOutlet NSButton *effectsPanelCheckbox;
 	
 	// A checkbox which when checked indicates smart interpolations should be used
-	IBOutlet id smartInterpolationCheckbox;
+	IBOutlet NSButton *smartInterpolationCheckbox;
 	
 	// A checkbox which when checked indicates a new document should be created at start-up
-	IBOutlet id openUntitledCheckbox;
+	IBOutlet NSButton *openUntitledCheckbox;
 
 	// A checkbox which when checked indicates the first pressure sensitive touch should be ignored
-	IBOutlet id ignoreFirstTouchCheckbox;
+	IBOutlet NSButton *ignoreFirstTouchCheckbox;
 	
 	// A checkbox which when checked indicates drawing should be multithreaded
-	IBOutlet id multithreadedCheckbox;
+	IBOutlet NSButton *multithreadedCheckbox;
 	
 	// A checkbox which when checked indicates mouse coalescing should always be on
-	IBOutlet id coalescingCheckbox;
+	IBOutlet NSButton *coalescingCheckbox;
 	
 	// A checkbox which when checked indicates updates should be checked for weekly
-	IBOutlet id checkForUpdatesCheckbox;
+	IBOutlet NSButton *checkForUpdatesCheckbox;
 	
 	// A checkbox which when checks indicates the precise cursor should be used
-	IBOutlet id preciseCursorCheckbox;
+	IBOutlet NSButton *preciseCursorCheckbox;
 	
 	// A checkbox which when checks indicates CoreImage should be used for scaling/rotation
-	IBOutlet id useCoreImageCheckbox;
+	IBOutlet NSButton *useCoreImageCheckbox;
 	
 	// Stores whether or not layer boundaries are visible
 	BOOL layerBounds;
@@ -139,7 +151,7 @@ enum {
 	BOOL firstRun;
 	
 	// Stores the memory cache size
-	int memoryCacheSize;
+	size_t memoryCacheSize;
 	
 	// Whether textures should be used
 	BOOL useTextures;
@@ -166,13 +178,13 @@ enum {
 	BOOL useCoreImage;
 	
 	// The current selection colour
-	int selectionColor;
+	SeaGuideColor selectionColor;
 
 	// Whether or not the layer bounds are white
 	BOOL whiteLayerBounds;
 	
 	// The current guide colour
-	int guideColor;
+	NSInteger guideColor;
 
 	// The standard width and height for a new document
 	int width, height;
@@ -181,19 +193,19 @@ enum {
 	int resolution;
 	
 	// The standard units for a new document
-	int newUnits;
+	SeaUnits newUnits;
 
 	// The mode used for a new document
-	int mode;
+	NSInteger mode;
 	
 	// How resolutions are handled
-	int resolutionHandling;
+	NSInteger resolutionHandling;
 	
 	// Whether images sholud have a transparent background
 	BOOL transparentBackground;
 
 	// Stores the number of times this version of Seashore has been run
-	int runCount;
+	NSInteger runCount;
 	
 	// The time of the last check
 	NSTimeInterval lastCheck;
@@ -208,7 +220,7 @@ enum {
 	BOOL mouseCoalescing;
 
 	// The toolbar
-	id toolbar;
+	NSToolbar *toolbar;
 	
 	// The main screen resolution
 	IntPoint mainScreenResolution;
@@ -220,7 +232,7 @@ enum {
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
+- (instancetype)init;
 
 /*!
 	@method		awakeFromNib
@@ -246,24 +258,18 @@ enum {
 /*!
 	@method		generalPrefs
 	@discussion	Shows the general preferences.
-	@param		sender
-				Ignored.
 */
 - (void) generalPrefs;
 
 /*!
 	@method		newPrefs
 	@discussion	Shows the new preferences.
-	@param		sender
-				Ignored.
 */
 - (void) newPrefs;
 
 /*!
 	@method		colorPrefs
 	@discussion	Shows the color preferences.
-	@param		sender
-				Ignored.
 */
 - (void) colorPrefs;
  
@@ -423,52 +429,52 @@ enum {
 - (void)windowWillClose:(NSNotification *)aNotification;
 
 /*!
-	@method		layerBounds
+	@property	layerBounds
 	@discussion	Returns whether or not the layer boundaries should be visible.
 	@result		YES if the layer boundaries should be visible, NO otherwise.
 */
-- (BOOL)layerBounds;
+@property (readonly) BOOL layerBounds;
 
 /*!
-	@method		guides
+	@property	guides
 	@discussion	Returns whether or not the layer guides should be visible.
 	@result		YES if the layer guides should be visible, NO otherwise.
 */
-- (BOOL)guides;
+@property (readonly) BOOL guides;
 
 /*!
-	@method		rulers
+	@property	rulers
 	@discussion	Returns whether or not the rulers should be visible.
 	@result		YES if the rulers should be visible, NO otherwise.
 */
-- (BOOL)rulers;
+@property (readonly) BOOL rulers;
 
 /*!
-	@method		firstRun
+	@property	firstRun
 	@discussion	Returns if this is the first time the application has been run
 				actually returns if the firstRun" boolean in user defaults is
 				YES).
 	@result		YES if it is the first time, NO otherwise.
 */
-- (BOOL)firstRun;
+@property (readonly) BOOL firstRun;
 
 /*!
-	@method		memoryCacheSize
+	@property	memoryCacheSize
 	@discussion	Returns the minimum size of the undo data for a paticular layer
 				that should be stored in memory before it is written to disk.
 				This is known as the memory cache size for that layer.
 	@result		Returns an integer representing the memory cache size in  bytes
 				for any layer.
 */
-- (int)memoryCacheSize;
+@property (readonly) size_t memoryCacheSize;
 
 /*!
-	@method		warningLevel
+	@property	warningLevel
 	@discussion	Returns the warning level. Only warnings with a priority less
 				than the returned to level shoule be displayed.
 	@result		Returns an integer indicating the warning level.
 */
-- (int)warningLevel;
+@property (readonly) SeaWarningImportance warningLevel;
 
 /*!
 	@method		effectsPanel
@@ -498,6 +504,9 @@ enum {
 				YES if textures should be used, NO otherwise.
 */
 - (void)setUseTextures:(BOOL)value;
+
+//! Returns whether textures should be used where possible.
+@property BOOL useTextures;
 
 /*!
 	@method		toggleBoundaries:
@@ -532,11 +541,11 @@ enum {
 - (IBAction)checkerboardChanged:(id)sender;
 
 /*!
-	@method		useCheckerboard
+	@property	useCheckerboard
 	@discussion	Whether the transparency should be represented by a pattern.
 	@result		True if a pattern; false would use the transparency color.
 */
-- (BOOL)useCheckerboard;
+@property (readonly) BOOL useCheckerboard;
 
 /*!
 	@method		defaultWindowBack:
@@ -568,14 +577,14 @@ enum {
 				The alpha value to be associated with the colour.
 	@result		Returns a RGB NSColor object representing the selection colour.
 */
-- (NSColor *)selectionColor:(float)alpha;
+- (NSColor *)selectionColor:(CGFloat)alpha NS_SWIFT_NAME(selectionColor(alpha:));
 
 /*!
-	@method		selectionColorIndex
+	@property	selectionColorIndex
 	@discussion	Returns the index of the current selection colour.
 	@result		Returns an integer representing the selection colour.
 */
-- (int)selectionColorIndex;
+@property (readonly) SeaGuideColor selectionColorIndex;
 
 /*!
 	@method		selectionColorChanged:
@@ -606,14 +615,14 @@ enum {
 				The alpha value to be associated with the colour.
  @result		Returns a RGB NSColor object representing the guide colour.
  */
-- (NSColor *)guideColor:(float)alpha;
+- (NSColor *)guideColor:(CGFloat)alpha NS_SWIFT_NAME(guideColor(alpha:));
 
 /*!
- @method		guideColorIndex
+ @property		guideColorIndex
  @discussion	Returns the index of the current guide colour.
  @result		Returns an integer representing the guide colour.
  */
-- (int)guideColorIndex;
+@property (readonly) NSInteger guideColorIndex;
 
 /*!
  @method		guideColorChanged:
@@ -625,49 +634,49 @@ enum {
 - (IBAction)guideColorChanged:(id)sender;
 
 /*!
-	@method		multithreaded
+	@property	multithreaded
 	@discussion	Returns whether drawing should be multithreaded.
 	@result		Returns YES if drawing should be multithreaded, NO otherwise.
 */
-- (BOOL)multithreaded;
+@property (readonly) BOOL multithreaded;
 
 /*!
-	@method		ignoreFirstTouch
+	@property	ignoreFirstTouch
 	@discussion	Returns whether the first pressure-sensitive touch should be
 				ignored.
 	@result		Returns YES if it should be ignored, NO otherwise.
 */
-- (BOOL)ignoreFirstTouch;
+@property (readonly) BOOL ignoreFirstTouch;
 
 /*!
-	@method		mouseCoalescing
+	@property	mouseCoalescing
 	@discussion	Returns whether mouse coalescing should always be on.
 	@result		Returns YES if it should always be on, NO otherwise.
 */
-- (BOOL)mouseCoalescing;
+@property (readonly) BOOL mouseCoalescing;
 
 /*!
-	@method		checkForUpdates
+	@property	checkForUpdates
 	@discussion	Returns whether an application should check for updates. This
 				will only return YES if it's been more than a week since the
 				last update.
 	@result		Returns YES if Seashore should check for updates, NO otherwise.
 */
-- (BOOL)checkForUpdates;
+@property (readonly) BOOL checkForUpdates;
 
 /*!
-	@method		preciseCursor
+	@property	preciseCursor
 	@discussion	Returns whether a precise cursor should be used.
 	@result		Returns YES if the precise cursor should be used, NO otherwise.
 */
-- (BOOL)preciseCursor;
+@property (readonly) BOOL preciseCursor;
 
 /*!
-	@method		useCoreImage
+	@property	useCoreImage
 	@discussion	Returns whether Core Image should be used for scaling/rotation.
 	@result		Returns YES if Core Image should be used for scaling/rotation, NO otherwise.
 */
-- (BOOL)useCoreImage;
+@property (readonly) BOOL useCoreImage;
 
 /*!
 	@method		delayOverlay
@@ -690,53 +699,54 @@ enum {
 	@discussion Returns the menu item index of the resolution for new images.
 	@result		Returns the menu item index of the resolution for new images.
 */
-- (int)resolution;
+- (NSInteger)resolution;
 
 /*!
 	@method		mode
 	@discussion Returns the menu item index of the mode for new images.
 	@result		Returns the menu item index of the mode for new images.
 */
-- (int)mode;
+- (NSInteger)mode;
+//@property (readonly) NSInteger mode;
 
 /*!
 	@method		screenResolution
 	@discussion	Returns the screen resolution to be used when calculating view size.
 				Considers resolution handling preference.
-	@param		Returns either (0, 0) (ignore image resolution), (72, 72) (assume 72 dpi)
+	@return		Returns either (0, 0) (ignore image resolution), (72, 72) (assume 72 dpi)
 				or the true screen resolution.
 */
 - (IntPoint)screenResolution;
 
 /*!
-	@method		transparentBackground
+	@property	transparentBackground
 	@discussion Returns whether the background should be transparent.
 	@result		Returns YES for transparency.
 */
-- (BOOL)transparentBackground;
+@property (readonly) BOOL transparentBackground;
 
 /*!
-	@method		newUnits
+	@property	newUnits
 	@discussion Returns the units used for new images.
 	@result		Returns an int that represents the units (see SeaDocument).
 */
-- (int)newUnits;
+@property (readonly) SeaUnits newUnits;
 
 /*!
-	@method		runCount
+	@property	runCount
 	@discussion	Returns the number of times this version of Seashore has run.
 	@result		Returns an integer indicating the number of times this version
 				of Seashore has run.
 */
-- (int)runCount;
+@property (readonly) NSInteger runCount;
 
 /*!
-	@method		openUntitled
+	@property	openUntitled
 	@discussion	Returns whether a new document should be created at
 				start-up.
 	@result		Returns YES if the a new document should be created, NO otherwise.
 */
-- (BOOL)openUntitled;
+@property (readonly) BOOL openUntitled;
 
 /*!
 	@method		validateMenuItem:
@@ -746,6 +756,6 @@ enum {
 				The menu item to be validated.
 	@result		YES if the menu item should be enabled, NO otherwise.
 */
-- (BOOL)validateMenuItem:(id)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end

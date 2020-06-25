@@ -1,50 +1,62 @@
 #import "SeaLayer.h"
 #import "SeaContent.h"
+#if MAIN_COMPILE
 #import "SeaDocument.h"
 #import "SeaLayerUndo.h"
 #import "SeaController.h"
 #import "UtilitiesManager.h"
 #import "PegasusUtility.h"
+#endif
 #import "Bitmap.h"
+#if MAIN_COMPILE
 #import "SeaWarning.h"
 #import "SeaPrefs.h"
 #import "SeaPlugins.h"
 #import "CIAffineTransformClass.h"
-#import <ApplicationServices/ApplicationServices.h>
-#import <sys/stat.h>
-#import <sys/mount.h>
-#import <GIMPCore/GIMPCore.h>
+#endif
+#include <ApplicationServices/ApplicationServices.h>
+#include <sys/stat.h>
+#include <sys/mount.h>
+#if MAIN_COMPILE
+#include <GIMPCore/GIMPCore.h>
+#endif
+#include <tgmath.h>
 
 @implementation SeaLayer
+@synthesize xOffset = xoff;
+@synthesize yOffset = yoff;
+@synthesize width;
+@synthesize height;
+@synthesize uniqueLayerID;
 
-- (id)initWithDocument:(id)doc
+#if MAIN_COMPILE
+- (instancetype)initWithDocument:(SeaDocument *)doc
 {	
 	// Set the data members to reasonable values
-	height = width = mode = 0;
-	opacity = 255; xoff = yoff = 0;
-	spp = 4; visible = YES; data = NULL; hasAlpha = YES;
-	lostprops = NULL; lostprops_len = 0;
-	compressed = NO; document = doc;
-	thumbnail = NULL; thumbData = NULL;
-	floating = NO;
-	seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
-	uniqueLayerID = [(SeaDocument *)doc uniqueLayerID];
-	if (uniqueLayerID == 0)
-		name = [[NSString alloc] initWithString:LOCALSTR(@"background layer", @"Background")];
-	else
-		name = [[NSString alloc] initWithFormat:LOCALSTR(@"layer title", @"Layer %d"), uniqueLayerID];
-	oldNames = [[NSArray alloc] init];
-	undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%d-l%d", [document uniqueDocID], [self uniqueLayerID]];
-	affinePlugin = [[SeaController seaPlugins] affinePlugin];
-	
+	if (self = [super init]) {
+		opacity = 255;
+		spp = 4; visible = YES;
+		hasAlpha = YES;
+		lostprops = NULL;
+		document = doc;
+		seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
+		uniqueLayerID = [doc uniqueLayerID];
+		if (uniqueLayerID == 0)
+			name = [[NSString alloc] initWithString:LOCALSTR(@"background layer", @"Background")];
+		else
+			name = [[NSString alloc] initWithFormat:LOCALSTR(@"layer title", @"Layer %d"), uniqueLayerID];
+		oldNames = [[NSArray alloc] init];
+		undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%ld-l%ld", (long)[document uniqueDocID], (long)[self uniqueLayerID]];
+		affinePlugin = [[SeaController seaPlugins] affinePlugin];
+	}
 	return self;
 }
 
--  (id)initWithDocument:(id)doc width:(int)lwidth height:(int)lheight opaque:(BOOL)opaque spp:(int)lspp;
+-  (instancetype)initWithDocument:(SeaDocument*)doc width:(int)lwidth height:(int)lheight opaque:(BOOL)opaque spp:(int)lspp;
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])
-		return NULL;
+		return nil;
 	
 	// Extract appropriate values of master
 	width = lwidth; height = lheight;
@@ -65,11 +77,11 @@
 	return self;
 }
 
-- (id)initWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata spp:(int)lspp
+- (instancetype)initWithDocument:(SeaDocument*)doc rect:(IntRect)lrect data:(unsigned char *)ldata spp:(int)lspp
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])
-		return NULL;
+		return nil;
 	
 	// Derive the width and height from the imageRep
 	xoff = lrect.origin.x; yoff = lrect.origin.y;
@@ -88,11 +100,11 @@
 	return self;
 }
 
-- (id)initWithDocument:(id)doc layer:(SeaLayer*)layer
+- (instancetype)initWithDocument:(SeaDocument*)doc layer:(SeaLayer*)layer
 {
 	// Call the core initializer
 	if (![self initWithDocument:doc])
-		return NULL;
+		return nil;
 		
 	// Synchronize properties
 	width = [layer width];
@@ -103,11 +115,9 @@
 	data = memcpy(data, [layer data], width * height * spp);
 	xoff = [layer xoff];
 	yoff = [layer yoff];
-	visible = [layer visible];
+	visible = [layer isVisible];
 	opacity = [layer opacity];
-	[name autorelease];
 	name = [NSString stringWithString:[layer name]];
-	[name retain];
 	
 	// Assume we always have alpha
 	hasAlpha = YES;
@@ -118,57 +128,78 @@
 	return self;
 }
 
-- (id)initFloatingWithDocument:(id)doc rect:(IntRect)lrect data:(unsigned char *)ldata
+- (instancetype)initFloatingWithDocument:(SeaDocument*)doc rect:(IntRect)lrect data:(unsigned char *)ldata
 {
-	// Set the offsets, height and width
-	xoff = lrect.origin.x;
-	yoff = lrect.origin.y;
-	width = lrect.size.width;
-	height = lrect.size.height;
-	
-	// Set the other variables according to the arguments
-	document = doc;
-	data = ldata;
-	
-	// And then make some sensible choices for the other variables
-	mode = 0;
-	opacity = 255;
-	spp = [[document contents] spp];
-	visible = YES;
-	hasAlpha = YES;
-	compressed = NO;
-	thumbnail = NULL; thumbData = NULL;
-	floating = YES;
-	affinePlugin = [[SeaController seaPlugins] affinePlugin];
-	
-	// Setup for undoing
-	seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
-	uniqueLayerID = [(SeaDocument *)doc uniqueFloatingLayerID];
-	name = NULL; oldNames = NULL;
-	undoFilePath = [[NSString alloc] initWithFormat:@"/tmp/seaundo-d%d-l%d", [self uniqueLayerID], [document uniqueDocID]];
+	if (self = [self initWithDocument:doc]) {
+		// Set the offsets, height and width
+		xoff = lrect.origin.x;
+		yoff = lrect.origin.y;
+		width = lrect.size.width;
+		height = lrect.size.height;
+		
+		// Set the other variables according to the arguments
+		document = doc;
+		data = ldata;
+		
+		// And then make some sensible choices for the other variables
+		mode = 0;
+		opacity = 255;
+		spp = [[document contents] spp];
+		visible = YES;
+		hasAlpha = YES;
+		compressed = NO;
+		thumbnail = NULL; thumbData = NULL;
+		floating = YES;
+		affinePlugin = [[SeaController seaPlugins] affinePlugin];
+		
+		// Setup for undoing
+		seaLayerUndo = [[SeaLayerUndo alloc] initWithDocument:doc forLayer:self];
+		uniqueLayerID = [(SeaDocument *)doc uniqueFloatingLayerID];
+		name = NULL; oldNames = NULL;
+		undoFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"seaundo-d%ld-l%ld", (long)[self uniqueLayerID], (long)[document uniqueDocID]]];
+	}
+	return self;
+}
+
+#else
+
+- (instancetype)init
+{
+	if (self = [super init]) {
+		// Set the data members to reasonable values
+		height = width = mode = 0;
+		opacity = 255; xoff = yoff = 0;
+		spp = 4;
+		srand(time(NULL) & 0x7FFFFFFF);
+		
+		uniqueLayerID = rand();
+		if (uniqueLayerID == 0)
+			name = [[NSString alloc] initWithString:LOCALSTR(@"background layer", @"Background")];
+		else
+			name = [[NSString alloc] initWithFormat:LOCALSTR(@"layer title", @"Layer %d"), uniqueLayerID];
+		oldNames = [[NSArray alloc] init];
+	}
 	
 	return self;
 }
 
+#endif
+
 - (void)dealloc
-{	
-	struct stat sb;
-	
-	if (name) [name autorelease];
-	if (oldNames) [oldNames autorelease];
+{
 	if (data) free(data);
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
-	if (seaLayerUndo) [seaLayerUndo autorelease];
+#if MAIN_COMPILE
+	struct stat sb;
 	if (data == NULL) {
 		if (stat([undoFilePath fileSystemRepresentation], &sb) == 0) {
 			unlink([undoFilePath fileSystemRepresentation]);
 		}
 	}
-	if (undoFilePath) [undoFilePath autorelease];
-	[super dealloc];
+#endif
 }
 
+#if MAIN_COMPILE
 - (void)compress
 {
 	FILE *file;
@@ -198,12 +229,9 @@
 			}
 
 			// Get rid of the thumbnail
-			if (thumbnail) [thumbnail autorelease];
 			if (thumbData) free(thumbData);
 			thumbnail = NULL; thumbData = NULL;
-
 		}
-		
 	}
 }
 
@@ -231,9 +259,7 @@
 			
 			// Delete the file (we have its contents in memory now)
 			unlink([undoFilePath fileSystemRepresentation]);
-			
 		}
-	
 	}
 }
 
@@ -241,27 +267,9 @@
 {
 	return document;
 }
+#endif
 
-- (int)width
-{
-	return width;
-}
-
-- (int)height
-{
-	return height;
-}
-
-- (int)xoff
-{
-	return xoff;
-}
-
-- (int)yoff
-{
-	return yoff;
-}
-
+#if MAIN_COMPILE
 - (IntRect)localRect
 {
 	return IntMakeRect(xoff, yoff, width, height);
@@ -275,15 +283,14 @@
 
 - (void)trimLayer
 {
-	int i, j;
 	int left, right, top, bottom;
 	
 	// Start out with invalid content borders
 	left = right = top = bottom =  -1;
 	
 	// Determine left content margin
-	for (i = 0; i < width && left == -1; i++) {
-		for (j = 0; j < height && left == -1; j++) {
+	for (int i = 0; i < width && left == -1; i++) {
+		for (int j = 0; j < height && left == -1; j++) {
 			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
 				left = i;
 			}
@@ -291,8 +298,8 @@
 	}
 	
 	// Determine right content margin
-	for (i = width - 1; i >= 0 && right == -1; i--) {
-		for (j = 0; j < height && right == -1; j++) {
+	for (int i = width - 1; i >= 0 && right == -1; i--) {
+		for (int j = 0; j < height && right == -1; j++) {
 			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
 				right = width - 1 - i;
 			}
@@ -300,8 +307,8 @@
 	}
 	
 	// Determine top content margin
-	for (j = 0; j < height && top == -1; j++) {
-		for (i = 0; i < width && top == -1; i++) {
+	for (int j = 0; j < height && top == -1; j++) {
+		for (int i = 0; i < width && top == -1; i++) {
 			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
 				top = j;
 			}
@@ -309,8 +316,8 @@
 	}
 	
 	// Determine bottom content margin
-	for (j = height - 1; j >= 0 && bottom == -1; j--) {
-		for (i = 0; i < width && bottom == -1; i++) {
+	for (int j = height - 1; j >= 0 && bottom == -1; j--) {
+		for (int i = 0; i < width && bottom == -1; i++) {
 			if (data[j * width * spp + i * spp + (spp - 1)] != 0) {
 				bottom = height - 1 - j;
 			}
@@ -325,10 +332,9 @@
 - (void)flipHorizontally
 {
 	unsigned char temp[4];
-	int i, j;
 	
-	for (j = 0; j < height; j++) {
-		for (i = 0; i < width / 2; i++) {
+	for (int j = 0; j < height; j++) {
+		for (int i = 0; i < width / 2; i++) {
 			memcpy(temp, &(data[(j * width + i) * spp]), spp);
 			memcpy(&(data[(j * width + i) * spp]), &(data[(j * width + (width - i - 1)) * spp]), spp);
 			memcpy(&(data[(j * width + (width - i - 1)) * spp]), temp, spp);
@@ -341,10 +347,9 @@
 - (void)flipVertically
 {
 	unsigned char temp[4];
-	int i, j;
 	
-	for (j = 0; j < height / 2; j++) {
-		for (i = 0; i < width; i++) {
+	for (int j = 0; j < height / 2; j++) {
+		for (int i = 0; i < width; i++) {
 			memcpy(temp, &(data[(j * width + i) * spp]), spp);
 			memcpy(&(data[(j * width + i) * spp]), &(data[((height - j - 1) * width + i) * spp]), spp);
 			memcpy(&(data[((height - j - 1) * width + i) * spp]), temp, spp);
@@ -356,25 +361,21 @@
 
 - (void)rotateLeft
 {
-	int newWidth, newHeight, ox, oy;
-	unsigned char *newData;
-	int i, j, k;
+	int newWidth = height;
+	int newHeight = width;
+	unsigned char *newData = malloc(make_128(newWidth * newHeight * spp));
 	
-	newWidth = height;
-	newHeight = width;
-	newData = malloc(make_128(newWidth * newHeight * spp));
-	
-	for (j = 0; j < height; j++) {
-		for (i = 0; i < width; i++) {
-			for (k = 0; k < spp; k++) {
+	for (int j = 0; j < height; j++) {
+		for (int i = 0; i < width; i++) {
+			for (int k = 0; k < spp; k++) {
 				newData[((newHeight - i - 1) * newWidth + j) * spp + k] = data[(j * width + i) * spp + k]; 
 			}
 		}
 	}
 	free(data);
 	
-	ox = [(SeaContent *)[document contents] width] - xoff - width;
-	oy = yoff;
+	int ox = [(SeaContent *)[document contents] width] - xoff - width;
+	int oy = yoff;
 	
 	width = newWidth;
 	height = newHeight;
@@ -386,25 +387,21 @@
 
 - (void)rotateRight
 {
-	int newWidth, newHeight, ox, oy;
-	unsigned char *newData;
-	int i, j, k;
+	int newWidth = height;
+	int newHeight = width;
+	unsigned char *newData = malloc(make_128(newWidth * newHeight * spp));
 	
-	newWidth = height;
-	newHeight = width;
-	newData = malloc(make_128(newWidth * newHeight * spp));
-	
-	for (j = 0; j < height; j++) {
-		for (i = 0; i < width; i++) {
-			for (k = 0; k < spp; k++) {
+	for (int j = 0; j < height; j++) {
+		for (int i = 0; i < width; i++) {
+			for (int k = 0; k < spp; k++) {
 				newData[(i * newWidth + (newWidth - j - 1)) * spp + k] = data[(j * width + i) * spp + k]; 
 			}
 		}
 	}
 	free(data);
 	
-	ox = xoff;
-	oy = [(SeaContent *)[document contents] height] - yoff - height;
+	int ox = xoff;
+	int oy = [(SeaContent *)[document contents] height] - yoff - height;
 	
 	width = newWidth;
 	height = newHeight;
@@ -414,7 +411,7 @@
 	yoff = ox;
 }
 
-- (void)setCocoaRotation:(float)degrees interpolation:(int)interpolation withTrim:(BOOL)trim
+- (void)setCocoaRotation:(CGFloat)degrees interpolation:(NSImageInterpolation)interpolation withTrim:(BOOL)trim
 {
 	NSAffineTransform *at, *tat;
 	unsigned char *srcData;
@@ -422,14 +419,14 @@
 	NSBitmapImageRep *in_rep, *final_rep;
 	NSPoint point[4], minPoint, maxPoint, transformPoint;
 	int i, oldHeight, oldWidth;
-	int ispp, bipp, bypr, ispace, ibps;
+	NSInteger ispp, bipp, bypr, ibps;
 	
 	// Define the rotation
 	at = [NSAffineTransform transform];
 	[at rotateByDegrees:degrees];
 	
 	// Determine the input image
-	premultiplyBitmap(spp, data, data, width * height);
+	SeaPremultiplyBitmap(spp, data, data, width * height);
 	in_rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&data pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:width * spp bitsPerPixel:8 * spp];
 
 	// Determine the output size
@@ -460,7 +457,6 @@
 	
 	// Determine the output image
 	image_out = [[NSImage alloc] initWithSize:NSMakeSize(width, height)];
-	[image_out setCachedSeparately:YES];
 	[image_out recache];
 	[image_out lockFocus];
 	
@@ -481,7 +477,6 @@
 	[image_out unlockFocus];
 	
 	// Start clean up
-	[in_rep autorelease];
 	free(data);
 	
 	// Make the swap
@@ -489,20 +484,18 @@
 	ispp = [final_rep samplesPerPixel];
 	bipp = [final_rep bitsPerPixel];
 	bypr = [final_rep bytesPerRow];
-	ispace = (ispp > 2) ? kRGBColorSpace : kGrayColorSpace;
+	BMPColorSpace ispace = (ispp > 2) ? BMPColorSpaceRGB : BMPColorSpaceGray;
 	ibps = [final_rep bitsPerPixel] / [final_rep samplesPerPixel];
-	data = convertBitmap(spp, (spp == 4) ? kRGBColorSpace : kGrayColorSpace, 8, srcData, width, height, ispp, bipp, bypr, ispace, NULL, ibps, 0); 
+	data = SeaConvertBitmap(spp, (spp == 4) ? BMPColorSpaceRGB : BMPColorSpaceGray, 8, srcData, width, height, ispp, bipp, bypr, ispace, NULL, ibps, 0);
 	
 	// Clean up
-	[final_rep autorelease];
-	[image_out autorelease];
-	unpremultiplyBitmap(spp, data, data, width * height);
+	SeaUnpremultiplyBitmap(spp, data, data, width * height);
 		
 	// Make margin changes
 	if (trim) [self trimLayer];
 }
 
-- (void)setCoreImageRotation:(float)degrees interpolation:(int)interpolation withTrim:(BOOL)trim
+- (void)setCoreImageRotation:(CGFloat)degrees interpolation:(NSImageInterpolation)interpolation withTrim:(BOOL)trim
 {
 	unsigned char *newData;
 	NSAffineTransform *at;
@@ -532,8 +525,8 @@
 		if (point[i].y > maxPoint.y)
 			maxPoint.y = point[i].y;
 	}
-	newWidth = ceilf(maxPoint.x - minPoint.x);
-	newHeight = ceilf(maxPoint.y - minPoint.y);
+	newWidth = ceil(maxPoint.x - minPoint.x);
+	newHeight = ceil(maxPoint.y - minPoint.y);
 	
 	// Run the transform
 	newData = [affinePlugin runAffineTransform:at withImage:data spp:spp width:width height:height opaque:NO newWidth:&newWidth newHeight:&newHeight];
@@ -546,7 +539,6 @@
 	width = newWidth; height = newHeight;
 	
 	// Destroy the thumbnail data
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
 	thumbnail = NULL; thumbData = NULL;
 	
@@ -555,7 +547,7 @@
 }
 
 
-- (void)setRotation:(float)degrees interpolation:(int)interpolation withTrim:(BOOL)trim
+- (void)setRotation:(CGFloat)degrees interpolation:(NSImageInterpolation)interpolation withTrim:(BOOL)trim
 {
 	if (affinePlugin && [[SeaController seaPrefs] useCoreImage]) {
 		[self setCoreImageRotation:degrees interpolation:interpolation withTrim:trim];
@@ -564,73 +556,28 @@
 		[self setCocoaRotation:degrees interpolation:interpolation withTrim:trim];
 	}
 }
+#endif
 
-- (BOOL)visible
-{
-	return visible;
-}
+@synthesize visible;
+@synthesize linked;
+@synthesize opacity;
+@synthesize mode;
+@synthesize name;
 
-- (void)setVisible:(BOOL)value
-{
-	visible = value;
-}
-
-- (BOOL)linked
-{
-	return linked;
-}
-
-- (void)setLinked:(BOOL)value
-{
-	linked = value;
-}
-
-- (int)opacity
-{
-	return opacity;
-}
-
-- (void)setOpacity:(int)value
-{
-	opacity = value;
-}
-
-- (int)mode
-{
-	return mode;
-}
-
-- (void)setMode:(int)value
-{
-	mode = value;
-}
-
-- (NSString *)name
-{
-	return name;
-}
-
+#if MAIN_COMPILE
 - (void)setName:(NSString *)newName
 {
 	if (name) {
-		[oldNames autorelease];
 		oldNames = [oldNames arrayByAddingObject:name];
-		[oldNames retain]; [name autorelease];
-		name = newName;
-		[name retain];
+		name = [newName copy];
 	}
 }
+#endif
 
-- (unsigned char *)data
-{
-	return data;
-}
+@synthesize data;
+@synthesize hasAlpha;
 
-- (BOOL)hasAlpha
-{
-	return hasAlpha;
-}
-
+#if MAIN_COMPILE
 - (void)toggleAlpha
 {
 	// Do nothing if we can't do anything
@@ -646,12 +593,14 @@
 	// Make action undoable
 	[[[document undoManager] prepareWithInvocationTarget:self] toggleAlpha];
 }
+#endif
 
 - (void)introduceAlpha
 {
 	hasAlpha = YES;
 }
 
+#if MAIN_COMPILE
 - (BOOL)canToggleAlpha
 {
 	int i;
@@ -668,6 +617,7 @@
 	
 	return YES;
 }
+#endif
 
 - (char *)lostprops
 {
@@ -679,28 +629,24 @@
 	return lostprops_len;
 }
 
-- (int)uniqueLayerID
-{
-	return uniqueLayerID;
-}
 
+#if MAIN_COMPILE
 - (int)index
 {
 	int i;
 	
 	for (i = 0; i < [[document contents] layerCount]; i++) {
-		if ([[document contents] layer:i] == self)
+		if ([[document contents] layerAtIndex:i] == self)
 			return i;
 	}
 	
 	return -1;
 }
+#endif
 
-- (BOOL)floating
-{
-	return floating;
-}
+@synthesize floating;
 
+#if MAIN_COMPILE
 - (id)seaLayerUndo
 {
 	return seaLayerUndo;
@@ -743,10 +689,8 @@
 	tempRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&thumbData pixelsWide:thumbWidth pixelsHigh:thumbHeight bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:thumbWidth * spp bitsPerPixel:8 * spp];
 	
 	// Wrap it up in an NSImage
-	if (thumbnail) [thumbnail autorelease];
 	thumbnail = [[NSImage alloc] initWithSize:NSMakeSize(thumbWidth, thumbHeight)];
 	[thumbnail addRepresentation:tempRep];
-	[tempRep autorelease];
 		
 	return thumbnail;
 }
@@ -803,10 +747,9 @@
 	if (hasAlpha) {
 		
 		// Formulate the premultiplied data from the data
-		premultiplyBitmap(spp, pmImageData, data, width * height);
+		SeaPremultiplyBitmap(spp, pmImageData, data, width * height);
 	
-	}
-	else {
+	} else {
 	
 		// Strip the alpha channel
 		for (i = 0; i < width * height; i++) {
@@ -825,7 +768,6 @@
 	imageTIFFData = [imageRep TIFFRepresentationUsingCompression:NSTIFFCompressionLZW factor:255];
 	
 	// Release the representation and the image data
-	[imageRep autorelease];
 	free(pmImageData);
 	
 	return imageTIFFData;
@@ -868,7 +810,6 @@
 	xoff -= left; yoff -= top; 
 	
 	// Destroy the thumbnail data
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
 	thumbnail = NULL; thumbData = NULL;
 }
@@ -890,7 +831,6 @@
 	width = newWidth; height = newHeight;
 	
 	// Destroy the thumbnail data
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
 	thumbnail = NULL; thumbData = NULL;
 }
@@ -903,7 +843,7 @@
 	
 	// Determine affine transform
 	at = [NSAffineTransform transform];
-	[at scaleXBy:(float)newWidth / (float)width yBy:(float)newHeight / (float)height];
+	[at scaleXBy:(CGFloat)newWidth / (CGFloat)width yBy:(CGFloat)newHeight / (CGFloat)height];
 	
 	// Run the transform
 	newData = [affinePlugin runAffineTransform:at withImage:data spp:spp width:width height:height opaque:!hasAlpha newWidth:&newWidth newHeight:&newHeight];
@@ -914,13 +854,12 @@
 	width = newWidth; height = newHeight;
 	
 	// Destroy the thumbnail data
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
 	thumbnail = NULL; thumbData = NULL;
 }
 
 
-- (void)setWidth:(int)newWidth height:(int)newHeight interpolation:(int)interpolation
+- (void)setWidth:(int)newWidth height:(int)newHeight interpolation:(GimpInterpolationType)interpolation
 {
 	// The issue here is it looks like we're not smart enough to pass anything
 	// to the affine plugin besides cubic, so if we're not cupbic we have to use cocoa
@@ -932,16 +871,12 @@
 	}
 }
 
-- (void)convertFromType:(int)srcType to:(int)destType
+- (void)convertFromType:(XcfImageType)srcType to:(XcfImageType)destType
 {
-	CMBitmap srcBitmap, destBitmap;
-	CMProfileRef srcProf, destProf;
-	CMWorldRef cw;
 	unsigned char *newData, *oldData;
 	int i;
 	
 	// Destroy the thumbnail data
-	if (thumbnail) [thumbnail autorelease];
 	if (thumbData) free(thumbData);
 	thumbnail = NULL; thumbData = NULL;
 
@@ -950,32 +885,35 @@
 		return;
 		
 	if (srcType == XCF_RGB_IMAGE && destType == XCF_GRAY_IMAGE) {
-	
+		ColorSyncProfileRef srcProf, destProf;
+		ColorSyncTransformRef cw;
+
 		// Create colour world
-		OpenDisplayProfile(&srcProf);
-		CMGetDefaultProfileBySpace(cmGrayData, &destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
+		srcProf = ColorSyncProfileCreateWithDisplayID(0);
+		destProf = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
+		NSArray<NSDictionary<NSString*,id>*>*
+		profSeq = @[
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)srcProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+					  },
+					
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+					  },
+					];
+		cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
 	
 		// Define the source
 		oldData = data;
-		srcBitmap.image = (char *)oldData;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * 4;
-		srcBitmap.pixelSize = 8 * 4;
-		srcBitmap.space = cmRGBA32Space;
-	
+		
 		// Define the destination
 		newData = malloc(make_128(width * height * 2));
-		destBitmap.image = (char *)newData;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 2;
-		destBitmap.pixelSize = 8 * 2;
-		destBitmap.space = cmGrayA16Space;
 		
 		// Execute the conversion
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
+		ColorSyncTransformConvert(cw, width, height, newData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaLast, width * 2, oldData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaLast, width * 4, NULL);
+
 		for (i = 0; i < width * height; i++)
 			newData[i * 2 + 1] = oldData[i * 4 + 3];
 		data = newData;
@@ -983,37 +921,40 @@
 		spp = 2;
 		
 		// Get rid of the colour world - we no longer need it
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(srcProf);
+		CFRelease(cw);
+		CFRelease(srcProf);
+		CFRelease(destProf);
 		
-	}
-	else if (srcType == XCF_GRAY_IMAGE && destType == XCF_RGB_IMAGE) {
-	
+	} else if (srcType == XCF_GRAY_IMAGE && destType == XCF_RGB_IMAGE) {
+		ColorSyncProfileRef srcProf, destProf;
+		ColorSyncTransformRef cw;
+
 		// Create colour world
-		CMGetDefaultProfileBySpace(cmGrayData, &srcProf);
-		OpenDisplayProfile(&destProf);
-		NCWNewColorWorld(&cw, srcProf, destProf);
-	
+		destProf = ColorSyncProfileCreateWithDisplayID(0);
+		srcProf = ColorSyncProfileCreateWithName(kColorSyncGenericGrayProfile);
+		NSArray<NSDictionary<NSString*,id>*>*
+		profSeq = @[
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)srcProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+					  },
+					
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+					  },
+					];
+		cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+		
 		// Define the source
 		oldData = data;
-		srcBitmap.image = (char *)oldData;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * 2;
-		srcBitmap.pixelSize = 8 * 2;
-		srcBitmap.space = cmGrayA16Space;
 	
 		// Define the destination
 		newData = malloc(make_128(width * height * 4));
-		destBitmap.image = (char *)newData;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 4;
-		destBitmap.pixelSize = 8 * 4;
-		destBitmap.space = cmRGBA32Space;
 		
 		// Execute the conversion
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
+		ColorSyncTransformConvert(cw, width, height, newData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaLast, width * 4, oldData, kColorSync8BitInteger, kColorSyncByteOrderDefault | kColorSyncAlphaLast, width * 2, NULL);
+		
 		for (i = 0; i < width * height; i++)
 			newData[i * 4 + 3] = oldData[i * 2 + 1];
 		data = newData;
@@ -1021,10 +962,11 @@
 		spp = 4;
 		
 		// Get rid of the colour world - we no longer need it
-		CWDisposeColorWorld(cw);
-		CloseDisplayProfile(destProf);
-		
+		CFRelease(cw);
+		CFRelease(srcProf);
+		CFRelease(destProf);
 	}
 }
+#endif
 
 @end

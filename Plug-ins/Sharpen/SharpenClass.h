@@ -10,40 +10,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
+#import "SSKCIPlugin.h"
 
-@interface SharpenClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// The label displaying the extent
-	IBOutlet id extentLabel;
-	
-	// The slider for the extent
-	IBOutlet id extentSlider;
-
-	// The panel for the plug-in
-	IBOutlet id panel;
-
-	// The number of extent
-	int extent;
-
-	// YES if the blurring must be refreshed
-	BOOL refresh;
-	
-	// YES if the application succeeded
-	BOOL success;
-
-}
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
+@interface SharpenClass : SSKVisualPlugin
+//! The number of extent
+@property NSInteger extent;
 
 /*!
 	@method		type
@@ -51,7 +22,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		name
@@ -108,14 +79,6 @@
 				Ignored.
 */
 - (IBAction)preview:(id)sender;
-
-/*!
-	@method		cancel:
-	@discussion	Cancels the plug-in's changes.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cancel:(id)sender;
 
 /*!
 	@method		update:

@@ -1,61 +1,20 @@
-#import "Globals.h"
+//
+//  SVGImporter.h
+//  SeashoreKit
+//
+//  Created by C.W. Betts on 7/5/18.
+//
 
-/*!
-	@class		SVGImporter
-	@abstract	Imports an SVG document as a layer.
-	@discussion	N/A
-				<br><br>
-				<b>License:</b> GNU General Public License<br>
-				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
-*/
+#import <Foundation/Foundation.h>
 
-@interface SVGImporter : NSObject {
-
-	// The length warning panel
-	IBOutlet id waitPanel;
-	
-	// The spinner to update
-	IBOutlet id spinner;
-
-	// The scaling panel
-	IBOutlet id scalePanel;
-	
-	// The slider indicating the extent of scaling
-	IBOutlet id scaleSlider;
-	
-	// A label indicating the document's expected size
-	IBOutlet id sizeLabel;
-	
-	// The document's actual and scaled size
-	IntSize trueSize, size;
-
-}
-
-/*!
-	@method		addToDocument:contentsOfFile:
-	@discussion	Adds the given image file to the given document.
-	@param		doc
-				The document to add to.
-	@param		path
-				The path to the image file.
-	@result		YES if the operation was successful, NO otherwise.
-*/
-- (BOOL)addToDocument:(id)doc contentsOfFile:(NSString *)path;
-
-/*!
-	@method		endPanel:
-	@discussion	Closes the current modal dialog.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)endPanel:(id)sender;
-
-/*!
-	@method		update:
-	@discussion	Updates the document's expected size.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
-
-@end
+extern NSErrorDomain _Nonnull const SVGImporterErrorsDomain;
+typedef NS_ERROR_ENUM(SVGImporterErrorsDomain, SVGImporterErrors) {
+	SVGImporterErrorsCouldNotFindBundle = -1,
+	SVGImporterErrorsCouldNotLoadBundle = -2,
+	SVGImporterErrorsCouldNotLoadSVG = -3,
+	SVGImporterErrorsUnableToGenerateTIFF = -4,
+	SVGImporterErrorsUnableToCreateBitmap = -5,
+	SVGImporterErrorsUnableToCreateLayer = -6,
+	SVGImporterErrorsCouldNotFindApp = -7,
+	SVGImporterErrorsCouldNotLoadConvertedPNG = -8,
+};

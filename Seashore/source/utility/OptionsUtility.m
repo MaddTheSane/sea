@@ -11,11 +11,33 @@
 #import "AbstractTool.h"
 #import "SeaWindowContent.h"
 
+// SeaOptions subclasses
+#import "LassoOptions.h"
+#import "PolygonLassoOptions.h"
+#import "PositionOptions.h"
+#import "ZoomOptions.h"
+#import "PencilOptions.h"
+#import "BrushOptions.h"
+#import "BucketOptions.h"
+#import "TextOptions.h"
+#import "EyedropOptions.h"
+#import "RectSelectOptions.h"
+#import "EllipseSelectOptions.h"
+#import "EraserOptions.h"
+#import "SmudgeOptions.h"
+#import "GradientOptions.h"
+#import "WandOptions.h"
+#import "CloneOptions.h"
+#import "CropOptions.h"
+#import "EffectOptions.h"
+
 @implementation OptionsUtility
 
-- (id)init
+- (instancetype)init
 {
-	currentTool = -1;
+	if (self = [super init]) {
+		currentTool = -1;
+	}
 	
 	return self;
 }
@@ -26,18 +48,11 @@
 	lastView = blankView;
 	
 	NSArray *allTools = [[document tools] allTools];
-	NSEnumerator *e = [allTools objectEnumerator];
-	AbstractTool *tool;
-	while(tool = [e nextObject]){
+	for (AbstractTool *tool in allTools){
 		[tool setOptions: [self getOptions:[tool toolId]]];
 	}
 	
 	[[SeaController utilitiesManager] setOptionsUtility: self for:document];
-}
-
-- (void)dealloc
-{
-	[super dealloc];
 }
 
 - (void)activate
@@ -62,7 +77,7 @@
 	} while (options != NULL);
 }
 
-- (id)currentOptions
+- (__kindof AbstractOptions*)currentOptions
 {
 	if (document == NULL)
 		return NULL;
@@ -70,63 +85,66 @@
 		return [self getOptions:[toolboxUtility tool]];
 }
 
-- (id)getOptions:(int)whichTool
+- (__kindof AbstractOptions*)getOptions:(SeaToolsDefines)whichTool
 {
 	switch (whichTool) {
-		case kRectSelectTool:
+		case SeaToolsSelectRect:
 			return rectSelectOptions;
 		break;
-		case kEllipseSelectTool:
+		case SeaToolsSelectEllipse:
 			return ellipseSelectOptions;
 		break;
-		case kLassoTool:
+		case SeaToolsLasso:
 			return lassoOptions;
 		break;
-		case kPolygonLassoTool:
+		case SeaToolsPolygonLasso:
 			return polygonLassoOptions;
 		break;
-		case kPositionTool:
+		case SeaToolsPosition:
 			return positionOptions;
 		break;
-		case kZoomTool:
+		case SeaToolsZoom:
 			return zoomOptions;
 		break;
-		case kPencilTool:
+		case SeaToolsPencil:
 			return pencilOptions;
 		break;
-		case kBrushTool:
+		case SeaToolsBrush:
 			return brushOptions;
 		break;
-		case kBucketTool:
+		case SeaToolsBucket:
 			return bucketOptions;
 		break;
-		case kTextTool:
+		case SeaToolsText:
 			return textOptions;
 		break;
-		case kEyedropTool:
+		case SeaToolsEyedrop:
 			return eyedropOptions;
 		break;
-		case kEraserTool:
+		case SeaToolsEraser:
 			return eraserOptions;
 		break;
-		case kSmudgeTool:
+		case SeaToolsSmudge:
 			return smudgeOptions;
 		break;
-		case kGradientTool:
+		case SeaToolsGradient:
 			return gradientOptions;
 		break;
-		case kWandTool:
+		case SeaToolsWand:
 			return wandOptions;
 		break;
-		case kCloneTool:
+		case SeaToolsClone:
 			return cloneOptions;
 		break;
-		case kCropTool:
+		case SeaToolsCrop:
 			return cropOptions;
 		break;
-		case kEffectTool:
+		case SeaToolsEffect:
 			return effectOptions;
 		break;
+			
+		case SeaToolsInvalid:
+			return nil;
 	}
 	
 	return NULL;
@@ -134,7 +152,7 @@
 
 - (void)update
 {
-	id currentOptions = [self currentOptions];
+	AbstractOptions *currentOptions = [self currentOptions];
 	
 	// If there are no current options put up a blank view
 	if (currentOptions == NULL) {
@@ -146,32 +164,32 @@
 	
 	// Otherwise select the current options are up-to-date with the current tool
 	if (currentTool != [toolboxUtility tool]) {
-		[view replaceSubview:lastView with:[(AbstractOptions *)currentOptions view]];
-		lastView = [(AbstractOptions *)currentOptions view];
+		[view replaceSubview:lastView with:[currentOptions view]];
+		lastView = [currentOptions view];
 		currentTool = [toolboxUtility tool];
 	}
 	
 	// Update the options
-	[(AbstractOptions *)currentOptions activate:document];
+	[currentOptions activate:document];
 	[currentOptions update];
 }
 
 - (IBAction)show:(id)sender
 {
-	[[[document window] contentView] setVisibility:YES forRegion:kOptionsBar];
+	[[[document window] contentView] setVisibility:YES forRegion:SeaWindowRegionOptionsBar];
 }
 
 - (IBAction)hide:(id)sender
 {
-	[[[document window] contentView] setVisibility:NO forRegion:kOptionsBar];
+	[[[document window] contentView] setVisibility:NO forRegion:SeaWindowRegionOptionsBar];
 }
 
 
 - (IBAction)toggle:(id)sender
 {
-	if([self visible]){
+	if (self.visible) {
 		[self hide:sender];
-	}else{
+	} else {
 		[self show:sender];
 	}
 }
@@ -181,9 +199,9 @@
 	[view setNeedsDisplay: YES];
 }
 
-- (BOOL)visible
+- (BOOL)isVisible
 {
-	return [[[document window] contentView] visibilityForRegion: kOptionsBar];
+	return [[[document window] contentView] visibilityForRegion: SeaWindowRegionOptionsBar];
 }
 
 @end

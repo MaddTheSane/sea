@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractSelectOptions.h"
 
@@ -10,7 +11,6 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface LassoOptions : AbstractSelectOptions {
-}
+@interface LassoOptions : AbstractSelectOptions
 
 @end

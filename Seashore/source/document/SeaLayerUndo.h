@@ -1,4 +1,9 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
 /*!
 	@defined	kNumberOfUndoRecordsPerMalloc
@@ -24,6 +29,9 @@ typedef struct {
 	unsigned char *data;
 } UndoRecord;
 
+@class SeaDocument;
+@class SeaLayer;
+
 /*!
 	@class		SeaLayerUndo
 	@abstract	Makes changes to the associated layer's pixels undoable.
@@ -32,27 +40,26 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaLayerUndo : NSObject {
 	
 	// The document associated with this oject
-	id document;
+	SeaDocument *document;
 	
 	// The layer associated with this oject
-	id layer;
+	SeaLayer *layer;
 
 	// The records of all changes to the layer
 	UndoRecord *records;
-	int records_len;
-	int records_max_len;
+	size_t records_len;
+	size_t records_max_len;
 	
 	// The minimum size of the memory cache
 	unsigned long memoryCacheSize;
 	
 	// The big block of memory which we use to record new data
 	char *memory_cache;
-	int memory_cache_pos;
-	int memory_cache_len;
+	ssize_t memory_cache_pos;
+	size_t memory_cache_len;
 	
 }
 
@@ -68,13 +75,8 @@ typedef struct {
 				The layer with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc forLayer:(id)ilayer;
+- (instancetype)initWithDocument:(SeaDocument*)doc forLayer:(SeaLayer*)ilayer;
 
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		checkDiskSpace
@@ -96,7 +98,7 @@ typedef struct {
 				document, NO otherwise.
 	@result		Returns an integer representing the index of the snapshot.
 */
-- (int)takeSnapshot:(IntRect)rect automatic:(BOOL)automatic;
+- (NSInteger)takeSnapshot:(IntRect)rect automatic:(BOOL)automatic;
 
 /*!
 	@method 	restoreSnapshot:manual:
@@ -108,6 +110,6 @@ typedef struct {
 				method does not handle either undoing the restoration nor
 				updating.
 */
-- (void)restoreSnapshot:(int)index automatic:(BOOL)automatic;
+- (void)restoreSnapshot:(NSInteger)index automatic:(BOOL)automatic;
 
 @end

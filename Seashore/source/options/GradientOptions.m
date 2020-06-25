@@ -7,24 +7,25 @@
 
 - (void)awakeFromNib
 {
-	int index;
+	NSInteger index;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"gradient type"] == NULL) {
+	if ([defaults objectForKey:@"gradient type"] == NULL) {
 		[typePopup selectItemAtIndex:GIMP_GRADIENT_LINEAR];
 	}
 	else {
-		index = [typePopup indexOfItemWithTag:[gUserDefaults integerForKey:@"gradient type"]];
+		index = [typePopup indexOfItemWithTag:[defaults integerForKey:@"gradient type"]];
 		if (index != -1)
 			[typePopup selectItemAtIndex:index];
 		else
 			[typePopup selectItemAtIndex:0];
 	}
 	
-	if ([gUserDefaults objectForKey:@"gradient repeat"] == NULL) {
+	if ([defaults objectForKey:@"gradient repeat"] == NULL) {
 		[repeatPopup selectItemAtIndex:GIMP_REPEAT_NONE];
 	}
 	else {
-		index = [repeatPopup indexOfItemWithTag:[gUserDefaults integerForKey:@"gradient repeat"]];
+		index = [repeatPopup indexOfItemWithTag:[defaults integerForKey:@"gradient repeat"]];
 		if (index != -1)
 			[repeatPopup selectItemAtIndex:index];
 		else
@@ -32,14 +33,14 @@
 	}
 }
 
-- (int)type
+- (GimpGradientType)type
 {
-	return [[typePopup selectedItem] tag];
+	return (GimpGradientType)[[typePopup selectedItem] tag];
 }
 
-- (int)repeat
+- (GimpRepeatMode)repeat
 {
-	return [[repeatPopup selectedItem] tag];
+	return (GimpRepeatMode)[[repeatPopup selectedItem] tag];
 }
 
 - (BOOL)supersample
@@ -59,8 +60,9 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:[[typePopup selectedItem] tag] forKey:@"gradient type"];
-	[gUserDefaults setInteger:[[repeatPopup selectedItem] tag] forKey:@"gradient repeat"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[[typePopup selectedItem] tag] forKey:@"gradient type"];
+	[defaults setInteger:[[repeatPopup selectedItem] tag] forKey:@"gradient repeat"];
 }
 
 @end

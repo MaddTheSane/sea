@@ -11,44 +11,47 @@
 #import "SeaDocument.h"
 #import "SeaTools.h"
 
-#ifdef TODO
-#warning Make textures lazy, that is if they are not in the active group they are not memory
-#endif
+//TODO: Make textures lazy, that is if they are not in the active group they are not memory
 
 @implementation TextureUtility
+@synthesize activeTextureIndex;
+@synthesize opacity;
 
-- (id)init
+- (instancetype)init
 {		
+	if (self = [super init]) {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Load the textures
 	[self loadTextures:NO];
 	
 	// Determine the currently active texture group
-	if ([gUserDefaults objectForKey:@"active texture group"] == NULL)
+	if ([defaults objectForKey:@"active texture group"] == NULL)
 		activeGroupIndex = 0;
 	else
-		activeGroupIndex = [gUserDefaults integerForKey:@"active texture group"];
+		activeGroupIndex = [defaults integerForKey:@"active texture group"];
 	if (activeGroupIndex < 0 || activeGroupIndex >= [groups count])
 		activeGroupIndex = 0;
 		
 	// Determine the currently active texture 	
-	if ([gUserDefaults objectForKey:@"active texture"] == NULL)
+	if ([defaults objectForKey:@"active texture"] == NULL)
 		activeTextureIndex = 0;
 	else
-		activeTextureIndex = [gUserDefaults integerForKey:@"active texture"];
-	if (activeTextureIndex < 0 || activeTextureIndex >= [[groups objectAtIndex:activeGroupIndex] count])
+		activeTextureIndex = [defaults integerForKey:@"active texture"];
+	if (activeTextureIndex < 0 || activeTextureIndex >= [groups[activeGroupIndex] count])
 		activeTextureIndex = 0;
 		
 	// Set the opacity
 	[opacitySlider setIntValue:100];
 	[opacityLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"opacity", @"Opacity: %d%%"), [opacitySlider intValue]]];
 	opacity = 255;
+	}
 	
 	return self;
 }
 
 - (void)awakeFromNib
 {
-	int yoff, i;
+	NSInteger yoff, i;
 	
 	[super awakeFromNib];
 
@@ -66,11 +69,11 @@
 	
 	// Configure the pop-up menu
 	[textureGroupPopUp removeAllItems];
-	[textureGroupPopUp addItemWithTitle:[groupNames objectAtIndex:0]];
+	[textureGroupPopUp addItemWithTitle:groupNames[0]];
 	[[textureGroupPopUp itemAtIndex:0] setTag:0];
 	[[textureGroupPopUp menu] addItem:[NSMenuItem separatorItem]];
 	for (i = 1; i < [groupNames count]; i++) {
-		[textureGroupPopUp addItemWithTitle:[groupNames objectAtIndex:i]];
+		[textureGroupPopUp addItemWithTitle:groupNames[i]];
 		[[textureGroupPopUp itemAtIndex:[[textureGroupPopUp menu] numberOfItems] - 1] setTag:i];
 	}
 	[textureGroupPopUp selectItemAtIndex:[textureGroupPopUp indexOfItemWithTag:activeGroupIndex]];
@@ -83,18 +86,7 @@
 
 - (void)dealloc
 {
-	int i;
-	
-	// Release any existing textures
-	if (textures) {
-		for (i = 0; i < [textures count]; i++)
-			[[[textures allValues] objectAtIndex:i] autorelease];
-		[textures autorelease];
-	}
-	if (groups) [groups autorelease];
-	if (groupNames) [groupNames autorelease];
-	if ([view documentView]) [[view documentView] autorelease];
-	[super dealloc];
+	if ([view documentView]) [view documentView];
 }
 
 - (void)activate:(id)sender
@@ -109,8 +101,9 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:activeTextureIndex forKey:@"active texture"];
-	[gUserDefaults setInteger:activeGroupIndex forKey:@"active texture group"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:activeTextureIndex forKey:@"active texture"];
+	[defaults setInteger:activeGroupIndex forKey:@"active texture group"];
 
 }
 
@@ -119,7 +112,7 @@
 	activeGroupIndex = [[textureGroupPopUp selectedItem] tag];
 	if (activeGroupIndex >= [groups count])
 		activeGroupIndex = 0;
-	if (activeTextureIndex >= [[groups objectAtIndex:activeGroupIndex] count])
+	if (activeTextureIndex >= [groups[activeGroupIndex] count])
 		activeTextureIndex = 0;
 	[self setActiveTextureIndex:activeTextureIndex];
 	[[view documentView] update];
@@ -128,26 +121,18 @@
 
 - (void)loadTextures:(BOOL)update
 {
-	NSArray *files, *subfiles, *newValues, *newKeys, *array;
+	NSArray *files, *subfiles, *newValues, *newKeys;
+	NSMutableArray *array;
 	NSString *path;
 	BOOL isDirectory;
 	id texture;
-	int i, j;
-	
-	// Release any existing textures
-	if (textures) {
-		for (i = 0; i < [textures count]; i++)
-			[[[textures allValues] objectAtIndex:i] autorelease];
-		[textures autorelease];
-	}
-	if (groups) [groups autorelease];
-	if (groupNames) [groupNames autorelease];
+	int j;
 	
 	// Create a dictionary of all textures
-	textures = [NSDictionary dictionary];
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/textures"]];
-	for (i = 0; i < [files count]; i++) {
-		path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:[files objectAtIndex:i]];
+	textures = @{};
+	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"textures"]];
+	for (NSString *file in files) {
+		path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"textures"] stringByAppendingPathComponent:file];
 		texture = [[SeaTexture alloc] initWithContentsOfFile:path];
 		if (texture) {
 			newKeys = [[textures allKeys] arrayByAddingObject:path];
@@ -155,106 +140,92 @@
 			textures = [NSDictionary dictionaryWithObjects:newValues forKeys:newKeys];
 		}
 	}
-	[textures retain];
 	
 	// Create the all group
-	array = [[textures allValues] sortedArrayUsingSelector:@selector(compare:)];
-	groups = [NSArray arrayWithObject:array];
-	groupNames = [NSArray arrayWithObject:LOCALSTR(@"all group", @"All")];
+	array = [[[textures allValues] sortedArrayUsingSelector:@selector(compare:)] mutableCopy];
+	groups = @[[array copy]];
+	groupNames = @[LOCALSTR(@"all group", @"All")];
 	
 	// Create the other groups
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/textures"]];
+	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"textures"]];
 	[files sortedArrayUsingSelector:@selector(compare:)];
-	for (i = 0; i < [files count]; i++) {
-		path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:[files objectAtIndex:i]];
+	for (NSString *file in files) {
+		path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"textures"] stringByAppendingPathComponent:file];
 		[gFileManager fileExistsAtPath:path isDirectory:&isDirectory];
 		if (isDirectory) {
-			path = [path stringByAppendingString:@"/"];
 			subfiles = [gFileManager subpathsAtPath:path];
-			array = [NSArray array];
+			[array removeAllObjects];
 			for (j = 0; j < [subfiles count]; j++) {
-				texture = [textures objectForKey:[path stringByAppendingString:[subfiles objectAtIndex:j]]];
+				texture = textures[[path stringByAppendingString:subfiles[j]]];
 				if (texture) {
-					array = [array arrayByAddingObject:texture];
+					[array addObject:texture];
 				}
 			}
 			if ([array count] > 0) {
-				array = [array sortedArrayUsingSelector:@selector(compare:)];
-				groups = [groups arrayByAddingObject:array];
+				[array sortUsingSelector:@selector(compare:)];
+				groups = [groups arrayByAddingObject:[array copy]];
 				groupNames = [groupNames arrayByAddingObject:[path lastPathComponent]];
 			}
 		}
 	}
-	
-	// Retain the groups and groupNames
-	[groups retain];
-	[groupNames retain];
-	
 	// Update utility if requested
-	if (update) [self update];
+	if (update)
+		[self update];
 }
 
 - (void)addTextureFromPath:(NSString *)path
 {
-	NSArray *files, *subfiles, *newValues, *newKeys, *oldValues, *oldKeys, *array;
+	NSArray *files, *subfiles, *oldValues, *oldKeys;
+	NSMutableArray *newValues, *newKeys, *array;
 	NSString *tpath;
 	BOOL isDirectory;
-	id texture;
-	int i, j;
-	
-	// Release any existing textures
-	if (groups) [groups autorelease];
-	if (groupNames) [groupNames autorelease];
+	SeaTexture *texture;
 	
 	// Update dictionary of all textures
-	[textures autorelease];
-	if ([textures objectForKey:path]) {
-		newKeys = [NSArray array];
-		newValues = [NSArray array];
+	if (textures[path]) {
+		newKeys = [NSMutableArray new];
+		newValues = [NSMutableArray new];
 		oldKeys = [textures allKeys];
 		oldValues = [textures allValues];
-		for (i = 0; i < [oldKeys count]; i++) {
-			if (![path isEqualToString:[oldKeys objectAtIndex:i]]) {
-				newKeys = [newKeys arrayByAddingObject:[oldKeys objectAtIndex:i]];
-				newValues = [newValues arrayByAddingObject:[oldValues objectAtIndex:i]];
+		for (NSString *oldKey in oldKeys) {
+			if (![path isEqualToString:oldKey]) {
+				[newKeys addObject:oldKey];
+				[newValues addObject:textures[oldKey]];
 			}
 		}
-	}
-	else {
-		newKeys = [textures allKeys];
-		newValues = [textures allValues];
+	} else {
+		newKeys = [[textures allKeys] mutableCopy];
+		newValues = [[textures allValues] mutableCopy];
 	}
 	texture = [[SeaTexture alloc] initWithContentsOfFile:path];
 	if (texture) {
-		newKeys = [newKeys arrayByAddingObject:path];
-		newValues = [newValues arrayByAddingObject:texture];
-		textures = [NSDictionary dictionaryWithObjects:newValues forKeys:newKeys];
+		[newKeys addObject:path];
+		[newValues addObject:texture];
+		textures = [[NSDictionary alloc] initWithObjects:newValues forKeys:newKeys];
 	}
-	[textures retain];
 	
 	// Create the all group
-	array = [[textures allValues] sortedArrayUsingSelector:@selector(compare:)];
-	groups = [NSArray arrayWithObject:array];
-	groupNames = [NSArray arrayWithObject:LOCALSTR(@"all group", @"All")];
+	array = [[[textures allValues] sortedArrayUsingSelector:@selector(compare:)] mutableCopy];
+	groups = @[array];
+	groupNames = @[LOCALSTR(@"all group", @"All")];
 	
 	// Create the other groups
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingString:@"/textures"]];
+	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"textures"]];
 	[files sortedArrayUsingSelector:@selector(compare:)];
-	for (i = 0; i < [files count]; i++) {
-		tpath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/textures/"] stringByAppendingString:[files objectAtIndex:i]];
+	for (NSString *file in files) {
+		tpath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"textures"] stringByAppendingPathComponent:file];
 		[gFileManager fileExistsAtPath:tpath isDirectory:&isDirectory];
 		if (isDirectory) {
-			tpath = [tpath stringByAppendingString:@"/"];
 			subfiles = [gFileManager subpathsAtPath:tpath];
-			array = [NSArray array];
-			for (j = 0; j < [subfiles count]; j++) {
-				texture = [textures objectForKey:[tpath stringByAppendingString:[subfiles objectAtIndex:j]]];
+			array = [NSMutableArray new];
+			for (NSInteger j = 0; j < [subfiles count]; j++) {
+				texture = textures[[tpath stringByAppendingString:subfiles[j]]];
 				if (texture) {
-					array = [array arrayByAddingObject:texture];
+					[array addObject:texture];
 				}
 			}
 			if ([array count] > 0) {
-				array = [array sortedArrayUsingSelector:@selector(compare:)];
+				[array sortUsingSelector:@selector(compare:)];
 				groups = [groups arrayByAddingObject:array];
 				groupNames = [groupNames arrayByAddingObject:[tpath lastPathComponent]];
 			}
@@ -262,16 +233,14 @@
 	}
 	
 	// Retain the groups and groupNames
-	[groups retain];
-	[groupNames retain];
 	
 	// Configure the pop-up menu
 	[textureGroupPopUp removeAllItems];
-	[textureGroupPopUp addItemWithTitle:[groupNames objectAtIndex:0]];
+	[textureGroupPopUp addItemWithTitle:groupNames[0]];
 	[[textureGroupPopUp itemAtIndex:0] setTag:0];
 	[[textureGroupPopUp menu] addItem:[NSMenuItem separatorItem]];
-	for (i = 1; i < [groupNames count]; i++) {
-		[textureGroupPopUp addItemWithTitle:[groupNames objectAtIndex:i]];
+	for (NSInteger i = 1; i < [groupNames count]; i++) {
+		[textureGroupPopUp addItemWithTitle:groupNames[i]];
 		[[textureGroupPopUp itemAtIndex:[[textureGroupPopUp menu] numberOfItems] - 1] setTag:i];
 	}
 	[textureGroupPopUp selectItemAtIndex:[textureGroupPopUp indexOfItemWithTag:activeGroupIndex]];
@@ -293,17 +262,12 @@
 	opacity = [opacitySlider intValue] * 2.55;
 }
 
-- (int)opacity
-{
-	return opacity;
-}
-
 - (id)activeTexture
 {
-	return [[groups objectAtIndex:activeGroupIndex] objectAtIndex:activeTextureIndex];
+	return groups[activeGroupIndex][activeTextureIndex];
 }
 
-- (int)activeTextureIndex
+- (NSInteger)activeTextureIndex
 {
 	if ([[SeaController seaPrefs] useTextures])
 		return activeTextureIndex;
@@ -311,20 +275,16 @@
 		return -1;
 }
 
-- (void)setActiveTextureIndex:(int)index
+- (void)setActiveTextureIndex:(NSInteger)index
 {
-	id oldTexture;
-	id newTexture;
-	
 	if (index == -1) {
 		[[SeaController seaPrefs] setUseTextures:NO];
 		[textureNameLabel setStringValue:@""];
 		[opacitySlider setEnabled:NO];
 		[view setNeedsDisplay:YES];
-	}
-	else {
-		oldTexture = [[groups objectAtIndex:activeGroupIndex] objectAtIndex:activeTextureIndex];
-		newTexture = [[groups objectAtIndex:activeGroupIndex] objectAtIndex:index];
+	} else {
+		SeaTexture *oldTexture = groups[activeGroupIndex][activeTextureIndex];
+		SeaTexture *newTexture = groups[activeGroupIndex][index];
 		[oldTexture deactivate];
 		activeTextureIndex = index;
 		[[SeaController seaPrefs] setUseTextures:YES];
@@ -332,13 +292,13 @@
 		[opacitySlider setEnabled:YES];
 		[newTexture activate];
 		[[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
-		[(TextTool *)[[document tools] getTool:kTextTool] preview:NULL];
+		[(TextTool *)[[document tools] getTool:SeaToolsText] preview:NULL];
 	}
 }
 
 - (NSArray *)textures
 {
-	return [groups objectAtIndex:activeGroupIndex];
+	return groups[activeGroupIndex];
 }
 
 - (NSArray *)groupNames

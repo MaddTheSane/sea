@@ -1,0 +1,6 @@
+author = "Mark Pazolli, Spencer Kimball and Peter Mattis";
+copyright = "Copyright (c) 2004 Mark Pazolli and Copyright (c) 1995 Spencer Kimball and Peter Mattis";
+groupName = "Color Adjust";
+description = "Adjusts the brightness and contrast of the selection";
+license = "GNU General Public License";
+name = "Brightness and Contrast";

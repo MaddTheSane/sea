@@ -681,7 +681,7 @@ void GCFillGradient(unsigned char *dest, int destWidth, int destHeight, IntRect 
 			rbd.dist = sqrt(SQR(info.end.x - info.start.x) + SQR(info.end.y - info.start.y));
 		break;
 		case GIMP_GRADIENT_SQUARE:
-			rbd.dist = MAX (fabs (info.end.x - info.start.x), fabs (info.end.y - info.start.y));
+			rbd.dist = MAX (abs (info.end.x - info.start.x), abs (info.end.y - info.start.y));
 		break;
 		case GIMP_GRADIENT_LINEAR:
 		case GIMP_GRADIENT_BILINEAR:

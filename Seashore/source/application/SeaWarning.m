@@ -7,69 +7,63 @@
 
 @implementation SeaWarning
 
-- (id)init
+- (instancetype)init
 {
 	self = [super init];
 	if(self){
-		documentQueues = [[NSMutableDictionary dictionary] retain];
-		appQueue = [[NSMutableArray array] retain];
+		documentQueues = [NSMutableDictionary dictionary];
+		appQueue = [NSMutableArray array];
 	}
 	return self;
 }
 
-- (void)dealloc
-{
-	[documentQueues release];
-	[appQueue release];
-	[super dealloc];
-}
 
-- (void)addMessage:(NSString *)message level:(int)level
+- (void)addMessage:(NSString *)message level:(SeaWarningImportance)level
 {
-	[appQueue addObject: [NSDictionary dictionaryWithObjectsAndKeys: message, @"message", [NSNumber numberWithInt:level], @"importance", nil]];
+	[appQueue addObject: @{@"message": message, @"importance": @(level)}];
 	[self triggerQueue: NULL];
 }
 
 - (void)triggerQueue:(id)key
 {
 	NSMutableArray* queue;
-	if(!key){
+	if (!key) {
 		queue = appQueue;
-	}else{
-		queue = [documentQueues objectForKey:[NSNumber numberWithLong:(long)key]];
+	} else {
+		queue = documentQueues[@((size_t)key)];
 	}
 	// First check to see if we have any messages
-	if(queue && [queue count] > 0){
+	if (queue && [queue count] > 0) {
 		// This is the app modal queue
-		if(!key){
+		if (!key) {
 			while([queue count] > 0){
-				NSDictionary *thisWarning = [queue objectAtIndex:0];
-				if([[thisWarning objectForKey:@"importance"] intValue] <= [[SeaController seaPrefs] warningLevel]){
-					NSRunAlertPanel(NULL, [thisWarning objectForKey:@"message"], NULL, NULL, NULL);
+				NSDictionary *thisWarning = queue[0];
+				if([thisWarning[@"importance"] intValue] <= [[SeaController seaPrefs] warningLevel]){
+					NSRunAlertPanel(NULL, @"%@", NULL, NULL, NULL, thisWarning[@"message"]);
 				}
 				[queue removeObjectAtIndex:0];
 			}
-		}else {
+		} else {
 			// First we need to see if the app has a warning object that
 			// is ready to be used (at init it's not all hooked up)
-			if([(SeaDocument *)key warnings] && [[key warnings] activeWarningImportance] == -1){
+			if ([(SeaDocument *)key warnings] && [[key warnings] activeWarningImportance] == -1) {
 				// Next, pop the object out of the queue and pass to the warnings
-				NSDictionary *thisWarning = [queue objectAtIndex:0];
-				[[key warnings] setWarning: [thisWarning objectForKey:@"message"] ofImportance: [[thisWarning objectForKey:@"importance"] intValue]];
+				NSDictionary *thisWarning = queue[0];
+				[[key warnings] setWarning: thisWarning[@"message"] ofImportance: [thisWarning[@"importance"] intValue]];
 				 [queue removeObjectAtIndex:0];
 			}
 		}
 	}
 }
 
-- (void)addMessage:(NSString *)message forDocument:(id)document level:(int)level
+- (void)addMessage:(NSString *)message forDocument:(id)document level:(SeaWarningImportance)level
 {	
-	NSMutableArray* thisDocQueue = [documentQueues objectForKey:[NSNumber numberWithLong:(long)document]];
+	NSMutableArray* thisDocQueue = documentQueues[@((size_t)document)];
 	if(!thisDocQueue){
 		thisDocQueue = [NSMutableArray array];
-		[documentQueues setObject: thisDocQueue forKey: [NSNumber numberWithLong:(long)document]];
+		documentQueues[@((size_t)document)] = thisDocQueue;
 	}
-	[thisDocQueue addObject: [NSDictionary dictionaryWithObjectsAndKeys: message, @"message", [NSNumber numberWithInt: level], @"importance", nil]];
+	[thisDocQueue addObject: @{@"message": message, @"importance": @(level)}];
 	[self triggerQueue: document];
 }
 

@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Stylize";
+description = "Renders the selection in a pointillistic style";
+license = "Public Domain";
+name = "Pointillize";

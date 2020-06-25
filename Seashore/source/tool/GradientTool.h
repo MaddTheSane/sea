@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
@@ -13,21 +14,13 @@
 
 @interface GradientTool : AbstractTool
 {
-	
 	// The point where to start the gradient
 	IntPoint startPoint;
 	NSPoint startNSPoint;
 	
 	// The temporary point we've dragged to
 	NSPoint tempNSPoint;
-	
 }
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		mouseDownAt:withEvent:
@@ -35,8 +28,6 @@
 	@param		where
 				Where in the document the mouse down event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse down event.
 */
@@ -48,8 +39,6 @@
 	@param		where
 				Where in the document the mouse up event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse up event.
 */
@@ -66,17 +55,17 @@
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event;
 
 /*!
-	@method		start
+	@property	start
 	@discussion	Returns the start point.
 	@result		Returns an NSPoint of the start of the tool.
 */
-- (NSPoint)start;
+@property (readonly) NSPoint start;
 
 /*!
-	@method		current
+	@property	current
 	@discussion	Returns the current point.
 	@result		Returns the NSPoint of where the mouse is currently dragged to.
 */
-- (NSPoint)current;
+@property (readonly) NSPoint current;
 
 @end

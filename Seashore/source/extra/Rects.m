@@ -1,95 +1,9 @@
+#include <math.h>
+#include <tgmath.h>
 #import "Rects.h"
 #import "Globals.h"
 
-inline IntPoint NSPointMakeIntPoint(NSPoint point)
-{
-	IntPoint newPoint;
-	
-	newPoint.x = floorf(point.x);
-	newPoint.y = floorf(point.y);
-	
-	return newPoint; 
-}
-
-inline IntSize NSSizeMakeIntSize(NSSize size)
-{
-	IntSize newSize;
-	
-	newSize.width = ceilf(size.width);
-	newSize.height = ceilf(size.height);
-	
-	return newSize;
-}
-
-inline NSPoint IntPointMakeNSPoint(IntPoint point)
-{
-	NSPoint newPoint;
-	
-	newPoint.x = point.x;
-	newPoint.y = point.y;
-	
-	return newPoint;
-}
-
-inline IntPoint IntMakePoint(int x, int y)
-{
-	IntPoint newPoint;
-	
-	newPoint.x = x;
-	newPoint.y = y;
-	
-	return newPoint;
-}
-
-inline NSSize IntSizeMakeNSSize(IntSize size)
-{
-	NSSize newSize;
-	
-	newSize.width = size.width;
-	newSize.height = size.height;
-	
-	return newSize;
-}
-
-inline IntSize IntMakeSize(int width, int height)
-{
-	IntSize newSize;
-	
-	newSize.width = width;
-	newSize.height = height;
-	
-	return newSize;
-}
-
-inline IntRect IntMakeRect(int x, int y, int width, int height)
-{
-	IntRect newRect;
-	
-	newRect.origin.x = x;
-	newRect.origin.y = y;
-	newRect.size.width = width;
-	newRect.size.height = height;
-	
-	return newRect;
-}
-
-inline void IntOffsetRect(IntRect *rect, int x, int y)
-{
-	rect->origin.x += x;
-	rect->origin.y += y;
-}
-
-inline BOOL IntPointInRect(IntPoint point, IntRect rect)
-{
-	if (point.x < rect.origin.x) return NO;
-	if (point.x >= rect.origin.x + rect.size.width) return NO;
-	if (point.y < rect.origin.y) return NO;
-	if (point.y >= rect.origin.y + rect.size.height) return NO;
-	
-	return YES;
-}
-
-inline BOOL IntContainsRect(IntRect bigRect, IntRect littleRect)
+BOOL IntContainsRect(IntRect bigRect, IntRect littleRect)
 {
 	if (littleRect.origin.x < bigRect.origin.x) return NO;
 	if (littleRect.origin.x + littleRect.size.width > bigRect.origin.x + bigRect.size.width) return NO;
@@ -99,7 +13,7 @@ inline BOOL IntContainsRect(IntRect bigRect, IntRect littleRect)
 	return YES;
 }
 
-inline IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect)
+IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect)
 {
 	IntRect rect = littleRect;
 	
@@ -116,7 +30,7 @@ inline IntRect IntConstrainRect(IntRect littleRect, IntRect bigRect)
 	return rect;
 }
 
-inline NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect)
+NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect)
 {
 	NSRect rect = littleRect;
 	
@@ -133,7 +47,7 @@ inline NSRect NSConstrainRect(NSRect littleRect, NSRect bigRect)
 	return rect;
 }
 
-inline IntRect IntSumRects(IntRect augendRect, IntRect addendRect)
+IntRect IntSumRects(IntRect augendRect, IntRect addendRect)
 {
 	// If either of the rects are zero
 	if(augendRect.size.width <= 0 || augendRect.size.height <= 0)
@@ -164,27 +78,7 @@ inline IntRect IntSumRects(IntRect augendRect, IntRect addendRect)
 	return rect;
 }
 
-inline IntRect NSRectMakeIntRect(NSRect rect)
-{
-	IntRect newRect;
-	
-	newRect.origin = NSPointMakeIntPoint(rect.origin);
-	newRect.size = NSSizeMakeIntSize(rect.size);
-	
-	return newRect;
-}
-
-inline NSRect IntRectMakeNSRect(IntRect rect)
-{
-	NSRect newRect;
-	
-	newRect.origin = IntPointMakeNSPoint(rect.origin);
-	newRect.size = IntSizeMakeNSSize(rect.size);
-	
-	return newRect;
-}
-
-inline NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, float radians)
+NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, CGFloat radians)
 {
 	if(radians == 0.0)
 		return initialPoint;
@@ -204,4 +98,3 @@ inline NSPoint NSPointRotateNSPoint (NSPoint initialPoint, NSPoint centerPoint, 
 	result.y += centerPoint.y;
 	return result;
 }
-

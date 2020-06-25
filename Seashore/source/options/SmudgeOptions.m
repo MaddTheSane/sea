@@ -8,19 +8,20 @@
 
 - (void)awakeFromNib
 {
-	int value;
+	NSInteger value;
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([gUserDefaults objectForKey:@"smudge rate"] == NULL) {
+	if ([defaults objectForKey:@"smudge rate"] == NULL) {
 		value = 50;
 	}
 	else {
-		value = [gUserDefaults integerForKey:@"smudge rate"];
+		value = [defaults integerForKey:@"smudge rate"];
 		if (value < 0 || value > 100)
 			value = 50;
 	}
-	[rateSlider setIntValue:value];
+	[rateSlider setIntegerValue:value];
 	[rateLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"rate", @"Rate: %d%%"), value]];
-	//[mergedCheckbox setState:[gUserDefaults boolForKey:@"smudge merged"]];
+	//[mergedCheckbox setState:[defaults boolForKey:@"smudge merged"]];
 }
 
 /*
@@ -42,8 +43,9 @@
 
 - (void)shutdown
 {
-	[gUserDefaults setInteger:[rateSlider intValue] forKey:@"smudge rate"];
-	//[gUserDefaults setInteger:[self mergedSample] forKey:@"smudge merged"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setInteger:[rateSlider integerValue] forKey:@"smudge rate"];
+	//[defaults setInteger:[self mergedSample] forKey:@"smudge merged"];
 }
 
 @end

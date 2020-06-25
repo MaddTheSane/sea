@@ -1,73 +1,114 @@
-#import "Globals.h"
+#import <Cocoa/Cocoa.h>
+#import <SeashoreKit/Globals.h>
 
-/*!
+/*
 	@enum		k...Tool
-	@constant	kRectSelectTool
+	@constant	SeaToolsSelectRect
 				The rectangular selection tool.
-	@constant	kEllipseSelectTool
+	@constant	SeaToolsSelectEllipse
 				The elliptical selection tool.
-	@constant	kLassoTool
+	@constant	SeaToolsLasso
 				The lasso tool.
-	@constant	kPolygonLassoTool
+	@constant	SeaToolsPolygonLasso
 				The polygon lasso tool.
-	@constant   kWandTool
+	@constant   SeaToolsWand
 				The wand selection tool.
-	@constant	kPencilTool
+	@constant	SeaToolsPencil
 				The pencil tool.
-	@constant	kBrushTool
+	@constant	SeaToolsBrush
 				The paintbrush tool.
-	@constant	kEyedropTool
+	@constant	SeaToolsEyedrop
 				The colour sampling tool.
-	@constant	kTextTool
+	@constant	SeaToolsText
 				The text tool.
-	@constant	kEraserTool
+	@constant	SeaToolsEraser
 				The eraser tool.
-	@constant	kBucketTool
+	@constant	SeaToolsBucket
 				The paint bucket tool.
-	@constant	kGradientTool
+	@constant	SeaToolsGradient
 				The gradient tool.
-	@constant	kCropTool
+	@constant	SeaToolsCrop
 				The crop tool.
-	@constant	kCloneTool
+	@constant	SeaToolsClone
 				The clone tool.
-	@constant	kSmudgeTool
+	@constant	SeaToolsSmudge
 				The smudging tool.
-	@constant	kEffectTool
+	@constant	SeaToolsEffect
 				The effect tool.
-	@constant	kZoomTool
+	@constant	SeaToolsZoom
 				The zoom tool.
-	@constant	kPositionTool
+	@constant	SeaToolsPosition
 				The layer positioning tool.
-	@constant	kFirstSelectionTool
+	@constant	SeaToolsFirstSelection
 				The first selection tool.
-	@constant	kLastSelectionTool
+	@constant	SeaToolsLastSelection
 				The last selection tool.
 */
-enum {
-	kRectSelectTool = 0,
-	kEllipseSelectTool = 1,
-	kLassoTool = 2,
-	kPolygonLassoTool = 3,
-	kWandTool = 4,
-	kPencilTool = 5, 
-	kBrushTool = 6,
-	kEyedropTool = 7,
-	kTextTool = 8,
-	kEraserTool = 9,
-	kBucketTool = 10,
-	kGradientTool = 11,
-	kCropTool = 12,
-	kCloneTool = 13,
-	kSmudgeTool = 14,
-	kEffectTool = 15,
-	kZoomTool = 16,
-	kPositionTool = 17,
-	kFirstSelectionTool = 0,
-	kLastSelectionTool = 4,
-	kLastTool = 17
+typedef NS_ENUM(NSInteger, SeaToolsDefines) {
+	//! An invalid value.
+	SeaToolsInvalid = -1,
+	//! The rectangular selection tool.
+	SeaToolsSelectRect = 0,
+	//! The elliptical selection tool.
+	SeaToolsSelectEllipse = 1,
+	//! The lasso tool.
+	SeaToolsLasso = 2,
+	//! The polygon lasso tool.
+	SeaToolsPolygonLasso = 3,
+	//! The wand selection tool.
+	SeaToolsWand = 4,
+	//! The pencil tool.
+	SeaToolsPencil = 5,
+	//! The paintbrush tool.
+	SeaToolsBrush = 6,
+	//! The colour sampling tool.
+	SeaToolsEyedrop = 7,
+	//! The text tool.
+	SeaToolsText = 8,
+	//! The eraser tool.
+	SeaToolsEraser = 9,
+	//! The paint bucket tool.
+	SeaToolsBucket = 10,
+	//! The gradient tool.
+	SeaToolsGradient = 11,
+	//! The crop tool.
+	SeaToolsCrop = 12,
+	//! The clone tool.
+	SeaToolsClone = 13,
+	//! The smudging tool.
+	SeaToolsSmudge = 14,
+	//! The effect tool.
+	SeaToolsEffect = 15,
+	//! The zoom tool.
+	SeaToolsZoom = 16,
+	//! The layer positioning tool.
+	SeaToolsPosition = 17,
+	//! The first selection tool.
+	SeaToolsFirstSelection = 0,
+	//! The last selection tool.
+	SeaToolsLastSelection = 4,
+	//! The last tool.
+	SeaToolsLast = 17
 };
 
 @class AbstractTool;
+@class RectSelectTool;
+@class EllipseSelectTool;
+@class LassoTool;
+@class PolygonLassoTool;
+@class WandTool;
+@class PencilTool;
+@class BrushTool;
+@class BucketTool;
+@class TextTool;
+@class EyedropTool;
+@class EraserTool;
+@class PositionTool;
+@class GradientTool;
+@class SmudgeTool;
+@class CloneTool;
+@class CropTool;
+@class EffectTool;
 
 /*!
 	@class		SeaTools
@@ -79,26 +120,25 @@ enum {
 */
 
 @interface SeaTools : NSObject {
-
 	// Various objects representing various tools
-	IBOutlet id rectSelectTool;
-	IBOutlet id ellipseSelectTool;	
-	IBOutlet id lassoTool;
-	IBOutlet id polygonLassoTool;
-	IBOutlet id wandTool;
-	IBOutlet id pencilTool;
-	IBOutlet id brushTool;
-	IBOutlet id bucketTool;
-	IBOutlet id textTool;
-	IBOutlet id eyedropTool;
-	IBOutlet id eraserTool;
-    IBOutlet id positionTool;
-	IBOutlet id gradientTool;
-	IBOutlet id smudgeTool;
-	IBOutlet id cloneTool;
-	IBOutlet id cropTool;
-	IBOutlet id effectTool;
-	
+	IBOutlet RectSelectTool *rectSelectTool;
+	IBOutlet EllipseSelectTool *ellipseSelectTool;
+	IBOutlet LassoTool *lassoTool;
+	IBOutlet PolygonLassoTool *polygonLassoTool;
+	IBOutlet WandTool *wandTool;
+	IBOutlet PencilTool *pencilTool;
+	IBOutlet BrushTool *brushTool;
+	IBOutlet BucketTool *bucketTool;
+	IBOutlet TextTool *textTool;
+	IBOutlet EyedropTool *eyedropTool;
+	IBOutlet EraserTool *eraserTool;
+    IBOutlet PositionTool *positionTool;
+	IBOutlet GradientTool *gradientTool;
+	IBOutlet SmudgeTool *smudgeTool;
+	IBOutlet CloneTool *cloneTool;
+	IBOutlet CropTool *cropTool;
+	IBOutlet EffectTool *effectTool;
+	//IBOutlet AbstractTool *zoomTool;
 }
 
 /*!
@@ -107,22 +147,22 @@ enum {
 				utility.
 	@result		Returns an object that is a subclass of AbstractTool.
 */
-- (id)currentTool;
+- (nullable __kindof AbstractTool*)currentTool;
 
 /*!
 	@method		getTool:
 	@discussion	Given a tool type returns the corresponding tool.
 	@param		whichOne
 				The tool type for the tool you are seeking.
-	@result		Returns an object that is a subclass of AbstractTool.
+	@result		Returns an object that is a subclass of <code>AbstractTool</code>.
 */
-- (id)getTool:(int)whichOne;
+- (nullable __kindof AbstractTool*)getTool:(SeaToolsDefines)whichOne;
 
 /*!
-	@method		allTools
+	@property	allTools
 	@discussion	This is purely for initialization to connect the options to the tools.
 	@result		Returns an array of AbstractTools.
 */
-- (NSArray *)allTools;
+@property (readonly, copy, nonnull) NSArray<__kindof AbstractTool*> *allTools;
 
 @end

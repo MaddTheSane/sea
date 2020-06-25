@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2004";
+groupName = "Color Effect";
+description = "Converts the selection to greyscale using ColorSync";
+license = "Public Domain";
+name = "Convert to Grayscale";

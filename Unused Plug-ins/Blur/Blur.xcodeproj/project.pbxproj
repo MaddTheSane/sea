@@ -3,29 +3,561 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55F084871D3996A200A34BF3 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 556CBD211D3995AB007D73A1 /* SeashoreKit.framework */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		A831E1410789471D0009080F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A831E13F0789471D0009080F /* Localizable.strings */; };
-		A89DCE51078A300C005008F4 /* Rects.m in Sources */ = {isa = PBXBuildFile; fileRef = A89DCE50078A300C005008F4 /* Rects.m */; };
-		A8CA58350793689B004BE921 /* Blur.nib in Resources */ = {isa = PBXBuildFile; fileRef = A8CA58330793689B004BE921 /* Blur.nib */; };
+		A8CA58350793689B004BE921 /* Blur.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CA58330793689B004BE921 /* Blur.xib */; };
 		A8D55D7A0792124D00B6C7C8 /* BlurClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D55D780792124D00B6C7C8 /* BlurClass.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		556CBC901D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A8EDF154078959C80022BB31;
+			remoteInfo = Seashore;
+		};
+		556CBC921D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 557D533318CF9FEC005809E3;
+			remoteInfo = "Affine Tile+";
+		};
+		556CBC941D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 557D536C18CFAAF6005809E3;
+			remoteInfo = "Affine Transform+";
+		};
+		556CBC961D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5599389718CFC72A00E92088;
+			remoteInfo = "Bloom+";
+		};
+		556CBC981D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 550AEAFC18CFC5DE008918BA;
+			remoteInfo = "Brightness+";
+		};
+		556CBC9A1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 550AEB0A18CFC5E1008918BA;
+			remoteInfo = "Bump+";
+		};
+		556CBC9C1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 559938B218CFCCCA00E92088;
+			remoteInfo = "Checkerboard+";
+		};
+		556CBC9E1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55909DC018CFCE5500F43F90;
+			remoteInfo = "Circle Splash+";
+		};
+		556CBCA01D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 559938C118CFCCCC00E92088;
+			remoteInfo = "Circular Screen+";
+		};
+		556CBCA21D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55909DA518CFCCF400F43F90;
+			remoteInfo = "Circular Wrap+";
+		};
+		556CBCA41D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55909DB418CFCCF700F43F90;
+			remoteInfo = "CMYK Halftone+";
+		};
+		556CBCA61D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55909DF818CFD43900F43F90;
+			remoteInfo = "Crystallize+";
+		};
+		556CBCA81D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55909E2418CFD6DD00F43F90;
+			remoteInfo = "Displacement Distortion+";
+		};
+		556CBCAA1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55909E4818CFDA6900F43F90;
+			remoteInfo = "Dot Screen+";
+		};
+		556CBCAC1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 551E569318D0132900E4CDAF;
+			remoteInfo = "Edges+";
+		};
+		556CBCAE1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 551E56A218D0132B00E4CDAF;
+			remoteInfo = "Edge Work+";
+		};
+		556CBCB01D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 551E572918D0268500E4CDAF;
+			remoteInfo = "Exposure+";
+		};
+		556CBCB21D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 551E573A18D0268A00E4CDAF;
+			remoteInfo = "False Color+";
+		};
+		556CBCB41D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2B9218D0CA7C00C4EE1B;
+			remoteInfo = "Gamma Adjust+";
+		};
+		556CBCB61D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2BA218D0CA7E00C4EE1B;
+			remoteInfo = "Gaussian Blur+";
+		};
+		556CBCB81D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2BB018D0CB0C00C4EE1B;
+			remoteInfo = "Glass Distortion+";
+		};
+		556CBCBA1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2BBE18D0CB0E00C4EE1B;
+			remoteInfo = "Glass Lozenge+";
+		};
+		556CBCBC1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2BCC18D0CB7F00C4EE1B;
+			remoteInfo = "Gloom+";
+		};
+		556CBCBE1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2BDA18D0CB8300C4EE1B;
+			remoteInfo = "Hatched Screen+";
+		};
+		556CBCC01D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2BE918D0CE1900C4EE1B;
+			remoteInfo = "Hole+";
+		};
+		556CBCC21D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2BF718D0CE1C00C4EE1B;
+			remoteInfo = "Horizontal Stripes+";
+		};
+		556CBCC41D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C0518D0CE7E00C4EE1B;
+			remoteInfo = "Invert+";
+		};
+		556CBCC61D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C1318D0CE9700C4EE1B;
+			remoteInfo = "Kaleidoscope+";
+		};
+		556CBCC81D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C2118D0CE9900C4EE1B;
+			remoteInfo = "Lenticular Halo+";
+		};
+		556CBCCA1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C2F18D0CF2D00C4EE1B;
+			remoteInfo = "Line Screen+";
+		};
+		556CBCCC1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C3D18D0CF3000C4EE1B;
+			remoteInfo = "Median+";
+		};
+		556CBCCE1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C4B18D0CF3300C4EE1B;
+			remoteInfo = "Monochrome+";
+		};
+		556CBCD01D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C5918D0CF9500C4EE1B;
+			remoteInfo = "Motion Blur+";
+		};
+		556CBCD21D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C6718D0CF9700C4EE1B;
+			remoteInfo = "Noise Reduction+";
+		};
+		556CBCD41D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C7518D0CF9B00C4EE1B;
+			remoteInfo = "Op Tile+";
+		};
+		556CBCD61D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C8318D0CF9F00C4EE1B;
+			remoteInfo = "Parallelogram Tile+";
+		};
+		556CBCD81D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C9118D0D02D00C4EE1B;
+			remoteInfo = "Perspective Tile+";
+		};
+		556CBCDA1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2C9F18D0D03300C4EE1B;
+			remoteInfo = "Perspective Transform+";
+		};
+		556CBCDC1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2CAD18D0D03900C4EE1B;
+			remoteInfo = "Pinch+";
+		};
+		556CBCDE1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2CBB18D0D03D00C4EE1B;
+			remoteInfo = "Pixellate+";
+		};
+		556CBCE01D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2CC918D0D05100C4EE1B;
+			remoteInfo = "Pointillize+";
+		};
+		556CBCE21D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2CD718D0D05400C4EE1B;
+			remoteInfo = "Posterize+";
+		};
+		556CBCE41D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2CE518D0D06600C4EE1B;
+			remoteInfo = "Random+";
+		};
+		556CBCE61D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2CF318D0D07100C4EE1B;
+			remoteInfo = "Sepia+";
+		};
+		556CBCE81D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2D0118D0D08300C4EE1B;
+			remoteInfo = "Sharpen+";
+		};
+		556CBCEA1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2D0F18D0D08600C4EE1B;
+			remoteInfo = "Spotlight+";
+		};
+		556CBCEC1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2D1D18D0D08F00C4EE1B;
+			remoteInfo = "Starshine+";
+		};
+		556CBCEE1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2D2B18D0D09200C4EE1B;
+			remoteInfo = "Sunbeams+";
+		};
+		556CBCF01D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2D3918D0D09F00C4EE1B;
+			remoteInfo = "Torus Lens+";
+		};
+		556CBCF21D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2D4718D0D0A200C4EE1B;
+			remoteInfo = "Triangle Tile+";
+		};
+		556CBCF41D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2D5518D0D0A800C4EE1B;
+			remoteInfo = "Twirl+";
+		};
+		556CBCF61D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2D6318D0D0AA00C4EE1B;
+			remoteInfo = "Unsharp Mask+";
+		};
+		556CBCF81D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2D7418D0D0B300C4EE1B;
+			remoteInfo = "Vertical Stripes+";
+		};
+		556CBCFA1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2D8518D0D0B900C4EE1B;
+			remoteInfo = "Vortex+";
+		};
+		556CBCFC1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2D9618D0D0C200C4EE1B;
+			remoteInfo = "White Point Adjust+";
+		};
+		556CBCFE1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BD2DA718D0D0C500C4EE1B;
+			remoteInfo = "Zoom Blur+";
+		};
+		556CBD001D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E3A518D26A8F0082E60F;
+			remoteInfo = Brightness;
+		};
+		556CBD021D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E3B518D26A950082E60F;
+			remoteInfo = Checkerboard;
+		};
+		556CBD041D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E3CA18D26D0D0082E60F;
+			remoteInfo = CMYK;
+		};
+		556CBD061D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E3DA18D26D100082E60F;
+			remoteInfo = Gaussian;
+		};
+		556CBD081D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E3EA18D26D120082E60F;
+			remoteInfo = Greyscale;
+		};
+		556CBD0A1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E40C18D26EBD0082E60F;
+			remoteInfo = "Horizontal Stripes";
+		};
+		556CBD0C1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E41C18D26EC00082E60F;
+			remoteInfo = HSV;
+		};
+		556CBD0E1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E42C18D26EC40082E60F;
+			remoteInfo = Invert;
+		};
+		556CBD101D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E43C18D26EC70082E60F;
+			remoteInfo = Median;
+		};
+		556CBD121D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E44818D26FB50082E60F;
+			remoteInfo = Pixellate;
+		};
+		556CBD141D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E45418D26FB80082E60F;
+			remoteInfo = Posterize;
+		};
+		556CBD161D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E46018D26FBB0082E60F;
+			remoteInfo = Random;
+		};
+		556CBD181D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E46C18D26FBF0082E60F;
+			remoteInfo = Sepia;
+		};
+		556CBD1A1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E47818D26FC50082E60F;
+			remoteInfo = Sharpen;
+		};
+		556CBD1C1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E48418D26FC70082E60F;
+			remoteInfo = Threshold;
+		};
+		556CBD1E1D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E5E49018D26FD70082E60F;
+			remoteInfo = "Vertical Stripes";
+		};
+		556CBD201D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55472B7E1C6EDCCA0065A852;
+			remoteInfo = SeashoreKit;
+		};
+		556CBD221D3995AB007D73A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 555F598D1D373CEC0085AC96;
+			remoteInfo = SwiftHorizStripes;
+		};
+		558A002B1E1AC52700739585 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55115C1D1D46D65000E76B5B;
+			remoteInfo = SwiftCMYK;
+		};
+		55F084851D39969C00A34BF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 55472B7D1C6EDCCA0065A852;
+			remoteInfo = SeashoreKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Seashore.xcodeproj; path = ../../Seashore/Seashore.xcodeproj; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Blur.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Blur.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
-		A831E1400789471D0009080F /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A84C96B8078965B900451E47 /* SeaPlugins.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SeaPlugins.h; sourceTree = "<group>"; };
-		A89DCE2A078A2FCB005008F4 /* Rects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rects.h; sourceTree = "<group>"; };
-		A89DCE50078A300C005008F4 /* Rects.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Rects.m; sourceTree = "<group>"; };
-		A8CA58340793689B004BE921 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Blur.nib; sourceTree = "<group>"; };
-		A8CA5C4307937C9E004BE921 /* PluginData.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PluginData.h; sourceTree = "<group>"; };
+		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A831E1400789471D0009080F /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A8CA58340793689B004BE921 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Blur.xib; sourceTree = "<group>"; };
 		A8D55D770792124D00B6C7C8 /* BlurClass.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BlurClass.h; sourceTree = "<group>"; };
 		A8D55D780792124D00B6C7C8 /* BlurClass.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BlurClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -35,6 +567,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55F084871D3996A200A34BF3 /* SeashoreKit.framework in Frameworks */,
 				8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,27 +578,28 @@
 		089C166AFE841209C02AAC07 /* Blur */ = {
 			isa = PBXGroup;
 			children = (
+				556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */,
 				08FB77AFFE84173DC02AAC07 /* Classes */,
 				089C167CFE841241C02AAC07 /* Resources */,
-				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				089C1671FE841209C02AAC07 /* Frameworks */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 			);
 			name = Blur;
 			sourceTree = "<group>";
 		};
-		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+		089C1671FE841209C02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
+				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
 				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
 			);
-			name = "Frameworks and Libraries";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A8CA58330793689B004BE921 /* Blur.nib */,
+				A8CA58330793689B004BE921 /* Blur.xib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				A831E13F0789471D0009080F /* Localizable.strings */,
 			);
@@ -75,22 +609,10 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A89DCE2A078A2FCB005008F4 /* Rects.h */,
-				A89DCE50078A300C005008F4 /* Rects.m */,
-				A8CA5C4307937C9E004BE921 /* PluginData.h */,
-				A84C96B8078965B900451E47 /* SeaPlugins.h */,
 				A8D55D770792124D00B6C7C8 /* BlurClass.h */,
 				A8D55D780792124D00B6C7C8 /* BlurClass.m */,
 			);
 			name = Classes;
-			sourceTree = "<group>";
-		};
-		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
-			);
-			name = "Linked Frameworks";
 			sourceTree = "<group>";
 		};
 		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
@@ -110,6 +632,88 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		556CBC401D3995AB007D73A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				556CBC911D3995AB007D73A1 /* Seashore.app */,
+				556CBD211D3995AB007D73A1 /* SeashoreKit.framework */,
+				556CBC931D3995AB007D73A1 /* Affine Tile+.bundle */,
+				556CBC951D3995AB007D73A1 /* Affine Transform+.bundle */,
+				556CBC971D3995AB007D73A1 /* Bloom+.bundle */,
+				556CBC991D3995AB007D73A1 /* Brightness+.bundle */,
+				556CBC9B1D3995AB007D73A1 /* Bump+.bundle */,
+				556CBC9D1D3995AB007D73A1 /* Checkerboard+.bundle */,
+				556CBC9F1D3995AB007D73A1 /* Circle Splash+.bundle */,
+				556CBCA11D3995AB007D73A1 /* Circular Screen+.bundle */,
+				556CBCA31D3995AB007D73A1 /* Circular Wrap+.bundle */,
+				556CBCA51D3995AB007D73A1 /* CMYK Halftone+.bundle */,
+				556CBCA71D3995AB007D73A1 /* Crystallize+.bundle */,
+				556CBCA91D3995AB007D73A1 /* Displacement Distortion+.bundle */,
+				556CBCAB1D3995AB007D73A1 /* Dot Screen+.bundle */,
+				556CBCAD1D3995AB007D73A1 /* Edges+.bundle */,
+				556CBCAF1D3995AB007D73A1 /* Edge Work+.bundle */,
+				556CBCB11D3995AB007D73A1 /* Exposure+.bundle */,
+				556CBCB31D3995AB007D73A1 /* False Color+.bundle */,
+				556CBCB51D3995AB007D73A1 /* Gamma Adjust+.bundle */,
+				556CBCB71D3995AB007D73A1 /* Gaussian Blur+.bundle */,
+				556CBCB91D3995AB007D73A1 /* Glass Distortion+.bundle */,
+				556CBCBB1D3995AB007D73A1 /* Glass Lozenge+.bundle */,
+				556CBCBD1D3995AB007D73A1 /* Gloom+.bundle */,
+				556CBCBF1D3995AB007D73A1 /* Hatched Screen+.bundle */,
+				556CBCC11D3995AB007D73A1 /* Hole+.bundle */,
+				556CBCC31D3995AB007D73A1 /* Horizontal Stripes+.bundle */,
+				556CBCC51D3995AB007D73A1 /* Invert+.bundle */,
+				556CBCC71D3995AB007D73A1 /* Kaleidoscope+.bundle */,
+				556CBCC91D3995AB007D73A1 /* Lenticular Halo+.bundle */,
+				556CBCCB1D3995AB007D73A1 /* Line Screen+.bundle */,
+				556CBCCD1D3995AB007D73A1 /* Median+.bundle */,
+				556CBCCF1D3995AB007D73A1 /* Monochrome+.bundle */,
+				556CBCD11D3995AB007D73A1 /* Motion Blur+.bundle */,
+				556CBCD31D3995AB007D73A1 /* Noise Reduction+.bundle */,
+				556CBCD51D3995AB007D73A1 /* Op Tile+.bundle */,
+				556CBCD71D3995AB007D73A1 /* Parallelogram Tile+.bundle */,
+				556CBCD91D3995AB007D73A1 /* Perspective Tile+.bundle */,
+				556CBCDB1D3995AB007D73A1 /* Perspective Transform+.bundle */,
+				556CBCDD1D3995AB007D73A1 /* Pinch+.bundle */,
+				556CBCDF1D3995AB007D73A1 /* Pixellate+.bundle */,
+				556CBCE11D3995AB007D73A1 /* Pointillize+.bundle */,
+				556CBCE31D3995AB007D73A1 /* Posterize+.bundle */,
+				556CBCE51D3995AB007D73A1 /* Random+.bundle */,
+				556CBCE71D3995AB007D73A1 /* Sepia+.bundle */,
+				556CBCE91D3995AB007D73A1 /* Sharpen+.bundle */,
+				556CBCEB1D3995AB007D73A1 /* Spotlight+.bundle */,
+				556CBCED1D3995AB007D73A1 /* Starshine+.bundle */,
+				556CBCEF1D3995AB007D73A1 /* Sunbeams+.bundle */,
+				556CBCF11D3995AB007D73A1 /* Torus Lens+.bundle */,
+				556CBCF31D3995AB007D73A1 /* Triangle Tile+.bundle */,
+				556CBCF51D3995AB007D73A1 /* Twirl+.bundle */,
+				556CBCF71D3995AB007D73A1 /* Unsharp Mask+.bundle */,
+				556CBCF91D3995AB007D73A1 /* Vertical Stripes+.bundle */,
+				556CBCFB1D3995AB007D73A1 /* Vortex+.bundle */,
+				556CBCFD1D3995AB007D73A1 /* White Point Adjust+.bundle */,
+				556CBCFF1D3995AB007D73A1 /* Zoom Blur+.bundle */,
+				556CBD011D3995AB007D73A1 /* Brightness.bundle */,
+				556CBD031D3995AB007D73A1 /* Checkerboard.bundle */,
+				556CBD051D3995AB007D73A1 /* CMYK.bundle */,
+				556CBD071D3995AB007D73A1 /* Gaussian Blur.bundle */,
+				556CBD091D3995AB007D73A1 /* Greyscale.bundle */,
+				556CBD0B1D3995AB007D73A1 /* Horizontal Stripes.bundle */,
+				556CBD0D1D3995AB007D73A1 /* HSV.bundle */,
+				556CBD0F1D3995AB007D73A1 /* Invert.bundle */,
+				556CBD111D3995AB007D73A1 /* Median.bundle */,
+				556CBD131D3995AB007D73A1 /* Pixellate.bundle */,
+				556CBD151D3995AB007D73A1 /* Posterize.bundle */,
+				556CBD171D3995AB007D73A1 /* Random.bundle */,
+				556CBD191D3995AB007D73A1 /* Sepia.bundle */,
+				556CBD1B1D3995AB007D73A1 /* Sharpen.bundle */,
+				556CBD1D1D3995AB007D73A1 /* Threshold.bundle */,
+				556CBD1F1D3995AB007D73A1 /* Vertical Stripes.bundle */,
+				556CBD231D3995AB007D73A1 /* SwiftHorizStripes.bundle */,
+				558A002C1E1AC52700739585 /* SwiftCMYK.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -124,6 +728,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				55F084861D39969C00A34BF3 /* PBXTargetDependency */,
 			);
 			name = Blur;
 			productInstallPath = "$(HOME)/Library/Bundles";
@@ -136,15 +741,558 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1000;
+			};
 			buildConfigurationList = A8582DD609BD8EF90098D48C /* Build configuration list for PBXProject "Blur" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Blur */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 556CBC401D3995AB007D73A1 /* Products */;
+					ProjectRef = 556CBC3F1D3995AB007D73A1 /* Seashore.xcodeproj */;
+				},
+			);
+			projectRoot = "";
 			targets = (
 				8D5B49AC048680CD000E48DA /* Blur */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		556CBC911D3995AB007D73A1 /* Seashore.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Seashore.app;
+			remoteRef = 556CBC901D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBC931D3995AB007D73A1 /* Affine Tile+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Affine Tile+.bundle";
+			remoteRef = 556CBC921D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBC951D3995AB007D73A1 /* Affine Transform+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Affine Transform+.bundle";
+			remoteRef = 556CBC941D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBC971D3995AB007D73A1 /* Bloom+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Bloom+.bundle";
+			remoteRef = 556CBC961D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBC991D3995AB007D73A1 /* Brightness+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Brightness+.bundle";
+			remoteRef = 556CBC981D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBC9B1D3995AB007D73A1 /* Bump+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Bump+.bundle";
+			remoteRef = 556CBC9A1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBC9D1D3995AB007D73A1 /* Checkerboard+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Checkerboard+.bundle";
+			remoteRef = 556CBC9C1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBC9F1D3995AB007D73A1 /* Circle Splash+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Circle Splash+.bundle";
+			remoteRef = 556CBC9E1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCA11D3995AB007D73A1 /* Circular Screen+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Circular Screen+.bundle";
+			remoteRef = 556CBCA01D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCA31D3995AB007D73A1 /* Circular Wrap+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Circular Wrap+.bundle";
+			remoteRef = 556CBCA21D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCA51D3995AB007D73A1 /* CMYK Halftone+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "CMYK Halftone+.bundle";
+			remoteRef = 556CBCA41D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCA71D3995AB007D73A1 /* Crystallize+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Crystallize+.bundle";
+			remoteRef = 556CBCA61D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCA91D3995AB007D73A1 /* Displacement Distortion+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Displacement Distortion+.bundle";
+			remoteRef = 556CBCA81D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCAB1D3995AB007D73A1 /* Dot Screen+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Dot Screen+.bundle";
+			remoteRef = 556CBCAA1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCAD1D3995AB007D73A1 /* Edges+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Edges+.bundle";
+			remoteRef = 556CBCAC1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCAF1D3995AB007D73A1 /* Edge Work+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Edge Work+.bundle";
+			remoteRef = 556CBCAE1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCB11D3995AB007D73A1 /* Exposure+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Exposure+.bundle";
+			remoteRef = 556CBCB01D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCB31D3995AB007D73A1 /* False Color+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "False Color+.bundle";
+			remoteRef = 556CBCB21D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCB51D3995AB007D73A1 /* Gamma Adjust+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Gamma Adjust+.bundle";
+			remoteRef = 556CBCB41D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCB71D3995AB007D73A1 /* Gaussian Blur+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Gaussian Blur+.bundle";
+			remoteRef = 556CBCB61D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCB91D3995AB007D73A1 /* Glass Distortion+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Glass Distortion+.bundle";
+			remoteRef = 556CBCB81D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCBB1D3995AB007D73A1 /* Glass Lozenge+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Glass Lozenge+.bundle";
+			remoteRef = 556CBCBA1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCBD1D3995AB007D73A1 /* Gloom+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Gloom+.bundle";
+			remoteRef = 556CBCBC1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCBF1D3995AB007D73A1 /* Hatched Screen+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Hatched Screen+.bundle";
+			remoteRef = 556CBCBE1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCC11D3995AB007D73A1 /* Hole+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Hole+.bundle";
+			remoteRef = 556CBCC01D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCC31D3995AB007D73A1 /* Horizontal Stripes+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Horizontal Stripes+.bundle";
+			remoteRef = 556CBCC21D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCC51D3995AB007D73A1 /* Invert+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Invert+.bundle";
+			remoteRef = 556CBCC41D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCC71D3995AB007D73A1 /* Kaleidoscope+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Kaleidoscope+.bundle";
+			remoteRef = 556CBCC61D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCC91D3995AB007D73A1 /* Lenticular Halo+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Lenticular Halo+.bundle";
+			remoteRef = 556CBCC81D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCCB1D3995AB007D73A1 /* Line Screen+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Line Screen+.bundle";
+			remoteRef = 556CBCCA1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCCD1D3995AB007D73A1 /* Median+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Median+.bundle";
+			remoteRef = 556CBCCC1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCCF1D3995AB007D73A1 /* Monochrome+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Monochrome+.bundle";
+			remoteRef = 556CBCCE1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCD11D3995AB007D73A1 /* Motion Blur+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Motion Blur+.bundle";
+			remoteRef = 556CBCD01D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCD31D3995AB007D73A1 /* Noise Reduction+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Noise Reduction+.bundle";
+			remoteRef = 556CBCD21D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCD51D3995AB007D73A1 /* Op Tile+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Op Tile+.bundle";
+			remoteRef = 556CBCD41D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCD71D3995AB007D73A1 /* Parallelogram Tile+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Parallelogram Tile+.bundle";
+			remoteRef = 556CBCD61D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCD91D3995AB007D73A1 /* Perspective Tile+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Perspective Tile+.bundle";
+			remoteRef = 556CBCD81D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCDB1D3995AB007D73A1 /* Perspective Transform+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Perspective Transform+.bundle";
+			remoteRef = 556CBCDA1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCDD1D3995AB007D73A1 /* Pinch+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Pinch+.bundle";
+			remoteRef = 556CBCDC1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCDF1D3995AB007D73A1 /* Pixellate+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Pixellate+.bundle";
+			remoteRef = 556CBCDE1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCE11D3995AB007D73A1 /* Pointillize+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Pointillize+.bundle";
+			remoteRef = 556CBCE01D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCE31D3995AB007D73A1 /* Posterize+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Posterize+.bundle";
+			remoteRef = 556CBCE21D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCE51D3995AB007D73A1 /* Random+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Random+.bundle";
+			remoteRef = 556CBCE41D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCE71D3995AB007D73A1 /* Sepia+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Sepia+.bundle";
+			remoteRef = 556CBCE61D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCE91D3995AB007D73A1 /* Sharpen+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Sharpen+.bundle";
+			remoteRef = 556CBCE81D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCEB1D3995AB007D73A1 /* Spotlight+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Spotlight+.bundle";
+			remoteRef = 556CBCEA1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCED1D3995AB007D73A1 /* Starshine+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Starshine+.bundle";
+			remoteRef = 556CBCEC1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCEF1D3995AB007D73A1 /* Sunbeams+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Sunbeams+.bundle";
+			remoteRef = 556CBCEE1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCF11D3995AB007D73A1 /* Torus Lens+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Torus Lens+.bundle";
+			remoteRef = 556CBCF01D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCF31D3995AB007D73A1 /* Triangle Tile+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Triangle Tile+.bundle";
+			remoteRef = 556CBCF21D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCF51D3995AB007D73A1 /* Twirl+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Twirl+.bundle";
+			remoteRef = 556CBCF41D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCF71D3995AB007D73A1 /* Unsharp Mask+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Unsharp Mask+.bundle";
+			remoteRef = 556CBCF61D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCF91D3995AB007D73A1 /* Vertical Stripes+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Vertical Stripes+.bundle";
+			remoteRef = 556CBCF81D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCFB1D3995AB007D73A1 /* Vortex+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Vortex+.bundle";
+			remoteRef = 556CBCFA1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCFD1D3995AB007D73A1 /* White Point Adjust+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "White Point Adjust+.bundle";
+			remoteRef = 556CBCFC1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBCFF1D3995AB007D73A1 /* Zoom Blur+.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Zoom Blur+.bundle";
+			remoteRef = 556CBCFE1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD011D3995AB007D73A1 /* Brightness.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Brightness.bundle;
+			remoteRef = 556CBD001D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD031D3995AB007D73A1 /* Checkerboard.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Checkerboard.bundle;
+			remoteRef = 556CBD021D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD051D3995AB007D73A1 /* CMYK.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CMYK.bundle;
+			remoteRef = 556CBD041D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD071D3995AB007D73A1 /* Gaussian Blur.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Gaussian Blur.bundle";
+			remoteRef = 556CBD061D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD091D3995AB007D73A1 /* Greyscale.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Greyscale.bundle;
+			remoteRef = 556CBD081D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD0B1D3995AB007D73A1 /* Horizontal Stripes.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Horizontal Stripes.bundle";
+			remoteRef = 556CBD0A1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD0D1D3995AB007D73A1 /* HSV.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = HSV.bundle;
+			remoteRef = 556CBD0C1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD0F1D3995AB007D73A1 /* Invert.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Invert.bundle;
+			remoteRef = 556CBD0E1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD111D3995AB007D73A1 /* Median.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Median.bundle;
+			remoteRef = 556CBD101D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD131D3995AB007D73A1 /* Pixellate.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Pixellate.bundle;
+			remoteRef = 556CBD121D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD151D3995AB007D73A1 /* Posterize.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Posterize.bundle;
+			remoteRef = 556CBD141D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD171D3995AB007D73A1 /* Random.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Random.bundle;
+			remoteRef = 556CBD161D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD191D3995AB007D73A1 /* Sepia.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Sepia.bundle;
+			remoteRef = 556CBD181D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD1B1D3995AB007D73A1 /* Sharpen.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Sharpen.bundle;
+			remoteRef = 556CBD1A1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD1D1D3995AB007D73A1 /* Threshold.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Threshold.bundle;
+			remoteRef = 556CBD1C1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD1F1D3995AB007D73A1 /* Vertical Stripes.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Vertical Stripes.bundle";
+			remoteRef = 556CBD1E1D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD211D3995AB007D73A1 /* SeashoreKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SeashoreKit.framework;
+			remoteRef = 556CBD201D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		556CBD231D3995AB007D73A1 /* SwiftHorizStripes.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftHorizStripes.bundle;
+			remoteRef = 556CBD221D3995AB007D73A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		558A002C1E1AC52700739585 /* SwiftCMYK.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftCMYK.bundle;
+			remoteRef = 558A002B1E1AC52700739585 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8D5B49AF048680CD000E48DA /* Resources */ = {
@@ -152,7 +1300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A831E1410789471D0009080F /* Localizable.strings in Resources */,
-				A8CA58350793689B004BE921 /* Blur.nib in Resources */,
+				A8CA58350793689B004BE921 /* Blur.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,104 +1311,148 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A89DCE51078A300C005008F4 /* Rects.m in Sources */,
 				A8D55D7A0792124D00B6C7C8 /* BlurClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		55F084861D39969C00A34BF3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SeashoreKit;
+			targetProxy = 55F084851D39969C00A34BF3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		A831E13F0789471D0009080F /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A831E1400789471D0009080F /* English */,
+				A831E1400789471D0009080F /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		A8CA58330793689B004BE921 /* Blur.nib */ = {
+		A8CA58330793689B004BE921 /* Blur.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A8CA58340793689B004BE921 /* English */,
+				A8CA58340793689B004BE921 /* en */,
 			);
-			name = Blur.nib;
+			name = Blur.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A8582DD309BD8EF90098D48C /* Development (Native) */ = {
+		A8582DD309BD8EF90098D48C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.Blur;
+				PRODUCT_NAME = Blur;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		A8582DD409BD8EF90098D48C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.0.1;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.seashore.Blur;
+				PRODUCT_NAME = Blur;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		A8582DD709BD8EF90098D48C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 3.3;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
-				PRODUCT_NAME = Blur;
-				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 			};
-			name = "Development (Native)";
+			name = Debug;
 		};
-		A8582DD409BD8EF90098D48C /* Deployment (Universal) */ = {
+		A8582DD809BD8EF90098D48C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 3.3;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
-				PRODUCT_NAME = Blur;
-				WRAPPER_EXTENSION = bundle;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
 			};
-			name = "Deployment (Universal)";
-		};
-		A8582DD509BD8EF90098D48C /* Deployment (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_VERSION_i386 = 4.0;
-				GCC_VERSION_ppc = 3.3;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
-				PRODUCT_NAME = Blur;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = "Deployment (Native)";
-		};
-		A8582DD709BD8EF90098D48C /* Development (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = "Development (Native)";
-		};
-		A8582DD809BD8EF90098D48C /* Deployment (Universal) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = "Deployment (Universal)";
-		};
-		A8582DD909BD8EF90098D48C /* Deployment (Native) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = "Deployment (Native)";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -268,22 +1460,20 @@
 		A8582DD209BD8EF90098D48C /* Build configuration list for PBXNativeTarget "Blur" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A8582DD309BD8EF90098D48C /* Development (Native) */,
-				A8582DD409BD8EF90098D48C /* Deployment (Universal) */,
-				A8582DD509BD8EF90098D48C /* Deployment (Native) */,
+				A8582DD309BD8EF90098D48C /* Debug */,
+				A8582DD409BD8EF90098D48C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 		A8582DD609BD8EF90098D48C /* Build configuration list for PBXProject "Blur" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A8582DD709BD8EF90098D48C /* Development (Native) */,
-				A8582DD809BD8EF90098D48C /* Deployment (Universal) */,
-				A8582DD909BD8EF90098D48C /* Deployment (Native) */,
+				A8582DD709BD8EF90098D48C /* Debug */,
+				A8582DD809BD8EF90098D48C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Deployment (Universal)";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

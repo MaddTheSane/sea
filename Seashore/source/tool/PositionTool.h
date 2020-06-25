@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
@@ -12,29 +13,20 @@
 */
 
 @interface PositionTool : AbstractTool {
-
-	// The point from which the drag started
+	/// The point from which the drag started
 	IntPoint initialPoint;
 	
-	// The mode of positioning
+	/// The mode of positioning
 	int mode;
 
-	// An outlet to an instance of a class with the same name
+	/// An outlet to an instance of a class with the same name
 	IBOutlet id seaOperations;
 	
 	// The scale and rotation values
-	float scale;
-	float rotation;
+	CGFloat scale;
+	CGFloat rotation;
 	BOOL rotationDefined;
-
 }
-
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		mouseDownAt:withEvent:
@@ -42,8 +34,6 @@
 	@param		where
 				Where in the document the mouse down event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse down event.
 */
@@ -55,8 +45,6 @@
 	@param		where
 				Where in the document the mouse down event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse dragged event.
 */
@@ -68,33 +56,31 @@
 	@param		where
 				Where in the document the mouse up event occurred (in terms of
 				the document's pixels).
-	@param		modifiers
-				The state of the modifiers at the time (see NSEvent).
 	@param		event
 				The mouse up event.
 */
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event;
 
 /*!
-	@method		scale
+	@property	scale
 	@discussion	Returns the scale value.
 	@result		Returns an floating point number representing the scale value.
 */
-- (float)scale;
+@property (readonly) CGFloat scale;
 
 /*!
-	@method		rotation
+	@property	rotation
 	@discussion	Returns the rotation value.
 	@result		Returns an float representing the rotation value in degrees.
 */
-- (float)rotation;
+@property (readonly) CGFloat rotation;
 
 /*!
-	@method		rotationDefined
+	@property	rotationDefined
 	@discussion	Returns whether or not the rotation value is defined.
 	@result		Returns YES if the rotation value is defined, NO otherwise.
 */
-- (BOOL)rotationDefined;
+@property (readonly) BOOL rotationDefined;
 
 /*!
 	@method		undoToOrigin:forLayer:
@@ -106,6 +92,6 @@
 	@param		index
 				The index of the layer to restore.
 */
-- (void)undoToOrigin:(IntPoint)origin forLayer:(int)index;
+- (void)undoToOrigin:(IntPoint)origin forLayer:(NSInteger)index;
 
 @end

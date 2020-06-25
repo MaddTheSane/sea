@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 
 /*!
@@ -14,6 +15,8 @@
 
 #define kTexturesPerRow 5
 
+@class TextureUtility;
+
 /*!
 	@class		TextureView
 	@abstract	Displays all available textures for easy selection by the user.
@@ -22,12 +25,9 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
 @interface TextureView : NSView {
-	
-	// The TextureUtility controlling this view
-	id master;
-	
+	/// The \c TextureUtility controlling this view
+	__weak TextureUtility *master;
 }
 
 /*!
@@ -37,13 +37,7 @@
 				The texture utility that will control the contents of this view.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithMaster:(id)sender;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)initWithMaster:(TextureUtility*)sender;
 
 /*!
 	@method		acceptsFirstMouse:
@@ -59,7 +53,7 @@
 /*!
 	@method		mouseDown:
 	@discussion	Handles mouse down events inside the view.
-	@param		theEvent
+	@param		event
 				The event triggering this method.
 */
 - (void)mouseDown:(NSEvent *)event;

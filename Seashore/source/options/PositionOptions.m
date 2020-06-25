@@ -6,56 +6,55 @@
 #import "SeaDocument.h"
 #import "SeaSelection.h"
 #import "AspectRatio.h"
+#import "SeaView.h"
 
 @implementation PositionOptions
+@synthesize toolFunction = function;
 
 - (void)awakeFromNib
 {
-	if ([gUserDefaults objectForKey:@"position anchor"] == NULL) {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if ([defaults objectForKey:@"position anchor"] == NULL) {
 		[canAnchorCheckbox setState:NSOffState];
+	} else {
+		[canAnchorCheckbox setState:[defaults boolForKey:@"position anchor"]];
 	}
-	else {
-		[canAnchorCheckbox setState:[gUserDefaults boolForKey:@"position anchor"]];
-	}
-	function = kMovingLayer;
+	function = SeaPositionOptionMoving;
 }
 
 - (BOOL)canAnchor
 {
-	return [canAnchorCheckbox state];
+	return [canAnchorCheckbox state] == NSOnState;
 }
 
-- (int)toolFunction
-{
-	return function;
-}
-- (void)setFunctionFromIndex:(unsigned int)index
+- (void)setFunctionFromIndex:(AbstractModifiers)index
 {
 	switch (index) {
-		case kShiftModifier:
-			function = kScalingLayer;
+		case AbstractModifierShift:
+			function = SeaPositionOptionScaling;
 			break;
-		case kControlModifier:
-			function = kRotatingLayer;
+		case AbstractModifierControl:
+			function = SeaPositionOptionRotating;
 			break;
 		default:
-			function = kMovingLayer;
+			function = SeaPositionOptionMoving;
 			break;
 	}
 	// Let's not check for floating, maybe we can do it all
 	/*if(function == kRotatingLayer){
-		if(![[document selection] floating])
+		if(!document.selection.floating)
 			function = kMovingLayer;
 	}else if(function == kScalingLayer){
-		if([[document selection] floating])
+		if(document.selection.floating)
 			function = kMovingLayer;
 	}*/
 }
 
-- (void)updateModifiers:(unsigned int)modifiers
+- (void)updateModifiers:(NSEventModifierFlags)modifiers
 {
 	[super updateModifiers:modifiers];
-	int modifier = [super modifier];
+	AbstractModifiers modifier = [super modifier];
 	[self setFunctionFromIndex: modifier];
 }
 
@@ -64,15 +63,15 @@
 	[self setFunctionFromIndex: [[sender selectedItem] tag]];	
 	
 	NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
-	int i;
-	for (i = 0; i < [documents count]; i++) {
-		[[(SeaDocument *)[documents objectAtIndex:i] docView] setNeedsDisplay:YES];
+	for (SeaDocument *doc in documents) {
+		[doc docView].needsDisplay = YES;
 	}
 }
 
 - (void)shutdown
 {
-	[gUserDefaults setObject:[canAnchorCheckbox state] ? @"YES" : @"NO" forKey:@"position anchor"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setBool:[canAnchorCheckbox state] != NSOffState forKey:@"position anchor"];
 }
 
 @end

@@ -16,19 +16,19 @@
 			break;
 	}
 
-    if([window isMainWindow] && usesOldStyle){
+    if ([window isMainWindow] && usesOldStyle) {
         topColor = [NSColor colorWithDeviceWhite:0.91 alpha:1.0];
         fillColor = [NSColor colorWithDeviceWhite:0.84 alpha:1.0];
         bottomColor = [NSColor colorWithDeviceWhite:0.50 alpha:1.0];
-    }else if(usesOldStyle){
+    } else if(usesOldStyle) {
         topColor = [NSColor colorWithDeviceWhite:0.96 alpha:1.0];
         fillColor = [NSColor colorWithDeviceWhite:0.93 alpha:1.0];
         bottomColor = [NSColor colorWithDeviceWhite:0.50 alpha:1.0];
-    }else if([window isMainWindow]){
+    } else if([window isMainWindow]) {
         topColor = [NSColor colorWithDeviceWhite:0.75 alpha:1.0];
         fillColor = [NSColor colorWithDeviceWhite:0.57 alpha:1.0];
         bottomColor = [NSColor colorWithDeviceWhite:0.50 alpha:1.0];
-    }else{
+    } else {
         topColor = [NSColor colorWithDeviceWhite:0.89 alpha:1.0];
         fillColor = [NSColor colorWithDeviceWhite:0.81 alpha:1.0];
         bottomColor = [NSColor colorWithDeviceWhite:0.62 alpha:1.0];
@@ -45,7 +45,6 @@
     [fillColor set];
     path = [NSBezierPath bezierPathWithRect:NSMakeRect(0.0, 1.0, [self frame].size.width, [self frame].size.height - 2.0)];
     [path fill];
-
 }
 
 @end

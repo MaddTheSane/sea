@@ -13,7 +13,7 @@
 - (void)awakeFromNib
 {
 	settingsLayer = nil;
-	[(InfoPanel *)panel setPanelStyle:kHorizontalPanelStyle];	
+	[panel setPanelStyle:SeaPanelStyleHorizontal];	
 }
 
 - (void)activate
@@ -44,21 +44,21 @@
 		[layerTitle setEnabled:NO];
 	}
 	
-	[leftValue setStringValue:StringFromPixels([layer xoff],units,xres)];
-	[topValue setStringValue:StringFromPixels([layer yoff], units, yres)];
-	[widthValue setStringValue:StringFromPixels([layer width],units,xres)];
-	[heightValue setStringValue:StringFromPixels([layer height],units, yres)];	
-	[leftUnits setTitle:UnitsString(units)];
-	[topUnits setTitle:UnitsString(units)];	
-	[widthUnits setTitle:UnitsString(units)];
-	[heightUnits setTitle:UnitsString(units)];
+	[leftValue setStringValue:SeaStringFromPixels([layer xoff],units,xres)];
+	[topValue setStringValue:SeaStringFromPixels([layer yoff], units, yres)];
+	[widthValue setStringValue:SeaStringFromPixels([layer width],units,xres)];
+	[heightValue setStringValue:SeaStringFromPixels([layer height],units, yres)];	
+	[leftUnits setTitle:SeaUnitsString(units)];
+	[topUnits setTitle:SeaUnitsString(units)];	
+	[widthUnits setTitle:SeaUnitsString(units)];
+	[heightUnits setTitle:SeaUnitsString(units)];
 	
 	[channelEditingMatrix selectCellAtRow:[[document contents] selectedChannel] column:0];
 
 	if([layer hasAlpha]){
 		[[channelEditingMatrix cellAtRow:1 column:0] setEnabled:YES];
 		[[channelEditingMatrix cellAtRow:2 column:0] setEnabled:YES];
-	}else {
+	} else {
 		[[channelEditingMatrix cellAtRow:1 column:0] setEnabled:NO];
 		[[channelEditingMatrix cellAtRow:2 column:0] setEnabled:NO];
 	}
@@ -67,7 +67,7 @@
 	if (document && layer) {
 		
 		// Set the opacity correctly
-		if ([layer floating]) {
+		if (layer.floating) {
 			[opacitySlider setIntValue:[layer opacity]];
 			[opacitySlider setEnabled:NO];
 			[opacityLabel setStringValue:[NSString stringWithFormat:@"%.1f%%", (float)[layer opacity] / 2.55]];
@@ -79,7 +79,7 @@
 		}
 		
 		// Set the mode correctly
-		if ([layer floating]) {
+		if (layer.floating) {
 			[modePopup selectItemAtIndex:[modePopup indexOfItemWithTag:[layer mode]]];
 			[modePopup setEnabled:NO];
 		}
@@ -89,7 +89,7 @@
 		}
 		
 		[linkedCheckbox setEnabled: YES];
-		[linkedCheckbox setState:[layer linked]];
+		[linkedCheckbox setState:layer.linked];
 
 		[alphaEnabledCheckbox setEnabled: [layer canToggleAlpha]];
 		[alphaEnabledCheckbox setState:[layer hasAlpha]];
@@ -126,8 +126,8 @@
 	yres = [contents yres];
 
 	// Parse width and height	
-	newLeftValue = PixelsFromFloat([leftValue floatValue],units, xres);
-	newTopValue = PixelsFromFloat([topValue floatValue],units,yres);
+	newLeftValue = SeaPixelsFromFloat([leftValue floatValue],units, xres);
+	newTopValue = SeaPixelsFromFloat([topValue floatValue],units,yres);
 	
 	if ([layer xoff] != newLeftValue || [layer yoff] != newTopValue)
 		[self setOffsetsLeft:newLeftValue top:newTopValue index:[layer index]];
@@ -154,7 +154,7 @@
 	[panel orderOut:self];
 }
 
-- (void)setOffsetsLeft:(int)left top:(int)top index:(int)index
+- (void)setOffsetsLeft:(int)left top:(int)top index:(NSInteger)index
 {
 	SeaLayer* layer;
 	IntPoint oldOffsets;
@@ -162,7 +162,7 @@
 	// Correct the index
 	if (index == kActiveLayer)
 		index = [[document contents] activeLayerIndex];
-	layer = [[document contents] layer:index];
+	layer = [[document contents] layerAtIndex:index];
 	
 	// Allow the undo/redo
 	oldOffsets = IntMakePoint([layer xoff], [layer yoff]);
@@ -175,14 +175,14 @@
 	[[document helpers] layerOffsetsChanged:index from:oldOffsets];
 }
 
-- (void)setName:(NSString *)newName index:(int)index
+- (void)setName:(NSString *)newName index:(NSInteger)index
 {
 	SeaLayer* layer;
 	
 	// Correct the index
 	if (index == kActiveLayer)
 		index = [[document contents] activeLayerIndex];
-	layer = [[document contents] layer:index];
+	layer = [[document contents] layerAtIndex:index];
 	
 	// Allow the undo/redo
 	[[[document undoManager] prepareWithInvocationTarget:self] setName:[layer name] index:index];
@@ -199,13 +199,13 @@
 	SeaLayer* layer = settingsLayer;
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] undoMode:[layer index] to:[layer mode]];
-	[layer setMode:[[modePopup selectedItem] tag]];
+	[layer setMode:(int)[[modePopup selectedItem] tag]];
 	[[document helpers] layerAttributesChanged:kActiveLayer hold:YES];
 }
 
-- (void)undoMode:(int)index to:(int)value
+- (void)undoMode:(NSInteger)index to:(int)value
 {
-	SeaLayer* layer = [[document contents] layer:index];
+	SeaLayer* layer = [[document contents] layerAtIndex:index];
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] undoMode:index to:[layer mode]];
 	[layer setMode:value];
@@ -226,9 +226,9 @@
 	[opacityLabel setStringValue:[NSString stringWithFormat:@"%.1f%%", (float)[opacitySlider intValue] / 2.55]];
 }
 
-- (void)undoOpacity:(int)index to:(int)value
+- (void)undoOpacity:(NSInteger)index to:(int)value
 {
-	SeaLayer* layer = [[document contents] layer:index];
+	SeaLayer* layer = [[document contents] layerAtIndex:index];
 	
 	[[[document undoManager] prepareWithInvocationTarget:self] undoOpacity:index to:[layer opacity]];
 	[layer setOpacity:value];
@@ -240,7 +240,7 @@
 - (IBAction)changeLinked:(id)sender
 {
 	[[document contents] setLinked:[linkedCheckbox state] forLayer: [settingsLayer index]];
-	[linkedCheckbox setState:[settingsLayer linked]];
+	[linkedCheckbox setState:settingsLayer.linked];
 }
 
 - (IBAction)changeEnabledAlpha:(id)sender
@@ -255,7 +255,7 @@
 
 - (IBAction)changeChannelEditing:(id)sender
 {
-	[[document contents] setSelectedChannel:[channelEditingMatrix selectedRow]];
+	[[document contents] setSelectedChannel:(int)[channelEditingMatrix selectedRow]];
 	[[document helpers] channelChanged];
 }
 

@@ -9,22 +9,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SeaPlugins.h"
+#import "SSKCIPlugin.h"
 
-@interface GreyscaleClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-}
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
+@interface GreyscaleClass : SSKPlugin
 
 /*!
 	@method		type
@@ -32,7 +19,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		name

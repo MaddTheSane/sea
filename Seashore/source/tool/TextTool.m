@@ -16,29 +16,25 @@
 #import "Bitmap.h"
 #import "OptionsUtility.h"
 
-extern id gNewFont;
+NSFont *gNewFont;
 
 @implementation TextTool
 
-- (int)toolId
+- (SeaToolsDefines)toolId
 {
-	return kTextTool;
+	return SeaToolsText;
 }
 
-- (id)init
+- (instancetype)init
 {
-	if(![super init])
-		return NULL;
+	if(self = [super init]) {
 	// Set up the font manager
 	fontManager = [NSFontManager sharedFontManager];
 	running = NO;
+	}
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
 
 - (void)mouseUpAt:(IntPoint)iwhere withEvent:(NSEvent *)theEvent
 {
@@ -55,7 +51,7 @@ extern id gNewFont;
 
 - (IntRect)drawOverlay
 {
-	int i, j, k, width, height, spp = [[document contents] spp], ispp, ispp2 = 0;
+	NSInteger i, j, k, width, height, spp = [[document contents] spp], ispp, ispp2 = 0;
 	NSFont *font;
 	IntSize fontSize;
 	NSDictionary *attributes;
@@ -64,7 +60,8 @@ extern id gNewFont;
 	NSColor *color;
 	NSString *text;
 	IntPoint pos, off;
-	id layer, activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	SeaLayer *layer;
+	SeaTexture *activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
 	NSBitmapImageRep *initRep, *initRep2 = NULL, *imageRep, *imageRep2 = NULL;
 	NSImage *image, *image2 = NULL;
 	NSMutableParagraphStyle *paraStyle;
@@ -76,7 +73,7 @@ extern id gNewFont;
 		color = [activeTexture textureAsNSColor:(spp == 4)];
 	else
 		color = [[document contents] foreground];
-	[[document whiteboard] setOverlayBehaviour:kReplacingBehaviour];
+	[[document whiteboard] setOverlayBehaviour:SeaOverlayBehaviourReplacing];
 	[[document whiteboard] setOverlayOpacity:255];
 	
 	// Get the font
@@ -85,22 +82,21 @@ extern id gNewFont;
 	paraStyle = [[NSMutableParagraphStyle alloc] init];
 	[paraStyle setAlignment:[options alignment]];
 	if (outline)
-		attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, color, NSForegroundColorAttributeName, paraStyle, NSParagraphStyleAttributeName, [NSNumber numberWithInt:outline], NSStrokeWidthAttributeName, NULL];
+		attributes = @{NSFontAttributeName: font, NSForegroundColorAttributeName: color, NSParagraphStyleAttributeName: paraStyle, NSStrokeWidthAttributeName: @(outline)};
 	else
-		attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, color, NSForegroundColorAttributeName, paraStyle, NSParagraphStyleAttributeName, NULL];
-	[paraStyle autorelease];
+		attributes = @{NSFontAttributeName: font, NSForegroundColorAttributeName: color, NSParagraphStyleAttributeName: paraStyle};
 	text = [[textbox textStorage] string];
 	fontSize = NSSizeMakeIntSize([text sizeWithAttributes:attributes]);
-	fontSize.width += [[NSString stringWithString:@"x"] sizeWithAttributes:attributes].width;
+	fontSize.width += [@"x" sizeWithAttributes:attributes].width;
 	slantWidth = ceil(MAX(sin([font italicAngle]) * [font pointSize], 0.0));
 	if (outline) slantWidth += (outline + 1) / 2;
 	fontSize.width += slantWidth * 2;
 	overlay = [[document whiteboard] overlay];
 	replace = [[document whiteboard] replace];
 	layer = [[document contents] activeLayer];
-	data = [(SeaLayer *)layer data];
-	width = [(SeaLayer *)layer width];
-	height = [(SeaLayer *)layer height];
+	data = [layer data];
+	width = [layer width];
+	height = [layer height];
 	
 	// Determine the position
 	switch([options alignment]){
@@ -140,7 +136,7 @@ extern id gNewFont;
 	}
 	
 	// Draw the text
-	if (![options allowFringe]) premultiplyBitmap(spp, initData, initData, fontSize.height * fontSize.width);
+	if (![options allowFringe]) SeaPremultiplyBitmap(spp, initData, initData, fontSize.height * fontSize.width);
 	initRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&initData pixelsWide:fontSize.width pixelsHigh:fontSize.height bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:fontSize.width * spp bitsPerPixel:8 * spp];
 	image = [[NSImage alloc] initWithSize:IntSizeMakeNSSize(fontSize)];
 	[image addRepresentation:initRep];
@@ -150,8 +146,8 @@ extern id gNewFont;
 	[image unlockFocus];
 	ispp = [imageRep samplesPerPixel];
 	bitmapData = [imageRep bitmapData];
-	if (ispp == 4) unpremultiplyBitmap(ispp, bitmapData, bitmapData, fontSize.height * fontSize.width);
-	if ([options allowFringe]) unpremultiplyBitmap(spp, initData, initData, fontSize.height * fontSize.width);
+	if (ispp == 4) SeaUnpremultiplyBitmap(ispp, bitmapData, bitmapData, fontSize.height * fontSize.width);
+	if ([options allowFringe]) SeaUnpremultiplyBitmap(spp, initData, initData, fontSize.height * fontSize.width);
 	
 	// Calculate fringe mask
 	if ([options allowFringe]) {
@@ -164,7 +160,7 @@ extern id gNewFont;
 		[image2 unlockFocus];
 		ispp2 = [imageRep2 samplesPerPixel];
 		bitmapData2 = [imageRep2 bitmapData];
-		if (ispp2 == 4) unpremultiplyBitmap(ispp2, bitmapData2, bitmapData2, fontSize.height * fontSize.width);
+		if (ispp2 == 4) SeaUnpremultiplyBitmap(ispp2, bitmapData2, bitmapData2, fontSize.height * fontSize.width);
 	}
 	
 	// Go through all pixels and change them
@@ -192,13 +188,7 @@ extern id gNewFont;
 	}
 	
 	// Clean-up everything
-	[image autorelease];
-	[imageRep autorelease];
-	[initRep autorelease];
 	if ([options allowFringe]) {
-		[image2 autorelease];
-		[imageRep2 autorelease];
-		[initRep2 autorelease];
 	}
 	free(initData);
 	
@@ -298,13 +288,13 @@ extern id gNewFont;
 	NSDictionary *attributes;
 	NSString *text;
 	int width;
-	id layer;
+	SeaLayer *layer;
 	
 	layer = [[document contents] activeLayer];
-	attributes = [NSDictionary dictionaryWithObjectsAndKeys:[fontManager selectedFont], NSFontAttributeName, NULL];
+	attributes = @{NSFontAttributeName: [fontManager selectedFont]};
 	text = [[textbox textStorage] string];
 	fontSize = NSSizeMakeIntSize([text sizeWithAttributes:attributes]);
-	width = [(SeaLayer *)layer width];
+	width = [layer width];
 	where.x = width / 2 - fontSize.width / 2;
 	[self preview:NULL];
 }
@@ -315,11 +305,12 @@ extern id gNewFont;
 	NSDictionary *attributes;
 	NSString *text;
 	int height;
-	id layer, font;
+	SeaLayer *layer;
+	NSFont *font;
 	
 	layer = [[document contents] activeLayer];
 	font = [fontManager selectedFont];
-	attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, NULL];
+	attributes = @{NSFontAttributeName: font};
 	text = [[textbox textStorage] string];
 	fontSize = NSSizeMakeIntSize([text sizeWithAttributes:attributes]);
 	height = [(SeaLayer *)layer height];

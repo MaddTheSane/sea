@@ -1,4 +1,12 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
+#import "SSKTerminatable.h"
 #import "Globals.h"
+#else
+#import <SeashoreKit/SSKTerminatable.h>
+#import <SeashoreKit/Globals.h>
+#endif
+
 
 /*!
 	@class		SeaController
@@ -12,46 +20,42 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface SeaController : NSObject {
-	
-	// An outlet to the utilities manager of the application
-	IBOutlet id utilitiesManager;
-	
-	// An outlet to the plug-ins manager of the application
-	IBOutlet id seaPlugins;
-	
-	// An outlet to the preferences manager of the application
-	IBOutlet id seaPrefs;
-	
-	// An outlet to the proxy object of the application
-	IBOutlet id seaProxy;
-	
-	// An outlet to the help manager of the application
-	IBOutlet id seaHelp;
+@class SeaPlugins, SeaPrefs, UtilitiesManager, SeaProxy;
+@class SeaHelp, SeaWarning;
 
-	// An outlet to the warning manager of the application
-	IBOutlet id seaWarning;
-	
-	// The window containing the GNU General Public License
-	IBOutlet id licenseWindow;
-	
-	// An array of objects wishing to recieve the terminate message
-	NSArray *terminationObjects;
-
+@interface SeaController : NSObject <NSApplicationDelegate>
+{
+	//! An array of objects wishing to recieve the terminate message
+	NSMutableArray<id<SSKTerminatable>> *terminationObjects;
 }
+
+//! An outlet to the utilities manager of the application
+@property (weak) IBOutlet UtilitiesManager *utilitiesManager;
+
+//! An outlet to the plug-ins manager of the application
+@property (weak) IBOutlet SeaPlugins *seaPlugins;
+
+//! An outlet to the preferences manager of the application
+@property (weak) IBOutlet SeaPrefs *seaPrefs;
+
+//! An outlet to the proxy object of the application
+@property (weak) IBOutlet SeaProxy *seaProxy;
+	
+//! An outlet to the help manager of the application
+@property (weak) IBOutlet SeaHelp *seaHelp;
+
+//! An outlet to the warning manager of the application
+@property (weak) IBOutlet SeaWarning *seaWarning;
+
+//! The window containing the GNU General Public License
+@property (weak) IBOutlet NSWindow *licenseWindow;
 
 /*!
 	@method		init
 	@discussion	Initializes an instance of this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+- (instancetype)init;
 
 /*!
 	@method		applicationDidFinishLaunching:
@@ -66,42 +70,57 @@
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of UtilitiesManager.
 */
-+ (id)utilitiesManager;
++ (UtilitiesManager *)utilitiesManager;
 
 /*!
 	@method		seaPlugins
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of SeaPlugins.
 */
-+ (id)seaPlugins;
++ (SeaPlugins *)seaPlugins;
 
 /*!
 	@method		seaPrefs
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of SeaPrefs.
 */
-+ (id)seaPrefs;
++ (SeaPrefs *)seaPrefs;
 
 /*!
 	@method		seaProxy
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of SeaProxy.
 */
-+ (id)seaProxy;
++ (SeaProxy *)seaProxy;
 
 /*!
 	@method		seaHelp
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of SeaHelp.
 */
-+ (id)seaHelp;
++ (SeaHelp *)seaHelp;
 
 /*!
 	@method		seaWarning
 	@discussion	A class method that returns the object of the same name.
 	@result		Returns the instance of SeaWarning.
 */
-+ (id)seaWarning;
++ (SeaWarning *)seaWarning;
+
+#if __has_feature(objc_class_property)
+/// The instance of utilitiesManager
+@property (class, readonly, strong) UtilitiesManager *utilitiesManager;
+/// The instance of SeaPlugins
+@property (class, readonly, strong) SeaPlugins *seaPlugins;
+/// The instance of SeaPrefs
+@property (class, readonly, strong) SeaPrefs *seaPrefs;
+/// The instance of SeaProxy
+@property (class, readonly, strong) SeaProxy *seaProxy;
+/// The instance of SeaHelp
+@property (class, readonly, strong) SeaHelp *seaHelp;
+/// The instance of SeaWarning
+@property (class, readonly, strong) SeaWarning *seaWarning;
+#endif
 
 /*!
 	@method		revert:
@@ -152,7 +171,7 @@
 				The object that wishes to recieve a termination message (the
 				object is not retained).
 */
-- (void)registerForTermination:(id)object;
+- (void)registerForTermination:(id<SSKTerminatable>)object;
 
 /*!
 	@method		applicationWillTerminate:
@@ -192,6 +211,6 @@
 				The menu item to be validated.
 	@result		YES if the menu item should be enabled, NO otherwise.
 */
-- (BOOL)validateMenuItem:(id)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end

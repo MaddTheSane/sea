@@ -11,25 +11,14 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "SeaPlugins.h"
+#import "PluginData.h"
+#import "SeaWhiteboard.h"
+#import "SSKPlugin.h"
 
-@interface CIVertStripesClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// YES if the application succeeded
-	BOOL success;
-
+@interface CIVertStripesClass : SSKPlugin
+{
+	NSBitmapImageRep *temp_rep;
 }
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type
@@ -37,7 +26,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		points

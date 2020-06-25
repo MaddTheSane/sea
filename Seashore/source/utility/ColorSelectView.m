@@ -13,22 +13,17 @@
 #import "ToolboxUtility.h"
 
 @implementation ColorSelectView
+@synthesize document;
 
-- (id)initWithFrame:(NSRect)frame
+- (instancetype)initWithFrame:(NSRect)frame
 {
 	// Initialize the super
-	if (![super initWithFrame:frame])
-		return NULL;
-	
-	// Set data members appropriately
-	mouseDownOnSwap = NO;
+	if (self = [super initWithFrame:frame]) {
+		// Set data members appropriately
+		mouseDownOnSwap = NO;
+	}
 	
 	return self;
-}
-
-- (void)dealloc
-{
-	[super dealloc];
 }
 
 - (void)setDocument:(id)doc
@@ -37,13 +32,11 @@
 	[self setNeedsDisplay:YES];
 	
 	if (doc == NULL) {
-	
 		// If we are closing the last document hide the panel for selecting the foreround or background colour
 		if ([gColorPanel isVisible] && ([[gColorPanel title] isEqualToString:LOCALSTR(@"foreground", @"Foreground")] || [[gColorPanel title] isEqualToString:LOCALSTR(@"background", @"Background")])) {
 			if ([[[NSDocumentController sharedDocumentController] documents] count] == 1)
 				[gColorPanel orderOut:self];
 		}
-		
 	}
 }
 
@@ -78,13 +71,14 @@
 	[tempPath lineToPoint:NSMakePoint(26,24)];
 	[tempPath fill];
 	// Actual Color
-	if (document == NULL)
+	if (document == NULL) {
 		[[NSColor whiteColor] set];
-	else {
-		if ([[document whiteboard] CMYKPreview])
+	} else {
+		if ([[document whiteboard] CMYKPreview]) {
 			[[[document whiteboard] matchColor:[[document contents] background]] set];
-		else
+		} else {
 			[[[document contents] background] set];
+		}
 	}
 	[[NSBezierPath bezierPathWithRect:NSMakeRect(26, 8, 26, 16)] fill];
 
@@ -113,22 +107,22 @@
 	if (foregroundIsTexture) {
 		[[NSColor colorWithPatternImage:[[[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture] thumbnail]] set];
 		[[NSBezierPath bezierPathWithRect:NSMakeRect(2, 2, 26, 16)] fill];
-	}
-	else {
-		if (document == NULL)
+	} else {
+		if (document == NULL) {
 			[[NSColor blackColor] set];
-		else {
-			if ([[document whiteboard] CMYKPreview])
+		} else {
+			if ([[document whiteboard] CMYKPreview]) {
 				[[[document whiteboard] matchColor:[[document contents] foreground]] set];
-			else
+			} else {
 				[[[document contents] foreground] set];
+			}
 		}
 		[[NSBezierPath bezierPathWithRect:NSMakeRect(2, 2, 26, 16)] fill];
 	}
 	
 	
 	// Draw the images
-	[[NSImage imageNamed:@"swap"] compositeToPoint:NSMakePoint(18, 27) operation:NSCompositeSourceOver];
+	[[NSImage imageNamed:@"swap"] drawAtPoint:NSMakePoint(18, 27) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	//[[NSImage imageNamed:@"samp"] compositeToPoint:NSMakePoint(0, 27) operation:NSCompositeSourceOver];
 	//[[NSImage imageNamed:@"def"] compositeToPoint:NSMakePoint(44, 6) operation:NSCompositeSourceOver];
 	
@@ -162,19 +156,18 @@
 
 - (IBAction)swapColors:(id)sender
 {
-	NSColor *tempColor;
 	[self setNeedsDisplay:YES];
-	tempColor = [[document contents] foreground];
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] setForeground:[[document contents] background]];
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] setBackground:tempColor];
+	NSColor *tempColor = [[document contents] foreground];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:document] setForeground:[[document contents] background]];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:document] setBackground:tempColor];
 	[self update];
 }
 
 - (IBAction)defaultColors:(id)sender
 {
 	[self setNeedsDisplay:YES];
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] setForeground:[NSColor blackColor]];
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] setBackground:[NSColor whiteColor]];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:document] setForeground:[NSColor blackColor]];
+	[[[SeaController utilitiesManager] toolboxUtilityFor:document] setBackground:[NSColor whiteColor]];
 	[self update];
 }
 
@@ -207,7 +200,6 @@
 	NSPoint clickPoint = [self convertPoint:[theEvent locationInWindow] fromView:NULL];
 	
 	if (mouseDownOnSwap) {
-	
 		// Return the swap button to normal
 		mouseDownOnSwap = NO;
 		[self setNeedsDisplay:YES];
@@ -220,7 +212,7 @@
 
 - (void)changeForegroundColor:(id)sender
 {
-	id toolboxUtility = (ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document];
+	ToolboxUtility *toolboxUtility = [[SeaController utilitiesManager] toolboxUtilityFor:document];
 	
 	[toolboxUtility setForeground:[sender color]];
 	[textureUtility setActiveTextureIndex:-1];
@@ -229,7 +221,7 @@
 
 - (void)changeBackgroundColor:(id)sender
 {
-	id toolboxUtility = (ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document];
+	ToolboxUtility *toolboxUtility = [[SeaController utilitiesManager] toolboxUtilityFor:document];
 	
 	[toolboxUtility setBackground:[sender color]];
 	[self setNeedsDisplay:YES];
@@ -239,13 +231,12 @@
 {
 	// Reconfigure the colour panel correctly
 	if ([gColorPanel isVisible] && ([[gColorPanel title] isEqualToString:LOCALSTR(@"foreground", @"Foreground")] || [[gColorPanel title] isEqualToString:LOCALSTR(@"background", @"Background")])) {
-				
 		// Set colour correctly
-		if ([[gColorPanel title] isEqualToString:LOCALSTR(@"foreground", @"Foreground")])
+		if ([[gColorPanel title] isEqualToString:LOCALSTR(@"foreground", @"Foreground")]) {
 			[gColorPanel setColor:[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] foreground]];
-		else
+		} else {
 			[gColorPanel setColor:[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] background]];
-		
+		}
 	}
 	
 	// Call for an update of the view

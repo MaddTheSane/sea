@@ -10,29 +10,18 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
-#import "SeaPlugins.h"
+#import <SeashoreKit/SeaPlugins.h>
+#import "PluginData.h"
+#import <SeashoreKit/SeaWhiteboard.h>
+#import <SeashoreKit/SSKPlugin.h>
 
-@interface CIZoomBlurClass : NSObject {
-
-	// The plug-in's manager
-	id seaPlugins;
-
-	// YES if the application succeeded
-	BOOL success;
-
+@interface CIZoomBlurClass : SSKPlugin
+{
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
 	
+	NSBitmapImageRep *temp_rep;
 }
-
-/*!
-	@method		initWithManager:
-	@discussion	Initializes an instance of this class with the given manager.
-	@param		manager
-				The SeaPlugins instance responsible for managing the plug-ins.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithManager:(SeaPlugins *)manager;
 
 /*!
 	@method		type
@@ -40,7 +29,7 @@
 				with the plug-in.
 	@result		Returns an integer indicating the plug-in's type.
 */
-- (int)type;
+- (SeaPluginType)type;
 
 /*!
 	@method		points

@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Halftone";
+description = "Generates a line screen.";
+license = "Public Domain";
+name = "Line Screen";

@@ -1,4 +1,11 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
+#import "Units.h"
+
+@class SeaLayer;
+@class SeaDocument;
+@class PegasusUtility;
+@class InfoPanel;
 
 /*!
 	@class		LayerSettings
@@ -9,57 +16,54 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
-
-@class SeaLayer;
-
 @interface LayerSettings : NSObject {
 
-	// The document in focus
-	IBOutlet id document;
+	//! The document in focus
+	IBOutlet SeaDocument *document;
 	
-	// The PegasusUtility controlling us
-	IBOutlet id pegasusUtility;
+	//! The PegasusUtility controlling us
+	IBOutlet PegasusUtility *pegasusUtility;
 
-	// The settings panel
-    IBOutlet id panel;
+	//! The settings panel
+    IBOutlet InfoPanel *panel;
 	
-	// The text box for entering the layer's title
-    IBOutlet id layerTitle;
+	//! The text box for entering the layer's title
+    IBOutlet NSTextField *layerTitle;
 	
 	// The various values
-    IBOutlet id leftValue;
-    IBOutlet id topValue;
-    IBOutlet id widthValue;
-    IBOutlet id heightValue;
+    IBOutlet NSTextField *leftValue;
+    IBOutlet NSTextField *topValue;
+    IBOutlet NSTextField *widthValue;
+    IBOutlet NSTextField *heightValue;
 	
-	// The various units
-	IBOutlet id leftUnits;
-	IBOutlet id topUnits;
-	IBOutlet id widthUnits;
-	IBOutlet id heightUnits;
+	//! The various units
+	IBOutlet NSButton *leftUnits;
+	IBOutlet NSButton *topUnits;
+	IBOutlet NSButton *widthUnits;
+	IBOutlet NSButton *heightUnits;
 
-	// The units for the panel
-	int units;
+	//! The units for the panel
+	SeaUnits units;
 	
-	// The slider that indicates the opacity of the layer
-	IBOutlet id opacitySlider;
+	//! The slider that indicates the opacity of the layer
+	IBOutlet NSSlider *opacitySlider;
 	
-	// The label that reflects the value of the slider
-	IBOutlet id opacityLabel;
+	//! The label that reflects the value of the slider
+	IBOutlet NSTextField *opacityLabel;
 	
-	// The pop-up menu that reflects the current mode of the layer
-	IBOutlet id modePopup;
+	//! The pop-up menu that reflects the current mode of the layer
+	IBOutlet NSPopUpButton *modePopup;
 		
-	// Whether or not this layer is linked
-	IBOutlet id linkedCheckbox;
+	//! Whether or not this layer is linked
+	IBOutlet NSButton *linkedCheckbox;
 	
-	// Whether or not the alpha layer is enabled
-	IBOutlet id alphaEnabledCheckbox;
+	//! Whether or not the alpha layer is enabled
+	IBOutlet NSButton *alphaEnabledCheckbox;
 	
-	// Channel editing
-	IBOutlet id channelEditingMatrix;
+	//! Channel editing
+	IBOutlet NSMatrix *channelEditingMatrix;
 	
-	// The layer whose settings are currently being changed
+	//! The layer whose settings are currently being changed
 	SeaLayer* settingsLayer;
 }
 
@@ -108,12 +112,10 @@
 	@method		setOffsetsLeft:top:index:
 	@discussion	Adjusts the offsets of a given layer (handles updates and
 				undos).
-	@param		newName
-				The name to which the layer should be renamed.
 	@param		index
 				The index of the layer to rename.
 */
-- (void)setOffsetsLeft:(int)left top:(int)top index:(int)index;
+- (void)setOffsetsLeft:(int)left top:(int)top index:(NSInteger)index NS_SWIFT_NAME(setOffsets(left:top:index:));
 
 /*!
 	@method		setName:index:
@@ -123,7 +125,7 @@
 	@param		index
 				The index of the layer to rename.
 */
-- (void)setName:(NSString *)newName index:(int)index;
+- (void)setName:(NSString *)newName index:(NSInteger)index;
 
 /*!
 	@method		changeMode:
@@ -143,7 +145,7 @@
 	@param		value
 				The desired mode value after the undo.
 */
-- (void)undoMode:(int)index to:(int)value;
+- (void)undoMode:(NSInteger)index to:(int)value;
 
 /*!
 	@method		changeOpacity:
@@ -163,7 +165,7 @@
 	@param		value
 				The desired opacity value after the undo.
 */
-- (void)undoOpacity:(int)index to:(int)value;
+- (void)undoOpacity:(NSInteger)index to:(int)value;
 
 /*!
 	@method		changeLinked:

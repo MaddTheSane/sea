@@ -1,5 +1,8 @@
-#import "Globals.h"
-#import "SeaContent.h"
+#import <Cocoa/Cocoa.h>
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/SeaContent.h>
+
+@class SeaDocument;
 
 /*!
 	@struct		SharedXBMInfo
@@ -53,6 +56,6 @@ typedef struct
 				The path of the image file with which to initalize this class.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
+- (instancetype)initWithDocument:(SeaDocument*)doc contentsOfFile:(NSString *)path;
 
 @end

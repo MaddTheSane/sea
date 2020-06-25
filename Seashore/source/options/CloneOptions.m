@@ -11,7 +11,8 @@
 
 - (void)awakeFromNib
 {
-	[mergedCheckbox setState:[gUserDefaults boolForKey:@"clone merged"]];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[mergedCheckbox setState:[defaults boolForKey:@"clone merged"]];
 }
 
 - (BOOL)mergedSample
@@ -21,14 +22,14 @@
 
 - (IBAction)mergedChanged:(id)sender
 {
-	id cloneTool = [[document tools] getTool:kCloneTool];
+	id cloneTool = [[document tools] getTool:SeaToolsClone];
 
 	[cloneTool unset];
 }
 
 - (void)update
 {
-	id cloneTool = [[document tools] getTool:kCloneTool];
+	id cloneTool = [[document tools] getTool:SeaToolsClone];
 	IntPoint sourcePoint;
 	
 	if ([cloneTool sourceSet]) {
@@ -37,15 +38,15 @@
 			[sourceLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"source set", @"Source: (%d, %d) from \"%@\""), sourcePoint.x, sourcePoint.y, [cloneTool sourceName]]];
 		else
 			[sourceLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"source set document", @"Source: (%d, %d) from whole document"), sourcePoint.x, sourcePoint.y]];
-	}
-	else {
-		[sourceLabel setStringValue:[NSString stringWithFormat:LOCALSTR(@"source unset", @"Source: Unset")]];
+	} else {
+		[sourceLabel setStringValue:LOCALSTR(@"source unset", @"Source: Unset")];
 	}
 }
 
 - (void)shutdown
 {
-	[gUserDefaults setObject:[self mergedSample] ? @"YES" : @"NO" forKey:@"clone merged"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setBool:[self mergedSample] forKey:@"clone merged"];
 }
 
 @end

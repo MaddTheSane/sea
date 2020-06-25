@@ -10,7 +10,7 @@
 
 - (void)mouseDownAt:(IntPoint)localPoint withEvent:(NSEvent *)event
 {	
-	if([[document selection] active]){
+	if (document.selection.active) {
 		/* incidentally, we should only be translating when the mode is default
 		 However, we don't know how to pass that logic in yet
 		 here it is:
@@ -22,7 +22,7 @@
 				  andMask: [(SeaSelection*)[document selection] mask]];
 		
 		// Also, we universally float the selection if alt is down
-		if(![self isMovingOrScaling] && [(AbstractOptions*)options modifier] == kAltModifier) {
+		if(![self isMovingOrScaling] && [options modifier] == AbstractModifierAlt) {
 			[[document contents] makeSelectionFloat:NO];
 		}
 	}	
@@ -30,16 +30,16 @@
 
 - (void)mouseDraggedTo:(IntPoint)localPoint withEvent:(NSEvent *)event
 {
-	if([[document selection] active]){
+	if (document.selection.active) {
 		IntRect newRect = [self mouseDraggedTo: localPoint
 									   forRect: [[document selection] globalRect]
-									   andMask: [(SeaSelection*)[document selection] mask]];
-		if(scalingDir > kNoDir && !translating){
+									   andMask: [[document selection] mask]];
+		if (scalingDir > SeaScaleDirectionNone && !translating) {
 			[[document selection] scaleSelectionTo: newRect
 											  from: [self preScaledRect]
 									 interpolation: GIMP_INTERPOLATION_CUBIC
 										 usingMask: [self preScaledMask]];
-		}else if (translating && scalingDir == kNoDir){
+		} else if (translating && scalingDir == SeaScaleDirectionNone) {
 			[[document selection] moveSelection:IntMakePoint(newRect.origin.x, newRect.origin.y)];
 		}
 	}
@@ -47,7 +47,7 @@
 
 - (void)mouseUpAt:(IntPoint)localPoint withEvent:(NSEvent *)event
 {
-	if([[document selection] active]){
+	if (document.selection.active) {
 		[self mouseUpAt: localPoint
 				forRect: [[document selection] globalRect]
 				andMask: [(SeaSelection*)[document selection] mask]];
@@ -57,7 +57,7 @@
 - (void)cancelSelection
 {
 	translating = NO;
-	scalingDir = kNoDir;
+	scalingDir = SeaScaleDirectionNone;
 
 	intermediate = NO;
 	[[document helpers] selectionChanged];

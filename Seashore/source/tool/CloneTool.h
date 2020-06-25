@@ -1,14 +1,15 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractTool.h"
 
 /*!
 	@struct		CTPointRecord
 	@discussion	Specifies a point to be drawn.
-	@param		point
+	@field		point
 				The point to be drawn.
-	@param		pressure
+	@field		pressure
 				The presure of the point to be drawn
-	@param		special
+	@field		special
 				0 = normal, 2 = terminate
 */
 typedef struct {
@@ -23,6 +24,8 @@ typedef struct {
 */
 #define kMaxBTPoints 16384
 
+@class SeaLayer;
+
 /*!
 	@class		CloneTool
 	@abstract	The paintbrush's role in Seashore is much the same as that in
@@ -34,9 +37,7 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface CloneTool : AbstractTool {
-
 	// The last point we've been and the last point a brush was plotted (there is a difference)
 	NSPoint lastPoint, lastPlotPoint;
 	
@@ -89,25 +90,17 @@ typedef struct {
 	int sourceSetting;
 	
 	// A timer to allow the source to set
-	id fadingTimer;
+	NSTimer *fadingTimer;
 	
 	// The index of the layer from which the source is drawn
-	id sourceLayer;
+	SeaLayer *sourceLayer;
 	
 	// YES if the merged data should be used, NO otherwise
 	BOOL sourceMerged;
 	
 	// The merged data from which the clone tool is working (only allocated between mouse clicks)
 	unsigned char *mergedData;
-	
 }
-
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		acceptsLineDraws
@@ -126,19 +119,19 @@ typedef struct {
 - (BOOL)useMouseCoalescing;
 
 /*!
-	@method		sourceSet
+	@property	sourceSet
 	@discussion	Returns whether the source point has been set.
 	@result		Returns YES if the source point is set, NO otherwise.
 */
-- (BOOL)sourceSet;
+@property (readonly) BOOL sourceSet;
 
 /*!
-	@method		sourceSetting
+	@property	sourceSetting
 	@discussion	Is the source point setting?
 	@result		Returns an integer between 0 and 100 (gradually decreasing with
 				fading).
 */
-- (int)sourceSetting;
+@property (readonly) int sourceSetting;
 
 /*!
 	@method		sourcePoint
@@ -151,12 +144,12 @@ typedef struct {
 - (IntPoint)sourcePoint:(BOOL)local;
 
 /*!
-	@method		sourceName
+	@property	sourceName
 	@discussion	Returns the name of the source.
 	@result		Returns a string indicating the source's name (e.g. the name of
 				the source layer)
 */
-- (NSString *)sourceName;
+@property (readonly, copy) NSString *sourceName;
 
 /*!
 	@method		mouseDownAt:withEvent:
@@ -222,7 +215,7 @@ typedef struct {
 /*!
 	@method		intermediateStroke:
 	@discussion	Specifies an intermediate point in the stroke.
-	@param		Where in the document to place the intermediate
+	@param		where in the document to place the intermediate
 				stroke.
 */
 - (void)intermediateStroke:(IntPoint)where;

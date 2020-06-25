@@ -1,5 +1,11 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
-#import "AbstractOptions.h"
+#import "SeaTools.h"
+
+@class SeaDocument;
+@class AbstractOptions;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
 	@class		AbstractTool
@@ -9,27 +15,32 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface AbstractTool : NSObject {
 
-	// The document associated with this tool
-	IBOutlet id document;
+	//! The document associated with this tool
+	__weak SeaDocument *document;
 	
-	// The options associated with this tool
-	id options;
+	//! The options associated with this tool
+	__unsafe_unretained __kindof AbstractOptions *options;
 	
-	// Is the selection being made
+	//! Is the selection being made
 	BOOL intermediate;
 	
 }
 
+//! The document associated with this tool
+@property (weak) IBOutlet SeaDocument *document;
+
+/// The options associated with this tool
+@property (unsafe_unretained) __kindof AbstractOptions *options;
+
 /*!
-	@method		toolId
+	@property	toolId
 	@discussion	For determining the type of a tool based on the object.
 				This method must be defined by subclasses.
 	@result		Returns an element of the k...Tool enum
 */
-- (int)toolId;
+@property (readonly) SeaToolsDefines toolId;
 
 /*!
 	@method		setOptions:
@@ -37,32 +48,32 @@
 	@param		newOptions
 				The options to set.
 */
-- (void)setOptions:(id)newOptions;
+- (void)setOptions:(__kindof AbstractOptions*)newOptions;
 
 /*!
-	@method		acceptsLineDraws
+	@property	acceptsLineDraws
 	@discussion	Returns whether or not this tool wants to allow line draws.
 	@result		Returns YES if the tool does want to allow line draws, NO
 				otherwise. The implementation in this class always returns NO.
 */
-- (BOOL)acceptsLineDraws;
+@property (readonly) BOOL acceptsLineDraws;
 
 /*!
-	@method		useMouseCoalescing
+	@property	useMouseCoalescing
 	@discussion	Returns whether or not this tool should use mouse coalescing.
 	@result		Returns YES if this tool should use mouse coalescing, NO
 				otherwise. The implementation in this class always returns YES.
 */
-- (BOOL)useMouseCoalescing;
+@property (readonly) BOOL useMouseCoalescing;
 
 /*!
-	@method		foregroundIsTexture
+	@property	foregroundIsTexture
 	@discussion	Returns whether the foreground colour should is the active
 				texture.
 	@result		Returns YES if the foreground colour is the active texture, NO
 				otherwise. The implementation in this class always returns NO.
 */
-- (BOOL)foregroundIsTexture;
+@property (readonly) BOOL foregroundIsTexture;
 
 /*!
 	@method		mouseDownAt:withEvent:
@@ -73,7 +84,7 @@
 	@param		event
 				The mouse down event.
 */
-- (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event;
+- (void)mouseDownAt:(IntPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	@method		mouseDraggedTo:withEvent:
@@ -84,7 +95,7 @@
 	@param		event
 				The mouse dragged event.
 */
-- (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event;
+- (void)mouseDraggedTo:(IntPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	@method		mouseUpAt:withEvent:
@@ -95,7 +106,7 @@
 	@param		event
 				The mouse up event.
 */
-- (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event;
+- (void)mouseUpAt:(IntPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	@method		fineMouseDownAt:withEvent:
@@ -106,7 +117,7 @@
 	@param		event
 				The mouse down event.
 */
-- (void)fineMouseDownAt:(NSPoint)where withEvent:(NSEvent *)event;
+- (void)fineMouseDownAt:(NSPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	@method		fineMouseDraggedTo:withEvent:
@@ -117,7 +128,7 @@
 	@param		event
 				The mouse dragged event.
 */
-- (void)fineMouseDraggedTo:(NSPoint)where withEvent:(NSEvent *)event;
+- (void)fineMouseDraggedTo:(NSPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
 	@method		fineMouseUpAt:withEvent:
@@ -128,22 +139,24 @@
 	@param		event
 				The mouse up event.
 */
-- (void)fineMouseUpAt:(NSPoint)where withEvent:(NSEvent *)event;
+- (void)fineMouseUpAt:(NSPoint)where withEvent:(nullable NSEvent *)event;
 
 /*!
-	 @method		intermediate
+	 @property		intermediate
 	 @discussion	This is used to detect if there is currently a mouse drag
-	 @result		Returns a BOOL: YES if there is currently an action being made.
+					Returns a BOOL: \c YES if there is currently an action being made.
 */
-- (BOOL) intermediate;
+@property (readonly) BOOL intermediate;
 
 /*!
-	@method		isFineTool
+	@property	fineTool
 	@discussion	Returns whether the tool needs an NSPoint input as opposed to an IntPoint
-				input (i.e. whether fineMouse... or mouse... should be called).
-	@result		Returns YES if the tool needs an NSPoint input as opposed to an IntPoint
-				input, NO otherwise. The implementation in this class always returns NO.
+				input (i.e. whether \c fineMouse... or \c mouse... should be called).
+				Is \c YES if the tool needs an \c NSPoint input as opposed to an \c IntPoint
+				input, \c NO otherwise. The default implementation always returns <code>NO</code>.
 */
-- (BOOL)isFineTool;
+@property (readonly, getter=isFineTool) BOOL fineTool;
 
 @end
+
+NS_ASSUME_NONNULL_END

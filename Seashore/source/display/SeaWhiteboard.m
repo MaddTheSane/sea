@@ -1,146 +1,241 @@
+#include <math.h>
+#include <tgmath.h>
 #import "SeaWhiteboard.h"
 #import "StandardMerge.h"
 #import "SeaLayer.h"
+#if MAIN_COMPILE
 #import "SeaDocument.h"
+#endif
 #import "SeaContent.h"
 #import "SeaLayer.h"
+#if MAIN_COMPILE
 #import "SeaLayerUndo.h"
 #import "SeaView.h"
 #import "SeaSelection.h"
+#endif
 #import "Bitmap.h"
+#if MAIN_COMPILE
 #import "ToolboxUtility.h"
 #import "SeaController.h"
 #import "UtilitiesManager.h"
+#endif
 
 extern BOOL useAltiVec;
 
-extern IntPoint gScreenResolution;
+extern IntPoint SeaScreenResolution;
 
 @implementation SeaWhiteboard
+@synthesize overlayBehaviour;
+@synthesize overlayOpacity;
+@synthesize compositor;
+@synthesize overlay;
+@synthesize replace;
+@synthesize data;
+@synthesize altData;
 
-- (id)initWithDocument:(id)doc
+#if MAIN_COMPILE
+- (instancetype)initWithDocument:(id)doc
 {
-	CMProfileRef destProf;
-	int layerWidth, layerHeight;
-	NSString *pluginPath;
-	NSBundle *bundle;
-	
-	// Remember the document we are representing
-	document = doc;
-	
-	// Initialize the compostior
-	compositor = NULL;
-	if (useAltiVec) {
-		pluginPath = [NSString stringWithFormat:@"%@/CompositorAV.bundle", [gMainBundle builtInPlugInsPath]];
-		if ([gFileManager fileExistsAtPath:pluginPath]) {
-			bundle = [NSBundle bundleWithPath:pluginPath];
-			if (bundle && [bundle principalClass]) {
-				compositor = [[bundle principalClass] alloc];
+	if (self = [super init]) {
+		ColorSyncProfileRef destProf;
+		int layerWidth, layerHeight;
+		NSString *pluginPath;
+		NSBundle *bundle;
+		
+		// Remember the document we are representing
+		document = doc;
+		
+		// Initialize the compostior
+		compositor = NULL;
+		if (useAltiVec) {
+			pluginPath = [[gMainBundle builtInPlugInsPath] stringByAppendingPathComponent:@"CompositorAV.bundle"];
+			if ([gFileManager fileExistsAtPath:pluginPath]) {
+				bundle = [NSBundle bundleWithPath:pluginPath];
+				if (bundle && [bundle principalClass]) {
+					compositor = [[[bundle principalClass] alloc] initWithDocument:document];
+				}
 			}
 		}
+		if (!compositor) {
+			compositor = [[SeaCompositor alloc] initWithDocument:document];
+		}
+		
+		// Record the width, height and use of greys
+		width = [(SeaContent *)[document contents] width];
+		height = [(SeaContent *)[document contents] height];
+		layerWidth = [[[document contents] activeLayer] width];
+		layerHeight = [[[document contents] activeLayer] height];
+		
+		// Record the samples per pixel used by the whiteboard
+		spp = [[document contents] spp];
+		
+		// Set the view type to show all channels
+		viewType = SeaChannelsAll;
+		CMYKPreview = NO;
+		
+		// Allocate the whiteboard data
+		data = malloc(make_128(width * height * spp));
+		overlay = malloc(make_128(layerWidth * layerHeight * spp));
+		memset(overlay, 0, layerWidth * layerHeight * spp);
+		replace = malloc(make_128(layerWidth * layerHeight));
+		memset(replace, 0, layerWidth * layerHeight);
+		altData = NULL;
+		
+		// Create the colour world
+		displayProf = ColorSyncProfileCreateWithDisplayID(0);
+		cgDisplayProf = CGColorSpaceCreateWithPlatformColorSpace(displayProf);
+		destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile);
+		NSArray<NSDictionary<NSString*,id>*>*
+		profSeq = @[
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)displayProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+					  },
+					
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+					  },
+					];
+		
+		cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+		
+		CFRelease(destProf);
+		
+		// Set the locking thread to NULL
+		lockingThread = NULL;
 	}
-	if (compositor == NULL)	compositor = [SeaCompositor alloc];
-	[compositor initWithDocument:document];
-	
-	// Record the width, height and use of greys
-	width = [(SeaContent *)[document contents] width];
-	height = [(SeaContent *)[document contents] height];
-	layerWidth = [(SeaLayer *)[[document contents] activeLayer] width];
-	layerHeight = [(SeaLayer *)[[document contents] activeLayer] height];
-	
-	// Record the samples per pixel used by the whiteboard
-	spp = [[document contents] spp];
-	
-	// Set the view type to show all channels
-	viewType = kAllChannelsView;
-	CMYKPreview = NO;
-	
-	// Allocate the whiteboard data
-	data = malloc(make_128(width * height * spp));
-	overlay = malloc(make_128(layerWidth * layerHeight * spp));
-	memset(overlay, 0, layerWidth * layerHeight * spp);
-	replace = malloc(make_128(layerWidth * layerHeight));
-	memset(replace, 0, layerWidth * layerHeight);
-	altData = NULL;
-	
-	// Create the colour world
-	OpenDisplayProfile(&displayProf);
-	cgDisplayProf = CGColorSpaceCreateWithPlatformColorSpace(displayProf);
-	CMGetDefaultProfileBySpace(cmCMYKData, &destProf);
-	NCWNewColorWorld(&cw, displayProf, destProf);
-	
-	// Set the locking thread to NULL
-	lockingThread = NULL;
-	
 	return self;
 }
-
-- (SeaCompositor *)compositor{
-	return compositor;
+#else
+- (instancetype)initWithContent:(SeaContent *)cont
+{
+	if (self = [super init]) {
+		ColorSyncProfileRef destProf;
+		int layerWidth, layerHeight;
+		
+		SeaScreenResolution = IntMakePoint(1024, 768);
+		// Remember the document we are representing
+		contents = cont;
+		
+		// Initialize the compostior
+		compositor = NULL;
+		
+		if (compositor == NULL)
+			compositor = [[SeaCompositor alloc] initWithContents:contents andWhiteboard:self];
+		
+		// Record the width, height and use of greys
+		width = [contents width];
+		height = [contents height];
+		layerWidth = [(SeaLayer *)[contents activeLayer] width];
+		layerHeight = [(SeaLayer *)[contents activeLayer] height];
+		
+		// Record the samples per pixel used by the whiteboard
+		spp = [contents spp];
+		
+		// Set the view type to show all channels
+		viewType = kAllChannelsView;
+		CMYKPreview = NO;
+		
+		// Allocate the whiteboard data
+		data = malloc(make_128(width * height * spp));
+		overlay = malloc(make_128(layerWidth * layerHeight * spp));
+		memset(overlay, 0, layerWidth * layerHeight * spp);
+		replace = malloc(make_128(layerWidth * layerHeight));
+		memset(replace, 0, layerWidth * layerHeight);
+		altData = NULL;
+		
+		// Create the colour world
+		displayProf = ColorSyncProfileCreateWithName(kColorSyncSRGBProfile);
+		cgDisplayProf = CGColorSpaceCreateWithPlatformColorSpace(displayProf);
+		destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile);
+		NSArray<NSDictionary<NSString*,id>*>*
+		profSeq = @[
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)displayProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+					  },
+					
+					@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+					  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+					  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+					  },
+					];
+		
+		cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+		
+		CFRelease(destProf);
+		
+		// Set the locking thread to NULL
+		lockingThread = NULL;
+	}
+	return self;
 }
+#endif
 
 - (void)dealloc
 {	
 	// Free the room we took for everything else
-	if (displayProf) CloseDisplayProfile(displayProf);
+	if (displayProf) CFRelease(displayProf);
 	if (cgDisplayProf) CGColorSpaceRelease(cgDisplayProf);
-	if (compositor) [compositor autorelease];
-	if (image) [image autorelease];
-	if (cw) CWDisposeColorWorld(cw);
+	if (cw) CFRelease(cw);
 	if (data) free(data);
 	if (overlay) free(overlay);
 	if (replace) free(replace);
 	if (altData) free(altData);
-	[super dealloc];
-}
-
-- (void)setOverlayBehaviour:(int)value
-{
-	overlayBehaviour = value;
-}
-
-- (void)setOverlayOpacity:(int)value
-{
-	overlayOpacity = value;
 }
 
 - (IntRect)applyOverlay
 {
-	id layer;
+	SeaLayer *layer;
 	int leftOffset, rightOffset, topOffset, bottomOffset;
-	int i, j, k, srcLoc, selectedChannel;
+	int k, srcLoc, selectedChannel;
 	int xoff, yoff;
-	unsigned char *srcPtr, *mask;
-	int lwidth, lheight, selectOpacity, t1;
+	unsigned char *srcPtr;
+	int lwidth, lheight, selectOpacity;
 	IntRect rect, selectRect;
 	BOOL overlayOkay, overlayReplacing;
-	IntPoint point, maskOffset, trueMaskOffset;
+	IntPoint maskOffset, trueMaskOffset;
+#if MAIN_COMPILE
 	IntSize maskSize;
+	IntPoint point;
+	int t1;
+	unsigned char *mask;
+#endif
 	BOOL floating;
 	
 	// Fill out the local variables
+#if MAIN_COMPILE
 	selectRect = [[document selection] localRect];
 	selectedChannel = [[document contents] selectedChannel];
 	layer = [[document contents] activeLayer];
-	floating = [layer floating];
-	srcPtr = [(SeaLayer *)layer data];
-	lwidth = [(SeaLayer *)layer width];
-	lheight = [(SeaLayer *)layer height];
+#else
+	selectedChannel = [contents selectedChannel];
+	layer = [contents activeLayer];
+#endif
+	floating = layer.floating;
+	srcPtr = [layer data];
+	lwidth = [layer width];
+	lheight = [layer height];
 	xoff = [layer xoff];
 	yoff = [layer yoff];
-	mask = [[document selection] mask];
+#if MAIN_COMPILE
+	mask = ([[document selection] mask]);
 	maskOffset = [[document selection] maskOffset];
+#endif
 	trueMaskOffset = IntMakePoint(maskOffset.x - selectRect.origin.x, maskOffset.y -  selectRect.origin.y);
+#if MAIN_COMPILE
 	maskSize = [[document selection] maskSize];
-	overlayReplacing = (overlayBehaviour == kReplacingBehaviour);
+#endif
+	overlayReplacing = (overlayBehaviour == SeaOverlayBehaviourReplacing);
 	
 	// Calculate offsets
 	leftOffset = lwidth + 1;
 	rightOffset = -1;
 	bottomOffset = -1;
 	topOffset = lheight + 1;
-	for (j = 0; j < lheight; j++) {
-		for (i = 0; i < lwidth; i++) {	
+	for (int j = 0; j < lheight; j++) {
+		for (int i = 0; i < lwidth; i++) {
 			if (overlayReplacing) {
 				if (replace[j * lwidth + i] != 0) {	
 					if (rightOffset < i + 1) rightOffset = i + 1;
@@ -151,8 +246,7 @@ extern IntPoint gScreenResolution;
 				else {
 					overlay[(j * lwidth + i + 1) * spp - 1] = 0;
 				}
-			}
-			else {
+			} else {
 				if (overlay[(j * lwidth + i + 1) * spp - 1] != 0) {
 					if (rightOffset < i + 1) rightOffset = i + 1;
 					if (topOffset > j) topOffset = j;
@@ -170,12 +264,14 @@ extern IntPoint gScreenResolution;
 	// Create the rectangle
 	rect = IntMakeRect(leftOffset, topOffset, rightOffset - leftOffset, bottomOffset - topOffset);
 	
+#if MAIN_COMPILE
 	// Allow the undo
 	[[layer seaLayerUndo] takeSnapshot:rect automatic:YES];
+#endif
 	
 	// Go through each column and row
-	for (j = rect.origin.y; j < rect.origin.y + rect.size.height; j++) {
-		for (i = rect.origin.x; i < rect.origin.x + rect.size.width; i++) {
+	for (int j = rect.origin.y; j < rect.origin.y + rect.size.height; j++) {
+		for (int i = rect.origin.x; i < rect.origin.x + rect.size.width; i++) {
 			
 			// Determine the source location
 			srcLoc = (j * lwidth + i) * spp;
@@ -183,15 +279,17 @@ extern IntPoint gScreenResolution;
 			// Check if we should apply the overlay for this pixel
 			overlayOkay = NO;
 			switch (overlayBehaviour) {
-				case kReplacingBehaviour:
-				case kMaskingBehaviour:
+				case SeaOverlayBehaviourReplacing:
+				case SeaOverlayBehaviourMasking:
 					selectOpacity = replace[j * lwidth + i];
-				break;
+					break;
+					
 				default:
 					selectOpacity = overlayOpacity;
-				break;
+					break;
 			}
-			if ([[document selection] active]) {
+#if MAIN_COMPILE
+			if (document.selection.active) {
 				point.x = i;
 				point.y = j;
 				if (IntPointInRect(point, selectRect)) {
@@ -199,10 +297,12 @@ extern IntPoint gScreenResolution;
 					if (mask && !floating)
 						selectOpacity = int_mult(selectOpacity, mask[(trueMaskOffset.y + point.y) * maskSize.width + (trueMaskOffset.x + point.x)], t1);
 				}
-			}
-			else {
+			} else {
 				overlayOkay = YES;
 			}
+#else
+			overlayOkay = YES;
+#endif
 			
 			// Don't do anything if there's no point
 			if (selectOpacity == 0)
@@ -210,47 +310,45 @@ extern IntPoint gScreenResolution;
 			
 			// Apply the overlay
 			if (overlayOkay) {
-				if (selectedChannel == kAllChannels && !floating) {
-					
+				if (selectedChannel == SeaSelectedChannelAll && !floating) {
 					// For the general case
 					switch (overlayBehaviour) {
-						case kErasingBehaviour:
-							eraseMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
-						break;
-						case kReplacingBehaviour:
-							replaceMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
-						break;
+						case SeaOverlayBehaviourErasing:
+							SeaEraseMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							break;
+							
+						case SeaOverlayBehaviourReplacing:
+							SeaReplaceMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							break;
+							
 						default:
-							specialMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
-						break;
+							SeaSpecialMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							break;
 					}
 					
-				}
-				else if (selectedChannel == kPrimaryChannels || floating) {
+				} else if (selectedChannel == SeaSelectedChannelPrimary || floating) {
 				
 					// For the primary channels
 					switch (overlayBehaviour) {
-						case kReplacingBehaviour:
-							replacePrimaryMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
-						break;
+						case SeaOverlayBehaviourReplacing:
+							SeaReplacePrimaryMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							break;
+							
 						default:
-							primaryMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity, NO);
-						break;
+							SeaPrimaryMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity, NO);
+							break;
 					}
-					
-				}
-				else if (selectedChannel == kAlphaChannel) {
-					
+				} else if (selectedChannel == SeaSelectedChannelAlpha) {
 					// For the alpha channels
 					switch (overlayBehaviour) {
-						case kReplacingBehaviour:
-							replaceAlphaMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
-						break;
+						case SeaOverlayBehaviourReplacing:
+							SeaReplaceAlphaMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							break;
+							
 						default:
-							alphaMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
-						break;
+							SeaAlphaMerge(spp, srcPtr, srcLoc, overlay, srcLoc, selectOpacity);
+							break;
 					}
-					
 				}
 			}
 			
@@ -268,51 +366,60 @@ extern IntPoint gScreenResolution;
 	
 	// Reset the overlay's opacity and behaviour
 	overlayOpacity = 0;
-	overlayBehaviour = kNormalBehaviour;
+	overlayBehaviour = SeaOverlayBehaviourNormal;
 	
 	return rect;
 }
 
 - (void)clearOverlay
 {
-	id layer = [[document contents] activeLayer];
+	SeaLayer *layer =
+#if MAIN_COMPILE
+	[[document contents] activeLayer];
+#else
+	[contents activeLayer];
+#endif
 
-	memset(overlay, 0, [(SeaLayer *)layer width] * [(SeaLayer *)layer height] * spp);
-	memset(replace, 0, [(SeaLayer *)layer width] * [(SeaLayer *)layer height]);
+	memset(overlay, 0, [layer width] * [layer height] * spp);
+	memset(replace, 0, [layer width] * [layer height]);
 	overlayOpacity = 0;
-	overlayBehaviour = kNormalBehaviour;
-}
-
-- (unsigned char *)overlay
-{
-	return overlay;
-}
-
-- (unsigned char *)replace
-{
-	return replace;
+	overlayBehaviour = SeaOverlayBehaviourNormal;
 }
 
 - (BOOL)whiteboardIsLayerSpecific
 {
-	return viewType == kPrimaryChannelsView || viewType == kAlphaChannelView;
+	return viewType == SeaChannelsPrimary || viewType == SeaChannelsAlpha;
 }
 
 - (void)readjust
 {	
-	// Resize the memory allocated to the data 
+#if MAIN_COMPILE
+	// Resize the memory allocated to the data
 	width = [(SeaContent *)[document contents] width];
 	height = [(SeaContent *)[document contents] height];
 	
 	// Change the samples per pixel if required
 	if (spp != [[document contents] spp]) {
 		spp = [[document contents] spp];
+		viewType = SeaChannelsAll;
+		CMYKPreview = NO;
+	}
+#else
+	// Resize the memory allocated to the data
+	width = [contents width];
+	height = [contents height];
+	
+	// Change the samples per pixel if required
+	if (spp != [contents spp]) {
+		spp = [contents spp];
 		viewType = kAllChannelsView;
 		CMYKPreview = NO;
 	}
+#endif
 	
 	// Revise the data
-	if (data) free(data);
+	if (data)
+		free(data);
 	data = malloc(make_128(width * height * spp));
 
 	// Adjust the alternate data as necessary
@@ -320,11 +427,22 @@ extern IntPoint gScreenResolution;
 	
 	// Update the overlay
 	if (overlay) free(overlay);
+#if MAIN_COMPILE
 	overlay = malloc(make_128([(SeaLayer *)[[document contents] activeLayer] width] * [(SeaLayer *)[[document contents] activeLayer] height] * spp));
 	memset(overlay, 0, [(SeaLayer *)[[document contents] activeLayer] width] * [(SeaLayer *)[[document contents] activeLayer] height] * spp);
+#else
+	overlay = malloc(make_128([(SeaLayer *)[contents activeLayer] width] * [(SeaLayer *)[contents activeLayer] height] * spp));
+	memset(overlay, 0, [(SeaLayer *)[contents activeLayer] width] * [(SeaLayer *)[contents activeLayer] height] * spp);
+#endif
 	if (replace) free(replace);
+	
+#if MAIN_COMPILE
 	replace = malloc(make_128([(SeaLayer *)[[document contents] activeLayer] width] * [(SeaLayer *)[[document contents] activeLayer] height]));
 	memset(replace, 0, [(SeaLayer *)[[document contents] activeLayer] width] * [(SeaLayer *)[[document contents] activeLayer] height]);
+#else
+	replace = malloc(make_128([(SeaLayer *)[contents activeLayer] width] * [(SeaLayer *)[contents activeLayer] height]));
+	memset(replace, 0, [(SeaLayer *)[contents activeLayer] width] * [(SeaLayer *)[contents activeLayer] height]);
+#endif
 
 	// Update ourselves
 	[self update];
@@ -337,11 +455,22 @@ extern IntPoint gScreenResolution;
 	
 	// Update the overlay
 	if (overlay) free(overlay);
+#if MAIN_COMPILE
 	overlay = malloc(make_128([(SeaLayer *)[[document contents] activeLayer] width] * [(SeaLayer *)[[document contents] activeLayer] height] * spp));
 	memset(overlay, 0, [(SeaLayer *)[[document contents] activeLayer] width] * [(SeaLayer *)[[document contents] activeLayer] height] * spp);
+#else
+	overlay = malloc(make_128([(SeaLayer *)[contents activeLayer] width] * [(SeaLayer *)[contents activeLayer] height] * spp));
+	memset(overlay, 0, [(SeaLayer *)[contents activeLayer] width] * [(SeaLayer *)[contents activeLayer] height] * spp);
+#endif
+	
 	if (replace) free(replace);
-	replace = malloc(make_128([(SeaLayer *)[[document contents] activeLayer] width] * [(SeaLayer *)[[document contents] activeLayer] height]));
-	memset(replace, 0, [(SeaLayer *)[[document contents] activeLayer] width] * [(SeaLayer *)[[document contents] activeLayer] height]);
+#if MAIN_COMPILE
+	replace = malloc(make_128([[[document contents] activeLayer] width] * [[[document contents] activeLayer] height]));
+	memset(replace, 0, [[[document contents] activeLayer] width] * [[[document contents] activeLayer] height]);
+#else
+	replace = malloc(make_128([[contents activeLayer] width] * [[contents activeLayer] height]));
+	memset(replace, 0, [[contents activeLayer] width] * [[contents activeLayer] height]);
+#endif
 	
 	// Update ourselves
 	[self update];
@@ -349,42 +478,47 @@ extern IntPoint gScreenResolution;
 
 - (void)readjustAltData:(BOOL)update
 {
-	id contents = [document contents];
-	int selectedChannel = [contents selectedChannel];
+#if MAIN_COMPILE
+	SeaContent *contents = [document contents];
+#endif
+	SeaSelectedChannel selectedChannel = [contents selectedChannel];
 	BOOL trueView = [contents trueView];
-	id layer;
+	SeaLayer *layer;
 	int xwidth, xheight;
 	
 	// Free existing data
-	viewType = kAllChannelsView;
+	viewType = SeaChannelsAll;
 	if (altData) free(altData);
 	altData = NULL;
 	
 	// Change layer if appropriate
-	if ([[document selection] floating]) {
-		layer = [contents layer:[contents activeLayerIndex] + 1];
-	}
-	else {
+#if MAIN_COMPILE
+	if (document.selection.floating) {
+		layer = [contents layerAtIndex:[contents activeLayerIndex] + 1];
+	} else {
 		layer = [contents activeLayer];
 	}
+#else
+	layer = [contents activeLayer];
+#endif
 	
 	// Create room for alternative data if necessary
-	if (!trueView && selectedChannel == kPrimaryChannels) {
-		viewType = kPrimaryChannelsView;
+	if (!trueView && selectedChannel == SeaSelectedChannelPrimary) {
+		viewType = SeaChannelsPrimary;
 		xwidth = [(SeaLayer *)layer width];
 		xheight = [(SeaLayer *)layer height];
 		altData = malloc(make_128(xwidth * xheight * (spp - 1)));
 	}
-	else if (!trueView && selectedChannel == kAlphaChannel) {
-		viewType = kAlphaChannelView;
-		xwidth = [(SeaLayer *)layer width];
-		xheight = [(SeaLayer *)layer height];
+	else if (!trueView && selectedChannel == SeaSelectedChannelAlpha) {
+		viewType = SeaChannelsAlpha;
+		xwidth = [layer width];
+		xheight = [layer height];
 		altData = malloc(make_128(xwidth * xheight));
 	}
 	else if (CMYKPreview && spp == 4) {
-		viewType = kCMYKPreviewView;
-		xwidth = [(SeaContent *)contents width];
-		xheight = [(SeaContent *)contents height];
+		viewType = SeaChannelsCMYKPreview;
+		xwidth = [contents width];
+		xheight = [contents height];
 		altData = malloc(make_128(xwidth * xheight * 4));
 	}
 	
@@ -393,10 +527,7 @@ extern IntPoint gScreenResolution;
 		[self update];
 }
 
-- (BOOL)CMYKPreview
-{
-	return CMYKPreview;
-}
+@synthesize CMYKPreview;
 
 - (BOOL)canToggleCMYKPreview
 {
@@ -412,47 +543,51 @@ extern IntPoint gScreenResolution;
 	// Otherwise make the change
 	CMYKPreview = !CMYKPreview;
 	[self readjustAltData:YES];
-	[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
+#if MAIN_COMPILE
+	[[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
+#endif
 }
 
 - (NSColor *)matchColor:(NSColor *)color
 {
-	CMColor cmColor;
 	NSColor *result;
 	
 	// Determine the RGB color
-	cmColor.rgb.red = ([color redComponent] * 65535.0);
-	cmColor.rgb.green = ([color greenComponent] * 65535.0);
-	cmColor.rgb.blue = ([color blueComponent] * 65535.0);
+	float srcColor[] = {color.redComponent, color.greenComponent, color.blueComponent};
+	float dstColor[4] = {0};
 	
 	// Match color
-	CWMatchColors(cw, &cmColor, 1);
+	ColorSyncTransformConvert(cw, 1, 1, dstColor, kColorSync32BitFloat, kColorSyncAlphaNone | kColorSyncByteOrderDefault, sizeof(dstColor), srcColor, kColorSync32BitFloat, kColorSyncAlphaNone | kColorSyncByteOrderDefault, sizeof(srcColor), NULL);
 	
 	// Calculate result
-	result = [NSColor colorWithDeviceCyan:(float)cmColor.cmyk.cyan / 65536.0 magenta:(float)cmColor.cmyk.magenta / 65536.0 yellow:(float)cmColor.cmyk.yellow / 65536.0 black:(float)cmColor.cmyk.black / 65536.0 alpha:[color alphaComponent]];
+	result = [NSColor colorWithDeviceCyan:dstColor[0] magenta:dstColor[1] yellow:dstColor[2] black:dstColor[3] alpha:[color alphaComponent]];
 	
 	return result;
 }
 
 - (void)forcedChannelUpdate
 {
-	id layer, flayer;
+	SeaLayer *layer;
 	int layerWidth, layerHeight, lxoff, lyoff;
 	unsigned char *layerData, tempSpace[4], tempSpace2[4], *mask, *floatingData;
 	int i, j, k, temp, tx, ty, t, selectOpacity, nextOpacity;
 	IntRect selectRect, minorUpdateRect;
 	IntSize maskSize = IntMakeSize(0, 0);
 	IntPoint point, maskOffset = IntMakePoint(0, 0);
-	BOOL useSelection, floating;
+	BOOL useSelection = NO, floating = NO;
+#if MAIN_COMPILE
+	SeaLayer *flayer;
+#endif
 	
 	// Prepare variables for later use
 	mask = NULL;
 	selectRect = IntMakeRect(0, 0, 0, 0);
-	useSelection = [[document selection] active];
-	floating = [[document selection] floating];
-	floatingData = [(SeaLayer *)[[document contents] activeLayer] data];
+#if MAIN_COMPILE
+	useSelection = document.selection.active;
+	floating = document.selection.floating;
+	floatingData = [[[document contents] activeLayer] data];
 	if (useSelection && floating) {
-		layer = [[document contents] layer:[[document contents] activeLayerIndex] + 1];
+		layer = [[document contents] layerAtIndex:[[document contents] activeLayerIndex] + 1];
 	}
 	else {
 		layer = [[document contents] activeLayer];
@@ -460,21 +595,25 @@ extern IntPoint gScreenResolution;
 	if (useSelection) {
 		if (floating) {
 			flayer = [[document contents] activeLayer];
-			selectRect = IntMakeRect([(SeaLayer *)flayer xoff] - [(SeaLayer *)layer xoff], [(SeaLayer *)flayer yoff] - [(SeaLayer *)layer yoff], [(SeaLayer *)flayer width], [(SeaLayer *)flayer height]);
+			selectRect = IntMakeRect([flayer xoff] - [layer xoff], [flayer yoff] - [layer yoff], [flayer width], [flayer height]);
 		}
 		else {
 			selectRect = [[document selection] globalRect];
 		}
-		mask = [[document selection] mask];
+		mask = ([[document selection] mask]);
 		maskOffset = [[document selection] maskOffset];
 		maskSize = [[document selection] maskSize];
 	}
+#else
+	floatingData = [[contents activeLayer] data];
+	layer = [contents activeLayer];
+#endif
 	selectOpacity = 255;
-	layerWidth = [(SeaLayer *)layer width];
-	layerHeight = [(SeaLayer *)layer height];
-	lxoff = [(SeaLayer *)layer xoff];
-	lyoff = [(SeaLayer *)layer yoff];
-	layerData = [(SeaLayer *)layer data];
+	layerWidth = [layer width];
+	layerHeight = [layer height];
+	lxoff = [layer xoff];
+	lyoff = [layer yoff];
+	layerData = [layer data];
 	
 	// Determine the minor update rect
 	if (useUpdateRect) {
@@ -492,7 +631,7 @@ extern IntPoint gScreenResolution;
 			temp = j * layerWidth + i;
 			
 			// Determine what we are compositing to
-			if (viewType == kPrimaryChannelsView) {
+			if (viewType == SeaChannelsPrimary) {
 				for (k = 0; k < spp - 1; k++)
 					tempSpace[k] = layerData[temp * spp + k];
 				tempSpace[spp - 1] =  0xFF;
@@ -510,14 +649,14 @@ extern IntPoint gScreenResolution;
 					if (floating) {
 						tx = i - selectRect.origin.x;
 						ty = j - selectRect.origin.y;
-						if (viewType == kPrimaryChannelsView) {
+						if (viewType == SeaChannelsPrimary) {
 							memcpy(&tempSpace2, &(floatingData[(ty * selectRect.size.width + tx) * spp]), spp);
 						}
 						else {
 							tempSpace2[0] = floatingData[(ty * selectRect.size.width + tx) * spp];
 							tempSpace2[1] = floatingData[(ty * selectRect.size.width + tx + 1) * spp - 1];
 						}
-						normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, 255);
+						SeaNormalMerge((viewType == SeaChannelsPrimary) ? spp : 2, tempSpace, 0, tempSpace2, 0, 255);
 					}
 					if (mask)
 						selectOpacity = mask[(point.y - selectRect.origin.y - maskOffset.y) * maskSize.width + (point.x - selectRect.origin.x - maskOffset.x)];
@@ -534,7 +673,7 @@ extern IntPoint gScreenResolution;
 					tx = i - selectRect.origin.x;
 					ty = j - selectRect.origin.y;
 					if (selectOpacity > 0) {
-						if (viewType == kPrimaryChannelsView) {
+						if (viewType == SeaChannelsPrimary) {
 							memcpy(&tempSpace2, &(overlay[(ty * selectRect.size.width + tx) * spp]), spp);
 							if (overlayOpacity < 255)
 								tempSpace2[spp - 1] = int_mult(tempSpace2[spp - 1], overlayOpacity, t);
@@ -546,16 +685,16 @@ extern IntPoint gScreenResolution;
 							else
 								tempSpace2[1] = int_mult(overlay[(ty * selectRect.size.width + tx + 1) * spp - 1], overlayOpacity, t);
 						}
-						if (overlayBehaviour == kReplacingBehaviour) {
+						if (overlayBehaviour == SeaOverlayBehaviourReplacing) {
 							nextOpacity = int_mult(replace[ty * selectRect.size.width + tx], selectOpacity, t); 
-							replaceMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
+							SeaReplaceMerge((viewType == SeaChannelsPrimary) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}
-						else if (overlayBehaviour ==  kMaskingBehaviour) {
+						else if (overlayBehaviour ==  SeaOverlayBehaviourMasking) {
 							nextOpacity = int_mult(replace[ty * selectRect.size.width + tx], selectOpacity, t); 
-							normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
+							SeaNormalMerge((viewType == SeaChannelsPrimary) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}
 						else {							
-							normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, selectOpacity);
+							SeaNormalMerge((viewType == SeaChannelsPrimary) ? spp : 2, tempSpace, 0, tempSpace2, 0, selectOpacity);
 						}
 					}
 				}
@@ -568,7 +707,7 @@ extern IntPoint gScreenResolution;
 				point.y = j;
 				if (IntPointInRect(point, selectRect) || !useSelection) {
 					if (selectOpacity > 0) {
-						if (viewType == kPrimaryChannelsView) {
+						if (viewType == SeaChannelsPrimary) {
 							memcpy(&tempSpace2, &(overlay[temp * spp]), spp);
 							if (overlayOpacity < 255)
 								tempSpace2[spp - 1] = int_mult(tempSpace2[spp - 1], overlayOpacity, t);
@@ -580,23 +719,23 @@ extern IntPoint gScreenResolution;
 							else
 								tempSpace2[1] = int_mult(overlay[(temp + 1) * spp - 1], overlayOpacity, t);
 						}
-						if (overlayBehaviour == kReplacingBehaviour) {
+						if (overlayBehaviour == SeaOverlayBehaviourReplacing) {
 							nextOpacity = int_mult(replace[temp], selectOpacity, t); 
-							replaceMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
+							SeaReplaceMerge((viewType == SeaChannelsPrimary) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}
-						else if (overlayBehaviour ==  kMaskingBehaviour) {
+						else if (overlayBehaviour ==  SeaOverlayBehaviourMasking) {
 							nextOpacity = int_mult(replace[temp], selectOpacity, t); 
-							normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
+							SeaNormalMerge((viewType == SeaChannelsPrimary) ? spp : 2, tempSpace, 0, tempSpace2, 0, nextOpacity);
 						}
 						else
-							normalMerge((viewType == kPrimaryChannelsView) ? spp : 2, tempSpace, 0, tempSpace2, 0, selectOpacity);
+							SeaNormalMerge((viewType == SeaChannelsPrimary) ? spp : 2, tempSpace, 0, tempSpace2, 0, selectOpacity);
 					}
 				}
 				
 			}
 			
 			// Finally update the channel
-			if (viewType == kPrimaryChannelsView) {
+			if (viewType == SeaChannelsPrimary) {
 				for (k = 0; k < spp - 1; k++)
 					altData[temp * (spp - 1) + k] = tempSpace[k];
 			}
@@ -611,7 +750,6 @@ extern IntPoint gScreenResolution;
 - (void)forcedCMYKUpdate:(IntRect)majorUpdateRect
 {
 	unsigned char *tempData;
-	CMBitmap srcBitmap, destBitmap;
 	int i;
 
 	// Define the source
@@ -620,23 +758,10 @@ extern IntPoint gScreenResolution;
 		
 			// Define the source
 			tempData = malloc(majorUpdateRect.size.width * 3);
-			stripAlphaToWhite(4, tempData, data + ((majorUpdateRect.origin.y + i) * width + majorUpdateRect.origin.x) * 4, majorUpdateRect.size.width);
-			srcBitmap.image = (char *)tempData;
-			srcBitmap.width = majorUpdateRect.size.width;
-			srcBitmap.height = 1;
-			srcBitmap.rowBytes = majorUpdateRect.size.width * 3;
-			srcBitmap.pixelSize = 8 * 3;
-			srcBitmap.space = cmRGB24Space;
-		
-			// Define the destination
-			destBitmap = srcBitmap;
-			destBitmap.image = (char *)altData + ((majorUpdateRect.origin.y + i) * width + majorUpdateRect.origin.x) * 4;
-			destBitmap.rowBytes = majorUpdateRect.size.width * 4;
-			destBitmap.pixelSize = 8 * 4;
-			destBitmap.space = cmCMYK32Space;
+			SeaStripAlphaToWhite(4, tempData, data + ((majorUpdateRect.origin.y + i) * width + majorUpdateRect.origin.x) * 4, majorUpdateRect.size.width);
 			
 			// Execute the conversion
-			CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
+			ColorSyncTransformConvert(cw, majorUpdateRect.size.width, 1, (char *)altData + ((majorUpdateRect.origin.y + i) * width + majorUpdateRect.origin.x) * 4, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, majorUpdateRect.size.width * 4, tempData, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, majorUpdateRect.size.width * 3, NULL);
 			
 			// Clean up after ourselves
 			free(tempData);
@@ -647,24 +772,10 @@ extern IntPoint gScreenResolution;
 	
 		// Define the source
 		tempData = malloc(width * height * 3);
-		stripAlphaToWhite(4, tempData, data, width * height);
-		srcBitmap.image = (char *)tempData;
-		srcBitmap.width = width;
-		srcBitmap.height = height;
-		srcBitmap.rowBytes = width * 3;
-		srcBitmap.pixelSize = 8 * 3;
-		srcBitmap.space = cmRGB24Space;
-	
-		// Define the destination
-		destBitmap.image = (char *)altData;
-		destBitmap.width = width;
-		destBitmap.height = height;
-		destBitmap.rowBytes = width * 4;
-		destBitmap.pixelSize = 8 * 4;
-		destBitmap.space = cmCMYK32Space;
+		SeaStripAlphaToWhite(4, tempData, data, width * height);
 		
 		// Execute the conversion
-		CWMatchBitmap(cw, &srcBitmap, NULL, 0, &destBitmap);
+		ColorSyncTransformConvert(cw, width, height, altData, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, width * 4, tempData, kColorSync8BitInteger, kColorSyncAlphaNone | kColorSyncByteOrderDefault, width * 3, NULL);
 
 		// Clean up after ourselves
 		free(tempData);
@@ -674,11 +785,18 @@ extern IntPoint gScreenResolution;
 
 - (void)forcedUpdate
 {
-	int i, count = 0, layerCount = [[document contents] layerCount];
+	NSInteger i, count = 0, layerCount =
+#if MAIN_COMPILE
+	[[document contents] layerCount];
+#else
+	[contents layerCount];
+#endif
 	IntRect majorUpdateRect;
 	CompositorOptions options;
+#if MAIN_COMPILE
 	BOOL floating;
-
+#endif
+	
 	// Determine the major update rect
 	if (useUpdateRect) {
 		majorUpdateRect = IntConstrainRect(updateRect, IntMakeRect(0, 0, width, height));
@@ -696,8 +814,13 @@ extern IntPoint gScreenResolution;
 			
 		// Determine how many layers are visible
 		for (i = 0; count < 2 && i < layerCount; i++) {
-			if ([[[document contents] layer:i] visible])
+#if MAIN_COMPILE
+			if ([[document contents] layerAtIndex:i].visible)
 				count++;
+#else
+			if ([contents layerAtIndex:i].visible)
+				count++;
+#endif
 		}
 		
 		// Set the composting options
@@ -709,18 +832,19 @@ extern IntPoint gScreenResolution;
 		options.overlayBehaviour = overlayBehaviour;
 		options.useSelection = NO;
 		
-		if ([[document selection] floating]) {
+#if MAIN_COMPILE
+		if (document.selection.floating) {
 	
 			// Go through compositing each visible layer
 			for (i = layerCount - 1; i >= 0; i--) {
-				if (i >= 1) floating = [[[document contents] layer:i - 1] floating];
+				if (i >= 1) floating = [document.contents layerAtIndex:i - 1].floating;
 				else floating = NO;
-				if ([[[document contents] layer:i] visible]) {
+				if ([document.contents layerAtIndex:i].visible) {
 					options.insertOverlay = floating;
 					if (floating)
-						[compositor compositeLayer:[[document contents] layer:i] withFloat:[[document contents] layer:i - 1] andOptions:options];
+						[compositor compositeLayer:[[document contents] layerAtIndex:i] withFloat:[[document contents] layerAtIndex:i - 1] andOptions:options];
 					else
-						[compositor compositeLayer:[[document contents] layer:i] withOptions:options];
+						[compositor compositeLayer:[[document contents] layerAtIndex:i] withOptions:options];
 				}
 				if (floating) i--;
 			}
@@ -730,24 +854,35 @@ extern IntPoint gScreenResolution;
 
 			// Go through compositing each visible layer
 			for (i = layerCount - 1; i >= 0; i--) {
-				if ([[[document contents] layer:i] visible]) {
+				if ([[document contents] layerAtIndex:i].visible) {
 					options.insertOverlay = (i == [[document contents] activeLayerIndex]);
-					options.useSelection = (i == [[document contents] activeLayerIndex]) && [[document selection] active];
-					[compositor compositeLayer:[[document contents] layer:i] withOptions:options];
+					options.useSelection = (i == [[document contents] activeLayerIndex]) && document.selection.active;
+					[compositor compositeLayer:[[document contents] layerAtIndex:i] withOptions:options];
 				}
 			}
 			
 		}
+#else
+		// Go through compositing each visible layer
+		for (i = layerCount - 1; i >= 0; i--) {
+			if ([contents layerAtIndex:i].visible) {
+				options.insertOverlay = (i == [contents activeLayerIndex]);
+				options.useSelection = NO;
+				[compositor compositeLayer:[contents layerAtIndex:i] withOptions:options];
+			}
+		}
+	
+#endif
 		
 	}
 	
 	// Handle channel updates here
-	if (viewType == kPrimaryChannelsView || viewType == kAlphaChannelView) {
+	if (viewType == SeaChannelsPrimary || viewType == SeaChannelsAlpha) {
 		[self forcedChannelUpdate];
 	}
 	
 	// If the user has requested a CMYK preview take the extra steps necessary
-	if (viewType == kCMYKPreviewView) {
+	if (viewType == SeaChannelsCMYKPreview) {
 		[self forcedCMYKUpdate:majorUpdateRect];
 	}
 }
@@ -756,22 +891,29 @@ extern IntPoint gScreenResolution;
 {
 	useUpdateRect = NO;
 	[self forcedUpdate];
+#if MAIN_COMPILE
 	[[document docView] setNeedsDisplay:YES];
+#endif
 }
 
 - (void)update:(IntRect)rect inThread:(BOOL)thread
 {
 	NSRect displayUpdateRect = IntRectMakeNSRect(rect);
-	float zoom = [[document docView] zoom];
+#if MAIN_COMPILE
+	CGFloat zoom = [[document docView] zoom];
 	int xres = [[document contents] xres], yres = [[document contents] yres];
+#else
+	CGFloat zoom = 1.0; // [[document docView] zoom];
+	int xres = [contents xres], yres = [contents yres];
+#endif
 	
-	if (gScreenResolution.x != 0 && xres != gScreenResolution.x) {
-		displayUpdateRect.origin.x /= ((float)xres / gScreenResolution.x);
-		displayUpdateRect.size.width /= ((float)xres / gScreenResolution.x);
+	if (SeaScreenResolution.x != 0 && xres != SeaScreenResolution.x) {
+		displayUpdateRect.origin.x /= ((CGFloat)xres / SeaScreenResolution.x);
+		displayUpdateRect.size.width /= ((CGFloat)xres / SeaScreenResolution.x);
 	}
-	if (gScreenResolution.y != 0 && yres != gScreenResolution.y) {
-		displayUpdateRect.origin.y /= ((float)yres / gScreenResolution.y);
-		displayUpdateRect.size.height /= ((float)yres / gScreenResolution.y);
+	if (SeaScreenResolution.y != 0 && yres != SeaScreenResolution.y) {
+		displayUpdateRect.origin.y /= ((CGFloat)yres / SeaScreenResolution.y);
+		displayUpdateRect.size.height /= ((CGFloat)yres / SeaScreenResolution.y);
 	}
 	displayUpdateRect.origin.x *= zoom;
 	displayUpdateRect.size.width *= zoom;
@@ -788,6 +930,7 @@ extern IntPoint gScreenResolution;
 	useUpdateRect = YES;
 	updateRect = rect;
 	[self forcedUpdate];
+#if MAIN_COMPILE
 	if (thread) {
 		threadUpdateRect = displayUpdateRect;
 		[[document docView] lockFocus];
@@ -796,91 +939,106 @@ extern IntPoint gScreenResolution;
 		//[[NSGraphicsContext currentContext] flushGraphics];
 		[[document docView] setNeedsDisplayInRect:displayUpdateRect];
 		[[document docView] unlockFocus];
-	}
-	else {
+	} else {
 		[[document docView] setNeedsDisplayInRect:displayUpdateRect];
 	}
+#endif
 }
 
 - (void)updateColorWorld
 {
-	CMProfileRef destProf;
-	
-	if (cw) CWDisposeColorWorld(cw);
-	if (displayProf) CloseDisplayProfile(displayProf);
-	if (cgDisplayProf) CGColorSpaceRelease(cgDisplayProf);
-	OpenDisplayProfile(&displayProf);
+	if (cw)
+		CFRelease(cw);
+	if (displayProf)
+		CFRelease(displayProf);
+	if (cgDisplayProf)
+		CGColorSpaceRelease(cgDisplayProf);
+	displayProf = ColorSyncProfileCreateWithDisplayID(0);
 	cgDisplayProf = CGColorSpaceCreateWithPlatformColorSpace(displayProf);
-	CMGetDefaultProfileBySpace(cmCMYKData, &destProf);
-	NCWNewColorWorld(&cw, displayProf, destProf);
+	ColorSyncProfileRef destProf = ColorSyncProfileCreateWithName(kColorSyncGenericCMYKProfile);
+	NSArray<NSDictionary<NSString*,id>*>*
+	profSeq = @[
+				@{(__bridge NSString*)kColorSyncProfile: (__bridge id)displayProf,
+				  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+				  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformDeviceToPCS,
+				  },
+				
+				@{(__bridge NSString*)kColorSyncProfile: (__bridge id)destProf,
+				  (__bridge NSString*)kColorSyncRenderingIntent: (__bridge NSString*)kColorSyncRenderingIntentPerceptual,
+				  (__bridge NSString*)kColorSyncTransformTag: (__bridge NSString*)kColorSyncTransformPCSToDevice,
+				  },
+				];
+	
+	cw = ColorSyncTransformCreate((__bridge CFArrayRef)(profSeq), NULL);
+	
+	CFRelease(destProf);
 	if ([self CMYKPreview])
 		[self update];
 }
 
 - (IntRect)imageRect
 {
-	id layer;
+	SeaLayer *layer;
 	
-	if (viewType == kPrimaryChannelsView || viewType == kAlphaChannelView) {
-		if ([[document selection] floating])
-			layer = [[document contents] layer:[[document contents] activeLayerIndex] + 1];
+	if (viewType == SeaChannelsPrimary || viewType == SeaChannelsAlpha) {
+#if MAIN_COMPILE
+		if (document.selection.floating)
+			layer = [[document contents] layerAtIndex:[[document contents] activeLayerIndex] + 1];
 		else
 			layer = [[document contents] activeLayer];
-		return IntMakeRect([layer xoff], [layer yoff], [(SeaLayer *)layer width], [(SeaLayer *)layer height]);
-	}
-	else {
+#else
+		layer = [contents activeLayer];
+#endif
+		return IntMakeRect([layer xoff], [layer yoff], [layer width], [layer height]);
+	} else {
 		return IntMakeRect(0, 0, width, height);
 	}
 }
 
+#if MAIN_COMPILE
 - (NSImage *)image
 {
 	NSBitmapImageRep *imageRep;
 	NSBitmapImageRep *altImageRep = NULL;
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 	int xwidth, xheight;
-	id layer;
+	SeaLayer *layer;
 	
-	if (image) [image autorelease];
 	image = [[NSImage alloc] init];
 	
 	if (altData) {
-		if ([[document selection] floating]) {
-			layer = [contents layer:[contents activeLayerIndex] + 1];
-		}
-		else {
+		if (document.selection.floating) {
+			layer = [contents layerAtIndex:[contents activeLayerIndex] + 1];
+		} else {
 			layer = [contents activeLayer];
 		}
-		if (viewType == kPrimaryChannelsView) {
-			xwidth = [(SeaLayer *)layer width];
-			xheight = [(SeaLayer *)layer height];
+		if (viewType == SeaChannelsPrimary) {
+			xwidth = [layer width];
+			xheight = [layer height];
 			altImageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&altData pixelsWide:xwidth pixelsHigh:xheight bitsPerSample:8 samplesPerPixel:spp - 1 hasAlpha:NO isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:xwidth * (spp - 1) bitsPerPixel:8 * (spp - 1)];
-		}
-		else if (viewType == kAlphaChannelView) {
-			xwidth = [(SeaLayer *)layer width];
-			xheight = [(SeaLayer *)layer height];
+		} else if (viewType == SeaChannelsAlpha) {
+			xwidth = [layer width];
+			xheight = [layer height];
 			altImageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&altData pixelsWide:xwidth pixelsHigh:xheight bitsPerSample:8 samplesPerPixel:1 hasAlpha:NO isPlanar:NO colorSpaceName:NSDeviceWhiteColorSpace bytesPerRow:xwidth * 1 bitsPerPixel:8];
-		}
-		else if (viewType == kCMYKPreviewView) {
-			xwidth = [(SeaContent *)contents width];
-			xheight = [(SeaContent *)contents height];
+		} else if (viewType == SeaChannelsCMYKPreview) {
+			xwidth = [contents width];
+			xheight = [contents height];
 			altImageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&altData pixelsWide:xwidth pixelsHigh:xheight bitsPerSample:8 samplesPerPixel:4 hasAlpha:NO isPlanar:NO colorSpaceName:NSDeviceCMYKColorSpace bytesPerRow:xwidth * 4 bitsPerPixel:8 * 4];
 		}
 		[image addRepresentation:altImageRep];
-	}
-	else {
+	} else {
 		imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&data pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:width * spp bitsPerPixel:8 * spp];
 		[image addRepresentation:imageRep];
 	}
 	
 	return image;
 }
+#endif
 
 - (NSImage *)printableImage
 {
 	NSBitmapImageRep *imageRep;
 	
-	if (image) [image autorelease];
 	image = [[NSImage alloc] init];
 	imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&data pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO colorSpaceName:(spp == 4) ? NSDeviceRGBColorSpace : NSDeviceWhiteColorSpace bytesPerRow:width * spp bitsPerPixel:8 * spp];
 	[image addRepresentation:imageRep];
@@ -888,19 +1046,6 @@ extern IntPoint gScreenResolution;
 	return image;
 }
 
-- (unsigned char *)data
-{
-	return data;
-}
-
-- (unsigned char *)altData
-{
-	return altData;
-}
-
-- (CGColorSpaceRef)displayProf
-{
-	return cgDisplayProf;
-}
+@synthesize displayProf = cgDisplayProf;
 
 @end

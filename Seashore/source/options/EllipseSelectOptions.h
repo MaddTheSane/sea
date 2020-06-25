@@ -1,3 +1,4 @@
+#import <Cocoa/Cocoa.h>
 #import "Globals.h"
 #import "AbstractSelectOptions.h"
 #import "AspectRatio.h"
@@ -10,12 +11,9 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface EllipseSelectOptions : AbstractSelectOptions {
-	
 	// The AspectRatio instance linked to this options panel
-	IBOutlet id aspectRatio;
-	
+	IBOutlet AspectRatio *aspectRatio;
 }
 
 /*!

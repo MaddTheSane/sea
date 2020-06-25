@@ -1,16 +1,11 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
+#else
+#import <SeashoreKit/Globals.h>
+#endif
 
-/*!
-	@enum		k...Flip
-	@constant	kHorizontalFlip
-				Specifies a horizontal flip.
-	@constant	kVerticalFlip
-				Specifies a vertical flip.
-*/
-enum {
-	kHorizontalFlip,
-	kVerticalFlip
-};
+@class SeaDocument;
 
 /*!
 	@class		SeaFlip
@@ -20,19 +15,16 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
 @interface SeaFlip : NSObject
 {
-
 	// The document associated with this object
-    IBOutlet id document;
-	
+    IBOutlet SeaDocument *document;
 }
 
-- (void)floatingFlip:(int)type;
+- (void)floatingFlip:(SeaFlipType)type;
 - (void)floatingHorizontalFlip;
 - (void)floatingVerticalFlip;
-- (void)standardFlip:(int)type;
+- (void)standardFlip:(SeaFlipType)type;
 
 /*!
 	@method		simpleFlipOf:width:height:spp:type:
@@ -48,7 +40,7 @@ enum {
 	@param		type
 				The type of flip to preform on the data.
 */
-- (void)simpleFlipOf:(unsigned char*)data width:(int)width height:(int)height spp:(int)spp type:(int)type;
+- (void)simpleFlipOf:(unsigned char*)data width:(int)width height:(int)height spp:(int)spp type:(SeaFlipType)type;
 
 /*!
 	@method		run:
@@ -57,6 +49,6 @@ enum {
 	@param		type
 				The type of flip (see SeaFlip).
 */
-- (void)run:(int)type;
+- (void)run:(SeaFlipType)type;
 
 @end

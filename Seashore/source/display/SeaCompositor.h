@@ -1,5 +1,11 @@
+#import <Cocoa/Cocoa.h>
+#ifdef SEASYSPLUGIN
 #import "Globals.h"
 #import "StandardMerge.h"
+#else
+#import <SeashoreKit/Globals.h>
+#import <SeashoreKit/StandardMerge.h>
+#endif
 
 /*!
 	@struct		CompositorOptions
@@ -36,9 +42,32 @@ typedef struct {
 	BOOL insertOverlay;
 	BOOL useSelection;
 	int overlayOpacity;
-	BOOL overlayBehaviour;
+	int overlayBehaviour;
 	int spp;
 } CompositorOptions;
+
+@class SeaLayer;
+#if MAIN_COMPILE
+@class SeaDocument;
+#else
+@class SeaContent;
+@class SeaWhiteboard;
+#endif
+
+NS_SWIFT_NAME(SeaCompositorProtocol)
+@protocol SeaCompositor <NSObject>
+
+#if MAIN_COMPILE
+- (instancetype)initWithDocument:(SeaDocument*)doc;
+#else
+- (instancetype)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board;
+#endif
+
+- (void)compositeLayer:(SeaLayer *)layer withOptions:(CompositorOptions)options;
+- (void)compositeLayer:(SeaLayer *)layer withOptions:(CompositorOptions)options andData:(unsigned char *)destPtr;
+- (void)compositeLayer:(SeaLayer *)layer withFloat:(SeaLayer *)floatingLayer andOptions:(CompositorOptions)options;
+
+@end
 
 /*!
 	@class		SeaCompositor
@@ -48,19 +77,21 @@ typedef struct {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
-
-@class SeaLayer;
-
-@interface SeaCompositor : NSObject {
-
+@interface SeaCompositor : NSObject <SeaCompositor> {
+#if MAIN_COMPILE
 	// The document associated with this compositor
-	id document;
+	SeaDocument *document;
+#else
+	// The contents associated with this compositor
+	__weak SeaContent *contents;
+	__weak SeaWhiteboard *whiteboard;
+#endif
 	
 	// The random table
 	int randomTable[RANDOM_TABLE_SIZE];
-	
 }
 
+#if MAIN_COMPILE
 /*!
 	@method		initWithDocument:
 	@discussion	Initializes an instance of this class with the given document.
@@ -68,13 +99,19 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)initWithDocument:(id)doc;
+- (instancetype)initWithDocument:(SeaDocument*)doc;
+
+#else
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
+	@method		initWithContents:andWhiteboard:
+	@discussion	Initializes an instance of this class with the given document.
+	@param		cont
+				The document with which to initialize the instance.
+	@result		Returns instance upon success (or NULL otherwise).
+ */
+- (instancetype)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board;
+#endif
 
 /*!
 	@method		compositeLayer:withOptions:
@@ -95,7 +132,7 @@ typedef struct {
 				The layer to composite.
 	@param		options
 				The options for compositing.
-	@param		andData
+	@param		destPtr
 				A pointer to the data the layer should be composited onto.
 */
 - (void)compositeLayer:(SeaLayer *)layer withOptions:(CompositorOptions)options andData:(unsigned char *)destPtr;

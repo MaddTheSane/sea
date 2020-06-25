@@ -1,0 +1,6 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Halftone";
+description = "Generates a hatched screen";
+license = "Public Domain";
+name = "Hatched Screen";
