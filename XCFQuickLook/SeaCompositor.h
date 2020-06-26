@@ -73,12 +73,6 @@ typedef struct {
 - (id)initWithContents:(SeaContent *)cont andWhiteboard:(SeaWhiteboard *)board;
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		compositeLayer:withOptions:
 	@discussion	Composites a layer on to the document's whiteboard using the
 				specified options.
@@ -101,18 +95,5 @@ typedef struct {
 				A pointer to the data the layer should be composited onto.
 */
 - (void)compositeLayer:(id)layer withOptions:(CompositorOptions)options andData:(unsigned char *)destPtr;
-
-/*!
-	@method		compositeLayer:withFloat:withOptions:
-	@discussion	Composites a layer on to the document's whiteboard using the
-				specified options with the specified floating layer.
-	@param		layer
-				The layer to composite.
-	@param		floatingLayer
-				The floating layer.
-	@param		options
-				The options for compositing.
-*/
-- (void)compositeLayer:(id)layer withFloat:(id)floatingLayer andOptions:(CompositorOptions)options;
 
 @end

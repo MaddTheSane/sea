@@ -1,5 +1,6 @@
 #import "Globals.h"
 #import "SeaCompositor.h"
+#import "SeaColorProfiles.h"
 
 /*!
 	@enum		k...ChannelsView
@@ -51,10 +52,12 @@ enum {
 				Copyright (c) 2005 Daniel Jalkut
 */
 
+@class SeaDocument;
+
 @interface SeaWhiteboard : NSObject {
 
 	// The document associated with this whiteboard
-	id document;
+	__weak SeaDocument *document;
 	
 	// The compositor for this whiteboard
 	id compositor;
@@ -65,9 +68,9 @@ enum {
 	// The whiteboard's data
 	unsigned char *data;
 	unsigned char *altData;
-	
-	// The whiteboard's images
-	NSImage *image;
+    
+    // the cached NSImage
+    CIImage * cachedImage;
 	
 	// The overlay for the current layer
 	unsigned char *overlay;
@@ -81,32 +84,14 @@ enum {
 	// The opacity for the overlay
 	int overlayOpacity;
 	
-	// The colour world for colour space conversions
-	CMWorldRef cw;
-	
 	// The whiteboard's samples per pixel
 	int spp;
 	
 	// Remembers whether is or is not active
-	BOOL CMYKPreview;
+    SeaColorProfile *proofProfile;
 	
 	// One of the above constants to specify what is seen by the user
 	int viewType;
-	
-	// The rectangle the update is needed in (useUpdateRect may be NO in which case the entire whiteboard is updated)
-	BOOL useUpdateRect;
-	IntRect updateRect;
-	
-	// Used for multi-threading
-	NSRect threadUpdateRect;
-	
-	// The thread that is locking or NULL otherwise
-	NSThread *lockingThread;
-	
-	// The display profile
-	CMProfileRef displayProf;
-	CGColorSpaceRef cgDisplayProf;
-	
 }
 
 // CREATION METHODS
@@ -216,39 +201,22 @@ enum {
 */
 - (void)readjustAltData:(BOOL)update;
 
-// CMYK PREVIEWING METHODS
+// ColorSync PREVIEWING METHODS
 
 /*!
-	@method		CMYKPreview
-	@discussion	Returns whether or not CMYK previewing is active.
-	@result		Returns YES if the CMYK previewing is active, NO otherwise.
-*/
-- (BOOL)CMYKPreview;
-
-
-/*!
-	@method		canToggleCMYKPreview
-	@discussion	Returns whether or not CMYK previewing can be toggled for this
-				document.
-	@result		Returns YES if CMYK previewing can be toggled, NO otherwise.
-*/
-- (BOOL)canToggleCMYKPreview;
+ @method        proofProfile
+ @discussion    Returns the selected proof profile, or NULL
+ @result        Returns a SeaColorProfile or NULL
+ */
+- (SeaColorProfile*)proofProfile;
 
 /*!
-	@method		toggleCMYKPreview
-	@discussion	Toggles whether or not CMYK previewing is active.
+	@method		toggleSoftProof
+	@discussion	sets the color profile for proof
+    @param      sender
+                the profile or null
 */
-- (void)toggleCMYKPreview;
-
-/*!
-	@method		matchColor:
-	@discussion	Returns the appropriately matched colour given an unmatched
-				colour.
-	@param		color
-				The unmatched RGBA color.
-	@result		The matched RGBA color. 
-*/
-- (NSColor *)matchColor:(NSColor *)color;
+- (void)toggleSoftProof:(SeaColorProfile*)profile;
 
 // UPDATING METHODS
 
@@ -259,22 +227,12 @@ enum {
 - (void)update;
 
 /*!
-	@method		update:inThread:
+	@method		update:rect
 	@discussion	Updates a specified rectangle of the whiteboard.
 	@param		rect
 				The rectangle to be updated.
-	@param		thread
-				YES if drawing should be done in thread, NO otherwise.
 */
-- (void)update:(IntRect)rect inThread:(BOOL)thread;
-
-/*!
-	@method		updateColorWorld
-	@discussion	Called to inform the whiteboard that the user has changed the
-				ColorSync system settings. Updates the CMYK preview to reflect
-				the changes.
-*/
-- (void)updateColorWorld;
+- (void)update:(IntRect)rect;
 
 // ACCESSOR METHODS
 
@@ -294,7 +252,7 @@ enum {
 				or channel-specific depending on user settings).
 	@result		Returns an NSImage representing the whiteboard.
 */
-- (NSImage *)image;
+- (CIImage *)image;
 
 /*!
 	@method		printableImage
@@ -320,12 +278,5 @@ enum {
 */
 - (unsigned char *)altData;
 
-/*!
-	@method		displayProf
-	@discussion	Returns the current display profile.
-	@result		Returns a CMProfileRef representing the ColorSync display profile
-				Seashore is using.
-*/
-- (CGColorSpaceRef)displayProf;
 
 @end

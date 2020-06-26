@@ -9,17 +9,13 @@
 #import "SeaHelpers.h"
 #import "SeaController.h"
 #import "SeaPrefs.h"
+#import <GIMPCore/GIMPCore.h>
 
 @implementation GradientTool
 
 - (int)toolId
 {
 	return kGradientTool;
-}
-
-- (void)dealloc
-{
-	[super dealloc];
 }
 
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
@@ -123,5 +119,15 @@
 {
 	return tempNSPoint;
 }
+
+- (AbstractOptions*)getOptions
+{
+    return options;
+}
+- (void)setOptions:(AbstractOptions*)newoptions
+{
+    options = (GradientOptions*)newoptions;
+}
+
 
 @end

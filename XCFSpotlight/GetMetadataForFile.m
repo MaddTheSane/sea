@@ -58,44 +58,38 @@ Boolean GetMetadataForFile(void* thisInterface,
     /* Return the attribute keys and attribute values in the dict */
     /* Return true if successful, false if there was no data provided */
     Boolean success=NO;
-    NSAutoreleasePool *pool;
 	
-    // Don't assume that there is an autorelease pool around the calling of this function.
-    pool = [[NSAutoreleasePool alloc] init];
     // load the document at the specified location
-	XCFContent *contents = [[XCFContent alloc] initWithContentsOfFile: (NSString *)pathToFile];
+	XCFContent *contents = [[XCFContent alloc] initWithDocument:NULL contentsOfFile: (__bridge NSString *)pathToFile];
 	if(contents)
 	{
 		int width = [contents width];
 		int height = [contents height];
-		[(NSMutableDictionary *)attributes setObject:[NSNumber numberWithInt:width]
+        
+        NSMutableDictionary *dict = (__bridge NSMutableDictionary*)attributes;
+        
+		[dict setObject:[NSNumber numberWithInt:width]
 											  forKey:(NSString *)kMDItemPixelWidth];
 
-		[(NSMutableDictionary *)attributes setObject:[NSNumber numberWithInt:height]
+		[dict setObject:[NSNumber numberWithInt:height]
 											  forKey:(NSString *)kMDItemPixelHeight];
 		
 		if(width > height){
-			[(NSMutableDictionary *)attributes setObject:[NSNumber numberWithInt:1]
-												  forKey:(NSString *)kMDItemOrientation];
+			[dict setObject:[NSNumber numberWithInt:1] forKey:(NSString *)kMDItemOrientation];
 		}else{
-			[(NSMutableDictionary *)attributes setObject:[NSNumber numberWithInt:0]
-												  forKey:(NSString *)kMDItemOrientation];
+			[dict setObject:[NSNumber numberWithInt:0] forKey:(NSString *)kMDItemOrientation];
 		}
 		
-
-		[(NSMutableDictionary *)attributes setObject:[NSNumber numberWithInt:[contents spp] * 8]
-											  forKey:(NSString *)kMDItemBitsPerSample];
+		[dict setObject:[NSNumber numberWithInt:[contents spp] * 8] forKey:(NSString *)kMDItemBitsPerSample];
 		
-		[(NSMutableDictionary *)attributes setObject:[NSNumber numberWithInt:[contents xres]]
-											  forKey:(NSString *)kMDItemResolutionWidthDPI];
+		[dict setObject:[NSNumber numberWithInt:[contents xres]] forKey:(NSString *)kMDItemResolutionWidthDPI];
 		
-		[(NSMutableDictionary *)attributes setObject:[NSNumber numberWithInt:[contents yres]]
-											  forKey:(NSString *)kMDItemResolutionHeightDPI];
+		[dict setObject:[NSNumber numberWithInt:[contents yres]] forKey:(NSString *)kMDItemResolutionHeightDPI];
 		
 		if([contents type] == XCF_RGB_IMAGE){
-			[(NSMutableDictionary *)attributes setObject:[NSString stringWithString:@"RGB"]	forKey:(NSString *)kMDItemColorSpace];
+			[dict setObject:@"RGB"	forKey:(NSString *)kMDItemColorSpace];
 		}else if([contents type] == XCF_GRAY_IMAGE){
-			[(NSMutableDictionary *)attributes setObject:[NSString stringWithString: @"Gray"] forKey:(NSString *)kMDItemColorSpace];
+			[dict setObject:@"Gray" forKey:(NSString *)kMDItemColorSpace];
 		}
 		
 		NSMutableArray *names = [NSMutableArray arrayWithCapacity:[contents layerCount]];
@@ -107,26 +101,21 @@ Boolean GetMetadataForFile(void* thisInterface,
 			if([layer hasAlpha]) hasAlpha = YES;
 		}
 
-		[(NSMutableDictionary *)attributes setObject:[NSNumber numberWithBool:hasAlpha]
-											  forKey:(NSString *)kMDItemHasAlphaChannel];
-		[(NSMutableDictionary *)attributes setObject:names
-											  forKey:(NSString *)kMDItemLayerNames];
+		[dict setObject:[NSNumber numberWithBool:hasAlpha] forKey:(NSString *)kMDItemHasAlphaChannel];
+		[dict setObject:names forKey:(NSString *)kMDItemLayerNames];
 
 		if([contents exifData]){
 			NSDictionary *data = [contents exifData];
 			if([data objectForKey:@"FNumber"]){
-				[(NSMutableDictionary *)attributes setObject:[data objectForKey:@"FNumber"]
-													  forKey:(NSString *)kMDItemFNumber];
+				[dict setObject:[data objectForKey:@"FNumber"] forKey:(NSString *)kMDItemFNumber];
 			}
 			
 			if([data objectForKey:@"ExifVersion"]){
-				[(NSMutableDictionary *)attributes setObject:[[data objectForKey:@"ExifVersion"] componentsJoinedByString:@"."]
-													  forKey:(NSString *)kMDItemEXIFVersion];
+				[dict setObject:[[data objectForKey:@"ExifVersion"] componentsJoinedByString:@"."] forKey:(NSString *)kMDItemEXIFVersion];
 			}
 			
 			if([data objectForKey:@"DateTimeOriginal"]){
-				[(NSMutableDictionary *)attributes setObject:[data objectForKey:@"DateTimeOriginal"]
-													  forKey:(NSString *)kMDItemContentCreationDate];
+				[dict setObject:[data objectForKey:@"DateTimeOriginal"] forKey:(NSString *)kMDItemContentCreationDate];
 				
 			}
 		}
@@ -160,6 +149,5 @@ Boolean GetMetadataForFile(void* thisInterface,
 		// release the loaded document
 		[tempDict release];
     }*/
-    [pool release];
     return success;
 }

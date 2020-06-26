@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -15,18 +17,18 @@
 			<key>CFBundleTypeIconFile</key>
 			<string>XCF Icon.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>GIMP image</string>
+			<string>Seashore/GIMP image</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>XCF</string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>org.gimp.xcf</string>
-				<string>com.gimp.xcf</string>
-				<string>net.sourceforge.seashore.xcf</string>
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
@@ -50,6 +52,8 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.microsoft.bmp</string>
@@ -77,6 +81,8 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.apple.pict</string>
@@ -106,6 +112,8 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.adobe.pdf</string>
@@ -137,6 +145,8 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.jpeg</string>
@@ -162,6 +172,8 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.xbitmap-image</string>
@@ -193,6 +205,8 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.tiff</string>
@@ -222,6 +236,8 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.png</string>
@@ -251,6 +267,8 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.jpeg-2000</string>
@@ -259,8 +277,6 @@
 			<false/>
 			<key>NSDocumentClass</key>
 			<string>SeaDocument</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>Binary</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -284,6 +300,8 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.compuserve.gif</string>
@@ -292,8 +310,6 @@
 			<false/>
 			<key>NSDocumentClass</key>
 			<string>SeaDocument</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>Binary</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -316,6 +332,8 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.svg-image</string>
@@ -324,14 +342,42 @@
 			<false/>
 			<key>NSDocumentClass</key>
 			<string>SeaDocument</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>Binary</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>heic</string>
+				<string>HEIC</string>
+			</array>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>image/heic</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>HEIC image</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>heic</string>
+				<string>HEIC</string>
+				<string>heif</string>
+				<string>HEIF</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.heic</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<integer>0</integer>
+			<key>NSDocumentClass</key>
+			<string>SeaDocument</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>Seashore</string>
-	<key>CFBundleGetInfoString</key>
-	<string>Seashore 0.6 - GNU General Public License</string>
 	<key>CFBundleIconFile</key>
 	<string>Main Icon.icns</string>
 	<key>CFBundleIdentifier</key>
@@ -343,13 +389,32 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.6.1</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>SeSh</string>
 	<key>CFBundleVersion</key>
-	<string>20171025</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.graphics-design</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>$(MACOSX_DEPLOYMENT_TARGET).0</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>seashore.sourceforge.net</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
+		</dict>
+	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright (c) 1995-2010 Mark Pazolli et al.
+	<string>Copyright (c) 1995-2019 Mark Pazolli et al.
 GNU General Public License v2.0</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
@@ -364,7 +429,7 @@ GNU General Public License v2.0</string>
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>GIMP image</string>
+			<string>Seahore/GIMP image</string>
 			<key>UTTypeIconFile</key>
 			<string>XCF Icon.icns</string>
 			<key>UTTypeIdentifier</key>

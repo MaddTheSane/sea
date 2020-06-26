@@ -1,4 +1,5 @@
 #import "Globals.h"
+#import "SeaCursors.h"
 
 /*!
 	@enum		k...HandleType
@@ -35,14 +36,15 @@ enum {
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli		
 */
+@class SeaDocument;
 
 @interface SeaView : NSView {
 	
 	// The document associated with this view
-	id document;
+	__weak SeaDocument *document;
 	
 	// The cursors manager for this view
-	id cursorsManager;
+	SeaCursors* cursorsManager;
 	
 	// The current zoom of the view
 	float zoom;
@@ -129,12 +131,6 @@ enum {
 - (id)initWithDocument:(id)doc;
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		changeSpecialFont:
 	@discussion	Responds to a font change by fowarding the message to the
 				text tool.
@@ -177,6 +173,14 @@ enum {
 				Ignored.
 */
 - (IBAction)zoomNormal:(id)sender;
+
+/*!
+    @method        zoomToFit:
+    @discussion    Sets the zoom of the view to fit in content area.
+    @param        sender
+                Ignored.
+*/
+- (IBAction)zoomToFit:(id)sender;
 
 /*!
 	@method		zoomIn:
@@ -326,7 +330,6 @@ enum {
 */
 - (void)readjust:(BOOL)scaling;
 
-#ifdef MACOS_10_4_COMPILE
 /*!
 	@method		tabletProximity:
 	@discussion	Handles tablet proximity events.
@@ -334,7 +337,6 @@ enum {
 				The event triggering this method.
 */
 - (void)tabletProximity:(NSEvent *)theEvent;
-#endif
 
 /*!
 	@method		tabletPoint:
@@ -509,6 +511,14 @@ enum {
 - (IBAction)selectInverse:(id)sender;
 
 /*!
+ @method        selectInverse:
+ @discussion    Selects the alpha mask
+ @param        sender
+ Ignored.
+ */
+- (IBAction)selectOpaque:(id)sender;
+
+/*!
 	@method		endLineDrawing
 	@discussion	Ends line drawing (called by some methods in SeaHelpers).
 */
@@ -525,6 +535,14 @@ enum {
 				over or (-1, -1) if no such pixel exists.
 */
 - (IntPoint)getMousePosition:(BOOL)compensation;
+
+/*!
+    @method     setNeedsDisplayInDocumentRect
+    @discussion invalid the view in document coordinates
+    @param      invalidRect
+                the rect to be refreshed in documen coordinates
+ */
+-(void)setNeedsDisplayInDocumentRect:(IntRect)invalidRect;
 
 /*!
 	@method		draggingEntered

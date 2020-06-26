@@ -1,8 +1,24 @@
-#ifdef USE_CENTERING_CLIPVIEW
-
 #import "CenteringClipView.h"
+#import "SeaPrefs.h"
 
 @implementation CenteringClipView
+
+-(void)drawRect:(NSRect)dirtyRect
+{
+    [[(SeaPrefs *)[SeaController seaPrefs] windowBack] set];
+    [[NSBezierPath bezierPathWithRect:dirtyRect] fill];
+    
+    NSRect docFrame = [[self documentView] frame];
+    
+    NSShadow *shadow = [[NSShadow alloc] init];
+    
+    [shadow setShadowOffset: NSMakeSize(5, -5)];
+    [shadow setShadowBlurRadius: 5];
+    [shadow setShadowColor:[NSColor controlShadowColor]];
+    [shadow set];
+    
+    [[NSBezierPath bezierPathWithRect:docFrame] fill];
+}
 
 - (NSPoint)centerPoint
 {
@@ -267,5 +283,3 @@ static BOOL preventRecurse = NO;
 }
 
 @end
-
-#endif

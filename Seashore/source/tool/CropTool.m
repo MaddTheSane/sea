@@ -24,11 +24,24 @@
 	return self;
 }
 
+- (void)cropRectChanged:(IntRect)dirty
+{
+    SeaLayer *activeLayer = [[document contents] activeLayer];
+    [[document helpers] selectionChanged:IntOffsetRect(dirty,-[activeLayer xoff],-[activeLayer yoff])];
+}
+
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
+    int modifier = [(CropOptions*)options modifier];
+    
+    if (modifier == kControlModifier) {
+        [self clearCrop];
+    }
+    
 	if(cropRect.size.width > 0 && cropRect.size.height > 0){
 		[self mouseDownAt: where
 				  forRect: cropRect
+             withMaskRect: IntZeroRect
 				  andMask: NULL];
 	}
 	
@@ -36,8 +49,8 @@
 		int aspectType = [options aspectType];
 		NSSize ratio;
 		double xres, yres;
-		int modifier = [(CropOptions*)options modifier];
-		id activeLayer;
+        
+		SeaLayer *activeLayer;
 		
 		// Make where appropriate
 		activeLayer = [[document contents] activeLayer];
@@ -75,9 +88,10 @@
 					cropRect.size.height = ratio.height * yres * 0.03937;
 				break;
 			}
-			[[document helpers] selectionChanged];
 		}
-	}
+        intermediate = YES;
+        [[document helpers] selectionChanged];
+    }
 }
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
@@ -85,12 +99,14 @@
 	IntRect draggedRect = [self mouseDraggedTo: where
 									   forRect: cropRect
 									   andMask: NULL];
-	
+    
 	if(![self isMovingOrScaling]){
 	
 		int aspectType = [options aspectType];
 		NSSize ratio;
-		id activeLayer;
+		SeaLayer *activeLayer;
+        
+        IntRect old = cropRect;
 		
 		// Make where appropriate
 		activeLayer = [[document contents] activeLayer];
@@ -144,16 +160,29 @@
 			
 		}
 		else {
-		
-			cropRect.origin.x = where.x;
-			cropRect.origin.y = where.y;
-			
-		}
-
-		// Update the changes
-		[[document helpers] selectionChanged];
+            cropRect.origin.x = where.x;
+            cropRect.origin.y = where.y;
+        }
+        [self cropRectChanged:IntSumRects(old,cropRect)];
 	} else {
-		[self setCropRect:draggedRect];
+        if(translating){
+            int xoff = where.x-moveOrigin.x;
+            int yoff = where.y-moveOrigin.y;
+
+            [self setCropRect:IntMakeRect(cropRect.origin.x +xoff,cropRect.origin.y + yoff,cropRect.size.width,cropRect.size.height)];
+            moveOrigin = where;
+        } else {
+            if(draggedRect.size.width < 0){
+                draggedRect.origin.x += draggedRect.size.width;
+                draggedRect.size.width *= -1;
+            }
+
+            if(draggedRect.size.height < 0){
+                draggedRect.origin.y += draggedRect.size.height;
+                draggedRect.size.height *= -1;
+            }
+            [self setCropRect:draggedRect];
+        }
 	}
 
 }
@@ -164,14 +193,17 @@
 	
 	scalingDir = kNoDir;
 	translating = NO;
+    intermediate = NO;
+    
+    [[document helpers] selectionChanged];
 }
 
 - (IntRect)cropRect
 {
 	int width, height;
 	
-	width = [(SeaContent *)[document contents] width];
-	height = [(SeaContent *)[document contents] height];
+	width = [[document contents] width];
+	height = [[document contents] height];
 	return IntConstrainRect(cropRect, IntMakeRect(0, 0, width, height));
 }
 
@@ -183,16 +215,28 @@
 
 - (void)adjustCrop:(IntPoint)offset
 {
+    IntRect old = cropRect;
 	cropRect.origin.x += offset.x;
 	cropRect.origin.y += offset.y;
-	[[document helpers] selectionChanged];
+    [self cropRectChanged:IntSumRects(old,cropRect)];
 }
 
 - (void)setCropRect:(IntRect)newCropRect
 {
+    IntRect old = cropRect;
 	cropRect = newCropRect;
-	[[document helpers] selectionChanged];
+    [self cropRectChanged:IntSumRects(old,cropRect)];
 }
+
+- (AbstractOptions*)getOptions
+{
+    return options;
+}
+- (void)setOptions:(AbstractOptions*)newoptions
+{
+    options = (CropOptions*)newoptions;
+}
+
 
 
 @end

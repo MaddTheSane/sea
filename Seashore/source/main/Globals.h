@@ -83,7 +83,7 @@
 	@defined	gCurrentDocument
 	@discussion	Allows quick reference to the current document.
 */
-#define gCurrentDocument [[NSDocumentController sharedDocumentController] currentDocument]
+#define gCurrentDocument ((SeaDocument*)[[NSDocumentController sharedDocumentController] currentDocument])
 
 /*!
 	@defined	LOCALSTR(x, y)
@@ -98,16 +98,3 @@
 				as IntPoint.
 */
 typedef IntPoint IntResolution;
-
-#ifndef NSAppKitVersionNumber10_2
-#define NSAppKitVersionNumber10_2 663
-#endif
-#ifndef NSAppKitVersionNumber10_3
-#define NSAppKitVersionNumber10_3 743
-#endif
-#ifndef NSAppKitVersionNumber10_4
-#define NSAppKitVersionNumber10_4 824
-#endif
-#ifndef NSAppKitVersionNumber10_4_6
-#define NSAppKitVersionNumber10_4_6 824.38
-#endif

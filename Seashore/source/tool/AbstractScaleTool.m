@@ -1,10 +1,8 @@
 #import "AbstractScaleTool.h"
 #import "AbstractTool.h"
 #import "SeaController.h"
-#import "UtilitiesManager.h"
 #import "OptionsUtility.h"
 #import "SeaController.h"
-#import "UtilitiesManager.h"
 #import "TextureUtility.h"
 #import "AbstractSelectOptions.h"
 #import "SeaSelection.h"
@@ -34,12 +32,16 @@
 	return (translating || scalingDir > kNoDir);
 }
 
-- (void)mouseDownAt:(IntPoint)localPoint forRect:(IntRect)globalRect andMask:(unsigned char *)mask
+- (AbstractScaleOptions*)scaleOptions {
+    return (AbstractScaleOptions*)[self getOptions];
+}
+
+- (void)mouseDownAt:(IntPoint)localPoint forRect:(IntRect)globalRect withMaskRect:(IntRect)maskRect andMask:(unsigned char *)mask
 {
 	translating = NO;
 	scalingDir = kNoDir;
 	
-	if([options ignoresMove]){
+	if([[self scaleOptions] ignoresMove]){
 		return;
 	}
 	
@@ -51,9 +53,7 @@
 	globalPoint.y *= [[document contents] yscale];
 	
 	// Check if location is in existing rect
-	scalingDir = [self point:globalPoint
-			   isInHandleFor:globalRect
-				  ];
+	scalingDir = [self point:globalPoint isInHandleFor:globalRect ];
 
 	// But the local rect for the moving
 	IntRect localRect = globalRect;
@@ -61,13 +61,16 @@
 	localRect.origin.x -= [[[document contents] activeLayer]  xoff];
 	localRect.origin.y -= [[[document contents] activeLayer]  yoff];
 	
-	
 	if(scalingDir > kNoDir){
-		// 1. Resizing selection
-		preScaledRect = globalRect;
-		if(mask){
-			preScaledMask = malloc(globalRect.size.width * globalRect.size.height);
-			memcpy(preScaledMask, mask, globalRect.size.width * globalRect.size.height);
+        if(!mask) {
+            preScaledRect = globalRect;
+        } else {
+            preScaledRect = IntMakeRect(maskRect.origin.x+globalRect.origin.x,maskRect.origin.y+globalRect.origin.y,maskRect.size.width,maskRect.size.height);
+        }
+        if(mask){
+            int len = preScaledRect.size.width * preScaledRect.size.height;
+			preScaledMask = malloc(len);
+            memcpy(preScaledMask, mask, len);
 		} else {
 			preScaledMask = NULL;
 		}
@@ -75,7 +78,6 @@
 		// 2. Moving Selection
 		translating = YES;
 		moveOrigin = localPoint;
-		oldOrigin =  localRect.origin;
 	}
 
 }
@@ -92,9 +94,9 @@
 
 		BOOL usesAspect = NO;
 		NSSize ratio = NSZeroSize;
-		if([options aspectType] == kRatioAspectType){
+		if([[self scaleOptions] aspectType] == kRatioAspectType){
 			usesAspect = YES;
-			ratio = [options ratio];
+			ratio = [[self scaleOptions] ratio];
 		}
 		
 		float newHeight = preScaledRect.size.height;
@@ -161,11 +163,7 @@
 
 		return IntMakeRect((int)newX, (int)newY, (int)newWidth, (int)newHeight);
 	} else if (translating) {
-		IntPoint newOrigin;
-		// Move the thing
-		newOrigin.x = oldOrigin.x + (localPoint.x - moveOrigin.x);
-		newOrigin.y = oldOrigin.y + (localPoint.y - moveOrigin.y);
-		return IntMakeRect(newOrigin.x, newOrigin.y, globalRect.size.width, globalRect.size.height);
+        return IntMakeRect(0,0,0,0);
 	}
 	return IntMakeRect(0,0,0,0);
 }

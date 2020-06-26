@@ -1,4 +1,16 @@
 #import "Globals.h"
+#import "SeaContent.h"
+#import "SeaWhiteboard.h"
+#import "TextureUtility.h"
+#import "BrushUtility.h"
+#import "ToolboxUtility.h"
+#import "OptionsUtility.h"
+#import "InfoUtility.h"
+#import "RecentsUtility.h"
+#import "PegasusUtility.h"
+#import "StatusUtility.h"
+#import "WarningsUtility.h"
+#import "SeaView.h"
 
 /*!
 	@class		SeaDocument
@@ -8,14 +20,16 @@
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
+@class SeaHelpers;
+@class SeaSelection;
 
 @interface SeaDocument : NSDocument {
 
 	// The contents of the document (a subclass of SeaContent)
-	id contents;
+	SeaContent *contents;
 	
 	// The whiteboard that represents this document
-	id whiteboard;
+	SeaWhiteboard *whiteboard;
 	
 	// The selection manager for this document
 	id selection;
@@ -42,10 +56,11 @@
 	IBOutlet id docWindow;
 	
 	// The exporters
-	IBOutlet id gifExporter, jpegExporter, jp2Exporter, pngExporter, tiffExporter, xcfExporter;
+	IBOutlet id gifExporter, jpegExporter, jp2Exporter, pngExporter, tiffExporter, xcfExporter, heicExporter;
 	
-	// The special texture exporter
 	IBOutlet id textureExporter;
+    
+    IBOutlet id brushExporter;
 	
 	// An array of all possible exporters
 	id exporters;
@@ -71,26 +86,27 @@
 	// The unique ID for floating layer
 	int uniqueFloatingLayerID;
 	
-	// The unique ID for this document (sometimes used)
-	int uniqueDocID;
-	
 	// The document's measure style
 	int measureStyle;
 	
 	// Is the document locked?
 	BOOL locked;
 	
-	// Is the document initing from the pasteboard or plug-in?
-	int specialStart;
-	
-	// File types with Cocoa can be difficult
-	BOOL restoreOldType;
-	NSString *oldType;
-	
-	// Is the file the current version?
-	BOOL current;
-	
+    NSString *selectedType;
+    
+    BOOL layerWarningShown;
+    
+    // utilities
 }
+
+@property (strong) IBOutlet RecentsUtility *recentsUtility;
+@property (strong) IBOutlet TextureUtility *textureUtility;
+@property (strong) IBOutlet BrushUtility *brushUtility;
+@property (strong) IBOutlet PegasusUtility *pegasusUtility;
+@property (strong) IBOutlet ToolboxUtility *toolboxUtility;
+@property (strong) IBOutlet OptionsUtility *optionsUtility;
+@property (strong) IBOutlet InfoUtility *infoUtility;
+@property (strong) IBOutlet StatusUtility *statusUtility;
 
 // CREATION METHODS
 
@@ -110,42 +126,10 @@
 - (id)initWithPasteboard;
 
 /*!
-	@method		initWithContentsOfFile:ofType:
-	@discussion	Initializes an instance of this class with the given image file.
-	@param		path
-				The path of the file with which to initalize this class.
-	@param		type
-				The type of file with which this class is being initialized.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithContentsOfFile:(NSString *)path ofType:(NSString *)type;
-
-/*!
-	@method		initWithData:type:width:height:
-	@discussion	Initializes an instance of this class with the given data.
-	@param		data
-				The data with which this class is being initialized.
-	@param		type
-				The type with which this class is being initialized.
-	@param		width
-				The width of the data with which this class is being initialized.
-	@param		height
-				The height of the data with which this class is being initialized.
-	@result		Returns instance upon success (or NULL otherwise).
-*/
-- (id)initWithData:(unsigned char *)data type:(int)type width:(int)width height:(int)height;
-
-/*!
 	@method		awakeFromNib
 	@discussion	Prepares document for use.
 */
 - (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		saveDocument:
@@ -170,21 +154,21 @@
 	@discussion	Returns the contents of the document.
 	@result		Returns an instance of SeaContent.
 */
-- (id)contents;
+- (SeaContent*)contents;
 
 /*!
 	@method		whiteboard
 	@discussion	Returns the whiteboard of the document.
 	@result		Returns an instance of SeaWhiteboard.
 */
-- (id)whiteboard;
+- (SeaWhiteboard*)whiteboard;
 
 /*!
 	@method		selection
 	@discussion	Returns the selection manager of the document.
 	@result		Returns an instance of SeaSelection.
 */
-- (id)selection;
+- (SeaSelection*)selection;
 
 /*!
 	@method		operations
@@ -201,19 +185,25 @@
 - (id)tools;
 
 /*!
+ @method        currentTool
+ @result        Returns the instance of the current tool
+ */
+- (id)currentTool;
+
+/*!
 	@method		helpers
 	@discussion	Returns an object containing various helper methods for the
 				document.
 	@result		Returns an instance of SeaHelpers.
 */
-- (id)helpers;
+- (SeaHelpers*)helpers;
 
 /*!
 	@method		warnings
 	@discussion	Returns an object contaning the warning related methods.
 	@result		Returns an instance of WarningsUtility.
 */
-- (id)warnings;
+- (WarningsUtility*)warnings;
 
 /*!
 	@method		pluginData
@@ -227,7 +217,7 @@
 	@discussion	Returns the document view of the document.
 	@result		Returns an instance of SeaView.
 */
-- (id)docView;
+- (SeaView *)docView;
 
 /*!
 	@method		window
@@ -248,6 +238,13 @@
 	@result		Returns an instance of TextureExporter.
 */
 - (id)textureExporter;
+
+/*!
+ @method        brushExporter
+ @discussion    Returns the brush exporter.
+ @result        Returns an instance of BrushExporter.
+ */
+- (id)brushExporter;
 
 // DOCUMENT METHODS
 
@@ -378,22 +375,6 @@
 // EXTRA METHODS
 
 /*!
-	@method		current
-	@discussion	Returns a boolean indicating whether the document is current.
-				Documents are not current, if they were created using the "Compare
-				to Last Saved" menu item and have not been resaved since.
-	@result		Returns YES if the document is original, NO otherwise.
-*/
-- (BOOL)current;
-
-/*!
-	@method		setCurrent
-	@discussion	Sets the current boolean to the specified value. Remember non-current
-				documents will be deleted upon closing!
-*/
-- (void)setCurrent:(BOOL)value;
-
-/*!
 	@method		uniqueLayerID
 	@discussion	Returns a unique ID for a given layer and then increments the
 				uniqueLayerID instance variable so the next layer will recieve a
@@ -416,13 +397,6 @@
 				itself.
 */
 - (int)uniqueFloatingLayerID;
-
-/*!
-	@method		uniqueDocID
-	@discussion	Returns the unique ID of the document.
-	@result		Returns an integer representing a unique ID for the document.
-*/
-- (int)uniqueDocID;
 
 /*!
 	@method		windowNibName
@@ -511,39 +485,6 @@
 - (BOOL)validateMenuItem:(id)menuItem;
 
 /*!
-	@method		runModalSavePanelForSaveOperation:delegate:didSaveSelector:contextInfo:
-	@discussion	Runs the save panel for the given save operation.
-	@param		saveOperation
-				The save operation.
-	@param		delegate
-				The save panel's delegate.
-	@param		didSaveSelector
-				The callback selector once the save panel is complete.
-	@param		contextInfo
-				The pointer to pass to the callback method.
-*/
-- (void)runModalSavePanelForSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo;
-
-/*!
-	@method		document:didSave:contextInfo:
-	@param		doc
-				The document being saved.
-	@param		didSave
-				Whether the document was saved.
-	@param		contextInfo
-				A pointer to pass to the callback method.
-*/
-- (void)document:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void *)contextInfo;
-
-/*!
-	@method		fileTypeFromLastRunSavePanel
-	@discussion	Must be overridden to make sure the saving of files works
-				correctly.
-	@result		Returns exactly the same as the "fileType" method would.
-*/
-- (NSString *)fileTypeFromLastRunSavePanel;
-
-/*!
     @method     scrollView
 	@result		Returns the document main view as a scroll view
 */
@@ -555,5 +496,12 @@
 	@result		Returns the data source used by the layers view
 */
 - (id) dataSource;
+
+/*!
+ @method maybeShowLayerWarning
+ @discussion maybe show the warning that the current document does not
+   support saving layers
+*/
+- (void)maybeShowLayerWarning;
 
 @end

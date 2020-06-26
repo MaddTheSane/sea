@@ -3,7 +3,6 @@
 #import "SeaHelp.h"
 #import "SeaTools.h"
 #import "SeaController.h"
-#import "UtilitiesManager.h"
 #import "SeaWarning.h"
 #import "SeaDocument.h"
 
@@ -60,19 +59,10 @@ enum {
 	}
 	
 	isErasing = NO;
-	warnedUser = NO;
 }
 
 - (IBAction)update:(id)sender
 {
-	if (!warnedUser && [sender tag] == 3) {
-		if ([pressureCheckbox state]) {
-			if (floor(NSAppKitVersionNumber) == NSAppKitVersionNumber10_4 && NSAppKitVersionNumber < NSAppKitVersionNumber10_4_6) {
-				[[SeaController seaWarning] addMessage:LOCALSTR(@"tablet bug message", @"There is a bug in Mac OS 10.4 that causes some tablets to incorrectly register their first touch at full strength. A workaround is provided in the \"Preferences\" dialog however the best solution is to upgrade to Mac OS 10.4.6 or later.") level:kModerateImportance];
-				warnedUser = YES;
-			}
-		}
-	}
 	[fadeSlider setEnabled:[fadeCheckbox state]];
 	[fadeCheckbox setTitle:[NSString stringWithFormat:LOCALSTR(@"fade-out", @"Fade-out: %d"), [fadeSlider intValue]]];
 	[pressurePopup setEnabled:[pressureCheckbox state]];
@@ -123,11 +113,6 @@ enum {
 - (BOOL)scale
 {
 	return [scaleCheckbox state];
-}
-
-- (BOOL)useTextures
-{
-	return [[SeaController seaPrefs] useTextures];
 }
 
 - (BOOL)brushIsErasing

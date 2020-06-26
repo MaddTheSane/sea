@@ -12,8 +12,9 @@
 #import "SeaHelpers.h"
 #import "SeaSelection.h"
 #import "SeaController.h"
-#import "UtilitiesManager.h"
 #import "TextureUtility.h"
+#import "RecentsUtility.h"
+#import "Bitmap.h"
 
 @implementation BucketTool
 
@@ -31,11 +32,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	startPoint = where;
@@ -51,6 +47,9 @@
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
+    if(!intermediate)
+        return;
+    
 	currentNSPoint = [[document docView] convertPoint:[event locationInWindow] fromView:NULL];
 	
 	BOOL optionDown = [(BucketOptions*)options modifier] == kAltModifier;
@@ -59,7 +58,7 @@
 	int width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height];
 	
 	[[document whiteboard] clearOverlay];
-	[[document helpers] overlayChanged:rect inThread:NO];
+	[[document helpers] overlayChanged:rect];
 
 	if (where.x < 0 || where.y < 0 || where.x >= width || where.y >= height) {
 		rect.size.width = rect.size.height = 0;
@@ -78,7 +77,7 @@
 	BOOL optionDown = [(BucketOptions*)options modifier] == kAltModifier;
 	
 	[[document whiteboard] clearOverlay];
-	[[document helpers] overlayChanged:rect inThread:NO];
+	[[document helpers] overlayChanged:rect];
 
 	if (where.x < 0 || where.y < 0 || where.x >= width || where.y >= height) {
 		rect.size.width = rect.size.height = 0;
@@ -87,11 +86,13 @@
 	}
 	isPreviewing = NO;
 	intermediate = NO;
+    
+    [[document recentsUtility] rememberBucket:(BucketOptions*)options];
 }
 
 - (void)fillAtPoint:(IntPoint)point useTolerance:(BOOL)useTolerance delay:(BOOL)delay
 {
-	id layer = [[document contents] activeLayer], activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	id layer = [[document contents] activeLayer], activeTexture = [[document textureUtility] activeTexture];
 	int tolerance, width = [(SeaLayer *)layer width], height = [(SeaLayer *)layer height], spp = [[document contents] spp];
 	int textureWidth = [(SeaTexture *)activeTexture width], textureHeight = [(SeaTexture *)activeTexture height];
 	unsigned char *overlay = [[document whiteboard] overlay], *data = [(SeaLayer *)layer data];
@@ -107,7 +108,7 @@
 	if ([options useTextures]) {
 		for (k = 0; k < spp - 1; k++)
 			basePixel[k] = 0;
-		basePixel[spp - 1] = [(TextureUtility*)[[SeaController utilitiesManager] textureUtilityFor:document] opacity];
+		basePixel[spp - 1] = [[document textureUtility] opacity];
 	}
 	else {
 		if (spp == 4) {
@@ -121,31 +122,40 @@
 			basePixel[1] = (unsigned char)([color alphaComponent] * 255.0);
 		}
 	}
-		
 	
-	int intervals = [options numIntervals];
-	
-	IntPoint* seeds = malloc(sizeof(IntPoint) * (intervals + 1));
-	
-	int seedIndex;
-	int xDelta = point.x - startPoint.x;
-	int yDelta = point.y - startPoint.y;
-	for(seedIndex = 0; seedIndex <= intervals; seedIndex++){
-		int x = startPoint.x + (int)ceil(xDelta * ((float)seedIndex / intervals));
-		int y = startPoint.y + (int)ceil(yDelta * ((float)seedIndex / intervals));
-		seeds[seedIndex] = IntMakePoint(x, y);				
-	}
+    int seedIndex;
+    int xDelta = point.x - startPoint.x;
+    int yDelta = point.y - startPoint.y;
+    
+    int distance = (int)ceil(sqrt(xDelta*xDelta+yDelta*yDelta));
+    int intervals = MAX(MIN(distance,64),1);
 
+    IntPoint* seeds = malloc(sizeof(IntPoint) * (intervals));
+    
+    int inrect=0;
+    for(seedIndex = 0; seedIndex < intervals; seedIndex++){
+        int x = startPoint.x + (int)ceil(xDelta * ((float)seedIndex / intervals));
+        int y = startPoint.y + (int)ceil(yDelta * ((float)seedIndex / intervals));
+        if(x<0 || x>=width || y <0 || y>=height)
+            continue;
+        // check if color already exists in seeds
+        for(int i=0;i<inrect;i++) {
+            if(isSameColor(data,width,spp,x,y,seeds[i].x,seeds[i].y))
+                goto next_seed;
+        }
+        seeds[inrect] = IntMakePoint(x, y);
+        inrect++;
+    next_seed:
+        continue;
+    }
+    intervals=inrect;
 	
 	// Fill everything
 	if (useTolerance)
 		tolerance = [(BucketOptions*)options tolerance];
 	else
 		tolerance = 255;
-	if ([layer floating])
-		channel = kPrimaryChannels;
-	else
-		channel = [[document contents] selectedChannel];
+    channel = [[document contents] selectedChannel];
 	if ([[document selection] active])
 		rect = bucketFill(spp, [[document selection] localRect], overlay, data, width, height, seeds, intervals, basePixel, tolerance, channel);
 	else
@@ -159,7 +169,7 @@
 	
 	// Do the update
 	if (delay)
-		[[document helpers] overlayChanged:rect inThread:NO];
+		[[document helpers] overlayChanged:rect];
 	else
 		[(SeaHelpers *)[document helpers] applyOverlay];
 }
@@ -173,5 +183,15 @@
 {
 	return currentNSPoint;
 }
+
+- (AbstractOptions*)getOptions
+{
+    return options;
+}
+- (void)setOptions:(AbstractOptions*)newoptions
+{
+    options = (BucketOptions*)newoptions;
+}
+
 
 @end

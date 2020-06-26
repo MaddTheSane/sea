@@ -16,16 +16,15 @@
 		 here it is:
 		 [(AbstractSelectOptions *)options selectionMode] == kDefaultMode
 		 */
+        IntPoint maskOffset = [[document selection] maskOffset];
+        IntSize maskSize = [[document selection] maskSize];
 		
 		[self mouseDownAt: localPoint
 				  forRect: [[document selection] globalRect]
+             withMaskRect: IntMakeRect(maskOffset.x,maskOffset.y,maskSize.width,maskSize.height)
 				  andMask: [(SeaSelection*)[document selection] mask]];
 		
-		// Also, we universally float the selection if alt is down
-		if(![self isMovingOrScaling] && [(AbstractOptions*)options modifier] == kAltModifier) {
-			[[document contents] makeSelectionFloat:NO];
-		}
-	}	
+	}
 }
 
 - (void)mouseDraggedTo:(IntPoint)localPoint withEvent:(NSEvent *)event
@@ -37,10 +36,11 @@
 		if(scalingDir > kNoDir && !translating){
 			[[document selection] scaleSelectionTo: newRect
 											  from: [self preScaledRect]
-									 interpolation: GIMP_INTERPOLATION_CUBIC
+									 interpolation: NSImageInterpolationHigh
 										 usingMask: [self preScaledMask]];
 		}else if (translating && scalingDir == kNoDir){
-			[[document selection] moveSelection:IntMakePoint(newRect.origin.x, newRect.origin.y)];
+            [[document selection] moveSelection:localPoint fromOrigin:moveOrigin];
+            moveOrigin = localPoint;
 		}
 	}
 }
@@ -51,6 +51,11 @@
 		[self mouseUpAt: localPoint
 				forRect: [[document selection] globalRect]
 				andMask: [(SeaSelection*)[document selection] mask]];
+        
+        // Also, we universally float the selection if alt is down
+        if([[self getOptions] modifier] == kAltModifier) {
+            [[document contents] makeSelectionFloat:NO];
+        }
 	}
 }
 

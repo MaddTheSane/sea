@@ -17,7 +17,8 @@ enum
 	kSidebar,
 	kPointInformation,
 	kStatusBar,
-	kWarningsBar
+	kWarningsBar,
+    kRecentsBar
 };
 
 
@@ -27,13 +28,13 @@ enum
 @class BannerView;
 
 @interface SeaWindowContent : NSView {
-	IBOutlet SeaDocument *document;
+	__weak IBOutlet SeaDocument *document;
 
-	IBOutlet SeaOptionsView* optionsBar;
+	__weak IBOutlet SeaOptionsView* optionsBar;
 	IBOutlet NSView *nonOptionsBar;
 	
 	IBOutlet NSView* sidebar;
-	IBOutlet NSScrollView* layers;
+	__weak IBOutlet NSScrollView* layers;
 	IBOutlet NSView* pointInformation;
 	IBOutlet LayerControlView* sidebarStatusbar;
 	
@@ -41,6 +42,7 @@ enum
 	IBOutlet BannerView *warningsBar;
 	IBOutlet NSView *mainDocumentView;
 	IBOutlet LayerControlView *statusBar;
+    IBOutlet NSView *recentsBar;
 	
 	// Dictionary for all properties
 	NSDictionary *dict;

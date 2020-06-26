@@ -29,21 +29,17 @@ typedef struct {
 
 /*!
 	@class		SeaBrush
-	@abstract	Represents a single GIMP brush.
-	@discussion	N/A
-				<br><br>
-				<b>License:</b> GNU General Public License<br>
-				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
+	@abstract	Represents a single brush.
 */
 
 @interface SeaBrush : NSObject {
 	
 	// A grayscale mask of the brush
-	unsigned char *mask, *scaled, *positioned;
+    unsigned char *mask, *scaled, *templateMask;
 	BOOL maskLibraryValid;
 	
 	// A cache of all the brushes
-	CachedMask *maskCache;
+    CachedMask *maskCache;
 	int checkCount;
 	
 	// A coloured pixmap of the brush (RGBA)
@@ -213,5 +209,7 @@ typedef struct {
 	@result		Returns an NSComparisonResult.
 */
 - (NSComparisonResult)compare:(id)other;
+
+-(void)drawBrushAt:(NSRect)rect;
 
 @end

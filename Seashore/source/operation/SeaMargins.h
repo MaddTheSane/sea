@@ -67,7 +67,7 @@ enum {
 @interface SeaMargins : NSObject {
 	
 	// The document and sheet associated with this object
-    IBOutlet id document;
+    __weak IBOutlet id document;
     IBOutlet id sheet;
 	IBOutlet id box;
 	
@@ -182,23 +182,6 @@ enum {
 				Ignored.
 */
 - (IBAction)expandLayer:(id)sender;
-
-
-/*!
-	@method		cropImage:
-	@discussion	Cut the current document down to the current selection.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)cropImage:(id)sender;
-
-/*!
-	@method		maskImage:
-	@discussion	Move the image's boundaries in to the current selection.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)maskImage:(id)sender;
 
 /*!
 	@method		setMarginsLeft:right:top:bottom:index:

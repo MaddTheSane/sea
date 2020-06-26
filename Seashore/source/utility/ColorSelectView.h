@@ -12,14 +12,13 @@
 @interface ColorSelectView : NSView {
 
 	// The document associated with this colour selection view
-	id document;
+	__weak id document;
 
 	// YES if the mouse is down on the swap button
 	BOOL mouseDownOnSwap;
 
 	// The texture utility
-	IBOutlet id textureUtility;
-	
+	__weak IBOutlet id textureUtility;
 }
 
 /*!
@@ -30,12 +29,6 @@
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)initWithFrame:(NSRect)frame;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		setDocument:

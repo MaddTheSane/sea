@@ -13,7 +13,7 @@
 				The parasite's data.
 */
 typedef struct {
-	NSString *name;
+	char *name;
 	unsigned int flags;
 	unsigned int size;
 	unsigned char *data;
@@ -30,6 +30,7 @@ typedef struct {
 */
 
 @class SeaWhiteboard;
+@class SeaLayer;
 
 @interface SeaContent : NSObject {
 	IntPoint gScreenResolution;
@@ -66,9 +67,6 @@ typedef struct {
 	ParasiteData *parasites;
 	int parasites_count;
 	
-	// Save as a CMYK TIFF file
-	BOOL cmykSave;
-	
 	// The EXIF data associated with this image
 	NSDictionary *exifData;
 	
@@ -84,7 +82,7 @@ typedef struct {
 				The document with which to initialize the instance.
 	@result		Returns instance upon success (or NULL otherwise).
 */
-- (id)init;
+- (id)initWithDocument:(id)doc;
 
 
 /*!
@@ -206,22 +204,22 @@ typedef struct {
 - (int)parasites_count;
 
 /*!
-	@method		parasiteWithName:
-	@discussion	Returns a pointer to the parasite with the given name.
-	@param		name
-				The name of the parasite.
-	@result		Returns a pointer to the ParasiteData record with the requested
-				name or NULL if no parasites match.
-*/
-- (ParasiteData *)parasiteWithName:(NSString *)name;
+ @method        parasiteWithName:
+ @discussion    Returns a pointer to the parasite with the given name.
+ @param        name
+ The name of the parasite.
+ @result        Returns a pointer to the ParasiteData record with the requested
+ name or NULL if no parasites match.
+ */
+- (ParasiteData *)parasiteWithName:(char *)name;
 
 /*!
-	@method		deleteParasiteWithName:
-	@discussion	Deletes the parasite with the given name.
-	@param		name
-				The name of the parasite to delete.
-*/
-- (void)deleteParasiteWithName:(NSString *)name;
+ @method        deleteParasiteWithName:
+ @discussion    Deletes the parasite with the given name.
+ @param        name
+ The name of the parasite to delete.
+ */
+- (void)deleteParasiteWithName:(char *)name;
 
 /*!
 	@method		addParasite:
@@ -252,25 +250,6 @@ typedef struct {
 				otherwise.
 */
 - (void)setTrueView:(BOOL)value;
-
-/*!
-	@method		setCMYKSave
-	@discussion	Sets whether TIFF files should be saved using the CMYK colour
-				space.
-	@param		value
-				YES if TIFF files should be saved using the CMYK colour space,
-				NO otherwise.
-*/
-- (void)setCMYKSave:(BOOL)value;
-
-/*!
-	@method		cmykSave
-	@discussion	Returns whether TIFF files should be saved using the CMYK colour
-				space.
-	@result		YES if TIFF files should be saved using the CMYK colour space,
-				NO otherwise.
-*/
-- (BOOL)cmykSave;
 
 /*!
 	@method		exifData
@@ -304,7 +283,7 @@ typedef struct {
 	@discussion	Returns the currently active layer.
 	@result		An instance of SeaLayer representing the active layer.
 */
-- (id)activeLayer;
+- (SeaLayer*)activeLayer;
 
 /*!
 	@method		activeLayerIndex
@@ -312,14 +291,5 @@ typedef struct {
 	@result		Returns an integer representing the index of the active layer.
 */
 - (int)activeLayerIndex;
-
-
-/*!
-	@method		bitmapUnderneath:
-	@discussion	Returns the bitmap underneath the rectangle.
-	@param		rect
-				The rectangle concerned.
-*/
-- (unsigned char *)bitmapUnderneath:(IntRect)rect forWhiteboard:(SeaWhiteboard *)whiteboard;
 
 @end

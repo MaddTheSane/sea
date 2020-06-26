@@ -1,5 +1,6 @@
 #import "Globals.h"
 #import "AbstractPanelUtility.h"
+#import "SeaBrush.h"
 
 /*!
 	@class		BrushUtility
@@ -26,10 +27,10 @@
     IBOutlet id view;
 		
 	// The document which is the focus of this utility
-	IBOutlet id document;
+	__weak IBOutlet id document;
 	
 	// An dictionary of all brushes known to Seashore
-	NSDictionary *brushes;
+	NSDictionary<NSString*,SeaBrush*> *brushes;
 	
 	// An array of all groups (an array of an array SeaBrush's) and group names (an array of NSString's)
 	NSArray *groups;
@@ -60,12 +61,6 @@
 - (void)awakeFromNib;
 
 /*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
-
-/*!
 	@method		shutdown
 	@discussion	Saves currently selected brush upon shutdown.
 */
@@ -80,6 +75,14 @@
 				the brushes (typical case), NO otherwise.
 */
 - (void)loadBrushes:(BOOL)update;
+
+/*!
+ @method        addBrushFromPath:toGroup:
+ @discussion    Loads a brush from the given path (handles updates).
+ @param        path
+ The path from which to load the brush.
+ */
+- (void)addBrushFromPath:(NSString *)path;
 
 /*!
 	@method		changeSpacing:
@@ -106,12 +109,27 @@
 - (int)spacing;
 
 /*!
+ @method        setSpacing
+ @discussion    sets the spacing
+ */
+- (void)setSpacing:(int)spacing;
+
+
+/*!
 	@method		activeBrush
 	@discussion	Returns the currently active brush.
 	@result		Returns an instance of SeaBrush representing the currently
 				active brush.
 */
 - (id)activeBrush;
+
+/*!
+ @method        activeGroupIndex
+ @discussion    Returns the index of the currently active brush group.
+ @result        Returns an integer representing the index of the currently
+ active brush group.
+ */
+- (int)activeGroupIndex;
 
 /*!
 	@method		activeBrushIndex
@@ -122,12 +140,29 @@
 - (int)activeBrushIndex;
 
 /*!
+ @method        setActiveGroupIndex:
+ @discussion    Sets the active brush group to that specified by the given index.
+ @param        index
+ The index of the brush group to activate.
+ */
+- (void)setActiveGroupIndex:(int)index;
+
+/*!
 	@method		setActiveBrushIndex:
 	@discussion	Sets the active brush to that specified by the given index.
 	@param		index
 				The index of the brush to activate.
 */
 - (void)setActiveBrushIndex:(int)index;
+
+
+/*!
+ @method        setActiveBrushIndex:
+ @discussion    Sets the active brush to that specified by the given index.
+ @param        index
+ The index of the brush to activate.
+ */
+- (void)setActiveBrush:(SeaBrush*)brush;
 
 /*!
 	@method		brushes
@@ -136,5 +171,12 @@
 				group. 
 */
 - (NSArray *)brushes;
+
+/*!
+ @method        groupNames
+ @discussion    Returns the textures' group names (excluding custom groups).
+ @result        Returns an NSArray containing the textures' group names.
+ */
+- (NSArray *)groupNames;
 
 @end

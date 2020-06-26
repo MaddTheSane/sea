@@ -6,7 +6,7 @@
 	@discussion	A record containing arbitrary data that will be saved with the
 				image using the XCF file format.
 	@field		name
-				The name of the parasite.
+				The null terminated name of the parasite.
 	@field		flags
 				Any flags associated with the parasite.
 	@field		size
@@ -15,7 +15,7 @@
 				The parasite's data.
 */
 typedef struct {
-	NSString *name;
+	char *name;
 	unsigned int flags;
 	unsigned int size;
 	unsigned char *data;
@@ -31,10 +31,12 @@ typedef struct {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
+@class SeaLayer;
+
 @interface SeaContent : NSObject {
 	
 	// The document associated with this object
-	id document;
+	__weak id document;
 	
 	// The document's x and y resolution
 	int xres, yres;
@@ -71,11 +73,11 @@ typedef struct {
 	ParasiteData *parasites;
 	int parasites_count;
 	
-	// Save as a CMYK TIFF file
-	BOOL cmykSave;
-	
 	// The EXIF data associated with this image
 	NSDictionary *exifData;
+    
+    // The color space retrieved from the original file load, or NULL
+    NSColorSpace *fileColorSpace;
 	
 }
 
@@ -148,12 +150,6 @@ typedef struct {
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (id)initWithDocument:(id)doc data:(unsigned char *)ddata type:(int)dtype width:(int)dwidth height:(int)dheight res:(int)dres;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 // PROPERTY METHODS
 
@@ -319,7 +315,7 @@ typedef struct {
 	@result		Returns a pointer to the ParasiteData record with the requested
 				name or NULL if no parasites match.
 */
-- (ParasiteData *)parasiteWithName:(NSString *)name;
+- (ParasiteData *)parasiteWithName:(char *)name;
 
 /*!
 	@method		deleteParasiteWithName:
@@ -327,7 +323,7 @@ typedef struct {
 	@param		name
 				The name of the parasite to delete.
 */
-- (void)deleteParasiteWithName:(NSString *)name;
+- (void)deleteParasiteWithName:(char *)name;
 
 /*!
 	@method		addParasite:
@@ -378,31 +374,20 @@ typedef struct {
 - (NSColor *)background;
 
 /*!
-	@method		setCMYKSave
-	@discussion	Sets whether TIFF files should be saved using the CMYK colour
-				space.
-	@param		value
-				YES if TIFF files should be saved using the CMYK colour space,
-				NO otherwise.
-*/
-- (void)setCMYKSave:(BOOL)value;
-
-/*!
-	@method		cmykSave
-	@discussion	Returns whether TIFF files should be saved using the CMYK colour
-				space.
-	@result		YES if TIFF files should be saved using the CMYK colour space,
-				NO otherwise.
-*/
-- (BOOL)cmykSave;
-
-/*!
 	@method		exifData
 	@discussion	Returns the EXIF data for this document.
 	@result		Returns an NSDictionary containing the EXIF data or NULL if no
 				such data exists.
 */
 - (NSDictionary *)exifData;
+
+/*!
+ @method        cs
+ @discussion    Returns the color space for this document.
+ @result        Returns an NSColorSpace or NULL such data exists.
+ */
+- (NSColorSpace *)fileColorSpace;
+
 
 // LAYER METHODS
 
@@ -428,7 +413,7 @@ typedef struct {
 	@discussion	Returns the currently active layer.
 	@result		An instance of SeaLayer representing the active layer.
 */
-- (id)activeLayer;
+- (SeaLayer*)activeLayer;
 
 /*!
 	@method		activeLayerIndex
@@ -579,10 +564,10 @@ typedef struct {
 - (void)makePasteboardFloat;
 
 /*!
-	@method		anchorSelection
-	@discussion	Anchors the currently floating selection.
+	@method		anchorLayer
+	@discussion	Anchors the currently floating layer
 */
-- (void)anchorSelection;
+- (void)anchorLayer;
 
 /*!
 	@method		canRaise:

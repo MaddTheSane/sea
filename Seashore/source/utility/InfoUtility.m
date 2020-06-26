@@ -8,7 +8,6 @@
 #import "SeaContent.h"
 #import "SeaPrefs.h"
 #import "SeaController.h"
-#import "UtilitiesManager.h"
 #import "SeaPrefs.h"
 #import "PositionTool.h"
 #import "RectSelectTool.h"
@@ -28,12 +27,7 @@
 - (void)awakeFromNib
 {
 	// Shown By Default
-	[[SeaController utilitiesManager] setInfoUtility: self for:document];
-	[(LayerControlView *)controlView setHasResizeThumb:YES];
-	
-	if(![self visible]){
-		[toggleButton setImage:[NSImage imageNamed:@"show-info"]];
-	}
+    [toggleButton setState:[self visible]];
 }
 
 - (void)shutdown
@@ -55,13 +49,13 @@
 - (IBAction)show:(id)sender
 {
 	[[[document window] contentView] setVisibility: YES forRegion: kPointInformation];
-	[toggleButton setImage:[NSImage imageNamed:@"hide-info"]];
+    [toggleButton setState:1];
 }
 
 - (IBAction)hide:(id)sender
 {
 	[[[document window] contentView] setVisibility: NO forRegion: kPointInformation];	
-	[toggleButton setImage:[NSImage imageNamed:@"show-info"]];
+    [toggleButton setState:0];
 }
 
 - (IBAction)toggle:(id)sender
@@ -80,7 +74,6 @@
 	IntSize size;
 	NSColor *color;
 	int xres, yres, units;
-	int curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
 	
 	// Show no values
 	if (!document) {
@@ -105,10 +98,12 @@
 	// Update the document information
 	xres = [[document contents] xres];
 	yres = [[document contents] yres];
+    
+    int curToolIndex = [[document currentTool] toolId];
 
 	// Get the selection
 	if (curToolIndex == kCropTool) {
-		size = [[[document tools] currentTool] cropRect].size;
+		size = [[document currentTool] cropRect].size;
 	}
 	else if ([[document selection] active]) {
 		size = [[document selection] globalRect].size;
@@ -133,13 +128,13 @@
 	color = [[[document tools] getTool:kEyedropTool] getColor];
 	if (color) {
 		[colorWell setColor:color];
-		if ([[color colorSpaceName] isEqualToString:NSDeviceRGBColorSpace]) {
+		if ([[color colorSpaceName] isEqualToString:MyRGBSpace]) {
 			[redValue setIntValue:[color redComponent] * 255.0];
 			[greenValue setIntValue:[color greenComponent] * 255.0];
 			[blueValue setIntValue:[color blueComponent] * 255.0];
 			[alphaValue setIntValue:[color alphaComponent] * 255.0];
 		}
-		else if ([[color colorSpaceName] isEqualToString:NSDeviceWhiteColorSpace]) {
+		else if ([[color colorSpaceName] isEqualToString:MyGraySpace]) {
 			[redValue setIntValue:[color whiteComponent] * 255.0];
 			[greenValue setIntValue:[color whiteComponent] * 255.0];
 			[blueValue setIntValue:[color whiteComponent] * 255.0];

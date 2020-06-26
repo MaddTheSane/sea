@@ -13,7 +13,6 @@
 */
 enum {
 	kLayerSwitched,
-	kTransparentLayerAdded,
 	kLayerAdded,
 	kLayerDeleted
 };
@@ -31,7 +30,7 @@ enum {
 @interface SeaHelpers : NSObject {
 	
 	// The document associated with this object
-    IBOutlet id document;
+    __weak IBOutlet id document;
 	
 }
 
@@ -40,6 +39,13 @@ enum {
 	@discussion	Called after a selection is made or cancelled.
 */
 - (void)selectionChanged;
+
+/*!
+    @method        selectionChanged
+    @discussion    Called after a selection is made or cancelled
+    @param         the rect encompasing the old and new selection
+*/
+- (void)selectionChanged:(IntRect)rect;
 
 /*!
 	@method		endLineDrawing
@@ -84,18 +90,13 @@ enum {
 - (void)activeLayerWillChange;
 
 /*!
-	@method		activeLayerChanged:rect:
+	@method		activeLayerChanged:
 	@discussion	Called after the document's active layer is changed.
 	@param		eventType
 				The layer event type associated with the change (see  constants
 				in the header).
-	@param		rect
-				The rectangle specifying the deleted layer's boundaries for
-				kLayerDeleted events or the added layer's boundaries for
-				kLayerAdded events or NULL. This is used to allow more effective
-				updating.
 */
-- (void)activeLayerChanged:(int)eventType rect:(IntRect *)rect;
+- (void)activeLayerChanged:(int)eventType;
 
 /*!
 	@method		documentWillFlatten
@@ -128,10 +129,8 @@ enum {
 	@param		rect
 				The rectangle containing the changed region in the overlay's
 				co-ordinates.
-	@param		thread
-				YES if drawing should be done in thread, NO otherwise.
 */
-- (void)overlayChanged:(IntRect)rect inThread:(BOOL)thread;
+- (void)overlayChanged:(IntRect)rect;
 
 /*!
 	@method		layerAttributesChanged:hold:
@@ -185,6 +184,16 @@ enum {
 				is kAllLayers or kLinkedLayers.
 */
 - (void)layerOffsetsChanged:(int)index from:(IntPoint)oldOffsets;
+
+/*!
+    @method        layerOffsetsChanged:rect:
+    @discussion    Called after multiple layer offsets  are changed.
+    @param        oldOffsets
+                Theold offsets of the active layer
+    @param        rect
+                The dirty rect containing the union of all old/new rects
+*/
+- (void)layerOffsetsChanged:(IntPoint)oldOffsets rect:(IntRect)dirtyRect;
 
 /*!
 	@method		layerSnapshotRestored:rect:

@@ -13,7 +13,6 @@
 #import "SeaRotation.h"
 #import "SeaScale.h"
 
-
 @implementation PositionTool
 
 - (int)toolId
@@ -33,26 +32,16 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[super dealloc];
-}
-
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	id contents = [document contents];
-	id activeLayer = [contents activeLayer];
+	SeaLayer * activeLayer = [contents activeLayer];
 	IntPoint oldOffsets;
 	int whichLayer;
 	int function = kMovingLayer;
 	
-	// Determine the function
-	if ([activeLayer floating] && [options canAnchor] && (where.x < 0 || where.y < 0 || where.x >= [(SeaLayer *)activeLayer width] || where.y >= [(SeaLayer *)activeLayer height])){
-		function = kAnchoringLayer;
-	}else{
-		function = [options toolFunction];
-	}
-
+    function = [options toolFunction];
+    
 	// Record the inital point for dragging
 	initialPoint = where;
 
@@ -104,61 +93,53 @@
 			[[document docView] setNeedsDisplay:YES];
 			
 		break;
-		case kAnchoringLayer:
-		
-			// Anchor the layer
-			[contents anchorSelection];
-			
-		break;
 	}
 }
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
 {
 	id contents = [document contents];
-	id activeLayer = [contents activeLayer];
+	SeaLayer *activeLayer = [contents activeLayer];
 	int xoff, yoff, whichLayer;
 	int deltax = where.x - initialPoint.x, deltay = where.y - initialPoint.y;
-	IntPoint oldOffsets;
-	NSPoint activeCenter = NSMakePoint([activeLayer xoff] + [(SeaLayer *)activeLayer width] / 2, [activeLayer yoff] + [(SeaLayer *)activeLayer height] / 2);
+	NSPoint activeCenter = NSMakePoint([activeLayer xoff] + [activeLayer width] / 2, [activeLayer yoff] + [activeLayer height] / 2);
 	float original, current;
 	
+    IntPoint oldOffsets = [activeLayer localRect].origin;
+                  
 	// Vary behaviour based on function
-	switch ([options  toolFunction]) {
+	switch ([options toolFunction]) {
 		case kMovingLayer:
-			
+            
 			// If the active layer is linked we have to move all associated layers
 			if ([activeLayer linked]) {
+                IntRect dirty = [activeLayer localRect];
 			
 				// Move all of the linked layers
 				for (whichLayer = 0; whichLayer < [contents layerCount]; whichLayer++) {
-					if ([[contents layer:whichLayer] linked]) {
-						xoff = [[contents layer:whichLayer] xoff]; yoff = [[contents layer:whichLayer] yoff];
-						[[contents layer:whichLayer] setOffsets:IntMakePoint(xoff + deltax, yoff + deltay)];
-					}
+                    SeaLayer *layer = [contents layer:whichLayer];
+					if ([layer linked]) {
+                        dirty = IntSumRects(dirty,[layer localRect]);
+						xoff = [layer xoff]; yoff = [layer yoff];
+						[layer setOffsets:IntMakePoint(xoff + deltax, yoff + deltay)];
+                        dirty = IntSumRects(dirty,[layer localRect]);
+                    }
 				}
-				[[document helpers] layerOffsetsChanged:kLinkedLayers from:oldOffsets];
-				
+                [[document helpers] layerOffsetsChanged:oldOffsets rect:dirty];
 			}
 			else {
-			
 				// Move the active layer
 				xoff = [activeLayer xoff]; yoff = [activeLayer yoff];
-				oldOffsets = IntMakePoint(xoff, yoff);
 				[activeLayer setOffsets:IntMakePoint(xoff + deltax, yoff + deltay)];
-				[[document helpers] layerOffsetsChanged:kActiveLayer from:oldOffsets];
-				
+                [[document helpers] layerOffsetsChanged:kActiveLayer from:oldOffsets];
 			}
-			
 		break;
 		case kRotatingLayer:
 		
 			// Continue rotating layer
-			original = atan((initialPoint.y - activeCenter.y) / (initialPoint.x - activeCenter.x));
-			current = atan((where.y - activeCenter.y) / (where.x - activeCenter.x));
-			rotation = current - original;
-			
-		
+            rotation = (initialPoint.x - where.x)/(float)[activeLayer width];
+            [[document docView] setNeedsDisplay:YES];
+
 		break;
 		case kScalingLayer:
 	
@@ -166,10 +147,10 @@
 			original = sqrt(sqr(initialPoint.x - activeCenter.x) + sqr(initialPoint.y - activeCenter.y));
 			current = sqrt(sqr(where.x - activeCenter.x) + sqr(where.y - activeCenter.y));
 			scale = current / original;
-		
+            [[document docView] setNeedsDisplay:YES];
+
 		break;
 	}
-	[[document docView] setNeedsDisplay:YES];
 }
 
 - (void)mouseUpAt:(IntPoint)where withEvent:(NSEvent *)event
@@ -177,10 +158,13 @@
 	id layer;
 	int deltax;
 	int newWidth, newHeight;
+    
+    id contents = [document contents];
+    SeaLayer *activeLayer = [contents activeLayer];
 	
 	// Determine the delta
 	deltax = where.x - initialPoint.x;
-	
+    
 	// Vary behaviour based on function
 	switch ([options toolFunction]) {
 		case kRotatingLayer:
@@ -192,10 +176,15 @@
 			layer = [[document contents] activeLayer];
 			newWidth = scale *  [(SeaLayer *)layer width];
 			newHeight = scale * [(SeaLayer *)layer height];
-			[[seaOperations seaScale] scaleToWidth:newWidth height:newHeight interpolation:GIMP_INTERPOLATION_CUBIC index:kActiveLayer];
+			[[seaOperations seaScale] scaleToWidth:newWidth height:newHeight interpolation:NSImageInterpolationHigh index:kActiveLayer];
 		break;
+        default:
+            if ([activeLayer floating] && [options canAnchor] && (where.x < 0 || where.y < 0 || where.x >= [activeLayer width] || where.y >= [activeLayer height])){
+                [contents anchorLayer];
+            }
+        break;
 	}
-	
+    
 	// Cancel the previewing
 	scale = -1;
 	rotationDefined = NO;
@@ -226,5 +215,15 @@
 	[layer setOffsets:origin];
 	[[document helpers] layerOffsetsChanged:index from:oldOffsets];
 }
+
+- (AbstractOptions*)getOptions
+{
+    return options;
+}
+- (void)setOptions:(AbstractOptions*)newoptions
+{
+    options = (PositionOptions*)newoptions;
+}
+
 
 @end

@@ -10,10 +10,12 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface ToolboxUtility : NSObject {
+@class SeaDocument;
+
+@interface ToolboxUtility : NSObject <NSToolbarDelegate> {
 
 	// The document which is the focus of this utility
-	IBOutlet id document;
+	__weak IBOutlet SeaDocument *document;
 
 	// The proxy object
 	IBOutlet id seaProxy;
@@ -28,7 +30,7 @@
 	IBOutlet id toolbox;
 	
 	// The options utility object
-	IBOutlet id optionsUtility;
+	__weak IBOutlet id optionsUtility;
 	
 	// The tag of the currently selected tool
 	int tool;
@@ -37,20 +39,22 @@
 	int oldTool;
 
 	// The toolbar
-	id toolbar;
+	NSToolbar *toolbar;
 
 	IBOutlet id selectionTBView;
 	IBOutlet id drawTBView;
 	IBOutlet id effectTBView;
 	IBOutlet id transformTBView;
-	
-	IBOutlet id selectionMenu;
+    IBOutlet id selectioneditTBView;
+    
+    IBOutlet id selectionMenu;
 	IBOutlet id drawMenu;
 	IBOutlet id effectMenu;
 	IBOutlet id transformMenu;
 	IBOutlet id colorsMenu;
-	
-	NSArray *selectionTools;
+    IBOutlet id selectioneditMenu;
+    
+    NSArray *selectionTools;
 	NSArray *drawTools;
 	NSArray *effectTools;
 	NSArray *transformTools;
@@ -72,12 +76,6 @@
 	@discussion	Configures the utility's interface.
 */
 - (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		foreground
@@ -170,13 +168,17 @@
 */
 - (IBAction)selectToolUsingTag:(id)sender;
 
+
 /*!
-	@method		selectToolFromSender:
-	@discussion	Called when the segmented controls get clicked.
-	@param		sender
-				The segemented control to select the tool.
-*/
-- (IBAction)selectToolFromSender:(id)sender;
+ @method        selectToolUsingTag:
+ @discussion    Called by menu item to change the tool.
+ @param        sender
+ An object with a tag that modulo-100 specifies the tool to be
+ selected.
+ */
+- (IBAction)selectToolUsingSegmentTag:(id)sender;
+
+- (IBAction)switchSelectionMode:(id)sender;
 
 /*!
 	@method		changeToolTo:
@@ -191,12 +193,6 @@
 	@discussion	Selects the position tool.
 */
 - (void)floatTool;
-
-/*!
-	@method		anchorTool
-	@discussion	Selects the last tool to call floatTool
-*/
-- (void)anchorTool;
 
 /*
 	@method		setEffectEnabled:

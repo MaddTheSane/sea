@@ -19,8 +19,8 @@
 - (void)awakeFromNib
 {
 	int i;
-	editableTypes = [[NSMutableDictionary dictionary] retain];
-	viewableTypes = [[NSMutableDictionary dictionary] retain];
+    editableTypes = [NSMutableDictionary dictionary];
+    viewableTypes = [NSMutableDictionary dictionary];
 	
 	// The document controller is responsible for tracking document types
 	// In addition, as it's in control of open, it also must know the types for import and export
@@ -46,13 +46,15 @@
 	}
 }
 
-- (void)dealloc
++ (void)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow *, NSError *))completionHandler
 {
-	// Then get rid of stuff that's no longer needed
-	if (editableTypes) [editableTypes autorelease];
-	if (viewableTypes) [viewableTypes autorelease];
-	// Finally call the super
-	[super dealloc];
+    NSInteger restorable = [state decodeIntegerForKey:@"restorable"];
+    if (!restorable) {
+        completionHandler(nil, [NSError errorWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil]);
+    }
+    else {
+        [super restoreWindowWithIdentifier:identifier state:state completionHandler:completionHandler];
+    }
 }
 
 - (IBAction)newDocument:(id)sender
@@ -81,17 +83,17 @@
 	[backgroundCheckbox setState:[(SeaPrefs *)[SeaController seaPrefs] transparentBackground]];
 	
 	// Set up the recents menu
-	int i;
 	NSArray *recentDocs = [super recentDocumentURLs];
 	if([recentDocs count]){
 		[recentMenu setEnabled:YES];
-		for(i = 0; i < [recentDocs count]; i++){
-			NSString *path = [[recentDocs objectAtIndex:i] path];
-			NSString *filename = [[path pathComponents] objectAtIndex:[[path pathComponents] count] -1];
-			NSImage *image = [[NSWorkspace sharedWorkspace] iconForFile: path];
+		for(NSURL *url in [super recentDocumentURLs]){
+            NSString *filename = [url lastPathComponent];
 			[recentMenu addItemWithTitle: filename];
-			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setRepresentedObject:path];
-			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setImage: image];
+			[[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setRepresentedObject:url];
+            if ([url isFileURL]) {
+                NSImage *image = [[NSWorkspace sharedWorkspace] iconForFile:[url path]];
+                [[recentMenu itemAtIndex:[recentMenu numberOfItems] - 1] setImage: image];
+            }
 		}
 	}else {
 		[recentMenu setEnabled:NO];
@@ -110,24 +112,42 @@
 
 - (id)openNonCurrentFile:(NSString *)path
 {
-	id newDocument;
+	SeaDocument *newDocument;
 	
 	stopNotingRecentDocuments = YES;
-	newDocument = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfFile:path display:YES];
+    
+    NSURL *url = [NSURL fileURLWithPath:path];
+    
+    NSString *displayName = [path stringByAppendingString:@"(Original)"];
+    NSURL *url0 = [NSURL fileURLWithPath:displayName];
+
+    NSError *error;
+    
+    newDocument = [[NSDocumentController sharedDocumentController] duplicateDocumentWithContentsOfURL:url
+                                                                                              copying:true
+                                                                                          displayName:displayName
+                                                                                                error:&error];
+    [newDocument updateChangeCount:NSChangeCleared];
+    [newDocument setFileURL:url0];
+    
+    NSString *title = [newDocument lastComponentOfFileName];
+    NSWindow *win = (NSWindow*)[newDocument window];
+    [win setTitle:title];
+
 	stopNotingRecentDocuments = NO;
-	[newDocument setCurrent:NO];
 	
 	return newDocument;
 }
 
 - (IBAction)openRecent:(id)sender
 {
-	[[NSDocumentController sharedDocumentController] openDocumentWithContentsOfFile:[[sender selectedItem] representedObject] display:YES];
+    NSURL *url = [[sender selectedItem] representedObject];
+    [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:url display:YES];
 }
 
 - (void)noteNewRecentDocument:(NSDocument *)aDocument
 {
-	if (stopNotingRecentDocuments == NO && [(SeaDocument *)aDocument current]) {
+	if (stopNotingRecentDocuments == NO) {
 		[super noteNewRecentDocument:aDocument];
 	}
 }
@@ -179,7 +199,6 @@
 			if (availableType) {
 				image = [[NSImage alloc] initWithData:[pboard dataForType:availableType]];
 				size = NSSizeMakeIntSize([image size]);
-				[image autorelease];
 			}
 			else {
 				NSBeep();
@@ -301,14 +320,6 @@
 
 - (BOOL)type:(NSString *)aType isContainedInDocType:(NSString*) key
 {
-	// We need to special case these for some reason, I don't know why
-	if([key isEqual:@"Gimp image"] &&
-	   (![aType caseInsensitiveCompare:@"com.gimp.xcf"] ||
-	    ![aType caseInsensitiveCompare:@"net.sourceforge.xcf"] ||
-		![aType caseInsensitiveCompare:@"Gimp Document"])){
-		return YES;
-	}
-	
 	NSMutableSet *set = [editableTypes objectForKey:key];
 	if(!set){
 		set = [viewableTypes objectForKey:key];

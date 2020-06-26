@@ -57,67 +57,67 @@
 	int i;
 	for(i = 0; i < [self numberOfRows]; i++){
 		if([selectedIndexes containsIndex:i]){
-			[items addObject: [self itemAtRow: i]];
+            id entry = [self itemAtRow:i];
+            if(entry!=NULL) {
+                [items addObject: entry];
+            }
 		}
 	}
     return items;
 }
 
 - (void)selectItems:(NSArray *)items byExtendingSelection:(BOOL)extend {
-    int i, totalCount = [items count];
-    if (extend==NO) [self deselectAll:nil];
-    for (i = 0; i < totalCount; i++) {
-        int row = [self rowForItem:[items objectAtIndex:i]];
-        if(row>=0) [self selectRow: row byExtendingSelection:YES];
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
+    
+    for (int i = 0; i < [items count]; i++) {
+        int row = (int)[self rowForItem:[items objectAtIndex:i]];
+        if(row>=0) {
+            [indexSet addIndex:row];
+        }
     }
+    [self selectRowIndexes:indexSet byExtendingSelection:extend];
 }
+
+- (void)selectRow:(int)row {
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
+    
+    [indexSet addIndex:row];
+    [self selectRowIndexes:indexSet byExtendingSelection:NO];
+}
+
 
 @end
 
 @implementation SeaOutlineView
 
-/* This NSOutlineView subclass is necessary only if you want to delete items by dragging them to the trash.  In order to support drags to the trash, you need to implement draggedImage:endedAt:operation: and handle the NSDragOperationDelete operation.  For any other operation, pass the message to the superclass */
-- (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation {
-    if (operation == NSDragOperationDelete) {
-        // Tell all of the dragged nodes to remove themselves from the model.
-        NSArray *selection = [(LayerDataSource *)[self dataSource] draggedNodes];
-        [selection makeObjectsPerformSelector: @selector(removeFromParent)];
-        [self deselectAll:nil];
-        [self reloadData];
-    } else {
-        [super draggedImage:image endedAt:screenPoint operation:operation];
-    }
-}
-
 -(void)highlightSelectionInClipRect:(NSRect)theClipRect
 {
-	[[NSBezierPath bezierPathWithRect:theClipRect] fill];
-	NSIndexSet *indecies = [self selectedRowIndexes];
-	int i;
-	for(i = 0; i < [self numberOfRows]; i++){
-		if([indecies containsIndex: i]){
-			[[NSImage imageNamed:((isFirst && [[self window] isMainWindow]) ?@"sel-gradient" :@"bg-gradient")] drawInRect:[self rectOfRow: i] fromRect:NSZeroRect operation: NSCompositeSourceOver fraction: 1.0];	
-		}else{
-			[[NSColor colorWithCalibratedRed:228.0/255 green:234.0/255 blue:241.0/255 alpha:1.0] set];
-			[[NSBezierPath bezierPathWithRect: [self rectOfRow: i]] fill];
-		}
-	}
-}
+    NSColor *select = [NSColor selectedControlColor];
 
--(id)_highlightColorForCell:(NSCell *)cell
-{
-    return nil;
+    NSIndexSet *indecies = [self selectedRowIndexes];
+    int i;
+    
+    for(i = 0; i < [self numberOfRows]; i++){
+        NSRect rect = [self rectOfRow:i];
+        if([indecies containsIndex: i]){
+            bool isMainWindow = [[self window] isMainWindow];
+            if(isMainWindow)
+                [select set];
+            else
+                [[select shadowWithLevel:.25] set];
+            [[NSBezierPath bezierPathWithRect: rect] fill];
+        }
+    }
 }
 
 -(BOOL)acceptsFirstResponder
 {
-	return NO;
+    return NO;
 }
 
--(BOOL)resignFirstResponder
+-(void)willOpenMenu:(NSMenu *)menu withEvent:(NSEvent *)event
 {
-	isFirst = NO;
-	return [super resignFirstResponder];
+    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:[self clickedRow]] byExtendingSelection:NO];
 }
 
 @end

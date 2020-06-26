@@ -13,6 +13,7 @@
 	if([controller type: aType isContainedInDocType: @"TIFF image"] ||
 	   [controller type: aType isContainedInDocType: @"Portable Network Graphics image"] ||
 	   [controller type: aType isContainedInDocType: @"JPEG image"] ||
+       [controller type: aType isContainedInDocType: @"HEIC image"] ||
 	   [controller type: aType isContainedInDocType: @"JPEG 2000 image"]){
 		return YES;
 	}else if ([controller type: aType isContainedInDocType: @"Graphics Interchange Format (GIF)"]){
@@ -44,7 +45,7 @@
 
 - (id)initWithDocument:(id)doc contentsOfFile:(NSString *)path
 {
-	id imageRep;
+	NSImageRep *imageRep;
 	NSImage *image;
 	id layer;
 	BOOL test, res_set = NO;
@@ -55,10 +56,8 @@
 		return NULL;
 	
 	// Open the image
-	image = [[NSImage alloc] initByReferencingFile:path];
+	image = [[NSImage alloc] initWithContentsOfFile:path];
 	if (image == NULL) {
-		[image autorelease];
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -68,21 +67,24 @@
 		imageRep = [[image representations] objectAtIndex:0];
 		if (![imageRep isKindOfClass:[NSBitmapImageRep class]]) {
 			if ([imageRep isKindOfClass:[NSPDFImageRep class]]) {
-				
-				[image setScalesWhenResized:YES];
-				[image setDataRetained:YES];
+                
+                int dpi_index =0;
+                if ([gUserDefaults objectForKey:@"pdfDPI"])
+                    dpi_index = [gUserDefaults integerForKey:@"pdfDPI"];
+                
+                NSPDFImageRep *pdfRep = (NSPDFImageRep*)imageRep;
 				
 				[NSBundle loadNibNamed:@"CocoaContent" owner:self];
 				[resMenu setEnabled:YES];
+                [resMenu selectItemAtIndex:dpi_index];
 				[pdfPanel center];
-				[pageLabel setStringValue:[NSString stringWithFormat:@"of %d", [imageRep pageCount]]];
-				[resMenu selectItemAtIndex:0];
+				[pageLabel setStringValue:[NSString stringWithFormat:@"of %d", [pdfRep pageCount]]];
 				[NSApp runModalForWindow:pdfPanel];
 				[pdfPanel orderOut:self];
 
 				value = [pageInput intValue];
-				if (value > 0 && value <= [imageRep pageCount]){
-					[imageRep setCurrentPage:value - 1];
+				if (value > 0 && value <= [pdfRep pageCount]){
+					[pdfRep setCurrentPage:value - 1];
 				}
 
 				NSSize sourceSize = [image size];
@@ -124,7 +126,15 @@
 						size.height *= 900.0 / 72.0;
 						xres = yres = 900.0;
 					break;
+                    case 6:
+                        res_set = YES;
+                        size.width *= 1200.0 / 72.0;
+                        size.height *= 1200.0 / 72.0;
+                        xres = yres = 1200.0;
+                        break;
 				}
+                
+                [gUserDefaults setInteger:value forKey:@"pdfDPI"];
 				[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationHigh];
 				[image setSize:size];
 				NSRect destinationRect = NSMakeRect( 0, 0, size.width, size.height );
@@ -138,7 +148,6 @@
 				NSBitmapImageRep* newRep = [[NSBitmapImageRep alloc]
 											initWithFocusedViewRect: destinationRect];
 				[dest unlockFocus];
-				[dest autorelease];
 				imageRep = newRep;
 			}else {
 				imageRep = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
@@ -146,8 +155,6 @@
 		}
 	}
 	if (imageRep == NULL) {
-		[image autorelease];
-		[self autorelease];
 		return NULL;
 	}
 	
@@ -175,21 +182,16 @@
 		type = XCF_RGB_IMAGE;
 		
 	// Store EXIF data
-	exifData = [imageRep valueForProperty:@"NSImageEXIFData"];
-	if (exifData) [exifData retain];
+	exifData = [(NSBitmapImageRep*)imageRep valueForProperty:@"NSImageEXIFData"];
+    
+    fileColorSpace = [(NSBitmapImageRep*)imageRep colorSpace];
 	
 	// Create the layer
 	layer = [[CocoaLayer alloc] initWithImageRep:imageRep document:doc spp:(type == XCF_RGB_IMAGE) ? 4 : 2];
 	if (layer == NULL) {
-		[image autorelease];
-		[self autorelease];
 		return NULL;
 	}
 	layers = [NSArray arrayWithObject:layer];
-	[layers retain];
-	
-	// Now forget the NSImage
-	[image autorelease];
 	
 	return self;
 }

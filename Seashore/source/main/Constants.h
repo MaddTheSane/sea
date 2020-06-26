@@ -241,10 +241,16 @@ enum {
 	@defined	kMaxResolution
 	@discussion	Specifies the maximum resolution of an image.
 */
-#define kMaxResolution 8192
+#define kMaxResolution 8192*2
 
 /*!
 	@defined	kMinResolution
 	@discussion	Specifies the minimum resolution of an image.
 */
 #define kMinResolution 18
+
+#define MyRGBSpace NSDeviceRGBColorSpace
+#define MyGraySpace NSDeviceWhiteColorSpace
+
+#define MyRGBCS NSColorSpace.deviceRGBColorSpace
+#define MyGrayCS NSColorSpace.deviceGrayColorSpace

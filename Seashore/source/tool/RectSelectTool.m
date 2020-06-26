@@ -83,6 +83,8 @@
 	if (intermediate && ![super isMovingOrScaling]) {
 		int aspectType = [options aspectType];
 		NSSize ratio;
+        
+        IntRect old = selectionRect;
 
 		if (aspectType == kNoAspectType || aspectType == kRatioAspectType || oneToOne) {
 			
@@ -111,7 +113,7 @@
 				}
 			}
 			else {
-				if (selectionRect.origin.y < where.y) {
+                if (startPoint.y < where.y) {
 					selectionRect.size.height = where.y - startPoint.y;
 					selectionRect.origin.y = startPoint.y;
 				}
@@ -126,8 +128,8 @@
 			selectionRect.origin.x = where.x;
 			selectionRect.origin.y = where.y;
 		}
-		[[document helpers] selectionChanged];
-		
+        
+        [[document helpers] selectionChanged:IntSumRects(old,selectionRect)];
 	}
 }
 
@@ -165,6 +167,15 @@
 {
 	NSLog(@"RectSelectTool invalidly being asked for the crop rect");
 	return IntMakeRect(0, 0, 0, 0);
+}
+
+- (AbstractOptions*)getOptions
+{
+    return options;
+}
+- (void)setOptions:(AbstractOptions*)newoptions
+{
+    options = (RectSelectOptions*)newoptions;
 }
 
 @end

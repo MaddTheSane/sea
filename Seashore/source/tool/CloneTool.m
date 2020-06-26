@@ -13,7 +13,6 @@
 #import "SeaTools.h"
 #import "SeaTexture.h"
 #import "BrushOptions.h"
-#import "UtilitiesManager.h"
 #import "TextureUtility.h"
 #import "Bucket.h"
 #import "SeaController.h"
@@ -35,12 +34,8 @@
 		return NULL;
 	sourceSet = NO;
 	mergedData = NULL;
+    points = NULL;
 	return self;
-}
-
-- (void)dealloc
-{
-	[super dealloc];
 }
 
 - (BOOL)acceptsLineDraws
@@ -146,7 +141,7 @@
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	id layer = [[document contents] activeLayer];
-	id curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	id curBrush = [[document brushUtility] activeBrush];
 	NSPoint curPoint = IntPointMakeNSPoint(where), temp;
 	IntRect rect;
 	int spp = [[document contents] spp];
@@ -210,7 +205,6 @@
 		startPoint.y = where.y;
 		lastWhere.x = where.x;
 		lastWhere.y = where.y;
-		multithreaded = [[SeaController seaPrefs] multithreaded];
 		ignoreFirstTouch = [[SeaController seaPrefs] ignoreFirstTouch];
 		if (ignoreFirstTouch && ([event type] == NSLeftMouseDown || [event type] == NSRightMouseDown) /* && [options pressureSensitive] */ && !(modifier == kAltModifier)) { 
 			firstTouchDone = NO;
@@ -239,7 +233,7 @@
 				spt.y = sourcePoint.y + (rect.origin.y - startPoint.y) - 1;
 				cloneFill(spp, rect, [[document whiteboard] overlay], [[document whiteboard] replace], [(SeaLayer *)layer width], [(SeaLayer *)layer height], sourceData, sourceWidth, sourceHeight, spt);
 			}
-			[[document helpers] overlayChanged:rect inThread:YES];
+			[[document helpers] overlayChanged:rect];
 		}
 		
 		// Record the position as the last point
@@ -250,19 +244,11 @@
 		points = malloc(kMaxBTPoints * sizeof(CTPointRecord));
 		pos = drawingPos = 0;
 		lastPressure = -1;
-		
-		// Detach the thread
-		if (multithreaded) {
-			drawingDone = NO;
-			[NSThread detachNewThreadSelector:@selector(drawThread:) toTarget:self withObject:NULL];
-		}
-	
 	}
 }
 
 - (void)drawThread:(id)object
 {	
-	NSAutoreleasePool *pool = NULL;
 	NSPoint curPoint;
 	id layer;
 	int layerWidth, layerHeight;
@@ -282,20 +268,15 @@
 	int sourceWidth, sourceHeight;
 	IntPoint spt;
 
-	// Create autorelease pool if needed
-	if (multithreaded) {
-		pool = [[NSAutoreleasePool alloc] init];
-	}
-
 	// Set-up variables
 	layer = [[document contents] activeLayer];
-	curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	curBrush = [[document brushUtility] activeBrush];
 	layerWidth = [(SeaLayer *)layer width];
 	layerHeight = [(SeaLayer *)layer height];
 	brushWidth = [(SeaBrush *)curBrush fakeWidth];
 	brushHeight = [(SeaBrush *)curBrush fakeHeight];
-	activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
-	brushSpacing = (double)[(BrushUtility*)[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
+	activeTexture = [[document textureUtility] activeTexture];
+	brushSpacing = (double)[[document brushUtility] spacing] / 100.0;
 	spp = [[document contents] spp];
 	bigRect = IntMakeRect(0, 0, 0, 0);
 	lastDate = [NSDate date];
@@ -320,9 +301,8 @@ next:
 			curPoint = IntPointMakeNSPoint(points[drawingPos].point);
 			origPressure = points[drawingPos].pressure;
 			if (points[drawingPos].special == 2) {
-				if (bigRect.size.width != 0) [[document helpers] overlayChanged:bigRect inThread:YES];
+				if (bigRect.size.width != 0) [[document helpers] overlayChanged:bigRect];
 				drawingDone = YES;
-				if (multithreaded) [pool release];
 				return;
 			}
 			drawingPos++;
@@ -331,10 +311,7 @@ next:
 			deltaX = curPoint.x - lastPoint.x;
 			deltaY = curPoint.y - lastPoint.y;
 			if (deltaX == 0.0 && deltaY == 0.0) {
-				if (multithreaded)
-					goto next;
-				else
-					return;
+                return;
 			}
 			
 			// Determine the number of brush strokes in the x and y directions
@@ -371,10 +348,7 @@ next:
 			
 				// We can't draw any points - this does actually get called albeit once in a blue moon
 				lastPoint = curPoint;
-				if (multithreaded)
-					goto next;
-				else
-					return;
+                return;
 				
 			}
 			else {
@@ -457,23 +431,9 @@ next:
 			lastPoint.y = lastPoint.y + deltaY; 
 		
 		}
-		else {
-			if (multithreaded) [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
-		}
 		
-		// Update periodically
-		if (multithreaded) {
-			if (bigRect.size.width != 0 && [[NSDate date] timeIntervalSinceDate:lastDate] > 0.02) {
-				[[document helpers] overlayChanged:bigRect inThread:YES];
-				lastDate = [NSDate date];
-				bigRect = IntMakeRect(0, 0, 0, 0);
-			}
-		}
-		else {
-			[[document helpers] overlayChanged:bigRect inThread:YES];
-		}
-		
-	} while (multithreaded);
+        [[document helpers] overlayChanged:bigRect];
+	} while (false /*multithreaded*/);
 }
 
 - (void)mouseDraggedTo:(IntPoint)where withEvent:(NSEvent *)event
@@ -505,31 +465,19 @@ next:
 			pos++;
 		}
 		
-		// Draw if drawing is not multithreaded
-		if (!multithreaded) {
-			[self drawThread:NULL];
-		}
-
+        [self drawThread:NULL];
 	}
 }
 
 - (void)endLineDrawing
 {
 	// Tell the other thread to terminate
-	if (pos < kMaxBTPoints) {
+	if (sourceSet && points != NULL && pos < kMaxBTPoints) {
 		points[pos].special = 2;
 		pos++;
 	}
 
-	// If multithreaded, wait until the other thread finishes
-	if (multithreaded) {
-		while (!drawingDone) {
-			[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
-		}
-	}
-	else {
-		[self drawThread:NULL];
-	}
+    [self drawThread:NULL];
 }
 
 - (IBAction)fade:(id)sender
@@ -596,5 +544,15 @@ next:
 {
 	[self mouseUpAt:where withEvent:NULL];
 }
+
+- (AbstractOptions*)getOptions
+{
+    return options;
+}
+- (void)setOptions:(AbstractOptions*)newoptions
+{
+    options = (CloneOptions*)newoptions;
+}
+
 
 @end

@@ -1,4 +1,5 @@
 #import "Globals.h"
+#import "PositionOptions.h"
 #import "AbstractTool.h"
 
 /*!
@@ -24,17 +25,13 @@
 	
 	// The scale and rotation values
 	float scale;
+    // rotation is in radians
 	float rotation;
 	BOOL rotationDefined;
+    
+    PositionOptions *options;
 
 }
-
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		mouseDownAt:withEvent:

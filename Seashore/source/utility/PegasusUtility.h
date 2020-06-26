@@ -29,6 +29,8 @@ enum {
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli	
 */
 
+@class SeaDocument;
+
 @interface PegasusUtility : NSObject {
 	
 	// The LayersView which appears in this utility
@@ -38,7 +40,7 @@ enum {
 	IBOutlet id layerSettingsPanel;
 	
 	// The object for handling layer settings
-	IBOutlet id layerSettings;
+	__weak IBOutlet id layerSettings;
 	
 	// The colour select view (this needs to be updated when the channel is changed on an RGBA image)
 	IBOutlet id colorSelectView;
@@ -51,7 +53,7 @@ enum {
 	IBOutlet id deleteButton;
 	
 	// The document which is the focus of this utility
-	IBOutlet id document;
+	__weak IBOutlet SeaDocument *document;
 	
 	// Whether or not the utility is enabled
 	BOOL enabled;
@@ -65,12 +67,6 @@ enum {
 	@discussion	Configures the utility's interface.
 */
 - (void)awakeFromNib;
-
-/*!
-	@method		dealloc
-	@discussion	Frees memory occupied by an instance of this class.
-*/
-- (void)dealloc;
 
 /*!
 	@method		activate
