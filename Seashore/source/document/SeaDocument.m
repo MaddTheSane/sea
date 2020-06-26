@@ -27,6 +27,7 @@
 #import "Units.h"
 #import "OptionsUtility.h"
 #import "SeaWindowContent.h"
+#import "BrushExporter.h"
 
 extern int globalUniqueDocID;
 int globalUniqueDocID;
@@ -55,6 +56,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 @synthesize warnings;
 @synthesize pluginData;
 @synthesize textureExporter;
+@synthesize brushExporter;
 @synthesize uniqueDocID;
 @synthesize selection;
 @synthesize dataSource;

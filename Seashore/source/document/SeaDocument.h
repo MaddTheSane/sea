@@ -19,6 +19,7 @@
 @class SeaTools;
 @class PluginData;
 @class TextureExporter;
+@class BrushExporter;
 @class WarningsUtility;
 @class LayerDataSource;
 @class SeaWarning;
@@ -242,6 +243,13 @@ NS_ASSUME_NONNULL_BEGIN
 	@result		Returns an instance of <code>TextureExporter</code>.
 */
 @property (weak) IBOutlet TextureExporter *textureExporter;
+
+/*!
+ @property      brushExporter
+ @discussion    Returns the brush exporter.
+ @result        Returns an instance of BrushExporter.
+ */
+@property (weak) IBOutlet BrushExporter *brushExporter;
 
 // DOCUMENT METHODS
 

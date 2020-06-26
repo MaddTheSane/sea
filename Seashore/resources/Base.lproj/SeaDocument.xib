@@ -10,6 +10,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="SeaDocument">
             <connections>
                 <outlet property="accessoryView" destination="70" id="75"/>
+                <outlet property="brushExporter" destination="q9a-Yx-19f" id="k9F-Ay-q5K"/>
                 <outlet property="dataSource" destination="7818" id="9833"/>
                 <outlet property="docWindow" destination="5" id="56"/>
                 <outlet property="exportersPopUp" destination="71" id="76"/>
@@ -1532,7 +1533,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="2az-qY-cA8">
                             <rect key="frame" x="1" y="1" width="438" height="54"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView ambiguous="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" usesFontPanel="YES" usesRuler="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1007" customClass="NSTextViewRedirect">
                                     <rect key="frame" x="0.0" y="0.0" width="423" height="54"/>
@@ -1616,6 +1617,17 @@ Gw
         <customObject id="307" customClass="EyedropTool">
             <connections>
                 <outlet property="document" destination="-2" id="311"/>
+            </connections>
+        </customObject>
+        <customObject id="q9a-Yx-19f" customClass="BrushExporter">
+            <connections>
+                <outlet property="categoryTable" destination="GRr-og-p8w" id="elA-sJ-UTS"/>
+                <outlet property="categoryTextbox" destination="d1S-ey-Gnb" id="1jk-9o-AaK"/>
+                <outlet property="document" destination="-2" id="T5e-8d-h3u"/>
+                <outlet property="existingCategoryRadio" destination="3X5-kO-zgQ" id="gFN-M9-YQw"/>
+                <outlet property="nameTextbox" destination="KEE-xl-3Pu" id="bSu-rt-xbo"/>
+                <outlet property="newCategoryRadio" destination="tdA-3u-bn6" id="048-ch-r3R"/>
+                <outlet property="sheet" destination="PsL-ga-c9u" id="ojM-yP-8ZC"/>
             </connections>
         </customObject>
         <customObject id="308" customClass="PencilTool">
@@ -1891,7 +1903,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" ambiguous="YES" id="9yS-N0-Caa">
                             <rect key="frame" x="1" y="1" width="246" height="94"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" id="415" customClass="NSExtendedTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="246" height="94"/>
@@ -4932,7 +4944,7 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" ambiguous="YES" id="pW7-Ok-ht6">
                             <rect key="frame" x="1" y="1" width="214" height="179"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="14" id="11980">
                                     <rect key="frame" x="0.0" y="0.0" width="214" height="179"/>
@@ -5126,6 +5138,181 @@ DQ
             </connections>
             <point key="canvasLocation" x="8" y="64"/>
         </segmentedControl>
+        <window title="Export as Brush" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="PsL-ga-c9u" userLabel="Brush Export" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="396" y="162" width="318" height="443"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" id="RW9-kG-5de">
+                <rect key="frame" x="0.0" y="0.0" width="318" height="443"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button toolTip="Adds texture to an existing category" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3X5-kO-zgQ">
+                        <rect key="frame" x="19" y="321" width="278" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="radio" title="Add to existing category" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="TC7-jT-ZBT">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="existingCategoryClick:" target="q9a-Yx-19f" id="UpK-pb-6Sj"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VW9-EM-5Gc">
+                        <rect key="frame" x="18" y="406" width="146" height="17"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Export as Brush" id="6aa-Mw-tlU">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="cej-K9-C8i">
+                        <rect key="frame" x="21" y="395" width="274" height="5"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </box>
+                    <button toolTip="Adds texture to a new category" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tdA-3u-bn6">
+                        <rect key="frame" x="19" y="173" width="278" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="radio" title="Add to new category" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="2kR-Jq-qWH">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="newCategoryClick:" target="q9a-Yx-19f" id="jAW-lN-yII"/>
+                        </connections>
+                    </button>
+                    <textField toolTip="Text box for entering new category" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d1S-ey-Gnb">
+                        <rect key="frame" x="47" y="144" width="248" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="Untitled" drawsBackground="YES" id="ND4-yG-Kcl">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="wPg-sl-bf9">
+                        <rect key="frame" x="21" y="52" width="274" height="5"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </box>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlE-01-skX">
+                        <rect key="frame" x="110" y="13" width="96" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="NbX-jo-I7Z">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="cancel:" target="q9a-Yx-19f" id="OWE-Qi-53b"/>
+                        </connections>
+                    </button>
+                    <scrollView toolTip="Table for selecting existing category" fixedFrame="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iry-gS-Vt7">
+                        <rect key="frame" x="47" y="218" width="248" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <clipView key="contentView" ambiguous="YES" id="uIP-Kq-Bgo">
+                            <rect key="frame" x="1" y="1" width="246" height="94"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" id="GRr-og-p8w" customClass="NSExtendedTableView">
+                                    <rect key="frame" x="0.0" y="0.0" width="246" height="94"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <size key="intercellSpacing" width="3" height="2"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                    <tableColumns>
+                                        <tableColumn editable="NO" width="228" minWidth="228" maxWidth="228" id="fTJ-g0-txY">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="0.33333299" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="left" id="w1c-hd-UhT">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </textFieldCell>
+                                        </tableColumn>
+                                    </tableColumns>
+                                    <connections>
+                                        <outlet property="dataSource" destination="q9a-Yx-19f" id="O0J-Ro-LBK"/>
+                                    </connections>
+                                </tableView>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="RoM-vF-Chq">
+                            <rect key="frame" x="-100" y="-100" width="231" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="hdi-oR-8Cw">
+                            <rect key="frame" x="231" y="1" width="16" height="94"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W30-kM-XVR">
+                        <rect key="frame" x="18" y="367" width="46" height="17"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Name" id="V8h-MV-9sD">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField toolTip="Name of the new texture" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KEE-xl-3Pu">
+                        <rect key="frame" x="72" y="367" width="226" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="Untitled" drawsBackground="YES" id="lMe-qV-9hB">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xXE-hz-vD7">
+                        <rect key="frame" x="19" y="75" width="278" height="25"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1000" doubleValue="100" tickMarkPosition="below" numberOfTickMarks="11" sliderType="linear" id="7KT-Tl-iix">
+                            <font key="font" metaFont="user"/>
+                        </sliderCell>
+                        <connections>
+                            <binding destination="q9a-Yx-19f" name="value" keyPath="self.spacing" id="PRM-lG-C9a"/>
+                        </connections>
+                    </slider>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mgn-61-6vT">
+                        <rect key="frame" x="205" y="13" width="96" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="5Wb-6R-9dF">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="apply:" target="q9a-Yx-19f" id="Nyc-pJ-uqV"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eOX-s2-yP5">
+                        <rect key="frame" x="18" y="106" width="120" height="14"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Spacing - 100%" id="0pl-7u-Ol9">
+                            <font key="font" metaFont="menu" size="10"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="q9a-Yx-19f" name="displayPatternValue1" keyPath="self.spacing" id="t9x-Ft-zZn">
+                                <dictionary key="options">
+                                    <string key="NSDisplayPattern">Spacing - %{value1}@%</string>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </textField>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="11" y="708"/>
+        </window>
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
@@ -5160,7 +5347,7 @@ DQ
         <image name="wand" width="22" height="22"/>
         <image name="zoom" width="22" height="22"/>
         <namedColor name="SettingsTitleColor">
-            <color red="0.0" green="0.16078432000000001" blue="0.35686275000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.16099999845027924" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

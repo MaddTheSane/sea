@@ -30,7 +30,7 @@
     IBOutlet NSScrollView *view;
 		
 	/// The document which is the focus of this utility
-	IBOutlet SeaDocument *document;
+	__weak IBOutlet SeaDocument *document;
 	
 	/// An dictionary of all brushes known to Seashore
 	NSDictionary<NSString*, SeaBrush*> *brushes;
@@ -71,6 +71,14 @@
 				the brushes (typical case), \c NO otherwise.
 */
 - (void)loadBrushes:(BOOL)update;
+
+/*!
+ @method        addBrushFromPath:toGroup:
+ @discussion    Loads a brush from the given path (handles updates).
+ @param        path
+ The path from which to load the brush.
+ */
+- (void)addBrushFromPath:(NSString *)path;
 
 /*!
 	@method		changeSpacing:
@@ -127,5 +135,12 @@
 				group. 
 */
 @property (readonly, copy) NSArray<SeaBrush*> *brushes;
+
+/*!
+ @method        groupNames
+ @discussion    Returns the textures' group names (excluding custom groups).
+ @result        Returns an NSArray containing the textures' group names.
+ */
+@property (readonly, copy) NSArray<NSString*> *groupNames;
 
 @end

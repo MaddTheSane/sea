@@ -61,10 +61,10 @@
 	BOOL stopNotingRecentDocuments;
 	
 	/// A long list of the possible things we can write
-	NSMutableDictionary<NSString*,NSSet<NSString*>*> *editableTypes;
+	NSMutableDictionary<NSString*, NSSet<NSString*>*> *editableTypes;
 	
 	/// A long list of the possible things we can read
-	NSMutableDictionary<NSString*,NSSet<NSString*>*> *viewableTypes;
+	NSMutableDictionary<NSString*, NSSet<NSString*>*> *viewableTypes;
 }
 
 /*!
@@ -206,14 +206,14 @@
 	@discussion	The file types this document controller can open and save to.
 	@result		A dict of file extensions, UTI's, and document type strings.
 */
-@property (readonly, copy) NSMutableDictionary<NSString*,NSSet<NSString*>*>* editableTypes;
+@property (readonly, copy) NSMutableDictionary<NSString*, NSSet<NSString*>*>* editableTypes;
 
 /*!
 	@property	viewableTypes
 	@discussion	The file types this document controller can open.
 	@result		A dict of file extensions, UTI's, and document type strings.
 */
-@property (readonly, copy) NSMutableDictionary<NSString*,NSSet<NSString*>*>* viewableTypes;
+@property (readonly, copy) NSMutableDictionary<NSString*, NSSet<NSString*>*>* viewableTypes;
 
 /*!
 	@property	readableTypes
