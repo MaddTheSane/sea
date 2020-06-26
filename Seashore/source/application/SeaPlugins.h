@@ -139,7 +139,7 @@ typedef NS_ENUM(int, SeaPluginType) {
 				<b>License:</b> Public Domain<br>
 				<b>Copyright:</b> N/A
 */
-@interface SeaPlugins : NSObject <SSKTerminatable> {
+@interface SeaPlugins : NSObject <SSKTerminatable, NSMenuItemValidation> {
 
 	/// The SeaController object
 	IBOutlet SeaController *controller;
