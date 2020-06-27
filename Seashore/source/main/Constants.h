@@ -277,7 +277,9 @@ typedef NS_OPTIONS(unsigned int, GIMPBitmapFormat) {
 				Specifies a vertical flip.
  */
 typedef NS_ENUM(int, SeaFlipType) {
+	//! Specifies a horizontal flip.
 	SeaFlipHorizontal,
+	//! Specifies a vertical flip.
 	SeaFlipVertical
 };
 

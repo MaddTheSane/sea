@@ -13,7 +13,10 @@ CF_ENUM(int) {
    readSpool   = 3,		/* read specified number of bytes */
    writeSpool  = 4,		/* write specified number of bytes */
    closeSpool  = 5		/* complete data transfer process */
-}; 
+};
+#if 0
+}
+#endif
 
 @implementation TIFFExporter
 
