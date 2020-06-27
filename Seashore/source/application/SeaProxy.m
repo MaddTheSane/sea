@@ -94,32 +94,33 @@
 
 - (IBAction)raiseLayer:(id)sender
 {
-	[(SeaContent *)[gCurrentDocument contents] raiseLayer:kActiveLayer];
+	[[gCurrentDocument contents] raiseLayer:kActiveLayer];
 }
 
 - (IBAction)bringToFront:(id)sender
 {
-	[(SeaContent *)[gCurrentDocument contents] moveLayerOfIndex:kActiveLayer toIndex: 0];
+	[[gCurrentDocument contents] moveLayerOfIndex:kActiveLayer toIndex: 0];
 }
 
 - (IBAction)lowerLayer:(id)sender
 {
-	[(SeaContent *)[gCurrentDocument contents] lowerLayer:kActiveLayer];
+	[[gCurrentDocument contents] lowerLayer:kActiveLayer];
 }
 
 - (IBAction)sendToBack:(id)sender
 {
-	[(SeaContent *)[gCurrentDocument contents] moveLayerOfIndex:kActiveLayer toIndex: [(SeaContent *)[gCurrentDocument contents] layerCount]];	
+	[[gCurrentDocument contents] moveLayerOfIndex:kActiveLayer toIndex: [[gCurrentDocument contents] layerCount]];	
 }
 
 - (IBAction)deleteLayer:(id)sender
 {
 	SeaDocument *document = gCurrentDocument;
 	
-	if ([[document contents] layerCount] > 1)
+	if ([[document contents] layerCount] > 1) {
 		[(SeaContent *)[document contents] deleteLayer:kActiveLayer];
-	else
+	} else {
 		NSBeep();
+	}
 }
 
 - (IBAction)addLayer:(id)sender
@@ -133,18 +134,18 @@
 	SeaSelection *selection = [(SeaDocument*)gCurrentDocument selection];
 	
 	if (!selection.floating) {
-		[(SeaContent *)[gCurrentDocument contents] duplicateLayer:kActiveLayer];
+		[[gCurrentDocument contents] duplicateLayer:kActiveLayer];
 	}
 }
 
 - (IBAction)layerAbove:(id)sender
 {
-	[(SeaContent *)[gCurrentDocument contents] layerAbove];
+	[[gCurrentDocument contents] layerAbove];
 }
 
 - (IBAction)layerBelow:(id)sender
 {
-	[(SeaContent *)[gCurrentDocument contents] layerBelow];
+	[[gCurrentDocument contents] layerBelow];
 }
 
 - (IBAction)setColorSpace:(id)sender
@@ -164,7 +165,7 @@
 
 - (IBAction)toggleFloatingSelection:(id)sender
 {
-	SeaSelection *selection = [(SeaDocument*)gCurrentDocument selection];
+	SeaSelection *selection = [gCurrentDocument selection];
 	SeaContent *contents = [gCurrentDocument contents];
 	
 	if ([selection isFloating]) {
@@ -206,7 +207,7 @@
 
 - (IBAction)alignLeft:(id)sender
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaAlignment] alignLeft:sender];
+	[[[gCurrentDocument operations] seaAlignment] alignLeft:sender];
 }
 
 - (IBAction)alignRight:(id)sender
@@ -216,117 +217,117 @@
 
 - (IBAction)alignHorizontalCenters:(id)sender
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaAlignment] alignHorizontalCenters:sender];
+	[[[gCurrentDocument operations] seaAlignment] alignHorizontalCenters:sender];
 }
 
 - (IBAction)alignTop:(id)sender
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaAlignment] alignTop:sender];
+	[[[gCurrentDocument operations] seaAlignment] alignTop:sender];
 }
 
 - (IBAction)alignBottom:(id)sender
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaAlignment] alignBottom:sender];
+	[[[gCurrentDocument operations] seaAlignment] alignBottom:sender];
 }
 
 - (IBAction)alignVerticalCenters:(id)sender
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaAlignment] alignVerticalCenters:sender];
+	[[[gCurrentDocument operations] seaAlignment] alignVerticalCenters:sender];
 }
 
 - (IBAction)centerLayerHorizontally:(id)sender
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaAlignment] centerLayerHorizontally:sender];
+	[[[gCurrentDocument operations] seaAlignment] centerLayerHorizontally:sender];
 }
 
 - (IBAction)centerLayerVertically:(id)sender
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaAlignment] centerLayerVertically:sender];
+	[[[gCurrentDocument operations] seaAlignment] centerLayerVertically:sender];
 }
 
 - (IBAction)setResolution:(id)sender
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaResolution] run];
+	[[[gCurrentDocument operations] seaResolution] run];
 }
 
 - (IBAction)setMargins:(id)sender
 {
-	[(SeaMargins *)[(SeaOperations *)[gCurrentDocument operations] seaMargins] run:YES];
+	[[[gCurrentDocument operations] seaMargins] run:YES];
 }
 
 - (IBAction)setLayerMargins:(id)sender
 {
-	[(SeaMargins *)[(SeaOperations *)[gCurrentDocument operations] seaMargins] run:NO];
+	[[[gCurrentDocument operations] seaMargins] run:NO];
 }
 
 - (IBAction)flipDocHorizontally:(id)sender;
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaDocRotation] flipDocHorizontally];
+	[[[gCurrentDocument operations] seaDocRotation] flipDocHorizontally];
 }
 
 - (IBAction)flipDocVertically:(id)sender
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaDocRotation] flipDocVertically];
+	[[[gCurrentDocument operations] seaDocRotation] flipDocVertically];
 }
 
 - (IBAction)rotateDocLeft:(id)sender
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaDocRotation] rotateDocLeft];
+	[[[gCurrentDocument operations] seaDocRotation] rotateDocLeft];
 }
 
 - (IBAction)rotateDocRight:(id)sender
 {
-	[[(SeaOperations *)[gCurrentDocument operations] seaDocRotation] rotateDocRight];
+	[[[gCurrentDocument operations] seaDocRotation] rotateDocRight];
 }
 
 - (IBAction)setLayerRotation:(id)sender
 {
-	[(SeaRotation *)[(SeaOperations *)[gCurrentDocument operations] seaRotation] run];
+	[[[gCurrentDocument operations] seaRotation] run];
 }
 
 - (IBAction)condenseLayer:(id)sender
 {
-	[(SeaMargins *)[(SeaOperations *)[gCurrentDocument operations] seaMargins] condenseLayer:sender];
+	[[[gCurrentDocument operations] seaMargins] condenseLayer:sender];
 }
 
 - (IBAction)condenseToSelection:(id)sender
 {
-	[(SeaMargins *)[(SeaOperations *)[gCurrentDocument operations] seaMargins] condenseToSelection:sender];
+	[[[gCurrentDocument operations] seaMargins] condenseToSelection:sender];
 }
 
 - (IBAction)expandLayer:(id)sender
 {
-	[(SeaMargins *)[(SeaOperations *)[gCurrentDocument operations] seaMargins] expandLayer:sender];
+	[[[gCurrentDocument operations] seaMargins] expandLayer:sender];
 }
 
 - (IBAction)cropImage:(id)sender
 {
-	[(SeaMargins *)[(SeaOperations *)[gCurrentDocument operations] seaMargins] cropImage:sender];
+	[[[gCurrentDocument operations] seaMargins] cropImage:sender];
 }
 
 - (IBAction)maskImage:(id)sender
 {
-	[(SeaMargins *)[(SeaOperations *)[gCurrentDocument operations] seaMargins] maskImage:sender];
+	[[[gCurrentDocument operations] seaMargins] maskImage:sender];
 }
 
 - (IBAction)setScale:(id)sender
 {
-	[(SeaScale *)[(SeaOperations *)[gCurrentDocument operations] seaScale] run:YES];
+	[[[gCurrentDocument operations] seaScale] run:YES];
 }
 
 - (IBAction)setLayerScale:(id)sender
 {
-	[(SeaScale *)[(SeaOperations *)[gCurrentDocument operations] seaScale] run:NO];
+	[[[gCurrentDocument operations] seaScale] run:NO];
 }
 
 - (IBAction)flipHorizontally:(id)sender
 {
-	[(SeaFlip *)[(SeaOperations *)[gCurrentDocument operations] seaFlip] run:kHorizontalFlip];
+	[[[gCurrentDocument operations] seaFlip] run:SeaFlipHorizontal];
 }
 
 - (IBAction)flipVertically:(id)sender
 {
-	[(SeaFlip *)[(SeaOperations *)[gCurrentDocument operations] seaFlip] run:kVerticalFlip];
+	[[[gCurrentDocument operations] seaFlip] run:SeaFlipVertical];
 }
 
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)sender
@@ -368,7 +369,7 @@
 // To the ColorView
 - (IBAction)activateForegroundColor:(id)sender
 {
-	[(ColorSelectView *)[[[SeaController utilitiesManager] toolboxUtilityForDocument:gCurrentDocument] colorView] activateForegroundColor: sender];
+	[[[[SeaController utilitiesManager] toolboxUtilityForDocument:gCurrentDocument] colorView] activateForegroundColor: sender];
 }
 
 - (IBAction)activateBackgroundColor:(id)sender

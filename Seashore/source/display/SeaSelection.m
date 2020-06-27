@@ -782,7 +782,7 @@
 	// There's nothing to do if there's no mask
 	if (mask) {
 	
-		if (type == kHorizontalFlip) {
+		if (type == SeaFlipHorizontal) {
 			for (int i = 0; i < rect.size.width / 2; i++) {
 				for (int j = 0; j < rect.size.height; j++) {
 					src = j * rect.size.width + rect.size.width - i - 1;
