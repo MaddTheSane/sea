@@ -35,8 +35,8 @@
 									   forRect: [[document selection] globalRect]
 									   andMask: [[document selection] mask]];
 		if (scalingDir > SeaScaleDirectionNone && !translating) {
-			[[document selection] scaleSelectionTo: newRect
-											  from: [self preScaledRect]
+			[[document selection] scaleSelectionToRect: newRect
+											  fromRect: [self preScaledRect]
 									 interpolation: GIMP_INTERPOLATION_CUBIC
 										 usingMask: [self preScaledMask]];
 		} else if (translating && scalingDir == SeaScaleDirectionNone) {

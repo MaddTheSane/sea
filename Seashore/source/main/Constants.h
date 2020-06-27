@@ -277,8 +277,8 @@ typedef NS_OPTIONS(unsigned int, GIMPBitmapFormat) {
 				Specifies a vertical flip.
  */
 typedef NS_ENUM(int, SeaFlipType) {
-	kHorizontalFlip NS_SWIFT_NAME(horizontal),
-	kVerticalFlip NS_SWIFT_NAME(vertical)
+	SeaFlipHorizontal,
+	SeaFlipVertical
 };
 
 /*!
@@ -317,3 +317,6 @@ static const GIMPBitmapFormat kAlphaFirstFormat NS_DEPRECATED_WITH_REPLACEMENT_M
 static const GIMPBitmapFormat kAlphaNonPremultipliedFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("GIMPBitmapFormatAlphaNonPremultiplied", 10.2, 10.8) = GIMPBitmapFormatAlphaNonPremultiplied;
 //! Specifies the colour components are specified as floating point values.
 static const GIMPBitmapFormat kFloatingFormat NS_DEPRECATED_WITH_REPLACEMENT_MAC("GIMPBitmapFormatFloatingPoint", 10.2, 10.8) = GIMPBitmapFormatFloatingPoint;
+
+static const SeaFlipType kHorizontalFlip NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaFlipHorizontal", 10.2, 10.8) = SeaFlipHorizontal;
+static const SeaFlipType kVerticalFlip NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaFlipVertical", 10.2, 10.8) = SeaFlipVertical;

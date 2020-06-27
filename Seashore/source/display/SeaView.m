@@ -282,7 +282,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 {
 	NSRect srcRect, destRect;
 	NSImage *image = NULL;
-	
+	ToolboxUtility *tUtil = [[SeaController utilitiesManager] toolboxUtilityForDocument:document];
+	SeaToolsDefines curToolIndex = [tUtil tool];
 	IntRect imageRect = [[document whiteboard] imageRect];
 	int xres = [[document contents] xres], yres = [[document contents] yres];
 	CGFloat xResScale, yResScale;
@@ -333,6 +334,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[[NSBezierPath bezierPathWithRect:rect] fill];
 	}
 	
+	// Set interpolation (image smoothing) appropriately
 	if ([[SeaController seaPrefs] smartInterpolation]) {
 		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
 	} else {

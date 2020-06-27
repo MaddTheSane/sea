@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SSKPlugin : NSObject <SeaPluginClass>
+@interface SSKPlugin : NSObject <SeaPluginClass, NSMenuItemValidation>
 {
 	@protected
 	// YES if the application succeeded
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
  *					The menu item to be validated.
  * @result		YES if the menu item should be enabled, NO otherwise.
  */
-- (BOOL)validateMenuItem:(NSMenuItem*)menuItem NS_SWIFT_NAME(validateMenuItem(_:));
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 /*!
  * @method		determineContentBorders
