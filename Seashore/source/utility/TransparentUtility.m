@@ -21,8 +21,16 @@
 		color = [NSColor colorWithCalibratedRed:values[0] green:values[1] blue:values[2] alpha:values[3]];
 	} else {
 		tempData = [defaults dataForKey:@"transparency color data"];
-		if (tempData != nil)
-			color = (NSColor *)[NSUnarchiver unarchiveObjectWithData:tempData];
+		if (tempData != nil) {
+			if (@available(macOS 10.13, *)) {
+				color = (NSColor *)[NSKeyedUnarchiver unarchivedObjectOfClass:[NSColor class] fromData:tempData error:NULL];
+			} else {
+				color = (NSColor *)[NSKeyedUnarchiver unarchiveObjectWithData:tempData];
+			}
+			if (!color) {
+				color = (NSColor *)[NSUnarchiver unarchiveObjectWithData:tempData];
+			}
+		}
 	}
 	}
 	
@@ -63,7 +71,7 @@
 		[doc docView].needsDisplay = YES;
 	}
 
-	[defaults setObject:[NSArchiver archivedDataWithRootObject:color] forKey:@"transparency color data"];
+	[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:color] forKey:@"transparency color data"];
 }
 
 @end
