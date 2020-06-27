@@ -26,17 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UtilitiesManager : NSObject <SSKTerminatable> {
 	// The controller object
 	IBOutlet SeaController *controller;
-	IBOutlet TransparentUtility *transparentUtility;
-	
-	// Outlets to the various utilities of Seashore
-    NSMutableDictionary<NSNumber*,PegasusUtility*> *pegasusUtilities;
-	NSMutableDictionary<NSNumber*,TransparentUtility*> *transparentUtilities;
-	NSMutableDictionary<NSNumber*,ToolboxUtility*> *toolboxUtilities;
-	NSMutableDictionary<NSNumber*,BrushUtility*> *brushUtilities;
-	NSMutableDictionary<NSNumber*,OptionsUtility*> *optionsUtilities;
-	NSMutableDictionary<NSNumber*,TextureUtility*> *textureUtilities;
-	NSMutableDictionary<NSNumber*,InfoUtility*> *infoUtilities;
-	NSMutableDictionary<NSNumber*,StatusUtility*> *statusUtilities;
 	
 	// Various choices
 	int optionsChoice;
@@ -88,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion	Returns the transparent colour utility.
 	@result		Returns an instance of TransparentUtility.
 */
-@property (readonly, strong) TransparentUtility *transparentUtility;
+@property (readonly, weak) IBOutlet TransparentUtility *transparentUtility;
 
 /*!
 	@method		toolboxUtilityForDocument:
