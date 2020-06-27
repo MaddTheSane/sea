@@ -286,14 +286,14 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	IntRect imageRect = [[document whiteboard] imageRect];
 	int xres = [[document contents] xres], yres = [[document contents] yres];
 	CGFloat xResScale, yResScale;
-
+	
 	// Get the correct image for displaying
 	image = [[document whiteboard] image];
-    
-    srcRect = NSMakeRect(0, 0, 0, 0);
-    
-    destRect = IntRectMakeNSRect(imageRect);
-    
+	
+	srcRect = NSMakeRect(0, 0, 0, 0);
+	
+	destRect = IntRectMakeNSRect(imageRect);
+	
 	[NSBezierPath clipRect:rect];
 	
 	// For non 72 dpi resolutions we must scale here
@@ -306,42 +306,42 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			yResScale = ((CGFloat)yres / SeaScreenResolution.y);
 		}
 	}
-    
-     destRect.origin.x /= xResScale;
-     destRect.size.width /= xResScale;
-     destRect.origin.y /= yResScale;
-     destRect.size.height /= yResScale;
-     
-     // Then scale here for zoom
-     destRect.origin.x *= zoom;
-     destRect.size.width *= zoom;
-     destRect.origin.y *= zoom;
-     destRect.size.height *= zoom;
-     
-     destRect = NSIntegralRectWithOptions(destRect,NSAlignAllEdgesOutward);
-    
+	
+	destRect.origin.x /= xResScale;
+	destRect.size.width /= xResScale;
+	destRect.origin.y /= yResScale;
+	destRect.size.height /= yResScale;
+	
+	// Then scale here for zoom
+	destRect.origin.x *= zoom;
+	destRect.size.width *= zoom;
+	destRect.origin.y *= zoom;
+	destRect.size.height *= zoom;
+	
+	destRect = NSIntegralRectWithOptions(destRect,NSAlignAllEdgesOutward);
+	
 	// Set the background color
 	if ([[document whiteboard] whiteboardIsLayerSpecific]) {
 		[[NSColor windowBackgroundColor] set];
 		[[NSBezierPath bezierPathWithRect:rect] fill];
 	} else {
-        if([[SeaController seaPrefs] useCheckerboard]){
-            [[NSColor colorWithPatternImage: [NSImage imageNamed:@"checkerboard"]] set];
-        }else{
-            [[[[SeaController utilitiesManager] transparentUtility] color] set];
-        }
-        [[NSBezierPath bezierPathWithRect:rect] fill];
-    }
-    
-    if ([[SeaController seaPrefs] smartInterpolation]) {
-        [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-    } else {
-        [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
-    }
+		if([[SeaController seaPrefs] useCheckerboard]){
+			[[NSColor colorWithPatternImage: [NSImage imageNamed:@"checkerboard"]] set];
+		}else{
+			[[[[SeaController utilitiesManager] transparentUtility] color] set];
+		}
+		[[NSBezierPath bezierPathWithRect:rect] fill];
+	}
+	
+	if ([[SeaController seaPrefs] smartInterpolation]) {
+		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+	} else {
+		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
+	}
 	
 	// Draw the image to screen
 	[image drawInRect:destRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
-
+	
 	// Clear out the old cursor rects
 	[self needsCursorsReset];
 	

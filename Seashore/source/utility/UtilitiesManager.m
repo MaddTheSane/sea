@@ -7,7 +7,7 @@
 
 @implementation UtilitiesManager {
 	// Outlets to the various utilities of Seashore
-    NSMapTable<SeaDocument*,PegasusUtility*> *pegasusUtilities;
+	NSMapTable<SeaDocument*,PegasusUtility*> *pegasusUtilities;
 	NSMapTable<SeaDocument*,TransparentUtility*> *transparentUtilities;
 	NSMapTable<SeaDocument*,ToolboxUtility*> *toolboxUtilities;
 	NSMapTable<SeaDocument*,BrushUtility*> *brushUtilities;
