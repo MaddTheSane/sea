@@ -80,7 +80,7 @@ NS_SWIFT_NAME(SeaCompositorProtocol)
 @interface SeaCompositor : NSObject <SeaCompositor> {
 #if MAIN_COMPILE
 	// The document associated with this compositor
-	SeaDocument *document;
+	__weak SeaDocument *document;
 #else
 	// The contents associated with this compositor
 	__weak SeaContent *contents;

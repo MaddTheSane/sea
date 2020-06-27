@@ -151,7 +151,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (IBAction)changeSpecialFont:(id)sender
 {
-	[[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:SeaToolsText] changeFont:sender];
+	[[[[SeaController utilitiesManager] optionsUtilityForDocument:document] getOptions:SeaToolsText] changeFont:sender];
 }
 
 - (void)needsCursorsReset
@@ -282,7 +282,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 {
 	NSRect srcRect, destRect;
 	NSImage *image = NULL;
-	ToolboxUtility *tUtil = [[SeaController utilitiesManager] toolboxUtilityFor:document];
+	ToolboxUtility *tUtil = [[SeaController utilitiesManager] toolboxUtilityForDocument:document];
 	SeaToolsDefines curToolIndex = [tUtil tool];
 	IntRect imageRect = [[document whiteboard] imageRect];
 	int xres = [[document contents] xres], yres = [[document contents] yres];
@@ -365,7 +365,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)drawBoundaries
 {
-	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool];
 	
 	if (curToolIndex == SeaToolsCrop) {
 		[self drawCropBoundaries];
@@ -411,7 +411,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	IntRect selectRect, tempSelectRect;
 	int xoff, yoff, width, height, lwidth, lheight;
 	BOOL useSelection, special, intermediate;
-	int curToolIndex = (int)[(ToolboxUtility *)[(UtilitiesManager *)[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	int curToolIndex = (int)[(ToolboxUtility *)[(UtilitiesManager *)[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool];
 	NSBezierPath *tempPath;
 	NSImage *maskImage;
 	int radius = 0;
@@ -484,7 +484,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Get the data for drawing rounded rectangular selections
 	special = NO;
 	if (curToolIndex == SeaToolsSelectRect) {
-		radius = [(RectSelectOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions] radius];
+		radius = [(RectSelectOptions *)[[[SeaController utilitiesManager] optionsUtilityForDocument:document] currentOptions] radius];
 		tempSelectRect = [(RectSelectTool *)[[document tools] currentTool] selectionRect];
 		special = tempSelectRect.size.width < 2 * radius && tempSelectRect.size.height < 2 * radius;
 	}
@@ -709,7 +709,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)drawExtras
 {	
-	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool];
 	CloneTool *cloneTool = [[document tools] getTool:SeaToolsClone];
 	EffectTool *effectTool = [[document tools] getTool:SeaToolsEffect];
 	NSPoint outPoint, hilightPoint;
@@ -884,7 +884,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 - (void)checkMouseTracking
 {
 	if ([[self window] isMainWindow]) {
-		if ([[document scrollView] rulersVisible] || [[[SeaController utilitiesManager] infoUtilityFor:document] visible])
+		if ([[document scrollView] rulersVisible] || [[[SeaController utilitiesManager] infoUtilityForDocument:document] visible])
 			[[self window] setAcceptsMouseMovedEvents:YES];
 		else
 			[[self window] setAcceptsMouseMovedEvents:NO];
@@ -920,7 +920,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)mouseMoved:(NSEvent *)theEvent
 {
-	if ([[[SeaController utilitiesManager] infoUtilityFor:document] visible]) [[[SeaController utilitiesManager] infoUtilityFor:document] update];
+	if ([[[SeaController utilitiesManager] infoUtilityForDocument:document] visible]) [[[SeaController utilitiesManager] infoUtilityForDocument:document] update];
 	if ([[document scrollView] rulersVisible]) [self updateRulerMarkings:[theEvent locationInWindow] andStationary:NSMakePoint(-256e6, -256e6)];
 }
 
@@ -995,8 +995,8 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	__kindof AbstractTool *curTool;
 	IntPoint localActiveLayerPoint;
 	NSPoint localPoint, globalPoint;
-	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
-	__kindof AbstractOptions *options = [[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool];
+	__kindof AbstractOptions *options = [[[SeaController utilitiesManager] optionsUtilityForDocument:document] currentOptions];
 	
 	// Get xScale, yScale	
 	xScale = [[document contents] xscale];
@@ -1119,7 +1119,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	double angle;
 	NSPoint origin, newScrollPoint;
 	NSClipView *view;
-	AbstractOptions *options = [[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions];
+	AbstractOptions *options = [[[SeaController utilitiesManager] optionsUtilityForDocument:document] currentOptions];
 	
 	NSRect visRect = [(NSClipView *)[self superview] documentVisibleRect];
 	localPoint = [self convertPoint:[theEvent locationInWindow] fromView:NULL];
@@ -1198,7 +1198,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	
 	// Set up tools
 	curTool = [[document tools] currentTool];
-	curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool];
 	
 	// Calculate the localPoint and localActiveLayerPoint
 	xScale = [[document contents] xscale];
@@ -1237,7 +1237,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	lineDraw = NO;
 	
 	// Update the info utility
-	if ([[[SeaController utilitiesManager] infoUtilityFor:document] visible]) [[[SeaController utilitiesManager] infoUtilityFor:document] update];
+	if ([[[SeaController utilitiesManager] infoUtilityForDocument:document] visible]) [[[SeaController utilitiesManager] infoUtilityForDocument:document] update];
 	if ([[document scrollView] rulersVisible]) [self updateRulerMarkings:[theEvent locationInWindow] andStationary:mouseDownLoc];
 }
 
@@ -1253,7 +1253,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	__kindof AbstractTool *curTool = [[document tools] currentTool];
 	NSPoint localPoint;
 	IntPoint localActiveLayerPoint;
-	AbstractOptions *options = [[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions];
+	AbstractOptions *options = [[[SeaController utilitiesManager] optionsUtilityForDocument:document] currentOptions];
 	
 	// Get xScale, yScale
 	xScale = [[document contents] xscale];
@@ -1303,7 +1303,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (void)flagsChanged:(NSEvent *)theEvent
 {
-	[[[[SeaController utilitiesManager] optionsUtilityFor:document] currentOptions] updateModifiers:[theEvent modifierFlags]];
+	[[[[SeaController utilitiesManager] optionsUtilityForDocument:document] currentOptions] updateModifiers:[theEvent modifierFlags]];
 	[[document helpers] endLineDrawing];
 }
 
@@ -1313,7 +1313,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	SeaLayer *curLayer, *activeLayer;
 	IntPoint oldOffsets;
 	unichar key;
-	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool];
 	BOOL floating = document.selection.floating;
 	
 	// End the line drawing
@@ -1501,73 +1501,73 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 				break;
 				case 'm':
 					if (!floating) {
-						if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == SeaToolsSelectRect)
-							[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsSelectEllipse];
+						if ([[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool] == SeaToolsSelectRect)
+							[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsSelectEllipse];
 						else
-							[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsSelectRect];
+							[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsSelectRect];
 					}
 				break;
 				case 'l':
 					if (!floating) {
-						if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == SeaToolsLasso)
-							[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsPolygonLasso];
+						if ([[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool] == SeaToolsLasso)
+							[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsPolygonLasso];
 						else
-							[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsLasso];
+							[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsLasso];
 					}
 				break;
 				case 'w':
 					if (!floating) {
-						[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsWand];
+						[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsWand];
 					}
 				break;
 				case 'b':
-					if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == SeaToolsBrush)
-						[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsPencil];
+					if ([[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool] == SeaToolsBrush)
+						[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsPencil];
 					else
-						[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsBrush];
+						[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsBrush];
 				break;
 				case 'g':
-					if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == SeaToolsBucket)
-						[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsGradient];
+					if ([[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool] == SeaToolsBucket)
+						[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsGradient];
 					else
-						[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsBucket];
+						[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsBucket];
 				break;
 				case 't':
-					[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsText];
+					[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsText];
 				break;
 				case 'e':
-					[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsEraser];
+					[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsEraser];
 				break;
 				case 'i':
-					[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsEyedrop];
+					[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsEyedrop];
 				break;
 				case 'o':
-					if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == SeaToolsSmudge)
-						[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsEffect];
+					if ([[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool] == SeaToolsSmudge)
+						[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsEffect];
 					else
-						[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsSmudge];
+						[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsSmudge];
 				break;
 				case 's':
-					[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsClone];
+					[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsClone];
 				break;
 				case 'c':
-					[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsCrop];
+					[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsCrop];
 				break;
 				case 'z':
-					[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsZoom];
+					[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsZoom];
 				break;
 				case 'v':
-					[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsPosition];
+					[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsPosition];
 				break;
 				case 'x':
-					[[[[SeaController utilitiesManager] toolboxUtilityFor:document] colorView] swapColors: self];
+					[[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] colorView] swapColors: self];
 				break;
 				case 'd':
-					[[[[SeaController utilitiesManager] toolboxUtilityFor:document] colorView] defaultColors: self];
+					[[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] colorView] defaultColors: self];
 				break;
 				case '\t':
-					eyedropToolMemory = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
-					[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsEyedrop];
+					eyedropToolMemory = [[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool];
+					[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsEyedrop];
 				break;
 				case '\r':
 				case kEnterCharCode:
@@ -1606,7 +1606,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 				break;
 				
 			case '\t':
-				[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:eyedropToolMemory];
+				[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:eyedropToolMemory];
 				break;
 		}
 	
@@ -1691,7 +1691,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 {
 	if (document.selection.active)
 		[[document selection] clearSelection];
-	[[[SeaController utilitiesManager] toolboxUtilityFor:document] changeToolTo:SeaToolsSelectRect];
+	[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] changeToolTo:SeaToolsSelectRect];
 	[[document contents] makePasteboardFloat];
 }
 
@@ -1712,7 +1712,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 
 - (IBAction)selectNone:(id)sender
 {
-	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool];
 	
 	if(curToolIndex >= SeaToolsFirstSelection && curToolIndex <= SeaToolsLastSelection && [[[document tools] currentTool] intermediate])
 		[[[document tools] currentTool] cancelSelection];
@@ -1929,7 +1929,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 				return NO;
 		break;
 		case 271: /* Select None */
-			if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == SeaToolsPolygonLasso && [[[document tools] currentTool] intermediate])
+			if ([[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool] == SeaToolsPolygonLasso && [[[document tools] currentTool] intermediate])
 				return YES;
 			if (!document.selection.active || document.selection.floating)
 				return NO;
@@ -1955,7 +1955,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {
 	if([[theItem itemIdentifier] isEqual: SelectNoneToolbarItemIdentifier]){
-		if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == SeaToolsPolygonLasso && [[[document tools] currentTool] intermediate])
+		if ([[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool] == SeaToolsPolygonLasso && [[[document tools] currentTool] intermediate])
 			return YES;
 		if (!document.selection.active || document.selection.floating)
 			return NO;

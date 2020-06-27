@@ -11,7 +11,7 @@
 
 - (IBAction)changeSpecialFont:(id)sender
 {
-	[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions:SeaToolsText] changeFont:sender];
+	[[[[SeaController utilitiesManager] optionsUtilityForDocument:gCurrentDocument] getOptions:SeaToolsText] changeFont:sender];
 }
 
 @end

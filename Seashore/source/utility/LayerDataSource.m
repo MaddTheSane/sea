@@ -123,7 +123,7 @@
 		[[document contents] setVisible:[object boolValue] forLayer:[(SeaLayer *)item index]];
 	}else if([[tableColumn identifier] isEqualToString:INFO_BUTTON_COL]){
 		NSPoint p = [NSEvent mouseLocation];
-		[[[[SeaController utilitiesManager] pegasusUtilityFor:document] layerSettings] showSettings:item from:p];
+		[[[[SeaController utilitiesManager] pegasusUtilityForDocument:document] layerSettings] showSettings:item from:p];
 	}else{
 		NSLog(@"Setting the value for unknown column %@", tableColumn);
 	}	

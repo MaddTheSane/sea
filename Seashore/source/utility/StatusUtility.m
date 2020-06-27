@@ -14,7 +14,7 @@
 @implementation StatusUtility
 - (void)awakeFromNib
 {
-	[[SeaController utilitiesManager] setStatusUtility: self for:document];
+	[[SeaController utilitiesManager] setStatusUtility: self forDocument:document];
 	
 	[view setHasResizeThumb: NO];
 	
@@ -178,7 +178,7 @@
 
 - (IBAction)quickColorChange:(id)sender
 {
-	ToolboxUtility *util = (ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document];
+	ToolboxUtility *util = (ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityForDocument:document];
 	
 	//NSLog(@"red value %d set to color value %f (which currently is %f or %d)",[redBox intValue], (float)[redBox intValue] / 255.0, ([foreground redComponent]), (int)round([foreground redComponent] * 255));
 	if([(SeaContent *)[document contents] type]){

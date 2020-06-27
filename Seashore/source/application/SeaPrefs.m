@@ -486,7 +486,7 @@ CGDisplayErr GetMainDisplayDPI(CGFloat *horizontalDPI, CGFloat *verticalDPI)
 	SeaDocument *document = gCurrentDocument;
 	[document changeMeasuringStyle:[sender tag] % 10];
 	[[document docView] updateRulers];
-	[[[SeaController utilitiesManager] infoUtilityFor:document] update];
+	[[[SeaController utilitiesManager] infoUtilityForDocument:document] update];
 	[[[SeaController utilitiesManager] statusUtilityFor:document] update];
 }
 

@@ -342,22 +342,22 @@
 // To Utitilies
 - (IBAction)selectTool:(id)sender
 {
-	[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] selectToolUsingTag:sender];
+	[[[SeaController utilitiesManager] toolboxUtilityForDocument:gCurrentDocument] selectToolUsingTag:sender];
 }
 
 - (IBAction)toggleLayers:(id)sender
 {
-	[[[SeaController utilitiesManager] pegasusUtilityFor:gCurrentDocument] toggleLayers:sender];
+	[[[SeaController utilitiesManager] pegasusUtilityForDocument:gCurrentDocument] toggleLayers:sender];
 }
 
 - (IBAction)toggleInformation:(id)sender
 {
-	[[[SeaController utilitiesManager] infoUtilityFor:gCurrentDocument] toggle: sender];
+	[[[SeaController utilitiesManager] infoUtilityForDocument:gCurrentDocument] toggle: sender];
 }
 
 - (IBAction)toggleOptions:(id)sender
 {
-	[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] toggle: sender];
+	[[[SeaController utilitiesManager] optionsUtilityForDocument:gCurrentDocument] toggle: sender];
 }
 
 - (IBAction)toggleStatusBar:(id)sender
@@ -368,22 +368,22 @@
 // To the ColorView
 - (IBAction)activateForegroundColor:(id)sender
 {
-	[(ColorSelectView *)[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] colorView] activateForegroundColor: sender];
+	[(ColorSelectView *)[[[SeaController utilitiesManager] toolboxUtilityForDocument:gCurrentDocument] colorView] activateForegroundColor: sender];
 }
 
 - (IBAction)activateBackgroundColor:(id)sender
 {
-	[[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] colorView] activateBackgroundColor: sender];
+	[[[[SeaController utilitiesManager] toolboxUtilityForDocument:gCurrentDocument] colorView] activateBackgroundColor: sender];
 }
 
 - (IBAction)swapColors:(id)sender
 {
-	[[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] colorView] swapColors: sender];
+	[[[[SeaController utilitiesManager] toolboxUtilityForDocument:gCurrentDocument] colorView] swapColors: sender];
 }
 
 - (IBAction)defaultColors:(id)sender
 {
-	[[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] colorView] defaultColors: sender];
+	[[[[SeaController utilitiesManager] toolboxUtilityForDocument:gCurrentDocument] colorView] defaultColors: sender];
 }
 
 - (IBAction)openColorSyncPanel:(id)sender

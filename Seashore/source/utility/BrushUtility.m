@@ -79,7 +79,7 @@
 	// Set the window's properties
 	[window setPanelStyle:SeaPanelStyleVertical];
 	
-	[[SeaController utilitiesManager] setBrushUtility: self for:document];
+	[[SeaController utilitiesManager] setBrushUtility: self forDocument:document];
 }
 
 - (void)shutdown

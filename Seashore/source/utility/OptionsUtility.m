@@ -52,7 +52,7 @@
 		[tool setOptions: [self getOptions:[tool toolId]]];
 	}
 	
-	[[SeaController utilitiesManager] setOptionsUtility: self for:document];
+	[[SeaController utilitiesManager] setOptionsUtility: self forDocument:document];
 }
 
 - (void)activate

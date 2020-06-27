@@ -17,7 +17,7 @@
 */
 @interface SeaPrintView : NSView {
 	// The document associated with this view
-	SeaDocument *document;
+	__weak SeaDocument *document;
 }
 
 /*!
@@ -53,7 +53,7 @@
 				The page for which to return the rectangle.
 	@result		Returns an NSRect indicating the printing rectangle.
 */
-- (NSRect)rectForPage:(int)page;
+- (NSRect)rectForPage:(NSInteger)page;
 
 /*!
 	@method		isFlipped

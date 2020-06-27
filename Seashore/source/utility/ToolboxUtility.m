@@ -110,7 +110,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
     // Attach the toolbar to the document window 
     [[document window] setToolbar: toolbar];
 	
-	[[SeaController utilitiesManager] setToolboxUtility: self for:document];
+	[[SeaController utilitiesManager] setToolboxUtility: self forDocument:document];
 }
 
 
@@ -160,15 +160,15 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[toolbarItem setMinSize: [colorSelectView frame].size];
 		[toolbarItem setMaxSize: [colorSelectView frame].size];
 	} else if ([itemIdent isEqual: NewLayerToolbarItemIdentifier]) {
-        return [[ImageToolbarItem alloc] initWithItemIdentifier: NewLayerToolbarItemIdentifier label: LOCALSTR(@"new", @"New") imageNamed: @"toolbar/new" toolTip: LOCALSTR(@"new tooltip", @"Add a new layer to the image") target: [[SeaController utilitiesManager] pegasusUtilityFor:document] selector: @selector(addLayer:)];
+        return [[ImageToolbarItem alloc] initWithItemIdentifier: NewLayerToolbarItemIdentifier label: LOCALSTR(@"new", @"New") imageNamed: @"toolbar/new" toolTip: LOCALSTR(@"new tooltip", @"Add a new layer to the image") target: [[SeaController utilitiesManager] pegasusUtilityForDocument:document] selector: @selector(addLayer:)];
 	} else if ([itemIdent isEqual: DuplicateLayerToolbarItemIdentifier]) {
-		return [[ImageToolbarItem alloc] initWithItemIdentifier: DuplicateLayerToolbarItemIdentifier label: LOCALSTR(@"duplicate", @"Duplicate") imageNamed: @"toolbar/duplicate" toolTip: LOCALSTR(@"duplicate tooltip", @"Duplicate the current layer") target: [[SeaController utilitiesManager] pegasusUtilityFor:document]  selector: @selector(duplicateLayer:)];
+		return [[ImageToolbarItem alloc] initWithItemIdentifier: DuplicateLayerToolbarItemIdentifier label: LOCALSTR(@"duplicate", @"Duplicate") imageNamed: @"toolbar/duplicate" toolTip: LOCALSTR(@"duplicate tooltip", @"Duplicate the current layer") target: [[SeaController utilitiesManager] pegasusUtilityForDocument:document]  selector: @selector(duplicateLayer:)];
 	} else if ([itemIdent isEqual: ForwardToolbarItemIdentifier]) {
-        return [[ImageToolbarItem alloc] initWithItemIdentifier: ForwardToolbarItemIdentifier label: LOCALSTR(@"forward", @"Forward") imageNamed: @"toolbar/forward" toolTip: LOCALSTR(@"forward tooltip", @"Move the current layer forward") target: [[SeaController utilitiesManager] pegasusUtilityFor:document]  selector: @selector(forward:)];
+        return [[ImageToolbarItem alloc] initWithItemIdentifier: ForwardToolbarItemIdentifier label: LOCALSTR(@"forward", @"Forward") imageNamed: @"toolbar/forward" toolTip: LOCALSTR(@"forward tooltip", @"Move the current layer forward") target: [[SeaController utilitiesManager] pegasusUtilityForDocument:document]  selector: @selector(forward:)];
 	} else if ([itemIdent isEqual: BackwardToolbarItemIdentifier]) {
-        return [[ImageToolbarItem alloc] initWithItemIdentifier: BackwardToolbarItemIdentifier label: LOCALSTR(@"backward", @"Backward") imageNamed: @"toolbar/backward" toolTip: LOCALSTR(@"backward tooltip", @"Move the current layer backward") target: [[SeaController utilitiesManager] pegasusUtilityFor:document]  selector: @selector(backward:)];
+        return [[ImageToolbarItem alloc] initWithItemIdentifier: BackwardToolbarItemIdentifier label: LOCALSTR(@"backward", @"Backward") imageNamed: @"toolbar/backward" toolTip: LOCALSTR(@"backward tooltip", @"Move the current layer backward") target: [[SeaController utilitiesManager] pegasusUtilityForDocument:document]  selector: @selector(backward:)];
 	} else if ([itemIdent isEqual: DeleteLayerToolbarItemIdentifier]) {
-        return [[ImageToolbarItem alloc] initWithItemIdentifier: DeleteLayerToolbarItemIdentifier label: LOCALSTR(@"delete", @"Delete") image: [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kToolbarDeleteIcon)] toolTip: LOCALSTR(@"delete tooltip", @"Delete the current layer") target: [[SeaController utilitiesManager] pegasusUtilityFor:document]  selector: @selector(deleteLayer:)];
+        return [[ImageToolbarItem alloc] initWithItemIdentifier: DeleteLayerToolbarItemIdentifier label: LOCALSTR(@"delete", @"Delete") image: [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kToolbarDeleteIcon)] toolTip: LOCALSTR(@"delete tooltip", @"Delete the current layer") target: [[SeaController utilitiesManager] pegasusUtilityForDocument:document]  selector: @selector(deleteLayer:)];
 	} else if ([itemIdent isEqual: ZoomInToolbarItemIdentifier]) {
         return [[ImageToolbarItem alloc] initWithItemIdentifier: ZoomInToolbarItemIdentifier label: LOCALSTR(@"zoom in", @"Zoom In") imageNamed: @"toolbar/zoomIn" toolTip: LOCALSTR(@"zoom in tooltip", @"Zoom in on the current view") target: [document docView] selector: @selector(zoomIn:)];
 	} else if ([itemIdent isEqual: ZoomOutToolbarItemIdentifier]) {
@@ -176,9 +176,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	} else if ([itemIdent isEqual: ActualSizeToolbarItemIdentifier]) {
         return [[ImageToolbarItem alloc] initWithItemIdentifier: ActualSizeToolbarItemIdentifier label: LOCALSTR(@"actual size", @"Actual Size") imageNamed: @"toolbar/actualSize" toolTip: LOCALSTR(@"actual size tooltip", @"View the document at its actual size") target: [document docView] selector: @selector(zoomNormal:)];
 	} else if ([itemIdent isEqual: ToggleLayersToolbarItemIdentifier]) {
-		return [[ImageToolbarItem alloc] initWithItemIdentifier: ToggleLayersToolbarItemIdentifier label: LOCALSTR(@"toggle layers", @"Layers") imageNamed: @"toolbar/showhidelayers" toolTip: LOCALSTR(@"toggle layers tooltip", @"Show or hide the layers list view") target: [[SeaController utilitiesManager] pegasusUtilityFor:document] selector: @selector(toggleLayers:)];
+		return [[ImageToolbarItem alloc] initWithItemIdentifier: ToggleLayersToolbarItemIdentifier label: LOCALSTR(@"toggle layers", @"Layers") imageNamed: @"toolbar/showhidelayers" toolTip: LOCALSTR(@"toggle layers tooltip", @"Show or hide the layers list view") target: [[SeaController utilitiesManager] pegasusUtilityForDocument:document] selector: @selector(toggleLayers:)];
 	} else if ([itemIdent isEqual: InspectorToolbarItemIdentifier]) {
-        return [[ImageToolbarItem alloc] initWithItemIdentifier: InspectorToolbarItemIdentifier label: LOCALSTR(@"information", @"Information") imageNamed: NSImageNameInfo toolTip: LOCALSTR(@"information tooltip", @"Show or hide point information") target: [[SeaController utilitiesManager] infoUtilityFor:document]  selector: @selector(toggle:)];
+        return [[ImageToolbarItem alloc] initWithItemIdentifier: InspectorToolbarItemIdentifier label: LOCALSTR(@"information", @"Information") imageNamed: NSImageNameInfo toolTip: LOCALSTR(@"information tooltip", @"Show or hide point information") target: [[SeaController utilitiesManager] infoUtilityForDocument:document]  selector: @selector(toggle:)];
 	} else if ([itemIdent isEqual: FloatAnchorToolbarItemIdentifier]) {
         return [[ImageToolbarItem alloc] initWithItemIdentifier: FloatAnchorToolbarItemIdentifier label: LOCALSTR(@"float", @"Float") imageNamed: @"toolbar/float-tb" toolTip: LOCALSTR(@"float tooltip", @"Float or anchor the current selection") target: [document contents] selector: @selector(toggleFloatingSelection:)];
 	} else if ([itemIdent isEqual: DuplicateSelectionToolbarItemIdentifier]) {
@@ -311,7 +311,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[[document docView] setNeedsDisplay:YES];
 	}
 	if (tool == newTool && [[NSApp currentEvent] type] == NSLeftMouseUp && [[NSApp currentEvent] clickCount] > 1) {
-		[[[SeaController utilitiesManager] optionsUtilityFor:document] show:NULL];
+		[[[SeaController utilitiesManager] optionsUtilityForDocument:document] show:NULL];
 	} else {
 		tool = newTool;
 		// Deselect the old tool
@@ -333,7 +333,7 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		[self update:YES];
 	}
 	if (updateCrop)
-		[[[SeaController utilitiesManager] infoUtilityFor:document] update];
+		[[[SeaController utilitiesManager] infoUtilityForDocument:document] update];
 }
 
 - (void)floatTool

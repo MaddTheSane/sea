@@ -94,7 +94,7 @@
 	SeaLayer *layer = [[document contents] activeLayer];
 	int layerWidth = [layer width], layerHeight = [layer height];
 	unsigned char *data = [layer data];
-	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityForDocument:document] activeBrush];
 	int brushWidth = [curBrush fakeWidth], brushHeight = [curBrush fakeHeight];
 	int i, j, k, tx, ty, spp = [[document contents] spp];
 	NSPoint curPoint = IntPointMakeNSPoint(where), temp;
@@ -168,7 +168,7 @@
 {
 	SeaLayer *layer = [[document contents] activeLayer];
 	int layerWidth = [layer width], layerHeight = [layer height];
-	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityForDocument:document] activeBrush];
 	int brushWidth = [curBrush fakeWidth], brushHeight = [curBrush fakeHeight];
 	NSPoint curPoint = IntPointMakeNSPoint(where);
 	double brushSpacing = 1.0 / 100.0;

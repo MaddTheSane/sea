@@ -43,105 +43,102 @@
 	[defaults synchronize];
 }
 
-- (void)shutdownFor:(SeaDocument*)doc
+- (void)shutdownForDocument:(SeaDocument*)doc
 {
 	NSNumber *key = @((size_t)doc);
 
 	[pegasusUtilities removeObjectForKey:key];
 	[toolboxUtilities removeObjectForKey:key];
 	
-	[[self brushUtilityFor:doc] shutdown];
+	[[self brushUtilityForDocument:doc] shutdown];
 	[brushUtilities removeObjectForKey:key];
 	
-	[[self optionsUtilityFor:doc] shutdown];
+	[[self optionsUtilityForDocument:doc] shutdown];
 	[optionsUtilities removeObjectForKey:key];
 	
-	[[self textureUtilityFor:doc] shutdown];
+	[[self textureUtilityForDocument:doc] shutdown];
 	[textureUtilities removeObjectForKey:key];
 	
-	[[self infoUtilityFor:doc] shutdown];
+	[[self infoUtilityForDocument:doc] shutdown];
 	[infoUtilities removeObjectForKey:key];
 }
 
 - (void)activate:(SeaDocument*)sender
 {
-	[[self pegasusUtilityFor:sender] activate];
-	[[self toolboxUtilityFor:sender] activate];
-	[[self optionsUtilityFor:sender] activate];
-	[[self infoUtilityFor:sender] activate];
+	[[self pegasusUtilityForDocument:sender] activate];
+	[[self toolboxUtilityForDocument:sender] activate];
+	[[self optionsUtilityForDocument:sender] activate];
+	[[self infoUtilityForDocument:sender] activate];
 }
 
-- (id)pegasusUtilityFor:(id)doc
+- (PegasusUtility*)pegasusUtilityForDocument:(SeaDocument*)doc
 {
 	return pegasusUtilities[@((size_t)doc)];
 }
 
-- (id)transparentUtility
-{
-	return transparentUtility;
-}
+@synthesize transparentUtility;
 
-- (id)toolboxUtilityFor:(id)doc
+- (ToolboxUtility*)toolboxUtilityForDocument:(SeaDocument*)doc
 {
 	return toolboxUtilities[@((size_t)doc)];
 }
 
-- (id)brushUtilityFor:(id)doc
+- (BrushUtility*)brushUtilityForDocument:(SeaDocument*)doc
 {
 	return brushUtilities[@((size_t)doc)];
 }
 
-- (id)textureUtilityFor:(id)doc
+- (TextureUtility*)textureUtilityForDocument:(SeaDocument*)doc
 {
 	return textureUtilities[@((size_t)doc)];
 }
 
-- (id)optionsUtilityFor:(id)doc
+- (OptionsUtility*)optionsUtilityForDocument:(SeaDocument*)doc
 {
 	return optionsUtilities[@((size_t)doc)];
 }
 
-- (id)infoUtilityFor:(id)doc
+- (InfoUtility*)infoUtilityForDocument:(SeaDocument*)doc
 {
 	return infoUtilities[@((size_t)doc)];
 }
 
-- (id)statusUtilityFor:(id)doc
+- (StatusUtility*)statusUtilityFor:(SeaDocument*)doc
 {
 	return statusUtilities[@((size_t)doc)];
 }
 
-- (void)setPegasusUtility:(id)util for:(id)doc
+- (void)setPegasusUtility:(PegasusUtility*)util forDocument:(SeaDocument*)doc
 {
 	pegasusUtilities[@((size_t)doc)] = util;
 }
 
-- (void)setToolboxUtility:(id)util for:(id)doc
+- (void)setToolboxUtility:(ToolboxUtility*)util forDocument:(SeaDocument*)doc
 {
 	toolboxUtilities[@((size_t)doc)] = util;
 }
 
-- (void)setBrushUtility:(id)util for:(id)doc
+- (void)setBrushUtility:(BrushUtility*)util forDocument:(SeaDocument*)doc
 {
 	brushUtilities[@((size_t)doc)] = util;
 }
 
-- (void)setTextureUtility:(id)util for:(id)doc
+- (void)setTextureUtility:(TextureUtility*)util forDocument:(SeaDocument*)doc
 {
 	textureUtilities[@((size_t)doc)] = util;
 }
 
-- (void)setOptionsUtility:(id)util for:(id)doc
+- (void)setOptionsUtility:(OptionsUtility*)util forDocument:(SeaDocument*)doc
 {
 	optionsUtilities[@((size_t)doc)] = util;
 }
 
-- (void)setInfoUtility:(id)util for:(id)doc
+- (void)setInfoUtility:(InfoUtility*)util forDocument:(SeaDocument*)doc
 {
 	infoUtilities[@((size_t)doc)] = util;
 }
 
-- (void)setStatusUtility:(id)util for:(id)doc
+- (void)setStatusUtility:(StatusUtility*)util forDocument:(SeaDocument*)doc
 {
 	statusUtilities[@((size_t)doc)] = util;
 }
