@@ -30,7 +30,7 @@ enum {
 {
 	NSArray *groupNames = [[[SeaController utilitiesManager] brushUtilityForDocument:document] groupNames];
     
-    if ([existingCategoryRadio state] == NSOnState && [categoryTable selectedRow]==-1) {
+    if ([existingCategoryRadio state] == NSOnState && [categoryTable selectedRow] == -1) {
         return;
     }
 
@@ -44,8 +44,7 @@ enum {
 	// Determine the path
 	if ([existingCategoryRadio state] == NSOnState) {
 		path = [path stringByAppendingPathComponent:[groupNames objectAtIndex:[categoryTable selectedRow]]];
-	}
-	else {
+	} else {
 		path = [path stringByAppendingPathComponent:[categoryTextbox stringValue]];
 	}
     [gFileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:0 error:NULL];
@@ -85,13 +84,13 @@ enum {
 			[newCategoryRadio setState:NSOffState];
 			[categoryTable setEnabled:YES];
 			[categoryTextbox setEnabled:NO];
-		break;
+			break;
 		case kNewCategoryButton:
 			[existingCategoryRadio setState:NSOffState];
 			[newCategoryRadio setState:NSOnState];
 			[categoryTable setEnabled:NO];
 			[categoryTextbox setEnabled:YES];
-		break;
+			break;
 	}
 }
 
@@ -99,7 +98,7 @@ enum {
 {
 	NSArray *groupNames = [[[SeaController utilitiesManager] brushUtilityForDocument:document] groupNames];
 
-	return [groupNames objectAtIndex:row];
+	return groupNames[row];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
@@ -110,13 +109,13 @@ enum {
 }
 
 typedef struct {
-    unsigned int   header_size;  /*  header_size = sizeof (BrushHeader) + brush name  */
-    unsigned int   version;      /*  brush file version #  */
-    unsigned int   width;        /*  width of brush  */
-    unsigned int   height;       /*  height of brush  */
-    unsigned int   bytes;        /*  depth of brush in bytes */
-    unsigned int   magic_number; /*  GIMP brush magic number  */
-    unsigned int   spacing;      /*  brush spacing  */
+    unsigned int   header_size;  /*!<  header_size = sizeof (BrushHeader) + brush name  */
+    unsigned int   version;      /*!<  brush file version #  */
+    unsigned int   width;        /*!<  width of brush  */
+    unsigned int   height;       /*!<  height of brush  */
+    unsigned int   bytes;        /*!<  depth of brush in bytes */
+    unsigned int   magic_number; /*!<  GIMP brush magic number  */
+    unsigned int   spacing;      /*!<  brush spacing  */
 } BrushHeader;
 
 #define GBRUSH_MAGIC    (('G' << 24) + ('I' << 16) + ('M' << 8) + ('P' << 0))
@@ -129,23 +128,24 @@ typedef struct {
     BrushHeader header;
     unsigned char* noalpha=NULL;
     
-    if(spp==2){
+	if (spp==2) {
         noalpha = malloc(width*height);
         SeaStripAlphaToWhite(2,noalpha,data,width*height);
         // need to invert to black color space
-        for(int i=0;i<width*height;i++) {
+        for (int i=0; i<width*height; i++) {
             noalpha[i] = noalpha[i] ^ 0xFF;
         }
         data = noalpha;
-        spp=1;
+        spp = 1;
     }
     
     NSString* name = [[path lastPathComponent] stringByDeletingPathExtension];
     
     // Open the brush file
     file = fopen([path fileSystemRepresentation], "wb");
-    if (file == NULL)
+	if (file == NULL) {
 		return NO;
+	}
     
 	const char *utf8Name = [name UTF8String];
     // Set-up the header
@@ -179,9 +179,9 @@ typedef struct {
     // Close the brush file
     fclose(file);
     
-    if(noalpha){
-        free(noalpha);
-    }
+	if (noalpha) {
+		free(noalpha);
+	}
     
     return YES;
 }

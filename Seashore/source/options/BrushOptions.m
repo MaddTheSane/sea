@@ -84,7 +84,7 @@ enum {
 
 - (BOOL)fade
 {
-	return [fadeCheckbox state];
+	return [fadeCheckbox state] == NSOnState;
 }
 
 - (int)fadeValue

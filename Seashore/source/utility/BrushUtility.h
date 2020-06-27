@@ -137,7 +137,7 @@
 @property (readonly, copy) NSArray<SeaBrush*> *brushes;
 
 /*!
- @method        groupNames
+ @property      groupNames
  @discussion    Returns the textures' group names (excluding custom groups).
  @result        Returns an NSArray containing the textures' group names.
  */

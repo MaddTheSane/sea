@@ -282,29 +282,19 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 {
 	NSRect srcRect, destRect;
 	NSImage *image = NULL;
-	ToolboxUtility *tUtil = [[SeaController utilitiesManager] toolboxUtilityForDocument:document];
-	SeaToolsDefines curToolIndex = [tUtil tool];
+	
 	IntRect imageRect = [[document whiteboard] imageRect];
 	int xres = [[document contents] xres], yres = [[document contents] yres];
 	CGFloat xResScale, yResScale;
 
 	// Get the correct image for displaying
 	image = [[document whiteboard] image];
-	srcRect = destRect = rect;
-	
-	// Set the background color
-	if ([[document whiteboard] whiteboardIsLayerSpecific]) {
-		[[NSColor colorWithCalibratedWhite:0.6667 alpha:1.0] set];
-		[[NSBezierPath bezierPathWithRect:destRect] fill];
-	}
-	else {
-		if([(SeaPrefs *)[SeaController seaPrefs] useCheckerboard]){
-			[[NSColor colorWithPatternImage: [NSImage imageNamed:@"checkerboard"] ] set];
-		}else{
-			[(NSColor*)[[[SeaController utilitiesManager] transparentUtility] color] set];
-		}
-		[[NSBezierPath bezierPathWithRect:destRect] fill];
-	}
+    
+    srcRect = NSMakeRect(0, 0, 0, 0);
+    
+    destRect = IntRectMakeNSRect(imageRect);
+    
+	[NSBezierPath clipRect:rect];
 	
 	// For non 72 dpi resolutions we must scale here
 	xResScale = yResScale = 1.0;
@@ -316,31 +306,38 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 			yResScale = ((CGFloat)yres / SeaScreenResolution.y);
 		}
 	}
-	srcRect.origin.x *= xResScale;
-	srcRect.size.width *= xResScale;
-	srcRect.origin.y *= yResScale;
-	srcRect.size.height *= yResScale;
-	
-	// Then scale here for zoom
-	srcRect.origin.x /= zoom;
-	srcRect.size.width /= zoom;
-	srcRect.origin.y /= zoom;
-	srcRect.size.height /= zoom;
-	
-	// Position the image correctly
-	srcRect.origin.x -= imageRect.origin.x;
-	srcRect.origin.y -= imageRect.origin.y;
-	
-	// Set interpolation (image smoothing) appropriately
-	if ([[SeaController seaPrefs] smartInterpolation]) {
-		if (srcRect.size.width > destRect.size.width || (SeaScreenResolution.x > 72 && (xres / 72.0) * zoom <= 4))
-			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-		else
-			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
-	}
-	else {
-		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
-	}
+    
+     destRect.origin.x /= xResScale;
+     destRect.size.width /= xResScale;
+     destRect.origin.y /= yResScale;
+     destRect.size.height /= yResScale;
+     
+     // Then scale here for zoom
+     destRect.origin.x *= zoom;
+     destRect.size.width *= zoom;
+     destRect.origin.y *= zoom;
+     destRect.size.height *= zoom;
+     
+     destRect = NSIntegralRectWithOptions(destRect,NSAlignAllEdgesOutward);
+    
+	// Set the background color
+	if ([[document whiteboard] whiteboardIsLayerSpecific]) {
+		[[NSColor windowBackgroundColor] set];
+		[[NSBezierPath bezierPathWithRect:rect] fill];
+	} else {
+        if([[SeaController seaPrefs] useCheckerboard]){
+            [[NSColor colorWithPatternImage: [NSImage imageNamed:@"checkerboard"]] set];
+        }else{
+            [[[[SeaController utilitiesManager] transparentUtility] color] set];
+        }
+        [[NSBezierPath bezierPathWithRect:rect] fill];
+    }
+    
+    if ([[SeaController seaPrefs] smartInterpolation]) {
+        [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+    } else {
+        [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
+    }
 	
 	// Draw the image to screen
 	[image drawInRect:destRect fromRect:srcRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
