@@ -157,7 +157,7 @@ public final class SVGImporter: NSObject, SeaImporter {
 	@objc(addToDocument:contentsOfURL:error:)
 	public func add(to doc: SeaDocument, contentsOf path: URL) throws {
 		trueSize = path.withUnsafeFileSystemRepresentation { (fileRef) -> IntSize in
-			return getDocumentSize(fileRef)
+			return SeaSVGGetDocumentSize(fileRef)
 		}
 		size = trueSize
 		

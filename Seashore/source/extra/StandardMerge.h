@@ -222,13 +222,13 @@ extern void SeaBlendPixel(int spp, unsigned char *destPtr, int destLoc, unsigned
 	@function	SeaSelectMerge
 	@discussion	Given two pixels in two bitmaps composites the source pixel on
 				to the destination pixel using the selected merge technique.
-				Note for \c XCF_DISSOLVE_MODE you must call 
-	\code 
-	srandom(randomTable[y % RANDOM_TABLE_SIZE]);
-	for (k = 0; k < x; k++) 
-		random();\endcode
-				for the merge to
-				work correctly.
+				Note for \c XCF_DISSOLVE_MODE you must call
+ \code
+ srandom(randomTable[y % RANDOM_TABLE_SIZE]);
+ for (k = 0; k < x; k++)
+    random();
+ \endcode
+	@discussion	for the merge to work correctly.
 	@param		choice
 				The selected merge technique (see Constants documentation).
 	@param		spp

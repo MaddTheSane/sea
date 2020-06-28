@@ -3,7 +3,7 @@
 #import <SeashoreKit/SeaContent.h>
 
 
-extern IntSize getDocumentSize(const char *path);
+extern IntSize SeaSVGGetDocumentSize(const char *path);
 #define SeaUseOldSVGImporterKey @"UseOldSVGApp"
 
 /*!
