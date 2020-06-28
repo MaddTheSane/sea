@@ -112,14 +112,11 @@ typedef struct {
 	 IntPoint end;						/**< Specifies the end co-ordinates */
 } GimpGradientInfo;
 
-typedef struct _GimpVector2 GimpVector2;
-
-struct _GimpVector2
-{
+typedef struct _GimpVector2 {
   double x, y;
-};
+} GimpVector2;
 
-typedef void (* ProgressFunction) (int max, int current);
+typedef void (* GimpProgressFunction) (int max, int current);
 
 /*!
 	@function	GCScalePixels
@@ -138,7 +135,7 @@ void GCDrawEllipse(unsigned char *dest, int destWidth, int destHeight, IntRect r
 	@function	GCFillGradient
 	@discussion	Fills a rectangle of the given bitmap with the given gradient.
  */
-void GCFillGradient(unsigned char *dest, int destWidth, int destHeight, IntRect rect, int spp, GimpGradientInfo info, ProgressFunction progress_callback);
+void GCFillGradient(unsigned char *dest, int destWidth, int destHeight, IntRect rect, int spp, GimpGradientInfo info, GimpProgressFunction progress_callback);
 
 /*!
 	@function	GCDrawPolygon
@@ -150,6 +147,6 @@ void GCDrawPolygon(unsigned char *dest, int destWidth, int destHeight, GimpVecto
 	@function	GCRotateImage
 	@discussion	Rotates the given bitmap through the specified angle (in radians).
  */
-void GCRotateImage(unsigned char **dest, int *destWidth, int *destHeight, int *destX, int *destY, unsigned char *src, int srcWidth, int srcHeight, float angle, GimpInterpolationType interpolation_type, int spp, ProgressFunction progress_callback);
+void GCRotateImage(unsigned char **dest, int *destWidth, int *destHeight, int *destX, int *destY, unsigned char *src, int srcWidth, int srcHeight, float angle, GimpInterpolationType interpolation_type, int spp, GimpProgressFunction progress_callback);
 
 #endif /* GIMPCORE_H */

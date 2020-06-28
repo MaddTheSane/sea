@@ -61,7 +61,9 @@ final public class CMYK: NSObject, SeaPluginClass {
 				kColorSyncTransformTag.takeUnretainedValue() as String: kColorSyncTransformPCSToDevice.takeUnretainedValue() as String]
 		]
 		
-		let cw = ColorSyncTransformCreate(profSeq as NSArray, nil).takeRetainedValue()
+		guard let cw = ColorSyncTransformCreate(profSeq as NSArray, nil)?.takeRetainedValue() else {
+			return
+		}
 		
 		for j in selection.minY ..< selection.maxY {
 			let pos = j * width + selection.origin.x;
