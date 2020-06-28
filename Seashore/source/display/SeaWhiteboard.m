@@ -544,7 +544,7 @@ extern IntPoint SeaScreenResolution;
 	CMYKPreview = !CMYKPreview;
 	[self readjustAltData:YES];
 #if MAIN_COMPILE
-	[[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
+	[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] update:NO];
 #endif
 }
 

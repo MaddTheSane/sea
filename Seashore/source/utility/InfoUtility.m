@@ -23,7 +23,7 @@
 - (void)awakeFromNib
 {
 	// Shown By Default
-	[[SeaController utilitiesManager] setInfoUtility: self for:document];
+	[[SeaController utilitiesManager] setInfoUtility: self forDocument:document];
 	[(LayerControlView *)controlView setHasResizeThumb:YES];
 	
 	if(![self visible]){
@@ -75,7 +75,7 @@
 	IntSize size;
 	NSColor *color;
 	int xres, yres;
-	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines curToolIndex = [[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool];
 	
 	// Show no values
 	if (!document) {

@@ -227,7 +227,7 @@ static inline void fix_endian_write(int *input, int size)
 	// Write the layer's opacity
 	tempIntString[0] = PROP_OPACITY;
 	tempIntString[1] = sizeof(int);
-	tempIntString[2] = [layer opacity];
+	tempIntString[2] = [(SeaLayer*)layer opacity];
 	fix_endian_write(tempIntString, 3);
 	fwrite(tempIntString, sizeof(int), 3, file);
 	

@@ -271,7 +271,7 @@ typedef struct {
 	@param		newHeight
 				The revised height as an integer in pixels.
 */
-- (void)setWidth:(int)newWidth height:(int)newHeight;
+- (void)setWidth:(int)newWidth height:(int)newHeight NS_SWIFT_NAME(set(width:height:));
 
 /*!
 	@method		setMarginLeft:top:right:bottom:

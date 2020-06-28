@@ -782,7 +782,7 @@
 	// There's nothing to do if there's no mask
 	if (mask) {
 	
-		if (type == kHorizontalFlip) {
+		if (type == SeaFlipHorizontal) {
 			for (int i = 0; i < rect.size.width / 2; i++) {
 				for (int j = 0; j < rect.size.height; j++) {
 					src = j * rect.size.width + rect.size.width - i - 1;
@@ -964,11 +964,11 @@
 		newRect.origin.y *= yScale;
 		newRect.size.width *= xScale;
 		newRect.size.height *= yScale;
-		[self scaleSelectionTo: newRect from: rect interpolation: interpolation usingMask: NULL];
+		[self scaleSelectionToRect: newRect fromRect: rect interpolation: interpolation usingMask: NULL];
 	}
 }
 
-- (void)scaleSelectionTo:(IntRect)newRect from: (IntRect)oldRect interpolation:(GimpInterpolationType)interpolation usingMask: (unsigned char*)oldMask
+- (void)scaleSelectionToRect:(IntRect)newRect fromRect: (IntRect)oldRect interpolation:(GimpInterpolationType)interpolation usingMask: (unsigned char*)oldMask
 {
 	BOOL hFlip = NO;
 	BOOL vFlip = NO;
@@ -993,9 +993,9 @@
 			unsigned char* flippedMask = malloc(oldRect.size.width * oldRect.size.height);
 			memcpy(flippedMask, oldMask, oldRect.size.width * oldRect.size.height);
 			if (hFlip)
-				[[[(SeaDocument *)gCurrentDocument operations] seaFlip] simpleFlipOf:flippedMask width:oldRect.size.width height:oldRect.size.height spp:1 type:kHorizontalFlip];
+				[[[(SeaDocument *)gCurrentDocument operations] seaFlip] simpleFlipOf:flippedMask width:oldRect.size.width height:oldRect.size.height spp:1 type:SeaFlipHorizontal];
 			if (vFlip)
-				[[[(SeaDocument *)gCurrentDocument operations] seaFlip] simpleFlipOf:flippedMask width:oldRect.size.width height:oldRect.size.height spp:1 type:kVerticalFlip];
+				[[[(SeaDocument *)gCurrentDocument operations] seaFlip] simpleFlipOf:flippedMask width:oldRect.size.width height:oldRect.size.height spp:1 type:SeaFlipVertical];
 			
 			newMask = malloc(newRect.size.width * newRect.size.height);
 			GCScalePixels(newMask, newRect.size.width, newRect.size.height, flippedMask, oldRect.size.width, oldRect.size.height, interpolation, 1);

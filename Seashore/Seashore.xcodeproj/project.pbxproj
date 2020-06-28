@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -289,6 +289,8 @@
 		556D43CE1D415E2700BECFB2 /* SVGImageRep.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 556D43B71D415E0C00BECFB2 /* SVGImageRep.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		556D43D01D41677F00BECFB2 /* SVGLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A8721E2907DAF1FA00995290 /* SVGLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		556D43D11D41678300BECFB2 /* SVGContent.h in Headers */ = {isa = PBXBuildFile; fileRef = A8721E2507DAF1F000995290 /* SVGContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		556D76EB24A6A97F003E619D /* BrushExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B8BD58F21ED169B00FD9AC5 /* BrushExporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		556D76EC24A6A97F003E619D /* BrushExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B8BD59021ED16AB00FD9AC5 /* BrushExporter.m */; };
 		557D533518CF9FEC005809E3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		557D534118CFA016005809E3 /* CIAffineTileClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D504A18CF9FBA005809E3 /* CIAffineTileClass.m */; };
 		557D536718CFAAF6005809E3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
@@ -1773,6 +1775,8 @@
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2B8BD58F21ED169B00FD9AC5 /* BrushExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrushExporter.h; sourceTree = "<group>"; };
+		2B8BD59021ED16AB00FD9AC5 /* BrushExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrushExporter.m; sourceTree = "<group>"; };
 		35B156DC0A2C00D0005B688F /* GIMPCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GIMPCore.xcodeproj; path = ../GIMPCore/GIMPCore.xcodeproj; sourceTree = SOURCE_ROOT; };
 		35B156E30A2C00E0005B688F /* TIFF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TIFF.xcodeproj; path = ../TIFF/TIFF.xcodeproj; sourceTree = SOURCE_ROOT; };
 		35B158630A2C089A005B688F /* Brushed.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Brushed.xcodeproj; path = ../Brushed/Brushed.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -4742,6 +4746,8 @@
 				F5B278C003EF952B01A0A16F /* SeaLayerUndo.m */,
 				A899739C07C42F5200B38F38 /* TextureExporter.h */,
 				A899739D07C42F5200B38F38 /* TextureExporter.m */,
+				2B8BD58F21ED169B00FD9AC5 /* BrushExporter.h */,
+				2B8BD59021ED16AB00FD9AC5 /* BrushExporter.m */,
 				F57AD82C03FF7FFB0185BAF6 /* SeaContent Subclasses */,
 				F57AD82D03FF802E0185BAF6 /* SeaLayer Subclasses */,
 			);
@@ -4947,6 +4953,7 @@
 				55472BA01C6EE1530065A852 /* SeaController.h in Headers */,
 				55D749081D52923900B099C9 /* CocoaContent.h in Headers */,
 				55DAC84120EECE6800CD7B26 /* CocoaImporter.h in Headers */,
+				556D76EB24A6A97F003E619D /* BrushExporter.h in Headers */,
 				55472BDF1C6EE5FC0065A852 /* ColorConversion.h in Headers */,
 				55472BB91C6EE2010065A852 /* SeaLayer.h in Headers */,
 				55472BBD1C6EE2010065A852 /* TextureExporter.h in Headers */,
@@ -6303,7 +6310,7 @@
 				};
 			};
 			buildConfigurationList = A8D01E0D09BD8EA3007CFE76 /* Build configuration list for PBXProject "Seashore" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -7308,6 +7315,7 @@
 				55DAC84020EECC3400CD7B26 /* SVGImporter.m in Sources */,
 				55472BA11C6EE1530065A852 /* SeaController.m in Sources */,
 				55472BBC1C6EE2010065A852 /* SeaLayerUndo.m in Sources */,
+				556D76EC24A6A97F003E619D /* BrushExporter.m in Sources */,
 				55472BC41C6EE4730065A852 /* CocoaLayer.m in Sources */,
 				55472BB71C6EE2010065A852 /* SeaContent.m in Sources */,
 				55472BCE1C6EE4EC0065A852 /* SeaWhiteboard.m in Sources */,
@@ -9566,7 +9574,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9584,7 +9592,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9604,7 +9612,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9622,7 +9630,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9675,7 +9683,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9693,7 +9701,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9713,7 +9721,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9731,7 +9739,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9751,7 +9759,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9769,7 +9777,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9789,7 +9797,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9807,7 +9815,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9932,7 +9940,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9949,7 +9957,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9965,7 +9973,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9979,7 +9987,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -9999,7 +10007,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10017,7 +10025,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10037,7 +10045,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10055,7 +10063,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10075,7 +10083,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10093,7 +10101,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10113,7 +10121,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10131,7 +10139,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10165,7 +10173,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10183,7 +10191,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10203,7 +10211,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10221,7 +10229,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10241,7 +10249,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10259,7 +10267,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10279,7 +10287,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10297,7 +10305,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10317,7 +10325,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10335,7 +10343,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10355,7 +10363,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10373,7 +10381,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10393,7 +10401,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10411,7 +10419,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10431,7 +10439,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10449,7 +10457,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10469,7 +10477,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10487,7 +10495,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10507,7 +10515,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10525,7 +10533,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10545,7 +10553,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10563,7 +10571,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10583,7 +10591,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10601,7 +10609,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10621,7 +10629,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10639,7 +10647,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10659,7 +10667,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10677,7 +10685,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10697,7 +10705,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10715,7 +10723,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10735,7 +10743,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10753,7 +10761,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10773,7 +10781,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10791,7 +10799,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10811,7 +10819,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10829,7 +10837,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10849,7 +10857,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10867,7 +10875,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10887,7 +10895,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10905,7 +10913,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10925,7 +10933,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10943,7 +10951,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10963,7 +10971,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -10981,7 +10989,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11001,7 +11009,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11019,7 +11027,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11039,7 +11047,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11057,7 +11065,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11077,7 +11085,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11095,7 +11103,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11115,7 +11123,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11133,7 +11141,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11153,7 +11161,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11171,7 +11179,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11191,7 +11199,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11209,7 +11217,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11229,7 +11237,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11247,7 +11255,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11267,7 +11275,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11285,7 +11293,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11305,7 +11313,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11323,7 +11331,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11343,7 +11351,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11361,7 +11369,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11381,7 +11389,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11399,7 +11407,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11419,7 +11427,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11437,7 +11445,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11457,7 +11465,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11475,7 +11483,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11495,7 +11503,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11513,7 +11521,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11533,7 +11541,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11551,7 +11559,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11571,7 +11579,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11589,7 +11597,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11609,7 +11617,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11627,7 +11635,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11647,7 +11655,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11665,7 +11673,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11685,7 +11693,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11703,7 +11711,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11723,7 +11731,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11741,7 +11749,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11761,7 +11769,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -11779,7 +11787,7 @@
 				);
 				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};

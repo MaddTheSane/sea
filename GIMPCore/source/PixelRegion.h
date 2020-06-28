@@ -32,7 +32,7 @@ static inline void pixel_region_info(PixelRegion pr, int *width, int *height, in
 	*spp = pr.bytes;
 }
 
-static inline gboolean pixel_region_has_alpha(void *unused)
+static inline gboolean pixel_region_has_alpha()
 {
 	return TRUE;
 }

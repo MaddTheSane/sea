@@ -26,7 +26,7 @@
 	__weak SeaDocument *document;
 	
 	//! The object responsible for changes to our bitmap
-	id seaLayerUndo;
+	SeaLayerUndo *seaLayerUndo;
 #endif
 	
 	//! The layer's height, width and mode

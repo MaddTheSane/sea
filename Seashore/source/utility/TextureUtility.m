@@ -81,7 +81,7 @@
 	// Inform the texture that it is active
 	[self setActiveTextureIndex:-1];
 
-	[[SeaController utilitiesManager] setTextureUtility: self for:document];
+	[[SeaController utilitiesManager] setTextureUtility: self forDocument:document];
 }
 
 - (void)dealloc
@@ -291,7 +291,7 @@
 		[textureNameLabel setStringValue:[newTexture name]];
 		[opacitySlider setEnabled:YES];
 		[newTexture activate];
-		[[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
+		[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] update:NO];
 		[(TextTool *)[[document tools] getTool:SeaToolsText] preview:NULL];
 	}
 }

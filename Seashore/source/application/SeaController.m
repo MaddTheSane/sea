@@ -31,7 +31,7 @@ static SeaController *seaController;
 	terminationObjects = [[NSMutableArray alloc] init];
 	
 	// Specify ourselves as NSApp's delegate
-	[NSApp setDelegate:self];
+    [NSApp setDelegate:seaController];
 
 	// We want to know when ColorSync changes
 	[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(colorSyncChanged:) name:@"AppleColorSyncPreferencesChangedNotification" object:NULL];

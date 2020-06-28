@@ -258,7 +258,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 	// Finish off
 	
 	// Correct effect tool
-	[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] setEffectEnabled:([pointPluginsNames count] != 0)];
+	[[[SeaController utilitiesManager] toolboxUtilityForDocument:gCurrentDocument] setEffectEnabled:([pointPluginsNames count] != 0)];
 
 	// Register to recieve the terminate message when Seashore quits
 	[controller registerForTermination:self];
@@ -268,7 +268,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 - (void)terminate
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setInteger:[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: SeaToolsEffect] selectedRow] forKey:@"effectIndex"];
+	[defaults setInteger:[[[[SeaController utilitiesManager] optionsUtilityForDocument:gCurrentDocument] getOptions: SeaToolsEffect] selectedRow] forKey:@"effectIndex"];
 }
 
 - (id)affinePlugin
@@ -307,7 +307,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 
 - (id)activePointEffect
 {
-	return pointPlugins[[[[[SeaController utilitiesManager] optionsUtilityFor:gCurrentDocument] getOptions: SeaToolsEffect] selectedRow]];
+	return pointPlugins[[[[[SeaController utilitiesManager] optionsUtilityForDocument:gCurrentDocument] getOptions: SeaToolsEffect] selectedRow]];
 }
 
 - (BOOL)validateMenuItem:(id)menuItem

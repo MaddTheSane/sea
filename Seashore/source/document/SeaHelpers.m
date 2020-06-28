@@ -21,7 +21,7 @@
 - (void)selectionChanged
 {
 	[[document docView] setNeedsDisplay:YES]; 
-	[[[SeaController utilitiesManager] infoUtilityFor:document] update];
+	[[[SeaController utilitiesManager] infoUtilityForDocument:document] update];
 }
 
 - (void)endLineDrawing
@@ -50,7 +50,7 @@
 	}
 	
 	// Special case for the effect tool
-	if ([[[SeaController utilitiesManager] toolboxUtilityFor:document] tool] == SeaToolsEffect) {
+	if ([[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool] == SeaToolsEffect) {
 		[curTool reset];
 	}
 }
@@ -58,7 +58,7 @@
 - (void)channelChanged
 {
 	if ([[document contents] spp] != 2)
-		[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
+		[(ToolboxUtility *)[[SeaController utilitiesManager] toolboxUtilityForDocument:document] update:NO];
 	[[document whiteboard] readjustAltData:YES];
 	[(StatusUtility *)[[SeaController utilitiesManager] statusUtilityFor:document] update];
 }
@@ -71,7 +71,7 @@
 
 - (void)zoomChanged
 {
-	[[[SeaController utilitiesManager] optionsUtilityFor:document] update];
+	[[[SeaController utilitiesManager] optionsUtilityForDocument:document] update];
 	[[[SeaController utilitiesManager] statusUtilityFor:document] updateZoom];
 }
 
@@ -85,7 +85,7 @@
 	for (i = 0; i < [contents layerCount]; i++) {
 		[[contents layerAtIndex:i] updateThumbnail];
 	}
-	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
+	[[[SeaController utilitiesManager] pegasusUtilityForDocument:document] update:kPegasusUpdateLayerView];
 	[[[SeaController utilitiesManager] statusUtilityFor:document] update];
 	[[document docView] setNeedsDisplay:YES]; 
 
@@ -124,7 +124,7 @@
 		break;
 	}
 	[[document dataSource] update];
-	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
+	[[[SeaController utilitiesManager] pegasusUtilityForDocument:document] update:kPegasusUpdateAll];
 }
 
 - (void)documentWillFlatten
@@ -139,7 +139,7 @@
 
 - (void)typeChanged
 {
-	[[[SeaController utilitiesManager] toolboxUtilityFor:document] update:NO];
+	[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] update:NO];
 	[[document whiteboard] readjust];
 	[self layerContentsChanged:kAllLayers];
 	[[[SeaController utilitiesManager] statusUtilityFor:document] update];
@@ -156,7 +156,7 @@
 	layer = [contents activeLayer];
 	[layer updateThumbnail];
 	[[document whiteboard] update:rect inThread:NO];
-	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
+	[[[SeaController utilitiesManager] pegasusUtilityForDocument:document] update:kPegasusUpdateLayerView];
 }
 
 - (void)overlayChanged:(IntRect)rect inThread:(BOOL)thread
@@ -190,7 +190,7 @@
 	}
 	
 	if (!hold)
-		[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
+		[[[SeaController utilitiesManager] pegasusUtilityForDocument:document] update:kPegasusUpdateAll];
 }
 
 - (void)layerBoundariesChanged:(NSInteger)index
@@ -224,7 +224,7 @@
 	
 	[[document selection] readjustSelection];
 	[[document whiteboard] readjustLayer];
-	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
+	[[[SeaController utilitiesManager] pegasusUtilityForDocument:document] update:kPegasusUpdateAll];
 	[[document docView] setNeedsDisplay:YES]; 
 
 }
@@ -261,7 +261,7 @@
 		break;
 	}
 	
-	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
+	[[[SeaController utilitiesManager] pegasusUtilityForDocument:document] update:kPegasusUpdateLayerView];
 }
 
 - (void)layerOffsetsChanged:(NSInteger)index from:(IntPoint)oldOffsets
@@ -328,7 +328,7 @@
 		break;
 	}
 	[[document dataSource] update];
-	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll];
+	[[[SeaController utilitiesManager] pegasusUtilityForDocument:document] update:kPegasusUpdateAll];
 }
 
 - (void)layerSnapshotRestored:(int)index rect:(IntRect)rect
@@ -340,13 +340,13 @@
 	rect.origin.y += [layer yoff];
 	[(SeaWhiteboard *)[document whiteboard] update:rect inThread:NO];
 	[layer updateThumbnail];
-	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
+	[[[SeaController utilitiesManager] pegasusUtilityForDocument:document] update:kPegasusUpdateLayerView];
 }
 
 - (void)layerTitleChanged
 {
 	[[document dataSource] update];
-	[[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateLayerView];
+	[[[SeaController utilitiesManager] pegasusUtilityForDocument:document] update:kPegasusUpdateLayerView];
 }
 
 @end

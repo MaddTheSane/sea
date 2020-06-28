@@ -27,6 +27,7 @@
 #import "Units.h"
 #import "OptionsUtility.h"
 #import "SeaWindowContent.h"
+#import "BrushExporter.h"
 
 extern int globalUniqueDocID;
 int globalUniqueDocID;
@@ -55,6 +56,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 @synthesize warnings;
 @synthesize pluginData;
 @synthesize textureExporter;
+@synthesize brushExporter;
 @synthesize uniqueDocID;
 @synthesize selection;
 @synthesize dataSource;
@@ -438,12 +440,12 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 
 - (void)windowWillBeginSheet:(NSNotification *)notification
 {
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:NO];
+	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityForDocument:self] setEnabled:NO];
 }
 
 - (void)windowDidEndSheet:(NSNotification *)notification
 {
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:YES];
+	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityForDocument:self] setEnabled:YES];
 }
 
 - (void)windowDidBecomeMain:(NSNotification *)notification
@@ -452,12 +454,12 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	
 	[[SeaController utilitiesManager] activate:self];
 	if ([docWindow attachedSheet])
-		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:NO];
+		[[[SeaController utilitiesManager] pegasusUtilityForDocument:self] setEnabled:NO];
 	else
-		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:YES];
+		[[[SeaController utilitiesManager] pegasusUtilityForDocument:self] setEnabled:YES];
 	point = [docWindow mouseLocationOutsideOfEventStream];
 	[[self docView] updateRulerMarkings:point andStationary:NSMakePoint(-256e6, -256e6)];
-	[(OptionsUtility *)[(UtilitiesManager *)[SeaController utilitiesManager] optionsUtilityFor:self] viewNeedsDisplay];
+	[(OptionsUtility *)[(UtilitiesManager *)[SeaController utilitiesManager] optionsUtilityForDocument:self] viewNeedsDisplay];
 }
 
 - (void)windowDidResignMain:(NSNotification *)notification
@@ -466,12 +468,12 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	
 	[helpers endLineDrawing];
 	if ([docWindow attachedSheet])
-		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:NO];
+		[[[SeaController utilitiesManager] pegasusUtilityForDocument:self] setEnabled:NO];
 	else
-		[[[SeaController utilitiesManager] pegasusUtilityFor:self] setEnabled:YES];
+		[[[SeaController utilitiesManager] pegasusUtilityForDocument:self] setEnabled:YES];
 	point = NSMakePoint(-256e6, -256e6);
 	[[self docView] updateRulerMarkings:point andStationary:point];
-	[[[SeaController utilitiesManager] optionsUtilityFor:self] viewNeedsDisplay];
+	[[[SeaController utilitiesManager] optionsUtilityForDocument:self] viewNeedsDisplay];
 	[gColorPanel orderOut:self];
 }
 
@@ -546,7 +548,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 
 - (void)close
 {
-	[[SeaController utilitiesManager] shutdownFor:self];
+	[[SeaController utilitiesManager] shutdownForDocument:self];
 
 	// Then call our supervisor
 	[super close];

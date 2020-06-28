@@ -61,7 +61,7 @@ NSFont *gNewFont;
 	NSString *text;
 	IntPoint pos, off;
 	SeaLayer *layer;
-	SeaTexture *activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
+	SeaTexture *activeTexture = [[[SeaController utilitiesManager] textureUtilityForDocument:document] activeTexture];
 	NSBitmapImageRep *initRep, *initRep2 = NULL, *imageRep, *imageRep2 = NULL;
 	NSImage *image, *image2 = NULL;
 	NSMutableParagraphStyle *paraStyle;

@@ -23,7 +23,7 @@
 @class SeaPlugins, SeaPrefs, UtilitiesManager, SeaProxy;
 @class SeaHelp, SeaWarning;
 
-@interface SeaController : NSObject <NSApplicationDelegate>
+@interface SeaController : NSObject <NSApplicationDelegate, NSMenuItemValidation>
 {
 	//! An array of objects wishing to recieve the terminate message
 	NSMutableArray<id<SSKTerminatable>> *terminationObjects;

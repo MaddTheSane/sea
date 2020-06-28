@@ -17,7 +17,7 @@ static BOOL forceAlt = NO;
 	SeaToolsDefines curTool;
 	
 	document = sender;
-	curTool = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	curTool = [[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool];
 	if (lastTool != curTool) {
 		[self updateModifiers:0];
 		lastTool = curTool;

@@ -121,7 +121,7 @@
 - (void)mouseDownAt:(IntPoint)where withEvent:(NSEvent *)event
 {
 	SeaLayer *layer = [[document contents] activeLayer];
-	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+	SeaBrush *curBrush = [[[SeaController utilitiesManager] brushUtilityForDocument:document] activeBrush];
 	NSPoint curPoint = IntPointMakeNSPoint(where), temp;
 	IntRect rect;
 	int spp = [[document contents] spp];
@@ -259,13 +259,13 @@
 		
 		// Set-up variables
 		layer = [[document contents] activeLayer];
-		curBrush = [[[SeaController utilitiesManager] brushUtilityFor:document] activeBrush];
+		curBrush = [[[SeaController utilitiesManager] brushUtilityForDocument:document] activeBrush];
 		layerWidth = [layer width];
 		layerHeight = [layer height];
 		brushWidth = [curBrush fakeWidth];
 		brushHeight = [curBrush fakeHeight];
-		activeTexture = [[[SeaController utilitiesManager] textureUtilityFor:document] activeTexture];
-		brushSpacing = (double)[[[SeaController utilitiesManager] brushUtilityFor:document] spacing] / 100.0;
+		activeTexture = [[[SeaController utilitiesManager] textureUtilityForDocument:document] activeTexture];
+		brushSpacing = (double)[[[SeaController utilitiesManager] brushUtilityForDocument:document] spacing] / 100.0;
 		spp = [[document contents] spp];
 		bigRect = IntMakeRect(0, 0, 0, 0);
 		lastDate = [NSDate date];

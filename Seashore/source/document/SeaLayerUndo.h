@@ -46,7 +46,7 @@ typedef struct {
 	SeaDocument *document;
 	
 	// The layer associated with this oject
-	SeaLayer *layer;
+	__weak SeaLayer *layer;
 
 	// The records of all changes to the layer
 	UndoRecord *records;

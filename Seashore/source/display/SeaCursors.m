@@ -121,7 +121,7 @@
 		return;
 	}
 	
-	SeaToolsDefines tool = [[[SeaController utilitiesManager] toolboxUtilityFor:document] tool];
+	SeaToolsDefines tool = [[[SeaController utilitiesManager] toolboxUtilityForDocument:document] tool];
 	SeaLayer *activeLayer = [[document contents] activeLayer];
 	CGFloat xScale = [[document contents] xscale];
 	CGFloat yScale = [[document contents] yscale];
@@ -130,7 +130,7 @@
 
 	if (tool >= SeaToolsFirstSelection && tool <= SeaToolsLastSelection) {
 		// Find out what the selection mode is
-		SeaSelectMode selectionMode = [(AbstractSelectOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] selectionMode];
+		SeaSelectMode selectionMode = [(AbstractSelectOptions *)[[[SeaController utilitiesManager] optionsUtilityForDocument:document] getOptions:tool] selectionMode];
 		
 		if (selectionMode == SeaSelectAdd) {
 			[self addCursorRect:operableRect cursor:addCursor];
@@ -233,16 +233,16 @@
 		
 	}
 
-	if (tool == SeaToolsBrush && [(BrushOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] brushIsErasing]) {
+	if (tool == SeaToolsBrush && [(BrushOptions *)[[[SeaController utilitiesManager] optionsUtilityForDocument:document] getOptions:tool] brushIsErasing]) {
 		// Do we need this?
 		//[view removeCursorRect:operableRect cursor:brushCursor];
 		[self addCursorRect:operableRect cursor:eraserCursor];
-	} else if (tool == SeaToolsPencil && [(PencilOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool] pencilIsErasing]) {
+	} else if (tool == SeaToolsPencil && [(PencilOptions *)[[[SeaController utilitiesManager] optionsUtilityForDocument:document] getOptions:tool] pencilIsErasing]) {
 		// Do we need this?
 		//[view removeCursorRect:operableRect cursor:pencilCursor];
 		[self addCursorRect:operableRect cursor:eraserCursor];
 	}/*else if (tool == kPositionTool){
-		PositionOptions *options = (PositionOptions *)[[[SeaController utilitiesManager] optionsUtilityFor:document] getOptions:tool];
+		PositionOptions *options = (PositionOptions *)[[[SeaController utilitiesManager] optionsUtilityForDocument:document] getOptions:tool];
 		if([options toolFunction] == kScalingLayer){
 			[self addCursorRect:[view frame] cursor:resizeCursor];
 		}else if([options toolFunction] == kRotatingLayer){

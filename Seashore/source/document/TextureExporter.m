@@ -23,7 +23,7 @@ NS_ENUM(int) {
 
 - (IBAction)apply:(id)sender
 {
-	NSArray *groupNames = [[[SeaController utilitiesManager] textureUtilityFor:document] groupNames];
+	NSArray *groupNames = [[[SeaController utilitiesManager] textureUtilityForDocument:document] groupNames];
 	NSString *path;
 
 	// End the sheet
@@ -49,7 +49,7 @@ NS_ENUM(int) {
 	//[document writeToFile:path ofType:@"Portable Network Graphics image"];
 	
 	// Refresh textures
-	[[[SeaController utilitiesManager] textureUtilityFor:document] addTextureFromPath:path];
+	[[[SeaController utilitiesManager] textureUtilityForDocument:document] addTextureFromPath:path];
 }
 
 - (IBAction)cancel:(id)sender
@@ -89,14 +89,14 @@ NS_ENUM(int) {
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)column row:(NSInteger)row
 {
-	NSArray *groupNames = [[[SeaController utilitiesManager] textureUtilityFor:document] groupNames];
+	NSArray *groupNames = [[[SeaController utilitiesManager] textureUtilityForDocument:document] groupNames];
 
 	return groupNames[row];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-	NSArray *groupNames = [[[SeaController utilitiesManager] textureUtilityFor:document] groupNames];
+	NSArray *groupNames = [[[SeaController utilitiesManager] textureUtilityForDocument:document] groupNames];
 
 	return [groupNames count];
 }

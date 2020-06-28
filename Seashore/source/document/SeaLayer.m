@@ -588,7 +588,7 @@
 	hasAlpha = !hasAlpha;
 	
 	// Update the Pegasus utility
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityFor:document] update:kPegasusUpdateAll]; 
+	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityForDocument:document] update:kPegasusUpdateAll]; 
 
 	// Make action undoable
 	[[[document undoManager] prepareWithInvocationTarget:self] toggleAlpha];

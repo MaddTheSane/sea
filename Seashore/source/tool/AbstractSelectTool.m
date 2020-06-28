@@ -19,7 +19,7 @@
 		
 		[self mouseDownAt: localPoint
 				  forRect: [[document selection] globalRect]
-				  andMask: [[document selection] mask]];
+				  andMask: [(SeaSelection*)[document selection] mask]];
 		
 		// Also, we universally float the selection if alt is down
 		if(![self isMovingOrScaling] && [options modifier] == AbstractModifierAlt) {
@@ -35,8 +35,8 @@
 									   forRect: [[document selection] globalRect]
 									   andMask: [[document selection] mask]];
 		if (scalingDir > SeaScaleDirectionNone && !translating) {
-			[[document selection] scaleSelectionTo: newRect
-											  from: [self preScaledRect]
+			[[document selection] scaleSelectionToRect: newRect
+											  fromRect: [self preScaledRect]
 									 interpolation: GIMP_INTERPOLATION_CUBIC
 										 usingMask: [self preScaledMask]];
 		} else if (translating && scalingDir == SeaScaleDirectionNone) {
@@ -50,7 +50,7 @@
 	if (document.selection.active) {
 		[self mouseUpAt: localPoint
 				forRect: [[document selection] globalRect]
-				andMask: [[document selection] mask]];		
+				andMask: [(SeaSelection*)[document selection] mask]];
 	}
 }
 

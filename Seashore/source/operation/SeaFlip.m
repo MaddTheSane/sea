@@ -22,7 +22,7 @@
 	[[document selection] selectOpaque];
 	
 	// Make action undoable
-	if (type == kHorizontalFlip)
+	if (type == SeaFlipHorizontal)
 		[[[document undoManager] prepareWithInvocationTarget:self] floatingHorizontalFlip];
 	else
 		[[[document undoManager] prepareWithInvocationTarget:self] floatingVerticalFlip];
@@ -31,7 +31,7 @@
 - (void)simpleFlipOf:(unsigned char*)data width:(int)width height:(int)height spp:(int)spp type:(SeaFlipType)type
 {
 	// Do the correct flip
-	if (type == kHorizontalFlip) {
+	if (type == SeaFlipHorizontal) {
 		for (int i = 0; i < width / 2; i++) {
 			for (int j = 0; j < height; j++) {
 				for (int k = 0; k < spp; k++) {
@@ -56,12 +56,12 @@
 
 - (void)floatingHorizontalFlip
 {
-	[self floatingFlip:kHorizontalFlip];
+	[self floatingFlip:SeaFlipHorizontal];
 }
 
 - (void)floatingVerticalFlip
 {
-	[self floatingFlip:kVerticalFlip];
+	[self floatingFlip:SeaFlipVertical];
 }
 
 - (void)standardFlip:(SeaFlipType)type
@@ -97,7 +97,7 @@
 	}
 	
 	// Do the correct flip
-	if (type == kHorizontalFlip) {
+	if (type == SeaFlipHorizontal) {
 		for (i = 0; i < rect.size.width; i++) {
 			for (j = 0; j < rect.size.height; j++) {
 				replace[(j + rect.origin.y) * width + (i + rect.origin.x)] = 255;

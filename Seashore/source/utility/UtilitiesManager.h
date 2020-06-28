@@ -26,17 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UtilitiesManager : NSObject <SSKTerminatable> {
 	// The controller object
 	IBOutlet SeaController *controller;
-	IBOutlet TransparentUtility *transparentUtility;
-	
-	// Outlets to the various utilities of Seashore
-    NSMutableDictionary<NSNumber*,PegasusUtility*> *pegasusUtilities;
-	NSMutableDictionary<NSNumber*,TransparentUtility*> *transparentUtilities;
-	NSMutableDictionary<NSNumber*,ToolboxUtility*> *toolboxUtilities;
-	NSMutableDictionary<NSNumber*,BrushUtility*> *brushUtilities;
-	NSMutableDictionary<NSNumber*,OptionsUtility*> *optionsUtilities;
-	NSMutableDictionary<NSNumber*,TextureUtility*> *textureUtilities;
-	NSMutableDictionary<NSNumber*,InfoUtility*> *infoUtilities;
-	NSMutableDictionary<NSNumber*,StatusUtility*> *statusUtilities;
 	
 	// Various choices
 	int optionsChoice;
@@ -63,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		doc
 				The document that is now closing.
 */
-- (void)shutdownFor:(SeaDocument*)doc NS_SWIFT_NAME(shutdown(for:));
+- (void)shutdownForDocument:(SeaDocument*)doc NS_SWIFT_NAME(shutdown(for:));
 
 /*!
 	@method		activate
@@ -80,66 +69,66 @@ NS_ASSUME_NONNULL_BEGIN
 				The document that the utility is requested for.
 	@result		Returns an instance of PegasusUtility.
 */
-- (nullable PegasusUtility*)pegasusUtilityFor:(SeaDocument*)doc NS_SWIFT_NAME(pegasusUtility(for:));
-- (void)setPegasusUtility:(PegasusUtility*)util for:(SeaDocument*)doc;
+- (nullable PegasusUtility*)pegasusUtilityForDocument:(SeaDocument*)doc NS_SWIFT_NAME(pegasusUtility(for:));
+- (void)setPegasusUtility:(PegasusUtility*)util forDocument:(SeaDocument*)doc;
 
 /*!
-	@method		transparentUtilityFor:
+	@property	transparentUtilityFor:
 	@discussion	Returns the transparent colour utility.
 	@result		Returns an instance of TransparentUtility.
 */
-- (TransparentUtility*)transparentUtility;
+@property (readonly, weak) IBOutlet TransparentUtility *transparentUtility;
 
 /*!
-	@method		toolboxUtilityFor:
+	@method		toolboxUtilityForDocument:
 	@discussion	Returns the toolbox utility.
 	@param		doc
 				The document that the utility is requested for.
 	@result		Returns an instance of ToolboxUtility.
 */
-- (nullable ToolboxUtility*)toolboxUtilityFor:(SeaDocument*)doc NS_SWIFT_NAME(toolboxUtility(for:));
-- (void)setToolboxUtility:(ToolboxUtility*)util for:(SeaDocument*)doc;
+- (nullable ToolboxUtility*)toolboxUtilityForDocument:(SeaDocument*)doc NS_SWIFT_NAME(toolboxUtility(for:));
+- (void)setToolboxUtility:(ToolboxUtility*)util forDocument:(SeaDocument*)doc;
 
 /*!
-	@method		brushUtilityFor:
+	@method		brushUtilityForDocument:
 	@discussion	Returns the brush utility.
 	@param		doc
 				The document that the utility is requested for.
 	@result		Returns an instance of BrushUtility.
 */
-- (nullable BrushUtility*)brushUtilityFor:(SeaDocument*)doc NS_SWIFT_NAME(brushUtility(for:));
-- (void)setBrushUtility:(BrushUtility*)util for:(SeaDocument*)doc;
+- (nullable BrushUtility*)brushUtilityForDocument:(SeaDocument*)doc NS_SWIFT_NAME(brushUtility(for:));
+- (void)setBrushUtility:(BrushUtility*)util forDocument:(SeaDocument*)doc;
 
 
 /*!
-	@method		textureUtilityFor:
+	@method		textureUtilityForDocument:
 	@discussion	Returns the texture utility.
 	@param		doc
 				The document that the utility is requested for.
 	@result		Returns an instance of TextureUtility.
 */
-- (nullable TextureUtility*)textureUtilityFor:(SeaDocument*)doc NS_SWIFT_NAME(textureUtility(for:));
-- (void)setTextureUtility:(TextureUtility*)util for:(SeaDocument*)doc;
+- (nullable TextureUtility*)textureUtilityForDocument:(SeaDocument*)doc NS_SWIFT_NAME(textureUtility(for:));
+- (void)setTextureUtility:(TextureUtility*)util forDocument:(SeaDocument*)doc;
 
 /*!
-	@method		optionsUtilityFor:
+	@method		optionsUtilityForDocument:
 	@discussion	Returns the options utility.
 	@param		doc
 				The document that the utility is requested for.
 	@result		Returns an instance of OptionsUtility.
 */
-- (nullable OptionsUtility*)optionsUtilityFor:(SeaDocument*)doc NS_SWIFT_NAME(optionsUtility(for:));
-- (void)setOptionsUtility:(OptionsUtility*)util for:(SeaDocument*)doc;
+- (nullable OptionsUtility*)optionsUtilityForDocument:(SeaDocument*)doc NS_SWIFT_NAME(optionsUtility(for:));
+- (void)setOptionsUtility:(OptionsUtility*)util forDocument:(SeaDocument*)doc;
 
 /*!
-	@method		infoUtilityFor:
+	@method		infoUtilityForDocument:
 	@discussion	Returns the information utility.
 	@param		doc
 				The document that the utility is requested for.	
 	@result		Returns an instance of InfoUtility.
 */
-- (nullable InfoUtility*)infoUtilityFor:(SeaDocument*)doc NS_SWIFT_NAME(infoUtility(for:));
-- (void)setInfoUtility:(InfoUtility*)util for:(SeaDocument*)doc;
+- (nullable InfoUtility*)infoUtilityForDocument:(SeaDocument*)doc NS_SWIFT_NAME(infoUtility(for:));
+- (void)setInfoUtility:(InfoUtility*)util forDocument:(SeaDocument*)doc;
 
 /*!
 	@method		statusUtilityFor:
@@ -149,7 +138,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@result		Returns an instance of StatusUtility.
 */
 - (nullable StatusUtility*)statusUtilityFor:(SeaDocument*)doc NS_SWIFT_NAME(statusUtility(for:));
-- (void)setStatusUtility:(StatusUtility*)util for:(SeaDocument*)doc;
+- (void)setStatusUtility:(StatusUtility*)util forDocument:(SeaDocument*)doc;
 
 
 @end

@@ -1,8 +1,20 @@
+
+# Created by https://www.gitignore.io/api/xcode
+
+### Xcode ###
 # Xcode
-.DS_Store
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## Build generated
 build/
+DerivedData/
+
+## Various settings
 *.pbxuser
 !default.pbxuser
+*.mode1
+!default.mode1
 *.mode1v3
 !default.mode1v3
 *.mode2v3
@@ -16,3 +28,16 @@ profile
 DerivedData
 .idea/
 *.xcscmblueprint
+
+## Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+.DS_Store
+
+### Xcode Patch ###
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno

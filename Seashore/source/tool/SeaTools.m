@@ -26,7 +26,7 @@
 
 - (id)currentTool
 {
-	return [self getTool:[[[SeaController utilitiesManager] toolboxUtilityFor:gCurrentDocument] tool]];
+	return [self getTool:[[[SeaController utilitiesManager] toolboxUtilityForDocument:gCurrentDocument] tool]];
 }
 
 - (id)getTool:(SeaToolsDefines)whichOne

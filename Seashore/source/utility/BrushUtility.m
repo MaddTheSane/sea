@@ -79,7 +79,7 @@
 	// Set the window's properties
 	[window setPanelStyle:SeaPanelStyleVertical];
 	
-	[[SeaController utilitiesManager] setBrushUtility: self for:document];
+	[[SeaController utilitiesManager] setBrushUtility: self forDocument:document];
 }
 
 - (void)shutdown
@@ -115,80 +115,112 @@
 
 - (void)loadBrushes:(BOOL)update
 {
-	NSArray *tempArray;
-	NSMutableArray *tempBrushArray;
-	BOOL isDirectory;
-	id tempBrush;
-	
-	// Create a dictionary of all brushes
-	NSMutableDictionary *tmpBrushDict = [NSMutableDictionary dictionary];
-	NSArray<NSString*> *files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
-	for (NSString *file in files) {
-		NSString *tempPathA = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"] stringByAppendingPathComponent:file];
-		if ([[tempPathA pathExtension] isEqualToString:@"gbr"]) {
-			SeaBrush *tempBrush = [[SeaBrush alloc] initWithContentsOfFile:tempPathA];
-			if (tempBrush) {
-				[tmpBrushDict setObject:tempBrush forKey:tempPathA];
-			}
-		}
-	}
-	
-	brushes = [tmpBrushDict copy];
-	
-	// Create the all group
-	tempBrushArray = [[[brushes allValues] sortedArrayUsingSelector:@selector(compare:)] mutableCopy];
-	groups = @[tempBrushArray];
-	groupNames = @[LOCALSTR(@"all group", @"All")];
-	
-	// Create the custom groups
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
-	for (NSString *file in files) {
-		NSString *tempPathA = [[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"];
-		NSString *tempPathB = [tempPathA stringByAppendingPathComponent:file];
-		if ([[tempPathB pathExtension] isEqualToString:@"txt"]) {
-			tempArray = [NSArray arrayWithContentsOfFile:tempPathB];
-			if (tempArray) {
-				[tempBrushArray removeAllObjects];
-				for (NSString *tmpNam in tempArray) {
-					tempBrush = brushes[[tempPathA stringByAppendingPathComponent:tmpNam]];
-					if (tempBrush) {
-						[tempBrushArray addObject:tempBrush];
-					}
-				}
-				if ([tempBrushArray count] > 0) {
-					groups = [groups arrayByAddingObject:tempBrushArray];
-					groupNames = [groupNames arrayByAddingObject:[[tempPathB lastPathComponent] stringByDeletingPathExtension]];
-				}
-			}	
-		}
-	}
-	customGroups = [groups count] - 1;
-	
-	// Create the other groups
-	files = [gFileManager subpathsAtPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
-	for (NSString *file in files) {
-		NSString *tempPathA = [[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"] stringByAppendingPathComponent:file];
-		[gFileManager fileExistsAtPath:tempPathA isDirectory:&isDirectory];
-		if (isDirectory) {
-			NSArray<NSString*> *tempArray = [gFileManager subpathsAtPath:tempPathA];
-			NSMutableArray *tempBrushArray = [[NSMutableArray alloc] init];
-			for (NSString *tmpNam in tempArray) {
-				SeaBrush *tempBrush = brushes[[tempPathA stringByAppendingPathComponent:tmpNam]];
-				if (tempBrush) {
-					[tempBrushArray addObject:tempBrush];
-				}
-			}
-			if ([tempBrushArray count] > 0) {
-				[tempBrushArray sortUsingSelector:@selector(compare:)];
-				groups = [groups arrayByAddingObject:tempBrushArray];
-				groupNames = [groupNames arrayByAddingObject:[tempPathA lastPathComponent]];
-			}
-		}
-	}
-	
-	// Update utility if requested
-	if (update)
-		[self update];
+    brushes = [NSDictionary dictionary];
+    [self loadBrushesFromPath:[[gMainBundle resourcePath] stringByAppendingPathComponent:@"brushes"]];
+	NSURL *userBrushes = [[[gFileManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:NULL] URLByAppendingPathComponent:@"Seashore"] URLByAppendingPathComponent:@"brushes" isDirectory:YES];
+    [self loadBrushesFromPath:[userBrushes path]];
+    [self createGroups];
+
+}
+- (void)loadBrushesFromPath:(NSString*)path
+{
+    NSArray *files;
+    BOOL isDirectory;
+    id brush;
+    
+    NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
+    
+    // Create a dictionary of all brushes
+    files = [gFileManager subpathsAtPath:path];
+    for (NSInteger i = 0; i < [files count]; i++) {
+        NSString *filepath =[path stringByAppendingPathComponent:files[i]];
+        
+        [gFileManager fileExistsAtPath:filepath isDirectory:&isDirectory];
+        if(isDirectory){
+            continue;
+        }
+        if ([[filepath pathExtension] caseInsensitiveCompare:@"gbr"] != NSOrderedSame) {
+            continue;
+        }
+        
+        brush = [[SeaBrush alloc] initWithContentsOfFile:filepath];
+        if (brush) {
+            [temp setValue:brush forKey:filepath];
+        }
+    }
+    
+    [temp setValuesForKeysWithDictionary:brushes];
+    
+    brushes = [NSDictionary dictionaryWithDictionary:temp];
+}
+- (void)createGroups
+{
+    // Create the all group
+    NSArray *array = [[brushes allValues] sortedArrayUsingSelector:@selector(compare:)];
+    groups = [NSArray arrayWithObject:array];
+    groupNames = [NSArray arrayWithObject:LOCALSTR(@"all group", @"All")];
+    
+    NSMutableSet *dirs = [[NSMutableSet alloc] init];
+    
+    for(NSString *filepath in [brushes allKeys]){
+        NSArray<NSString *> *comps = [filepath pathComponents];
+        // directory is parent component of filename
+        NSString *dir = [comps objectAtIndex:([comps count] - 2)];
+        [dirs addObject:dir];
+    }
+    
+    NSArray* sorted = [dirs allObjects];
+    sorted = [sorted sortedArrayUsingSelector:@selector(compare:)];
+    
+    for(NSString* dirname in sorted){
+        NSArray *groupBrushes = [[NSArray alloc] init];
+        for(NSString *filepath in [brushes allKeys]){
+            NSArray<NSString *> *comps = [filepath pathComponents];
+            // directory is parent component of filename
+            NSString *dir = [comps objectAtIndex:([comps count] - 2)];
+            if([dirname isEqualToString:dir]){
+                groupBrushes = [groupBrushes arrayByAddingObject:[brushes valueForKey:filepath]];
+            }
+        }
+        if([groupBrushes count]>0){
+            groupBrushes = [groupBrushes sortedArrayUsingSelector:@selector(compare:)];
+            groups = [groups arrayByAddingObject:groupBrushes];
+            groupNames = [groupNames arrayByAddingObject:dirname];
+        }
+    }
+}
+
+- (void)addBrushFromPath:(NSString *)path
+{
+    int i;
+    
+    SeaBrush *brush = [[SeaBrush alloc] initWithContentsOfFile:path];
+    if(!brush){
+        return;
+    }
+    
+    NSMutableDictionary *copy = [NSMutableDictionary dictionaryWithDictionary:brushes];
+    [copy setValue:brush forKey:path];
+    
+    brushes = [NSDictionary dictionaryWithDictionary:copy];
+    
+    [self createGroups];
+    
+    // Configure the pop-up menu
+    [brushGroupPopUp removeAllItems];
+    [brushGroupPopUp addItemWithTitle:[groupNames objectAtIndex:0]];
+    [[brushGroupPopUp itemAtIndex:0] setTag:0];
+    [[brushGroupPopUp menu] addItem:[NSMenuItem separatorItem]];
+    for (i = 1; i < [groupNames count]; i++) {
+        [brushGroupPopUp addItemWithTitle:[groupNames objectAtIndex:i]];
+        [[brushGroupPopUp itemAtIndex:[[brushGroupPopUp menu] numberOfItems] - 1] setTag:i];
+    }
+    [brushGroupPopUp selectItemAtIndex:[brushGroupPopUp indexOfItemWithTag:activeGroupIndex]];
+    
+    // Update utility
+    [self setActiveBrushIndex:-1];
+    [[view documentView] update];
+    [view setNeedsDisplay:YES];
 }
 
 - (IBAction)changeSpacing:(id)sender
@@ -229,5 +261,9 @@
 	return groups[activeGroupIndex];
 }
 
+- (NSArray *)groupNames
+{
+    return [groupNames subarrayWithRange:NSMakeRange(1, [groupNames count] - 1)];
+}
 
 @end

@@ -21,7 +21,7 @@
 	// Enable the utility
 	enabled = YES;
 	
-	[[SeaController utilitiesManager] setPegasusUtility: self for:document];
+	[[SeaController utilitiesManager] setPegasusUtility: self forDocument:document];
 }
 
 - (void)activate

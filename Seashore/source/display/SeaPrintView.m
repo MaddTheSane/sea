@@ -26,8 +26,6 @@
 - (instancetype)initWithDocument:(SeaDocument*)doc
 {	
 	NSRect frame;
-		
-	// Remember the document this view is displaying
 
 	// Determine the frame at 100% 72-dpi
 	frame = NSMakeRect(0, 0, [(SeaContent*)[doc contents] width] * (72.0 / (CGFloat)[[doc contents] xres]), [[doc contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
@@ -36,6 +34,7 @@
 	if (!(self = [super initWithFrame:frame]))
 		return NULL;
 	
+	// Remember the document this view is displaying
 	document = doc;
 	
     return self;
@@ -84,7 +83,7 @@
 	NSPrintInfo *pi = [[NSPrintOperation currentOperation] printInfo];
 	NSRect bounds;
 	NSRect paper;
-	float scale;
+	CGFloat scale;
 	
 	// Work out the image's bounds
 	bounds = NSMakeRect(0, 0, [(SeaContent *)[document contents] width] * (72.0 / (CGFloat)[[document contents] xres]), [[document contents] height] * (72.0 / (CGFloat)[[document contents] yres]));
@@ -93,7 +92,7 @@
 	paper.size = [pi paperSize];
 	paper.size.height -= [pi topMargin] + [pi bottomMargin];
 	paper.size.width -= [pi leftMargin] + [pi rightMargin];
-	scale = [[pi dictionary][NSPrintScalingFactor] floatValue];
+	scale = [[pi dictionary][NSPrintScalingFactor] doubleValue];
 	paper.size.height /= scale;
 	paper.size.width /= scale;
 	
@@ -139,7 +138,7 @@ __unused static inline double mod(double a, double b) __attribute__((__overloada
 }
 
 
-- (NSRect)rectForPage:(int)page
+- (NSRect)rectForPage:(NSInteger)page
 {
 	NSPrintInfo *pi = [[NSPrintOperation currentOperation] printInfo];
 	NSRect bounds, paper, result;

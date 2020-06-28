@@ -32,7 +32,7 @@ typedef NS_ENUM(int, BMPColorSpace) {
 	//! Indicates the gray/white colour space.
 	BMPColorSpaceGray,
 	//! Indicates the gray/black colour space.
-	BMPColorSpaceInvertedGray,
+	BMPColorSpaceInvertedGray DEPRECATED_ATTRIBUTE,
 	//! Indicates the RGB colour space.
 	BMPColorSpaceRGB,
 	//! Indicates the CMYK colour space.
@@ -207,6 +207,8 @@ extern void OpenDisplayProfile(CMProfileRef __nonnull*__nullable profile) DEPREC
 				The profile to make the default display's profile.
 */
 extern void CloseDisplayProfile(CMProfileRef profile) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
+
+void CMFlattenProfile(CMProfileRef _Null_unspecified pref, int flags, CMFlattenUPP  _Null_unspecified* _Null_unspecified cmFlattenUPP, void * _Null_unspecified refcon, Boolean *_Null_unspecified cmmNotFound) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER UNAVAILABLE_ATTRIBUTE;
 
 static const BMPColorSpace kGrayColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceGray", 10.2, 10.8) = BMPColorSpaceGray;
 static const BMPColorSpace kInvertedGrayColorSpace NS_DEPRECATED_WITH_REPLACEMENT_MAC("BMPColorSpaceInvertedGray", 10.2, 10.8) = BMPColorSpaceInvertedGray;

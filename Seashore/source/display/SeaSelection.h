@@ -315,7 +315,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)scaleSelectionHorizontally:(CGFloat)xScale vertically:(CGFloat)yScale interpolation:(GimpInterpolationType)interpolation NS_SWIFT_NAME(scaleSelection(horizontally:vertically:interpolation:));
 
 /*!
-	@method		scaleSelectionTo:from:interpolation:usingMask:
+	@method		scaleSelectionToRect:fromRect:interpolation:usingMask:
 	@discussion	Scales the current selection.
 	@param		newRect
 				The rectangle of the new selection.
@@ -326,7 +326,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@param		oldMask
 				The mask that should be scaled to the newRect.
 */
-- (void)scaleSelectionTo:(IntRect)newRect from:(IntRect)oldRect interpolation:(GimpInterpolationType)interpolation usingMask:(nullable unsigned char*)oldMask NS_SWIFT_NAME(scaleSelection(to:from:interpolation:usingMask:));
+- (void)scaleSelectionToRect:(IntRect)newRect fromRect:(IntRect)oldRect interpolation:(GimpInterpolationType)interpolation usingMask:(nullable unsigned char*)oldMask NS_SWIFT_NAME(scaleSelection(to:from:interpolation:usingMask:));
 
 /*!
 	@method		trimSelection
