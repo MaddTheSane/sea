@@ -124,7 +124,7 @@
 	
 	[panel setAlphaValue:1.0];
 	refresh = YES;
-	if ([[NSApp currentEvent] type] == NSLeftMouseUp || [sender tag] == 99) {
+	if ([[NSApp currentEvent] type] == NSEventTypeLeftMouseUp || [sender tag] == 99) {
 		[self preview:sender];
 		pluginData = [self.seaPlugins data];
 		if ([pluginData window])

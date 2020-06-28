@@ -4,4 +4,4 @@ groupName = "Distort";
 description = "Pinches the selection at the specified point";
 license = "Public Domain";
 name = "Pinch";
-instruction = "Click twice: first to locate the center of the pinch and then to determine its extent";
+instruction = "Click twice: first to locate the centre of the pinch and then to determine its extent";

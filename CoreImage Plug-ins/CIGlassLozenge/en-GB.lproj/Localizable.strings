@@ -4,4 +4,4 @@ groupName = "Distort";
 description = "Creates a glass lozenge as specfied.";
 license = "Public Domain";
 name = "Glass Lozenge";
-instruction = "Click twice: to locate the center-left and center-right of the lozenge.";
+instruction = "Click twice: to locate the centre-left and centre-right of the lozenge.";

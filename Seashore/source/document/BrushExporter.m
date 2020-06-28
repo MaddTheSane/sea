@@ -149,7 +149,7 @@ typedef struct {
 	
 	const char *utf8Name = [name UTF8String];
 	// Set-up the header
-	header.header_size = strlen(utf8Name) + 1 + sizeof(header);
+	header.header_size = (unsigned int)(strlen(utf8Name) + 1 + sizeof(header));
 	header.version = 2;
 	header.width = width;
 	header.height = height;

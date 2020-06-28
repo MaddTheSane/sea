@@ -93,15 +93,17 @@
 	PluginData *pluginData = [self.seaPlugins data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if (refresh)
+	if (refresh) {
 		[self execute];
+	}
 	[pluginData apply];
 	
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window])
+	if ([pluginData window]) {
 		[NSApp endSheet:panel];
+	}
 	[panel orderOut:sender];
 	success = YES;
 	running = NO;

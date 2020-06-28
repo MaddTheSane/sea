@@ -191,16 +191,18 @@
 	selection = [pluginData selection];
 	point1 = [pluginData point:0];
 	point2 = [pluginData point:1];
-	if (point2.x - point1.x == 0)
-		angle = M_PI / 2.0;
-	else if (point2.x - point1.x > 0)
-		angle = atanf((float)(point1.y - point2.y) / fabsf((float)(point2.x - point1.x)));
-	else if (point2.x - point1.x < 0 && point1.y - point2.y > 0)
-		angle = M_PI - atanf((float)(point1.y - point2.y) / fabsf((float)(point2.x - point1.x)));
-	else
-		angle = -M_PI - atanf((float)(point1.y - point2.y) / fabsf((float)(point2.x - point1.x)));
-	if (angle < 0)
+	if (point2.x - point1.x == 0) {
+		angle = M_PI_2;
+	} else if (point2.x - point1.x > 0) {
+		angle = atan((double)(point1.y - point2.y) / fabs((double)(point2.x - point1.x)));
+	} else if (point2.x - point1.x < 0 && point1.y - point2.y > 0) {
+		angle = M_PI - atan((double)(point1.y - point2.y) / fabs((double)(point2.x - point1.x)));
+	} else {
+		angle = -M_PI - atan((double)(point1.y - point2.y) / fabs((double)(point2.x - point1.x)));
+	}
+	if (angle < 0) {
 		angle = 2 * M_PI + angle;
+	}
 	radius = abs(point2.x - point1.x) * abs(point2.x - point1.x) + abs(point2.y - point1.y) * abs(point2.y - point1.y);
 	radius = sqrt(radius);
 	// radius /= 4.0;
