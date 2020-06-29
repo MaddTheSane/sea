@@ -1872,10 +1872,10 @@
 		557B939818D77FF8003ABCD6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557D504918CF9FBA005809E3 /* CIAffineTileClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIAffineTileClass.h; sourceTree = "<group>"; };
 		557D504A18CF9FBA005809E3 /* CIAffineTileClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIAffineTileClass.m; sourceTree = "<group>"; };
-		557D504C18CF9FBA005809E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		557D504C18CF9FBA005809E3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D505218CF9FBA005809E3 /* CIAffineTransformClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIAffineTransformClass.h; sourceTree = "<group>"; };
 		557D505318CF9FBA005809E3 /* CIAffineTransformClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIAffineTransformClass.m; sourceTree = "<group>"; };
-		557D505518CF9FBA005809E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		557D505518CF9FBA005809E3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D505B18CF9FBA005809E3 /* CIBloomClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIBloomClass.h; sourceTree = "<group>"; };
 		557D505C18CF9FBA005809E3 /* CIBloomClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIBloomClass.m; sourceTree = "<group>"; };
 		557D506018CF9FBA005809E3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };

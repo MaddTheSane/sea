@@ -338,15 +338,15 @@ static BOOL checkRun(NSString *path, NSString *file)
 
 @end
 
-CIImage *SeaCreateCIImage(PluginData *pluginData){
+CIImage *SeaCreateCIImage(PluginData *pluginData)
+{
     int width = [pluginData width];
-    int height = [pluginData height];
-    
-    unsigned char *data = [pluginData data];
-    
+	int height = [pluginData height];
+	
+	unsigned char *data = [pluginData data];
+	
 	simd_uint4 *vdata;
 	size_t vec_len;
-	
 	
 	// Get plug-in data
 	vec_len = width * height * 4;
@@ -369,55 +369,56 @@ CIImage *SeaCreateCIImage(PluginData *pluginData){
 	return [CIImage imageWithBitmapData:[NSData dataWithBytesNoCopy:newdata length:width * height * 4 freeWhenDone:YES] bytesPerRow:width * 4 size:NSMakeSize(width, height) format:kCIFormatARGB8 colorSpace:[pluginData displayProf]];
 }
 
-static void SeaConvertImageRep(NSImageRep *imageRep, unsigned char *dest, int width, int height, int spp) {
-    
-    NSColorSpaceName csname = NSDeviceRGBColorSpace;
+static void SeaConvertImageRep(NSImageRep *imageRep, unsigned char *dest, int width, int height, int spp)
+{
+	NSColorSpaceName csname = NSDeviceRGBColorSpace;
     if (spp==2) {
         csname = NSDeviceWhiteColorSpace;
-    }
-    
-    memset(dest,0,width*height*spp);
+	}
+	
+	memset(dest,0,width*height*spp);
     
     NSBitmapImageRep *bitmapWhoseFormatIKnow = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&dest pixelsWide:width pixelsHigh:height
                                                                                     bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO
                                                                                    colorSpaceName:csname bytesPerRow:width*spp
                                                                                      bitsPerPixel:8*spp];
     
-    NSRect rect = NSMakeRect(0,0,width,height);
-    
-    [NSGraphicsContext saveGraphicsState];
-    NSGraphicsContext *ctx = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmapWhoseFormatIKnow];
-    [NSGraphicsContext setCurrentContext:ctx];
-    [imageRep drawInRect:rect fromRect:rect operation:NSCompositingOperationCopy fraction:1.0 respectFlipped:NO hints:NULL];
-    [NSGraphicsContext restoreGraphicsState];
-    
-    SeaUnpremultiplyBitmap(spp, dest, dest, width*height);
+	NSRect rect = NSMakeRect(0, 0, width, height);
+	
+	[NSGraphicsContext saveGraphicsState];
+	NSGraphicsContext *ctx = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmapWhoseFormatIKnow];
+	[NSGraphicsContext setCurrentContext:ctx];
+	[imageRep drawInRect:rect fromRect:rect operation:NSCompositingOperationCopy fraction:1.0 respectFlipped:NO hints:NULL];
+	[NSGraphicsContext restoreGraphicsState];
+	
+	SeaUnpremultiplyBitmap(spp, dest, dest, width*height);
 }
 
-void SeaRenderCIImage(PluginData *pluginData, CIImage *image){
+void SeaRenderCIImage(PluginData *pluginData, CIImage *image)
+{
     int spp = [pluginData spp];
-    int width = [pluginData width];
-    int height = [pluginData height];
-    IntRect selection = [pluginData selection];
-    
-    [pluginData setOverlayOpacity:255];
+	int width = [pluginData width];
+	int height = [pluginData height];
+	IntRect selection = [pluginData selection];
+	
+	[pluginData setOverlayOpacity:255];
 	[pluginData setOverlayBehaviour:SeaOverlayBehaviourReplacing];
-    
-    unsigned char *overlay = [pluginData overlay];
-    
-    NSCIImageRep *imageRep = [NSCIImageRep imageRepWithCIImage:image];
-    
-    SeaConvertImageRep(imageRep,overlay,width,height,spp);
-    
-    unsigned char *replace = [pluginData replace];
-    int i;
-    
-    // set the replace mask
-    if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-        for (i = 0; i < selection.size.height; i++) {
-            memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
-        }
-    } else {
-        memset(replace, 0xFF, width * height);
-    }
+	
+	unsigned char *overlay = [pluginData overlay];
+	
+	NSCIImageRep *imageRep = [NSCIImageRep imageRepWithCIImage:image];
+	
+	SeaConvertImageRep(imageRep,overlay,width,height,spp);
+	
+	unsigned char *replace = [pluginData replace];
+	int i;
+	
+	// set the replace mask
+	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
+		for (i = 0; i < selection.size.height; i++) {
+			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
+		}
+	} else {
+		memset(replace, 0xFF, width * height);
+	}
 }

@@ -18,10 +18,10 @@
 "65.title" = "Angle:";
 
 /* Class = "NSTextFieldCell"; title = ".00"; ObjectID = "67"; */
-"67.title" = ".00";
+"67.title" = "0.00";
 
 /* Class = "NSTextFieldCell"; title = "Sharpness:"; ObjectID = "68"; */
 "68.title" = "Sharpness:";
 
 /* Class = "NSTextFieldCell"; title = ".70"; ObjectID = "70"; */
-"70.title" = ".70";
+"70.title" = "0.70";
