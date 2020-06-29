@@ -646,111 +646,111 @@ gradient_put_pixel (int      x,
 
 void GCFillGradient(unsigned char *dest, int destWidth, int destHeight, IntRect rect, int spp, GimpGradientInfo info, GimpProgressFunction progress_callback)
 {
-	RenderBlendData rbd;
-	PutPixelData ppd;
-	GimpRGB color;
-	int x, y;
-	
-	rbd.gradient = NULL;
-	rbd.reverse = 0;
-
-	rbd.fg.r = (double)info.start_color[0] / 255.0;
-	rbd.fg.g = (double)info.start_color[1] / 255.0;
-	rbd.fg.b = (double)info.start_color[2] / 255.0;
-	rbd.fg.a = (double)info.start_color[3] / 255.0;
-
-	rbd.bg.r = (double)info.end_color[0] / 255.0;
-	rbd.bg.g = (double)info.end_color[1] / 255.0;
-	rbd.bg.b = (double)info.end_color[2] / 255.0;
-	rbd.bg.a = (double)info.end_color[3] / 255.0;
-	
-	switch (info.repeat) {
-		case GIMP_REPEAT_NONE:
-			rbd.repeat_func = gradient_repeat_none;
-		break;
-		case GIMP_REPEAT_SAWTOOTH:
-			rbd.repeat_func = gradient_repeat_sawtooth;
-		break;
-		case GIMP_REPEAT_TRIANGULAR:
-			rbd.repeat_func = gradient_repeat_triangular;
-		break;
+  RenderBlendData rbd;
+  PutPixelData ppd;
+  GimpRGB color;
+  int x, y;
+  
+  rbd.gradient = NULL;
+  rbd.reverse = 0;
+  
+  rbd.fg.r = (double)info.start_color[0] / 255.0;
+  rbd.fg.g = (double)info.start_color[1] / 255.0;
+  rbd.fg.b = (double)info.start_color[2] / 255.0;
+  rbd.fg.a = (double)info.start_color[3] / 255.0;
+  
+  rbd.bg.r = (double)info.end_color[0] / 255.0;
+  rbd.bg.g = (double)info.end_color[1] / 255.0;
+  rbd.bg.b = (double)info.end_color[2] / 255.0;
+  rbd.bg.a = (double)info.end_color[3] / 255.0;
+  
+  switch (info.repeat) {
+    case GIMP_REPEAT_NONE:
+      rbd.repeat_func = gradient_repeat_none;
+      break;
+    case GIMP_REPEAT_SAWTOOTH:
+      rbd.repeat_func = gradient_repeat_sawtooth;
+      break;
+    case GIMP_REPEAT_TRIANGULAR:
+      rbd.repeat_func = gradient_repeat_triangular;
+      break;
+  }
+  
+  switch (info.gradient_type) {
+    case GIMP_GRADIENT_RADIAL:
+      rbd.dist = sqrt(SQR(info.end.x - info.start.x) + SQR(info.end.y - info.start.y));
+      break;
+    case GIMP_GRADIENT_SQUARE:
+      rbd.dist = MAX (abs (info.end.x - info.start.x), abs (info.end.y - info.start.y));
+      break;
+    case GIMP_GRADIENT_LINEAR:
+    case GIMP_GRADIENT_BILINEAR:
+      rbd.dist = sqrt (SQR (info.end.x - info.start.x) + SQR (info.end.y - info.start.y));
+      if (rbd.dist > 0.0) {
+	rbd.vec[0] = (info.end.x - info.start.x) / rbd.dist;
+	rbd.vec[1] = (info.end.y - info.start.y) / rbd.dist;
+      }
+      break;
+    case GIMP_GRADIENT_CONICAL_SYMMETRIC:
+    case GIMP_GRADIENT_CONICAL_ASYMMETRIC:
+    case GIMP_GRADIENT_SPIRAL_CLOCKWISE:
+    case GIMP_GRADIENT_SPIRAL_ANTICLOCKWISE:
+      rbd.repeat_func = gradient_repeat_none;
+      rbd.dist = sqrt (SQR (info.end.x - info.start.x) + SQR (info.end.y - info.start.y));
+      if (rbd.dist > 0.0) {
+	rbd.vec[0] = (info.end.x - info.start.x) / rbd.dist;
+	rbd.vec[1] = (info.end.y - info.start.y) / rbd.dist;
+      }
+      break;
+      /*
+       case GIMP_GRADIENT_SHAPEBURST_ANGULAR:
+       case GIMP_GRADIENT_SHAPEBURST_SPHERICAL:
+       case GIMP_GRADIENT_SHAPEBURST_DIMPLED:
+       rbd.dist = sqrt (SQR (ex - sx) + SQR (ey - sy));
+       gradient_precalc_shapeburst (gimage, drawable, PR, rbd.dist);
+       break;
+       */
+  }
+  
+  rbd.offset = 0;
+  rbd.sx = info.start.x - rect.origin.x;
+  rbd.sy = info.start.y - rect.origin.y;
+  rbd.gradient_type = info.gradient_type;
+  
+  if (info.supersample) {
+    ppd.data = dest;
+    ppd.width = destWidth;
+    ppd.height = destHeight;
+    ppd.rect = rect;
+    ppd.spp = spp;
+    gimp_adaptive_supersample_area (0, 0, (rect.size.width - 1), (rect.size.height - 1),
+				    info.max_depth, info.threshold,
+				    gradient_render_pixel, &rbd,
+				    gradient_put_pixel, &ppd,
+				    progress_callback);
+  }
+  else {
+    int max_progress = rect.size.width * rect.size.height;
+    int progress = 0;
+    
+    for (y = rect.origin.y; y < rect.origin.y + rect.size.height; y++) {
+      for (x = rect.origin.x; x < rect.origin.x + rect.size.width; x++) {
+	gradient_render_pixel (x - rect.origin.x, y - rect.origin.y, &color, &rbd);
+	if (spp == 4) {
+	  dest[(y * destWidth + x) * spp] = color.r * 255.0;
+	  dest[(y * destWidth + x) * spp + 1] = color.g * 255.0;
+	  dest[(y * destWidth + x) * spp + 2] = color.b * 255.0;
+	  dest[(y * destWidth + x) * spp + 3] = color.a * 255.0;
 	}
-	
-	switch (info.gradient_type) {
-		case GIMP_GRADIENT_RADIAL:
-			rbd.dist = sqrt(SQR(info.end.x - info.start.x) + SQR(info.end.y - info.start.y));
-		break;
-		case GIMP_GRADIENT_SQUARE:
-			rbd.dist = MAX (abs (info.end.x - info.start.x), abs (info.end.y - info.start.y));
-		break;
-		case GIMP_GRADIENT_LINEAR:
-		case GIMP_GRADIENT_BILINEAR:
-			rbd.dist = sqrt (SQR (info.end.x - info.start.x) + SQR (info.end.y - info.start.y));
-			if (rbd.dist > 0.0) {
-				rbd.vec[0] = (info.end.x - info.start.x) / rbd.dist;
-				rbd.vec[1] = (info.end.y - info.start.y) / rbd.dist;
-			}
-		break;
-		case GIMP_GRADIENT_CONICAL_SYMMETRIC:
-		case GIMP_GRADIENT_CONICAL_ASYMMETRIC:
-		case GIMP_GRADIENT_SPIRAL_CLOCKWISE:
-		case GIMP_GRADIENT_SPIRAL_ANTICLOCKWISE:
-			rbd.repeat_func = gradient_repeat_none;
-			rbd.dist = sqrt (SQR (info.end.x - info.start.x) + SQR (info.end.y - info.start.y));
-			if (rbd.dist > 0.0) {
-				rbd.vec[0] = (info.end.x - info.start.x) / rbd.dist;
-				rbd.vec[1] = (info.end.y - info.start.y) / rbd.dist;
-			}
-		break;
-		/*
-		case GIMP_GRADIENT_SHAPEBURST_ANGULAR:
-		case GIMP_GRADIENT_SHAPEBURST_SPHERICAL:
-		case GIMP_GRADIENT_SHAPEBURST_DIMPLED:
-			rbd.dist = sqrt (SQR (ex - sx) + SQR (ey - sy));
-			gradient_precalc_shapeburst (gimage, drawable, PR, rbd.dist);
-		break;
-		*/
+	else if (spp == 2) {
+	  double gray = INTENSITY (color.r, color.g, color.b);
+	  dest[(y * destWidth + x) * spp] = gray * 255.0;
+	  dest[(y * destWidth + x) * spp + 3] = color.a * 255.0;
 	}
-	
-	rbd.offset = 0;
-	rbd.sx = info.start.x - rect.origin.x;
-	rbd.sy = info.start.y - rect.origin.y;
-	rbd.gradient_type = info.gradient_type;
-	
-	if (info.supersample) {
-		ppd.data = dest;
-		ppd.width = destWidth;
-		ppd.height = destHeight;
-		ppd.rect = rect;
-		ppd.spp = spp;
-		gimp_adaptive_supersample_area (0, 0, (rect.size.width - 1), (rect.size.height - 1),
-					  info.max_depth, info.threshold,
-					  gradient_render_pixel, &rbd,
-					  gradient_put_pixel, &ppd,
-					  progress_callback);
+      }
+      progress += rect.size.width;
+      if (progress_callback)
+	(* progress_callback) (max_progress, progress);
     }
-	else {
-		int max_progress = rect.size.width * rect.size.height;
-		int progress = 0;
-
-		for (y = rect.origin.y; y < rect.origin.y + rect.size.height; y++) {
-			for (x = rect.origin.x; x < rect.origin.x + rect.size.width; x++) {
-				gradient_render_pixel (x - rect.origin.x, y - rect.origin.y, &color, &rbd);
-				if (spp == 4) {
-					dest[(y * destWidth + x) * spp] = color.r * 255.0;
-					dest[(y * destWidth + x) * spp + 1] = color.g * 255.0;
-					dest[(y * destWidth + x) * spp + 2] = color.b * 255.0;
-					dest[(y * destWidth + x) * spp + 3] = color.a * 255.0;
-				}
-				else if (spp == 2) {
-					double gray = INTENSITY (color.r, color.g, color.b);
-					dest[(y * destWidth + x) * spp] = gray * 255.0;
-					dest[(y * destWidth + x) * spp + 3] = color.a * 255.0;
-				}
-			}
-			progress += rect.size.width;
-			if (progress_callback)
-				(* progress_callback) (max_progress, progress);
-		}
-	}
+  }
 }

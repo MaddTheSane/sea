@@ -146,11 +146,11 @@ gimp_channel_combine_ellipse (GimpChannel    *mask,
 
 void GCDrawEllipse(unsigned char *dest, int destWidth, int destHeight, IntRect rect, unsigned int antialiased)
 {
-	GimpChannel destChannel;
-	
-	if (!dest)
-		return;
-	destChannel = channel_make(dest, destWidth, destHeight);
-	gimp_channel_combine_ellipse(&destChannel, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height, antialiased);
+  GimpChannel destChannel;
+  
+  if (!dest)
+    return;
+  destChannel = channel_make(dest, destWidth, destHeight);
+  gimp_channel_combine_ellipse(&destChannel, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height, antialiased);
 }
 
