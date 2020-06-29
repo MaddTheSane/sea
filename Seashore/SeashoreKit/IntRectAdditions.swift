@@ -87,12 +87,6 @@ public extension IntRect {
 		IntOffsetRect(&self, x, y)
 	}
 	
-	@available(*, unavailable, renamed: "formOffset(x:y:)")
-	mutating func offsetInPlace(x: Int32, y: Int32) {
-		IntOffsetRect(&self, x, y)
-	}
-
-	
 	/// Tests to see if a given `IntPoint` lies within
 	/// this `IntRect`. This function assumes a flipped coordinate system like that
 	/// used by QuickDraw or `NSPointInRect()`.
@@ -111,7 +105,10 @@ public extension IntRect {
 		return IntContainsRect(self, littleRect)
 	}
 	
-	//extern IntRect IntSumRects(IntRect augendRect, IntRect addendRect);
+	/// Returns an `IntRect` that contains exactly the two input IntRects. This rect
+	/// is the augend.
+	/// - parameter addendRect: The second `IntRect` that we are adding to the aguend.
+	/// - returns: Returns an `IntRect` that contains this and addend.
 	@inlinable func sum(_ addendRect: IntRect) -> IntRect {
 		return IntSumRects(self, addendRect)
 	}
@@ -160,11 +157,11 @@ public extension IntRect {
 	}
 	
 	@inlinable var midX: Int32 {
-		return (origin.x + Int32(round(Double(size.width) * 0.5)))
+		return (origin.x + Int32(lrint(Double(size.width) * 0.5)))
 	}
 	
 	@inlinable var midY: Int32 {
-		return (origin.y + Int32(round(Double(size.height) * 0.5)))
+		return (origin.y + Int32(lrint(Double(size.height) * 0.5)))
 	}
 	
 	@inlinable var minX: Int32 {

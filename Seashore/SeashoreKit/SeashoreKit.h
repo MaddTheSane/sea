@@ -55,7 +55,6 @@ FOUNDATION_EXPORT const unsigned char SeashoreKitVersionString[];
 #import <SeashoreKit/CocoaLayer.h>
 #import <SeashoreKit/CocoaImporter.h>
 #import <SeashoreKit/SVGContent.h>
-#import <SeashoreKit/SVGLayer.h>
 #import <SeashoreKit/SVGImporter.h>
 #import <SeashoreKit/XBMContent.h>
 #import <SeashoreKit/XBMLayer.h>
