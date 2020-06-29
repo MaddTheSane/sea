@@ -131,6 +131,12 @@
 		5509D2991F5C87720037CE4E /* EraserTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5509D2981F5C87720037CE4E /* EraserTool.swift */; };
 		550AEAF618CFC5DE008918BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		550AEB0418CFC5E1008918BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		5510683F24A961F6004C2486 /* SeashoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55472B7E1C6EDCCA0065A852 /* SeashoreKit.framework */; };
+		5510684024A961F6004C2486 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		5510684124A961F6004C2486 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551E56A418D0138C00E4CDAF /* Quartz.framework */; };
+		5510685F24A9624F004C2486 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5510685524A9624F004C2486 /* Localizable.strings */; };
+		5510686024A9624F004C2486 /* CIAutoEnhanceClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 5510685A24A9624F004C2486 /* CIAutoEnhanceClass.m */; };
+		5510686224A962E7004C2486 /* Auto Enhance+.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 5510684724A961F7004C2486 /* Auto Enhance+.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55115C041D46AC2700E76B5B /* SSKTerminatable.h in Headers */ = {isa = PBXBuildFile; fileRef = 55115C031D46AC2700E76B5B /* SSKTerminatable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55115C241D46D68E00E76B5B /* SwiftCMYK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55115C231D46D68D00E76B5B /* SwiftCMYK.swift */; };
 		55115C271D46D71200E76B5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55115C291D46D71200E76B5B /* Localizable.strings */; };
@@ -886,6 +892,13 @@
 			remoteGlobalIDString = A8F100DC09C126A6003F15A3;
 			remoteInfo = Pat2PNG;
 		};
+		5510683B24A961F6004C2486 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55472B7D1C6EDCCA0065A852;
+			remoteInfo = SeashoreKit;
+		};
 		55115C2A1D46D81700E76B5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -1630,6 +1643,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				5510686224A962E7004C2486 /* Auto Enhance+.bundle in Copy PlugIns */,
 				556D43CE1D415E2700BECFB2 /* SVGImageRep.bundle in Copy PlugIns */,
 				55E5E4CD18D27A370082E60F /* Brightness.bundle in Copy PlugIns */,
 				55E5E4CE18D27A370082E60F /* Checkerboard.bundle in Copy PlugIns */,
@@ -1784,6 +1798,10 @@
 		5509D2981F5C87720037CE4E /* EraserTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraserTool.swift; sourceTree = "<group>"; };
 		550AEAFC18CFC5DE008918BA /* Brightness+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Brightness+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		550AEB0A18CFC5E1008918BA /* Bump+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bump+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5510684724A961F7004C2486 /* Auto Enhance+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Auto Enhance+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5510685424A9624F004C2486 /* CIAutoEnhanceClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIAutoEnhanceClass.h; sourceTree = "<group>"; };
+		5510685624A9624F004C2486 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5510685A24A9624F004C2486 /* CIAutoEnhanceClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIAutoEnhanceClass.m; sourceTree = "<group>"; };
 		55115C031D46AC2700E76B5B /* SSKTerminatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKTerminatable.h; sourceTree = "<group>"; };
 		55115C1D1D46D65000E76B5B /* SwiftCMYK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCMYK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55115C1F1D46D65100E76B5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2566,6 +2584,16 @@
 				55B95A521C6FAF7C00E37A8C /* SeashoreKit.framework in Frameworks */,
 				550AEB0418CFC5E1008918BA /* Cocoa.framework in Frameworks */,
 				551E56B018D0139A00E4CDAF /* Quartz.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5510683E24A961F6004C2486 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5510683F24A961F6004C2486 /* SeashoreKit.framework in Frameworks */,
+				5510684024A961F6004C2486 /* Cocoa.framework in Frameworks */,
+				5510684124A961F6004C2486 /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3381,6 +3409,7 @@
 				55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */,
 				555F598D1D373CEC0085AC96 /* SwiftHorizStripes.bundle */,
 				55115C1D1D46D65000E76B5B /* SwiftCMYK.bundle */,
+				5510684724A961F7004C2486 /* Auto Enhance+.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3576,6 +3605,16 @@
 				35B158720A2C08A4005B688F /* Pat2PNG.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5510685324A9624F004C2486 /* CIAutoEnhance */ = {
+			isa = PBXGroup;
+			children = (
+				5510685424A9624F004C2486 /* CIAutoEnhanceClass.h */,
+				5510685A24A9624F004C2486 /* CIAutoEnhanceClass.m */,
+				5510685524A9624F004C2486 /* Localizable.strings */,
+			);
+			path = CIAutoEnhance;
 			sourceTree = "<group>";
 		};
 		55115C1E1D46D65100E76B5B /* SwiftCMYK */ = {
@@ -4463,6 +4502,7 @@
 				559E255818DCB79000D0F3DB /* CICommon-RestoreAlpha.mi */,
 				557D504518CF9FBA005809E3 /* CIAffineTile */,
 				557D504E18CF9FBA005809E3 /* CIAffineTransform */,
+				5510685324A9624F004C2486 /* CIAutoEnhance */,
 				557D505718CF9FBA005809E3 /* CIBloom */,
 				557D506218CF9FBA005809E3 /* CIBrightness */,
 				557D506D18CF9FBA005809E3 /* CIBump */,
@@ -5021,6 +5061,24 @@
 			name = "Bump+";
 			productName = CIAffineTile;
 			productReference = 550AEB0A18CFC5E1008918BA /* Bump+.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		5510683924A961F6004C2486 /* Auto Enhance+ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5510684424A961F6004C2486 /* Build configuration list for PBXNativeTarget "Auto Enhance+" */;
+			buildPhases = (
+				5510683C24A961F6004C2486 /* Sources */,
+				5510683E24A961F6004C2486 /* Frameworks */,
+				5510684224A961F6004C2486 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5510683A24A961F6004C2486 /* PBXTargetDependency */,
+			);
+			name = "Auto Enhance+";
+			productName = CIAffineTile;
+			productReference = 5510684724A961F7004C2486 /* Auto Enhance+.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		55115C1C1D46D65000E76B5B /* SwiftCMYK */ = {
@@ -6325,6 +6383,7 @@
 				fr,
 				de,
 				Base,
+				English,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Seashore */;
 			projectDirPath = "";
@@ -6365,6 +6424,7 @@
 				A89B83C60A426D3B00AD6941 /* Seashore Disk Image */,
 				55909DFD18CFD59A00F43F90 /* CoreImage-based Plug-ins */,
 				557D533218CF9FEC005809E3 /* Affine Tile+ */,
+				5510683924A961F6004C2486 /* Auto Enhance+ */,
 				557D536118CFAAF6005809E3 /* Affine Transform+ */,
 				5599388A18CFC72A00E92088 /* Bloom+ */,
 				550AEAF018CFC5DE008918BA /* Brightness+ */,
@@ -6581,6 +6641,14 @@
 			files = (
 				5599388918CFC6F500E92088 /* Localizable.strings in Resources */,
 				55909DE218CFCFEF00F43F90 /* CIBump.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5510684224A961F6004C2486 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5510685F24A9624F004C2486 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7254,6 +7322,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5599388818CFC6F100E92088 /* CIBumpClass.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5510683C24A961F6004C2486 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5510686024A9624F004C2486 /* CIAutoEnhanceClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8002,6 +8078,11 @@
 			name = TIFF;
 			targetProxy = 35B157390A2C015E005B688F /* PBXContainerItemProxy */;
 		};
+		5510683A24A961F6004C2486 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55472B7D1C6EDCCA0065A852 /* SeashoreKit */;
+			targetProxy = 5510683B24A961F6004C2486 /* PBXContainerItemProxy */;
+		};
 		55115C2B1D46D81700E76B5B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 55472B7D1C6EDCCA0065A852 /* SeashoreKit */;
@@ -8465,6 +8546,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5510685524A9624F004C2486 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5510685624A9624F004C2486 /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		55115C291D46D71200E76B5B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -9634,6 +9723,42 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CIPrincipalClass = CIBumpClass;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		5510684524A961F6004C2486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CIPrincipalClass = CIAutoEnhanceClass;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"../CoreImage Plug-ins\"",
+				);
+				INFOPLIST_FILE = "../CoreImage Plug-ins/CI-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.sourceforge.seashore.${PRODUCT_NAME:rfc1034identifier}Plus";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		5510684624A961F6004C2486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CIPrincipalClass = CIAutoEnhanceClass;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"../CoreImage Plug-ins\"",
@@ -12507,6 +12632,15 @@
 			buildConfigurations = (
 				550AEB0818CFC5E1008918BA /* Debug */,
 				550AEB0918CFC5E1008918BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5510684424A961F6004C2486 /* Build configuration list for PBXNativeTarget "Auto Enhance+" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5510684524A961F6004C2486 /* Debug */,
+				5510684624A961F6004C2486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

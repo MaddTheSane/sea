@@ -167,7 +167,7 @@
 	apoint = [pluginData point:1];
 	yapoint = [pluginData point:2];
 	if (apoint.x - point.x == 0)
-		angle = M_PI / 2.0;
+		angle = M_PI_2;
 	else if (apoint.x - point.x > 0)
 		angle = atan((double)(point.y - apoint.y) / fabs((double)(apoint.x - point.x)));
 	else if (apoint.x - point.x < 0 && point.y - apoint.y > 0)
