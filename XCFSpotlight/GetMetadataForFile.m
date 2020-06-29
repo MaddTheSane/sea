@@ -61,7 +61,7 @@ Boolean GetMetadataForFile(void* thisInterface,
     Boolean success=NO;
 	
     // Don't assume that there is an autorelease pool around the calling of this function.
-    @autoreleasepool {
+	@autoreleasepool {
 		NSMutableDictionary *nsAttribs = (__bridge NSMutableDictionary*)attributes;
 		// load the document at the specified location
 		XCFContent *contents = [[XCFContent alloc] initWithContentsOfFile: (__bridge NSString *)pathToFile];
@@ -69,16 +69,16 @@ Boolean GetMetadataForFile(void* thisInterface,
 			int width = [contents width];
 			int height = [contents height];
 			nsAttribs[(NSString *)kMDItemPixelWidth] = @(width);
-
+			
 			nsAttribs[(NSString *)kMDItemPixelHeight] = @(height);
 			
-			if(width > height){
+			if (width > height) {
 				nsAttribs[(NSString *)kMDItemOrientation] = @1;
-			}else{
+			} else {
 				nsAttribs[(NSString *)kMDItemOrientation] = @0;
 			}
 			
-
+			
 			nsAttribs[(NSString *)kMDItemBitsPerSample] = @([contents spp] * 8);
 			nsAttribs[(NSString *)kMDItemResolutionWidthDPI] = @([contents xres]);
 			nsAttribs[(NSString *)kMDItemResolutionHeightDPI] = @([contents yres]);
@@ -97,10 +97,10 @@ Boolean GetMetadataForFile(void* thisInterface,
 					hasAlpha = YES;
 				}
 			}
-
+			
 			nsAttribs[(NSString *)kMDItemHasAlphaChannel] = @(hasAlpha);
 			nsAttribs[(NSString *)kMDItemLayerNames] = [names copy];
-
+			
 			if ([contents exifData]) {
 				NSDictionary *data = [contents exifData];
 				if(data[@"FNumber"]){
@@ -121,32 +121,6 @@ Boolean GetMetadataForFile(void* thisInterface,
 		}
 		
 		
-#if 0
-		tempDict=[[NSDictionary alloc] initWithContentsOfFile:(NSString *)pathToFile];
-    if (tempDict)
-    {
-			// set the kMDItemTitle attribute to the Title
-			[(NSMutableDictionary *)attributes setObject:[tempDict objectForKey:@"title"]
-												  forKey:(NSString *)kMDItemTitle];
-			
-			// set the kMDItemAuthors attribute to an array containing the single Author
-			// value
-			[(NSMutableDictionary *)attributes setObject:[NSArray arrayWithObject:[tempDict objectForKey:@"author"]]
-												  forKey:(NSString *)kMDItemAuthors];
-			
-			// set our custom document notes attribute to the Notes value
-			// (in the real world, you'd likely use the kMDItemTextContent attribute, however that
-			// would make it hard to demonstrate using a custom key!)
-			[(NSMutableDictionary *)attributes setObject:[tempDict objectForKey:@"notes"]
-												  forKey:@"com_apple_myCocoaDocumentApp_myCustomDocument_notes"];
-			
-			// return YES so that the attributes are imported
-			success=YES;
-			
-			// release the loaded document
-			[tempDict release];
-    }
-#endif
-    return success;
-    }
+		return success;
+	}
 }

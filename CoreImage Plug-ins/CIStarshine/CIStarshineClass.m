@@ -191,16 +191,18 @@
 	selection = [pluginData selection];
 	point1 = [pluginData point:0];
 	point2 = [pluginData point:1];
-	if (point2.x - point1.x == 0)
-		angle = M_PI / 2.0;
-	else if (point2.x - point1.x > 0)
-		angle = atanf((float)(point1.y - point2.y) / fabsf((float)(point2.x - point1.x)));
-	else if (point2.x - point1.x < 0 && point1.y - point2.y > 0)
-		angle = M_PI - atanf((float)(point1.y - point2.y) / fabsf((float)(point2.x - point1.x)));
-	else
-		angle = -M_PI - atanf((float)(point1.y - point2.y) / fabsf((float)(point2.x - point1.x)));
-	if (angle < 0)
+	if (point2.x - point1.x == 0) {
+		angle = M_PI_2;
+	} else if (point2.x - point1.x > 0) {
+		angle = atan((double)(point1.y - point2.y) / fabs((double)(point2.x - point1.x)));
+	} else if (point2.x - point1.x < 0 && point1.y - point2.y > 0) {
+		angle = M_PI - atan((double)(point1.y - point2.y) / fabs((double)(point2.x - point1.x)));
+	} else {
+		angle = -M_PI - atan((double)(point1.y - point2.y) / fabs((double)(point2.x - point1.x)));
+	}
+	if (angle < 0) {
 		angle = 2 * M_PI + angle;
+	}
 	radius = abs(point2.x - point1.x) * abs(point2.x - point1.x) + abs(point2.y - point1.y) * abs(point2.y - point1.y);
 	radius = sqrt(radius);
 	// radius /= 4.0;
@@ -224,22 +226,22 @@
 	[filter setValue:@(opacity) forKey:@"inputCrossOpacity"];
 	[filter setValue:@(star_width) forKey:@"inputCrossWidth"];
 	[filter setValue:@-2 forKey:@"inputEpsilon"];
-	halo = [filter valueForKey: @"outputImage"];
+	halo = [filter valueForKey: kCIOutputImageKey];
 	
 	// Run filter
 	filter = [CIFilter filterWithName:@"CISourceOverCompositing"];
 	[filter setDefaults];
-	[filter setValue:halo forKey:@"inputImage"];
+	[filter setValue:halo forKey:kCIInputImageKey];
 	[filter setValue:input forKey:@"inputBackgroundImage"];
-	output = [filter valueForKey: @"outputImage"];
+	output = [filter valueForKey: kCIOutputImageKey];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
-		[filter setValue:output forKey:@"inputImage"];
+		[filter setValue:output forKey:kCIInputImageKey];
 		[filter setValue:[CIVector vectorWithX:selection.origin.x Y:height - selection.size.height - selection.origin.y Z:selection.size.width W:selection.size.height] forKey:@"inputRectangle"];
-		crop_output = [filter valueForKey:@"outputImage"];
+		crop_output = [filter valueForKey:kCIOutputImageKey];
 		
 		// Create output core image
 		rect.origin.x = selection.origin.x;

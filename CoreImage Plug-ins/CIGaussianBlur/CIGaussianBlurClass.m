@@ -141,9 +141,9 @@
 	// the content outside the borders of the image
 	clamp = [CIFilter filterWithName: @"CIAffineClamp"];
 	[clamp setDefaults];
-	[clamp setValue:[NSAffineTransform transform] forKey:@"inputTransform"];
-	[clamp setValue:unclampedInput forKey: @"inputImage"];
-	clampedInput = [clamp valueForKey: @"outputImage"];
+	[clamp setValue:[NSAffineTransform transform] forKey:kCIInputTransformKey];
+	[clamp setValue:unclampedInput forKey: kCIInputImageKey];
+	clampedInput = [clamp valueForKey: kCIOutputImageKey];
 	
 	// Run filter
 	filter = [CIFilter filterWithName:@"CIGaussianBlur"];
@@ -151,17 +151,17 @@
 		@throw [NSException exceptionWithName:@"CoreImageFilterNotFoundException" reason:[NSString stringWithFormat:@"The Core Image filter named \"%@\" was not found.", @"CIGaussianBlur"] userInfo:NULL];
 	}
 	[filter setDefaults];
-	[filter setValue:clampedInput forKey:@"inputImage"];
+	[filter setValue:clampedInput forKey:kCIInputImageKey];
 	[filter setValue:@(radius) forKey:@"inputRadius"];
-	output = [filter valueForKey:@"outputImage"];
+	output = [filter valueForKey:kCIOutputImageKey];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
-		[filter setValue:output forKey:@"inputImage"];
+		[filter setValue:output forKey:kCIInputImageKey];
 		[filter setValue:[CIVector vectorWithX:selection.origin.x Y:height - selection.size.height - selection.origin.y Z:selection.size.width W:selection.size.height] forKey:@"inputRectangle"];
-		crop_output = [filter valueForKey:@"outputImage"];
+		crop_output = [filter valueForKey:kCIOutputImageKey];
 		
 		// Create output core image
 		rect.origin.x = selection.origin.x;

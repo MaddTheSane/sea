@@ -4,7 +4,7 @@
 #import "SeaDocumentController.h"
 #import "SeaWarning.h"
 
-IntSize getDocumentSize(const char *path)
+IntSize SeaSVGGetDocumentSize(const char *path)
 {
 	FILE *file;
 	char header[2056], dstr[128];
@@ -222,7 +222,7 @@ IntSize getDocumentSize(const char *path)
 		
 		// Run the scaling panel
 		[scalePanel center];
-		trueSize = getDocumentSize([path fileSystemRepresentation]);
+		trueSize = SeaSVGGetDocumentSize([path fileSystemRepresentation]);
 		size.width = trueSize.width; size.height = trueSize.height;
 		[sizeLabel setStringValue:[NSString stringWithFormat:@"%d x %d", size.width, size.height]];
 		[scaleSlider setIntValue:2];

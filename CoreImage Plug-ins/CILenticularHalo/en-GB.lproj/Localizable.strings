@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Generate";
+description = "Generates a colourful halo";
+license = "Public Domain";
+name = "Halo";
+instruction = "Click three times: first to locate the centre of the halo, then to specify its radius and width";

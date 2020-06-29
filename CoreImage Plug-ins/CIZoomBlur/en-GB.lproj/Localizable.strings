@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Blur";
+description = "Applies a zoom blur effect to the selection";
+license = "Public Domain";
+name = "Zoom Blur";
+instruction = "Click twice: first to locate the centre of the zoom and then to specify the extent of the blur";

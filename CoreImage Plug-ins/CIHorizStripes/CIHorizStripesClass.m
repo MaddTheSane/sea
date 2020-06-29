@@ -173,24 +173,24 @@
 	[filter setValue:backColorAlpha forKey:@"inputColor1"];
 	[filter setValue:@(amount) forKey:@"inputWidth"];
 	[filter setValue:@1.0f forKey:@"inputSharpness"];
-	pre_output = [filter valueForKey: @"outputImage"];
+	pre_output = [filter valueForKey: kCIOutputImageKey];
 	
 	// Run rotation
 	filter = [CIFilter filterWithName:@"CIAffineTransform"];
 	[filter setDefaults];
 	rotateTransform = [NSAffineTransform transform];
 	[rotateTransform rotateByDegrees:90.0];
-	[filter setValue:pre_output forKey:@"inputImage"];
-	[filter setValue:rotateTransform forKey:@"inputTransform"];
-	output = [filter valueForKey: @"outputImage"];
+	[filter setValue:pre_output forKey:kCIInputImageKey];
+	[filter setValue:rotateTransform forKey:kCIInputTransformKey];
+	output = [filter valueForKey: kCIOutputImageKey];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
-		[filter setValue:output forKey:@"inputImage"];
+		[filter setValue:output forKey:kCIInputImageKey];
 		[filter setValue:[CIVector vectorWithX:selection.origin.x Y:height - selection.size.height - selection.origin.y Z:selection.size.width W:selection.size.height] forKey:@"inputRectangle"];
-		crop_output = [filter valueForKey:@"outputImage"];
+		crop_output = [filter valueForKey:kCIOutputImageKey];
 		
 		// Create output core image
 		rect.origin.x = selection.origin.x;

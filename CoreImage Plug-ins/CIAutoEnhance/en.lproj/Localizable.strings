@@ -1,0 +1,6 @@
+author = "Robert Engels";
+copyright = "Public Domain 2019";
+description = "Adjusts the selection using Core Image auto enhancement filter set.";
+groupName = "Enhance";
+license = "Public Domain";
+name = "Auto Enhance";

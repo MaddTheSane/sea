@@ -16,7 +16,7 @@
 #import "SSKCIPlugin.h"
 
 @interface CISepiaClass : SSKCIPlugin
-// The new intensity
+//! The new intensity
 @property CGFloat intensity;
 
 /*!

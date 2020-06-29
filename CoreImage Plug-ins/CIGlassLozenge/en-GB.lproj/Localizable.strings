@@ -1,0 +1,7 @@
+author = "Mark Pazolli";
+copyright = "Public Domain 2007";
+groupName = "Distort";
+description = "Creates a glass lozenge as specfied.";
+license = "Public Domain";
+name = "Glass Lozenge";
+instruction = "Click twice: to locate the centre-left and centre-right of the lozenge.";

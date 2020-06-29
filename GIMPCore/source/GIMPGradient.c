@@ -644,7 +644,7 @@ gradient_put_pixel (int      x,
     }
 }
 
-void GCFillGradient(unsigned char *dest, int destWidth, int destHeight, IntRect rect, int spp, GimpGradientInfo info, ProgressFunction progress_callback)
+void GCFillGradient(unsigned char *dest, int destWidth, int destHeight, IntRect rect, int spp, GimpGradientInfo info, GimpProgressFunction progress_callback)
 {
 	RenderBlendData rbd;
 	PutPixelData ppd;
