@@ -1800,7 +1800,7 @@
 		550AEB0A18CFC5E1008918BA /* Bump+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bump+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5510684724A961F7004C2486 /* Auto Enhance+.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Auto Enhance+.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5510685424A9624F004C2486 /* CIAutoEnhanceClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIAutoEnhanceClass.h; sourceTree = "<group>"; };
-		5510685624A9624F004C2486 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5510685624A9624F004C2486 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5510685A24A9624F004C2486 /* CIAutoEnhanceClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIAutoEnhanceClass.m; sourceTree = "<group>"; };
 		55115C031D46AC2700E76B5B /* SSKTerminatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKTerminatable.h; sourceTree = "<group>"; };
 		55115C1D1D46D65000E76B5B /* SwiftCMYK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCMYK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -8548,7 +8548,7 @@
 		5510685524A9624F004C2486 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				5510685624A9624F004C2486 /* English */,
+				5510685624A9624F004C2486 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

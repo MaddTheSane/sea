@@ -222,32 +222,32 @@
 		@throw [NSException exceptionWithName:@"CoreImageFilterNotFoundException" reason:[NSString stringWithFormat:@"The Core Image filter named \"%@\" was not found.", @"CISpotLight"] userInfo:NULL];
 	}
 	[filter setDefaults];
-	[filter setValue:input forKey:@"inputImage"];
+	[filter setValue:input forKey:kCIInputImageKey];
 	[filter setValue:mainColor forKey:@"inputColor"];
 	[filter setValue:[CIVector vectorWithX:point.x Y:height - point.y Z:srcHeight] forKey:@"inputLightPosition"];
 	[filter setValue:[CIVector vectorWithX:apoint.x Y:height - apoint.y Z:destHeight] forKey:@"inputLightPointsAt"];
 	[filter setValue:@(concentration) forKey:@"inputConcentration"];
 	[filter setValue:@(brightness) forKey:@"inputBrightness"];
-	imm_output = [filter valueForKey: @"outputImage"];
+	imm_output = [filter valueForKey: kCIOutputImageKey];
 	
 	// Add opaque background (if required)
 	filter = [CIFilter filterWithName:@"CIConstantColorGenerator"];
 	[filter setDefaults];
 	[filter setValue:backColor forKey:@"inputColor"];
-	background = [filter valueForKey: @"outputImage"]; 
+	background = [filter valueForKey: kCIOutputImageKey]; 
 	filter = [CIFilter filterWithName:@"CISourceOverCompositing"];
 	[filter setDefaults];
 	[filter setValue:background forKey:@"inputBackgroundImage"];
-	[filter setValue:imm_output forKey:@"inputImage"];
-	output = [filter valueForKey:@"outputImage"];
+	[filter setValue:imm_output forKey:kCIInputImageKey];
+	output = [filter valueForKey:kCIOutputImageKey];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
-		[filter setValue:output forKey:@"inputImage"];
+		[filter setValue:output forKey:kCIInputImageKey];
 		[filter setValue:[CIVector vectorWithX:selection.origin.x Y:height - selection.size.height - selection.origin.y Z:selection.size.width W:selection.size.height] forKey:@"inputRectangle"];
-		crop_output = [filter valueForKey:@"outputImage"];
+		crop_output = [filter valueForKey:kCIOutputImageKey];
 		
 		// Create output core image
 		rect.origin.x = selection.origin.x;

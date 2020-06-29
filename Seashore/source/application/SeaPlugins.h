@@ -271,8 +271,8 @@ extern CIImage *SeaCreateCIImage(PluginData *plugin);
 /*!
  convert NSImageRep to a format Seashore can work with, which is RGBA, or GrayA. If spp is 4, then RGBA, if 2, the GrayA
  */
-extern void convertImageRep(NSImageRep *imageRep,unsigned char *dest,int width,int height,int spp);
+extern void convertImageRep(NSImageRep *imageRep, unsigned char *dest, int width, int height, int spp);
 
-extern void SeaRenderCIImage(PluginData *pluginData,CIImage *image);
+extern void SeaRenderCIImage(PluginData *pluginData, CIImage *image);
 
 NS_ASSUME_NONNULL_END

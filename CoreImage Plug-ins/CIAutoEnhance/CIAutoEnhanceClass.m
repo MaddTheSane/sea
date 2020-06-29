@@ -13,9 +13,9 @@
 	return self;
 }
 
-- (int)type
+- (SeaPluginType)type
 {
-	return 0;
+	return SeaPluginBasic;
 }
 
 - (NSString *)name

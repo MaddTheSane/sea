@@ -206,22 +206,22 @@
 	[filter setValue:@(strength) forKey:@"inputStriationStrength"];
 	[filter setValue:@(contrast) forKey:@"inputStriationContrast"];
 	[filter setValue:@0 forKey:@"inputTime"];
-	halo = [filter valueForKey: @"outputImage"];
+	halo = [filter valueForKey: kCIOutputImageKey];
 	
 	// Run filter
 	filter = [CIFilter filterWithName:@"CISourceOverCompositing"];
 	[filter setDefaults];
-	[filter setValue:halo forKey:@"inputImage"];
+	[filter setValue:halo forKey:kCIInputImageKey];
 	[filter setValue:input forKey:@"inputBackgroundImage"];
-	output = [filter valueForKey: @"outputImage"];
+	output = [filter valueForKey: kCIOutputImageKey];
 	
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
-		[filter setValue:output forKey:@"inputImage"];
+		[filter setValue:output forKey:kCIInputImageKey];
 		[filter setValue:[CIVector vectorWithX:selection.origin.x Y:height - selection.size.height - selection.origin.y Z:selection.size.width W:selection.size.height] forKey:@"inputRectangle"];
-		crop_output = [filter valueForKey:@"outputImage"];
+		crop_output = [filter valueForKey:kCIOutputImageKey];
 		
 		// Create output core image
 		rect.origin.x = selection.origin.x;

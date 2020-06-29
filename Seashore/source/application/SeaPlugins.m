@@ -357,7 +357,6 @@ CIImage *SeaCreateCIImage(PluginData *pluginData){
 		vec_len++;
 	}
 	unsigned char * newdata = malloc(vec_len * 16);
-	data = [pluginData data];
 	SeaPremultiplyBitmap(4, newdata, data, width * height);
 	// Convert from RGBA to ARGB
 	vdata = (simd_uint4 *)newdata;
@@ -370,7 +369,7 @@ CIImage *SeaCreateCIImage(PluginData *pluginData){
 	return [CIImage imageWithBitmapData:[NSData dataWithBytesNoCopy:newdata length:width * height * 4 freeWhenDone:YES] bytesPerRow:width * 4 size:NSMakeSize(width, height) format:kCIFormatARGB8 colorSpace:[pluginData displayProf]];
 }
 
-void SeaConvertImageRep(NSImageRep *imageRep,unsigned char *dest,int width,int height,int spp) {
+static void SeaConvertImageRep(NSImageRep *imageRep, unsigned char *dest, int width, int height, int spp) {
     
     NSColorSpaceName csname = NSDeviceRGBColorSpace;
     if (spp==2) {
@@ -392,10 +391,10 @@ void SeaConvertImageRep(NSImageRep *imageRep,unsigned char *dest,int width,int h
     [imageRep drawInRect:rect fromRect:rect operation:NSCompositingOperationCopy fraction:1.0 respectFlipped:NO hints:NULL];
     [NSGraphicsContext restoreGraphicsState];
     
-    SeaUnpremultiplyBitmap(spp,dest,dest,width*height);
+    SeaUnpremultiplyBitmap(spp, dest, dest, width*height);
 }
 
-void SeaRenderCIImage(PluginData *pluginData,CIImage *image){
+void SeaRenderCIImage(PluginData *pluginData, CIImage *image){
     int spp = [pluginData spp];
     int width = [pluginData width];
     int height = [pluginData height];
@@ -418,8 +417,7 @@ void SeaRenderCIImage(PluginData *pluginData,CIImage *image){
         for (i = 0; i < selection.size.height; i++) {
             memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
         }
-    }
-    else {
+    } else {
         memset(replace, 0xFF, width * height);
     }
 }

@@ -366,27 +366,27 @@
 	// the content outside the borders of the image
 	clamp = [CIFilter filterWithName: @"CIAffineClamp"];
 	[clamp setDefaults];
-	[clamp setValue:[NSAffineTransform transform] forKey:@"inputTransform"];
-	[clamp setValue:unclampedInput forKey: @"inputImage"];
-	clampedInput = [clamp valueForKey: @"outputImage"];
+	[clamp setValue:[NSAffineTransform transform] forKey:kCIInputTransformKey];
+	[clamp setValue:unclampedInput forKey: kCIInputImageKey];
+	clampedInput = [clamp valueForKey: kCIOutputImageKey];
 	
 	// Position correctly
 	if (boundsValid) {
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
-		[filter setValue:clampedInput forKey:@"inputImage"];
+		[filter setValue:clampedInput forKey:kCIInputImageKey];
 		[filter setValue:[CIVector vectorWithX:bounds.origin.x Y:height - bounds.size.height - bounds.origin.y Z:bounds.size.width W:bounds.size.height] forKey:@"inputRectangle"];
-		imm_output_1 = [filter valueForKey:@"outputImage"];
+		imm_output_1 = [filter valueForKey:kCIOutputImageKey];
 		
 		// Offset properly
 		filter = [CIFilter filterWithName:@"CIAffineTransform"];
 		[filter setDefaults];
-		[filter setValue:imm_output_1 forKey:@"inputImage"];
+		[filter setValue:imm_output_1 forKey:kCIInputImageKey];
 		offsetTransform = [NSAffineTransform transform];
 		[offsetTransform translateXBy:-bounds.origin.x yBy:-height + bounds.origin.y + bounds.size.height];
-		[filter setValue:offsetTransform forKey:@"inputTransform"];
-		imm_output_2 = [filter valueForKey:@"outputImage"];
+		[filter setValue:offsetTransform forKey:kCIInputTransformKey];
+		imm_output_2 = [filter valueForKey:kCIOutputImageKey];
 	} else {
 		imm_output_2 = clampedInput;
 	}
@@ -397,21 +397,21 @@
 		@throw [NSException exceptionWithName:@"CoreImageFilterNotFoundException" reason:[NSString stringWithFormat:@"The Core Image filter named \"%@\" was not found.", @"CIAffineTransform"] userInfo:NULL];
 	}
 	[filter setDefaults];
-	[filter setValue:imm_output_2 forKey:@"inputImage"];
-	[filter setValue:trueTransform forKey:@"inputTransform"];
-	imm_output = [filter valueForKey: @"outputImage"];
+	[filter setValue:imm_output_2 forKey:kCIInputImageKey];
+	[filter setValue:trueTransform forKey:kCIInputTransformKey];
+	imm_output = [filter valueForKey: kCIOutputImageKey];
 	
 	// Add opaque background (if required)
 	if (opaque) {
 		filter = [CIFilter filterWithName:@"CIConstantColorGenerator"];
 		[filter setDefaults];
 		[filter setValue:backColor forKey:@"inputColor"];
-		background = [filter valueForKey: @"outputImage"]; 
+		background = [filter valueForKey: kCIOutputImageKey];
 		filter = [CIFilter filterWithName:@"CISourceOverCompositing"];
 		[filter setDefaults];
 		[filter setValue:background forKey:@"inputBackgroundImage"];
-		[filter setValue:imm_output forKey:@"inputImage"];
-		output = [filter valueForKey:@"outputImage"];
+		[filter setValue:imm_output forKey:kCIInputImageKey];
+		output = [filter valueForKey:kCIOutputImageKey];
 	} else {
 		output = imm_output;
 	}
@@ -420,9 +420,9 @@
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
-		[filter setValue:output forKey:@"inputImage"];
+		[filter setValue:output forKey:kCIInputImageKey];
 		[filter setValue:[CIVector vectorWithX:selection.origin.x Y:height - selection.size.height - selection.origin.y Z:selection.size.width W:selection.size.height] forKey:@"inputRectangle"];
-		crop_output = [filter valueForKey:@"outputImage"];
+		crop_output = [filter valueForKey:kCIOutputImageKey];
 		
 		// Create output core image
 		rect.origin.x = selection.origin.x;
@@ -525,9 +525,9 @@
 	// the content outside the borders of the image
 	clamp = [CIFilter filterWithName: @"CIAffineClamp"];
 	[clamp setDefaults];
-	[clamp setValue:[NSAffineTransform transform] forKey:@"inputTransform"];
-	[clamp setValue:unclampedInput forKey: @"inputImage"];
-	clampedInput = [clamp valueForKey: @"outputImage"];
+	[clamp setValue:[NSAffineTransform transform] forKey:kCIInputTransformKey];
+	[clamp setValue:unclampedInput forKey: kCIInputImageKey];
+	clampedInput = [clamp valueForKey: kCIOutputImageKey];
 	
 	// Run filter
 	filter = [CIFilter filterWithName:@"CIAffineTransform"];
@@ -535,9 +535,9 @@
 		@throw [NSException exceptionWithName:@"CoreImageFilterNotFoundException" reason:[NSString stringWithFormat:@"The Core Image filter named \"%@\" was not found.", @"CIAffineTransform"] userInfo:NULL];
 	}
 	[filter setDefaults];
-	[filter setValue:clampedInput forKey:@"inputImage"];
-	[filter setValue:at forKey:@"inputTransform"];
-	output = [filter valueForKey: @"outputImage"];
+	[filter setValue:clampedInput forKey:kCIInputImageKey];
+	[filter setValue:at forKey:kCIInputTransformKey];
+	output = [filter valueForKey: kCIOutputImageKey];
 
 	// Figure out transformation
 	point[0] = [at transformPoint:NSMakePoint(0.0, 0.0)];

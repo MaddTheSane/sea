@@ -116,18 +116,18 @@
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
-		[filter setValue:input forKey:@"inputImage"];
+		[filter setValue:input forKey:kCIInputImageKey];
 		[filter setValue:[CIVector vectorWithX:bounds.origin.x Y:height - bounds.size.height - bounds.origin.y Z:bounds.size.width W:bounds.size.height] forKey:@"inputRectangle"];
-		imm_output_1 = [filter valueForKey:@"outputImage"];
+		imm_output_1 = [filter valueForKey:kCIOutputImageKey];
 		
 		// Offset properly
 		filter = [CIFilter filterWithName:@"CIAffineTransform"];
 		[filter setDefaults];
-		[filter setValue:imm_output_1 forKey:@"inputImage"];
+		[filter setValue:imm_output_1 forKey:kCIInputImageKey];
 		offsetTransform = [NSAffineTransform transform];
 		[offsetTransform translateXBy:-bounds.origin.x yBy:-height + bounds.origin.y + bounds.size.height];
-		[filter setValue:offsetTransform forKey:@"inputTransform"];
-		imm_output_2 = [filter valueForKey:@"outputImage"];
+		[filter setValue:offsetTransform forKey:kCIInputTransformKey];
+		imm_output_2 = [filter valueForKey:kCIOutputImageKey];
 	} else {
 		imm_output_2 = input;
 	}
@@ -138,18 +138,18 @@
 		@throw [NSException exceptionWithName:@"CoreImageFilterNotFoundException" reason:[NSString stringWithFormat:@"The Core Image filter named \"%@\" was not found.", @"CIAffineTile"] userInfo:NULL];
 	}
 	[filter setDefaults];
-	[filter setValue:imm_output_2 forKey:@"inputImage"];
-	[filter setValue:trueTransform forKey:@"inputTransform"];
-	output = [filter valueForKey: @"outputImage"];
+	[filter setValue:imm_output_2 forKey:kCIInputImageKey];
+	[filter setValue:trueTransform forKey:kCIInputTransformKey];
+	output = [filter valueForKey: kCIOutputImageKey];
 		
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
 		
 		// Crop to selection
 		filter = [CIFilter filterWithName:@"CICrop"];
 		[filter setDefaults];
-		[filter setValue:output forKey:@"inputImage"];
+		[filter setValue:output forKey:kCIInputImageKey];
 		[filter setValue:[CIVector vectorWithX:selection.origin.x Y:height - selection.size.height - selection.origin.y Z:selection.size.width W:selection.size.height] forKey:@"inputRectangle"];
-		crop_output = [filter valueForKey:@"outputImage"];
+		crop_output = [filter valueForKey:kCIOutputImageKey];
 		
 		// Create output core image
 		rect.origin.x = selection.origin.x;
