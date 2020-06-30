@@ -366,14 +366,14 @@ extension ToolboxUtility2: NSToolbarDelegate {
 		case SelectNoneToolbarItemIdentifier:
 			return ImageToolbarItem(itemIdentifier: SelectNoneToolbarItemIdentifier, label: NSLocalizedString("select none", value: "None", comment: "select none"), imageNamed: "toolbar/none", toolTip: NSLocalizedString("select none tooltip", value: "Select nothing", comment: "select none tooltip"), target: document.docView, selector: #selector(SeaView.selectNone(_:)))
 			
-			case SelectAllToolbarItemIdentifier:
-				return ImageToolbarItem(itemIdentifier: SelectAllToolbarItemIdentifier, label: NSLocalizedString("select all", value: "All", comment: "select all"), imageNamed: "toolbar/selectall", toolTip: NSLocalizedString("select All tooltip", value: "Select all of the current layer", comment: "select All tooltip"), target: document.docView, selector: #selector(SeaView.selectAll(_:)))
+		case SelectAllToolbarItemIdentifier:
+			return ImageToolbarItem(itemIdentifier: SelectAllToolbarItemIdentifier, label: NSLocalizedString("select all", value: "All", comment: "select all"), imageNamed: "toolbar/selectall", toolTip: NSLocalizedString("select All tooltip", value: "Select all of the current layer", comment: "select All tooltip"), target: document.docView, selector: #selector(SeaView.selectAll(_:)))
 			
-			case SelectInverseToolbarItemIdentifier:
-				return ImageToolbarItem(itemIdentifier: SelectInverseToolbarItemIdentifier, label: NSLocalizedString("select inverse", value: "Inverse", comment: "select inverse"), imageNamed: "toolbar/selectinverse", toolTip: NSLocalizedString("select inverse tooltip", value: "Select the inverse of the current selection", comment: "select inverse tooltip"), target: document.docView, selector: #selector(SeaView.selectInverse(_:)))
+		case SelectInverseToolbarItemIdentifier:
+			return ImageToolbarItem(itemIdentifier: SelectInverseToolbarItemIdentifier, label: NSLocalizedString("select inverse", value: "Inverse", comment: "select inverse"), imageNamed: "toolbar/selectinverse", toolTip: NSLocalizedString("select inverse tooltip", value: "Select the inverse of the current selection", comment: "select inverse tooltip"), target: document.docView, selector: #selector(SeaView.selectInverse(_:)))
 			
-			case SelectAlphaToolbarItemIdentifier:
-				return ImageToolbarItem(itemIdentifier: SelectAlphaToolbarItemIdentifier, label: NSLocalizedString("select alpha", value: "Alpha", comment: "select alpha"), imageNamed: "toolbar/selectalpha", toolTip: NSLocalizedString("select alpha tooltip", value: "Select a copy of the alpha transparency channel", comment: "select alpha tooltip"), target: document.docView, selector: #selector(SeaView.selectOpaque(_:)))
+		case SelectAlphaToolbarItemIdentifier:
+			return ImageToolbarItem(itemIdentifier: SelectAlphaToolbarItemIdentifier, label: NSLocalizedString("select alpha", value: "Alpha", comment: "select alpha"), imageNamed: "toolbar/selectalpha", toolTip: NSLocalizedString("select alpha tooltip", value: "Select a copy of the alpha transparency channel", comment: "select alpha tooltip"), target: document.docView, selector: #selector(SeaView.selectOpaque(_:)))
 			
 		default:
 			break

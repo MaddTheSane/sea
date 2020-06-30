@@ -131,6 +131,8 @@
 			name = Source;
 			path = source;
 			sourceTree = "<group>";
+			tabWidth = 8;
+			usesTabs = 1;
 		};
 		1058C7B2FEA5585E11CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;

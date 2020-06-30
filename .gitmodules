@@ -1,3 +1,3 @@
-[submodule "Vendor/SVGImageRep"]
-	path = Vendor/SVGImageRep
-	url = https://github.com/MaddTheSane/SVGImageRep.git
+[submodule "Vendor/PocketSVG"]
+	path = Vendor/PocketSVG
+	url = https://github.com/pocketsvg/PocketSVG.git

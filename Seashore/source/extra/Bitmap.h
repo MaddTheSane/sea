@@ -32,7 +32,7 @@ typedef NS_ENUM(int, BMPColorSpace) {
 	//! Indicates the gray/white colour space.
 	BMPColorSpaceGray,
 	//! Indicates the gray/black colour space.
-	BMPColorSpaceInvertedGray DEPRECATED_ATTRIBUTE,
+	BMPColorSpaceInvertedGray NS_ENUM_DEPRECATED_MAC(10.2, 10.10),
 	//! Indicates the RGB colour space.
 	BMPColorSpaceRGB,
 	//! Indicates the CMYK colour space.

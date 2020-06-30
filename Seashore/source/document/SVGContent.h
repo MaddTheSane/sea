@@ -3,9 +3,6 @@
 #import <SeashoreKit/SeaContent.h>
 
 
-extern IntSize SeaSVGGetDocumentSize(const char *path);
-#define SeaUseOldSVGImporterKey @"UseOldSVGApp"
-
 /*!
 	@class		SVGContent
 	@abstract	Loads the contents of an SVG file using Apache's Batik.
@@ -14,25 +11,7 @@ extern IntSize SeaSVGGetDocumentSize(const char *path);
 				<b>License:</b> GNU General Public License<br>
 				<b>Copyright:</b> Copyright (c) 2005 Mark Pazolli
 */
-@interface SVGContent : SeaContent {
-	// The length warning panel
-	IBOutlet NSPanel *waitPanel;
-	
-	// The spinner to update
-	IBOutlet NSProgressIndicator *spinner;
-	
-	// The scaling panel
-	IBOutlet NSPanel *scalePanel;
-	
-	// The slider indicating the extent of scaling
-	IBOutlet NSSlider *scaleSlider;
-	
-	// A label indicating the document's expected size
-	IBOutlet NSTextField *sizeLabel;
-	
-	// The document's actual and scaled size
-	IntSize trueSize, size;
-}
+@interface SVGContent : SeaContent
 
 /*!
 	@method		typeIsViewable:
@@ -53,21 +32,5 @@ extern IntSize SeaSVGGetDocumentSize(const char *path);
 	@result		Returns instance upon success (or NULL otherwise).
 */
 - (instancetype)initWithDocument:(id)doc contentsOfFile:(NSString *)path;
-
-/*!
-	@method		endPanel:
-	@discussion	Closes the current modal dialog.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)endPanel:(id)sender;
-
-/*!
-	@method		update:
-	@discussion	Updates the document's expected size.
-	@param		sender
-				Ignored.
-*/
-- (IBAction)update:(id)sender;
 
 @end

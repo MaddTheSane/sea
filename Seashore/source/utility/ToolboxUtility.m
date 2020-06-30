@@ -30,31 +30,31 @@
 - (void)selectOpaque:(id)selector;
 @end
 
-static NSString*	DocToolbarIdentifier 	= @"Document Toolbar Instance Identifier";
+static NSToolbarIdentifier const	DocToolbarIdentifier 	= @"Document Toolbar Instance Identifier";
 
-static NSString*	SelectionIdentifier 	= @"Selection  Item Identifier";
-static NSString*	DrawIdentifier 	= @"Draw Item Identifier";
-static NSString*    EffectIdentifier = @"Effect Item Identifier";
-static NSString*    TransformIdentifier = @"Transform Item Identifier";
-static NSString*	ColorsIdentifier = @"Colors Item Identifier";
+static NSToolbarItemIdentifier const	SelectionIdentifier 	= @"Selection  Item Identifier";
+static NSToolbarItemIdentifier const	DrawIdentifier 	= @"Draw Item Identifier";
+static NSToolbarItemIdentifier const	EffectIdentifier = @"Effect Item Identifier";
+static NSToolbarItemIdentifier const	TransformIdentifier = @"Transform Item Identifier";
+static NSToolbarItemIdentifier const	ColorsIdentifier = @"Colors Item Identifier";
 
 // Additional (Non-default) toolbar items
-static NSString*	ZoomInToolbarItemIdentifier = @"Zoom In Toolbar Item Identifier";
-static NSString*	ZoomOutToolbarItemIdentifier = @"Zoom Out Toolbar Item Identifier";
-static NSString*	ActualSizeToolbarItemIdentifier = @"Actual Size Toolbar Item Identifier";
-static NSString*	NewLayerToolbarItemIdentifier = @"New Layer Toolbar Item Identifier";
-static NSString*	DuplicateLayerToolbarItemIdentifier = @"Duplicate Layer Toolbar Item Identifier";
-static NSString*	ForwardToolbarItemIdentifier = @"Move Layer Forward  Toolbar Item Identifier";
-static NSString*	BackwardToolbarItemIdentifier = @"Move Layer Backward Toolbar Item Identifier";
-static NSString*	DeleteLayerToolbarItemIdentifier = @"Delete Layer Toolbar Item Identifier";
-static NSString*	ToggleLayersToolbarItemIdentifier = @"Show/Hide Layers Item Identifier";
-static NSString*	InspectorToolbarItemIdentifier = @"Show/Hide Inspector Toolbar Item Identifier";
-static NSString*	FloatAnchorToolbarItemIdentifier = @"Float/Anchor Toolbar Item Identifier";
-static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection Toolbar Item Identifier";
-static NSString*	SelectNoneToolbarItemIdentifier = @"Select None Toolbar Item Identifier";
-static NSString*	SelectAllToolbarItemIdentifier = @"Select All Toolbar Item Identifier";
-static NSString*	SelectInverseToolbarItemIdentifier = @"Select Inverse Toolbar Item Identifier";
-static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	ZoomInToolbarItemIdentifier = @"Zoom In Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	ZoomOutToolbarItemIdentifier = @"Zoom Out Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	ActualSizeToolbarItemIdentifier = @"Actual Size Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	NewLayerToolbarItemIdentifier = @"New Layer Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	DuplicateLayerToolbarItemIdentifier = @"Duplicate Layer Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	ForwardToolbarItemIdentifier = @"Move Layer Forward  Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	BackwardToolbarItemIdentifier = @"Move Layer Backward Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	DeleteLayerToolbarItemIdentifier = @"Delete Layer Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	ToggleLayersToolbarItemIdentifier = @"Show/Hide Layers Item Identifier";
+static NSToolbarItemIdentifier const	InspectorToolbarItemIdentifier = @"Show/Hide Inspector Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	FloatAnchorToolbarItemIdentifier = @"Float/Anchor Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	SelectNoneToolbarItemIdentifier = @"Select None Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	SelectAllToolbarItemIdentifier = @"Select All Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	SelectInverseToolbarItemIdentifier = @"Select Inverse Toolbar Item Identifier";
+static NSToolbarItemIdentifier const	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item Identifier";
 
 @implementation ToolboxUtility
 @synthesize background;
