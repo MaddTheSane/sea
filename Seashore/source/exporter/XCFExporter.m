@@ -51,15 +51,14 @@ static inline void fix_endian_write(int *input, int size)
 
 - (BOOL)writeHeader:(FILE *)file
 {
-	int i;
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 	
 	// Start with lowest version possible
 	version = 0;
 		
 	// Determine if file must be version 2 - we don't match exactly with 1.3.x but I think we have it correct
-	for (i = 0; i < [contents layerCount]; i++) {
-		switch ([(SeaLayer *)[contents layerAtIndex:i] mode]) {
+	for (NSInteger i = 0; i < [contents layerCount]; i++) {
+		switch ([[contents layerAtIndex:i] mode]) {
 			case XCF_DODGE_MODE:
 			case XCF_BURN_MODE:
 			case XCF_HARDLIGHT_MODE:
@@ -86,9 +85,9 @@ static inline void fix_endian_write(int *input, int size)
 	}
 	
 	// Write the width, height and type to file
-	tempIntString[0] = [(SeaContent *)contents width];
-	tempIntString[1] = [(SeaContent *)contents height];
-	tempIntString[2] = [(SeaContent *)contents type];
+	tempIntString[0] = [contents width];
+	tempIntString[1] = [contents height];
+	tempIntString[2] = [contents type];
 	fix_endian_write(tempIntString, 3);
 	fwrite(tempIntString, sizeof(int), 3, file);
 	

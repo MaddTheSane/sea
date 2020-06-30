@@ -104,8 +104,13 @@ static SeaController *seaController;
 	NSURL *fileURL = [gCurrentDocument fileURL];
 	NSRect frame = [[[gCurrentDocument windowControllers][0] window] frame];
 	
+	NSAlert *alert = [[NSAlert alloc] init];
+	alert.messageText = LOCALSTR(@"revert title", @"Revert");
+	alert.informativeText = [NSString stringWithFormat:LOCALSTR(@"revert body", @"\"%@\" has been edited. Are you sure you want to undo changes?"), [gCurrentDocument displayName]];
+	[alert addButtonWithTitle:LOCALSTR(@"revert", @"Revert")];
+	[alert addButtonWithTitle:LOCALSTR(@"cancel", @"Cancel")];
 	// Question whether to proceed with reverting
-	if (NSRunAlertPanel(LOCALSTR(@"revert title", @"Revert"), LOCALSTR(@"revert body", @"\"%@\" has been edited. Are you sure you want to undo changes?"), LOCALSTR(@"revert", @"Revert"), LOCALSTR(@"cancel", @"Cancel"), NULL, [gCurrentDocument displayName]) == NSAlertDefaultReturn) {
+	if ([alert runModal] == NSAlertFirstButtonReturn) {
 		
 		// Close the document and reopen it
 		[gCurrentDocument close];
@@ -150,7 +155,10 @@ static SeaController *seaController;
 	if ([fm copyItemAtPath:old_path toPath:new_path error:NULL]) {
 		originalDocument = [[SeaDocumentController sharedDocumentController] openNonCurrentFile:new_path];
 	} else {
-		NSRunAlertPanel(LOCALSTR(@"locked title", @"Operation Failed"), LOCALSTR(@"locked body", @"The \"Compare to Last Saved\" operation failed. The most likely cause for this is that the disk the original is kept on is full or read-only."), LOCALSTR(@"ok", @"OK"), NULL, NULL, [gCurrentDocument displayName]);
+		NSAlert *alert = [[NSAlert alloc] init];
+		alert.messageText = LOCALSTR(@"locked title", @"Operation Failed");
+		alert.informativeText = [NSString stringWithFormat:LOCALSTR(@"locked body", @"The \"Compare to Last Saved\" operation failed. The most likely cause for this is that the disk the original is kept on is full or read-only."), [gCurrentDocument displayName]];
+		[alert runModal];
 		return;
 	}
 	

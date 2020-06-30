@@ -140,6 +140,8 @@
 		5510694024AA96DA004C2486 /* PocketSVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5510693324AA96AE004C2486 /* PocketSVG.framework */; };
 		5510694124AA96DB004C2486 /* PocketSVG.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 5510693324AA96AE004C2486 /* PocketSVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5510694224AA9712004C2486 /* PocketSVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5510693324AA96AE004C2486 /* PocketSVG.framework */; };
+		5510695224AB1BF5004C2486 /* SeaLibZ.h in Headers */ = {isa = PBXBuildFile; fileRef = 5510695024AB1BF5004C2486 /* SeaLibZ.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5510695324AB1BF5004C2486 /* SeaLibZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 5510695124AB1BF5004C2486 /* SeaLibZ.m */; };
 		55115C041D46AC2700E76B5B /* SSKTerminatable.h in Headers */ = {isa = PBXBuildFile; fileRef = 55115C031D46AC2700E76B5B /* SSKTerminatable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55115C241D46D68E00E76B5B /* SwiftCMYK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55115C231D46D68D00E76B5B /* SwiftCMYK.swift */; };
 		55115C271D46D71200E76B5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55115C291D46D71200E76B5B /* Localizable.strings */; };
@@ -1747,6 +1749,8 @@
 		5510685624A9624F004C2486 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5510685A24A9624F004C2486 /* CIAutoEnhanceClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIAutoEnhanceClass.m; sourceTree = "<group>"; };
 		5510692A24AA96AE004C2486 /* PocketSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PocketSVG.xcodeproj; path = ../Vendor/PocketSVG/PocketSVG.xcodeproj; sourceTree = "<group>"; };
+		5510695024AB1BF5004C2486 /* SeaLibZ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeaLibZ.h; sourceTree = "<group>"; };
+		5510695124AB1BF5004C2486 /* SeaLibZ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeaLibZ.m; sourceTree = "<group>"; };
 		55115C031D46AC2700E76B5B /* SSKTerminatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKTerminatable.h; sourceTree = "<group>"; };
 		55115C1D1D46D65000E76B5B /* SwiftCMYK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCMYK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		55115C1F1D46D65100E76B5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -4254,6 +4258,8 @@
 				A835EAB305355C3800A80207 /* IndiciesKeeper.m */,
 				DC709EE30A61A173000B8333 /* Units.h */,
 				DC709EE50A61A35C000B8333 /* Units.m */,
+				5510695024AB1BF5004C2486 /* SeaLibZ.h */,
+				5510695124AB1BF5004C2486 /* SeaLibZ.m */,
 			);
 			name = "Extra Sources";
 			path = source/extra;
@@ -4954,6 +4960,7 @@
 				55472BB01C6EE1530065A852 /* SeaApplication.h in Headers */,
 				55472BCB1C6EE4EC0065A852 /* SeaView.h in Headers */,
 				55DAC83E20EECC2600CD7B26 /* SVGImporter.h in Headers */,
+				5510695224AB1BF5004C2486 /* SeaLibZ.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7269,6 +7276,7 @@
 				55472BC61C6EE48D0065A852 /* SVGContent.m in Sources */,
 				55472BE61C6EE7AC0065A852 /* XBMContent.m in Sources */,
 				55DAC84020EECC3400CD7B26 /* SVGImporter.m in Sources */,
+				5510695324AB1BF5004C2486 /* SeaLibZ.m in Sources */,
 				55472BA11C6EE1530065A852 /* SeaController.m in Sources */,
 				55472BBC1C6EE2010065A852 /* SeaLayerUndo.m in Sources */,
 				556D76EC24A6A97F003E619D /* BrushExporter.m in Sources */,

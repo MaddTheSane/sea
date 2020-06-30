@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5510695824AB1EDE004C2486 /* SeaLibZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 5510695624AB1EDD004C2486 /* SeaLibZ.m */; };
+		5510695924AB1EDE004C2486 /* SeaLibZ.h in Headers */ = {isa = PBXBuildFile; fileRef = 5510695724AB1EDD004C2486 /* SeaLibZ.h */; };
 		55AAF2A71D36D97900E2ADF9 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 55AAF2A61D36D97900E2ADF9 /* Bitmap.h */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
@@ -33,6 +35,8 @@
 /* Begin PBXFileReference section */
 		089C167EFE841241C02AAC07 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		5510695624AB1EDD004C2486 /* SeaLibZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeaLibZ.m; path = extra/SeaLibZ.m; sourceTree = "<group>"; };
+		5510695724AB1EDD004C2486 /* SeaLibZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeaLibZ.h; path = extra/SeaLibZ.h; sourceTree = "<group>"; };
 		55909E9C18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/schema.strings"; sourceTree = "<group>"; };
 		55909E9D18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		55AAF2A61D36D97900E2ADF9 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bitmap.h; path = extra/Bitmap.h; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 				DC0D53A81041FFB30037378A /* Rects.m */,
 				DC0D53AB1041FFB30037378A /* RLE.h */,
 				DC0D53AA1041FFB30037378A /* RLE.m */,
+				5510695724AB1EDD004C2486 /* SeaLibZ.h */,
+				5510695624AB1EDD004C2486 /* SeaLibZ.m */,
 				DC0D53AC1041FFB30037378A /* SeaContent.h */,
 				DC0D53AD1041FFB30037378A /* SeaContent.m */,
 				DC0D53B01041FFB30037378A /* SeaLayer.h */,
@@ -165,6 +171,7 @@
 				DC0D53BE1041FFB30037378A /* XCFContent.h in Headers */,
 				DC0D53C01041FFB30037378A /* SeaLayer.h in Headers */,
 				DC0D53C21041FFB30037378A /* XCFLayer.h in Headers */,
+				5510695924AB1EDE004C2486 /* SeaLibZ.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +249,7 @@
 				DC0D53BF1041FFB30037378A /* XCFContent.m in Sources */,
 				DC0D53C11041FFB30037378A /* SeaLayer.m in Sources */,
 				DC0D53C31041FFB30037378A /* XCFLayer.m in Sources */,
+				5510695824AB1EDE004C2486 /* SeaLibZ.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

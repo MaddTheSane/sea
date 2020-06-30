@@ -77,8 +77,14 @@
 
 - (IBAction)flatten:(id)sender
 {
+	NSAlert *alert = [[NSAlert alloc] init];
+	alert.messageText = LOCALSTR(@"flatten title", @"Information will be lost");
+	alert.informativeText = LOCALSTR(@"flatten body", @"Parts of the document that are not currently visible will be lost. Are you sure you wish to continue?");
+	[alert addButtonWithTitle:LOCALSTR(@"flatten", @"Flatten")];
+	[alert addButtonWithTitle:LOCALSTR(@"cancel", @"Cancel")];
+
 	// Warn before flattening the image
-	if (NSRunAlertPanel(LOCALSTR(@"flatten title", @"Information will be lost"), @"%@", LOCALSTR(@"flatten", @"Flatten"), LOCALSTR(@"cancel", @"Cancel"), NULL, LOCALSTR(@"flatten body", @"Parts of the document that are not currently visible will be lost. Are you sure you wish to continue?")) == NSAlertDefaultReturn)
+	if ([alert runModal] == NSAlertFirstButtonReturn)
 		[[gCurrentDocument contents] flatten];
 }
 
