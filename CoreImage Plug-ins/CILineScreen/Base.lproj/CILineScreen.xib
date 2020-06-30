@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -162,7 +162,7 @@ Gw
                     <constraint firstItem="39" firstAttribute="baseline" secondItem="40" secondAttribute="baseline" id="WLB-Ox-vbC"/>
                     <constraint firstItem="34" firstAttribute="top" secondItem="33" secondAttribute="bottom" constant="8" symbolic="YES" id="XN3-QN-Oy1"/>
                     <constraint firstItem="33" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="8" symbolic="YES" id="YDz-fK-NEc"/>
-                    <constraint firstItem="7" firstAttribute="width" secondItem="16" secondAttribute="width" id="Yu2-kX-1wg"/>
+                    <constraint firstItem="7" firstAttribute="width" secondItem="16" secondAttribute="width" priority="999" id="Yu2-kX-1wg"/>
                     <constraint firstAttribute="trailing" secondItem="35" secondAttribute="trailing" constant="20" symbolic="YES" id="cFN-xS-03R"/>
                     <constraint firstItem="7" firstAttribute="baseline" secondItem="16" secondAttribute="baseline" id="hly-7g-ESH"/>
                     <constraint firstItem="35" firstAttribute="width" secondItem="21" secondAttribute="width" id="ioH-dF-kxf"/>
@@ -177,6 +177,7 @@ Gw
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="33" secondAttribute="trailing" constant="20" symbolic="YES" id="zm2-nX-b2K"/>
                 </constraints>
             </view>
+            <point key="canvasLocation" x="139" y="147"/>
         </window>
     </objects>
 </document>

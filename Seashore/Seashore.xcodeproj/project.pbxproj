@@ -920,6 +920,13 @@
 			remoteGlobalIDString = B0B5922B20752E980009ECA2;
 			remoteInfo = PocketSVGTests;
 		};
+		5510694524AACAF9004C2486 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5510692A24AA96AE004C2486 /* PocketSVG.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C79800F41A21CDFD00380860;
+			remoteInfo = "PocketSVG (Mac)";
+		};
 		55115C2A1D46D81700E76B5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -1872,10 +1879,10 @@
 		557B939818D77FF8003ABCD6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		557D504918CF9FBA005809E3 /* CIAffineTileClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIAffineTileClass.h; sourceTree = "<group>"; };
 		557D504A18CF9FBA005809E3 /* CIAffineTileClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIAffineTileClass.m; sourceTree = "<group>"; };
-		557D504C18CF9FBA005809E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		557D504C18CF9FBA005809E3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D505218CF9FBA005809E3 /* CIAffineTransformClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIAffineTransformClass.h; sourceTree = "<group>"; };
 		557D505318CF9FBA005809E3 /* CIAffineTransformClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIAffineTransformClass.m; sourceTree = "<group>"; };
-		557D505518CF9FBA005809E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		557D505518CF9FBA005809E3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		557D505B18CF9FBA005809E3 /* CIBloomClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIBloomClass.h; sourceTree = "<group>"; };
 		557D505C18CF9FBA005809E3 /* CIBloomClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIBloomClass.m; sourceTree = "<group>"; };
 		557D506018CF9FBA005809E3 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -5105,6 +5112,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5510694624AACAF9004C2486 /* PBXTargetDependency */,
 				55FD12401C6EF326009FB22C /* PBXTargetDependency */,
 				55FD123E1C6EF321009FB22C /* PBXTargetDependency */,
 			);
@@ -7949,6 +7957,11 @@
 			isa = PBXTargetDependency;
 			target = 55472B7D1C6EDCCA0065A852 /* SeashoreKit */;
 			targetProxy = 5510683B24A961F6004C2486 /* PBXContainerItemProxy */;
+		};
+		5510694624AACAF9004C2486 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "PocketSVG (Mac)";
+			targetProxy = 5510694524AACAF9004C2486 /* PBXContainerItemProxy */;
 		};
 		55115C2B1D46D81700E76B5B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

@@ -103,7 +103,7 @@ public final class SVGImporter: NSObject, SeaImporter {
 	}
 	
 	/// Updates the document's expected size.
-	@IBAction func update(_ sender: AnyObject?) {
+	@IBAction func update(_ sender: Any?) {
 		var factor: Double
 		
 		switch scaleSlider.integerValue {
