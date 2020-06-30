@@ -311,7 +311,7 @@ static inline void fix_endian_read(int *input, size_t size)
 	exifParasite = [self parasiteWithName:@"exif-plist"];
 	if (exifParasite) {
 		exifContainer = [NSData dataWithBytesNoCopy:exifParasite->data length:exifParasite->size freeWhenDone:NO];
-		exifData = [NSPropertyListSerialization propertyListFromData:exifContainer mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:&errorString];
+		exifData = [NSPropertyListSerialization propertyListWithData:exifContainer options:NSPropertyListImmutable format:NULL error:NULL];
 	}
 	[self deleteParasiteWithName:@"exif-plist"];
 	
