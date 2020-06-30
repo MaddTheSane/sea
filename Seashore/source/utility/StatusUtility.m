@@ -20,10 +20,10 @@
 	
 	// This is how you're SUPPOSED to change these things
 	[[channelSelectionPopup itemAtIndex: 0] setTitle: @""];
-	[[channelSelectionPopup itemAtIndex: 0] setImage: [NSImage imageNamed: @"channels-menu"]];
+	[[channelSelectionPopup itemAtIndex: 0] setImage: [NSImage imageNamed: @"channels-menuTemplate"]];
 	// But this is what apparently works in 10.4
 	[channelSelectionPopup setTitle: @""];
-	[channelSelectionPopup setImage: [NSImage imageNamed: @"channels-menu"]];
+	[channelSelectionPopup setImage: [NSImage imageNamed: @"channels-menuTemplate"]];
 	
 	/*
 	 
@@ -82,9 +82,8 @@
 		
 		[channelSelectionPopup selectItemAtIndex:([contents selectedChannel] + 1)];
 		[channelSelectionPopup setEnabled:YES];
-		//trueViewCheckbox.state = [contents trueView] ? NSOnState : NSOffState;
-		[trueViewCheckbox setImage:[NSImage imageNamed:([contents trueView] ? @"trueview-sel" : @"trueview-not" )]];
 		[trueViewCheckbox setEnabled:YES];
+        [trueViewCheckbox setState:[contents trueView]];
 		
 		SeaUnits newUnits = [document measureStyle];
 		NSMutableString *statusString = [NSMutableString string];
@@ -111,8 +110,7 @@
 		[channelSelectionPopup setEnabled:NO];
 		[channelSelectionPopup selectItemAtIndex:0];
 		[trueViewCheckbox setEnabled:NO];
-		//trueViewCheckbox.state = NSOffState;
-		[trueViewCheckbox setImage:[NSImage imageNamed:@"trueview-not"]];
+		trueViewCheckbox.state = NSControlStateValueOff;
 		
 		[dimensionLabel setStringValue:@""];		
 	}

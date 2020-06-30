@@ -124,7 +124,7 @@ DQ
                                             <button toolTip="Zoom to the default zoom level" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="16608">
                                                 <rect key="frame" x="625" y="0.0" width="32" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="normal" imagePosition="only" alignment="center" inset="2" id="16794">
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="normalTemplate" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="16794">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -250,7 +250,7 @@ DQ
                                             <button toolTip="Display all channels when editing the document" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14779">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="trueview-sel" imagePosition="only" alignment="left" alternateImage="trueview-not" imageScaling="proportionallyDown" inset="2" id="16784">
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="trueviewTemplate" imagePosition="only" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="16784">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                     <font key="font" metaFont="system" size="17"/>
                                                 </buttonCell>
@@ -330,7 +330,7 @@ DQ
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
-                                                            <buttonCell key="dataCell" type="bevel" bezelStyle="regularSquare" image="layer-info" imagePosition="left" alignment="left" inset="2" id="15197">
+                                                            <buttonCell key="dataCell" type="bevel" bezelStyle="regularSquare" image="layer-infoTemplate" imagePosition="left" alignment="left" imageScaling="proportionallyDown" inset="2" id="15197">
                                                                 <behavior key="behavior" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
@@ -362,7 +362,7 @@ DQ
                                             <button toolTip="Show or hide point information" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3577">
                                                 <rect key="frame" x="93" y="0.0" width="33" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="hide-info" imagePosition="only" alignment="center" inset="2" id="16783">
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="hide-infoTemplate" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="16783">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -384,7 +384,7 @@ DQ
                                             <button toolTip="Duplicate the currently selected layer" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1614">
                                                 <rect key="frame" x="62" y="0.0" width="32" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="duplicate" imagePosition="only" alignment="center" inset="2" id="16781">
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="duplicateTemplate" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="16781">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -5214,7 +5214,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" ambiguous="YES" id="uIP-Kq-Bgo">
                             <rect key="frame" x="1" y="1" width="246" height="94"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" id="GRr-og-p8w" customClass="NSExtendedTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="246" height="94"/>
@@ -5322,19 +5322,19 @@ DQ
         <image name="circle" width="22" height="22"/>
         <image name="clone" width="22" height="22"/>
         <image name="crop" width="22" height="22"/>
-        <image name="duplicate" width="32" height="23"/>
+        <image name="duplicateTemplate" width="32" height="23"/>
         <image name="effect" width="22" height="22"/>
         <image name="eraser" width="22" height="22"/>
         <image name="eyedrop" width="22" height="22"/>
         <image name="gradient" width="22" height="22"/>
         <image name="help-button" width="15" height="16"/>
-        <image name="hide-info" width="33" height="23"/>
+        <image name="hide-infoTemplate" width="33" height="23"/>
         <image name="info-bg" width="1" height="132"/>
         <image name="lasso" width="22" height="22"/>
-        <image name="layer-info" width="13" height="13"/>
+        <image name="layer-infoTemplate" width="24" height="24"/>
         <image name="left-align" width="18" height="13"/>
         <image name="move" width="22" height="22"/>
-        <image name="normal" width="32" height="23"/>
+        <image name="normalTemplate" width="32" height="23"/>
         <image name="paintbrush" width="22" height="22"/>
         <image name="pencil" width="22" height="22"/>
         <image name="poly-lasso" width="22" height="22"/>
@@ -5342,8 +5342,7 @@ DQ
         <image name="right-align" width="19" height="13"/>
         <image name="smudge" width="22" height="22"/>
         <image name="text" width="22" height="22"/>
-        <image name="trueview-not" width="32" height="23"/>
-        <image name="trueview-sel" width="32" height="23"/>
+        <image name="trueviewTemplate" width="24" height="24"/>
         <image name="wand" width="22" height="22"/>
         <image name="zoom" width="22" height="22"/>
         <namedColor name="SettingsTitleColor">

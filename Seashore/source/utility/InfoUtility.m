@@ -27,7 +27,7 @@
 	[(LayerControlView *)controlView setHasResizeThumb:YES];
 	
 	if(![self visible]){
-		[toggleButton setImage:[NSImage imageNamed:@"show-info"]];
+		[toggleButton setImage:[NSImage imageNamed:@"show-infoTemplate"]];
 	}
 }
 
@@ -50,13 +50,13 @@
 - (IBAction)show:(id)sender
 {
 	[[[document window] contentView] setVisibility: YES forRegion: SeaWindowRegionPointInformation];
-	[toggleButton setImage:[NSImage imageNamed:@"hide-info"]];
+	[toggleButton setImage:[NSImage imageNamed:@"hide-infoTemplate"]];
 }
 
 - (IBAction)hide:(id)sender
 {
 	[[[document window] contentView] setVisibility: NO forRegion: SeaWindowRegionPointInformation];	
-	[toggleButton setImage:[NSImage imageNamed:@"show-info"]];
+	[toggleButton setImage:[NSImage imageNamed:@"show-infoTemplate"]];
 }
 
 - (IBAction)toggle:(id)sender
