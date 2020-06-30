@@ -212,21 +212,20 @@ static BOOL checkRun(NSString *path, NSString *file)
 
 - (void)awakeFromNib
 {
-	id menuItem, submenuItem;
+	NSMenuItem *menuItem, *submenuItem;
 	NSMenu *submenu;
 	id<SeaPluginClass> plugin;
-	int i;
 	
 	// Set up
 	pointPlugins = @[];
 	pointPluginsNames = @[];
 	    
 	// Configure all plug-ins
-	for (i = 0; i < [plugins count] && i < 7500; i++) {
+	for (int i = 0; i < [plugins count] && i < 7500; i++) {
 		plugin = plugins[i];
         
 		// If the plug-in is a basic plug-in add it to the effects menu
-		if ([(id <SeaPluginClass>)plugin type] == SeaPluginBasic) {
+		if ([plugin type] == SeaPluginBasic) {
 			
 			// Add or find group submenu
 			submenuItem = [effectMenu itemWithTitle:[plugin groupName]];
@@ -249,8 +248,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 				[menuItem setTag:i + 10000];
 			}
 			
-		}
-		else if ([(id <SeaPluginClass>)plugin type] == SeaPluginPoint) {
+		} else if ([plugin type] == SeaPluginPoint) {
 			pointPluginsNames = [pointPluginsNames arrayByAddingObject:[NSString stringWithFormat:@"%@ / %@", [plugin groupName], [plugin name]]];
 			pointPlugins = [pointPlugins arrayByAddingObject:plugin];
 		}
@@ -288,7 +286,7 @@ static BOOL checkRun(NSString *path, NSString *file)
 
 - (IBAction)run:(id)sender
 {
-	[(id <SeaPluginClass>)plugins[[sender tag] - 10000] run];
+	[plugins[[sender tag] - 10000] run];
 	lastEffect = [sender tag] - 10000;
 }
 
@@ -340,9 +338,8 @@ static BOOL checkRun(NSString *path, NSString *file)
 
 CIImage *SeaCreateCIImage(PluginData *pluginData)
 {
-    int width = [pluginData width];
+	int width = [pluginData width];
 	int height = [pluginData height];
-	
 	unsigned char *data = [pluginData data];
 	
 	simd_uint4 *vdata;
@@ -372,17 +369,17 @@ CIImage *SeaCreateCIImage(PluginData *pluginData)
 static void SeaConvertImageRep(NSImageRep *imageRep, unsigned char *dest, int width, int height, int spp)
 {
 	NSColorSpaceName csname = NSDeviceRGBColorSpace;
-    if (spp==2) {
-        csname = NSDeviceWhiteColorSpace;
+	if (spp == 2) {
+		csname = NSDeviceWhiteColorSpace;
 	}
 	
 	memset(dest,0,width*height*spp);
-    
-    NSBitmapImageRep *bitmapWhoseFormatIKnow = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&dest pixelsWide:width pixelsHigh:height
-                                                                                    bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO
-                                                                                   colorSpaceName:csname bytesPerRow:width*spp
-                                                                                     bitsPerPixel:8*spp];
-    
+	
+	NSBitmapImageRep *bitmapWhoseFormatIKnow = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&dest pixelsWide:width pixelsHigh:height
+																					bitsPerSample:8 samplesPerPixel:spp hasAlpha:YES isPlanar:NO
+																				   colorSpaceName:csname bytesPerRow:width*spp
+																					 bitsPerPixel:8*spp];
+	
 	NSRect rect = NSMakeRect(0, 0, width, height);
 	
 	[NSGraphicsContext saveGraphicsState];
@@ -396,7 +393,7 @@ static void SeaConvertImageRep(NSImageRep *imageRep, unsigned char *dest, int wi
 
 void SeaRenderCIImage(PluginData *pluginData, CIImage *image)
 {
-    int spp = [pluginData spp];
+	int spp = [pluginData spp];
 	int width = [pluginData width];
 	int height = [pluginData height];
 	IntRect selection = [pluginData selection];
@@ -411,11 +408,10 @@ void SeaRenderCIImage(PluginData *pluginData, CIImage *image)
 	SeaConvertImageRep(imageRep,overlay,width,height,spp);
 	
 	unsigned char *replace = [pluginData replace];
-	int i;
 	
 	// set the replace mask
 	if ((selection.size.width > 0 && selection.size.width < width) || (selection.size.height > 0 && selection.size.height < height)) {
-		for (i = 0; i < selection.size.height; i++) {
+		for (int i = 0; i < selection.size.height; i++) {
 			memset(&(replace[width * (selection.origin.y + i) + selection.origin.x]), 0xFF, selection.size.width);
 		}
 	} else {
