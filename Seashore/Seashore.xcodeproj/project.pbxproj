@@ -920,6 +920,13 @@
 			remoteGlobalIDString = B0B5922B20752E980009ECA2;
 			remoteInfo = PocketSVGTests;
 		};
+		5510694524AACAF9004C2486 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5510692A24AA96AE004C2486 /* PocketSVG.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C79800F41A21CDFD00380860;
+			remoteInfo = "PocketSVG (Mac)";
+		};
 		55115C2A1D46D81700E76B5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -5105,6 +5112,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5510694624AACAF9004C2486 /* PBXTargetDependency */,
 				55FD12401C6EF326009FB22C /* PBXTargetDependency */,
 				55FD123E1C6EF321009FB22C /* PBXTargetDependency */,
 			);
@@ -7949,6 +7957,11 @@
 			isa = PBXTargetDependency;
 			target = 55472B7D1C6EDCCA0065A852 /* SeashoreKit */;
 			targetProxy = 5510683B24A961F6004C2486 /* PBXContainerItemProxy */;
+		};
+		5510694624AACAF9004C2486 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "PocketSVG (Mac)";
+			targetProxy = 5510694524AACAF9004C2486 /* PBXContainerItemProxy */;
 		};
 		55115C2B1D46D81700E76B5B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
