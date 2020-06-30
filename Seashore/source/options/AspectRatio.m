@@ -106,7 +106,9 @@
 	
 	[panel center];
 	[panel makeFirstResponder:xRatioValue];
-	[NSApp beginSheet:panel modalForWindow:[document window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
+	[document.window beginSheet:panel completionHandler:^(NSModalResponse returnCode) {
+		
+	}];
 }
 
 - (IBAction)applyCustomItem:(id)sender
@@ -144,7 +146,7 @@
 
 	}
 	[NSApp stopModal];
-	[NSApp endSheet:panel];
+	[document.window endSheet:panel returnCode:NSModalResponseOK];
 	[panel orderOut:self];
 	[ratioPopup selectItemAtIndex:customItemIndex];
 }

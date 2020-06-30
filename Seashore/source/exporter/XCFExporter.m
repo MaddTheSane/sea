@@ -410,7 +410,7 @@ static inline void fix_endian_write(int *input, int size)
 	FILE *file;
 	NSInteger i, offsetPos, oldPos, layerCount;
 	ParasiteData exifParasite;
-	NSString *errorString;
+	NSError *errorString;
 	NSData *exifContainer;
 	
 	// Remember the document
@@ -420,7 +420,7 @@ static inline void fix_endian_write(int *input, int size)
 		
 	// Add EXIF parasite
 	if ([[document contents] exifData]) {
-		exifContainer = [NSPropertyListSerialization dataFromPropertyList:[[document contents] exifData] format:NSPropertyListXMLFormat_v1_0 errorDescription:&errorString];
+		exifContainer = [NSPropertyListSerialization dataWithPropertyList:[[document contents] exifData] format:NSPropertyListXMLFormat_v1_0 options:0 error:&errorString];
 		if (exifContainer) {
 			exifParasite.name = CFSTR("exif-plist");
 			exifParasite.flags = 0;

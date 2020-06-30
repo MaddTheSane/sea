@@ -105,12 +105,14 @@
 	[interpolationPopup selectItemAtIndex:value];
 	
 	// Show the sheet
-	[NSApp beginSheet:sheet modalForWindow:[document window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
+	[document.window beginSheet:sheet completionHandler:^(NSModalResponse returnCode) {
+		
+	}];
 }
 
 - (IBAction)apply:(id)sender
 {
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 	int newWidth, newHeight;
 	float xres, yres;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -121,7 +123,7 @@
 	
 	// End the sheet
 	[NSApp stopModal];
-	[NSApp endSheet:sheet];
+	[document.window endSheet:sheet returnCode:NSModalResponseOK];
 	[sheet orderOut:self];
 	[defaults setInteger:[interpolationPopup indexOfSelectedItem] forKey:@"interpolation"];
 
@@ -133,10 +135,10 @@
 	if (newWidth < kMinImageSize || newWidth > kMaxImageSize) { NSBeep(); return; }
 	if (newHeight < kMinImageSize || newHeight > kMaxImageSize) { NSBeep(); return; }
 	if (workingIndex == kAllLayers) {
-		if (newWidth == [(SeaContent *)contents width] && newHeight == [(SeaContent *)contents height]) { return; }
+		if (newWidth == [contents width] && newHeight == [contents height]) { return; }
 	}
 	else {
-		if (newWidth == [(SeaContent *)[contents activeLayer] width] && newHeight == [(SeaContent *)[contents activeLayer] height]) { return; }
+		if (newWidth == [[contents activeLayer] width] && newHeight == [[contents activeLayer] height]) { return; }
 	}
 	
 	// Make the changes
@@ -146,7 +148,7 @@
 - (IBAction)cancel:(id)sender
 {
 	[NSApp stopModal];
-	[NSApp endSheet:sheet];
+	[document.window endSheet:sheet returnCode:NSModalResponseCancel];
 	[sheet orderOut:self];
 }
 

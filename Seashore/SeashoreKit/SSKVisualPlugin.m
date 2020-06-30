@@ -40,7 +40,7 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	[NSApp endSheet:panel];
+	[pluginData.window endSheet:panel];
 	[panel orderOut:self];
 	success = NO;	
 }

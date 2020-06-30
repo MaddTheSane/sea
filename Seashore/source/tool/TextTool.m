@@ -46,7 +46,9 @@ NSFont *gNewFont;
 	[panel setAlphaValue:0.6];
 	[movePanel setAlphaValue:0.6];
 	[self preview:NULL];
-	[NSApp beginSheet:panel modalForWindow:[document window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
+	[document.window beginSheet:panel completionHandler:^(NSModalResponse returnCode) {
+		
+	}];
 }
 
 - (IntRect)drawOverlay
@@ -100,10 +102,10 @@ NSFont *gNewFont;
 	
 	// Determine the position
 	switch([options alignment]){
-		case NSRightTextAlignment:
+		case NSTextAlignmentRight:
 			pos.x = where.x - fontSize.width;
 			break;
-		case NSCenterTextAlignment:
+		case NSTextAlignmentCenter:
 			pos.x = where.x - (int)round(fontSize.width / 2);
 			break;
 		default:
@@ -200,7 +202,7 @@ NSFont *gNewFont;
 	// End the panel
 	if (sender != NULL) {
 		[NSApp stopModal];
-		[NSApp endSheet:panel];
+		[document.window endSheet:panel];
 		[panel orderOut:self];
 	}
 	running = NO;
@@ -209,7 +211,7 @@ NSFont *gNewFont;
 	[[document whiteboard] clearOverlay];
 	if ([[[textbox textStorage] string] length] > 0) {
 		[self drawOverlay];
-		[(SeaHelpers *)[document helpers] applyOverlay];
+		[[document helpers] applyOverlay];
 	}
 }
 
@@ -222,7 +224,7 @@ NSFont *gNewFont;
 	}
 	running = NO;
 	[NSApp stopModal];
-	[NSApp endSheet:panel];
+	[document.window endSheet:panel];
 	[panel orderOut:self];
 }
 
@@ -254,15 +256,17 @@ NSFont *gNewFont;
 - (IBAction)move:(id)sender
 {
 	[NSApp stopModal];
-	[NSApp endSheet:panel];
+	[document.window endSheet:panel];
 	[panel orderOut:self];
-	[NSApp beginSheet:movePanel modalForWindow:[document window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
+	[document.window beginSheet:movePanel completionHandler:^(NSModalResponse returnCode) {
+		
+	}];
 }
 
 - (IBAction)doneMove:(id)sender
 {
 	[NSApp stopModal];
-	[NSApp endSheet:movePanel];
+	[document.window endSheet:movePanel];
 	[movePanel orderOut:self];
 	[self apply:NULL];
 }
@@ -270,9 +274,11 @@ NSFont *gNewFont;
 - (IBAction)cancelMove:(id)sender
 {
 	[NSApp stopModal];
-	[NSApp endSheet:movePanel];
+	[document.window endSheet:movePanel];
 	[movePanel orderOut:self];
-	[NSApp beginSheet:panel modalForWindow:[document window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
+	[document.window beginSheet:panel completionHandler:^(NSModalResponse returnCode) {
+		
+	}];
 }
 
 - (void)setNudge:(IntPoint)nudge
