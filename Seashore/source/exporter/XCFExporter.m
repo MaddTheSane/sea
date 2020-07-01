@@ -304,7 +304,7 @@ static inline void fix_endian_write(int *input, int size)
 	// Allocate memory for the tile data, point to the total data
 	tileData = malloc(XCF_TILE_HEIGHT * XCF_TILE_WIDTH * spp);
 	compressedTileData = malloc(XCF_TILE_HEIGHT * XCF_TILE_WIDTH * spp * 1.3 + 1);
-	totalData = [(SeaLayer *)layer data];
+	totalData = [layer data];
 	
 	// Write in our default tile height and width
 	tempIntString[0] = width;
