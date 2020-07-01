@@ -103,17 +103,17 @@
 {
 	switch ([alignmentControl selectedSegment]) {
 		case 0:
-			return NSLeftTextAlignment;
-		break;
+			return NSTextAlignmentLeft;
+			break;
 		case 1:
-			return NSCenterTextAlignment;
-		break;
+			return NSTextAlignmentCenter;
+			break;
 		case 2:
-			return NSRightTextAlignment;
-		break;
+			return NSTextAlignmentRight;
+			break;
 	}
 	
-	return NSLeftTextAlignment;
+	return NSTextAlignmentLeft;
 }
 
 - (int)outline

@@ -31,7 +31,9 @@ extern IntPoint SeaScreenResolution;
 	[preserveSize setState:NSOffState];
 	
 	// Show the sheet
-	[NSApp beginSheet:sheet modalForWindow:[document window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
+	[document.window beginSheet:sheet completionHandler:^(NSModalResponse returnCode) {
+		
+	}];
 }
 
 - (IBAction)apply:(id)sender
@@ -45,7 +47,7 @@ extern IntPoint SeaScreenResolution;
 	
 	// End the sheet
 	[NSApp stopModal];
-	[NSApp endSheet:sheet];
+	[document.window endSheet:sheet returnCode:NSModalResponseOK];
 	[sheet orderOut:self];
 	
 	// Don't do if values are unreasonable or unchanged
@@ -60,14 +62,14 @@ extern IntPoint SeaScreenResolution;
 	}
 	
 	// Make the changes
-	if ([preserveSize state]) [seaScale scaleToWidth:[(SeaContent *)contents width] * ((float)newRes.x / (float)[contents xres]) height:[(SeaContent *)contents height] * ((float)newRes.y / (float)[contents yres]) interpolation:GIMP_INTERPOLATION_CUBIC index:kAllLayers];
+	if ([preserveSize state]) [seaScale scaleToWidth:[contents width] * ((float)newRes.x / (float)[contents xres]) height:[contents height] * ((float)newRes.y / (float)[contents yres]) interpolation:GIMP_INTERPOLATION_CUBIC index:kAllLayers];
 	[self setResolution:newRes];
 }
 
 - (IBAction)cancel:(id)sender
 {
 	[NSApp stopModal];
-	[NSApp endSheet:sheet];
+	[document.window endSheet:sheet returnCode:NSModalResponseCancel];
 	[sheet orderOut:self];
 }
 

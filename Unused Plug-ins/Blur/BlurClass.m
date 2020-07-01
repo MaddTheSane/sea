@@ -66,9 +66,11 @@
 	
 	success = NO;
 	pluginData = [seaPlugins data];
-	if ([pluginData window])
-		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
-	else
+	if ([pluginData window]) {
+		[[pluginData window] beginSheet:panel completionHandler:^(NSModalResponse returnCode) {
+			
+		}];
+	} else
 		[NSApp runModalForWindow:panel];
 }
 
@@ -83,7 +85,7 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	if ([pluginData window]) [NSApp endSheet:panel];
+	if ([pluginData window]) [pluginData.window endSheet:panel];
 	[panel orderOut:self];
 	success = YES;
 	
@@ -125,7 +127,7 @@
 	[panel setAlphaValue:1.0];
 	
 	[NSApp stopModal];
-	[NSApp endSheet:panel];
+	[pluginData.window endSheet:panel];
 	[panel orderOut:self];
 	success = NO;
 }

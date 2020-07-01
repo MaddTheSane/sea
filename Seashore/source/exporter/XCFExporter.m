@@ -51,15 +51,14 @@ static inline void fix_endian_write(int *input, int size)
 
 - (BOOL)writeHeader:(FILE *)file
 {
-	int i;
-	id contents = [document contents];
+	SeaContent *contents = [document contents];
 	
 	// Start with lowest version possible
 	version = 0;
 		
 	// Determine if file must be version 2 - we don't match exactly with 1.3.x but I think we have it correct
-	for (i = 0; i < [contents layerCount]; i++) {
-		switch ([(SeaLayer *)[contents layerAtIndex:i] mode]) {
+	for (NSInteger i = 0; i < [contents layerCount]; i++) {
+		switch ([[contents layerAtIndex:i] mode]) {
 			case XCF_DODGE_MODE:
 			case XCF_BURN_MODE:
 			case XCF_HARDLIGHT_MODE:
@@ -86,9 +85,9 @@ static inline void fix_endian_write(int *input, int size)
 	}
 	
 	// Write the width, height and type to file
-	tempIntString[0] = [(SeaContent *)contents width];
-	tempIntString[1] = [(SeaContent *)contents height];
-	tempIntString[2] = [(SeaContent *)contents type];
+	tempIntString[0] = [contents width];
+	tempIntString[1] = [contents height];
+	tempIntString[2] = [contents type];
 	fix_endian_write(tempIntString, 3);
 	fwrite(tempIntString, sizeof(int), 3, file);
 	
@@ -305,7 +304,7 @@ static inline void fix_endian_write(int *input, int size)
 	// Allocate memory for the tile data, point to the total data
 	tileData = malloc(XCF_TILE_HEIGHT * XCF_TILE_WIDTH * spp);
 	compressedTileData = malloc(XCF_TILE_HEIGHT * XCF_TILE_WIDTH * spp * 1.3 + 1);
-	totalData = [(SeaLayer *)layer data];
+	totalData = [layer data];
 	
 	// Write in our default tile height and width
 	tempIntString[0] = width;
@@ -410,7 +409,7 @@ static inline void fix_endian_write(int *input, int size)
 	FILE *file;
 	NSInteger i, offsetPos, oldPos, layerCount;
 	ParasiteData exifParasite;
-	NSString *errorString;
+	NSError *errorString;
 	NSData *exifContainer;
 	
 	// Remember the document
@@ -420,7 +419,7 @@ static inline void fix_endian_write(int *input, int size)
 		
 	// Add EXIF parasite
 	if ([[document contents] exifData]) {
-		exifContainer = [NSPropertyListSerialization dataFromPropertyList:[[document contents] exifData] format:NSPropertyListXMLFormat_v1_0 errorDescription:&errorString];
+		exifContainer = [NSPropertyListSerialization dataWithPropertyList:[[document contents] exifData] format:NSPropertyListXMLFormat_v1_0 options:0 error:&errorString];
 		if (exifContainer) {
 			exifParasite.name = CFSTR("exif-plist");
 			exifParasite.flags = 0;

@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "normal.png",
+      "filename" : "duplicateTemplate.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "duplicateTemplate@2x.png",
       "scale" : "2x"
     },
     {
@@ -17,5 +18,8 @@
   "info" : {
     "version" : 1,
     "author" : "xcode"
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
   }
 }

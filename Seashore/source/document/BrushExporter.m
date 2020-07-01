@@ -23,7 +23,9 @@ enum {
 
 - (IBAction)exportAsBrush:(id)sender
 {
-	[NSApp beginSheet:sheet modalForWindow:[document window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
+	[document.window beginSheet:sheet completionHandler:^(NSModalResponse returnCode) {
+		
+	}];
 }
 
 - (IBAction)apply:(id)sender
@@ -36,7 +38,7 @@ enum {
 	
 	// End the sheet
 	[NSApp stopModal];
-	[NSApp endSheet:sheet];
+	[document.window endSheet:sheet];
 	[sheet orderOut:self];
 	
 	NSString *path = [[[[gFileManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:NULL] URLByAppendingPathComponent:@"Seashore"] URLByAppendingPathComponent:@"brushes" isDirectory:YES] path];
@@ -62,7 +64,7 @@ enum {
 - (IBAction)cancel:(id)sender
 {
 	[NSApp stopModal];
-	[NSApp endSheet:sheet];
+	[document.window endSheet:sheet];
 	[sheet orderOut:self];
 }
 

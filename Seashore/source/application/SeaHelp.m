@@ -56,19 +56,30 @@
 		newest_version = [dict[@"current version"] intValue];
 		if (newest_version > installed_version) {
 			download_url = [NSURL URLWithString:dict[@"url"]];
-			if (NSRunAlertPanel(LOCALSTR(@"download available title", @"Update available"), @"%@", LOCALSTR(@"download now", @"Download now"), LOCALSTR(@"download later", @"Download later"), NULL, LOCALSTR(@"download available body", @"An updated version of Seashore is now availble for download.")) == NSAlertDefaultReturn) {
+			NSAlert *alert = [[NSAlert alloc] init];
+			alert.messageText = LOCALSTR(@"download available title", @"Update available");
+			alert.informativeText = LOCALSTR(@"download available body", @"An updated version of Seashore is now availble for download.");
+			[alert addButtonWithTitle:LOCALSTR(@"download now", @"Download now")];
+			[[alert addButtonWithTitle:LOCALSTR(@"download later", @"Download later")] setKeyEquivalent:@"\x1b"];
+			if ([alert runModal] == NSAlertFirstButtonReturn) {
 				[[NSWorkspace sharedWorkspace] openURL:download_url];
 			}
 		}
 		else {
 			if (adviseFailure) {
-				NSRunAlertPanel(LOCALSTR(@"up-to-date title", @"Seashore up-to-date"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"up-to-date body", @"Seashore is up-to-date."));
+				NSAlert *alert = [[NSAlert alloc] init];
+				alert.messageText = LOCALSTR(@"up-to-date title", @"Seashore up-to-date");
+				alert.informativeText = LOCALSTR(@"up-to-date body", @"Seashore is up-to-date.");
+				[alert runModal];
 			}
 		}
 	}
 	else {
 		if (adviseFailure) {
-			NSRunAlertPanel(LOCALSTR(@"download error title", @"Download error"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"download error body", @"The file required to check if Seashore cannot be downloaded from the Internet. Please check your Internet connection and try again."));
+			NSAlert *alert = [[NSAlert alloc] init];
+			alert.messageText = LOCALSTR(@"download error title", @"Download error");
+			alert.informativeText = LOCALSTR(@"download error body", @"The file required to check if Seashore cannot be downloaded from the Internet. Please check your Internet connection and try again.");
+			[alert runModal];
 		}
 	}
 }

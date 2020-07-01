@@ -568,7 +568,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[openPanel beginSheetModalForWindow:[document window] completionHandler:^(NSInteger result) {
 		NSArray<NSURL*> *filenames = [openPanel URLs];
 		
-		if (result == NSOKButton) {
+		if (result == NSModalResponseOK) {
 			for (NSURL *aURL in filenames) {
 				[self importLayerFromURL:aURL error:NULL];
 			}

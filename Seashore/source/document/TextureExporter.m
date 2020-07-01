@@ -18,7 +18,9 @@ NS_ENUM(int) {
 
 - (IBAction)exportAsTexture:(id)sender
 {
-	[NSApp beginSheet:sheet modalForWindow:[document window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
+	[document.window beginSheet:sheet completionHandler:^(NSModalResponse returnCode) {
+		
+	}];
 }
 
 - (IBAction)apply:(id)sender
@@ -28,7 +30,7 @@ NS_ENUM(int) {
 
 	// End the sheet
 	[NSApp stopModal];
-	[NSApp endSheet:sheet];
+	[document.window endSheet:sheet];
 	[sheet orderOut:self];
 	
 	// Determine the path
@@ -55,7 +57,7 @@ NS_ENUM(int) {
 - (IBAction)cancel:(id)sender
 {
 	[NSApp stopModal];
-	[NSApp endSheet:sheet];
+	[document.window endSheet:sheet];
 	[sheet orderOut:self];
 }
 
@@ -77,13 +79,13 @@ NS_ENUM(int) {
 			[newCategoryRadio setState:NSOffState];
 			[categoryTable setEnabled:YES];
 			[categoryTextbox setEnabled:NO];
-		break;
+			break;
 		case kNewCategoryButton:
 			[existingCategoryRadio setState:NSOffState];
 			[newCategoryRadio setState:NSOnState];
 			[categoryTable setEnabled:NO];
 			[categoryTextbox setEnabled:YES];
-		break;
+			break;
 	}
 }
 

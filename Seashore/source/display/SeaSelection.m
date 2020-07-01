@@ -893,7 +893,10 @@
 		}
 		if (containsNothing) {
 			free(data);
-			NSRunAlertPanel(LOCALSTR(@"empty selection copy title", @"Selection empty"), @"%@", LOCALSTR(@"ok", @"OK"), NULL, NULL, LOCALSTR(@"empty selection copy body", @"The selection cannot be copied since it is empty."));
+			NSAlert *alert = [[NSAlert alloc] init];
+			alert.messageText = LOCALSTR(@"empty selection copy title", @"Selection empty");
+			alert.informativeText = LOCALSTR(@"empty selection copy body", @"The selection cannot be copied since it is empty.");
+			[alert runModal];
 			return;
 		}
 		

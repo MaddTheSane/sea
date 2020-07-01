@@ -61,9 +61,11 @@
 	newdata = malloc(make_128([pluginData width] * [pluginData height] * 4));
 	//}
 	[self preview:self];
-	if ([pluginData window])
-		[NSApp beginSheet:panel modalForWindow:[pluginData window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
-	else
+	if ([pluginData window]) {
+		[[pluginData window] beginSheet:panel completionHandler:^(NSModalResponse returnCode) {
+			
+		}];
+	} else
 		[NSApp runModalForWindow:panel];
 	// Nothing to go here
 }
@@ -127,7 +129,7 @@
 	
 	[openPanel beginSheetModalForWindow:[pluginData window] ? [pluginData window] : self.panel completionHandler:^(NSInteger result) {
 		[self.panel setAlphaValue:1.0];
-		if (result == NSOKButton) {
+		if (result == NSModalResponseOK) {
 			NSURL *fileURL = [openPanel URL];
 			self.texturePath = [fileURL path];
 			NSString *localStr = [gOurBundle localizedStringForKey:@"texture label" value:@"Texture: %@" table:NULL];

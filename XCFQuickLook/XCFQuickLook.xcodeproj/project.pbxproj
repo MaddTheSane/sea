@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2C05A19C06CAA52B00D84F6F /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.m */; };
+		5510695C24AB1F11004C2486 /* SeaLibZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 5510695A24AB1F11004C2486 /* SeaLibZ.m */; };
+		5510695D24AB1F11004C2486 /* SeaLibZ.h in Headers */ = {isa = PBXBuildFile; fileRef = 5510695B24AB1F11004C2486 /* SeaLibZ.h */; };
 		61E3BCFB0870B4F2002186A0 /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */; };
 		8D576312048677EA00EA77CD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B6FE84183AC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
@@ -47,6 +49,8 @@
 		08FB77B6FE84183AC02AAC07 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; usesTabs = 0; };
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
+		5510695A24AB1F11004C2486 /* SeaLibZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeaLibZ.m; path = extra/SeaLibZ.m; sourceTree = "<group>"; };
+		5510695B24AB1F11004C2486 /* SeaLibZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeaLibZ.h; path = extra/SeaLibZ.h; sourceTree = "<group>"; };
 		554B76E71D37079900269BCC /* QuickLook.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = QuickLook.exp; sourceTree = "<group>"; };
 		558A003D1E1AD35B00739585 /* GenerateThumb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenerateThumb.h; sourceTree = "<group>"; };
 		55909E9B18CFEEB000F43F90 /* en-GB */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				DC0E91381041DD3F00C3FC48 /* Rects.m */,
 				DC0E913B1041DD3F00C3FC48 /* RLE.h */,
 				DC0E913A1041DD3F00C3FC48 /* RLE.m */,
+				5510695B24AB1F11004C2486 /* SeaLibZ.h */,
+				5510695A24AB1F11004C2486 /* SeaLibZ.m */,
 				DC0E91481041DD3F00C3FC48 /* SeaCompositor.h */,
 				DC0E91491041DD3F00C3FC48 /* SeaCompositor.m */,
 				DC0E913C1041DD3F00C3FC48 /* SeaContent.h */,
@@ -204,6 +210,7 @@
 				DC0E91601041DD3F00C3FC48 /* SeaCompositor.h in Headers */,
 				DC0E91621041DD3F00C3FC48 /* Bitmap.h in Headers */,
 				DC0E91641041DD3F00C3FC48 /* SeaWhiteboard.h in Headers */,
+				5510695D24AB1F11004C2486 /* SeaLibZ.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +294,7 @@
 				DC0E91611041DD3F00C3FC48 /* SeaCompositor.m in Sources */,
 				DC0E91631041DD3F00C3FC48 /* Bitmap.m in Sources */,
 				DC0E91651041DD3F00C3FC48 /* SeaWhiteboard.m in Sources */,
+				5510695C24AB1F11004C2486 /* SeaLibZ.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

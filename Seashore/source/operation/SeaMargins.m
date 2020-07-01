@@ -186,7 +186,9 @@
 	[self marginsChanged:NULL];
 
 	// Show the sheet
-	[NSApp beginSheet:sheet modalForWindow:[document window] modalDelegate:NULL didEndSelector:NULL contextInfo:NULL];
+	[document.window beginSheet:sheet completionHandler:^(NSModalResponse returnCode) {
+		
+	}];
 }
 
 - (IBAction)apply:(id)sender
@@ -200,7 +202,7 @@
 	
 	// End the sheet
 	[NSApp stopModal];
-	[NSApp endSheet:sheet];
+	[document.window endSheet:sheet returnCode:NSModalResponseOK];
 	[sheet orderOut:self];
 	
 	// Find the resolution
@@ -259,7 +261,7 @@
 - (IBAction)cancel:(id)sender
 {
 	[NSApp stopModal];
-	[NSApp endSheet:sheet];
+	[document.window endSheet:sheet returnCode:NSModalResponseCancel];
 	[sheet orderOut:self];
 }
 

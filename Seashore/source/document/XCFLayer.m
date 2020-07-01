@@ -1,5 +1,6 @@
 #import "XCFLayer.h"
 #import "RLE.h"
+#import "SeaLibZ.h"
 #include <zlib.h>
 
 @implementation XCFLayer
@@ -296,9 +297,20 @@ static inline void fix_endian_read(int *input, size_t size)
 					break;
 					
 				case COMPRESS_ZLIB:
+#if 0
+					srcData = malloc(expectedSize * 1.3 + 1);
+					srcSize = fread(srcData, sizeof(char), expectedSize * 1.3 + 1, file);
+					if (!SeaZDecompress(tileData, srcData, srcSize, tileWidth, tileHeight, srcSPP)) {
+						NSLog(@"zlib decompression failed (pixels)");
+						free(srcData); free(tileData); free(totalData);
+						return NULL;
+					}
+					free(srcData);
+#else
 					NSLog(@"xcf: zlib compression unimplemented");
 					free(tileData); free(totalData);
 					return NULL;
+#endif
 					break;
 					
 				case COMPRESS_FRACTAL:
@@ -436,10 +448,24 @@ static inline void fix_endian_read(int *input, size_t size)
 					break;
 					
 				case COMPRESS_ZLIB:
+#if 0
+					srcData = malloc(expectedSize * 1.3 + 1);
+					srcSize = fread(srcData, sizeof(char), expectedSize * 1.3 + 1, file);
+					if (!SeaZDecompress(tileData, srcData, (int)srcSize, tileWidth, tileHeight, 1)) {
+						// NSRunAlertPanel(@"RLE decompression failed", @"The RLE decompression of a certain part of this file failed, this could be due to an incomplete or corrupted XCF file. As such this file cannot be properly loaded.", @"OK", NULL, NULL);
+						NSLog(@"zlib decompression failed (mask)");
+						free(srcData); free(tileData); free(totalData);
+						return NO;
+					}
+					free(srcData);
+					break;
+
+#else
 					NSLog(@"xcf: zlib compression unimplemented");
 					free(tileData); free(totalData);
 					return NO;
 					break;
+#endif
 					
 				case COMPRESS_FRACTAL:
 					NSLog (@"xcf: fractal compression unimplemented");

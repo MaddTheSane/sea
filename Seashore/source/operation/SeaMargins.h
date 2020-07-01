@@ -76,7 +76,7 @@ enum {
 	
 	// The document and sheet associated with this object
     IBOutlet SeaDocument *document;
-    IBOutlet id sheet;
+    IBOutlet NSWindow *sheet;
 	IBOutlet id box;
 	
 	// The working index associated with this object

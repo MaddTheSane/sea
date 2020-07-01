@@ -170,7 +170,7 @@
 			[buttonCell setImage:[NSImage imageNamed:@"unchecked"]];
 		}
 	}else if([[tableColumn identifier] isEqualToString:INFO_BUTTON_COL]){
-		[(NSButtonCell *)cell setImage:[NSImage imageNamed:@"layer-info"]];
+		[(NSButtonCell *)cell setImage:[NSImage imageNamed:@"layer-infoTemplate"]];
 	}else{
 		NSLog(@"Will display cell for unkown column %@", tableColumn);
 	}
