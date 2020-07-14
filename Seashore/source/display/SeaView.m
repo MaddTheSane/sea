@@ -1833,6 +1833,14 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 		//}
 		
 		// Accept files as new layers
+		if ([[pboard types] containsObject:(__bridge NSString*)kUTTypeFileURL]) {
+            NSArray<NSURL*> *filePaths = [pboard readObjectsForClasses:@[[NSURL class]] options:@{NSPasteboardURLReadingFileURLsOnlyKey: @YES}];
+			success = YES;
+			for (NSURL *file in filePaths)
+				success = success && [[document contents] importLayerFromURL:file error:NULL];
+			return success;
+		}
+
 		if ([[pboard types] containsObject:NSFilenamesPboardType]) {
 			files = [pboard propertyListForType:NSFilenamesPboardType];
 			success = YES;
@@ -1862,9 +1870,9 @@ static NSString*	SelectAlphaToolbarItemIdentifier = @"Select Alpha Toolbar Item 
 	// Set up the rulers for the new settings
 	switch ([document measureStyle]) {
 		case kPixelUnits:
-			[NSRulerView registerUnitWithName:@"Custom Horizontal Pixels" abbreviation:@"px" unitToPointsConversionFactor:((float)[[document contents] xres] / 72.0) * zoom stepUpCycle:@[@10.0f] stepDownCycle:@[@0.5f]];
+			[NSRulerView registerUnitWithName:@"Custom Horizontal Pixels" abbreviation:@"px" unitToPointsConversionFactor:((CGFloat)[[document contents] xres] / 72.0) * zoom stepUpCycle:@[@10.0f] stepDownCycle:@[@0.5f]];
 			[horizontalRuler setMeasurementUnits:@"Custom Horizontal Pixels"];
-			[NSRulerView registerUnitWithName:@"Custom Vertical Pixels" abbreviation:@"px" unitToPointsConversionFactor:((float)[[document contents] yres] / 72.0) * zoom stepUpCycle:@[@10.0f] stepDownCycle:@[@0.5f]];
+			[NSRulerView registerUnitWithName:@"Custom Vertical Pixels" abbreviation:@"px" unitToPointsConversionFactor:((CGFloat)[[document contents] yres] / 72.0) * zoom stepUpCycle:@[@10.0f] stepDownCycle:@[@0.5f]];
 			[verticalRuler setMeasurementUnits:@"Custom Vertical Pixels"];
 		break;
 		case kInchUnits:
