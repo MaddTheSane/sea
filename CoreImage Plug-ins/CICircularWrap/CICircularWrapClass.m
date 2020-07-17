@@ -4,6 +4,12 @@
 #include <simd/simd.h>
 #import "CICircularWrapClass.h"
 
+#if defined(__i386__) || defined(__x86_64__)
+typedef __m128i simd_type;
+#else
+typedef simd_uint4 simd_type;
+#endif
+
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -138,7 +144,7 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-	simd_uint4 *vdata;
+	simd_type *vdata;
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -162,11 +168,17 @@
 	data = [pluginData data];
 	overlay = [pluginData overlay];
 	replace = [pluginData replace];
-	vdata = (simd_uint4 *)data;
+	vdata = (simd_type *)data;
 	for (size_t i = 0; i < vec_len; i++) {
+#if defined(__i386__) || defined(__x86_64__)
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
+		vdata[i] = _mm_slli_epi32(vdata[i], 8);
+		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+#else
 		simd_uint4 vstore = (vdata[i] >> 24) & 0xFF;
 		vdata[i] = (vdata[i] << 8) & 0xFFFFFF00;
 		vdata[i] = vdata[i] | vstore;
+#endif
 	}
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
@@ -175,9 +187,15 @@
 	}
 	@catch (NSException *exception) {
 		for (size_t i = 0; i < vec_len; i++) {
+#if defined(__i386__) || defined(__x86_64__)
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
+			vdata[i] = _mm_srli_epi32(vdata[i], 8);
+			vdata[i] = _mm_add_epi32(vdata[i], vstore);
+#else
 			simd_uint4 vstore = (vdata[i] << 24) & 0xFF000000;
 			vdata[i] = (vdata[i] >> 8) & 0x00FFFFFF;
 			vdata[i] = vdata[i] | vstore;
+#endif
 		}
 		NSLog(@"%@", [exception reason]);
 		return;
@@ -185,9 +203,15 @@
 
 	// Convert from ARGB to RGBA
 	for (size_t i = 0; i < vec_len; i++) {
+#if defined(__i386__) || defined(__x86_64__)
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
+		vdata[i] = _mm_srli_epi32(vdata[i], 8);
+		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+#else
 		simd_uint4 vstore = (vdata[i] << 24) & 0xFF000000;
 		vdata[i] = (vdata[i] >> 8) & 0x00FFFFFF;
 		vdata[i] = vdata[i] | vstore;
+#endif
 	}
 	
 	// Copy to destination

@@ -233,9 +233,9 @@ typedef simd_uint4 simd_type;
 	IntRect selection;
 	simd_type *vdata, *nvdata, *rvdata;
 #if defined(__i386__) || defined(__x86_64__)
+	__m128i orvmask;
 	{
 		unsigned char ormask[16];
-		__m128i orvmask;
 		for (short i = 0; i < 16; i++) {
 			ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
 		}

@@ -8,6 +8,12 @@
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 #define make_128(x) (x + 16 - (x % 16))
 
+#if defined(__i386__) || defined(__x86_64__)
+typedef __m128i simd_type;
+#else
+typedef simd_uint4 simd_type;
+#endif
+
 @implementation CIGaussianBlurClass
 @synthesize radius;
 

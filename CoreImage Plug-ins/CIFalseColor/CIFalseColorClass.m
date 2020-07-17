@@ -4,6 +4,12 @@
 #include <simd/simd.h>
 #import "CIFalseColorClass.h"
 
+#if defined(__i386__) || defined(__x86_64__)
+typedef __m128i simd_type;
+#else
+typedef simd_uint4 simd_type;
+#endif
+
 #define gOurBundle [NSBundle bundleForClass:[self class]]
 #define make_128(x) (x + 16 - (x % 16))
 
@@ -125,7 +131,7 @@
 
 - (void)executeColor:(PluginData *)pluginData
 {
-	simd_uint4 *vdata;
+	simd_type *vdata;
 	IntRect selection;
 	int width, height;
 	unsigned char *data, *resdata, *overlay, *replace;
@@ -151,11 +157,17 @@
 	replace = [pluginData replace];
 	
 	// Convert from RGBA to ARGB
-	vdata = (simd_uint4 *)data;
+	vdata = (simd_type *)data;
 	for (size_t i = 0; i < vec_len; i++) {
+#if defined(__i386__) || defined(__x86_64__)
+		__m128i vstore = _mm_srli_epi32(vdata[i], 24);
+		vdata[i] = _mm_slli_epi32(vdata[i], 8);
+		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+#else
 		simd_uint4 vstore = (vdata[i] >> 24) & 0xFF;
 		vdata[i] = (vdata[i] << 8) & 0xFFFFFF00;
 		vdata[i] = vdata[i] | vstore;
+#endif
 	}
 	
 	// Run CoreImage effect (exception handling is essential because we've altered the image data)
@@ -164,9 +176,15 @@
 	}
 	@catch (NSException *exception) {
 		for (size_t i = 0; i < vec_len; i++) {
+#if defined(__i386__) || defined(__x86_64__)
+			__m128i vstore = _mm_slli_epi32(vdata[i], 24);
+			vdata[i] = _mm_srli_epi32(vdata[i], 8);
+			vdata[i] = _mm_add_epi32(vdata[i], vstore);
+#else
 			simd_uint4 vstore = (vdata[i] << 24) & 0xFF000000;
 			vdata[i] = (vdata[i] >> 8) & 0x00FFFFFF;
 			vdata[i] = vdata[i] | vstore;
+#endif
 		}
 		NSLog(@"%@", [exception reason]);
 		return;
@@ -174,9 +192,15 @@
 	
 	// Convert from ARGB to RGBA
 	for (size_t i = 0; i < vec_len; i++) {
+#if defined(__i386__) || defined(__x86_64__)
+		__m128i vstore = _mm_slli_epi32(vdata[i], 24);
+		vdata[i] = _mm_srli_epi32(vdata[i], 8);
+		vdata[i] = _mm_add_epi32(vdata[i], vstore);
+#else
 		simd_uint4 vstore = (vdata[i] << 24) & 0xFF000000;
 		vdata[i] = (vdata[i] >> 8) & 0x00FFFFFF;
 		vdata[i] = vdata[i] | vstore;
+#endif
 	}
 	
 	// Copy to destination
@@ -196,8 +220,19 @@
 	int i, j, vec_len, width, height, channel;
 	IntRect selection;
 	unsigned char *resdata, *datatouse;
-	simd_uint4 *vdata, *nvdata;
+	simd_type *vdata, *nvdata;
+#if defined(__i386__) || defined(__x86_64__)
+	__m128i orvmask;
+	{
+		unsigned char ormask[16];
+		for (i = 0; i < 16; i++) {
+			ormask[i] = (i % 4 == 0) ? 0xFF : 0x00;
+		}
+		memcpy(&orvmask, ormask, 16);
+	}
+#else
 	const simd_uint4 orvmask = simd_make_uint4(255, 255, 255, 255);
+#endif
 	
 	// Make adjustments for the channel
 	channel = [pluginData channel];
@@ -213,8 +248,8 @@
 		vec_len /= 16;
 		vec_len++;
 	}
-	vdata = (simd_uint4 *)data;
-	nvdata = (simd_uint4 *)newdata;
+	vdata = (simd_type *)data;
+	nvdata = (simd_type *)newdata;
 	datatouse = newdata;
 	if (channel == SeaSelectedChannelAlpha) {
 		for (size_t i = 0; i < vec_len; i++) {
@@ -223,7 +258,11 @@
 		}
 	} else {
 		for (size_t i = 0; i < vec_len; i++) {
+#if defined(__i386__) || defined(__x86_64__)
+			nvdata[i] = _mm_or_si128(vdata[i], orvmask);
+#else
 			nvdata[i] = vdata[i] | orvmask;
+#endif
 		}
 	}
 	
