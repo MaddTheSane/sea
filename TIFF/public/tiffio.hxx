@@ -30,8 +30,8 @@
  */
 
 #include <iostream>
-#include "tiff.h"
-#include "tiffio.h"
+#include <TIFF/tiff.h>
+#include <TIFF/tiffio.h>
 
 extern TIFF* TIFFStreamOpen(const char*, std::ostream *);
 extern TIFF* TIFFStreamOpen(const char*, std::istream *);

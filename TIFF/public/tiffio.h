@@ -28,8 +28,8 @@
 /*
  * TIFF I/O Library Definitions.
  */
-#include "tiff.h"
-#include "tiffvers.h"
+#include <TIFF/tiff.h>
+#include <TIFF/tiffvers.h>
 
 /*
  * TIFF is defined as an incomplete type to hide the
