@@ -19,7 +19,7 @@
         <window title="Select page..." allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="alertPanel" id="5" userLabel="Panel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="397" y="484" width="251" height="136"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="251" height="135"/>
                 <autoresizingMask key="autoresizingMask"/>
