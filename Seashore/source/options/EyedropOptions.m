@@ -30,7 +30,7 @@
 
 - (BOOL)mergedSample
 {
-	return [mergedCheckbox state];
+	return [mergedCheckbox state] == NSControlStateValueOn;
 }
 
 - (void)shutdown

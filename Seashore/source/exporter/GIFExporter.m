@@ -36,13 +36,13 @@
 	return @"gif";
 }
 
-- (BOOL) writeDocument: (SeaDocument*) document toFile: (NSString *) path
+- (BOOL) writeDocument: (SeaDocument*) document toFileURL:(NSURL *)path error:(NSError *__autoreleasing *)outError
 {
 	// Get the image data
-	unsigned char* srcData = [(SeaWhiteboard *)[document whiteboard] data];
-	int width = [(SeaContent *)[document contents] width];
-	int height = [(SeaContent *)[document contents] height];
-	int spp = [(SeaContent *)[document contents] spp];
+	unsigned char* srcData = [[document whiteboard] data];
+	int width = [[document contents] width];
+	int height = [[document contents] height];
+	int spp = [[document contents] spp];
 	
 	// Strip the alpha channel (there is no alpha in then GIF format)
 	unsigned char* destData = malloc(width * height * (spp - 1));
@@ -66,12 +66,12 @@
 	
 	// Save to a file
 	NSData* imageData = [imageRep representationUsingType: NSGIFFileType properties: gifProperties];
-	[imageData writeToFile: path atomically: YES];
+	BOOL success = [imageData writeToURL:path options:NSDataWritingAtomic error:outError];
 	
 	// Cleanup
 	free(destData);
 	
-	return YES;
+	return success;
 }
 
 @end

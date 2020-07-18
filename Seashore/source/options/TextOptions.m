@@ -159,9 +159,9 @@
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setInteger:[alignmentControl selectedSegment] forKey:@"text alignment"];
-	[defaults setObject:[outlineCheckbox state] ? @"YES" : @"NO" forKey:@"text outline checkbox"];
+	[defaults setBool:[outlineCheckbox state] == NSControlStateValueOn forKey:@"text outline checkbox"];
 	[defaults setInteger:[outlineSlider intValue] forKey:@"text outline slider"];
-	[defaults setObject:[fringeCheckbox state] ? @"YES" : @"NO" forKey:@"text fringe checkbox"];
+	[defaults setBool:[fringeCheckbox state] == NSControlStateValueOn forKey:@"text fringe checkbox"];
 	[defaults setObject:[[fontManager selectedFont] fontName] forKey:@"text font"];
 	[defaults setInteger:(int)[[fontManager selectedFont] pointSize] forKey:@"text size"];
 }

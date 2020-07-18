@@ -44,7 +44,7 @@
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setInteger:[opacitySlider intValue] forKey:@"eraser opacity"];
-	[defaults setObject:[mimicBrushCheckbox state] ? @"YES" : @"NO" forKey:@"eraser mimicBrush"];
+	[defaults setBool:[mimicBrushCheckbox state] ? YES : NO forKey:@"eraser mimicBrush"];
 }
 
 @end

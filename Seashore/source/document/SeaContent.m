@@ -466,7 +466,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		newIndex = activeLayerIndex + 1;
 	}
 	[self setActiveLayerIndex: newIndex];
-	[[document helpers] activeLayerChanged:kLayerSwitched rect:NULL];	
+	[[document helpers] activeLayerChanged:SeaHelpersLayerSwitched rect:NULL];	
 }
 
 - (void)layerAbove
@@ -480,7 +480,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		newIndex = activeLayerIndex - 1;
 	}
 	[self setActiveLayerIndex: newIndex];
-	[[document helpers] activeLayerChanged:kLayerSwitched rect:NULL];	
+	[[document helpers] activeLayerChanged:SeaHelpersLayerSwitched rect:NULL];	
 }
 
 - (BOOL)canImportLayerFromFile:(NSString *)path

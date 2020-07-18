@@ -346,13 +346,14 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 - (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
 	BOOL result = NO;
+	BOOL success = NO;
 	
 	for (id<SeaAbstractExporter> exporter in exporters) {
 		if ([[SeaDocumentController sharedDocumentController]
 			 type: typeName
 			 isContainedInDocType:[exporter title]
 			 ]) {
-			[exporter writeDocument:self toFile:[url path]];
+			success = [exporter writeDocument:self toFileURL:url error:outError];
 			result = YES;
 			break;
 		}
@@ -367,7 +368,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 						   }];
 		}
 	}
-	return result;
+	return result && success;
 }
 
 - (void)printShowingPrintPanel:(BOOL)showPanels
@@ -440,12 +441,12 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 
 - (void)windowWillBeginSheet:(NSNotification *)notification
 {
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityForDocument:self] setEnabled:NO];
+	[[[SeaController utilitiesManager] pegasusUtilityForDocument:self] setEnabled:NO];
 }
 
 - (void)windowDidEndSheet:(NSNotification *)notification
 {
-	[(PegasusUtility *)[[SeaController utilitiesManager] pegasusUtilityForDocument:self] setEnabled:YES];
+	[[[SeaController utilitiesManager] pegasusUtilityForDocument:self] setEnabled:YES];
 }
 
 - (void)windowDidBecomeMain:(NSNotification *)notification
@@ -459,7 +460,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 		[[[SeaController utilitiesManager] pegasusUtilityForDocument:self] setEnabled:YES];
 	point = [docWindow mouseLocationOutsideOfEventStream];
 	[[self docView] updateRulerMarkings:point andStationary:NSMakePoint(-256e6, -256e6)];
-	[(OptionsUtility *)[(UtilitiesManager *)[SeaController utilitiesManager] optionsUtilityForDocument:self] viewNeedsDisplay];
+	[[[SeaController utilitiesManager] optionsUtilityForDocument:self] viewNeedsDisplay];
 }
 
 - (void)windowDidResignMain:(NSNotification *)notification
@@ -507,8 +508,8 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	rect.origin.y = frame.origin.y;
 	xScale = [contents xscale];
 	yScale = [contents yscale];
-	rect.size.width = [(SeaContent *)contents width]  * xScale;
-	rect.size.height = [(SeaContent *)contents height] * yScale;
+	rect.size.width = [contents width]  * xScale;
+	rect.size.height = [contents height] * yScale;
 		
 	 // Remember the rulers have dimension
 	 if([[SeaController seaPrefs] rulers]){

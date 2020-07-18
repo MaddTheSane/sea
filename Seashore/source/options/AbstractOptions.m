@@ -49,23 +49,23 @@ static BOOL forceAlt = NO;
 	
 	if (modifierPopup) {
 	
-		if ((modifiers & NSAlternateKeyMask) >> 19 && (modifiers & NSControlKeyMask) >> 18) {
+		if ((modifiers & NSEventModifierFlagOption) >> 19 && (modifiers & NSEventModifierFlagControl) >> 18) {
 			index = [modifierPopup indexOfItemWithTag:AbstractModifierAltControl];
 			if (index > 0)
 				[modifierPopup selectItemAtIndex:index];
-		} else if ((modifiers & NSShiftKeyMask) >> 17 && (modifiers & NSControlKeyMask) >> 18) {
+		} else if ((modifiers & NSEventModifierFlagShift) >> 17 && (modifiers & NSEventModifierFlagControl) >> 18) {
 			index = [modifierPopup indexOfItemWithTag:AbstractModifierShiftControl];
 			if (index > 0)
 				[modifierPopup selectItemAtIndex:index];
-		} else if ((modifiers & NSControlKeyMask) >> 18) {
+		} else if ((modifiers & NSEventModifierFlagControl) >> 18) {
 			index = [modifierPopup indexOfItemWithTag:AbstractModifierControl];
 			if (index > 0)
 				[modifierPopup selectItemAtIndex:index];
-		} else if ((modifiers & NSShiftKeyMask) >> 17) {
+		} else if ((modifiers & NSEventModifierFlagShift) >> 17) {
 			index = [modifierPopup indexOfItemWithTag:AbstractModifierShift];
 			if (index > 0)
 				[modifierPopup selectItemAtIndex:index];
-		} else if ((modifiers & NSAlternateKeyMask) >> 19) {
+		} else if ((modifiers & NSEventModifierFlagShift) >> 19) {
 			index = [modifierPopup indexOfItemWithTag:AbstractModifierAlt];
 			if (index > 0)
 				[modifierPopup selectItemAtIndex:index];

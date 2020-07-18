@@ -228,7 +228,7 @@
 		return [NSString stringWithFormat:@"Print %.0f%%", [self reviseCompression] * 100.0];
 }
 
-- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)document toFileURL:(NSURL *)path error:(NSError *__autoreleasing *)outError
 {
 	int width, height, spp;
 	unsigned char *srcData, *destData;
@@ -284,13 +284,13 @@
 	imageData = [imageRep representationUsingType:NSJPEG2000FileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}];
 	
 	// Save our file and let's go
-	[imageData writeToFile:path atomically:YES];
+	BOOL success = [imageData writeToURL:path options:NSDataWritingAtomic error:outError];
 	
 	// If the destination data is not equivalent to the source data free the former
 	if (destData != srcData)
 		free(destData);
 	
-	return YES;
+	return success;
 }
 
 @end

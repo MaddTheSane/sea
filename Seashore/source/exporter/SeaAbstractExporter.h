@@ -70,15 +70,20 @@
 - (NSString *)optionsString;
 
 /*!
-	@method		writeDocument:toFile:
+	@method		writeDocument:toFileURL:error:
 	@discussion	Writes the given document to disk using the format of the
 				exporter.
 	@param		document
 				The document to write to disk.
 	@param		path
 				The path at which to write the document.
+	@param		outError
+				The returned error on failure.
 	@result		Returns \c YES if the operation was successful, \c NO otherwise.
 */
-- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path;
+- (BOOL)writeDocument:(SeaDocument*)document toFileURL:(NSURL *)path error:(NSError**)outError;
+
+@optional
+- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path DEPRECATED_ATTRIBUTE;
 
 @end

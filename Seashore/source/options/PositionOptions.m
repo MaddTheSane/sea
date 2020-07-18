@@ -16,7 +16,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	if ([defaults objectForKey:@"position anchor"] == NULL) {
-		[canAnchorCheckbox setState:NSOffState];
+		[canAnchorCheckbox setState:NSControlStateValueOff];
 	} else {
 		[canAnchorCheckbox setState:[defaults boolForKey:@"position anchor"]];
 	}
@@ -71,7 +71,7 @@
 - (void)shutdown
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setBool:[canAnchorCheckbox state] != NSOffState forKey:@"position anchor"];
+	[defaults setBool:[canAnchorCheckbox state] == NSControlStateValueOn forKey:@"position anchor"];
 }
 
 @end

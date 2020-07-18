@@ -9,42 +9,34 @@
 
 /*!
 	@struct		CompositorOptions
-	@discussion	Allows the easy exchange of options between the whiteboard and
+	@brief		Allows the easy exchange of options between the whiteboard and
 				compositor.
-	@field		forceNormal
-				YES if the layer should be composited using the normal mode
-				regardless of its own mode), NO otherwise.
-	@field		rect
-				The rectangle within which to composite the layer. Only parts of
-				the layer that reside in this rectangle will be drawn,
-				rectangles that extend beyond the layer's boundaries are also
-				acceptable.
-	@field		destRect
-				The rectangle 
-	@field		insertOverlay
-				YES if the overlay should be composited on top of the layer, NO
-				otherwise.
-	@field		useSelection
-				YES if the selection should be used during compositing, NO
-				otherwise.
-	@field		overlayOpacity
-				A value between 0 and 255 indicating the opacity with which the
-				overlay should be drawn.
-	@field		overlayBehaviour
-				The behaviour of the overlay (see SeaWhiteboard).
-	@field		spp
-				The samples per pixel to be used during compositing.
 */
-typedef struct {
+typedef struct CompositorOptions {
+	//! @c YES if the layer should be composited using the normal mode
+	//! regardless of its own mode), @c NO otherwise.
 	BOOL forceNormal;
+	//! The rectangle within which to composite the layer. Only parts of
+	//! the layer that reside in this rectangle will be drawn,
+	//! rectangles that extend beyond the layer's boundaries are also
+	//! acceptable.
 	IntRect rect;
+	//! The rectangle
 	IntRect destRect;
+	//! @c YES if the overlay should be composited on top of the layer, @c NO
+	//! otherwise.
 	BOOL insertOverlay;
+	//! @c YES if the selection should be used during compositing, @c NO
+	//! otherwise.
 	BOOL useSelection;
+	//! A value between \a 0 and \a 255 indicating the opacity with which the
+	//! overlay should be drawn.
 	int overlayOpacity;
+	//! The behaviour of the overlay (see SeaWhiteboard).
 	int overlayBehaviour;
+	//! The samples per pixel to be used during compositing.
 	int spp;
-} CompositorOptions;
+} CompositorOptions NS_SWIFT_NAME(SeaCompositor.Options);
 
 @class SeaLayer;
 #if MAIN_COMPILE

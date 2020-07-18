@@ -16,12 +16,16 @@
 	@constant	kLayerDeleted
 				Indicates that the user deleted a layer.
 */
-enum {
-	kLayerSwitched,
-	kTransparentLayerAdded,
-	kLayerAdded,
-	kLayerDeleted
-};
+typedef NS_ENUM(int, SeaHelpersLayerActions) {
+	//! Indicates that the user simply selected another layer.
+	SeaHelpersLayerSwitched,
+	//! Indicates that the user added another transparent layer.
+	SeaHelpersLayerTransparentAdded,
+	//! Indicates that the user added another non-transparent layer.
+	SeaHelpersLayerAdded,
+	//! Indicates that the user deleted a layer.
+	SeaHelpersLayerDeleted
+} NS_SWIFT_NAME(SeaHelpers.LayerActions);
 
 @class SeaDocument;
 
@@ -101,7 +105,7 @@ enum {
 				kLayerAdded events or NULL. This is used to allow more effective
 				updating.
 */
-- (void)activeLayerChanged:(int)eventType rect:(IntRect *)rect;
+- (void)activeLayerChanged:(SeaHelpersLayerActions)eventType rect:(IntRect *)rect;
 
 /*!
 	@method		documentWillFlatten
@@ -211,3 +215,10 @@ enum {
 - (void)layerTitleChanged;
 
 @end
+
+#pragma mark - Deprecated constants.
+
+static const SeaHelpersLayerActions kLayerSwitched NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaHelpersLayerSwitched", 10.2, 10.8) = SeaHelpersLayerSwitched;
+static const SeaHelpersLayerActions kTransparentLayerAdded NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaHelpersLayerTransparentAdded", 10.2, 10.8) = SeaHelpersLayerTransparentAdded;
+static const SeaHelpersLayerActions kLayerAdded NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaHelpersLayerAdded", 10.2, 10.8) = SeaHelpersLayerAdded;
+static const SeaHelpersLayerActions kLayerDeleted NS_DEPRECATED_WITH_REPLACEMENT_MAC("SeaHelpersLayerDeleted", 10.2, 10.8) = SeaHelpersLayerDeleted;

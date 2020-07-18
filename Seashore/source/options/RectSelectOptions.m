@@ -27,8 +27,7 @@
 	
 	if ([defaults objectForKey:@"rect selection radius"] == NULL) {
 		value = 8;
-	}
-	else {
+	} else {
 		value = [defaults integerForKey:@"rect selection radius"];
 		if (value < [radiusSlider minValue] || value > [radiusSlider maxValue])
 			value = 8;
@@ -66,7 +65,7 @@
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setInteger:[radiusSlider intValue] forKey:@"rect selection radius"];
-	[defaults setObject:[radiusCheckbox state] ? @"YES" : @"NO" forKey:@"rect selection radius enabled"];
+	[defaults setBool:[radiusCheckbox state] == NSControlStateValueOn forKey:@"rect selection radius enabled"];
 	[aspectRatio shutdown];
 }
 

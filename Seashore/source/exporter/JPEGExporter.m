@@ -243,7 +243,7 @@ static BOOL JPEGReviseResolution(unsigned char *input, size_t len, int xres, int
 		return [NSString stringWithFormat:@"Print %.0f%%", [self reviseCompression] * 100.0];
 }
 
-- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)document toFileURL:(NSURL *)path error:(NSError *__autoreleasing *)outError
 {
 	int width, height, xres, yres, spp;
 	unsigned char *srcData, *destData;
@@ -295,13 +295,13 @@ static BOOL JPEGReviseResolution(unsigned char *input, size_t len, int xres, int
 		NSLog(@"The resolution of the current JPEG file could not be saved. This indicates a change in the approach with which Cocoa saves JPEG files. Please contact the author, quoting this log message, for further assistance."); 
 
 	// Save our file and let's go
-	[imageData writeToFile:path atomically:YES];
+	BOOL success = [imageData writeToURL:path options:NSDataWritingAtomic error:outError];
 	
 	// If the destination data is not equivalent to the source data free the former
 	if (destData != srcData)
 		free(destData);
 	
-	return YES;
+	return success;
 }
 
 @end

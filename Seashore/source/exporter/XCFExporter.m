@@ -404,7 +404,7 @@ static inline void fix_endian_write(int *input, int size)
 	return YES;
 }
 
-- (BOOL)writeDocument:(SeaDocument*)doc toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)doc toFileURL:(NSURL *)path error:(NSError *__autoreleasing *)outError
 {
 	FILE *file;
 	NSInteger i, offsetPos, oldPos, layerCount;
@@ -425,7 +425,7 @@ static inline void fix_endian_write(int *input, int size)
 			exifParasite.flags = 0;
 			exifParasite.size = (int)[exifContainer length];
 			exifParasite.data = malloc(exifParasite.size);
-			memcpy(exifParasite.data, (char *)[exifContainer bytes], exifParasite.size);
+			memcpy(exifParasite.data, (const char *)[exifContainer bytes], exifParasite.size);
 			[[document contents] addParasite:exifParasite];
 		}
 	}	
@@ -433,18 +433,30 @@ static inline void fix_endian_write(int *input, int size)
 	// Open the file for writing
 	file = fopen([path fileSystemRepresentation], "w");
 	if (file == NULL) {
+		int ferr = errno;
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSURLErrorKey: path, NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:ferr userInfo:nil]}];
+		}
 		return NO;
 	}
 	
 	// Write the header
 	if ([self writeHeader:file] == NO) {
+		int ferr = ferror(file);
 		fclose(file);
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:@{NSURLErrorKey: path, NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:ferr userInfo:nil]}];
+		}
 		return NO;
 	}
 	
 	// Write the properties
 	if ([self writeProperties:file] == NO) {
+		int ferr = ferror(file);
 		fclose(file);
+		if (outError) {
+			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:@{NSURLErrorKey: path, NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:ferr userInfo:nil]}];
+		}
 		return NO;
 	}
 	
@@ -465,7 +477,11 @@ static inline void fix_endian_write(int *input, int size)
 		
 		// Write given layer
 		if ([self writeLayer:i file:file] == NO) {
+			int ferr = ferror(file);
 			fclose(file);
+			if (outError) {
+				*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:@{NSURLErrorKey: path, NSUnderlyingErrorKey: [NSError errorWithDomain:NSPOSIXErrorDomain code:ferr userInfo:nil]}];
+			}
 			return NO;
 		}
 	

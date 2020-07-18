@@ -96,7 +96,7 @@
 	[self endLineDrawing];
 }
 
-- (void)activeLayerChanged:(int)eventType rect:(IntRect *)rect
+- (void)activeLayerChanged:(SeaHelpersLayerActions)eventType rect:(IntRect *)rect
 {
 	SeaWhiteboard *whiteboard = [document whiteboard];
 	id docView = [document docView];
@@ -107,8 +107,8 @@
 		[[document helpers] channelChanged];
 	}
 	switch (eventType) {
-		case kLayerSwitched:
-		case kTransparentLayerAdded:
+		case SeaHelpersLayerSwitched:
+		case SeaHelpersLayerTransparentAdded:
 			[whiteboard readjustLayer];
 			if ([whiteboard whiteboardIsLayerSpecific]) {
 				[whiteboard readjustAltData:YES];
@@ -117,8 +117,8 @@
 				[docView setNeedsDisplay:YES];
 			}
 		break;
-		case kLayerAdded:
-		case kLayerDeleted:
+		case SeaHelpersLayerAdded:
+		case SeaHelpersLayerDeleted:
 			[whiteboard readjustLayer];
 			[whiteboard readjustAltData:YES];
 		break;
@@ -134,7 +134,7 @@
 
 - (void)documentFlattened
 {
-	[self activeLayerChanged:kLayerAdded rect:NULL];
+	[self activeLayerChanged:SeaHelpersLayerAdded rect:NULL];
 }
 
 - (void)typeChanged

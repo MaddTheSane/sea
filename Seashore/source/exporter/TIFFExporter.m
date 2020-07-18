@@ -80,7 +80,7 @@ CF_ENUM(int) {
 		return @"RGB/RGBA";
 }
 
-- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)document toFileURL:(NSURL *)path error:(NSError *__autoreleasing *)outError
 {
 	int i, j, width, height, spp, xres, yres, linebytes;
 	unsigned char *srcData, *tempData, *destData, *buf;
@@ -185,6 +185,9 @@ CF_ENUM(int) {
 				if (destData != srcData) {
 					free(destData);
 				}
+				if (outError) {
+					*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:-1 userInfo:nil];
+				}
 				return NO;
 			}
 		}
@@ -254,6 +257,9 @@ CF_ENUM(int) {
 			memcpy(buf, &(destData[width * spp * i]), linebytes);
 			if (TIFFWriteScanline(tiff, buf, i, 0) < 0) {
 				if (destData != srcData) free(destData);
+				if (outError) {
+					*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:-1 userInfo:nil];
+				}
 				return NO;
 			}
 		}

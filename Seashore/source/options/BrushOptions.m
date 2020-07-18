@@ -1,3 +1,4 @@
+#include <tgmath.h>
 #import "BrushOptions.h"
 #import "ToolboxUtility.h"
 #import "SeaHelp.h"
@@ -170,9 +171,9 @@ enum {
 - (void)shutdown
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setBool:[fadeCheckbox state] forKey:@"brush fade"];
+	[defaults setBool:[fadeCheckbox state] == NSControlStateValueOn forKey:@"brush fade"];
 	[defaults setInteger:[fadeSlider integerValue] forKey:@"brush fade rate"];
-	[defaults setBool:[pressureCheckbox state] forKey:@"brush pressure"];
+	[defaults setBool:[pressureCheckbox state] == NSControlStateValueOn forKey:@"brush pressure"];
 	[defaults setInteger:[pressurePopup indexOfSelectedItem] forKey:@"brush pressure style"];
 	[defaults setInteger:[scaleCheckbox state] forKey:@"brush scale"];
 }

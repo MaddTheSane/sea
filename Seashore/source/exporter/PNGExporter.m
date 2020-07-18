@@ -35,7 +35,7 @@
 	return @"png";
 }
 
-- (BOOL)writeDocument:(SeaDocument*)document toFile:(NSString *)path
+- (BOOL)writeDocument:(SeaDocument*)document toFileURL:(NSURL *)path error:(NSError *__autoreleasing *)outError
 {
 	int i, j, width, height, spp;
 	unsigned char *srcData, *destData;
@@ -45,9 +45,9 @@
 	
 	// Get the data to write
 	srcData = [[document whiteboard] data];
-	width = [(SeaContent *)[document contents] width];
-	height = [(SeaContent *)[document contents] height];
-	spp = [(SeaContent *)[document contents] spp];
+	width = [[document contents] width];
+	height = [[document contents] height];
+	spp = [[document contents] spp];
 	
 	// Determine whether or not an alpha channel would be redundant
 	for (i = 0; i < width * height && hasAlpha == NO; i++) {
@@ -72,13 +72,13 @@
 	imageData = [imageRep representationUsingType:NSPNGFileType properties:@{}];
 		
 	// Save our file and let's go
-	[imageData writeToFile:path atomically:YES];
+	BOOL success = [imageData writeToURL:path options:NSDataWritingAtomic error:outError];
 	
 	// If the destination data is not equivalent to the source data free the former
 	if (destData != srcData)
 		free(destData);
 	
-	return YES;
+	return success;
 }
 
 @end
