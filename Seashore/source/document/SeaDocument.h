@@ -5,7 +5,7 @@
 #import "Units.h"
 #else
 #import <SeashoreKit/Globals.h>
-#import <SeashoreKit/AbstractExporter.h>
+#import <SeashoreKit/SeaAbstractExporter.h>
 #import <SeashoreKit/Units.h>
 #endif
 
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 	IBOutlet XCFExporter *xcfExporter;
 	
 	/// An array of all possible exporters
-	NSArray<id<AbstractExporter>> *exporters;
+	NSArray<id<SeaAbstractExporter>> *exporters;
 	
 	/// The view to attach to the save panel
 	IBOutlet NSView *accessoryView;

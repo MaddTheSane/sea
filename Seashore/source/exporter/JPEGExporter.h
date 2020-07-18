@@ -1,6 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
-#import "AbstractExporter.h"
+#import "SeaAbstractExporter.h"
 
 /*!
 	@defined	kMaxCompression
@@ -17,7 +17,7 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface JPEGExporter : NSObject <AbstractExporter> {
+@interface JPEGExporter : NSObject <SeaAbstractExporter> {
 	// The compression factor to be used with the web target (between 0 and 30)
 	int webCompression;
 

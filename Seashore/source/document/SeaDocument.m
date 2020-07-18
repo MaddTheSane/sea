@@ -347,7 +347,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 {
 	BOOL result = NO;
 	
-	for (id<AbstractExporter> exporter in exporters) {
+	for (id<SeaAbstractExporter> exporter in exporters) {
 		if ([[SeaDocumentController sharedDocumentController]
 			 type: typeName
 			 isContainedInDocType:[exporter title]
@@ -393,7 +393,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	[savePanel setAccessoryView:accessoryView];
 	
 	// Find the default exporter's index
-	for (id<AbstractExporter> exporter in exporters) {
+	for (id<SeaAbstractExporter> exporter in exporters) {
 		if ([[SeaDocumentController sharedDocumentController]
 			 type: [self fileType]
 			 isContainedInDocType:[exporter title]
@@ -411,7 +411,7 @@ typedef NS_ENUM(int, SeaSpecialStart) {
 	
 	// Add in our exporters
 	[exportersPopUp removeAllItems];
-	for (id<AbstractExporter> exporter in exporters) {
+	for (id<SeaAbstractExporter> exporter in exporters) {
 		[exportersPopUp addItemWithTitle:[exporter title]];
 	}
 	[exportersPopUp selectItemAtIndex:exporterIndex];

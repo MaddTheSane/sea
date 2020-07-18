@@ -1,6 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
-#import "AbstractExporter.h"
+#import "SeaAbstractExporter.h"
 
 /*!
 	@class		PNGExporter
@@ -11,6 +11,6 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface PNGExporter : NSObject <AbstractExporter>
+@interface PNGExporter : NSObject <SeaAbstractExporter>
 
 @end

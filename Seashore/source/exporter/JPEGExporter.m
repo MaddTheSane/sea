@@ -248,14 +248,14 @@ static BOOL JPEGReviseResolution(unsigned char *input, size_t len, int xres, int
 	int width, height, xres, yres, spp;
 	unsigned char *srcData, *destData;
 	NSBitmapImageRep *imageRep;
-	NSData *imageData;
+	NSMutableData *imageData;
 	NSDictionary *exifData;
 	
 	// Get the data to write
-	srcData = [(SeaWhiteboard *)[document whiteboard] data];
-	width = [(SeaContent *)[document contents] width];
-	height = [(SeaContent *)[document contents] height];
-	spp = [(SeaContent *)[document contents] spp];
+	srcData = [[document whiteboard] data];
+	width = [[document contents] width];
+	height = [[document contents] height];
+	spp = [[document contents] spp];
 	xres = [[document contents] xres];
 	yres = [[document contents] yres];
 	
@@ -269,7 +269,7 @@ static BOOL JPEGReviseResolution(unsigned char *input, size_t len, int xres, int
 	
 	// Add EXIF data
 	exifData = [[document contents] exifData];
-	if (exifData) [imageRep setProperty:@"NSImageEXIFData" withValue:exifData];
+	if (exifData) [imageRep setProperty:NSImageEXIFData withValue:exifData];
 	
 	// Embed ColorSync profile
 	if (!targetWeb) {
@@ -287,11 +287,11 @@ static BOOL JPEGReviseResolution(unsigned char *input, size_t len, int xres, int
 	}
 	
 	// Finally build the JPEG data
-	imageData = [imageRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}];
+	imageData = [[imageRep representationUsingType:NSJPEGFileType properties:@{NSImageCompressionFactor: @([self reviseCompression])}] mutableCopy];
 	
 	// Now add in the resolution settings
 	// Notice how we are working on [imageData bytes] despite being explicitly told not to in Cocoa's documentation - well if Cocoa gave us proper resolution handling that wouldn't be a problem
-	if (!JPEGReviseResolution((unsigned char *)[imageData bytes], [imageData length], xres, yres))
+	if (!JPEGReviseResolution([imageData mutableBytes], [imageData length], xres, yres))
 		NSLog(@"The resolution of the current JPEG file could not be saved. This indicates a change in the approach with which Cocoa saves JPEG files. Please contact the author, quoting this log message, for further assistance."); 
 
 	// Save our file and let's go

@@ -749,7 +749,7 @@
 		55E5E4DA18D27A370082E60F /* Sharpen.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E47818D26FC50082E60F /* Sharpen.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4DB18D27A370082E60F /* Threshold.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E48418D26FC70082E60F /* Threshold.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E5E4DC18D27A370082E60F /* Vertical Stripes.bundle in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55E5E49018D26FD70082E60F /* Vertical Stripes.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		55FD12411C6F0352009FB22C /* AbstractExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = A8D9FDA0053C0B5500A80207 /* AbstractExporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55FD12411C6F0352009FB22C /* SeaAbstractExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = A8D9FDA0053C0B5500A80207 /* SeaAbstractExporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A80983D70871420900F7412F /* JP2Exporter.m in Sources */ = {isa = PBXBuildFile; fileRef = A80983D50871420900F7412F /* JP2Exporter.m */; };
 		A8138D660CEFD5FA00C2F880 /* Seashore Effects Guide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8138D640CEFD5FA00C2F880 /* Seashore Effects Guide.pdf */; };
 		A830C7B30B8AE3B4002AB85C /* EffectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A830C7B10B8AE3B4002AB85C /* EffectTool.m */; };
@@ -2371,8 +2371,8 @@
 		A8D6DDD50BEE08EF0092F477 /* NSTextViewRedirect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTextViewRedirect.m; sourceTree = "<group>"; };
 		A8D7CC580A20A74300FFC6A4 /* SeaDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaDocumentController.h; sourceTree = "<group>"; };
 		A8D7CC590A20A74300FFC6A4 /* SeaDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaDocumentController.m; sourceTree = "<group>"; };
-		A8D9FDA0053C0B5500A80207 /* AbstractExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractExporter.h; sourceTree = "<group>"; };
-		A8D9FDA1053C0B5500A80207 /* AbstractExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractExporter.m; sourceTree = "<group>"; };
+		A8D9FDA0053C0B5500A80207 /* SeaAbstractExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaAbstractExporter.h; sourceTree = "<group>"; };
+		A8D9FDA1053C0B5500A80207 /* SeaAbstractExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaAbstractExporter.m; sourceTree = "<group>"; };
 		A8DB7A3D04F35ED500A80207 /* SeaOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaOperations.h; sourceTree = "<group>"; };
 		A8DB7A3E04F35ED500A80207 /* SeaOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeaOperations.m; sourceTree = "<group>"; };
 		A8DC07BB06A96CA1004A2D2D /* SeaFlip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeaFlip.h; sourceTree = "<group>"; };
@@ -4745,8 +4745,8 @@
 		F57AD82B03FF7FDB0185BAF6 /* Exporter Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A8D9FDA0053C0B5500A80207 /* AbstractExporter.h */,
-				A8D9FDA1053C0B5500A80207 /* AbstractExporter.m */,
+				A8D9FDA0053C0B5500A80207 /* SeaAbstractExporter.h */,
+				A8D9FDA1053C0B5500A80207 /* SeaAbstractExporter.m */,
 				A8F0FFCE0A35E06200259FD6 /* GIFExporter.h */,
 				A8F0FFCF0A35E06200259FD6 /* GIFExporter.m */,
 				A80983D60871420900F7412F /* JP2Exporter.h */,
@@ -4944,7 +4944,7 @@
 				55472BBD1C6EE2010065A852 /* TextureExporter.h in Headers */,
 				55472BDA1C6EE5400065A852 /* Units.h in Headers */,
 				55D749091D52929400B099C9 /* CocoaLayer.h in Headers */,
-				55FD12411C6F0352009FB22C /* AbstractExporter.h in Headers */,
+				55FD12411C6F0352009FB22C /* SeaAbstractExporter.h in Headers */,
 				55472BDC1C6EE5730065A852 /* IndiciesKeeper.h in Headers */,
 				55472BCD1C6EE4EC0065A852 /* SeaWhiteboard.h in Headers */,
 				55472BA61C6EE1530065A852 /* SeaHelp.h in Headers */,

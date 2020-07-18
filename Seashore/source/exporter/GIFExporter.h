@@ -1,6 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Globals.h"
-#import "AbstractExporter.h"
+#import "SeaAbstractExporter.h"
 
 /*!
 	@class		GIFExporter
@@ -11,6 +11,6 @@
 				<b>Copyright:</b> Copyright (c) 2002 Mark Pazolli
 */
 
-@interface GIFExporter : NSObject <AbstractExporter>
+@interface GIFExporter : NSObject <SeaAbstractExporter>
 
 @end
