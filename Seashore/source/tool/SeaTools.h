@@ -89,7 +89,7 @@ typedef NS_ENUM(NSInteger, SeaToolsDefines) {
 	SeaToolsLastSelection = 4,
 	//! The last tool.
 	SeaToolsLast = 17
-};
+} NS_SWIFT_NAME(SeaTools.Defines);
 
 @class AbstractTool;
 @class RectSelectTool;

@@ -10,34 +10,32 @@ import Cocoa
 import SeashoreKit
 
 
-protocol SeaOptions: NSObjectProtocol {
+protocol SeaOptions: AbstractTool {
 	associatedtype OptionClass: AbstractOptions
 	
-	static var toolType: SeaToolsDefines {get}
+	static var toolType: SeaTools.Defines { get }
 }
 
 extension RectSelectTool: SeaOptions {
 	typealias OptionClass = RectSelectOptions
 
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .selectRect
 	}
 }
 
-
 extension EllipseSelectTool: SeaOptions {
 	typealias OptionClass = EllipseSelectOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .selectEllipse
 	}
 }
 
-
 extension LassoTool: SeaOptions {
 	typealias OptionClass = LassoOptions
 	
-	@objc class var toolType: SeaToolsDefines {
+	@objc class var toolType: SeaTools.Defines {
 		return .lasso
 	}
 }
@@ -45,7 +43,7 @@ extension LassoTool: SeaOptions {
 extension PolygonLassoTool {
 	typealias OptionClass = PolygonLassoOptions
 	
-	override class var toolType: SeaToolsDefines {
+	override class var toolType: SeaTools.Defines {
 		return .polygonLasso
 	}
 }
@@ -53,7 +51,7 @@ extension PolygonLassoTool {
 extension WandTool: SeaOptions {
 	typealias OptionClass = WandOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .wand
 	}
 }
@@ -61,7 +59,7 @@ extension WandTool: SeaOptions {
 extension PencilTool: SeaOptions {
 	typealias OptionClass = PencilOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .pencil
 	}
 }
@@ -69,7 +67,7 @@ extension PencilTool: SeaOptions {
 extension BrushTool: SeaOptions {
 	typealias OptionClass = BrushOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .brush
 	}
 }
@@ -77,7 +75,7 @@ extension BrushTool: SeaOptions {
 extension BucketTool: SeaOptions {
 	typealias OptionClass = BucketOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .bucket
 	}
 }
@@ -85,7 +83,7 @@ extension BucketTool: SeaOptions {
 extension TextTool: SeaOptions {
 	typealias OptionClass = TextOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .text
 	}
 }
@@ -93,7 +91,7 @@ extension TextTool: SeaOptions {
 extension EyedropTool: SeaOptions {
 	typealias OptionClass = EyedropOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .eyedrop
 	}
 }
@@ -101,7 +99,7 @@ extension EyedropTool: SeaOptions {
 extension PositionTool: SeaOptions {
 	typealias OptionClass = PositionOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .position
 	}
 }
@@ -109,7 +107,7 @@ extension PositionTool: SeaOptions {
 extension GradientTool: SeaOptions {
 	typealias OptionClass = GradientOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .gradient
 	}
 }
@@ -117,7 +115,7 @@ extension GradientTool: SeaOptions {
 extension SmudgeTool: SeaOptions {
 	typealias OptionClass = SmudgeOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .smudge
 	}
 }
@@ -125,7 +123,7 @@ extension SmudgeTool: SeaOptions {
 extension CloneTool: SeaOptions {
 	typealias OptionClass = CloneOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .clone
 	}
 }
@@ -133,7 +131,7 @@ extension CloneTool: SeaOptions {
 extension CropTool: SeaOptions {
 	typealias OptionClass = CropOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .crop
 	}
 }
@@ -141,7 +139,7 @@ extension CropTool: SeaOptions {
 extension EffectTool: SeaOptions {
 	typealias OptionClass = EffectOptions
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .effect
 	}
 }

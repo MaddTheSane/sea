@@ -37,7 +37,7 @@ class EraserTool: AbstractTool, SeaOptions {
 		var special: UInt8
 	}
 	
-	class var toolType: SeaToolsDefines {
+	class var toolType: SeaTools.Defines {
 		return .eraser
 	}
 	
@@ -74,7 +74,7 @@ class EraserTool: AbstractTool, SeaOptions {
 	/// The last where recorded
 	var lastWhere: IntPoint = IntPoint(x: 0, y: 0)
 
-	override var toolId: SeaToolsDefines {
+	override var toolId: SeaTools.Defines {
 		return .eraser
 	}
 	
@@ -227,7 +227,7 @@ class EraserTool: AbstractTool, SeaOptions {
 		autoreleasepool { () -> Void in
 			// Set-up variables
 			guard let document = document,
-				let boptions: BrushOptions = SeaController.utilitiesManager.optionsUtility(for: document)?.options(for: BrushTool.self),
+				let boptions = SeaController.utilitiesManager.optionsUtility(for: document)?.options(for: BrushTool.self),
 				let layer = document.contents.activeLayer,
 				let bUtil = SeaController.utilitiesManager.brushUtility(for: document),
 				let curBrush = bUtil.activeBrush else {

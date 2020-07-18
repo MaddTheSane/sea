@@ -68,10 +68,10 @@ class ToolboxUtility2 : NSObject, NSMenuItemValidation {
 	@IBOutlet weak var optionsUtility: OptionsUtility!
 	
 	/// The tag of the currently selected tool
-	private(set) var tool = SeaToolsDefines.invalid
+	private(set) var tool = SeaTools.Defines.invalid
 	
 	/// The old tool
-	private var oldTool = SeaToolsDefines.invalid
+	private var oldTool = SeaTools.Defines.invalid
 	
 	/// The toolbar
 	var toolbar: NSToolbar!
@@ -87,24 +87,24 @@ class ToolboxUtility2 : NSObject, NSMenuItemValidation {
 	@IBOutlet weak var transformMenu: NSMenuItem!
 	@IBOutlet weak var colorsMenu: NSMenuItem!
 
-	private let selectionTools: [SeaToolsDefines] = [
+	private let selectionTools: [SeaTools.Defines] = [
 		.selectRect,
 		.selectEllipse,
 		.lasso,
 		.polygonLasso,
 		.wand]
-	private let drawTools: [SeaToolsDefines] = [
+	private let drawTools: [SeaTools.Defines] = [
 		.pencil,
 		.brush,
 		.text,
 		.eraser,
 		.bucket,
 		.gradient];
-	private let effectTools: [SeaToolsDefines] = [
+	private let effectTools: [SeaTools.Defines] = [
 		.effect,
 		.smudge,
 		.clone];
-	private let transformTools: [SeaToolsDefines] = [
+	private let transformTools: [SeaTools.Defines] = [
 		.eyedrop,
 		.crop,
 		.zoom,
@@ -155,7 +155,7 @@ class ToolboxUtility2 : NSObject, NSMenuItemValidation {
 	/// Deactivates this utility.
 	func deactivate() {
 		colorView.document = document
-		for i in SeaToolsDefines.firstSelection.rawValue ... SeaToolsDefines.lastSelection.rawValue {
+		for i in SeaTools.Defines.firstSelection.rawValue ... SeaTools.Defines.lastSelection.rawValue {
 			toolbox.cell(withTag: Int(i))?.isEnabled = true
 		}
 	}
@@ -167,12 +167,12 @@ class ToolboxUtility2 : NSObject, NSMenuItemValidation {
 		if full {
 			/* Disable or enable the tool */
 			if document.selection.isFloating {
-				for i in SeaToolsDefines.firstSelection.rawValue ... SeaToolsDefines.lastSelection.rawValue {
+				for i in SeaTools.Defines.firstSelection.rawValue ... SeaTools.Defines.lastSelection.rawValue {
 					selectionTBView.setEnabled(false, forSegment: i)
 				}
 				selectionMenu.isEnabled = false
 			} else {
-				for i in SeaToolsDefines.firstSelection.rawValue ... SeaToolsDefines.lastSelection.rawValue {
+				for i in SeaTools.Defines.firstSelection.rawValue ... SeaTools.Defines.lastSelection.rawValue {
 					selectionTBView.setEnabled(true, forSegment: i)
 				}
 				selectionMenu.isEnabled = false
@@ -191,7 +191,7 @@ class ToolboxUtility2 : NSObject, NSMenuItemValidation {
 	@IBAction func selectToolUsingTag(_ sender: AnyObject) {
 		let theTag = sender.tag
 		let preTool = theTag! % 100
-		if let newTool = SeaToolsDefines(rawValue: preTool) {
+		if let newTool = SeaTools.Defines(rawValue: preTool) {
 			changeTool(to: newTool)
 		}
 	}
@@ -199,14 +199,14 @@ class ToolboxUtility2 : NSObject, NSMenuItemValidation {
 	/// Called when the segmented controls get clicked.
 	/// - parameter sender: The segemented control to select the tool.
 	@IBAction func selectToolFromSender(_ sender: NSSegmentedControl) {
-		if let newTool = SeaToolsDefines(rawValue: (sender.cell as! NSSegmentedCell).tag(forSegment: sender.selectedSegment) % 100) {
+		if let newTool = SeaTools.Defines(rawValue: (sender.cell as! NSSegmentedCell).tag(forSegment: sender.selectedSegment) % 100) {
 			changeTool(to: newTool)
 		}
 	}
 	
 	/// Preforms checks to make sure changing the tool is valid, and if any updates are needed.
 	/// - parameter newTool: The index of the new tool.
-	@objc(changeToolTo:) func changeTool(to newTool: SeaToolsDefines) {
+	@objc(changeToolTo:) func changeTool(to newTool: SeaTools.Defines) {
 		var updateCrop = false;
 		
 		document.helpers?.endLineDrawing()
@@ -263,7 +263,7 @@ class ToolboxUtility2 : NSObject, NSMenuItemValidation {
 	}
 	
 	func setEffectEnabled(_ enable: Bool) {
-		effectTBView.setEnabled(enable, forSegment: SeaToolsDefines.effect.rawValue)
+		effectTBView.setEnabled(enable, forSegment: SeaTools.Defines.effect.rawValue)
 	}
 	
 	func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
