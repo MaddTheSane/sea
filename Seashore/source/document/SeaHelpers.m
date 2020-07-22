@@ -331,7 +331,7 @@
 	[[[SeaController utilitiesManager] pegasusUtilityForDocument:document] update:kPegasusUpdateAll];
 }
 
-- (void)layerSnapshotRestored:(int)index rect:(IntRect)rect
+- (void)layerSnapshotRestored:(NSInteger)index rect:(IntRect)rect
 {
 	SeaLayer *layer;
 	

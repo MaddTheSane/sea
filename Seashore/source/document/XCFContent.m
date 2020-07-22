@@ -202,7 +202,6 @@ static inline void fix_endian_read(int *input, size_t size)
 	int i;
 	BOOL maskToAlpha = NO;
 	ParasiteData *exifParasite;
-	NSString *errorString;
 	NSData *exifContainer;
 	
 	// Initialize superclass first

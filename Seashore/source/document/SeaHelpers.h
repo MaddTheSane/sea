@@ -85,7 +85,7 @@ typedef NS_ENUM(int, SeaHelpersLayerActions) {
 	@param		scaling
 				YES if the change is due to scaling, NO otherwise.
 */
-- (void)boundariesAndContentChanged:(BOOL)scaling;
+- (void)boundariesAndContentChanged:(BOOL)scaling NS_SWIFT_NAME(boundariesAndContentChanged(scaling:));
 
 /*!
 	@method		activeLayerWillChange
@@ -205,7 +205,7 @@ typedef NS_ENUM(int, SeaHelpersLayerActions) {
 				The rectangle in which the snapshot is being restored in the
 				layer's co-ordinates.
 */
-- (void)layerSnapshotRestored:(int)index rect:(IntRect)rect;
+- (void)layerSnapshotRestored:(NSInteger)index rect:(IntRect)rect;
 
 /*!
 	@method		layerTitleChanged

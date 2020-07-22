@@ -15,7 +15,7 @@
 #import "SeaWhiteboard.h"
 #import "SSKPlugin.h"
 
-@interface CIAffineTransformClass : SSKPlugin
+@interface CIAffineTransformClass : SSKPlugin <NSMenuItemValidation>
 {
 	// Some temporary space we need preallocated for greyscale data
 	unsigned char *newdata;
@@ -174,6 +174,6 @@
 				The menu item to be validated.
 	@result		YES if the menu item should be enabled, NO otherwise.
 */
-- (BOOL)validateMenuItem:(id)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem;
 
 @end

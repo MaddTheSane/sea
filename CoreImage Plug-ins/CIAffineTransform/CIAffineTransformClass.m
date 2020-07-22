@@ -675,7 +675,7 @@ typedef simd_uint4 simd_type;
 	return odata;
 }
 
-- (BOOL)validateMenuItem:(id)menuItem
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	return YES;
 }

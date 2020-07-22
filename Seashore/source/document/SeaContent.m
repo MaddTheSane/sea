@@ -615,7 +615,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		layers = tempArray;
 		
 		// Inform document of layer change
-		[[document helpers] activeLayerChanged:kLayerAdded rect:&dataRect];
+		[[document helpers] activeLayerChanged:SeaHelpersLayerAdded rect:&dataRect];
 		
 		// Make action undoable
 		[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:activeLayerIndex];	
@@ -639,7 +639,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		layers = tempArray;
 		
 		// Inform document of layer change
-		[[document helpers] activeLayerChanged:kTransparentLayerAdded rect:NULL];
+		[[document helpers] activeLayerChanged:SeaHelpersLayerTransparentAdded rect:NULL];
 		
 		// Make action undoable
 		[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:index];
@@ -669,7 +669,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	layers = tempArray;
 	
 	// Inform document of layer change
-	[[document helpers] activeLayerChanged:kTransparentLayerAdded rect:NULL];
+	[[document helpers] activeLayerChanged:SeaHelpersLayerTransparentAdded rect:NULL];
 	
 	// Make action undoable
 	[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:index];
@@ -781,7 +781,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	layers = tempArray;
 	
 	// Inform document of layer change
-	[[document helpers] activeLayerChanged:kLayerAdded rect:&rect];
+	[[document helpers] activeLayerChanged:SeaHelpersLayerAdded rect:&rect];
 	
 	// Make action undoable
 	[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:activeLayerIndex];	
@@ -808,7 +808,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	layers = tempArray;
 	
 	// Inform document of layer change
-	[[document helpers] activeLayerChanged:kLayerAdded rect:NULL];
+	[[document helpers] activeLayerChanged:SeaHelpersLayerAdded rect:NULL];
 	
 	// Make action undoable
 	[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:index];
@@ -839,7 +839,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	
 	// Inform document of layer change
 	rect = IntMakeRect([layers[index] xoff], [layers[index] yoff], [(SeaLayer *)layers[index] width], [(SeaLayer *)layers[index] height]);
-	[[document helpers] activeLayerChanged:kLayerAdded rect:&rect];
+	[[document helpers] activeLayerChanged:SeaHelpersLayerAdded rect:&rect];
 	
 	// Make action undoable
 	[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:index];
@@ -884,8 +884,8 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	if (activeLayerIndex >= [layers count]) activeLayerIndex = [layers count] - 1;
 	
 	// Update Seashore with the changes
-	rect = IntMakeRect([layer xoff], [layer yoff], [(SeaLayer *)layer width], [(SeaLayer *)layer height]);
-	[[document helpers] activeLayerChanged:kLayerDeleted rect:&rect];
+	rect = IntMakeRect([layer xoff], [layer yoff], [layer width], [layer height]);
+	[[document helpers] activeLayerChanged:SeaHelpersLayerDeleted rect:&rect];
 	
 	// Unset the clone tool
 	[[[document tools] getTool:SeaToolsClone] unset];
@@ -946,7 +946,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		
 	// Update Seashore with the changes
 	rect = IntMakeRect([layer xoff], [layer yoff], [(SeaLayer *)layer width], [(SeaLayer *)layer height]);
-	[[document helpers] activeLayerChanged:kLayerAdded rect:&rect];
+	[[document helpers] activeLayerChanged:SeaHelpersLayerAdded rect:&rect];
 	
 	// Make action undoable
 	[(SeaContent *)[[document undoManager] prepareWithInvocationTarget:self] deleteLayer:index];
@@ -1014,7 +1014,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[document selection] selectOpaque];
 	
 	// Inform document of layer change
-	[[document helpers] activeLayerChanged:kLayerAdded rect:&rect];
+	[[document helpers] activeLayerChanged:SeaHelpersLayerAdded rect:&rect];
 	
 	// Inform the tools of the floating
 	[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] floatTool];
@@ -1165,7 +1165,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 	[[document selection] selectOpaque];
 	
 	// Inform document of layer change
-	[[document helpers] activeLayerChanged:kLayerAdded rect:&rect];
+	[[document helpers] activeLayerChanged:SeaHelpersLayerAdded rect:&rect];
 	
 	// Inform the tools of the floating
 	[[[SeaController utilitiesManager] toolboxUtilityForDocument:document] floatTool];
