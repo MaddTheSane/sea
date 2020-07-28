@@ -134,7 +134,7 @@ extern IntPoint SeaScreenResolution;
 		spp = [contents spp];
 		
 		// Set the view type to show all channels
-		viewType = kAllChannelsView;
+		viewType = SeaChannelsAll;
 		CMYKPreview = NO;
 		
 		// Allocate the whiteboard data
@@ -395,8 +395,8 @@ extern IntPoint SeaScreenResolution;
 {	
 #if MAIN_COMPILE
 	// Resize the memory allocated to the data
-	width = [(SeaContent *)[document contents] width];
-	height = [(SeaContent *)[document contents] height];
+	width = [[document contents] width];
+	height = [[document contents] height];
 	
 	// Change the samples per pixel if required
 	if (spp != [[document contents] spp]) {
@@ -412,7 +412,7 @@ extern IntPoint SeaScreenResolution;
 	// Change the samples per pixel if required
 	if (spp != [contents spp]) {
 		spp = [contents spp];
-		viewType = kAllChannelsView;
+		viewType = SeaChannelsAll;
 		CMYKPreview = NO;
 	}
 #endif

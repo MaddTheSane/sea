@@ -222,7 +222,7 @@ static NSString*	DuplicateSelectionToolbarItemIdentifier = @"Duplicate Selection
 		layersToRedo = [NSMutableArray array];
 		orderings = [NSMutableArray array];
 		deletedLayers = [[NSArray alloc] init];
-		selectedChannel = kAllChannels; trueView = NO;
+		selectedChannel = SeaSelectedChannelAll; trueView = NO;
 		cmykSave = NO;
 		SeaScreenResolution = IntMakePoint(1024, 768);
 	}
